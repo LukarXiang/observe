@@ -29,22 +29,31 @@ def run_kind(root, kind, params):
         from .data.locks import DATA_WRITER, operation_lock
         with operation_lock(root, DATA_WRITER): return {'files': Store(root).gc(apply = params.get('apply', False)), 'applied': params.get('apply', False)}
     if kind == 'data_audit':
-        import hashlib
         from .data.audit import audit_daily
         from .data.update import default_rules
-        st = Store(root); state = st.published(); batch_id = state['batch_id']
-        if not batch_id: raise RuntimeError('还没有已发布的数据')
-        pin = f'audit-running-{__import__("os").getpid()}'
-        st.pin_state(pin, state)
+        from .data.locks import DATA_WRITER, operation_lock
+        st = Store(root)
+        import secrets
+        with operation_lock(root, DATA_WRITER):
+            state = st.published(); batch_id = state['batch_id']
+            if not batch_id: raise RuntimeError('还没有已发布的数据')
+            pin = f'audit-running-{__import__("os").getpid()}-{secrets.token_hex(4)}'
+            st.pin_state(pin, state)
         try:
             b = st.load_state(state, 'bars_1d'); cal = st.load_state(state, 'calendar'); inst = st.load_state(state, 'instruments')
             days = sorted(set(cal[cal.is_open].date)) if len(cal) else sorted(b.date.unique())
-            iss = audit_daily(b, days, inst, default_rules())
-            rules = default_rules(); rule_fingerprint = hashlib.sha256(repr(rules).encode()).hexdigest() if rules is not None else 'builtin'
-            aid = st.commit_audit(batch_id, iss, rule_fingerprint, {'start': str(min(days)) if days else None, 'end': str(max(days)) if days else None, 'days': len(days), 'rows': len(b)})
+            rules = default_rules(); iss = audit_daily(b, days, inst, rules)
+            rule_fingerprint = rules.config_fingerprint() if rules is not None else 'builtin-v1'
+            aid = st.commit_audit(batch_id, iss, rule_fingerprint, {'start': str(min(days)) if days else None, 'end': str(max(days)) if days else None, 'days': len(days), 'rows': len(b)}, scope='snapshot', input_state=state)
         finally:
             st.unpin(pin)
         return {'rows': len(b), 'days': len(days), 'issues': {f'{l}/{r}': int(n) for (l, r), n in iss.groupby(['level', 'rule']).size().items()} if len(iss) else {}, 'audit_id': aid, 'batch_id': batch_id}
+    if kind == 'run_experiment':
+        from .replay import run_offline
+        return run_offline(root, **params)
+    if kind == 'reproduce':
+        from .replay import reproduce
+        return reproduce(root, params['run'], params.get('output'))
     raise NotImplementedError(f'任务种类 {kind} 尚未实现')
 
 
@@ -62,6 +71,8 @@ def main(argv = None):
     j.add_parser('list'); w = j.add_parser('worker'); w.add_argument('--once', action = 'store_true')
     for name in ('exec', 'retry', 'cancel', 'show'): j.add_parser(name).add_argument('job_id')
     sv = sub.add_parser('serve'); sv.add_argument('--port', type = int, default = 8765)
+    r = sub.add_parser('run'); r.add_argument('--snapshot'); r.add_argument('--output'); r.add_argument('--cash', type=float, default=100000.0); r.add_argument('--start'); r.add_argument('--end')
+    rp = sub.add_parser('reproduce'); rp.add_argument('run'); rp.add_argument('--output')
     a = ap.parse_args(argv); root = Path(a.root)
     from .jobs import Jobs, SUPPORTED
     if a.cmd == 'data':
@@ -93,6 +104,8 @@ def main(argv = None):
             except Exception as e:   # noqa: BLE001  任务失败要落盘，不能让子进程静默退出
                 traceback.print_exc(); q.finish(a.job_id, 'failed', error = f'{type(e).__name__}: {e}'); sys.exit(1)
             return
+    if a.cmd == 'run': return _json(run_kind(root, 'run_experiment', {'snapshot': a.snapshot, 'output': a.output, 'initial_cash': a.cash, 'start': a.start, 'end': a.end}))
+    if a.cmd == 'reproduce': return _json(run_kind(root, 'reproduce', {'run': a.run, 'output': a.output}))
     if a.cmd == 'serve':
         import threading, uvicorn
         from .api.app import create_app

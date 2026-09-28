@@ -3,6 +3,7 @@ from bisect import bisect_right
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import date
+import math
 
 
 @dataclass
@@ -25,7 +26,9 @@ class Book:
     PAY_SPLIT, PAY_LAG, LIST_LAG = date(2014, 1, 1), 10, 1   # 到账日 / 红股上市日缺失时的从严推断（决策 18）
 
     def __init__(self, cash, calendar = ()):
-        self.initial = self.cash = round(float(cash), 2); self.calendar = sorted(calendar)
+        self.initial = self.cash = round(float(cash), 2)
+        if not math.isfinite(self.initial) or self.initial < 0: raise LedgerError('initial cash must be finite and non-negative')
+        self.calendar = sorted(calendar)
         self.positions, self.receivable, self.listing = {}, defaultdict(float), defaultdict(list)   # listing: {上市日: [(证券, 股数)]}
         self.cash_events, self.fills, self.equity_rows, self.assumptions, self.issues = [], [], [], [], []
         self._order_seq = 0; self._fill_seq = 0
@@ -39,6 +42,7 @@ class Book:
         return self.calendar[k]
 
     def _cash(self, day, kind, amount, **ref):
+        if not isinstance(amount, (int, float)) or not math.isfinite(amount): raise LedgerError(f'invalid cash amount on {day}: {amount}')
         self.cash = round(self.cash + amount, 2); self.cash_events.append({'date': day, 'kind': kind, 'amount': round(amount, 2), **ref})
         if self.cash < -0.005: raise LedgerError(f'negative cash {self.cash} on {day}: {kind} {ref}')
 
@@ -140,14 +144,16 @@ class Book:
             if not p.qty: continue
             q = quotes.get(i, {})
             if q.get('delisted'): self.issues.append({'date': day, 'instrument': i, 'kind': 'delisted_holding', 'qty': p.qty})
-            if q.get('suspended') or q.get('close') is None: p.stale = p.last_price is not None   # 停牌行的占位收盘价不用于估值
+            if q.get('suspended'): p.stale = p.last_price is not None   # 停牌行的占位收盘价不用于估值
+            elif q.get('close') is None: raise LedgerError(f'no valuation price for {i} on {day}')
             else: p.last_price, p.stale = q['close'], False
-            if p.last_price is None: raise LedgerError(f'no valuation price for {i} on {day}')
+            if p.last_price is None or not math.isfinite(float(p.last_price)): raise LedgerError(f'non-finite valuation price for {i} on {day}')
             market += p.qty * p.last_price; stale = stale or p.stale
         receivable = round(sum(self.receivable.values()), 2); equity = round(self.cash + market + receivable, 2)
         flow = round(self.initial + sum(e['amount'] for e in self.cash_events), 2)          # 现金流水核对
         if abs(flow - self.cash) > 0.01: raise LedgerError(f'cash {self.cash} != initial + events {flow} on {day}')
         prev = self.equity_rows[-1]['equity'] if self.equity_rows else self.initial
+        if not math.isfinite(equity): raise LedgerError(f'non-finite equity on {day}')
         row = {'date': day, 'cash': self.cash, 'market_value': round(market, 2), 'receivable': receivable, 'equity': equity, 'daily_return': equity / prev - 1 if prev else None, 'stale_price': stale}
         self.equity_rows.append(row); return row
 
