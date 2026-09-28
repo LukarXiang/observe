@@ -41,12 +41,12 @@ def daily(raw):
     return d.sort_values(['date', 'instrument']).reset_index(drop = True)
 
 
-def market_input(bars, adjusted = None):
+def market_input(bars, adjusted=None, coverage=None):
     """统一提供账本/标签使用的市场字段；原始行情不会冒充复权行情。"""
     out = bars.copy()
     if adjusted is not None:
         from .prices import with_adjusted
-        out = with_adjusted(out, adjusted)
+        out = with_adjusted(out, adjusted, coverage=coverage)
     rename = {'open_adj': 'adj_open', 'high_adj': 'adj_high', 'low_adj': 'adj_low', 'close_adj': 'adj_close'}
     for src, dst in rename.items():
         if src in out and dst not in out: out[dst] = out[src]
