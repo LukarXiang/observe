@@ -8,6 +8,7 @@ from fastapi.testclient import TestClient
 from observe.api.app import create_app
 from observe.data.store import Store
 from observe.jobs import Jobs
+from observe.cli import run_kind
 from tests.unit.test_data import hold
 
 DATA_WRITER = 'data-writer'
@@ -68,3 +69,12 @@ def test_api_reads_published_data(tmp_path):
     raw = c.get('/api/instruments/600000.SH/bars').json(); adj = c.get('/api/instruments/600000.SH/bars', params = {'price': 'adj'}).json()
     assert [x['close'] for x in raw] == [10.1, 10.3] and [x['close_adj'] for x in adj] == [None, 20.6]   # 首个复权事件前无可信基准，保持缺失
     assert c.post('/api/jobs', json = {'kind': 'nope'}).status_code == 400
+
+
+def test_api_audit_status_is_explicit_and_batch_bound(tmp_path):
+    seed(tmp_path); c = TestClient(create_app(tmp_path))
+    assert c.get('/api/data/issues').json()['status'] == 'not_audited'
+    run_kind(tmp_path, 'data_audit', {})
+    passed = c.get('/api/data/issues').json(); assert passed['status'] == 'passed' and passed['batch_id'] == Store(tmp_path).published()['batch_id']
+    s = Store(tmp_path); s.publish(s.write_batch({'bars_1d': {'2025': s.write_partition('bars_1d', '2025', s.load('bars_1d', parts = ['2025']))}}))
+    assert c.get('/api/data/issues').json()['status'] == 'expired'

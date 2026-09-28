@@ -41,7 +41,7 @@ def audit_daily(bars, trading_days, instruments = None, rules = None):
     jump = count[count > 0].pct_change().abs()
     out += [issue('warn', 'count_jump', d, detail = f'{v:.1%}') for d, v in jump.items() if v > 0.05]
     fresh = np.zeros(len(t), bool)                                            # 上市前 5 个交易日（含首日）另有涨跌幅规则，不查
-    if instruments is not None:
+    if instruments is not None and 'list_date' in instruments.columns:
         cal = np.array(sorted(trading_days), dtype = object); ld = t.instrument.map(instruments.set_index('instrument').list_date)
         l = ld.fillna(date.min).to_numpy(); pos = np.searchsorted(cal, t.date.to_numpy())
         lpos = np.where(l < cal[0], -10 ** 9, np.searchsorted(cal, l))              # 窗口之前就上市的不算新股
