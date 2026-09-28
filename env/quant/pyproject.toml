@@ -11,6 +11,7 @@ dependencies = [
     "lightgbm>=4.7.0",
     "mootdx>=0.11.7",
     "numpy>=2.5.3",
+    "observe",
     "pandas>=3.0.6",
     "pyarrow>=25.0.1",
     "pydantic>=2.13.5",
@@ -22,3 +23,6 @@ dependencies = [
 
 [dependency-groups]
 dev = ["pytest>=9.1.1", "ruff>=0.16.9"]
+
+[tool.uv.sources]
+observe = { path = "../../projects/observe", editable = true }

@@ -37,7 +37,7 @@ def em_min(code, period, start):
 
 def sina_min(sym, period):
     d = ak.stock_zh_a_minute(symbol = sym, period = period, adjust = ''); p.save(f'sina_min{period}_{sym}', d)
-    r = profile(d, 'day');
+    r = profile(d, 'day')
     if len(d): r['n_days'] = int(d.day.astype(str).str[:10].nunique())
     return r
 

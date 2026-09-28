@@ -1,26 +1,17 @@
+"""跨进程互斥：命令行、Web 任务、独立脚本共用的操作系统文件锁（决策 19）。进程退出时由操作系统释放，拿不到立即失败。"""
 from contextlib import contextmanager
 from pathlib import Path
 
-try:
-    from filelock import FileLock, Timeout
-except ImportError:  # keeps offline development usable before uv sync
-    FileLock = None; Timeout = TimeoutError
+from filelock import FileLock, Timeout
+
+BAOSTOCK, DATA_WRITER = 'baostock', 'data-writer'
 
 
 @contextmanager
 def operation_lock(root, name, timeout = 0):
-    path = Path(root) / "locks" / f"{name}.lock"; path.parent.mkdir(parents = True, exist_ok = True)
-    if FileLock is not None:
-        lock = FileLock(str(path))
-        try:
-            with lock.acquire(timeout = timeout): yield lock
-        except Timeout as exc:
-            raise RuntimeError(f"lock occupied: {path}") from exc
-        return
-    marker = path.with_suffix(path.suffix + ".held")
-    try:
-        marker.touch(exist_ok = False); yield marker
-    except FileExistsError as exc:
-        raise RuntimeError(f"lock occupied: {path}") from exc
-    finally:
-        marker.unlink(missing_ok = True)
+    path = Path(root) / 'locks' / f'{name}.lock'; path.parent.mkdir(parents = True, exist_ok = True)
+    lock = FileLock(str(path), timeout = timeout)
+    try: lock.acquire()
+    except Timeout as exc: raise RuntimeError(f'{name} 锁被占用：{path}') from exc
+    try: yield lock
+    finally: lock.release()

@@ -2,10 +2,7 @@
 name = "observe"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = ["pandas>=3.0", "numpy>=2.0", "filelock>=3.0"]
-
-[project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.8"]
+dependencies = ["pandas>=3.0", "numpy>=2.0", "pyyaml>=6.0", "filelock>=3.0"]
 
 [build-system]
 requires = ["setuptools>=68"]
@@ -16,3 +13,10 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 200
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]   # 固定规则集，避免 ruff 升级后含义变化
+ignore = ["E401", "E701", "E702", "E731", "E741"]   # 用户紧凑风格：一行多导入、多语句、lambda 赋值

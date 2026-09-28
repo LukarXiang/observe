@@ -788,6 +788,25 @@ wheels = [
 ]
 
 [[package]]
+name = "observe"
+version = "0.1.0"
+source = { editable = "../../projects/observe" }
+dependencies = [
+    { name = "filelock" },
+    { name = "numpy" },
+    { name = "pandas" },
+    { name = "pyyaml" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "filelock", specifier = ">=3.0" },
+    { name = "numpy", specifier = ">=2.0" },
+    { name = "pandas", specifier = ">=3.0" },
+    { name = "pyyaml", specifier = ">=6.0" },
+]
+
+[[package]]
 name = "openpyxl"
 version = "3.1.5"
 source = { registry = "https://pypi.org/simple" }
@@ -1133,6 +1152,7 @@ dependencies = [
     { name = "lightgbm" },
     { name = "mootdx" },
     { name = "numpy" },
+    { name = "observe" },
     { name = "pandas" },
     { name = "pyarrow" },
     { name = "pydantic" },
@@ -1158,6 +1178,7 @@ requires-dist = [
     { name = "lightgbm", specifier = ">=4.7.0" },
     { name = "mootdx", specifier = ">=0.11.7" },
     { name = "numpy", specifier = ">=2.5.3" },
+    { name = "observe", editable = "../../projects/observe" },
     { name = "pandas", specifier = ">=3.0.6" },
     { name = "pyarrow", specifier = ">=25.0.1" },
     { name = "pydantic", specifier = ">=2.13.5" },
