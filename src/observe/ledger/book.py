@@ -1,0 +1,77 @@
+from collections import defaultdict
+from dataclasses import dataclass, field
+
+
+@dataclass
+class Position:
+    qty: int = 0
+    today_buy: int = 0
+    pending: int = 0
+    cost: float = 0.0
+    last_price: float | None = None
+    stale_price: bool = False
+    @property
+    def sellable(self):
+        return self.qty - self.today_buy - self.pending
+
+@dataclass
+class Book:
+    cash: float
+    positions: dict = field(default_factory=dict)
+    receivable: dict = field(default_factory=lambda: defaultdict(float))
+    fees_paid: float = 0.0
+    fills: list = field(default_factory=list)
+    equity_rows: list = field(default_factory=list)
+
+    def position(self, instrument):
+        return self.positions.setdefault(instrument, Position())
+
+    def start_day(self, on, actions = None):
+        for p in self.positions.values():
+            p.today_buy = 0
+        for a in actions or []:
+            p = self.position(a["instrument"])
+            if a.get("ex_date") == on:
+                dividend = p.qty * a.get("cash_per_share", 0.0)
+                if dividend: self.receivable[a.get("pay_date") or on] += dividend
+                ratio = a.get("bonus_ratio", 0.0)
+                if ratio:
+                    added = int(p.qty * ratio); p.qty += added; p.pending += added
+            if a.get("bonus_list_date") == on:
+                p.today_buy = max(0, p.today_buy - p.pending); p.pending = 0
+        amount = self.receivable.pop(on, 0.0)
+        self.cash = round(self.cash + amount, 2)
+        return amount
+
+    def execute(self, order, quote, on, rules, slippage = 0.0, open_cash = None):
+        side, instrument = order["side"], order["instrument"]
+        p = self.position(instrument); raw = quote.get("open")
+        if quote.get("suspended") or raw is None or raw <= 0: return {**order, "qty_filled": 0, "status": "rejected", "reject_reason": "suspended" if quote.get("suspended") else "no_open_price"}
+        if side == "sell":
+            qty = p.sellable if order.get("qty") in (None, "all") else min(p.sellable, int(order["qty"]))
+        else:
+            target = order.get("amount", 0.0); r = rules.for_date(on); qty = int(target / rules.fill_price(raw, "buy", slippage, on) // r.buy_unit * r.buy_unit)
+            available = self.cash if open_cash is None else open_cash
+            price = rules.fill_price(raw, "buy", slippage, on)
+            while qty and available < price * qty + rules.fees(price * qty, "buy", on)["total"]: qty -= r.buy_unit
+        if not qty: return {**order, "qty_filled": 0, "status": "rejected", "reject_reason": "cash" if side == "buy" else "not_sellable"}
+        price = rules.fill_price(raw, side, slippage, on); amount = round(price * qty, 2); fees = rules.fees(amount, side, on)
+        if side == "buy": self.cash = round(self.cash - amount - fees["total"], 2); p.qty += qty; p.today_buy += qty
+        else: self.cash = round(self.cash + amount - fees["total"], 2); p.qty -= qty
+        p.cost = price; self.fees_paid += fees["total"]
+        fill = {**order, "qty_filled": qty, "fill_price": price, "amount": amount, **fees, "status": "filled"}; self.fills.append(fill)
+        return fill
+
+    def mark_to_market(self, on, quotes):
+        market = 0.0; stale = False
+        for instrument, p in self.positions.items():
+            q = quotes.get(instrument, {}); close = q.get("close")
+            if close is None:
+                close = p.last_price; p.stale_price = True
+            else: p.last_price = close; p.stale_price = bool(q.get("stale_price", False))
+            if close is not None: market += p.qty * close
+            stale = stale or p.stale_price
+        receivable = sum(self.receivable.values()); equity = round(self.cash + market + receivable, 2)
+        previous = self.equity_rows[-1]["equity"] if self.equity_rows else None
+        row = {"date": on, "cash": self.cash, "market_value": round(market, 2), "receivable": round(receivable, 2), "equity": equity, "daily_return": None if previous is None else equity / previous - 1, "stale_price": stale}
+        self.equity_rows.append(row); return row
