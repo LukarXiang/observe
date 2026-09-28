@@ -95,3 +95,28 @@ def test_first_day_fee_counts_in_first_return():
     b.execute({'instrument': 'A', 'side': 'buy', 'amount': 5000}, {'open': 50, 'preclose': 50}, CAL[0], rules)
     r = b.close_day(CAL[0], {'A': {'close': 50}})
     assert b.equity_curve()[:2] == [10000, 9994.95] and r['daily_return'] == pytest.approx(-0.000505)
+
+
+# 切分计划 ------------------------------------------------------------------------------------------------
+def test_splits_roll_without_overlap_and_respect_holdout():
+    from observe.dataset import plan_splits
+    days = list(pd.bdate_range('2015-01-01', periods = 1000).date)
+    sp = plan_splits(days, 504, 126, 63, holdout_start = days[900])
+    assert len(sp) == 4 and (sp.test_start.iloc[1:].to_numpy() > sp.test_end.iloc[:-1].to_numpy()).all()   # 测试窗首尾相接不重叠
+    assert (sp.test_end < days[900]).all() and (sp.select_asof == sp.valid_start).all()
+    assert all(days.index(r.test_start) == days.index(r.fit_asof) + 1 for r in sp.itertuples())           # fit_asof 为测试窗前一交易日
+
+
+def test_samples_respect_maturity_at_select_and_fit():
+    from observe.dataset import plan_splits, samples
+    days = list(pd.bdate_range('2020-01-01', periods = 40).date); h = 5
+    lab = build_labels(bars_n(days), days, h = h)
+    sp = plan_splits(days, 20, 10, 5).iloc[0]
+    sel, fit = samples(lab, sp, 'select'), samples(lab, sp, 'fit')
+    assert sel.matured_at.max() <= sp.select_asof and fit.matured_at.max() <= sp.fit_asof
+    assert sel.decision_date.max() == days[days.index(sp.select_asof) - h - 1]                            # 训练窗最后 h+1 天因未成熟被排除
+    assert fit.decision_date.max() == days[days.index(sp.fit_asof) - h - 1]                               # 验证窗最后 h+1 天不参与重拟合
+
+
+def bars_n(days):
+    return pd.DataFrame({'date': days, 'instrument': 'X', 'adj_open': [10 + k * 0.1 for k in range(len(days))], 'is_trading': True})
