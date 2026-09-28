@@ -64,9 +64,16 @@ def create_app(root):
             except (OSError, ValueError): continue
         info = max(match, key = lambda x: x.get('audited_at', '')) if match else None
         csv = path / f"{info['audit_id']}.issues.csv" if info else None
-        complete = bool(info and csv.exists())
+        complete = bool(info and csv.exists() and info.get('status') in ('passed', 'problem') and csv.name == f"{info.get('audit_id')}.issues.csv")
         rows = _records(pd.read_csv(csv)) if complete else []
-        status = 'not_audited' if not info else ('problem' if not complete or rows else 'passed')
+        current_rules = None
+        try:
+            from ..data.update import default_rules
+            current_rules = default_rules()
+        except Exception:
+            pass
+        fingerprint_ok = bool(info and (current_rules is None or info.get('rule_fingerprint') == current_rules.config_fingerprint()))
+        status = 'not_audited' if not info else ('problem' if not complete else ('expired' if not fingerprint_ok else ('problem' if rows else 'passed')))
         if not info:
             latest = path / 'latest.json'
             try:

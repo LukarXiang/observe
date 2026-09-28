@@ -117,14 +117,15 @@ class Store:
             for f in drop: (self.root / f).unlink()
         return drop
 
-    def commit_audit(self, batch_id, issues, rule_fingerprint, input_range):
+    def commit_audit(self, batch_id, issues, rule_fingerprint, input_range, scope='snapshot', input_state=None):
         """Commit an audit result and its metadata before advancing the latest pointer."""
         aid = f"{_now()}-{secrets.token_hex(2)}"
         d = self.root / 'audits'; d.mkdir(parents = True, exist_ok = True)
         csv = d / f'{aid}.issues.csv'; meta = d / f'{aid}.json'
-        issues.to_csv(csv, index = False)
+        tmp = csv.with_suffix('.tmp'); issues.to_csv(tmp, index=False); os.replace(tmp, csv)
         _atomic_json(meta, {'audit_id': aid, 'batch_id': batch_id, 'rule_fingerprint': rule_fingerprint,
-                            'input_range': input_range, 'audited_at': datetime.now().isoformat(timespec = 'seconds'),
-                            'problem_count': int(len(issues))})
+                            'input_range': input_range, 'scope': scope, 'input_state': input_state,
+                            'audited_at': datetime.now().isoformat(timespec = 'seconds'),
+                            'status': 'problem' if len(issues) else 'passed', 'problem_count': int(len(issues))})
         _atomic_json(d / 'latest.json', {'audit_id': aid, 'batch_id': batch_id})
         return aid

@@ -3,6 +3,8 @@ from dataclasses import dataclass, replace
 from datetime import date
 from decimal import ROUND_CEILING, ROUND_FLOOR, ROUND_HALF_UP, Decimal
 from pathlib import Path
+import hashlib
+import json
 
 
 @dataclass(frozen = True)
@@ -43,6 +45,14 @@ def _d(x): return x if isinstance(x, date) else date.fromisoformat(str(x))
 class RuleSet:
     def __init__(self, rules, trading = None):
         self.rules = sorted(rules, key = lambda r: r.start); self.trading = sorted(trading or [], key = lambda r: r.start); self.used_unverified = set()
+
+    def config_fingerprint(self):
+        """Stable identity of configured rules, excluding runtime usage state."""
+        payload = {'version': 1,
+                   'rules': [{k: (v.isoformat() if isinstance(v, date) else v) for k, v in vars(r).items()} for r in self.rules],
+                   'trading': [{k: (v.isoformat() if isinstance(v, date) else v) for k, v in vars(r).items()} for r in self.trading]}
+        raw = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()
+        return hashlib.sha256(raw).hexdigest()
 
     @classmethod
     def from_yaml(cls, path):
