@@ -1,5 +1,6 @@
 from collections import defaultdict
 from dataclasses import dataclass, field
+from datetime import date, timedelta
 
 
 @dataclass
@@ -23,6 +24,14 @@ class Book:
     fills: list = field(default_factory=list)
     equity_rows: list = field(default_factory=list)
     assumptions: list = field(default_factory=list)
+    listing_dates: dict = field(default_factory=dict)
+
+    @staticmethod
+    def infer_missing_date(ex_date, trading_dates, before_2014_days = 10):
+        dates = sorted(trading_dates or [])
+        if ex_date >= date(2014, 1, 1): return ex_date
+        following = [item for item in dates if item > ex_date]
+        return following[before_2014_days - 1] if len(following) >= before_2014_days else ex_date + timedelta(days = before_2014_days)
 
     def position(self, instrument):
         return self.positions.setdefault(instrument, Position())
@@ -31,16 +40,25 @@ class Book:
         quotes = quotes or {}
         for p in self.positions.values():
             p.today_buy = 0
+        for instrument, listing_date in list(self.listing_dates.items()):
+            if listing_date == on:
+                self.position(instrument).pending = 0; del self.listing_dates[instrument]
         for a in actions or []:
             p = self.position(a["instrument"])
             if a.get("ex_date") == on:
                 dividend = p.qty * a.get("cash_per_share", 0.0)
-                pay_date = a.get("pay_date") or a.get("assumed_pay_date") or on
-                if a.get("pay_date") is None: self.assumptions.append({"instrument": a["instrument"], "date": on, "field": "pay_date", "assumed": True})
+                pay_date = a.get("pay_date")
+                if pay_date is None:
+                    pay_date = a.get("assumed_pay_date") or self.infer_missing_date(on, a.get("trading_dates", [])); self.assumptions.append({"instrument": a["instrument"], "date": on, "field": "pay_date", "assumed": True, "value": pay_date})
                 if dividend: self.receivable[pay_date] += dividend
                 ratio = a.get("bonus_ratio", 0.0)
                 if ratio:
                     added = int(p.qty * ratio); p.qty += added; p.pending += added
+                    listing_date = a.get("bonus_list_date")
+                    if listing_date is None:
+                        following = [item for item in sorted(a.get("trading_dates", [])) if item > on]; listing_date = following[0] if following else on + timedelta(days = 1)
+                        self.assumptions.append({"instrument": a["instrument"], "date": on, "field": "bonus_list_date", "assumed": True, "value": listing_date})
+                    self.listing_dates[a["instrument"]] = listing_date
                 q = quotes.get(a["instrument"], {})
                 if q.get("suspended") and p.last_price is not None:
                     cash = a.get("cash_per_share", 0.0); rights = a.get("rights_price", 0.0) * a.get("rights_ratio", 0.0)

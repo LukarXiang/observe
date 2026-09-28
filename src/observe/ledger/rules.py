@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import date
 from math import ceil, floor
+from pathlib import Path
 
 
 @dataclass(frozen=True)
@@ -17,6 +18,12 @@ class Rule:
 class RuleSet:
     def __init__(self, rules = None):
         self.rules = sorted(rules or [Rule()], key = lambda r: r.start)
+
+    @classmethod
+    def from_yaml(cls, path):
+        import yaml
+        data = yaml.safe_load(Path(path).read_text(encoding = "utf-8"))
+        return cls([Rule(start = item.pop("start") if isinstance(item.get("start"), date) else date.fromisoformat(item.pop("start")), **item) for item in data["rules"]])
 
     def for_date(self, on):
         matches = [r for r in self.rules if r.start <= on]
