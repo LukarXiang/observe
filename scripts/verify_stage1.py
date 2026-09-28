@@ -38,7 +38,7 @@ def main():
     out['sina_mismatch'] = ok[~ok[['open', 'high', 'low', 'close']].all(axis = 1)].head(10).to_dict('records') if len(ok) else []
     out['sina_errors'] = int(cmp['error'].notna().sum()) if 'error' in cmp else 0
     p = s.root / 'batches' / f"{out['batch_id']}.issues.csv"                  # 3. 审计问题
-    out['issues'] = pd.read_csv(p).groupby(['level', 'rule']).size().to_dict() if p.exists() else {}
+    out['issues'] = {f'{l}/{r}': int(n) for (l, r), n in pd.read_csv(p).groupby(['level', 'rule']).size().items()} if p.exists() else {}
     adj = s.load('adj_factors'); full = adj.groupby('instrument').ex_date.min(); full = full[full < pd.Timestamp('2010-01-01').date()].index   # 4. 后复权连续性
     v = with_adjusted(bars[bars.instrument.isin(full)], adj); out['adj_instruments'] = len(full)
     out['adj_max_abs_daily_ret'] = float(v.ret.abs().max()) if len(v) else None; out['adj_missing_factor_rows'] = int(v.back_factor.isna().sum())
