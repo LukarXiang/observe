@@ -78,8 +78,12 @@ def create_app(root):
             latest = path / 'latest.json'
             try:
                 old = json.loads(latest.read_text(encoding = 'utf-8'))
-                if old.get('batch_id') != b: status = 'expired'
-            except (OSError, ValueError): pass
+                if old.get('batch_id') != b:
+                    status = 'expired'
+                elif old.get('audit_id'):
+                    status = 'problem' if not (path / f"{old['audit_id']}.json").exists() or not (path / f"{old['audit_id']}.issues.csv").exists() else 'not_audited'
+            except (OSError, ValueError):
+                pass
         return {'source': f"audit {info['audit_id']}" if info else f'batch {b}', 'batch_id': b, 'status': status, 'rows': rows}
 
     @app.get('/api/instruments')

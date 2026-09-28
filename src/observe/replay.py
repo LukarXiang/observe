@@ -50,4 +50,13 @@ def run_offline(root, output=None, snapshot=None, initial_cash=100000.0, start=N
     _json(out / 'manifest.json', {'files': sorted(p.name for p in out.iterdir()), 'core_hash': hashlib.sha256(json.dumps(metrics, sort_keys=True).encode()).hexdigest()})
     return {'run_id': out.name, 'output': str(out), **metrics, 'status': book.status}
 
-def reproduce(root, run, output=None): return run_offline(root, output=output, reproduce_from=run)
+def reproduce(root, run, output=None):
+    source = Path(run); result = run_offline(root, output=output, reproduce_from=run)
+    target = Path(result['output']); expected = json.loads((source / 'metrics.json').read_text(encoding='utf-8'))
+    actual = json.loads((target / 'metrics.json').read_text(encoding='utf-8'))
+    keys = ('total_return', 'final_equity', 'days')
+    comparison = {'source': str(source), 'reproduced': str(target), 'keys': list(keys),
+                  'matches': all(expected.get(k) == actual.get(k) for k in keys),
+                  'expected': {k: expected.get(k) for k in keys}, 'actual': {k: actual.get(k) for k in keys}}
+    _json(target / 'comparison.json', comparison); result['matches'] = comparison['matches']
+    return result

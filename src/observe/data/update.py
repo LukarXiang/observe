@@ -77,7 +77,7 @@ def _merge_coverage(store, new):
     return store.write_partition('adj_coverage', 'all', normalize_coverage(left.reset_index()))
 
 
-def fetch_day(source, day, staging, force=False, checkpoint=None):
+def fetch_day(source, day, staging, force=False, checkpoint=None, raw_root=None):
     """Fetch and validate one day; no final table is touched here."""
     key = str(day); checkpoint = checkpoint or {}
     daily_path, adj_path = staging / f'{key}.parquet', staging / f'{key}.adj.parquet'
@@ -87,11 +87,17 @@ def fetch_day(source, day, staging, force=False, checkpoint=None):
         except Exception: bars = adj = None
     downloaded = False
     if bars is None:
-        response = source.daily_market(day); downloaded = True; bars = std.daily(response) if len(response) else pd.DataFrame()
+        response = source.daily_market(day); downloaded = True
+        if raw_root is not None: raw.save(raw_root, 'baostock', 'daily_market', key, response)
+        bars = std.daily(response) if response is not None and len(response) else pd.DataFrame()
         if len(bars): _atomic_parquet(daily_path, bars)
     if adj is None:
         try:
-            adj = source.adjust_factor_day(day); _atomic_parquet(adj_path, adj)
+            adj = source.adjust_factor_day(day)
+            if adj is None:
+                return {'date': day, 'bars': bars, 'adj': None, 'fetch_status': 'success' if len(bars) else 'unknown_empty',
+                        'validation_status': 'unknown_empty', 'reuse_basis': 'source', 'retry_components': ['adjust_factor'], 'downloaded': downloaded}
+            _atomic_parquet(adj_path, adj)
         except Exception as exc:
             return {'date': day, 'bars': bars, 'adj': pd.DataFrame(), 'fetch_status': 'success' if len(bars) else 'unknown_empty',
                     'validation_status': 'failed', 'reuse_basis': 'none', 'retry_components': ['adjust_factor'], 'downloaded': downloaded, 'error': str(exc)}
@@ -131,63 +137,35 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                 published_year = store.load('bars_1d', parts=[str(year)])
                 published_counts[year] = published_year.groupby('date').size().to_dict() if len(published_year) else {}
             for d in todo:
-                key = str(d)
+                key = str(d); published_count = int(published_counts.get(d.year, {}).get(d, 0))
+                checkpoint = progress.get(key, {})
                 staged = staging / f'{key}.parquet'
-                one = None
-                if not force and progress.get(key, {}).get('status') == 'success' and progress.get(key, {}).get('adj_status') in ('success', 'no_events') and staged.exists():
-                    try: one = pd.read_parquet(staged)
-                    except Exception: one = None
-                    published_count = int(published_counts.get(d.year, {}).get(d, 0))
-                    if one is not None and {'date', 'instrument', 'open', 'high', 'low', 'close'}.issubset(one.columns) and len(one) and (not published_count or len(one) == published_count):
-                        bars.append(one); days_done.append(d)
-                        af = staging / f'{key}.adj.parquet'
-                        try: a = pd.read_parquet(af)
-                        except Exception: a = None
-                        if a is not None:
-                            events.append(a); continue
-                        bars.pop(); days_done.pop()
                 try:
-                    published_count = int(published_counts.get(d.year, {}).get(d, 0))
-                    checkpoint_ok = not published_count or (one is not None and len(one) == published_count)
-                    if not force and checkpoint_ok and progress.get(key, {}).get('status') == 'success' and staged.exists():
-                        try: one = pd.read_parquet(staged)
-                        except Exception: one = None
-                        if one is None:
-                            r = src.daily_market(d); downloaded_days.append(d); raw.save(root, 'baostock', 'daily_market', key, r)
-                            one = std.daily(r) if len(r) else pd.DataFrame()
-                            if len(one): _atomic_parquet(staged, one)
-                    else:
-                        r = src.daily_market(d); downloaded_days.append(d); raw.save(root, 'baostock', 'daily_market', key, r)
-                        one = std.daily(r) if len(r) else pd.DataFrame()
-                        if len(one): _atomic_parquet(staged, one)
-                    status = 'success' if len(one) else 'unknown_empty'
+                    staged_rows = None
+                    if staged.exists() and checkpoint.get('status') == 'success':
+                        try: staged_rows = len(pd.read_parquet(staged))
+                        except Exception: staged_rows = None
+                    checkpoint_ok = not published_count or (staged_rows is not None and staged_rows == published_count)
+                    if not checkpoint_ok: checkpoint = {}
+                    result = fetch_day(src, d, staging, force=force, checkpoint=checkpoint, raw_root=root)
+                    one, a = result['bars'], result['adj']; status = result['fetch_status']; adj_status = result.get('adj_status', 'unknown_empty')
+                    if result.get('downloaded'): downloaded_days.append(d)
                     if not len(one): missing_days.append(d)
-                    adj_status = 'unknown_empty'
-                    a = pd.DataFrame()
-                    try:
-                        a = src.adjust_factor_day(d)
-                        if a is None:
-                            adj_status = 'unknown_empty'
-                            unknown_adj_days.append(key)
-                        elif len(a) == 0 and {'dividOperateDate', 'backAdjustFactor', 'code'}.issubset(a.columns):
-                            adj_status = 'no_events'
-                        elif len(a):
-                            adj_status = 'success'
-                        else:
-                            adj_status = 'unknown_empty'
-                            unknown_adj_days.append(key)
-                        if a is not None: _atomic_parquet(staging / f'{key}.adj.parquet', a)
-                    except Exception as exc:
-                        component_failures.append({'date': key, 'component': 'adjust_factor', 'error': str(exc)[:300]}); adj_status = 'failed'
+                    if result.get('validation_status') == 'failed':
+                        component_failures.append({'date': key, 'component': 'adjust_factor', 'error': result.get('error', 'unknown')}); adj_status = 'failed'
+                    elif a is not None and len(a) == 0 and {'dividOperateDate', 'backAdjustFactor', 'code'}.issubset(a.columns):
+                        adj_status = 'no_events'
+                    elif a is not None and len(a): adj_status = 'success'
+                    else:
+                        adj_status = 'unknown_empty'; unknown_adj_days.append(key)
                     _progress(root, {'date': key, 'requested_start': key, 'requested_end': key, 'actual_start': key if len(one) else None,
                                      'actual_end': key if len(one) else None, 'records': len(one), 'status': status, 'adj_status': adj_status,
                                      'validation_status': 'validated' if len(one) and adj_status in ('success', 'no_events') else 'incomplete',
                                      'fields': list(one.columns), 'primary_key': ['date', 'instrument'], 'pagination_ended': True,
-                                     'reuse_basis': 'source', 'retry_components': ([] if len(one) else ['daily_market']) + ([] if adj_status in ('success', 'no_events') else ['adjust_factor']),
+                                     'reuse_basis': result.get('reuse_basis'), 'retry_components': result.get('retry_components', []),
                                      'evidence': 'daily_market_response'})
                     if len(one): bars.append(one); days_done.append(d)
                     if len(a): events.append(a)
-                    continue
                 except Exception as exc:
                     _progress(root, {'date': key, 'requested_start': key, 'requested_end': key, 'records': 0, 'status': 'failed', 'adj_status': 'failed', 'error': str(exc)[:300]})
                     raise
