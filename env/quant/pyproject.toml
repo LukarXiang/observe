@@ -1,0 +1,24 @@
+[project]
+name = "quant"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "akshare>=1.18.97",
+    "baostock>=0.9.4",
+    "duckdb>=1.5.5",
+    "fastapi>=0.141.1",
+    "filelock>=3.0",
+    "lightgbm>=4.7.0",
+    "mootdx>=0.11.7",
+    "numpy>=2.5.3",
+    "pandas>=3.0.6",
+    "pyarrow>=25.0.1",
+    "pydantic>=2.13.5",
+    "pyyaml>=6.0.3",
+    "scikit-learn>=1.9.1",
+    "scipy>=1.18.1",
+    "uvicorn>=0.54.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=9.1.1", "ruff>=0.16.9"]
