@@ -71,6 +71,8 @@ def _merge_coverage(store, new):
         if trusted and row.get('verified_through') is not None and previous.get('verified_through') is not None:
             if row['verified_through'] < previous['verified_through']:
                 row['verified_through'] = previous['verified_through']
+        if trusted and row.get('verified_through') == previous.get('verified_through'):
+            row['verified_at'] = previous.get('verified_at')
         left.loc[inst] = row
     return store.write_partition('adj_coverage', 'all', normalize_coverage(left.reset_index()))
 
@@ -111,7 +113,7 @@ def default_rules():
 def update_daily(root, start, end, source = None, tdx = None, factor_codes = (), force = False, rules = None):
     """下载 [start, end] 的交易日历、证券资料、全市场日线与当日复权因子变动；当期有除权的证券从通达信刷新公司行动。
     factor_codes：需要取全部复权因子历史的证券（首次初始化用）。返回摘要；审计有阻断问题时批次标为 rejected、不发布"""
-    start, end = _d(start), _d(end); store = Store(root); parts, days_done, downloaded_days, missing_days, component_failures = {}, [], [], [], []
+    start, end = _d(start), _d(end); store = Store(root); parts, days_done, downloaded_days, missing_days, component_failures, unknown_adj_days = {}, [], [], [], [], []
     with operation_lock(root, DATA_WRITER):
         src = source or BaoStock(root)
         pub = store.published()
@@ -124,6 +126,10 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
             todo = days
             inst_raw = src.stock_basic(); raw.save(root, 'baostock', 'stock_basic', str(end), inst_raw)
             bars, events = [], []
+            published_counts = {}
+            for year in sorted({d.year for d in days}):
+                published_year = store.load('bars_1d', parts=[str(year)])
+                published_counts[year] = published_year.groupby('date').size().to_dict() if len(published_year) else {}
             for d in todo:
                 key = str(d)
                 staged = staging / f'{key}.parquet'
@@ -131,8 +137,7 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                 if not force and progress.get(key, {}).get('status') == 'success' and progress.get(key, {}).get('adj_status') in ('success', 'no_events') and staged.exists():
                     try: one = pd.read_parquet(staged)
                     except Exception: one = None
-                    published = store.load('bars_1d', parts = [str(d.year)])
-                    published_count = int((published.date == d).sum()) if len(published) else 0
+                    published_count = int(published_counts.get(d.year, {}).get(d, 0))
                     if one is not None and {'date', 'instrument', 'open', 'high', 'low', 'close'}.issubset(one.columns) and len(one) and (not published_count or len(one) == published_count):
                         bars.append(one); days_done.append(d)
                         af = staging / f'{key}.adj.parquet'
@@ -142,8 +147,7 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                             events.append(a); continue
                         bars.pop(); days_done.pop()
                 try:
-                    published = store.load('bars_1d', parts = [str(d.year)])
-                    published_count = int((published.date == d).sum()) if len(published) else 0
+                    published_count = int(published_counts.get(d.year, {}).get(d, 0))
                     checkpoint_ok = not published_count or (one is not None and len(one) == published_count)
                     if not force and checkpoint_ok and progress.get(key, {}).get('status') == 'success' and staged.exists():
                         try: one = pd.read_parquet(staged)
@@ -161,11 +165,25 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                     adj_status = 'unknown_empty'
                     a = pd.DataFrame()
                     try:
-                        a = src.adjust_factor_day(d); _atomic_parquet(staging / f'{key}.adj.parquet', a); adj_status = 'success' if len(a) else 'no_events'
+                        a = src.adjust_factor_day(d)
+                        if a is None:
+                            adj_status = 'unknown_empty'
+                            unknown_adj_days.append(key)
+                        elif len(a) == 0 and {'dividOperateDate', 'backAdjustFactor', 'code'}.issubset(a.columns):
+                            adj_status = 'no_events'
+                        elif len(a):
+                            adj_status = 'success'
+                        else:
+                            adj_status = 'unknown_empty'
+                            unknown_adj_days.append(key)
+                        if a is not None: _atomic_parquet(staging / f'{key}.adj.parquet', a)
                     except Exception as exc:
                         component_failures.append({'date': key, 'component': 'adjust_factor', 'error': str(exc)[:300]}); adj_status = 'failed'
                     _progress(root, {'date': key, 'requested_start': key, 'requested_end': key, 'actual_start': key if len(one) else None,
                                      'actual_end': key if len(one) else None, 'records': len(one), 'status': status, 'adj_status': adj_status,
+                                     'validation_status': 'validated' if len(one) and adj_status in ('success', 'no_events') else 'incomplete',
+                                     'fields': list(one.columns), 'primary_key': ['date', 'instrument'], 'pagination_ended': True,
+                                     'reuse_basis': 'source', 'retry_components': ([] if len(one) else ['daily_market']) + ([] if adj_status in ('success', 'no_events') else ['adjust_factor']),
                                      'evidence': 'daily_market_response'})
                     if len(one): bars.append(one); days_done.append(d)
                     if len(a): events.append(a)
@@ -203,11 +221,18 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
         issues = audit_daily(new, days, inst, rules or default_rules()) if days else pd.DataFrame(columns = ['level'])
         current_tables = store.published().get('tables', {})
         has_changes = any(current_tables.get(table, {}).get(part, {}).get('file') != value.get('file') for table, values in parts.items() for part, value in values.items())
-        if not has_changes and not downloaded_days and not missing_days and not component_failures:
+        if not has_changes and not downloaded_days and not missing_days and not component_failures and not unknown_adj_days:
             return {'batch_id': pub['batch_id'], 'status': 'no_change', 'base': pub['batch_id'], 'days': 0, 'verified_days': len(days_done), 'missing_days': [], 'component_failures': [], 'rows': 0, 'adj_events': 0, 'issues': {}}
         bid = store.write_batch(parts, note = f'daily {start}..{end}')
         if missing_days: issues = pd.concat([issues, pd.DataFrame([{'level': 'block', 'rule': 'missing_requested_day', 'date': d, 'instrument': None, 'detail': 'no validated daily artifact'} for d in missing_days])], ignore_index = True)
         if component_failures: issues = pd.concat([issues, pd.DataFrame([{'level': 'block', 'rule': 'component_failed', 'date': x.get('date'), 'instrument': x.get('instrument'), 'detail': x['error']} for x in component_failures])], ignore_index = True)
+        if unknown_adj_days:
+            issues = pd.concat([issues, pd.DataFrame([{'level': 'block', 'rule': 'unknown_adjustment_response', 'date': d, 'instrument': None, 'detail': '复权查询返回 None 或无法确认字段'} for d in unknown_adj_days])], ignore_index=True)
+        audit_rules = rules or default_rules()
+        audit_fingerprint = audit_rules.config_fingerprint() if audit_rules is not None else 'builtin-v1'
+        audit_id = store.commit_audit(bid, issues, audit_fingerprint,
+                                      {'start': str(start), 'end': str(end), 'days': len(days), 'rows': len(new)},
+                                      scope='incremental', input_state={'base_batch_id': pub['batch_id'], 'batch_id': bid, 'tables': parts})
         blocked = issues[issues.level == 'block'] if len(issues) else issues
         if len(blocked):
             store.reject(bid, f'{len(blocked)} 条阻断级审计问题'); status = 'rejected'
@@ -216,5 +241,5 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                 _progress(root, {'date': d, 'status': 'rejected', 'adj_status': 'rejected', 'retry': True})
         else: store.publish(bid); status = 'published'
         if len(issues): issues.to_csv(store.root / 'batches' / f'{bid}.issues.csv', index = False)
-    return {'batch_id': bid, 'status': status, 'base': pub['batch_id'], 'days': len(downloaded_days), 'verified_days': len(days_done), 'missing_days': [str(x) for x in missing_days], 'component_failures': component_failures, 'rows': len(new), 'adj_events': len(adj),
+    return {'batch_id': bid, 'audit_id': audit_id, 'status': status, 'base': pub['batch_id'], 'days': len(downloaded_days), 'verified_days': len(days_done), 'missing_days': [str(x) for x in missing_days], 'component_failures': component_failures, 'rows': len(new), 'adj_events': len(adj),
             'issues': {f'{l}/{r}': int(n) for (l, r), n in issues.groupby(['level', 'rule']).size().items()} if len(issues) else {}}
