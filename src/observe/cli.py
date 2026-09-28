@@ -10,23 +10,23 @@ def run_kind(root, kind, params):
     """任务种类 → 研究核心函数；命令行直接执行和队列执行都走这里"""
     from .data.store import Store
     if kind == 'data_update':
-        lock_path = Path(root) / 'locks' / 'data-writer.lock'
-        owner_path = lock_path.with_suffix('.owner')
-        if owner_path.exists() or lock_path.exists():
-            raise RuntimeError(f'data-writer 锁被占用：{lock_path}')
         from .data import standardize as std
         from .data.sources.tdx import Tdx
         from .data.update import update_daily
         codes = params.get('factors') or []
         if params.get('factors_all'): codes = Store(root).load('instruments').query("kind == 'stock'").instrument.tolist()
         from .data.locks import DATA_WRITER, operation_lock
-        with operation_lock(root, DATA_WRITER): pass
-        tdx = None if params.get('no_actions') else Tdx(root)
-        try: return update_daily(root, params['start'], params['end'], tdx = tdx, factor_codes = [std.to_baostock(c) for c in codes], force = params.get('force', False))
-        finally:
-            if tdx: tdx.close()
-    if kind == 'snapshot': return {'snapshot_id': Store(root).snapshot(params.get('note', ''))}
-    if kind == 'gc': return {'files': Store(root).gc(apply = params.get('apply', False)), 'applied': params.get('apply', False)}
+        with operation_lock(root, DATA_WRITER):
+            tdx = None if params.get('no_actions') else Tdx(root)
+            try: return update_daily(root, params['start'], params['end'], tdx = tdx, factor_codes = [std.to_baostock(c) for c in codes], force = params.get('force', False))
+            finally:
+                if tdx: tdx.close()
+    if kind == 'snapshot':
+        from .data.locks import DATA_WRITER, operation_lock
+        with operation_lock(root, DATA_WRITER): return {'snapshot_id': Store(root).snapshot(params.get('note', ''))}
+    if kind == 'gc':
+        from .data.locks import DATA_WRITER, operation_lock
+        with operation_lock(root, DATA_WRITER): return {'files': Store(root).gc(apply = params.get('apply', False)), 'applied': params.get('apply', False)}
     if kind == 'data_audit':
         from .data.audit import audit_daily
         from .data.update import default_rules
@@ -34,6 +34,7 @@ def run_kind(root, kind, params):
         days = sorted(set(cal[cal.is_open].date)) if len(cal) else sorted(b.date.unique())
         iss = audit_daily(b, days, st.load('instruments'), default_rules())
         p = root / 'coverage' / 'audit_latest.csv'; p.parent.mkdir(parents = True, exist_ok = True); iss.to_csv(p, index = False)
+        (root / 'coverage' / 'audit_latest.json').write_text(json.dumps({'batch_id': st.published()['batch_id']}, ensure_ascii = False), encoding = 'utf-8')
         return {'rows': len(b), 'days': len(days), 'issues': {f'{l}/{r}': int(n) for (l, r), n in iss.groupby(['level', 'rule']).size().items()}, 'file': str(p), 'batch_id': st.published()['batch_id']}
     raise NotImplementedError(f'任务种类 {kind} 尚未实现')
 

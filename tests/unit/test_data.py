@@ -146,6 +146,46 @@ def test_update_reuses_successful_staged_days_after_source_failure(tmp_path):
     assert result['status'] == 'published' and retry.calls == [str(DAYS[2])]
 
 
+def test_partial_published_day_is_requested_again(tmp_path):
+    bs = FakeBS(DAYS)
+    first = update_daily(tmp_path, DAYS[0], DAYS[0], source = BaoStock(tmp_path, bs), tdx = FakeTdx())
+    assert first['status'] == 'published'
+    s = Store(tmp_path); old = s.load('bars_1d', parts = ['2025']).query('date == @DAYS[0]').iloc[[0]]
+    s.publish(s.write_batch({'bars_1d': {'2025': s.write_partition('bars_1d', '2025', old)}}))
+    bs.calls.clear(); result = update_daily(tmp_path, DAYS[0], DAYS[0], source = BaoStock(tmp_path, bs), tdx = FakeTdx())
+    assert bs.calls == [str(DAYS[0])] and result['verified_days'] == 1
+
+
+def test_empty_requested_day_is_reported_as_missing(tmp_path):
+    class Empty(FakeBS):
+        def query_daily_history_k_AStock(self, day):
+            self.calls.append(day); return RS(RAW.iloc[:0])
+    result = update_daily(tmp_path, DAYS[0], DAYS[0], source = BaoStock(tmp_path, Empty(DAYS)), tdx = FakeTdx())
+    assert result['status'] == 'rejected' and result['missing_days'] == [str(DAYS[0])] and 'block/empty_day' in result['issues']
+
+
+def test_force_reloads_a_valid_checkpoint(tmp_path):
+    bs = FakeBS(DAYS); update_daily(tmp_path, DAYS[0], DAYS[0], source = BaoStock(tmp_path, bs), tdx = FakeTdx())
+    bs.calls.clear(); result = update_daily(tmp_path, DAYS[0], DAYS[0], source = BaoStock(tmp_path, bs), tdx = FakeTdx(), force = True)
+    assert result['status'] == 'published' and bs.calls == [str(DAYS[0])]
+
+
+def test_corrupt_checkpoint_is_not_published_without_refetch(tmp_path):
+    bs = FakeBS(DAYS); update_daily(tmp_path, DAYS[0], DAYS[0], source = BaoStock(tmp_path, bs), tdx = FakeTdx())
+    (tmp_path / 'staging' / 'daily' / f'{DAYS[0]}.parquet').write_bytes(b'not parquet')
+    bs.calls.clear(); result = update_daily(tmp_path, DAYS[0], DAYS[0], source = BaoStock(tmp_path, bs), tdx = FakeTdx())
+    assert result['status'] == 'published' and bs.calls == [str(DAYS[0])]
+
+
+def test_corp_action_refresh_failure_keeps_old_history_and_reports_limit(tmp_path):
+    class BrokenTdx(FakeTdx):
+        def xdxr(self, code): raise RuntimeError('tdx unavailable')
+    bs = FakeBS(DAYS); update_daily(tmp_path, DAYS[0], DAYS[-1], source = BaoStock(tmp_path, bs), tdx = FakeTdx())
+    old = Store(tmp_path).load('corp_actions')
+    result = update_daily(tmp_path, DAYS[3], DAYS[3], source = BaoStock(tmp_path, bs), tdx = BrokenTdx(), force = True)
+    assert result['status'] == 'rejected' and result['component_failures'] and len(Store(tmp_path).load('corp_actions')) == len(old)
+
+
 def test_audit_limits_st_and_fresh_listing_exemption():
     b = pd.DataFrame({'date': [DAYS[1]] * 3, 'instrument': ['600001.SH', '600002.SH', '600003.SH'], 'open': [10.0] * 3, 'high': [11.0] * 3, 'low': [10.0] * 3,
                       'close': [10.8, 10.8, 10.8], 'preclose': [10.0] * 3, 'volume': [100] * 3, 'amount': [1050.0] * 3, 'is_trading': True, 'is_st': [False, True, False], 'board': 'main'})

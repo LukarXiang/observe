@@ -53,10 +53,18 @@ def create_app(root):
 
     @app.get('/api/data/issues')
     def issues(batch: str | None = None):
-        """默认读最近一次 observe data audit 的重审结果（按当前规则），没有时读已发布批次的审计结果"""
-        latest = root / 'coverage' / 'audit_latest.csv'; b = batch or store.published()['batch_id']; p = root / 'batches' / f'{b}.issues.csv'
-        src, path = ('audit_latest', latest) if batch is None and latest.exists() else (f'batch {b}', p)
-        return {'source': src, 'rows': _records(pd.read_csv(path)) if path.exists() else []}
+        """审计结果必须与指定发布批次绑定；没有当前批次产物时返回明确状态。"""
+        latest = root / 'coverage' / 'audit_latest.csv'; meta = root / 'coverage' / 'audit_latest.json'; b = batch or store.published()['batch_id']; p = root / 'batches' / f'{b}.issues.csv'
+        if batch is None and meta.exists():
+            try: info = json.loads(meta.read_text(encoding = 'utf-8'))
+            except (OSError, ValueError): info = {}
+            if info.get('batch_id') == b and latest.exists(): path, src = latest, 'audit_latest'
+            else: path, src = p, f'batch {b}'
+        else: path, src = p, f'batch {b}'
+        rows = _records(pd.read_csv(path)) if path.exists() else []
+        status = 'not_audited' if not path.exists() else ('problem' if rows else 'passed')
+        if batch is None and meta.exists() and info.get('batch_id') != b: status = 'expired'
+        return {'source': src, 'batch_id': b, 'status': status, 'rows': rows}
 
     @app.get('/api/instruments')
     def instruments(q: str = '', limit: int = 50):

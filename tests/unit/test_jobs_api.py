@@ -66,5 +66,5 @@ def test_api_reads_published_data(tmp_path):
     assert c.get('/api/data/coverage').json()[0]['n_days'] == 2
     assert [x['instrument'] for x in c.get('/api/instruments', params = {'q': '浦发'}).json()] == ['600000.SH']
     raw = c.get('/api/instruments/600000.SH/bars').json(); adj = c.get('/api/instruments/600000.SH/bars', params = {'price': 'adj'}).json()
-    assert [x['close'] for x in raw] == [10.1, 10.3] and [x['close_adj'] for x in adj] == [10.1, 20.6]   # 因子 2 自 6/24 起生效
+    assert [x['close'] for x in raw] == [10.1, 10.3] and [x['close_adj'] for x in adj] == [None, 20.6]   # 首个复权事件前无可信基准，保持缺失
     assert c.post('/api/jobs', json = {'kind': 'nope'}).status_code == 400

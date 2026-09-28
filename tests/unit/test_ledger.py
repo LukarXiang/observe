@@ -56,6 +56,20 @@ def test_bonus_shares_pending_until_listing_and_equity_unchanged():
     b.close_day(D[0], {'A': {**Q, 'close': 5}}); b.start_day(D[1]); assert p.sellable == 100
 
 
+def test_bonus_listed_on_ex_date_is_sellable_before_matching():
+    b = Book(0, D); p = b.pos('A'); p.qty, p.last_price = 100, 10.0
+    b.start_day(D[0], [{'instrument': 'A', 'ex_date': D[0], 'bonus_ratio': 1.0, 'bonus_list_date': D[0]}])
+    assert (p.qty, p.pending, p.sellable) == (200, 0, 200)
+
+
+def test_participation_requires_reference_and_records_partial_fill():
+    b = Book(10000, D); b.start_day(D[0])
+    missing = b.execute({'instrument': 'A', 'side': 'buy', 'amount': 1000, 'participation': 0.05}, Q, D[0], ZERO)
+    assert missing['reject_reason'] == 'no_liquidity_reference'
+    r = b.execute({'instrument': 'A', 'side': 'buy', 'amount': 2000, 'participation': 0.05}, {**Q, 'avg_amount_20d': 20000}, D[0], ZERO)
+    assert r['status'] == 'partial' and r['remaining_qty'] == 100 and r['qty_filled'] == 100
+
+
 def test_min_commission_and_roundtrip_cost():
     assert FEE.fees(10000, 'buy', D[0])['commission'] == 5                              # 10000 × 万 2.5 = 2.5 → 最低 5
     b = Book(2000, D); b.start_day(D[0])

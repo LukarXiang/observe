@@ -86,11 +86,18 @@ class Jobs:
         jid = self.claim()
         if jid is None: return None
         log = Path(self.get(jid)['log_path']); log.parent.mkdir(parents = True, exist_ok = True)
-        with log.open('a', encoding = 'utf-8') as h:
-            env = {**os.environ, 'PYTHONIOENCODING': 'utf-8', 'PYTHONUTF8': '1'}                    # 日志一律 UTF-8（Windows 控制台默认 GBK）
-            p = subprocess.Popen([sys.executable, '-m', 'observe.cli', '--root', str(self.root), 'jobs', 'exec', jid], stdout = h, stderr = subprocess.STDOUT, env = env)
+        try:
+            with log.open('a', encoding = 'utf-8') as h:
+                env = {**os.environ, 'PYTHONIOENCODING': 'utf-8', 'PYTHONUTF8': '1'}
+                p = subprocess.Popen([sys.executable, '-m', 'observe.cli', '--root', str(self.root), 'jobs', 'exec', jid], stdout = h, stderr = subprocess.STDOUT, env = env)
+        except Exception as exc:
+            self.finish(jid, 'failed', error = f'{type(exc).__name__}: {exc}')
+            return jid
         with self._db() as c: c.execute('update jobs set pid = ? where job_id = ?', (p.pid, jid))
-        if wait: p.wait()
+        if wait:
+            code = p.wait(); current = self.get(jid)
+            if current and current['status'] == 'running':
+                self.finish(jid, 'failed' if code else 'interrupted', error = f'子进程退出码 {code} 且未写入完成状态')
         return jid
 
     def worker(self, idle = 2.0, once = False):

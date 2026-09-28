@@ -12,7 +12,7 @@ ZERO = RuleSet([Rule(start = date(2020, 1, 1), stamp_tax = 0, transfer_fee = 0, 
 FEE = RuleSet([Rule(start = date(2020, 1, 1))])
 
 
-def flat(names, price = 10.0, days = D): return {d: {i: {'open': price, 'close': price, 'preclose': price} for i in names} for d in days}
+def flat(names, price = 10.0, days = D): return {d: {i: {'open': price, 'close': price, 'preclose': price, 'avg_amount_20d': 1e9} for i in names} for d in days}
 def cash_path(book): return [r['cash'] for r in book.equity_rows]
 def holding(book): return {i: p.qty for i, p in book.positions.items() if p.qty}
 
@@ -66,8 +66,8 @@ def test_full_rotation_cash_path_under_both_policies():
 
 
 def test_failed_sell_is_retried_and_funds_the_next_buy():
-    m = flat('AB', 10.0, D[:5]); m.update({d: {**m[d], 'B': {'open': 9, 'close': 9, 'preclose': 9}} for d in D[:5]})
-    m[D[3]]['A'] = {'open': 9, 'close': 9, 'preclose': 10}; m[D[4]]['A'] = {'open': 9, 'close': 9, 'preclose': 9}   # D3 开盘跌停
+    m = flat('AB', 10.0, D[:5]); m.update({d: {**m[d], 'B': {'open': 9, 'close': 9, 'preclose': 9, 'avg_amount_20d': 1e9}} for d in D[:5]})
+    m[D[3]]['A'] = {'open': 9, 'close': 9, 'preclose': 10, 'avg_amount_20d': 1e9}; m[D[4]]['A'] = {'open': 9, 'close': 9, 'preclose': 9, 'avg_amount_20d': 1e9}   # D3 开盘跌停
     book, orders = run_loop(D[:5], m, {D[0]: {'A': 2, 'B': 1}, D[2]: {'B': 2, 'A': 1}, D[4]: {'B': 2, 'A': 1}}, 1000, ZERO,
                             eligible_by_date = {d: {'A', 'B'} for d in D}, rebalance_every = 2, n = 1, buffer = 0, max_sell = None, max_weight = 1.0)
     d3 = [(o['instrument'], o.get('reject_reason')) for o in orders if o['exec_date'] == D[3]]
@@ -78,7 +78,7 @@ def test_failed_sell_is_retried_and_funds_the_next_buy():
 
 
 def test_bonus_across_pending_sell_order_and_listing_date():
-    m = flat('AB', 10.0, D[:5]); m[D[3]]['A'] = m[D[4]]['A'] = {'open': 5, 'close': 5, 'preclose': 5}
+    m = flat('AB', 10.0, D[:5]); m[D[3]]['A'] = m[D[4]]['A'] = {'open': 5, 'close': 5, 'preclose': 5, 'avg_amount_20d': 1e9}
     acts = {D[3]: [{'instrument': 'A', 'ex_date': D[3], 'bonus_ratio': 1.0, 'bonus_list_date': D[4]}]}
     book, orders = run_loop(D[:5], m, {D[0]: {'A': 1}}, 1000, ZERO, eligible_by_date = {D[0]: {'A'}, D[2]: {'B'}, D[4]: {'B'}},
                             actions = acts, rebalance_every = 2, n = 1, buffer = 0, max_sell = None, max_weight = 1.0)
@@ -88,7 +88,7 @@ def test_bonus_across_pending_sell_order_and_listing_date():
 
 
 def test_buy_order_across_ex_date_uses_post_split_price():
-    m = flat('A', 10.0, D[:3]); m[D[1]]['A'] = {'open': 5, 'close': 5, 'preclose': 5}
+    m = flat('A', 10.0, D[:3]); m[D[1]]['A'] = {'open': 5, 'close': 5, 'preclose': 5, 'avg_amount_20d': 1e9}
     book, orders = run_loop(D[:3], m, {D[0]: {'A': 1}}, 2000, ZERO, actions = {D[1]: [{'instrument': 'A', 'ex_date': D[1], 'bonus_ratio': 1.0, 'bonus_list_date': D[2]}]},
                             n = 1, buffer = 0, max_weight = 1.0)
     assert orders[0]['qty_filled'] == 400 and book.pos('A').pending == 0        # 金额 2000 / 除权后 5 元；除权当天才买入，不享受送股

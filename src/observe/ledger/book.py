@@ -69,7 +69,8 @@ class Book:
             added = int(p.qty * bonus); listed = a.get('bonus_list_date')
             if listed is None:
                 listed = self._after(day, self.LIST_LAG); self.assumptions.append({'date': day, 'instrument': i, 'field': 'bonus_list_date', 'value': listed})
-            p.qty += added; p.pending += added; p.cost = p.cost * (p.qty - added) / p.qty; self.listing[listed].append((i, added))
+            old_qty = p.qty; p.qty += added; p.cost = p.cost * old_qty / p.qty
+            if listed > day: p.pending += added; self.listing[listed].append((i, added))
         if quote.get('suspended') and p.last_price is not None:   # 停牌期间除权：估值价按除权参考价调整（与是否参与配股无关）
             ref = a.get('ref_price')
             p.last_price = ref if ref is not None else (p.last_price - cash + rights_price * rights_ratio) / (1 + bonus + rights_ratio); p.stale = True
@@ -102,9 +103,11 @@ class Book:
         if pre is not None:
             down, up = rules.limit_prices(pre, day, bd, st)
             if not down <= price <= up: return reject('slippage_outside_limit')
+        requested = None
         if side == 'sell':
             qty = p.sellable
             if qty <= 0: return reject('not_sellable')
+            requested = qty
             if 'participation' in order:
                 cap = quote.get('avg_amount_20d'); limit = order['participation']
                 if cap is None: return reject('no_liquidity_reference')
@@ -112,8 +115,10 @@ class Book:
                 if qty <= 0: return reject('participation_limit')
         else:
             qty = int(order['amount'] / price // unit * unit)
-            cap = quote.get('avg_amount_20d'); limit = order.get('participation', 0.05)
-            if cap is not None: qty = min(qty, int(cap * limit / price // unit * unit))
+            requested = qty; cap = quote.get('avg_amount_20d'); limit = order.get('participation')
+            if limit is not None:
+                if cap is None: return reject('no_liquidity_reference')
+                qty = min(qty, int(cap * limit / price // unit * unit))
             money = self.cash if budget is None else min(budget, self.cash)
             while qty and price * qty + rules.fees(price * qty, 'buy', day)['fee'] > money: qty -= unit
             if not qty: return reject('cash')
@@ -124,7 +129,8 @@ class Book:
         else:
             p.qty -= qty; self._cash(day, 'sell', value, instrument = i); self._cash(day, 'fee', -f['fee'], instrument = i)
         self._fill_seq += 1
-        fill = {**order, 'order_id': oid, 'fill_id': f'fill-{self._fill_seq}', 'date': day, 'qty_filled': qty, 'fill_price': price, 'value': value, **f, 'status': 'filled'}   # amount 保留为买单的目标金额
+        remaining = max(0, requested - qty) if requested is not None else 0
+        fill = {**order, 'order_id': oid, 'fill_id': f'fill-{self._fill_seq}', 'date': day, 'qty_requested': requested, 'qty_filled': qty, 'remaining_qty': remaining, 'fill_price': price, 'value': value, **f, 'status': 'partial' if remaining else 'filled'}
         self.fills.append(fill); return fill
 
     # 收盘 -----------------------------------------------------------------

@@ -28,6 +28,8 @@ def _limit_fn(rules):
 
 def audit_daily(bars, trading_days, instruments = None, rules = None):
     """bars: 标准化后的 bars_1d（可只含本批次的日子）；trading_days: 本批次应有的交易日；rules: 执行规则集（涨跌幅来源）"""
+    if not len(bars):
+        return pd.DataFrame([issue('block', 'empty_day', d, detail = '全市场 0 行') for d in sorted(trading_days)], columns = ['level', 'rule', 'date', 'instrument', 'detail'])
     out = []; t = bars[bars.is_trading]; s = bars[~bars.is_trading]
     count = bars.groupby('date').size().reindex(sorted(trading_days), fill_value = 0)
     out += [issue('block', 'empty_day', d, detail = '全市场 0 行') for d, n in count.items() if n == 0]

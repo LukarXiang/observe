@@ -35,6 +35,15 @@ def _last_progress(root):
     return out
 
 
+def _atomic_parquet(path, frame):
+    path = path if hasattr(path, 'parent') else Store(path).root
+    path.parent.mkdir(parents = True, exist_ok = True)
+    tmp = path.with_name(f'.{path.name}.tmp')
+    frame.to_parquet(tmp, index = False)
+    pd.read_parquet(tmp)  # validate that the staged artifact is readable before commit
+    tmp.replace(path)
+
+
 def _merge(store, table, part, new, drop = None):
     """new 覆盖已发布分区中主键相同的行；drop(old) 先删掉要整体替换的行"""
     old = store.load(table, parts = [part])
@@ -54,7 +63,7 @@ def default_rules():
 def update_daily(root, start, end, source = None, tdx = None, factor_codes = (), force = False, rules = None):
     """下载 [start, end] 的交易日历、证券资料、全市场日线与当日复权因子变动；当期有除权的证券从通达信刷新公司行动。
     factor_codes：需要取全部复权因子历史的证券（首次初始化用）。返回摘要；审计有阻断问题时批次标为 rejected、不发布"""
-    start, end = _d(start), _d(end); store = Store(root); parts, days_done = {}, []
+    start, end = _d(start), _d(end); store = Store(root); parts, days_done, downloaded_days, missing_days, component_failures = {}, [], [], [], []
     with operation_lock(root, DATA_WRITER):
         src = source or BaoStock(root)
         pub = store.published()
@@ -62,35 +71,62 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
         with src.session():
             cal = std.calendar(src.calendar(start, end)); raw.save(root, 'baostock', 'calendar', f'{start}_{end}', cal)
             days = [d for d in cal[cal.is_open].date if start <= d <= end]
-            have = set() if force else set(store.load('bars_1d', parts = sorted({str(d.year) for d in days}), columns = ['date']).get('date', []))
-            todo = [d for d in days if d not in have]
+            # Published rows alone do not prove a complete day. Only a validated
+            # checkpoint with both required components may be reused.
+            todo = days
             inst_raw = src.stock_basic(); raw.save(root, 'baostock', 'stock_basic', str(end), inst_raw)
             bars, events = [], []
             for d in todo:
                 key = str(d)
                 staged = staging / f'{key}.parquet'
-                if progress.get(key, {}).get('status') == 'success' and staged.exists():
-                    bars.append(pd.read_parquet(staged)); days_done.append(d)
-                    af = staging / f'{key}.adj.parquet'
-                    if af.exists(): events.append(pd.read_parquet(af))
-                    continue
+                one = None
+                if not force and progress.get(key, {}).get('status') == 'success' and progress.get(key, {}).get('adj_status') == 'success' and staged.exists():
+                    try: one = pd.read_parquet(staged)
+                    except Exception: one = None
+                    published = store.load('bars_1d', parts = [str(d.year)])
+                    published_count = int((published.date == d).sum()) if len(published) else 0
+                    if one is not None and {'date', 'instrument', 'open', 'high', 'low', 'close'}.issubset(one.columns) and len(one) and (not published_count or len(one) == published_count):
+                        bars.append(one); days_done.append(d)
+                        af = staging / f'{key}.adj.parquet'
+                        try: a = pd.read_parquet(af)
+                        except Exception: a = None
+                        if a is not None: events.append(a); continue
                 try:
-                    r = src.daily_market(d); raw.save(root, 'baostock', 'daily_market', key, r)
-                    one = std.daily(r) if len(r) else pd.DataFrame()
-                    if len(one): one.to_parquet(staged, index = False)
+                    published = store.load('bars_1d', parts = [str(d.year)])
+                    published_count = int((published.date == d).sum()) if len(published) else 0
+                    checkpoint_ok = not published_count or (one is not None and len(one) == published_count)
+                    if not force and checkpoint_ok and progress.get(key, {}).get('status') == 'success' and staged.exists():
+                        try: one = pd.read_parquet(staged)
+                        except Exception: one = None
+                        if one is None:
+                            r = src.daily_market(d); downloaded_days.append(d); raw.save(root, 'baostock', 'daily_market', key, r)
+                            one = std.daily(r) if len(r) else pd.DataFrame()
+                            if len(one): _atomic_parquet(staged, one)
+                    else:
+                        r = src.daily_market(d); downloaded_days.append(d); raw.save(root, 'baostock', 'daily_market', key, r)
+                        one = std.daily(r) if len(r) else pd.DataFrame()
+                        if len(one): _atomic_parquet(staged, one)
                     status = 'success' if len(one) else 'unknown_empty'
+                    if not len(one): missing_days.append(d)
+                    adj_status = 'unknown_empty'
+                    a = pd.DataFrame()
+                    try:
+                        a = src.adjust_factor_day(d); _atomic_parquet(staging / f'{key}.adj.parquet', a); adj_status = 'success'
+                    except Exception as exc:
+                        component_failures.append({'date': key, 'component': 'adjust_factor', 'error': str(exc)[:300]}); adj_status = 'failed'
                     _progress(root, {'date': key, 'requested_start': key, 'requested_end': key, 'actual_start': key if len(one) else None,
-                                     'actual_end': key if len(one) else None, 'records': len(one), 'status': status, 'evidence': 'daily_market_response'})
-                    if not len(one): continue
-                    bars.append(one); days_done.append(d)
-                    a = src.adjust_factor_day(d); a.to_parquet(staging / f'{key}.adj.parquet', index = False); events.append(a)
+                                     'actual_end': key if len(one) else None, 'records': len(one), 'status': status, 'adj_status': adj_status,
+                                     'evidence': 'daily_market_response'})
+                    if len(one): bars.append(one); days_done.append(d)
+                    if len(a): events.append(a)
+                    continue
                 except Exception as exc:
-                    _progress(root, {'date': key, 'requested_start': key, 'requested_end': key, 'records': 0, 'status': 'failed', 'error': str(exc)[:300]})
+                    _progress(root, {'date': key, 'requested_start': key, 'requested_end': key, 'records': 0, 'status': 'failed', 'adj_status': 'failed', 'error': str(exc)[:300]})
                     raise
             full = [src.adjust_factor(c) for c in factor_codes]
         inst = std.instruments(inst_raw)
         parts['calendar'] = {'all': _merge(store, 'calendar', 'all', cal)}; parts['instruments'] = {'all': store.write_partition('instruments', 'all', inst)}
-        new = pd.concat([b for b in bars if len(b)], ignore_index = True) if any(len(b) for b in bars) else pd.DataFrame(columns = ['date'])
+        new = pd.concat([b for b in bars if len(b)], ignore_index = True) if any(len(b) for b in bars) else pd.DataFrame(columns = ['date', 'instrument', 'open', 'high', 'low', 'close', 'preclose', 'volume', 'amount', 'is_trading', 'is_st', 'board'])
         if len(new):
             parts['bars_1d'] = {str(y): _merge(store, 'bars_1d', str(y), g) for y, g in new.groupby(new.date.map(lambda x: x.year))}
         adj = pd.concat([std.adj_factors(x) for x in events + full if len(x)], ignore_index = True) if any(len(x) for x in events + full) else pd.DataFrame()
@@ -108,16 +144,19 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
             acts, refreshed = [], []
             for i in changed:
                 try: x = tdx.xdxr(i.split('.')[0])
-                except Exception: continue
+                except Exception as exc:
+                    component_failures.append({'instrument': i, 'component': 'corp_actions', 'error': str(exc)[:300]}); continue
                 if x is not None and len(x): acts.append(std.corp_actions(x, i)); refreshed.append(i)
             if acts:
                 acts = pd.concat(acts, ignore_index = True)
                 parts['corp_actions'] = {'all': _merge(store, 'corp_actions', 'all', acts, drop = lambda o: o.instrument.isin(refreshed))}
-        issues = audit_daily(new, days_done, inst, rules or default_rules()) if days_done else pd.DataFrame(columns = ['level'])
+        issues = audit_daily(new, days, inst, rules or default_rules()) if days else pd.DataFrame(columns = ['level'])
         bid = store.write_batch(parts, note = f'daily {start}..{end}')
+        if missing_days: issues = pd.concat([issues, pd.DataFrame([{'level': 'block', 'rule': 'missing_requested_day', 'date': d, 'instrument': None, 'detail': 'no validated daily artifact'} for d in missing_days])], ignore_index = True)
+        if component_failures: issues = pd.concat([issues, pd.DataFrame([{'level': 'block', 'rule': 'component_failed', 'date': x.get('date'), 'instrument': x.get('instrument'), 'detail': x['error']} for x in component_failures])], ignore_index = True)
         blocked = issues[issues.level == 'block'] if len(issues) else issues
         if len(blocked): store.reject(bid, f'{len(blocked)} 条阻断级审计问题'); status = 'rejected'
         else: store.publish(bid); status = 'published'
         if len(issues): issues.to_csv(store.root / 'batches' / f'{bid}.issues.csv', index = False)
-    return {'batch_id': bid, 'status': status, 'base': pub['batch_id'], 'days': len(days_done), 'rows': len(new), 'adj_events': len(adj),
+    return {'batch_id': bid, 'status': status, 'base': pub['batch_id'], 'days': len(downloaded_days), 'verified_days': len(days_done), 'missing_days': [str(x) for x in missing_days], 'component_failures': component_failures, 'rows': len(new), 'adj_events': len(adj),
             'issues': {f'{l}/{r}': int(n) for (l, r), n in issues.groupby(['level', 'rule']).size().items()} if len(issues) else {}}

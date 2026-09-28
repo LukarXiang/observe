@@ -14,17 +14,20 @@ def plan_rebalance(scores, eligible, held, n = 20, buffer = 10, max_sell = 5):
     return {'keep': keep, 'missing': missing, 'forced': forced, 'sells': sells, 'buys': buys, 'target': keep | set(buys), 'rank': rank}
 
 
-def rebalance_orders(plan, amount):
-    return [{'instrument': i, 'side': 'sell', 'qty': 'all', 'reason': 'exit_universe'} for i in plan['forced']] + \
-           [{'instrument': i, 'side': 'sell', 'qty': 'all', 'reason': 'exit_rank'} for i in plan['sells']] + \
-           [{'instrument': i, 'side': 'buy', 'amount': amount, 'reason': 'enter_top'} for i in plan['buys']]
+DEFAULT_PARTICIPATION = 0.05
 
 
-def refill_orders(target, target_amount, held_value, sell_reason, rank, lot_value, completed = None):
+def rebalance_orders(plan, amount, participation = DEFAULT_PARTICIPATION):
+    return [{'instrument': i, 'side': 'sell', 'qty': 'all', 'participation': participation, 'reason': 'exit_universe'} for i in plan['forced']] + \
+           [{'instrument': i, 'side': 'sell', 'qty': 'all', 'participation': participation, 'reason': 'exit_rank'} for i in plan['sells']] + \
+           [{'instrument': i, 'side': 'buy', 'amount': amount, 'participation': participation, 'reason': 'enter_top'} for i in plan['buys']]
+
+
+def refill_orders(target, target_amount, held_value, sell_reason, rank, lot_value, completed = None, participation = DEFAULT_PARTICIPATION):
     """非调仓日：目标外持仓继续卖；目标内持有市值不足的补买差额（不足一个买入单位不补）；不重新排名、不再平衡"""
-    sells = [{'instrument': i, 'side': 'sell', 'qty': 'all', 'reason': sell_reason.get(i, 'exit_rank')} for i in sorted(held_value) if i not in target]
+    sells = [{'instrument': i, 'side': 'sell', 'qty': 'all', 'participation': participation, 'reason': sell_reason.get(i, 'exit_rank')} for i in sorted(held_value) if i not in target]
     basis = completed if completed is not None else held_value
     gaps = {i: target_amount[i] - basis.get(i, 0.0) for i in target if i in target_amount}
-    buys = [{'instrument': i, 'side': 'buy', 'amount': round(g, 2), 'reason': 'refill'} for i, g in sorted(gaps.items(), key = lambda x: rank.get(x[0], 10 ** 9))
+    buys = [{'instrument': i, 'side': 'buy', 'amount': round(g, 2), 'participation': participation, 'reason': 'refill'} for i, g in sorted(gaps.items(), key = lambda x: rank.get(x[0], 10 ** 9))
             if g >= lot_value.get(i, float('inf'))]
     return sells + buys
