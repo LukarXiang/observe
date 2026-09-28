@@ -10,6 +10,7 @@ from .audit import audit_daily
 from .locks import DATA_WRITER, operation_lock
 from .sources.baostock import BaoStock
 from .store import Store
+from .prices import normalize_coverage
 
 
 def _d(x): return x if isinstance(x, date) else date.fromisoformat(str(x))
@@ -51,6 +52,53 @@ def _merge(store, table, part, new, drop = None):
     return store.write_partition(table, part, pd.concat([old, new], ignore_index = True) if len(old) else new)
 
 
+def _merge_coverage(store, new):
+    """Merge coverage monotonically; a partial observation cannot erase a trusted row."""
+    old = store.load('adj_coverage')
+    if not len(old):
+        return store.write_partition('adj_coverage', 'all', normalize_coverage(new))
+    left = normalize_coverage(old).set_index('instrument')
+    for row in normalize_coverage(new).to_dict('records'):
+        inst = row['instrument']
+        if inst not in left.index:
+            left.loc[inst] = row
+            continue
+        previous = left.loc[inst].to_dict()
+        trusted = previous.get('status') in ('complete', 'no_events') and not bool(previous.get('has_gap', False))
+        incoming = row.get('status')
+        if trusted and (incoming == 'partial' or bool(row.get('has_gap', False))):
+            continue
+        if trusted and row.get('verified_through') is not None and previous.get('verified_through') is not None:
+            if row['verified_through'] < previous['verified_through']:
+                row['verified_through'] = previous['verified_through']
+        left.loc[inst] = row
+    return store.write_partition('adj_coverage', 'all', normalize_coverage(left.reset_index()))
+
+
+def fetch_day(source, day, staging, force=False, checkpoint=None):
+    """Fetch and validate one day; no final table is touched here."""
+    key = str(day); checkpoint = checkpoint or {}
+    daily_path, adj_path = staging / f'{key}.parquet', staging / f'{key}.adj.parquet'
+    bars = adj = None
+    if not force and checkpoint.get('status') == 'success' and checkpoint.get('adj_status') in ('success', 'no_events'):
+        try: bars = pd.read_parquet(daily_path); adj = pd.read_parquet(adj_path)
+        except Exception: bars = adj = None
+    downloaded = False
+    if bars is None:
+        response = source.daily_market(day); downloaded = True; bars = std.daily(response) if len(response) else pd.DataFrame()
+        if len(bars): _atomic_parquet(daily_path, bars)
+    if adj is None:
+        try:
+            adj = source.adjust_factor_day(day); _atomic_parquet(adj_path, adj)
+        except Exception as exc:
+            return {'date': day, 'bars': bars, 'adj': pd.DataFrame(), 'fetch_status': 'success' if len(bars) else 'unknown_empty',
+                    'validation_status': 'failed', 'reuse_basis': 'none', 'retry_components': ['adjust_factor'], 'downloaded': downloaded, 'error': str(exc)}
+    return {'date': day, 'bars': bars, 'adj': adj, 'fetch_status': 'success' if len(bars) else 'unknown_empty',
+            'validation_status': 'success' if len(bars) and adj is not None else 'incomplete',
+            'reuse_basis': 'checkpoint' if not downloaded else 'source',
+            'retry_components': ([] if len(bars) else ['daily_market']) + ([] if adj is not None else ['adjust_factor']), 'downloaded': downloaded}
+
+
 RULES = 'configs/rule_profiles/main_board.yaml'
 
 
@@ -90,7 +138,9 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                         af = staging / f'{key}.adj.parquet'
                         try: a = pd.read_parquet(af)
                         except Exception: a = None
-                        if a is not None: events.append(a); continue
+                        if a is not None:
+                            events.append(a); continue
+                        bars.pop(); days_done.pop()
                 try:
                     published = store.load('bars_1d', parts = [str(d.year)])
                     published_count = int((published.date == d).sum()) if len(published) else 0
@@ -134,12 +184,12 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
         if len(adj): parts['adj_factors'] = {'all': _merge(store, 'adj_factors', 'all', adj)}
         coverage_rows = []
         for code in factor_codes:
-            coverage_rows.append({'instrument': std.instrument(code), 'status': 'complete', 'requested_start': '1990-01-01', 'requested_end': '2099-12-31', 'verified_through': str(end), 'has_start_basis': True, 'has_gap': False, 'source': 'baostock.full_adjust_factor', 'evidence': 'full_adjust_factor_query'})
+            coverage_rows.append({'instrument': std.instrument(code), 'status': 'complete', 'requested_start': '1990-01-01', 'requested_end': '2099-12-31', 'verified_from': '1990-01-01', 'verified_through': str(end), 'has_start_basis': True, 'has_gap': False, 'confirmed_no_events': False, 'verified_at': datetime.now().isoformat(timespec='seconds'), 'source': 'baostock.full_adjust_factor', 'evidence': 'full_adjust_factor_query'})
         if changed:
             known = {r['instrument'] for r in coverage_rows}
-            coverage_rows.extend({'instrument': i, 'status': 'partial', 'requested_start': str(start), 'requested_end': str(end), 'verified_through': str(end), 'has_start_basis': False, 'has_gap': True, 'source': 'baostock.daily_adjust_factor', 'evidence': 'daily_adjust_factor_query'} for i in changed if i not in known)
+            coverage_rows.extend({'instrument': i, 'status': 'partial', 'requested_start': str(start), 'requested_end': str(end), 'verified_from': str(start), 'verified_through': str(end), 'has_start_basis': False, 'has_gap': True, 'confirmed_no_events': False, 'verified_at': datetime.now().isoformat(timespec='seconds'), 'source': 'baostock.daily_adjust_factor', 'evidence': 'daily_adjust_factor_query'} for i in changed if i not in known)
         if coverage_rows:
-            parts['adj_coverage'] = {'all': _merge(store, 'adj_coverage', 'all', pd.DataFrame(coverage_rows))}
+            parts['adj_coverage'] = {'all': _merge_coverage(store, pd.DataFrame(coverage_rows))}
         if tdx is not None and changed:
             acts, refreshed = [], []
             for i in changed:
@@ -151,11 +201,19 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                 acts = pd.concat(acts, ignore_index = True)
                 parts['corp_actions'] = {'all': _merge(store, 'corp_actions', 'all', acts, drop = lambda o: o.instrument.isin(refreshed))}
         issues = audit_daily(new, days, inst, rules or default_rules()) if days else pd.DataFrame(columns = ['level'])
+        current_tables = store.published().get('tables', {})
+        has_changes = any(current_tables.get(table, {}).get(part, {}).get('file') != value.get('file') for table, values in parts.items() for part, value in values.items())
+        if not has_changes and not downloaded_days and not missing_days and not component_failures:
+            return {'batch_id': pub['batch_id'], 'status': 'no_change', 'base': pub['batch_id'], 'days': 0, 'verified_days': len(days_done), 'missing_days': [], 'component_failures': [], 'rows': 0, 'adj_events': 0, 'issues': {}}
         bid = store.write_batch(parts, note = f'daily {start}..{end}')
         if missing_days: issues = pd.concat([issues, pd.DataFrame([{'level': 'block', 'rule': 'missing_requested_day', 'date': d, 'instrument': None, 'detail': 'no validated daily artifact'} for d in missing_days])], ignore_index = True)
         if component_failures: issues = pd.concat([issues, pd.DataFrame([{'level': 'block', 'rule': 'component_failed', 'date': x.get('date'), 'instrument': x.get('instrument'), 'detail': x['error']} for x in component_failures])], ignore_index = True)
         blocked = issues[issues.level == 'block'] if len(issues) else issues
-        if len(blocked): store.reject(bid, f'{len(blocked)} 条阻断级审计问题'); status = 'rejected'
+        if len(blocked):
+            store.reject(bid, f'{len(blocked)} 条阻断级审计问题'); status = 'rejected'
+            rejected_dates = {str(x) for x in issues.loc[issues.level == 'block', 'date'].dropna().tolist()}
+            for d in rejected_dates:
+                _progress(root, {'date': d, 'status': 'rejected', 'adj_status': 'rejected', 'retry': True})
         else: store.publish(bid); status = 'published'
         if len(issues): issues.to_csv(store.root / 'batches' / f'{bid}.issues.csv', index = False)
     return {'batch_id': bid, 'status': status, 'base': pub['batch_id'], 'days': len(downloaded_days), 'verified_days': len(days_done), 'missing_days': [str(x) for x in missing_days], 'component_failures': component_failures, 'rows': len(new), 'adj_events': len(adj),
