@@ -6,6 +6,14 @@ from pathlib import Path
 def _json(x): print(json.dumps(x, ensure_ascii = False, indent = 1, default = str))
 
 
+def _config(path):
+    if not path: return {}
+    import yaml
+    data = yaml.safe_load(Path(path).read_text(encoding='utf-8')) or {}
+    if not isinstance(data, dict): raise ValueError('run 配置必须是对象')
+    return data
+
+
 def run_kind(root, kind, params):
     """任务种类 → 研究核心函数；命令行直接执行和队列执行都走这里"""
     from .data.store import Store
@@ -71,7 +79,7 @@ def main(argv = None):
     j.add_parser('list'); w = j.add_parser('worker'); w.add_argument('--once', action = 'store_true')
     for name in ('exec', 'retry', 'cancel', 'show'): j.add_parser(name).add_argument('job_id')
     sv = sub.add_parser('serve'); sv.add_argument('--port', type = int, default = 8765)
-    r = sub.add_parser('run'); r.add_argument('--snapshot'); r.add_argument('--output'); r.add_argument('--cash', type=float, default=100000.0); r.add_argument('--start'); r.add_argument('--end')
+    r = sub.add_parser('run'); r.add_argument('--config'); r.add_argument('--snapshot'); r.add_argument('--output'); r.add_argument('--cash', type=float, default=100000.0); r.add_argument('--start'); r.add_argument('--end')
     rp = sub.add_parser('reproduce'); rp.add_argument('run'); rp.add_argument('--output')
     a = ap.parse_args(argv); root = Path(a.root)
     from .jobs import Jobs, SUPPORTED
@@ -104,7 +112,13 @@ def main(argv = None):
             except Exception as e:   # noqa: BLE001  任务失败要落盘，不能让子进程静默退出
                 traceback.print_exc(); q.finish(a.job_id, 'failed', error = f'{type(e).__name__}: {e}'); sys.exit(1)
             return
-    if a.cmd == 'run': return _json(run_kind(root, 'run_experiment', {'snapshot': a.snapshot, 'output': a.output, 'initial_cash': a.cash, 'start': a.start, 'end': a.end}))
+    if a.cmd == 'run':
+        cfg = _config(a.config)
+        if 'snapshot_id' in cfg and 'snapshot' not in cfg: cfg['snapshot'] = cfg.pop('snapshot_id')
+        p = {'snapshot': a.snapshot, 'output': a.output, 'initial_cash': a.cash, 'start': a.start, 'end': a.end}
+        p.update({k: v for k, v in cfg.items() if k in {'snapshot', 'output', 'initial_cash', 'cash', 'start', 'end'} and v is not None})
+        if 'cash' in p and 'initial_cash' not in cfg: p['initial_cash'] = p.pop('cash')
+        return _json(run_kind(root, 'run_experiment', p))
     if a.cmd == 'reproduce': return _json(run_kind(root, 'reproduce', {'run': a.run, 'output': a.output}))
     if a.cmd == 'serve':
         import threading, uvicorn
