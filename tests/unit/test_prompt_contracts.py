@@ -109,3 +109,13 @@ def test_synthetic_rule_profile_is_loaded_by_date():
 def test_missing_benchmark_is_reported_without_deleting_strategy_days():
     result = metrics([100, 101, 102, 101], [100, float("nan"), 101, 102])
     assert result["benchmark_missing_days"] == 2 and result["annualized_return"] is not None
+
+
+def test_manual_cashflow_fixture_matches_book_step_by_step():
+    table = pd.read_csv("tests/fixtures/synthetic_cashflows.csv")
+    b = Book(10000); d1, d2 = date(2024, 1, 2), date(2024, 1, 3); b.start_day(d1)
+    assert table.loc[0, "expected_cash"] == b.cash
+    b.execute({"instrument": "A", "side": "buy", "amount": 5000}, {"open": 50}, d1, RULES)
+    assert b.cash == pytest.approx(table.loc[1, "expected_cash"])
+    b.start_day(d2); b.execute({"instrument": "A", "side": "sell", "qty": "all"}, {"open": 50}, d2, RULES)
+    assert b.cash == pytest.approx(table.loc[2, "expected_cash"])
