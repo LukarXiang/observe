@@ -135,6 +135,17 @@ def test_update_with_blocking_audit_issue_is_not_published(tmp_path):
     assert bad['status'] == 'rejected' and 'block/ohlc_order' in bad['issues'] and Store(tmp_path).published()['batch_id'] == ok['batch_id']
 
 
+def test_update_reuses_successful_staged_days_after_source_failure(tmp_path):
+    class Failing(FakeBS):
+        def __init__(self, days, fail): super().__init__(days); self.fail = fail
+        def query_daily_history_k_AStock(self, day):
+            if day == str(self.fail): raise RuntimeError('mid-run failure')
+            return super().query_daily_history_k_AStock(day)
+    with pytest.raises(RuntimeError): update_daily(tmp_path, DAYS[0], DAYS[2], source = BaoStock(tmp_path, Failing(DAYS, DAYS[2])))
+    retry = Failing(DAYS, date(2099, 1, 1)); result = update_daily(tmp_path, DAYS[0], DAYS[2], source = BaoStock(tmp_path, retry))
+    assert result['status'] == 'published' and retry.calls == [str(DAYS[2])]
+
+
 def test_audit_limits_st_and_fresh_listing_exemption():
     b = pd.DataFrame({'date': [DAYS[1]] * 3, 'instrument': ['600001.SH', '600002.SH', '600003.SH'], 'open': [10.0] * 3, 'high': [11.0] * 3, 'low': [10.0] * 3,
                       'close': [10.8, 10.8, 10.8], 'preclose': [10.0] * 3, 'volume': [100] * 3, 'amount': [1050.0] * 3, 'is_trading': True, 'is_st': [False, True, False], 'board': 'main'})

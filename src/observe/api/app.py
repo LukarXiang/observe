@@ -9,7 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from ..data.store import Store
-from ..jobs import KINDS, Jobs
+from ..jobs import KINDS, SUPPORTED, Jobs
 
 
 class JobIn(BaseModel):
@@ -69,7 +69,8 @@ def create_app(root):
         if price == 'adj' and len(df):
             from ..data.prices import with_adjusted
             adj = query('adj_factors', "select * from {t} where instrument = ?", (inst,), state = state)
-            df = with_adjusted(df, adj)
+            cov = query('adj_coverage', "select * from {t} where instrument = ?", (inst,), state = state)
+            df = with_adjusted(df, adj, cov if len(cov) else None)
         return _records(df)
 
     @app.get('/api/instruments/{inst}/actions')
@@ -82,6 +83,7 @@ def create_app(root):
     @app.post('/api/jobs')
     def submit(j: JobIn):
         if j.kind not in KINDS: raise HTTPException(400, f'未知任务种类 {j.kind}')
+        if j.kind not in SUPPORTED: raise HTTPException(400, f'任务种类 {j.kind} 尚未实现')
         return {'job_id': jobs.submit(j.kind, j.params)}
 
     @app.get('/api/jobs/{jid}')

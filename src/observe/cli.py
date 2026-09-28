@@ -10,6 +10,10 @@ def run_kind(root, kind, params):
     """任务种类 → 研究核心函数；命令行直接执行和队列执行都走这里"""
     from .data.store import Store
     if kind == 'data_update':
+        lock_path = Path(root) / 'locks' / 'data-writer.lock'
+        owner_path = lock_path.with_suffix('.owner')
+        if owner_path.exists() or lock_path.exists():
+            raise RuntimeError(f'data-writer 锁被占用：{lock_path}')
         from .data import standardize as std
         from .data.sources.tdx import Tdx
         from .data.update import update_daily
@@ -49,7 +53,7 @@ def main(argv = None):
     for name in ('exec', 'retry', 'cancel', 'show'): j.add_parser(name).add_argument('job_id')
     sv = sub.add_parser('serve'); sv.add_argument('--port', type = int, default = 8765)
     a = ap.parse_args(argv); root = Path(a.root)
-    from .jobs import Jobs
+    from .jobs import Jobs, SUPPORTED
     if a.cmd == 'data':
         from .data.store import Store
         if a.act == 'update':
@@ -62,7 +66,9 @@ def main(argv = None):
             pub = Store(root).published(); return _json({'batch_id': pub['batch_id'], 'tables': {t: {'partitions': len(v), 'rows': sum(x['rows'] for x in v.values())} for t, v in pub['tables'].items()}})
     if a.cmd == 'jobs':
         q = Jobs(root)
-        if a.act == 'submit': return print(q.submit(a.kind, json.loads(a.params)))
+        if a.act == 'submit':
+            if a.kind not in SUPPORTED: raise SystemExit(f'任务种类 {a.kind} 尚未实现')
+            return print(q.submit(a.kind, json.loads(a.params)))
         if a.act == 'list': return _json([{k: r[k] for k in ('job_id', 'kind', 'status', 'created_at', 'finished_at', 'error')} for r in q.list()])
         if a.act == 'worker': return q.worker(once = a.once)
         if a.act == 'retry': return print(q.retry(a.job_id))
