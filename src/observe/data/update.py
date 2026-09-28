@@ -21,7 +21,16 @@ def _merge(store, table, part, new, drop = None):
     return store.write_partition(table, part, pd.concat([old, new], ignore_index = True) if len(old) else new)
 
 
-def update_daily(root, start, end, source = None, tdx = None, factor_codes = (), force = False):
+RULES = 'configs/rule_profiles/main_board.yaml'
+
+
+def default_rules():
+    from pathlib import Path
+    from ..ledger.rules import RuleSet
+    return RuleSet.from_yaml(RULES) if Path(RULES).exists() else None
+
+
+def update_daily(root, start, end, source = None, tdx = None, factor_codes = (), force = False, rules = None):
     """下载 [start, end] 的交易日历、证券资料、全市场日线与当日复权因子变动；当期有除权的证券从通达信刷新公司行动。
     factor_codes：需要取全部复权因子历史的证券（首次初始化用）。返回摘要；审计有阻断问题时批次标为 rejected、不发布"""
     start, end = _d(start), _d(end); store = Store(root); src = source or BaoStock(root); parts, days_done = {}, []
@@ -51,11 +60,11 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
             if acts:
                 acts = pd.concat(acts, ignore_index = True)
                 parts['corp_actions'] = {'all': _merge(store, 'corp_actions', 'all', acts, drop = lambda o: o.instrument.isin(changed))}
-        issues = audit_daily(new, days_done, inst) if days_done else pd.DataFrame(columns = ['level'])
+        issues = audit_daily(new, days_done, inst, rules or default_rules()) if days_done else pd.DataFrame(columns = ['level'])
         bid = store.write_batch(parts, note = f'daily {start}..{end}')
         blocked = issues[issues.level == 'block'] if len(issues) else issues
         if len(blocked): store.reject(bid, f'{len(blocked)} 条阻断级审计问题'); status = 'rejected'
         else: store.publish(bid); status = 'published'
         if len(issues): issues.to_csv(store.root / 'batches' / f'{bid}.issues.csv', index = False)
     return {'batch_id': bid, 'status': status, 'base': pub['batch_id'], 'days': len(days_done), 'rows': len(new), 'adj_events': len(adj),
-            'issues': issues.groupby(['level', 'rule']).size().to_dict() if len(issues) else {}}
+            'issues': {f'{l}/{r}': int(n) for (l, r), n in issues.groupby(['level', 'rule']).size().items()} if len(issues) else {}}

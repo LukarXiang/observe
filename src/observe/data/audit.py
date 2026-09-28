@@ -7,7 +7,7 @@ import pandas as pd
 GEM_20 = date(2020, 8, 24)   # 创业板涨跌幅由 10% 改为 20%
 
 
-def _limit(board, is_st, day):
+def _fallback_limit(board, is_st, day):
     if board == 'main': return 0.05 if is_st else 0.10
     if board == 'gem': return 0.20 if day >= GEM_20 else (0.05 if is_st else 0.10)
     return {'star': 0.20, 'bse': 0.30}.get(board, np.nan)
@@ -16,8 +16,18 @@ def _limit(board, is_st, day):
 def issue(level, rule, day = None, inst = None, detail = ''): return {'level': level, 'rule': rule, 'date': day, 'instrument': inst, 'detail': detail}
 
 
-def audit_daily(bars, trading_days, instruments = None):
-    """bars: 标准化后的 bars_1d（可只含本批次的日子）；trading_days: 本批次应有的交易日"""
+def _limit_fn(rules):
+    """涨跌幅优先取执行规则集（与账本同一份），规则集没有覆盖的板块退回内置值"""
+    def f(board, is_st, day):
+        if rules is not None:
+            try: return rules.on(day, board, bool(is_st)).limit_pct
+            except ValueError: pass
+        return _fallback_limit(board, is_st, day)
+    return f
+
+
+def audit_daily(bars, trading_days, instruments = None, rules = None):
+    """bars: 标准化后的 bars_1d（可只含本批次的日子）；trading_days: 本批次应有的交易日；rules: 执行规则集（涨跌幅来源）"""
     out = []; t = bars[bars.is_trading]; s = bars[~bars.is_trading]
     count = bars.groupby('date').size().reindex(sorted(trading_days), fill_value = 0)
     out += [issue('block', 'empty_day', d, detail = '全市场 0 行') for d, n in count.items() if n == 0]
@@ -34,7 +44,8 @@ def audit_daily(bars, trading_days, instruments = None):
         l = ld.fillna(date.min).to_numpy(); pos = np.searchsorted(cal, t.date.to_numpy())
         lpos = np.where(l < cal[0], -10 ** 9, np.searchsorted(cal, l))              # 窗口之前就上市的不算新股
         fresh = ld.notna().to_numpy() & (pos - lpos < 5)
-    chg = (t.close / t.preclose - 1).abs(); lim = [_limit(b, st, d) for b, st, d in zip(t.board, t.is_st, t.date)]
+    lim_of = _limit_fn(rules); cache = {}
+    chg = (t.close / t.preclose - 1).abs(); lim = [cache.setdefault((b, st, d), lim_of(b, st, d)) for b, st, d in zip(t.board, t.is_st, t.date)]
     over = t[(chg > np.asarray(lim) + 0.005).to_numpy() & ~fresh]
     out += [issue('warn', 'beyond_limit', r.date, r.instrument, f'{r.close / r.preclose - 1:+.2%}') for r in over.itertuples()]
     v = t[t.volume > 0]; vwap = v.amount / v.volume

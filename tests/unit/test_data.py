@@ -132,7 +132,7 @@ def test_update_publishes_and_rerun_downloads_nothing_new(tmp_path):
 def test_update_with_blocking_audit_issue_is_not_published(tmp_path):
     ok = update_daily(tmp_path, DAYS[0], DAYS[1], source = BaoStock(tmp_path, FakeBS(DAYS)))
     bad = update_daily(tmp_path, DAYS[2], DAYS[2], source = BaoStock(tmp_path, FakeBS(DAYS, corrupt = str(DAYS[2]))))
-    assert bad['status'] == 'rejected' and ('block', 'ohlc_order') in bad['issues'] and Store(tmp_path).published()['batch_id'] == ok['batch_id']
+    assert bad['status'] == 'rejected' and 'block/ohlc_order' in bad['issues'] and Store(tmp_path).published()['batch_id'] == ok['batch_id']
 
 
 def test_audit_limits_st_and_fresh_listing_exemption():
@@ -177,3 +177,12 @@ def test_adjusted_prices_use_factor_in_effect_and_unknown_stays_missing():
     assert m.loc[('600519.SH', d[0]), 'back_factor'] == 1.0 and m.loc[('600519.SH', d[1]), 'back_factor'] == pytest.approx(1.11828)
     assert m.loc[('600519.SH', d[1]), 'ret'] == pytest.approx(35 * 1.11828 / 39 - 1)                        # 除权日收益按复权价连续
     assert m.loc[('600000.SH', d[0]), 'back_factor'] != m.loc[('600000.SH', d[0]), 'back_factor']          # 没有复权记录 → 缺失
+
+
+def test_audit_uses_rule_profile_st_limit_changed_on_2026_07_06():
+    from observe.ledger.rules import RuleSet
+    r = RuleSet.from_yaml('configs/rule_profiles/main_board.yaml')
+    mk = lambda d: pd.DataFrame({'date': [d], 'instrument': ['600730.SH'], 'open': [10.0], 'high': [10.8], 'low': [10.0], 'close': [10.8], 'preclose': [10.0],
+                                 'volume': [100], 'amount': [1050.0], 'is_trading': True, 'is_st': True, 'board': 'main'})
+    assert audit_daily(mk(date(2026, 7, 3)), [date(2026, 7, 3)], rules = r).rule.tolist() == ['beyond_limit']     # 改制前 ST 5%
+    assert audit_daily(mk(date(2026, 7, 6)), [date(2026, 7, 6)], rules = r).empty                                 # 2026-07-06 起 10%

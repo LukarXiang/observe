@@ -32,7 +32,7 @@ def main(argv = None):
     u.add_argument('--factors-all', action = 'store_true'); u.add_argument('--no-actions', action = 'store_true'); u.add_argument('--force', action = 'store_true'); u.add_argument('--queue', action = 'store_true', help = '提交到任务队列而不是直接执行')
     s = d.add_parser('snapshot'); s.add_argument('--note', default = '')
     g = d.add_parser('gc'); g.add_argument('--apply', action = 'store_true', help = '真正删除（默认只列出）')
-    d.add_parser('status')
+    d.add_parser('status'); d.add_parser('audit', help = '按当前执行规则重新审计已发布的日线')
     j = sub.add_parser('jobs').add_subparsers(dest = 'act', required = True)
     js = j.add_parser('submit'); js.add_argument('kind'); js.add_argument('--params', default = '{}')
     j.add_parser('list'); w = j.add_parser('worker'); w.add_argument('--once', action = 'store_true')
@@ -47,6 +47,12 @@ def main(argv = None):
             return _json({'job_id': Jobs(root).submit('data_update', p)} if a.queue else run_kind(root, 'data_update', p))
         if a.act == 'snapshot': return _json(run_kind(root, 'snapshot', {'note': a.note}))
         if a.act == 'gc': return _json(run_kind(root, 'gc', {'apply': a.apply}))
+        if a.act == 'audit':
+            from .data.audit import audit_daily
+            from .data.update import default_rules
+            st = Store(root); b = st.load('bars_1d'); cal = st.load('calendar'); days = sorted(set(cal[cal.is_open].date) & set(b.date)) if len(cal) else sorted(b.date.unique())
+            iss = audit_daily(b, days, st.load('instruments'), default_rules()); p = root / 'coverage' / 'audit_latest.csv'; p.parent.mkdir(parents = True, exist_ok = True); iss.to_csv(p, index = False)
+            return _json({'rows': len(b), 'days': len(days), 'issues': {f'{l}/{r}': int(n) for (l, r), n in iss.groupby(['level', 'rule']).size().items()}, 'file': str(p)})
         if a.act == 'status':
             pub = Store(root).published(); return _json({'batch_id': pub['batch_id'], 'tables': {t: {'partitions': len(v), 'rows': sum(x['rows'] for x in v.values())} for t, v in pub['tables'].items()}})
     if a.cmd == 'jobs':
