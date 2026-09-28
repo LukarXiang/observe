@@ -6,7 +6,7 @@ from pathlib import Path
 
 # KINDS 保留数据库兼容性；SUPPORTED 才是界面和新提交允许执行的能力。
 KINDS = ('data_update', 'data_audit', 'snapshot', 'gc', 'factor_eval', 'run_experiment', 'backtest_variant', 'reproduce')
-SUPPORTED = frozenset(('data_update', 'data_audit', 'snapshot', 'gc'))
+SUPPORTED = frozenset(('data_update', 'data_audit', 'snapshot', 'gc', 'run_experiment', 'reproduce'))
 STATUS = ('queued', 'running', 'success', 'partial', 'failed', 'cancelled', 'interrupted')
 SCHEMA = '''create table if not exists jobs (job_id text primary key, kind text not null, params text not null, status text not null,
             created_at text, started_at text, finished_at text, pid integer, result text, error text, retry_of text, log_path text)'''
