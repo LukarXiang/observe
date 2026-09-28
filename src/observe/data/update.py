@@ -173,18 +173,21 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                 except Exception as exc:
                     _progress(root, {'date': key, 'requested_start': key, 'requested_end': key, 'records': 0, 'status': 'failed', 'adj_status': 'failed', 'error': str(exc)[:300]})
                     raise
-            full = [src.adjust_factor(c) for c in factor_codes]
+            full = [(c, src.adjust_factor(c)) for c in factor_codes]
         inst = std.instruments(inst_raw)
         parts['calendar'] = {'all': _merge(store, 'calendar', 'all', cal)}; parts['instruments'] = {'all': store.write_partition('instruments', 'all', inst)}
         new = pd.concat([b for b in bars if len(b)], ignore_index = True) if any(len(b) for b in bars) else pd.DataFrame(columns = ['date', 'instrument', 'open', 'high', 'low', 'close', 'preclose', 'volume', 'amount', 'is_trading', 'is_st', 'board'])
         if len(new):
             parts['bars_1d'] = {str(y): _merge(store, 'bars_1d', str(y), g) for y, g in new.groupby(new.date.map(lambda x: x.year))}
-        adj = pd.concat([std.adj_factors(x) for x in events + full if len(x)], ignore_index = True) if any(len(x) for x in events + full) else pd.DataFrame()
+        full_frames = [x for _, x in full]
+        adj = pd.concat([std.adj_factors(x) for x in events + full_frames if len(x)], ignore_index = True) if any(len(x) for x in events + full_frames) else pd.DataFrame()
         changed = sorted(set(adj.instrument)) if len(adj) else []
         if len(adj): parts['adj_factors'] = {'all': _merge(store, 'adj_factors', 'all', adj)}
         coverage_rows = []
+        full_by_code = {std.instrument(code): frame for code, frame in full}
         for code in factor_codes:
-            coverage_rows.append({'instrument': std.instrument(code), 'status': 'complete', 'requested_start': '1990-01-01', 'requested_end': '2099-12-31', 'verified_from': '1990-01-01', 'verified_through': str(end), 'has_start_basis': True, 'has_gap': False, 'confirmed_no_events': False, 'verified_at': datetime.now().isoformat(timespec='seconds'), 'source': 'baostock.full_adjust_factor', 'evidence': 'full_adjust_factor_query'})
+            frame = full_by_code.get(std.instrument(code), pd.DataFrame())
+            coverage_rows.append({'instrument': std.instrument(code), 'status': 'no_events' if not len(frame) else 'complete', 'requested_start': '1990-01-01', 'requested_end': '2099-12-31', 'verified_from': '1990-01-01', 'verified_through': str(end), 'has_start_basis': True, 'has_gap': False, 'confirmed_no_events': not len(frame), 'verified_at': datetime.now().isoformat(timespec='seconds'), 'source': 'baostock.full_adjust_factor', 'evidence': 'full_adjust_factor_query'})
         if changed:
             known = {r['instrument'] for r in coverage_rows}
             coverage_rows.extend({'instrument': i, 'status': 'partial', 'requested_start': str(start), 'requested_end': str(end), 'verified_from': str(start), 'verified_through': str(end), 'has_start_basis': False, 'has_gap': True, 'confirmed_no_events': False, 'verified_at': datetime.now().isoformat(timespec='seconds'), 'source': 'baostock.daily_adjust_factor', 'evidence': 'daily_adjust_factor_query'} for i in changed if i not in known)
