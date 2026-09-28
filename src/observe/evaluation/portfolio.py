@@ -1,17 +1,23 @@
+"""组合指标（决策 17 / 模块 17）。equity 为含期初净值 E0 的序列，第一天费用已计入第一天收益。"""
 import numpy as np
 
 
-def metrics(equity, benchmark = None, rf = 0.0, annualization = 242):
-    e = np.asarray(equity, dtype = float); r = e[1:] / e[:-1] - 1
-    rf_d = (1 + rf) ** (1 / annualization) - 1; excess = r - rf_d
-    sharpe = float(excess.mean() / excess.std(ddof = 1) * np.sqrt(annualization)) if len(excess) >= 20 and excess.std(ddof = 1) else None
-    result = {"sharpe": sharpe, "annualized_return": float((e[-1] / e[0]) ** (annualization / len(r)) - 1) if len(r) else None, "max_drawdown": float(np.min(e / np.maximum.accumulate(e) - 1))}
+def _annual(levels, a):
+    levels = np.asarray(levels, dtype = float); t = len(levels) - 1
+    return float((levels[-1] / levels[0]) ** (a / t) - 1) if t > 0 else None
+
+
+def metrics(equity, benchmark = None, rf = 0.0, annualization = 242, min_days = 20):
+    e = np.asarray(equity, dtype = float); r = e[1:] / e[:-1] - 1; a = annualization
+    rf_d = (1 + rf) ** (1 / a) - 1; x = r - rf_d; sd = x.std(ddof = 1) if len(x) > 1 else 0.0
+    peak = np.maximum.accumulate(e); dd = e / peak - 1; low = int(dd.argmin()); high = int(e[:low + 1].argmax())
+    out = {'total_return': float(e[-1] / e[0] - 1), 'annual_return': _annual(e, a), 'annual_vol': float(r.std(ddof = 1) * np.sqrt(a)) if len(r) > 1 else None,
+           'sharpe': float(x.mean() / sd * np.sqrt(a)) if len(x) >= min_days and sd > 0 else None,
+           'max_drawdown': float(dd.min()), 'drawdown_peak': high, 'drawdown_trough': low}
     if benchmark is not None:
-        b = np.asarray(benchmark, dtype = float); n = min(len(e), len(b)); strategy_r = e[1:n] / e[:n - 1] - 1; benchmark_r = b[1:n] / b[:n - 1] - 1
-        valid = np.isfinite(benchmark_r); active = strategy_r[valid] - benchmark_r[valid]
-        deviation = active.std(ddof = 1) if len(active) > 1 else 0.0
-        result["information_ratio"] = float(active.mean() / deviation * np.sqrt(annualization)) if deviation else None
-        result["benchmark_missing_days"] = int((~valid).sum())
-        valid_levels = b[np.isfinite(b)]
-        result["annualized_return_diff"] = result["annualized_return"] - ((valid_levels[-1] / valid_levels[0]) ** (annualization / (len(valid_levels) - 1)) - 1) if len(valid_levels) > 1 else None
-    return result
+        b = np.asarray(benchmark, dtype = float); br = b[1:] / b[:-1] - 1; ok = np.isfinite(br); act = r[ok] - br[ok]
+        asd = act.std(ddof = 1) if len(act) > 1 else 0.0; lv = b[np.isfinite(b)]
+        bench_annual = _annual(lv, a) if np.isfinite(b[0]) and np.isfinite(b[-1]) else None
+        out.update(benchmark_missing_days = int((~ok).sum()), information_ratio = float(act.mean() / asd * np.sqrt(a)) if len(act) >= min_days and asd > 0 else None,
+                   annual_return_diff = None if bench_annual is None else out['annual_return'] - bench_annual, relative_nav = (e / e[0]) / (b / b[0]))
+    return out
