@@ -12,6 +12,10 @@ def instrument(code):
     return f"{code.zfill(6)}.{'SH' if code[0] in '569' and not code.startswith('92') else 'BJ' if code[0] in '48' or code.startswith('92') else 'SZ'}"
 
 
+def to_baostock(inst):
+    num, ex = inst.split('.'); return f'{ex.lower()}.{num}'
+
+
 def board(inst):
     num, ex = inst.split('.')
     if ex == 'BJ': return 'bse'
