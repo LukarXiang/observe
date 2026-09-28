@@ -14,8 +14,10 @@ from observe.loop import run_loop
 def test_small_published_research_loop_is_repeatable(tmp_path):
     days = [date(2024, 1, 2), date(2024, 1, 3), date(2024, 1, 4), date(2024, 1, 5)]
     bars = pd.DataFrame({'date': days * 2, 'instrument': ['A'] * 4 + ['B'] * 4,
-                         'open': [10, 10, 11, 11, 20, 20, 20, 21], 'high': 11, 'low': 9,
-                         'close': [10, 11, 11, 12, 20, 20, 21, 21], 'preclose': 10,
+                         'open': [10, 10, 11, 11, 20, 20, 20, 21],
+                         'high': [10.5, 10.5, 11.5, 11.5, 20.5, 20.5, 21.5, 21.5],
+                         'low': [9.5, 9.5, 10.5, 10.5, 19.5, 19.5, 19.5, 20.5],
+                         'close': [10, 11, 11, 12, 20, 20, 21, 21], 'preclose': [10, 10, 11, 11, 20, 20, 20, 21],
                          'is_trading': True, 'is_st': False, 'board': 'main', 'volume': 1000, 'amount': 10000})
     adj = pd.DataFrame({'instrument': ['A'], 'ex_date': [days[1]], 'back_factor': [2.0]})
     store = Store(tmp_path); bid = store.write_batch({'bars_1d': {'2024': store.write_partition('bars_1d', '2024', bars)}, 'adj_factors': {'all': store.write_partition('adj_factors', 'all', adj)}}); store.publish(bid); sid = store.snapshot()
@@ -26,7 +28,12 @@ def test_small_published_research_loop_is_repeatable(tmp_path):
     rules = RuleSet([Rule(start = date(2020, 1, 1), stamp_tax = 0, transfer_fee = 0, commission_rate = 0, min_commission = 0)])
     market = {d: {i: {'open': float(r.open), 'close': float(r.close), 'preclose': float(r.preclose), 'avg_amount_20d': 1e9} for i, r in view[view.date == d].set_index('instrument').iterrows()} for d in days}
     scores = {d: {'A': float(factor.loc[d, 'A']) if pd.notna(factor.loc[d, 'A']) else 0.0} for d in days}
-    first = run_loop(days, market, scores, 1000, rules, eligible_by_date = {d: {'A'} for d in days}, n = 1, max_weight = 1.0, rebalance_every = 2)[0]
-    second = run_loop(days, market, scores, 1000, rules, eligible_by_date = {d: {'A'} for d in days}, n = 1, max_weight = 1.0, rebalance_every = 2)[0]
+    first, first_orders = run_loop(days, market, scores, 1000, rules, eligible_by_date = {d: {'A'} for d in days}, n = 1, max_weight = 1.0, rebalance_every = 2)
+    second, _ = run_loop(days, market, scores, 1000, rules, eligible_by_date = {d: {'A'} for d in days}, n = 1, max_weight = 1.0, rebalance_every = 2)
+    expected_label = (view.loc[(view.instrument == 'A') & (view.date == days[3]), 'adj_open'].iloc[0] /
+                      view.loc[(view.instrument == 'A') & (view.date == days[2]), 'adj_open'].iloc[0] - 1)
+    assert labels.loc[(labels.instrument == 'A') & (labels.decision_date == days[1]), 'value'].iloc[0] == expected_label
+    fills = [x for x in first_orders if x.get('qty_filled')]
+    assert fills and fills[0]['fill_price'] == 10 and first.cash == 0
     assert labels.valid.any() and first.equity_curve() == second.equity_curve()
     assert metrics(first.equity_curve())['total_return'] == metrics(second.equity_curve())['total_return']

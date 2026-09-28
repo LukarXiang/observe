@@ -15,12 +15,13 @@ def run_kind(root, kind, params):
         from .data.update import update_daily
         codes = params.get('factors') or []
         if params.get('factors_all'): codes = Store(root).load('instruments').query("kind == 'stock'").instrument.tolist()
-        from .data.locks import DATA_WRITER, operation_lock
-        with operation_lock(root, DATA_WRITER):
-            tdx = None if params.get('no_actions') else Tdx(root)
-            try: return update_daily(root, params['start'], params['end'], tdx = tdx, factor_codes = [std.to_baostock(c) for c in codes], force = params.get('force', False))
-            finally:
-                if tdx: tdx.close()
+        # update_daily is the public writer service and owns the complete
+        # DATA_WRITER scope.  The adapter is constructed here only; network
+        # initialization remains inside update_daily's protected call chain.
+        tdx = None if params.get('no_actions') else Tdx(root)
+        try: return update_daily(root, params['start'], params['end'], tdx = tdx, factor_codes = [std.to_baostock(c) for c in codes], force = params.get('force', False))
+        finally:
+            if tdx: tdx.close()
     if kind == 'snapshot':
         from .data.locks import DATA_WRITER, operation_lock
         with operation_lock(root, DATA_WRITER): return {'snapshot_id': Store(root).snapshot(params.get('note', ''))}
@@ -28,14 +29,22 @@ def run_kind(root, kind, params):
         from .data.locks import DATA_WRITER, operation_lock
         with operation_lock(root, DATA_WRITER): return {'files': Store(root).gc(apply = params.get('apply', False)), 'applied': params.get('apply', False)}
     if kind == 'data_audit':
+        import hashlib
         from .data.audit import audit_daily
         from .data.update import default_rules
-        st = Store(root); b = st.load('bars_1d'); cal = st.load('calendar')
-        days = sorted(set(cal[cal.is_open].date)) if len(cal) else sorted(b.date.unique())
-        iss = audit_daily(b, days, st.load('instruments'), default_rules())
-        p = root / 'coverage' / 'audit_latest.csv'; p.parent.mkdir(parents = True, exist_ok = True); iss.to_csv(p, index = False)
-        (root / 'coverage' / 'audit_latest.json').write_text(json.dumps({'batch_id': st.published()['batch_id']}, ensure_ascii = False), encoding = 'utf-8')
-        return {'rows': len(b), 'days': len(days), 'issues': {f'{l}/{r}': int(n) for (l, r), n in iss.groupby(['level', 'rule']).size().items()}, 'file': str(p), 'batch_id': st.published()['batch_id']}
+        st = Store(root); state = st.published(); batch_id = state['batch_id']
+        if not batch_id: raise RuntimeError('还没有已发布的数据')
+        pin = f'audit-running-{__import__("os").getpid()}'
+        st.pin_state(pin, state)
+        try:
+            b = st.load_state(state, 'bars_1d'); cal = st.load_state(state, 'calendar'); inst = st.load_state(state, 'instruments')
+            days = sorted(set(cal[cal.is_open].date)) if len(cal) else sorted(b.date.unique())
+            iss = audit_daily(b, days, inst, default_rules())
+            rules = default_rules(); rule_fingerprint = hashlib.sha256(repr(rules).encode()).hexdigest() if rules is not None else 'builtin'
+            aid = st.commit_audit(batch_id, iss, rule_fingerprint, {'start': str(min(days)) if days else None, 'end': str(max(days)) if days else None, 'days': len(days), 'rows': len(b)})
+        finally:
+            st.unpin(pin)
+        return {'rows': len(b), 'days': len(days), 'issues': {f'{l}/{r}': int(n) for (l, r), n in iss.groupby(['level', 'rule']).size().items()} if len(iss) else {}, 'audit_id': aid, 'batch_id': batch_id}
     raise NotImplementedError(f'任务种类 {kind} 尚未实现')
 
 

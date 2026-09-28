@@ -80,7 +80,7 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                 key = str(d)
                 staged = staging / f'{key}.parquet'
                 one = None
-                if not force and progress.get(key, {}).get('status') == 'success' and progress.get(key, {}).get('adj_status') == 'success' and staged.exists():
+                if not force and progress.get(key, {}).get('status') == 'success' and progress.get(key, {}).get('adj_status') in ('success', 'no_events') and staged.exists():
                     try: one = pd.read_parquet(staged)
                     except Exception: one = None
                     published = store.load('bars_1d', parts = [str(d.year)])
@@ -111,7 +111,7 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                     adj_status = 'unknown_empty'
                     a = pd.DataFrame()
                     try:
-                        a = src.adjust_factor_day(d); _atomic_parquet(staging / f'{key}.adj.parquet', a); adj_status = 'success'
+                        a = src.adjust_factor_day(d); _atomic_parquet(staging / f'{key}.adj.parquet', a); adj_status = 'success' if len(a) else 'no_events'
                     except Exception as exc:
                         component_failures.append({'date': key, 'component': 'adjust_factor', 'error': str(exc)[:300]}); adj_status = 'failed'
                     _progress(root, {'date': key, 'requested_start': key, 'requested_end': key, 'actual_start': key if len(one) else None,
@@ -134,10 +134,10 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
         if len(adj): parts['adj_factors'] = {'all': _merge(store, 'adj_factors', 'all', adj)}
         coverage_rows = []
         for code in factor_codes:
-            coverage_rows.append({'instrument': std.instrument(code), 'status': 'complete', 'requested_start': '1990-01-01', 'requested_end': '2099-12-31', 'evidence': 'full_adjust_factor_query'})
+            coverage_rows.append({'instrument': std.instrument(code), 'status': 'complete', 'requested_start': '1990-01-01', 'requested_end': '2099-12-31', 'verified_through': str(end), 'has_start_basis': True, 'has_gap': False, 'source': 'baostock.full_adjust_factor', 'evidence': 'full_adjust_factor_query'})
         if changed:
             known = {r['instrument'] for r in coverage_rows}
-            coverage_rows.extend({'instrument': i, 'status': 'partial', 'requested_start': str(start), 'requested_end': str(end), 'evidence': 'daily_adjust_factor_query'} for i in changed if i not in known)
+            coverage_rows.extend({'instrument': i, 'status': 'partial', 'requested_start': str(start), 'requested_end': str(end), 'verified_through': str(end), 'has_start_basis': False, 'has_gap': True, 'source': 'baostock.daily_adjust_factor', 'evidence': 'daily_adjust_factor_query'} for i in changed if i not in known)
         if coverage_rows:
             parts['adj_coverage'] = {'all': _merge(store, 'adj_coverage', 'all', pd.DataFrame(coverage_rows))}
         if tdx is not None and changed:

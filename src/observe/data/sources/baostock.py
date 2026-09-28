@@ -19,8 +19,10 @@ class BaoStock:
 
     @contextmanager
     def session(self):
-        if self.bs is None: import baostock as bs; self.bs = bs
         with operation_lock(self.root, BAOSTOCK):
+            # Import/login are source initialization and must not happen before
+            # the shared process lock has rejected an external competitor.
+            if self.bs is None: import baostock as bs; self.bs = bs
             lg = self.bs.login()
             if lg.error_code != '0': raise BaoStockError(f'登录失败 {lg.error_code} {lg.error_msg}')
             try: yield self

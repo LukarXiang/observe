@@ -10,6 +10,7 @@ from observe.data.store import Store
 from observe.jobs import Jobs
 from observe.cli import run_kind
 from tests.unit.test_data import hold
+from tests.unit.test_data import DAYS, FakeBS
 
 DATA_WRITER = 'data-writer'
 
@@ -59,6 +60,14 @@ def test_web_and_cli_download_are_mutually_exclusive(tmp_path):
     j = client.get(f'/api/jobs/{jid}').json(); assert j['status'] == 'failed' and '锁被占用' in j['error']
     assert not (tmp_path / 'raw' / 'requests.jsonl').exists()                     # 没有发出任何数据请求
     assert '锁被占用' in client.get(f'/api/jobs/{jid}/log').json()['text']
+
+
+def test_cli_data_update_uses_public_service_without_nested_writer_lock(tmp_path, monkeypatch):
+    from observe.data import update as update_module
+    from observe.data.sources.baostock import BaoStock
+    monkeypatch.setattr(update_module, 'BaoStock', lambda root: BaoStock(root, FakeBS(DAYS)))
+    result = run_kind(tmp_path, 'data_update', {'start': str(DAYS[0]), 'end': str(DAYS[0]), 'no_actions': True})
+    assert result['status'] == 'published' and result['verified_days'] == 1
 
 
 def test_api_reads_published_data(tmp_path):

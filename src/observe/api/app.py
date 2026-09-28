@@ -53,18 +53,27 @@ def create_app(root):
 
     @app.get('/api/data/issues')
     def issues(batch: str | None = None):
-        """审计结果必须与指定发布批次绑定；没有当前批次产物时返回明确状态。"""
-        latest = root / 'coverage' / 'audit_latest.csv'; meta = root / 'coverage' / 'audit_latest.json'; b = batch or store.published()['batch_id']; p = root / 'batches' / f'{b}.issues.csv'
-        if batch is None and meta.exists():
-            try: info = json.loads(meta.read_text(encoding = 'utf-8'))
-            except (OSError, ValueError): info = {}
-            if info.get('batch_id') == b and latest.exists(): path, src = latest, 'audit_latest'
-            else: path, src = p, f'batch {b}'
-        else: path, src = p, f'batch {b}'
-        rows = _records(pd.read_csv(path)) if path.exists() else []
-        status = 'not_audited' if not path.exists() else ('problem' if rows else 'passed')
-        if batch is None and meta.exists() and info.get('batch_id') != b: status = 'expired'
-        return {'source': src, 'batch_id': b, 'status': status, 'rows': rows}
+        """审计明细和元数据必须来自同一个已提交产物。"""
+        b = batch or store.published()['batch_id']
+        path = root / 'audits'
+        match = []
+        for m in path.glob('*.json'):
+            try:
+                info = json.loads(m.read_text(encoding = 'utf-8'))
+                if info.get('batch_id') == b and info.get('audit_id'): match.append(info)
+            except (OSError, ValueError): continue
+        info = max(match, key = lambda x: x.get('audited_at', '')) if match else None
+        csv = path / f"{info['audit_id']}.issues.csv" if info else None
+        complete = bool(info and csv.exists())
+        rows = _records(pd.read_csv(csv)) if complete else []
+        status = 'not_audited' if not info else ('problem' if not complete or rows else 'passed')
+        if not info:
+            latest = path / 'latest.json'
+            try:
+                old = json.loads(latest.read_text(encoding = 'utf-8'))
+                if old.get('batch_id') != b: status = 'expired'
+            except (OSError, ValueError): pass
+        return {'source': f"audit {info['audit_id']}" if info else f'batch {b}', 'batch_id': b, 'status': status, 'rows': rows}
 
     @app.get('/api/instruments')
     def instruments(q: str = '', limit: int = 50):

@@ -197,7 +197,9 @@ def test_audit_limits_st_and_fresh_listing_exemption():
 
 # 跨进程锁 ---------------------------------------------------------------------------------------------------
 def hold(tmp_path, name):
-    code = f"import time; from observe.data.locks import operation_lock\nwith operation_lock(r'{tmp_path}', '{name}'):\n    print('held', flush = True); time.sleep(3)"
+    # Keep the competing process alive for the full queue subprocess startup;
+    # the assertion is about lock rejection, not a timing race.
+    code = f"import time; from observe.data.locks import operation_lock\nwith operation_lock(r'{tmp_path}', '{name}'):\n    print('held', flush = True); time.sleep(30)"
     p = subprocess.Popen([sys.executable, '-c', code], stdout = subprocess.PIPE, text = True); assert p.stdout.readline().strip() == 'held'; return p
 
 

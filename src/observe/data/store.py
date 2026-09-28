@@ -86,10 +86,21 @@ class Store:
         if not files: return pd.DataFrame(columns = columns)
         return pd.concat([pd.read_parquet(f, columns = columns) for f in files], ignore_index = True)
 
+    def load_state(self, state, table, columns = None, parts = None):
+        """Read from an already captured published state without re-resolving PUBLISHED."""
+        entries = state['tables'].get(table, {})
+        files = [self.root / v['file'] for k, v in sorted(entries.items()) if parts is None or k in parts]
+        if not files: return pd.DataFrame(columns = columns)
+        return pd.concat([pd.read_parquet(f, columns = columns) for f in files], ignore_index = True)
+
     # 清理 ---------------------------------------------------------------------
     def pin(self, job_id, snapshot = None):
         """运行中的任务固定其输入；结束时 unpin"""
         _atomic_json(self.root / 'pins' / f'{job_id}.json', self.state(snapshot)); return job_id
+
+    def pin_state(self, job_id, state):
+        """Pin an already captured state, avoiding a second PUBLISHED lookup."""
+        _atomic_json(self.root / 'pins' / f'{job_id}.json', state); return job_id
 
     def unpin(self, job_id): (self.root / 'pins' / f'{job_id}.json').unlink(missing_ok = True)
 
@@ -105,3 +116,15 @@ class Store:
         if apply:
             for f in drop: (self.root / f).unlink()
         return drop
+
+    def commit_audit(self, batch_id, issues, rule_fingerprint, input_range):
+        """Commit an audit result and its metadata before advancing the latest pointer."""
+        aid = f"{_now()}-{secrets.token_hex(2)}"
+        d = self.root / 'audits'; d.mkdir(parents = True, exist_ok = True)
+        csv = d / f'{aid}.issues.csv'; meta = d / f'{aid}.json'
+        issues.to_csv(csv, index = False)
+        _atomic_json(meta, {'audit_id': aid, 'batch_id': batch_id, 'rule_fingerprint': rule_fingerprint,
+                            'input_range': input_range, 'audited_at': datetime.now().isoformat(timespec = 'seconds'),
+                            'problem_count': int(len(issues))})
+        _atomic_json(d / 'latest.json', {'audit_id': aid, 'batch_id': batch_id})
+        return aid
