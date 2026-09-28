@@ -27,7 +27,8 @@ class Book:
     def position(self, instrument):
         return self.positions.setdefault(instrument, Position())
 
-    def start_day(self, on, actions = None):
+    def start_day(self, on, actions = None, quotes = None):
+        quotes = quotes or {}
         for p in self.positions.values():
             p.today_buy = 0
         for a in actions or []:
@@ -40,6 +41,10 @@ class Book:
                 ratio = a.get("bonus_ratio", 0.0)
                 if ratio:
                     added = int(p.qty * ratio); p.qty += added; p.pending += added
+                q = quotes.get(a["instrument"], {})
+                if q.get("suspended") and p.last_price is not None:
+                    cash = a.get("cash_per_share", 0.0); rights = a.get("rights_price", 0.0) * a.get("rights_ratio", 0.0)
+                    p.last_price = (p.last_price - cash + rights) / (1 + a.get("bonus_ratio", 0.0) + a.get("rights_ratio", 0.0)); p.stale_price = True
             if a.get("bonus_list_date") == on:
                 p.today_buy = max(0, p.today_buy - p.pending); p.pending = 0
         amount = self.receivable.pop(on, 0.0)
@@ -50,19 +55,29 @@ class Book:
         side, instrument = order["side"], order["instrument"]
         p = self.position(instrument); raw = quote.get("open")
         if quote.get("suspended") or raw is None or raw <= 0: return {**order, "qty_filled": 0, "status": "rejected", "reject_reason": "suspended" if quote.get("suspended") else "no_open_price"}
+        preclose = quote.get("preclose")
+        if preclose is not None:
+            down, up = rules.limit_prices(preclose, on)
+            if side == "buy" and raw >= up: return {**order, "qty_filled": 0, "status": "rejected", "reject_reason": "limit_up"}
+            if side == "sell" and raw <= down: return {**order, "qty_filled": 0, "status": "rejected", "reject_reason": "limit_down"}
         if side == "sell":
             qty = p.sellable if order.get("qty") in (None, "all") else min(p.sellable, int(order["qty"]))
         else:
             target = order.get("amount", 0.0); r = rules.for_date(on); qty = int(target / rules.fill_price(raw, "buy", slippage, on) // r.buy_unit * r.buy_unit)
             available = self.cash if open_cash is None else open_cash
             price = rules.fill_price(raw, "buy", slippage, on)
+            participation = order.get("participation_limit", quote.get("participation_limit"))
+            if participation is not None and quote.get("avg_amount") is not None:
+                qty = min(qty, int(quote["avg_amount"] * participation / price // r.buy_unit * r.buy_unit))
             while qty and available < price * qty + rules.fees(price * qty, "buy", on)["total"]: qty -= r.buy_unit
         if not qty: return {**order, "qty_filled": 0, "status": "rejected", "reject_reason": "cash" if side == "buy" else "not_sellable"}
         price = rules.fill_price(raw, side, slippage, on); amount = round(price * qty, 2); fees = rules.fees(amount, side, on)
         if side == "buy": self.cash = round(self.cash - amount - fees["total"], 2); p.qty += qty; p.today_buy += qty
         else: self.cash = round(self.cash + amount - fees["total"], 2); p.qty -= qty
         p.cost = price; self.fees_paid += fees["total"]
-        fill = {**order, "qty_filled": qty, "fill_price": price, "amount": amount, **fees, "status": "filled"}; self.fills.append(fill)
+        planned = order.get("qty") if side == "sell" else order.get("amount")
+        status = "partially_filled" if side == "sell" and planned not in (None, "all") and qty < int(planned) else "filled"
+        fill = {**order, "qty_filled": qty, "fill_price": price, "amount": amount, **fees, "status": status}; self.fills.append(fill)
         return fill
 
     def mark_to_market(self, on, quotes):

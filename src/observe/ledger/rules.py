@@ -29,6 +29,10 @@ class RuleSet:
         value = raw * (1 + slippage if side == "buy" else 1 - slippage)
         return (ceil(value / r.price_tick) if side == "buy" else floor(value / r.price_tick)) * r.price_tick
 
+    def limit_prices(self, preclose, on):
+        r = self.for_date(on)
+        return (round(preclose * (1 - r.limit_pct), 2), round(preclose * (1 + r.limit_pct), 2))
+
     def fees(self, amount, side, on):
         r = self.for_date(on)
         commission = max(amount * r.commission_rate, r.min_commission)

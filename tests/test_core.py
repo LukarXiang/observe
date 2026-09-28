@@ -8,6 +8,7 @@ from observe.evaluation.portfolio import metrics
 from observe.labels import adj_open_to_open_h
 from observe.ledger.book import Book
 from observe.ledger.rules import Rule, RuleSet
+from observe.loop import rerun_scenario
 from observe.portfolio import target_list
 
 RULES = RuleSet([Rule(start = date(2020, 1, 1), commission_rate = 0.00025, min_commission = 5, transfer_fee = 0.00001, stamp_tax = 0.0005)])
@@ -81,3 +82,20 @@ def test_sharpe_defined_at_twenty_days_and_drawdown():
     e = [100 + i for i in range(21)]
     result = metrics(e)
     assert result["sharpe"] is not None and result["max_drawdown"] == 0
+
+def test_limit_prices_and_participation_reject_or_partial():
+    b = Book(100000); d = date(2024, 1, 2); b.start_day(d)
+    up = b.execute({"instrument": "A", "side": "buy", "amount": 10000}, {"open": 11, "preclose": 10}, d, RULES)
+    assert up["reject_reason"] == "limit_up"
+    partial = b.execute({"instrument": "A", "side": "buy", "amount": 10000, "participation_limit": .05}, {"open": 10, "preclose": 10, "avg_amount": 1000}, d, RULES)
+    assert partial["qty_filled"] == 0
+
+def test_stale_ex_date_adjusts_reference_price():
+    b = Book(0); p = b.position("A"); p.qty = 100; p.last_price = 10
+    b.start_day(date(2024, 1, 2), [{"instrument": "A", "ex_date": date(2024, 1, 2), "cash_per_share": 1, "bonus_ratio": 1}], {"A": {"suspended": True}})
+    assert p.last_price == 4.5 and p.stale_price
+
+def test_cost_scenario_replays_same_inputs():
+    config = {"dates": [date(2024, 1, 2)], "market": {date(2024, 1, 2): {}}, "scores_by_date": {}, "initial_cash": 100, "rules": RULES}
+    base, _ = rerun_scenario(config, slippage = 0.0); doubled, _ = rerun_scenario(config, slippage = 0.01)
+    assert base.equity_rows[0]["equity"] == doubled.equity_rows[0]["equity"]

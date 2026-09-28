@@ -6,7 +6,7 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, rebalance_every
     if open_cash_policy not in {"sell_then_buy", "preopen_cash_only"}: raise ValueError("invalid open_cash_policy")
     book = Book(initial_cash); pending = []; target = set(); all_orders = []
     for index, on in enumerate(dates):
-        book.start_day(on, (actions or {}).get(on, [])); quotes = market[on]; pre_cash = book.cash
+        quotes = market[on]; book.start_day(on, (actions or {}).get(on, []), quotes); pre_cash = book.cash
         available = pre_cash
         for order in pending:
             result = book.execute(order, quotes[order["instrument"]], on, rules, slippage, available if open_cash_policy == "preopen_cash_only" else None); all_orders.append(result)
@@ -24,3 +24,8 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, rebalance_every
             value = book.equity_rows[-1]["equity"] / max(1, n)
             pending = orders_for_targets(result, held, {i: value for i in result["target"]}, True)
     return book, all_orders
+
+def rerun_scenario(config, **overrides):
+    """Run the full loop again with the same frozen inputs and changed costs."""
+    options = dict(config); options.update(overrides)
+    return run_loop(**options)
