@@ -49,3 +49,35 @@ def test_label_and_preprocess_future_independent():
 def test_metrics_and_short_sharpe_undefined():
     e = [100, 101, 100, 102, 101, 103, 104, 103, 105, 106, 107]
     m = metrics(e, [100 + i for i in range(len(e))]); assert m["annualized_return"] > 0; assert m["sharpe"] is None
+
+def test_max_sell_modes_and_forced_exit_not_counted():
+    scores = {"A": 1, "B": 2, "C": 3, "D": 4}
+    held = {"A": 1, "B": 1, "X": 1}
+    assert len(target_list(scores, held, n = 2, buffer = 0, max_sell = 0)["exits"]) == 1
+    assert len(target_list(scores, held, n = 2, buffer = 0, max_sell = 1)["exits"]) == 2
+    assert len(target_list(scores, held, n = 2, buffer = 0, max_sell = None)["exits"]) == 3
+
+def test_missing_pay_date_is_assumed_and_recorded():
+    b = Book(0); b.position("A").qty = 10; d = date(2024, 1, 2)
+    b.start_day(d, [{"instrument": "A", "ex_date": d, "cash_per_share": 2}])
+    assert b.cash == 20 and b.assumptions[0]["assumed"]
+
+def test_suspended_quote_uses_stale_value():
+    b = Book(100); b.position("A").qty = 10; b.position("A").last_price = 12
+    row = b.mark_to_market(date(2024, 1, 2), {"A": {"suspended": True}})
+    assert row["market_value"] == 120 and row["stale_price"]
+
+def test_limit_and_no_cash_rejections():
+    b = Book(100); d = date(2024, 1, 2); b.start_day(d)
+    assert b.execute({"instrument": "A", "side": "buy", "amount": 10000}, {"open": 10}, d, RULES)["status"] == "rejected"
+    assert b.execute({"instrument": "A", "side": "buy", "amount": 100}, {"open": None}, d, RULES)["reject_reason"] == "no_open_price"
+
+def test_rules_change_by_date():
+    rules = RuleSet([Rule(start = date(2020, 1, 1), stamp_tax = .001), Rule(start = date(2023, 8, 28), stamp_tax = .0005)])
+    assert rules.fees(10000, "sell", date(2023, 8, 27))["stamp_tax"] == 10
+    assert rules.fees(10000, "sell", date(2023, 8, 28))["stamp_tax"] == 5
+
+def test_sharpe_defined_at_twenty_days_and_drawdown():
+    e = [100 + i for i in range(21)]
+    result = metrics(e)
+    assert result["sharpe"] is not None and result["max_drawdown"] == 0

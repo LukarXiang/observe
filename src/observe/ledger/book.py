@@ -22,6 +22,7 @@ class Book:
     fees_paid: float = 0.0
     fills: list = field(default_factory=list)
     equity_rows: list = field(default_factory=list)
+    assumptions: list = field(default_factory=list)
 
     def position(self, instrument):
         return self.positions.setdefault(instrument, Position())
@@ -33,7 +34,9 @@ class Book:
             p = self.position(a["instrument"])
             if a.get("ex_date") == on:
                 dividend = p.qty * a.get("cash_per_share", 0.0)
-                if dividend: self.receivable[a.get("pay_date") or on] += dividend
+                pay_date = a.get("pay_date") or a.get("assumed_pay_date") or on
+                if a.get("pay_date") is None: self.assumptions.append({"instrument": a["instrument"], "date": on, "field": "pay_date", "assumed": True})
+                if dividend: self.receivable[pay_date] += dividend
                 ratio = a.get("bonus_ratio", 0.0)
                 if ratio:
                     added = int(p.qty * ratio); p.qty += added; p.pending += added
