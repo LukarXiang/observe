@@ -108,3 +108,18 @@ def test_manual_cashflow_table_matches_step_by_step():
     b.close_day(D[0], {'A': {'close': 50}}); b.start_day(D[1])
     sell(b, 'A', D[1], FEE, open = 50, preclose = 50); assert b.cash == pytest.approx(t.expected_cash[2])
     assert sum(e['amount'] for e in b.cash_events) == pytest.approx(t.cash_delta[1:].sum())
+
+
+def test_rule_profile_by_board_st_and_bilateral_stamp():
+    r = RuleSet.from_yaml('configs/rule_profiles/main_board.yaml')
+    assert r.limit_prices(10, date(2024, 1, 2), 'main', True) == (9.5, 10.5) and r.limit_prices(10, date(2024, 1, 2), 'main', False) == (9.0, 11.0)
+    assert r.fees(10000, 'buy', date(2008, 5, 5))['stamp_tax'] == 10 and r.fees(10000, 'buy', date(2008, 9, 19))['stamp_tax'] == 0   # 2008-09-19 起卖方单边
+    assert r.fees(10000, 'sell', date(2007, 6, 1))['stamp_tax'] == 30 and r.used_unverified                                          # 用到未核实规则会被记录
+    with pytest.raises(ValueError, match = 'no trading rule'): r.on(date(2024, 1, 2), 'star', False)
+
+
+def test_st_stock_uses_five_percent_limit_in_ledger():
+    r = RuleSet.from_yaml('configs/rule_profiles/main_board.yaml'); b = Book(10000, D); b.start_day(D[0])
+    q = {'open': 10.5, 'preclose': 10.0, 'board': 'main'}
+    assert b.execute({'instrument': 'A', 'side': 'buy', 'amount': 2000}, {**q, 'is_st': True}, D[0], r)['reject_reason'] == 'limit_up'   # ST 涨停 10.50
+    assert b.execute({'instrument': 'A', 'side': 'buy', 'amount': 2000}, {**q, 'is_st': False}, D[0], r)['status'] == 'filled'

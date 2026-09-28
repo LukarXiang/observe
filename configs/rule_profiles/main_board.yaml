@@ -1,0 +1,92 @@
+# 沪深主板执行规则集（模块 16）。verified: false 的条目来自记忆，阶段 2 必须逐条对照 source 核实后改为 true。
+# 账本用到未核实规则时，RuleSet.used_unverified 会记录，报告必须披露。
+fees:
+  - start: 2005-01-24
+    stamp_tax: 0.001
+    stamp_both_sides: true
+    transfer_fee: 0.00002
+    commission_rate: 0.00025
+    min_commission: 5.0
+    verified: false
+    source: "财政部 2005-01-23 印花税调整公告；2015 年前沪市过户费按股数（每千股 1 元）、深市不收，此处以成交额比例近似"
+  - start: 2007-05-30
+    stamp_tax: 0.003
+    stamp_both_sides: true
+    transfer_fee: 0.00002
+    commission_rate: 0.00025
+    min_commission: 5.0
+    verified: false
+    source: "财政部 2007-05-29 公告：证券交易印花税由 1‰ 调至 3‰"
+  - start: 2008-04-24
+    stamp_tax: 0.001
+    stamp_both_sides: true
+    transfer_fee: 0.00002
+    commission_rate: 0.00025
+    min_commission: 5.0
+    verified: false
+    source: "财政部 2008-04-23 公告：由 3‰ 调至 1‰"
+  - start: 2008-09-19
+    stamp_tax: 0.001
+    stamp_both_sides: false
+    transfer_fee: 0.00002
+    commission_rate: 0.00025
+    min_commission: 5.0
+    verified: false
+    source: "财政部 2008-09-18 公告：改为卖方单边征收"
+  - start: 2015-08-01
+    stamp_tax: 0.001
+    stamp_both_sides: false
+    transfer_fee: 0.00002
+    commission_rate: 0.00025
+    min_commission: 5.0
+    verified: false
+    source: "中国结算 2015 年过户费调整：沪深统一按成交金额 0.02‰"
+  - start: 2022-04-29
+    stamp_tax: 0.001
+    stamp_both_sides: false
+    transfer_fee: 0.00001
+    commission_rate: 0.00025
+    min_commission: 5.0
+    verified: false
+    source: "中国结算 2022 年过户费下调至 0.01‰"
+  - start: 2023-08-28
+    stamp_tax: 0.0005
+    stamp_both_sides: false
+    transfer_fee: 0.00001
+    commission_rate: 0.00025
+    min_commission: 5.0
+    verified: false
+    source: "财政部 税务总局 2023 年第 39 号公告：减半征收；佣金为研究假设，待你提供实际费率"
+trading:
+  - start: 1996-12-16
+    board: main
+    st: false
+    limit_pct: 0.10
+    buy_unit: 100
+    price_tick: 0.01
+    verified: false
+    source: "沪深交易所 1996-12 起实行 10% 涨跌幅限制"
+  - start: 1998-04-22
+    board: main
+    st: true
+    limit_pct: 0.05
+    buy_unit: 100
+    price_tick: 0.01
+    verified: false
+    source: "特别处理（ST）制度，涨跌幅 5%；上交所 2026 年修订规则（2026-07-06 施行）对主板风险警示股的调整待核实后追加条目"
+  - start: 2009-10-30
+    board: gem
+    st: false
+    limit_pct: 0.10
+    buy_unit: 100
+    price_tick: 0.01
+    verified: false
+    source: "创业板开板；第一版不启用"
+  - start: 2020-08-24
+    board: gem
+    st: false
+    limit_pct: 0.20
+    buy_unit: 100
+    price_tick: 0.01
+    verified: false
+    source: "创业板注册制改革，涨跌幅 20%；第一版不启用"

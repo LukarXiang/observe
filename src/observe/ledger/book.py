@@ -74,15 +74,15 @@ class Book:
     # 开盘成交 -------------------------------------------------------------
     def execute(self, order, quote, day, rules, slippage = 0.0, budget = None):
         """order: {'instrument','side','amount'(买)|'qty':'all'(卖)}；budget 为 preopen_cash_only 下本事件可用现金"""
-        side, i = order['side'], order['instrument']; p = self.pos(i); raw, pre = quote.get('open'), quote.get('preclose')
+        side, i = order['side'], order['instrument']; p = self.pos(i); raw, pre = quote.get('open'), quote.get('preclose'); bd, st = quote.get('board', 'main'), bool(quote.get('is_st', False))
         def reject(why): return {**order, 'qty_filled': 0, 'status': 'rejected', 'reject_reason': why}
         if quote.get('suspended'): return reject('suspended')
         if raw is None or raw <= 0: return reject('no_open_price')
         if pre is not None:
-            down, up = rules.limit_prices(pre, day)
+            down, up = rules.limit_prices(pre, day, bd, st)
             if side == 'buy' and raw >= up: return reject('limit_up')
             if side == 'sell' and raw <= down: return reject('limit_down')
-        price, unit = rules.fill_price(raw, side, slippage, day), rules.on(day).buy_unit
+        price, unit = rules.fill_price(raw, side, slippage, day, bd, st), rules.on(day, bd, st).buy_unit
         if side == 'sell':
             qty = p.sellable
             if qty <= 0: return reject('not_sellable')

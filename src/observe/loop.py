@@ -29,7 +29,7 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_dat
             pending = [{**o, 'decision_date': day} for o in rebalance_orders(plan, amount)]
         elif refill_between_rebalance:
             value = {i: book.positions[i].qty * book.positions[i].last_price for i in held}
-            lot = {i: quotes[i]['close'] * rules.on(day).buy_unit for i in target if quotes.get(i, {}).get('close')}
+            lot = {i: q['close'] * rules.on(day, q.get('board', 'main'), q.get('is_st', False)).buy_unit for i in target if (q := quotes.get(i, {})).get('close')}
             pending = [{**o, 'decision_date': day} for o in refill_orders(target, target_amount, value, sell_reason, rank, lot)]
         else: pending = []
     return book, orders
