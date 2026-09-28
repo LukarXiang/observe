@@ -73,8 +73,9 @@ def main(argv = None):
                 traceback.print_exc(); q.finish(a.job_id, 'failed', error = f'{type(e).__name__}: {e}'); sys.exit(1)
             return
     if a.cmd == 'serve':
-        import uvicorn
+        import threading, uvicorn
         from .api.app import create_app
+        threading.Thread(target = Jobs(root).worker, daemon = True).start()   # 同进程内的工作线程：网页提交的任务无需另开命令行执行
         uvicorn.run(create_app(root), host = '127.0.0.1', port = a.port)
 
 

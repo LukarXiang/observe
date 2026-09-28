@@ -42,13 +42,21 @@ def create_app(root):
                               "count(distinct instrument) as n_instruments from {t} group by 1 order by 1")
         return _records(df)
 
+    @app.get('/api/data/daily')
+    def daily():
+        df = query('bars_1d', "select date, count(*) as n_rows, count(*) filter (where is_trading) as n_trading, count(*) filter (where is_st) as n_st "
+                              "from {t} group by 1 order by 1")
+        return _records(df)
+
     @app.get('/api/data/snapshots')
     def snapshots(): return sorted((p.stem for p in (root / 'snapshots').glob('*.json')), reverse = True)
 
     @app.get('/api/data/issues')
     def issues(batch: str | None = None):
-        b = batch or store.published()['batch_id']; p = root / 'batches' / f'{b}.issues.csv'
-        return _records(pd.read_csv(p)) if b and p.exists() else []
+        """默认读最近一次 observe data audit 的重审结果（按当前规则），没有时读已发布批次的审计结果"""
+        latest = root / 'coverage' / 'audit_latest.csv'; b = batch or store.published()['batch_id']; p = root / 'batches' / f'{b}.issues.csv'
+        src, path = ('audit_latest', latest) if batch is None and latest.exists() else (f'batch {b}', p)
+        return {'source': src, 'rows': _records(pd.read_csv(path)) if path.exists() else []}
 
     @app.get('/api/instruments')
     def instruments(q: str = '', limit: int = 50):
