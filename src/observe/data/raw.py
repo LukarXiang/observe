@@ -1,12 +1,22 @@
 """原始记录留底：原样保存（字段全为字符串），每次请求写一行日志（模块 10）。"""
-import json, time
+import hashlib, json, time
 from datetime import datetime
 from pathlib import Path
+import pandas as pd
 
 
 def save(root, upstream, dataset, key, df):
-    path = Path(root) / 'raw' / upstream / dataset / f'{key}.parquet'; path.parent.mkdir(parents = True, exist_ok = True)
-    df.astype(str).to_parquet(path, index = False); return path
+    payload = df.astype(str)
+    digest = hashlib.sha256(pd.util.hash_pandas_object(payload, index = False).to_numpy().tobytes()).hexdigest()[:12]
+    base = Path(root) / 'raw' / upstream / dataset / f'{key}.parquet'; base.parent.mkdir(parents = True, exist_ok = True)
+    if not base.exists(): path = base
+    else:
+        old = pd.read_parquet(base).astype(str)
+        old_digest = hashlib.sha256(pd.util.hash_pandas_object(old, index = False).to_numpy().tobytes()).hexdigest()[:12]
+        if old_digest == digest: return base
+        path = base.with_name(f'{key}__{digest}.parquet')
+    if not path.exists(): payload.to_parquet(path, index = False)
+    return path
 
 
 def log(root, source, upstream, endpoint, params, status, rows = None, error = None, sec = None):

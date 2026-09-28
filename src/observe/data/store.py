@@ -59,7 +59,10 @@ class Store:
     def publish(self, bid):
         """把批次合并进已发布状态并原子替换 PUBLISHED.json；调用方须持有 data-writer 锁"""
         path = self.root / 'batches' / f'{bid}.json'; m = _read_json(path); cur = self.published()
+        if m['status'] == 'published': return bid
         if m['status'] != 'pending': raise ValueError(f'批次 {bid} 状态为 {m["status"]}，不能发布')
+        if cur['batch_id'] == bid:
+            m['status'] = 'published'; _atomic_json(path, m); return bid
         if m['base'] != cur['batch_id']: raise RuntimeError(f'批次 {bid} 基于 {m["base"]}，但当前已发布 {cur["batch_id"]}：请重新生成批次')
         tables = {t: dict(v) for t, v in cur['tables'].items()}
         for t, parts in m['tables'].items(): tables.setdefault(t, {}).update(parts)

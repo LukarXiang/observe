@@ -15,12 +15,22 @@ def run_kind(root, kind, params):
         from .data.update import update_daily
         codes = params.get('factors') or []
         if params.get('factors_all'): codes = Store(root).load('instruments').query("kind == 'stock'").instrument.tolist()
+        from .data.locks import DATA_WRITER, operation_lock
+        with operation_lock(root, DATA_WRITER): pass
         tdx = None if params.get('no_actions') else Tdx(root)
         try: return update_daily(root, params['start'], params['end'], tdx = tdx, factor_codes = [std.to_baostock(c) for c in codes], force = params.get('force', False))
         finally:
             if tdx: tdx.close()
     if kind == 'snapshot': return {'snapshot_id': Store(root).snapshot(params.get('note', ''))}
     if kind == 'gc': return {'files': Store(root).gc(apply = params.get('apply', False)), 'applied': params.get('apply', False)}
+    if kind == 'data_audit':
+        from .data.audit import audit_daily
+        from .data.update import default_rules
+        st = Store(root); b = st.load('bars_1d'); cal = st.load('calendar')
+        days = sorted(set(cal[cal.is_open].date)) if len(cal) else sorted(b.date.unique())
+        iss = audit_daily(b, days, st.load('instruments'), default_rules())
+        p = root / 'coverage' / 'audit_latest.csv'; p.parent.mkdir(parents = True, exist_ok = True); iss.to_csv(p, index = False)
+        return {'rows': len(b), 'days': len(days), 'issues': {f'{l}/{r}': int(n) for (l, r), n in iss.groupby(['level', 'rule']).size().items()}, 'file': str(p), 'batch_id': st.published()['batch_id']}
     raise NotImplementedError(f'任务种类 {kind} 尚未实现')
 
 
@@ -47,12 +57,7 @@ def main(argv = None):
             return _json({'job_id': Jobs(root).submit('data_update', p)} if a.queue else run_kind(root, 'data_update', p))
         if a.act == 'snapshot': return _json(run_kind(root, 'snapshot', {'note': a.note}))
         if a.act == 'gc': return _json(run_kind(root, 'gc', {'apply': a.apply}))
-        if a.act == 'audit':
-            from .data.audit import audit_daily
-            from .data.update import default_rules
-            st = Store(root); b = st.load('bars_1d'); cal = st.load('calendar'); days = sorted(set(cal[cal.is_open].date) & set(b.date)) if len(cal) else sorted(b.date.unique())
-            iss = audit_daily(b, days, st.load('instruments'), default_rules()); p = root / 'coverage' / 'audit_latest.csv'; p.parent.mkdir(parents = True, exist_ok = True); iss.to_csv(p, index = False)
-            return _json({'rows': len(b), 'days': len(days), 'issues': {f'{l}/{r}': int(n) for (l, r), n in iss.groupby(['level', 'rule']).size().items()}, 'file': str(p)})
+        if a.act == 'audit': return _json(run_kind(root, 'data_audit', {}))
         if a.act == 'status':
             pub = Store(root).published(); return _json({'batch_id': pub['batch_id'], 'tables': {t: {'partitions': len(v), 'rows': sum(x['rows'] for x in v.values())} for t, v in pub['tables'].items()}})
     if a.cmd == 'jobs':

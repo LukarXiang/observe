@@ -28,6 +28,7 @@ class Book:
         self.initial = self.cash = round(float(cash), 2); self.calendar = sorted(calendar)
         self.positions, self.receivable, self.listing = {}, defaultdict(float), defaultdict(list)   # listing: {上市日: [(证券, 股数)]}
         self.cash_events, self.fills, self.equity_rows, self.assumptions, self.issues = [], [], [], [], []
+        self._order_seq = 0; self._fill_seq = 0
 
     # 工具 -----------------------------------------------------------------
     def pos(self, i): return self.positions.setdefault(i, Position())
@@ -88,17 +89,27 @@ class Book:
     def execute(self, order, quote, day, rules, slippage = 0.0, budget = None):
         """order: {'instrument','side','amount'(买)|'qty':'all'(卖)}；budget 为 preopen_cash_only 下本事件可用现金"""
         side, i = order['side'], order['instrument']; p = self.pos(i); raw, pre = quote.get('open'), quote.get('preclose'); bd, st = quote.get('board', 'main'), bool(quote.get('is_st', False))
-        def reject(why): return {**order, 'qty_filled': 0, 'status': 'rejected', 'reject_reason': why}
+        self._order_seq += 1; oid = order.get('order_id', f'order-{self._order_seq}')
+        def reject(why): return {**order, 'order_id': oid, 'qty_filled': 0, 'status': 'rejected', 'reject_reason': why}
         if quote.get('suspended'): return reject('suspended')
-        if raw is None or raw <= 0: return reject('no_open_price')
+        if raw is None or not isinstance(raw, (int, float)) or raw <= 0 or raw != raw or raw in (float('inf'), float('-inf')): return reject('no_open_price')
         if pre is not None:
             down, up = rules.limit_prices(pre, day, bd, st)
             if side == 'buy' and raw >= up: return reject('limit_up')
             if side == 'sell' and raw <= down: return reject('limit_down')
         price, unit = rules.fill_price(raw, side, slippage, day, bd, st), rules.on(day, bd, st).buy_unit
+        if not isinstance(price, (int, float)) or price <= 0 or price != price or price in (float('inf'), float('-inf')): return reject('invalid_fill_price')
+        if pre is not None:
+            down, up = rules.limit_prices(pre, day, bd, st)
+            if not down <= price <= up: return reject('slippage_outside_limit')
         if side == 'sell':
             qty = p.sellable
             if qty <= 0: return reject('not_sellable')
+            if 'participation' in order:
+                cap = quote.get('avg_amount_20d'); limit = order['participation']
+                if cap is None: return reject('no_liquidity_reference')
+                qty = min(qty, int(cap * limit / price // unit * unit))
+                if qty <= 0: return reject('participation_limit')
         else:
             qty = int(order['amount'] / price // unit * unit)
             cap = quote.get('avg_amount_20d'); limit = order.get('participation', 0.05)
@@ -112,7 +123,8 @@ class Book:
             self._cash(day, 'buy', -value, instrument = i); self._cash(day, 'fee', -f['fee'], instrument = i)
         else:
             p.qty -= qty; self._cash(day, 'sell', value, instrument = i); self._cash(day, 'fee', -f['fee'], instrument = i)
-        fill = {**order, 'date': day, 'qty_filled': qty, 'fill_price': price, 'value': value, **f, 'status': 'filled'}   # amount 保留为买单的目标金额
+        self._fill_seq += 1
+        fill = {**order, 'order_id': oid, 'fill_id': f'fill-{self._fill_seq}', 'date': day, 'qty_filled': qty, 'fill_price': price, 'value': value, **f, 'status': 'filled'}   # amount 保留为买单的目标金额
         self.fills.append(fill); return fill
 
     # 收盘 -----------------------------------------------------------------

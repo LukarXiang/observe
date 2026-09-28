@@ -41,6 +41,19 @@ def daily(raw):
     return d.sort_values(['date', 'instrument']).reset_index(drop = True)
 
 
+def market_input(bars, adjusted = None):
+    """统一提供账本/标签使用的市场字段；原始行情不会冒充复权行情。"""
+    out = bars.copy()
+    if adjusted is not None:
+        from .prices import with_adjusted
+        out = with_adjusted(out, adjusted)
+    rename = {'open_adj': 'adj_open', 'high_adj': 'adj_high', 'low_adj': 'adj_low', 'close_adj': 'adj_close'}
+    for src, dst in rename.items():
+        if src in out and dst not in out: out[dst] = out[src]
+    if 'suspended' not in out and 'is_trading' in out: out['suspended'] = ~out['is_trading'].astype(bool)
+    return out
+
+
 def calendar(raw):
     return pd.DataFrame({'date': pd.to_datetime(raw['calendar_date']).dt.date, 'is_open': raw['is_trading_day'].astype(str) == '1'}).sort_values('date').reset_index(drop = True)
 

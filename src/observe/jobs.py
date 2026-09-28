@@ -4,7 +4,8 @@ import json, os, secrets, sqlite3, subprocess, sys, time
 from datetime import datetime
 from pathlib import Path
 
-KINDS = ('data_update', 'data_audit', 'snapshot', 'gc', 'factor_eval', 'run_experiment', 'backtest_variant', 'reproduce')
+# 只有这些任务已经有 CLI/Web 共用的实际执行函数；其余能力尚未实现。
+KINDS = ('data_update', 'data_audit', 'snapshot', 'gc')
 STATUS = ('queued', 'running', 'success', 'partial', 'failed', 'cancelled', 'interrupted')
 SCHEMA = '''create table if not exists jobs (job_id text primary key, kind text not null, params text not null, status text not null,
             created_at text, started_at text, finished_at text, pid integer, result text, error text, retry_of text, log_path text)'''

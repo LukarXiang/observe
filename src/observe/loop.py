@@ -10,7 +10,7 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_dat
     """market: {日: {证券: {'open','close','preclose','suspended','avg_amount_20d',...}}}；返回 (账本, 订单记录)"""
     if open_cash_policy not in POLICIES: raise ValueError(f'open_cash_policy must be one of {POLICIES}')
     book = Book(initial_cash, calendar = calendar or dates); actions = actions or {}; pending, orders = [], []   # calendar 用于推断缺失日期
-    target, target_amount, sell_reason, rank = set(), {}, {}, {}
+    target, target_amount, target_filled, sell_reason, rank = set(), {}, {}, {}, {}
     for k, day in enumerate(dates):
         quotes = market.get(day, {}); book.start_day(day, actions.get(day, ()), quotes)
         budget = book.cash if open_cash_policy == 'preopen_cash_only' else None
@@ -18,6 +18,7 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_dat
             r = book.execute(o, quotes.get(o['instrument'], {}), day, rules, slippage, budget)
             if budget is not None and o['side'] == 'buy' and r['qty_filled']: budget -= r['value'] + r['fee']
             orders.append({**r, 'exec_date': day})                            # 未成交部分当天撤销
+            if o['side'] == 'buy' and r.get('qty_filled'): target_filled[o['instrument']] = target_filled.get(o['instrument'], 0.0) + r['value']
         row = book.close_day(day, quotes)
         held = {i for i, p in book.positions.items() if p.qty}
         if k % rebalance_every == 0:
@@ -25,12 +26,13 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_dat
             plan = plan_rebalance(scores, eligible, held, n, buffer, max_sell); amount = round(row['equity'] * min(1 / n, max_weight), 2)
             target, rank = plan['target'], plan['rank']
             target_amount = {**{i: target_amount[i] for i in plan['keep'] if i in target_amount}, **{i: amount for i in plan['buys']}}
+            target_filled = {i: target_filled.get(i, 0.0) for i in target_amount}
             sell_reason = {**{i: 'exit_universe' for i in plan['forced']}, **{i: 'exit_rank' for i in plan['sells']}}
             pending = [{**o, 'decision_date': day} for o in rebalance_orders(plan, amount)]
         elif refill_between_rebalance:
             value = {i: book.positions[i].qty * book.positions[i].last_price for i in held}
             lot = {i: q['close'] * rules.on(day, q.get('board', 'main'), q.get('is_st', False)).buy_unit for i in target if (q := quotes.get(i, {})).get('close')}
-            pending = [{**o, 'decision_date': day} for o in refill_orders(target, target_amount, value, sell_reason, rank, lot)]
+            pending = [{**o, 'decision_date': day} for o in refill_orders(target, target_amount, value, sell_reason, rank, lot, target_filled)]
         else: pending = []
     return book, orders
 

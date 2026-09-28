@@ -33,8 +33,9 @@ def default_rules():
 def update_daily(root, start, end, source = None, tdx = None, factor_codes = (), force = False, rules = None):
     """下载 [start, end] 的交易日历、证券资料、全市场日线与当日复权因子变动；当期有除权的证券从通达信刷新公司行动。
     factor_codes：需要取全部复权因子历史的证券（首次初始化用）。返回摘要；审计有阻断问题时批次标为 rejected、不发布"""
-    start, end = _d(start), _d(end); store = Store(root); src = source or BaoStock(root); parts, days_done = {}, []
+    start, end = _d(start), _d(end); store = Store(root); parts, days_done = {}, []
     with operation_lock(root, DATA_WRITER):
+        src = source or BaoStock(root)
         pub = store.published()
         with src.session():
             cal = std.calendar(src.calendar(start, end)); raw.save(root, 'baostock', 'calendar', f'{start}_{end}', cal)
@@ -56,10 +57,14 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
         changed = sorted(set(adj.instrument)) if len(adj) else []
         if len(adj): parts['adj_factors'] = {'all': _merge(store, 'adj_factors', 'all', adj)}
         if tdx is not None and changed:
-            acts = [std.corp_actions(x, i) for i in changed if (x := tdx.xdxr(i.split('.')[0])) is not None and len(x)]
+            acts, refreshed = [], []
+            for i in changed:
+                try: x = tdx.xdxr(i.split('.')[0])
+                except Exception: continue
+                if x is not None and len(x): acts.append(std.corp_actions(x, i)); refreshed.append(i)
             if acts:
                 acts = pd.concat(acts, ignore_index = True)
-                parts['corp_actions'] = {'all': _merge(store, 'corp_actions', 'all', acts, drop = lambda o: o.instrument.isin(changed))}
+                parts['corp_actions'] = {'all': _merge(store, 'corp_actions', 'all', acts, drop = lambda o: o.instrument.isin(refreshed))}
         issues = audit_daily(new, days_done, inst, rules or default_rules()) if days_done else pd.DataFrame(columns = ['level'])
         bid = store.write_batch(parts, note = f'daily {start}..{end}')
         blocked = issues[issues.level == 'block'] if len(issues) else issues

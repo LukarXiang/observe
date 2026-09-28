@@ -94,6 +94,9 @@ def compute(expr, panel, eligible = None, min_obs_ratio = 1.0):
     p = parse(expr) if isinstance(expr, str) else expr
     ref = panel[next(iter(p.fields))] if p.fields else next(iter(panel.values()))
     mask = eligible if eligible is not None else pd.DataFrame(True, index = ref.index, columns = ref.columns)
+    def frame(v):
+        if isinstance(v, pd.DataFrame): return v
+        return pd.DataFrame(v, index = ref.index, columns = ref.columns, dtype = float)
     def mp(w): return max(1, math.ceil(w * min_obs_ratio))
 
     def ev(n):
@@ -110,9 +113,13 @@ def compute(expr, panel, eligible = None, min_obs_ratio = 1.0):
             return r.astype(float).where(a.notna()) if isinstance(a, pd.DataFrame) else r
         f, args = n.func.id, n.args
         if f in TS_LAG:
-            x, d = ev(args[0]), args[1].value; return x.shift(d) if f == 'ts_delay' else x - x.shift(d)
+            x, d = ev(args[0]), args[1].value
+            if not isinstance(x, pd.DataFrame): raise ExprError(f'{f} 的第一个参数必须是表格')
+            return x.shift(d) if f == 'ts_delay' else x - x.shift(d)
         if f in TS1:
-            x, w = ev(args[0]), args[1].value; r = x.rolling(w, min_periods = mp(w))
+            x, w = ev(args[0]), args[1].value
+            if not isinstance(x, pd.DataFrame): raise ExprError(f'{f} 的第一个参数必须是表格')
+            r = x.rolling(w, min_periods = mp(w))
             if f == 'ts_slope': return _slope(x, w, mp(w))
             if f == 'ts_rank': return r.rank(pct = True)
             if f == 'ts_std': return r.std(ddof = 1)
@@ -120,13 +127,23 @@ def compute(expr, panel, eligible = None, min_obs_ratio = 1.0):
                 wt = np.arange(1, w + 1, dtype = float); return x.rolling(w, min_periods = w).apply(lambda a: a @ wt / wt.sum(), raw = True)
             return getattr(r, f[3:])()
         if f in TS2:
-            x, y, w = ev(args[0]), ev(args[1]), args[2].value; return getattr(x.rolling(w, min_periods = mp(w)), f[3:])(y)
+            x, y, w = ev(args[0]), ev(args[1]), args[2].value
+            if not isinstance(x, pd.DataFrame) or not isinstance(y, pd.DataFrame): raise ExprError(f'{f} 的参数必须是表格')
+            return getattr(x.rolling(w, min_periods = mp(w)), f[3:])(y)
         if f in CS: return _cross(f, ev(args[0]), mask)
         if f in EL1:
-            x = ev(args[0]); return np.abs(x) if f == 'abs' else np.sign(x) if f == 'sign' else np.log(x.where(x > 0))
+            x = ev(args[0])
+            if not isinstance(x, pd.DataFrame): return float(np.abs(x) if f == 'abs' else np.sign(x) if f == 'sign' else np.log(x)) if (f != 'log' or x > 0) else np.nan
+            return np.abs(x) if f == 'abs' else np.sign(x) if f == 'sign' else np.log(x.where(x > 0))
         if f in EL2:
-            a, b = ev(args[0]), ev(args[1]); return (np.fmax if f == 'max2' else np.fmin)(a, b).where(a.notna() & b.notna()) if isinstance(a, pd.DataFrame) else max(a, b)
-        c, a, b = ev(args[0]), ev(args[1]), ev(args[2]); return a.where(c > 0, b).where(c.notna())   # where(条件 > 0, a, b)
+            a, b = ev(args[0]), ev(args[1])
+            if not isinstance(a, pd.DataFrame) and not isinstance(b, pd.DataFrame): return max(a, b) if f == 'max2' else min(a, b)
+            a, b = frame(a), frame(b); fn = np.maximum if f == 'max2' else np.minimum
+            return fn(a, b).where(a.notna() & b.notna())
+        c, a, b = ev(args[0]), ev(args[1]), ev(args[2])
+        if not any(isinstance(x, pd.DataFrame) for x in (c, a, b)): return a if c > 0 else b
+        c, a, b = frame(c), frame(a), frame(b)
+        return a.where(c > 0, b).where(c.notna())   # where(条件 > 0, a, b)
 
     out = ev(p.tree)
     return out if isinstance(out, pd.DataFrame) else pd.DataFrame(out, index = ref.index, columns = ref.columns)

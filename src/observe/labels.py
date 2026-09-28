@@ -6,7 +6,8 @@ import pandas as pd
 
 def build_labels(bars, calendar, h = 5):
     """bars: 长表 date / instrument / adj_open / is_trading；calendar: 全部交易日（有序）。返回每个「决策日 × 证券」一行"""
-    cal = pd.Index(sorted(calendar)); px = bars.pivot(index = 'date', columns = 'instrument', values = 'adj_open').reindex(cal)
+    cal = pd.Index(sorted(calendar)); price_col = 'adj_open' if 'adj_open' in bars else 'open_adj'
+    px = bars.pivot(index = 'date', columns = 'instrument', values = price_col).reindex(cal)
     trading = bars.pivot(index = 'date', columns = 'instrument', values = 'is_trading').reindex(cal).fillna(False).astype(bool)
     entry, exit_ = px.shift(-1), px.shift(-(1 + h)); tr_in, tr_out = trading.shift(-1, fill_value = False), trading.shift(-(1 + h), fill_value = False)
     out = pd.DataFrame({'value': (exit_ / entry - 1).stack(future_stack = True), 'entry_ok': tr_in.stack(), 'exit_ok': tr_out.stack()}).reset_index()

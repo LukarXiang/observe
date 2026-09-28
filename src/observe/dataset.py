@@ -17,7 +17,8 @@ def cross_sectional_preprocess(frame, features, eligible = 'eligible'):
 def training_rows(frame, labels, asof):
     """训练样本 = 预处理后的特征 ∩ 有效且 matured_at <= asof 的标签"""
     ok = labels[labels.valid & (labels.matured_at <= asof)]
-    return frame.merge(ok[['decision_date', 'instrument', 'value']], left_on = ['date', 'instrument'], right_on = ['decision_date', 'instrument']).drop(columns = 'decision_date')
+    eligible = frame[frame.eligible.astype(bool)] if 'eligible' in frame else frame
+    return eligible.merge(ok[['decision_date', 'instrument', 'value']], left_on = ['date', 'instrument'], right_on = ['decision_date', 'instrument']).drop(columns = 'decision_date')
 
 
 def plan_splits(dates, train = 504, valid = 126, test = 63, holdout_start = None):

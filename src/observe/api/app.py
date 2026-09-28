@@ -23,11 +23,11 @@ def _records(df): return json.loads(df.to_json(orient = 'records', date_format =
 def create_app(root):
     root = Path(root); store, jobs = Store(root), Jobs(root); app = FastAPI(title = 'observe')
 
-    def files(table, snapshot = None):
-        return [(root / v['file']).as_posix() for v in store.state(snapshot)['tables'].get(table, {}).values()]
+    def files(table, state):
+        return [(root / v['file']).as_posix() for v in state['tables'].get(table, {}).values()]
 
-    def query(table, sql, params = ()):
-        f = files(table)
+    def query(table, sql, params = (), state = None):
+        f = files(table, state or store.published())
         if not f: return pd.DataFrame()
         return duckdb.connect().execute(sql.replace('{t}', f"read_parquet({f!r})"), list(params)).df()
 
@@ -64,15 +64,17 @@ def create_app(root):
 
     @app.get('/api/instruments/{inst}/bars')
     def bars(inst: str, start: str = '1990-01-01', end: str = '2099-12-31', price: str = 'raw'):
-        df = query('bars_1d', "select * from {t} where instrument = ? and date between ? and ? order by date", (inst, start, end))
+        state = store.published()
+        df = query('bars_1d', "select * from {t} where instrument = ? and date between ? and ? order by date", (inst, start, end), state = state)
         if price == 'adj' and len(df):
             from ..data.prices import with_adjusted
-            adj = query('adj_factors', "select * from {t} where instrument = ?", (inst,))
-            df = with_adjusted(df, adj) if len(adj) else df.assign(back_factor = None)
+            adj = query('adj_factors', "select * from {t} where instrument = ?", (inst,), state = state)
+            df = with_adjusted(df, adj)
         return _records(df)
 
     @app.get('/api/instruments/{inst}/actions')
-    def actions(inst: str): return _records(query('corp_actions', "select * from {t} where instrument = ? order by ex_date", (inst,)))
+    def actions(inst: str):
+        state = store.published(); return _records(query('corp_actions', "select * from {t} where instrument = ? order by ex_date", (inst,), state = state))
 
     @app.get('/api/jobs')
     def list_jobs(limit: int = 50): return jobs.list(limit)
