@@ -22,7 +22,8 @@ def test_small_published_research_loop_is_repeatable(tmp_path):
                          'is_trading': True, 'is_st': False, 'board': 'main', 'volume': 1000, 'amount': 10000})
     adj = pd.DataFrame({'instrument': ['A'], 'ex_date': [days[2]], 'back_factor': [2.0]})
     store = Store(tmp_path); bid = store.write_batch({'bars_1d': {'2024': store.write_partition('bars_1d', '2024', bars)}, 'adj_factors': {'all': store.write_partition('adj_factors', 'all', adj)}}); store.publish(bid); sid = store.snapshot()
-    view = market_input(store.load('bars_1d', snapshot = sid), store.load('adj_factors', snapshot = sid))
+    coverage = pd.DataFrame([{'instrument': 'A', 'status': 'complete', 'verified_from': days[0], 'verified_through': days[-1], 'has_start_basis': True, 'has_gap': False}])
+    view = market_input(store.load('bars_1d', snapshot = sid), store.load('adj_factors', snapshot = sid), coverage)
     panel = {'close_adj': view.pivot(index = 'date', columns = 'instrument', values = 'close_adj'), 'ret': view.pivot(index = 'date', columns = 'instrument', values = 'ret')}
     factor = compute('max2(ret, 0)', panel)
     labels = build_labels(view, days, h = 1)

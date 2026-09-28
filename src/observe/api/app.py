@@ -98,7 +98,7 @@ def create_app(root):
             from ..data.prices import with_adjusted
             adj = query('adj_factors', "select * from {t} where instrument = ?", (inst,), state = state)
             cov = query('adj_coverage', "select * from {t} where instrument = ?", (inst,), state = state)
-            df = with_adjusted(df, adj, cov if len(cov) else None)
+            df = with_adjusted(df, adj, cov)
         return _records(df)
 
     @app.get('/api/instruments/{inst}/actions')

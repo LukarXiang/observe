@@ -21,8 +21,9 @@ def seed(root):
                          'close': [10.1, 10.3], 'preclose': [10.0, 10.1], 'volume': 100, 'amount': 1000.0, 'is_trading': True, 'is_st': False, 'board': 'main'})
     inst = pd.DataFrame({'instrument': ['600000.SH', '000001.SZ'], 'name': ['浦发银行', '平安银行'], 'kind': 'stock'})
     adj = pd.DataFrame({'instrument': ['600000.SH'], 'ex_date': [date(2025, 6, 24)], 'back_factor': [2.0]})
+    coverage = pd.DataFrame([{'instrument': '600000.SH', 'status': 'partial', 'verified_from': date(2025, 6, 23), 'verified_through': date(2025, 6, 24), 'has_start_basis': False, 'has_gap': True}])
     s.publish(s.write_batch({'bars_1d': {'2025': s.write_partition('bars_1d', '2025', bars)}, 'instruments': {'all': s.write_partition('instruments', 'all', inst)},
-                             'adj_factors': {'all': s.write_partition('adj_factors', 'all', adj)}}))
+                             'adj_factors': {'all': s.write_partition('adj_factors', 'all', adj)}, 'adj_coverage': {'all': s.write_partition('adj_coverage', 'all', coverage)}}))
     return s
 
 
@@ -76,7 +77,7 @@ def test_api_reads_published_data(tmp_path):
     assert c.get('/api/data/coverage').json()[0]['n_days'] == 2
     assert [x['instrument'] for x in c.get('/api/instruments', params = {'q': '浦发'}).json()] == ['600000.SH']
     raw = c.get('/api/instruments/600000.SH/bars').json(); adj = c.get('/api/instruments/600000.SH/bars', params = {'price': 'adj'}).json()
-    assert [x['close'] for x in raw] == [10.1, 10.3] and [x['close_adj'] for x in adj] == [None, 20.6]   # 首个复权事件前无可信基准，保持缺失
+    assert [x['close'] for x in raw] == [10.1, 10.3] and [x['close_adj'] for x in adj] == [None, None]   # 缺口且无起始基准，整段不可用
     assert c.post('/api/jobs', json = {'kind': 'nope'}).status_code == 400
 
 

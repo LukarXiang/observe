@@ -61,7 +61,6 @@ def with_adjusted(bars, adj, coverage=None, allow_estimated=False):
         m = b.copy(); m['back_factor'] = np.nan
     else:
         m = pd.merge_asof(b, a, on = '_d', by = 'instrument', direction = 'backward')
-    coverage_unspecified = coverage is None
     cov = normalize_coverage(coverage)
     coverage_rows = cov.set_index('instrument').to_dict('index')
     m['_coverage'] = m.instrument.map(coverage_rows)
@@ -79,9 +78,7 @@ def with_adjusted(bars, adj, coverage=None, allow_estimated=False):
         return bool(c.get('has_start_basis', False) or c.get('confirmed_no_events', False) or c.get('status') == 'no_events')
     m['_coverage_usable'] = m.apply(usable, axis=1)
     m['_factor_known'] = m.back_factor.notna()
-    # A legacy caller that supplies factors but no coverage may still use known
-    # event-day factors; it cannot synthesize the pre-event baseline.
-    m['_available'] = m['_factor_known'] & (m['_coverage_usable'] | coverage_unspecified)
+    m['_available'] = m['_factor_known'] & m['_coverage_usable']
     m['_no_event_basis'] = m.back_factor.isna() & m['_coverage_usable']
     m['_estimated'] = m['_factor_known'] & ~m['_coverage_usable']
     m['back_factor'] = m.back_factor.where(m['_available'] | (m['_no_event_basis']))

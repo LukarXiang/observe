@@ -226,7 +226,8 @@ def test_adjusted_prices_use_factor_in_effect_and_unknown_stays_missing():
     d = [date(2002, 7, 24), date(2002, 7, 25), date(2002, 7, 26)]
     bars = pd.DataFrame({'date': d * 2, 'instrument': ['600519.SH'] * 3 + ['600000.SH'] * 3, 'open': [39.0, 35.0, 35.5, 10, 10, 10], 'high': 40.0, 'low': 30.0,
                          'close': [39.0, 35.0, 35.5, 10, 10, 10], 'preclose': 39.0})
-    m = with_adjusted(bars, adj).set_index(['instrument', 'date'])
+    coverage = pd.DataFrame([{'instrument': '600519.SH', 'status': 'complete', 'verified_from': d[0], 'verified_through': d[-1], 'has_start_basis': True, 'has_gap': False}])
+    m = with_adjusted(bars, adj, coverage).set_index(['instrument', 'date'])
     assert m.loc[('600519.SH', d[0]), 'back_factor'] == 1.0 and m.loc[('600519.SH', d[1]), 'back_factor'] == pytest.approx(1.11828)
     assert m.loc[('600519.SH', d[1]), 'ret'] == pytest.approx(35 * 1.11828 / 39 - 1)                        # 除权日收益按复权价连续
     assert m.loc[('600000.SH', d[0]), 'back_factor'] != m.loc[('600000.SH', d[0]), 'back_factor']          # 没有复权记录 → 缺失
