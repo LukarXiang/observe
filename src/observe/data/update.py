@@ -83,7 +83,11 @@ def fetch_day(source, day, staging, force=False, checkpoint=None, raw_root=None)
     daily_path, adj_path = staging / f'{key}.parquet', staging / f'{key}.adj.parquet'
     bars = adj = None
     if not force and checkpoint.get('status') == 'success' and checkpoint.get('adj_status') in ('success', 'no_events'):
-        try: bars = pd.read_parquet(daily_path); adj = pd.read_parquet(adj_path)
+        try:
+            bars = pd.read_parquet(daily_path); adj = pd.read_parquet(adj_path)
+            required = {'date', 'instrument', 'open', 'high', 'low', 'close'}
+            valid = required.issubset(bars.columns) and len(bars) and set(pd.to_datetime(bars.date).dt.date) == {day}
+            if not valid: bars = adj = None
         except Exception: bars = adj = None
     downloaded = False
     if bars is None:

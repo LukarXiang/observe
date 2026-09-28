@@ -87,3 +87,9 @@ def test_api_audit_status_is_explicit_and_batch_bound(tmp_path):
     passed = c.get('/api/data/issues').json(); assert passed['status'] == 'passed' and passed['batch_id'] == Store(tmp_path).published()['batch_id']
     s = Store(tmp_path); s.publish(s.write_batch({'bars_1d': {'2025': s.write_partition('bars_1d', '2025', s.load('bars_1d', parts = ['2025']))}}))
     assert c.get('/api/data/issues').json()['status'] == 'expired'
+
+
+def test_api_audit_artifact_corruption_is_not_passed(tmp_path):
+    seed(tmp_path); c = TestClient(create_app(tmp_path)); result = run_kind(tmp_path, 'data_audit', {})
+    (tmp_path / 'audits' / f"{result['audit_id']}.issues.csv").unlink()
+    assert c.get('/api/data/issues').json()['status'] == 'problem'
