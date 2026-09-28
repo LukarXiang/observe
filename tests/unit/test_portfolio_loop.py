@@ -112,3 +112,26 @@ def test_cost_scenario_reruns_loop_and_changes_second_rebalance_amount():
         b = [o for o in orders if o['instrument'] == 'B'][0]
         assert b['reason'] == 'enter_top' and b['amount'] == pytest.approx(999_000 + cash)   # 第二次调仓的目标金额随成本变化
         assert book.equity_rows[1]['equity'] == pytest.approx(999_000 + cash)
+
+
+def test_share_conversion_moves_position_and_cost():
+    from observe.ledger import Book
+    b = Book(0, D); p = b.pos('OLD'); p.qty, p.cost, p.last_price = 1000, 8.0, 10.0
+    b.start_day(D[0], [{'instrument': 'OLD', 'ex_date': D[0], 'convert_to': 'NEW', 'convert_ratio': 1.2345}])
+    n = b.pos('NEW'); assert (b.pos('OLD').qty, n.qty) == (0, 1234) and n.cost == pytest.approx(8000 / 1234) and n.last_price == pytest.approx(10 / 1.2345)
+    assert b.assumptions[0]['field'] == 'conversion_fraction' and b.issues[0]['kind'] == 'converted'
+    assert b.close_day(D[0], {'NEW': {'close': 10 / 1.2345}})['equity'] == pytest.approx(1234 * 10 / 1.2345, abs = 0.01)
+
+
+def test_fixed_order_replay_reproduces_run_and_differs_from_full_rerun_under_new_cost():
+    from observe.loop import fixed_order_replay
+    # 半仓、股价 1 元：买单金额不受现金约束，两套费率下的金额差会落到不同的手数上
+    inputs = dict(dates = D[:3], market = flat('AB', 1.0, D[:3]), scores_by_date = {D[0]: {'A': 2, 'B': 1}, D[1]: {'B': 2, 'A': 1}},
+                  initial_cash = 1_000_000, rules = FEE, eligible_by_date = {d: {'A', 'B'} for d in D}, rebalance_every = 1, n = 1, buffer = 0, max_sell = None, max_weight = 0.5)
+    base, orders = run_loop(**inputs)
+    same, _ = fixed_order_replay(orders, D[:3], inputs['market'], 1_000_000, FEE)
+    assert [r['equity'] for r in same.equity_rows] == [r['equity'] for r in base.equity_rows]           # 原费率重放 = 原运行
+    costly = FEE.scaled(commission_rate = 2); rerun, _ = run_loop(**{**inputs, 'rules': costly}); replay, _ = fixed_order_replay(orders, D[:3], inputs['market'], 1_000_000, costly)
+    qty = lambda book: book.pos('B').qty
+    assert qty(replay) == qty(base) != qty(rerun)                                                         # 重放沿用基础情景的买单金额；完整重跑按更高成本后的净值重算
+    assert replay.equity_rows[-1]['equity'] != rerun.equity_rows[-1]['equity']

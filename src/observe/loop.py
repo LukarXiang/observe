@@ -35,6 +35,20 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_dat
     return book, orders
 
 
+def fixed_order_replay(orders, dates, market, initial_cash, rules, actions = None, open_cash_policy = 'sell_then_buy', slippage = 0.0, calendar = None):
+    """诊断项：把一次运行已产生的订单按原执行日原样重放（例如换一套费率）。订单不随持仓与现金变化，不能替代完整重跑"""
+    book = Book(initial_cash, calendar = calendar or dates); actions = actions or {}; by_day, out = {}, []
+    for o in orders: by_day.setdefault(o['exec_date'], []).append({k: o[k] for k in ('instrument', 'side', 'reason') if k in o} | ({'amount': o['amount']} if o['side'] == 'buy' else {'qty': 'all'}))
+    for day in dates:
+        quotes = market.get(day, {}); book.start_day(day, actions.get(day, ()), quotes); budget = book.cash if open_cash_policy == 'preopen_cash_only' else None
+        for o in by_day.get(day, []):
+            r = book.execute(o, quotes.get(o['instrument'], {}), day, rules, slippage, budget)
+            if budget is not None and o['side'] == 'buy' and r['qty_filled']: budget -= r['value'] + r['fee']
+            out.append({**r, 'exec_date': day})
+        book.close_day(day, quotes)
+    return book, out
+
+
 def rerun_scenario(inputs, **changes):
     """成本情景：同一份预测与组合配置，改变费率 / 滑点后完整重跑逐日循环（不是固定订单重放）"""
     return run_loop(**{**inputs, **changes})

@@ -48,7 +48,9 @@ class Book:
         for d in [d for d in self.listing if d <= day]:
             for i, q in self.listing.pop(d): self.pos(i).pending -= q
         for a in actions:
-            if a['ex_date'] == day: self._ex_date(day, a, quotes.get(a['instrument'], {}))
+            if a['ex_date'] != day: continue
+            if a.get('convert_to'): self._convert(day, a)
+            else: self._ex_date(day, a, quotes.get(a['instrument'], {}))
         for d in [d for d in self.receivable if d <= day]:
             self._cash(day, 'dividend_paid', self.receivable.pop(d))
 
@@ -70,6 +72,17 @@ class Book:
         if quote.get('suspended') and p.last_price is not None:   # 停牌期间除权：估值价按除权参考价调整（与是否参与配股无关）
             ref = a.get('ref_price')
             p.last_price = ref if ref is not None else (p.last_price - cash + rights_price * rights_ratio) / (1 + bonus + rights_ratio); p.stale = True
+
+    def _convert(self, day, a):
+        """吸收合并换股：旧代码持仓按比例转为新代码，成本整体转移；不足 1 股的零头舍去并记为假设（实际多以现金补偿）"""
+        old = self.pos(a['instrument'])
+        if not old.qty: return
+        new = self.pos(a['convert_to']); r = a['convert_ratio']; q = int(old.qty * r)
+        if old.qty * r - q > 1e-9: self.assumptions.append({'date': day, 'instrument': a['instrument'], 'field': 'conversion_fraction', 'value': old.qty * r - q})
+        total_cost = old.cost * old.qty; new.cost = (new.cost * new.qty + total_cost) / (new.qty + q); new.qty += q
+        if new.last_price is None and old.last_price is not None: new.last_price = old.last_price / r
+        self.issues.append({'date': day, 'instrument': a['instrument'], 'kind': 'converted', 'to': a['convert_to'], 'qty': q})
+        old.qty = old.today_buy = old.pending = 0
 
     # 开盘成交 -------------------------------------------------------------
     def execute(self, order, quote, day, rules, slippage = 0.0, budget = None):
