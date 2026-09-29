@@ -116,8 +116,8 @@ def _pipeline(cfg, fset, t, out, status, limitations):
     names = [f['name'] for f in fset['factors']]; directions = {f['name']: f['direction'] for f in fset['factors']}
     bars = t['bars_1d'].copy(); bars['date'] = pd.to_datetime(bars.date).dt.date
     if not len(bars): raise InputBlocked([{'kind': 'bars_missing', 'detail': '快照没有日线'}])
-    cal = [d for d in open_sessions(t['calendar']) if d <= max(bars.date)]
-    have = set(bars.date); first = min(have); cal = [d for d in cal if d >= first]
+    have = set(bars.date); first, last = min(have), max(have)
+    cal = [d for d in open_sessions(t['calendar']) if first <= d <= last]
     missing = [d for d in cal if d not in have]
     if missing: raise InputBlocked([{'kind': 'missing_session', 'detail': f'{len(missing)} 个交易日整日没有日线', 'dates': [str(d) for d in missing[:50]]}])
     warmup = max(cfg.universe.min_listed_sessions, max(f['lookback'] for f in fset['factors']) + 1, cfg.universe.liquidity_window, cfg.universe.suspend_window)
