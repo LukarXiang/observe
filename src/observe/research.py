@@ -94,7 +94,14 @@ def _research(root, cfg, output = None, runs_root = None, factor_file = None, ta
         t = {name: store.load_state(state, name) for name in TABLES}
         write_json(out / 'data_manifest.json', {'snapshot_id': doc['snapshot_id'], 'batch_id': doc['batch_id'], 'offline': True, 'tables': state.get('tables', {}),
                                                 'used': {n: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in state['tables'].get(n, {}).items()} for n in TABLES}})
-        status.stage('load')
+        from .data.audit import audit_status
+        from .data.update import default_rules
+        try: rules = default_rules()
+        except Exception: rules = None
+        audit = {k: v for k, v in audit_status(root, doc['batch_id'], rules).items() if k != 'rows'}   # 运行前检查：与回放、数据中心同一判定
+        if audit['status'] != 'passed':
+            limitations.append({'kind': 'data_audit', 'detail': f"快照批次审计状态为 {audit['status']}（范围 {audit['scope']}），不是全快照审计通过", 'audit': audit})
+        status.stage('load', audit = audit['status'])
         result = _pipeline(cfg, fset, t, out, status, limitations)
         final = 'success_limited' if limitations else 'success'; info = {'summary': result}
     except InputBlocked as exc:
