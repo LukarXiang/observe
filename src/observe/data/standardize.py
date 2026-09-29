@@ -28,6 +28,25 @@ def board(inst):
 def _num(s): return pd.to_numeric(s.replace('', np.nan), errors = 'coerce')
 
 
+TRUE, FALSE = frozenset(('true', '1', 'yes', 't', 'y')), frozenset(('false', '0', 'no', 'f', 'n', ''))
+
+
+def flag(x, missing = False):
+    """明确解析布尔值：字符串 'False' 不能当成 True；缺失返回 missing；无法识别的值报错"""
+    if x is None: return missing
+    if isinstance(x, (bool, np.bool_)): return bool(x)
+    if isinstance(x, (int, float, np.integer, np.floating)):
+        if x != x: return missing
+        if x in (0, 1): return bool(x)
+        raise ValueError(f'cannot parse boolean {x!r}')
+    if x is pd.NA or x is pd.NaT: return missing
+    s = str(x).strip().lower()
+    if s in TRUE: return True
+    if s in FALSE: return False if s else missing
+    if s in ('nan', 'none', '<na>'): return missing
+    raise ValueError(f'cannot parse boolean {x!r}')
+
+
 def daily(raw):
     """BaoStock 全市场日线（query_daily_history_k_AStock）→ bars_1d"""
     d = pd.DataFrame({'date': pd.to_datetime(raw['date']).dt.date, 'instrument': raw['code'].map(instrument)})
@@ -42,7 +61,7 @@ def daily(raw):
 
 
 def market_input(bars, adjusted=None, coverage=None):
-    """统一提供账本/标签使用的市场字段；原始行情不会冒充复权行情。"""
+    """研究视图（因子、标签）使用的市场字段；原始行情不会冒充复权行情。账本行情只由 observe.execution 生成。"""
     out = bars.copy()
     if adjusted is not None:
         from .prices import with_adjusted
