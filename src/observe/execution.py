@@ -62,8 +62,9 @@ def load(store, state, start = None, end = None, liquidity_window = 20):
     if s is not None and days:
         k = max(bisect_left(days, s) - liquidity_window, 0); first = days[k].year
         parts = [p for p in state['tables'].get('bars_1d', {}) if not p.isdigit() or (int(p) >= first and (e is None or int(p) <= e.year))]
+    used = {t: {p: v for p, v in state['tables'].get(t, {}).items() if t != 'bars_1d' or parts is None or p in parts} for t in TABLES}
     return {'calendar': cal, 'bars_1d': store.load_state(state, 'bars_1d', parts = parts), 'instruments': store.load_state(state, 'instruments'),
-            'corp_actions': store.load_state(state, 'corp_actions')}
+            'corp_actions': store.load_state(state, 'corp_actions'), 'partitions': used}
 
 
 def _action(r):

@@ -19,7 +19,7 @@ from tests.integration.helpers import A, BIG, D, action, bar, flat, instruments,
 CASH_AFTER_BUY, EQUITY = 974.26, 99974.26
 
 
-def run(root, sid, **kw): return run_offline(root, snapshot = sid, initial_cash = 100000, liquidity_window = 2, **kw)
+def run(root, sid, **kw): return run_offline(root, snapshot = sid, initial_cash = 100000, execution = {'liquidity_window': 2}, **kw)
 
 
 def table(result, name): return json.loads((Path(result['output']) / f'{name}.json').read_text(encoding = 'utf-8'))
@@ -126,7 +126,7 @@ def test_participation_limit_uses_history_before_decision(tmp_path):
 
 def test_no_liquidity_history_rejects_orders_instead_of_infinite_default(tmp_path):
     rows = flat(A)
-    r = run_offline(tmp_path, snapshot = snapshot(tmp_path, rows), initial_cash = 100000, liquidity_window = 2, start = D[0])
+    r = run_offline(tmp_path, snapshot = snapshot(tmp_path, rows), initial_cash = 100000, execution = {'liquidity_window': 2}, start = D[0])
     assert r['status'] == 'success_limited' and r['limitations'][0]['kind'] == 'liquidity_warmup_short'
     first = table(r, 'orders')[0]
     assert first['exec_date'] == str(D[1]) and first['reject_reason'] == 'no_liquidity_reference'

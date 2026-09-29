@@ -7,7 +7,7 @@ from pathlib import Path
 # KINDS 保留数据库兼容性；SUPPORTED 才是界面和新提交允许执行的能力。
 KINDS = ('data_update', 'data_audit', 'snapshot', 'gc', 'factor_eval', 'run_experiment', 'backtest_variant', 'reproduce')
 SUPPORTED = frozenset(('data_update', 'data_audit', 'snapshot', 'gc', 'run_experiment', 'reproduce'))
-STATUS = ('queued', 'running', 'success', 'partial', 'failed', 'cancelled', 'interrupted')
+STATUS = ('queued', 'running', 'success', 'success_limited', 'partial', 'blocked', 'mismatch', 'failed', 'cancelled', 'interrupted')   # 回放与复现沿用 runs.py 的运行状态
 SCHEMA = '''create table if not exists jobs (job_id text primary key, kind text not null, params text not null, status text not null,
             created_at text, started_at text, finished_at text, pid integer, result text, error text, retry_of text, log_path text)'''
 
@@ -71,7 +71,7 @@ class Jobs:
 
     def retry(self, jid):
         j = self.get(jid)
-        if j['status'] not in ('failed', 'interrupted', 'partial', 'cancelled'): raise ValueError(f'任务 {jid} 状态为 {j["status"]}，不能重试')
+        if j['status'] not in ('failed', 'interrupted', 'partial', 'blocked', 'mismatch', 'cancelled'): raise ValueError(f'任务 {jid} 状态为 {j["status"]}，不能重试')
         return self.submit(j['kind'], json.loads(j['params']), retry_of = jid)
 
     def recover(self):

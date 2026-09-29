@@ -1,14 +1,42 @@
-"""实验目录（模块 18）：独占创建、不覆盖已有产物；运行状态先写 running，结束时提交终态；复现源目录只读。"""
-import hashlib, json, secrets
+"""实验目录（模块 18）：独占创建、不覆盖已有产物；运行状态先写 running，结束时提交终态；复现源目录只读；核心产物逐值比较。
+
+状态（文件、函数返回值、命令退出码、队列任务共用一套定义）：
+  success          程序跑完，没有证据限制
+  success_limited  程序跑完，但有数据或执行上的证据限制（limitations 非空）
+  blocked          输入或账本遇到无法正确处理的情况；有限制也不会改成 success_limited
+  mismatch         复现重跑的核心产物与源实验不一致
+  failed           程序出错（异常）
+"""
+import hashlib, importlib.metadata, json, math, platform, secrets, subprocess
 from datetime import datetime
 from pathlib import Path
 
 from .data.store import _atomic_json
 
-TERMINAL = ('success', 'success_limited', 'blocked', 'failed')
+TERMINAL = ('success', 'success_limited', 'blocked', 'mismatch', 'failed')
+EXIT_CODES = {'success': 0, 'success_limited': 0, 'failed': 1, 'mismatch': 2, 'blocked': 3}
+REPO = Path(__file__).resolve().parents[2]
 
 
 class RunDirError(ValueError): pass
+
+
+def environment():
+    """代码与依赖版本：复现时只检测并报告差异，不自动切换工作区"""
+    def git(*args):
+        try: return subprocess.run(['git', *args], cwd = REPO, capture_output = True, text = True, timeout = 10).stdout.strip()
+        except (OSError, subprocess.SubprocessError): return None
+    lock = REPO / 'uv.lock'; dirty = git('status', '--porcelain', '--untracked-files=no')
+    packages = {}
+    for p in ('pandas', 'numpy', 'pyarrow', 'pydantic'):
+        try: packages[p] = importlib.metadata.version(p)
+        except importlib.metadata.PackageNotFoundError: packages[p] = None
+    return {'git_commit': git('rev-parse', 'HEAD') or None, 'git_dirty': None if dirty is None else bool(dirty),
+            'lock_sha256': file_sha(lock) if lock.exists() else None, 'python': platform.python_version(), 'packages': packages}
+
+
+def drift(recorded, current):
+    return {k: {'recorded': recorded.get(k), 'current': current.get(k)} for k in sorted(set(recorded) | set(current)) if recorded.get(k) != current.get(k)}
 
 
 def create_run_dir(runs_root, output = None, tag = ''):
@@ -67,3 +95,46 @@ class RunStatus:
     def finish(self, status, **info):
         if status not in TERMINAL: raise ValueError(f'unknown run status {status}')
         self.data.update(status = status, finished_at = datetime.now().isoformat(timespec = 'seconds'), **info); self._write()
+
+
+# 复现比较 ---------------------------------------------------------------------------------------------
+KEYS = {'scores': ('decision_date', 'instrument'), 'orders': ('exec_date', 'order_id'), 'fills': ('fill_id',), 'cash_events': None,
+        'equity': ('date',), 'positions_daily': ('date', 'instrument'), 'receivables': ('date', 'pay_date'), 'limitations': None}
+STATUS_FIELDS = ('status', 'blocked', 'assumptions', 'issues', 'limitations', 'rules_used_unverified', 'summary')
+
+
+def _same(a, b, abs_tol, rel_tol):
+    if isinstance(a, bool) or isinstance(b, bool) or not isinstance(a, (int, float)) or not isinstance(b, (int, float)): return a == b
+    if math.isnan(a) or math.isnan(b): return math.isnan(a) and math.isnan(b)
+    return abs(a - b) <= abs_tol + rel_tol * abs(b)
+
+
+def _rows(table, rows):
+    key = KEYS.get(table)
+    if key is None: return {(k,): r for k, r in enumerate(rows)}, ('row',)
+    return {tuple(r.get(k) for k in key): r for r in rows}, key
+
+
+def compare_tables(expected, actual, abs_tol = 1e-9, rel_tol = 0.0, limit = 200):
+    """expected / actual: {表名: 行列表或字典}。按稳定主键对齐逐字段比较；返回 (差异明细, 每表摘要)"""
+    diffs, summary = [], {}
+    for table in sorted(set(expected) | set(actual)):
+        e, a = expected.get(table), actual.get(table); n = 0
+        if isinstance(e, dict) or isinstance(a, dict):
+            e, a = e or {}, a or {}
+            for f in sorted(set(e) | set(a)):
+                if not _same(e.get(f), a.get(f), abs_tol, rel_tol): n += 1; diffs.append({'table': table, 'key': {}, 'field': f, 'expected': e.get(f), 'actual': a.get(f)})
+            summary[table] = {'differences': n}; continue
+        if e is None or a is None:
+            diffs.append({'table': table, 'key': {}, 'field': None, 'kind': 'missing_table', 'expected': e is not None, 'actual': a is not None})
+            summary[table] = {'differences': 1}; continue
+        (er, key), (ar, _) = _rows(table, e), _rows(table, a)
+        for k in sorted(set(er) | set(ar), key = lambda x: tuple(map(str, x))):
+            kd = dict(zip(key, k))
+            if k not in ar or k not in er:
+                n += 1; diffs.append({'table': table, 'key': kd, 'field': None, 'kind': 'only_in_expected' if k not in ar else 'only_in_actual'}); continue
+            x, y = er[k], ar[k]
+            for f in sorted(set(x) | set(y)):
+                if not _same(x.get(f), y.get(f), abs_tol, rel_tol): n += 1; diffs.append({'table': table, 'key': kd, 'field': f, 'expected': x.get(f), 'actual': y.get(f)})
+        summary[table] = {'rows_expected': len(e), 'rows_actual': len(a), 'differences': n}
+    return diffs[:limit], summary

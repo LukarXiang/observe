@@ -14,6 +14,12 @@ def _config(path):
     return data
 
 
+def job_status(kind, result):
+    """任务结果 → 队列状态：回放与复现直接沿用运行状态（与 status.json、函数返回值、命令退出码同一定义）"""
+    if kind in ('run_experiment', 'reproduce'): return result['status']
+    return 'partial' if isinstance(result, dict) and result.get('status') == 'rejected' else 'success'
+
+
 def run_kind(root, kind, params):
     """任务种类 → 研究核心函数；命令行直接执行和队列执行都走这里"""
     from .data.store import Store
@@ -57,11 +63,13 @@ def run_kind(root, kind, params):
             st.unpin(pin)
         return {'rows': len(b), 'days': len(days), 'issues': {f'{l}/{r}': int(n) for (l, r), n in iss.groupby(['level', 'rule']).size().items()} if len(iss) else {}, 'audit_id': aid, 'batch_id': batch_id}
     if kind == 'run_experiment':
-        from .replay import run_offline
-        return run_offline(root, **params)
+        from .replay import _run, run_params
+        p = run_params(params); return _run(root, p['config'], p['output'])
     if kind == 'reproduce':
         from .replay import reproduce
-        return reproduce(root, params['run'], params.get('output'))
+        unknown = set(params) - {'run', 'output', 'abs_tol', 'rel_tol'}
+        if unknown: raise ValueError(f'reproduce 不认识的参数：{sorted(unknown)}')
+        return reproduce(root, params['run'], params.get('output'), **{k: float(params[k]) for k in ('abs_tol', 'rel_tol') if params.get(k) is not None})
     raise NotImplementedError(f'任务种类 {kind} 尚未实现')
 
 
@@ -79,8 +87,10 @@ def main(argv = None):
     j.add_parser('list'); w = j.add_parser('worker'); w.add_argument('--once', action = 'store_true')
     for name in ('exec', 'retry', 'cancel', 'show'): j.add_parser(name).add_argument('job_id')
     sv = sub.add_parser('serve'); sv.add_argument('--port', type = int, default = 8765)
-    r = sub.add_parser('run'); r.add_argument('--config'); r.add_argument('--snapshot'); r.add_argument('--output'); r.add_argument('--cash', type=float, default=100000.0); r.add_argument('--start'); r.add_argument('--end')
-    rp = sub.add_parser('reproduce'); rp.add_argument('run'); rp.add_argument('--output')
+    r = sub.add_parser('run', help = '离线回放：显式参数 > --config YAML > 默认值；退出码 0 成功 / 3 阻断 / 1 出错')
+    r.add_argument('--config'); r.add_argument('--snapshot'); r.add_argument('--output'); r.add_argument('--cash', type = float); r.add_argument('--start'); r.add_argument('--end')
+    rp = sub.add_parser('reproduce', help = '用冻结输入在新目录重跑并逐表比较；退出码 0 一致 / 2 不一致 / 3 阻断 / 1 出错或拒绝')
+    rp.add_argument('run'); rp.add_argument('--output'); rp.add_argument('--abs-tol', type = float); rp.add_argument('--rel-tol', type = float)
     a = ap.parse_args(argv); root = Path(a.root)
     from .jobs import Jobs, SUPPORTED
     if a.cmd == 'data':
@@ -107,19 +117,20 @@ def main(argv = None):
             job = q.get(a.job_id)
             try:
                 r = run_kind(root, job['kind'], json.loads(job['params']))
-                status = 'partial' if isinstance(r, dict) and r.get('status') == 'rejected' else 'success'
-                q.finish(a.job_id, status, r); _json(r)
+                q.finish(a.job_id, job_status(job['kind'], r), r); _json(r)
             except Exception as e:   # noqa: BLE001  任务失败要落盘，不能让子进程静默退出
                 traceback.print_exc(); q.finish(a.job_id, 'failed', error = f'{type(e).__name__}: {e}'); sys.exit(1)
             return
-    if a.cmd == 'run':
-        cfg = _config(a.config)
-        if 'snapshot_id' in cfg and 'snapshot' not in cfg: cfg['snapshot'] = cfg.pop('snapshot_id')
-        p = {'snapshot': a.snapshot, 'output': a.output, 'initial_cash': a.cash, 'start': a.start, 'end': a.end}
-        p.update({k: v for k, v in cfg.items() if k in {'snapshot', 'output', 'initial_cash', 'cash', 'start', 'end'} and v is not None})
-        if 'cash' in p and 'initial_cash' not in cfg: p['initial_cash'] = p.pop('cash')
-        return _json(run_kind(root, 'run_experiment', p))
-    if a.cmd == 'reproduce': return _json(run_kind(root, 'reproduce', {'run': a.run, 'output': a.output}))
+    if a.cmd in ('run', 'reproduce'):
+        from .runs import EXIT_CODES
+        if a.cmd == 'run':
+            from .replay import _run, run_params
+            p = run_params(_config(a.config), snapshot = a.snapshot, output = a.output, initial_cash = a.cash, start = a.start, end = a.end)
+            r = _run(root, p['config'], p['output'])
+        else: r = run_kind(root, 'reproduce', {'run': a.run, 'output': a.output, 'abs_tol': a.abs_tol, 'rel_tol': a.rel_tol})
+        _json(r)
+        if EXIT_CODES[r['status']]: sys.exit(EXIT_CODES[r['status']])
+        return
     if a.cmd == 'serve':
         import threading, uvicorn
         from .api.app import create_app
