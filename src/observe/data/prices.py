@@ -66,29 +66,19 @@ def with_adjusted(bars, adj, coverage=None, allow_estimated=False):
         m = b.copy(); m['back_factor'] = np.nan
     else:
         m = pd.merge_asof(b, a, on = '_d', by = 'instrument', direction = 'backward')
-    cov = normalize_coverage(coverage)
-    coverage_rows = cov.set_index('instrument').to_dict('index')
-    m['_coverage'] = m.instrument.map(coverage_rows)
-    def usable(row):
-        c = row['_coverage'] if isinstance(row['_coverage'], dict) else {}
-        day = row['_d'].date()
-        if not c or bool(c.get('has_gap', False)):
-            return False
-        through = c.get('verified_through')
-        if through is None or pd.isna(through) or day > through:
-            return False
-        start = c.get('verified_from') or c.get('requested_start')
-        if start is not None and not pd.isna(start) and day < start:
-            return False
-        return bool(c.get('has_start_basis', False) or c.get('confirmed_no_events', False) or c.get('status') == 'no_events')
+    cov = normalize_coverage(coverage).set_index('instrument')
+    col = lambda name: m.instrument.map(cov[name]) if len(cov) else pd.Series(pd.NA, index = m.index, dtype = 'object')
+    known = m.instrument.isin(cov.index); gap = col('has_gap').fillna(False).astype(bool)
+    through = pd.to_datetime(col('verified_through')); start = pd.to_datetime(col('verified_from')).fillna(pd.to_datetime(col('requested_start')))
+    basis = col('has_start_basis').fillna(False).astype(bool) | col('confirmed_no_events').fillna(False).astype(bool) | col('status').eq('no_events')
+    usable = known & ~gap & through.notna() & (m['_d'] <= through) & (start.isna() | (m['_d'] >= start)) & basis
     # 覆盖声明「确认无事件」，但覆盖区间内却有复权事件：两者冲突，显式报告而不是任选其一
-    conflict = set()
-    for inst, c in coverage_rows.items():
-        if not (c.get('confirmed_no_events') or c.get('status') == 'no_events'): continue
-        lo, hi = (None if x is None or pd.isna(x) else x for x in (c.get('verified_from'), c.get('verified_through')))
-        if any((lo is None or d >= lo) and (hi is None or d <= hi) for d in a.loc[a.instrument == inst, '_d'].dt.date): conflict.add(inst)
+    claims = cov[cov.confirmed_no_events | cov.status.eq('no_events')]
+    ev = a.merge(claims[['verified_from', 'verified_through']], left_on = 'instrument', right_index = True)
+    lo, hi = pd.to_datetime(ev.verified_from), pd.to_datetime(ev.verified_through)
+    conflict = set(ev.loc[(lo.isna() | (ev['_d'] >= lo)) & (hi.isna() | (ev['_d'] <= hi)), 'instrument'])
     m['_bad'] = m.instrument.isin(invalid | conflict)
-    m['_coverage_usable'] = m.apply(usable, axis=1) & ~m['_bad']
+    m['_coverage_usable'] = usable & ~m['_bad']
     m['_factor_known'] = m.back_factor.notna()
     m['_available'] = m['_factor_known'] & m['_coverage_usable']
     m['_no_event_basis'] = ~m['_factor_known'] & m['_coverage_usable']       # 覆盖完整、首个事件之前：初始基准因子为 1
@@ -98,19 +88,14 @@ def with_adjusted(bars, adj, coverage=None, allow_estimated=False):
         if c in m: m[f'{c}_adj'] = m[c] * m.back_factor
     m = m.sort_values(['instrument', '_d'])
     if 'close_adj' in m:
-        prev = m.groupby('instrument').close_adj.transform(lambda s: s.ffill().shift())
+        prev = m.groupby('instrument').close_adj.ffill().groupby(m.instrument).shift()
         m['ret'] = (m.close_adj / prev - 1).where(m.close_adj.notna() & prev.notna())
     else: m['ret'] = np.nan
     m['adjustment_status'] = np.select([m['_available'] | m['_no_event_basis'], m['_estimated']], ['usable', 'estimated'], default='unavailable')
-    if coverage_rows:
-        m['adjustment_verified_through'] = m.instrument.map(lambda x: coverage_rows.get(x, {}).get('verified_through'))
-        m['adjustment_source'] = m.instrument.map(lambda x: coverage_rows.get(x, {}).get('source'))
-    else:
-        m['adjustment_verified_through'] = None; m['adjustment_source'] = None
+    m['adjustment_verified_through'] = col('verified_through'); m['adjustment_source'] = col('source')
     # 状态、数值与原因一致：usable 有值无原因；estimated 有值并说明未经覆盖核实；unavailable 无值且必有原因
     m['adjusted_unavailable_reason'] = np.select([
-        m['_available'] | m['_no_event_basis'], m.instrument.isin(invalid), m.instrument.isin(conflict), m['_coverage'].isna(),
-        m['_coverage'].map(lambda x: bool(x.get('has_gap', False)) if isinstance(x, dict) else False),
+        m['_available'] | m['_no_event_basis'], m.instrument.isin(invalid), m.instrument.isin(conflict), ~known, gap,
         m['_factor_known'], pd.Series(True, index = m.index)
     ], [None, 'invalid_factor', 'coverage_conflict', 'coverage_unknown', 'unknown_gap', 'outside_verified_coverage', 'coverage_not_verified'], default=None)
-    return m.drop(columns = ['_d', '_coverage', '_bad', '_coverage_usable', '_factor_known', '_available', '_no_event_basis', '_estimated']).sort_values(['date', 'instrument']).reset_index(drop = True)
+    return m.drop(columns = ['_d', '_bad', '_coverage_usable', '_factor_known', '_available', '_no_event_basis', '_estimated']).sort_values(['date', 'instrument']).reset_index(drop = True)

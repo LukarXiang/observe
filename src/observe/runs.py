@@ -125,6 +125,7 @@ def compare_tables(expected, actual, abs_tol = 1e-9, rel_tol = 0.0, limit = 200)
             for f in sorted(set(e) | set(a)):
                 if not _same(e.get(f), a.get(f), abs_tol, rel_tol): n += 1; diffs.append({'table': table, 'key': {}, 'field': f, 'expected': e.get(f), 'actual': a.get(f)})
             summary[table] = {'differences': n}; continue
+        if e is None and a is None: summary[table] = {'differences': 0}; continue
         if e is None or a is None:
             diffs.append({'table': table, 'key': {}, 'field': None, 'kind': 'missing_table', 'expected': e is not None, 'actual': a is not None})
             summary[table] = {'differences': 1}; continue
@@ -138,3 +139,26 @@ def compare_tables(expected, actual, abs_tol = 1e-9, rel_tol = 0.0, limit = 200)
                 if not _same(x.get(f), y.get(f), abs_tol, rel_tol): n += 1; diffs.append({'table': table, 'key': kd, 'field': f, 'expected': x.get(f), 'actual': y.get(f)})
         summary[table] = {'rows_expected': len(e), 'rows_actual': len(a), 'differences': n}
     return diffs[:limit], summary
+
+
+def compare_frames(expected, actual, keys, abs_tol = 1e-9, rel_tol = 0.0, limit = 20):
+    """大表按主键对齐逐列比较（数值按容差，其他按相等，缺失与缺失视为相同）。返回 (差异样例, 摘要)"""
+    import numpy as np, pandas as pd
+    keys = list(keys); m = expected.merge(actual, on = keys, how = 'outer', suffixes = ('__e', '__a'), indicator = True)
+    summary = {'rows_expected': len(expected), 'rows_actual': len(actual), 'only_in_expected': int((m._merge == 'left_only').sum()),
+               'only_in_actual': int((m._merge == 'right_only').sum()), 'columns': {}}
+    diffs = [{'key': canonical(dict(zip(keys, r[:-1]))), 'kind': 'only_in_expected' if r[-1] == 'left_only' else 'only_in_actual'}
+             for r in m.loc[m._merge != 'both', keys + ['_merge']].head(limit).itertuples(index = False)]
+    both = m[m._merge == 'both']
+    for c in [c for c in expected.columns if c not in keys]:
+        if f'{c}__a' not in both: summary['columns'][c] = -1; diffs.append({'field': c, 'kind': 'missing_column'}); continue
+        x, y = both[f'{c}__e'], both[f'{c}__a']
+        if pd.api.types.is_numeric_dtype(x) and pd.api.types.is_numeric_dtype(y) and not pd.api.types.is_bool_dtype(x):
+            xv, yv = x.to_numpy(float), y.to_numpy(float); same = np.isclose(xv, yv, atol = abs_tol, rtol = rel_tol) | (np.isnan(xv) & np.isnan(yv))
+        else: same = ((x == y) | (x.isna() & y.isna())).to_numpy(bool)
+        bad = np.flatnonzero(~same)
+        if len(bad): summary['columns'][c] = int(len(bad))
+        for k in bad[:max(0, limit - len(diffs))]:
+            r = both.iloc[k]; diffs.append({'key': canonical({n: r[n] for n in keys}), 'field': c, 'expected': canonical(r[f'{c}__e']), 'actual': canonical(r[f'{c}__a'])})
+    summary['differences'] = summary['only_in_expected'] + summary['only_in_actual'] + sum(abs(v) for v in summary['columns'].values())
+    return diffs, summary

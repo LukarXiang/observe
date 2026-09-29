@@ -1,0 +1,40 @@
+# 第一批基础日频因子（模块 12、14）。direction 在注册时先验固定，不得依据任何回测结果修改；顺序即相关性去重时的优先顺序。
+version: 1
+min_obs_ratio: 0.8          # 窗口内有效值少于 80% 时输出缺失（停牌日在日历上占位）
+factors:
+  - name: rev_5
+    expr: close_adj / ts_delay(close_adj, 5) - 1
+    direction: -1
+    desc: 5 日收益；A 股短期反转，近期涨幅大的随后相对走弱
+  - name: rev_20
+    expr: close_adj / ts_delay(close_adj, 20) - 1
+    direction: -1
+    desc: 20 日收益；中期反转
+  - name: mom_60_skip5
+    expr: ts_delay(close_adj, 5) / ts_delay(close_adj, 60) - 1
+    direction: 1
+    desc: 剔除最近 5 日的 60 日收益；中期动量
+  - name: vol_20
+    expr: ts_std(ret, 20)
+    direction: -1
+    desc: 20 日收益标准差；低波动异象
+  - name: range_20
+    expr: ts_mean((high_adj - low_adj) / close_adj, 20)
+    direction: -1
+    desc: 20 日平均振幅；日内波动大的随后相对走弱
+  - name: turnover_20
+    expr: ts_mean(turnover, 20)
+    direction: -1
+    desc: 20 日平均换手；过度交易的股票随后相对走弱
+  - name: amihud_20
+    expr: ts_mean(abs(ret) / amount, 20)
+    direction: 1
+    desc: 20 日 Amihud 非流动性；流动性差需要收益补偿
+  - name: amount_surge
+    expr: amount / ts_mean(amount, 20)
+    direction: -1
+    desc: 当日成交额相对 20 日均值；放量后短期回落
+  - name: pv_corr_20
+    expr: ts_corr(close_adj, volume, 20)
+    direction: -1
+    desc: 20 日价量相关；量价同向推动的上涨难以持续

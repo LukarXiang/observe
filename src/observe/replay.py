@@ -8,6 +8,7 @@ from datetime import date
 from pathlib import Path
 from typing import Literal
 
+import pandas as pd
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from .data.audit import audit_status
@@ -48,6 +49,12 @@ class ExecutionConfig(_Strict):
     liquidity_override: float | None = Field(None, gt = 0)       # 只给隔离的合成测试用；设定后运行记为 success_limited
 
 
+class ScoresConfig(_Strict):
+    source: Literal['baseline', 'predictions'] = 'baseline'
+    run: str | None = None                                       # predictions：研究实验目录（observe research 的产物）
+    model: str = 'ridge'
+
+
 class RunConfig(_Strict):
     snapshot: str = Field(min_length = 1)
     start: date | None = None
@@ -57,6 +64,7 @@ class RunConfig(_Strict):
     rules: str = RULES
     portfolio: PortfolioConfig = Field(default_factory = PortfolioConfig)
     execution: ExecutionConfig = Field(default_factory = ExecutionConfig)
+    scores: ScoresConfig = Field(default_factory = ScoresConfig)
 
 
 ALIASES = {'snapshot_id': 'snapshot', 'cash': 'initial_cash'}
@@ -108,6 +116,33 @@ class _Recorder:
 def _hash(x): return hashlib.sha256(json.dumps(canonical(x), sort_keys = True).encode()).hexdigest()
 
 
+def score_source(cfg):
+    """分数来源：工程基线，或研究实验的样本外预测表（同时带来研究候选）。预测表与股票池按文件哈希冻结"""
+    sc = cfg.scores
+    if sc.source == 'baseline': return BASELINE, cfg
+    if not sc.run: raise ValueError('scores.source = predictions 需要 scores.run（研究实验目录）')
+    run = Path(sc.run); st = json.loads((run / 'status.json').read_text(encoding = 'utf-8'))
+    if st.get('kind') != 'research' or st.get('status') not in ('success', 'success_limited'): raise ValueError(f'{run} 不是已完成的研究实验（状态 {st.get("status")}）')
+    pred = pd.read_parquet(run / 'predictions.parquet', columns = ['model_id', 'decision_date'])
+    days = pred.loc[pred.model_id == sc.model, 'decision_date']
+    if not len(days): raise ValueError(f'研究实验 {run.name} 没有模型 {sc.model} 的预测')
+    meta = {'source': 'predictions', 'run': str(run.resolve()), 'research_run_id': run.name, 'model': sc.model, 'evidence': 'development_oos_prediction',
+            'predictions_sha256': file_sha(run / 'predictions.parquet'), 'universe_sha256': file_sha(run / 'universe.parquet')}
+    first, last = pd.Timestamp(days.min()).date(), pd.Timestamp(days.max()).date()
+    return meta, cfg.model_copy(update = {'start': cfg.start or first, 'end': cfg.end or last})
+
+
+def _prediction_scores(meta, dates):
+    run, keep = Path(meta['run']), set(dates)
+    p = pd.read_parquet(run / 'predictions.parquet'); p = p[(p.model_id == meta['model'])]; p['decision_date'] = pd.to_datetime(p.decision_date).dt.date
+    u = pd.read_parquet(run / 'universe.parquet', columns = ['decision_date', 'instrument', 'eligible']); u['decision_date'] = pd.to_datetime(u.decision_date).dt.date
+    p = p[p.decision_date.isin(keep)].sort_values(['decision_date', 'instrument'])
+    scores = [{'decision_date': d, 'instrument': i, 'score': float(v)} for d, i, v in zip(p.decision_date, p.instrument, p.score)]
+    eligible = {d: set() for d in dates}
+    for d, i in zip(*u.loc[u.eligible & u.decision_date.isin(keep), ['decision_date', 'instrument']].to_numpy().T): eligible[d].add(i)
+    return scores, eligible
+
+
 def run_offline(root, output = None, runs_root = None, **params):
     """公开入口：params 与 YAML 同构（snapshot、start、end、initial_cash、boards、rules、portfolio、execution）"""
     p = run_params(params); return _run(root, p['config'], output or p['output'], runs_root)
@@ -115,13 +150,14 @@ def run_offline(root, output = None, runs_root = None, **params):
 
 def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = None, reproduce_of = None, compare = None):
     store = Store(root); state = store.state(cfg.snapshot)                       # 快照不存在时在建目录之前就报错
+    source, cfg = score_source(cfg)
     rules_file = Path(rules_file or cfg.rules); rules_text = rules_file.read_text(encoding = 'utf-8'); rules = RuleSet.from_yaml(rules_file)
     doc = {'config': cfg.model_dump(mode = 'json'), 'snapshot_id': state.get('snapshot_id') or cfg.snapshot, 'batch_id': state.get('batch_id'),
-           'scores': BASELINE, 'rules': {'source_path': str(cfg.rules), 'sha256': hashlib.sha256(rules_text.encode()).hexdigest(), 'fingerprint': rules.config_fingerprint()},
+           'scores': source, 'rules': {'source_path': str(cfg.rules), 'sha256': hashlib.sha256(rules_text.encode()).hexdigest(), 'fingerprint': rules.config_fingerprint()},
            'environment': environment(), 'reproduce_of': reproduce_of}
     h = _hash({k: doc[k] for k in ('config', 'snapshot_id', 'scores', 'rules')})
     out = create_run_dir(Path(runs_root) if runs_root else Path(root) / 'runs', output, '-'.join(x for x in (h[:6], tag) if x))
-    status = RunStatus(out, out.name, evidence = BASELINE['evidence'], config_hash = h, reproduce_of = reproduce_of)
+    status = RunStatus(out, out.name, evidence = source['evidence'], config_hash = h, reproduce_of = reproduce_of)
     (out / 'rules.yaml').write_text(rules_text, encoding = 'utf-8'); write_json(out / 'config.json', doc); status.stage('config')
     rec, orders, limitations, x = None, None, [], cfg.execution
     try:
@@ -134,16 +170,18 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
         status.stage('load')
         inputs = build(tables, cfg.start, cfg.end, cfg.boards, x.liquidity_window, x.liquidity_override); limitations += inputs.limitations
         status.stage('inputs', **inputs.info)
-        scores = baseline_scores(inputs.candidates); write_table(out, 'scores', scores); status.stage('scores', rows = len(scores))
+        if source['source'] == 'baseline': scores, eligible = baseline_scores(inputs.candidates), inputs.candidates
+        else: scores, eligible = _prediction_scores(source, inputs.dates)
+        write_table(out, 'scores', scores); status.stage('scores', rows = len(scores), source = source['source'])
         by_date = {}
         for s in scores: by_date.setdefault(s['decision_date'], {})[s['instrument']] = s['score']
         rec = _Recorder(inputs.dates, inputs.unexplained); p = cfg.portfolio
-        book, orders = run_loop(inputs.dates, inputs.market, by_date, cfg.initial_cash, rules, eligible_by_date = inputs.candidates, actions = inputs.actions,
+        book, orders = run_loop(inputs.dates, inputs.market, by_date, cfg.initial_cash, rules, eligible_by_date = eligible, actions = inputs.actions,
                                 rebalance_every = p.rebalance_every, open_cash_policy = p.open_cash_policy, slippage = x.slippage, n = p.n, buffer = p.buffer,
                                 max_sell = p.max_sell, max_weight = p.max_weight, refill_between_rebalance = p.refill_between_rebalance, calendar = inputs.calendar,
                                 participation = p.participation, on_close = rec)
         status.stage('loop', orders = len(orders))
-        status.stage('labels', 'not_run', reason = '工程基线不使用标签；标签由 labels.build_labels 在研究阶段生成')
+        status.stage('labels', 'not_run', reason = '回放不使用标签；标签由研究阶段 labels.build_labels 生成')
         metrics = evaluate(book.equity_curve()); write_json(out / 'metrics.json', metrics); status.stage('evaluation')
         final = 'blocked' if book.status == 'blocked' else ('success_limited' if limitations else 'success')
         info = {'assumptions': book.assumptions, 'issues': book.issues, 'rules_used_unverified': sorted(map(str, rules.used_unverified)),
@@ -196,9 +234,24 @@ def _read(path):
     except (OSError, ValueError) as exc: raise ReproduceRefused(f'无法读取 {path}: {exc}') from None
 
 
+def check_snapshot(store, snapshot, data_manifest):
+    """快照存在，且实际读取过的每个分区文件与源实验记录的字节哈希一致；否则拒绝称作原实验复现"""
+    try: state = store.state(snapshot)
+    except FileNotFoundError: raise ReproduceRefused(f'快照 {snapshot} 不存在') from None
+    for table, parts in data_manifest.get('used', {}).items():
+        for part, v in parts.items():
+            cur = state['tables'].get(table, {}).get(part, {}); path = store.root / v['file']
+            if cur.get('file') != v['file'] or not path.exists() or file_sha(path) != v['file_sha256']:
+                raise ReproduceRefused(f'快照数据与源实验记录不一致：{table}/{part}')
+    return state
+
+
 def reproduce(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0):
-    """先读取并校验源实验的全部冻结输入与核心产物，再在新目录重跑并逐表比较；源目录只读"""
+    """先读取并校验源实验的全部冻结输入与核心产物，再在新目录重跑并逐表比较；源目录只读。研究实验转给 research.reproduce_research"""
     source = Path(run); ensure_outside(source, output)
+    if _read(source / 'config.json').get('kind') == 'research':
+        from .research import reproduce_research
+        return reproduce_research(root, run, output, abs_tol, rel_tol)
     manifest = _read(source / 'manifest.json'); doc = _read(source / 'config.json'); src_status = _read(source / 'status.json')
     if src_status.get('status') not in ('success', 'success_limited', 'blocked', 'mismatch'): raise ReproduceRefused(f"源实验状态为 {src_status.get('status')}，不是已完成的实验")
     integrity = sorted(n for n, sha in manifest.get('files', {}).items() if not (source / n).exists() or file_sha(source / n) != sha)
@@ -207,14 +260,12 @@ def reproduce(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0):
     frozen = source / 'rules.yaml'
     if not frozen.exists(): raise ReproduceRefused('源实验没有冻结的 rules.yaml')
     if RuleSet.from_yaml(frozen).config_fingerprint() != doc['rules']['fingerprint']: raise ReproduceRefused('冻结的 rules.yaml 与记录的规则指纹不一致')
-    store = Store(root)
-    try: state = store.state(cfg.snapshot)
-    except FileNotFoundError: raise ReproduceRefused(f'快照 {cfg.snapshot} 不存在') from None
-    for table, parts in _read(source / 'data_manifest.json').get('used', {}).items():
-        for part, v in parts.items():
-            cur = state['tables'].get(table, {}).get(part, {}); path = store.root / v['file']
-            if cur.get('file') != v['file'] or not path.exists() or file_sha(path) != v['file_sha256']:
-                raise ReproduceRefused(f'快照数据与源实验记录不一致：{table}/{part}')
+    sc = doc.get('scores') or {}
+    if sc.get('source') == 'predictions':
+        for key, name in (('predictions_sha256', 'predictions.parquet'), ('universe_sha256', 'universe.parquet')):
+            f = Path(sc['run']) / name
+            if not f.exists() or file_sha(f) != sc[key]: raise ReproduceRefused(f'研究实验的 {name} 与源实验记录不一致')
+    check_snapshot(Store(root), cfg.snapshot, _read(source / 'data_manifest.json'))
     expected = read_core(source); expected_status = {k: src_status.get('execution_status', src_status.get('status')) if k == 'status' else src_status.get(k) for k in STATUS_FIELDS}
     code = drift(doc.get('environment') or {}, environment())
     workspace = Path(cfg.rules); workspace_differs = not workspace.exists() or RuleSet.from_yaml(workspace).config_fingerprint() != doc['rules']['fingerprint']

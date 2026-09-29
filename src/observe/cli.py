@@ -16,7 +16,7 @@ def _config(path):
 
 def job_status(kind, result):
     """任务结果 → 队列状态：回放与复现直接沿用运行状态（与 status.json、函数返回值、命令退出码同一定义）"""
-    if kind in ('run_experiment', 'reproduce'): return result['status']
+    if kind in ('run_experiment', 'reproduce', 'research'): return result['status']
     return 'partial' if isinstance(result, dict) and result.get('status') == 'rejected' else 'success'
 
 
@@ -65,6 +65,9 @@ def run_kind(root, kind, params):
     if kind == 'run_experiment':
         from .replay import _run, run_params
         p = run_params(params); return _run(root, p['config'], p['output'])
+    if kind == 'research':
+        from .research import _research, research_params
+        p = research_params(params); return _research(root, p['config'], p['output'])
     if kind == 'reproduce':
         from .replay import reproduce
         unknown = set(params) - {'run', 'output', 'abs_tol', 'rel_tol'}
@@ -89,6 +92,8 @@ def main(argv = None):
     sv = sub.add_parser('serve'); sv.add_argument('--port', type = int, default = 8765)
     r = sub.add_parser('run', help = '离线回放：显式参数 > --config YAML > 默认值；退出码 0 成功 / 3 阻断 / 1 出错')
     r.add_argument('--config'); r.add_argument('--snapshot'); r.add_argument('--output'); r.add_argument('--cash', type = float); r.add_argument('--start'); r.add_argument('--end')
+    rs = sub.add_parser('research', help = '研究流水线：股票池 → 因子 → 标签 → 切分 → 基线与 Ridge 样本外预测 → 评价；退出码同 run')
+    rs.add_argument('--config'); rs.add_argument('--snapshot'); rs.add_argument('--output')
     rp = sub.add_parser('reproduce', help = '用冻结输入在新目录重跑并逐表比较；退出码 0 一致 / 2 不一致 / 3 阻断 / 1 出错或拒绝')
     rp.add_argument('run'); rp.add_argument('--output'); rp.add_argument('--abs-tol', type = float); rp.add_argument('--rel-tol', type = float)
     a = ap.parse_args(argv); root = Path(a.root)
@@ -121,9 +126,13 @@ def main(argv = None):
             except Exception as e:   # noqa: BLE001  任务失败要落盘，不能让子进程静默退出
                 traceback.print_exc(); q.finish(a.job_id, 'failed', error = f'{type(e).__name__}: {e}'); sys.exit(1)
             return
-    if a.cmd in ('run', 'reproduce'):
+    if a.cmd in ('run', 'research', 'reproduce'):
         from .runs import EXIT_CODES
-        if a.cmd == 'run':
+        if a.cmd == 'research':
+            from .research import _research, research_params
+            p = research_params(_config(a.config), snapshot = a.snapshot, output = a.output)
+            r = _research(root, p['config'], p['output'])
+        elif a.cmd == 'run':
             from .replay import _run, run_params
             p = run_params(_config(a.config), snapshot = a.snapshot, output = a.output, initial_cash = a.cash, start = a.start, end = a.end)
             r = _run(root, p['config'], p['output'])
