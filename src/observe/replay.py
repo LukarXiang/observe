@@ -13,7 +13,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from .data.audit import audit_status
 from .data.store import Store
-from .evaluation import metrics as evaluate
+from .evaluation import metrics as evaluate, trading_stats
 from .execution import InputBlocked, build, load
 from .ledger import LedgerError, RuleSet
 from .loop import POLICIES, run_loop
@@ -24,7 +24,7 @@ from .runs import (KEYS, STATUS_FIELDS, RunStatus, canonical, compare_tables, cr
 RULES = 'configs/rule_profiles/main_board.yaml'
 BASELINE = {'source': 'baseline', 'name': 'lexicographic_engineering_baseline_v1', 'evidence': 'engineering_baseline_not_a_prediction_model',
             'detail': '按证券代码字典序给研究候选打分，只用于验证执行链路，不是预测模型'}
-CORE = ('scores', 'orders', 'fills', 'cash_events', 'equity', 'positions_daily', 'receivables', 'metrics', 'limitations')
+CORE = ('scores', 'orders', 'fills', 'cash_events', 'equity', 'positions_daily', 'receivables', 'metrics', 'trading', 'limitations')
 
 
 # 配置 -------------------------------------------------------------------------------------------------
@@ -47,6 +47,7 @@ class ExecutionConfig(_Strict):
     slippage: float = Field(0.0, ge = 0, lt = 0.1)
     liquidity_window: int = Field(20, ge = 1)
     liquidity_override: float | None = Field(None, gt = 0)       # 只给隔离的合成测试用；设定后运行记为 success_limited
+    fee_multiplier: float = Field(1.0, gt = 0)                   # 成本情景：佣金、印花税、过户费与最低佣金同乘；冻结的规则原文不变
 
 
 class ScoresConfig(_Strict):
@@ -160,6 +161,7 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
     status = RunStatus(out, out.name, evidence = source['evidence'], config_hash = h, reproduce_of = reproduce_of)
     (out / 'rules.yaml').write_text(rules_text, encoding = 'utf-8'); write_json(out / 'config.json', doc); status.stage('config')
     rec, orders, limitations, x = None, None, [], cfg.execution
+    if x.fee_multiplier != 1: m = x.fee_multiplier; rules = rules.scaled(commission_rate = m, stamp_tax = m, transfer_fee = m, min_commission = m)
     try:
         tables = load(store, state, cfg.start, cfg.end, x.liquidity_window)
         audit = {k: v for k, v in audit_status(root, doc['batch_id'], rules).items() if k != 'rows'}   # 运行前检查：与数据中心页面同一判定
@@ -182,7 +184,8 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
                                 participation = p.participation, on_close = rec)
         status.stage('loop', orders = len(orders))
         status.stage('labels', 'not_run', reason = '回放不使用标签；标签由研究阶段 labels.build_labels 生成')
-        metrics = evaluate(book.equity_curve()); write_json(out / 'metrics.json', metrics); status.stage('evaluation')
+        metrics = evaluate(book.equity_curve()); write_json(out / 'metrics.json', metrics)
+        write_json(out / 'trading.json', canonical(trading_stats(book.equity_rows, book.fills, orders, rec.positions, cfg.initial_cash))); status.stage('evaluation')
         final = 'blocked' if book.status == 'blocked' else ('success_limited' if limitations else 'success')
         info = {'assumptions': book.assumptions, 'issues': book.issues, 'rules_used_unverified': sorted(map(str, rules.used_unverified)),
                 'summary': {'final_equity': book.equity_curve()[-1], 'days': len(inputs.dates), 'start': inputs.info['start'], 'end': inputs.info['end']}}

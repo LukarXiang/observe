@@ -1,3 +1,3 @@
-from .portfolio import metrics
+from .portfolio import metrics, trading_stats
 
-__all__ = ['metrics']
+__all__ = ['metrics', 'trading_stats']

@@ -186,3 +186,21 @@ def test_unknown_snapshot_fails_before_creating_a_directory(tmp_path):
 def test_rules_constant_sanity():
     fees = RuleSet([Rule(start = date(2023, 8, 28), stamp_tax = 0.0005, transfer_fee = 0.00001, commission_rate = 0.00025, min_commission = 5.0)]).fees(99000, 'buy', D[3])
     assert fees['fee'] == 25.74
+
+
+# 组合层交易统计与成本情景 -----------------------------------------------------------------------------
+def test_trading_stats_match_hand_calculation(tmp_path):
+    r = run(tmp_path, snapshot(tmp_path, flat(A))); t = table(r, 'trading')
+    # 只有 1/5 一笔买入：成交额 99000 / 前一日净值 100000 = 0.99，六个交易日平均 0.165
+    assert t['turnover_two_sided_daily_mean'] == pytest.approx(0.99 / 6) and t['turnover_half_daily_mean'] == pytest.approx(0.99 / 12)
+    assert t['fees'] == {'commission': 24.75, 'stamp_tax': 0.0, 'transfer_fee': 0.99, 'fee': 25.74} and t['fee_ratio_to_initial'] == pytest.approx(25.74 / 100000)
+    assert t['orders'] == 1 and t['fill_rate'] == 1.0 and t['reject_reasons'] == {}
+    assert t['max_single_weight_mean'] == pytest.approx(5 * 99000 / EQUITY / 6) and t['cash_share_mean'] == pytest.approx((1 + 5 * CASH_AFTER_BUY / EQUITY) / 6)
+
+
+def test_fee_multiplier_reruns_the_loop_with_scaled_costs(tmp_path):
+    sid = snapshot(tmp_path, flat(A))
+    r = run_offline(tmp_path, snapshot = sid, initial_cash = 100000, execution = {'liquidity_window': 2, 'fee_multiplier': 2.0})
+    f = table(r, 'fills')[0]
+    assert f['commission'] == 49.5 and f['transfer_fee'] == 1.98 and f['fee'] == 51.48 and table(r, 'equity')[-1]['cash'] == round(100000 - 99000 - 51.48, 2)
+    assert reproduce(tmp_path, r['output'])['reproduction']['result'] == 'match'

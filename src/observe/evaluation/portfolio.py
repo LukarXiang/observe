@@ -29,3 +29,25 @@ def metrics(equity, benchmark = None, rf = 0.0, annualization = 242, min_days = 
         out.update(benchmark_missing_days = int((~ok).sum()), information_ratio = float(act.mean() / asd * np.sqrt(a)) if len(act) >= min_days and asd > 0 else None,
                    annual_return_diff = None if bench_annual is None else out['annual_return'] - bench_annual, relative_nav = (e / e[0]) / (b / b[0]))
     return out
+
+
+def trading_stats(equity_rows, fills, orders, positions_daily, initial):
+    """组合层交易统计（模块 17）：换手、费用分项、成交情况、现金占比、持仓集中度。输入是账本产物的行列表"""
+    eq = {r['date']: r for r in equity_rows}; days = sorted(eq); prev = dict(zip(days, [initial] + [eq[d]['equity'] for d in days[:-1]]))
+    traded = {}
+    for f in fills: traded[f['date']] = traded.get(f['date'], 0.0) + f['value']
+    turnover = np.array([traded.get(d, 0.0) / prev[d] for d in days]) if days else np.array([])
+    fee = {k: round(sum(f.get(k, 0.0) for f in fills), 2) for k in ('commission', 'stamp_tax', 'transfer_fee', 'fee')}
+    reasons = {}
+    for o in orders:
+        if o.get('status') == 'rejected': reasons[o.get('reject_reason')] = reasons.get(o.get('reject_reason'), 0) + 1
+    weights = {}
+    for p in positions_daily:
+        if p['last_price'] is not None and eq[p['date']]['equity'] > 0: weights.setdefault(p['date'], []).append(p['qty'] * p['last_price'] / eq[p['date']]['equity'])
+    top1 = np.array([max(weights.get(d, [0.0])) for d in days]); top5 = np.array([sum(sorted(weights.get(d, []), reverse = True)[:5]) for d in days])
+    cash = np.array([eq[d]['cash'] / eq[d]['equity'] for d in days if eq[d]['equity'] > 0])
+    mean = lambda x: float(x.mean()) if len(x) else None
+    return {'turnover_two_sided_daily_mean': mean(turnover), 'turnover_half_daily_mean': mean(turnover / 2), 'fees': fee, 'fee_ratio_to_initial': fee['fee'] / initial if initial else None,
+            'orders': len(orders), 'filled_orders': sum(1 for o in orders if o.get('qty_filled')), 'partial_fills': sum(1 for o in orders if o.get('status') == 'partial'),
+            'fill_rate': sum(1 for o in orders if o.get('qty_filled')) / len(orders) if orders else None, 'reject_reasons': dict(sorted(reasons.items(), key = lambda x: str(x[0]))),
+            'cash_share_mean': mean(cash), 'max_single_weight_mean': mean(top1), 'top5_weight_mean': mean(top5), 'stale_price_days': sum(1 for d in days if eq[d].get('stale_price'))}
