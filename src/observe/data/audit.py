@@ -1,5 +1,7 @@
 """质量审计：阻断级问题存在时批次不发布（模块 10）。"""
+import json
 from datetime import date
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -53,3 +55,34 @@ def audit_daily(bars, trading_days, instruments = None, rules = None):
     v = t[t.volume > 0]; vwap = v.amount / v.volume
     out += [issue('warn', 'vwap_outside', r.date, r.instrument, f'{w:.3f}') for r, w in zip(v.itertuples(), vwap) if not (r.low * 0.99 <= w <= r.high * 1.01)]
     return pd.DataFrame(out, columns = ['level', 'rule', 'date', 'instrument', 'detail'])
+
+
+def audit_status(root, batch_id, rules):
+    """某批次最近一次审计的状态，页面与运行前检查共用。
+    rules：当前执行规则集；为 None（加载失败）时不能确认指纹，状态是 rules_unavailable，不会被当成通过。
+    只审计了增量区间的通过记为 passed_incremental，不能显示成全快照通过。"""
+    path = Path(root) / 'audits'; found = []
+    for m in path.glob('*.json'):
+        try:
+            info = json.loads(m.read_text(encoding = 'utf-8'))
+            if info.get('batch_id') == batch_id and info.get('audit_id'): found.append(info)
+        except (OSError, ValueError): continue
+    info = max(found, key = lambda x: x.get('audited_at', '')) if found else None
+    csv = path / f"{info['audit_id']}.issues.csv" if info else None
+    complete = bool(info and csv.exists() and info.get('status') in ('passed', 'problem'))
+    rows = pd.read_csv(csv) if complete else pd.DataFrame()
+    if not info:
+        status = 'not_audited'
+        try:
+            old = json.loads((path / 'latest.json').read_text(encoding = 'utf-8'))
+            if old.get('batch_id') != batch_id: status = 'expired'
+            elif old.get('audit_id') and not ((path / f"{old['audit_id']}.json").exists() and (path / f"{old['audit_id']}.issues.csv").exists()): status = 'problem'
+        except (OSError, ValueError): pass
+    elif not complete: status = 'problem'
+    elif rules is None: status = 'rules_unavailable'
+    elif info.get('rule_fingerprint') != rules.config_fingerprint(): status = 'expired'
+    elif len(rows): status = 'problem'
+    else: status = 'passed' if info.get('scope') == 'snapshot' else 'passed_incremental'
+    return {'source': f"audit {info['audit_id']}" if info else f'batch {batch_id}', 'batch_id': batch_id, 'status': status, 'rows': rows,
+            'audit_id': info.get('audit_id') if info else None, 'scope': info.get('scope') if info else None,
+            'input_range': info.get('input_range') if info else None, 'audited_at': info.get('audited_at') if info else None}

@@ -53,38 +53,13 @@ def create_app(root):
 
     @app.get('/api/data/issues')
     def issues(batch: str | None = None):
-        """审计明细和元数据必须来自同一个已提交产物。"""
-        b = batch or store.published()['batch_id']
-        path = root / 'audits'
-        match = []
-        for m in path.glob('*.json'):
-            try:
-                info = json.loads(m.read_text(encoding = 'utf-8'))
-                if info.get('batch_id') == b and info.get('audit_id'): match.append(info)
-            except (OSError, ValueError): continue
-        info = max(match, key = lambda x: x.get('audited_at', '')) if match else None
-        csv = path / f"{info['audit_id']}.issues.csv" if info else None
-        complete = bool(info and csv.exists() and info.get('status') in ('passed', 'problem') and csv.name == f"{info.get('audit_id')}.issues.csv")
-        rows = _records(pd.read_csv(csv)) if complete else []
-        current_rules = None
-        try:
-            from ..data.update import default_rules
-            current_rules = default_rules()
-        except Exception:
-            pass
-        fingerprint_ok = bool(info and (current_rules is None or info.get('rule_fingerprint') == current_rules.config_fingerprint()))
-        status = 'not_audited' if not info else ('problem' if not complete else ('expired' if not fingerprint_ok else ('problem' if rows else 'passed')))
-        if not info:
-            latest = path / 'latest.json'
-            try:
-                old = json.loads(latest.read_text(encoding = 'utf-8'))
-                if old.get('batch_id') != b:
-                    status = 'expired'
-                elif old.get('audit_id'):
-                    status = 'problem' if not (path / f"{old['audit_id']}.json").exists() or not (path / f"{old['audit_id']}.issues.csv").exists() else 'not_audited'
-            except (OSError, ValueError):
-                pass
-        return {'source': f"audit {info['audit_id']}" if info else f'batch {b}', 'batch_id': b, 'status': status, 'rows': rows}
+        """审计明细和元数据必须来自同一个已提交产物；返回审计范围（scope / input_range），增量通过不显示成全快照通过。"""
+        from ..data.audit import audit_status
+        from ..data.update import default_rules
+        try: rules = default_rules()
+        except Exception: rules = None                                          # 规则加载失败 → rules_unavailable，不绕过指纹校验
+        r = audit_status(root, batch or store.published()['batch_id'], rules)
+        return {**r, 'rows': _records(r['rows']) if len(r['rows']) else []}
 
     @app.get('/api/instruments')
     def instruments(q: str = '', limit: int = 50):

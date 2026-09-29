@@ -2,6 +2,8 @@
 import pandas as pd
 import numpy as np
 
+from .standardize import flag
+
 
 COVERAGE_COLUMNS = ('instrument', 'status', 'requested_start', 'requested_end',
                     'verified_from', 'verified_through', 'has_gap', 'has_start_basis',
@@ -26,7 +28,7 @@ def normalize_coverage(coverage):
     for name in ('requested_start', 'requested_end', 'verified_from', 'verified_through', 'verified_at'):
         c[name] = pd.to_datetime(c[name], errors='coerce').dt.date
     for name in ('has_gap', 'has_start_basis', 'confirmed_no_events'):
-        c[name] = c[name].fillna(False).astype(bool)
+        c[name] = c[name].map(flag).astype(bool)                               # 'False' 字符串是 False；无法识别的值报错
     c['status'] = c['status'].where(c['status'].notna(), 'unknown').astype(str)
     return c[list(COVERAGE_COLUMNS)].drop_duplicates('instrument', keep='last')
 
@@ -56,7 +58,10 @@ def with_adjusted(bars, adj, coverage=None, allow_estimated=False):
     b['_d'] = pd.to_datetime(b.date)
     a['_d'] = pd.to_datetime(a.ex_date, errors = 'coerce')
     a['back_factor'] = pd.to_numeric(a.back_factor, errors = 'coerce')
-    b = b.sort_values('_d'); a = a.dropna(subset = ['_d']).sort_values('_d')
+    a = a.dropna(subset = ['_d'])
+    ok = np.isfinite(a.back_factor) & (a.back_factor > 0)                    # 因子必须有限且大于零；否则该证券整段不可用
+    invalid = set(a.loc[~ok, 'instrument']); a = a[ok]
+    b = b.sort_values('_d'); a = a.sort_values('_d')
     if a.empty:
         m = b.copy(); m['back_factor'] = np.nan
     else:
@@ -76,14 +81,19 @@ def with_adjusted(bars, adj, coverage=None, allow_estimated=False):
         if start is not None and not pd.isna(start) and day < start:
             return False
         return bool(c.get('has_start_basis', False) or c.get('confirmed_no_events', False) or c.get('status') == 'no_events')
-    m['_coverage_usable'] = m.apply(usable, axis=1)
+    # 覆盖声明「确认无事件」，但覆盖区间内却有复权事件：两者冲突，显式报告而不是任选其一
+    conflict = set()
+    for inst, c in coverage_rows.items():
+        if not (c.get('confirmed_no_events') or c.get('status') == 'no_events'): continue
+        lo, hi = (None if x is None or pd.isna(x) else x for x in (c.get('verified_from'), c.get('verified_through')))
+        if any((lo is None or d >= lo) and (hi is None or d <= hi) for d in a.loc[a.instrument == inst, '_d'].dt.date): conflict.add(inst)
+    m['_bad'] = m.instrument.isin(invalid | conflict)
+    m['_coverage_usable'] = m.apply(usable, axis=1) & ~m['_bad']
     m['_factor_known'] = m.back_factor.notna()
     m['_available'] = m['_factor_known'] & m['_coverage_usable']
-    m['_no_event_basis'] = m.back_factor.isna() & m['_coverage_usable']
-    m['_estimated'] = m['_factor_known'] & ~m['_coverage_usable']
-    m['back_factor'] = m.back_factor.where(m['_available'] | (m['_no_event_basis']))
-    if allow_estimated:
-        m['back_factor'] = m.back_factor.where(~m['_estimated'] | m['_factor_known'])
+    m['_no_event_basis'] = ~m['_factor_known'] & m['_coverage_usable']       # 覆盖完整、首个事件之前：初始基准因子为 1
+    m['_estimated'] = m['_factor_known'] & ~m['_coverage_usable'] & ~m['_bad'] & bool(allow_estimated)   # 只在显式估计模式下保留
+    m['back_factor'] = m.back_factor.where(m['_available'] | m['_estimated']).mask(m['_no_event_basis'], 1.0)
     for c in ('open', 'high', 'low', 'close', 'preclose'):
         if c in m: m[f'{c}_adj'] = m[c] * m.back_factor
     m = m.sort_values(['instrument', '_d'])
@@ -97,8 +107,10 @@ def with_adjusted(bars, adj, coverage=None, allow_estimated=False):
         m['adjustment_source'] = m.instrument.map(lambda x: coverage_rows.get(x, {}).get('source'))
     else:
         m['adjustment_verified_through'] = None; m['adjustment_source'] = None
+    # 状态、数值与原因一致：usable 有值无原因；estimated 有值并说明未经覆盖核实；unavailable 无值且必有原因
     m['adjusted_unavailable_reason'] = np.select([
-        m['_coverage'].isna(), m['_coverage'].map(lambda x: bool(x.get('has_gap', False)) if isinstance(x, dict) else False),
-        m['_coverage_usable'].eq(False) & m['_factor_known'], m['_coverage_usable'].eq(False)
-    ], ['coverage_unknown', 'unknown_gap', 'outside_verified_coverage', 'coverage_not_verified'], default=None)
-    return m.drop(columns = ['_d', '_coverage', '_coverage_usable', '_factor_known', '_available', '_no_event_basis', '_estimated']).sort_values(['date', 'instrument']).reset_index(drop = True)
+        m['_available'] | m['_no_event_basis'], m.instrument.isin(invalid), m.instrument.isin(conflict), m['_coverage'].isna(),
+        m['_coverage'].map(lambda x: bool(x.get('has_gap', False)) if isinstance(x, dict) else False),
+        m['_factor_known'], pd.Series(True, index = m.index)
+    ], [None, 'invalid_factor', 'coverage_conflict', 'coverage_unknown', 'unknown_gap', 'outside_verified_coverage', 'coverage_not_verified'], default=None)
+    return m.drop(columns = ['_d', '_coverage', '_bad', '_coverage_usable', '_factor_known', '_available', '_no_event_basis', '_estimated']).sort_values(['date', 'instrument']).reset_index(drop = True)

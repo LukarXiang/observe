@@ -14,7 +14,7 @@ export const api = {
   coverage: () => j<Row[]>('/api/data/coverage'),
   daily: () => j<Row[]>('/api/data/daily'),
   snapshots: () => j<string[]>('/api/data/snapshots'),
-  issues: () => j<{ source: string; rows: Row[] }>('/api/data/issues'),
+  issues: () => j<{ source: string; batch_id: string | null; status: string; rows: Row[]; audit_id: string | null; scope: 'snapshot' | 'incremental' | null; input_range: { start?: string; end?: string; days?: number; rows?: number } | null; audited_at: string | null }>('/api/data/issues'),
   instruments: (q: string) => j<Row[]>(`/api/instruments?q=${encodeURIComponent(q)}&limit=80`),
   bars: (id: string, price: 'raw' | 'adj') => j<Row[]>(`/api/instruments/${id}/bars?price=${price}`),
   actions: (id: string) => j<Row[]>(`/api/instruments/${id}/actions`),

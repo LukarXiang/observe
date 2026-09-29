@@ -10,6 +10,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
+from .data.audit import audit_status
 from .data.store import Store
 from .evaluation import metrics as evaluate
 from .execution import InputBlocked, build, load
@@ -125,10 +126,13 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
     rec, orders, limitations, x = None, None, [], cfg.execution
     try:
         tables = load(store, state, cfg.start, cfg.end, x.liquidity_window)
-        write_json(out / 'data_manifest.json', {'snapshot_id': doc['snapshot_id'], 'batch_id': doc['batch_id'], 'offline': True, 'tables': state.get('tables', {}),
+        audit = {k: v for k, v in audit_status(root, doc['batch_id'], rules).items() if k != 'rows'}   # 运行前检查：与数据中心页面同一判定
+        if audit['status'] != 'passed':
+            limitations.append({'kind': 'data_audit', 'detail': f"快照批次审计状态为 {audit['status']}（范围 {audit['scope']}），不是全快照审计通过", 'audit': audit})
+        write_json(out / 'data_manifest.json', {'snapshot_id': doc['snapshot_id'], 'batch_id': doc['batch_id'], 'offline': True, 'audit': audit, 'tables': state.get('tables', {}),
                                                 'used': {t: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in parts.items()} for t, parts in tables['partitions'].items()}})
         status.stage('load')
-        inputs = build(tables, cfg.start, cfg.end, cfg.boards, x.liquidity_window, x.liquidity_override); limitations = list(inputs.limitations)
+        inputs = build(tables, cfg.start, cfg.end, cfg.boards, x.liquidity_window, x.liquidity_override); limitations += inputs.limitations
         status.stage('inputs', **inputs.info)
         scores = baseline_scores(inputs.candidates); write_table(out, 'scores', scores); status.stage('scores', rows = len(scores))
         by_date = {}

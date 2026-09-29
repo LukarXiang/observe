@@ -1,6 +1,6 @@
 """数据更新：下载 → 留底 → 标准化 → 与已发布数据合并 → 写批次 → 审计 → 通过才发布（模块 10、决策 19）。
 全程持 data-writer 锁；BaoStock 会话持 baostock 锁。"""
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import json
 
 import pandas as pd
@@ -77,6 +77,27 @@ def _merge_coverage(store, new):
     return store.write_partition('adj_coverage', 'all', normalize_coverage(left.reset_index()))
 
 
+def _continued_coverage(store, cal, days, verified, end, changed, skip, complete):
+    """单段连续覆盖的推进规则：已有可信起始基准，且从原 verified_through 到本批首日之间的每个自然日都在交易日历里、都是休市日，
+    本批每个交易日的复权查询又都完整成功（包括明确确认当日没有事件）时，verified_through 推进到本批末日。
+    中间缺日（日历没覆盖或有未下载的交易日）、失败或未知响应都不推进，也不填平缺口。"""
+    if not days or not complete or set(verified) != set(days): return []
+    old = store.load('calendar'); is_open = {}
+    for frame in (old, cal):
+        if len(frame): is_open.update(zip(pd.to_datetime(frame.date).dt.date, frame.is_open.map(std.flag)))
+    first, now, out = min(days), datetime.now().isoformat(timespec = 'seconds'), []
+    for c in normalize_coverage(store.load('adj_coverage')).to_dict('records'):
+        through = c['verified_through']
+        if c['instrument'] in skip or c['status'] not in ('complete', 'no_events') or c['has_gap'] or not (c['has_start_basis'] or c['confirmed_no_events']): continue
+        if through is None or pd.isna(through) or through >= end: continue
+        between = [through + timedelta(days = k) for k in range(1, (first - through).days)]
+        if any(d not in is_open or is_open[d] for d in between): continue
+        event = c['instrument'] in changed
+        out.append({**c, 'status': 'complete' if event or c['status'] == 'complete' else 'no_events', 'confirmed_no_events': bool(c['confirmed_no_events'] and not event),
+                    'verified_through': str(end), 'verified_at': now, 'source': 'baostock.daily_adjust_factor', 'evidence': 'continuous_daily_adjust_factor_query'})
+    return out
+
+
 def fetch_day(source, day, staging, force=False, checkpoint=None, raw_root=None):
     """Fetch and validate one day; no final table is touched here."""
     key = str(day); checkpoint = checkpoint or {}
@@ -123,7 +144,7 @@ def default_rules():
 def update_daily(root, start, end, source = None, tdx = None, factor_codes = (), force = False, rules = None):
     """下载 [start, end] 的交易日历、证券资料、全市场日线与当日复权因子变动；当期有除权的证券从通达信刷新公司行动。
     factor_codes：需要取全部复权因子历史的证券（首次初始化用）。返回摘要；审计有阻断问题时批次标为 rejected、不发布"""
-    start, end = _d(start), _d(end); store = Store(root); parts, days_done, downloaded_days, missing_days, component_failures, unknown_adj_days = {}, [], [], [], [], []
+    start, end = _d(start), _d(end); store = Store(root); parts, days_done, downloaded_days, missing_days, component_failures, unknown_adj_days, adj_verified = {}, [], [], [], [], [], []
     with operation_lock(root, DATA_WRITER):
         src = source or BaoStock(root)
         pub = store.published()
@@ -169,6 +190,7 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
                                      'reuse_basis': result.get('reuse_basis'), 'retry_components': result.get('retry_components', []),
                                      'evidence': 'daily_market_response'})
                     if len(one): bars.append(one); days_done.append(d)
+                    if len(one) and adj_status in ('success', 'no_events'): adj_verified.append(d)
                     if len(a): events.append(a)
                 except Exception as exc:
                     _progress(root, {'date': key, 'requested_start': key, 'requested_end': key, 'records': 0, 'status': 'failed', 'adj_status': 'failed', 'error': str(exc)[:300]})
@@ -188,6 +210,8 @@ def update_daily(root, start, end, source = None, tdx = None, factor_codes = (),
         for code in factor_codes:
             frame = full_by_code.get(std.instrument(code), pd.DataFrame())
             coverage_rows.append({'instrument': std.instrument(code), 'status': 'no_events' if not len(frame) else 'complete', 'requested_start': '1990-01-01', 'requested_end': '2099-12-31', 'verified_from': '1990-01-01', 'verified_through': str(end), 'has_start_basis': True, 'has_gap': False, 'confirmed_no_events': not len(frame), 'verified_at': datetime.now().isoformat(timespec='seconds'), 'source': 'baostock.full_adjust_factor', 'evidence': 'full_adjust_factor_query'})
+        coverage_rows += _continued_coverage(store, cal, days, adj_verified, end, changed, skip = {r['instrument'] for r in coverage_rows},
+                                             complete = not missing_days and not component_failures and not unknown_adj_days)
         if changed:
             known = {r['instrument'] for r in coverage_rows}
             coverage_rows.extend({'instrument': i, 'status': 'partial', 'requested_start': str(start), 'requested_end': str(end), 'verified_from': str(start), 'verified_through': str(end), 'has_start_basis': False, 'has_gap': True, 'confirmed_no_events': False, 'verified_at': datetime.now().isoformat(timespec='seconds'), 'source': 'baostock.daily_adjust_factor', 'evidence': 'daily_adjust_factor_query'} for i in changed if i not in known)

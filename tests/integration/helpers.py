@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 
 from observe.data.standardize import board
+from observe.cli import run_kind
 from observe.data.store import Store
 
 D = [date(2024, 1, 2), date(2024, 1, 3), date(2024, 1, 4), date(2024, 1, 5), date(2024, 1, 8), date(2024, 1, 9), date(2024, 1, 10), date(2024, 1, 11)]
@@ -35,7 +36,8 @@ def action(inst, ex, cash = 0.0, bonus = 0.0, pay = None, listed = None):
             'record_date': None, 'pay_date': pay, 'bonus_list_date': listed, 'source': 'test'}
 
 
-def snapshot(root, rows, inst = None, actions = (), sessions = D, adj = None, coverage = None):
+def snapshot(root, rows, inst = None, actions = (), sessions = D, adj = None, coverage = None, audit = True):
+    """发布后按当前执行规则跑一次全快照审计（与 observe data audit 相同），再冻结快照"""
     s = Store(root); b = pd.DataFrame(rows)
     cal = pd.DataFrame({'date': sessions, 'is_open': True})
     parts = {'calendar': {'all': s.write_partition('calendar', 'all', cal)},
@@ -44,7 +46,9 @@ def snapshot(root, rows, inst = None, actions = (), sessions = D, adj = None, co
     if actions: parts['corp_actions'] = {'all': s.write_partition('corp_actions', 'all', pd.DataFrame(list(actions)))}
     if adj is not None: parts['adj_factors'] = {'all': s.write_partition('adj_factors', 'all', adj)}
     if coverage is not None: parts['adj_coverage'] = {'all': s.write_partition('adj_coverage', 'all', coverage)}
-    s.publish(s.write_batch(parts)); return s.snapshot()
+    s.publish(s.write_batch(parts))
+    if audit: run_kind(root, 'data_audit', {})
+    return s.snapshot()
 
 
 def tree_hash(path):
