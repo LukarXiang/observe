@@ -188,3 +188,16 @@ def test_predictions_are_checked_against_snapshot_candidates_fit_time_and_range(
     with pytest.raises(ValueError, match = 'fit_asof'): run_offline(root, **_replay_params(sid, bad))
     off = tmp_path / 'off_universe'; shutil.copytree(src, off); u = pd.read_parquet(off / 'universe.parquet'); u.loc[u.decision_date == first, 'eligible'] = False; u.to_parquet(off / 'universe.parquet', index = False)
     with pytest.raises(ValueError, match = '不在该实验的研究候选'): run_offline(root, **_replay_params(sid, off))
+
+
+def test_holdout_is_never_silently_dropped_and_undefined_selection_blocks(tmp_path):
+    root = tmp_path / 'short'; root.mkdir(); sid, days, fs = make(root, n_days = 46)                                     # 预热 6 天后剩 40 个可用决策日
+    small = {'train': 10, 'valid': 5, 'test': 5}
+    r = run_research(root, **{**cfg(sid, fs), 'split': {**small, 'holdout': 60}})
+    assert r['status'] == 'blocked' and r['blocked'][0]['kind'] == 'insufficient_history' and '60' in r['blocked'][0]['detail'] and not (Path(r['output']) / 'predictions.parquet').exists()   # 没有生成五个没有留出的测试窗
+    ok = run_research(root, **{**cfg(sid, fs), 'split': {**small, 'holdout': 0}})                                       # 显式 holdout = 0：不设最终留出，窗口正常
+    assert ok['status'] == 'success' and ok['summary']['holdout_start'] is None and ok['summary']['windows'] == 5
+    tight = run_research(root, **{**cfg(sid, fs), 'split': {**small, 'holdout': 30}})                                    # 留出后只剩 10 个开发日，不足一个窗口
+    assert tight['status'] == 'blocked' and tight['blocked'][0]['kind'] == 'insufficient_history_for_split' and '已扣除 30' in tight['blocked'][0]['detail']
+    undefined = run_research(root, **{**cfg(sid, fs), 'split': {**small, 'holdout': 5}, 'models': {**cfg(sid, fs)['models'], 'min_names': 10000}})
+    assert undefined['status'] == 'blocked' and undefined['blocked'][0]['kind'] == 'selection_undefined' and any(t['undefined'] for t in undefined['blocked'][0]['candidates'])

@@ -238,7 +238,22 @@ def test_diagnostics_decompose_score_changes_and_pnl_and_are_read_only(paired_mi
     assert sd['equal_blend']['fit_perturbation_b_minus_A']['diff_mean'] == 0                                                          # 等权合成没有拟合环节
     c = res['concentration']; assert set(c) == {'ridge', 'equal_blend'}
     for v in c.values():
-        assert abs(v['arms']['base']['unreconciled_over_initial']) < 0.01 and v['names_common'] + v['names_extended_only'] > 0                 # 按证券的盈亏加总与净值变化对得上（合成数据无分红）
-        assert v['decomposition_over_initial']['common_names'] + v['decomposition_over_initial']['extended_only_names'] + v['decomposition_over_initial']['base_only_names'] == pytest.approx(v['difference_extended_minus_base_over_initial'])
+        assert all(x['reconciliation_over_initial']['reconciled'] and abs(x['reconciliation_over_initial']['residual_unexplained']) < 1e-5 for x in v['arms'].values()) and v['attribution_status'] in ('complete', 'partial') and v['names_common'] + v['names_extended_only'] > 0                 # 按证券的盈亏加总与净值变化对得上（合成数据无分红）
+        assert v['decomposition_over_initial']['common_names'] + v['decomposition_over_initial']['extended_only_names'] + v['decomposition_over_initial']['base_only_names'] == pytest.approx(v['allocated_difference_extended_minus_base_over_initial'])
         assert 'no_minute_names_effect_over_initial' in v and v['valid_portfolio_comparison'] is True
     assert read(d['output'], 'status.json')['kind'] == 'diagnostic'
+
+
+def test_invalid_pairing_removes_the_headline_numbers_and_keeps_a_separate_diagnostic(paired, tmp_path):
+    """扩展侧有一条分数缺失：正式条件不满足，headline 与主摘要数值不可用；共同子集诊断另列，不进入主摘要"""
+    import shutil
+    root, sid, days, base, ext, r = paired; sub = json.loads(json.dumps(r['subruns'])); copy = tmp_path / 'ext_tampered'; shutil.copytree(sub['arms']['extended']['output'], copy)
+    p = pd.read_parquet(copy / 'predictions.parquet'); i = p.index[(p.model_id == 'ridge')][3]; p.loc[i, 'score'] = np.nan; p.to_parquet(copy / 'predictions.parquet', index = False); sub['arms']['extended']['output'] = str(copy)
+    plan = pd.read_parquet(Path(r['subruns']['arms']['base']['output']) / 'split_plan.parquet'); c = PairedConfig.model_validate(json.loads((Path(r['output']) / 'config.json').read_text(encoding = 'utf-8'))['config'])
+    ev = evaluate(c, sub, plan)
+    assert ev['valid_primary_comparison'] is False and any('ridge:nonfinite_scores' in x for x in ev['invalid_reasons']) and ev['headline']['valid_primary_comparison'] is False
+    assert ev['headline']['ridge_rank_ic_diff'] is None and ev['headline']['ridge_rank_ic_extended'] is None                                   # 主摘要数值不可用，不再引用有问题的数字
+    m = ev['models']['ridge']; assert m['valid_primary_comparison'] is False and m['rank_ic'] is None and m['diagnostic']['rows_removed']['nonfinite_score_b'] == 1
+    assert ev['models']['equal_blend']['valid_primary_comparison'] is True and ev['models']['equal_blend']['rank_ic']['days'] > 0                    # 其他模型不受牵连
+    assert any(x['kind'] == 'pairing_invalid' for x in ev['limitations'])
+    good = evaluate(c, r['subruns'], plan); assert good['valid_primary_comparison'] is True and good['invalid_reasons'] == [] and good['headline']['ridge_rank_ic_diff'] is not None

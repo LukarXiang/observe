@@ -38,43 +38,106 @@ def diff_stats(a, b, block, n_boot = 1000, seed = 0, grid = None, alt_block = No
     return out
 
 
-def pairing_report(pa, pb):
-    """两侧预测表（单个模型）的主键、唯一性、fit_asof、证据级别、有限值状态。差异先报告，不靠内连接悄悄消失"""
+REQUIRED = ['model_id', 'decision_date', 'instrument', 'score', 'split_id', 'fit_asof', 'evidence_level']
+MODEL_IDS = ('single_factor', 'equal_blend', 'ridge')
+
+
+def pairing_report(pa, pb, plan = None, evidence = None):
+    """两侧预测表（单个模型）能否作正式成对比较：必要字段、主键唯一与集合相同、分数有限、split_id / fit_asof / 证据级别一致，
+    fit_asof 早于决策日并与切分计划一致。任一项不满足记入 invalid_reasons；缺必要字段不视为通过。差异先报告，不靠内连接悄悄消失"""
+    reasons = []; miss_a, miss_b = sorted(set(REQUIRED) - set(pa.columns)), sorted(set(REQUIRED) - set(pb.columns))
+    if miss_a: reasons.append(f'missing_columns_a:{miss_a}')
+    if miss_b: reasons.append(f'missing_columns_b:{miss_b}')
+    if miss_a or miss_b: return {'rows_a': int(len(pa)), 'rows_b': int(len(pb)), 'identical_keys': False, 'invalid_reasons': reasons}
     ka, kb = pa[KEY].drop_duplicates(), pb[KEY].drop_duplicates(); m = ka.merge(kb, on = KEY, how = 'outer', indicator = True)
     both = pa.drop_duplicates(KEY).merge(pb.drop_duplicates(KEY), on = KEY, suffixes = ('_a', '_b'))
+    count = lambda mask: int(mask.sum())
     out = {'rows_a': int(len(pa)), 'rows_b': int(len(pb)), 'common_keys': int((m._merge == 'both').sum()), 'only_in_a': int((m._merge == 'left_only').sum()), 'only_in_b': int((m._merge == 'right_only').sum()),
            'duplicates_a': int(pa.duplicated(KEY).sum()), 'duplicates_b': int(pb.duplicated(KEY).sum()),
-           'nonfinite_score_a': int((~np.isfinite(pa.score.to_numpy(float))).sum()), 'nonfinite_score_b': int((~np.isfinite(pb.score.to_numpy(float))).sum()),
-           'fit_asof_mismatch': int((pd.to_datetime(both.fit_asof_a) != pd.to_datetime(both.fit_asof_b)).sum()) if 'fit_asof_a' in both else None,
-           'evidence_mismatch': int((both.evidence_level_a != both.evidence_level_b).sum()) if 'evidence_level_a' in both else None}
-    out['identical_keys'] = out['only_in_a'] == 0 and out['only_in_b'] == 0 and out['duplicates_a'] == 0 and out['duplicates_b'] == 0
+           'nonfinite_score_a': count(~np.isfinite(pa.score.to_numpy(float))), 'nonfinite_score_b': count(~np.isfinite(pb.score.to_numpy(float))),
+           'split_id_mismatch': count(both.split_id_a != both.split_id_b), 'fit_asof_mismatch': count(pd.to_datetime(both.fit_asof_a) != pd.to_datetime(both.fit_asof_b)),
+           'evidence_mismatch': count(both.evidence_level_a != both.evidence_level_b)}
+    for side, p in (('a', pa), ('b', pb)):
+        out[f'fit_asof_not_before_decision_{side}'] = count(pd.to_datetime(p.fit_asof) >= pd.to_datetime(p.decision_date))
+        out[f'fit_asof_differs_from_plan_{side}'] = out[f'outside_test_window_{side}'] = out[f'evidence_unexpected_{side}'] = 0
+        if plan is not None:
+            pl = plan.set_index('split_id'); known = p.split_id.isin(pl.index); q = p[known]
+            out[f'unknown_split_{side}'] = count(~known)
+            out[f'fit_asof_differs_from_plan_{side}'] = count(pd.to_datetime(q.fit_asof).to_numpy() != pd.to_datetime(pl.fit_asof.reindex(q.split_id).to_numpy()))
+            d = pd.to_datetime(q.decision_date).to_numpy(); out[f'outside_test_window_{side}'] = count((d < pd.to_datetime(pl.test_start.reindex(q.split_id).to_numpy())) | (d > pd.to_datetime(pl.test_end.reindex(q.split_id).to_numpy())))
+        if evidence is not None: out[f'evidence_unexpected_{side}'] = count(p.evidence_level != evidence)
+    flags = {'duplicate_keys': out['duplicates_a'] + out['duplicates_b'], 'key_sets_differ': out['only_in_a'] + out['only_in_b'], 'nonfinite_scores': out['nonfinite_score_a'] + out['nonfinite_score_b'],
+             'split_id_differs': out['split_id_mismatch'], 'fit_asof_differs_between_sides': out['fit_asof_mismatch'], 'evidence_level_differs_between_sides': out['evidence_mismatch'],
+             'fit_asof_not_before_decision': out['fit_asof_not_before_decision_a'] + out['fit_asof_not_before_decision_b'], 'fit_asof_differs_from_plan': out['fit_asof_differs_from_plan_a'] + out['fit_asof_differs_from_plan_b'],
+             'decision_outside_test_window': out['outside_test_window_a'] + out['outside_test_window_b'], 'evidence_level_unexpected': out['evidence_unexpected_a'] + out['evidence_unexpected_b'],
+             'unknown_split': out.get('unknown_split_a', 0) + out.get('unknown_split_b', 0)}
+    reasons += [k for k, v in flags.items() if v]
+    out['identical_keys'] = not (flags['duplicate_keys'] or flags['key_sets_differ']); out['invalid_reasons'] = reasons
     return out
 
 
-def model_pairs(pred_a, pred_b, lab, block, min_n = 30, top_n = 20, n_boot = 1000, seed = 0, holdout = None, alt_block = None):
+def pairing_gate(pred_a, pred_b, lab_a, lab_b, expected_models = None):
+    """整体门槛：模型集合两侧一致（只在一侧出现的模型不能靠取交集忽略）、期望的模型都在、两侧标签主键唯一且逐值相同。返回原因列表"""
+    reasons = []; ma, mb = set(pred_a.model_id), set(pred_b.model_id)
+    if ma != mb: reasons.append(f'model_set_differs:only_a={sorted(ma - mb)},only_b={sorted(mb - ma)}')
+    if expected_models and set(expected_models) - (ma & mb): reasons.append(f'expected_models_missing:{sorted(set(expected_models) - (ma & mb))}')
+    for side, lab in (('a', lab_a), ('b', lab_b)):
+        if lab.duplicated(KEY).any(): reasons.append(f'label_duplicate_keys_{side}')
+    cols = KEY + ['value', 'valid', 'matured_at']
+    if set(cols) <= set(lab_a.columns) and set(cols) <= set(lab_b.columns):
+        x, y = lab_a[cols].sort_values(KEY).reset_index(drop = True), lab_b[cols].sort_values(KEY).reset_index(drop = True)
+        if not x.equals(y): reasons.append('labels_differ_between_sides')
+    else: reasons.append('label_columns_missing')
+    return reasons
+
+
+def _primary(a, b, y, labd, grid, block, min_n, top_n, n_boot, seed, alt_block):
+    """正式主比较：两侧预测完整且成对，各自用自己的原始预测名单"""
+    ja, jb = a.merge(y, on = KEY, how = 'left'), b.merge(y, on = KEY, how = 'left')
+    ta, tb = rank_ic_table(ja, min_n = min_n), rank_ic_table(jb, min_n = min_n); ia, ib = ta.ic, tb.ic
+    pa_, pb_ = topn_table(a, labd, top_n), topn_table(b, labd, top_n)
+    split = a.drop_duplicates('decision_date').set_index('decision_date').split_id
+    both = pd.concat([ia.rename('a'), ib.rename('b')], axis = 1, join = 'inner').dropna(); windows = []
+    for s, g in both.groupby(split.reindex(both.index)): windows.append({'split_id': int(s), 'days': int(len(g)), 'a': _f(g.a.mean()), 'b': _f(g.b.mean()), 'diff': _f((g.b - g.a).mean())})
+    years = pd.to_datetime(pd.Series(both.index, index = both.index)).dt.year
+    cover = lambda t: {'valid_label_share': _f(t.valid_label_count.sum() / t.selected_count.sum()) if len(t) else None, 'undefined_days': int((~t.defined).sum()), 'days': int(len(t))}
+    return {'rank_ic': {**diff_stats(ia, ib, block, n_boot, seed, grid, alt_block), 'undefined_a': undefined_reasons(ta), 'undefined_b': undefined_reasons(tb)},
+            f'top{top_n}_mean_label': {**diff_stats(pa_.mean_label, pb_.mean_label, block, n_boot, seed, grid, alt_block), 'coverage_a': cover(pa_), 'coverage_b': cover(pb_)},
+            'by_window': windows, 'window_wins_b': int(sum(1 for w in windows if w['diff'] is not None and w['diff'] > 0)), 'windows': len(windows),
+            'by_year': {int(y_): {'days': int(len(g)), 'a': _f(g.a.mean()), 'b': _f(g.b.mean()), 'diff': _f((g.b - g.a).mean())} for y_, g in both.groupby(years)},
+            'identical_scores': bool(len(ja) == len(jb) and np.array_equal(ja.sort_values(KEY).score.to_numpy(), jb.sort_values(KEY).score.to_numpy()))}
+
+
+def _common_subset(a, b, y, labd, grid, block, min_n, top_n, n_boot, seed, alt_block):
+    """受限诊断：只在「主键在两侧都出现且唯一、score_A、score_B、label 同时有限」的证券上算双方 IC，并报告删除数量。
+    这里的前 N 名名单在共同子集上**重新定义**，是另一个样本上的名单，不能当作原组合的前 N 名，也不进入正式主摘要"""
+    a1, b1 = a[~a.duplicated(KEY, keep = False)], b[~b.duplicated(KEY, keep = False)]
+    j = a1[KEY + ['score']].merge(b1[KEY + ['score']], on = KEY, suffixes = ('_a', '_b')).merge(y, on = KEY, how = 'left')
+    ok = np.isfinite(j.score_a.to_numpy(float)) & np.isfinite(j.score_b.to_numpy(float)) & np.isfinite(j.value.to_numpy(float)); k = j[ok]
+    removed = {'rows_a': int(len(a)), 'rows_b': int(len(b)), 'dropped_duplicate_keys_a': int(len(a) - len(a1)), 'dropped_duplicate_keys_b': int(len(b) - len(b1)), 'not_in_both': int(len(a1) + len(b1) - 2 * len(j)),
+               'nonfinite_score_a': int((~np.isfinite(j.score_a.to_numpy(float))).sum()), 'nonfinite_score_b': int((~np.isfinite(j.score_b.to_numpy(float))).sum()),
+               'label_not_finite': int((~np.isfinite(j.value.to_numpy(float))).sum()), 'kept_rows': int(ok.sum())}
+    ia = rank_ic_table(k.assign(score = k.score_a), min_n = min_n).ic; ib = rank_ic_table(k.assign(score = k.score_b), min_n = min_n).ic
+    ta = topn_table(k[KEY + ['score_a']].rename(columns = {'score_a': 'score'}), labd, top_n); tb = topn_table(k[KEY + ['score_b']].rename(columns = {'score_b': 'score'}), labd, top_n)
+    return {'kind': 'common_subset_diagnostic', 'rows_removed': removed, 'rank_ic': diff_stats(ia, ib, block, n_boot, seed, grid, alt_block),
+            f'top{top_n}_common_subset': {**diff_stats(ta.mean_label, tb.mean_label, block, n_boot, seed, grid, alt_block), 'list_redefined': True},
+            'note': '受限诊断：不进入正式主摘要；前 N 名名单已在共同证券子集上重新定义'}
+
+
+def model_pairs(pred_a, pred_b, lab, block, min_n = 30, top_n = 20, n_boot = 1000, seed = 0, holdout = None, alt_block = None, plan = None, evidence = None):
     """逐模型比较测试窗上的每日秩 IC 与前 N 名平均标签。标签只用开发区间可用的（dataset.dev_labels）。
-    预测主键不完全相同时，该模型的指标只在共同主键上算并标 restricted_to_common_keys。返回 {model_id: {...}}"""
+    每个模型先过 pairing_report：通过才输出正式主结果（valid_primary_comparison = true，双方用各自完整的原始预测）；
+    不通过则主结果为 None、列出 invalid_reasons，另给单独命名的共同子集诊断。只在一侧出现的模型也逐个列出，不取交集忽略"""
     labd = dev_labels(lab, holdout); y = labd[KEY + ['value']]; out = {}
     grid = pd.Index(sorted(set(pred_a.decision_date) | set(pred_b.decision_date)))
-    for model in sorted(set(pred_a.model_id) & set(pred_b.model_id)):
-        a, b = pred_a[pred_a.model_id == model], pred_b[pred_b.model_id == model]; rep = pairing_report(a, b)
-        a, b = a.drop_duplicates(KEY), b.drop_duplicates(KEY)
-        if not rep['identical_keys']:
-            common = a[KEY].merge(b[KEY], on = KEY); a, b = a.merge(common, on = KEY), b.merge(common, on = KEY)
-        ja, jb = a.merge(y, on = KEY, how = 'left'), b.merge(y, on = KEY, how = 'left')
-        ta, tb = rank_ic_table(ja, min_n = min_n), rank_ic_table(jb, min_n = min_n); ia, ib = ta.ic, tb.ic
-        pa_, pb_ = topn_table(a, labd, top_n), topn_table(b, labd, top_n)
-        split = a.drop_duplicates('decision_date').set_index('decision_date').split_id
-        both = pd.concat([ia.rename('a'), ib.rename('b')], axis = 1, join = 'inner').dropna(); windows = []
-        for s, g in both.groupby(split.reindex(both.index)): windows.append({'split_id': int(s), 'days': int(len(g)), 'a': _f(g.a.mean()), 'b': _f(g.b.mean()), 'diff': _f((g.b - g.a).mean())})
-        years = pd.to_datetime(pd.Series(both.index, index = both.index)).dt.year
-        cover = lambda t: {'valid_label_share': _f(t.valid_label_count.sum() / t.selected_count.sum()) if len(t) else None, 'undefined_days': int((~t.defined).sum()), 'days': int(len(t))}
-        out[model] = {'pairing': rep, 'restricted_to_common_keys': not rep['identical_keys'],
-                      'rank_ic': {**diff_stats(ia, ib, block, n_boot, seed, grid, alt_block), 'undefined_a': undefined_reasons(ta), 'undefined_b': undefined_reasons(tb)},
-                      f'top{top_n}_mean_label': {**diff_stats(pa_.mean_label, pb_.mean_label, block, n_boot, seed, grid, alt_block), 'coverage_a': cover(pa_), 'coverage_b': cover(pb_)},
-                      'by_window': windows, 'window_wins_b': int(sum(1 for w in windows if w['diff'] is not None and w['diff'] > 0)), 'windows': len(windows),
-                      'by_year': {int(y_): {'days': int(len(g)), 'a': _f(g.a.mean()), 'b': _f(g.b.mean()), 'diff': _f((g.b - g.a).mean())} for y_, g in both.groupby(years)},
-                      'identical_scores': bool(len(ja) == len(jb) and np.array_equal(ja.sort_values(KEY).score.to_numpy(), jb.sort_values(KEY).score.to_numpy()))}
+    for model in sorted(set(pred_a.model_id) | set(pred_b.model_id)):
+        a, b = pred_a[pred_a.model_id == model], pred_b[pred_b.model_id == model]
+        if not len(a) or not len(b):
+            out[model] = {'pairing': {'rows_a': int(len(a)), 'rows_b': int(len(b))}, 'valid_primary_comparison': False, 'invalid_reasons': ['model_only_in_a' if len(a) else 'model_only_in_b'], 'rank_ic': None, 'diagnostic': None}; continue
+        rep = pairing_report(a, b, plan, evidence); entry = {'pairing': rep, 'valid_primary_comparison': not rep['invalid_reasons'], 'invalid_reasons': rep['invalid_reasons']}
+        if entry['valid_primary_comparison']: entry.update(_primary(a, b, y, labd, grid, block, min_n, top_n, n_boot, seed, alt_block), diagnostic = None)
+        else: entry.update(rank_ic = None, diagnostic = _common_subset(a, b, y, labd, grid, block, min_n, top_n, n_boot, seed, alt_block) if not rep.get('invalid_reasons', [''])[0].startswith('missing_columns') else None)
+        out[model] = entry
     return out
 
 

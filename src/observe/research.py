@@ -182,15 +182,19 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
     lab = lab.merge(elig[['decision_date', 'instrument']], on = ['decision_date', 'instrument']); _pq(out, 'labels', lab)
     status.stage('labels', rows = len(lab), valid = int(lab.valid.sum()))
 
-    s = cfg.split; holdout = days[-s.holdout] if s.holdout and len(days) > s.holdout else None
+    s = cfg.split; holdout = None
+    if s.holdout:       # holdout > 0：最终留出不能被静默取消或缩短；只有显式 holdout = 0 才表示不设最终留出
+        if len(days) <= s.holdout: raise InputBlocked([{'kind': 'insufficient_history', 'detail': f'可用决策日 {len(days)} 个，不足以保留 {s.holdout} 个交易日的最终留出（显式设 holdout = 0 才是不留出）'}])
+        holdout = days[-s.holdout]
     plan = plan_splits(days, s.train, s.valid, s.test, holdout)
-    if not len(plan): raise InputBlocked([{'kind': 'insufficient_history_for_split', 'detail': f'开发区间 {len(days) - (s.holdout if holdout else 0)} 个决策日，不足一个训练 + 验证 + 测试窗（{s.train + s.valid + s.test}）'}])
+    if not len(plan): raise InputBlocked([{'kind': 'insufficient_history_for_split', 'detail': f'开发区间 {len(days) - s.holdout} 个决策日（已扣除 {s.holdout} 个留出日），不足一个训练 + 验证 + 测试窗（{s.train + s.valid + s.test}）'}])
     plan['holdout_start'] = holdout; _pq(out, 'split_plan', plan); status.stage('splits', windows = len(plan), holdout_start = str(holdout) if holdout else None)
 
     X = cross_sectional_preprocess(fac.assign(eligible = True), names).drop(columns = 'eligible')
     preds, evals, models_dir = [], [], out / 'models'; models_dir.mkdir()
     for sp in plan.itertuples(index = False):
-        kept, dropped, sel, val, fit, candidates, tried, best = selection_stage(sp, X, lab, names, directions, cfg.models)
+        try: kept, dropped, sel, val, fit, candidates, tried, best = selection_stage(sp, X, lab, names, directions, cfg.models)
+        except SelectionUndefined as exc: raise InputBlocked([{'kind': 'selection_undefined', 'split_id': int(sp.split_id), 'detail': str(exc), 'candidates': exc.tried}]) from None
         test = X[(X.date >= sp.test_start) & (X.date <= sp.test_end)].sort_values(['date', 'instrument'])
         for model_id, key in (('single_factor', 'single_factor'), ('equal_blend', 'equal_blend'), ('ridge', best)):
             m = dict(candidates)[key]
@@ -210,6 +214,12 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
             'test_start': str(plan.test_start.min()), 'test_end': str(plan.test_end.max()), 'models': {k: v['test_rank_ic_mean'] for k, v in model_eval['summary'].items()}}
 
 
+class SelectionUndefined(ValueError):
+    """一个窗口里所有 Ridge 候选的验证秩 IC 都不可定义：没有选参证据，不能用第一个 alpha 冒充「验证窗选出的」"""
+    def __init__(self, split_id, tried):
+        self.tried = tried; super().__init__(f'窗口 {split_id} 的全部 Ridge 候选验证秩 IC 不可定义（有效验证日 / 原因见 candidates），没有选参证据')
+
+
 def candidate_models(mc, kept, directions):
     """一个窗口的候选模型：单因子基线、等权合成、各 alpha 的 Ridge"""
     return [('single_factor', SingleFactor([mc.baseline_factor], directions, factor = mc.baseline_factor)), ('equal_blend', EqualBlend(kept, directions))] +            [(f'ridge@{a:g}', RidgeModel(kept, directions, alpha = a)) for a in mc.ridge_alphas]
@@ -224,11 +234,13 @@ def selection_stage(sp, X, lab, names, directions, mc):
         return X.merge(y, left_on = ['date', 'instrument'], right_on = ['decision_date', 'instrument']).sort_values(['date', 'instrument'])
     sel, val, fit = rows('select'), rows('valid'), rows('fit'); candidates = candidate_models(mc, kept, directions); tried = []
     for key, m in candidates:
-        m.fit(sel[m.features], sel.value, day_weights(sel.date))
-        ic = rank_ic(val.assign(score = m.predict(val[m.features])), min_n = mc.min_names).mean()
-        tried.append({'split_id': sp.split_id, 'candidate': key, 'valid_rank_ic': None if np.isnan(ic) else float(ic)})
-    ridge = [x for x in tried if x['candidate'].startswith('ridge@')]
-    best = max(ridge, key = lambda x: -np.inf if x['valid_rank_ic'] is None else x['valid_rank_ic'])['candidate']   # 并列取先出现（更小的 alpha）
+        if len(sel): m.fit(sel[m.features], sel.value, day_weights(sel.date))
+        t = rank_ic_table(val.assign(score = m.predict(val[m.features])) if len(sel) and len(val) else val.assign(score = np.nan), min_n = mc.min_names); ic = t.ic.mean()
+        tried.append({'split_id': sp.split_id, 'candidate': key, 'valid_rank_ic': None if np.isnan(ic) else float(ic), 'valid_days': int(t.ic.notna().sum()), 'valid_pairs_mean': _f(t.n_valid.mean()) if len(t) else None,
+                      'select_rows': int(len(sel)), 'valid_rows': int(len(val)), 'undefined': undefined_reasons(t)['reasons']})
+    ridge = [x for x in tried if x['candidate'].startswith('ridge@') and x['valid_rank_ic'] is not None]
+    if not ridge: raise SelectionUndefined(sp.split_id, tried)
+    best = max(ridge, key = lambda x: x['valid_rank_ic'])['candidate']   # 并列取先出现（更小的 alpha）
     return kept, dropped, sel, val, fit, candidates, tried, best
 
 

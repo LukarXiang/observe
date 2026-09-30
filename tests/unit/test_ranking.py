@@ -7,7 +7,7 @@ import pytest
 from scipy.stats import spearmanr
 
 from observe.dataset import dev_labels
-from observe.evaluation.paired import block_ci, diff_stats, model_pairs, pairing_report
+from observe.evaluation.paired import block_ci, diff_stats, model_pairs, pairing_gate, pairing_report
 from observe.evaluation.ranking import rank_ic, rank_ic_table, spearman, topn_summary, topn_table
 from observe.labels import build_labels
 
@@ -104,14 +104,76 @@ def test_dev_labels_without_holdout_is_identity():
     pd.testing.assert_frame_equal(dev_labels(lab, None), lab)
 
 
-def test_pairing_report_and_common_key_restriction():
+def test_pairing_problems_invalidate_the_primary_result_and_only_feed_a_diagnostic():
     base = pd.DataFrame({'model_id': 'm', 'decision_date': D, 'instrument': list('ABCD'), 'score': [4.0, 3.0, 2.0, 1.0], 'split_id': 0, 'fit_asof': date(2023, 12, 29), 'evidence_level': 'x'})
     b = base.iloc[:3].copy(); b = pd.concat([b, b.iloc[[0]]]); b.loc[b.index[1], 'fit_asof'] = date(2023, 12, 28); b.loc[b.index[2], 'score'] = np.inf
     rep = pairing_report(base, b)
     assert (rep['only_in_a'], rep['only_in_b'], rep['common_keys'], rep['duplicates_b'], rep['nonfinite_score_b'], rep['fit_asof_mismatch'], rep['identical_keys']) == (1, 0, 3, 1, 1, 1, False)
+    assert {'duplicate_keys', 'key_sets_differ', 'nonfinite_scores', 'fit_asof_differs_between_sides'} <= set(rep['invalid_reasons'])
     lab = labels([(D, i, v, True, '') for i, v in zip('ABCD', [0.4, 0.3, 0.2, 0.1])]).assign(matured_at = date(2024, 1, 9))
     r = model_pairs(base, b, lab, 2, min_n = 2, top_n = 2, n_boot = 100)['m']
-    assert r['restricted_to_common_keys'] and r['pairing']['only_in_a'] == 1 and r['rank_ic']['days'] == 1          # 缺一行不靠内连接静默消失：先报告，再只在共同主键上算
+    assert r['valid_primary_comparison'] is False and r['rank_ic'] is None and r['invalid_reasons']             # 不能靠共同主键悄悄得到主结果
+    assert r['diagnostic']['kind'] == 'common_subset_diagnostic' and r['diagnostic']['rows_removed']['dropped_duplicate_keys_b'] == 2 and r['diagnostic']['top2_common_subset']['list_redefined'] is True
+
+
+def pair_frame(scores, split = 0, fit = date(2023, 12, 29), model = 'm', ev = 'x', keys = 'ABCD'):
+    return pd.DataFrame({'model_id': model, 'decision_date': D, 'instrument': list(keys), 'score': scores, 'split_id': split, 'fit_asof': fit, 'evidence_level': ev})
+
+
+PLAN = pd.DataFrame({'split_id': [0], 'fit_asof': [date(2023, 12, 29)], 'test_start': [D], 'test_end': [D]})
+
+
+def test_golden_pairing_sample_formal_invalid_diagnostic_zero():
+    lab = labels([(D, i, v, True, '') for i, v in zip('ABCD', [4, 1, 3, 2])]).assign(matured_at = date(2024, 1, 9))
+    a, b = pair_frame([1.0, 2, 3, 4]), pair_frame([1.0, 2, 3, np.nan])
+    joined = lambda p: p.merge(lab[['decision_date', 'instrument', 'value']], on = ['decision_date', 'instrument'])
+    direct = rank_ic_table(joined(b), min_n = 2).ic.iloc[0] - rank_ic_table(joined(a), min_n = 2).ic.iloc[0]
+    assert direct == pytest.approx(-0.1)                                                                             # 旧的直接比较：两侧在不同证券集上算 IC，差约 −0.10
+    r = model_pairs(a, b, lab, 2, min_n = 2, top_n = 2, n_boot = 50)['m']
+    assert r['valid_primary_comparison'] is False and r['invalid_reasons'] == ['nonfinite_scores'] and r['rank_ic'] is None
+    d = r['diagnostic']; assert d['rank_ic']['diff_mean'] == pytest.approx(0) and d['rows_removed']['nonfinite_score_b'] == 1 and d['rows_removed']['kept_rows'] == 3
+    ok = model_pairs(a, pair_frame([1.0, 2, 3, 4.5]), lab, 2, min_n = 2, top_n = 2, n_boot = 50)['m']; assert ok['valid_primary_comparison'] is True and ok['rank_ic']['days'] == 1 and ok['diagnostic'] is None
+
+
+@pytest.mark.parametrize('mutate,reason', [
+    (lambda b: b.assign(fit_asof = date(2023, 12, 28)), 'fit_asof_differs_between_sides'),
+    (lambda b: b.assign(split_id = 1), 'split_id_differs'),
+    (lambda b: b.assign(evidence_level = 'y'), 'evidence_level_differs_between_sides'),
+    (lambda b: pd.concat([b, b.iloc[[0]]]), 'duplicate_keys'),
+    (lambda b: b.iloc[:3], 'key_sets_differ'),
+    (lambda b: b.drop(columns = 'fit_asof'), 'missing_columns_b'),
+])
+def test_each_pairing_problem_blocks_the_formal_comparison(mutate, reason):
+    a = pair_frame([4.0, 3, 2, 1]); b = mutate(pair_frame([4.0, 3, 2, 1]))
+    rep = pairing_report(a, b, PLAN); assert any(r.startswith(reason) for r in rep['invalid_reasons'])
+
+
+def test_fit_asof_must_precede_decision_and_match_the_plan():
+    late = pair_frame([4.0, 3, 2, 1], fit = D); rep = pairing_report(late, late, PLAN, 'x')
+    assert 'fit_asof_not_before_decision' in rep['invalid_reasons'] and 'fit_asof_differs_from_plan' in rep['invalid_reasons']
+    other = pair_frame([4.0, 3, 2, 1], fit = date(2023, 12, 28)); assert 'fit_asof_differs_from_plan' in pairing_report(other, other, PLAN)['invalid_reasons']
+    assert 'evidence_level_unexpected' in pairing_report(pair_frame([4.0, 3, 2, 1]), pair_frame([4.0, 3, 2, 1]), PLAN, 'exploratory')['invalid_reasons']
+    assert 'decision_outside_test_window' in pairing_report(pair_frame([4.0, 3, 2, 1]), pair_frame([4.0, 3, 2, 1]), PLAN.assign(test_end = date(2023, 12, 30), test_start = date(2023, 12, 30)))['invalid_reasons']
+    assert 'unknown_split' in pairing_report(pair_frame([4.0, 3, 2, 1], split = 5), pair_frame([4.0, 3, 2, 1], split = 5), PLAN)['invalid_reasons']
+    assert pairing_report(pair_frame([4.0, 3, 2, 1]), pair_frame([4.0, 3, 2, 1]), PLAN, 'x')['invalid_reasons'] == []
+
+
+def test_model_present_on_one_side_only_is_reported_not_intersected_away():
+    a = pd.concat([pair_frame([4.0, 3, 2, 1], model = 'ridge'), pair_frame([4.0, 3, 2, 1], model = 'equal_blend')]); b = pair_frame([4.0, 3, 2, 1], model = 'ridge')
+    lab = labels([(D, i, v, True, '') for i, v in zip('ABCD', [4, 1, 3, 2])]).assign(matured_at = date(2024, 1, 9))
+    gate = pairing_gate(a, b, lab, lab, ('ridge', 'equal_blend')); assert gate[0].startswith('model_set_differs') and gate[1].startswith('expected_models_missing')
+    r = model_pairs(a, b, lab, 2, min_n = 2, top_n = 2, n_boot = 50)
+    assert set(r) == {'ridge', 'equal_blend'} and r['equal_blend']['invalid_reasons'] == ['model_only_in_a'] and r['equal_blend']['rank_ic'] is None and r['ridge']['valid_primary_comparison'] is True
+    assert pairing_gate(b, b, lab, lab.assign(value = lab.value + 1), ('ridge',)) == ['labels_differ_between_sides']
+
+
+def test_original_top_n_is_not_reselected_when_the_other_side_lacks_a_security():
+    a = pair_frame([1.0, 2, 3, 4, 5], keys = 'ABCDE'); b = pair_frame([1.0, 2, 3, 4], keys = 'ABCD')                # B 侧缺 E，而 E 是 A 侧分数最高的
+    lab = labels([(D, i, v, True, '') for i, v in zip('ABCDE', [0.0, 0.0, 0.0, 0.1, 0.5])]).assign(matured_at = date(2024, 1, 9))
+    orig = topn_table(a, lab, 1).loc[D]; assert orig.selected_names == ['E'] and orig.mean_label == pytest.approx(0.5)             # 本侧原始名单不受另一侧缺失影响
+    r = model_pairs(a, b, lab, 2, min_n = 2, top_n = 1, n_boot = 50)['m']
+    assert r['valid_primary_comparison'] is False and 'top1_mean_label' not in r                                                       # 不进入正式主摘要
+    d = r['diagnostic']['top1_common_subset']; assert d['list_redefined'] is True and d['a_mean'] == pytest.approx(0.1)             # 共同子集上的名单已重新定义（E 被删，名单变成 D）
 
 
 def test_block_bootstrap_keeps_trading_day_positions():
