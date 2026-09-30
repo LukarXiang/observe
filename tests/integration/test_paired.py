@@ -259,3 +259,15 @@ def test_invalid_pairing_removes_the_headline_numbers_and_keeps_a_separate_diagn
     assert ev['models']['equal_blend']['valid_primary_comparison'] is True and ev['models']['equal_blend']['rank_ic']['days'] > 0                    # 其他模型不受牵连
     assert any(x['kind'] == 'pairing_invalid' for x in ev['limitations'])
     good = evaluate(c, r['subruns'], plan); assert good['valid_primary_comparison'] is True and good['invalid_reasons'] == [] and good['headline']['ridge_rank_ic_diff'] is not None
+
+
+def test_paired_experiment_with_normalized_ridge_records_lambdas_and_compares_with_the_alpha_mode(paired, tmp_path):
+    from observe.reeval import reevaluate
+    root, sid, days, base, ext, r = paired; c = cfg(sid, base, ext); c['models'] = {**c['models'], 'penalty_mode': 'normalized', 'ridge_lambdas': [0.01, 1.0, 100.0]}; c['models'].pop('ridge_alphas'); c['backtest_models'] = ['ridge']
+    n = run_paired(root, **c); ev = read(n['output'], 'paired_eval.json')
+    assert n['status'] == 'success_limited' and ev['valid_primary_comparison'] is True and len(n['subruns']['backtests']) == 2                       # 只回测 Ridge：等权合成没有拟合环节
+    use = ev['ridge_new_factor_use']; assert all(v['selected'].startswith('ridge_norm@') and v['lambda'] is not None and v['alpha'] > 0 for v in use.values())
+    assert all(v['base_lambda'] is not None and v['base_selected'].startswith('ridge_norm@') for v in use.values())
+    res = read(reevaluate(root, {'alpha_mode': r['output'], 'normalized': n['output']})['output'], 'reeval.json')          # 同一批测试日：同一臂在两种惩罚口径之间的差
+    cd = res['common_test_dates']; assert cd['common_days'] > 0 and set(cd['between_experiment_arm_difference']['ridge']['ic']) == {'base', 'extended'}
+    assert cd['between_experiment_arm_difference']['equal_blend']['ic']['base']['diff_mean'] == pytest.approx(0)              # 等权合成不受惩罚口径影响

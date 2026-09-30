@@ -4,6 +4,7 @@
 产物写入新建实验目录（与 run 相同的独占创建、running 状态与 manifest），预测表交给 run 的唯一执行入口做组合与账本回测。"""
 import hashlib, json, shutil
 from datetime import date
+from typing import Literal
 from pathlib import Path
 
 import numpy as np
@@ -50,7 +51,9 @@ class SplitConfig(_Strict):
 
 class ModelConfig(_Strict):
     baseline_factor: str = 'rev_5'
+    penalty_mode: Literal['alpha', 'normalized'] = 'alpha'      # alpha：数值 alpha 固定（旧口径）；normalized：alpha = lambda × sum_weight（决策 23）
     ridge_alphas: list[float] = Field(default_factory = lambda: [1.0, 10.0, 100.0, 1000.0, 10000.0], min_length = 1, max_length = 12)
+    ridge_lambdas: list[float] = Field(default_factory = lambda: [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0], min_length = 1, max_length = 12)      # 只在 normalized 下使用
     correlation_threshold: float = Field(0.9, gt = 0, le = 1)
     min_names: int = Field(30, ge = 2)
     top_n: int = Field(20, ge = 1)
@@ -191,7 +194,7 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
     plan['holdout_start'] = holdout; _pq(out, 'split_plan', plan); status.stage('splits', windows = len(plan), holdout_start = str(holdout) if holdout else None)
 
     X = cross_sectional_preprocess(fac.assign(eligible = True), names).drop(columns = 'eligible')
-    preds, evals, models_dir = [], [], out / 'models'; models_dir.mkdir()
+    preds, evals, fit_records, models_dir = [], [], [], out / 'models'; models_dir.mkdir()
     for sp in plan.itertuples(index = False):
         try: kept, dropped, sel, val, fit, candidates, tried, best = selection_stage(sp, X, lab, names, directions, cfg.models)
         except SelectionUndefined as exc: raise InputBlocked([{'kind': 'selection_undefined', 'split_id': int(sp.split_id), 'detail': str(exc), 'candidates': exc.tried}]) from None
@@ -201,12 +204,17 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
             m.fit(fit[m.features], fit.value, day_weights(fit.date), split_id = sp.split_id, train_start = sp.train_start, fit_end = sp.valid_end, fit_asof = sp.fit_asof,
                   refit = 'train+valid', label = f'adj_open_to_open_{cfg.label_h}', dropped_features = dropped, selected = key)
             m.save(models_dir / f'split{sp.split_id:02d}_{model_id}.json')
+            if model_id == 'ridge':       # 每个拟合阶段的正则强度记录：选参拟合与重拟合各自的 sum_weight / 实际 alpha / lambda，验证证据，是否在网格边界
+                keys = [k for k, _ in candidates if k.startswith('ridge')]; chosen = next(t for t in tried if t['candidate'] == key)
+                fit_records.append({'split_id': int(sp.split_id), 'selected': key, 'at_upper_edge': key == keys[-1], 'at_lower_edge': key == keys[0], 'penalty_mode': cfg.models.penalty_mode,
+                                    'select': {k: chosen.get(k) for k in ('sum_weight', 'select_days', 'select_rows', 'lambda', 'alpha_used', 'features', 'coef_norm', 'valid_rank_ic', 'valid_days', 'valid_pairs_mean')},
+                                    'refit': {**m.penalty, 'days': int(fit.date.nunique()), 'rows': int(len(fit))}, 'candidates': [{k: t.get(k) for k in ('candidate', 'lambda', 'alpha_used', 'valid_rank_ic', 'valid_days', 'coef_norm')} for t in tried if t['candidate'].startswith('ridge')]})
             preds.append(pd.DataFrame({'model_id': model_id, 'decision_date': test.date.to_numpy(), 'instrument': test.instrument.to_numpy(), 'score': m.predict(test[m.features]),
                                        'split_id': sp.split_id, 'fit_asof': sp.fit_asof, 'evidence_level': evidence_level(cfg)}))
         evals += tried
     pred = pd.concat(preds, ignore_index = True); _pq(out, 'predictions', pred); status.stage('models', predictions = len(pred))
 
-    model_eval = _model_eval(pred, lab, evals, cfg.models, holdout); write_json(out / 'model_eval.json', canonical(model_eval))
+    model_eval = _model_eval(pred, lab, evals, cfg.models, holdout, fit_records); write_json(out / 'model_eval.json', canonical(model_eval))
     dev = [d for d in days if holdout is None or d < holdout]
     factor_eval = _factor_eval(fac, lab, names, directions, dev, cfg.models.min_names, holdout); write_json(out / 'factor_eval.json', canonical(factor_eval))
     status.stage('evaluation')
@@ -222,7 +230,8 @@ class SelectionUndefined(ValueError):
 
 def candidate_models(mc, kept, directions):
     """一个窗口的候选模型：单因子基线、等权合成、各 alpha 的 Ridge"""
-    return [('single_factor', SingleFactor([mc.baseline_factor], directions, factor = mc.baseline_factor)), ('equal_blend', EqualBlend(kept, directions))] +            [(f'ridge@{a:g}', RidgeModel(kept, directions, alpha = a)) for a in mc.ridge_alphas]
+    ridge = [(f'ridge_norm@{l:g}', RidgeModel(kept, directions, lam = l)) for l in mc.ridge_lambdas] if mc.penalty_mode == 'normalized' else [(f'ridge@{a:g}', RidgeModel(kept, directions, alpha = a)) for a in mc.ridge_alphas]
+    return [('single_factor', SingleFactor([mc.baseline_factor], directions, factor = mc.baseline_factor)), ('equal_blend', EqualBlend(kept, directions))] + ridge
 
 
 def selection_stage(sp, X, lab, names, directions, mc):
@@ -237,8 +246,9 @@ def selection_stage(sp, X, lab, names, directions, mc):
         if len(sel): m.fit(sel[m.features], sel.value, day_weights(sel.date))
         t = rank_ic_table(val.assign(score = m.predict(val[m.features])) if len(sel) and len(val) else val.assign(score = np.nan), min_n = mc.min_names); ic = t.ic.mean()
         tried.append({'split_id': sp.split_id, 'candidate': key, 'valid_rank_ic': None if np.isnan(ic) else float(ic), 'valid_days': int(t.ic.notna().sum()), 'valid_pairs_mean': _f(t.n_valid.mean()) if len(t) else None,
-                      'select_rows': int(len(sel)), 'valid_rows': int(len(val)), 'undefined': undefined_reasons(t)['reasons']})
-    ridge = [x for x in tried if x['candidate'].startswith('ridge@') and x['valid_rank_ic'] is not None]
+                      'select_rows': int(len(sel)), 'valid_rows': int(len(val)), 'undefined': undefined_reasons(t)['reasons'], 'select_days': int(sel.date.nunique()) if len(sel) else 0,
+                      **({k: getattr(m, 'penalty', None)[k] for k in ('penalty_mode', 'lambda', 'alpha_used', 'sum_weight', 'coef_norm', 'features')} if key.startswith('ridge') and getattr(m, 'penalty', None) else {})})
+    ridge = [x for x in tried if x['candidate'].startswith('ridge') and x['valid_rank_ic'] is not None]
     if not ridge: raise SelectionUndefined(sp.split_id, tried)
     best = max(ridge, key = lambda x: x['valid_rank_ic'])['candidate']   # 并列取先出现（更小的 alpha）
     return kept, dropped, sel, val, fit, candidates, tried, best
@@ -279,7 +289,7 @@ def _prune(X, sp, names, threshold):
     return kept, dropped
 
 
-def _model_eval(pred, lab, tried, mc, holdout = None):
+def _model_eval(pred, lab, tried, mc, holdout = None, fit_records = None):
     """测试窗上的模型评价。标签只用开发区间可用的（dataset.dev_labels）；秩 IC 与前 N 名都走 evaluation.ranking 的唯一实现，
     前 N 名名单由预测先固定，标签无效的证券留在名单里、不替补"""
     labd = dev_labels(lab, holdout); j = pred.merge(labd[['decision_date', 'instrument', 'value']], on = ['decision_date', 'instrument'], how = 'left')
@@ -298,7 +308,7 @@ def _model_eval(pred, lab, tried, mc, holdout = None):
         wide = by.pivot(index = 'split_id', columns = 'model_id', values = 'test_rank_ic_mean')
         for base in ('single_factor', 'equal_blend'):
             if 'ridge' in wide and base in wide: wins[f'ridge_vs_{base}'] = {'wins': int((wide.ridge > wide[base]).sum()), 'windows': int(wide[['ridge', base]].notna().all(axis = 1).sum())}
-    return {'eval_version': 2, 'per_window': per, 'summary': summary, 'window_wins': wins, 'selection': tried,
+    return {'eval_version': 2, 'ridge_fit_records': fit_records or [], 'per_window': per, 'summary': summary, 'window_wins': wins, 'selection': tried,
             'label_rule': dev_label_rule(holdout),
             'note': '标签是复权 open-to-open 收益，只作排序目标，不是可实现收益；组合收益只来自账本回测'}
 

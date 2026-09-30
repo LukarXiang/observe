@@ -58,20 +58,29 @@ class EqualBlend(_Model):
 
 
 class RidgeModel(_Model):
-    """scikit-learn Ridge；系数随模型说明一起保存，加载后逐位复现预测"""
+    """scikit-learn Ridge；系数随模型说明一起保存，加载后逐位复现预测。两种惩罚口径，构造时二选一：
+    - `alpha = a`：数值 alpha 原样传给 scikit-learn（旧口径，含义不变）；
+    - `lam = l`：归一化口径，目标 = Σ w·err² / Σ w + l·‖beta‖²，传给 scikit-learn 的 alpha = l × 本次拟合的 sum_weight（选参拟合与重拟合各按各自的样本权重换算）"""
     kind = 'ridge'
+
+    def __init__(self, features, directions, **params):
+        if ('alpha' in params) == ('lam' in params): raise ValueError('RidgeModel 需要且只需要 alpha（旧口径）或 lam（归一化口径）之一')
+        super().__init__(features, directions, **params); self.penalty = None
 
     def fit(self, X, y, w = None, **info):
         from sklearn.linear_model import Ridge
-        r = Ridge(alpha = self.params['alpha'], fit_intercept = True).fit(self._x(X), np.asarray(y, float), sample_weight = None if w is None else np.asarray(w, float))
+        sw = float(np.sum(w)) if w is not None else float(len(X))
+        alpha = self.params['lam'] * sw if 'lam' in self.params else float(self.params['alpha'])
+        r = Ridge(alpha = alpha, fit_intercept = True).fit(self._x(X), np.asarray(y, float), sample_weight = None if w is None else np.asarray(w, float))
         self.coef, self.intercept = [float(c) for c in r.coef_], float(r.intercept_)
-        return super().fit(X, y, w, **info)
+        self.penalty = {'penalty_mode': 'normalized' if 'lam' in self.params else 'alpha', 'alpha_used': float(alpha), 'sum_weight': sw, 'lambda': float(alpha / sw), 'coef_norm': float(np.linalg.norm(self.coef)), 'features': len(self.features)}
+        out = super().fit(X, y, w, **info); self.info.update(self.penalty); return out
 
     def predict(self, X): return self._x(X) @ np.array(self.coef) + self.intercept
 
-    def state(self): return {'coef': dict(zip(self.features, self.coef)), 'intercept': self.intercept}
+    def state(self): return {'coef': dict(zip(self.features, self.coef)), 'intercept': self.intercept, 'penalty': self.penalty}
 
-    def restore(self, d): self.coef, self.intercept = [d['coef'][f] for f in self.features], d['intercept']
+    def restore(self, d): self.coef, self.intercept, self.penalty = [d['coef'][f] for f in self.features], d['intercept'], d.get('penalty')
 
 
 KINDS = {c.kind: c for c in (SingleFactor, EqualBlend, RidgeModel)}

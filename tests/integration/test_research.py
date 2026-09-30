@@ -201,3 +201,19 @@ def test_holdout_is_never_silently_dropped_and_undefined_selection_blocks(tmp_pa
     assert tight['status'] == 'blocked' and tight['blocked'][0]['kind'] == 'insufficient_history_for_split' and '已扣除 30' in tight['blocked'][0]['detail']
     undefined = run_research(root, **{**cfg(sid, fs), 'split': {**small, 'holdout': 5}, 'models': {**cfg(sid, fs)['models'], 'min_names': 10000}})
     assert undefined['status'] == 'blocked' and undefined['blocked'][0]['kind'] == 'selection_undefined' and any(t['undefined'] for t in undefined['blocked'][0]['candidates'])
+
+
+def test_normalized_ridge_mode_runs_records_every_fit_stage_and_reproduces(base):
+    root, sid, days, fs, r = base
+    c = cfg(sid, fs); c['models'] = {**c['models'], 'penalty_mode': 'normalized', 'ridge_lambdas': [0.01, 1.0, 100.0]}; c['models'].pop('ridge_alphas')
+    n = run_research(root, **c); out = Path(n['output']); ev = read(out, 'model_eval.json'); rec = ev['ridge_fit_records']
+    assert n['status'] == 'success' and len(rec) == len(pd.read_parquet(out / 'split_plan.parquet')) and ev['eval_version'] == 2
+    for x in rec:
+        assert x['selected'].startswith('ridge_norm@') and x['penalty_mode'] == 'normalized' and isinstance(x['at_upper_edge'], bool) and isinstance(x['at_lower_edge'], bool)
+        s, f = x['select'], x['refit']
+        assert s['sum_weight'] == pytest.approx(s['select_days']) and f['sum_weight'] == pytest.approx(f['days']) and f['sum_weight'] > s['sum_weight']              # 每天总权重 1：sum_weight = 决策日数；重拟合样本更大
+        assert f['alpha_used'] == pytest.approx(f['lambda'] * f['sum_weight']) and s['alpha_used'] == pytest.approx(s['lambda'] * s['sum_weight']) and f['lambda'] == pytest.approx(s['lambda'])      # lambda 不变，alpha 各按各自权重换算
+        assert s['valid_days'] > 0 and s['features'] > 0 and s['coef_norm'] > 0 and len(x['candidates']) == 3
+    m = json.loads((out / 'models' / 'split00_ridge.json').read_text(encoding = 'utf-8')); assert 'lam' in m['params'] and 'alpha' not in m['params'] and m['penalty']['penalty_mode'] == 'normalized'
+    rep = reproduce(root, n['output']); assert rep['status'] == 'success' and rep['reproduction']['result'] == 'match'
+    old = read(base[4]['output'], 'model_eval.json'); assert all(x['penalty_mode'] == 'alpha' and x['selected'].startswith('ridge@') for x in old['ridge_fit_records'])       # 旧口径的实验含义不变

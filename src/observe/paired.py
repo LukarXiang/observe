@@ -124,7 +124,8 @@ def evaluate(cfg, subruns, plan):
     ridge = {}
     for sp in plan.itertuples():
         m = _json(b / 'models' / f'split{sp.split_id:02d}_ridge.json')
-        ridge[int(sp.split_id)] = {'alpha': m['params']['alpha'], 'base_alpha': _json(a / 'models' / f'split{sp.split_id:02d}_ridge.json')['params']['alpha'], 'kept_new': [f for f in m['features'] if f in new], 'dropped': m['info'].get('dropped_features', []),
+        mb_ = _json(a / 'models' / f'split{sp.split_id:02d}_ridge.json')
+        ridge[int(sp.split_id)] = {'alpha': (m.get('penalty') or {}).get('alpha_used', m['params'].get('alpha')), 'base_alpha': (mb_.get('penalty') or {}).get('alpha_used', mb_['params'].get('alpha')), 'lambda': (m.get('penalty') or {}).get('lambda'), 'base_lambda': (mb_.get('penalty') or {}).get('lambda'), 'selected': m['info'].get('selected'), 'base_selected': mb_['info'].get('selected'), 'kept_new': [f for f in m['features'] if f in new], 'dropped': m['info'].get('dropped_features', []),
                                    'coef_new': {f: m['coef'][f] for f in m['features'] if f in new}}
     windows = [(sp.split_id, pd.Timestamp(sp.test_start).date(), pd.Timestamp(sp.test_end).date()) for sp in plan.itertuples()]
     portfolio, outs = {}, {(x['model'], x['arm']): Path(x['output']) for x in subruns['backtests']}

@@ -105,10 +105,10 @@ def _returns(equity):
 
 
 def common_dates(sources, series, block, n_boot, seed):
-    """各实验测试日期的交集上：实验内 B−A、训练长度效应（同一臂在两个实验里的差）、两个实验的 B−A 之差"""
+    """各实验测试日期的交集上：实验内 B−A、同一臂在两个实验之间的差（两个实验只差训练窗或惩罚口径时即该因素的效应）、两个实验的 B−A 之差"""
     labels = list(sources); dates = [set(pd.Index(series[l][0][('base', 'ridge')]['ic'].index)) for l in labels]; common = pd.Index(sorted(set.intersection(*dates)))
     out = {'labels': labels, 'common_days': int(len(common)), 'first': str(common.min()) if len(common) else None, 'last': str(common.max()) if len(common) else None,
-           'test_days_by_experiment': {l: int(len(d)) for l, d in zip(labels, dates)}, 'within_experiment': {}, 'training_length_effect': {}, 'effect_difference': {}}
+           'test_days_by_experiment': {l: int(len(d)) for l, d in zip(labels, dates)}, 'within_experiment': {}, 'between_experiment_arm_difference': {}, 'effect_difference': {}}
     for model in ('ridge', 'equal_blend', 'single_factor'):
         for metric in ('ic', 'top'):
             for l in labels:
@@ -118,7 +118,7 @@ def common_dates(sources, series, block, n_boot, seed):
                 l0, l1 = labels
                 for arm in ('base', 'extended'):
                     a, b = (series[l][0][(arm, model)][metric].reindex(common) for l in (l1, l0))          # B 项 = 第一个实验，A 项 = 第二个实验：差 = 第一个 − 第二个
-                    out['training_length_effect'].setdefault(model, {}).setdefault(metric, {})[arm] = {'first_minus_second': f'{l0} − {l1}', **diff_stats(a, b, block, n_boot, seed, common, 2 * block)}
+                    out['between_experiment_arm_difference'].setdefault(model, {}).setdefault(metric, {})[arm] = {'first_minus_second': f'{l0} − {l1}', **diff_stats(a, b, block, n_boot, seed, common, 2 * block)}
                 d = [(series[l][0][('extended', model)][metric].reindex(common) - series[l][0][('base', model)][metric].reindex(common)) for l in labels]
                 out['effect_difference'].setdefault(model, {}).setdefault(metric, diff_stats(d[1], d[0], block, n_boot, seed, common, 2 * block) | {'note': f'加分钟效应（B−A）：{labels[0]} 减 {labels[1]}'})
     return out, common
@@ -167,10 +167,10 @@ def replay_selection(arm_dir):
 def fit_scale(split_id, sel, val, kept, candidates, tried, best):
     """一个拟合阶段的正则强度记录：每天总样本权重为 1，所以 sum_weight = 选参样本的决策日数；alpha / sum_weight 才是与样本量无关的相对强度。
     另给验证曲线，以及验证窗上相邻 alpha 的预测在每日横截面上的平均秩相关（趋于 1 说明再加大 alpha 排名不再变化）"""
-    w = day_weights(sel.date); ridge = [(k, m) for k, m in candidates if k.startswith('ridge@')]; score = {k: m.predict(val[m.features]) for k, m in ridge}
+    w = day_weights(sel.date); ridge = [(k, m) for k, m in candidates if k.startswith('ridge')]; score = {k: m.predict(val[m.features]) for k, m in ridge}
     def stab(k1, k2):
         f = val[['date']].assign(x = score[k1], y = score[k2]); v = f.groupby('date').apply(lambda g: spearman(g.x, g.y), include_groups = False); return _mean(v)
-    curve = [{'candidate': k, 'alpha': m.params['alpha'], 'alpha_over_sum_weight': m.params['alpha'] / float(w.sum()), 'valid_rank_ic': next(t['valid_rank_ic'] for t in tried if t['candidate'] == k)} for k, m in ridge]
+    curve = [{'candidate': k, 'alpha': m.penalty['alpha_used'], 'alpha_over_sum_weight': m.penalty['alpha_used'] / float(w.sum()), 'valid_rank_ic': next(t['valid_rank_ic'] for t in tried if t['candidate'] == k)} for k, m in ridge]
     return {'split_id': int(split_id), 'sum_weight': float(w.sum()), 'decision_days': int(sel.date.nunique()), 'rows': int(len(sel)), 'features': len(kept), 'selected': best,
             'selected_at_grid_edge': best == ridge[-1][0], 'curve': curve, 'adjacent_alpha_rank_agreement': [{'from': ridge[i][0], 'to': ridge[i + 1][0], 'mean_daily_spearman': stab(ridge[i][0], ridge[i + 1][0])} for i in range(len(ridge) - 1)]}
 

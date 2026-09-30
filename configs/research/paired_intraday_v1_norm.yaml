@@ -1,0 +1,35 @@
+# 归一化 Ridge 正则强度的受控对照（决策 23，在读取任何结果之前冻结）。
+# 只改一件事：Ridge 的惩罚口径从「数值 alpha 固定」改为「目标 = 加权平均损失 + lambda · ‖beta‖²」，即传给 scikit-learn 的 alpha = lambda × 该次拟合的 sum_weight。
+# 选参拟合与 train+valid 重拟合各按各自的 sum_weight 换算。其余（快照、候选、标签、因子集与方向、缺失政策、切分、留出、测试日期）与 paired_intraday_v1.yaml 逐项相同。
+# lambda 网格是研究设计，不是经过验证的最优网格；选到边界不追加候选，不据测试结果扩大或改动。旧 alpha 口径（penalty_mode: alpha）及旧模型文件保持原义。
+# 主实验训练 504 天；训练 252 天的敏感性是预先指定的另一份配置 paired_intraday_v1_norm_train252.yaml。
+# 用法：observe --root data paired --config configs/research/paired_intraday_v1_norm.yaml --snapshot 20260930-121952-b7e8
+factor_set: configs/factor_sets/daily_basic_v1.yaml
+extended_factor_set: configs/factor_sets/daily_intraday_v1.yaml
+minute_pool: true
+label_h: 5
+universe:
+  boards: [main]
+  min_listed_sessions: 120
+  exclude_st: true
+  suspend_window: 20
+  max_suspended: 10
+  liquidity_window: 20
+  min_avg_amount: 20000000
+split:
+  train: 504
+  valid: 126
+  test: 63
+  holdout: 252
+models:
+  baseline_factor: rev_5
+  penalty_mode: normalized
+  ridge_lambdas: [0.01, 0.1, 1, 10, 100, 1000]
+  correlation_threshold: 0.9
+  min_names: 30
+  top_n: 20
+initial_cash: 1000000
+portfolio: {n: 20, max_weight: 0.1, rebalance_every: 5, buffer: 10, max_sell: 5}
+backtest_models: [ridge]          # 等权合成没有拟合环节，组合结果与 alpha 口径完全相同，不重复回测
+n_boot: 1000
+seed: 20260930
