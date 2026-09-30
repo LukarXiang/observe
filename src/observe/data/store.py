@@ -125,7 +125,7 @@ class Store:
         tmp = csv.with_suffix('.tmp'); issues.to_csv(tmp, index=False); os.replace(tmp, csv)
         _atomic_json(meta, {'audit_id': aid, 'batch_id': batch_id, 'rule_fingerprint': rule_fingerprint,
                             'input_range': input_range, 'scope': scope, 'input_state': input_state,
-                            'audited_at': datetime.now().isoformat(timespec = 'seconds'),
+                            'audited_at': datetime.now().isoformat(timespec = 'microseconds'),   # 精度到秒时，同一秒内的两次审计并列，取到旧的
                             'status': 'problem' if len(issues) else 'passed', 'problem_count': int(len(issues))})
         _atomic_json(d / 'latest.json', {'audit_id': aid, 'batch_id': batch_id})
         return aid
