@@ -5,7 +5,9 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 
-FIELDS = {'open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret', 'volume', 'amount', 'turnover'}
+from .intraday import INTRADAY_FIELDS
+
+FIELDS = {'open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret', 'volume', 'amount', 'turnover'} | set(INTRADAY_FIELDS)   # 后者由 5 分钟线聚合，见 intraday.py
 TS1 = {'ts_mean', 'ts_std', 'ts_sum', 'ts_min', 'ts_max', 'ts_rank', 'ts_slope', 'ts_decay_linear'}   # (x, w)
 TS_LAG = {'ts_delay', 'ts_delta'}                                                                       # (x, d)
 TS2 = {'ts_corr', 'ts_cov'}                                                                             # (x, y, w)

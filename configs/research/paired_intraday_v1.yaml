@@ -1,0 +1,32 @@
+# 阶段 4 成对对照实验：分钟股票池内，「日频基础因子」对「日频 + 分钟聚合因子」。两侧只有因子集不同，其余（股票池、区间、切分、标签、模型）逐项相同。
+# 用法：observe --root data paired --config configs/research/paired_intraday_v1.yaml --snapshot <snapshot_id>
+# 研究候选再限制在当年的分钟股票池内，区间自动限制在「有名单的年份、且不晚于分钟线最后一天」；证据级别为探索（分钟样本缺退市证券）。
+# 事先固定的判断口径：主要指标 = Ridge 测试窗逐日秩 IC 的差（扩展侧减基础侧）及块抽样 95% 区间；没有增量也照实报告。
+factor_set: configs/factor_sets/daily_basic_v1.yaml
+extended_factor_set: configs/factor_sets/daily_intraday_v1.yaml
+minute_pool: true
+label_h: 5
+universe:
+  boards: [main]
+  min_listed_sessions: 120
+  exclude_st: true
+  suspend_window: 20
+  max_suspended: 10
+  liquidity_window: 20
+  min_avg_amount: 20000000
+split:
+  train: 504
+  valid: 126
+  test: 63
+  holdout: 252          # 分钟区间的最近 252 个交易日为最终留出：不生成预测、不参与任何选择
+models:
+  baseline_factor: rev_5
+  ridge_alphas: [1, 10, 100, 1000, 10000]
+  correlation_threshold: 0.9
+  min_names: 30
+  top_n: 20
+initial_cash: 1000000
+portfolio: {n: 20, max_weight: 0.1, rebalance_every: 5, buffer: 10, max_sell: 5}
+backtest_models: [ridge, equal_blend]
+n_boot: 1000
+seed: 20260930

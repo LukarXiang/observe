@@ -2,7 +2,7 @@
 
 目录：std/<表>/<分区>__<指纹8位>.parquet；batches/<批次>.json；PUBLISHED.json；snapshots/<快照>.json；pins/<任务>.json
 分区写入后不改；同内容同指纹同文件。研究只读已发布状态或快照。"""
-import hashlib, json, os, secrets, tempfile
+import hashlib, json, os, secrets, tempfile, time
 from datetime import datetime
 from pathlib import Path
 
@@ -20,7 +20,11 @@ def _atomic_json(path, data):
     fd, tmp = tempfile.mkstemp(prefix = f'.{path.name}.', dir = path.parent)
     try:
         with os.fdopen(fd, 'w', encoding = 'utf-8') as h: json.dump(data, h, ensure_ascii = False, indent = 1, default = str); h.flush(); os.fsync(h.fileno())
-        os.replace(tmp, path)
+        for attempt in range(20):       # Windows 上目标文件被杀毒软件或索引服务短暂占用时 os.replace 会拒绝访问，稍等重试
+            try: os.replace(tmp, path); break
+            except PermissionError:
+                if attempt == 19: raise
+                time.sleep(0.05 * (attempt + 1))
     finally:
         if os.path.exists(tmp): os.unlink(tmp)
 

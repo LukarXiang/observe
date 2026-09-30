@@ -127,7 +127,7 @@ def score_source(cfg):
     pred = pd.read_parquet(run / 'predictions.parquet', columns = ['model_id', 'decision_date'])
     days = pred.loc[pred.model_id == sc.model, 'decision_date']
     if not len(days): raise ValueError(f'研究实验 {run.name} 没有模型 {sc.model} 的预测')
-    meta = {'source': 'predictions', 'run': str(run.resolve()), 'research_run_id': run.name, 'model': sc.model, 'evidence': 'development_oos_prediction',
+    meta = {'source': 'predictions', 'run': str(run.resolve()), 'research_run_id': run.name, 'model': sc.model, 'evidence': f"{st.get('evidence') or 'development_oos'}_prediction",
             'predictions_sha256': file_sha(run / 'predictions.parquet'), 'universe_sha256': file_sha(run / 'universe.parquet')}
     first, last = pd.Timestamp(days.min()).date(), pd.Timestamp(days.max()).date()
     return meta, cfg.model_copy(update = {'start': cfg.start or first, 'end': cfg.end or last})
@@ -252,9 +252,13 @@ def check_snapshot(store, snapshot, data_manifest):
 def reproduce(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0):
     """先读取并校验源实验的全部冻结输入与核心产物，再在新目录重跑并逐表比较；源目录只读。研究实验转给 research.reproduce_research"""
     source = Path(run); ensure_outside(source, output)
-    if _read(source / 'config.json').get('kind') == 'research':
+    kind = _read(source / 'config.json').get('kind')
+    if kind == 'research':
         from .research import reproduce_research
         return reproduce_research(root, run, output, abs_tol, rel_tol)
+    if kind == 'paired':
+        from .paired import reproduce_paired
+        return reproduce_paired(root, run, output, abs_tol, rel_tol)
     manifest = _read(source / 'manifest.json'); doc = _read(source / 'config.json'); src_status = _read(source / 'status.json')
     if src_status.get('status') not in ('success', 'success_limited', 'blocked', 'mismatch'): raise ReproduceRefused(f"源实验状态为 {src_status.get('status')}，不是已完成的实验")
     integrity = sorted(n for n, sha in manifest.get('files', {}).items() if not (source / n).exists() or file_sha(source / n) != sha)

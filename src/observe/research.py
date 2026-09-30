@@ -14,18 +14,20 @@ from .data.prices import with_adjusted
 from .data.store import Store
 from .dataset import cross_sectional_preprocess, plan_splits, samples
 from .execution import InputBlocked, sessions as open_sessions
+from .factors.intraday import INTRADAY_FIELDS, daily_features, gap_reasons
 from .features import factor_frame, load_factor_set, panel
 from .labels import build_labels
 from .models import EqualBlend, RidgeModel, SingleFactor, day_weights, rank_ic
 from .replay import _Strict
 from .runs import RunStatus, canonical, compare_frames, compare_tables, create_run_dir, drift, ensure_outside, environment, file_sha, write_json
-from .universe import build_universe
+from .universe import build_universe, version as universe_version
 
 FACTOR_SET = 'configs/factor_sets/daily_basic_v1.yaml'
 TABLES = ('calendar', 'bars_1d', 'instruments', 'adj_factors', 'adj_coverage')
 CORE = {'universe': ('decision_date', 'instrument'), 'factors': ('date', 'instrument'), 'labels': ('decision_date', 'instrument'),
-        'split_plan': ('split_id',), 'predictions': ('model_id', 'decision_date', 'instrument')}
-CORE_JSON = ('model_eval', 'factor_eval', 'limitations')
+        'split_plan': ('split_id',), 'predictions': ('model_id', 'decision_date', 'instrument'), 'intraday': ('date', 'instrument')}
+CORE_JSON = ('model_eval', 'factor_eval', 'limitations', 'intraday_coverage')
+RESTRICTED = '受限样本：缺退市证券的分钟数据'
 
 
 class UniverseConfig(_Strict):
@@ -62,6 +64,7 @@ class ResearchConfig(_Strict):
     universe: UniverseConfig = Field(default_factory = UniverseConfig)
     split: SplitConfig = Field(default_factory = SplitConfig)
     models: ModelConfig = Field(default_factory = ModelConfig)
+    minute_pool: bool = False      # 研究候选再限制在分钟股票池内，区间限制在有名单的年份、且不晚于分钟线最后一天；分钟聚合特征因子必须开启
 
 
 def research_params(file_cfg = None, **cli):
@@ -77,23 +80,44 @@ def run_research(root, output = None, runs_root = None, **params):
 def _pq(out, name, df): df.to_parquet(Path(out) / f'{name}.parquet', index = False)
 
 
+def evidence_level(cfg): return 'exploratory' if cfg.minute_pool else 'development_oos'      # 分钟样本缺退市证券：数据受限，证据级别为探索
+
+
+def _minute_inputs(store, state, cfg, need_bars):
+    """分钟股票池研究的输入：名单表与分钟线分区必须在快照里；需要分钟特征时读全部分区（含预热月份），否则只读最后一个分区确定分钟线的最后一天"""
+    parts, pool = state['tables'].get('bars_5m', {}), state['tables'].get('minute_universe', {})
+    if not parts or not pool: raise InputBlocked([{'kind': 'minute_data_missing', 'detail': '快照没有 bars_5m 或 minute_universe，不能做分钟股票池研究'}])
+    if cfg.end: parts = {k: v for k, v in parts.items() if k <= f'{cfg.end:%Y%m}'}
+    if not parts: raise InputBlocked([{'kind': 'minute_data_missing', 'detail': f'{cfg.end} 之前没有分钟线'}])
+    last = max(parts); day = pd.read_parquet(store.root / parts[last]['file'], columns = ['bar_end']).bar_end.max().date()
+    return {'parts': parts if need_bars else {last: parts[last]}, 'last_day': day}
+
+
 def _research(root, cfg, output = None, runs_root = None, factor_file = None, tag = 'research', reproduce_of = None, compare = None):
     store = Store(root); state = store.state(cfg.snapshot)
     factor_file = Path(factor_file or cfg.factor_set); fset = load_factor_set(factor_file)
     names = [f['name'] for f in fset['factors']]
     if cfg.models.baseline_factor not in names: raise ValueError(f'单因子基线 {cfg.models.baseline_factor} 不在因子集里')
+    intraday = sorted({x for f in fset['factors'] for x in f['fields']} & set(INTRADAY_FIELDS))
+    if intraday and not cfg.minute_pool: raise ValueError(f'因子集用了分钟聚合特征 {intraday}，必须同时设置 minute_pool: true（只有分钟股票池内的证券有值）')
     doc = {'kind': 'research', 'config': cfg.model_dump(mode = 'json'), 'snapshot_id': state.get('snapshot_id') or cfg.snapshot, 'batch_id': state.get('batch_id'),
            'factor_set': {'source_path': str(cfg.factor_set), 'sha256': fset['sha256'], 'version': fset['version']}, 'label': {'name': 'adj_open_to_open_h', 'h': cfg.label_h},
            'environment': environment(), 'reproduce_of': reproduce_of}
     h = hashlib.sha256(json.dumps(canonical({k: doc[k] for k in ('config', 'snapshot_id', 'factor_set', 'label')}), sort_keys = True).encode()).hexdigest()
     out = create_run_dir(Path(runs_root) if runs_root else Path(root) / 'runs', output, '-'.join(x for x in (h[:6], tag) if x))
-    status = RunStatus(out, out.name, kind = 'research', evidence = 'development_oos', config_hash = h, reproduce_of = reproduce_of)
+    status = RunStatus(out, out.name, kind = 'research', evidence = evidence_level(cfg), config_hash = h, reproduce_of = reproduce_of)
     shutil.copyfile(factor_file, out / 'factor_set.yaml'); write_json(out / 'config.json', doc); status.stage('config')
     limitations = []
     try:
+        used = {n: state['tables'].get(n, {}) for n in TABLES + (('minute_universe',) if cfg.minute_pool else ())}
+        minute = _minute_inputs(store, state, cfg, bool(intraday)) if cfg.minute_pool else None
+        if minute: used['bars_5m'] = minute['parts']
         t = {name: store.load_state(state, name) for name in TABLES}
         write_json(out / 'data_manifest.json', {'snapshot_id': doc['snapshot_id'], 'batch_id': doc['batch_id'], 'offline': True, 'tables': state.get('tables', {}),
-                                                'used': {n: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in state['tables'].get(n, {}).items()} for n in TABLES}})
+                                                'used': {n: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in parts.items()} for n, parts in used.items()}})
+        if minute:
+            minute['pool'] = store.load_state(state, 'minute_universe')
+            minute['daily'] = pd.concat([daily_features(pd.read_parquet(store.root / v['file'])) for v in minute['parts'].values()], ignore_index = True) if intraday else None
         from .data.audit import audit_status
         from .data.update import default_rules
         try: rules = default_rules()
@@ -102,7 +126,8 @@ def _research(root, cfg, output = None, runs_root = None, factor_file = None, ta
         if audit['status'] != 'passed':
             limitations.append({'kind': 'data_audit', 'detail': f"快照批次审计状态为 {audit['status']}（范围 {audit['scope']}），不是全快照审计通过", 'audit': audit})
         status.stage('load', audit = audit['status'])
-        result = _pipeline(cfg, fset, t, out, status, limitations)
+        if cfg.minute_pool: limitations.append({'kind': 'minute_sample_restricted', 'detail': f'{RESTRICTED}（外部分钟线不含退市证券；这些证券的分钟特征缺失，按 0 处理）'})
+        result = _pipeline(cfg, fset, t, out, status, limitations, minute)
         final = 'success_limited' if limitations else 'success'; info = {'summary': result}
     except InputBlocked as exc:
         final, info = 'blocked', {'blocked': exc.issues}
@@ -119,7 +144,7 @@ def _research(root, cfg, output = None, runs_root = None, factor_file = None, ta
     return {'run_id': out.name, 'output': str(out), 'status': final, 'limitations': limitations, **info, **extra}
 
 
-def _pipeline(cfg, fset, t, out, status, limitations):
+def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
     names = [f['name'] for f in fset['factors']]; directions = {f['name']: f['direction'] for f in fset['factors']}
     bars = t['bars_1d'].copy(); bars['date'] = pd.to_datetime(bars.date).dt.date
     if not len(bars): raise InputBlocked([{'kind': 'bars_missing', 'detail': '快照没有日线'}])
@@ -129,18 +154,29 @@ def _pipeline(cfg, fset, t, out, status, limitations):
     if missing: raise InputBlocked([{'kind': 'missing_session', 'detail': f'{len(missing)} 个交易日整日没有日线', 'dates': [str(d) for d in missing[:50]]}])
     warmup = max(cfg.universe.min_listed_sessions, max(f['lookback'] for f in fset['factors']) + 1, cfg.universe.liquidity_window, cfg.universe.suspend_window)
     days = [d for d in cal[warmup:] if (cfg.start is None or d >= cfg.start) and (cfg.end is None or d <= cfg.end)]
-    if not days: raise InputBlocked([{'kind': 'insufficient_history', 'detail': f'交易日历 {len(cal)} 天，不足预热 {warmup} 天'}])
+    if minute:
+        years = sorted({int(y) for y in minute['pool'].year})
+        if not years or years != list(range(years[0], years[-1] + 1)): raise InputBlocked([{'kind': 'minute_pool_years', 'detail': f'分钟股票池的年份 {years} 不连续或为空'}])
+        days = [d for d in days if years[0] <= d.year <= years[-1] and d <= minute['last_day']]
+    if not days: raise InputBlocked([{'kind': 'insufficient_history', 'detail': f'交易日历 {len(cal)} 天，不足预热 {warmup} 天，或区间内没有分钟股票池'}])
 
-    uni = build_universe(bars, t['instruments'], cal, cfg.universe.model_dump(), days[0], days[-1]); _pq(out, 'universe', uni)
+    uni = build_universe(bars, t['instruments'], cal, cfg.universe.model_dump(), days[0], days[-1])
+    if minute: uni = _restrict_to_pool(uni, minute['pool'], cfg.universe.model_dump())
+    _pq(out, 'universe', uni)
     elig = uni[uni.eligible]; status.stage('universe', rows = len(uni), eligible = len(elig), days = len(days), warmup = warmup)
     ever = sorted(set(elig.instrument))
     view = with_adjusted(bars[bars.instrument.isin(set(ever))], t['adj_factors'], t['adj_coverage'])
     ok = view.merge(elig[['decision_date', 'instrument']], left_on = ['date', 'instrument'], right_on = ['decision_date', 'instrument'])
     unusable = float((ok.adjustment_status != 'usable').mean()) if len(ok) else 1.0
     if unusable > 0: limitations.append({'kind': 'adjusted_price_unavailable', 'detail': f'{unusable:.2%} 的研究候选行没有可用复权价（因子、标签缺失）', 'share': unusable})
+    if minute and minute['daily'] is not None:
+        view['date'] = pd.to_datetime(view.date).dt.date; view = view.merge(minute['daily'].drop(columns = 'n_bars'), on = ['date', 'instrument'], how = 'left')
     wide = panel(view, cal, ever)
     mask = elig.assign(v = True).pivot(index = 'decision_date', columns = 'instrument', values = 'v').reindex(index = cal, columns = ever).fillna(False).astype(bool)
     fac = factor_frame(fset, wide, mask); _pq(out, 'factors', fac); status.stage('factors', rows = len(fac), factors = names)
+    if minute and minute['daily'] is not None:
+        table, coverage = _intraday_report(elig, minute['daily']); _pq(out, 'intraday', table); write_json(out / 'intraday_coverage.json', coverage)
+        status.stage('intraday', rows = len(table), with_bars = coverage['total']['with_minute_bars'], candidate_rows = coverage['total']['candidate_rows'])
     lab = build_labels(view.rename(columns = {'open_adj': 'adj_open'})[['date', 'instrument', 'adj_open', 'is_trading']], cal, h = cfg.label_h)
     lab = lab.merge(elig[['decision_date', 'instrument']], on = ['decision_date', 'instrument']); _pq(out, 'labels', lab)
     status.stage('labels', rows = len(lab), valid = int(lab.valid.sum()))
@@ -174,7 +210,7 @@ def _pipeline(cfg, fset, t, out, status, limitations):
                   refit = 'train+valid', label = f'adj_open_to_open_{cfg.label_h}', dropped_features = dropped, selected = key)
             m.save(models_dir / f'split{sp.split_id:02d}_{model_id}.json')
             preds.append(pd.DataFrame({'model_id': model_id, 'decision_date': test.date.to_numpy(), 'instrument': test.instrument.to_numpy(), 'score': m.predict(test[m.features]),
-                                       'split_id': sp.split_id, 'fit_asof': sp.fit_asof, 'evidence_level': 'development_oos'}))
+                                       'split_id': sp.split_id, 'fit_asof': sp.fit_asof, 'evidence_level': evidence_level(cfg)}))
         evals += tried
     pred = pd.concat(preds, ignore_index = True); _pq(out, 'predictions', pred); status.stage('models', predictions = len(pred))
 
@@ -184,6 +220,29 @@ def _pipeline(cfg, fset, t, out, status, limitations):
     status.stage('evaluation')
     return {'days': len(days), 'first_day': str(days[0]), 'last_day': str(days[-1]), 'windows': len(plan), 'holdout_start': str(holdout) if holdout else None,
             'test_start': str(plan.test_start.min()), 'test_end': str(plan.test_end.max()), 'models': {k: v['test_rank_ic_mean'] for k, v in model_eval['summary'].items()}}
+
+
+def _restrict_to_pool(uni, pool, universe_cfg):
+    """研究候选再限制在当年的分钟股票池内（名单按上一自然年数据生成，当年的决策日都可用）"""
+    members = pd.MultiIndex.from_arrays([pool.year.astype(int).to_numpy(), pool.instrument.to_numpy()])
+    key = pd.MultiIndex.from_arrays([pd.to_datetime(uni.decision_date).dt.year.to_numpy(), uni.instrument.to_numpy()])
+    drop = uni.eligible.to_numpy() & ~key.isin(members)
+    uni = uni.copy(); uni.loc[drop, 'eligible'] = False; uni.loc[drop, 'reason'] = 'not_in_minute_pool'
+    uni['universe_version'] = universe_version({**universe_cfg, 'minute_pool': True}); return uni
+
+
+def _intraday_report(elig, daily):
+    """研究候选行 × 分钟特征（无分钟线的行各特征为缺失）与覆盖报告：按年、按证券；缺失原因见 factors.intraday.gap_reasons"""
+    e = elig[['decision_date', 'instrument']].rename(columns = {'decision_date': 'date'}); e['date'] = pd.to_datetime(e.date).dt.date
+    j = e.merge(daily, on = ['date', 'instrument'], how = 'left'); year = pd.to_datetime(j.date).dt.year; has = j.n_bars.notna()
+    def block(g): return {'candidate_rows': int(len(g)), 'with_minute_bars': int(g.n_bars.notna().sum()), 'bar_coverage': _f(g.n_bars.notna().mean()),
+                          'feature_coverage': {f: _f(g[f].notna().mean()) for f in INTRADAY_FIELDS}, 'gaps': gap_reasons(g[g.n_bars.notna()])}
+    per = j.groupby('instrument').n_bars.apply(lambda x: x.notna().mean()).sort_values(kind = 'stable')
+    coverage = {'total': block(j), 'by_year': {int(y): block(g) for y, g in j.groupby(year)},
+                'instruments': {'candidates': int(len(per)), 'no_minute_data': sorted(per.index[per == 0]), 'below_90pct': int((per < 0.9).sum()),
+                                'lowest': {i: _f(v) for i, v in per.head(20).items()}},
+                'note': f'{RESTRICTED}；无分钟线的研究候选行特征缺失，横截面预处理后按 0 处理'}
+    return j, canonical(coverage)
 
 
 def _prune(X, sp, names, threshold):
