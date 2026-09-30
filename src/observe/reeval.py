@@ -60,6 +60,7 @@ def _pull(ev):
             for f in ('a_mean', 'b_mean', 'diff_mean'): out[f'models/{m}/{sec}/{f}'] = d.get(f)
             for i, f in enumerate(('lo', 'hi')): out[f'models/{m}/{sec}/diff_ci95_{f}'] = (d.get('diff_ci95') or [None, None])[i]
             out[f'models/{m}/{sec}/days'] = d.get('days')
+    out['valid_primary_comparison'] = ev.get('valid_primary_comparison')
     for n, v in ev.get('new_factors', {}).items():
         out[f'new_factors/{n}/rank_ic_mean'] = v.get('rank_ic_mean'); out[f'new_factors/{n}/direction_adjusted_ic'] = v.get('direction_adjusted_ic')
         for i, f in enumerate(('lo', 'hi')): out[f'new_factors/{n}/rank_ic_ci95_{f}'] = (v.get('rank_ic_ci95') or [None, None])[i]
@@ -192,6 +193,23 @@ def boundary_effect(arm_dir, plan):
             'max_abs_boundary_effect': max(abs(r['boundary_effect']) for r in rows)}
 
 
+def attribution_check(s):
+    """逐个回测核对持仓归因：旧代码取「positions_daily 的最大日期」作期末持仓，新代码取净值日历的截止日；两者是否相同，以及与账户净值勾稽的残差各由什么构成"""
+    from .diagnose import attribute_run       # diagnose 依赖本模块的读取函数，这里延迟导入避免循环
+    out = []
+    for b in s['sub']['backtests']:
+        d = Path(b['output']); bad = [i['date'] for i in (_read(d / 'status.json').get('issues') or [])]; until = min(bad) if bad else None
+        pos = sorted({x['date'] for x in _read(d / 'positions_daily.json') if until is None or x['date'] < until}); r = attribute_run(d, None, until, s['cfg'].initial_cash)
+        row = {'model': b['model'], 'arm': b['arm'], 'status': b['status'], 'until_exclusive': until, 'legacy_last_position_date': pos[-1] if pos else None, 'equity_calendar_end': r.get('end')}
+        row['same_cutoff'] = row['legacy_last_position_date'] == row['equity_calendar_end']
+        if 'reconciliation' in r:
+            rc = r['reconciliation']; row.update(holdings_at_end = r['holdings_at_end'], account_equity_change = rc['account_equity_change'], allocated_to_instruments = rc['allocated_to_instruments'],
+                                                 identified_not_allocated = rc['identified_not_allocated'], residual_unexplained = rc['residual_unexplained'], reconciled = rc['reconciled'])
+        else: row['insufficient_data'] = r.get('insufficient_data')
+        out.append(row)
+    return out
+
+
 # 入口 ---------------------------------------------------------------------------------------------------
 def reevaluate(root, paths, output = None, runs_root = None):
     """paths：{标签: 成对实验目录}，第一个是主实验。写到新的实验目录；源目录只读"""
@@ -216,6 +234,7 @@ def reevaluate(root, paths, output = None, runs_root = None):
         result['holdout_boundary'] = {l: {arm: boundary_effect(item['output'], s['plan']) for arm, item in s['sub']['arms'].items()} for l, s in sources.items()}
         result['selection_replay'] = {l: {arm: replay_selection(item['output']) for arm, item in s['sub']['arms'].items()} for l, s in sources.items()}; status.stage('diagnostics')
         cd, common = common_dates(sources, series, block, nb, seed); result['common_test_dates'] = cd; result['portfolio_common'] = portfolio_common(sources, common, block, nb, seed)
+        result['attribution_check'] = {l: attribution_check(s) for l, s in sources.items()}
         result['portfolio_status'] = {l: {m: {'runs': {a: {k: v for k, v in r.items() if k in ('run_id', 'status', 'valid', 'blocked_from', 'blocked_kinds', 'blocked_instruments')} for a, r in slot['runs'].items()},
                                              'full_period_metrics': slot.get('full_period_metrics', 'available' if 'pair' in slot else 'n/a'), 'diagnostic_prefix': slot.get('diagnostic_prefix')} for m, slot in new[l]['portfolio'].items()} for l in sources}
     except Exception as exc:

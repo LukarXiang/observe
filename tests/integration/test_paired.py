@@ -206,6 +206,8 @@ def test_reevaluation_is_read_only_deterministic_and_pinned_to_source_hashes(pai
     assert all(v['identical'] for d in res['selection_replay'].values() for v in d.values())                                          # 选参重放与原保存值逐项一致 ⇒ 预测不受影响
     assert res['holdout_boundary']['main']['extended']['boundary_labels_used_by_saved_diagnostics']['label_rows'] > 0
     assert res['common_test_dates']['common_days'] > 0 and set(res['common_test_dates']['effect_difference']) >= {'ridge', 'equal_blend'} and 'topn_daily.parquet' in read(out, 'manifest.json')['files']
+    rows = res['attribution_check']['main']; assert len(rows) == 4 and all(x['same_cutoff'] and x['reconciled'] for x in rows) and all(abs(x['residual_unexplained']) < 1.0 for x in rows)       # 归因截止日与旧算法选中的持仓日相同，且与净值勾稽
+    assert res['old_vs_new']['main']['summary']['valid_primary_comparison']['changed'] == 0 and all(v['valid_primary_comparison'] for v in read(out, 'paired_eval_new_main.json')['models'].values())
     assert set(res['portfolio_common']) <= {'ridge', 'equal_blend'} and read(out, 'paired_eval_new_main.json')['design']['label_rule']['holdout_start'] is not None
     again = reevaluate(root, {'main': src, 'short': other['output']}); assert read(again['output'], 'reeval.json') == res and again['output'] != a['output']
     p = src / 'paired_eval.json'; backup = p.read_bytes()
