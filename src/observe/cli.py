@@ -17,7 +17,7 @@ def _config(path):
 def job_status(kind, result):
     """任务结果 → 队列状态：回放与复现直接沿用运行状态（与 status.json、函数返回值、命令退出码同一定义）"""
     if kind in ('run_experiment', 'reproduce', 'research', 'paired'): return result['status']
-    return 'partial' if isinstance(result, dict) and result.get('status') == 'rejected' else 'success'
+    return 'partial' if isinstance(result, dict) and result.get('status') in ('rejected', 'published_partial') else 'success'
 
 
 def run_kind(root, kind, params):

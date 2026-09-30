@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 
 KEYS = {'calendar': ['date'], 'instruments': ['instrument'], 'bars_1d': ['date', 'instrument'], 'adj_factors': ['instrument', 'ex_date'],
-        'corp_actions': ['instrument', 'ex_date'], 'adj_coverage': ['instrument'], 'shares': ['instrument', 'date'], 'index_1d': ['date', 'index'], 'bars_5m': ['bar_end', 'instrument'], 'minute_universe': ['year', 'instrument']}
+        'corp_actions': ['instrument', 'ex_date'], 'adj_coverage': ['instrument'], 'shares': ['instrument', 'date'], 'index_1d': ['date', 'index'], 'bars_5m': ['bar_end', 'instrument'], 'minute_universe': ['year', 'instrument'], 'minute_source': ['date', 'instrument']}
 
 
 def _now(): return datetime.now().strftime('%Y%m%d-%H%M%S')

@@ -1,6 +1,7 @@
 """外部分钟线导入（模块 10、决策 17）：格式变体、逐文件校验、日线对账、5 分钟合成、分钟股票池、端到端发布。离线，全部合成数据。"""
-import json, zipfile
+import io, json, zipfile
 from datetime import date
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -104,7 +105,7 @@ def test_process_day_filters_reconciles_and_flags(tmp_path):
             '000005.SZ': (0.0, 0.0, False)}                                                          # 日线停牌但分钟线有成交
     out, issues, st = mn.process_day((day, str(z), want, None))
     rules = {(i['rule'], i['instrument']) for i in issues}
-    assert set(out.instrument) == {'600001.SH'} and len(out) == 48 and st == {'expected': 4, 'kept': 1}
+    assert set(out.instrument) == {'600001.SH'} and len(out) == 48 and (st['expected'], st['kept'], st['validated']) == (4, 1, ['600001.SH']) and sorted(st['failed']) == ['000002.SZ', '600003.SH', '600004.SH'] and st['not_trading'] == ['000005.SZ']
     assert ('excluded_daily_mismatch', '000002.SZ') in rules and ('excluded_ohlc_inconsistent', '600004.SH') in rules
     assert ('missing_file', '600003.SH') in rules and ('bars_on_suspended_day', '000005.SZ') in rules
     assert out.bar_end.iloc[0] == pd.Timestamp('2024-05-08 09:35') and out.bar_end.iloc[-1] == pd.Timestamp('2024-05-08 15:00')
@@ -190,7 +191,101 @@ def test_import_minute_records_missing_days_and_fails_without_any_data(world, tm
     root, src, insts, ndays = world; store = Store(root)
     import os; victim = next(p for p in sorted((tmp_path / 'src').rglob('*.zip')) if p.stem == '20220105'); os.remove(victim)
     r = mn.import_minute(root, src, top = 2, workers = 1)
-    assert r['issues'] == {'warn/missing_day': 1} and len(store.load('bars_5m')) == 2 * 48 * (ndays - 1)
+    assert r['issues'] == {'warn/missing_day': 2} and len(store.load('bars_5m')) == 2 * 48 * (ndays - 1)      # 整日缺失按证券日记录（两只证券）
+    assert r['coverage'] == {'planned': 2 * ndays, 'new_validated': 2 * (ndays - 1), 'reused_old': 0, 'missing': 2, 'invalidated': 0, 'published': 2 * (ndays - 1), 'failed': 2} and r['status'] == 'published_partial'
     empty = tmp_path / 'empty'; empty.mkdir(); pub = store.published()['batch_id']
     with pytest.raises(RuntimeError, match = '没有任何证券'): mn.import_minute(root, str(empty), top = 2, workers = 1)
     assert store.published()['batch_id'] == pub                                                                   # 失败不改已发布状态
+
+
+# 重导入保护旧数据 ---------------------------------------------------------------
+def zip_of(src, day): return Path(src) / f'{day:%Y}' / f'{day:%m}' / f'{day:%Y%m%d}.zip'
+
+
+def rewrite(src, day, mutate):
+    """读出当日压缩包，逐个成员交给 mutate(成员名, DataFrame) → DataFrame 或 None（删掉该成员），再写回"""
+    p = zip_of(src, day)
+    with zipfile.ZipFile(p) as z: files = {n: pd.read_csv(io.BytesIO(z.read(n))) for n in z.namelist()}
+    out = {n: r.to_csv(index = False) for n, df in files.items() if (r := mutate(n, df)) is not None}
+    p.unlink(); make_zip(p, out)
+
+
+def bump(df): return df.assign(**{c: df[c] + 0.01 for c in ('open', 'high', 'low', 'close')})              # 价格整体加 1 分：对账不受影响，内容与旧记录不同
+
+
+def day_rows(store, day, snapshot = None):
+    b = store.load('bars_5m', snapshot = snapshot); return b[pd.to_datetime(b.bar_end).dt.date == day].sort_values(['instrument', 'bar_end']).reset_index(drop = True)
+
+
+D5, D6, D7 = date(2022, 1, 5), date(2022, 1, 6), date(2022, 1, 7)
+
+
+def test_reimport_with_only_the_last_day_refreshed_keeps_earlier_days(world):
+    root, src, insts, ndays = world; store = Store(root); mn.import_minute(root, src, top = 2, workers = 1)
+    old = {d: day_rows(store, d) for d in (D5, D6, D7)}
+    for d in (D5, D6): zip_of(src, d).unlink()                                    # 前两天压缩包丢了
+    rewrite(src, D7, lambda n, df: bump(df))
+    r = mn.import_minute(root, src, start = D5, end = D7, top = 2, workers = 1)
+    assert r['status'] == 'published_partial'                                     # 有刷新失败：不宣称已完整更新
+    assert r['coverage'] == {'planned': 6, 'new_validated': 2, 'reused_old': 4, 'missing': 0, 'invalidated': 0, 'published': 6, 'failed': 4}
+    assert r['issues']['warn/refresh_failed_kept_old'] == 4 and r['issues']['warn/missing_day'] == 4
+    for d in (D5, D6): pd.testing.assert_frame_equal(day_rows(store, d), old[d])   # 前两天原样保留
+    new7 = day_rows(store, D7); assert (new7.close.round(2) == (old[D7].close + 0.01).round(2)).all()          # 第三天确实被替换
+    b = store.load('bars_5m'); assert not b.duplicated(['bar_end', 'instrument']).any() and len(b) == 2 * 48 * ndays
+    csv_ = pd.read_csv(root / 'minute_audits' / f'{r["batch_id"]}.issues.csv'); assert (csv_.rule == 'refresh_failed_kept_old').sum() == 4
+
+
+def test_one_instrument_fails_on_the_same_day_only_the_other_is_replaced(world):
+    root, src, insts, ndays = world; store = Store(root); mn.import_minute(root, src, top = 2, workers = 1); old = day_rows(store, D5)
+    rewrite(src, D5, lambda n, df: bump(df) if n.startswith('sh/') else df.assign(low = df.low + 5))       # 600001 正常、000002 的 OHLC 自相矛盾
+    r = mn.import_minute(root, src, start = D5, end = D5, top = 2, workers = 1); now = day_rows(store, D5)
+    a_old, a_new = old[old.instrument == '600001.SH'], now[now.instrument == '600001.SH']; b_old, b_new = old[old.instrument == '000002.SZ'], now[now.instrument == '000002.SZ']
+    assert (a_new.close.round(2) == (a_old.close + 0.01).round(2)).all()
+    pd.testing.assert_frame_equal(b_new.reset_index(drop = True), b_old.reset_index(drop = True))            # 失败的一只沿用旧记录
+    iss = pd.read_csv(root / 'minute_audits' / f'{r["batch_id"]}.issues.csv')
+    kept = iss[iss.rule == 'refresh_failed_kept_old']; assert kept.instrument.tolist() == ['000002.SZ'] and (iss.rule == 'excluded_ohlc_inconsistent').sum() == 1
+    assert r['coverage']['new_validated'] == 1 and r['coverage']['reused_old'] == 1 and r['status'] == 'published_partial'
+
+
+def test_evidence_that_old_data_is_wrong_is_quarantined_unlike_a_failed_refresh(world):
+    root, src, insts, ndays = world; store = Store(root); mn.import_minute(root, src, top = 2, workers = 1)
+    daily = store.load('bars_1d', parts = ['2022']); hit = (daily.instrument == '000002.SZ') & (pd.to_datetime(daily.date).dt.date == D6)
+    daily.loc[hit, ['is_trading', 'volume', 'amount']] = [False, 0.0, 0.0]                                       # 日线更正：D6 这天该证券停牌
+    store.publish(store.write_batch({'bars_1d': {'2022': store.write_partition('bars_1d', '2022', daily)}}, 'daily correction'))
+    rewrite(src, D6, lambda n, df: None if n.startswith('sz/') else df)          # D6 的 000002 没有文件，日线也说它停牌：旧记录被推翻
+    rewrite(src, D7, lambda n, df: None if n.startswith('sz/') else df)          # D7 的 000002 文件缺失但日线仍有交易：只是刷新失败
+    r = mn.import_minute(root, src, start = D6, end = D7, top = 2, workers = 1)
+    assert day_rows(store, D6).instrument.unique().tolist() == ['600001.SH']                                      # 被推翻的旧记录移出
+    assert sorted(day_rows(store, D7).instrument.unique()) == ['000002.SZ', '600001.SH']                            # 刷新失败的沿用旧记录
+    assert r['coverage']['invalidated'] == 1 and r['coverage']['reused_old'] == 1 and r['issues']['warn/invalidated_old'] == 1 and r['issues']['warn/refresh_failed_kept_old'] == 1
+    q = pd.read_parquet(root / 'minute_audits' / f'{r["batch_id"]}.quarantine.parquet'); assert len(q) == 48 and q.instrument.unique().tolist() == ['000002.SZ']
+    src_ = store.load('minute_source'); assert not ((pd.to_datetime(src_.date).dt.date == D6) & (src_.instrument == '000002.SZ')).any()
+
+
+def test_old_snapshots_are_untouched_by_later_imports(world):
+    root, src, insts, ndays = world; store = Store(root); mn.import_minute(root, src, top = 2, workers = 1); sid = store.snapshot('before')
+    frozen = store.load('bars_5m', snapshot = sid); files = {v['file']: v['sha'] for v in store.state(sid)['tables']['bars_5m'].values()}
+    rewrite(src, D7, lambda n, df: bump(df)); zip_of(src, D5).unlink()
+    mn.import_minute(root, src, start = D5, end = D7, top = 2, workers = 1)
+    pd.testing.assert_frame_equal(store.load('bars_5m', snapshot = sid), frozen)
+    assert all((root / f).exists() for f in files) and not store.load('bars_5m').equals(frozen)                       # 已发布的变了，快照没变
+
+
+def test_provenance_is_recorded_per_validated_stock_day(world):
+    import hashlib
+    root, src, insts, ndays = world; store = Store(root); mn.import_minute(root, src, top = 2, workers = 1)
+    p = store.load('minute_source'); assert len(p) == 2 * ndays and not p.duplicated(['date', 'instrument']).any()
+    row = p[(pd.to_datetime(p.date).dt.date == D7) & (p.instrument == '000002.SZ')].iloc[0]
+    assert row.archive_sha256 == hashlib.sha256(zip_of(src, D7).read_bytes()).hexdigest() and row.archive.endswith('2022/01/20220107.zip')
+    assert (row.member, row.header, row.grouping, row.volume_scale, row.amount_scale, row.processing_version, row.bars) == ('sz/000002.csv', 'open,high,low,close,amount,volume', 'position', 1.0, 1.0, mn.PROCESSING_VERSION, 48)
+    old_sha = dict(zip(p.date.astype(str) + p.instrument, p.archive_sha256))
+    rewrite(src, D7, lambda n, df: bump(df)); zip_of(src, D6).unlink(); mn.import_minute(root, src, start = D6, end = D7, top = 2, workers = 1)
+    q = store.load('minute_source'); new_sha = dict(zip(q.date.astype(str) + q.instrument, q.archive_sha256))
+    assert new_sha[f'{D6}000002.SZ'] == old_sha[f'{D6}000002.SZ'] and new_sha[f'{D7}000002.SZ'] != old_sha[f'{D7}000002.SZ']    # 沿用的保留旧来源，重新取得的换成新来源
+
+
+def test_identical_reimport_with_failures_is_no_change_but_leaves_a_record(world):
+    root, src, insts, ndays = world; store = Store(root); mn.import_minute(root, src, top = 2, workers = 1); batch = store.published()['batch_id']
+    zip_of(src, D7).unlink(); r = mn.import_minute(root, src, top = 2, workers = 1)
+    assert r['status'] == 'no_change' and store.published()['batch_id'] == batch and r['coverage']['reused_old'] == 2 and r['coverage']['published'] == r['coverage']['planned']
+    rec = json.loads((root / 'minute_audits' / f'{r["refresh_record"]}.json').read_text(encoding = 'utf-8')); assert rec['coverage']['failed'] == 2 and rec['published_batch'] == batch
