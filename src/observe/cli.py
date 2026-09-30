@@ -36,6 +36,10 @@ def run_kind(root, kind, params):
         try: return update_daily(root, params['start'], params['end'], tdx = tdx, factor_codes = [std.to_baostock(c) for c in codes], force = params.get('force', False))
         finally:
             if tdx: tdx.close()
+    if kind == 'minute_import':
+        from .data.minute import import_minute
+        return import_minute(root, params['source'], params.get('start'), params.get('end'), top = int(params.get('top', 800)), workers = int(params.get('workers', 4)), sevenzip = params.get('sevenzip'),
+                             log = lambda m: print(m, file = sys.stderr, flush = True))
     if kind == 'snapshot':
         from .data.locks import DATA_WRITER, operation_lock
         with operation_lock(root, DATA_WRITER): return {'snapshot_id': Store(root).snapshot(params.get('note', ''))}
@@ -82,6 +86,9 @@ def main(argv = None):
     u = d.add_parser('update', help = '下载并发布 [start, end] 的日历、证券资料、全市场日线与复权因子变动')
     u.add_argument('--start', required = True); u.add_argument('--end', required = True); u.add_argument('--factors', default = '', help = '逗号分隔，取全部复权因子历史的证券，如 600519.SH')
     u.add_argument('--factors-all', action = 'store_true'); u.add_argument('--no-actions', action = 'store_true'); u.add_argument('--force', action = 'store_true'); u.add_argument('--queue', action = 'store_true', help = '提交到任务队列而不是直接执行')
+    m = d.add_parser('import-minute', help = '导入外部 1 分钟线压缩包：校验、与日线对账、合成 5 分钟，写入 bars_5m 并发布（决策 17）')
+    m.add_argument('--source', required = True, help = '目录/年/月/YYYYMMDD.zip 的根目录'); m.add_argument('--start'); m.add_argument('--end'); m.add_argument('--top', type = int, default = 800)
+    m.add_argument('--workers', type = int, default = 4); m.add_argument('--sevenzip', help = '7z.exe 路径（个别日期是 7z 格式）'); m.add_argument('--queue', action = 'store_true')
     s = d.add_parser('snapshot'); s.add_argument('--note', default = '')
     g = d.add_parser('gc'); g.add_argument('--apply', action = 'store_true', help = '真正删除（默认只列出）')
     d.add_parser('status'); d.add_parser('audit', help = '按当前执行规则重新审计已发布的日线')
@@ -103,6 +110,9 @@ def main(argv = None):
         if a.act == 'update':
             p = {'start': a.start, 'end': a.end, 'factors': [x for x in a.factors.split(',') if x], 'factors_all': a.factors_all, 'no_actions': a.no_actions, 'force': a.force}
             return _json({'job_id': Jobs(root).submit('data_update', p)} if a.queue else run_kind(root, 'data_update', p))
+        if a.act == 'import-minute':
+            p = {'source': a.source, 'start': a.start, 'end': a.end, 'top': a.top, 'workers': a.workers, 'sevenzip': a.sevenzip}
+            return _json({'job_id': Jobs(root).submit('minute_import', p)} if a.queue else run_kind(root, 'minute_import', p))
         if a.act == 'snapshot': return _json(run_kind(root, 'snapshot', {'note': a.note}))
         if a.act == 'gc': return _json(run_kind(root, 'gc', {'apply': a.apply}))
         if a.act == 'audit': return _json(run_kind(root, 'data_audit', {}))
