@@ -192,10 +192,10 @@ def test_import_minute_records_missing_days_and_fails_without_any_data(world, tm
     import os; victim = next(p for p in sorted((tmp_path / 'src').rglob('*.zip')) if p.stem == '20220105'); os.remove(victim)
     r = mn.import_minute(root, src, top = 2, workers = 1)
     assert r['issues'] == {'warn/missing_day': 2} and len(store.load('bars_5m')) == 2 * 48 * (ndays - 1)      # 整日缺失按证券日记录（两只证券）
-    assert r['coverage'] == {'planned': 2 * ndays, 'new_validated': 2 * (ndays - 1), 'reused_old': 0, 'missing': 2, 'invalidated': 0, 'published': 2 * (ndays - 1), 'failed': 2} and r['status'] == 'published_partial'
+    assert {k: r['coverage'][k] for k in ('planned', 'new_validated', 'reused_old', 'missing', 'invalidated', 'published', 'failed')} == {'planned': 2 * ndays, 'new_validated': 2 * (ndays - 1), 'reused_old': 0, 'missing': 2, 'invalidated': 0, 'published': 2 * (ndays - 1), 'failed': 2} and r['status'] == 'published_partial'
     empty = tmp_path / 'empty'; empty.mkdir(); pub = store.published()['batch_id']
-    with pytest.raises(RuntimeError, match = '没有任何证券'): mn.import_minute(root, str(empty), top = 2, workers = 1)
-    assert store.published()['batch_id'] == pub                                                                   # 失败不改已发布状态
+    bad = mn.import_minute(root, str(empty), top = 2, workers = 1)
+    assert bad['status'] == 'refresh_failed' and store.published()['batch_id'] == pub                                # 全失败不改已发布状态，也不抛出：结果与刷新报告落盘（细节见后面的专门测试）
 
 
 # 重导入保护旧数据 ---------------------------------------------------------------
@@ -227,7 +227,7 @@ def test_reimport_with_only_the_last_day_refreshed_keeps_earlier_days(world):
     rewrite(src, D7, lambda n, df: bump(df))
     r = mn.import_minute(root, src, start = D5, end = D7, top = 2, workers = 1)
     assert r['status'] == 'published_partial'                                     # 有刷新失败：不宣称已完整更新
-    assert r['coverage'] == {'planned': 6, 'new_validated': 2, 'reused_old': 4, 'missing': 0, 'invalidated': 0, 'published': 6, 'failed': 4}
+    assert {k: r['coverage'][k] for k in ('planned', 'new_validated', 'reused_old', 'missing', 'invalidated', 'published', 'failed')} == {'planned': 6, 'new_validated': 2, 'reused_old': 4, 'missing': 0, 'invalidated': 0, 'published': 6, 'failed': 4}
     assert r['issues']['warn/refresh_failed_kept_old'] == 4 and r['issues']['warn/missing_day'] == 4
     for d in (D5, D6): pd.testing.assert_frame_equal(day_rows(store, d), old[d])   # 前两天原样保留
     new7 = day_rows(store, D7); assert (new7.close.round(2) == (old[D7].close + 0.01).round(2)).all()          # 第三天确实被替换
@@ -289,3 +289,62 @@ def test_identical_reimport_with_failures_is_no_change_but_leaves_a_record(world
     zip_of(src, D7).unlink(); r = mn.import_minute(root, src, top = 2, workers = 1)
     assert r['status'] == 'no_change' and store.published()['batch_id'] == batch and r['coverage']['reused_old'] == 2 and r['coverage']['published'] == r['coverage']['planned']
     rec = json.loads((root / 'minute_audits' / f'{r["refresh_record"]}.json').read_text(encoding = 'utf-8')); assert rec['coverage']['failed'] == 2 and rec['published_batch'] == batch
+
+
+# 全失败 / 全失效 / 分母不完整 ----------------------------------------------------------------
+KEYS7 = ('planned', 'new_validated', 'reused_old', 'missing', 'failed', 'invalidated', 'published')
+
+
+def core(r): return {k: r['coverage'][k] for k in KEYS7}
+
+
+def record(root, r): return json.loads((root / 'minute_audits' / f'{r["refresh_record"]}.json').read_text(encoding = 'utf-8'))
+
+
+def test_all_archives_missing_keeps_the_published_data_and_persists_the_refresh_report(world, tmp_path):
+    root, src, insts, ndays = world; store = Store(root); mn.import_minute(root, src, top = 2, workers = 1); before = store.published(); rows = store.load('bars_5m')
+    empty = tmp_path / 'no_archives'; empty.mkdir(); r = mn.import_minute(root, str(empty), top = 2, workers = 1)
+    assert r['status'] == 'refresh_failed' and store.published() == before and store.load('bars_5m').equals(rows)                         # 旧发布数据原样保留，没有新批次
+    assert core(r) == {'planned': 2 * ndays, 'new_validated': 0, 'reused_old': 2 * ndays, 'missing': 0, 'failed': 2 * ndays, 'invalidated': 0, 'published': 2 * ndays}
+    rec = record(root, r); assert rec['status'] == 'refresh_failed' and rec['coverage'] == r['coverage'] and rec['issues']['warn/missing_day'] == 2 * ndays and rec['issues']['warn/refresh_failed_kept_old'] == 2 * ndays
+    assert len(pd.read_csv(root / 'minute_audits' / f'{r["refresh_record"]}.issues.csv')) == 4 * ndays                                    # 逐证券日的报告落盘
+
+
+def test_every_file_failing_validation_is_a_refresh_failure_not_an_update(world):
+    root, src, insts, ndays = world; store = Store(root); mn.import_minute(root, src, top = 2, workers = 1); before = store.published()
+    for d in [D5, D6, D7]: rewrite(src, d, lambda n, df: df.assign(low = df.low + 5))                                                    # 这三天所有文件 OHLC 自相矛盾
+    r = mn.import_minute(root, src, start = D5, end = D7, top = 2, workers = 1)
+    assert r['status'] == 'refresh_failed' and store.published() == before and core(r) == {'planned': 6, 'new_validated': 0, 'reused_old': 6, 'missing': 0, 'failed': 6, 'invalidated': 0, 'published': 6}
+    assert record(root, r)['issues']['warn/excluded_ohlc_inconsistent'] == 6
+
+
+def test_no_old_data_and_everything_failing_makes_no_fake_publication(world, tmp_path):
+    root, src, insts, ndays = world; store = Store(root); before = store.published(); empty = tmp_path / 'none'; empty.mkdir()
+    r = mn.import_minute(root, str(empty), top = 2, workers = 1)
+    assert r['status'] == 'refresh_failed_no_data' and store.published() == before and 'bars_5m' not in store.published()['tables']
+    assert core(r) == {'planned': 2 * ndays, 'new_validated': 0, 'reused_old': 0, 'missing': 2 * ndays, 'failed': 2 * ndays, 'invalidated': 0, 'published': 0}
+    rec = record(root, r); assert rec['coverage']['missing'] == 2 * ndays and rec['range'] and rec['published_batch'] == before['batch_id']
+    from observe.cli import job_status; assert job_status('minute_import', r) == 'failed' and job_status('minute_import', {'status': 'refresh_failed'}) == 'partial'
+
+
+def test_a_month_whose_old_records_are_all_invalidated_updates_bars_and_sources_together(world):
+    root, src, insts, ndays = world; store = Store(root); mn.import_minute(root, src, top = 2, workers = 1); sid = store.snapshot('before'); frozen = store.load('bars_5m', snapshot = sid)
+    frozen_src = store.load('minute_source', snapshot = sid); files = [v['file'] for t in ('bars_5m', 'minute_source') for v in store.state(sid)['tables'][t].values()]
+    daily = store.load('bars_1d', parts = ['2022']); hit = daily.instrument.isin(['600001.SH', '000002.SZ']); daily.loc[hit, ['is_trading', 'volume', 'amount']] = [False, 0.0, 0.0]      # 日线更正：2022-01 这几天名单内的证券都停牌（名单外的证券保留，年份才在日线里出现）
+    store.publish(store.write_batch({'bars_1d': {'2022': store.write_partition('bars_1d', '2022', daily)}}, 'daily correction'))
+    r = mn.import_minute(root, src, start = date(2022, 1, 4), end = D7, top = 2, workers = 1)
+    assert r['coverage']['invalidated'] == 8 and r['coverage']['planned'] == 0 and r['status'] == 'published' and len(store.load('bars_5m', parts = ['202201'])) == 0
+    assert len(store.load('minute_source', parts = ['202201'])) == 0                                                                        # 来源表同步清空，没有保留已失效的旧来源
+    kept = store.load('bars_5m', parts = ['202112']); assert len(kept) == 2 * 48 * 20 and len(store.load('minute_source', parts = ['202112'])) == 2 * 20
+    q = pd.read_parquet(root / 'minute_audits' / f'{r["batch_id"]}.quarantine.parquet'); assert len(q) == 8 * 48
+    pd.testing.assert_frame_equal(store.load('bars_5m', snapshot = sid), frozen); pd.testing.assert_frame_equal(store.load('minute_source', snapshot = sid), frozen_src)
+    assert all((root / f).exists() for f in files)                                                                                          # 原快照的文件与引用都没变
+
+
+def test_calendar_day_without_daily_bars_marks_the_denominator_incomplete(world):
+    root, src, insts, ndays = world; store = Store(root)
+    daily = store.load('bars_1d', parts = ['2022']); daily = daily[pd.to_datetime(daily.date).dt.date != D6]                                    # 日历里有 D6，但日线整日缺失
+    store.publish(store.write_batch({'bars_1d': {'2022': store.write_partition('bars_1d', '2022', daily)}}, 'missing day'))
+    r = mn.import_minute(root, src, top = 2, workers = 1)
+    assert r['coverage']['planned_denominator_complete'] is False and r['coverage']['days_without_daily_bars'] == [str(D6)] and r['status'] == 'published_partial'   # 不能报告覆盖完整
+    assert r['issues']['warn/planned_denominator_incomplete'] == 1 and core(r)['planned'] == 2 * (ndays - 1)

@@ -260,7 +260,7 @@ def import_minute(root, source, start = None, end = None, top = 800, workers = 4
         plan = plan_days(sessions, set(pools), start, end)
         if not plan: raise RuntimeError('区间内没有需要导入的交易日')
         daily = {d: g for d, g in bars[bars.date.isin(plan)].groupby('date')}
-        issues, parts, quarantine = [], {}, []
+        issues, parts, quarantine, no_daily = [], {}, [], []
         n = dict(planned = 0, new_validated = 0, reused_old = 0, missing = 0, invalidated = 0, published = 0)
         months = sorted({(d.year, d.month) for d in plan})
         with ProcessPoolExecutor(workers) if workers > 1 else _Inline() as pool:
@@ -268,7 +268,7 @@ def import_minute(root, source, start = None, end = None, top = 800, workers = 4
                 days = [d for d in plan if (d.year, d.month) == ym]; tasks, results = [], []
                 for d in days:
                     g = daily.get(d)
-                    if g is None: issues.append(issue('warn', 'no_daily_bars', str(d), None, '交易日历有该日但日线没有任何记录，无法确定计划处理的证券日')); continue
+                    if g is None: no_daily.append(str(d)); issues.append(issue('warn', 'planned_denominator_incomplete', str(d), None, '交易日历有该日但日线没有任何记录，无法确定计划处理的证券日：计划分母不完整')); continue
                     want = set().union(*(pools[y] for y in plan[d])); g = g[g.instrument.isin(want)]
                     wanted = {r.instrument: (float(r.volume), float(r.amount), bool(r.is_trading)) for r in g.itertuples()}; path = archive_path(source, d)
                     if path is None: results.append(missing_day(d, wanted))
@@ -288,20 +288,25 @@ def import_minute(root, source, start = None, end = None, top = 800, workers = 4
                 new = pd.concat(frames, ignore_index = True) if frames else pd.DataFrame(columns = BAR_COLS)
                 merged, removed = merge_month(old, new, bad); quarantine.append(removed); n['published'] += len(planned & _keys(merged))
                 new_p = pd.concat(provs, ignore_index = True) if provs else pd.DataFrame(columns = PROV_COLS)
-                merged_p, _ = merge_month(store.load('minute_source', parts = [part]), new_p, bad, col = 'date')
+                old_p = store.load('minute_source', parts = [part]); merged_p, _ = merge_month(old_p, new_p, bad, col = 'date')
                 parts.setdefault('bars_5m', {})[part] = store.write_partition('bars_5m', part, merged)
-                if len(merged_p): parts.setdefault('minute_source', {})[part] = store.write_partition('minute_source', part, merged_p)
+                if len(merged_p) or len(old_p): parts.setdefault('minute_source', {})[part] = store.write_partition('minute_source', part, merged_p)      # 整月旧记录被推翻时发布空来源分区，来源表与行情同步
                 say(f'{part}: {parts["bars_5m"][part]["rows"]} 行')
-        coverage = {**n, 'failed': n['reused_old'] + n['missing']}
-        if 'bars_5m' not in parts: raise RuntimeError('没有任何证券通过校验，未写入')
-        parts['minute_universe'] = {'all': store.write_partition('minute_universe', 'all', uni)}
-        cur = pub['tables']; iss = pd.DataFrame(issues, columns = ['level', 'rule', 'date', 'instrument', 'detail'])
+        coverage = {**n, 'failed': n['reused_old'] + n['missing'], 'planned_denominator_complete': not no_daily, 'days_without_daily_bars': no_daily}
+        iss = pd.DataFrame(issues, columns = ['level', 'rule', 'date', 'instrument', 'detail'])
         counts = {f'{l}/{r}': int(c) for (l, r), c in iss.groupby(['level', 'rule']).size().items()} if len(iss) else {}
+        def record(status):       # 没有新批次时也把本次逐证券日的刷新报告和覆盖统计落盘：任务日志里的一条错误不能替代它
+            d = Path(root) / 'minute_audits'; d.mkdir(parents = True, exist_ok = True); rid = f'refresh-{datetime.now():%Y%m%d-%H%M%S-%f}'
+            iss.to_csv(d / f'{rid}.issues.csv', index = False)
+            _atomic_json(d / f'{rid}.json', {'published_batch': pub['batch_id'], 'status': status, 'range': [str(min(plan)), str(max(plan))], 'processing_version': PROCESSING_VERSION, 'coverage': coverage, 'issues': counts}); return rid
+        if 'bars_5m' not in parts:       # 本次没有任何新验证的证券日，也没有被推翻的旧记录：已发布数据原样保留，不创建成功发布
+            status = 'refresh_failed' if n['published'] else 'refresh_failed_no_data'
+            return {'batch_id': pub['batch_id'], 'status': status, 'coverage': coverage, 'issues': counts, 'refresh_record': record(status), 'range': [str(min(plan)), str(max(plan))],
+                    'stock_days_expected': n['planned'], 'stock_days_kept': n['new_validated']}
+        parts['minute_universe'] = {'all': store.write_partition('minute_universe', 'all', uni)}
+        cur = pub['tables']
         if all(cur.get(t, {}).get(p, {}).get('file') == v['file'] for t, ps in parts.items() for p, v in ps.items()):
-            rid = None
-            if coverage['failed']:       # 没有新批次，但本次有刷新失败：单独留一份记录，不能悄悄当作没发生
-                d = Path(root) / 'minute_audits'; d.mkdir(parents = True, exist_ok = True); rid = f'refresh-{datetime.now():%Y%m%d-%H%M%S-%f}'
-                iss.to_csv(d / f'{rid}.issues.csv', index = False); _atomic_json(d / f'{rid}.json', {'published_batch': pub['batch_id'], 'status': 'no_change', 'coverage': coverage, 'issues': counts})
+            rid = record('no_change') if coverage['failed'] or no_daily else None       # 没有新批次，但本次有刷新失败 / 计划分母不完整：单独留一份记录
             return {'batch_id': pub['batch_id'], 'status': 'no_change', 'coverage': coverage, 'issues': counts, 'refresh_record': rid, 'stock_days_expected': n['planned'], 'stock_days_kept': n['new_validated']}
         bid = store.write_batch(parts, note = f'minute {min(plan)}..{max(plan)} pool_top={top} source={SOURCE} version={PROCESSING_VERSION}')
         d = Path(root) / 'minute_audits'; d.mkdir(parents = True, exist_ok = True); tmp = d / f'{bid}.issues.tmp'; iss.to_csv(tmp, index = False); os.replace(tmp, d / f'{bid}.issues.csv')
@@ -311,7 +316,7 @@ def import_minute(root, source, start = None, end = None, top = 800, workers = 4
                                           'stock_days_expected': n['planned'], 'stock_days_kept': n['new_validated'], 'coverage': coverage, 'issues': counts, 'quarantined_rows': 0 if q is None else int(len(q))})
         blocked = iss[iss.level == 'block'] if len(iss) else iss
         if len(blocked): store.reject(bid, f'{len(blocked)} 条阻断级问题'); status = 'rejected'
-        else: store.publish(bid); status = 'published' if coverage['failed'] == 0 else 'published_partial'
+        else: store.publish(bid); status = 'published' if coverage['failed'] == 0 and not no_daily else 'published_partial'
     return {'batch_id': bid, 'status': status, 'range': [str(min(plan)), str(max(plan))], 'days': len(plan), 'coverage': coverage, 'stock_days_expected': n['planned'], 'stock_days_kept': n['new_validated'],
             'rows': sum(v['rows'] for v in parts['bars_5m'].values()), 'issues': counts}
 

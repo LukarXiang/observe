@@ -17,7 +17,8 @@ def _config(path):
 def job_status(kind, result):
     """任务结果 → 队列状态：回放与复现直接沿用运行状态（与 status.json、函数返回值、命令退出码同一定义）"""
     if kind in ('run_experiment', 'reproduce', 'research', 'paired'): return result['status']
-    return 'partial' if isinstance(result, dict) and result.get('status') in ('rejected', 'published_partial') else 'success'
+    if isinstance(result, dict) and result.get('status') == 'refresh_failed_no_data': return 'failed'
+    return 'partial' if isinstance(result, dict) and result.get('status') in ('rejected', 'published_partial', 'refresh_failed') else 'success'
 
 
 def run_kind(root, kind, params):
@@ -121,7 +122,10 @@ def main(argv = None):
             return _json({'job_id': Jobs(root).submit('data_update', p)} if a.queue else run_kind(root, 'data_update', p))
         if a.act == 'import-minute':
             p = {'source': a.source, 'start': a.start, 'end': a.end, 'top': a.top, 'workers': a.workers, 'sevenzip': a.sevenzip}
-            return _json({'job_id': Jobs(root).submit('minute_import', p)} if a.queue else run_kind(root, 'minute_import', p))
+            if a.queue: return _json({'job_id': Jobs(root).submit('minute_import', p)})
+            r = run_kind(root, 'minute_import', p); _json(r)
+            if r.get('status') == 'refresh_failed_no_data': sys.exit(1)      # 没有任何可用数据：退出码非零
+            return
         if a.act == 'snapshot': return _json(run_kind(root, 'snapshot', {'note': a.note}))
         if a.act == 'gc': return _json(run_kind(root, 'gc', {'apply': a.apply}))
         if a.act == 'audit': return _json(run_kind(root, 'data_audit', {}))
