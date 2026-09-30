@@ -27,11 +27,11 @@ EXTENDED = FACTORS + """  - name: rv_5
 POOL, LAST = 30, 80             # 分钟股票池只有前 30 只；分钟线只到第 80 个交易日（共 90 天）
 
 
-def minute_bars(rows, days, seed = 1):
+def minute_bars(rows, days, seed = 1, drop = ()):
     """每只证券每天 48 根 5 分钟线：路径从开盘价走到收盘价，波动大小因证券而异"""
     rng = np.random.default_rng(seed); ends = [pd.Timedelta(minutes = 575 + 5 * k) for k in range(24)] + [pd.Timedelta(minutes = 785 + 5 * k) for k in range(24)]; out = []
     for r in rows:
-        if r['date'] > days[LAST] or not r['is_trading'] or int(r['instrument'][1:6]) > POOL: continue
+        if r['date'] > days[LAST] or not r['is_trading'] or int(r['instrument'][1:6]) > POOL or r['instrument'] in drop: continue
         sigma = 0.0005 * (1 + int(r['instrument'][1:6]) % 5); steps = rng.normal(0, sigma, 48)
         path = r['open'] * np.exp(np.cumsum(steps) - (np.arange(1, 49) / 48) * (steps.sum() - np.log(r['close'] / r['open'])))
         close = np.round(path, 2); open_ = np.r_[r['open'], close[:-1]]; vol = 100 * rng.integers(1, 50, 48)
@@ -40,8 +40,8 @@ def minute_bars(rows, days, seed = 1):
     return pd.concat(out, ignore_index = True)
 
 
-def make(root, n_days = 90, shock = None):
-    days, insts, rows = market(n_days = n_days); bars = minute_bars(rows, days)
+def make(root, n_days = 90, shock = None, drop = ()):
+    days, insts, rows = market(n_days = n_days); bars = minute_bars(rows, days, drop = drop)
     if shock is not None:                                                    # 只改 shock 日及以后的分钟线：尾盘 30 分钟收盘价与最高价抬高 2%
         late = (bars.bar_end.dt.date >= shock) & (bars.bar_end.dt.hour * 60 + bars.bar_end.dt.minute >= 875); bars.loc[late, ['close', 'high']] *= 1.02
     cov = pd.DataFrame([{'instrument': i, 'status': 'no_events', 'verified_from': days[0].replace(year = 1990), 'verified_through': days[-1], 'has_start_basis': True,
@@ -213,3 +213,32 @@ def test_reevaluation_is_read_only_deterministic_and_pinned_to_source_hashes(pai
         p.write_text(backup.decode('utf-8').replace('exploratory', 'x', 1), encoding = 'utf-8')
         with pytest.raises(ReproduceRefused, match = 'manifest'): reevaluate(root, {'main': src})
     finally: p.write_bytes(backup)
+
+
+@pytest.fixture(scope = 'module')
+def paired_missing(tmp_path_factory):
+    """分钟股票池里有两只证券完全没有分钟线（模拟退市证券缺文件）"""
+    root = tmp_path_factory.mktemp('paired_missing'); sid, days, base, ext = make(root, drop = ('600003.SH', '600004.SH'))
+    return root, run_paired(root, **cfg(sid, base, ext))
+
+
+def test_diagnostics_decompose_score_changes_and_pnl_and_are_read_only(paired_missing, tmp_path):
+    from observe.diagnose import diagnose
+    from tests.integration.helpers import tree_hash
+    root, r = paired_missing; runs = Path(r['output']).parent; src = Path(r['output']); before = tree_hash(runs)
+    d = diagnose(root, src); after = tree_hash(runs); res = read(d['output'], 'diagnostics.json')
+    assert {k: v for k, v in after.items() if not k.startswith(Path(d['output']).name)} == before                                      # 源目录只读
+    m = res['missingness']; assert m['no_minute_instruments'] == ['600003.SH', '600004.SH'] and m['candidates'] > 10 and 'no_minute' in m['label_profile'] and 'has_minute' in m['label_profile']
+    assert set(m['top_n_slots']) == {'ridge', 'equal_blend'} and m['missing_marker_probe']['rows_missing_share'] > 0
+    sd = res['score_decomposition']['models']
+    for model in ('ridge', 'equal_blend'):
+        v = sd[model]; assert v['rebuild_max_abs_diff'] < 1e-9 and v['rows_missing_any_score'] == 0                                 # 用保存的系数重建的加分钟侧分数与保存的预测逐值一致
+        assert v['total_B_minus_A']['diff_mean'] == pytest.approx(v['fit_perturbation_b_minus_A']['diff_mean'] + v['minute_values_B_minus_b']['diff_mean'], abs = 1e-12)      # 总差 = 拟合扰动 + 分钟因子数值
+        cc = v['complete_coverage_subsample']; assert set(cc['rank_ic_mean']) == {'A', 'B', 'b'} and '事后' in cc['note']
+    assert sd['equal_blend']['fit_perturbation_b_minus_A']['diff_mean'] == 0                                                          # 等权合成没有拟合环节
+    c = res['concentration']; assert set(c) == {'ridge', 'equal_blend'}
+    for v in c.values():
+        assert abs(v['arms']['base']['unreconciled_over_initial']) < 0.01 and v['names_common'] + v['names_extended_only'] > 0                 # 按证券的盈亏加总与净值变化对得上（合成数据无分红）
+        assert v['decomposition_over_initial']['common_names'] + v['decomposition_over_initial']['extended_only_names'] + v['decomposition_over_initial']['base_only_names'] == pytest.approx(v['difference_extended_minus_base_over_initial'])
+        assert 'no_minute_names_effect_over_initial' in v and v['valid_portfolio_comparison'] is True
+    assert read(d['output'], 'status.json')['kind'] == 'diagnostic'

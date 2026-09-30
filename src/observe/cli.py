@@ -108,6 +108,8 @@ def main(argv = None):
     pr.add_argument('--config'); pr.add_argument('--snapshot'); pr.add_argument('--output')
     re_ = sub.add_parser('reevaluate', help = '只读重新评价已有成对实验（评价口径修正后）：写到新目录，引用原实验编号与产物哈希，不改动源目录')
     re_.add_argument('--source', action = 'append', required = True, metavar = '标签=成对目录', help = '可重复；第一个是主实验，例如 main=data/runs/<id> sensitivity=data/runs/<id>'); re_.add_argument('--output')
+    dg = sub.add_parser('diagnose-minute', help = '只读诊断成对实验：缺失模式、打分变化分解（拟合扰动 / 分钟因子数值）、集中持仓贡献；写到新目录，不改动源目录')
+    dg.add_argument('--source', required = True, help = '成对实验目录'); dg.add_argument('--source-check', help = 'scripts/check_missing_minute_source.py 输出的核验文件'); dg.add_argument('--output')
     rp = sub.add_parser('reproduce', help = '用冻结输入在新目录重跑并逐表比较；退出码 0 一致 / 2 不一致 / 3 阻断 / 1 出错或拒绝')
     rp.add_argument('run'); rp.add_argument('--output'); rp.add_argument('--abs-tol', type = float); rp.add_argument('--rel-tol', type = float)
     a = ap.parse_args(argv); root = Path(a.root)
@@ -161,6 +163,9 @@ def main(argv = None):
         _json(r)
         if EXIT_CODES[r['status']]: sys.exit(EXIT_CODES[r['status']])
         return
+    if a.cmd == 'diagnose-minute':
+        from .diagnose import diagnose
+        return _json(diagnose(root, a.source, a.source_check, a.output))
     if a.cmd == 'reevaluate':
         from .reeval import reevaluate
         return _json(reevaluate(root, dict(x.split('=', 1) for x in a.source), a.output))
