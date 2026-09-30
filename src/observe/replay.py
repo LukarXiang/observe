@@ -54,6 +54,7 @@ class ScoresConfig(_Strict):
     source: Literal['baseline', 'predictions'] = 'baseline'
     run: str | None = None                                       # predictions：研究实验目录（observe research 的产物）
     model: str = 'ridge'
+    allow_cross_snapshot: bool = False                           # 研究实验的快照与回放快照不同时默认拒绝；确需用新快照评价旧预测，显式设为 true，记为对照情景并记录双方版本
 
 
 class RunConfig(_Strict):
@@ -117,19 +118,28 @@ class _Recorder:
 def _hash(x): return hashlib.sha256(json.dumps(canonical(x), sort_keys = True).encode()).hexdigest()
 
 
-def score_source(cfg):
-    """分数来源：工程基线，或研究实验的样本外预测表（同时带来研究候选）。预测表与股票池按文件哈希冻结"""
+def score_source(cfg, snapshot_id = None):
+    """分数来源：工程基线，或研究实验的样本外预测表（同时带来研究候选）。预测表与股票池按文件哈希冻结。
+    predictions 时先检查身份：研究实验与回放的快照一致（否则须显式声明对照情景）、模型存在、预测都落在该实验的研究候选上、fit_asof 早于决策日、请求区间不超出预测的定义范围"""
     sc = cfg.scores
     if sc.source == 'baseline': return BASELINE, cfg
     if not sc.run: raise ValueError('scores.source = predictions 需要 scores.run（研究实验目录）')
-    run = Path(sc.run); st = json.loads((run / 'status.json').read_text(encoding = 'utf-8'))
+    run = Path(sc.run); st = json.loads((run / 'status.json').read_text(encoding = 'utf-8')); rdoc = json.loads((run / 'config.json').read_text(encoding = 'utf-8'))
     if st.get('kind') != 'research' or st.get('status') not in ('success', 'success_limited'): raise ValueError(f'{run} 不是已完成的研究实验（状态 {st.get("status")}）')
-    pred = pd.read_parquet(run / 'predictions.parquet', columns = ['model_id', 'decision_date'])
-    days = pred.loc[pred.model_id == sc.model, 'decision_date']
-    if not len(days): raise ValueError(f'研究实验 {run.name} 没有模型 {sc.model} 的预测')
+    pred = pd.read_parquet(run / 'predictions.parquet', columns = ['model_id', 'decision_date', 'instrument', 'fit_asof']); pred = pred[pred.model_id == sc.model]
+    if not len(pred): raise ValueError(f'研究实验 {run.name} 没有模型 {sc.model} 的预测')
+    day = pd.to_datetime(pred.decision_date)
+    if (pd.to_datetime(pred.fit_asof) >= day).any(): raise ValueError(f'研究实验 {run.name} 的模型 {sc.model} 有 fit_asof 不早于决策日的预测，拒绝使用')
+    uni = pd.read_parquet(run / 'universe.parquet', columns = ['decision_date', 'instrument', 'eligible']); uni = uni[uni.eligible]
+    off = pred[['decision_date', 'instrument']].merge(uni[['decision_date', 'instrument']], how = 'left', indicator = True)._merge.eq('left_only').sum()
+    if off: raise ValueError(f'研究实验 {run.name} 有 {int(off)} 条预测不在该实验的研究候选里，预测与候选不对应')
+    first, last = day.min().date(), day.max().date()
+    if (cfg.start and cfg.start < first) or (cfg.end and cfg.end > last): raise ValueError(f'请求区间 {cfg.start}..{cfg.end} 超出该模型预测的定义范围 {first}..{last}')
     meta = {'source': 'predictions', 'run': str(run.resolve()), 'research_run_id': run.name, 'model': sc.model, 'evidence': f"{st.get('evidence') or 'development_oos'}_prediction",
-            'predictions_sha256': file_sha(run / 'predictions.parquet'), 'universe_sha256': file_sha(run / 'universe.parquet')}
-    first, last = pd.Timestamp(days.min()).date(), pd.Timestamp(days.max()).date()
+            'predictions_sha256': file_sha(run / 'predictions.parquet'), 'universe_sha256': file_sha(run / 'universe.parquet'), 'research_snapshot': rdoc.get('snapshot_id')}
+    if snapshot_id is not None and rdoc.get('snapshot_id') != snapshot_id:
+        if not sc.allow_cross_snapshot: raise ValueError(f"研究实验的快照 {rdoc.get('snapshot_id')} 与回放快照 {snapshot_id} 不一致；确需用新快照评价旧预测，请显式设置 scores.allow_cross_snapshot 并按对照情景解读")
+        meta['cross_snapshot_scenario'] = {'research_snapshot': rdoc.get('snapshot_id'), 'replay_snapshot': snapshot_id}
     return meta, cfg.model_copy(update = {'start': cfg.start or first, 'end': cfg.end or last})
 
 
@@ -151,7 +161,7 @@ def run_offline(root, output = None, runs_root = None, **params):
 
 def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = None, reproduce_of = None, compare = None):
     store = Store(root); state = store.state(cfg.snapshot)                       # 快照不存在时在建目录之前就报错
-    source, cfg = score_source(cfg)
+    source, cfg = score_source(cfg, state.get('snapshot_id') or cfg.snapshot)
     rules_file = Path(rules_file or cfg.rules); rules_text = rules_file.read_text(encoding = 'utf-8'); rules = RuleSet.from_yaml(rules_file)
     doc = {'config': cfg.model_dump(mode = 'json'), 'snapshot_id': state.get('snapshot_id') or cfg.snapshot, 'batch_id': state.get('batch_id'),
            'scores': source, 'rules': {'source_path': str(cfg.rules), 'sha256': hashlib.sha256(rules_text.encode()).hexdigest(), 'fingerprint': rules.config_fingerprint()},
@@ -161,6 +171,7 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
     status = RunStatus(out, out.name, evidence = source['evidence'], config_hash = h, reproduce_of = reproduce_of)
     (out / 'rules.yaml').write_text(rules_text, encoding = 'utf-8'); write_json(out / 'config.json', doc); status.stage('config')
     rec, orders, limitations, x = None, None, [], cfg.execution
+    if 'cross_snapshot_scenario' in source: limitations.append({'kind': 'cross_snapshot_scenario', 'detail': '对照情景：用与预测不同的快照做回放评价', **source['cross_snapshot_scenario']})
     if x.fee_multiplier != 1: m = x.fee_multiplier; rules = rules.scaled(commission_rate = m, stamp_tax = m, transfer_fee = m, min_commission = m)
     try:
         tables = load(store, state, cfg.start, cfg.end, x.liquidity_window)

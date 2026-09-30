@@ -1,4 +1,5 @@
 """数据集视图：先在当天全部研究候选上做横截面预处理，训练时再按标签有效性与成熟时点过滤。"""
+import numpy as np
 import pandas as pd
 
 
@@ -41,3 +42,15 @@ def samples(labels, split, stage):
     elif stage == 'fit': win, asof = (d >= split.train_start) & (d <= split.valid_end), split.fit_asof
     else: raise ValueError(stage)
     return labels[ok & win & (m <= asof)]
+
+
+def dev_labels(labels, holdout_start):
+    """开发区间分析（因子评价、方向核对、缺失诊断、测试窗评价）共用的标签可用性规则：
+    决策日与成熟时点（退出日）都严格早于最终留出起点。不满足的行保留，标为无效、原因 holdout_boundary，值置缺失；训练逻辑另有 matured_at <= asof 的规则，不经过这里。"""
+    out = labels.copy()
+    if holdout_start is None: return out
+    h = pd.Timestamp(holdout_start)
+    late = (pd.to_datetime(out.decision_date) >= h) | (pd.to_datetime(out.matured_at).fillna(pd.Timestamp.max) >= h)
+    hit = late & out.valid.astype(bool)
+    out.loc[hit, 'invalid_reason'] = 'holdout_boundary'; out.loc[late, 'valid'] = False; out.loc[late, 'value'] = np.nan
+    return out

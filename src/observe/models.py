@@ -8,6 +8,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from .evaluation.ranking import rank_ic      # noqa: F401  秩 IC 只有 evaluation.ranking 一份实现，这里保留旧的导入位置
+
 
 class FeatureMismatch(ValueError): pass
 
@@ -78,11 +80,3 @@ KINDS = {c.kind: c for c in (SingleFactor, EqualBlend, RidgeModel)}
 def day_weights(dates):
     """每个决策日总权重相同，同一天的证券平分"""
     d = pd.Series(list(dates)); return 1.0 / d.map(d.value_counts()).to_numpy(float)
-
-
-def rank_ic(frame, score = 'score', label = 'value', min_n = 30):
-    """每日秩相关（斯皮尔曼）；有效证券少于 min_n 或任一侧为常数的日子记缺失。返回按日期的序列"""
-    def one(g):
-        if len(g) < min_n or g[score].nunique() < 2 or g[label].nunique() < 2: return np.nan
-        return g[score].rank().corr(g[label].rank())
-    return frame.groupby('decision_date')[[score, label]].apply(one)

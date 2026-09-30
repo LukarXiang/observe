@@ -1,4 +1,6 @@
 """成对比较的统计部分（模块 17）：块抽样区间、逐日差值、分窗口与分年份。手工构造的小例子。"""
+from datetime import date
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -36,7 +38,8 @@ def frame(scores, labels, model = 'm', split = 0):
     days = [d.date() for d in pd.bdate_range('2024-01-02', periods = len(scores))]; rows = []
     for d, (sc, lb) in zip(days, zip(scores, labels)):
         for i, (s_, l_) in enumerate(zip(sc, lb)): rows.append({'model_id': model, 'decision_date': d, 'instrument': f'{i:06d}.SH', 'score': s_, 'value': l_, 'split_id': split})
-    df = pd.DataFrame(rows); return df[['model_id', 'decision_date', 'instrument', 'score', 'split_id']], df[['decision_date', 'instrument', 'value']].assign(valid = True)
+    df = pd.DataFrame(rows); df['fit_asof'] = date(2023, 12, 29); df['evidence_level'] = 'exploratory'
+    return df[['model_id', 'decision_date', 'instrument', 'score', 'split_id', 'fit_asof', 'evidence_level']], df[['decision_date', 'instrument', 'value']].assign(valid = True, matured_at = df.decision_date, invalid_reason = '')
 
 
 def test_model_pairs_hand_computed():

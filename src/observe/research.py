@@ -12,12 +12,13 @@ from pydantic import Field, ValidationError
 
 from .data.prices import with_adjusted
 from .data.store import Store
-from .dataset import cross_sectional_preprocess, plan_splits, samples
+from .dataset import cross_sectional_preprocess, dev_labels, plan_splits, samples
 from .execution import InputBlocked, sessions as open_sessions
 from .factors.intraday import INTRADAY_FIELDS, daily_features, gap_reasons
 from .features import factor_frame, load_factor_set, panel
 from .labels import build_labels
-from .models import EqualBlend, RidgeModel, SingleFactor, day_weights, rank_ic
+from .evaluation.ranking import rank_ic, rank_ic_table, topn_summary, topn_table, undefined_reasons
+from .models import EqualBlend, RidgeModel, SingleFactor, day_weights
 from .replay import _Strict
 from .runs import RunStatus, canonical, compare_frames, compare_tables, create_run_dir, drift, ensure_outside, environment, file_sha, write_json
 from .universe import build_universe, version as universe_version
@@ -214,9 +215,9 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
         evals += tried
     pred = pd.concat(preds, ignore_index = True); _pq(out, 'predictions', pred); status.stage('models', predictions = len(pred))
 
-    model_eval = _model_eval(pred, lab, evals, cfg.models); write_json(out / 'model_eval.json', canonical(model_eval))
+    model_eval = _model_eval(pred, lab, evals, cfg.models, holdout); write_json(out / 'model_eval.json', canonical(model_eval))
     dev = [d for d in days if holdout is None or d < holdout]
-    factor_eval = _factor_eval(fac, lab, names, directions, dev, cfg.models.min_names); write_json(out / 'factor_eval.json', canonical(factor_eval))
+    factor_eval = _factor_eval(fac, lab, names, directions, dev, cfg.models.min_names, holdout); write_json(out / 'factor_eval.json', canonical(factor_eval))
     status.stage('evaluation')
     return {'days': len(days), 'first_day': str(days[0]), 'last_day': str(days[-1]), 'windows': len(plan), 'holdout_start': str(holdout) if holdout else None,
             'test_start': str(plan.test_start.min()), 'test_end': str(plan.test_end.max()), 'models': {k: v['test_rank_ic_mean'] for k, v in model_eval['summary'].items()}}
@@ -234,7 +235,7 @@ def _restrict_to_pool(uni, pool, universe_cfg):
 def _intraday_report(elig, daily):
     """研究候选行 × 分钟特征（无分钟线的行各特征为缺失）与覆盖报告：按年、按证券；缺失原因见 factors.intraday.gap_reasons"""
     e = elig[['decision_date', 'instrument']].rename(columns = {'decision_date': 'date'}); e['date'] = pd.to_datetime(e.date).dt.date
-    j = e.merge(daily, on = ['date', 'instrument'], how = 'left'); year = pd.to_datetime(j.date).dt.year; has = j.n_bars.notna()
+    j = e.merge(daily, on = ['date', 'instrument'], how = 'left'); year = pd.to_datetime(j.date).dt.year
     def block(g): return {'candidate_rows': int(len(g)), 'with_minute_bars': int(g.n_bars.notna().sum()), 'bar_coverage': _f(g.n_bars.notna().mean()),
                           'feature_coverage': {f: _f(g[f].notna().mean()) for f in INTRADAY_FIELDS}, 'gaps': gap_reasons(g[g.n_bars.notna()])}
     per = j.groupby('instrument').n_bars.apply(lambda x: x.notna().mean()).sort_values(kind = 'stable')
@@ -257,36 +258,46 @@ def _prune(X, sp, names, threshold):
     return kept, dropped
 
 
-def _model_eval(pred, lab, tried, mc):
-    y = lab[lab.valid][['decision_date', 'instrument', 'value']]; j = pred.merge(y, on = ['decision_date', 'instrument'])
-    per, summary = [], {}
+def _model_eval(pred, lab, tried, mc, holdout = None):
+    """测试窗上的模型评价。标签只用开发区间可用的（dataset.dev_labels）；秩 IC 与前 N 名都走 evaluation.ranking 的唯一实现，
+    前 N 名名单由预测先固定，标签无效的证券留在名单里、不替补"""
+    labd = dev_labels(lab, holdout); j = pred.merge(labd[['decision_date', 'instrument', 'value']], on = ['decision_date', 'instrument'], how = 'left')
+    per, summary, key = [], {}, f'top{mc.top_n}_mean_label'
     for (model, split), g in j.groupby(['model_id', 'split_id']):
-        ic = rank_ic(g, min_n = mc.min_names)
-        top = g.sort_values(['decision_date', 'score', 'instrument'], ascending = [True, False, True]).groupby('decision_date').head(mc.top_n).groupby('decision_date').value.mean()
-        per.append({'model_id': model, 'split_id': int(split), 'test_rank_ic_mean': _f(ic.mean()), 'test_days': int(ic.notna().sum()), f'top{mc.top_n}_mean_label': _f(top.mean())})
+        ic = rank_ic(g, min_n = mc.min_names); top = topn_table(g, labd, mc.top_n)
+        per.append({'model_id': model, 'split_id': int(split), 'test_rank_ic_mean': _f(ic.mean()), 'test_days': int(ic.notna().sum()), key: _f(top.mean_label.mean()),
+                    f'top{mc.top_n}_valid_label_share': _f(top.valid_label_count.sum() / top.selected_count.sum()) if len(top) else None, f'top{mc.top_n}_undefined_days': int((~top.defined).sum())})
     by = pd.DataFrame(per)
     for model, g in j.groupby('model_id'):
-        ic = rank_ic(g, min_n = mc.min_names)
-        summary[model] = {'test_rank_ic_mean': _f(ic.mean()), 'test_rank_ic_std': _f(ic.std()), 'positive_share': _f((ic > 0).mean()), 'test_days': int(ic.notna().sum())}
+        t = rank_ic_table(g, min_n = mc.min_names); ic = t.ic
+        summary[model] = {'test_rank_ic_mean': _f(ic.mean()), 'test_rank_ic_std': _f(ic.std()), 'positive_share': _f((ic > 0).mean()), 'test_days': int(ic.notna().sum()),
+                          'rank_ic_undefined': undefined_reasons(t), f'top{mc.top_n}': topn_summary(topn_table(g, labd, mc.top_n))}
     wins = {}
     if len(by):
         wide = by.pivot(index = 'split_id', columns = 'model_id', values = 'test_rank_ic_mean')
         for base in ('single_factor', 'equal_blend'):
             if 'ridge' in wide and base in wide: wins[f'ridge_vs_{base}'] = {'wins': int((wide.ridge > wide[base]).sum()), 'windows': int(wide[['ridge', base]].notna().all(axis = 1).sum())}
-    return {'per_window': per, 'summary': summary, 'window_wins': wins, 'selection': tried,
+    return {'eval_version': 2, 'per_window': per, 'summary': summary, 'window_wins': wins, 'selection': tried,
+            'label_rule': dev_label_rule(holdout),
             'note': '标签是复权 open-to-open 收益，只作排序目标，不是可实现收益；组合收益只来自账本回测'}
 
 
-def _factor_eval(fac, lab, names, directions, dev, min_names):
-    j = fac[fac.date.isin(set(dev))].merge(lab[lab.valid][['decision_date', 'instrument', 'value']], left_on = ['date', 'instrument'], right_on = ['decision_date', 'instrument'])
+def dev_label_rule(holdout):
+    return {'holdout_start': None if holdout is None else str(holdout), 'rule': '标签有效，且决策日与成熟时点（退出日）都严格早于最终留出起点' if holdout is not None else '没有最终留出，标签有效即可'}
+
+
+def _factor_eval(fac, lab, names, directions, dev, min_names, holdout = None):
+    """开发区间因子评价：因子行取开发区间决策日，标签只用开发区间可用的（dataset.dev_labels，成熟时点也在留出起点之前）"""
+    labd = dev_labels(lab, holdout); j = fac[fac.date.isin(set(dev))].merge(labd[['decision_date', 'instrument', 'value']], left_on = ['date', 'instrument'], right_on = ['decision_date', 'instrument'], how = 'left')
     out = {}
     for n in names:
-        ic = rank_ic(j.assign(score = j[n]), min_n = min_names)
+        t = rank_ic_table(j.assign(score = j[n]), min_n = min_names); ic = t.ic
         cover = fac[fac.date.isin(set(dev))][n].notna().mean()
         years = ic.groupby(pd.to_datetime(pd.Series(ic.index, index = ic.index)).dt.year).mean()
         out[n] = {'direction': directions[n], 'rank_ic_mean': _f(ic.mean()), 'rank_ic_std': _f(ic.std()), 'positive_share': _f((ic > 0).mean()),
-                  'direction_adjusted_ic': _f(ic.mean() * directions[n]), 'coverage': _f(cover), 'days': int(ic.notna().sum()), 'by_year': {int(k): _f(v) for k, v in years.items()}}
-    return {'period': {'start': str(min(dev)) if dev else None, 'end': str(max(dev)) if dev else None, 'note': '开发区间，不含最终留出'}, 'factors': out}
+                  'direction_adjusted_ic': _f(ic.mean() * directions[n]), 'coverage': _f(cover), 'days': int(ic.notna().sum()), 'by_year': {int(k): _f(v) for k, v in years.items()},
+                  'undefined': undefined_reasons(t)}
+    return {'eval_version': 2, 'period': {'start': str(min(dev)) if dev else None, 'end': str(max(dev)) if dev else None, 'note': '开发区间，不含最终留出'}, 'label_rule': dev_label_rule(holdout), 'factors': out}
 
 
 def _f(x): return None if x is None or not np.isfinite(x) else float(x)

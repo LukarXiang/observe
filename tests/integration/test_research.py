@@ -151,3 +151,40 @@ def test_research_status_through_cli_and_queue(base, tmp_path):
     short = {**cfg(sid, fs), 'split': {'train': 200, 'valid': 10, 'test': 5, 'holdout': 5}}
     jid = q.submit('research', short); q.run_next(); j = q.get(jid)
     assert j['status'] == 'blocked' and 'insufficient_history_for_split' in j['result']
+
+
+def test_development_analysis_ignores_prices_from_the_holdout_start(base, tmp_path):
+    """只改最终留出起点及以后的价格：开发区间的因子评价与测试窗评价逐值不变；不用统一规则（只按决策日过滤）时因子评价会变"""
+    root, sid, days, fs, r = base; out = Path(r['output']); hold = pd.Timestamp(pd.read_parquet(out / 'split_plan.parquet').holdout_start.iloc[0]).date()
+    sid2, _, fs2 = make(tmp_path, shock = hold); r2 = run_research(tmp_path, **cfg(sid2, fs2)); out2 = Path(r2['output'])
+    for name in ('factor_eval.json', 'model_eval.json'): assert read(out, name) == read(out2, name)
+    rule = read(out, 'factor_eval.json')['label_rule']; assert rule['holdout_start'] == str(hold)
+    from observe.research import _factor_eval
+    names = list(read(out, 'factor_eval.json')['factors']); dirs = {n: -1 for n in names}
+    fac, fac2 = pd.read_parquet(out / 'factors.parquet'), pd.read_parquet(out2 / 'factors.parquet'); lab, lab2 = pd.read_parquet(out / 'labels.parquet'), pd.read_parquet(out2 / 'labels.parquet')
+    dev = sorted(d for d in set(fac.date) if pd.Timestamp(d).date() < hold)
+    assert _factor_eval(fac, lab, names, dirs, dev, 10, hold) == _factor_eval(fac2, lab2, names, dirs, dev, 10, hold)
+    assert _factor_eval(fac, lab, names, dirs, dev, 10, None) != _factor_eval(fac2, lab2, names, dirs, dev, 10, None)      # 旧规则会把成熟时点在留出期内的标签算进来
+
+
+def _replay_params(sid, run, **scores): return {'snapshot': sid, 'initial_cash': 1_000_000, 'scores': {'source': 'predictions', 'run': str(run), 'model': 'ridge', **scores},
+                                             'portfolio': {'n': 5, 'max_weight': 0.2, 'rebalance_every': 2, 'buffer': 2, 'max_sell': 5}, 'execution': {'liquidity_window': 5}}
+
+
+def test_predictions_are_checked_against_snapshot_candidates_fit_time_and_range(base, tmp_path):
+    import shutil
+    from observe.data.store import Store
+    root, sid, days, fs, r = base; src = Path(r['output'])
+    other = Store(root).snapshot('same content, different snapshot')                                          # 内容相同、编号不同的快照
+    with pytest.raises(ValueError, match = '快照.*不一致'): run_offline(root, **_replay_params(other, src))
+    ok = run_offline(root, **_replay_params(other, src, allow_cross_snapshot = True)); doc = read(ok['output'], 'config.json')
+    assert ok['status'] == 'success_limited' and doc['scores']['cross_snapshot_scenario'] == {'research_snapshot': sid, 'replay_snapshot': other}
+    assert any(x['kind'] == 'cross_snapshot_scenario' for x in ok['limitations'])                                # 对照情景写进限制，双方版本都记录
+    with pytest.raises(ValueError, match = '没有模型'): run_offline(root, **_replay_params(sid, src, model = 'lightgbm'))
+    pred = pd.read_parquet(src / 'predictions.parquet'); first, last = pred[pred.model_id == 'ridge'].decision_date.min(), pred[pred.model_id == 'ridge'].decision_date.max()
+    with pytest.raises(ValueError, match = '超出'): run_offline(root, **{**_replay_params(sid, src), 'start': str(pd.Timestamp(first).date() - pd.Timedelta(days = 4))})
+    with pytest.raises(ValueError, match = '超出'): run_offline(root, **{**_replay_params(sid, src), 'end': str(pd.Timestamp(last).date() + pd.Timedelta(days = 4))})
+    bad = tmp_path / 'bad_fit'; shutil.copytree(src, bad); p = pd.read_parquet(bad / 'predictions.parquet'); p['fit_asof'] = p.decision_date; p.to_parquet(bad / 'predictions.parquet', index = False)
+    with pytest.raises(ValueError, match = 'fit_asof'): run_offline(root, **_replay_params(sid, bad))
+    off = tmp_path / 'off_universe'; shutil.copytree(src, off); u = pd.read_parquet(off / 'universe.parquet'); u.loc[u.decision_date == first, 'eligible'] = False; u.to_parquet(off / 'universe.parquet', index = False)
+    with pytest.raises(ValueError, match = '不在该实验的研究候选'): run_offline(root, **_replay_params(sid, off))

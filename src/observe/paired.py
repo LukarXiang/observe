@@ -13,8 +13,8 @@ from pydantic import Field, ValidationError, model_validator
 from .data.store import Store
 from .evaluation.paired import curve_pairs, factor_pairs, model_pairs
 from .features import load_factor_set
-from .replay import PortfolioConfig, ReproduceRefused, _Strict, _read, run_offline
-from .research import RESTRICTED, ResearchConfig, _research
+from .replay import PortfolioConfig, ReproduceRefused, _read, run_offline
+from .research import RESTRICTED, ResearchConfig, _research, dev_label_rule
 from .runs import RunStatus, canonical, compare_frames, create_run_dir, drift, ensure_outside, environment, file_sha, write_json
 
 EXTENDED = 'configs/factor_sets/daily_intraday_v1.yaml'
@@ -113,11 +113,12 @@ def evaluate(cfg, subruns, plan):
     """只读两侧实验目录与回测目录里已保存的产物，不重新训练、不重新成交；同样输入得到同样输出（块抽样种子固定）"""
     a, b = (Path(subruns['arms'][k]['output']) for k in ('base', 'extended')); block = max(20, 4 * cfg.label_h); nb, seed = cfg.n_boot, cfg.seed
     pa, pb, lab = pd.read_parquet(a / 'predictions.parquet'), pd.read_parquet(b / 'predictions.parquet'), pd.read_parquet(a / 'labels.parquet')
-    models = model_pairs(pa, pb, lab, block, cfg.models.min_names, cfg.models.top_n, nb, seed)
+    holdout = plan.holdout_start.iloc[0]; hold = None if pd.isna(holdout) else pd.Timestamp(holdout).date()
+    models = model_pairs(pa, pb, lab, block, cfg.models.min_names, cfg.models.top_n, nb, seed, hold, 2 * block)
     base_names = [f['name'] for f in load_factor_set(a / 'factor_set.yaml')['factors']]; ext = load_factor_set(b / 'factor_set.yaml')
     new = [f['name'] for f in ext['factors'] if f['name'] not in base_names]; directions = {f['name']: f['direction'] for f in ext['factors']}
-    fac = pd.read_parquet(b / 'factors.parquet'); holdout = plan.holdout_start.iloc[0]
-    dev = [d for d in sorted(set(fac.date)) if pd.isna(holdout) or d < holdout]
+    fac = pd.read_parquet(b / 'factors.parquet')
+    dev = [d for d in sorted(set(fac.date)) if hold is None or d < hold]
     ridge = {}
     for sp in plan.itertuples():
         m = _json(b / 'models' / f'split{sp.split_id:02d}_ridge.json')
@@ -146,6 +147,7 @@ def evaluate(cfg, subruns, plan):
     kinds = sorted({x['kind'] for r in (sa, sb) for x in r.get('limitations', [])})
     limitations = [{'kind': 'minute_sample_restricted', 'detail': RESTRICTED}]
     if len(plan) < 6: limitations.append({'kind': 'few_test_windows', 'detail': f'只有 {len(plan)} 个测试窗（约 {len(plan) * cfg.split.test} 个交易日），差值的区间很宽，结论只作探索'})
+    if any(v['restricted_to_common_keys'] for v in models.values()): limitations.append({'kind': 'prediction_coverage_differs', 'detail': '两侧预测主键不完全相同，相应模型的指标只在共同主键上计算'})
     limitations.append({'kind': 'arm_limitations', 'detail': f'两侧实验自身的限制类型：{kinds}'})
     ridge_ic = models.get('ridge', {}).get('rank_ic', {})
     headline = {'train_start': str(plan.train_start.min()), 'test_start': str(plan.test_start.min()), 'test_end': str(plan.test_end.max()), 'windows': int(len(plan)),
@@ -153,8 +155,9 @@ def evaluate(cfg, subruns, plan):
     return {'design': {'question': '在同一分钟股票池、同一区间、同一切分上，日频基础因子加入分钟聚合因子后，样本外预测是否有增量',
                        'primary': 'Ridge 在测试窗上的逐日秩 IC，扩展侧减基础侧的均值及块抽样 95% 区间', 'secondary': ['等权合成的秩 IC', '前 N 名平均标签', '分窗口与分年份的差值方向', '成本后账本回测的组合指标'],
                        'block_days': block, 'n_boot': nb, 'seed': seed, 'sides': {'base': subruns['arms']['base']['run_id'], 'extended': subruns['arms']['extended']['run_id']},
-                       'new_factors': new, 'directions_prespecified': True, 'evidence': 'exploratory'},
-            'headline': headline, 'models': models, 'new_factors': factor_pairs(fac, lab, new, directions, dev, block, cfg.models.min_names, nb, seed), 'ridge_new_factor_use': ridge,
+                       'new_factors': new, 'directions_prespecified': True, 'evidence': 'exploratory', 'alt_block_days': 2 * block,
+                       'uncertainty_scope': '固定预测条件下按交易日位置的块抽样区间；预测、模型选择与拟合当作已知，区间不含重新选模、重新拟合带来的变化', 'label_rule': dev_label_rule(hold)},
+            'headline': headline, 'models': models, 'new_factors': factor_pairs(fac, lab, new, directions, dev, block, cfg.models.min_names, nb, seed, hold), 'ridge_new_factor_use': ridge,
             'coverage': {'total': cover['total'], 'by_year': cover['by_year'], 'instruments': cover['instruments']}, 'portfolio': portfolio, 'limitations': limitations}
 
 
