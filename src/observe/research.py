@@ -190,21 +190,8 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
     X = cross_sectional_preprocess(fac.assign(eligible = True), names).drop(columns = 'eligible')
     preds, evals, models_dir = [], [], out / 'models'; models_dir.mkdir()
     for sp in plan.itertuples(index = False):
-        kept, dropped = _prune(X, sp, names, cfg.models.correlation_threshold)
-        def rows(stage):
-            y = samples(lab, sp, stage)[['decision_date', 'instrument', 'value']]
-            return X.merge(y, left_on = ['date', 'instrument'], right_on = ['decision_date', 'instrument']).sort_values(['date', 'instrument'])
-        sel, val, fit = rows('select'), rows('valid'), rows('fit')
+        kept, dropped, sel, val, fit, candidates, tried, best = selection_stage(sp, X, lab, names, directions, cfg.models)
         test = X[(X.date >= sp.test_start) & (X.date <= sp.test_end)].sort_values(['date', 'instrument'])
-        candidates = [('single_factor', SingleFactor([cfg.models.baseline_factor], directions, factor = cfg.models.baseline_factor)),
-                      ('equal_blend', EqualBlend(kept, directions))] + [(f'ridge@{a:g}', RidgeModel(kept, directions, alpha = a)) for a in cfg.models.ridge_alphas]
-        tried = []
-        for key, m in candidates:
-            m.fit(sel[m.features], sel.value, day_weights(sel.date))
-            ic = rank_ic(val.assign(score = m.predict(val[m.features])), min_n = cfg.models.min_names).mean()
-            tried.append({'split_id': sp.split_id, 'candidate': key, 'valid_rank_ic': None if np.isnan(ic) else float(ic)})
-        ridge = [x for x in tried if x['candidate'].startswith('ridge@')]
-        best = max(ridge, key = lambda x: -np.inf if x['valid_rank_ic'] is None else x['valid_rank_ic'])['candidate']   # 并列取先出现（更小的 alpha）
         for model_id, key in (('single_factor', 'single_factor'), ('equal_blend', 'equal_blend'), ('ridge', best)):
             m = dict(candidates)[key]
             m.fit(fit[m.features], fit.value, day_weights(fit.date), split_id = sp.split_id, train_start = sp.train_start, fit_end = sp.valid_end, fit_asof = sp.fit_asof,
@@ -221,6 +208,28 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
     status.stage('evaluation')
     return {'days': len(days), 'first_day': str(days[0]), 'last_day': str(days[-1]), 'windows': len(plan), 'holdout_start': str(holdout) if holdout else None,
             'test_start': str(plan.test_start.min()), 'test_end': str(plan.test_end.max()), 'models': {k: v['test_rank_ic_mean'] for k, v in model_eval['summary'].items()}}
+
+
+def candidate_models(mc, kept, directions):
+    """一个窗口的候选模型：单因子基线、等权合成、各 alpha 的 Ridge"""
+    return [('single_factor', SingleFactor([mc.baseline_factor], directions, factor = mc.baseline_factor)), ('equal_blend', EqualBlend(kept, directions))] +            [(f'ridge@{a:g}', RidgeModel(kept, directions, alpha = a)) for a in mc.ridge_alphas]
+
+
+def selection_stage(sp, X, lab, names, directions, mc):
+    """一个窗口的选参阶段：训练窗内相关性去重 → 选参样本上拟合全部候选 → 验证窗按秩 IC 打分 → 选 Ridge 的 alpha。
+    返回 (保留因子, 被去重因子, 选参样本, 验证样本, 重拟合样本, 候选, 验证结果, 选中的 Ridge)；重放选参（reeval）与研究流水线共用这一段"""
+    kept, dropped = _prune(X, sp, names, mc.correlation_threshold)
+    def rows(stage):
+        y = samples(lab, sp, stage)[['decision_date', 'instrument', 'value']]
+        return X.merge(y, left_on = ['date', 'instrument'], right_on = ['decision_date', 'instrument']).sort_values(['date', 'instrument'])
+    sel, val, fit = rows('select'), rows('valid'), rows('fit'); candidates = candidate_models(mc, kept, directions); tried = []
+    for key, m in candidates:
+        m.fit(sel[m.features], sel.value, day_weights(sel.date))
+        ic = rank_ic(val.assign(score = m.predict(val[m.features])), min_n = mc.min_names).mean()
+        tried.append({'split_id': sp.split_id, 'candidate': key, 'valid_rank_ic': None if np.isnan(ic) else float(ic)})
+    ridge = [x for x in tried if x['candidate'].startswith('ridge@')]
+    best = max(ridge, key = lambda x: -np.inf if x['valid_rank_ic'] is None else x['valid_rank_ic'])['candidate']   # 并列取先出现（更小的 alpha）
+    return kept, dropped, sel, val, fit, candidates, tried, best
 
 
 def _restrict_to_pool(uni, pool, universe_cfg):

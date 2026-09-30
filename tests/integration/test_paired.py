@@ -184,6 +184,32 @@ def test_blocked_backtest_is_reported_and_compared_only_on_the_clean_period(pair
     plan = pd.read_parquet(Path(r['subruns']['arms']['base']['output']) / 'split_plan.parquet'); c = PairedConfig.model_validate(json.loads((Path(r['output']) / 'config.json').read_text(encoding = 'utf-8'))['config'])
     ev = evaluate(c, sub, plan)['portfolio']['ridge']; run = ev['runs']['base']
     assert run['valid'] is False and run['blocked_from'] == first and run['blocked_kinds'] == ['delisted_holding'] and run['blocked_instruments'] == ['600001.SH'] and 'sharpe' not in run
-    assert 'sharpe' in ev['runs']['extended'] and ev['pair']['period']['truncated_before'] == first and ev['pair']['period']['last'] < first
-    assert ev['pair']['period']['days'] < len(eq) - 1
+    assert 'sharpe' in ev['runs']['extended'] and 'pair' not in ev and ev['full_period_metrics'] == 'unavailable'
+    d = ev['diagnostic_prefix']; assert d['valid_portfolio_comparison'] is False and d['period']['truncated_before'] == first and d['period']['last'] < first and 'delisted_holding' in d['truncation_reason']
+    assert d['period']['days'] < len(eq) - 1 and d['planned_period']['days'] == len(eq) - 1 and d['excluded_days'] == d['planned_period']['days'] - d['period']['days'] > 0
     full = evaluate(c, r['subruns'], plan)['portfolio']['ridge']; assert full['pair']['period']['truncated_before'] is None and full['pair']['period']['days'] == len(eq) - 1
+
+
+def test_reevaluation_is_read_only_deterministic_and_pinned_to_source_hashes(paired, tmp_path):
+    from observe.reeval import reevaluate
+    from observe.replay import ReproduceRefused
+    from tests.integration.helpers import tree_hash
+    root, sid, days, base, ext, r = paired; src = Path(r['output']); runs = src.parent
+    other = run_paired(root, **cfg(sid, base, ext, split = {'train': 15, 'valid': 10, 'test': 5, 'holdout': 5}))          # 训练窗更短的第二个实验：测试日期与主实验部分重叠
+    before = tree_hash(runs); a = reevaluate(root, {'main': src, 'short': other['output']}); after = tree_hash(runs)
+    assert {k: v for k, v in after.items() if not k.startswith(Path(a['output']).name)} == before                                  # 源实验、子实验目录一个字节都没变
+    out = Path(a['output']); assert out.parent == runs and '-reeval-' in out.name and read(out, 'status.json')['kind'] == 'reeval'
+    doc = read(out, 'config.json'); assert doc['sources']['main']['paired_dir'] == src.name and len(doc['sources']['main']['manifest_sha256']) == 64
+    assert all(len(v) == 64 for arm in doc['sources']['main']['arms'].values() for k, v in arm.items() if k.endswith('.parquet'))
+    res = read(out, 'reeval.json')
+    assert res['old_vs_new']['main']['summary']['models/rank_ic']['changed'] == 0 and res['old_vs_new']['main']['summary']['models/rank_ic']['metrics'] > 0             # 预测与标签都是有限值：秩 IC 不变
+    assert all(v['identical'] for d in res['selection_replay'].values() for v in d.values())                                          # 选参重放与原保存值逐项一致 ⇒ 预测不受影响
+    assert res['holdout_boundary']['main']['extended']['boundary_labels_used_by_saved_diagnostics']['label_rows'] > 0
+    assert res['common_test_dates']['common_days'] > 0 and set(res['common_test_dates']['effect_difference']) >= {'ridge', 'equal_blend'} and 'topn_daily.parquet' in read(out, 'manifest.json')['files']
+    assert set(res['portfolio_common']) <= {'ridge', 'equal_blend'} and read(out, 'paired_eval_new_main.json')['design']['label_rule']['holdout_start'] is not None
+    again = reevaluate(root, {'main': src, 'short': other['output']}); assert read(again['output'], 'reeval.json') == res and again['output'] != a['output']
+    p = src / 'paired_eval.json'; backup = p.read_bytes()
+    try:
+        p.write_text(backup.decode('utf-8').replace('exploratory', 'x', 1), encoding = 'utf-8')
+        with pytest.raises(ReproduceRefused, match = 'manifest'): reevaluate(root, {'main': src})
+    finally: p.write_bytes(backup)

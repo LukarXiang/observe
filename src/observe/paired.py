@@ -142,7 +142,11 @@ def evaluate(cfg, subruns, plan):
         if set(r) == {'base', 'extended'} and all((outs[(model, k)] / 'equity.json').exists() for k in r):
             bad = [v['blocked_from'] for v in r.values() if v.get('blocked_from')]
             eq = {k: _json(outs[(model, k)] / 'equity.json') for k in r}
-            slot['pair'] = curve_pairs(eq['base'], eq['extended'], windows, block, nb, seed, until = min(bad) if bad else None)
+            pair = curve_pairs(eq['base'], eq['extended'], windows, block, nb, seed, until = min(bad) if bad else None)
+            if not bad: slot['pair'] = pair
+            else:       # 完整计划区间的组合指标不可用；阻断前的共同区间只作诊断，不能当作有效的组合比较
+                slot['full_period_metrics'] = 'unavailable'
+                slot['diagnostic_prefix'] = {**pair, 'valid_portfolio_comparison': False, 'truncation_reason': '账本阻断：' + '、'.join(sorted({f"{k}:{'/'.join(v['blocked_kinds'])}({','.join(v['blocked_instruments'])})@{v['blocked_from']}" for k, v in r.items() if v.get('blocked_from')}))}
     cover = _json(b / 'intraday_coverage.json'); sa, sb = _json(a / 'status.json'), _json(b / 'status.json')
     kinds = sorted({x['kind'] for r in (sa, sb) for x in r.get('limitations', [])})
     limitations = [{'kind': 'minute_sample_restricted', 'detail': RESTRICTED}]

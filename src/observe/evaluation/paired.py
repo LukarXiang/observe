@@ -92,16 +92,19 @@ def factor_pairs(fac, lab, names, directions, dev_dates, block, min_n = 30, n_bo
 
 def curve_pairs(eq_a, eq_b, windows, block, n_boot = 1000, seed = 0, until = None):
     """两条净值曲线（{date, equity} 行列表）的日收益差与分窗口累计收益。windows：[(split_id, 首日, 末日)]。
-    until：只比较早于该日的日子（一侧账本在该日起因持仓退市等原因不可信时，取双方都干净的区间，仅作诊断）；没有任何日子的窗口不列出"""
+    until：只比较早于该日的日子（一侧账本在该日起因持仓退市等原因不可信时，取双方都干净的区间，仅作诊断）；没有任何日子的窗口不列出。
+    返回计划区间（截断前双方共有的日子）、实际可评价区间与被排除的天数"""
     def rets(eq):
-        e = pd.DataFrame(eq).set_index('date').equity.astype(float); e.index = pd.to_datetime(e.index).date; r = e.pct_change().dropna()
-        return r if until is None else r[r.index < pd.Timestamp(until).date()]
-    ra, rb = rets(eq_a), rets(eq_b); rows = []
+        e = pd.DataFrame(eq).set_index('date').equity.astype(float); e.index = pd.to_datetime(e.index).date; return e.pct_change().dropna()
+    fa, fb = rets(eq_a), rets(eq_b); planned = fa.index.intersection(fb.index)
+    ra, rb = (fa, fb) if until is None else (fa[fa.index < pd.Timestamp(until).date()], fb[fb.index < pd.Timestamp(until).date()]); rows = []
     comp = lambda r: float((1 + r).prod() - 1)
     for sid, lo, hi in windows:
         a, b = (r[(r.index >= lo) & (r.index <= hi)] for r in (ra, rb))
         if len(a) and len(b): rows.append({'split_id': int(sid), 'days': int(len(a)), 'a': comp(a), 'b': comp(b), 'diff': comp(b) - comp(a)})
     both = ra.index.intersection(rb.index)
-    return {'period': {'first': str(both.min()) if len(both) else None, 'last': str(both.max()) if len(both) else None, 'days': int(len(both)), 'truncated_before': None if until is None else str(until)},
+    return {'planned_period': {'first': str(planned.min()) if len(planned) else None, 'last': str(planned.max()) if len(planned) else None, 'days': int(len(planned))},
+            'period': {'first': str(both.min()) if len(both) else None, 'last': str(both.max()) if len(both) else None, 'days': int(len(both)), 'truncated_before': None if until is None else str(until)},
+            'excluded_days': int(len(planned) - len(both)),
             'a_total_return': comp(ra.loc[both]) if len(both) else None, 'b_total_return': comp(rb.loc[both]) if len(both) else None,
             'daily_return': diff_stats(ra, rb, block, n_boot, seed), 'by_window': rows, 'window_wins_b': int(sum(1 for r in rows if r['diff'] > 0)), 'windows': len(rows)}

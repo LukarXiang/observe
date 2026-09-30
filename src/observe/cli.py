@@ -106,6 +106,8 @@ def main(argv = None):
     rs.add_argument('--config'); rs.add_argument('--snapshot'); rs.add_argument('--output')
     pr = sub.add_parser('paired', help = '成对对照实验：分钟股票池内「日频基础因子」对「日频 + 分钟特征」，两侧样本外预测与账本回测的成对比较；退出码同 run')
     pr.add_argument('--config'); pr.add_argument('--snapshot'); pr.add_argument('--output')
+    re_ = sub.add_parser('reevaluate', help = '只读重新评价已有成对实验（评价口径修正后）：写到新目录，引用原实验编号与产物哈希，不改动源目录')
+    re_.add_argument('--source', action = 'append', required = True, metavar = '标签=成对目录', help = '可重复；第一个是主实验，例如 main=data/runs/<id> sensitivity=data/runs/<id>'); re_.add_argument('--output')
     rp = sub.add_parser('reproduce', help = '用冻结输入在新目录重跑并逐表比较；退出码 0 一致 / 2 不一致 / 3 阻断 / 1 出错或拒绝')
     rp.add_argument('run'); rp.add_argument('--output'); rp.add_argument('--abs-tol', type = float); rp.add_argument('--rel-tol', type = float)
     a = ap.parse_args(argv); root = Path(a.root)
@@ -159,6 +161,9 @@ def main(argv = None):
         _json(r)
         if EXIT_CODES[r['status']]: sys.exit(EXIT_CODES[r['status']])
         return
+    if a.cmd == 'reevaluate':
+        from .reeval import reevaluate
+        return _json(reevaluate(root, dict(x.split('=', 1) for x in a.source), a.output))
     if a.cmd == 'serve':
         import threading, uvicorn
         from .api.app import create_app

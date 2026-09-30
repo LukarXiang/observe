@@ -68,4 +68,5 @@ def test_curve_pairs_truncates_at_the_first_unreliable_day():
     r = curve_pairs(a, b, [(0, days[1], days[3]), (1, days[4], days[7])], 3, 100, 0, until = days[5])
     assert r['period'] == {'first': str(days[1]), 'last': str(days[4]), 'days': 4, 'truncated_before': str(days[5])} and r['daily_return']['days'] == 4
     assert [w['days'] for w in r['by_window']] == [3, 1] and r['a_total_return'] == pytest.approx(104 / 100 - 1) and r['b_total_return'] == pytest.approx(108 / 100 - 1)
+    assert r['planned_period']['days'] == 7 and r['excluded_days'] == 3
     empty = curve_pairs(a, b, [(0, days[6], days[7])], 3, 100, 0, until = days[5]); assert empty['by_window'] == [] and empty['windows'] == 0
