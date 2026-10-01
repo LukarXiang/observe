@@ -21,13 +21,15 @@ def metrics(equity, benchmark = None, rf = 0.0, annualization = 242, min_days = 
     if benchmark is not None:
         b = np.asarray(benchmark, dtype = float)
         if b.ndim != 1 or len(b) != len(e): raise ValueError('benchmark 与 equity 长度必须一致')
-        finite_b = np.isfinite(b)
-        if finite_b.any() and not np.isfinite(b[finite_b]).all(): raise ValueError('benchmark 含无效值')
+        if np.isinf(b).any() or (b[np.isfinite(b)] <= 0).any(): raise ValueError('benchmark 的已知净值必须有限且为正，缺失用 NaN')
         br = b[1:] / b[:-1] - 1; ok = np.isfinite(br) & np.isfinite(r); act = r[ok] - br[ok]
         asd = act.std(ddof = 1) if len(act) > 1 else 0.0
-        bench_annual = _annual(b, a)
+        bench_annual = _annual([1.0, *np.cumprod(1 + br[ok])], a)
+        strategy_annual = _annual([1.0, *np.cumprod(1 + r[ok])], a)
         out.update(benchmark_missing_days = int((~ok).sum()), information_ratio = float(act.mean() / asd * np.sqrt(a)) if len(act) >= min_days and asd > 0 else None,
-                   annual_return_diff = None if bench_annual is None else out['annual_return'] - bench_annual, relative_nav = (e / e[0]) / (b / b[0]))
+                   annual_return_diff = None if bench_annual is None else strategy_annual - bench_annual, relative_nav = (e / e[0]) / (b / b[0]),
+                   benchmark_common_days = int(ok.sum()), common_strategy_annual_return = strategy_annual, common_benchmark_annual_return = bench_annual,
+                   active_return_mean = float(act.mean()) if len(act) else None, active_annualization_basis = 'matched_daily_returns_compounded')
     return out
 
 

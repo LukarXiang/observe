@@ -49,7 +49,7 @@ class RunRegistry:
             db.execute(f'insert into runs ({cols}) values ({",".join("?" for _ in row)}) on conflict(run_id) do update set {assignments}', tuple(row.values()))
 
     def index(self):
-        paths = sorted(set(self.root.glob('*/status.json')) | set(self.root.glob('*/research/*/status.json')) | set(self.root.glob('*/variants/*/status.json')))
+        paths = sorted(self.root.rglob('status.json'))
         for path in paths: self.record(path.parent, json.loads(path.read_text(encoding = 'utf-8')))
         return len(paths)
 

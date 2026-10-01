@@ -1,6 +1,10 @@
 # 后端完整实验：四模型同窗比较，预测只训练一次，三个成本情景分别完整重跑账本。
 # uv run --extra ml observe --root data experiment --config configs/research/daily_four_models_v1.yaml --snapshot <snapshot_id>
 name: daily_four_models_v1
+cache: true
+benchmarks:
+  enabled: true
+  index: 000300.SH
 factor_set: configs/factor_sets/daily_basic_v1.yaml
 label_h: 5
 universe:

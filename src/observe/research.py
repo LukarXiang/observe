@@ -12,7 +12,8 @@ import pandas as pd
 from pydantic import Field, ValidationError
 
 from .data.prices import with_adjusted
-from .data.store import Store
+from .data.store import Store, fingerprint
+from .cache import StageCache, code_version, function_version
 from .dataset import cross_sectional_preprocess, dev_labels, plan_splits, samples
 from .execution import InputBlocked, sessions as open_sessions
 from .factors.intraday import INTRADAY_FIELDS, daily_features, gap_reasons
@@ -81,6 +82,7 @@ class ResearchConfig(_Strict):
     split: SplitConfig = Field(default_factory = SplitConfig)
     models: ModelConfig = Field(default_factory = ModelConfig)
     minute_pool: bool = False      # 研究候选再限制在分钟股票池内，区间限制在有名单的年份、且不晚于分钟线最后一天；分钟聚合特征因子必须开启
+    cache: bool = True
 
 
 def research_params(file_cfg = None, **cli):
@@ -109,7 +111,7 @@ def _minute_inputs(store, state, cfg, need_bars):
     return {'parts': parts if need_bars else {last: parts[last]}, 'last_day': day}
 
 
-def _research(root, cfg, output = None, runs_root = None, factor_file = None, tag = 'research', reproduce_of = None, compare = None, parent_run_id = None):
+def _research(root, cfg, output = None, runs_root = None, factor_file = None, tag = 'research', reproduce_of = None, compare = None, parent_run_id = None, force_recompute = False):
     store = Store(root); state = store.state(cfg.snapshot)
     if cfg.models.lgbm: lightgbm()      # 可选依赖缺失时在创建实验目录前明确报错
     factor_file = Path(factor_file or cfg.factor_set); fset = load_factor_set(factor_file)
@@ -124,17 +126,22 @@ def _research(root, cfg, output = None, runs_root = None, factor_file = None, ta
     out = create_run_dir(Path(runs_root) if runs_root else Path(root) / 'runs', output, '-'.join(x for x in (h[:6], tag) if x))
     status = RunStatus(out, out.name, kind = 'research', registry = Path(root) / 'runs', evidence = evidence_level(cfg), config_hash = h, reproduce_of = reproduce_of, parent_run_id = parent_run_id)
     shutil.copyfile(factor_file, out / 'factor_set.yaml'); write_json(out / 'config.json', doc); status.stage('config')
-    limitations = []
+    limitations, cache = [], None
     try:
         used = {n: state['tables'].get(n, {}) for n in TABLES + (('minute_universe',) if cfg.minute_pool else ())}
         minute = _minute_inputs(store, state, cfg, bool(intraday)) if cfg.minute_pool else None
         if minute: used['bars_5m'] = minute['parts']
         t = {name: store.load_state(state, name) for name in TABLES}
-        write_json(out / 'data_manifest.json', {'snapshot_id': doc['snapshot_id'], 'batch_id': doc['batch_id'], 'offline': True, 'tables': state.get('tables', {}),
-                                                'used': {n: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in parts.items()} for n, parts in used.items()}})
+        data_manifest = {'snapshot_id': doc['snapshot_id'], 'batch_id': doc['batch_id'], 'offline': True, 'tables': state.get('tables', {}),
+                         'used': {n: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in parts.items()} for n, parts in used.items()}}
+        write_json(out / 'data_manifest.json', data_manifest)
+        env = doc['environment']
+        cache = StageCache(root, {'snapshot': doc['snapshot_id'], 'used': data_manifest['used'], 'code': code_version('cache.py'),
+                                 'runtime': {k: env[k] for k in ('python', 'packages', 'lock_sha256')}}, cfg.cache and reproduce_of is None and not force_recompute)
         if minute:
             minute['pool'] = store.load_state(state, 'minute_universe')
-            minute['daily'] = pd.concat([daily_features(pd.read_parquet(store.root / v['file'])) for v in minute['parts'].values()], ignore_index = True) if intraday else None
+            minute['daily'] = pd.concat([cache.frame('intraday', {'partition': v, 'code': code_version('factors/intraday.py')}, out / 'intraday_parts' / str(k),
+                                           'daily', lambda v = v: daily_features(pd.read_parquet(store.root / v['file']))) for k, v in enumerate(minute['parts'].values())], ignore_index = True) if intraday else None
         from .data.audit import audit_status
         from .data.update import default_rules
         try: rules = default_rules()
@@ -144,12 +151,14 @@ def _research(root, cfg, output = None, runs_root = None, factor_file = None, ta
             limitations.append({'kind': 'data_audit', 'detail': f"快照批次审计状态为 {audit['status']}（范围 {audit['scope']}），不是全快照审计通过", 'audit': audit})
         status.stage('load', audit = audit['status'])
         if cfg.minute_pool: limitations.append({'kind': 'minute_sample_restricted', 'detail': f'{RESTRICTED}（外部分钟线不含退市证券；这些证券的分钟特征缺失，按 0 处理）'})
-        result = _pipeline(cfg, fset, t, out, status, limitations, minute)
+        result = _pipeline(cfg, fset, t, out, status, limitations, minute, cache)
         final = 'success_limited' if limitations else 'success'; info = {'summary': result}
     except InputBlocked as exc:
         final, info = 'blocked', {'blocked': exc.issues}
     except Exception as exc:
+        if cache is not None: write_json(out / 'cache.json', cache.report())
         status.finish('failed', error = f'{type(exc).__name__}: {exc}'); raise
+    if cache is not None: write_json(out / 'cache.json', cache.report())
     write_json(out / 'limitations.json', canonical(limitations))
     extra = {}
     if compare is not None:
@@ -161,8 +170,8 @@ def _research(root, cfg, output = None, runs_root = None, factor_file = None, ta
     return {'run_id': out.name, 'output': str(out), 'status': final, 'limitations': limitations, **info, **extra}
 
 
-def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
-    names = [f['name'] for f in fset['factors']]; directions = {f['name']: f['direction'] for f in fset['factors']}
+def _pipeline(cfg, fset, t, out, status, limitations, minute = None, cache = None):
+    names = [f['name'] for f in fset['factors']]
     bars = t['bars_1d'].copy(); bars['date'] = pd.to_datetime(bars.date).dt.date
     if not len(bars): raise InputBlocked([{'kind': 'bars_missing', 'detail': '快照没有日线'}])
     have = set(bars.date); first, last = min(have), max(have)
@@ -177,9 +186,11 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
         days = [d for d in days if years[0] <= d.year <= years[-1] and d <= minute['last_day']]
     if not days: raise InputBlocked([{'kind': 'insufficient_history', 'detail': f'交易日历 {len(cal)} 天，不足预热 {warmup} 天，或区间内没有分钟股票池'}])
 
-    uni = build_universe(bars, t['instruments'], cal, cfg.universe.model_dump(), days[0], days[-1])
-    if minute: uni = _restrict_to_pool(uni, minute['pool'], cfg.universe.model_dump())
-    _pq(out, 'universe', uni)
+    def universe():
+        u = build_universe(bars, t['instruments'], cal, cfg.universe.model_dump(), days[0], days[-1])
+        return _restrict_to_pool(u, minute['pool'], cfg.universe.model_dump()) if minute else u
+    uni = cache.frame('universe', {'config': cfg.universe.model_dump(), 'days': days, 'minute_pool': cfg.minute_pool,
+                                  'code': code_version('universe.py', 'data/standardize.py'), 'functions': function_version(_restrict_to_pool)}, out, 'universe', universe)
     elig = uni[uni.eligible]; status.stage('universe', rows = len(uni), eligible = len(elig), days = len(days), warmup = warmup)
     ever = sorted(set(elig.instrument))
     view = with_adjusted(bars[bars.instrument.isin(set(ever))], t['adj_factors'], t['adj_coverage'])
@@ -190,22 +201,45 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
         view['date'] = pd.to_datetime(view.date).dt.date; view = view.merge(minute['daily'].drop(columns = 'n_bars'), on = ['date', 'instrument'], how = 'left')
     wide = panel(view, cal, ever)
     mask = elig.assign(v = True).pivot(index = 'decision_date', columns = 'instrument', values = 'v').reindex(index = cal, columns = ever).fillna(False).astype(bool)
-    fac = factor_frame(fset, wide, mask); _pq(out, 'factors', fac); status.stage('factors', rows = len(fac), factors = names)
+    factor_inputs = {'universe': fingerprint(uni), 'calendar': cal, 'code': code_version('features.py', 'factors/expr.py', 'factors/__init__.py', 'data/prices.py')}
+    pieces = [cache.frame('factor', {**factor_inputs, 'spec': f, 'min_obs_ratio': fset['min_obs_ratio']}, out / 'factor_parts' / str(k), 'factor',
+                         lambda f = f: factor_frame({**fset, 'factors': [f]}, wide, mask)) for k, f in enumerate(fset['factors'])]
+    fac = pieces[0]
+    for p in pieces[1:]: fac = fac.merge(p, on = ['date', 'instrument'], validate = 'one_to_one')
+    _pq(out, 'factors', fac); status.stage('factors', rows = len(fac), factors = names)
     if minute and minute['daily'] is not None:
         table, coverage = _intraday_report(elig, minute['daily']); _pq(out, 'intraday', table); write_json(out / 'intraday_coverage.json', coverage)
         status.stage('intraday', rows = len(table), with_bars = coverage['total']['with_minute_bars'], candidate_rows = coverage['total']['candidate_rows'])
-    lab = build_labels(view.rename(columns = {'open_adj': 'adj_open'})[['date', 'instrument', 'adj_open', 'is_trading']], cal, h = cfg.label_h)
-    lab = lab.merge(elig[['decision_date', 'instrument']], on = ['decision_date', 'instrument']); _pq(out, 'labels', lab)
+    def labels():
+        l = build_labels(view.rename(columns = {'open_adj': 'adj_open'})[['date', 'instrument', 'adj_open', 'is_trading']], cal, h = cfg.label_h)
+        return l.merge(elig[['decision_date', 'instrument']], on = ['decision_date', 'instrument'])
+    lab = cache.frame('labels', {'universe': fingerprint(uni), 'calendar': cal, 'h': cfg.label_h, 'code': code_version('labels.py', 'data/prices.py')}, out, 'labels', labels)
     status.stage('labels', rows = len(lab), valid = int(lab.valid.sum()))
 
     s = cfg.split; holdout = None
     if s.holdout:       # holdout > 0：最终留出不能被静默取消或缩短；只有显式 holdout = 0 才表示不设最终留出
         if len(days) <= s.holdout: raise InputBlocked([{'kind': 'insufficient_history', 'detail': f'可用决策日 {len(days)} 个，不足以保留 {s.holdout} 个交易日的最终留出（显式设 holdout = 0 才是不留出）'}])
         holdout = days[-s.holdout]
-    plan = plan_splits(days, s.train, s.valid, s.test, holdout)
+    def splits():
+        p = plan_splits(days, s.train, s.valid, s.test, holdout); p['holdout_start'] = holdout; return p
+    plan = cache.frame('splits', {'days': days, 'config': s.model_dump(), 'code': code_version('dataset.py')}, out, 'split_plan', splits)
     if not len(plan): raise InputBlocked([{'kind': 'insufficient_history_for_split', 'detail': f'开发区间 {len(days) - s.holdout} 个决策日（已扣除 {s.holdout} 个留出日），不足一个训练 + 验证 + 测试窗（{s.train + s.valid + s.test}）'}])
-    plan['holdout_start'] = holdout; _pq(out, 'split_plan', plan); status.stage('splits', windows = len(plan), holdout_start = str(holdout) if holdout else None)
+    status.stage('splits', windows = len(plan), holdout_start = str(holdout) if holdout else None)
 
+    payload = {'factors': fingerprint(fac), 'labels': fingerprint(lab), 'split_plan': fingerprint(plan), 'models': cfg.models.model_dump(),
+               'specs': fset['factors'], 'h': cfg.label_h, 'days': days, 'minute_pool': cfg.minute_pool,
+               'code': code_version('models.py', 'dataset.py', 'evaluation/ranking.py', 'research.py')}
+    def fit(dest):
+        summary = _fit_predict(cfg, fac, lab, plan, fset, days, holdout, dest, status)
+        write_json(dest / 'research_summary.json', summary)
+    cache.materialize('models', payload, out, fit)
+    summary = json.loads((out / 'research_summary.json').read_text(encoding = 'utf-8'))
+    status.stage('models', windows = len(plan)); status.stage('evaluation')
+    return summary
+
+
+def _fit_predict(cfg, fac, lab, plan, fset, days, holdout, out, status):
+    names = [f['name'] for f in fset['factors']]; directions = {f['name']: f['direction'] for f in fset['factors']}
     X = cross_sectional_preprocess(fac.assign(eligible = True), names).drop(columns = 'eligible')
     preds, evals, fit_records, lgbm_records, models_dir = [], [], [], [], out / 'models'; models_dir.mkdir()
     for sp in plan.itertuples(index = False):

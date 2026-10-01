@@ -135,9 +135,9 @@ def create_app(root):
 
     @app.get('/api/runs/{rid}/{table}')
     def run_table(rid: str, table: str, limit: int = Query(100, ge = 1, le = 5000), offset: int = Query(0, ge = 0),
-                  start: Date | None = None, end: Date | None = None, date: Date | None = None, instrument: str | None = None, model: str | None = None, scenario: str = 'base'):
+                  start: Date | None = None, end: Date | None = None, date: Date | None = None, instrument: str | None = None, model: str | None = None, scenario: str = 'base', benchmark: str | None = None):
         from ..artifacts import run_table as read_table
-        return read_result(read_table, root, rid, table, limit, offset, date or start, date or end, instrument, model, scenario)
+        return read_result(read_table, root, rid, table, limit, offset, date or start, date or end, instrument, model, scenario, benchmark)
 
     @app.get('/api/jobs/{jid}')
     def get_job(jid: str):

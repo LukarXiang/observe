@@ -10,7 +10,10 @@ import pandas as pd
 from pydantic import Field, ValidationError, model_validator
 
 from .data.store import Store
+from .cache import StageCache, code_version
 from .evaluation.research import factor_diagnostics, holdout_start, model_comparisons
+from .evaluation.benchmarks import benchmark_comparison, price_levels
+from .execution import sessions
 from .features import load_factor_set
 from .replay import RULES, ExecutionConfig, PortfolioConfig, ReproduceRefused, RunConfig, _Strict, _read, _run, check_snapshot, read_core
 from .research import CORE as RESEARCH_CORE, CORE_JSON, ResearchConfig, _research
@@ -19,6 +22,11 @@ from .runs import RunStatus, canonical, compare_frames, compare_tables, create_r
 OK = ('success', 'success_limited')
 MODELS = Literal['single_factor', 'equal_blend', 'ridge', 'lgbm']
 SCENARIOS = Literal['base', 'fees_x2', 'slippage_x2']
+
+
+class BenchmarkConfig(_Strict):
+    enabled: bool = True
+    index: str = Field('000300.SH', pattern = r'^\d{6}\.(SH|SZ|BJ)$')
 
 
 class ExperimentConfig(ResearchConfig):
@@ -30,6 +38,7 @@ class ExperimentConfig(ResearchConfig):
     backtest_models: list[MODELS] = Field(default_factory = list)
     cost_scenarios: list[SCENARIOS] = Field(default_factory = lambda: ['base', 'fees_x2', 'slippage_x2'], min_length = 1)
     n_boot: int = Field(1000, ge = 100, le = 20000)
+    benchmarks: BenchmarkConfig = Field(default_factory = BenchmarkConfig)
 
     @model_validator(mode = 'after')
     def _models(self):
@@ -109,6 +118,51 @@ def _portfolio_report(subruns):
     return rows
 
 
+def scenario_execution(cfg, scenario):
+    execution = cfg.execution.model_dump()
+    if scenario == 'fees_x2': execution['fee_multiplier'] *= 2
+    if scenario == 'slippage_x2': execution['slippage'] *= 2
+    return execution
+
+
+def evaluate_benchmarks(root, state, cfg, research, out, subruns, force_recompute = False):
+    """每个成本情景各跑一份完整股票池等权账本；评价不改子实验指标。"""
+    store = Store(root); calendar = sessions(store.load_state(state, 'calendar')); limitations, comparisons, tables = [], [], []
+    used = {n: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in state['tables'].get(n, {}).items()} for n in ('calendar', 'index_1d')}
+    write_json(out / 'benchmark_data_manifest.json', {'snapshot_id': cfg.snapshot, 'tables': state['tables'], 'used': used})
+    index = store.load_state(state, 'index_1d')
+    for scenario in cfg.cost_scenarios:
+        portfolio = {**cfg.portfolio.model_dump(), 'construction': 'universe_equal'}
+        bc = RunConfig(snapshot = cfg.snapshot, initial_cash = cfg.initial_cash, boards = cfg.universe.boards, rules = cfg.rules, portfolio = portfolio,
+                       execution = scenario_execution(cfg, scenario), scores = {'source': 'universe', 'run': research['output']}, cache = cfg.cache)
+        r = _run(root, bc, runs_root = out / 'benchmarks', rules_file = out / 'rules.yaml', tag = f'universe-equal-{scenario}', parent_run_id = out.name, force_recompute = force_recompute)
+        subruns['benchmarks'].append({'model': 'universe_equal', 'scenario': scenario, **reference(r)}); limitations += r['limitations']
+        if r['status'] not in OK: limitations.append({'kind': 'benchmark_blocked', 'scenario': scenario, 'detail': '同股票池等权账本被阻断，该基准的完整绩效与主动比较不可用'})
+    equal = {x['scenario']: x for x in subruns['benchmarks']}; metadata = None
+    for item in subruns['backtests']:
+        if item['status'] not in OK: continue
+        rows = _read(Path(item['output']) / 'equity.json'); dates = [pd.Timestamp(r['date']).date() for r in rows]
+        levels, meta = price_levels(index, calendar, dates, cfg.benchmarks.index); metadata = meta
+        daily, price = benchmark_comparison(rows, cfg.initial_cash, levels, cfg.benchmarks.index, item['model'], item['scenario']); tables.append(daily)
+        pool = equal[item['scenario']]; pool_metric = {'available': False, 'reason': '同股票池等权账本被阻断'}
+        if pool['status'] in OK:
+            eq = _read(Path(pool['output']) / 'equity.json'); by_date = {pd.Timestamp(r['date']).date(): r['equity'] for r in eq}
+            # 两个账本都在首日开盘前从相同资金起步；缺失首日时不能把较晚净值当成期初。
+            initial = cfg.initial_cash if eq and pd.Timestamp(eq[0]['date']).date() == dates[0] else float('nan')
+            levels = [initial, *[by_date.get(d, float('nan')) for d in dates]]
+            daily, pool_metric = benchmark_comparison(rows, cfg.initial_cash, levels, 'universe_equal', item['model'], item['scenario']); tables.append(daily)
+        comparisons.append({'model': item['model'], 'scenario': item['scenario'], 'benchmarks': {cfg.benchmarks.index: price, 'universe_equal': pool_metric}})
+    price_ok = bool(comparisons) and all(x['benchmarks'][cfg.benchmarks.index]['benchmark_missing_days'] == 0 for x in comparisons)
+    if not price_ok: limitations.append({'kind': 'price_benchmark_missing', 'detail': '指定快照中的价格指数缺失或不完整；保留全部策略日收益，主动指标只使用相邻两日指数均有效的日期', 'index': cfg.benchmarks.index})
+    result = {'available': any(x['benchmarks'][k]['available'] for x in comparisons for k in x['benchmarks']), 'price_index': metadata,
+              'universe_equal': {'description': '同一历史研究候选完整等权、同调仓节奏、同成本情景，使用唯一账本；整手、现金、成交限制导致实际权重偏离目标',
+                                 'ignored_topn_fields': ['n', 'buffer', 'max_sell']}, 'comparisons': comparisons}
+    write_json(out / 'benchmark_eval.json', result)
+    daily = pd.concat(tables, ignore_index = True) if tables else pd.DataFrame(columns = ['date', 'model_id', 'scenario', 'benchmark_id', 'strategy_return', 'benchmark_return', 'active_return', 'relative_nav'])
+    daily['date'] = pd.to_datetime(daily.date).dt.date; daily.to_parquet(out / 'benchmark_daily.parquet', index = False)
+    return result, limitations
+
+
 def run_experiment(root, output = None, runs_root = None, **params):
     p = experiment_params(params); return _experiment(root, p['config'], output or p['output'], runs_root)
 
@@ -123,29 +177,37 @@ def _experiment(root, cfg, output = None, runs_root = None, factor_file = None, 
     status = RunStatus(out, out.name, kind = 'experiment', registry = Path(root) / 'runs', config_hash = fingerprint, snapshot_id = cfg.snapshot,
                        evidence = 'exploratory' if cfg.minute_pool else 'development_oos')
     write_json(out / 'config.json', doc); shutil.copyfile(frozen_rules, out / 'rules.yaml'); status.stage('config')
-    subruns, limitations, report = {'research': None, 'backtests': []}, [], None
+    subruns, limitations, report, cache = {'research': None, 'backtests': [], 'benchmarks': []}, [], None, None
     try:
         rc = ResearchConfig(**{k: getattr(cfg, k) for k in ResearchConfig.model_fields})
-        research = _research(root, rc, runs_root = out / 'research', factor_file = factor_file, parent_run_id = out.name)
+        research = _research(root, rc, runs_root = out / 'research', factor_file = factor_file, parent_run_id = out.name, force_recompute = reproduce_of is not None)
         subruns['research'] = reference(research); status.stage('research', **subruns['research'])
         limitations += research['limitations']
         final = research['status']
         if final in OK:
-            factors, models = detailed_evaluation(research['output'], cfg, out); status.stage('diagnostics')
+            rp = Path(research['output']); used = _read(rp / 'data_manifest.json')['used']
+            cache = StageCache(root, {'snapshot': cfg.snapshot, 'used': used, 'code': code_version('cache.py'),
+                                     'runtime': {k: env[k] for k in ('python', 'packages', 'lock_sha256')}}, cfg.cache and reproduce_of is None)
+            payload = {'upstream': {n: file_sha(rp / f'{n}.parquet') for n in ('factors', 'labels', 'split_plan', 'predictions')},
+                       'config': {'h': cfg.label_h, 'models': cfg.models.model_dump(), 'n_boot': cfg.n_boot, 'rebalance_every': cfg.portfolio.rebalance_every},
+                       'code': code_version('evaluation/research.py', 'evaluation/paired.py', 'evaluation/ranking.py', 'dataset.py', 'experiments.py')}
+            cache.materialize('diagnostics', payload, out, lambda dest: detailed_evaluation(research['output'], cfg, dest))
+            factors, models = _read(out / 'factor_diagnostics.json'), _read(out / 'model_comparison.json'); status.stage('diagnostics')
             for model in cfg.backtest_models:
                 for scenario in cfg.cost_scenarios:
-                    execution = cfg.execution.model_dump()
-                    if scenario == 'fees_x2': execution['fee_multiplier'] *= 2
-                    if scenario == 'slippage_x2':
-                        execution['slippage'] *= 2
-                        if cfg.execution.slippage == 0: limitations.append({'kind': 'zero_slippage_sensitivity', 'detail': '基准滑点为 0，滑点加倍仍为 0，此情景没有增加执行压力'})
+                    execution = scenario_execution(cfg, scenario)
+                    if scenario == 'slippage_x2' and cfg.execution.slippage == 0: limitations.append({'kind': 'zero_slippage_sensitivity', 'detail': '基准滑点为 0，滑点加倍仍为 0，此情景没有增加执行压力'})
                     bc = RunConfig(snapshot = cfg.snapshot, initial_cash = cfg.initial_cash, boards = cfg.universe.boards, rules = cfg.rules, portfolio = cfg.portfolio,
-                                   execution = execution, scores = {'source': 'predictions', 'run': research['output'], 'model': model})
-                    r = _run(root, bc, runs_root = out / 'variants', rules_file = out / 'rules.yaml', tag = f'{model}-{scenario}', parent_run_id = out.name)
+                                   execution = execution, scores = {'source': 'predictions', 'run': research['output'], 'model': model}, cache = cfg.cache)
+                    r = _run(root, bc, runs_root = out / 'variants', rules_file = out / 'rules.yaml', tag = f'{model}-{scenario}', parent_run_id = out.name, force_recompute = reproduce_of is not None)
                     subruns['backtests'].append({'model': model, 'scenario': scenario, **reference(r)}); limitations += r['limitations']
                     status.stage(f'{model}_{scenario}', **reference(r))
             blocked = [x for x in subruns['backtests'] if x['status'] not in OK]
             if blocked: limitations.append({'kind': 'portfolio_blocked', 'detail': '部分账本无法处理持仓或输入，相关组合绩效不进入正式比较', 'runs': [{k: x[k] for k in ('model', 'scenario', 'status')} for x in blocked]})
+            benchmark = {'available': False, 'reason': '本实验配置禁用基准'}
+            if cfg.benchmarks.enabled:
+                benchmark, extra_limits = evaluate_benchmarks(root, state, cfg, research, out, subruns, reproduce_of is not None); limitations += extra_limits
+                status.stage('benchmarks')
             final = 'blocked' if blocked else ('success_limited' if limitations else 'success')
             summary = research['summary']
             report = {'header': {'snapshot_id': cfg.snapshot, 'batch_id': state['batch_id'], 'period': summary, 'universe': cfg.universe.model_dump(),
@@ -154,11 +216,13 @@ def _experiment(root, cfg, output = None, runs_root = None, factor_file = None, 
                        'approximation': '日频开盘参考价近似；收益已扣交易费用，未扣个人股息红利所得税', 'holdout': '最终留出不生成预测、不用于因子挑选、参数与组合选择'},
                       'factor': {'evaluation': _read(Path(research['output']) / 'factor_eval.json'), 'diagnostics': factors},
                       'model': {'evaluation': _read(Path(research['output']) / 'model_eval.json'), **models}, 'portfolio': _portfolio_report(subruns['backtests']),
-                      'limitations': limitations, 'benchmark': {'available': False, 'reason': '当前完整实验未接入价格指数与同股票池等权基准，未计算主动收益指标'}}
+                      'limitations': limitations, 'benchmark': benchmark}
             write_json(out / 'report.json', report); status.stage('report')
         else: status.stage('backtests', 'not_run', reason = '研究阶段未完成，不用部分预测进入账本')
     except Exception as exc:
+        if cache is not None: write_json(out / 'cache.json', cache.report())
         write_json(out / 'subruns.json', subruns); status.finish('failed', error = f'{type(exc).__name__}: {exc}'); raise
+    if cache is not None: write_json(out / 'cache.json', cache.report())
     write_json(out / 'subruns.json', subruns); write_json(out / 'limitations.json', limitations)
     extra = compare(out, subruns) if compare is not None else {}
     if extra.get('reproduction', {}).get('result') == 'mismatch': extra['execution_status'], final = final, 'mismatch'
@@ -209,9 +273,10 @@ def run_factor_eval(root, output = None, **params):
 
 def reproduce_experiment(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0):
     source = resolve_run(root, run); ensure_outside(source, output); verify_manifest(source)
-    doc, subs = _read(source / 'config.json'), _read(source / 'subruns.json'); cfg = ExperimentConfig.model_validate(doc['config'])
+    doc, subs = _read(source / 'config.json'), _read(source / 'subruns.json'); raw = dict(doc['config']); raw.setdefault('benchmarks', {'enabled': False}); cfg = ExperimentConfig.model_validate(raw)
     research = resolve_run(root, subs['research']['output']); verify_manifest(research)
     check_snapshot(Store(root), cfg.snapshot, _read(research / 'data_manifest.json'))
+    if (source / 'benchmark_data_manifest.json').exists(): check_snapshot(Store(root), cfg.snapshot, _read(source / 'benchmark_data_manifest.json'))
     frozen = research / 'factor_set.yaml'
     if file_sha(frozen) != doc['factor_set_sha256'] or file_sha(source / 'rules.yaml') != doc['rules_sha256']: raise ReproduceRefused('冻结因子集或执行规则不一致')
 
@@ -226,17 +291,17 @@ def reproduce_experiment(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0
         expected_json = {n: _read(a / f'{n}.json') if (a / f'{n}.json').exists() else None for n in CORE_JSON}
         actual_json = {n: _read(b / f'{n}.json') if (b / f'{n}.json').exists() else None for n in CORE_JSON}
         d, s = compare_tables(expected_json, actual_json, abs_tol, rel_tol); diffs += d; summaries.update(s)
-        old = {(x['model'], x['scenario']): x for x in subs['backtests']}; new = {(x['model'], x['scenario']): x for x in now['backtests']}
+        old = {(x['model'], x['scenario']): x for x in subs['backtests'] + subs.get('benchmarks', [])}; new = {(x['model'], x['scenario']): x for x in now['backtests'] + now.get('benchmarks', [])}
         summaries['backtest_set'] = {'differences': int(old.keys() != new.keys())}
         for key in old.keys() & new.keys():
             d, s = compare_tables(read_core(resolve_run(root, old[key]['output'])), read_core(new[key]['output']), abs_tol, rel_tol)
             label = '/'.join(key); diffs += [{'variant': label, **x} for x in d]; summaries[label] = {'differences': sum(v['differences'] for v in s.values()), 'tables': s}
             if old[key]['status'] != new[key]['status']: summaries[label]['differences'] += 1
-        for n in ('factor_diagnostics', 'model_comparison'):
+        for n in ('factor_diagnostics', 'model_comparison', 'benchmark_eval'):
             old_file, new_file = source / f'{n}.json', out / f'{n}.json'
             d, s = compare_tables({n: _read(old_file) if old_file.exists() else None}, {n: _read(new_file) if new_file.exists() else None}, abs_tol, rel_tol)
             diffs += d; summaries.update(s)
-        for n, keys in (('factor_daily', ('factor', 'date')), ('factor_groups', ('factor', 'date', 'quantile'))):
+        for n, keys in (('factor_daily', ('factor', 'date')), ('factor_groups', ('factor', 'date', 'quantile')), ('benchmark_daily', ('model_id', 'scenario', 'benchmark_id', 'date'))):
             af, bf = source / f'{n}.parquet', out / f'{n}.parquet'
             if af.exists() and bf.exists():
                 d, s = compare_frames(pd.read_parquet(af), pd.read_parquet(bf), keys, abs_tol, rel_tol); diffs += [{'table': n, **x} for x in d]; summaries[n] = s

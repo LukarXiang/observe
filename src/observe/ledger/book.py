@@ -112,6 +112,11 @@ class Book:
             qty = p.sellable
             if qty <= 0: return reject('not_sellable')
             requested = qty
+            if order.get('qty', 'all') != 'all':
+                desired = order['qty']
+                if type(desired) is not int or desired <= 0: return reject('invalid_qty')
+                if desired < p.sellable and desired % unit: return reject('sell_unit')
+                requested, qty = desired, min(desired, p.sellable)
             if 'participation' in order:
                 cap = quote.get('avg_amount_20d'); limit = order['participation']
                 if cap is None: return reject('no_liquidity_reference')

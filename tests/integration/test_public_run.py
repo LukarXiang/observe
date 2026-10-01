@@ -169,7 +169,7 @@ def test_failure_keeps_running_status_and_completed_stages(tmp_path, monkeypatch
     sid = snapshot(tmp_path, flat(A)); src = run(tmp_path, sid)['output']; before = tree_hash(src)
     def boom(*a, **k): raise RuntimeError('evaluation exploded')
     monkeypatch.setattr(replay, 'evaluate', boom)
-    with pytest.raises(RuntimeError): run(tmp_path, sid)
+    with pytest.raises(RuntimeError): run(tmp_path, sid, cache = False)
     with pytest.raises(RuntimeError): reproduce(tmp_path, src)
     failed = [json.loads(p.read_text(encoding = 'utf-8')) for p in (tmp_path / 'runs').glob('*/status.json')]
     failed = [s for s in failed if s['status'] == 'failed']

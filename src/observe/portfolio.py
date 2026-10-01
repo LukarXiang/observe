@@ -31,3 +31,22 @@ def refill_orders(target, target_amount, held_value, sell_reason, rank, lot_valu
     buys = [{'instrument': i, 'side': 'buy', 'amount': round(g, 2), 'participation': participation, 'reason': 'refill'} for i, g in sorted(gaps.items(), key = lambda x: rank.get(x[0], 10 ** 9))
             if g >= lot_value.get(i, float('inf'))]
     return sells + buys
+
+
+def equal_weight_orders(eligible, positions, equity, quotes, rules, day, max_weight = 1.0, participation = DEFAULT_PARTICIPATION):
+    """完整候选等权；调仓时重设所有目标，用决策收盘价算减持整手与增持金额。"""
+    amount = round(equity * min(1 / len(eligible), max_weight), 2) if eligible else 0.0
+    sells, buys = [], []
+    for i in sorted(set(positions) | set(eligible)):
+        p = positions.get(i); qty = p.qty if p else 0
+        if i not in eligible:
+            if qty: sells.append({'instrument': i, 'side': 'sell', 'qty': 'all', 'reason': 'exit_universe', 'participation': participation})
+            continue
+        q = quotes.get(i, {}); price = p.last_price if qty else q.get('close')
+        if not price or price <= 0: continue
+        unit = rules.on(day, q.get('board', 'main'), q.get('is_st', False)).buy_unit
+        gap = round(amount - qty * price, 2)
+        trim = int(max(0, -gap) / price // unit * unit)
+        if trim: sells.append({'instrument': i, 'side': 'sell', 'qty': trim, 'reason': 'equal_weight_trim', 'participation': participation})
+        elif gap >= unit * price: buys.append({'instrument': i, 'side': 'buy', 'amount': gap, 'reason': 'equal_weight_add', 'participation': participation})
+    return sells + buys

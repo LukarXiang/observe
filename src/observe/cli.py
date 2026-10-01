@@ -112,8 +112,10 @@ def main(argv = None):
     sv = sub.add_parser('serve'); sv.add_argument('--port', type = int, default = 8765)
     r = sub.add_parser('run', help = '离线回放：显式参数 > --config YAML > 默认值；退出码 0 成功 / 3 阻断 / 1 出错')
     r.add_argument('--config'); r.add_argument('--snapshot'); r.add_argument('--output'); r.add_argument('--cash', type = float); r.add_argument('--start'); r.add_argument('--end')
+    r.add_argument('--no-cache', dest = 'cache', action = 'store_false', default = None)
     rs = sub.add_parser('research', help = '研究流水线：股票池 → 因子 → 标签 → 切分 → 基线与 Ridge 样本外预测 → 评价；退出码同 run')
     rs.add_argument('--config'); rs.add_argument('--snapshot'); rs.add_argument('--output')
+    rs.add_argument('--no-cache', dest = 'cache', action = 'store_false', default = None)
     pr = sub.add_parser('paired', help = '成对对照实验：分钟股票池内「日频基础因子」对「日频 + 分钟特征」，两侧样本外预测与账本回测的成对比较；退出码同 run')
     pr.add_argument('--config'); pr.add_argument('--snapshot'); pr.add_argument('--output')
     re_ = sub.add_parser('reevaluate', help = '只读重新评价已有成对实验（评价口径修正后）：写到新目录，引用原实验编号与产物哈希，不改动源目录')
@@ -124,6 +126,7 @@ def main(argv = None):
     rp.add_argument('run'); rp.add_argument('--output'); rp.add_argument('--abs-tol', type = float); rp.add_argument('--rel-tol', type = float)
     ex = sub.add_parser('experiment', help = '完整研究实验：冻结快照 → 四模型预测 → 三层评价 → 组合变体与成本情景')
     ex.add_argument('--config'); ex.add_argument('--snapshot'); ex.add_argument('--output'); ex.add_argument('--queue', action = 'store_true')
+    ex.add_argument('--no-cache', dest = 'cache', action = 'store_false', default = None)
     vr = sub.add_parser('variant', help = '复用已有研究预测，仅重跑组合与账本；产物放入父实验 variants 子目录')
     vr.add_argument('parent'); vr.add_argument('--config'); vr.add_argument('--model'); vr.add_argument('--output'); vr.add_argument('--queue', action = 'store_true')
     co = sub.add_parser('compare', help = '并列读取已有实验的指标'); co.add_argument('runs', nargs = '+')
@@ -139,7 +142,7 @@ def main(argv = None):
     if a.cmd == 'experiment':
         from .experiments import experiment_params
         from .runs import EXIT_CODES
-        p = experiment_params(_config(a.config), snapshot = a.snapshot, output = a.output)
+        p = experiment_params(_config(a.config), snapshot = a.snapshot, output = a.output, cache = a.cache)
         params = {**p['config'].model_dump(mode = 'json'), 'output': p['output']}
         if a.queue: return _json({'job_id': Jobs(root).submit('experiment', params)})
         r = run_kind(root, 'experiment', params); _json(r)
@@ -214,7 +217,7 @@ def main(argv = None):
         from .runs import EXIT_CODES
         if a.cmd == 'research':
             from .research import _research, research_params
-            p = research_params(_config(a.config), snapshot = a.snapshot, output = a.output)
+            p = research_params(_config(a.config), snapshot = a.snapshot, output = a.output, cache = a.cache)
             r = _research(root, p['config'], p['output'])
         elif a.cmd == 'paired':
             from .paired import _paired, paired_params
@@ -222,7 +225,7 @@ def main(argv = None):
             r = _paired(root, p['config'], p['output'])
         elif a.cmd == 'run':
             from .replay import _run, run_params
-            p = run_params(_config(a.config), snapshot = a.snapshot, output = a.output, initial_cash = a.cash, start = a.start, end = a.end)
+            p = run_params(_config(a.config), snapshot = a.snapshot, output = a.output, initial_cash = a.cash, start = a.start, end = a.end, cache = a.cache)
             r = _run(root, p['config'], p['output'])
         else: r = run_kind(root, 'reproduce', {'run': a.run, 'output': a.output, 'abs_tol': a.abs_tol, 'rel_tol': a.rel_tol})
         _json(r)

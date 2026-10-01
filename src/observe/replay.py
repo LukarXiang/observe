@@ -19,6 +19,7 @@ from .execution import InputBlocked, build, load
 from .ledger import LedgerError, RuleSet
 from .loop import POLICIES, run_loop
 from .portfolio import DEFAULT_PARTICIPATION
+from .cache import StageCache, code_version, digest
 from .runs import (KEYS, STATUS_FIELDS, RunStatus, canonical, compare_tables, create_run_dir, drift, ensure_outside, environment, file_sha,
                    write_json, write_table, resolve_run)
 
@@ -34,6 +35,7 @@ class _Strict(BaseModel):
 
 
 class PortfolioConfig(_Strict):
+    construction: Literal['topn', 'universe_equal'] = 'topn'
     n: int = Field(1, ge = 1)
     max_weight: float = Field(1.0, gt = 0, le = 1)
     rebalance_every: int = Field(1, ge = 1)
@@ -52,7 +54,7 @@ class ExecutionConfig(_Strict):
 
 
 class ScoresConfig(_Strict):
-    source: Literal['baseline', 'predictions'] = 'baseline'
+    source: Literal['baseline', 'predictions', 'universe'] = 'baseline'
     run: str | None = None                                       # predictions：研究实验目录（observe research 的产物）
     model: str = 'ridge'
     allow_cross_snapshot: bool = False                           # 研究实验的快照与回放快照不同时默认拒绝；确需用新快照评价旧预测，显式设为 true，记为对照情景并记录双方版本
@@ -68,6 +70,7 @@ class RunConfig(_Strict):
     portfolio: PortfolioConfig = Field(default_factory = PortfolioConfig)
     execution: ExecutionConfig = Field(default_factory = ExecutionConfig)
     scores: ScoresConfig = Field(default_factory = ScoresConfig)
+    cache: bool = True
 
 
 ALIASES = {'snapshot_id': 'snapshot', 'cash': 'initial_cash'}
@@ -123,7 +126,9 @@ def score_source(cfg, snapshot_id = None, root = None):
     """分数来源：工程基线，或研究实验的样本外预测表（同时带来研究候选）。预测表与股票池按文件哈希冻结。
     predictions 时先检查身份：研究实验与回放的快照一致（否则须显式声明对照情景）、模型存在、预测都落在该实验的研究候选上、fit_asof 早于决策日、请求区间不超出预测的定义范围"""
     sc = cfg.scores
+    if cfg.portfolio.construction == 'universe_equal' and sc.source != 'universe': raise ValueError('universe_equal 必须显式使用 universe 分数来源')
     if sc.source == 'baseline': return BASELINE, cfg
+    if sc.source == 'universe': return universe_source(cfg, snapshot_id, root)
     if not sc.run: raise ValueError('scores.source = predictions 需要 scores.run（研究实验目录）')
     run = resolve_run(root, sc.run) if root is not None else Path(sc.run); st = json.loads((run / 'status.json').read_text(encoding = 'utf-8')); rdoc = json.loads((run / 'config.json').read_text(encoding = 'utf-8'))
     if st.get('kind') != 'research' or st.get('status') not in ('success', 'success_limited'): raise ValueError(f'{run} 不是已完成的研究实验（状态 {st.get("status")}）')
@@ -151,6 +156,28 @@ def score_source(cfg, snapshot_id = None, root = None):
     return meta, cfg.model_copy(update = {'start': cfg.start or first, 'end': cfg.end or last})
 
 
+def universe_source(cfg, snapshot_id, root):
+    """完整测试区间的历史研究候选；不读取模型分数或标签，不按预测缺失过滤。"""
+    if not cfg.scores.run or cfg.portfolio.construction != 'universe_equal': raise ValueError('universe 来源需要研究目录和 universe_equal 组合')
+    run = resolve_run(root, cfg.scores.run); st, doc = _read(run / 'status.json'), _read(run / 'config.json')
+    if st.get('kind') != 'research' or st.get('status') not in ('success', 'success_limited'): raise ValueError('等权基准需要已完成的研究实验')
+    if doc['snapshot_id'] != snapshot_id: raise ValueError('等权基准必须使用研究实验的同一快照')
+    uni = pd.read_parquet(run / 'universe.parquet'); plan = pd.read_parquet(run / 'split_plan.parquet')
+    if uni.duplicated(['decision_date', 'instrument']).any() or not len(plan): raise ValueError('等权基准的候选主键重复或切分为空')
+    first, last = pd.Timestamp(plan.test_start.min()).date(), pd.Timestamp(plan.test_end.max()).date()
+    if (cfg.start and cfg.start < first) or (cfg.end and cfg.end > last): raise ValueError('等权基准不能超出冻结测试区间')
+    meta = {'source': 'universe', 'run': str(run.resolve()), 'research_run_id': run.name, 'evidence': f"{st.get('evidence') or 'development_oos'}_universe",
+            'universe_sha256': file_sha(run / 'universe.parquet'), 'split_plan_sha256': file_sha(run / 'split_plan.parquet'), 'research_snapshot': doc['snapshot_id']}
+    return meta, cfg.model_copy(update = {'start': cfg.start or first, 'end': cfg.end or last})
+
+
+def _universe_scores(meta, dates):
+    u = pd.read_parquet(Path(meta['run']) / 'universe.parquet'); u['decision_date'] = pd.to_datetime(u.decision_date).dt.date
+    eligible = {d: set() for d in dates}
+    for row in u[u.eligible & u.decision_date.isin(set(dates))].itertuples(): eligible[row.decision_date].add(row.instrument)
+    return [{'decision_date': d, 'instrument': i, 'score': 0.0} for d in dates for i in sorted(eligible[d])], eligible
+
+
 def _prediction_scores(meta, dates):
     run, keep = Path(meta['run']), set(dates)
     p = pd.read_parquet(run / 'predictions.parquet'); p = p[(p.model_id == meta['model'])]; p['decision_date'] = pd.to_datetime(p.decision_date).dt.date
@@ -167,7 +194,7 @@ def run_offline(root, output = None, runs_root = None, **params):
     p = run_params(params); return _run(root, p['config'], output or p['output'], runs_root)
 
 
-def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = None, reproduce_of = None, compare = None, parent_run_id = None):
+def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = None, reproduce_of = None, compare = None, parent_run_id = None, force_recompute = False):
     store = Store(root); state = store.state(cfg.snapshot)                       # 快照不存在时在建目录之前就报错
     source, cfg = score_source(cfg, state.get('snapshot_id') or cfg.snapshot, root)
     rules_file = Path(rules_file or cfg.rules); rules_text = rules_file.read_text(encoding = 'utf-8'); rules = RuleSet.from_yaml(rules_file)
@@ -178,7 +205,7 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
     out = create_run_dir(Path(runs_root) if runs_root else Path(root) / 'runs', output, '-'.join(x for x in (h[:6], tag) if x))
     status = RunStatus(out, out.name, registry = Path(root) / 'runs', evidence = source['evidence'], config_hash = h, reproduce_of = reproduce_of, parent_run_id = parent_run_id)
     (out / 'rules.yaml').write_text(rules_text, encoding = 'utf-8'); write_json(out / 'config.json', doc); status.stage('config')
-    rec, orders, limitations, x = None, None, [], cfg.execution
+    cache, limitations, x = None, [], cfg.execution
     if 'cross_snapshot_scenario' in source: limitations.append({'kind': 'cross_snapshot_scenario', 'detail': '对照情景：用与预测不同的快照做回放评价', **source['cross_snapshot_scenario']})
     audit_rules = rules
     if x.fee_multiplier != 1: m = x.fee_multiplier; rules = rules.scaled(commission_rate = m, stamp_tax = m, transfer_fee = m, min_commission = m)
@@ -193,32 +220,29 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
         inputs = build(tables, cfg.start, cfg.end, cfg.boards, x.liquidity_window, x.liquidity_override); limitations += inputs.limitations
         status.stage('inputs', **inputs.info)
         if source['source'] == 'baseline': scores, eligible = baseline_scores(inputs.candidates), inputs.candidates
+        elif source['source'] == 'universe': scores, eligible = _universe_scores(source, inputs.dates)
         else: scores, eligible = _prediction_scores(source, inputs.dates)
         write_table(out, 'scores', scores); status.stage('scores', rows = len(scores), source = source['source'])
-        by_date = {}
-        for s in scores: by_date.setdefault(s['decision_date'], {})[s['instrument']] = s['score']
-        rec = _Recorder(inputs.dates, inputs.unexplained); p = cfg.portfolio
-        book, orders = run_loop(inputs.dates, inputs.market, by_date, cfg.initial_cash, rules, eligible_by_date = eligible, actions = inputs.actions,
-                                rebalance_every = p.rebalance_every, open_cash_policy = p.open_cash_policy, slippage = x.slippage, n = p.n, buffer = p.buffer,
-                                max_sell = p.max_sell, max_weight = p.max_weight, refill_between_rebalance = p.refill_between_rebalance, calendar = inputs.calendar,
-                                participation = p.participation, on_close = rec)
-        status.stage('loop', orders = len(orders))
-        status.stage('labels', 'not_run', reason = '回放不使用标签；标签由研究阶段 labels.build_labels 生成')
-        metrics = evaluate(book.equity_curve()); write_json(out / 'metrics.json', metrics)
-        write_json(out / 'trading.json', canonical(trading_stats(book.equity_rows, book.fills, orders, rec.positions, cfg.initial_cash))); status.stage('evaluation')
-        final = 'blocked' if book.status == 'blocked' else ('success_limited' if limitations else 'success')
-        info = {'assumptions': book.assumptions, 'issues': book.issues, 'rules_used_unverified': sorted(map(str, rules.used_unverified)),
-                'summary': {'final_equity': book.equity_curve()[-1], 'days': len(inputs.dates), 'start': inputs.info['start'], 'end': inputs.info['end']}}
+        data_manifest = _read(out / 'data_manifest.json'); env = doc['environment']
+        cache = StageCache(root, {'snapshot': doc['snapshot_id'], 'used': data_manifest['used'], 'code': code_version('cache.py'),
+                                 'runtime': {k: env[k] for k in ('python', 'packages', 'lock_sha256')}}, cfg.cache and reproduce_of is None and not force_recompute)
+        payload = {'config': {k: v for k, v in cfg.model_dump(mode = 'json').items() if k not in ('scores', 'rules', 'cache')},
+                   'scores': digest(scores), 'eligible': digest([{'date': d, 'instruments': sorted(v)} for d, v in sorted(eligible.items())]),
+                   'rules': rules.config_fingerprint(), 'code': code_version('loop.py', 'portfolio.py', 'ledger/book.py', 'ledger/rules.py', 'execution.py', 'evaluation/portfolio.py', 'replay.py')}
+        cache.materialize('ledger', payload, out, lambda dest: _simulate(inputs, scores, eligible, cfg, rules, dest, status))
+        sim = _read(out / 'loop_result.json'); info = sim['info']
+        status.stage('loop', 'blocked' if 'blocked' in info else 'done'); status.stage('labels', 'not_run', reason = '回放不使用标签；标签由研究阶段 labels.build_labels 生成')
+        if (out / 'metrics.json').exists(): status.stage('evaluation')
+        final = 'blocked' if sim['status'] == 'blocked' else ('success_limited' if limitations else 'success')
     except InputBlocked as exc:
         final, info = 'blocked', {'blocked': exc.issues}; status.stage('inputs', 'blocked')
     except LedgerError as exc:
         final, info = 'blocked', {'blocked': [{'kind': 'ledger', 'detail': str(exc)}]}; status.stage('loop', 'blocked')
     except Exception as exc:
+        if cache is not None: write_json(out / 'cache.json', cache.report())
         status.finish('failed', error = f'{type(exc).__name__}: {exc}'); raise
     try:
-        if rec is not None:
-            for name, rows in rec.tables().items(): write_table(out, name, rows)
-        if orders is not None: write_table(out, 'orders', orders)
+        if cache is not None: write_json(out / 'cache.json', cache.report())
         write_table(out, 'limitations', limitations)
         extra = {}
         if compare is not None:
@@ -230,6 +254,30 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
     _manifest(out, status.data, doc['environment'])
     return {'run_id': out.name, 'output': str(out), 'status': final, 'limitations': limitations, **info.get('summary', {}),
             **({'blocked': info['blocked']} if 'blocked' in info else {}), **({'reproduction': extra['reproduction']} if extra else {})}
+
+
+def _simulate(inputs, scores, eligible, cfg, rules, out, status = None):
+    rec, orders = None, None
+    try:
+        by_date = {}
+        for s in scores: by_date.setdefault(s['decision_date'], {})[s['instrument']] = s['score']
+        rec = _Recorder(inputs.dates, inputs.unexplained); p = cfg.portfolio; x = cfg.execution
+        book, orders = run_loop(inputs.dates, inputs.market, by_date, cfg.initial_cash, rules, eligible_by_date = eligible, actions = inputs.actions,
+                                rebalance_every = p.rebalance_every, open_cash_policy = p.open_cash_policy, slippage = x.slippage, n = p.n, buffer = p.buffer,
+                                max_sell = p.max_sell, max_weight = p.max_weight, refill_between_rebalance = p.refill_between_rebalance, calendar = inputs.calendar,
+                                participation = p.participation, on_close = rec, construction = p.construction)
+        if status is not None: status.stage('loop', orders = len(orders))
+        metrics = evaluate(book.equity_curve()); write_json(out / 'metrics.json', metrics)
+        write_json(out / 'trading.json', canonical(trading_stats(book.equity_rows, book.fills, orders, rec.positions, cfg.initial_cash)))
+        final = book.status
+        info = {'assumptions': book.assumptions, 'issues': book.issues, 'rules_used_unverified': sorted(map(str, rules.used_unverified)),
+                'summary': {'final_equity': book.equity_curve()[-1], 'days': len(inputs.dates), 'start': inputs.info['start'], 'end': inputs.info['end']}}
+    except LedgerError as exc:
+        final, info = 'blocked', {'blocked': [{'kind': 'ledger', 'detail': str(exc)}]}
+    if rec is not None:
+        for name, rows in rec.tables().items(): write_table(out, name, rows)
+    if orders is not None: write_table(out, 'orders', orders)
+    write_json(out / 'loop_result.json', canonical({'status': final, 'info': info}))
 
 
 def read_core(out):
@@ -291,8 +339,9 @@ def reproduce(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0):
     if not frozen.exists(): raise ReproduceRefused('源实验没有冻结的 rules.yaml')
     if RuleSet.from_yaml(frozen).config_fingerprint() != doc['rules']['fingerprint']: raise ReproduceRefused('冻结的 rules.yaml 与记录的规则指纹不一致')
     sc = doc.get('scores') or {}
-    if sc.get('source') == 'predictions':
-        for key, name in (('predictions_sha256', 'predictions.parquet'), ('universe_sha256', 'universe.parquet')):
+    if sc.get('source') in ('predictions', 'universe'):
+        names = (('predictions_sha256', 'predictions.parquet'), ('universe_sha256', 'universe.parquet')) if sc['source'] == 'predictions' else (('universe_sha256', 'universe.parquet'), ('split_plan_sha256', 'split_plan.parquet'))
+        for key, name in names:
             f = resolve_run(root, sc['run']) / name
             if not f.exists() or file_sha(f) != sc[key]: raise ReproduceRefused(f'研究实验的 {name} 与源实验记录不一致')
     check_snapshot(Store(root), cfg.snapshot, _read(source / 'data_manifest.json'))

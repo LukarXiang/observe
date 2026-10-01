@@ -7,12 +7,13 @@ import pytest
 from fastapi.testclient import TestClient
 
 from observe.api.app import create_app
-from observe.cli import main
+from observe.cli import main, run_kind
 from observe.experiments import run_experiment, run_variant
 from observe.jobs import Jobs
 from observe.models import LGBMModel, RidgeModel
 from observe.replay import reproduce, run_offline
 from observe.runs import RunRegistry, file_sha
+from observe.data.store import Store
 from tests.integration.test_research import cfg, make, read
 
 pytest.importorskip('lightgbm')
@@ -21,6 +22,8 @@ pytest.importorskip('lightgbm')
 @pytest.fixture(scope = 'module')
 def full(tmp_path_factory):
     root = tmp_path_factory.mktemp('complete'); sid, days, fs = make(root, n_days = 55)
+    store = Store(root); idx = pd.DataFrame({'date': days, 'index': '000300.SH', 'close': [100 + k for k in range(len(days))]})
+    store.publish(store.write_batch({'index_1d': {'all': store.write_partition('index_1d', 'all', idx)}})); run_kind(root, 'data_audit', {}); sid = store.snapshot('完整实验的价格指数')
     config = cfg(sid, fs); config['models'].update(lgbm = [{'num_boost_round': 12, 'early_stopping_rounds': 3, 'num_leaves': 4, 'min_data_in_leaf': 10}], num_threads = 1)
     config.update(n_boot = 100, portfolio = {'n': 5, 'max_weight': .2, 'rebalance_every': 2, 'buffer': 2, 'max_sell': 5}, execution = {'slippage': .001, 'liquidity_window': 5})
     return root, config, run_experiment(root, **config)
@@ -38,6 +41,12 @@ def test_four_models_and_every_cost_scenario_share_the_frozen_predictions(full):
         assert docs['fees_x2']['config']['execution']['fee_multiplier'] == 2 and docs['slippage_x2']['config']['execution']['slippage'] == .002
     assert all(r['valid_performance'] for r in report['portfolio']) and len(report['model']['evaluation']['lgbm_fit_records']) == len(plan)
     assert RunRegistry(root / 'runs').get(out.name)['status'] == 'success'
+    assert len(result['subruns']['benchmarks']) == 3 and report['benchmark']['available']
+    assert all(x['benchmarks']['000300.SH']['benchmark_missing_days'] == 0 and x['benchmarks']['universe_equal']['available'] for x in report['benchmark']['comparisons'])
+    first = result['subruns']['benchmarks'][0]; equal_scores = read(first['output'], 'scores.json')
+    uni = pd.read_parquet(research / 'universe.parquet'); scores = pd.DataFrame(equal_scores); scores['decision_date'] = pd.to_datetime(scores.decision_date).dt.date
+    expected = uni[uni.eligible & uni.decision_date.between(plan.test_start.min(), plan.test_end.max())]
+    assert set(zip(scores.decision_date, scores.instrument)) == set(zip(expected.decision_date, expected.instrument)) and set(scores.score) == {0}
 
 
 def test_variant_cannot_train_and_preserves_all_existing_parent_files(full, monkeypatch):
@@ -55,6 +64,8 @@ def test_variant_cannot_train_and_preserves_all_existing_parent_files(full, monk
 def test_complete_experiment_reproduces(full):
     root, config, result = full; rep = reproduce(root, result['run_id'])
     assert rep['status'] == 'success' and rep['reproduction']['result'] == 'match' and rep['reproduction']['differences'] == 0
+    children = [rep['subruns']['research'], *rep['subruns']['backtests'], *rep['subruns']['benchmarks']]
+    assert all(not read(c['output'], 'cache.json')['enabled'] and read(c['output'], 'cache.json')['hits'] == 0 for c in children)
 
 
 def test_api_cli_and_queue_query_the_same_frozen_results(full, capsys):
@@ -69,6 +80,9 @@ def test_api_cli_and_queue_query_the_same_frozen_results(full, capsys):
     dated = c.get(f'/api/runs/{rid}/predictions', params = {'model': 'lgbm', 'date': day, 'instrument': selected['rows'][0]['instrument']}).json()
     assert dated['total'] == 1 and dated['rows'][0]['model_id'] == 'lgbm'
     assert len(c.get(f'/api/runs/{rid}/equity', params = {'model': 'lgbm', 'limit': 2}).json()['rows']) == 2
+    assert c.get(f'/api/runs/{rid}/equity', params = {'model': 'universe_equal'}).status_code == 200
+    active = c.get(f'/api/runs/{rid}/benchmark_daily', params = {'model': 'lgbm', 'scenario': 'fees_x2', 'benchmark': '000300.SH', 'limit': 2}).json()
+    assert len(active['rows']) == 2 and {r['benchmark_id'] for r in active['rows']} == {'000300.SH'} and {r['scenario'] for r in active['rows']} == {'fees_x2'}
     assert c.get(f'/api/runs/{rid}/positions', params = {'instrument': page['rows'][0]['instrument'], 'limit': 2}).status_code == 200
     assert c.get('/api/factors/rev_3/evaluation', params = {'run': rid}).status_code == 200
     assert c.post('/api/factors/validate', json = {'expr': 'ts_mean(close_adj, 5)'}).json()['lookback'] == 4
