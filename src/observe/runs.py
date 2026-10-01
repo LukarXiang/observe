@@ -7,9 +7,10 @@
   mismatch         复现重跑的核心产物与源实验不一致
   failed           程序出错（异常）
 """
-import hashlib, importlib.metadata, json, math, platform, secrets, subprocess
+import hashlib, importlib.metadata, json, math, platform, secrets, sqlite3, subprocess
+from contextlib import contextmanager
 from datetime import datetime
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 from .data.store import _atomic_json
 
@@ -21,6 +22,63 @@ REPO = Path(__file__).resolve().parents[2]
 class RunDirError(ValueError): pass
 
 
+class RunRegistry:
+    """SQLite 只登记实验元信息；产物仍在不可覆盖的目录中。历史目录可显式索引，源文件不改。"""
+    def __init__(self, root): self.root, self.path = Path(root), Path(root) / 'registry.sqlite'
+
+    @contextmanager
+    def _db(self):
+        self.root.mkdir(parents = True, exist_ok = True)
+        db = sqlite3.connect(self.path, timeout = 10); db.row_factory = sqlite3.Row
+        try:
+            db.execute('''create table if not exists runs (run_id text primary key, name text, kind text, status text, config_hash text,
+                          snapshot_id text, git_commit text, evidence_level text, started_at text, finished_at text, parent_run_id text, path text not null)''')
+            with db: yield db
+        finally: db.close()
+
+    def record(self, out, status):
+        out = Path(out).resolve(); cfg = out / 'config.json'; doc = json.loads(cfg.read_text(encoding = 'utf-8')) if cfg.exists() else {}
+        row = {'run_id': status['run_id'], 'name': doc.get('config', {}).get('name') or status['run_id'], 'kind': status.get('kind', doc.get('kind', 'run')),
+               'status': status['status'], 'config_hash': status.get('config_hash'), 'snapshot_id': doc.get('snapshot_id', status.get('snapshot_id')),
+               'git_commit': doc.get('environment', {}).get('git_commit'), 'evidence_level': status.get('evidence'), 'started_at': status.get('started_at'),
+               'finished_at': status.get('finished_at'), 'parent_run_id': status.get('parent_run_id'), 'path': str(out)}
+        with self._db() as db:
+            old = db.execute('select path from runs where run_id = ?', (row['run_id'],)).fetchone()
+            if old and old['path'] != row['path'] and Path(old['path']).exists(): raise RunDirError(f"实验编号 {row['run_id']} 已登记在 {old['path']}，不能改指向 {out}")
+            cols = ','.join(row); assignments = ','.join(f'{k}=excluded.{k}' for k in row if k != 'run_id')
+            db.execute(f'insert into runs ({cols}) values ({",".join("?" for _ in row)}) on conflict(run_id) do update set {assignments}', tuple(row.values()))
+
+    def index(self):
+        paths = sorted(set(self.root.glob('*/status.json')) | set(self.root.glob('*/research/*/status.json')) | set(self.root.glob('*/variants/*/status.json')))
+        for path in paths: self.record(path.parent, json.loads(path.read_text(encoding = 'utf-8')))
+        return len(paths)
+
+    def get(self, run_id):
+        if not self.path.exists(): return None
+        with self._db() as db: row = db.execute('select * from runs where run_id = ?', (run_id,)).fetchone()
+        return dict(row) if row else None
+
+    def list(self, limit = 50, offset = 0, kind = None, status = None):
+        clauses, args = [], []
+        for key, value in (('kind', kind), ('status', status)):
+            if value: clauses.append(f'{key} = ?'); args.append(value)
+        sql = 'select * from runs' + (' where ' + ' and '.join(clauses) if clauses else '') + ' order by started_at desc, run_id desc limit ? offset ?'
+        with self._db() as db: return [dict(x) for x in db.execute(sql, args + [limit, offset])]
+
+
+def resolve_run(root, ref):
+    """接受现存目录或实验编号；Windows 迁移路径只按原编号定位，后续仍必须校验冻结产物哈希。"""
+    path = Path(ref)
+    if path.is_dir(): return path.resolve()
+    run_id = PureWindowsPath(str(ref)).name if '\\' in str(ref) else path.name
+    if run_id in ('', '.', '..'): raise FileNotFoundError(f'实验路径不合法：{ref}')
+    candidate = Path(root) / 'runs' / run_id
+    if candidate.is_dir(): return candidate.resolve()
+    record = RunRegistry(Path(root) / 'runs').get(run_id)
+    if record and Path(record['path']).is_dir(): return Path(record['path']).resolve()
+    raise FileNotFoundError(f'实验不存在：{ref}；迁移定位路径：{candidate}')
+
+
 def environment():
     """代码与依赖版本：复现时只检测并报告差异，不自动切换工作区"""
     def git(*args):
@@ -28,7 +86,7 @@ def environment():
         except (OSError, subprocess.SubprocessError): return None
     lock = REPO / 'uv.lock'; dirty = git('status', '--porcelain', '--untracked-files=no')
     packages = {}
-    for p in ('pandas', 'numpy', 'pyarrow', 'pydantic'):
+    for p in ('pandas', 'numpy', 'pyarrow', 'pydantic', 'scikit-learn', 'scipy', 'lightgbm'):
         try: packages[p] = importlib.metadata.version(p)
         except importlib.metadata.PackageNotFoundError: packages[p] = None
     return {'git_commit': git('rev-parse', 'HEAD') or None, 'git_dirty': None if dirty is None else bool(dirty),
@@ -82,12 +140,15 @@ def canonical(x):
 
 class RunStatus:
     """status.json：创建目录后立即写 running；每完成一个阶段记一次；结束写终态。失败目录保留已完成阶段与错误。"""
-    def __init__(self, out, run_id, kind = 'run', **info):
+    def __init__(self, out, run_id, kind = 'run', registry = None, **info):
         self.path = Path(out) / 'status.json'
+        self.registry = RunRegistry(registry) if registry is not None else None
         self.data = {'run_id': run_id, 'kind': kind, 'status': 'running', 'started_at': datetime.now().isoformat(timespec = 'seconds'), 'stages': {}, **info}
         self._write()
 
-    def _write(self): write_json(self.path, self.data)
+    def _write(self):
+        write_json(self.path, self.data)
+        if self.registry is not None: self.registry.record(self.path.parent, self.data)
 
     def stage(self, name, state = 'done', **info):
         self.data['stages'][name] = {'state': state, **info}; self._write()
@@ -104,7 +165,12 @@ STATUS_FIELDS = ('status', 'blocked', 'assumptions', 'issues', 'limitations', 'r
 
 
 def _same(a, b, abs_tol, rel_tol):
-    if isinstance(a, bool) or isinstance(b, bool) or not isinstance(a, (int, float)) or not isinstance(b, (int, float)): return a == b
+    if isinstance(a, dict) or isinstance(b, dict):
+        return isinstance(a, dict) and isinstance(b, dict) and a.keys() == b.keys() and all(_same(a[k], b[k], abs_tol, rel_tol) for k in a)
+    if isinstance(a, list) or isinstance(b, list):
+        return isinstance(a, list) and isinstance(b, list) and len(a) == len(b) and all(_same(x, y, abs_tol, rel_tol) for x, y in zip(a, b))
+    if isinstance(a, bool) or isinstance(b, bool): return type(a) is type(b) and a == b
+    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)): return a == b
     if math.isnan(a) or math.isnan(b): return math.isnan(a) and math.isnan(b)
     return abs(a - b) <= abs_tol + rel_tol * abs(b)
 

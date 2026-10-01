@@ -8,6 +8,7 @@ from datetime import date
 from pathlib import Path
 from typing import Literal
 
+import numpy as np
 import pandas as pd
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
@@ -19,7 +20,7 @@ from .ledger import LedgerError, RuleSet
 from .loop import POLICIES, run_loop
 from .portfolio import DEFAULT_PARTICIPATION
 from .runs import (KEYS, STATUS_FIELDS, RunStatus, canonical, compare_tables, create_run_dir, drift, ensure_outside, environment, file_sha,
-                   write_json, write_table)
+                   write_json, write_table, resolve_run)
 
 RULES = 'configs/rule_profiles/main_board.yaml'
 BASELINE = {'source': 'baseline', 'name': 'lexicographic_engineering_baseline_v1', 'evidence': 'engineering_baseline_not_a_prediction_model',
@@ -118,18 +119,25 @@ class _Recorder:
 def _hash(x): return hashlib.sha256(json.dumps(canonical(x), sort_keys = True).encode()).hexdigest()
 
 
-def score_source(cfg, snapshot_id = None):
+def score_source(cfg, snapshot_id = None, root = None):
     """分数来源：工程基线，或研究实验的样本外预测表（同时带来研究候选）。预测表与股票池按文件哈希冻结。
     predictions 时先检查身份：研究实验与回放的快照一致（否则须显式声明对照情景）、模型存在、预测都落在该实验的研究候选上、fit_asof 早于决策日、请求区间不超出预测的定义范围"""
     sc = cfg.scores
     if sc.source == 'baseline': return BASELINE, cfg
     if not sc.run: raise ValueError('scores.source = predictions 需要 scores.run（研究实验目录）')
-    run = Path(sc.run); st = json.loads((run / 'status.json').read_text(encoding = 'utf-8')); rdoc = json.loads((run / 'config.json').read_text(encoding = 'utf-8'))
+    run = resolve_run(root, sc.run) if root is not None else Path(sc.run); st = json.loads((run / 'status.json').read_text(encoding = 'utf-8')); rdoc = json.loads((run / 'config.json').read_text(encoding = 'utf-8'))
     if st.get('kind') != 'research' or st.get('status') not in ('success', 'success_limited'): raise ValueError(f'{run} 不是已完成的研究实验（状态 {st.get("status")}）')
-    pred = pd.read_parquet(run / 'predictions.parquet', columns = ['model_id', 'decision_date', 'instrument', 'fit_asof']); pred = pred[pred.model_id == sc.model]
+    pred = pd.read_parquet(run / 'predictions.parquet', columns = ['model_id', 'decision_date', 'instrument', 'fit_asof', 'score', 'split_id']); pred = pred[pred.model_id == sc.model]
     if not len(pred): raise ValueError(f'研究实验 {run.name} 没有模型 {sc.model} 的预测')
+    if pred.duplicated(['decision_date', 'instrument']).any(): raise ValueError('预测主键重复，不能用于账本')
+    if not np.isfinite(pred.score.to_numpy(float)).all(): raise ValueError('预测包含非有限分数，不能用于账本')
     day = pd.to_datetime(pred.decision_date)
+    if day.isna().any() or pd.to_datetime(pred.fit_asof).isna().any(): raise ValueError('预测 decision_date / fit_asof 缺失')
     if (pd.to_datetime(pred.fit_asof) >= day).any(): raise ValueError(f'研究实验 {run.name} 的模型 {sc.model} 有 fit_asof 不早于决策日的预测，拒绝使用')
+    plan = pd.read_parquet(run / 'split_plan.parquet'); joined = pred.merge(plan[['split_id', 'fit_asof', 'test_start', 'test_end']], on = 'split_id', how = 'left', suffixes = ('', '_plan'), validate = 'many_to_one')
+    d, fit, planned = pd.to_datetime(joined.decision_date), pd.to_datetime(joined.fit_asof), pd.to_datetime(joined.fit_asof_plan)
+    if planned.isna().any() or (fit != planned).any() or ((d < pd.to_datetime(joined.test_start)) | (d > pd.to_datetime(joined.test_end))).any():
+        raise ValueError('预测 split_id / fit_asof / 决策日与冻结测试窗不一致')
     uni = pd.read_parquet(run / 'universe.parquet', columns = ['decision_date', 'instrument', 'eligible']); uni = uni[uni.eligible]
     off = pred[['decision_date', 'instrument']].merge(uni[['decision_date', 'instrument']], how = 'left', indicator = True)._merge.eq('left_only').sum()
     if off: raise ValueError(f'研究实验 {run.name} 有 {int(off)} 条预测不在该实验的研究候选里，预测与候选不对应')
@@ -159,23 +167,24 @@ def run_offline(root, output = None, runs_root = None, **params):
     p = run_params(params); return _run(root, p['config'], output or p['output'], runs_root)
 
 
-def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = None, reproduce_of = None, compare = None):
+def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = None, reproduce_of = None, compare = None, parent_run_id = None):
     store = Store(root); state = store.state(cfg.snapshot)                       # 快照不存在时在建目录之前就报错
-    source, cfg = score_source(cfg, state.get('snapshot_id') or cfg.snapshot)
+    source, cfg = score_source(cfg, state.get('snapshot_id') or cfg.snapshot, root)
     rules_file = Path(rules_file or cfg.rules); rules_text = rules_file.read_text(encoding = 'utf-8'); rules = RuleSet.from_yaml(rules_file)
     doc = {'config': cfg.model_dump(mode = 'json'), 'snapshot_id': state.get('snapshot_id') or cfg.snapshot, 'batch_id': state.get('batch_id'),
            'scores': source, 'rules': {'source_path': str(cfg.rules), 'sha256': hashlib.sha256(rules_text.encode()).hexdigest(), 'fingerprint': rules.config_fingerprint()},
            'environment': environment(), 'reproduce_of': reproduce_of}
     h = _hash({k: doc[k] for k in ('config', 'snapshot_id', 'scores', 'rules')})
     out = create_run_dir(Path(runs_root) if runs_root else Path(root) / 'runs', output, '-'.join(x for x in (h[:6], tag) if x))
-    status = RunStatus(out, out.name, evidence = source['evidence'], config_hash = h, reproduce_of = reproduce_of)
+    status = RunStatus(out, out.name, registry = Path(root) / 'runs', evidence = source['evidence'], config_hash = h, reproduce_of = reproduce_of, parent_run_id = parent_run_id)
     (out / 'rules.yaml').write_text(rules_text, encoding = 'utf-8'); write_json(out / 'config.json', doc); status.stage('config')
     rec, orders, limitations, x = None, None, [], cfg.execution
     if 'cross_snapshot_scenario' in source: limitations.append({'kind': 'cross_snapshot_scenario', 'detail': '对照情景：用与预测不同的快照做回放评价', **source['cross_snapshot_scenario']})
+    audit_rules = rules
     if x.fee_multiplier != 1: m = x.fee_multiplier; rules = rules.scaled(commission_rate = m, stamp_tax = m, transfer_fee = m, min_commission = m)
     try:
         tables = load(store, state, cfg.start, cfg.end, x.liquidity_window)
-        audit = {k: v for k, v in audit_status(root, doc['batch_id'], rules).items() if k != 'rows'}   # 运行前检查：与数据中心页面同一判定
+        audit = {k: v for k, v in audit_status(root, doc['batch_id'], audit_rules).items() if k != 'rows'}   # 成本情景不改变市场数据审计所依据的原始规则
         if audit['status'] != 'passed':
             limitations.append({'kind': 'data_audit', 'detail': f"快照批次审计状态为 {audit['status']}（范围 {audit['scope']}），不是全快照审计通过", 'audit': audit})
         write_json(out / 'data_manifest.json', {'snapshot_id': doc['snapshot_id'], 'batch_id': doc['batch_id'], 'offline': True, 'audit': audit, 'tables': state.get('tables', {}),
@@ -262,7 +271,7 @@ def check_snapshot(store, snapshot, data_manifest):
 
 def reproduce(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0):
     """先读取并校验源实验的全部冻结输入与核心产物，再在新目录重跑并逐表比较；源目录只读。研究实验转给 research.reproduce_research"""
-    source = Path(run); ensure_outside(source, output)
+    source = resolve_run(root, run); run = str(source); ensure_outside(source, output)
     kind = _read(source / 'config.json').get('kind')
     if kind == 'research':
         from .research import reproduce_research
@@ -270,6 +279,9 @@ def reproduce(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0):
     if kind == 'paired':
         from .paired import reproduce_paired
         return reproduce_paired(root, run, output, abs_tol, rel_tol)
+    if kind == 'experiment':
+        from .experiments import reproduce_experiment
+        return reproduce_experiment(root, run, output, abs_tol, rel_tol)
     manifest = _read(source / 'manifest.json'); doc = _read(source / 'config.json'); src_status = _read(source / 'status.json')
     if src_status.get('status') not in ('success', 'success_limited', 'blocked', 'mismatch'): raise ReproduceRefused(f"源实验状态为 {src_status.get('status')}，不是已完成的实验")
     integrity = sorted(n for n, sha in manifest.get('files', {}).items() if not (source / n).exists() or file_sha(source / n) != sha)
@@ -281,7 +293,7 @@ def reproduce(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0):
     sc = doc.get('scores') or {}
     if sc.get('source') == 'predictions':
         for key, name in (('predictions_sha256', 'predictions.parquet'), ('universe_sha256', 'universe.parquet')):
-            f = Path(sc['run']) / name
+            f = resolve_run(root, sc['run']) / name
             if not f.exists() or file_sha(f) != sc[key]: raise ReproduceRefused(f'研究实验的 {name} 与源实验记录不一致')
     check_snapshot(Store(root), cfg.snapshot, _read(source / 'data_manifest.json'))
     expected = read_core(source); expected_status = {k: src_status.get('execution_status', src_status.get('status')) if k == 'status' else src_status.get(k) for k in STATUS_FIELDS}

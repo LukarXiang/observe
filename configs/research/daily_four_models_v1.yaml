@@ -1,0 +1,41 @@
+# 后端完整实验：四模型同窗比较，预测只训练一次，三个成本情景分别完整重跑账本。
+# uv run --extra ml observe --root data experiment --config configs/research/daily_four_models_v1.yaml --snapshot <snapshot_id>
+name: daily_four_models_v1
+factor_set: configs/factor_sets/daily_basic_v1.yaml
+label_h: 5
+universe:
+  boards: [main]
+  min_listed_sessions: 120
+  exclude_st: true
+  liquidity_window: 20
+  min_avg_amount: 20000000
+split:
+  train: 504
+  valid: 126
+  test: 63
+  holdout: 252
+models:
+  baseline_factor: rev_5
+  penalty_mode: normalized
+  ridge_lambdas: [0.01, 0.1, 1, 10, 100, 1000]
+  correlation_threshold: 0.9
+  min_names: 30
+  top_n: 20
+  seed: 20261001
+  num_threads: 4
+  lgbm:
+    - {num_leaves: 15, min_data_in_leaf: 100, lambda_l2: 0.1, learning_rate: 0.05, num_boost_round: 200, early_stopping_rounds: 20}
+    - {num_leaves: 31, min_data_in_leaf: 100, lambda_l2: 1.0, learning_rate: 0.05, num_boost_round: 200, early_stopping_rounds: 20}
+initial_cash: 1000000
+portfolio:
+  n: 20
+  max_weight: 0.1
+  rebalance_every: 5
+  buffer: 10
+  max_sell: 5
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+backtest_models: [single_factor, equal_blend, ridge, lgbm]
+cost_scenarios: [base, fees_x2, slippage_x2]
+n_boot: 1000

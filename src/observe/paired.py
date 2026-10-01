@@ -71,7 +71,7 @@ def _paired(root, cfg, output = None, runs_root = None, tag = 'paired'):
            'new_factors': new, 'environment': environment()}
     h = hashlib.sha256(json.dumps(canonical({k: doc[k] for k in ('config', 'snapshot_id', 'factor_sets')}), sort_keys = True).encode()).hexdigest()
     runs_root = Path(runs_root) if runs_root else Path(root) / 'runs'
-    out = create_run_dir(runs_root, output, '-'.join((h[:6], tag))); status = RunStatus(out, out.name, kind = 'paired', evidence = 'exploratory', config_hash = h)
+    out = create_run_dir(runs_root, output, '-'.join((h[:6], tag))); status = RunStatus(out, out.name, kind = 'paired', registry = Path(root) / 'runs', evidence = 'exploratory', config_hash = h)
     shutil.copyfile(cfg.factor_set, out / 'base_factor_set.yaml'); shutil.copyfile(cfg.extended_factor_set, out / 'extended_factor_set.yaml'); write_json(out / 'config.json', doc); status.stage('config')
     subruns = {'arms': {}, 'backtests': []}; limitations = []; blocked = None
     try:

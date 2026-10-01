@@ -16,7 +16,7 @@ def _config(path):
 
 def job_status(kind, result):
     """任务结果 → 队列状态：回放与复现直接沿用运行状态（与 status.json、函数返回值、命令退出码同一定义）"""
-    if kind in ('run_experiment', 'reproduce', 'research', 'paired'): return result['status']
+    if kind in ('run_experiment', 'reproduce', 'research', 'paired', 'experiment', 'backtest_variant', 'factor_eval'): return result['status']
     if isinstance(result, dict) and result.get('status') == 'refresh_failed_no_data': return 'failed'
     return 'partial' if isinstance(result, dict) and result.get('status') in ('rejected', 'published_partial', 'refresh_failed') else 'success'
 
@@ -76,6 +76,15 @@ def run_kind(root, kind, params):
     if kind == 'paired':
         from .paired import _paired, paired_params
         p = paired_params(params); return _paired(root, p['config'], p['output'])
+    if kind == 'experiment':
+        from .experiments import run_experiment
+        return run_experiment(root, **params)
+    if kind == 'backtest_variant':
+        from .experiments import run_variant
+        return run_variant(root, **params)
+    if kind == 'factor_eval':
+        from .experiments import run_factor_eval
+        return run_factor_eval(root, **params)
     if kind == 'reproduce':
         from .replay import reproduce
         unknown = set(params) - {'run', 'output', 'abs_tol', 'rel_tol'}
@@ -113,8 +122,60 @@ def main(argv = None):
     dg.add_argument('--source', required = True, help = '成对实验目录'); dg.add_argument('--source-check', help = 'scripts/check_missing_minute_source.py 输出的核验文件'); dg.add_argument('--output')
     rp = sub.add_parser('reproduce', help = '用冻结输入在新目录重跑并逐表比较；退出码 0 一致 / 2 不一致 / 3 阻断 / 1 出错或拒绝')
     rp.add_argument('run'); rp.add_argument('--output'); rp.add_argument('--abs-tol', type = float); rp.add_argument('--rel-tol', type = float)
+    ex = sub.add_parser('experiment', help = '完整研究实验：冻结快照 → 四模型预测 → 三层评价 → 组合变体与成本情景')
+    ex.add_argument('--config'); ex.add_argument('--snapshot'); ex.add_argument('--output'); ex.add_argument('--queue', action = 'store_true')
+    vr = sub.add_parser('variant', help = '复用已有研究预测，仅重跑组合与账本；产物放入父实验 variants 子目录')
+    vr.add_argument('parent'); vr.add_argument('--config'); vr.add_argument('--model'); vr.add_argument('--output'); vr.add_argument('--queue', action = 'store_true')
+    co = sub.add_parser('compare', help = '并列读取已有实验的指标'); co.add_argument('runs', nargs = '+')
+    rr = sub.add_parser('runs').add_subparsers(dest = 'act', required = True)
+    rl = rr.add_parser('list'); rl.add_argument('--kind'); rl.add_argument('--status'); rl.add_argument('--limit', type = int, default = 50)
+    rr.add_parser('index'); rr.add_parser('show').add_argument('run')
+    fa = sub.add_parser('factor').add_subparsers(dest = 'act', required = True)
+    fa.add_parser('list'); fa.add_parser('validate').add_argument('expr')
+    fe = fa.add_parser('eval', help = '只读已保存研究产物，计算完整因子诊断；不重新训练')
+    fe.add_argument('--config'); fe.add_argument('--run'); fe.add_argument('--output'); fe.add_argument('--queue', action = 'store_true')
     a = ap.parse_args(argv); root = Path(a.root)
     from .jobs import Jobs, SUPPORTED
+    if a.cmd == 'experiment':
+        from .experiments import experiment_params
+        from .runs import EXIT_CODES
+        p = experiment_params(_config(a.config), snapshot = a.snapshot, output = a.output)
+        params = {**p['config'].model_dump(mode = 'json'), 'output': p['output']}
+        if a.queue: return _json({'job_id': Jobs(root).submit('experiment', params)})
+        r = run_kind(root, 'experiment', params); _json(r)
+        if EXIT_CODES[r['status']]: sys.exit(EXIT_CODES[r['status']])
+        return
+    if a.cmd == 'variant':
+        from .runs import EXIT_CODES
+        cfg = _config(a.config); configured_output = cfg.pop('output', None); output = a.output or configured_output
+        if a.model: cfg['model'] = a.model
+        p = {'parent': a.parent, 'config': cfg, 'output': output}
+        if a.queue: return _json({'job_id': Jobs(root).submit('backtest_variant', p)})
+        r = run_kind(root, 'backtest_variant', p); _json(r)
+        if EXIT_CODES[r['status']]: sys.exit(EXIT_CODES[r['status']])
+        return
+    if a.cmd == 'factor':
+        from .features import load_factor_set
+        from .runs import EXIT_CODES, REPO
+        if a.act == 'list': return _json(load_factor_set(REPO / 'configs/factor_sets/daily_basic_v1.yaml')['factors'])
+        if a.act == 'validate':
+            from .factors import parse
+            p = parse(a.expr); return _json({'expr': a.expr, 'fields': sorted(p.fields), 'lookback': p.lookback})
+        params = {**_config(a.config), **{k: v for k, v in {'run': a.run, 'output': a.output}.items() if v is not None}}
+        if a.queue: return _json({'job_id': Jobs(root).submit('factor_eval', params)})
+        r = run_kind(root, 'factor_eval', params); _json(r)
+        if EXIT_CODES[r['status']]: sys.exit(EXIT_CODES[r['status']])
+        return
+    if a.cmd == 'runs':
+        from .runs import RunRegistry
+        from .artifacts import run_detail
+        registry = RunRegistry(root / 'runs')
+        if a.act == 'show': return _json(run_detail(root, a.run))
+        count = registry.index()
+        return _json({'indexed': count}) if a.act == 'index' else _json(registry.list(a.limit, kind = a.kind, status = a.status))
+    if a.cmd == 'compare':
+        from .artifacts import compare_runs
+        return _json(compare_runs(root, a.runs))
     if a.cmd == 'data':
         from .data.store import Store
         if a.act == 'update':

@@ -45,10 +45,10 @@ def test_cancel_retry_and_recover(tmp_path):
 
 
 def test_worker_runs_jobs_in_subprocess_and_records_failure(tmp_path):
-    seed(tmp_path); q = Jobs(tmp_path); ok, bad = q.submit('snapshot', {'note': 't'}), q.submit('factor_eval')
+    seed(tmp_path); q = Jobs(tmp_path); ok, bad = q.submit('snapshot', {'note': 't'}), q.submit('factor_eval', {'run': 'missing'})
     q.worker(once = True)
     assert q.get(ok)['status'] == 'success' and 'snapshot_id' in q.get(ok)['result']
-    assert q.get(bad)['status'] == 'failed' and '尚未实现' in q.get(bad)['error']
+    assert q.get(bad)['status'] == 'failed' and '实验不存在' in q.get(bad)['error']
 
 
 def test_web_and_cli_download_are_mutually_exclusive(tmp_path):

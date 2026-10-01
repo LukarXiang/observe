@@ -1,15 +1,17 @@
 """本机 Web 接口（模块 19）：只读查询走 DuckDB 读已发布分区；写数据一律提交任务，由工作进程执行。只监听 127.0.0.1。"""
 import json
+from datetime import date as Date
 from pathlib import Path
 
 import duckdb
 import pandas as pd
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from ..data.store import Store
 from ..jobs import KINDS, SUPPORTED, Jobs
+from ..runs import REPO, RunRegistry
 
 
 class JobIn(BaseModel):
@@ -17,11 +19,20 @@ class JobIn(BaseModel):
     params: dict = {}
 
 
+class ExprIn(BaseModel):
+    expr: str = Field(min_length = 1, max_length = 10000)
+
+
 def _records(df): return json.loads(df.to_json(orient = 'records', date_format = 'iso', force_ascii = False))
 
 
 def create_app(root):
-    root = Path(root); store, jobs = Store(root), Jobs(root); app = FastAPI(title = 'observe')
+    root = Path(root); store, jobs = Store(root), Jobs(root); app = FastAPI(title = 'observe'); registry = RunRegistry(root / 'runs'); registry.index()
+
+    def read_result(fn, *args, **kwargs):
+        try: return fn(*args, **kwargs)
+        except FileNotFoundError as exc: raise HTTPException(404, str(exc)) from exc
+        except ValueError as exc: raise HTTPException(400, str(exc)) from exc
 
     def files(table, state):
         return [(root / v['file']).as_posix() for v in state['tables'].get(table, {}).values()]
@@ -87,7 +98,46 @@ def create_app(root):
     def submit(j: JobIn):
         if j.kind not in KINDS: raise HTTPException(400, f'未知任务种类 {j.kind}')
         if j.kind not in SUPPORTED: raise HTTPException(400, f'任务种类 {j.kind} 尚未实现')
-        return {'job_id': jobs.submit(j.kind, j.params)}
+        return read_result(lambda: {'job_id': jobs.submit(j.kind, j.params)})
+
+    @app.get('/api/factors')
+    def factors(factor_set: str = 'daily_basic_v1'):
+        from ..features import load_factor_set
+        if factor_set not in ('daily_basic_v1', 'daily_intraday_v1'): raise HTTPException(400, '未知内置因子集')
+        return load_factor_set(REPO / 'configs/factor_sets' / f'{factor_set}.yaml')['factors']
+
+    @app.post('/api/factors/validate')
+    def validate_factor(body: ExprIn):
+        from ..factors import parse
+        p = read_result(parse, body.expr); return {'expr': body.expr, 'fields': sorted(p.fields), 'lookback': p.lookback}
+
+    @app.get('/api/factors/{name}/evaluation')
+    def factor_evaluation(name: str, run: str):
+        from ..artifacts import run_detail
+        reports = read_result(run_detail, root, run)['reports']; report = reports.get('factor_diagnostics') or reports.get('factor_eval')
+        if report is None and reports.get('report'): report = reports['report']['factor']['diagnostics']
+        if report is None or name not in report.get('factors', {}): raise HTTPException(404, '实验没有该因子的评价')
+        return report['factors'][name]
+
+    @app.get('/api/runs')
+    def runs(limit: int = Query(50, ge = 1, le = 1000), offset: int = Query(0, ge = 0), kind: str | None = None, status: str | None = None):
+        return registry.list(limit, offset, kind, status)
+
+    @app.get('/api/runs/compare')
+    def compare(ids: str):
+        from ..artifacts import compare_runs
+        return read_result(compare_runs, root, ids.split(','))
+
+    @app.get('/api/runs/{rid}')
+    def run(rid: str):
+        from ..artifacts import run_detail
+        return read_result(run_detail, root, rid)
+
+    @app.get('/api/runs/{rid}/{table}')
+    def run_table(rid: str, table: str, limit: int = Query(100, ge = 1, le = 5000), offset: int = Query(0, ge = 0),
+                  start: Date | None = None, end: Date | None = None, date: Date | None = None, instrument: str | None = None, model: str | None = None, scenario: str = 'base'):
+        from ..artifacts import run_table as read_table
+        return read_result(read_table, root, rid, table, limit, offset, date or start, date or end, instrument, model, scenario)
 
     @app.get('/api/jobs/{jid}')
     def get_job(jid: str):

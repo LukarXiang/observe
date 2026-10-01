@@ -4,7 +4,7 @@
 产物写入新建实验目录（与 run 相同的独占创建、running 状态与 manifest），预测表交给 run 的唯一执行入口做组合与账本回测。"""
 import hashlib, json, shutil
 from datetime import date
-from typing import Literal
+from typing import Annotated, Literal
 from pathlib import Path
 
 import numpy as np
@@ -19,7 +19,7 @@ from .factors.intraday import INTRADAY_FIELDS, daily_features, gap_reasons
 from .features import factor_frame, load_factor_set, panel
 from .labels import build_labels
 from .evaluation.ranking import rank_ic, rank_ic_table, topn_summary, topn_table, undefined_reasons
-from .models import EqualBlend, RidgeModel, SingleFactor, day_weights
+from .models import EqualBlend, LGBMModel, RidgeModel, SingleFactor, day_weights, lightgbm
 from .replay import _Strict
 from .runs import RunStatus, canonical, compare_frames, compare_tables, create_run_dir, drift, ensure_outside, environment, file_sha, write_json
 from .universe import build_universe, version as universe_version
@@ -49,14 +49,26 @@ class SplitConfig(_Strict):
     holdout: int = Field(252, ge = 0)
 
 
+class LGBMCandidate(_Strict):
+    learning_rate: float = Field(0.05, gt = 0, le = 1)
+    num_leaves: int = Field(15, ge = 2, le = 255)
+    min_data_in_leaf: int = Field(100, ge = 1)
+    lambda_l2: float = Field(0.1, ge = 0)
+    num_boost_round: int = Field(200, ge = 1, le = 5000)
+    early_stopping_rounds: int = Field(20, ge = 1)
+
+
 class ModelConfig(_Strict):
     baseline_factor: str = 'rev_5'
     penalty_mode: Literal['alpha', 'normalized'] = 'alpha'      # alpha：数值 alpha 固定（旧口径）；normalized：alpha = lambda × sum_weight（决策 23）
-    ridge_alphas: list[float] = Field(default_factory = lambda: [1.0, 10.0, 100.0, 1000.0, 10000.0], min_length = 1, max_length = 12)
-    ridge_lambdas: list[float] = Field(default_factory = lambda: [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0], min_length = 1, max_length = 12)      # 只在 normalized 下使用
+    ridge_alphas: list[Annotated[float, Field(ge = 0)]] = Field(default_factory = lambda: [1.0, 10.0, 100.0, 1000.0, 10000.0], min_length = 1, max_length = 12)
+    ridge_lambdas: list[Annotated[float, Field(ge = 0)]] = Field(default_factory = lambda: [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0], min_length = 1, max_length = 12)      # 只在 normalized 下使用
     correlation_threshold: float = Field(0.9, gt = 0, le = 1)
     min_names: int = Field(30, ge = 2)
     top_n: int = Field(20, ge = 1)
+    lgbm: list[LGBMCandidate] = Field(default_factory = list, max_length = 12)      # 空网格保留原三个模型；显式网格启用第四个模型
+    seed: int = Field(20261001, ge = 0, le = 2147483647)
+    num_threads: int = Field(4, ge = 1, le = 32)
 
 
 class ResearchConfig(_Strict):
@@ -97,8 +109,9 @@ def _minute_inputs(store, state, cfg, need_bars):
     return {'parts': parts if need_bars else {last: parts[last]}, 'last_day': day}
 
 
-def _research(root, cfg, output = None, runs_root = None, factor_file = None, tag = 'research', reproduce_of = None, compare = None):
+def _research(root, cfg, output = None, runs_root = None, factor_file = None, tag = 'research', reproduce_of = None, compare = None, parent_run_id = None):
     store = Store(root); state = store.state(cfg.snapshot)
+    if cfg.models.lgbm: lightgbm()      # 可选依赖缺失时在创建实验目录前明确报错
     factor_file = Path(factor_file or cfg.factor_set); fset = load_factor_set(factor_file)
     names = [f['name'] for f in fset['factors']]
     if cfg.models.baseline_factor not in names: raise ValueError(f'单因子基线 {cfg.models.baseline_factor} 不在因子集里')
@@ -109,7 +122,7 @@ def _research(root, cfg, output = None, runs_root = None, factor_file = None, ta
            'environment': environment(), 'reproduce_of': reproduce_of}
     h = hashlib.sha256(json.dumps(canonical({k: doc[k] for k in ('config', 'snapshot_id', 'factor_set', 'label')}), sort_keys = True).encode()).hexdigest()
     out = create_run_dir(Path(runs_root) if runs_root else Path(root) / 'runs', output, '-'.join(x for x in (h[:6], tag) if x))
-    status = RunStatus(out, out.name, kind = 'research', evidence = evidence_level(cfg), config_hash = h, reproduce_of = reproduce_of)
+    status = RunStatus(out, out.name, kind = 'research', registry = Path(root) / 'runs', evidence = evidence_level(cfg), config_hash = h, reproduce_of = reproduce_of, parent_run_id = parent_run_id)
     shutil.copyfile(factor_file, out / 'factor_set.yaml'); write_json(out / 'config.json', doc); status.stage('config')
     limitations = []
     try:
@@ -194,16 +207,23 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
     plan['holdout_start'] = holdout; _pq(out, 'split_plan', plan); status.stage('splits', windows = len(plan), holdout_start = str(holdout) if holdout else None)
 
     X = cross_sectional_preprocess(fac.assign(eligible = True), names).drop(columns = 'eligible')
-    preds, evals, fit_records, models_dir = [], [], [], out / 'models'; models_dir.mkdir()
+    preds, evals, fit_records, lgbm_records, models_dir = [], [], [], [], out / 'models'; models_dir.mkdir()
     for sp in plan.itertuples(index = False):
         try: kept, dropped, sel, val, fit, candidates, tried, best = selection_stage(sp, X, lab, names, directions, cfg.models)
         except SelectionUndefined as exc: raise InputBlocked([{'kind': 'selection_undefined', 'split_id': int(sp.split_id), 'detail': str(exc), 'candidates': exc.tried}]) from None
         test = X[(X.date >= sp.test_start) & (X.date <= sp.test_end)].sort_values(['date', 'instrument'])
-        for model_id, key in (('single_factor', 'single_factor'), ('equal_blend', 'equal_blend'), ('ridge', best)):
+        chosen_models = [('single_factor', 'single_factor'), ('equal_blend', 'equal_blend'), ('ridge', best)]
+        if cfg.models.lgbm: chosen_models.append(('lgbm', best_candidate(tried, sp.split_id, 'lgbm')))
+        for model_id, key in chosen_models:
             m = dict(candidates)[key]
+            select_iteration = m.best_iteration if model_id == 'lgbm' else None
             m.fit(fit[m.features], fit.value, day_weights(fit.date), split_id = sp.split_id, train_start = sp.train_start, fit_end = sp.valid_end, fit_asof = sp.fit_asof,
-                  refit = 'train+valid', label = f'adj_open_to_open_{cfg.label_h}', dropped_features = dropped, selected = key)
+                  refit = 'train+valid', label = f'adj_open_to_open_{cfg.label_h}', dropped_features = dropped, selected = key,
+                  **({'num_boost_round': select_iteration, 'selected_iteration': select_iteration} if model_id == 'lgbm' else {}))
             m.save(models_dir / f'split{sp.split_id:02d}_{model_id}.json')
+            if model_id == 'lgbm':
+                lgbm_records.append({'split_id': int(sp.split_id), 'selected': key, 'selected_iteration': select_iteration, 'refit': m.info, 'importance_gain': m.importance,
+                                     'candidates': [x for x in tried if x['candidate'].startswith('lgbm@')]})
             if model_id == 'ridge':       # 每个拟合阶段的正则强度记录：选参拟合与重拟合各自的 sum_weight / 实际 alpha / lambda，验证证据，是否在网格边界
                 keys = [k for k, _ in candidates if k.startswith('ridge')]; chosen = next(t for t in tried if t['candidate'] == key)
                 fit_records.append({'split_id': int(sp.split_id), 'selected': key, 'at_upper_edge': key == keys[-1], 'at_lower_edge': key == keys[0], 'penalty_mode': cfg.models.penalty_mode,
@@ -212,9 +232,13 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
             preds.append(pd.DataFrame({'model_id': model_id, 'decision_date': test.date.to_numpy(), 'instrument': test.instrument.to_numpy(), 'score': m.predict(test[m.features]),
                                        'split_id': sp.split_id, 'fit_asof': sp.fit_asof, 'evidence_level': evidence_level(cfg)}))
         evals += tried
-    pred = pd.concat(preds, ignore_index = True); _pq(out, 'predictions', pred); status.stage('models', predictions = len(pred))
+    pred = pd.concat(preds, ignore_index = True)
+    if not np.isfinite(pred.score.to_numpy(float)).all(): raise InputBlocked([{'kind': 'nonfinite_prediction', 'detail': '模型生成非有限预测分数，不能用于排序或正式评价'}])
+    _pq(out, 'predictions', pred); status.stage('models', predictions = len(pred))
 
     model_eval = _model_eval(pred, lab, evals, cfg.models, holdout, fit_records); write_json(out / 'model_eval.json', canonical(model_eval))
+    if cfg.models.lgbm:
+        model_eval['lgbm_fit_records'] = lgbm_records; write_json(out / 'model_eval.json', canonical(model_eval))
     dev = [d for d in days if holdout is None or d < holdout]
     factor_eval = _factor_eval(fac, lab, names, directions, dev, cfg.models.min_names, holdout); write_json(out / 'factor_eval.json', canonical(factor_eval))
     status.stage('evaluation')
@@ -223,15 +247,22 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None):
 
 
 class SelectionUndefined(ValueError):
-    """一个窗口里所有 Ridge 候选的验证秩 IC 都不可定义：没有选参证据，不能用第一个 alpha 冒充「验证窗选出的」"""
-    def __init__(self, split_id, tried):
-        self.tried = tried; super().__init__(f'窗口 {split_id} 的全部 Ridge 候选验证秩 IC 不可定义（有效验证日 / 原因见 candidates），没有选参证据')
+    """所有候选的验证秩 IC 都不可定义时阻断，不用第一个候选冒充选参结果。"""
+    def __init__(self, split_id, tried, family = 'ridge'):
+        self.tried = tried; super().__init__(f'窗口 {split_id} 的全部 {family} 候选验证秩 IC 不可定义（有效验证日 / 原因见 candidates），没有选参证据')
+
+
+def best_candidate(tried, split_id, family):
+    valid = [t for t in tried if t['candidate'].startswith(family) and t['valid_rank_ic'] is not None]
+    if not valid: raise SelectionUndefined(split_id, tried, family)
+    return max(valid, key = lambda t: t['valid_rank_ic'])['candidate']      # 并列取网格中先出现的候选
 
 
 def candidate_models(mc, kept, directions):
     """一个窗口的候选模型：单因子基线、等权合成、各 alpha 的 Ridge"""
     ridge = [(f'ridge_norm@{l:g}', RidgeModel(kept, directions, lam = l)) for l in mc.ridge_lambdas] if mc.penalty_mode == 'normalized' else [(f'ridge@{a:g}', RidgeModel(kept, directions, alpha = a)) for a in mc.ridge_alphas]
-    return [('single_factor', SingleFactor([mc.baseline_factor], directions, factor = mc.baseline_factor)), ('equal_blend', EqualBlend(kept, directions))] + ridge
+    trees = [(f'lgbm@{i}', LGBMModel(kept, directions, **p.model_dump(), seed = mc.seed, num_threads = mc.num_threads)) for i, p in enumerate(mc.lgbm)]
+    return [('single_factor', SingleFactor([mc.baseline_factor], directions, factor = mc.baseline_factor)), ('equal_blend', EqualBlend(kept, directions))] + ridge + trees
 
 
 def selection_stage(sp, X, lab, names, directions, mc):
@@ -243,14 +274,16 @@ def selection_stage(sp, X, lab, names, directions, mc):
         return X.merge(y, left_on = ['date', 'instrument'], right_on = ['decision_date', 'instrument']).sort_values(['date', 'instrument'])
     sel, val, fit = rows('select'), rows('valid'), rows('fit'); candidates = candidate_models(mc, kept, directions); tried = []
     for key, m in candidates:
-        if len(sel): m.fit(sel[m.features], sel.value, day_weights(sel.date))
+        if len(sel):
+            kw = {'X_valid': val[m.features], 'y_valid': val.value, 'w_valid': day_weights(val.date)} if m.kind == 'lgbm' and len(val) else {}
+            m.fit(sel[m.features], sel.value, day_weights(sel.date), **kw)
         t = rank_ic_table(val.assign(score = m.predict(val[m.features])) if len(sel) and len(val) else val.assign(score = np.nan), min_n = mc.min_names); ic = t.ic.mean()
         tried.append({'split_id': sp.split_id, 'candidate': key, 'valid_rank_ic': None if np.isnan(ic) else float(ic), 'valid_days': int(t.ic.notna().sum()), 'valid_pairs_mean': _f(t.n_valid.mean()) if len(t) else None,
                       'select_rows': int(len(sel)), 'valid_rows': int(len(val)), 'undefined': undefined_reasons(t)['reasons'], 'select_days': int(sel.date.nunique()) if len(sel) else 0,
-                      **({k: getattr(m, 'penalty', None)[k] for k in ('penalty_mode', 'lambda', 'alpha_used', 'sum_weight', 'coef_norm', 'features')} if key.startswith('ridge') and getattr(m, 'penalty', None) else {})})
-    ridge = [x for x in tried if x['candidate'].startswith('ridge') and x['valid_rank_ic'] is not None]
-    if not ridge: raise SelectionUndefined(sp.split_id, tried)
-    best = max(ridge, key = lambda x: x['valid_rank_ic'])['candidate']   # 并列取先出现（更小的 alpha）
+                      **({k: getattr(m, 'penalty', None)[k] for k in ('penalty_mode', 'lambda', 'alpha_used', 'sum_weight', 'coef_norm', 'features')} if key.startswith('ridge') and getattr(m, 'penalty', None) else {}),
+                      **({'params': m.params, 'best_iteration': m.best_iteration, 'early_stopping': m.info['early_stopping']} if m.kind == 'lgbm' and len(sel) else {})})
+    best = best_candidate(tried, sp.split_id, 'ridge')
+    if mc.lgbm: best_candidate(tried, sp.split_id, 'lgbm')
     return kept, dropped, sel, val, fit, candidates, tried, best
 
 
@@ -306,8 +339,9 @@ def _model_eval(pred, lab, tried, mc, holdout = None, fit_records = None):
     wins = {}
     if len(by):
         wide = by.pivot(index = 'split_id', columns = 'model_id', values = 'test_rank_ic_mean')
-        for base in ('single_factor', 'equal_blend'):
-            if 'ridge' in wide and base in wide: wins[f'ridge_vs_{base}'] = {'wins': int((wide.ridge > wide[base]).sum()), 'windows': int(wide[['ridge', base]].notna().all(axis = 1).sum())}
+        for model in ('ridge', 'lgbm'):
+            for base in ('single_factor', 'equal_blend'):
+                if model in wide and base in wide: wins[f'{model}_vs_{base}'] = {'wins': int((wide[model] > wide[base]).sum()), 'windows': int(wide[[model, base]].notna().all(axis = 1).sum())}
     return {'eval_version': 2, 'ridge_fit_records': fit_records or [], 'per_window': per, 'summary': summary, 'window_wins': wins, 'selection': tried,
             'label_rule': dev_label_rule(holdout),
             'note': '标签是复权 open-to-open 收益，只作排序目标，不是可实现收益；组合收益只来自账本回测'}

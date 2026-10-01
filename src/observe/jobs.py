@@ -5,8 +5,8 @@ from datetime import datetime
 from pathlib import Path
 
 # KINDS 保留数据库兼容性；SUPPORTED 才是界面和新提交允许执行的能力。
-KINDS = ('data_update', 'data_audit', 'snapshot', 'gc', 'factor_eval', 'run_experiment', 'backtest_variant', 'reproduce', 'research', 'minute_import', 'paired')
-SUPPORTED = frozenset(('data_update', 'data_audit', 'snapshot', 'gc', 'run_experiment', 'reproduce', 'research', 'minute_import', 'paired'))
+KINDS = ('data_update', 'data_audit', 'snapshot', 'gc', 'factor_eval', 'run_experiment', 'backtest_variant', 'reproduce', 'research', 'minute_import', 'paired', 'experiment')
+SUPPORTED = frozenset(KINDS)
 STATUS = ('queued', 'running', 'success', 'success_limited', 'partial', 'blocked', 'mismatch', 'failed', 'cancelled', 'interrupted')   # 回放与复现沿用 runs.py 的运行状态
 SCHEMA = '''create table if not exists jobs (job_id text primary key, kind text not null, params text not null, status text not null,
             created_at text, started_at text, finished_at text, pid integer, result text, error text, retry_of text, log_path text)'''
@@ -38,6 +38,17 @@ class Jobs:
 
     def submit(self, kind, params = None, retry_of = None):
         if kind not in KINDS: raise ValueError(f'未知任务种类 {kind}')
+        params = dict(params or {})
+        if kind == 'experiment':
+            from .experiments import experiment_params
+            p = experiment_params(params); params = {**p['config'].model_dump(mode = 'json'), 'output': p['output']}
+        if kind == 'factor_eval':
+            from .experiments import FactorEvalConfig
+            output = params.pop('output', None); params = {**FactorEvalConfig.model_validate(params).model_dump(mode = 'json'), 'output': output}
+        if kind == 'backtest_variant':
+            from .experiments import VariantConfig
+            if set(params) - {'parent', 'config', 'output'} or not params.get('parent'): raise ValueError('组合变体任务需要 parent，仅接受 parent / config / output')
+            params['config'] = VariantConfig.model_validate(params.get('config') or {}).model_dump(mode = 'json', exclude_unset = True)
         jid = f"{datetime.now():%Y%m%d-%H%M%S}-{secrets.token_hex(3)}"; log = self.root / 'jobs' / f'{jid}.log'
         with self._db() as c:
             c.execute('insert into jobs (job_id, kind, params, status, created_at, retry_of, log_path) values (?,?,?,?,?,?,?)',
