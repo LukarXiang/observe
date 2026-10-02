@@ -76,6 +76,12 @@ def create_app(root):
     def instruments(q: str = '', limit: int = 50):
         df = query('instruments', "select * from {t} where instrument ilike ? or name ilike ? order by instrument limit ?", (f'%{q}%', f'%{q}%', limit)); return _records(df)
 
+    @app.get('/api/indices/{index}/bars')
+    def index_bars(index: str, start: str = '1990-01-01', end: str = '2099-12-31', snapshot: str | None = None,
+                   limit: int = Query(1000, ge = 1, le = 10000), offset: int = Query(0, ge = 0)):
+        from ..data.indices import index_bars as read_index
+        return read_result(read_index, root, index, start, end, snapshot, limit, offset)
+
     @app.get('/api/instruments/{inst}/bars')
     def bars(inst: str, start: str = '1990-01-01', end: str = '2099-12-31', price: str = 'raw'):
         state = store.published()

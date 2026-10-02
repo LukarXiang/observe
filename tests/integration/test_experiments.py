@@ -14,7 +14,9 @@ from observe.models import LGBMModel, RidgeModel
 from observe.replay import reproduce, run_offline
 from observe.runs import RunRegistry, file_sha
 from observe.data.store import Store
+from observe.data.indices import update_indices
 from tests.integration.test_research import cfg, make, read
+from tests.unit.test_indices import Source, response
 
 pytest.importorskip('lightgbm')
 
@@ -22,8 +24,15 @@ pytest.importorskip('lightgbm')
 @pytest.fixture(scope = 'module')
 def full(tmp_path_factory):
     root = tmp_path_factory.mktemp('complete'); sid, days, fs = make(root, n_days = 55)
-    store = Store(root); idx = pd.DataFrame({'date': days, 'index': '000300.SH', 'close': [100 + k for k in range(len(days))]})
-    store.publish(store.write_batch({'index_1d': {'all': store.write_partition('index_1d', 'all', idx)}})); run_kind(root, 'data_audit', {}); sid = store.snapshot('完整实验的价格指数')
+    store = Store(root); idx = response(days = days)
+    for name in ('open', 'close', 'preclose'): idx[name] = [100 + k for k in range(len(days))]
+    idx['high'] = idx.close + 1; idx['low'] = idx.close - 1
+    dates = pd.date_range(days[0], days[-1]); cal = pd.DataFrame({'date': dates.date, 'is_open': dates.isin(pd.to_datetime(days))})
+    inst = pd.concat([store.load('instruments'), pd.DataFrame([{'instrument': '000300.SH', 'kind': 'index', 'board': 'index'}])], ignore_index = True)
+    store.publish(store.write_batch({'calendar': {'all': store.write_partition('calendar', 'all', cal)},
+                                     'instruments': {'all': store.write_partition('instruments', 'all', inst)}}))
+    assert update_indices(root, days[0], days[-1], source = Source({'sh.000300': idx}))['status'] == 'published'
+    run_kind(root, 'data_audit', {}); sid = store.snapshot('经公开指数入库入口审计发布的完整实验')
     config = cfg(sid, fs); config['models'].update(lgbm = [{'num_boost_round': 12, 'early_stopping_rounds': 3, 'num_leaves': 4, 'min_data_in_leaf': 10}], num_threads = 1)
     config.update(n_boot = 100, portfolio = {'n': 5, 'max_weight': .2, 'rebalance_every': 2, 'buffer': 2, 'max_sell': 5}, execution = {'slippage': .001, 'liquidity_window': 5})
     return root, config, run_experiment(root, **config)

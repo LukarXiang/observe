@@ -5,7 +5,7 @@ from datetime import datetime
 from pathlib import Path
 
 # KINDS 保留数据库兼容性；SUPPORTED 才是界面和新提交允许执行的能力。
-KINDS = ('data_update', 'data_audit', 'snapshot', 'gc', 'factor_eval', 'run_experiment', 'backtest_variant', 'reproduce', 'research', 'minute_import', 'paired', 'experiment')
+KINDS = ('data_update', 'data_audit', 'data_index', 'snapshot', 'gc', 'factor_eval', 'run_experiment', 'backtest_variant', 'reproduce', 'research', 'minute_import', 'paired', 'experiment')
 SUPPORTED = frozenset(KINDS)
 STATUS = ('queued', 'running', 'success', 'success_limited', 'partial', 'blocked', 'mismatch', 'failed', 'cancelled', 'interrupted')   # 回放与复现沿用 runs.py 的运行状态
 SCHEMA = '''create table if not exists jobs (job_id text primary key, kind text not null, params text not null, status text not null,
@@ -39,6 +39,9 @@ class Jobs:
     def submit(self, kind, params = None, retry_of = None):
         if kind not in KINDS: raise ValueError(f'未知任务种类 {kind}')
         params = dict(params or {})
+        if kind == 'data_index':
+            from .data.indices import IndexUpdateConfig
+            params = IndexUpdateConfig.model_validate(params).model_dump(mode = 'json')
         if kind == 'experiment':
             from .experiments import experiment_params
             p = experiment_params(params); params = {**p['config'].model_dump(mode = 'json'), 'output': p['output']}

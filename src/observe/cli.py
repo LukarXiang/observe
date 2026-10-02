@@ -17,6 +17,7 @@ def _config(path):
 def job_status(kind, result):
     """任务结果 → 队列状态：回放与复现直接沿用运行状态（与 status.json、函数返回值、命令退出码同一定义）"""
     if kind in ('run_experiment', 'reproduce', 'research', 'paired', 'experiment', 'backtest_variant', 'factor_eval'): return result['status']
+    if kind == 'data_index': return 'failed' if result['status'] == 'rejected' else 'success'
     if isinstance(result, dict) and result.get('status') == 'refresh_failed_no_data': return 'failed'
     return 'partial' if isinstance(result, dict) and result.get('status') in ('rejected', 'published_partial', 'refresh_failed') else 'success'
 
@@ -24,6 +25,9 @@ def job_status(kind, result):
 def run_kind(root, kind, params):
     """任务种类 → 研究核心函数；命令行直接执行和队列执行都走这里"""
     from .data.store import Store
+    if kind == 'data_index':
+        from .data.indices import IndexUpdateConfig, update_indices
+        return update_indices(root, **IndexUpdateConfig.model_validate(params).model_dump())
     if kind == 'data_update':
         from .data import standardize as std
         from .data.sources.tdx import Tdx
@@ -96,6 +100,12 @@ def run_kind(root, kind, params):
 def main(argv = None):
     ap = argparse.ArgumentParser(prog = 'observe'); ap.add_argument('--root', default = 'data', help = '数据目录'); sub = ap.add_subparsers(dest = 'cmd', required = True)
     d = sub.add_parser('data').add_subparsers(dest = 'act', required = True)
+    ix = d.add_parser('index', help = '下载价格指数日线；完整区间审计通过后只发布 index_1d')
+    ix.add_argument('--start', required = True); ix.add_argument('--end', required = True)
+    ix.add_argument('--indices', default = '000300.SH', help = '逗号分隔的指数代码，必须包含交易所'); ix.add_argument('--queue', action = 'store_true')
+    ib = d.add_parser('index-bars', help = '分页读取已发布状态或指定快照的价格指数日线')
+    ib.add_argument('--index', default = '000300.SH'); ib.add_argument('--start', default = '1990-01-01'); ib.add_argument('--end', default = '2099-12-31')
+    ib.add_argument('--snapshot'); ib.add_argument('--limit', type = int, default = 1000); ib.add_argument('--offset', type = int, default = 0)
     u = d.add_parser('update', help = '下载并发布 [start, end] 的日历、证券资料、全市场日线与复权因子变动')
     u.add_argument('--start', required = True); u.add_argument('--end', required = True); u.add_argument('--factors', default = '', help = '逗号分隔，取全部复权因子历史的证券，如 600519.SH')
     u.add_argument('--factors-all', action = 'store_true'); u.add_argument('--no-actions', action = 'store_true'); u.add_argument('--force', action = 'store_true'); u.add_argument('--queue', action = 'store_true', help = '提交到任务队列而不是直接执行')
@@ -181,6 +191,15 @@ def main(argv = None):
         return _json(compare_runs(root, a.runs))
     if a.cmd == 'data':
         from .data.store import Store
+        if a.act == 'index':
+            p = {'start': a.start, 'end': a.end, 'indices': a.indices.split(',')}
+            if a.queue: return _json({'job_id': Jobs(root).submit('data_index', p)})
+            r = run_kind(root, 'data_index', p); _json(r)
+            if r['status'] == 'rejected': sys.exit(1)
+            return
+        if a.act == 'index-bars':
+            from .data.indices import index_bars
+            return _json(index_bars(root, a.index, a.start, a.end, a.snapshot, a.limit, a.offset))
         if a.act == 'update':
             p = {'start': a.start, 'end': a.end, 'factors': [x for x in a.factors.split(',') if x], 'factors_all': a.factors_all, 'no_actions': a.no_actions, 'force': a.force}
             return _json({'job_id': Jobs(root).submit('data_update', p)} if a.queue else run_kind(root, 'data_update', p))
