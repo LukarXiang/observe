@@ -23,6 +23,13 @@ class ExprIn(BaseModel):
     expr: str = Field(min_length = 1, max_length = 10000)
 
 
+class DoctorIn(BaseModel):
+    model_config = {'extra': 'forbid'}
+    snapshot: str | None = None
+    config: dict | None = None
+    verify_files: bool = False
+
+
 def _records(df): return json.loads(df.to_json(orient = 'records', date_format = 'iso', force_ascii = False))
 
 
@@ -33,6 +40,16 @@ def create_app(root):
         try: return fn(*args, **kwargs)
         except FileNotFoundError as exc: raise HTTPException(404, str(exc)) from exc
         except ValueError as exc: raise HTTPException(400, str(exc)) from exc
+
+    @app.get('/api/doctor')
+    def doctor_get(snapshot: str | None = None, verify_files: bool = False):
+        from ..doctor import doctor
+        return doctor(root, snapshot = snapshot, verify_files = verify_files)
+
+    @app.post('/api/doctor')
+    def doctor_post(body: DoctorIn):
+        from ..doctor import doctor
+        return doctor(root, **body.model_dump())
 
     def files(table, state):
         return [(root / v['file']).as_posix() for v in state['tables'].get(table, {}).values()]

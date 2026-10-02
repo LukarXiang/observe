@@ -44,6 +44,9 @@ class Store:
         """按主键去重排序后写入；返回 {'file','sha','rows'}。内容相同则复用已有文件"""
         key = KEYS[table]; df = df.drop_duplicates(key, keep = 'last').sort_values(key).reset_index(drop = True)
         if df[key].isna().any().any(): raise ValueError(f'{table}/{part}: 主键含空值')
+        # Arrow/Parquet 没有秒级 timestamp：写入会提升到毫秒。先无损提升再算指纹，确保重读一致。
+        for column in df.select_dtypes(include = ['datetime', 'datetimetz']).columns:
+            if df[column].dt.unit == 's': df[column] = df[column].dt.as_unit('ms')
         sha = fingerprint(df); rel = f'std/{table}/{part}__{sha[:8]}.parquet'; path = self.root / rel
         if not path.exists():
             path.parent.mkdir(parents = True, exist_ok = True); tmp = path.with_suffix('.tmp'); df.to_parquet(tmp, index = False); os.replace(tmp, path)

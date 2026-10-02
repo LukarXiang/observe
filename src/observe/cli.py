@@ -99,6 +99,8 @@ def run_kind(root, kind, params):
 
 def main(argv = None):
     ap = argparse.ArgumentParser(prog = 'observe'); ap.add_argument('--root', default = 'data', help = '数据目录'); sub = ap.add_subparsers(dest = 'cmd', required = True)
+    doc = sub.add_parser('doctor', help = '只读检查环境、完整实验配置、快照与研究日期切分；不会创建任务或实验')
+    doc.add_argument('--snapshot'); doc.add_argument('--config'); doc.add_argument('--verify-files', action = 'store_true', help = '逐分区读取完整内容，校验清单指纹与分区内主键（大表耗时）')
     d = sub.add_parser('data').add_subparsers(dest = 'act', required = True)
     ix = d.add_parser('index', help = '下载价格指数日线；完整区间审计通过后只发布 index_1d')
     ix.add_argument('--start', required = True); ix.add_argument('--end', required = True)
@@ -148,6 +150,11 @@ def main(argv = None):
     fe = fa.add_parser('eval', help = '只读已保存研究产物，计算完整因子诊断；不重新训练')
     fe.add_argument('--config'); fe.add_argument('--run'); fe.add_argument('--output'); fe.add_argument('--queue', action = 'store_true')
     a = ap.parse_args(argv); root = Path(a.root)
+    if a.cmd == 'doctor':
+        from .doctor import doctor, EXIT_CODES
+        result = doctor(root, a.snapshot, a.config, a.verify_files); _json(result)
+        if EXIT_CODES[result['status']]: sys.exit(EXIT_CODES[result['status']])
+        return
     from .jobs import Jobs, SUPPORTED
     if a.cmd == 'experiment':
         from .experiments import experiment_params
