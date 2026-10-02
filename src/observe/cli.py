@@ -232,12 +232,13 @@ def main(argv = None):
         if a.act == 'cancel': return print('cancelled' if q.cancel(a.job_id) else '只能取消排队中的任务')
         if a.act == 'show': return _json(q.get(a.job_id))
         if a.act == 'exec':
-            job = q.get(a.job_id)
-            try:
-                r = run_kind(root, job['kind'], json.loads(job['params']))
-                q.finish(a.job_id, job_status(job['kind'], r), r); _json(r)
-            except Exception as e:   # noqa: BLE001  任务失败要落盘，不能让子进程静默退出
-                traceback.print_exc(); q.finish(a.job_id, 'failed', error = f'{type(e).__name__}: {e}'); sys.exit(1)
+            # 校验失败不能写失败状态，否则可覆盖其他进程的有效任务。
+            with q.execution(a.job_id) as job:
+                try:
+                    r = run_kind(root, job['kind'], json.loads(job['params']))
+                    q.finish(a.job_id, job_status(job['kind'], r), r); _json(r)
+                except Exception as e:   # noqa: BLE001  任务失败要落盘
+                    traceback.print_exc(); q.finish(a.job_id, 'failed', error = f'{type(e).__name__}: {e}'); sys.exit(1)
             return
     if a.cmd in ('run', 'research', 'paired', 'reproduce'):
         from .runs import EXIT_CODES

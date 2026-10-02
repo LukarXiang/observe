@@ -30,7 +30,10 @@ def seed(root):
 def test_claim_is_atomic_across_threads(tmp_path):
     q = Jobs(tmp_path); ids = {q.submit('snapshot') for _ in range(20)}; got = []
     def take():
-        while (j := q.claim()) is not None: got.append(j)
+        while (j := q.claim()) is not None:
+            got.append(j)
+            assert sum(x['status'] == 'running' for x in q.list()) == 1
+            assert q.finish(j, 'success')
     t = [threading.Thread(target = take) for _ in range(4)]; [x.start() for x in t]; [x.join() for x in t]
     assert sorted(got) == sorted(ids)                                            # 每个任务恰好被领取一次
 
