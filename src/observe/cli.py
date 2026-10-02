@@ -147,6 +147,13 @@ def main(argv = None):
     rr.add_parser('index'); rr.add_parser('show').add_argument('run')
     rv = rr.add_parser('verify', help = '只读核验实验冻结产物与子实验引用；不重跑研究')
     rv.add_argument('run'); rv.add_argument('--shallow', action = 'store_true', help = '只核验当前 manifest，不沿 subruns 递归')
+    for action in ('table', 'export'):
+        rt = rr.add_parser(action, help = '查询实验产物' if action == 'table' else '导出全部筛选行到新 CSV 文件')
+        rt.add_argument('run'); rt.add_argument('table')
+        rt.add_argument('--start'); rt.add_argument('--end'); rt.add_argument('--date'); rt.add_argument('--instrument'); rt.add_argument('--model')
+        rt.add_argument('--scenario', default = 'base'); rt.add_argument('--benchmark'); rt.add_argument('--sort-by'); rt.add_argument('--descending', action = 'store_true')
+        if action == 'table': rt.add_argument('--limit', type = int, default = 100); rt.add_argument('--offset', type = int, default = 0)
+        else: rt.add_argument('--output', required = True)
     fa = sub.add_parser('factor').add_subparsers(dest = 'act', required = True)
     fa.add_parser('list'); fa.add_parser('validate').add_argument('expr')
     fe = fa.add_parser('eval', help = '只读已保存研究产物，计算完整因子诊断；不重新训练')
@@ -189,6 +196,12 @@ def main(argv = None):
         if EXIT_CODES[r['status']]: sys.exit(EXIT_CODES[r['status']])
         return
     if a.cmd == 'runs':
+        if a.act in ('table', 'export'):
+            from .artifacts import run_table, export_table
+            filters = {k: getattr(a, k) for k in ('instrument', 'model', 'scenario', 'benchmark', 'sort_by', 'descending')}
+            filters.update(start = a.date or a.start, end = a.date or a.end)
+            if a.act == 'table': return _json(run_table(root, a.run, a.table, limit = a.limit, offset = a.offset, **filters))
+            return _json(export_table(root, a.run, a.table, a.output, **filters))
         if a.act == 'verify':
             from .integrity import verify_run
             result = verify_run(root, a.run, recursive = not a.shallow); _json(result)

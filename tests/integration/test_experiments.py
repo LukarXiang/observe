@@ -145,3 +145,22 @@ def test_complete_experiment_integrity_graph_and_api(full):
     report = verify_run(root, result['run_id'])
     assert report['status'] == 'ok' and report['summary']['runs'] == 17 and report['summary']['references'] == 16
     assert TestClient(create_app(root)).get(f"/api/runs/{result['run_id']}/verify").json() == report
+
+
+def test_full_experiment_exports_selected_model_and_cost_scenario(full, tmp_path):
+    import csv
+    import io
+    from observe.artifacts import export_table, run_table
+    root, config, result = full; rid = result['run_id']; source = Path(result['output'])
+    before = file_sha(source / 'manifest.json'); client = TestClient(create_app(root))
+    for model, scenario in [('lgbm', 'fees_x2'), ('ridge', 'slippage_x2'), ('universe_equal', 'base')]:
+        filters = {'model': model, 'scenario': scenario, 'sort_by': 'date', 'descending': True}
+        page = run_table(root, rid, 'equity', **filters)
+        target = tmp_path / f'{model}-{scenario}.csv'
+        exported = export_table(root, rid, 'equity', target, **filters)
+        response = client.get(f'/api/runs/{rid}/equity/csv', params = filters)
+        assert response.status_code == 200 and response.content == target.read_bytes()
+        rows = list(csv.DictReader(io.StringIO(response.text)))
+        assert exported['rows'] == page['total'] == len(rows)
+        assert rows[0]['date'][:10] == page['rows'][0]['date'][:10]
+    assert file_sha(source / 'manifest.json') == before

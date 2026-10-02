@@ -6,6 +6,8 @@ from pathlib import Path
 import duckdb
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import StreamingResponse
+from starlette.background import BackgroundTask
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
@@ -163,9 +165,20 @@ def create_app(root):
 
     @app.get('/api/runs/{rid}/{table}')
     def run_table(rid: str, table: str, limit: int = Query(100, ge = 1, le = 5000), offset: int = Query(0, ge = 0),
-                  start: Date | None = None, end: Date | None = None, date: Date | None = None, instrument: str | None = None, model: str | None = None, scenario: str = 'base', benchmark: str | None = None):
+                  start: Date | None = None, end: Date | None = None, date: Date | None = None, instrument: str | None = None, model: str | None = None, scenario: str = 'base', benchmark: str | None = None,
+                  sort_by: str | None = None, descending: bool = False):
         from ..artifacts import run_table as read_table
-        return read_result(read_table, root, rid, table, limit, offset, date or start, date or end, instrument, model, scenario, benchmark)
+        return read_result(read_table, root, rid, table, limit, offset, date or start, date or end, instrument, model, scenario, benchmark, sort_by, descending)
+
+    @app.get('/api/runs/{rid}/{table}/csv')
+    def export_run_table(rid: str, table: str, start: Date | None = None, end: Date | None = None, date: Date | None = None,
+                         instrument: str | None = None, model: str | None = None, scenario: str = 'base', benchmark: str | None = None,
+                         sort_by: str | None = None, descending: bool = False):
+        from ..artifacts import TableCSV
+        stream = read_result(TableCSV, root, rid, table, start = date or start, end = date or end, instrument = instrument,
+                             model = model, scenario = scenario, benchmark = benchmark, sort_by = sort_by, descending = descending)
+        return StreamingResponse(stream, media_type = 'text/csv; charset=utf-8',
+                                 headers = {'Content-Disposition': f'attachment; filename="{table}.csv"'}, background = BackgroundTask(stream.close))
 
     @app.get('/api/jobs/{jid}')
     def get_job(jid: str):

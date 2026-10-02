@@ -1,5 +1,9 @@
 """实验产物的只读查询：CLI 与 API 共用；大表通过 DuckDB 按条件分页。"""
+import csv
+import io
 import json
+from datetime import date
+from pathlib import Path
 
 import duckdb
 
@@ -35,37 +39,99 @@ def table_path(root, run, table, model = 'ridge', scenario = 'base'):
     raise FileNotFoundError(f'实验 {out.name} 没有产物 {table}')
 
 
-def run_table(root, run, table, limit = 100, offset = 0, start = None, end = None, instrument = None, model = None, scenario = 'base', benchmark = None):
+def _open_query(root, run, table, start = None, end = None, instrument = None, model = None, scenario = 'base', benchmark = None,
+                sort_by = None, descending = False):
+    """分页和导出共用筛选 / 排序 SQL；字段来自实际 schema，值使用绑定参数。"""
     if table not in TABLES: raise ValueError(f'未知实验表 {table}')
-    if not 1 <= limit <= 5000 or offset < 0: raise ValueError('limit 必须在 1–5000 内，offset 不得为负数')
+    start, end = (date.fromisoformat(str(v)) if v is not None else None for v in (start, end))
+    if start is not None and end is not None and start > end: raise ValueError('start 不得晚于 end')
+    if descending and sort_by is None: raise ValueError('降序必须指定 sort_by')
     p = table_path(root, run, table, model or 'ridge', scenario); reader = 'read_parquet' if p.suffix == '.parquet' else 'read_json_auto'
     source = f'{reader}(?)'; params, clauses = [str(p)], []
-    with duckdb.connect() as db:
-        columns = {r[0] for r in db.execute(f'describe select * from {source}', params).fetchall()}
+    db = duckdb.connect()
+    try:
+        columns = [r[0] for r in db.execute(f'describe select * from {source}', params).fetchall()]
         day = TABLES[table]
-        absent_filter = ((start is not None or end is not None) and day not in columns) or (instrument is not None and 'instrument' not in columns)
-        if absent_filter and db.execute(f'select count(*) from {source}', params).fetchone()[0] == 0:
-            return {'total': 0, 'limit': limit, 'offset': offset, 'rows': []}      # 全现金 / 无成交 JSON 没有可推断字段，仍是可筛选的空结果
+        # 空 JSON 数组无 schema；不存在的日期 / 证券筛选仍返回空结果。
+        empty_json = p.suffix == '.json' and columns == ['json'] and db.execute(f'select count(*) from {source}', params).fetchone()[0] == 0
+        if sort_by is not None and sort_by not in columns: raise ValueError(f'未知排序字段 {sort_by}')
+        quote = lambda c: '"' + c.replace('"', '""') + '"'
         for value, op in ((start, '>='), (end, '<=')):
-            if value is not None:
+            if value is not None and not empty_json:
                 if day not in columns: raise ValueError(f'{table} 没有可筛选的日期字段')
-                clauses.append(f'"{day}" {op} ?'); params.append(value)
-        if instrument is not None:
+                clauses.append(f'{quote(day)} {op} ?'); params.append(value.isoformat())
+        if instrument is not None and not empty_json:
             if 'instrument' not in columns: raise ValueError(f'{table} 没有证券字段')
             clauses.append('instrument = ?'); params.append(instrument)
         if model is not None and 'model_id' in columns:
             clauses.append('model_id = ?'); params.append(model)
         if 'scenario' in columns:
             clauses.append('scenario = ?'); params.append(scenario)
-        if benchmark is not None:
+        if benchmark is not None and not empty_json:
             if 'benchmark_id' not in columns: raise ValueError(f'{table} 没有基准字段')
             clauses.append('benchmark_id = ?'); params.append(benchmark)
         where = ' where ' + ' and '.join(clauses) if clauses else ''
-        total = db.execute(f'select count(*) from {source}{where}', params).fetchone()[0]
-        order = [c for c in (day, 'model_id', 'scenario', 'benchmark_id', 'instrument', 'factor', 'quantile', 'order_id', 'fill_id', 'split_id') if c and c in columns]
-        sql = f'select * from {source}{where}' + (' order by ' + ','.join(f'"{c}"' for c in dict.fromkeys(order)) if order else '') + ' limit ? offset ?'
-        frame = db.execute(sql, params + [limit, offset]).df()
+        base = f'select * from {source}{where}'
+        natural = [c for c in (day, 'model_id', 'scenario', 'benchmark_id', 'instrument', 'factor', 'quantile', 'order_id', 'fill_id', 'split_id') if c and c in columns]
+        # 所有剩余列用于打破并列，跨页排序稳定；完全相同的行没有可观察差异。
+        order = list(dict.fromkeys(([sort_by] if sort_by else []) + natural + columns))
+        suffix = ' order by ' + ','.join(quote(c) + (' desc' if c == sort_by and descending else ' asc') + ' nulls last' for c in order)
+        return db, base, suffix, params, [] if empty_json else columns
+    except Exception:
+        db.close(); raise
+
+
+def run_table(root, run, table, limit = 100, offset = 0, start = None, end = None, instrument = None, model = None, scenario = 'base', benchmark = None,
+              sort_by = None, descending = False):
+    if not 1 <= limit <= 5000 or offset < 0: raise ValueError('limit 必须在 1–5000 内，offset 不得为负数')
+    db, base, order, params, columns = _open_query(root, run, table, start, end, instrument, model, scenario, benchmark, sort_by, descending)
+    with db:
+        total = db.execute(f'select count(*) from ({base})', params).fetchone()[0]
+        frame = db.execute(base + order + ' limit ? offset ?', params + [limit, offset]).df()
     return {'total': int(total), 'limit': limit, 'offset': offset, 'rows': json.loads(frame.to_json(orient = 'records', date_format = 'iso', force_ascii = False))}
+
+
+class TableCSV:
+    """打开查询后逐批读取，API 响应前完成参数验证；close 可重复调用。"""
+    def __init__(self, root, run, table, **filters):
+        self.db, base, order, params, self.columns = _open_query(root, run, table, **filters)
+        self.header = False; self.rows = 0; self.closed = False
+        try: self.db.execute(base + order, params)
+        except Exception: self.close(); raise
+
+    def __iter__(self): return self
+
+    def __next__(self):
+        if self.closed: raise StopIteration
+        try:
+            buf = io.StringIO(newline = ''); writer = csv.writer(buf)
+            if not self.header:
+                self.header = True
+                if self.columns: writer.writerow(self.columns)
+                return buf.getvalue()
+            rows = self.db.fetchmany(4096)
+            if not rows: self.close(); raise StopIteration
+            writer.writerows(rows); self.rows += len(rows)
+            return buf.getvalue()
+        except BaseException:
+            self.close(); raise
+
+    def close(self):
+        if not self.closed: self.closed = True; self.db.close()
+
+
+def export_table(root, run, table, output, **filters):
+    """导出全部筛选行；目标独占创建，失败仅移除本次创建的未完成文件。"""
+    stream = TableCSV(root, run, table, **filters); output = Path(output); created = False
+    try:
+        with output.open('x', encoding = 'utf-8', newline = '') as handle:
+            created = True
+            for chunk in stream: handle.write(chunk)
+        return {'output': str(output.resolve()), 'table': table, 'rows': stream.rows, 'columns': stream.columns}
+    except BaseException:
+        if created: output.unlink(missing_ok = True)
+        raise
+    finally: stream.close()
 
 
 def compare_runs(root, runs):
