@@ -55,7 +55,11 @@ class RunRegistry:
 
     def get(self, run_id):
         if not self.path.exists(): return None
-        with self._db() as db: row = db.execute('select * from runs where run_id = ?', (run_id,)).fetchone()
+        # 定位已有实验必须只读，不能在核验 / 读取产物时初始化或改写登记库。
+        db = sqlite3.connect(self.path.resolve().as_uri() + '?mode=ro', uri = True, timeout = 10)
+        db.row_factory = sqlite3.Row
+        try: row = db.execute('select * from runs where run_id = ?', (run_id,)).fetchone()
+        finally: db.close()
         return dict(row) if row else None
 
     def list(self, limit = 50, offset = 0, kind = None, status = None):

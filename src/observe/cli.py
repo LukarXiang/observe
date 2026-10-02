@@ -145,6 +145,8 @@ def main(argv = None):
     rr = sub.add_parser('runs').add_subparsers(dest = 'act', required = True)
     rl = rr.add_parser('list'); rl.add_argument('--kind'); rl.add_argument('--status'); rl.add_argument('--limit', type = int, default = 50)
     rr.add_parser('index'); rr.add_parser('show').add_argument('run')
+    rv = rr.add_parser('verify', help = '只读核验实验冻结产物与子实验引用；不重跑研究')
+    rv.add_argument('run'); rv.add_argument('--shallow', action = 'store_true', help = '只核验当前 manifest，不沿 subruns 递归')
     fa = sub.add_parser('factor').add_subparsers(dest = 'act', required = True)
     fa.add_parser('list'); fa.add_parser('validate').add_argument('expr')
     fe = fa.add_parser('eval', help = '只读已保存研究产物，计算完整因子诊断；不重新训练')
@@ -187,6 +189,11 @@ def main(argv = None):
         if EXIT_CODES[r['status']]: sys.exit(EXIT_CODES[r['status']])
         return
     if a.cmd == 'runs':
+        if a.act == 'verify':
+            from .integrity import verify_run
+            result = verify_run(root, a.run, recursive = not a.shallow); _json(result)
+            if result['status'] != 'ok': sys.exit(1 if result['status'] == 'error' else 2)
+            return
         from .runs import RunRegistry
         from .artifacts import run_detail
         registry = RunRegistry(root / 'runs')

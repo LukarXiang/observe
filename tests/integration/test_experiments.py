@@ -137,3 +137,11 @@ def test_empty_positions_and_fills_accept_date_and_instrument_filters(tmp_path):
     for name in ('positions_daily', 'fills'): (out / f'{name}.json').write_text('[]')
     for table in ('positions', 'fills'):
         assert run_table(tmp_path, 'cash', table, start = '2024-01-02', instrument = '600000.SH')['rows'] == []
+
+
+def test_complete_experiment_integrity_graph_and_api(full):
+    from observe.integrity import verify_run
+    root, config, result = full
+    report = verify_run(root, result['run_id'])
+    assert report['status'] == 'ok' and report['summary']['runs'] == 17 and report['summary']['references'] == 16
+    assert TestClient(create_app(root)).get(f"/api/runs/{result['run_id']}/verify").json() == report

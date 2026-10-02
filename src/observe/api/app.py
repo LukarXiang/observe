@@ -156,6 +156,11 @@ def create_app(root):
         from ..artifacts import run_detail
         return read_result(run_detail, root, rid)
 
+    @app.get('/api/runs/{rid}/verify')
+    def verify(rid: str, recursive: bool = True):
+        from ..integrity import verify_run
+        return read_result(verify_run, root, rid, recursive)
+
     @app.get('/api/runs/{rid}/{table}')
     def run_table(rid: str, table: str, limit: int = Query(100, ge = 1, le = 5000), offset: int = Query(0, ge = 0),
                   start: Date | None = None, end: Date | None = None, date: Date | None = None, instrument: str | None = None, model: str | None = None, scenario: str = 'base', benchmark: str | None = None):
