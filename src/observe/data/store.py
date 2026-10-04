@@ -10,6 +10,9 @@ import pandas as pd
 
 KEYS = {'calendar': ['date'], 'instruments': ['instrument'], 'bars_1d': ['date', 'instrument'], 'adj_factors': ['instrument', 'ex_date'],
         'corp_actions': ['instrument', 'ex_date'], 'adj_coverage': ['instrument'], 'shares': ['instrument', 'date'], 'index_1d': ['date', 'index'], 'bars_5m': ['bar_end', 'instrument'], 'minute_universe': ['year', 'instrument'], 'minute_source': ['date', 'instrument']}
+KEYS.update({t: ['source_sha256', 'source_row'] for t in ('financial_annual', 'financial_quarterly', 'company_controls_annual')})
+KEYS.update(financial_availability = ['source_sha256', 'source_row', 'source_group'], financial_fields = ['source_sha256', 'column'])
+KEYS.update(index_constituents = ['date', 'index', 'instrument'])
 
 
 def _now(): return datetime.now().strftime('%Y%m%d-%H%M%S')
@@ -42,7 +45,10 @@ class Store:
     # 分区 ---------------------------------------------------------------------
     def write_partition(self, table, part, df):
         """按主键去重排序后写入；返回 {'file','sha','rows'}。内容相同则复用已有文件"""
-        key = KEYS[table]; df = df.drop_duplicates(key, keep = 'last').sort_values(key).reset_index(drop = True)
+        key = KEYS[table]
+        if table in ('financial_annual', 'financial_quarterly', 'company_controls_annual', 'financial_availability', 'financial_fields', 'index_constituents') and df.duplicated(key).any():
+            raise ValueError(f'{table}/{part}: 财务来源主键重复，禁止静默覆盖版本')
+        df = df.drop_duplicates(key, keep = 'last').sort_values(key).reset_index(drop = True)
         if df[key].isna().any().any(): raise ValueError(f'{table}/{part}: 主键含空值')
         # Arrow/Parquet 没有秒级 timestamp：写入会提升到毫秒。先无损提升再算指纹，确保重读一致。
         for column in df.select_dtypes(include = ['datetime', 'datetimetz']).columns:

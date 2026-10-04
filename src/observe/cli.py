@@ -16,8 +16,8 @@ def _config(path):
 
 def job_status(kind, result):
     """任务结果 → 队列状态：回放与复现直接沿用运行状态（与 status.json、函数返回值、命令退出码同一定义）"""
-    if kind in ('run_experiment', 'reproduce', 'research', 'paired', 'experiment', 'backtest_variant', 'factor_eval'): return result['status']
-    if kind == 'data_index': return 'failed' if result['status'] == 'rejected' else 'success'
+    if kind in ('run_experiment', 'reproduce', 'research', 'paired', 'experiment', 'backtest_variant', 'factor_eval', 'rule_strategy'): return result['status']
+    if kind in ('data_index', 'constituents_update'): return 'failed' if result['status'] in ('rejected', 'failed') else 'success'
     if isinstance(result, dict) and result.get('status') == 'refresh_failed_no_data': return 'failed'
     return 'partial' if isinstance(result, dict) and result.get('status') in ('rejected', 'published_partial', 'refresh_failed') else 'success'
 
@@ -25,9 +25,18 @@ def job_status(kind, result):
 def run_kind(root, kind, params):
     """任务种类 → 研究核心函数；命令行直接执行和队列执行都走这里"""
     from .data.store import Store
+    if kind == 'financial_import':
+        from .data.financials import FinancialImportConfig, import_financials
+        return import_financials(root, **FinancialImportConfig.model_validate(params).model_dump(), log = lambda m: print(m, file = sys.stderr, flush = True))
+    if kind == 'rule_strategy':
+        from .strategies import run_strategy
+        return run_strategy(root, **params)
     if kind == 'data_index':
         from .data.indices import IndexUpdateConfig, update_indices
         return update_indices(root, **IndexUpdateConfig.model_validate(params).model_dump())
+    if kind == 'constituents_update':
+        from .data.constituents import ConstituentsUpdateConfig, update_constituents
+        return update_constituents(root, **ConstituentsUpdateConfig.model_validate(params).model_dump(), log = lambda m: print(m, file = sys.stderr, flush = True))
     if kind == 'data_update':
         from .data import standardize as std
         from .data.sources.tdx import Tdx
@@ -54,6 +63,7 @@ def run_kind(root, kind, params):
     if kind == 'data_audit':
         from .data.audit import audit_daily
         from .data.update import default_rules
+        from .ledger.rules import RuleSet
         from .data.locks import DATA_WRITER, operation_lock
         st = Store(root)
         import secrets
@@ -65,7 +75,7 @@ def run_kind(root, kind, params):
         try:
             b = st.load_state(state, 'bars_1d'); cal = st.load_state(state, 'calendar'); inst = st.load_state(state, 'instruments')
             days = sorted(set(cal[cal.is_open].date)) if len(cal) else sorted(b.date.unique())
-            rules = default_rules(); iss = audit_daily(b, days, inst, rules)
+            rules = RuleSet.from_yaml(params['rules']) if params.get('rules') else default_rules(); iss = audit_daily(b, days, inst, rules)
             rule_fingerprint = rules.config_fingerprint() if rules is not None else 'builtin-v1'
             aid = st.commit_audit(batch_id, iss, rule_fingerprint, {'start': str(min(days)) if days else None, 'end': str(max(days)) if days else None, 'days': len(days), 'rows': len(b)}, scope='snapshot', input_state=state)
         finally:
@@ -102,12 +112,28 @@ def main(argv = None):
     doc = sub.add_parser('doctor', help = '只读检查环境、完整实验配置、快照与研究日期切分；不会创建任务或实验')
     doc.add_argument('--snapshot'); doc.add_argument('--config'); doc.add_argument('--verify-files', action = 'store_true', help = '逐分区读取完整内容，校验清单指纹与分区内主键（大表耗时）')
     d = sub.add_parser('data').add_subparsers(dest = 'act', required = True)
+    fi = d.add_parser('import-financials', help = '完整归档财务年度/季度 CSV 与年度控制变量 DTA，审计后一起原子发布')
+    fi.add_argument('--annual', required = True); fi.add_argument('--quarterly', required = True); fi.add_argument('--controls', required = True)
+    fi.add_argument('--definitions'); fi.add_argument('--chunksize', type = int, default = 4000); fi.add_argument('--queue', action = 'store_true')
+    fq = d.add_parser('financial-history', help = '按明确的决策时点读取财务核心字段；严格模式不放行未知历史版本')
+    fq.add_argument('--snapshot', required = True); fq.add_argument('--fields', required = True); fq.add_argument('--instruments', required = True)
+    fq.add_argument('--decision-time', required = True); fq.add_argument('--mode', choices = ['strict', 'exploratory'], default = 'strict'); fq.add_argument('--lag-days', type = int)
+    fq.add_argument('--table', choices = ['financial_annual', 'financial_quarterly'], default = 'financial_quarterly')
+    st = sub.add_parser('strategy', help = '策略来源清单和无模型训练的规则策略').add_subparsers(dest = 'act', required = True)
+    sc = st.add_parser('catalog'); sc.add_argument('--source', default = 'repo/量化策略源代码')
+    sr = st.add_parser('run'); sr.add_argument('--config', required = True); sr.add_argument('--snapshot'); sr.add_argument('--output'); sr.add_argument('--queue', action = 'store_true'); sr.add_argument('--no-cache', dest = 'cache', action = 'store_false', default = None)
     ix = d.add_parser('index', help = '下载价格指数日线；完整区间审计通过后只发布 index_1d')
     ix.add_argument('--start', required = True); ix.add_argument('--end', required = True)
     ix.add_argument('--indices', default = '000300.SH', help = '逗号分隔的指数代码，必须包含交易所'); ix.add_argument('--queue', action = 'store_true')
     ib = d.add_parser('index-bars', help = '分页读取已发布状态或指定快照的价格指数日线')
     ib.add_argument('--index', default = '000300.SH'); ib.add_argument('--start', default = '1990-01-01'); ib.add_argument('--end', default = '2099-12-31')
     ib.add_argument('--snapshot'); ib.add_argument('--limit', type = int, default = 1000); ib.add_argument('--offset', type = int, default = 0)
+    ic = d.add_parser('constituents', help = '归档指定日期范围的周频历史成分；完整审计后发布')
+    ic.add_argument('--start', required = True); ic.add_argument('--end', required = True); ic.add_argument('--indices', default = '000906.SH')
+    ic.add_argument('--max-age-days', type = int, default = 7); ic.add_argument('--force', action = 'store_true'); ic.add_argument('--queue', action = 'store_true')
+    ca = d.add_parser('constituents-at', help = '读取精确归档日期的名单，不向未知日期填充')
+    ca.add_argument('--index', default = '000906.SH'); ca.add_argument('--date', required = True); ca.add_argument('--snapshot')
+    ca.add_argument('--limit', type = int, default = 1000); ca.add_argument('--offset', type = int, default = 0)
     u = d.add_parser('update', help = '下载并发布 [start, end] 的日历、证券资料、全市场日线与复权因子变动')
     u.add_argument('--start', required = True); u.add_argument('--end', required = True); u.add_argument('--factors', default = '', help = '逗号分隔，取全部复权因子历史的证券，如 600519.SH')
     u.add_argument('--factors-all', action = 'store_true'); u.add_argument('--no-actions', action = 'store_true'); u.add_argument('--force', action = 'store_true'); u.add_argument('--queue', action = 'store_true', help = '提交到任务队列而不是直接执行')
@@ -116,7 +142,7 @@ def main(argv = None):
     m.add_argument('--workers', type = int, default = 4); m.add_argument('--sevenzip', help = '7z.exe 路径（个别日期是 7z 格式）'); m.add_argument('--queue', action = 'store_true')
     s = d.add_parser('snapshot'); s.add_argument('--note', default = '')
     g = d.add_parser('gc'); g.add_argument('--apply', action = 'store_true', help = '真正删除（默认只列出）')
-    d.add_parser('status'); d.add_parser('audit', help = '按当前执行规则重新审计已发布的日线')
+    d.add_parser('status'); da = d.add_parser('audit', help = '按执行规则重新审计已发布的日线'); da.add_argument('--rules')
     j = sub.add_parser('jobs').add_subparsers(dest = 'act', required = True)
     js = j.add_parser('submit'); js.add_argument('kind'); js.add_argument('--params', default = '{}')
     j.add_parser('list'); w = j.add_parser('worker'); w.add_argument('--once', action = 'store_true')
@@ -159,6 +185,29 @@ def main(argv = None):
     fe = fa.add_parser('eval', help = '只读已保存研究产物，计算完整因子诊断；不重新训练')
     fe.add_argument('--config'); fe.add_argument('--run'); fe.add_argument('--output'); fe.add_argument('--queue', action = 'store_true')
     a = ap.parse_args(argv); root = Path(a.root)
+    if a.cmd == 'strategy':
+        if a.act == 'catalog':
+            from .strategy_catalog import catalog_strategies
+            _json(catalog_strategies(root, a.source)); return
+        from .strategies import run_strategy
+        from .runs import EXIT_CODES
+        params = {**_config(a.config), **{k: v for k, v in vars(a).items() if k in ('snapshot', 'output', 'cache') and v is not None}}
+        if a.queue:
+            from .jobs import Jobs
+            _json({'job_id': Jobs(root).submit('rule_strategy', params)}); return
+        result = run_strategy(root, **params)
+        _json(result); return EXIT_CODES[result['status']]
+    if a.cmd == 'data' and a.act == 'import-financials':
+        if a.queue:
+            from .jobs import Jobs
+            _json({'job_id': Jobs(root).submit('financial_import', {'annual': a.annual, 'quarterly': a.quarterly, 'controls': a.controls, 'definitions_root': a.definitions, 'chunksize': a.chunksize})}); return
+        from .data.financials import import_financials
+        _json(import_financials(root, a.annual, a.quarterly, a.controls, a.definitions, a.chunksize, log = lambda m: print(m, file = sys.stderr, flush = True))); return
+    if a.cmd == 'data' and a.act == 'financial-history':
+        from .data.financial_history import query_financial_history
+        from .runs import canonical
+        result = query_financial_history(root, a.snapshot, a.fields.split(','), a.instruments.split(','), a.decision_time, a.mode, a.lag_days, archive_table = a.table)
+        _json({'coverage': result.coverage, 'data': canonical(result.data.to_dict('records'))}); return
     if a.cmd == 'doctor':
         from .doctor import doctor, EXIT_CODES
         result = doctor(root, a.snapshot, a.config, a.verify_files); _json(result)
@@ -218,6 +267,15 @@ def main(argv = None):
         return _json(compare_runs(root, a.runs))
     if a.cmd == 'data':
         from .data.store import Store
+        if a.act == 'constituents':
+            p = {'start': a.start, 'end': a.end, 'indices': a.indices.split(','), 'max_age_days': a.max_age_days, 'force': a.force}
+            if a.queue: return _json({'job_id': Jobs(root).submit('constituents_update', p)})
+            r = run_kind(root, 'constituents_update', p); _json(r)
+            if r['status'] in ('rejected', 'failed'): sys.exit(1)
+            return
+        if a.act == 'constituents-at':
+            from .data.constituents import constituents_at
+            return _json(constituents_at(root, a.index, a.date, a.snapshot, a.limit, a.offset))
         if a.act == 'index':
             p = {'start': a.start, 'end': a.end, 'indices': a.indices.split(',')}
             if a.queue: return _json({'job_id': Jobs(root).submit('data_index', p)})
@@ -238,7 +296,7 @@ def main(argv = None):
             return
         if a.act == 'snapshot': return _json(run_kind(root, 'snapshot', {'note': a.note}))
         if a.act == 'gc': return _json(run_kind(root, 'gc', {'apply': a.apply}))
-        if a.act == 'audit': return _json(run_kind(root, 'data_audit', {}))
+        if a.act == 'audit': return _json(run_kind(root, 'data_audit', {'rules': a.rules} if a.rules else {}))
         if a.act == 'status':
             pub = Store(root).published(); return _json({'batch_id': pub['batch_id'], 'tables': {t: {'partitions': len(v), 'rows': sum(x['rows'] for x in v.values())} for t, v in pub['tables'].items()}})
     if a.cmd == 'jobs':

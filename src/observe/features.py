@@ -12,7 +12,7 @@ from .factors import parse
 from .factors.expr import compute
 from .factors.intraday import INTRADAY_FIELDS
 
-FIELDS = ('open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret', 'volume', 'amount', 'turnover', *INTRADAY_FIELDS)
+FIELDS = ('open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret', 'volume', 'amount', 'turnover', 'pe_ttm', 'pb_mrq', *INTRADAY_FIELDS)
 
 
 def load_factor_set(path):

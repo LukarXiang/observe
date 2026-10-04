@@ -1,0 +1,747 @@
+{
+  "date": "2026-10-04",
+  "status": "passed",
+  "full_pytest": "449 passed, 1 warning in 150.71s (0:02:30)",
+  "pytest_log_sha256": "0b35587686869b3e00045fe0cecdd060c9917efec5816a988c1bd958c6a7c480",
+  "warning": "Existing FastAPI/Starlette TestClient httpx deprecation; no dependency change",
+  "ruff": "passed",
+  "git_diff_check": "passed",
+  "environment_rebuild_dry_run": "39 packages checked; no changes",
+  "archive": {
+    "archive": "observe-2026-10-04-batch2.tar.gz",
+    "archive_bytes": 3548336837,
+    "archive_sha256": "4bbfa2cf19cf9b0e627b6bf0b0b7c2226079f36287717327b5112aa3868df1d2",
+    "manifest": "observe-2026-10-04-batch2.manifest.json",
+    "manifest_sha256": "f5c8d8a19b3d7927d3df552afe4f897c7232ce60b5057476f8ef3d4f6fbdcec3",
+    "file_count": 4537,
+    "payload_bytes": 4668941037
+  },
+  "source_files_with_financial_inputs": {
+    "status": "ok",
+    "checked_files": 4616,
+    "financial_inputs_checked": true,
+    "issues": []
+  },
+  "manifest_base_git_commit": "8961f51ebe63fe31d910aa6614f837f15529533f",
+  "manifest_git_note": "Archive records the pre-commit base plus exact source/config/lock hashes; final code commit is a descendant. Git metadata drift does not replace core comparisons.",
+  "limitations": [
+    "strict financial history not proved",
+    "provider weekly constituent evidence is exploratory",
+    "332 daily audit warnings remain",
+    "real STAR fills are zero in the fixed engineering window",
+    "other-machine operating system/native dependency validation remains required"
+  ],
+  "relocation": {
+    "scope": "same_Mac_independent_directory_with_transferred_data_and_fresh_registry",
+    "root": "/private/var/folders/fy/3twvtzfj0y34my99vwfww8wc0000gn/T/observe-handoff-20261004-a27g6rkc",
+    "started_at": "2026-10-04T21:07:31",
+    "before_files": {
+      "status": "ok",
+      "checked_files": 4613,
+      "financial_inputs_checked": false,
+      "issues": []
+    },
+    "original_registry_present": false,
+    "indexed_runs": 103,
+    "doctor": {
+      "status": "warning",
+      "summary": {
+        "error": 0,
+        "ok": 25,
+        "warning": 4
+      },
+      "tables": {
+        "adj_coverage": {
+          "partitions": 1,
+          "rows": 5560,
+          "verified_partitions": 1
+        },
+        "adj_factors": {
+          "partitions": 1,
+          "rows": 64980,
+          "verified_partitions": 1
+        },
+        "bars_1d": {
+          "partitions": 6,
+          "rows": 6848484,
+          "verified_partitions": 6
+        },
+        "bars_5m": {
+          "partitions": 58,
+          "rows": 44571408,
+          "verified_partitions": 58
+        },
+        "calendar": {
+          "partitions": 1,
+          "rows": 2093,
+          "verified_partitions": 1
+        },
+        "company_controls_annual": {
+          "partitions": 26,
+          "rows": 73738,
+          "verified_partitions": 26
+        },
+        "corp_actions": {
+          "partitions": 1,
+          "rows": 59065,
+          "verified_partitions": 1
+        },
+        "financial_annual": {
+          "partitions": 36,
+          "rows": 95486,
+          "verified_partitions": 36
+        },
+        "financial_availability": {
+          "partitions": 73,
+          "rows": 1460899,
+          "verified_partitions": 73
+        },
+        "financial_fields": {
+          "partitions": 1,
+          "rows": 1911,
+          "verified_partitions": 1
+        },
+        "financial_quarterly": {
+          "partitions": 37,
+          "rows": 405867,
+          "verified_partitions": 37
+        },
+        "index_1d": {
+          "partitions": 1,
+          "rows": 1453,
+          "verified_partitions": 1
+        },
+        "index_constituents": {
+          "partitions": 1,
+          "rows": 96000,
+          "verified_partitions": 1
+        },
+        "instruments": {
+          "partitions": 1,
+          "rows": 6156,
+          "verified_partitions": 1
+        },
+        "minute_universe": {
+          "partitions": 1,
+          "rows": 4000,
+          "verified_partitions": 1
+        }
+      },
+      "seconds": 53.48,
+      "non_ok_checks": [
+        {
+          "detail": "历史秒精度无损还原后指纹匹配，数据与清单未修改",
+          "name": "partitions:bars_5m",
+          "partitions": 58,
+          "representation_adjustments": [
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202112",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202201",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202202",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202203",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202204",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202205",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202206",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202207",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202208",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202209",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202210",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202211",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202212",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202301",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202302",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202303",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202304",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202305",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202306",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202307",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202308",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202309",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202310",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202311",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202312",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202401",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202402",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202403",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202404",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202405",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202406",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202407",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202408",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202409",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202410",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202411",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202412",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202501",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202502",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202503",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202504",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202505",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202506",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202507",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202508",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202509",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202510",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202511",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202601",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202602",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202603",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202604",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202605",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202606",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202607",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202608",
+              "stored_unit": "ms"
+            },
+            {
+              "columns": [
+                "bar_end"
+              ],
+              "original_unit": "s",
+              "partition": "202609",
+              "stored_unit": "ms"
+            }
+          ],
+          "rows": 44571408,
+          "status": "warning"
+        },
+        {
+          "detail": "自然日日历缺口 2 个",
+          "missing_dates": [
+            "2021-01-09",
+            "2021-01-10"
+          ],
+          "name": "calendar",
+          "sessions": 1392,
+          "status": "warning"
+        },
+        {
+          "audit": {
+            "audit_id": "20261003-224421-8deb",
+            "audited_at": "2026-10-03T22:44:21.367484",
+            "batch_id": "20261003-223428-14b7",
+            "input_range": {
+              "days": 1392,
+              "end": "2026-09-29",
+              "rows": 6848484,
+              "start": "2021-01-04"
+            },
+            "scope": "snapshot",
+            "source": "audit 20261003-224421-8deb",
+            "status": "expired"
+          },
+          "blocking": 0,
+          "detail": "沿用批次绑定的日线审计；本次没有重新审计",
+          "name": "daily_audit",
+          "problems": 332,
+          "status": "warning"
+        },
+        {
+          "detail": "费用与交易规则覆盖决策区间",
+          "name": "rules",
+          "status": "warning",
+          "unverified": [
+            [
+              "fees",
+              "2015-08-01"
+            ],
+            [
+              "fees",
+              "2022-04-29"
+            ],
+            [
+              "fees",
+              "2023-08-28"
+            ],
+            [
+              "trading",
+              "main",
+              false,
+              "1996-12-16"
+            ],
+            [
+              "trading",
+              "main",
+              true,
+              "1998-04-22"
+            ],
+            [
+              "trading",
+              "main",
+              true,
+              "2026-07-06"
+            ]
+          ]
+        }
+      ]
+    },
+    "reproductions": [
+      {
+        "run_id": "20261003-204703-e212d2-strategy-984e",
+        "integrity": "ok",
+        "reproduction": {
+          "of": "/private/var/folders/fy/3twvtzfj0y34my99vwfww8wc0000gn/T/observe-handoff-20261004-a27g6rkc/data/runs/20261003-204703-e212d2-strategy-984e",
+          "result": "match",
+          "differences": 0
+        },
+        "seconds": 57.37,
+        "source_manifest_unchanged": true
+      },
+      {
+        "run_id": "20261003-205014-4ba8ca-strategy-efe6",
+        "integrity": "ok",
+        "reproduction": {
+          "of": "/private/var/folders/fy/3twvtzfj0y34my99vwfww8wc0000gn/T/observe-handoff-20261004-a27g6rkc/data/runs/20261003-205014-4ba8ca-strategy-efe6",
+          "result": "match",
+          "differences": 0
+        },
+        "seconds": 57.26,
+        "source_manifest_unchanged": true
+      },
+      {
+        "run_id": "20261003-205108-ff466c-strategy-6033",
+        "integrity": "ok",
+        "reproduction": {
+          "of": "/private/var/folders/fy/3twvtzfj0y34my99vwfww8wc0000gn/T/observe-handoff-20261004-a27g6rkc/data/runs/20261003-205108-ff466c-strategy-6033",
+          "result": "match",
+          "differences": 0
+        },
+        "seconds": 45.34,
+        "source_manifest_unchanged": true
+      },
+      {
+        "run_id": "20261003-224520-a72d3d-strategy-b8bc",
+        "integrity": "ok",
+        "reproduction": {
+          "of": "/private/var/folders/fy/3twvtzfj0y34my99vwfww8wc0000gn/T/observe-handoff-20261004-a27g6rkc/data/runs/20261003-224520-a72d3d-strategy-b8bc",
+          "result": "match",
+          "differences": 0
+        },
+        "seconds": 52.38,
+        "source_manifest_unchanged": true
+      },
+      {
+        "run_id": "20261003-224702-682101-strategy-2823",
+        "integrity": "ok",
+        "reproduction": {
+          "of": "/private/var/folders/fy/3twvtzfj0y34my99vwfww8wc0000gn/T/observe-handoff-20261004-a27g6rkc/data/runs/20261003-224702-682101-strategy-2823",
+          "result": "match",
+          "differences": 0
+        },
+        "seconds": 52.63,
+        "source_manifest_unchanged": true
+      },
+      {
+        "run_id": "20261002-213302-dc7654-experiment-0f0c",
+        "integrity": "ok",
+        "reproduction": {
+          "of": "/private/var/folders/fy/3twvtzfj0y34my99vwfww8wc0000gn/T/observe-handoff-20261004-a27g6rkc/data/runs/20261002-213302-dc7654-experiment-0f0c",
+          "result": "match",
+          "differences": 0
+        },
+        "seconds": 58.06,
+        "source_manifest_unchanged": true
+      }
+    ],
+    "after_files": {
+      "status": "ok",
+      "checked_files": 4613,
+      "financial_inputs_checked": false,
+      "issues": []
+    },
+    "finished_at": "2026-10-04T21:13:54",
+    "status": "passed"
+  },
+  "local_markdown_links": "27 Markdown files checked; no missing local links",
+  "staged_data_and_machine_state": "No data/, repo/, .venv/, node_modules or .DS_Store staged",
+  "staged_credential_pattern_scan": "No matches in staged files"
+}

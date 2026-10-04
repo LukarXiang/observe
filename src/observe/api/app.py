@@ -81,6 +81,27 @@ def create_app(root):
     @app.get('/api/data/snapshots')
     def snapshots(): return sorted((p.stem for p in (root / 'snapshots').glob('*.json')), reverse = True)
 
+    @app.get('/api/data/financial-history')
+    def financial_history(snapshot: str, fields: str, instruments: str, decision_time: str, mode: str = 'strict', lag_days: int | None = None, table: str = 'financial_quarterly'):
+        from ..data.financial_history import query_financial_history
+        result = read_result(query_financial_history, root, snapshot, fields.split(','), instruments.split(','), decision_time, mode, lag_days, archive_table = table)
+        return {'coverage': result.coverage, 'data': _records(result.data)}
+
+    @app.get('/api/strategies')
+    def strategies(status: str | None = None, limit: int = Query(100, ge = 1, le = 1000), offset: int = Query(0, ge = 0)):
+        def read():
+            latest = json.loads((root / 'catalog/strategies/latest.json').read_text(encoding = 'utf-8'))
+            path = root / 'catalog/strategies' / latest['catalog_id'] / 'catalog.json'
+            records = json.loads(path.read_text(encoding = 'utf-8'))
+            if status: records = [r for r in records if r['status'] == status]
+            return {'catalog_id': latest['catalog_id'], 'total': len(records), 'data': records[offset:offset + limit]}
+        return read_result(read)
+
+    @app.get('/api/data/constituents')
+    def constituents(index: str, date: Date, snapshot: str | None = None, limit: int = Query(1000, ge = 1, le = 1000), offset: int = Query(0, ge = 0)):
+        from ..data.constituents import constituents_at
+        return read_result(constituents_at, root, index, date, snapshot, limit, offset)
+
     @app.get('/api/data/issues')
     def issues(batch: str | None = None):
         """审计明细和元数据必须来自同一个已提交产物；返回审计范围（scope / input_range），增量通过不显示成全快照通过。"""

@@ -1,0 +1,131 @@
+# 仅用于已上市超过5个交易日的中证800日频探索版本；不模拟IPO无涨跌幅期或盘中价格笼子。
+# 旧规则集原样保留；费用和原主板/创业板条目的未核实状态继续披露。
+fees:
+- start: 2005-01-24
+  stamp_tax: 0.001
+  stamp_both_sides: true
+  transfer_fee: 2.0e-05
+  commission_rate: 0.00025
+  min_commission: 5.0
+  verified: false
+  source: 财政部 2005-01-23 印花税调整公告；2015 年前沪市过户费按股数（每千股 1 元）、深市不收，此处以成交额比例近似
+- start: 2007-05-30
+  stamp_tax: 0.003
+  stamp_both_sides: true
+  transfer_fee: 2.0e-05
+  commission_rate: 0.00025
+  min_commission: 5.0
+  verified: false
+  source: 财政部 2007-05-29 公告：证券交易印花税由 1‰ 调至 3‰
+- start: 2008-04-24
+  stamp_tax: 0.001
+  stamp_both_sides: true
+  transfer_fee: 2.0e-05
+  commission_rate: 0.00025
+  min_commission: 5.0
+  verified: false
+  source: 财政部 2008-04-23 公告：由 3‰ 调至 1‰
+- start: 2008-09-19
+  stamp_tax: 0.001
+  stamp_both_sides: false
+  transfer_fee: 2.0e-05
+  commission_rate: 0.00025
+  min_commission: 5.0
+  verified: false
+  source: 财政部 2008-09-18 公告：改为卖方单边征收
+- start: 2015-08-01
+  stamp_tax: 0.001
+  stamp_both_sides: false
+  transfer_fee: 2.0e-05
+  commission_rate: 0.00025
+  min_commission: 5.0
+  verified: false
+  source: 中国结算 2015 年过户费调整：沪深统一按成交金额 0.02‰
+- start: 2022-04-29
+  stamp_tax: 0.001
+  stamp_both_sides: false
+  transfer_fee: 1.0e-05
+  commission_rate: 0.00025
+  min_commission: 5.0
+  verified: false
+  source: 中国结算 2022 年过户费下调至 0.01‰
+- start: 2023-08-28
+  stamp_tax: 0.0005
+  stamp_both_sides: false
+  transfer_fee: 1.0e-05
+  commission_rate: 0.00025
+  min_commission: 5.0
+  verified: false
+  source: 财政部 税务总局 2023 年第 39 号公告：减半征收；佣金为研究假设，待你提供实际费率
+trading:
+- start: 1996-12-16
+  board: main
+  st: false
+  limit_pct: 0.1
+  buy_unit: 100
+  price_tick: 0.01
+  verified: false
+  source: 沪深交易所 1996-12 起实行 10% 涨跌幅限制
+- start: 1998-04-22
+  board: main
+  st: true
+  limit_pct: 0.05
+  buy_unit: 100
+  price_tick: 0.01
+  verified: false
+  source: 特别处理（ST）制度，涨跌幅 5%；上交所 2026 年修订规则（2026-07-06 施行）对主板风险警示股的调整待核实后追加条目
+- start: 2026-07-06
+  board: main
+  st: true
+  limit_pct: 0.1
+  buy_unit: 100
+  price_tick: 0.01
+  verified: false
+  source: 上交所 2026 年修订交易规则（2026-07-06 施行）主板风险警示股涨跌幅调整；实测印证：抽查沪深各 6 只主板 ST 股，2026-07-06
+    之前单日涨跌均不超过 5.2%，此后沪深两市均出现超过 5.5%（2026-09 主板 ST 最大涨幅沪 10.19%、深 10.47%）。深交所对应条文待核对
+- start: 2009-10-30
+  board: gem
+  st: false
+  limit_pct: 0.1
+  buy_unit: 100
+  price_tick: 0.01
+  verified: false
+  source: 创业板开板；第一版不启用
+- start: 2020-08-24
+  board: gem
+  st: false
+  limit_pct: 0.2
+  buy_unit: 100
+  price_tick: 0.01
+  verified: false
+  source: 创业板注册制改革，涨跌幅 20%；第一版不启用
+- start: '2020-08-24'
+  board: gem
+  st: true
+  limit_pct: 0.2
+  buy_unit: 100
+  price_tick: 0.01
+  verified: false
+  source: 创业板风险警示股票按20%涨跌幅处理；对应历史条文仍待核实
+- start: '2019-07-22'
+  board: star
+  st: false
+  limit_pct: 0.2
+  buy_unit: 1
+  min_buy_qty: 200
+  min_sell_qty: 200
+  max_order_qty: 50000
+  price_tick: 0.01
+  verified: true
+  source: 上交所2019-04-10投教说明：20%涨跌幅；市价申报200至50000股，1股递增，不足200股余额一次卖出；https://edu.sse.com.cn/tib/qa/c/4761956.shtml
+- start: '2019-07-22'
+  board: star
+  st: true
+  limit_pct: 0.2
+  buy_unit: 1
+  min_buy_qty: 200
+  min_sell_qty: 200
+  max_order_qty: 50000
+  price_tick: 0.01
+  verified: true
+  source: 上交所2019-04-10投教说明：20%涨跌幅；市价申报200至50000股，1股递增，不足200股余额一次卖出；https://edu.sse.com.cn/tib/qa/c/4761956.shtml

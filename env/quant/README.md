@@ -1,5 +1,7 @@
 # quant 环境清单
 
+> 以下为早期 Windows / WSL 环境归档。2026-10-04 起跨机续接使用仓库根目录 `pyproject.toml` / `uv.lock`，具体步骤见 [工作总结与跨机续接](../../docs/tasks/2026-10-04-工作总结与跨机续接.md)。不要用本目录旧锁文件覆盖当前根锁文件。Mac 使用根项目 `.venv`；Windows / WSL 可由 uv 在各自目录重建独立项目环境。
+
 Windows 与 WSL 使用同一份 `pyproject.toml` / `uv.lock` 约束，但各自维护独立环境：
 
 | 环境 | 解释器 | 用途 |

@@ -102,7 +102,8 @@ class Book:
             down, up = rules.limit_prices(pre, day, bd, st)
             if side == 'buy' and raw >= up: return reject('limit_up')
             if side == 'sell' and raw <= down: return reject('limit_down')
-        price, unit = rules.fill_price(raw, side, slippage, day, bd, st), rules.on(day, bd, st).buy_unit
+        rule = rules.on(day, bd, st)
+        price, unit = rules.fill_price(raw, side, slippage, day, bd, st), rule.buy_unit
         if not isinstance(price, (int, float)) or price <= 0 or price != price or price in (float('inf'), float('-inf')): return reject('invalid_fill_price')
         if pre is not None:
             down, up = rules.limit_prices(pre, day, bd, st)
@@ -116,20 +117,24 @@ class Book:
                 desired = order['qty']
                 if type(desired) is not int or desired <= 0: return reject('invalid_qty')
                 if desired < p.sellable and desired % unit: return reject('sell_unit')
+                if rule.min_sell_qty is not None and rule.sell_quantity(min(desired, p.sellable), p.sellable) != min(desired, p.sellable): return reject('sell_unit')
                 requested, qty = desired, min(desired, p.sellable)
+            if rule.max_order_qty is not None: qty = min(qty, rule.max_order_qty)
             if 'participation' in order:
                 cap = quote.get('avg_amount_20d'); limit = order['participation']
                 if cap is None: return reject('no_liquidity_reference')
-                qty = min(qty, int(cap * limit / price // unit * unit))
+                cap_qty = rule.sell_quantity(cap * limit / price, p.sellable)
+                qty = min(qty, cap_qty)
                 if qty <= 0: return reject('participation_limit')
         else:
-            qty = int(order['amount'] / price // unit * unit)
+            qty = rule.buy_quantity(order['amount'] / price)
             requested = qty; cap = quote.get('avg_amount_20d'); limit = order.get('participation')
             if limit is not None:
                 if cap is None: return reject('no_liquidity_reference')
-                qty = min(qty, int(cap * limit / price // unit * unit))
+                qty = min(qty, rule.buy_quantity(cap * limit / price))
             money = self.cash if budget is None else min(budget, self.cash)
             while qty and price * qty + rules.fees(price * qty, 'buy', day)['fee'] > money: qty -= unit
+            if qty < (rule.min_buy_qty or unit): qty = 0
             if not qty: return reject('cash')
         value = round(price * qty, 2); f = rules.fees(value, side, day)
         if side == 'buy':

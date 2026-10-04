@@ -13,6 +13,7 @@ from .runs import resolve_run
 TABLES = {'universe': 'decision_date', 'factors': 'date', 'labels': 'decision_date', 'split_plan': None, 'predictions': 'decision_date',
           'factor_daily': 'date', 'factor_groups': 'date', 'equity': 'date', 'orders': 'decision_date', 'fills': 'date', 'positions': 'date',
           'cash_events': 'date', 'receivables': 'date', 'benchmark_daily': 'date'}
+TABLES.update(scores = 'decision_date', targets = 'decision_date', signal_coverage = 'date')
 
 
 def run_detail(root, run):
@@ -28,10 +29,12 @@ def table_path(root, run, table, model = 'ridge', scenario = 'base'):
     for suffix in ('parquet', 'json'):
         p = out / f'{name}.{suffix}'
         if p.is_file(): return p
-    if _read(out / 'config.json').get('kind') == 'experiment':
+    kind = _read(out / 'config.json').get('kind')
+    if kind in ('experiment', 'strategy'):
         subruns = _read(out / 'subruns.json')
         if table in ('universe', 'factors', 'labels', 'predictions', 'split_plan'): child = subruns['research']
         else:
+            if kind == 'strategy' and model == 'ridge': model = _read(out / 'config.json')['config']['implementation']
             children = [x for x in subruns['backtests'] + subruns.get('benchmarks', []) if x['model'] == model and x['scenario'] == scenario]
             if not children: raise ValueError(f'实验没有 {model} / {scenario} 的账本产物')
             child = children[0]
