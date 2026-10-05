@@ -1,17 +1,20 @@
 """逐日循环：盘前公司行动 → 开盘执行上一决策的订单（先卖后买）→ 撤单 → 收盘估值勾稽 → 决策生成下一交易日订单。"""
 from .ledger.book import Book
-from .portfolio import DEFAULT_PARTICIPATION, equal_weight_orders, plan_rebalance, rebalance_orders, refill_orders
+from .portfolio import DEFAULT_PARTICIPATION, equal_weight_orders, plan_rebalance, rebalance_orders, refill_orders, target_weight_orders
+from .schedule import rebalance_dates
 
 POLICIES = ('sell_then_buy', 'preopen_cash_only')
 
 
 def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_date = None, actions = None, rebalance_every = 5,
              open_cash_policy = 'sell_then_buy', slippage = 0.0, n = 20, buffer = 10, max_sell = 5, max_weight = 0.10, refill_between_rebalance = True, calendar = None,
-             participation = DEFAULT_PARTICIPATION, on_close = None, construction = 'topn'):
+             participation = DEFAULT_PARTICIPATION, on_close = None, construction = 'topn', targets_by_date = None, rebalance_frequency = 'sessions', rebalance_session = 1):
     """market: {日: {证券: {'open','close','preclose','suspended','avg_amount_20d',...}}}；返回 (账本, 订单记录)。
     on_close(日, 账本, 当日净值行) 在收盘勾稽之后、决策之前调用，用于记录逐日持仓等状态；抛出异常即中止循环"""
     if open_cash_policy not in POLICIES: raise ValueError(f'open_cash_policy must be one of {POLICIES}')
-    if construction not in ('topn', 'universe_equal'): raise ValueError('未知组合构建方式')
+    if construction not in ('topn', 'universe_equal', 'target_weights'): raise ValueError('未知组合构建方式')
+    if construction == 'target_weights' and targets_by_date is None: raise ValueError('target_weights 必须提供逐日明确目标')
+    rebalance = rebalance_dates(dates, calendar or dates, rebalance_frequency, rebalance_every, rebalance_session)
     book = Book(initial_cash, calendar = calendar or dates); actions = actions or {}; pending, orders = [], []   # calendar 用于推断缺失日期
     target, target_amount, target_filled, sell_reason, rank = set(), {}, {}, {}, {}
     for k, day in enumerate(dates):
@@ -23,7 +26,7 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_dat
             if budget is not None and o['side'] == 'buy' and r['qty_filled']: budget -= r['value'] + r['fee']
             orders.append({**r, 'exec_date': day})                            # 未成交部分当天撤销
             if o['side'] == 'buy' and r.get('qty_filled'): target_filled[o['instrument']] = target_filled.get(o['instrument'], 0.0) + r['value']
-            if construction == 'universe_equal':
+            if construction in ('universe_equal', 'target_weights'):
                 if o['side'] == 'buy':
                     left = round(o['amount'] - r.get('value', 0.0), 2)
                     if left > 0: remaining.append({**o, 'amount': left})
@@ -35,10 +38,14 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_dat
         row = book.close_day(day, quotes)
         if on_close: on_close(day, book, row)
         held = {i for i, p in book.positions.items() if p.qty}
-        if construction == 'universe_equal':
-            if k % rebalance_every == 0:
-                eligible = eligible_by_date.get(day, set()) if eligible_by_date is not None else set(scores_by_date.get(day, {}))
-                intents = equal_weight_orders(eligible, book.positions, row['equity'], quotes, rules, day, max_weight, participation)
+        if construction in ('universe_equal', 'target_weights'):
+            if day in rebalance:
+                if construction == 'target_weights':
+                    if day not in targets_by_date: raise ValueError(f'{day}: 缺少规则策略目标，不能当作空仓')
+                    intents = target_weight_orders(targets_by_date[day], book.positions, row['equity'], quotes, rules, day, participation)
+                else:
+                    eligible = eligible_by_date.get(day, set()) if eligible_by_date is not None else set(scores_by_date.get(day, {}))
+                    intents = equal_weight_orders(eligible, book.positions, row['equity'], quotes, rules, day, max_weight, participation)
             else:
                 intents = remaining if refill_between_rebalance else []
                 def can_refill(o):
@@ -48,7 +55,7 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_dat
                 intents = [o for o in intents if can_refill(o)]
             pending = [{**o, 'decision_date': day} for o in intents]
             continue
-        if k % rebalance_every == 0:
+        if day in rebalance:
             scores = scores_by_date.get(day, {}); eligible = eligible_by_date.get(day, set()) if eligible_by_date is not None else set(scores)
             plan = plan_rebalance(scores, eligible, held, n, buffer, max_sell); amount = round(row['equity'] * min(1 / n, max_weight), 2)
             target, rank = plan['target'], plan['rank']

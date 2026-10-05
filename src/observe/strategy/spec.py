@@ -1,6 +1,6 @@
 """策略规格（声明式）：一个 YAML 描述一个策略的股票池、选股、调度、择时、退出与执行，不含任意代码。
 
-字段语义见 docs/08-策略库.md。规格只描述「做什么」；数据从快照读取，成交与费用由账本按执行规则集模拟。
+规格只描述「做什么」；数据从快照读取，成交与费用由账本按执行规则集模拟。
 """
 from datetime import date
 import hashlib
@@ -132,8 +132,8 @@ class StrategySpec(_Strict):
         return out
 
 
-def load_spec(path):
+def load_spec(path, check_filename = True):
     path = Path(path); text = path.read_text(encoding = 'utf-8')
     spec = StrategySpec.model_validate(yaml.safe_load(text))
-    if path.stem != spec.id: raise ValueError(f'规格文件名 {path.name} 与 id {spec.id} 不一致')
+    if check_filename and path.stem != spec.id: raise ValueError(f'规格文件名 {path.name} 与 id {spec.id} 不一致')
     return spec, {'path': str(path), 'sha256': hashlib.sha256(text.encode()).hexdigest(), 'text': text}

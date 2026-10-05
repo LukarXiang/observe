@@ -12,19 +12,21 @@ from pathlib import Path
 import pandas as pd
 
 from ..data.audit import audit_status
+from ..data.locks import DATA_WRITER, operation_lock
 from ..data.store import Store
 from ..evaluation import metrics as evaluate, trading_stats
 from ..execution import InputBlocked, build, load, sessions
 from ..factors.expr import parse
 from ..ledger import LedgerError, RuleSet
-from ..replay import RULES, _Recorder
-from ..runs import RunStatus, canonical, create_run_dir, environment, file_sha, write_json, write_table
+from ..replay import STATUS_FIELDS, ReproduceRefused, _Recorder, _read, check_snapshot, read_core
+from ..runs import RunStatus, canonical, compare_tables, create_run_dir, drift, ensure_outside, environment, file_sha, resolve_run, write_json, write_table
 from .engine import Selector, run_strategy_loop, summarize_targets
 from .fields import FIELDS, IndexPanel, StockPanel
 from .spec import load_spec
 
 DEFAULT_START = date(2022, 1, 1)          # 统一回测区间起点：本地日线自 2021-01 起，留出一年预热给回看较长的表达式
 LIQUIDITY_WINDOW = 20
+RULES = 'configs/rule_profiles/csi800_daily_v1.yaml'
 
 
 def _lookback(spec):
@@ -41,22 +43,33 @@ def yearly_returns(equity_rows, initial):
     return out
 
 
-def run_strategy(root, spec_path, snapshot = None, start = None, end = None, output = None, rules_file = None):
-    root = Path(root); store = Store(root); state = store.state(snapshot)
-    spec, meta = load_spec(spec_path)
-    rules_path = Path(rules_file or RULES); rules_text = rules_path.read_text(encoding = 'utf-8'); rules = RuleSet.from_yaml(rules_path)
+def run_strategy(root, spec_path, snapshot = None, start = None, end = None, output = None, rules_file = None,
+                 source_file = None, reproduce_of = None, compare = None):
+    root = Path(root); store = Store(root)
+    spec, meta = load_spec(spec_path, check_filename = reproduce_of is None)
+    source_path = Path(source_file or spec.source.file)
+    if source_file is None and not source_path.is_absolute(): source_path = Path('repo/量化策略源代码') / source_path
+    source_bytes = source_path.read_bytes()
+    if snapshot is None:
+        with operation_lock(root, DATA_WRITER): snapshot = store.snapshot(f'声明式策略 {spec.id} 冻结输入')
+    state = store.state(snapshot)
+    rules_path = Path(rules_file or RULES); rules_bytes = rules_path.read_bytes(); rules = RuleSet.from_yaml(rules_path)
     cal = sessions(store.load_state(state, 'calendar'))
+    if not cal: raise ValueError('声明式策略需要冻结交易日历')
     s = pd.Timestamp(start or spec.start or DEFAULT_START).date(); e = pd.Timestamp(end or spec.end or cal[-1]).date()
+    if s > e or s < cal[0] or e > cal[-1]: raise ValueError('声明式策略日期范围无效或超出冻结交易日历')
     s = cal[bisect_left(cal, s)] if bisect_left(cal, s) < len(cal) else s
     warm = cal[max(bisect_left(cal, s) - _lookback(spec) - LIQUIDITY_WINDOW - 5, 0)]
-    doc = {'kind': 'strategy', 'config': {'name': spec.id, 'start': str(s), 'end': str(e)}, 'spec': {k: v for k, v in meta.items() if k != 'text'},
+    doc = {'kind': 'strategy', 'engine': 'declarative', 'config': {'name': spec.id, 'start': str(s), 'end': str(e)}, 'spec': {k: v for k, v in meta.items() if k != 'text'},
+           'source': {'path': spec.source.file, 'bytes_sha256': hashlib.sha256(source_bytes).hexdigest()}, 'reproduce_of': reproduce_of,
            'snapshot_id': state.get('snapshot_id') or snapshot, 'batch_id': state.get('batch_id'),
-           'rules': {'source_path': str(rules_path), 'sha256': hashlib.sha256(rules_text.encode()).hexdigest(), 'fingerprint': rules.config_fingerprint()},
+           'rules': {'source_path': str(rules_path), 'sha256': hashlib.sha256(rules_bytes).hexdigest(), 'fingerprint': rules.config_fingerprint()},
            'environment': environment()}
-    h = hashlib.sha256(json.dumps(canonical({k: doc[k] for k in ('config', 'spec', 'snapshot_id', 'rules')}), sort_keys = True).encode()).hexdigest()
+    h = hashlib.sha256(json.dumps(canonical({k: doc[k] for k in ('config', 'spec', 'snapshot_id', 'rules', 'source')}), sort_keys = True).encode()).hexdigest()
     out = create_run_dir(root / 'runs', output, f'strategy-{spec.id}')
-    status = RunStatus(out, out.name, kind = 'strategy', registry = root / 'runs', evidence = 'exploration', config_hash = h, strategy = spec.id)
-    (out / 'spec.yaml').write_text(meta['text'], encoding = 'utf-8'); (out / 'rules.yaml').write_text(rules_text, encoding = 'utf-8')
+    status = RunStatus(out, out.name, kind = 'strategy', registry = root / 'runs', evidence = 'exploratory', config_hash = h, strategy = spec.id)
+    (out / 'source.original').write_bytes(source_bytes)
+    (out / 'spec.yaml').write_bytes(meta['text'].encode('utf-8')); (out / 'rules.yaml').write_bytes(rules_bytes)
     write_json(out / 'config.json', doc); status.stage('config')
     limitations = [{'kind': 'deviation', 'detail': d} for d in spec.deviations]
     limitations.append({'kind': 'strategy_port', 'detail': '聚宽策略的声明式改写，非原代码逐行执行；证据级别为探索'})
@@ -106,8 +119,33 @@ def run_strategy(root, spec_path, snapshot = None, start = None, end = None, out
     except Exception as exc:
         status.finish('failed', error = f'{type(exc).__name__}: {exc}'); raise
     write_table(out, 'limitations', limitations)
-    status.finish(final, limitations = limitations, **info)
+    extra = compare(out, final, info, limitations) if compare is not None else {}
+    if extra.get('reproduction', {}).get('result') == 'mismatch': extra['execution_status'], final = final, 'mismatch'
+    status.finish(final, limitations = limitations, **info, **extra)
     files = {p.name: file_sha(p) for p in sorted(out.iterdir()) if p.is_file() and p.name != 'manifest.json'}
     write_json(out / 'manifest.json', {'run_id': out.name, 'kind': 'strategy', 'strategy': spec.id, 'status': final, 'environment': doc['environment'], 'files': files})
-    return {'run_id': out.name, 'output': str(out), 'strategy': spec.id, 'status': final, **info.get('summary', {}),
+    return {'run_id': out.name, 'output': str(out), 'strategy': spec.id, 'status': final, **extra, **info.get('summary', {}),
             **({'blocked': info['blocked']} if 'blocked' in info else {})}
+
+
+def reproduce_strategy(root, run, output = None, abs_tol = 1e-9, rel_tol = 0):
+    from ..experiments import verify_manifest
+    source = resolve_run(root, run); ensure_outside(source, output); verify_manifest(source)
+    doc = _read(source / 'config.json'); saved = _read(source / 'status.json')
+    if not doc.get('snapshot_id'): raise ReproduceRefused('旧声明式实验没有冻结快照，须用明确快照创建新实验')
+    if not doc.get('source') or not (source / 'source.original').is_file(): raise ReproduceRefused('旧声明式实验缺少冻结来源源码，须创建新实验')
+    check_snapshot(Store(root), doc['snapshot_id'], _read(source / 'data_manifest.json'))
+    if file_sha(source / 'source.original') != doc['source']['bytes_sha256']: raise ReproduceRefused('冻结来源源码指纹不同')
+    if file_sha(source / 'rules.yaml') != doc['rules']['sha256']: raise ReproduceRefused('冻结规则指纹不同')
+    expected = {**read_core(source), 'decisions': _read(source / 'decisions.json') if (source / 'decisions.json').exists() else None,
+                'status': {k: saved.get('execution_status', saved.get(k)) if k == 'status' else saved.get(k) for k in STATUS_FIELDS}}
+    def compare(out, final, info, limitations):
+        actual = {**read_core(out), 'decisions': _read(out / 'decisions.json') if (out / 'decisions.json').exists() else None,
+                  'status': {k: {'status': final, 'limitations': limitations, **info}.get(k) for k in STATUS_FIELDS}}
+        differences, tables = compare_tables(expected, actual, abs_tol, rel_tol)
+        result = 'mismatch' if differences else 'match'
+        write_json(out / 'comparison.json', {'result': result, 'differences': differences, 'tables': tables,
+                                             'code_drift': drift(doc['environment'], environment()), 'cache': 'bypassed'})
+        return {'reproduction': {'of': str(source), 'result': result, 'differences': len(differences)}}
+    return run_strategy(root, source / 'spec.yaml', snapshot = doc['snapshot_id'], start = doc['config']['start'], end = doc['config']['end'],
+                        output = output, rules_file = source / 'rules.yaml', source_file = source / 'source.original', reproduce_of = str(source), compare = compare)

@@ -1,0 +1,49 @@
+# 探索证据：供应商按周更新成分；排除IPO前5个交易日；费用仍有未核实项。
+# 固定2024Q2工程窗口已查看，不用于独立最终留出。
+name: BP 中证800周频历史成分近似版本（固定参数工程验证）
+implementation: bp_csi800_weekly_v1
+source_path: repo/量化策略源代码/2022年度精选策略/74.基本面单因子测试——以BP因子为例.txt
+snapshot: 20261003-224421-9d2b
+start: 2024-03-29
+end: 2024-06-28
+initial_cash: 1000000
+parameters:
+  top_fraction: 0.1
+  positive_only: true
+universe:
+  boards:
+  - main
+  - gem
+  - star
+  min_listed_sessions: 6
+  exclude_st: true
+  suspend_window: 21
+  max_suspended: 0
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: target_weights
+  n: 1
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: monthly
+  rebalance_session: 1
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.05
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+cost_scenarios:
+- base
+- fees_x2
+- slippage_x2
+benchmark: 000906.SH
+cache: true
+rules: configs/rule_profiles/csi800_daily_v1.yaml
+index_universe:
+  index: 000906.SH
+  policy: provider_weekly_asof
+  max_age_days: 7

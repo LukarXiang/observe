@@ -35,10 +35,12 @@ class _Strict(BaseModel):
 
 
 class PortfolioConfig(_Strict):
-    construction: Literal['topn', 'universe_equal'] = 'topn'
+    construction: Literal['topn', 'universe_equal', 'target_weights'] = 'topn'
     n: int = Field(1, ge = 1)
     max_weight: float = Field(1.0, gt = 0, le = 1)
     rebalance_every: int = Field(1, ge = 1)
+    rebalance_frequency: Literal['sessions', 'daily', 'weekly', 'monthly'] = 'sessions'
+    rebalance_session: int = Field(1, ge = 1)
     buffer: int = Field(10, ge = 0)
     max_sell: int | None = Field(5, ge = 0)
     participation: float = Field(DEFAULT_PARTICIPATION, gt = 0, le = 1)
@@ -54,7 +56,7 @@ class ExecutionConfig(_Strict):
 
 
 class ScoresConfig(_Strict):
-    source: Literal['baseline', 'predictions', 'universe'] = 'baseline'
+    source: Literal['baseline', 'predictions', 'universe', 'rules'] = 'baseline'
     run: str | None = None                                       # predictions：研究实验目录（observe research 的产物）
     model: str = 'ridge'
     allow_cross_snapshot: bool = False                           # 研究实验的快照与回放快照不同时默认拒绝；确需用新快照评价旧预测，显式设为 true，记为对照情景并记录双方版本
@@ -126,6 +128,10 @@ def score_source(cfg, snapshot_id = None, root = None):
     """分数来源：工程基线，或研究实验的样本外预测表（同时带来研究候选）。预测表与股票池按文件哈希冻结。
     predictions 时先检查身份：研究实验与回放的快照一致（否则须显式声明对照情景）、模型存在、预测都落在该实验的研究候选上、fit_asof 早于决策日、请求区间不超出预测的定义范围"""
     sc = cfg.scores
+    if cfg.portfolio.construction == 'target_weights' and sc.source != 'rules': raise ValueError('target_weights 必须显式使用 rules 来源')
+    if sc.source == 'rules':
+        from .strategies import rule_source
+        return rule_source(root, cfg, snapshot_id)
     if cfg.portfolio.construction == 'universe_equal' and sc.source != 'universe': raise ValueError('universe_equal 必须显式使用 universe 分数来源')
     if sc.source == 'baseline': return BASELINE, cfg
     if sc.source == 'universe': return universe_source(cfg, snapshot_id, root)
@@ -221,6 +227,9 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
         status.stage('inputs', **inputs.info)
         if source['source'] == 'baseline': scores, eligible = baseline_scores(inputs.candidates), inputs.candidates
         elif source['source'] == 'universe': scores, eligible = _universe_scores(source, inputs.dates)
+        elif source['source'] == 'rules':
+            from .strategies import rule_scores
+            scores, eligible, _ = rule_scores(source, inputs.dates)
         else: scores, eligible = _prediction_scores(source, inputs.dates)
         write_table(out, 'scores', scores); status.stage('scores', rows = len(scores), source = source['source'])
         data_manifest = _read(out / 'data_manifest.json'); env = doc['environment']
@@ -228,7 +237,8 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
                                  'runtime': {k: env[k] for k in ('python', 'packages', 'lock_sha256')}}, cfg.cache and reproduce_of is None and not force_recompute)
         payload = {'config': {k: v for k, v in cfg.model_dump(mode = 'json').items() if k not in ('scores', 'rules', 'cache')},
                    'scores': digest(scores), 'eligible': digest([{'date': d, 'instruments': sorted(v)} for d, v in sorted(eligible.items())]),
-                   'rules': rules.config_fingerprint(), 'code': code_version('loop.py', 'portfolio.py', 'ledger/book.py', 'ledger/rules.py', 'execution.py', 'evaluation/portfolio.py', 'replay.py')}
+                   'rules': rules.config_fingerprint(), 'code': code_version('loop.py', 'portfolio.py', 'ledger/book.py', 'ledger/rules.py', 'execution.py', 'evaluation/portfolio.py', 'replay.py', 'schedule.py'),
+                   **({'rule_inputs': source} if source['source'] == 'rules' else {})}
         cache.materialize('ledger', payload, out, lambda dest: _simulate(inputs, scores, eligible, cfg, rules, dest, status))
         sim = _read(out / 'loop_result.json'); info = sim['info']
         status.stage('loop', 'blocked' if 'blocked' in info else 'done'); status.stage('labels', 'not_run', reason = '回放不使用标签；标签由研究阶段 labels.build_labels 生成')
@@ -262,10 +272,16 @@ def _simulate(inputs, scores, eligible, cfg, rules, out, status = None):
         by_date = {}
         for s in scores: by_date.setdefault(s['decision_date'], {})[s['instrument']] = s['score']
         rec = _Recorder(inputs.dates, inputs.unexplained); p = cfg.portfolio; x = cfg.execution
+        target_options = {}
+        if cfg.scores.source == 'rules':
+            from .strategies import rule_scores
+            _, _, targets = rule_scores({'run': cfg.scores.run}, inputs.dates)
+            target_options['targets_by_date'] = targets
         book, orders = run_loop(inputs.dates, inputs.market, by_date, cfg.initial_cash, rules, eligible_by_date = eligible, actions = inputs.actions,
                                 rebalance_every = p.rebalance_every, open_cash_policy = p.open_cash_policy, slippage = x.slippage, n = p.n, buffer = p.buffer,
                                 max_sell = p.max_sell, max_weight = p.max_weight, refill_between_rebalance = p.refill_between_rebalance, calendar = inputs.calendar,
-                                participation = p.participation, on_close = rec, construction = p.construction)
+                                participation = p.participation, on_close = rec, construction = p.construction,
+                                rebalance_frequency = p.rebalance_frequency, rebalance_session = p.rebalance_session, **target_options)
         if status is not None: status.stage('loop', orders = len(orders))
         metrics = evaluate(book.equity_curve()); write_json(out / 'metrics.json', metrics)
         write_json(out / 'trading.json', canonical(trading_stats(book.equity_rows, book.fills, orders, rec.positions, cfg.initial_cash)))
@@ -330,6 +346,12 @@ def reproduce(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0):
     if kind == 'experiment':
         from .experiments import reproduce_experiment
         return reproduce_experiment(root, run, output, abs_tol, rel_tol)
+    if kind == 'strategy':
+        if 'spec' in _read(source / 'config.json'):
+            from .strategy.run import reproduce_strategy
+        else:
+            from .strategies import reproduce_strategy
+        return reproduce_strategy(root, run, output, abs_tol, rel_tol)
     manifest = _read(source / 'manifest.json'); doc = _read(source / 'config.json'); src_status = _read(source / 'status.json')
     if src_status.get('status') not in ('success', 'success_limited', 'blocked', 'mismatch'): raise ReproduceRefused(f"源实验状态为 {src_status.get('status')}，不是已完成的实验")
     integrity = sorted(n for n, sha in manifest.get('files', {}).items() if not (source / n).exists() or file_sha(source / n) != sha)
@@ -339,6 +361,9 @@ def reproduce(root, run, output = None, abs_tol = 1e-9, rel_tol = 0.0):
     if not frozen.exists(): raise ReproduceRefused('源实验没有冻结的 rules.yaml')
     if RuleSet.from_yaml(frozen).config_fingerprint() != doc['rules']['fingerprint']: raise ReproduceRefused('冻结的 rules.yaml 与记录的规则指纹不一致')
     sc = doc.get('scores') or {}
+    if sc.get('source') == 'rules':
+        parent = resolve_run(root, sc['run'])
+        if file_sha(parent / 'signals_manifest.json') != sc['signals_manifest_sha256']: raise ReproduceRefused('规则策略信号清单与源账本记录不同')
     if sc.get('source') in ('predictions', 'universe'):
         names = (('predictions_sha256', 'predictions.parquet'), ('universe_sha256', 'universe.parquet')) if sc['source'] == 'predictions' else (('universe_sha256', 'universe.parquet'), ('split_plan_sha256', 'split_plan.parquet'))
         for key, name in names:

@@ -45,7 +45,7 @@ def collect(root, catalog = 'strategies/catalog.csv', specs = 'strategies/specs'
             if r['status'] == 'blocked': row['blocked'] = '; '.join(x.get('kind', '') for x in s.get('blocked', []))
         if sid in cat.index: row['catalog_status'] = cat.at[sid, 'status']
         rows.append(row)
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows).reindex(columns = list(dict.fromkeys(['id', 'run_status', *METRICS, *[k for row in rows for k in row]])))
 
 
 def _pct(x): return '' if x is None or pd.isna(x) else f'{x:.1%}'
@@ -69,11 +69,11 @@ def markdown(df, specs = 'strategies/specs'):
         lines += [f"### {r['id']} {r['title']}", '', f"- 来源：`{spec['source']['file']}`" + (f"（{spec['source']['url']}）" if spec['source'].get('url') else ''),
                   f"- 规格：`{r['spec']}`；最近实验：`{r['run_id'] or '未运行'}`", '', spec['idea'].strip(), '']
         if spec.get('deviations'): lines += ['与原文的差异：', ''] + [f'- {d}' for d in spec['deviations']] + ['']
-    return '\n'.join(lines) + '\n'
+    return '\n'.join(lines).rstrip() + '\n'
 
 
 def write_report(root, out_csv = 'strategies/results.csv', out_md = 'docs/09-策略库回测汇总.md', **kw):
     df = collect(root, **kw)
-    Path(out_csv).parent.mkdir(parents = True, exist_ok = True); df.to_csv(out_csv, index = False, encoding = 'utf-8')
-    Path(out_md).write_bytes(markdown(df, kw.get('specs', 'strategies/specs')).replace('\n', '\r\n').encode('utf-8'))   # docs 统一 CRLF
+    Path(out_csv).parent.mkdir(parents = True, exist_ok = True); df.to_csv(out_csv, index = False, encoding = 'utf-8', lineterminator = '\n')
+    Path(out_md).write_bytes(markdown(df, kw.get('specs', 'strategies/specs')).encode('utf-8'))
     return {'strategies': len(df), 'run': int((df.run_status != 'not_run').sum()) if len(df) else 0, 'csv': out_csv, 'markdown': out_md}

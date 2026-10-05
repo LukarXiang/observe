@@ -1,0 +1,38 @@
+name: 美的集团 MA10/MA20 日频近似复现（原参数）
+implementation: ma10_ma20_v1
+source_path: repo/量化策略源代码/2020年度精选策略/66 高于MA10买入低于MA20卖出回测半年收益率20.4%.txt
+snapshot: 20261003-204105-3ad0
+start: 2024-03-29
+end: 2024-06-28
+instrument: 000333.SZ
+initial_cash: 1000000
+parameters:
+  short: 10
+  long: 20
+  buy_multiplier: 1.01
+universe:
+  boards: [main]
+  min_listed_sessions: 1
+  exclude_st: false
+  suspend_window: 1
+  max_suspended: 1
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: target_weights
+  n: 1
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: daily
+  rebalance_session: 1
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.05
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+cost_scenarios: [base, fees_x2, slippage_x2]
+benchmark: 000300.SH
+cache: true

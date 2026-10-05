@@ -7,7 +7,7 @@ import pandas as pd
 
 from .intraday import INTRADAY_FIELDS
 
-FIELDS = {'open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret', 'volume', 'amount', 'turnover'} | set(INTRADAY_FIELDS)   # 后者由 5 分钟线聚合，见 intraday.py
+FIELDS = {'open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret', 'volume', 'amount', 'turnover', 'pe_ttm', 'pb_mrq'} | set(INTRADAY_FIELDS)
 TS1 = {'ts_mean', 'ts_std', 'ts_sum', 'ts_min', 'ts_max', 'ts_rank', 'ts_slope', 'ts_decay_linear'}   # (x, w)
 TS_LAG = {'ts_delay', 'ts_delta'}                                                                       # (x, d)
 TS2 = {'ts_corr', 'ts_cov'}                                                                             # (x, y, w)
@@ -68,7 +68,7 @@ def parse(expr, fields = FIELDS):
 
 # 计算 ---------------------------------------------------------------------------------------------------
 def _div(a, b):
-    b = b.where(b != 0) if isinstance(b, pd.DataFrame) else (np.nan if b == 0 else b)   # 分母为 0 输出缺失，不输出无穷大
+    b = b.where((b != 0) & np.isfinite(b)) if isinstance(b, pd.DataFrame) else (np.nan if b == 0 or not np.isfinite(b) else b)
     r = a / b
     return r.where(np.isfinite(r)) if isinstance(r, pd.DataFrame) else r
 

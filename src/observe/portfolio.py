@@ -1,4 +1,5 @@
-"""组合构建：调仓日定目标名单（强制退出 → 分数缺失保留 → 排名缓冲 → 普通换出 → 补足新买入），非调仓日只补单。"""
+"""组合构建：排名名单、完整等权基准及显式目标权重，共用唯一账本。"""
+import math
 
 
 def plan_rebalance(scores, eligible, held, n = 20, buffer = 10, max_sell = 5):
@@ -44,9 +45,30 @@ def equal_weight_orders(eligible, positions, equity, quotes, rules, day, max_wei
             continue
         q = quotes.get(i, {}); price = p.last_price if qty else q.get('close')
         if not price or price <= 0: continue
-        unit = rules.on(day, q.get('board', 'main'), q.get('is_st', False)).buy_unit
+        rule = rules.on(day, q.get('board', 'main'), q.get('is_st', False))
         gap = round(amount - qty * price, 2)
-        trim = int(max(0, -gap) / price // unit * unit)
+        trim = rule.sell_quantity(max(0, -gap) / price, qty)
         if trim: sells.append({'instrument': i, 'side': 'sell', 'qty': trim, 'reason': 'equal_weight_trim', 'participation': participation})
-        elif gap >= unit * price: buys.append({'instrument': i, 'side': 'buy', 'amount': gap, 'reason': 'equal_weight_add', 'participation': participation})
+        elif rule.buy_quantity(gap / price): buys.append({'instrument': i, 'side': 'buy', 'amount': gap, 'reason': 'equal_weight_add', 'participation': participation})
+    return sells + buys
+
+
+def target_weight_orders(weights, positions, equity, quotes, rules, day, participation = DEFAULT_PARTICIPATION):
+    """显式只做多权重，剩余为现金；每次调仓也调整仍在目标名单内的已有持仓。"""
+    if any(not isinstance(i, str) or not math.isfinite(float(w)) or not 0 <= w <= 1 for i, w in weights.items()) or sum(weights.values()) > 1 + 1e-10:
+        raise ValueError('目标权重必须有限、非负，合计不超过1')
+    sells, buys = [], []
+    for instrument in sorted(set(positions) | set(weights)):
+        p = positions.get(instrument); qty = p.qty if p else 0
+        weight = weights.get(instrument, 0.0)
+        if weight == 0:
+            if qty: sells.append({'instrument': instrument, 'side': 'sell', 'qty': 'all', 'reason': 'target_exit', 'participation': participation})
+            continue
+        q = quotes.get(instrument, {}); price = p.last_price if qty else q.get('close')
+        if not price or price <= 0: continue
+        rule = rules.on(day, q.get('board', 'main'), q.get('is_st', False))
+        gap = round(equity * weight - qty * price, 2)
+        trim = rule.sell_quantity(max(0, -gap) / price, qty)
+        if trim: sells.append({'instrument': instrument, 'side': 'sell', 'qty': trim, 'reason': 'target_trim', 'participation': participation})
+        elif rule.buy_quantity(gap / price): buys.append({'instrument': instrument, 'side': 'buy', 'amount': gap, 'reason': 'target_add', 'participation': participation})
     return sells + buys

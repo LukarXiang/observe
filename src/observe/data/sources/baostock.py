@@ -1,6 +1,6 @@
 """BaoStock 适配器：全机单会话（持 baostock 锁），结果集逐行读取（0.9.4 的 get_data 与 pandas 2+ 不兼容，决策 3）。"""
-import time
-from contextlib import contextmanager
+import sys, time
+from contextlib import contextmanager, redirect_stdout
 
 import pandas as pd
 
@@ -23,10 +23,11 @@ class BaoStock:
             # Import/login are source initialization and must not happen before
             # the shared process lock has rejected an external competitor.
             if self.bs is None: import baostock as bs; self.bs = bs
-            lg = self.bs.login()
+            with redirect_stdout(sys.stderr): lg = self.bs.login()
             if lg.error_code != '0': raise BaoStockError(f'登录失败 {lg.error_code} {lg.error_msg}')
             try: yield self
-            finally: self.bs.logout()
+            finally:
+                with redirect_stdout(sys.stderr): self.bs.logout()
 
     def _rows(self, endpoint, params, call):
         t = time.perf_counter()
@@ -50,3 +51,9 @@ class BaoStock:
     def index_daily(self, code, start, end):
         f = 'date,code,open,high,low,close,preclose,volume,amount'
         return self._rows('query_history_k_data_plus', {'code': code, 'start': start, 'end': end}, lambda: self.bs.query_history_k_data_plus(code, f, start_date = str(start), end_date = str(end), frequency = 'd', adjustflag = '3'))
+
+    def index_constituents(self, index, day):
+        methods = {'000300.SH': 'query_hs300_stocks', '000905.SH': 'query_zz500_stocks'}
+        if index not in methods: raise ValueError('供应商成分接口只提供沪深300和中证500')
+        method = methods[index]
+        return self._rows(method, {'date': day}, lambda: getattr(self.bs, method)(date = str(day)))

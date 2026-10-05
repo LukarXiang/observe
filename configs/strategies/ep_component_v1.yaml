@@ -1,0 +1,36 @@
+name: EP 倒数组件与主板近似变体（固定参数工程验证）
+implementation: ep_component_v1
+source_path: repo/量化策略源代码/2022年度精选策略/74.基本面单因子测试——以BP因子为例.txt
+snapshot: 20261003-204105-3ad0
+start: 2024-03-29
+end: 2024-06-28
+initial_cash: 1000000
+parameters:
+  top_fraction: 0.10
+  positive_only: true
+universe:
+  boards: [main]
+  min_listed_sessions: 1
+  exclude_st: true
+  suspend_window: 21
+  max_suspended: 0
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: target_weights
+  n: 1
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: monthly
+  rebalance_session: 1
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.05
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+cost_scenarios: [base, fees_x2, slippage_x2]
+benchmark: 000300.SH
+cache: true

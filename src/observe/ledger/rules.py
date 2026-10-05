@@ -21,6 +21,22 @@ class Rule:
     min_commission: float = 5.0
     verified: bool = True
     source: str = ''
+    min_buy_qty: int | None = None
+    min_sell_qty: int | None = None
+    max_order_qty: int | None = None
+
+    def buy_quantity(self, quantity):
+        qty = int(quantity // self.buy_unit * self.buy_unit)
+        if self.max_order_qty is not None: qty = min(qty, self.max_order_qty)
+        return qty if qty >= (self.min_buy_qty or self.buy_unit) else 0
+
+    def sell_quantity(self, quantity, balance):
+        qty = int(quantity // self.buy_unit * self.buy_unit)
+        if self.max_order_qty is not None: qty = min(qty, self.max_order_qty)
+        # 小额余额可以一次卖清；不能把不足最小申报量的余额拆开。
+        if self.min_sell_qty is not None and qty < self.min_sell_qty:
+            return balance if quantity >= balance and balance < self.min_sell_qty else 0
+        return qty
 
 
 @dataclass(frozen = True)
@@ -33,6 +49,9 @@ class TradingRule:
     price_tick: float = 0.01
     verified: bool = True
     source: str = ''
+    min_buy_qty: int | None = None
+    min_sell_qty: int | None = None
+    max_order_qty: int | None = None
 
 
 def _round(x, tick = 0.01, mode = ROUND_HALF_UP):
@@ -49,8 +68,8 @@ class RuleSet:
     def config_fingerprint(self):
         """Stable identity of configured rules, excluding runtime usage state."""
         payload = {'version': 1,
-                   'rules': [{k: (v.isoformat() if isinstance(v, date) else v) for k, v in vars(r).items()} for r in self.rules],
-                   'trading': [{k: (v.isoformat() if isinstance(v, date) else v) for k, v in vars(r).items()} for r in self.trading]}
+                   'rules': [{k: (v.isoformat() if isinstance(v, date) else v) for k, v in vars(r).items() if v is not None} for r in self.rules],
+                   'trading': [{k: (v.isoformat() if isinstance(v, date) else v) for k, v in vars(r).items() if v is not None} for r in self.trading]}
         raw = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()
         return hashlib.sha256(raw).hexdigest()
 
@@ -75,7 +94,8 @@ class RuleSet:
         if self.trading:
             t = [x for x in self.trading if x.start <= day and x.board == board and x.st == bool(st)]
             if not t: raise ValueError(f'no trading rule for {day} board={board} st={st}')
-            t = t[-1]; r = replace(r, limit_pct = t.limit_pct, buy_unit = t.buy_unit, price_tick = t.price_tick, verified = r.verified and t.verified)
+            t = t[-1]; r = replace(r, limit_pct = t.limit_pct, buy_unit = t.buy_unit, price_tick = t.price_tick, verified = r.verified and t.verified,
+                                   min_buy_qty = t.min_buy_qty, min_sell_qty = t.min_sell_qty, max_order_qty = t.max_order_qty)
             if not t.verified: self.used_unverified.add(('trading', t.board, t.st, t.start))
         return r
 
