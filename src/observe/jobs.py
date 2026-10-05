@@ -32,9 +32,18 @@ def alive(pid):
     return bool(ok) and code.value == 259
 
 
+def _owner(pid):
+    """交接时记录的是 Popen 得到的 PID。Windows 的 venv python.exe 是启动器，真正的解释器是它的子进程，
+    此时记录的 PID 是本进程的父进程；只在 Windows 上接受这一层，其他平台必须是本进程"""
+    if pid == os.getpid(): return pid
+    if os.name == 'nt' and pid and pid == os.getppid(): return pid
+    return None
+
+
 class Jobs:
     def __init__(self, root):
         self.root = Path(root); self.root.mkdir(parents = True, exist_ok = True); self.path = self.root / 'jobs.sqlite'
+        self._exec_pid = None                                                       # execution() 内记录的任务所有者 PID，finish 默认用它
         with self._db() as c: c.execute(SCHEMA)
 
     def _db(self):
@@ -86,7 +95,7 @@ class Jobs:
         if status not in STATUS or status in ('queued', 'running', 'cancelled'): raise ValueError(f'非法完成状态 {status}')
         with self._db() as c:
             return c.execute("update jobs set status = ?, finished_at = ?, result = ?, error = ? where job_id = ? and status = 'running' and pid = ?",
-                             (status, _now(), json.dumps(result, ensure_ascii = False, default = str) if result is not None else None, error, jid, os.getpid() if pid is None else pid)).rowcount == 1
+                             (status, _now(), json.dumps(result, ensure_ascii = False, default = str) if result is not None else None, error, jid, (self._exec_pid or os.getpid()) if pid is None else pid)).rowcount == 1
 
     def cancel(self, jid):
         with self._db() as c: return c.execute("update jobs set status = 'cancelled', finished_at = ? where job_id = ? and status = 'queued'", (_now(), jid)).rowcount == 1
@@ -112,9 +121,12 @@ class Jobs:
                 row = c.execute('select * from jobs where job_id = ?', (jid,)).fetchone()
                 job = dict(row) if row else None
                 c.execute('commit')
-            if job is None or job['status'] != 'running' or job['pid'] != os.getpid():
+            owner = _owner(job['pid']) if job else None
+            if job is None or job['status'] != 'running' or owner is None:
                 raise ValueError(f'任务 {jid} 未授权当前进程执行')
-            yield job
+            self._exec_pid = owner
+            try: yield job
+            finally: self._exec_pid = None
 
     def recover(self):
         """不触碰仍在运行的子进程；失去执行者的任务只标记中断，不自动重跑。"""

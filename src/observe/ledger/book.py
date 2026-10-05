@@ -90,6 +90,13 @@ class Book:
         self.issues.append({'date': day, 'instrument': a['instrument'], 'kind': 'converted', 'to': a['convert_to'], 'qty': q})
         old.qty = old.today_buy = old.pending = 0
 
+    def settle_delisted(self, day, i):
+        """退市持仓按最后估值价折成现金并记为假设。只由策略回测显式调用；研究回放仍按退市持仓阻断（status = blocked）"""
+        p = self.pos(i); px = p.last_price or 0.0; value = round(p.qty * px, 2)
+        self._cash(day, 'delisted_settlement', value, instrument = i)
+        self.assumptions.append({'date': day, 'instrument': i, 'field': 'delisted_settlement', 'qty': p.qty, 'price': px, 'value': value})
+        p.qty = p.today_buy = p.pending = 0
+
     # 开盘成交 -------------------------------------------------------------
     def execute(self, order, quote, day, rules, slippage = 0.0, budget = None):
         """order: {'instrument','side','amount'(买)|'qty':'all'(卖)}；budget 为 preopen_cash_only 下本事件可用现金"""

@@ -63,8 +63,9 @@ def test_manifest_paths_cannot_escape_run(tmp_path, name):
 
 def test_symlink_to_external_file_is_not_read(tmp_path, monkeypatch):
     out = sealed(tmp_path, 'links'); external = tmp_path / 'external'; external.write_text('private')
-    (out / 'link').symlink_to(external)
-    m = json.loads((out / 'manifest.json').read_text()); m['files']['link'] = file_sha(external); write_json(out / 'manifest.json', m)
+    try: (out / 'link').symlink_to(external)
+    except OSError as e: pytest.skip(f'当前系统不允许创建符号链接：{e}')            # Windows 非管理员且未开开发者模式
+    m = json.loads((out / 'manifest.json').read_text(encoding = 'utf-8')); m['files']['link'] = file_sha(external); write_json(out / 'manifest.json', m)
     import observe.integrity as module
     original = module.file_sha
     def guarded(path):

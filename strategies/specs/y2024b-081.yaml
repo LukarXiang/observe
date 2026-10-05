@@ -1,0 +1,36 @@
+id: y2024b-081
+title: 低PB小市值低换手策略总结
+source:
+  file: 2024年度精选策略2/81.低PB小市值低换手策略总结.txt
+  url: https://www.joinquant.com/post/35317
+  author: QuantYY
+archetype: small_cap
+idea: |
+  每月第一个交易日开盘调仓。两条选股管线取并集：
+  (1) 全市场按市净率从低到高取 70 只，再按换手率从低到高取 35 只；
+  (2) 全市场按市值从小到大取 70 只，再按换手率从低到高取 35 只。
+  剔除 ST、停牌；开盘涨停买不进（账本按涨停价拒单）。名单内等权，原文先清仓再按可用现金等分买入。
+  这里用 reweight（每月把每只调回等权，偏离不超过 20% 的不动）表达同一目标持仓。
+deviations:
+  - 原文 market_cap 为总市值；这里用流通市值（成交量 ÷ 换手率 × 收盘价）替代，总股本数据入库后改回总市值
+  - 原文 pb_ratio 来自聚宽 valuation 表；这里用 BaoStock 日线的 pbMRQ，口径接近但不保证一致
+  - 原文每月先全部卖出再买入（保留的股票也会卖出再买回，产生双边费用）；这里保留仍在名单内的持仓，只在偏离超过 20% 时调整，费用偏低
+  - 原文股票池含北交所；本地数据没有北交所，只在沪深主板、创业板、科创板中选
+  - 原文无滑点；这里统一按 0.1% 滑点和本项目执行规则集的费用计算
+universe:
+  boards: [main, gem, star]
+  exclude_st: true
+  exclude_paused: true
+select:
+  n: 70
+  pipelines:
+    - - {sort: pb_mrq, asc: true, take: 70}
+      - {sort: turnover, asc: true, take: 35}
+    - - {sort: float_mcap, asc: true, take: 70}
+      - {sort: turnover, asc: true, take: 35}
+schedule:
+  freq: monthly
+  day: 1
+rebalance:
+  mode: reweight
+  band: 0.2

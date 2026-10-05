@@ -1,5 +1,6 @@
 """队列生命周期：真实进程互斥、执行身份、恢复及终态保护。"""
 import os
+import signal
 import subprocess
 import sys
 import threading
@@ -43,7 +44,7 @@ def test_processes_share_one_slot_and_recover_only_dead_owner(tmp_path):
         assert q.recover() == []
         assert q.claim() is None and q.run_next() is None
         assert not q.finish(jid, 'failed', error = '非拥有者不得完成')
-        p.terminate(); p.wait(timeout = 10)
+        os.kill(q.get(jid)['pid'], signal.SIGTERM); p.wait(timeout = 10)    # 结束真正的拥有者；Windows venv 下 p 只是启动器
         assert q.recover() == [jid]
         assert q.get(jid)['status'] == 'interrupted'
         assert q.claim() in ids - {jid}

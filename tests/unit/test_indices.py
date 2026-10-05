@@ -92,7 +92,7 @@ def test_rejection_retains_published_state_and_evidence(seeded, fault, rule):
     assert result['status'] == 'rejected' and result['batch_id'] is None
     assert seeded.published_path.read_bytes() == before
     assert rule in set(pd.read_csv(result['issues_file']).rule)
-    assert json.loads(Path(result['report_file']).read_text())['status'] == 'rejected'
+    assert json.loads(Path(result['report_file']).read_text(encoding = 'utf-8'))['status'] == 'rejected'
     assert job_status('data_index', result) == 'failed'
 
 

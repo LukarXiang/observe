@@ -158,7 +158,34 @@ def main(argv = None):
     fa.add_parser('list'); fa.add_parser('validate').add_argument('expr')
     fe = fa.add_parser('eval', help = '只读已保存研究产物，计算完整因子诊断；不重新训练')
     fe.add_argument('--config'); fe.add_argument('--run'); fe.add_argument('--output'); fe.add_argument('--queue', action = 'store_true')
+    st = sub.add_parser('strategy', help = '策略库：声明式策略规格的回测与统一汇总（docs/08-策略库.md）').add_subparsers(dest = 'act', required = True)
+    sr = st.add_parser('run', help = '按规格回测，每个规格一个新实验目录；退出码同 run（多个规格时取最严重者）')
+    sr.add_argument('specs', nargs = '+', help = '规格文件，或 strategies/specs 下的策略编号'); sr.add_argument('--snapshot'); sr.add_argument('--start'); sr.add_argument('--end')
+    st.add_parser('report', help = '汇总每个策略最近一次回测，写 strategies/results.csv 与 docs/09-策略库回测汇总.md')
+    st.add_parser('validate', help = '只校验 strategies/specs 下全部规格能否解析').add_argument('specs', nargs = '*')
     a = ap.parse_args(argv); root = Path(a.root)
+    if a.cmd == 'strategy':
+        def resolve(x): return Path(x) if x.endswith(('.yaml', '.yml')) else Path('strategies/specs') / f'{x}.yaml'
+        if a.act == 'validate':
+            from .strategy.spec import load_spec
+            bad = {}
+            for f in [resolve(x) for x in a.specs] or sorted(Path('strategies/specs').glob('*.yaml')):
+                try: load_spec(f)
+                except Exception as e: bad[str(f)] = f'{type(e).__name__}: {e}'   # noqa: BLE001  逐个报告，不因一个失败中止
+            _json({'invalid': bad})
+            if bad: sys.exit(1)
+            return
+        if a.act == 'report':
+            from .strategy.report import write_report
+            return _json(write_report(root))
+        from .runs import EXIT_CODES
+        from .strategy.run import run_strategy
+        worst = 0
+        for x in a.specs:
+            r = run_strategy(root, resolve(x), snapshot = a.snapshot, start = a.start, end = a.end); _json(r)
+            worst = max(worst, EXIT_CODES[r['status']])
+        if worst: sys.exit(worst)
+        return
     if a.cmd == 'doctor':
         from .doctor import doctor, EXIT_CODES
         result = doctor(root, a.snapshot, a.config, a.verify_files); _json(result)

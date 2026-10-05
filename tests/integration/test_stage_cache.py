@@ -18,7 +18,7 @@ def test_changing_one_formula_only_computes_that_factor_and_preserves_unrelated_
     calls, original = [], research.factor_frame
     def track(spec, *args, **kwargs): calls.extend(f['name'] for f in spec['factors']); return original(spec, *args, **kwargs)
     monkeypatch.setattr(research, 'factor_frame', track)
-    Path(fs).write_text(Path(fs).read_text().replace('expr: ts_std(ret, 5)', 'expr: -ts_std(ret, 5)'))
+    Path(fs).write_text(Path(fs).read_text(encoding = 'utf-8').replace('expr: ts_std(ret, 5)', 'expr: -ts_std(ret, 5)'), encoding = 'utf-8')
     b = run_research(tmp_path, **config); rows = events(b)
     assert calls == ['vol_5']
     assert [e['result'] for e in rows if e['stage'] == 'factor'] == ['hit', 'miss', 'hit']

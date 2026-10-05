@@ -33,37 +33,37 @@ def _int(node, name):
     return node.value
 
 
-def _check(n):
-    """返回 (回看长度, 依赖字段)；不在白名单的语法一律报错"""
-    if isinstance(n, ast.Expression): return _check(n.body)
+def _check(n, fields = FIELDS):
+    """返回 (回看长度, 依赖字段)；不在白名单的语法一律报错。fields 是允许的字段名，默认研究因子字段"""
+    if isinstance(n, ast.Expression): return _check(n.body, fields)
     if isinstance(n, ast.Constant) and type(n.value) in (int, float): return 0, set()
     if isinstance(n, ast.Name):
-        if n.id not in FIELDS: raise ExprError(f'未知字段 {n.id}')
+        if n.id not in fields: raise ExprError(f'未知字段 {n.id}')
         return 0, {n.id}
-    if isinstance(n, ast.UnaryOp) and isinstance(n.op, (ast.USub, ast.UAdd)): return _check(n.operand)
+    if isinstance(n, ast.UnaryOp) and isinstance(n.op, (ast.USub, ast.UAdd)): return _check(n.operand, fields)
     if isinstance(n, ast.BinOp) and isinstance(n.op, (ast.Add, ast.Sub, ast.Mult, ast.Div)):
-        (a, fa), (b, fb) = _check(n.left), _check(n.right); return max(a, b), fa | fb
+        (a, fa), (b, fb) = _check(n.left, fields), _check(n.right, fields); return max(a, b), fa | fb
     if isinstance(n, ast.Compare) and len(n.ops) == 1 and isinstance(n.ops[0], (ast.Gt, ast.Lt, ast.GtE, ast.LtE)):
-        (a, fa), (b, fb) = _check(n.left), _check(n.comparators[0]); return max(a, b), fa | fb
+        (a, fa), (b, fb) = _check(n.left, fields), _check(n.comparators[0], fields); return max(a, b), fa | fb
     if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and not n.keywords:
         f, args = n.func.id, n.args
         if f in TS_LAG | TS1 and len(args) == 2:
-            lb, fs = _check(args[0]); w = _int(args[1], f); return lb + (w if f in TS_LAG else w - 1), fs
+            lb, fs = _check(args[0], fields); w = _int(args[1], f); return lb + (w if f in TS_LAG else w - 1), fs
         if f in TS2 and len(args) == 3:
-            (a, fa), (b, fb) = _check(args[0]), _check(args[1]); return max(a, b) + _int(args[2], f) - 1, fa | fb
-        if f in CS | EL1 and len(args) == 1: return _check(args[0])
+            (a, fa), (b, fb) = _check(args[0], fields), _check(args[1], fields); return max(a, b) + _int(args[2], f) - 1, fa | fb
+        if f in CS | EL1 and len(args) == 1: return _check(args[0], fields)
         if f in EL2 and len(args) == 2:
-            (a, fa), (b, fb) = _check(args[0]), _check(args[1]); return max(a, b), fa | fb
+            (a, fa), (b, fb) = _check(args[0], fields), _check(args[1], fields); return max(a, b), fa | fb
         if f == 'where' and len(args) == 3:
-            r = [_check(x) for x in args]; return max(x[0] for x in r), set().union(*(x[1] for x in r))
+            r = [_check(x, fields) for x in args]; return max(x[0] for x in r), set().union(*(x[1] for x in r))
         raise ExprError(f'不支持的函数或参数个数：{f}/{len(args)}')
     raise ExprError(f'不允许的语法：{type(n).__name__}')
 
 
-def parse(expr):
+def parse(expr, fields = FIELDS):
     try: tree = ast.parse(expr, mode = 'eval')
     except SyntaxError as e: raise ExprError(f'语法错误：{e.msg}') from e
-    lb, fs = _check(tree); return Parsed(expr, tree, lb, frozenset(fs))
+    lb, fs = _check(tree, fields); return Parsed(expr, tree, lb, frozenset(fs))
 
 
 # 计算 ---------------------------------------------------------------------------------------------------
@@ -90,10 +90,10 @@ def _cross(f, x, mask):
     return out.where(mask)
 
 
-def compute(expr, panel, eligible = None, min_obs_ratio = 1.0):
+def compute(expr, panel, eligible = None, min_obs_ratio = 1.0, fields = FIELDS):
     """panel: {字段: 宽表(交易日 × 证券)}，停牌日为缺失；eligible: 同形状布尔表，横截面算子只在 True 上算。
     窗口内有效值少于 ceil(w × min_obs_ratio) 时输出缺失"""
-    p = parse(expr) if isinstance(expr, str) else expr
+    p = parse(expr, fields) if isinstance(expr, str) else expr
     ref = panel[next(iter(p.fields))] if p.fields else next(iter(panel.values()))
     mask = eligible if eligible is not None else pd.DataFrame(True, index = ref.index, columns = ref.columns)
     def frame(v):
