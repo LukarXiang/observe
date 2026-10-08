@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "goal": {
+    "id": "G-strategy-library",
+    "status": "in_progress",
+    "scope": "研究695份策略来源，按数据可用范围开发、复现、评价及留档；同时维护财务、因子、模型与分钟研究能力",
+    "done_when": "每份来源有人工审查、明确交付或阻断、来源与规则证据；可运行策略完成独立验证、成本与离线复现，不宣称全库已完成",
+    "plan": "docs/tasks/2026-10-03-财务数据标准化与策略逐批复现-执行计划.md"
+  },
+  "accepted_checkpoint": "20261007-203501-128a",
+  "accepted_receipt": "docs/handoff/2026-10-07-batch63-verification.json",
+  "numeric_resolution": "data/staging/strategies-batch14/20261005-long-history/numeric-resolution.json",
+  "publication": {
+    "original_git_directory": "read_only_in_current_execution_environment",
+    "local_commit": "delivery_in_separate_writable_checkout_with_git_bundle",
+    "remote_sync": "blocked_proxy_and_dns",
+    "research_acceptance_is_separate": true
+  },
+  "tasks": [
+    {"id": "T-git-metadata", "status": "completed", "action": "只读元数据、入口、Git白名单和隔离阅读已验收；后续每批继续导出", "done_when": "元数据、代码指纹、引用及隔离阅读测试通过，关联文件完成审查", "plan": "docs/tasks/2026-10-08-Git元数据管理实施与交付.md"},
+    {"id": "T-data-handoff", "status": "completed", "action": "当前发布/布林主包与审计控制补充包已生成；迁移3749+166核验及禁网三成本复现match0通过", "done_when": "实际包/manifest/receipt齐全，迁移后SHA与所选复现match通过；当前包范围和旧远程缺失分开记录", "plan": "docs/handoff/2026-10-08-local-plan.json"},
+    {"id": "T-git-publication", "status": "blocked", "action": "在可写独立检出提交，保存Git bundle，恢复网络后同步远端", "done_when": "远端master明确包含审查通过的提交；原仓库Git目录可写后再同步本机登记", "blockers": ["B-git-write", "B-network"]},
+    {"id": "T-batch64", "status": "in_progress", "action": "完成第64批正式checks、冻结终审和finish；已有study/offline不覆盖重跑", "done_when": "正式验收凭据及最终读回通过；研究组件不计新增交易回测", "plan": "docs/tasks/2026-10-07-第六十四批价格形态与K线识别研究.md"},
+    {"id": "T-financial-version", "status": "blocked", "action": "补首次披露值、修订版本与来源公告证据", "done_when": "可证明决策时点可用的历史财务版本进入新快照并通过时点门禁", "blockers": ["B-financial-version"]},
+    {"id": "T-shares-pcf-names", "status": "blocked", "action": "核实历史股本事件、PCF、名称及专属股票池，优先解除微盘400/小盘价值100依赖", "done_when": "时点证据、单位与覆盖核实后新增不可变分区；年度控制市值不作替代", "blockers": ["B-shares-pool"]},
+    {"id": "T-settlement", "status": "blocked", "action": "补退市转板权益、换股待上市权益并开发唯一Book的相应结算", "done_when": "所选策略依赖结算有证据、模块测试和新实验验收，BP原blocked实验保持只读", "blockers": ["B-settlement"]},
+    {"id": "T-source-reviews", "status": "in_progress", "action": "继续人工审查剩余482份来源，缺数据逐项留档", "done_when": "695来源均有人工规则/研究性质/重复关系/依赖结论；统计与目录一致"}
+  ],
+  "decisions": [
+    {"id": "D-bollinger", "status": "approved", "provenance": "conversation_confirmed", "answer": "推进修正变体（推荐）", "scope": "2020/52：去除布林上下轨标量[-1]索引，保留20日均值±2倍总体标准差，日频近似及唯一账本"},
+    {"id": "D-pair-anchor", "status": "approved", "provenance": "conversation_confirmed", "answer": "推进动态锚定近似变体（推荐）", "scope": "伊利/招行与海天/招行按每决策日锚定历史价，保留120日、比例1、±1和状态机；平台不等价"},
+    {"id": "D-svm-shape", "status": "approved", "provenance": "conversation_confirmed", "answer": "只修输入形状，保留滞后（推荐）", "scope": "SVM98预测样本改二维，旧特征、滞后和参数保留"},
+    {"id": "D-rsi", "status": "approved", "provenance": "conversation_confirmed", "answer": "推进修正近似变体（推荐）", "scope": "RSI40缺失窗口阻断；61行重算RSI6、整数阈值、9槽及实际现金分配保留"},
+    {"id": "D-rotation66", "status": "approved", "provenance": "conversation_confirmed", "answer": "推进修正近似变体（推荐）", "scope": "修datetime.timedelta和末值位置索引，保留60行价差/样本标准差/四位z/±2；动态锚定与日频近似"},
+    {"id": "D-numeric-means", "status": "approved", "provenance": "archived_approval", "approval_file": "data/staging/strategies-batch14/20261005-long-history/numeric-policy-approval.json", "scope": "国航及复星逐窗口math.fsum稳定求和；严格比较、均线参数、每笔2万元和两种资金保留"},
+    {"id": "D-ema55", "status": "approved", "provenance": "archived_approval", "approval_file": "data/staging/strategies-batch18/20261005-kd-ema-lof/ema-policy-approval.json", "scope": "三进兵TA-Lib连续EMA2/25/60、均值种子、跳已知停牌、八股顺序、五槽、现金除数及参与/滑点保留；19批已完成"},
+    {"id": "D-gac12", "status": "pending", "scope": "广汽2020/12近似经济规则确认，原问题待回复，不重复询问"},
+    {"id": "D-lowvol24", "status": "pending", "scope": "七股低波2022/24近似经济规则确认，原问题待回复"},
+    {"id": "D-bp-liquidation", "status": "evidence_recheck_required", "scope": "BP末价折现探索不能从其他批准推断获批；长区间原实验仍blocked"}
+  ],
+  "blockers": [
+    {"id": "B-financial-version", "kind": "historical_evidence", "detail": "最终合并财报历史修订版本不明，严格可用0；滞后不消除修订前视", "affects": ["PEG", "ROE质量", "财务评分", "SVR价值模型"]},
+    {"id": "B-shares-pool", "kind": "missing_input", "detail": "历史股本事件、每日总市值、PCF、历史名称与专属池未补齐", "affects": ["微盘400", "小盘价值100"]},
+    {"id": "B-settlement", "kind": "input_and_feature", "detail": "BP长区间15证券退市/换股权益待核实，海通待上市权益结算未完成", "evidence": "docs/tasks/2026-10-05-退市与换股结算核查.md"},
+    {"id": "B-remote-payload", "kind": "missing_handoff", "detail": "部分远程2026-10-03/04快照、成员表和实验未迁入；禁止新数据替换旧输入"},
+    {"id": "B-special-assets", "kind": "missing_input_and_rules", "detail": "ETF事件、全池分钟/Tick、期货合约/主力/结算及外置名单/模块依赖缺失；指标组件不是交易验收"},
+    {"id": "B-network", "kind": "interface_unreachable", "detail": "本次Git代理127.0.0.1:7897不可达；仅本命令去代理后github.com DNS失败；近期补数DNS失败不证明供应商无数据"},
+    {"id": "B-git-write", "kind": "execution_environment", "detail": "原仓库.git只读，git add无法创建index.lock；使用独立可写检出形成提交与bundle"}
+  ],
+  "capabilities": [
+    {"id": "C-financial", "status": "implemented_limited", "code": ["src/observe/data/financials.py", "src/observe/data/financial_history.py"], "supports": "完整归档、字典、时点门禁、探索滞后、单季/TTM/同比", "limits": "严格历史输入0，不借公告日期、不以实收资本金额替股数"},
+    {"id": "C-rule-strategy", "status": "verified_limited", "code": ["src/observe/strategies.py", "src/observe/portfolio.py", "src/observe/loop.py"], "supports": "目标权重/现金、真实日历周月调仓、状态机、固定金额、槽位现金、唯一Book", "limits": "日频与原即时成交不等价，固定池事后选择保留"},
+    {"id": "C-ledger", "status": "verified_limited", "code": ["src/observe/ledger/book.py", "src/observe/execution.py"], "supports": "原始价、T+1、数量约束、费用、部分成交、公司行动与转换", "limits": "退市/换股待上市权益仍有策略阻断；不是期货/期权/全分钟撮合实现"},
+    {"id": "C-research", "status": "verified_limited", "code": ["src/observe/research.py", "src/observe/features.py", "src/observe/models.py"], "supports": "因子、滚动模型、标签成熟、阶段缓存、三成本与基准", "evidence": "docs/07-后端研究框架逻辑.md", "limits": "已查看区间不是独立最终留出"},
+    {"id": "C-minute", "status": "research_limited", "code": ["src/observe/paired.py"], "evidence": "docs/06-分钟特征成对实验报告.md", "supports": "主实验Ridge秩IC增量+0.0065，95%区间[-0.0091,+0.0234]包含0", "limits": "无可确认增量；缺退市分钟；组合阻断不能作为收益证明"},
+    {"id": "C-reproduce", "status": "verified_limited", "code": ["src/observe/replay.py", "src/observe/strategies.py", "src/observe/runs.py"], "supports": "冻结输入、禁网重算、逐值比较、迁移后重建索引", "limits": "本机缺失的旧输入须按原SHA迁移，不能替代"}
+  ],
+  "examples": [
+    {"id": "numeric-ma5", "nature": "real_boundary_case", "purpose": "原MA5一ULP误判与稳定求和差异；包含实际窗口值与日期", "source": "data/staging/strategies-batch14/20261005-long-history/ma5-numeric-boundary-blocked.json"},
+    {"id": "numeric-fosun", "nature": "real_boundary_case", "purpose": "复星严格均线相等边界与原意图差异", "source": "data/staging/strategies-batch14/20261005-long-history/multi_ma_fixed_20k_batch5-extended-numeric-boundary-blocked.json"},
+    {"id": "fee-arithmetic", "nature": "real_validation_summary", "purpose": "既有16,418笔费用独立算术核对，不证明费率外部准确性", "source": "data/staging/strategies-batch14/20261005-long-history/fee-hand-checks.json"},
+    {"id": "financial-time", "nature": "real_query_case", "purpose": "strict0及探索查询、归档样例、旧输入保护", "source": "data/validations/20261005-financial-merge.json"},
+    {"id": "ema-validation", "nature": "real_component_validation_summary", "purpose": "EMA/订单独立核对覆盖和方法，摘要不能替代全部窗口输入", "source": "data/staging/strategies-batch19/20261005-ema55/ema55-long-verification.json", "fields": ["status", "hand_check", "source_sha256", "original_unchanged"]}
+  ]
+}

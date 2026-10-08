@@ -1,0 +1,624 @@
+{
+ "status": "ok",
+ "reviews": {
+  "sources": [
+   {
+    "source_path": "repo/量化策略源代码/2020年度精选策略/37 个股止损.txt",
+    "source_sha256": "26566d21047ed5276351bcce52be13833f47b0f9b24969ff85ed263bcdfe2ab3",
+    "source_copy": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/source-reviews/S-df677a5ebcd4.source",
+    "encoding": "gb18030",
+    "complete_lines_read": 452,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "上证A股/深证综指模板与外部个股风控",
+     "fidelity": "可核可见池/顺序/状态，核心wizard风控及下单未知",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "000002.XSHG/399106.XSHE并集去重后证券代码升序，ST/退市/暂停/开盘涨停过滤，五仓",
+      "selection": "财务/行情/技术/形态/其他筛选全为空；排序字典为空，desc不改变升序原池",
+      "risk": "every_bar调用外部security_stopprofit(context,0.2,open_sell_securities)，没有可见stoploss逻辑",
+      "orders": "开盘重试未卖出、选股、trade；先卖不在买名单者；默认filter_holded=False实际排除已持仓",
+      "budget": "外部by_market_cap_percent/100、最大比例1；最大买股数/金额None，持仓槽位实时检查",
+      "cost": "FixedSlippage(.02)、参与度1、佣金.0003/卖税.001/最低5"
+     },
+     "gaps": [
+      "kuanke.wizard及security_stopprofit/order_style/金额股数转换缺失，不能凭标题补20%止损",
+      "搜索同名Tick函数只有两参数且十倍杠杆收益，不是原三参数wizard实现",
+      "缺原两指数历史池、证券名称/ST/盘中价格及即时成交语义；默认无额外因子排序"
+     ],
+     "next_step": "冻结三参数调用和可见状态；缺外部核心与历史池继续搁置，不构造自行解释的止损策略"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2020年度精选策略/38 一个简单的跟踪聪明钱策略.txt",
+    "source_sha256": "f7e8f47b4260440780b678780982d6b0f76624b01108740f3c4501c17328a2eb",
+    "source_copy": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/source-reviews/S-e2209e269e29.source",
+    "encoding": "gb18030",
+    "complete_lines_read": 246,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "上证指数池一分钟聪明钱与缩尾ATR仓位",
+     "fidelity": "仅原24行缩尾ATR14日线组件与规则诊断",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "000001.XSHG成分、当前特殊状态与开盘涨跌停过滤；上市60自然日用电脑datetime.date.today非回测日",
+      "ranking": "20日涨幅升序保留80%；230行1m abs(close/open-1)/sqrt(volume)降序，累计量<=20%整行子集VWAP比率最低10",
+      "allocation": "每股ATR14用24行close/high/low各自均值±3倍总体标准差缩尾，风险预算总资产*.1/只数，金额=分钟价*预算/(2ATR)，总额超资产同比缩减",
+      "schedule": "每月首交易日14:50调仓，handle_data逐回调检查沪深300与创业板20日到分钟末收益均<=0清仓；月调仓未检查市场安全",
+      "orders": "先卖非目标，再目标金额调仓；差额绝对值>.2元；can_buy未调用"
+     },
+     "gaps": [
+      "缺原一分钟230行窗口/14:50价格/历史上证池及当前状态；五分钟/日线不能替代",
+      "Python2 print、旧DataFrame.sort/.ix及日期Series[0]不兼容；isnan未显式导入依赖平台注入",
+      "机器当前日期过滤导致历史上市前视，days参数未使用；空名单风险预算除零，历史/指标异常返回ATR0",
+      "瞬时清仓与月调仓顺序、分钟数组金额输入和动态复权仍未证明平台等价"
+     ],
+     "next_step": "原TA-Lib缩尾ATR独立核算长日线，合成聪明钱算术明确非分钟策略；原完整交易继续待数据"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2020年度精选策略/73 跟着港资（北向资金）买A股.txt",
+    "source_sha256": "26cc8a6f92143e1c20d5cdd00f9f9e83ba248f222650101d50bf75cdb7ad05c2",
+    "source_copy": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/source-reviews/S-850132b43dab.source",
+    "encoding": "gb18030",
+    "complete_lines_read": 155,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "昨日沪深通活跃榜净买额第一名单仓轮换",
+     "fidelity": "仅原净买额/市场过滤算术与状态诊断",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "selection": "STK_EL_TOP_ACTIVATE昨日全榜buy-sell降序，之后排除link_id310003/310004，取前1；不要求净额为正",
+      "filters": "ST/暂停/创业板/上市一年/涨跌停过滤全被注释，不能加入原策略",
+      "time": "handle_data只在09:30运行；上一交易日通过全日历位置减1，首行可负索引回绕",
+      "orders": "非目标且末1m价<涨停价才清仓，目标空仓且实际持仓少于1则现金/剩余槽位买；保留旧共同持仓",
+      "cost": "PerTrade买.0003/卖.0013/最低5；真实价格"
+     },
+     "gaps": [
+      "缺完整STK_EL_TOP_ACTIVATE逐日活跃榜buy/sell、link_id及发布时间；持股增减或总流量不可替代",
+      "Python2 print和旧sort(columns)失败；minute Series[-1]当前pandas索引不兼容",
+      "09:30分钟价格可用性及涨停不卖/先卖释放槽位的即时语义未证明；拒单不检查"
+     ],
+     "next_step": "净买额表达式及市场过滤独立诊断；现有AKShare持股接口不宣称等价活跃榜，原交易搁置"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2021年度精选策略/29.北上资金（北向资金港资外资）因子分析与策略分享.txt",
+    "source_sha256": "92f18864f41f9ba58e26901bca315efc8f580318eaa2819f2e19ac5f6a423aba",
+    "source_copy": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/source-reviews/S-2c9d2319c7d3.source",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 218,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "每日北向持股数量乘收盘价最高十股",
+     "fidelity": "原持股市值乘法与输入对齐/排序缺陷诊断，非原指数选股",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "当日沪深300成分、暂停/ST/特殊名称、上市>365自然日、盘中未涨跌停；创业板/科创过滤未调用",
+      "factor": "昨日STK_HK_HOLD_INFO share_number乘昨日fq=pre收盘价；没有link_id筛选或同代码多行汇总",
+      "ranking": "旧sort_index(by=昨日日期)升序最后十项，实际排序次序不是降序；空因子表沿用当前持仓",
+      "time": "每日10:00；沪深30010日涨幅择时被整块注释，未参与交易",
+      "orders": "非目标且分钟价<涨停才卖；目标未持有按现金/实际剩余10槽位买，不再平衡共同股",
+      "cost": "PerTrade买.00025/卖.001/最低5、零固定滑点"
+     },
+     "gaps": [
+      "缺历史沪深300池、北向逐股持股数量/市场归属和可用时点；原查询可能重复代码且未汇总",
+      "DataFrame列/日期标签不匹配可产生全缺值但非empty，原排序不兼容；Python2 print/urllib2等旧依赖",
+      "历史名称/ST/10:00分钟及订单即时语义未知，最终收盘持股市值不自动证明原因子时点"
+     ],
+     "next_step": "探测按日期个股持股数量接口，原乘法/对齐和空表沿用原仓留证；缺依赖不替换历史池或收益"
+    }
+   }
+  ],
+  "references": [
+   {
+    "file": "repo/backtrader/backtrader/indicators/atr.py",
+    "copy": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/references/atr.py",
+    "sha256": "aa3f3bfdd2ed58e34c50004e0cb15c6b0b55e55fef1b259a9a8271836b90ac08",
+    "commit": "b853d7c90b6721476eb5a5ea3135224e33db1f14",
+    "use": "Wilder true-range/smoothing comparison; vendor holding schema and recent-only minute restriction, no strategy substitution"
+   },
+   {
+    "file": "repo/akshare/akshare/stock_feature/stock_hsgt_em.py",
+    "copy": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/references/stock_hsgt_em.py",
+    "sha256": "abcd346fe916dc739800ffdaf54a9233558b01548994aaf6a78845c55211ffe9",
+    "commit": "0191689d57c667b7c7a198fd0cf97316837ef311",
+    "use": "Wilder true-range/smoothing comparison; vendor holding schema and recent-only minute restriction, no strategy substitution"
+   },
+   {
+    "file": "repo/akshare/akshare/stock_feature/stock_hist_em.py",
+    "copy": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/references/stock_hist_em.py",
+    "sha256": "787eece19fadd4e0fcc0cee9bdf4c6f5c0a4c11186d2cbc233d311a84b8bcaf7",
+    "commit": "0191689d57c667b7c7a198fd0cf97316837ef311",
+    "use": "Wilder true-range/smoothing comparison; vendor holding schema and recent-only minute restriction, no strategy substitution"
+   }
+  ],
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "181bd2eebfca6c014810",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 506,
+    "已验证": 11,
+    "待审查": 2,
+    "暂不可复现": 62,
+    "非交易研究脚本": 73,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 315,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10
+   },
+   "reviewed_sources": [
+    "S-25a2ce74300f",
+    "S-a02bd5fb82fa",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-af09cfafe6cf",
+    "S-95b83db2a7bc",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-df677a5ebcd4",
+    "S-e2209e269e29",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-db01c1c96ded",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-850132b43dab",
+    "S-147b0cfb49ff",
+    "S-d07877e2c354",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-57b937da520d",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-cafee3ad464a",
+    "S-560abd656ca0",
+    "S-2c9d2319c7d3",
+    "S-84b17f428272",
+    "S-88c607586b82",
+    "S-954b41e5a396",
+    "S-72e5a8798544",
+    "S-a4c77bd8b44e",
+    "S-4b7dbe8af8ac",
+    "S-bee2c8d71c81",
+    "S-f81bb8422f94",
+    "S-790f0000ed44",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-979d5187c3ec",
+    "S-daecf5bc2eef",
+    "S-f39f02e3e03f",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-e12e4a8dd5e5",
+    "S-05431e7ae641",
+    "S-de485dcbc1fe",
+    "S-03e5e601f4cc",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-47d77840ec26",
+    "S-2034813a5b91",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-84f3f0c3c784",
+    "S-c02ac3bad6ef",
+    "S-69bfefcb4d1d",
+    "S-653ef41eb685",
+    "S-c55ddc35cce6",
+    "S-c2a42783423c",
+    "S-75af9ddf3d76",
+    "S-f23cf187dc47",
+    "S-64a80805fb8a",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-bdfd3c6fde91",
+    "S-e0fb958bf2d4",
+    "S-53655cbaa9bc",
+    "S-b01f3e94a5b8",
+    "S-c98372326f58",
+    "S-c5a0e347acdc",
+    "S-69ef2eedcc68",
+    "S-4766560702c0",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-976aaefe793c",
+    "S-84adbe33af88",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-68dd8d2d5eec",
+    "S-926d08fe0ba8",
+    "S-9e752d17571d",
+    "S-624b1cbccd4f",
+    "S-5008146cd1d4",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-2d40c2d698f7",
+    "S-028ef663b462",
+    "S-d68e945d07cb",
+    "S-1e5fd99659cf",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-c1bba20dca69",
+    "S-4730e53b92bc"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/181bd2eebfca6c014810"
+  },
+  "previous_catalog_file": "data/catalog/strategies/874ec800b29163f5b8f7/catalog.json",
+  "previous_catalog_sha256": "c17d9eda8e9f21c9714312323024e341fe249daa2a9c1bcfe2fa6ee09a81cf96",
+  "snapshot": "20261006-145049-e06c",
+  "dependency_search": {
+   "command": [
+    "rg",
+    "-n",
+    "^def security_stopprofit|^def order_style|^def judge_security_max_proportion|^def max_buy_value_or_amount",
+    "repo",
+    "-g",
+    "*.py",
+    "-g",
+    "*.txt"
+   ],
+   "returncode": 0,
+   "matches": [
+    "repo/量化策略源代码/2023年度精选策略/60.抄底神器2.0，低回撤，高成功率，无未来函数.txt:102:def security_stopprofit_1(context, profit1=0.5):",
+    "repo/量化策略源代码/2022年度精选策略/9.高频Tick频率策略分享.txt:78:def security_stopprofit(context, profit):"
+   ]
+  },
+  "non_equivalent_tick_function": {
+   "file": "repo/量化策略源代码/2022年度精选策略/9.高频Tick频率策略分享.txt",
+   "copy": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/references/tick9-not-wizard.source",
+   "sha256": "726d3aa867bc5492101087fbe08813ab63ae3d4143b829ac28af9446e336c070",
+   "finding": "Two-argument security_stopprofit and ten-times futures profit; not three-argument wizard implementation"
+  },
+  "not_a_backtest": true,
+  "strategy_results": []
+ },
+ "source_review_supplement": {
+  "source_sha256": "f7e8f47b4260440780b678780982d6b0f76624b01108740f3c4501c17328a2eb",
+  "before": {
+   "review_status": "人工审查完成",
+   "scope": "上证指数池一分钟聪明钱与缩尾ATR仓位",
+   "fidelity": "仅原24行缩尾ATR14日线组件与规则诊断",
+   "implementations": [],
+   "status": "待数据",
+   "rules": {
+    "pool": "000001.XSHG成分、当前特殊状态与开盘涨跌停过滤；上市60自然日用电脑datetime.date.today非回测日",
+    "ranking": "20日涨幅升序保留80%；230行1m abs(close/open-1)/sqrt(volume)降序，累计量<=20%整行子集VWAP比率最低10",
+    "allocation": "每股ATR14用24行close/high/low各自均值±3倍总体标准差缩尾，风险预算总资产*.1/只数，金额=分钟价*预算/(2ATR)，总额超资产同比缩减",
+    "schedule": "每月首交易日14:50调仓，handle_data逐回调检查沪深300与创业板20日到分钟末收益均<=0清仓；月调仓未检查市场安全",
+    "orders": "先卖非目标，再目标金额调仓；差额绝对值>.2元；can_buy未调用"
+   },
+   "gaps": [
+    "缺原一分钟230行窗口/14:50价格/历史上证池及当前状态；五分钟/日线不能替代",
+    "Python2 print、旧DataFrame.sort/.ix及日期Series[0]不兼容；isnan未显式导入依赖平台注入",
+    "机器当前日期过滤导致历史上市前视，days参数未使用；空名单风险预算除零，历史/指标异常返回ATR0",
+    "瞬时清仓与月调仓顺序、分钟数组金额输入和动态复权仍未证明平台等价"
+   ],
+   "next_step": "原TA-Lib缩尾ATR独立核算长日线，合成聪明钱算术明确非分钟策略；原完整交易继续待数据"
+  },
+  "after": {
+   "review_status": "人工审查完成",
+   "scope": "上证指数池一分钟聪明钱与缩尾ATR仓位",
+   "fidelity": "仅原24行缩尾ATR14日线组件与规则诊断",
+   "implementations": [],
+   "status": "待数据",
+   "rules": {
+    "pool": "000001.XSHG成分、当前特殊状态与开盘涨跌停过滤；上市60自然日用电脑datetime.date.today非回测日",
+    "ranking": "20日涨幅升序保留80%；230行1m abs(close/open-1)/sqrt(volume)降序，累计量<=20%整行子集VWAP比率最低10",
+    "allocation": "每股ATR14用24行close/high/low各自均值±3倍总体标准差缩尾，风险预算总资产*.1/只数，金额=分钟价*预算/(2ATR)，总额超资产同比缩减",
+    "schedule": "每月首交易日14:50调仓，handle_data逐回调检查沪深300与创业板20日到分钟末收益均<=0清仓；月调仓未检查市场安全",
+    "orders": "先卖非目标，再目标金额调仓；差额绝对值>.2元；can_buy未调用"
+   },
+   "gaps": [
+    "缺原一分钟230行窗口/14:50价格/历史上证池及当前状态；五分钟/日线不能替代",
+    "Python2 print、旧DataFrame.sort/.ix及日期Series[0]不兼容；isnan未显式导入依赖平台注入",
+    "机器当前日期过滤导致历史上市前视，days参数未使用；空名单风险预算除零，历史/指标异常返回ATR0",
+    "瞬时清仓与月调仓顺序、分钟数组金额输入和动态复权仍未证明平台等价",
+    "逐列独立3σ缩尾可使原有效OHLC倒置；十个真实窗口操作数已证实，原ATR照算不等于仓位逻辑有效"
+   ],
+   "next_step": "原TA-Lib缩尾ATR独立核算长日线，合成聪明钱算术明确非分钟策略；原完整交易继续待数据"
+  },
+  "review_sha256": "b05e93efe3f7ea265e011ca32e2aa56405ca3cc3bd94d67f534ebabb702bf006",
+  "component_sha256": "26d07b65b4aebd22ce715b625e26fc052f2157897826140dfa0120bc2eaa5bb3",
+  "clip_sha256": "c2f1903b8c73d96e70b1860501da8526ee49eaaf5cc5b3ec8f9fe7eeff4dd28c"
+ },
+ "progress": {
+  "checkpoint": "20261006-161343-7b7f",
+  "note": "Batch29 four complete reviews/long ATR/probes/offline accepted; original trading gaps retained",
+  "catalog_id": "6d680586a192ff9ed51d",
+  "catalog_sha256": "df49258eb5da8e7e663619b99cead7eda708d41f3b81e5c324421e251f27e4e5",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 506,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 62,
+   "非交易研究脚本": 73,
+   "重复版本": 41
+  },
+  "manually_reviewed": 132,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 67,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261006-161343-7b7f"
+ },
+ "snapshot": "20261006-145049-e06c",
+ "checks": {
+  "status": "passed",
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/review_strategy_batch29.py",
+     "scripts/prepare_handoff.py",
+     "scripts/build_strategy_catalog.py",
+     "scripts/verify_financial_import.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/check-0.log",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "scripts.verify_offline_tests",
+     "-q",
+     "tests/unit/test_batch29_research.py",
+     "tests/unit/test_batch28_research.py",
+     "tests/unit/test_batch27_research.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_catalog_schedules.py",
+     "tests/unit/test_signal_slots.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/check-1.log",
+    "sha256": "8685e103781af7ee4f8ac9657f3ab529da324ee4bf76c9e85e6c6322b1849361"
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch29/20261006-wizard-smart-northbound/check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch28.py": "65f5376b72fc62e5e8dbbb7f697003a21533a4f9d7f944beb14bf2ee47b49321",
+   "scripts/review_strategy_batch29.py": "67c61c77ea6705a3f8f3f630d8f02316bc9c0b5566e066ca142ebf01d85a6948",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "64030f8c38275d5c6416d2c17943bc8f6b48b35aefdd21634667e320ee86b7f9",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch28_research.py": "86c511e47fde1b97bd2b5e305fb9a6ce70df2b23b66642aaab686b606d8e0e37",
+   "tests/unit/test_batch29_research.py": "d7f6d96593f47e1535a0ae2e31f68462032e7d3691ab2a3ed428913cb38df755"
+  },
+  "evidence_sha256": {
+   "baseline.json": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9",
+   "check-0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+   "check-1.log": "8685e103781af7ee4f8ac9657f3ab529da324ee4bf76c9e85e6c6322b1849361",
+   "check-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "clip-order-diagnostics.json": "c2f1903b8c73d96e70b1860501da8526ee49eaaf5cc5b3ec8f9fe7eeff4dd28c",
+   "component-offline.json": "26d07b65b4aebd22ce715b625e26fc052f2157897826140dfa0120bc2eaa5bb3",
+   "component-research.json": "26d07b65b4aebd22ce715b625e26fc052f2157897826140dfa0120bc2eaa5bb3",
+   "diagnostics.json": "8c3d9ec85e4947c94a95055677558879e04c81f0a95bf1c3b602965c6b27578a",
+   "existing-apis.json": "8f8afc1f5ddb8b849c85f74c537e92b9825206f8549299650224ff6896779a67",
+   "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "input-analysis.json": "8d672ebc04dac9f69dd1d3e759d88afce2cb0e0a78726d06939b63d522ec4105",
+   "input-binding.json": "e3c9237776b99e232f37011da37c6661a8097bdc91b8467997f473e1b85dba3e",
+   "offline-verification.json": "ca43fe49e646f259e8e9a004a96755d9cd4821ab0e6286c5278452ad8d6c6eda",
+   "price-input.parquet": "2084026fe481d7bf7c1495588039a1b3079ca2168365f7851025fd2f05c38c39",
+   "probe-holdings.json": "15af65b95b39543141e051316107705eab8cfbd25167a96a5b0aff165221c7e9",
+   "probe-holdings.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "probe-holdings.stdout": "b9d2536ceed96eb1a346849ba1ea4d70ad2f43e99738b5e29bf8f4c0ab10697e",
+   "probe-minute_stock.json": "651b90505a577e1f6efbfcdaba3963f5edf218995f5ee1b66499c0f059a1d816",
+   "probe-minute_stock.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "probe-minute_stock.stdout": "e015933c9c3ca1bad35562254232c7cdf556ee71ecca4958a5b2f7036391a4a5",
+   "probe-results.json": "613aa28cd2b5d3657356772da93d16d9dd09a95a124f5c9f6903ae54e5d658fc",
+   "progress-start.json": "90be673c2be046cad1e75be89dbaaf4d34e7893d9b23d544d9967be1b7322c5f",
+   "source-review-supplement.json": "1c502908e35f83f719085f54ab94daadc85a9339293eceb4da13b5f90c7465ae",
+   "references/atr.py": "aa3f3bfdd2ed58e34c50004e0cb15c6b0b55e55fef1b259a9a8271836b90ac08",
+   "references/stock_hist_em.py": "787eece19fadd4e0fcc0cee9bdf4c6f5c0a4c11186d2cbc233d311a84b8bcaf7",
+   "references/stock_hsgt_em.py": "abcd346fe916dc739800ffdaf54a9233558b01548994aaf6a78845c55211ffe9",
+   "references/tick9-not-wizard.source": "726d3aa867bc5492101087fbe08813ab63ae3d4143b829ac28af9446e336c070",
+   "source-reviews/review.json": "b05e93efe3f7ea265e011ca32e2aa56405ca3cc3bd94d67f534ebabb702bf006",
+   "source-reviews/S-2c9d2319c7d3.source": "92f18864f41f9ba58e26901bca315efc8f580318eaa2819f2e19ac5f6a423aba",
+   "source-reviews/S-850132b43dab.source": "26cc8a6f92143e1c20d5cdd00f9f9e83ba248f222650101d50bf75cdb7ad05c2",
+   "source-reviews/S-df677a5ebcd4.source": "26566d21047ed5276351bcce52be13833f47b0f9b24969ff85ed263bcdfe2ab3",
+   "source-reviews/S-e2209e269e29.source": "f7e8f47b4260440780b678780982d6b0f76624b01108740f3c4501c17328a2eb",
+   "implementation-checked/scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "implementation-checked/scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "implementation-checked/scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "implementation-checked/scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "implementation-checked/scripts/review_strategy_batch28.py": "65f5376b72fc62e5e8dbbb7f697003a21533a4f9d7f944beb14bf2ee47b49321",
+   "implementation-checked/scripts/review_strategy_batch29.py": "67c61c77ea6705a3f8f3f630d8f02316bc9c0b5566e066ca142ebf01d85a6948",
+   "implementation-checked/scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "implementation-checked/scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "implementation-checked/scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "implementation-checked/src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "implementation-checked/src/observe/strategy_catalog.py": "64030f8c38275d5c6416d2c17943bc8f6b48b35aefdd21634667e320ee86b7f9",
+   "implementation-checked/src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "implementation-checked/src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "implementation-checked/src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "implementation-checked/tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "implementation-checked/tests/unit/test_batch28_research.py": "86c511e47fde1b97bd2b5e305fb9a6ce70df2b23b66642aaab686b606d8e0e37",
+   "implementation-checked/tests/unit/test_batch29_research.py": "d7f6d96593f47e1535a0ae2e31f68462032e7d3691ab2a3ed428913cb38df755"
+  }
+ },
+ "offline": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "sha256": "26d07b65b4aebd22ce715b625e26fc052f2157897826140dfa0120bc2eaa5bb3",
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch28.py": "65f5376b72fc62e5e8dbbb7f697003a21533a4f9d7f944beb14bf2ee47b49321",
+   "scripts/review_strategy_batch29.py": "67c61c77ea6705a3f8f3f630d8f02316bc9c0b5566e066ca142ebf01d85a6948",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "64030f8c38275d5c6416d2c17943bc8f6b48b35aefdd21634667e320ee86b7f9",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch28_research.py": "86c511e47fde1b97bd2b5e305fb9a6ce70df2b23b66642aaab686b606d8e0e37",
+   "tests/unit/test_batch29_research.py": "d7f6d96593f47e1535a0ae2e31f68462032e7d3691ab2a3ed428913cb38df755"
+  },
+  "not_a_backtest": true
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5223,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9"
+ },
+ "probes": {
+  "results": [
+   {
+    "endpoint": "holdings",
+    "query": {
+     "function": "stock_hsgt_stock_statistics_em",
+     "parameters": {
+      "symbol": "北向持股",
+      "start_date": "20200601",
+      "end_date": "20200601"
+     },
+     "limit": "One-date final vendor holdings sample; not STK_EL_TOP_ACTIVATE buy/sell or proven platform share_number vintage"
+    },
+    "api_sha256": "8f8afc1f5ddb8b849c85f74c537e92b9825206f8549299650224ff6896779a67",
+    "status": "failed",
+    "published": false,
+    "files": [],
+    "wire": [],
+    "error": "ConnectionError: HTTPConnectionPool(host='datacenter-web.eastmoney.com', port=80): Max retries exceeded with url: /api/data/v1/get?sortColumns=TRADE_DATE&sortTypes=-1&pageSize=1000&pageNumber=1&columns=ALL&source=WEB&client=WEB&filter=%28INTERVAL_TYPE%3D%221%22%29%28MUTUAL_TYPE+in+%28%22001%22%2C%22003%22%29%29%28TRADE_DATE%3D%272020-06-01%27%29&rt=53160469&reportName=RPT_MUTUAL_STOCK_NORTHSTA (Caused by NameResolutionError(\"HTTPConnection(host='datacenter-web.eastmoney.com', port=80): Failed to resolve 'datacenter-web.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+   },
+   {
+    "endpoint": "minute_stock",
+    "query": {
+     "function": "stock_zh_a_hist_min_em",
+     "parameters": {
+      "symbol": "600519",
+      "period": "1",
+      "start_date": "2020-06-01 09:30:00",
+      "end_date": "2020-06-01 15:00:00",
+      "adjust": ""
+     },
+     "limit": "One-minute endpoint requests latest five days then filters dates, not original 230-row history"
+    },
+    "api_sha256": "8f8afc1f5ddb8b849c85f74c537e92b9825206f8549299650224ff6896779a67",
+    "status": "failed",
+    "published": false,
+    "files": [],
+    "wire": [],
+    "error": "ConnectionError: HTTPSConnectionPool(host='push2his.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/stock/trends2/get?fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6%2Cf7%2Cf8%2Cf9%2Cf10%2Cf11%2Cf12%2Cf13&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58&ut=7eea3edcaed734bea9cbfc24409ed989&ndays=5&iscr=0&secid=1.600519 (Caused by NameResolutionError(\"HTTPSConnection(host='push2his.eastmoney.com', port=443): Failed to resolve 'push2his.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+   }
+  ],
+  "published": false
+ },
+ "not_a_backtest": true,
+ "original_strategy_complete": false
+}

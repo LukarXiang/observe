@@ -1,0 +1,928 @@
+{
+ "status": "ok",
+ "environment": {
+  "git_commit": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+  "git_dirty": true,
+  "lock_sha256": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382",
+  "python": "3.12.12",
+  "packages": {
+   "pandas": "3.0.6",
+   "numpy": "2.5.3",
+   "pyarrow": "25.0.1",
+   "pydantic": "2.13.5",
+   "scikit-learn": "1.9.1",
+   "scipy": "1.18.1",
+   "lightgbm": "4.7.0"
+  }
+ },
+ "reviews": {
+  "snapshot": "20261005-211958-89b5",
+  "sources": [
+   {
+    "source_path": "repo/量化策略源代码/2022年度精选策略/53.【指标研究】MACD日、周、月以及分别级别研究（包含低位二次金叉算法）.txt",
+    "source_sha256": "cb4caae4aa2d1f8609d7e872e9d413b650eb6b26935c66433a75477ffb5a785c",
+    "source_copy": "data/staging/strategies-batch20/20261005-macd-patterns/source-reviews/S-af075cf4c6b7.source",
+    "source_copy_sha256": "cb4caae4aa2d1f8609d7e872e9d413b650eb6b26935c66433a75477ffb5a785c",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 435,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "平安银行多周期MACD与低位二次金叉指标研究",
+     "fidelity": "非交易研究；原函数可复算，供应商周期与复权等价未证明",
+     "implementations": [],
+     "status": "非交易研究脚本",
+     "rules": {
+      "instrument": "000001.SZ",
+      "units": [
+       "1d",
+       "1w",
+       "1M",
+       "60m"
+      ],
+      "count": 200,
+      "indicator": "TA-Lib MACDEXT(12,26,9)，三均线类型EMA，柱值乘2",
+      "second_cross": "最新严格负值金叉，历史交叉数>4，倒序金/死/金/死的DIF负/负/负/正"
+     },
+     "gaps": [
+      "没有持仓、下单、费用或回测规则；动态系统日期未冻结",
+      "get_bars fq_ref_date=None与供应商原始价格及周/月/60分钟边界等价未证明",
+      "绘图scatter color空字符串在当前环境有兼容风险；恰好4个交叉仍返回False"
+     ],
+     "next_step": "冻结供应商周期样本，原函数与独立递推及禁网复算；只登记指标研究，不生成交易收益"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2024年度精选策略2/55.【复现】技术指标形态识别.txt",
+    "source_sha256": "8ea88ccc58a8c5a40f5bb501ac23b7e8178838370c6e60c91d36b03dd6f66556",
+    "source_copy": "data/staging/strategies-batch20/20261005-macd-patterns/source-reviews/S-d68e945d07cb.source",
+    "source_copy_sha256": "8ea88ccc58a8c5a40f5bb501ac23b7e8178838370c6e60c91d36b03dd6f66556",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 540,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "35行技术形态识别与行业事件收益研究",
+     "fidelity": "非交易研究；缺核心模块与原行业输入，暂不完整复现",
+     "implementations": [],
+     "status": "非交易研究脚本",
+     "rules": {
+      "module": "technical_analysis_patterns",
+      "window": 35,
+      "reset_window": 120,
+      "examples": [
+       "000009.SZ",
+       "600418.SH",
+       "000300.SH"
+      ],
+      "event": "形态末点p2后3个交易日",
+      "win_rate": "正收益数/非缺失数；零非赢",
+      "profit_loss": "正收益均值/负收益均值（负号保留）"
+     },
+     "gaps": [
+      "缺rolling_patterns2pool/plot_patterns_chart原实现、sw_lv1.csv/res_json.json及历史行业版本",
+      "第二个股票示例下载data2却重复识别data1；没有交易执行规则",
+      "set作为loc列索引及groupby(axis=1)与当前pandas不兼容",
+      "形态窗口因果性和p2+3尾部越界未证明；未来价格仅能用于事后事件统计"
+     ],
+     "next_step": "保存缺模块搜索与兼容诊断，尝试既有申万接口；不凭注释重写缺失形态算法"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2022年度精选策略/84.MACD新研究，配合ETF十年稳稳的幸福.txt",
+    "source_sha256": "2c7856c2a172e40da89201444c061f437a6c0d596170d85c5bca5d90220a8e4f",
+    "source_copy": "data/staging/strategies-batch20/20261005-macd-patterns/source-reviews/S-c02ac3bad6ef.source",
+    "source_copy_sha256": "2c7856c2a172e40da89201444c061f437a6c0d596170d85c5bca5d90220a8e4f",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 76,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "沪深300 MACD柱值驱动510300ETF空仓入场/清仓",
+     "fidelity": "缺ETF事件、历史状态与交易规则，尚未回测",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "signal": "000300.SH",
+      "instrument": "510300.SH",
+      "history": 60,
+      "macd": [
+       5,
+       15,
+       7
+      ],
+      "schedule": "09:30",
+      "signal_states": "前15柱和>0：末柱>0为0，否则后5柱和>0为1；其余2",
+      "buy": "无持仓且状态0投入现金",
+      "sell": "有持仓且状态1清仓",
+      "hold": "状态2不操作"
+     },
+     "gaps": [
+      "缺510300复权/分红事件、历史交易状态、ETF税费与执行核实，不能用510310替代",
+      "原stock费用设定是否作用于ETF未证明；array/nan由平台注入",
+      "attribute_history跳停牌前复权窗口与本地指数价格未证明等价"
+     ],
+     "next_step": "探测510300行情，冻结指数原信号组件复算；补齐ETF依赖后另批研究执行"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2023年度精选策略/73.MACD多周期共振，精准打击！.txt",
+    "source_sha256": "c9627cb5e502dcaadc7de4ee02e48d896b402279762e8bafc5afa125c39c8b50",
+    "source_copy": "data/staging/strategies-batch20/20261005-macd-patterns/source-reviews/S-69ef2eedcc68.source",
+    "source_copy_sha256": "c9627cb5e502dcaadc7de4ee02e48d896b402279762e8bafc5afa125c39c8b50",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 311,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "周/60分钟MACD动态股票池及盘中10%止盈",
+     "fidelity": "缺历史股票池与盘中状态，尚未实现",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "bars": 200,
+      "macd": [
+       12,
+       26,
+       9
+      ],
+      "histogram_scale": 2,
+      "universe": "每日估值股票池，排停牌/退名/ST/688，上市超过60自然日",
+      "pool": "周线函数实际检测死叉；持续g.s追加不去重；遍历同时remove",
+      "buy": "14:00按周DEA前三，周柱>DEA且60m金叉，初始现金/N",
+      "sell": "every_bar当前价格高于成本10%；market_sell未调度"
+     },
+     "gaps": [
+      "缺历史证券名称/估值池、周/60分钟行情与14:00/every_bar即时状态",
+      "get_bars fq_ref_date=True时点/复权语义未证明；函数名称与死叉条件不同",
+      "遍历remove会跳元素；重复池/排序ties/订单失败后移除等行为未修正"
+     ],
+     "next_step": "保存原状态机诊断，补依赖后再确认必要变体；不静默改为日频"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2022年度精选策略/89.MACD+波动率过滤+追踪止损 期货择时汇总.txt",
+    "source_sha256": "8edfa1550e2fdff5a45c7f729d507c24b19eb28c47e2e8de8f986a3064fe26c5",
+    "source_copy": "data/staging/strategies-batch20/20261005-macd-patterns/source-reviews/S-c2a42783423c.source",
+    "source_copy_sha256": "8edfa1550e2fdff5a45c7f729d507c24b19eb28c47e2e8de8f986a3064fe26c5",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 458,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "24商品期货MACD零轴双向择时、换月与ATR追踪止损",
+     "fidelity": "缺合约与保证金/结算能力，暂不可复现",
+     "implementations": [],
+     "status": "暂不可复现",
+     "rules": {
+      "instruments": [
+       "AL",
+       "NI",
+       "CU",
+       "PB",
+       "AG",
+       "RU",
+       "MA",
+       "PP",
+       "TA",
+       "L",
+       "V",
+       "M",
+       "P",
+       "Y",
+       "C",
+       "CS",
+       "JD",
+       "SR",
+       "HC",
+       "J",
+       "I",
+       "SF",
+       "RB",
+       "ZC"
+      ],
+      "history": 50,
+      "macd": [
+       3,
+       7,
+       7
+      ],
+      "signal": "DIF/DEA均正做多、均负做空；交叉模式注释",
+      "atr": 10,
+      "stop": "3ATR与1分钟价格",
+      "margin": 0.15,
+      "commission": 0.0001,
+      "slippage": 0.0002,
+      "risk": "初始资金/信号数，再乘.02/(ATR×合约单位)",
+      "filter": "跨品种19收盘价方差，z分母仍为方差；fliter_var错拼使filter_var过滤失效"
+     },
+     "gaps": [
+      "缺真实主力映射、换月合约、分钟价、合约乘数/交割日和历史规则",
+      "唯一Book尚无期货保证金、多空、逐日盯市和平今费用；511880仅基准",
+      "to_dict(record)与当前pandas不兼容；平台注入array/nan/np；包含send_message不能整段执行"
+     ],
+     "next_step": "保存过滤失效诊断；数据与规则齐备后扩展唯一账本，不以ETF或股票撮合代替"
+    }
+   }
+  ],
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "47ad227b15c5b5146ac9",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 505,
+    "已验证": 11,
+    "待审查": 13,
+    "暂不可复现": 55,
+    "非交易研究脚本": 70,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 315,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10
+   },
+   "reviewed_sources": [
+    "S-25a2ce74300f",
+    "S-a02bd5fb82fa",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-af09cfafe6cf",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-db01c1c96ded",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-147b0cfb49ff",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-cafee3ad464a",
+    "S-560abd656ca0",
+    "S-84b17f428272",
+    "S-a4c77bd8b44e",
+    "S-4b7dbe8af8ac",
+    "S-bee2c8d71c81",
+    "S-f81bb8422f94",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-979d5187c3ec",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-05431e7ae641",
+    "S-03e5e601f4cc",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-47d77840ec26",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-c02ac3bad6ef",
+    "S-653ef41eb685",
+    "S-c2a42783423c",
+    "S-f23cf187dc47",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-bdfd3c6fde91",
+    "S-c98372326f58",
+    "S-69ef2eedcc68",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-84adbe33af88",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-9e752d17571d",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-2d40c2d698f7",
+    "S-028ef663b462",
+    "S-d68e945d07cb",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-c1bba20dca69",
+    "S-4730e53b92bc"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/47ad227b15c5b5146ac9"
+  },
+  "previous_catalog_file": "data/catalog/strategies/69261368c785cd5ad812/catalog.json",
+  "previous_catalog_sha256": "1a8ed77bd998aa2dbae1ae9c8dfc9c5e6ac1ee1e30c6920d5d6ac3f475c5bfd6",
+  "dependency_searches": [
+   {
+    "argv": [
+     "rg",
+     "--files",
+     "--hidden",
+     "repo",
+     "data",
+     "-g",
+     "technical_analysis_patterns.py",
+     "-g",
+     "sw_lv1.csv",
+     "-g",
+     "res_json.json"
+    ],
+    "returncode": 1,
+    "matches": []
+   },
+   {
+    "argv": [
+     "rg",
+     "-l",
+     "rolling_patterns2pool|def plot_patterns_chart",
+     "repo",
+     "-g",
+     "*.py",
+     "-g",
+     "*.txt"
+    ],
+    "returncode": 0,
+    "matches": [
+     "repo/量化策略源代码/2024年度精选策略2/55.【复现】技术指标形态识别.txt"
+    ]
+   }
+  ],
+  "installed_modules": {
+   "talib": true,
+   "scipy": true,
+   "statsmodels": false,
+   "technical_analysis_patterns": false
+  },
+  "strategy_results": [],
+  "limits": [
+   "Two sources are research only",
+   "No economic variant or substitute detector implemented"
+  ]
+ },
+ "analysis": {
+  "snapshot": "20261005-211958-89b5",
+  "daily_overlap": {
+   "old_rows": 1392,
+   "overlap_rows": 1392,
+   "differences": {
+    "amount": 0,
+    "board": 0,
+    "close": 0,
+    "high": 0,
+    "is_st": 0,
+    "is_trading": 0,
+    "low": 0,
+    "open": 0,
+    "pb_mrq": 0,
+    "pe_ttm": 0,
+    "preclose": 0,
+    "turnover": 0,
+    "volume": 0
+   }
+  },
+  "samples": [
+   {
+    "unit": "daily",
+    "status": "sample_ready",
+    "provider_rows": 5280,
+    "sample_rows": 200,
+    "first": "2025-12-04",
+    "last": "2026-09-29",
+    "price_semantics": "BaoStock adjustflag=3; original get_bars equality unproved"
+   },
+   {
+    "unit": "weekly",
+    "status": "sample_ready",
+    "provider_rows": 1106,
+    "sample_rows": 200,
+    "first": "2022-11-04",
+    "last": "2026-09-24",
+    "price_semantics": "BaoStock adjustflag=3; original get_bars equality unproved"
+   },
+   {
+    "unit": "monthly",
+    "status": "sample_ready",
+    "provider_rows": 260,
+    "sample_rows": 200,
+    "first": "2010-01-29",
+    "last": "2026-08-31",
+    "price_semantics": "BaoStock adjustflag=3; original get_bars equality unproved"
+   },
+   {
+    "unit": "hourly",
+    "status": "sample_ready",
+    "provider_rows": 340,
+    "sample_rows": 200,
+    "first": "20260721103000000",
+    "last": "20260929150000000",
+    "price_semantics": "BaoStock adjustflag=3; original get_bars equality unproved"
+   }
+  ],
+  "extras": [
+   {
+    "endpoint": "etf510300",
+    "status": "sample_only",
+    "rows": 3488,
+    "first": "2012-05-28 00:00:00",
+    "last": "2026-09-30 00:00:00",
+    "invalid_dates": 0,
+    "duplicate_dates": 0,
+    "rows_through_frozen_end": 3487
+   },
+   {
+    "endpoint": "sw801030",
+    "status": "sample_only",
+    "rows": 6466,
+    "first": "1999-12-30 00:00:00",
+    "last": "2026-09-30 00:00:00",
+    "invalid_dates": 0,
+    "duplicate_dates": 0,
+    "rows_through_frozen_end": 6465
+   }
+  ],
+  "input_file": "data/staging/strategies-batch20/20261005-macd-patterns/study-inputs.parquet",
+  "input_sha256": "e7e7b2656a3964fb18864d2f53c89719cbce78d587f3a8cbf5752ed7406b1c5c",
+  "published": false,
+  "limits": [
+   "Weekly/monthly current incomplete periods excluded",
+   "Native provider periods not proved equal to JoinQuant",
+   "Chart/index history does not supply ETF events/status/rules, historic SW universe or missing pattern algorithm"
+  ]
+ },
+ "review_supplement": {
+  "prior_review_sha256": "4bf4440f0e1f7b13eecbe71c3c96d038a3738a98d1a5b73664ac8fb10202b59e",
+  "source_sha256": "c9627cb5e502dcaadc7de4ee02e48d896b402279762e8bafc5afa125c39c8b50",
+  "source_index": 3,
+  "prior_review": {
+   "review_status": "人工审查完成",
+   "scope": "周/60分钟MACD动态股票池及盘中10%止盈",
+   "fidelity": "缺历史股票池与盘中状态，尚未实现",
+   "implementations": [],
+   "status": "待数据",
+   "rules": {
+    "bars": 200,
+    "macd": [
+     12,
+     26,
+     9
+    ],
+    "histogram_scale": 2,
+    "universe": "每日估值股票池，排停牌/退名/ST/688，上市超过60自然日",
+    "pool": "周线函数实际检测死叉；持续g.s追加不去重；遍历同时remove",
+    "buy": "14:00按周DEA前三，周柱>DEA且60m金叉，初始现金/N",
+    "sell": "every_bar当前价格高于成本10%；market_sell未调度"
+   },
+   "gaps": [
+    "缺历史证券名称/估值池、周/60分钟行情与14:00/every_bar即时状态",
+    "get_bars fq_ref_date=True时点/复权语义未证明；函数名称与死叉条件不同",
+    "遍历remove会跳元素；重复池/排序ties/订单失败后移除等行为未修正"
+   ],
+   "next_step": "保存原状态机诊断，补依赖后再确认必要变体；不静默改为日频"
+  },
+  "review": {
+   "review_status": "人工审查完成",
+   "scope": "周/60分钟MACD动态股票池及盘中10%止盈",
+   "fidelity": "缺历史股票池与盘中状态，尚未实现",
+   "implementations": [],
+   "status": "待数据",
+   "rules": {
+    "bars": 200,
+    "macd": [
+     12,
+     26,
+     9
+    ],
+    "histogram_scale": 2,
+    "universe": "每日估值股票池，排停牌/退名/ST/688，上市超过60自然日",
+    "pool": "周线函数实际检测死叉；持续g.s追加不去重；遍历同时remove",
+    "buy": "14:00按周DEA前三，周柱>DEA且60m金叉，回调开始时可用现金/N固定分配",
+    "sell": "every_bar收益达到或超过10%；market_sell未调度"
+   },
+   "gaps": [
+    "缺历史证券名称/估值池、周/60分钟行情与14:00/every_bar即时状态",
+    "get_bars fq_ref_date=True时点/复权语义未证明；函数名称与死叉条件不同",
+    "遍历remove会跳元素；重复池/排序ties/订单失败后移除等行为未修正"
+   ],
+   "next_step": "保存原状态机诊断，补依赖后再确认必要变体；不静默改为日频"
+  },
+  "reason": "Original buy_stock uses callback available_cash/N; every_bar exits on ret>=0.1. Initial archive retained."
+ },
+ "research": {
+  "status": "research_recomputed_with_limits",
+  "snapshot": "20261005-211958-89b5",
+  "input_sha256": "e7e7b2656a3964fb18864d2f53c89719cbce78d587f3a8cbf5752ed7406b1c5c",
+  "backend": {
+   "wrapper": "0.8.1",
+   "c_version": "0.8.1 (Sep 21 2026 16:39:22)",
+   "compatibility": 0,
+   "ema_unstable": 0,
+   "binary": "/home/zuozhe/envs/quant/.venv/lib/python3.12/site-packages/talib/_ta_lib.cpython-312-x86_64-linux-gnu.so",
+   "binary_sha256": "6ca8b9e702647ef00abcd21a677efb8ba17a60c627f674c539b8497b4ccb8266"
+  },
+  "source_sha256": [
+   "cb4caae4aa2d1f8609d7e872e9d413b650eb6b26935c66433a75477ffb5a785c",
+   "8ea88ccc58a8c5a40f5bb501ac23b7e8178838370c6e60c91d36b03dd6f66556",
+   "2c7856c2a172e40da89201444c061f437a6c0d596170d85c5bca5d90220a8e4f",
+   "c9627cb5e502dcaadc7de4ee02e48d896b402279762e8bafc5afa125c39c8b50",
+   "8edfa1550e2fdff5a45c7f729d507c24b19eb28c47e2e8de8f986a3064fe26c5"
+  ],
+  "selected_ast_sha256": [
+   "19d5ebfa4e6f6ff9c662fc397fd13911f958d4eb1e1d4c2f590262b8d32cac91",
+   "26353df0d881307157ac67b695978cf5c3e77fd4a5a776bc8482e7f9827d1afd"
+  ],
+  "macd53": [
+   {
+    "unit": "daily",
+    "rows": 200,
+    "finite_values": 501,
+    "max_absolute_differences": [
+     0.0,
+     1.3877787807814457e-17,
+     2.7755575615628914e-17
+    ],
+    "last5": [
+     [
+      0.08524271852369658,
+      0.06907696891703274,
+      0.03169266972187401,
+      0.0020418065949332487,
+      -0.017223591086800383
+     ],
+     [
+      0.12064840814644966,
+      0.11033412030056627,
+      0.09460583018482782,
+      0.0760930254668489,
+      0.05742970215611904
+     ],
+     [
+      -0.07081137924550615,
+      -0.08251430276706706,
+      -0.12582632092590762,
+      -0.1481024377438313,
+      -0.14930658648583883
+     ]
+    ],
+    "second_low_gold_cross": false
+   },
+   {
+    "unit": "hourly",
+    "rows": 200,
+    "finite_values": 501,
+    "max_absolute_differences": [
+     0.0,
+     3.469446951953614e-18,
+     1.3877787807814457e-17
+    ],
+    "last5": [
+     [
+      -0.11368567865926593,
+      -0.11267648305512346,
+      -0.10661313626492586,
+      -0.09905224477670771,
+      -0.09439283127708897
+     ],
+     [
+      -0.08896339687906359,
+      -0.09370601411427557,
+      -0.09628743854440562,
+      -0.09684039979086603,
+      -0.09635088608811063
+     ],
+     [
+      -0.04944456356040469,
+      -0.03794093788169578,
+      -0.02065139544104047,
+      -0.004423689971683353,
+      0.003916109622043307
+     ]
+    ],
+    "second_low_gold_cross": false
+   },
+   {
+    "unit": "monthly",
+    "rows": 200,
+    "finite_values": 501,
+    "max_absolute_differences": [
+     1.7763568394002505e-15,
+     1.2212453270876722e-15,
+     3.1086244689504383e-15
+    ],
+    "last5": [
+     [
+      -0.1633616343437989,
+      -0.18243350230789268,
+      -0.2654962649315227,
+      -0.20150844345509178,
+      -0.14189965519344128
+     ],
+     [
+      -0.19473416602767696,
+      -0.1922740332837201,
+      -0.20691847961328064,
+      -0.20583647238164288,
+      -0.19304910894400257
+     ],
+     [
+      0.0627450633677561,
+      0.019681061951654866,
+      -0.11715557063648407,
+      0.008656057853102195,
+      0.10229890750112258
+     ]
+    ],
+    "second_low_gold_cross": false
+   },
+   {
+    "unit": "weekly",
+    "rows": 200,
+    "finite_values": 501,
+    "max_absolute_differences": [
+     0.0,
+     1.3877787807814457e-17,
+     5.551115123125783e-17
+    ],
+    "last5": [
+     [
+      0.0537481916151048,
+      0.1095248905198023,
+      0.14001062452753033,
+      0.15910901300050817,
+      0.14035009783830432
+     ],
+     [
+      -0.05582253163218602,
+      -0.022753047201788352,
+      0.009799687144075387,
+      0.03966155231536194,
+      0.059799261419950414
+     ],
+     [
+      0.21914144649458164,
+      0.2645558754431813,
+      0.26042187476690987,
+      0.23889492137029245,
+      0.16110167283670782
+     ]
+    ],
+    "second_low_gold_cross": false
+   }
+  ],
+  "event_boundary": [
+   {
+    "events": 4,
+    "actual": false,
+    "expected": false
+   },
+   {
+    "events": 5,
+    "actual": true,
+    "expected": true
+   }
+  ],
+  "macd84_component": {
+   "rows": 60,
+   "state": 2,
+   "max_absolute_difference": 0.0,
+   "earlier15_sum": -46.73083675554098,
+   "latest5_sum": -17.847537038505937,
+   "last_hist": -26.493455318718226
+  },
+  "not_a_backtest": true,
+  "not_a_strategy_reproduction": true,
+  "limits": [
+   "Provider price/period and original platform equality unproved",
+   "Fixed 2026-09-29 research endpoint replaces unfrozen dynamic date explicitly",
+   "MACD53 contains no trading policy; MACD84 signal component is not ETF execution",
+   "No PnL or costs computed"
+  ]
+ },
+ "research_offline": {
+  "status": "match",
+  "differences": 0,
+  "original_unchanged": true,
+  "original_file": "data/staging/strategies-batch20/20261005-macd-patterns/macd-research.json",
+  "original_sha256": "5497993014a2d13bb3f094980f5cd214c7666a61c8f7d690d78dd1dcc661bd43",
+  "recomputed_file": "data/staging/strategies-batch20/20261005-macd-patterns/macd-research-offline.json",
+  "recomputed_sha256": "5497993014a2d13bb3f094980f5cd214c7666a61c8f7d690d78dd1dcc661bd43",
+  "network": "socket connect/connect_ex and requests forbidden",
+  "not_a_strategy_reproduction": true
+ },
+ "diagnostics": {
+  "status": "diagnosed_not_corrected",
+  "selected_ast_sha256": [
+   "a1cace32e444c1bfe5b8f4c78a9c3d2f7d6d40fbfdc692f779aabfbbe7b53ef0",
+   "69538a7a47d151b57c2308819c9cfe839f3f73f7b3469676988e01fdc100420b",
+   "c2f3ea4bef6950d5bd16c4a5d4e62c2d28f8a77c2ed572c3037ff38dc307257d"
+  ],
+  "pattern_set_index_error": "Passing a set as an indexer is not supported. Use a list instead.",
+  "synthetic_win_rate": 0.3333333333333333,
+  "synthetic_signed_profit_loss": -0.5,
+  "iterative_pool_removal": {
+   "initial": [
+    "A",
+    "B",
+    "C"
+   ],
+   "remaining": [
+    "B"
+   ]
+  },
+  "futures_filter_typo": {
+   "filter_var": [],
+   "fliter_var": [
+    "RB"
+   ],
+   "buylist": [
+    "RB"
+   ],
+   "stub_order_intents": [
+    {
+     "contract": "RB2610",
+     "amount": 0,
+     "side": "short"
+    },
+    {
+     "contract": "RB2610",
+     "amount": 1,
+     "side": "long"
+    }
+   ]
+  },
+  "external_orders_messages": 0,
+  "not_a_backtest": true
+ },
+ "checks": {
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/prepare_handoff.py",
+     "scripts/build_strategy_catalog.py",
+     "scripts/verify_financial_import.py",
+     "scripts/review_strategy_batch20.py"
+    ],
+    "returncode": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "pytest",
+     "-q",
+     "tests/unit/test_batch20_research.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_catalog_schedules.py"
+    ],
+    "returncode": 0,
+    "stdout": "..............................................................           [100%]\n62 passed in 3.94s\n",
+    "stderr": ""
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/review_strategy_batch20.py": "ef266672928706139987461ea01958a2e530ffe9c044a4952aaafd4a0cb1d8b5",
+   "scripts/run_strategy_batch19.py": "30563d5c0113170b139c6db2662816e7b20dbdbd235b6ae8637628a32e3c8c86",
+   "src/observe/strategy_catalog.py": "d31ae0b8f82f83a9986c08915505d9b7ddd1650cc29582c13f0c01f656e620ae",
+   "tests/unit/test_batch20_research.py": "507ba22c3fbbb7b208cec56e0d56bf1e448460b7f57e3c4a4d189e85d817504d"
+  },
+  "evidence_sha256": {
+   "baseline.json": "6992ca242e7ed8bb01168e01f5069ab976b3d41c8845514d34532f087d3086a6",
+   "diagnostics.json": "9ec0dcda6e9d3e533abfd7fa31b76f054c15af5924e060c33f351b6564732783",
+   "existing-apis.json": "e3053560fec5e48bf40079dbc4f1f7a9c1454c2956cb0b2740c6d5880ca0ec6e",
+   "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "input-analysis.json": "903dbc9660d12365230dd314ac7e19fac810b1eb47e7c819406c77827a186af1",
+   "macd-research-offline.json": "5497993014a2d13bb3f094980f5cd214c7666a61c8f7d690d78dd1dcc661bd43",
+   "macd-research.json": "5497993014a2d13bb3f094980f5cd214c7666a61c8f7d690d78dd1dcc661bd43",
+   "probe-results.json": "fac9199c01869556f6beec56fcfe090156daa9eb7ab1aa8a58a17f6f60829707",
+   "progress-start.json": "ef0e56abc0f8b7c98e9d0e589e76869ad1023e9cfe09b8cdd88d800e9ea4630c",
+   "research-offline-verification.json": "988be0fc6e66fc9bb62dcfc90970c95d4a0e1e0a9aa7fc12f0c74bd825d5608c",
+   "source-review-supplement.json": "6710664b65889589253f1a8a1e16bd3cb8e18b14276c1007ca3a962e3c7643e9",
+   "study-inputs.parquet": "e7e7b2656a3964fb18864d2f53c89719cbce78d587f3a8cbf5752ed7406b1c5c",
+   "source-reviews/review.json": "4bf4440f0e1f7b13eecbe71c3c96d038a3738a98d1a5b73664ac8fb10202b59e",
+   "source-reviews/S-69ef2eedcc68.source": "c9627cb5e502dcaadc7de4ee02e48d896b402279762e8bafc5afa125c39c8b50",
+   "source-reviews/S-af075cf4c6b7.source": "cb4caae4aa2d1f8609d7e872e9d413b650eb6b26935c66433a75477ffb5a785c",
+   "source-reviews/S-c02ac3bad6ef.source": "2c7856c2a172e40da89201444c061f437a6c0d596170d85c5bca5d90220a8e4f",
+   "source-reviews/S-c2a42783423c.source": "8edfa1550e2fdff5a45c7f729d507c24b19eb28c47e2e8de8f986a3064fe26c5",
+   "source-reviews/S-d68e945d07cb.source": "8ea88ccc58a8c5a40f5bb501ac23b7e8178838370c6e60c91d36b03dd6f66556",
+   "probes/daily/result.json": "50acb5ab5dc35a958f25f9a873de397ae9b5d25c06fe7e28c3013c61bf1cf3a7",
+   "probes/etf510300/response-000.bin": "01e0a8522389487db8f9aff93be728f811b8707821273e05c2fb2ff899d8e0bc",
+   "probes/etf510300/result.json": "a53de5be8fbbcf5735f1e65510fccbbad2a3f73386a28b9a83f85622fa20b896",
+   "probes/hourly/result.json": "246a5cd183f6e4765fd5d33b88d5cf4e5a21b568a2cdebdc48e47087f94e9fa3",
+   "probes/monthly/result.json": "c0759c42865da6c24fa77e50602d0c4089eda0e3be1707a0ca9897bb6a1123c8",
+   "probes/sw801030/response-000.bin": "0603b1180ea61126f0d9a14effd50069caaf3dc21e0cf132d85b289b7a9245b4",
+   "probes/sw801030/result.json": "5dddc828cdffa90d290d383f4b10d9065afd756fe9486ff8741d931a9f19b552",
+   "probes/weekly/result.json": "05f198542dc60a58d7ddff8a9e3a2852795b76400c3db62e80c61bd7b4fa64d1"
+  }
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5222,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 260,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "6992ca242e7ed8bb01168e01f5069ab976b3d41c8845514d34532f087d3086a6"
+ },
+ "strategy_results": [],
+ "progress": {
+  "checkpoint": "20261005-214400-87ee",
+  "note": "Batch20 five reviews, MACD component research and dependencies verified; full strategy work continues",
+  "catalog_id": "8812d254ce88f777c25a",
+  "catalog_sha256": "a0b6a9b960a1169757e5b3a21efa021b2497035ac1a785c75ec3d4cfc421ca93",
+  "published_batch": "20261005-211958-420e",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 505,
+   "已验证": 11,
+   "待审查": 13,
+   "暂不可复现": 55,
+   "非交易研究脚本": 70,
+   "重复版本": 41
+  },
+  "manually_reviewed": 100,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 67,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261005-214400-87ee"
+ }
+}

@@ -12,7 +12,7 @@ from .factors import parse
 from .factors.expr import compute
 from .factors.intraday import INTRADAY_FIELDS
 
-FIELDS = ('open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret', 'volume', 'amount', 'turnover', 'pe_ttm', 'pb_mrq', *INTRADAY_FIELDS)
+FIELDS = ('open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret', 'volume', 'amount', 'turnover', 'pe_ttm', 'pb_mrq', 'ps_ttm', 'pcf_ncf_ttm', *INTRADAY_FIELDS)
 
 
 def load_factor_set(path):
@@ -31,13 +31,13 @@ def load_factor_set(path):
     return {'text': text, 'sha256': hashlib.sha256(data).hexdigest(), 'version': y.get('version'), 'min_obs_ratio': float(y.get('min_obs_ratio', 1.0)), 'factors': specs}
 
 
-def panel(view, days, instruments):
-    """研究视图长表 → {字段: 宽表(交易日 × 证券)}；停牌日的量、额、换手置为缺失，不当作 0 进入窗口"""
+def panel(view, days, instruments, fields = FIELDS):
+    """研究视图长表 → 字段宽表；可只取所需字段，停牌行始终为缺失。"""
     v = view[view.instrument.isin(set(instruments))].copy(); v['date'] = pd.to_datetime(v.date).dt.date
     idx, cols = pd.Index(days), sorted(set(instruments))
     trading = v.pivot(index = 'date', columns = 'instrument', values = 'is_trading').reindex(index = idx, columns = cols).fillna(False).astype(bool)
     out = {}
-    for f in FIELDS:
+    for f in fields:
         w = v.pivot(index = 'date', columns = 'instrument', values = f).reindex(index = idx, columns = cols).astype(float) if f in v else pd.DataFrame(float('nan'), index = idx, columns = cols)
         out[f] = w.where(trading)
     return out

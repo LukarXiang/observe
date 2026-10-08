@@ -7,7 +7,7 @@ import pandas as pd
 
 from .intraday import INTRADAY_FIELDS
 
-FIELDS = {'open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret', 'volume', 'amount', 'turnover', 'pe_ttm', 'pb_mrq'} | set(INTRADAY_FIELDS)
+FIELDS = {'open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret', 'volume', 'amount', 'turnover', 'pe_ttm', 'pb_mrq', 'ps_ttm', 'pcf_ncf_ttm'} | set(INTRADAY_FIELDS)
 TS1 = {'ts_mean', 'ts_std', 'ts_sum', 'ts_min', 'ts_max', 'ts_rank', 'ts_slope', 'ts_decay_linear'}   # (x, w)
 TS_LAG = {'ts_delay', 'ts_delta'}                                                                       # (x, d)
 TS2 = {'ts_corr', 'ts_cov'}                                                                             # (x, y, w)

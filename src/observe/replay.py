@@ -10,12 +10,12 @@ from typing import Literal
 
 import numpy as np
 import pandas as pd
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
 
 from .data.audit import audit_status
 from .data.store import Store
 from .evaluation import metrics as evaluate, trading_stats
-from .execution import InputBlocked, build, load
+from .execution import InputBlocked, build, load, validate_scope
 from .ledger import LedgerError, RuleSet
 from .loop import POLICIES, run_loop
 from .portfolio import DEFAULT_PARTICIPATION
@@ -35,7 +35,7 @@ class _Strict(BaseModel):
 
 
 class PortfolioConfig(_Strict):
-    construction: Literal['topn', 'universe_equal', 'target_weights'] = 'topn'
+    construction: Literal['topn', 'universe_equal', 'target_weights', 'conditional_values', 'signal_slots', 'signal_cash_rotation'] = 'topn'
     n: int = Field(1, ge = 1)
     max_weight: float = Field(1.0, gt = 0, le = 1)
     rebalance_every: int = Field(1, ge = 1)
@@ -73,6 +73,17 @@ class RunConfig(_Strict):
     execution: ExecutionConfig = Field(default_factory = ExecutionConfig)
     scores: ScoresConfig = Field(default_factory = ScoresConfig)
     cache: bool = True
+    execution_instruments: list[str] | None = Field(None, exclude_if = lambda v: v is None)
+
+    @field_validator('execution_instruments')
+    @classmethod
+    def _scope(cls, value): return validate_scope(value)
+
+    @model_validator(mode = 'after')
+    def _scope_source(self):
+        if self.execution_instruments is not None and self.scores.source != 'rules':
+            raise ValueError('execution_instruments 当前仅用于已冻结的规则策略')
+        return self
 
 
 ALIASES = {'snapshot_id': 'snapshot', 'cash': 'initial_cash'}
@@ -128,7 +139,7 @@ def score_source(cfg, snapshot_id = None, root = None):
     """分数来源：工程基线，或研究实验的样本外预测表（同时带来研究候选）。预测表与股票池按文件哈希冻结。
     predictions 时先检查身份：研究实验与回放的快照一致（否则须显式声明对照情景）、模型存在、预测都落在该实验的研究候选上、fit_asof 早于决策日、请求区间不超出预测的定义范围"""
     sc = cfg.scores
-    if cfg.portfolio.construction == 'target_weights' and sc.source != 'rules': raise ValueError('target_weights 必须显式使用 rules 来源')
+    if cfg.portfolio.construction in ('target_weights', 'conditional_values', 'signal_slots', 'signal_cash_rotation') and sc.source != 'rules': raise ValueError('规则组合必须显式使用 rules 来源')
     if sc.source == 'rules':
         from .strategies import rule_source
         return rule_source(root, cfg, snapshot_id)
@@ -216,12 +227,13 @@ def _run(root, cfg, output = None, runs_root = None, rules_file = None, tag = No
     audit_rules = rules
     if x.fee_multiplier != 1: m = x.fee_multiplier; rules = rules.scaled(commission_rate = m, stamp_tax = m, transfer_fee = m, min_commission = m)
     try:
-        tables = load(store, state, cfg.start, cfg.end, x.liquidity_window)
+        tables = load(store, state, cfg.start, cfg.end, x.liquidity_window, cfg.execution_instruments)
         audit = {k: v for k, v in audit_status(root, doc['batch_id'], audit_rules).items() if k != 'rows'}   # 成本情景不改变市场数据审计所依据的原始规则
         if audit['status'] != 'passed':
             limitations.append({'kind': 'data_audit', 'detail': f"快照批次审计状态为 {audit['status']}（范围 {audit['scope']}），不是全快照审计通过", 'audit': audit})
         write_json(out / 'data_manifest.json', {'snapshot_id': doc['snapshot_id'], 'batch_id': doc['batch_id'], 'offline': True, 'audit': audit, 'tables': state.get('tables', {}),
-                                                'used': {t: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in parts.items()} for t, parts in tables['partitions'].items()}})
+                                                'used': {t: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in parts.items()} for t, parts in tables['partitions'].items()},
+                                                **({'execution_instruments': cfg.execution_instruments} if cfg.execution_instruments is not None else {})})
         status.stage('load')
         inputs = build(tables, cfg.start, cfg.end, cfg.boards, x.liquidity_window, x.liquidity_override); limitations += inputs.limitations
         status.stage('inputs', **inputs.info)
@@ -274,9 +286,10 @@ def _simulate(inputs, scores, eligible, cfg, rules, out, status = None):
         rec = _Recorder(inputs.dates, inputs.unexplained); p = cfg.portfolio; x = cfg.execution
         target_options = {}
         if cfg.scores.source == 'rules':
-            from .strategies import rule_scores
-            _, _, targets = rule_scores({'run': cfg.scores.run}, inputs.dates)
-            target_options['targets_by_date'] = targets
+            from .strategies import rule_targets
+            targets = rule_targets({'run': cfg.scores.run}, inputs.dates)
+            option = {'conditional_values': 'conditional_values_by_date', 'signal_slots': 'slot_signals_by_date', 'signal_cash_rotation': 'cash_rotations_by_date'}.get(p.construction, 'targets_by_date')
+            target_options[option] = targets
         book, orders = run_loop(inputs.dates, inputs.market, by_date, cfg.initial_cash, rules, eligible_by_date = eligible, actions = inputs.actions,
                                 rebalance_every = p.rebalance_every, open_cash_policy = p.open_cash_policy, slippage = x.slippage, n = p.n, buffer = p.buffer,
                                 max_sell = p.max_sell, max_weight = p.max_weight, refill_between_rebalance = p.refill_between_rebalance, calendar = inputs.calendar,

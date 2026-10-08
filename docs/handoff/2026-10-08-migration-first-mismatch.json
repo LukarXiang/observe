@@ -1,0 +1,446 @@
+{
+ "result": "mismatch",
+ "differences": [
+  {
+   "table": "report",
+   "key": {},
+   "field": "limitations",
+   "expected": [
+    {
+     "kind": "strategy_port",
+     "detail": "茅台20日布林突破修正变体",
+     "fidelity": "经用户确认的源码修正及执行近似",
+     "gaps": [
+      "原文np.mean/np.std结果为标量却以[-1]索引，当前NumPy运行会报错",
+      "聚宽动态复权及skip_paused窗口未证明完全等价"
+     ],
+     "differences": [
+      "2026-10-05用户确认去除上下轨标量的[-1]索引，另建修正变体，原始字节保留",
+      "后复权日线、完整交易日窗口，停牌或缺失不更新状态；不以零补齐",
+      "原文仅空仓时投入可用现金；本实现每日按目标权重再平衡，可能追加整手或再试未成交订单",
+      "原文固定价差滑点0.02；本实现比例滑点0.1%、参与度5%、分日期费率，另跑费用和滑点加倍",
+      "初始状态为空仓，预热只计算指标，不回放区间之前的仓位；收盘决策、下一交易日开盘成交"
+     ]
+    },
+    {
+     "kind": "evaluation_scope",
+     "detail": "固定参数工程验证；此区间已查看，不作为独立最终留出，不据此判断策略有效"
+    },
+    {
+     "kind": "data_audit",
+     "detail": "快照批次审计状态为 expired（范围 None），不是全快照审计通过",
+     "audit": {
+      "source": "batch 20261005-143444-56c1",
+      "batch_id": "20261005-143444-56c1",
+      "status": "expired",
+      "audit_id": null,
+      "scope": null,
+      "input_range": null,
+      "audited_at": null
+     }
+    },
+    {
+     "kind": "data_audit",
+     "detail": "快照批次审计状态为 expired（范围 None），不是全快照审计通过",
+     "audit": {
+      "source": "batch 20261005-143444-56c1",
+      "batch_id": "20261005-143444-56c1",
+      "status": "expired",
+      "audit_id": null,
+      "scope": null,
+      "input_range": null,
+      "audited_at": null
+     }
+    },
+    {
+     "kind": "data_audit",
+     "detail": "快照批次审计状态为 expired（范围 None），不是全快照审计通过",
+     "audit": {
+      "source": "batch 20261005-143444-56c1",
+      "batch_id": "20261005-143444-56c1",
+      "status": "expired",
+      "audit_id": null,
+      "scope": null,
+      "input_range": null,
+      "audited_at": null
+     }
+    }
+   ],
+   "actual": [
+    {
+     "kind": "strategy_port",
+     "detail": "茅台20日布林突破修正变体",
+     "fidelity": "经用户确认的源码修正及执行近似",
+     "gaps": [
+      "原文np.mean/np.std结果为标量却以[-1]索引，当前NumPy运行会报错",
+      "聚宽动态复权及skip_paused窗口未证明完全等价"
+     ],
+     "differences": [
+      "2026-10-05用户确认去除上下轨标量的[-1]索引，另建修正变体，原始字节保留",
+      "后复权日线、完整交易日窗口，停牌或缺失不更新状态；不以零补齐",
+      "原文仅空仓时投入可用现金；本实现每日按目标权重再平衡，可能追加整手或再试未成交订单",
+      "原文固定价差滑点0.02；本实现比例滑点0.1%、参与度5%、分日期费率，另跑费用和滑点加倍",
+      "初始状态为空仓，预热只计算指标，不回放区间之前的仓位；收盘决策、下一交易日开盘成交"
+     ]
+    },
+    {
+     "kind": "evaluation_scope",
+     "detail": "固定参数工程验证；此区间已查看，不作为独立最终留出，不据此判断策略有效"
+    },
+    {
+     "kind": "data_audit",
+     "detail": "快照批次审计状态为 not_audited（范围 None），不是全快照审计通过",
+     "audit": {
+      "source": "batch 20261005-143444-56c1",
+      "batch_id": "20261005-143444-56c1",
+      "status": "not_audited",
+      "audit_id": null,
+      "scope": null,
+      "input_range": null,
+      "audited_at": null
+     }
+    },
+    {
+     "kind": "data_audit",
+     "detail": "快照批次审计状态为 not_audited（范围 None），不是全快照审计通过",
+     "audit": {
+      "source": "batch 20261005-143444-56c1",
+      "batch_id": "20261005-143444-56c1",
+      "status": "not_audited",
+      "audit_id": null,
+      "scope": null,
+      "input_range": null,
+      "audited_at": null
+     }
+    },
+    {
+     "kind": "data_audit",
+     "detail": "快照批次审计状态为 not_audited（范围 None），不是全快照审计通过",
+     "audit": {
+      "source": "batch 20261005-143444-56c1",
+      "batch_id": "20261005-143444-56c1",
+      "status": "not_audited",
+      "audit_id": null,
+      "scope": null,
+      "input_range": null,
+      "audited_at": null
+     }
+    }
+   ]
+  },
+  {
+   "table": "limitations",
+   "key": {
+    "row": 0
+   },
+   "field": "audit",
+   "expected": {
+    "audit_id": null,
+    "audited_at": null,
+    "batch_id": "20261005-143444-56c1",
+    "input_range": null,
+    "scope": null,
+    "source": "batch 20261005-143444-56c1",
+    "status": "expired"
+   },
+   "actual": {
+    "audit_id": null,
+    "audited_at": null,
+    "batch_id": "20261005-143444-56c1",
+    "input_range": null,
+    "scope": null,
+    "source": "batch 20261005-143444-56c1",
+    "status": "not_audited"
+   },
+   "scenario": "base"
+  },
+  {
+   "table": "limitations",
+   "key": {
+    "row": 0
+   },
+   "field": "detail",
+   "expected": "快照批次审计状态为 expired（范围 None），不是全快照审计通过",
+   "actual": "快照批次审计状态为 not_audited（范围 None），不是全快照审计通过",
+   "scenario": "base"
+  },
+  {
+   "table": "limitations",
+   "key": {
+    "row": 0
+   },
+   "field": "audit",
+   "expected": {
+    "audit_id": null,
+    "audited_at": null,
+    "batch_id": "20261005-143444-56c1",
+    "input_range": null,
+    "scope": null,
+    "source": "batch 20261005-143444-56c1",
+    "status": "expired"
+   },
+   "actual": {
+    "audit_id": null,
+    "audited_at": null,
+    "batch_id": "20261005-143444-56c1",
+    "input_range": null,
+    "scope": null,
+    "source": "batch 20261005-143444-56c1",
+    "status": "not_audited"
+   },
+   "scenario": "fees_x2"
+  },
+  {
+   "table": "limitations",
+   "key": {
+    "row": 0
+   },
+   "field": "detail",
+   "expected": "快照批次审计状态为 expired（范围 None），不是全快照审计通过",
+   "actual": "快照批次审计状态为 not_audited（范围 None），不是全快照审计通过",
+   "scenario": "fees_x2"
+  },
+  {
+   "table": "limitations",
+   "key": {
+    "row": 0
+   },
+   "field": "audit",
+   "expected": {
+    "audit_id": null,
+    "audited_at": null,
+    "batch_id": "20261005-143444-56c1",
+    "input_range": null,
+    "scope": null,
+    "source": "batch 20261005-143444-56c1",
+    "status": "expired"
+   },
+   "actual": {
+    "audit_id": null,
+    "audited_at": null,
+    "batch_id": "20261005-143444-56c1",
+    "input_range": null,
+    "scope": null,
+    "source": "batch 20261005-143444-56c1",
+    "status": "not_audited"
+   },
+   "scenario": "slippage_x2"
+  },
+  {
+   "table": "limitations",
+   "key": {
+    "row": 0
+   },
+   "field": "detail",
+   "expected": "快照批次审计状态为 expired（范围 None），不是全快照审计通过",
+   "actual": "快照批次审计状态为 not_audited（范围 None），不是全快照审计通过",
+   "scenario": "slippage_x2"
+  }
+ ],
+ "tables": {
+  "universe": {
+   "rows_expected": 60,
+   "rows_actual": 60,
+   "only_in_expected": 0,
+   "only_in_actual": 0,
+   "columns": {},
+   "differences": 0
+  },
+  "factors": {
+   "rows_expected": 60,
+   "rows_actual": 60,
+   "only_in_expected": 0,
+   "only_in_actual": 0,
+   "columns": {},
+   "differences": 0
+  },
+  "scores": {
+   "rows_expected": 60,
+   "rows_actual": 60,
+   "only_in_expected": 0,
+   "only_in_actual": 0,
+   "columns": {},
+   "differences": 0
+  },
+  "targets": {
+   "rows_expected": 120,
+   "rows_actual": 120,
+   "only_in_expected": 0,
+   "only_in_actual": 0,
+   "columns": {},
+   "differences": 0
+  },
+  "report": {
+   "report": {
+    "differences": 1
+   }
+  },
+  "benchmark_eval": {
+   "benchmark_eval": {
+    "rows_expected": 3,
+    "rows_actual": 3,
+    "differences": 0
+   }
+  },
+  "base": {
+   "cash_events": {
+    "rows_expected": 4,
+    "rows_actual": 4,
+    "differences": 0
+   },
+   "equity": {
+    "rows_expected": 60,
+    "rows_actual": 60,
+    "differences": 0
+   },
+   "fills": {
+    "rows_expected": 2,
+    "rows_actual": 2,
+    "differences": 0
+   },
+   "limitations": {
+    "rows_expected": 1,
+    "rows_actual": 1,
+    "differences": 2
+   },
+   "metrics": {
+    "differences": 0
+   },
+   "orders": {
+    "rows_expected": 2,
+    "rows_actual": 2,
+    "differences": 0
+   },
+   "positions_daily": {
+    "rows_expected": 25,
+    "rows_actual": 25,
+    "differences": 0
+   },
+   "receivables": {
+    "rows_expected": 0,
+    "rows_actual": 0,
+    "differences": 0
+   },
+   "scores": {
+    "rows_expected": 60,
+    "rows_actual": 60,
+    "differences": 0
+   },
+   "trading": {
+    "differences": 0
+   }
+  },
+  "fees_x2": {
+   "cash_events": {
+    "rows_expected": 4,
+    "rows_actual": 4,
+    "differences": 0
+   },
+   "equity": {
+    "rows_expected": 60,
+    "rows_actual": 60,
+    "differences": 0
+   },
+   "fills": {
+    "rows_expected": 2,
+    "rows_actual": 2,
+    "differences": 0
+   },
+   "limitations": {
+    "rows_expected": 1,
+    "rows_actual": 1,
+    "differences": 2
+   },
+   "metrics": {
+    "differences": 0
+   },
+   "orders": {
+    "rows_expected": 2,
+    "rows_actual": 2,
+    "differences": 0
+   },
+   "positions_daily": {
+    "rows_expected": 25,
+    "rows_actual": 25,
+    "differences": 0
+   },
+   "receivables": {
+    "rows_expected": 0,
+    "rows_actual": 0,
+    "differences": 0
+   },
+   "scores": {
+    "rows_expected": 60,
+    "rows_actual": 60,
+    "differences": 0
+   },
+   "trading": {
+    "differences": 0
+   }
+  },
+  "slippage_x2": {
+   "cash_events": {
+    "rows_expected": 4,
+    "rows_actual": 4,
+    "differences": 0
+   },
+   "equity": {
+    "rows_expected": 60,
+    "rows_actual": 60,
+    "differences": 0
+   },
+   "fills": {
+    "rows_expected": 2,
+    "rows_actual": 2,
+    "differences": 0
+   },
+   "limitations": {
+    "rows_expected": 1,
+    "rows_actual": 1,
+    "differences": 2
+   },
+   "metrics": {
+    "differences": 0
+   },
+   "orders": {
+    "rows_expected": 2,
+    "rows_actual": 2,
+    "differences": 0
+   },
+   "positions_daily": {
+    "rows_expected": 25,
+    "rows_actual": 25,
+    "differences": 0
+   },
+   "receivables": {
+    "rows_expected": 0,
+    "rows_actual": 0,
+    "differences": 0
+   },
+   "scores": {
+    "rows_expected": 60,
+    "rows_actual": 60,
+    "differences": 0
+   },
+   "trading": {
+    "differences": 0
+   }
+  }
+ },
+ "code_drift": {
+  "git_commit": {
+   "recorded": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+   "current": null
+  },
+  "git_dirty": {
+   "recorded": true,
+   "current": false
+  },
+  "lock_sha256": {
+   "recorded": "7feb849499392e03669d579880e733ffa9cf462f388d9124b6b19e3040f96bfe",
+   "current": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382"
+  }
+ },
+ "implementation_drift": true,
+ "cache": "bypassed"
+}

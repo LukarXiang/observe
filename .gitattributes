@@ -1,0 +1,11 @@
+# Metadata originals retain their recorded bytes across operating systems.
+data/metadata/** -text whitespace=cr-at-eol
+# These files are bound by byte SHA in research and metadata manifests.
+src/** -text
+scripts/** -text
+configs/** -text
+tests/** -text
+strategies/specs/** -text
+docs/handoff/** -text
+pyproject.toml -text
+uv.lock -text

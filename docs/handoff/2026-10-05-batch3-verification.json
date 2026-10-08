@@ -1,0 +1,118 @@
+{
+ "status": "ok",
+ "snapshot": "20261005-143509-75b4",
+ "published_batch": "20261005-143444-56c1",
+ "period": {
+  "start": "2024-03-29",
+  "end": "2024-06-28"
+ },
+ "validation_file": "data/validations/20261005-strategy-batch3.json",
+ "validation_sha256": "aa3d817431616de0f2144ba15e314379944f3c19708c548e2944115cd03dff87",
+ "fee_hand_check_file": "data/validations/20261005-batch3-fee-hand-checks.json",
+ "fee_hand_check_sha256": "66bc605d3e2584401eb74e2dbdc48fda807ad43864840d4d31e5ef5ff1318c5b",
+ "protection": {
+  "old_controls_checked": 821,
+  "old_partitions_checked": 243,
+  "all_unchanged": true
+ },
+ "strategies": [
+  {
+   "strategy_id": "S-38b227d4327a",
+   "implementation": "bollinger_breakout_corrected_v1",
+   "source_path": "2020年度精选策略/52 布林带1.txt",
+   "source_sha256": "0bbc8915882fbef9a78c10209248cb131b10c1a72e4c4d639ee1b21aba96efb3",
+   "run_id": "20261005-143611-844865-strategy-a327",
+   "reproduction_run_id": "20261005-144026-844865-strategy-cc25",
+   "result": "match",
+   "differences": 0,
+   "original_strategy_complete": false,
+   "signal_sessions_checked": 60,
+   "results": [
+    {
+     "scenario": "base",
+     "total_return": -0.10039079000000006,
+     "max_drawdown": -0.1012807108273317,
+     "filled_orders": 2
+    },
+    {
+     "scenario": "fees_x2",
+     "total_return": -0.10121658,
+     "max_drawdown": -0.10189952254607026,
+     "filled_orders": 2
+    },
+    {
+     "scenario": "slippage_x2",
+     "total_return": -0.10206043000000009,
+     "max_drawdown": -0.10215468580108467,
+     "filled_orders": 2
+    }
+   ]
+  },
+  {
+   "strategy_id": "S-d32775c4089e",
+   "implementation": "ma10_ma20_v1",
+   "source_path": "2020年度精选策略/66 高于MA10买入低于MA20卖出回测半年收益率20.4%.txt",
+   "source_sha256": "0d502476995f15dffd692752410d5d10884d5ec8db0479e27346036207e8a634",
+   "run_id": "20261005-143759-c6e006-strategy-233b",
+   "reproduction_run_id": "20261005-144223-c6e006-strategy-d9a2",
+   "result": "match",
+   "differences": 0,
+   "original_strategy_complete": false,
+   "signal_sessions_checked": 60,
+   "results": [
+    {
+     "scenario": "base",
+     "total_return": 0.04069166000000002,
+     "max_drawdown": -0.07565349587727221,
+     "filled_orders": 5
+    },
+    {
+     "scenario": "fees_x2",
+     "total_return": 0.038715489999999964,
+     "max_drawdown": -0.07719682072171208,
+     "filled_orders": 5
+    },
+    {
+     "scenario": "slippage_x2",
+     "total_return": 0.0366662900000001,
+     "max_drawdown": -0.0784723428085552,
+     "filled_orders": 5
+    }
+   ]
+  }
+ ],
+ "catalog": {
+  "catalog_id": "cf954e25d31e5407e96f",
+  "files": 695,
+  "reviewed_sources": [
+   "S-eff4d7ae7982",
+   "S-38b227d4327a",
+   "S-d32775c4089e",
+   "S-979d5187c3ec",
+   "S-f8eaf0fa2c7c",
+   "S-84adbe33af88"
+  ],
+  "status_counts": {
+   "待数据": 493,
+   "待审查": 65,
+   "暂不可复现": 28,
+   "已验证": 2,
+   "非交易研究脚本": 65,
+   "实现中": 1,
+   "重复版本": 41
+  }
+ },
+ "tests": {
+  "related_unique_tests_passed": 79,
+  "bollinger_final_tests_passed": 3,
+  "warning": "Existing Starlette/httpx deprecation warning",
+  "full_suite_run": false
+ },
+ "limitations": [
+  "Exploratory corrected or daily execution approximations, not complete original strategy reproduction",
+  "New snapshot full daily audit expired; index-only audit passed; old daily issues not re-audited",
+  "Micro400 and small-value100 remain data-blocked; no shares/PCF/name standard tables published",
+  "Remote historical snapshots/runs were not migrated; local results are new experiments",
+  "data/ and repo/ are outside Git and require separate transfer"
+ ]
+}

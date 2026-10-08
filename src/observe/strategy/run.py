@@ -14,6 +14,7 @@ import pandas as pd
 from ..data.audit import audit_status
 from ..data.locks import DATA_WRITER, operation_lock
 from ..data.store import Store
+from ..data.valuations import attach_valuations, load_valuations, required_fields, valuation_lookback
 from ..evaluation import metrics as evaluate, trading_stats
 from ..execution import InputBlocked, build, load, sessions
 from ..factors.expr import parse
@@ -77,6 +78,12 @@ def run_strategy(root, spec_path, snapshot = None, start = None, end = None, out
         tables = load(store, state, warm, e, LIQUIDITY_WINDOW)
         for t in ('adj_factors', 'adj_coverage'):
             tables[t] = store.load_state(state, t) if t in state.get('tables', {}) else None
+        field_parser = lambda text: parse(text, FIELDS)
+        valuation_fields = required_fields(spec.expressions(), field_parser)
+        valuation_used, valuation_values = {}, None
+        if valuation_fields:
+            val_start = cal[max(bisect_left(cal, s) - valuation_lookback(spec.expressions(), field_parser) - 1, 0)]
+            valuation_values, valuation_used = load_valuations(store, state, val_start, e, valuation_fields, spec.valuation_policy)
         index_bars = None
         if spec.exposure.index:
             if 'index_1d' not in state.get('tables', {}):
@@ -85,7 +92,7 @@ def run_strategy(root, spec_path, snapshot = None, start = None, end = None, out
         audit = {k: v for k, v in audit_status(root, doc['batch_id'], rules).items() if k != 'rows'}
         if audit['status'] != 'passed': limitations.append({'kind': 'data_audit', 'detail': f"快照批次审计状态为 {audit['status']}", 'audit': audit})
         used = {t: {p: v for p, v in state['tables'].get(t, {}).items()} for t in ('adj_factors', 'adj_coverage', 'index_1d') if t in state.get('tables', {})}
-        used = {**tables['partitions'], **used}
+        used = {**tables['partitions'], **used, **valuation_used}
         write_json(out / 'data_manifest.json', {'snapshot_id': doc['snapshot_id'], 'batch_id': doc['batch_id'], 'offline': True, 'audit': audit,
                                                 'used': {t: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in parts.items()} for t, parts in used.items()}})
         status.stage('load')
@@ -94,6 +101,9 @@ def run_strategy(root, spec_path, snapshot = None, start = None, end = None, out
         inst = tables['instruments'].drop_duplicates('instrument', keep = 'last').set_index('instrument')
         stocks = set(inst.index[inst.kind == 'stock'])
         bars = tables['bars_1d']; bars = bars[bars.instrument.isin(stocks) & bars.board.isin(spec.universe.boards)]
+        if valuation_values is not None:
+            bars, detail = attach_valuations(bars, valuation_values, valuation_fields, val_start, e)
+            limitations.append(detail)
         days = [d for d in cal if warm <= d <= e]
         panel = StockPanel(bars, tables['adj_factors'], tables['adj_coverage'], inst, days, rules)
         selector = Selector(spec, panel, inputs.candidates, IndexPanel(index_bars, spec.exposure.index, days) if index_bars is not None else None)

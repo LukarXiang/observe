@@ -1,0 +1,1275 @@
+{
+ "status": "ok",
+ "environment": {
+  "git_commit": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+  "git_dirty": true,
+  "lock_sha256": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382",
+  "python": "3.12.12",
+  "packages": {
+   "pandas": "3.0.6",
+   "numpy": "2.5.3",
+   "pyarrow": "25.0.1",
+   "pydantic": "2.13.5",
+   "scikit-learn": "1.9.1",
+   "scipy": "1.18.1",
+   "lightgbm": "4.7.0"
+  }
+ },
+ "snapshot": "20261005-201432-93d0",
+ "reviews": {
+  "snapshot": "20261005-201432-93d0",
+  "published_batch": "20261005-201432-dd1d",
+  "sources": [
+   {
+    "strategy_id": "S-4cc2cba1cbd9",
+    "source_path": "repo/量化策略源代码/2021年度精选策略/20.冲天炮最高板策略，收益惊呆了我.txt",
+    "source_sha256": "dc19dbd84e05d7f8562c6a373c7d2fd18e720d1e22f6ea86260c63121404f7bb",
+    "source_copy": "data/staging/strategies-batch16/20261005-momentum-dependencies/source-reviews/S-4cc2cba1cbd9.source",
+    "source_copy_sha256": "dc19dbd84e05d7f8562c6a373c7d2fd18e720d1e22f6ea86260c63121404f7bb",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 156,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "每bar冲天炮最高连板单日一买",
+     "fidelity": "缺分钟价格、历史名称及涨跌停价口径",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "60交易日前在市股票，当前非停牌/ST/ST星退名称，排除688",
+      "selection": "11行close==high_limit，按返回行相邻股票/交易日累积ups，停牌不加；昨天最高ups",
+      "buy": "11点前，上证3日OLS斜率四舍五入两位>0、最高板>2；每天1次非空订单即记已买，现金>500股价格",
+      "sell": "14:51起可卖且未涨停清仓，无最大持仓数约束"
+     },
+     "gaps": [
+      "缺每bar历史last_price及可成交路径、历史名称与原high_limit；5分钟不证明每分钟等价",
+      "np/pd依赖平台注入；float二维coef_在当前NumPy报错；连板累积依赖get_price返回排序，原代码没有按股日期排序"
+     ],
+     "next_step": "补原返回排序与每bar数据；只修数组取标量或改为日频均须单独确认，不按注释排除一字板"
+    }
+   },
+   {
+    "strategy_id": "S-d5b7c03a7119",
+    "source_path": "repo/量化策略源代码/2021年度精选策略/95.冲天炮最高板策略迭代.txt",
+    "source_sha256": "5478cf9105ff32513ed6dd4b9187e84534eca03a512e6a2622d0bdfcd44d2a77",
+    "source_copy": "data/staging/strategies-batch16/20261005-momentum-dependencies/source-reviews/S-d5b7c03a7119.source",
+    "source_copy_sha256": "5478cf9105ff32513ed6dd4b9187e84534eca03a512e6a2622d0bdfcd44d2a77",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 229,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "冲天炮一持仓七日冷却及分钟止损",
+     "fidelity": "缺盘中、历史名称和涨跌停数据",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "原20号池，风控另用当日在市非ST/停牌/退名称全池",
+      "risk": "昨日跌停数>前一自然日截止查询数且>15，禁止选股且不递增冷却计数",
+      "selection": "最高连板>2、最近买入记录<7时递增并排除，MA60仅要求上升，没有close>MA60条件",
+      "buy": "11点前上证3日四舍五入斜率>0、最多1持仓、未涨停、现金>500股价；非空订单登记冷却",
+      "sell": "14:56起只按未涨停退出；其他bar价格<成本95%止损"
+     },
+     "gaps": [
+      "缺每bar价格、全市场历史证券名称和high/low_limit，自然日减一天不总是上一交易日",
+      "原连板计数依赖返回排序；float二维coef_不兼容；冷却以回调递增，风控日跳过，非7自然日"
+     ],
+     "next_step": "保留分支优先级、风控日冷却停计和实际订单状态；输入不足先搁置，不自动日频化"
+    }
+   },
+   {
+    "strategy_id": "S-bf4ed04c68a7",
+    "source_path": "repo/量化策略源代码/2021年度精选策略/98.追涨大师（超额142）.txt",
+    "source_sha256": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+    "source_copy": "data/staging/strategies-batch16/20261005-momentum-dependencies/source-reviews/S-bf4ed04c68a7.source",
+    "source_copy_sha256": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 187,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "09:50主力资金筛选追涨单持仓",
+     "fidelity": "缺历史资金流及盘中输入",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "前日在市非ST/当前停牌/退名称，上市>360自然日，排除68和300前缀",
+      "selection": "前一自然日截止change_pct<9，昨天>9.7且net_pct_main>0；30行前2/3/4/5/15/20/30行涨幅和均<=13",
+      "trend": "360/91/61/46/31行四舍五入OLS斜率非负；121行斜率>=0且最大，同值取后出现者",
+      "sell": "持有日递增，09:50价格>购买记录105%或天数恰等19或(open-now)/now>4%",
+      "buy": "卖出后实际空仓才买，先记录last_price和day=0，再下单；成交比例原设1"
+     },
+     "gaps": [
+      "缺get_money_flow change_pct/net_pct_main原口径及可用时点，成交额/换手率不能代替主力占比",
+      "缺09:50价格和历史名称；df.drop未赋值，实际保留昨日；float数组不兼容；裸except吞掉斜率错误",
+      "前N行受供应商返回排序影响；rate>4%实际为从开盘下跌约3.85%，不符合上涨4%的注释"
+     ],
+     "next_step": "探测资金流和1分钟覆盖，保留算术和订单前更新；缺口大则存档搁置，不凭标题重写"
+    }
+   },
+   {
+    "strategy_id": "S-e69eb36bb221",
+    "source_path": "repo/量化策略源代码/2023年度精选策略/26.追涨大师（超额142）.txt",
+    "source_sha256": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+    "source_copy": "data/staging/strategies-batch16/20261005-momentum-dependencies/source-reviews/S-e69eb36bb221.source",
+    "source_copy_sha256": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 187,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "2021年98号追涨原文重复文件",
+     "fidelity": "完整文本重复，保留独立来源映射",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "canonical_source": "2021年度精选策略/98.追涨大师（超额142）.txt"
+     },
+     "gaps": [
+      "与2021年98号完全同文，历史资金流、09:50价格及兼容缺口相同"
+     ],
+     "next_step": "共用原文规则审查，独立保存字节SHA，不计作新增可运行策略"
+    }
+   },
+   {
+    "strategy_id": "S-bb46c1ee16cf",
+    "source_path": "repo/量化策略源代码/2024年度精选策略1/4.首板低开策略.txt",
+    "source_sha256": "953a46add178f7cec14c7abe0c55be015ccbf82518aa7bca811dd389b8b1af53",
+    "source_copy": "data/staging/strategies-batch16/20261005-momentum-dependencies/source-reviews/S-bb46c1ee16cf.source",
+    "source_copy_sha256": "953a46add178f7cec14c7abe0c55be015ccbf82518aa7bca811dd389b8b1af53",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 219,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "首板低开09:30买与两时点退出",
+     "fidelity": "缺11:28分钟输入及原涨跌停口径",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "昨日在市，排除4/8/68，上市>250自然日，历史非ST/昨日非停牌",
+      "selection": "昨日涨停、最近10行无连续2板；60行相对位置<=0.5，开盘/昨收在[0.96,0.97]",
+      "buy": "实际零持仓时，按所有入选股数目标分配总资产，不限制只数",
+      "sell": "11:28可卖且未涨停并盈利清仓；14:50可卖且未涨停清仓"
+     },
+     "gaps": [
+      "缺11:28原分钟价、完整历史池与high_limit；5分钟聚合不能还原11:28",
+      "DataFrame.append已删除；df.iloc[-1,-1]依赖返回列序，相对位置高低相等可除0"
+     ],
+     "next_step": "补原盘中和列序；保留空仓买及两卖点，不自动改成次日开盘退出"
+    }
+   },
+   {
+    "strategy_id": "S-726f0aa658ec",
+    "source_path": "repo/量化策略源代码/2024年度精选策略1/7.连板龙头策略.txt",
+    "source_sha256": "36d9ab13955f12a666db1bc3d347d4bd2caa7ff7210098fe6d79e40c03d0eb6e",
+    "source_copy": "data/staging/strategies-batch16/20261005-momentum-dependencies/source-reviews/S-726f0aa658ec.source",
+    "source_copy_sha256": "36d9ab13955f12a666db1bc3d347d4bd2caa7ff7210098fe6d79e40c03d0eb6e",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 399,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "最高连板VOL5前十槽位与涨停排队",
+     "fidelity": "缺原因子和盘中限价排队证据",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "昨日在市，排除4/8/68，上市>50自然日，历史非ST/非停牌",
+      "selection": "20行连续至少2板的最高板全部候选，原VOL5升序，截取10减持仓数；不排除已持有候选",
+      "buy": "09:30每股追加总资产/10；现金>100股价格；涨停用开盘价限价排队，其余开盘价市价",
+      "sell": "14:50非涨停、可卖且达到买入后第2交易日或盈利，价格必须高于跌停"
+     },
+     "gaps": [
+      "缺get_factor_values VOL5原定义/历史可用版本与涨停限价排队/14:50价，日线拒单不能等价排板",
+      "DataFrame.append已删除；概念/流通市值/HSL筛选全部在三引号示例中，不能当实际交易条件"
+     ],
+     "next_step": "核实VOL5和盘中排队；不把注释中条件或普通五日换手均值静默加到运行规则"
+    }
+   },
+   {
+    "strategy_id": "S-9e752d17571d",
+    "source_path": "repo/量化策略源代码/2024年度精选策略1/84.【社区研究】连板龙头策略-wywy：复现与研究.txt",
+    "source_sha256": "a69f94b9e2d30369276cab3824bbc6bf9f5292bb9be5657c0372c9eb41d054a8",
+    "source_copy": "data/staging/strategies-batch16/20261005-momentum-dependencies/source-reviews/S-9e752d17571d.source",
+    "source_copy_sha256": "a69f94b9e2d30369276cab3824bbc6bf9f5292bb9be5657c0372c9eb41d054a8",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 177,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "2022年初全股票连板/概念特征研究",
+     "fidelity": "非交易研究脚本，含事后特征",
+     "implementations": [],
+     "status": "非交易研究脚本",
+     "rules": {
+      "interval": [
+       "2022-01-01",
+       "2022-03-01"
+      ],
+      "pool": "运行日股票池回溯，排除3/68",
+      "features": "20行反向非零连续板数、次日open shift(-1)涨停溢价、同日涨停概念数量、3日统计"
+     },
+     "gaps": [
+      "缺历史get_concept及原涨跌停值；使用date=None当前池回溯，非逐日历史池",
+      "next open是未来标签；无买卖、调仓或成本规则，不算7号策略复现"
+     ],
+     "next_step": "可独立复算cal_lb_count原函数；研究特征与可用交易信号明确分开，不能生成收益回测"
+    }
+   }
+  ],
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "52a695b93295ee07a91b",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 497,
+    "已验证": 10,
+    "待审查": 24,
+    "暂不可复现": 54,
+    "非交易研究脚本": 69,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 315,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10
+   },
+   "reviewed_sources": [
+    "S-25a2ce74300f",
+    "S-a02bd5fb82fa",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-af09cfafe6cf",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-db01c1c96ded",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-147b0cfb49ff",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-cafee3ad464a",
+    "S-560abd656ca0",
+    "S-84b17f428272",
+    "S-a4c77bd8b44e",
+    "S-4b7dbe8af8ac",
+    "S-bee2c8d71c81",
+    "S-f81bb8422f94",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-979d5187c3ec",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-05431e7ae641",
+    "S-03e5e601f4cc",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-47d77840ec26",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-653ef41eb685",
+    "S-f23cf187dc47",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-64bca3ebbca5",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-bdfd3c6fde91",
+    "S-c98372326f58",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-84adbe33af88",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-9e752d17571d",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-2d40c2d698f7",
+    "S-028ef663b462",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-c1bba20dca69",
+    "S-4730e53b92bc"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/52a695b93295ee07a91b"
+  },
+  "static_detection_changes": [
+   {
+    "path": "2021年度精选策略/98.追涨大师（超额142）.txt",
+    "old_apis": [
+     "history",
+     "get_current_data",
+     "get_all_securities",
+     "run_daily",
+     "order_target_value",
+     "order_value"
+    ],
+    "new_apis": [
+     "get_money_flow",
+     "history",
+     "get_current_data",
+     "get_all_securities",
+     "run_daily",
+     "order_target_value",
+     "order_value"
+    ]
+   },
+   {
+    "path": "2023年度精选策略/26.追涨大师（超额142）.txt",
+    "old_apis": [
+     "history",
+     "get_current_data",
+     "get_all_securities",
+     "run_daily",
+     "order_target_value",
+     "order_value"
+    ],
+    "new_apis": [
+     "get_money_flow",
+     "history",
+     "get_current_data",
+     "get_all_securities",
+     "run_daily",
+     "order_target_value",
+     "order_value"
+    ]
+   },
+   {
+    "path": "2023年度精选策略/28.F_Score 选股，年化80%+.txt",
+    "old_apis": [
+     "get_index_stocks",
+     "run_weekly",
+     "order_target_value",
+     "order_target"
+    ],
+    "new_apis": [
+     "get_money_flow",
+     "get_index_stocks",
+     "run_weekly",
+     "order_target_value",
+     "order_target"
+    ]
+   },
+   {
+    "path": "2024年度精选策略1/34.韶华研究之十八，201系列.txt",
+    "old_apis": [
+     "get_index_stocks",
+     "get_call_auction",
+     "get_price",
+     "get_current_data",
+     "get_all_securities",
+     "run_daily",
+     "order_target_value"
+    ],
+    "new_apis": [
+     "get_money_flow",
+     "get_index_stocks",
+     "get_call_auction",
+     "get_price",
+     "get_current_data",
+     "get_all_securities",
+     "run_daily",
+     "order_target_value"
+    ]
+   },
+   {
+    "path": "2024年度精选策略2/8.14个月200%，超短线实盘交易策略！无未来函数.txt",
+    "old_apis": [
+     "get_price",
+     "get_current_data",
+     "get_all_securities",
+     "order_target",
+     "order_value"
+    ],
+    "new_apis": [
+     "get_money_flow",
+     "get_price",
+     "get_current_data",
+     "get_all_securities",
+     "order_target",
+     "order_value"
+    ]
+   },
+   {
+    "path": "2024年度精选策略2/80.短线策略-2022年两个半月收益45%-无未来函数.txt",
+    "old_apis": [
+     "get_price",
+     "get_current_data",
+     "get_all_securities",
+     "order_target",
+     "order_value"
+    ],
+    "new_apis": [
+     "get_money_flow",
+     "get_price",
+     "get_current_data",
+     "get_all_securities",
+     "order_target",
+     "order_value"
+    ]
+   },
+   {
+    "path": "聚宽2025年精选/28韶华研究之十九，一致性用在微盘控制回撤.txt",
+    "old_apis": [
+     "get_fundamentals",
+     "get_index_stocks",
+     "get_price",
+     "history",
+     "get_current_data",
+     "get_factor_values",
+     "get_all_securities",
+     "run_daily",
+     "run_weekly",
+     "order_target_value"
+    ],
+    "new_apis": [
+     "get_fundamentals",
+     "get_money_flow",
+     "get_index_stocks",
+     "get_price",
+     "history",
+     "get_current_data",
+     "get_factor_values",
+     "get_all_securities",
+     "run_daily",
+     "run_weekly",
+     "order_target_value"
+    ]
+   },
+   {
+    "path": "聚宽2025年精选/57韶华研究之十八，201系列.txt",
+    "old_apis": [
+     "get_index_stocks",
+     "get_call_auction",
+     "get_price",
+     "get_current_data",
+     "get_all_securities",
+     "run_daily",
+     "order_target_value"
+    ],
+    "new_apis": [
+     "get_money_flow",
+     "get_index_stocks",
+     "get_call_auction",
+     "get_price",
+     "get_current_data",
+     "get_all_securities",
+     "run_daily",
+     "order_target_value"
+    ]
+   },
+   {
+    "path": "聚宽2025年精选/98热点行业和热点概念-成分股-及龙一龙二龙三.py",
+    "old_apis": [
+     "get_industry",
+     "get_price",
+     "get_all_securities"
+    ],
+    "new_apis": [
+     "get_money_flow",
+     "get_industry",
+     "get_price",
+     "get_all_securities"
+    ]
+   }
+  ],
+  "api_sha256": "9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe",
+  "existing_tables": [
+   "adj_coverage",
+   "adj_factors",
+   "bars_1d",
+   "bars_5m",
+   "calendar",
+   "company_controls_annual",
+   "corp_actions",
+   "financial_annual",
+   "financial_availability",
+   "financial_fields",
+   "financial_quarterly",
+   "index_1d",
+   "instruments",
+   "minute_universe"
+  ],
+  "sample_600000_5m": {
+   "rows": 55344,
+   "first": "2021-12-06 09:35:00",
+   "last": "2026-09-04 15:00:00",
+   "not_equivalent_to_1m_or_all_market": true
+  },
+  "strategy_results": [],
+  "limits": [
+   "Minute prices, original price limits, historical names and flow semantics are not supplied by daily bars",
+   "Source84 is research with next-day labels; source26 is a byte-identical duplicate of source98"
+  ]
+ },
+ "probes": {
+  "snapshot": "20261005-201432-93d0",
+  "results": [
+   {
+    "endpoint": "money_flow",
+    "returncode": 0,
+    "stdout": "%2Cf60%2Cf61%2Cf62%2Cf63%2Cf64%2Cf65&ut=b2884a393a59ad64002292a3e90d46a5&_=1791203732280\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch16/20261005-momentum-dependencies/probes/money_flow/response-000.bin\", \"sha256\": \"70fc8e36326c04e9fc5aa252c627c9325009d180c8e1d0c3f2d00ffd5872937a\"}], \"published\": false, \"strict_usable\": false, \"api\": \"stock_individual_fund_flow\", \"parameters\": {\"stock\": \"600000\", \"market\": \"sh\"}, \"api_evidence_sha256\": \"9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe\", \"raw_file\": \"data/raw/momentum_dependency_batch16/money_flow/20261005-momentum-dependencies.parquet\", \"raw_sha256\": \"d2a6f3f2a13f4f683e2bf626921933a0fb889d439ddd42fbe73f61f3a3291da2\", \"rows\": 120, \"columns\": [\"日期\", \"收盘价\", \"涨跌幅\", \"主力净流入-净额\", \"主力净流入-净占比\", \"超大单净流入-净额\", \"超大单净流入-净占比\", \"大单净流入-净额\", \"大单净流入-净占比\", \"中单净流入-净额\", \"中单净流入-净占比\", \"小单净流入-净额\", \"小单净流入-净占比\"], \"coverage\": {\"column\": \"日期\", \"first\": \"2026-04-09 00:00:00\", \"last\": \"2026-09-30 00:00:00\", \"unparsed\": 0, \"duplicate_times\": 0, \"days\": 120}, \"limitations\": [\"One sampled stock or day only; no complete historical pool proof\", \"Eastmoney fields and prices have not been proven equivalent to original JoinQuant inputs\"]}\n",
+    "stderr": "",
+    "result": {
+     "endpoint": "money_flow",
+     "status": "success",
+     "wire_responses": [
+      {
+       "url": "https://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get?lmt=0&klt=101&secid=1.600000&fields1=f1%2Cf2%2Cf3%2Cf7&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61%2Cf62%2Cf63%2Cf64%2Cf65&ut=b2884a393a59ad64002292a3e90d46a5&_=1791203732280",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/money_flow/response-000.bin",
+       "sha256": "70fc8e36326c04e9fc5aa252c627c9325009d180c8e1d0c3f2d00ffd5872937a"
+      }
+     ],
+     "published": false,
+     "strict_usable": false,
+     "api": "stock_individual_fund_flow",
+     "parameters": {
+      "stock": "600000",
+      "market": "sh"
+     },
+     "api_evidence_sha256": "9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe",
+     "raw_file": "data/raw/momentum_dependency_batch16/money_flow/20261005-momentum-dependencies.parquet",
+     "raw_sha256": "d2a6f3f2a13f4f683e2bf626921933a0fb889d439ddd42fbe73f61f3a3291da2",
+     "rows": 120,
+     "columns": [
+      "日期",
+      "收盘价",
+      "涨跌幅",
+      "主力净流入-净额",
+      "主力净流入-净占比",
+      "超大单净流入-净额",
+      "超大单净流入-净占比",
+      "大单净流入-净额",
+      "大单净流入-净占比",
+      "中单净流入-净额",
+      "中单净流入-净占比",
+      "小单净流入-净额",
+      "小单净流入-净占比"
+     ],
+     "coverage": {
+      "column": "日期",
+      "first": "2026-04-09 00:00:00",
+      "last": "2026-09-30 00:00:00",
+      "unparsed": 0,
+      "duplicate_times": 0,
+      "days": 120
+     },
+     "limitations": [
+      "One sampled stock or day only; no complete historical pool proof",
+      "Eastmoney fields and prices have not been proven equivalent to original JoinQuant inputs"
+     ]
+    },
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/money_flow/response-000.bin",
+      "sha256": "70fc8e36326c04e9fc5aa252c627c9325009d180c8e1d0c3f2d00ffd5872937a"
+     },
+     {
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/money_flow/result.json",
+      "sha256": "2b7ba207108c99017831274de6f6ec6d20024d18d20d1336a432be2eac396f7d"
+     }
+    ]
+   },
+   {
+    "endpoint": "minute_2021",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"minute_2021\", \"status\": \"failed\", \"wire_responses\": [], \"published\": false, \"strict_usable\": false, \"api\": \"stock_zh_a_hist_min_em\", \"parameters\": {\"symbol\": \"600000\", \"start_date\": \"2021-03-29 09:30:00\", \"end_date\": \"2021-03-29 15:00:00\", \"period\": \"1\", \"adjust\": \"\"}, \"api_evidence_sha256\": \"9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe\", \"error\": \"ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))\"}\n",
+    "stderr": "",
+    "result": {
+     "endpoint": "minute_2021",
+     "status": "failed",
+     "wire_responses": [],
+     "published": false,
+     "strict_usable": false,
+     "api": "stock_zh_a_hist_min_em",
+     "parameters": {
+      "symbol": "600000",
+      "start_date": "2021-03-29 09:30:00",
+      "end_date": "2021-03-29 15:00:00",
+      "period": "1",
+      "adjust": ""
+     },
+     "api_evidence_sha256": "9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe",
+     "error": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    },
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_2021/result.json",
+      "sha256": "a32b33f4f8eec28b0660adeda3cded687d7716dc67dff1ea8a7256f6e238a966"
+     }
+    ]
+   },
+   {
+    "endpoint": "minute_recent",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"minute_recent\", \"status\": \"failed\", \"wire_responses\": [], \"published\": false, \"strict_usable\": false, \"api\": \"stock_zh_a_hist_min_em\", \"parameters\": {\"symbol\": \"600000\", \"start_date\": \"2026-09-01 09:30:00\", \"end_date\": \"2026-09-29 15:00:00\", \"period\": \"1\", \"adjust\": \"\"}, \"api_evidence_sha256\": \"9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe\", \"error\": \"ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))\"}\n",
+    "stderr": "",
+    "result": {
+     "endpoint": "minute_recent",
+     "status": "failed",
+     "wire_responses": [],
+     "published": false,
+     "strict_usable": false,
+     "api": "stock_zh_a_hist_min_em",
+     "parameters": {
+      "symbol": "600000",
+      "start_date": "2026-09-01 09:30:00",
+      "end_date": "2026-09-29 15:00:00",
+      "period": "1",
+      "adjust": ""
+     },
+     "api_evidence_sha256": "9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe",
+     "error": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    },
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_recent/result.json",
+      "sha256": "1741e3326cc9f29c234993a9f35609f2f4a1318be03b09ff7dd754b828e9c273"
+     }
+    ]
+   },
+   {
+    "endpoint": "limit_pool_2021",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"limit_pool_2021\", \"status\": \"empty\", \"wire_responses\": [{\"url\": \"https://push2ex.eastmoney.com/getTopicZTPool?ut=7eea3edcaed734bea9cbfc24409ed989&dpt=wz.ztzt&Pageindex=0&pagesize=10000&sort=fbt%3Aasc&date=20210329\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch16/20261005-momentum-dependencies/probes/limit_pool_2021/response-000.bin\", \"sha256\": \"1f6de708ad03cf9d5d4aeacf5048351e872a0abd3f35ceffb15056bb71397db5\"}], \"published\": false, \"strict_usable\": false, \"api\": \"stock_zt_pool_em\", \"parameters\": {\"date\": \"20210329\"}, \"api_evidence_sha256\": \"9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe\", \"raw_file\": \"data/raw/momentum_dependency_batch16/limit_pool_2021/20261005-momentum-dependencies.parquet\", \"raw_sha256\": \"74c2ffa7bea3077c928dc76c593eef3efb6c933da14a442e2432fb8276e30b24\", \"rows\": 0, \"columns\": [], \"limitations\": [\"One sampled stock or day only; no complete historical pool proof\", \"Eastmoney fields and prices have not been proven equivalent to original JoinQuant inputs\"]}\n",
+    "stderr": "",
+    "result": {
+     "endpoint": "limit_pool_2021",
+     "status": "empty",
+     "wire_responses": [
+      {
+       "url": "https://push2ex.eastmoney.com/getTopicZTPool?ut=7eea3edcaed734bea9cbfc24409ed989&dpt=wz.ztzt&Pageindex=0&pagesize=10000&sort=fbt%3Aasc&date=20210329",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/limit_pool_2021/response-000.bin",
+       "sha256": "1f6de708ad03cf9d5d4aeacf5048351e872a0abd3f35ceffb15056bb71397db5"
+      }
+     ],
+     "published": false,
+     "strict_usable": false,
+     "api": "stock_zt_pool_em",
+     "parameters": {
+      "date": "20210329"
+     },
+     "api_evidence_sha256": "9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe",
+     "raw_file": "data/raw/momentum_dependency_batch16/limit_pool_2021/20261005-momentum-dependencies.parquet",
+     "raw_sha256": "74c2ffa7bea3077c928dc76c593eef3efb6c933da14a442e2432fb8276e30b24",
+     "rows": 0,
+     "columns": [],
+     "limitations": [
+      "One sampled stock or day only; no complete historical pool proof",
+      "Eastmoney fields and prices have not been proven equivalent to original JoinQuant inputs"
+     ]
+    },
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/limit_pool_2021/response-000.bin",
+      "sha256": "1f6de708ad03cf9d5d4aeacf5048351e872a0abd3f35ceffb15056bb71397db5"
+     },
+     {
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/limit_pool_2021/result.json",
+      "sha256": "bbc13eea862671f537ad422fd44e4eea32374d475d4f95070654a911d233cc70"
+     }
+    ]
+   },
+   {
+    "endpoint": "limit_pool_recent",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"limit_pool_recent\", \"status\": \"success\", \"wire_responses\": [{\"url\": \"https://push2ex.eastmoney.com/getTopicZTPool?ut=7eea3edcaed734bea9cbfc24409ed989&dpt=wz.ztzt&Pageindex=0&pagesize=10000&sort=fbt%3Aasc&date=20260929\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch16/20261005-momentum-dependencies/probes/limit_pool_recent/response-000.bin\", \"sha256\": \"4f2bf6ae2560aec5804aab9372b21ae58567cf51c4437fe853206f2d04dc5e75\"}], \"published\": false, \"strict_usable\": false, \"api\": \"stock_zt_pool_em\", \"parameters\": {\"date\": \"20260929\"}, \"api_evidence_sha256\": \"9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe\", \"raw_file\": \"data/raw/momentum_dependency_batch16/limit_pool_recent/20261005-momentum-dependencies.parquet\", \"raw_sha256\": \"4da371a34aad2f4a109d7f79f7b2e02303a347c57e4a8880064518084b592e68\", \"rows\": 57, \"columns\": [\"序号\", \"代码\", \"名称\", \"涨跌幅\", \"最新价\", \"成交额\", \"流通市值\", \"总市值\", \"换手率\", \"封板资金\", \"首次封板时间\", \"最后封板时间\", \"炸板次数\", \"涨停统计\", \"连板数\", \"所属行业\"], \"limitations\": [\"One sampled stock or day only; no complete historical pool proof\", \"Eastmoney fields and prices have not been proven equivalent to original JoinQuant inputs\"]}\n",
+    "stderr": "",
+    "result": {
+     "endpoint": "limit_pool_recent",
+     "status": "success",
+     "wire_responses": [
+      {
+       "url": "https://push2ex.eastmoney.com/getTopicZTPool?ut=7eea3edcaed734bea9cbfc24409ed989&dpt=wz.ztzt&Pageindex=0&pagesize=10000&sort=fbt%3Aasc&date=20260929",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/limit_pool_recent/response-000.bin",
+       "sha256": "4f2bf6ae2560aec5804aab9372b21ae58567cf51c4437fe853206f2d04dc5e75"
+      }
+     ],
+     "published": false,
+     "strict_usable": false,
+     "api": "stock_zt_pool_em",
+     "parameters": {
+      "date": "20260929"
+     },
+     "api_evidence_sha256": "9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe",
+     "raw_file": "data/raw/momentum_dependency_batch16/limit_pool_recent/20261005-momentum-dependencies.parquet",
+     "raw_sha256": "4da371a34aad2f4a109d7f79f7b2e02303a347c57e4a8880064518084b592e68",
+     "rows": 57,
+     "columns": [
+      "序号",
+      "代码",
+      "名称",
+      "涨跌幅",
+      "最新价",
+      "成交额",
+      "流通市值",
+      "总市值",
+      "换手率",
+      "封板资金",
+      "首次封板时间",
+      "最后封板时间",
+      "炸板次数",
+      "涨停统计",
+      "连板数",
+      "所属行业"
+     ],
+     "limitations": [
+      "One sampled stock or day only; no complete historical pool proof",
+      "Eastmoney fields and prices have not been proven equivalent to original JoinQuant inputs"
+     ]
+    },
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/limit_pool_recent/response-000.bin",
+      "sha256": "4f2bf6ae2560aec5804aab9372b21ae58567cf51c4437fe853206f2d04dc5e75"
+     },
+     {
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/limit_pool_recent/result.json",
+      "sha256": "acd2bb18cf865bcff8cd4f75516d7ce0ee215b5edf05a8f9c021a98050ebf5ca"
+     }
+    ]
+   }
+  ],
+  "published": false,
+  "api_evidence_sha256": "9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe",
+  "strategy_results": []
+ },
+ "minute_fallback": {
+  "snapshot": "20261005-201432-93d0",
+  "record": {
+   "endpoint": "minute_sina",
+   "returncode": 0,
+   "stdout": "esponse-002.bin\", \"sha256\": \"59a1a3d5b2a3495a6371fde4ac2c0b32f15f263be1aab9f3a018a5ace29ba8e0\"}, {\"url\": \"https://finance.sina.com.cn/realstock/company/sh600000/qfq.js\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_sina/response-003.bin\", \"sha256\": \"86f86a46c58b35796d5a3a2ed921fb3ae4851e47a54f020fc047c402d7324e28\"}], \"published\": false, \"strict_usable\": false, \"api\": \"stock_zh_a_minute\", \"parameters\": {\"symbol\": \"sh600000\", \"period\": \"1\", \"adjust\": \"\"}, \"api_evidence_sha256\": \"a4502e86ca77597122285cba3a9605081d4790b068cf8282931f0db8018e872e\", \"raw_file\": \"data/raw/momentum_dependency_batch16/minute_sina/20261005-momentum-dependencies.parquet\", \"raw_sha256\": \"78de1aca26285583cc4c46f67d1bc2f57f36ef5b6c7ddae73b4c12caa9ca001a\", \"rows\": 1970, \"columns\": [\"day\", \"open\", \"high\", \"low\", \"close\", \"volume\", \"amount\"], \"coverage\": {\"column\": \"day\", \"first\": \"2026-09-17 13:53:00\", \"last\": \"2026-09-30 15:00:00\", \"unparsed\": 0, \"duplicate_times\": 0, \"days\": 9}, \"limitations\": [\"One sampled stock or day only; no complete historical pool proof\", \"Eastmoney fields and prices have not been proven equivalent to original JoinQuant inputs\"]}\n",
+   "stderr": "",
+   "result": {
+    "endpoint": "minute_sina",
+    "status": "success",
+    "wire_responses": [
+     {
+      "url": "https://quotes.sina.cn/cn/api/jsonp_v2.php/=/CN_MarketDataService.getKLineData?symbol=sh600000&scale=1&ma=no&datalen=1970",
+      "status_code": 200,
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_sina/response-000.bin",
+      "sha256": "701607b6d7207ea618fcf1c3f369ec54c0ca8a2a6a5392242be7e5bd31c65862"
+     },
+     {
+      "url": "https://finance.sina.com.cn/realstock/company/sh600000/hisdata_klc2/klc_kl.js",
+      "status_code": 200,
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_sina/response-001.bin",
+      "sha256": "f3ffa74023a809ee53ca0f378c138a2752d53945d26d0265e1a11e071c346233"
+     },
+     {
+      "url": "https://stock.finance.sina.com.cn/stock/api/jsonp.php/var%20KKE_ShareAmount_sh600000=/StockService.getAmountBySymbol?_=20&symbol=sh600000",
+      "status_code": 200,
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_sina/response-002.bin",
+      "sha256": "59a1a3d5b2a3495a6371fde4ac2c0b32f15f263be1aab9f3a018a5ace29ba8e0"
+     },
+     {
+      "url": "https://finance.sina.com.cn/realstock/company/sh600000/qfq.js",
+      "status_code": 200,
+      "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_sina/response-003.bin",
+      "sha256": "86f86a46c58b35796d5a3a2ed921fb3ae4851e47a54f020fc047c402d7324e28"
+     }
+    ],
+    "published": false,
+    "strict_usable": false,
+    "api": "stock_zh_a_minute",
+    "parameters": {
+     "symbol": "sh600000",
+     "period": "1",
+     "adjust": ""
+    },
+    "api_evidence_sha256": "a4502e86ca77597122285cba3a9605081d4790b068cf8282931f0db8018e872e",
+    "raw_file": "data/raw/momentum_dependency_batch16/minute_sina/20261005-momentum-dependencies.parquet",
+    "raw_sha256": "78de1aca26285583cc4c46f67d1bc2f57f36ef5b6c7ddae73b4c12caa9ca001a",
+    "rows": 1970,
+    "columns": [
+     "day",
+     "open",
+     "high",
+     "low",
+     "close",
+     "volume",
+     "amount"
+    ],
+    "coverage": {
+     "column": "day",
+     "first": "2026-09-17 13:53:00",
+     "last": "2026-09-30 15:00:00",
+     "unparsed": 0,
+     "duplicate_times": 0,
+     "days": 9
+    },
+    "limitations": [
+     "One sampled stock or day only; no complete historical pool proof",
+     "Eastmoney fields and prices have not been proven equivalent to original JoinQuant inputs"
+    ]
+   },
+   "evidence_files": [
+    {
+     "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_sina/response-000.bin",
+     "sha256": "701607b6d7207ea618fcf1c3f369ec54c0ca8a2a6a5392242be7e5bd31c65862"
+    },
+    {
+     "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_sina/response-001.bin",
+     "sha256": "f3ffa74023a809ee53ca0f378c138a2752d53945d26d0265e1a11e071c346233"
+    },
+    {
+     "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_sina/response-002.bin",
+     "sha256": "59a1a3d5b2a3495a6371fde4ac2c0b32f15f263be1aab9f3a018a5ace29ba8e0"
+    },
+    {
+     "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_sina/response-003.bin",
+     "sha256": "86f86a46c58b35796d5a3a2ed921fb3ae4851e47a54f020fc047c402d7324e28"
+    },
+    {
+     "file": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/minute_sina/result.json",
+     "sha256": "9f232188e69bd10a22557e319b99fb0bd0500a2f8d7a8b8414d97e71ffeee7e2"
+    }
+   ]
+  },
+  "published": false,
+  "original_probe_sha256": "f27effd5d0c6677b64f886315cb90ec80adcfc4d3339fd37f3df80fc68f0207c",
+  "api_evidence_sha256": "a4502e86ca77597122285cba3a9605081d4790b068cf8282931f0db8018e872e",
+  "policy": "One independent existing Sina interface probe after Eastmoney disconnections; original failures unchanged"
+ },
+ "rule_clarifications": {
+  "original_review_sha256": "b159a35e1b5cb54a8639be9089d0b4c729f6f9963e30a74fc6d4c25781f218a4",
+  "corrections": [
+   {
+    "path": "2021年度精选策略/20.冲天炮最高板策略，收益惊呆了我.txt",
+    "source_sha256": "dc19dbd84e05d7f8562c6a373c7d2fd18e720d1e22f6ea86260c63121404f7bb",
+    "before": {
+     "review_status": "人工审查完成",
+     "scope": "每bar冲天炮最高连板单日一买",
+     "fidelity": "缺分钟价格、历史名称及涨跌停价口径",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "60交易日前在市股票，当前非停牌/ST/ST星退名称，排除688",
+      "selection": "11行close==high_limit，按返回行相邻股票/交易日累积ups，停牌不加；昨天最高ups",
+      "buy": "11点前，上证3日OLS斜率四舍五入两位>0、最高板>2；每天1次非空订单即记已买，现金>500股价格",
+      "sell": "14:51起可卖且未涨停清仓，无最大持仓数约束"
+     },
+     "gaps": [
+      "缺每bar历史last_price及可成交路径、历史名称与原high_limit；5分钟不证明每分钟等价",
+      "np/pd依赖平台注入；float二维coef_在当前NumPy报错；连板累积依赖get_price返回排序，原代码没有按股日期排序"
+     ],
+     "next_step": "补原返回排序与每bar数据；只修数组取标量或改为日频均须单独确认，不按注释排除一字板"
+    },
+    "after": {
+     "review_status": "人工审查完成",
+     "scope": "每bar冲天炮最高连板每日买入门禁",
+     "fidelity": "缺分钟价格、历史名称及涨跌停价口径",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "60交易日前在市股票，当前非停牌/ST/ST星退名称，排除688",
+      "selection": "11行close==high_limit，按返回行相邻股票/交易日累积ups，停牌不加；昨天最高ups",
+      "buy": "11点前，上证3日OLS斜率四舍五入两位>0、最高板>2；循环前当日买入集合>=1则返回；非空订单记已买，现金>500股价格；循环内没有硬上限或break",
+      "sell": "14:51起可卖且未涨停清仓，无最大持仓数约束"
+     },
+     "gaps": [
+      "缺每bar历史last_price及可成交路径、历史名称与原high_limit；5分钟不证明每分钟等价",
+      "np/pd依赖平台注入；float二维coef_在当前NumPy报错；连板累积依赖get_price返回排序，原代码没有按股日期排序",
+      "部分成交后need_count=0仍用剩余现金，可在同一回调继续买其他候选，不能强制每日最多一笔"
+     ],
+     "next_step": "补原返回排序与每bar数据；只修数组取标量或改为日频均须单独确认，不按注释排除一字板"
+    },
+    "reason": "The daily guard runs before the loop; partially filled orders can leave cash for another candidate in the same callback"
+   },
+   {
+    "path": "2021年度精选策略/98.追涨大师（超额142）.txt",
+    "source_sha256": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+    "before": {
+     "review_status": "人工审查完成",
+     "scope": "09:50主力资金筛选追涨单持仓",
+     "fidelity": "缺历史资金流及盘中输入",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "前日在市非ST/当前停牌/退名称，上市>360自然日，排除68和300前缀",
+      "selection": "前一自然日截止change_pct<9，昨天>9.7且net_pct_main>0；30行前2/3/4/5/15/20/30行涨幅和均<=13",
+      "trend": "360/91/61/46/31行四舍五入OLS斜率非负；121行斜率>=0且最大，同值取后出现者",
+      "sell": "持有日递增，09:50价格>购买记录105%或天数恰等19或(open-now)/now>4%",
+      "buy": "卖出后实际空仓才买，先记录last_price和day=0，再下单；成交比例原设1"
+     },
+     "gaps": [
+      "缺get_money_flow change_pct/net_pct_main原口径及可用时点，成交额/换手率不能代替主力占比",
+      "缺09:50价格和历史名称；df.drop未赋值，实际保留昨日；float数组不兼容；裸except吞掉斜率错误",
+      "前N行受供应商返回排序影响；rate>4%实际为从开盘下跌约3.85%，不符合上涨4%的注释"
+     ],
+     "next_step": "探测资金流和1分钟覆盖，保留算术和订单前更新；缺口大则存档搁置，不凭标题重写"
+    },
+    "after": {
+     "review_status": "人工审查完成",
+     "scope": "09:50主力资金筛选追涨单持仓",
+     "fidelity": "缺历史资金流及盘中输入",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "前日在市非ST/当前停牌/退名称，上市>360自然日，排除68和300前缀",
+      "selection": "前一自然日截止change_pct<9，昨天>9.7且net_pct_main>0；30行前2/3/4/5/15/20/30行涨幅和均<=13",
+      "trend": "360/91/61/46/31行四舍五入OLS斜率非负；121行斜率>=0且最大，同值取后出现者",
+      "sell": "持有日递增，09:50价格>购买记录105%或天数恰等19或(open-now)/now>4%",
+      "buy": "卖出后实际空仓才买，先记录last_price，再order_value，返回后day=0；非空订单/成交不作判断，成交比例原设1"
+     },
+     "gaps": [
+      "缺get_money_flow change_pct/net_pct_main原口径及可用时点，成交额/换手率不能代替主力占比",
+      "缺09:50价格和历史名称；df.drop未赋值，实际保留昨日；float数组不兼容；裸except吞掉斜率错误",
+      "前N行受供应商返回排序影响；rate>4%实际为从开盘下跌约3.85%，不符合上涨4%的注释"
+     ],
+     "next_step": "探测资金流和1分钟覆盖，保留原算术、下单前购买价及下单返回后day归零；缺口大则存档搁置，不凭标题重写"
+    },
+    "reason": "Recorded purchase price precedes order_value, while day=0 follows its return"
+   },
+   {
+    "path": "2024年度精选策略1/4.首板低开策略.txt",
+    "source_sha256": "953a46add178f7cec14c7abe0c55be015ccbf82518aa7bca811dd389b8b1af53",
+    "before": {
+     "review_status": "人工审查完成",
+     "scope": "首板低开09:30买与两时点退出",
+     "fidelity": "缺11:28分钟输入及原涨跌停口径",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "昨日在市，排除4/8/68，上市>250自然日，历史非ST/昨日非停牌",
+      "selection": "昨日涨停、最近10行无连续2板；60行相对位置<=0.5，开盘/昨收在[0.96,0.97]",
+      "buy": "实际零持仓时，按所有入选股数目标分配总资产，不限制只数",
+      "sell": "11:28可卖且未涨停并盈利清仓；14:50可卖且未涨停清仓"
+     },
+     "gaps": [
+      "缺11:28原分钟价、完整历史池与high_limit；5分钟聚合不能还原11:28",
+      "DataFrame.append已删除；df.iloc[-1,-1]依赖返回列序，相对位置高低相等可除0"
+     ],
+     "next_step": "补原盘中和列序；保留空仓买及两卖点，不自动改成次日开盘退出"
+    },
+    "after": {
+     "review_status": "人工审查完成",
+     "scope": "首板低开09:30买与两时点退出",
+     "fidelity": "缺11:28分钟输入及原涨跌停口径",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "昨日在市，排除4/8/68，上市>250自然日，历史非ST/昨日非停牌",
+      "selection": "昨日涨停，排除以昨日结尾且2至10行全涨停的后缀；更早已中断连板不排除；60行相对位置<=0.5，开盘/昨收在[0.96,0.97]",
+      "buy": "实际零持仓时，按所有入选股数目标分配总资产，不限制只数",
+      "sell": "11:28可卖且未涨停并盈利清仓；14:50可卖且未涨停清仓"
+     },
+     "gaps": [
+      "缺11:28原分钟价、完整历史池与high_limit；5分钟聚合不能还原11:28",
+      "DataFrame.append已删除；df.iloc[-1,-1]依赖返回列序，相对位置高低相等可除0"
+     ],
+     "next_step": "补原盘中和列序；保留空仓买及两卖点，不自动改成次日开盘退出"
+    },
+    "reason": "The two-to-ten-row limit-up exclusion tests suffixes ending yesterday, not arbitrary earlier streaks"
+   }
+  ],
+  "original_archive_retained": true,
+  "not_a_backtest": true,
+  "superseded_clarification_sha256": "48d738de9ecc809ebc49f53df989decef1bfb8d56fcf4b852414c0af829ed5a0"
+ },
+ "diagnostics": {
+  "status": "ok",
+  "not_a_backtest": true,
+  "source_sha256": {
+   "repo/量化策略源代码/2021年度精选策略/20.冲天炮最高板策略，收益惊呆了我.txt": "dc19dbd84e05d7f8562c6a373c7d2fd18e720d1e22f6ea86260c63121404f7bb",
+   "repo/量化策略源代码/2021年度精选策略/95.冲天炮最高板策略迭代.txt": "5478cf9105ff32513ed6dd4b9187e84534eca03a512e6a2622d0bdfcd44d2a77",
+   "repo/量化策略源代码/2021年度精选策略/98.追涨大师（超额142）.txt": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+   "repo/量化策略源代码/2023年度精选策略/26.追涨大师（超额142）.txt": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+   "repo/量化策略源代码/2024年度精选策略1/4.首板低开策略.txt": "953a46add178f7cec14c7abe0c55be015ccbf82518aa7bca811dd389b8b1af53",
+   "repo/量化策略源代码/2024年度精选策略1/7.连板龙头策略.txt": "36d9ab13955f12a666db1bc3d347d4bd2caa7ff7210098fe6d79e40c03d0eb6e",
+   "repo/量化策略源代码/2024年度精选策略1/84.【社区研究】连板龙头策略-wywy：复现与研究.txt": "a69f94b9e2d30369276cab3824bbc6bf9f5292bb9be5657c0372c9eb41d054a8"
+  },
+  "examples": [
+   {
+    "input": [],
+    "result": 0
+   },
+   {
+    "input": [
+     0
+    ],
+    "result": 0
+   },
+   {
+    "input": [
+     1
+    ],
+    "result": 1
+   },
+   {
+    "input": [
+     1,
+     1,
+     0,
+     1
+    ],
+    "result": 1
+   },
+   {
+    "input": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "result": 20
+   },
+   {
+    "input": [
+     0,
+     1,
+     1,
+     1
+    ],
+    "result": 3
+   },
+   {
+    "input": [
+     1,
+     0
+    ],
+    "result": 0
+   },
+   {
+    "input": [
+     2,
+     2,
+     0,
+     2
+    ],
+    "result": 1
+   }
+  ],
+  "ols_compatibility": [
+   {
+    "source": "2021年度精选策略/20.冲天炮最高板策略，收益惊呆了我.txt",
+    "status": "failed",
+    "error": "TypeError: only 0-dimensional arrays can be converted to Python scalars"
+   },
+   {
+    "source": "2021年度精选策略/95.冲天炮最高板策略迭代.txt",
+    "status": "failed",
+    "error": "TypeError: only 0-dimensional arrays can be converted to Python scalars"
+   },
+   {
+    "source": "2021年度精选策略/98.追涨大师（超额142）.txt",
+    "status": "failed",
+    "error": "TypeError: only 0-dimensional arrays can be converted to Python scalars"
+   }
+  ],
+  "offline_count_recheck": {
+   "result": "match",
+   "differences": 0,
+   "source_unchanged": true
+  },
+  "red_regression": "Four money-flow API/gap cases failed on old code, then all eight dependency cases passed",
+  "limits": [
+   "Synthetic pure-function examples and runtime compatibility evidence only",
+   "Source84 next-day features and historical concept data are not reconstructed; no trading or return claimed"
+  ]
+ },
+ "checks": {
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "pytest",
+     "-q",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_batch16_archive.py"
+    ],
+    "returncode": 0,
+    "stdout": "................                                                         [100%]\n16 passed in 2.91s\n",
+    "stderr": ""
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/prepare_handoff.py",
+     "scripts/build_strategy_catalog.py",
+     "scripts/verify_financial_import.py",
+     "scripts/review_strategy_batch16.py"
+    ],
+    "returncode": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/review_strategy_batch16.py": "36340a94ede948c57be1bbfd0d15ea9a14ec24b0dcd53cb390ccdda082c97bc3",
+   "src/observe/strategy_catalog.py": "dab59b6db3c671baad493675462010e2e41528307399645e876dd16cec1a2e14",
+   "tests/unit/test_batch16_archive.py": "3c53cd3fa8da7b67d8ab990aaebe8aa1347c9ae2700afff38a13163863be1f11",
+   "tests/unit/test_catalog_dependencies.py": "7f98c50e3d61906278a924e371a2f711d472d8ee7c9de1f47732e700d1d289ed"
+  },
+  "evidence_sha256": {
+   "baseline.json": "b34c0e69f7fa317562243d975b5105d0e71267a75d9713cf4e74d1fa3a161c29",
+   "diagnostics.json": "8103f5840d63c6bd1a4d35aee3af427e12907597357631e1d82a129e80fee86f",
+   "existing-api-sina.json": "a4502e86ca77597122285cba3a9605081d4790b068cf8282931f0db8018e872e",
+   "existing-apis.json": "9d58d8c09a9e7eab5af0da5cecc487f338e5cee3b042bf4d61f2e38eb0ea4afe",
+   "implementation-evidence.before.json": "b52966bd29d993cb4c0dcf9c83fc92d998ade4da45ce21ad8eb3b396533b08e7",
+   "minute-fallback.json": "be37563c4507f6d948892ace33651cd5212f35bcc0b489dfe7d49de4f7e6b281",
+   "probe-results.json": "f27effd5d0c6677b64f886315cb90ec80adcfc4d3339fd37f3df80fc68f0207c",
+   "progress-start.json": "d2e22fac126f6c129a2ff20ec175004782e330bcb285d830419d13085041cd90",
+   "rule-clarifications-final.json": "6686eb64d796825f18c706993128e32218ee73184ac659956766b2e5df0e6637",
+   "rule-clarifications.json": "48d738de9ecc809ebc49f53df989decef1bfb8d56fcf4b852414c0af829ed5a0",
+   "source-reviews/review.json": "b159a35e1b5cb54a8639be9089d0b4c729f6f9963e30a74fc6d4c25781f218a4",
+   "source-reviews/S-4cc2cba1cbd9.source": "dc19dbd84e05d7f8562c6a373c7d2fd18e720d1e22f6ea86260c63121404f7bb",
+   "source-reviews/S-726f0aa658ec.source": "36d9ab13955f12a666db1bc3d347d4bd2caa7ff7210098fe6d79e40c03d0eb6e",
+   "source-reviews/S-9e752d17571d.source": "a69f94b9e2d30369276cab3824bbc6bf9f5292bb9be5657c0372c9eb41d054a8",
+   "source-reviews/S-bb46c1ee16cf.source": "953a46add178f7cec14c7abe0c55be015ccbf82518aa7bca811dd389b8b1af53",
+   "source-reviews/S-bf4ed04c68a7.source": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+   "source-reviews/S-d5b7c03a7119.source": "5478cf9105ff32513ed6dd4b9187e84534eca03a512e6a2622d0bdfcd44d2a77",
+   "source-reviews/S-e69eb36bb221.source": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+   "probes/limit_pool_2021/response-000.bin": "1f6de708ad03cf9d5d4aeacf5048351e872a0abd3f35ceffb15056bb71397db5",
+   "probes/limit_pool_2021/result.json": "bbc13eea862671f537ad422fd44e4eea32374d475d4f95070654a911d233cc70",
+   "probes/limit_pool_recent/response-000.bin": "4f2bf6ae2560aec5804aab9372b21ae58567cf51c4437fe853206f2d04dc5e75",
+   "probes/limit_pool_recent/result.json": "acd2bb18cf865bcff8cd4f75516d7ce0ee215b5edf05a8f9c021a98050ebf5ca",
+   "probes/minute_2021/result.json": "a32b33f4f8eec28b0660adeda3cded687d7716dc67dff1ea8a7256f6e238a966",
+   "probes/minute_recent/result.json": "1741e3326cc9f29c234993a9f35609f2f4a1318be03b09ff7dd754b828e9c273",
+   "probes/minute_sina/response-000.bin": "701607b6d7207ea618fcf1c3f369ec54c0ca8a2a6a5392242be7e5bd31c65862",
+   "probes/minute_sina/response-001.bin": "f3ffa74023a809ee53ca0f378c138a2752d53945d26d0265e1a11e071c346233",
+   "probes/minute_sina/response-002.bin": "59a1a3d5b2a3495a6371fde4ac2c0b32f15f263be1aab9f3a018a5ace29ba8e0",
+   "probes/minute_sina/response-003.bin": "86f86a46c58b35796d5a3a2ed921fb3ae4851e47a54f020fc047c402d7324e28",
+   "probes/minute_sina/result.json": "9f232188e69bd10a22557e319b99fb0bd0500a2f8d7a8b8414d97e71ffeee7e2",
+   "probes/money_flow/response-000.bin": "70fc8e36326c04e9fc5aa252c627c9325009d180c8e1d0c3f2d00ffd5872937a",
+   "probes/money_flow/result.json": "2b7ba207108c99017831274de6f6ec6d20024d18d20d1336a432be2eac396f7d"
+  }
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 4868,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 260,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "b34c0e69f7fa317562243d975b5105d0e71267a75d9713cf4e74d1fa3a161c29"
+ },
+ "strategy_results": [],
+ "progress": {
+  "checkpoint": "20261005-204451-dd56",
+  "note": "Batch16 seven source reviews, money-flow omission fix and six input probes archived; original dependency gaps retained",
+  "catalog_id": "394e4995fbd591867b34",
+  "catalog_sha256": "14a9719c4202ffcf7f2e9c8adfc8ef84541d3365bfbb8d3be1bf0ef844044129",
+  "published_batch": "20261005-201432-dd1d",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 497,
+   "已验证": 10,
+   "待审查": 24,
+   "暂不可复现": 54,
+   "非交易研究脚本": 69,
+   "重复版本": 41
+  },
+  "manually_reviewed": 94,
+  "locally_backtested_sources": 11,
+  "locally_reproduced_sources": 11,
+  "local_strategy_runs": 62,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261005-204451-dd56"
+ },
+ "limits": [
+  "No new strategy backtest; daily/minute/flow and historical-name dependencies still incomplete",
+  "Pure-function offline checks are not trading reproductions; original sources and snapshots unchanged",
+  "Strict financial usable rows remain zero; existing daily audit warnings retained"
+ ]
+}

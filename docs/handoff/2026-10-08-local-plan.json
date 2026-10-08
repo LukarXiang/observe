@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "label": "20261008-local-current-and-bollinger-example",
+  "published_batch": "20261006-145049-5ceb",
+  "snapshots": ["20261006-145049-e06c", "20261005-143509-75b4"],
+  "runs": ["20261005-143611-844865-strategy-a327", "20261005-144026-844865-strategy-cc25"],
+  "financial_inputs": [],
+  "include": [
+    "data/PUBLISHED.json",
+    "data/batches/20261006-145049-5ceb.json",
+    "repo/量化策略源代码",
+    "data/catalog/strategies",
+    "data/catalog/financial-fields-c863b10a0ed2c27df694.json",
+    "data/raw/external_financials/c863b10a0ed2c27df694.json",
+    "data/audits/financials/c863b10a0ed2c27df694.json",
+    "data/validations/20261005-strategy-batch3.json"
+  ],
+  "scope": "当前发布全部标准分区、两个本机快照和布林短窗口父实验及其既有复现、695来源目录；不包含全部历史实验/staging、原始Excel或旧远程缺失输入",
+  "restore": "先恢复Git代码，再在空目录校验解包路径并解包；prepare_handoff verify核对文件和代码后重建runs index。冻结JSON中旧绝对路径保持原样。"
+}

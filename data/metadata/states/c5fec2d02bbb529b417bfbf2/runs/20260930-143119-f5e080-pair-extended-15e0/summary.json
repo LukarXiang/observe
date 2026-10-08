@@ -1,0 +1,116 @@
+{
+  "benchmark": null,
+  "configuration": {
+    "end": null,
+    "factor_set": "configs/factor_sets/daily_intraday_v1.yaml",
+    "label_h": 5,
+    "minute_pool": true,
+    "models": {
+      "baseline_factor": "rev_5",
+      "correlation_threshold": 0.9,
+      "min_names": 30,
+      "ridge_alphas": [
+        1.0,
+        10.0,
+        100.0,
+        1000.0,
+        10000.0
+      ],
+      "top_n": 20
+    },
+    "snapshot": "20260930-121952-b7e8",
+    "split": {
+      "holdout": 252,
+      "test": 63,
+      "train": 504,
+      "valid": 126
+    },
+    "start": null,
+    "universe": {
+      "boards": [
+        "main"
+      ],
+      "exclude_st": true,
+      "liquidity_window": 20,
+      "max_suspended": 10,
+      "min_avg_amount": 20000000.0,
+      "min_listed_sessions": 120,
+      "suspend_window": 20
+    }
+  },
+  "configuration_available": true,
+  "coverage": null,
+  "decision_time": null,
+  "evidence_status": "archived_unreviewed",
+  "execution_status": "success_limited",
+  "execution_time": null,
+  "implementation": null,
+  "kind": "research",
+  "limitations": [
+    {
+      "audit": {
+        "audit_id": "20260930-121951-c0f4",
+        "audited_at": "2026-09-30T12:19:51",
+        "batch_id": "20260930-121727-4c66",
+        "input_range": {
+          "days": 1392,
+          "end": "2026-09-29",
+          "rows": 6848484,
+          "start": "2021-01-04"
+        },
+        "scope": "snapshot",
+        "source": "audit 20260930-121951-c0f4",
+        "status": "problem"
+      },
+      "detail": "快照批次审计状态为 problem（范围 snapshot），不是全快照审计通过",
+      "kind": "data_audit"
+    },
+    {
+      "detail": "受限样本：缺退市证券的分钟数据（外部分钟线不含退市证券；这些证券的分钟特征缺失，按 0 处理）",
+      "kind": "minute_sample_restricted"
+    }
+  ],
+  "metrics": null,
+  "original_strategy_complete": false,
+  "parameters": null,
+  "payload_verification": "not_reaudited",
+  "period": null,
+  "portfolio": null,
+  "recorded_environment": {
+    "git_commit": "f584c92d9079c329411b0faf205a59716d339f43",
+    "git_dirty": true,
+    "lock_sha256": "1275fd87c5be5c97618f9a534e5c288a9e038d068d51cb0892fd034eba11cd5a",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5"
+    },
+    "python": "3.12.11"
+  },
+  "references": [
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20260930-143119-f5e080-pair-extended-15e0/config.json",
+      "sha256": "e3b0970094f62f63711ee6054530cc55f47a4da968c68a32801bb47091f293d1"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20260930-143119-f5e080-pair-extended-15e0/status.json",
+      "sha256": "4c2ca7edddef774128cefba88e28f31afae46f0586839faae2011b88f3ce88b2"
+    }
+  ],
+  "reproduce_of": null,
+  "reproduction": null,
+  "result_scope": "configured_run",
+  "results": null,
+  "rules": {},
+  "run_id": "20260930-143119-f5e080-pair-extended-15e0",
+  "schema": 1,
+  "snapshot": "20260930-121952-b7e8",
+  "strategy_id": null,
+  "superseded_by": null,
+  "trading": null,
+  "universe": null,
+  "validation": []
+}

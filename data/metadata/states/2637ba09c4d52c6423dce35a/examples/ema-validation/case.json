@@ -1,0 +1,90 @@
+{
+  "case": {
+    "hand_check": {
+      "ema_stock_days_checked": 28504,
+      "ema_values_checked": 171024,
+      "history_counts": {
+        "000651.SZ": {
+          "history_start": "2005-01-05",
+          "paused_rows": 203,
+          "traded_rows": 5077
+        },
+        "000858.SZ": {
+          "history_start": "2005-01-05",
+          "paused_rows": 125,
+          "traded_rows": 5155
+        },
+        "300014.SZ": {
+          "history_start": "2009-10-30",
+          "paused_rows": 62,
+          "traded_rows": 4049
+        },
+        "300059.SZ": {
+          "history_start": "2010-03-19",
+          "paused_rows": 65,
+          "traded_rows": 3952
+        },
+        "300168.SZ": {
+          "history_start": "2011-01-25",
+          "paused_rows": 231,
+          "traded_rows": 3578
+        },
+        "300253.SZ": {
+          "history_start": "2011-08-18",
+          "paused_rows": 69,
+          "traded_rows": 3602
+        },
+        "300274.SZ": {
+          "history_start": "2011-11-02",
+          "paused_rows": 28,
+          "traded_rows": 3595
+        },
+        "600809.SH": {
+          "history_start": "2005-01-05",
+          "paused_rows": 49,
+          "traded_rows": 5231
+        }
+      },
+      "maximum_absolute_arithmetic_difference": 4.547473508864641e-13,
+      "method": "Independent SMA seed and EMA recurrence/strict comparisons; independent original ordered slot branches using sole Book for cash/fees/NAV",
+      "orders": [
+        {
+          "max_positions": 5,
+          "orders_checked": 914,
+          "partial_orders": 0,
+          "rejected_orders": 1,
+          "scenario": "base",
+          "sessions_checked": 3563
+        },
+        {
+          "max_positions": 5,
+          "orders_checked": 914,
+          "partial_orders": 0,
+          "rejected_orders": 1,
+          "scenario": "fees_x2",
+          "sessions_checked": 3563
+        },
+        {
+          "max_positions": 5,
+          "orders_checked": 914,
+          "partial_orders": 0,
+          "rejected_orders": 1,
+          "scenario": "slippage_x2",
+          "sessions_checked": 3563
+        }
+      ],
+      "sessions_checked": 3563
+    },
+    "original_unchanged": true,
+    "source_sha256": "2ecc7295bec6f264228985e5f08a1dac2f5621e51ff3ecd0234473a4cea9b507",
+    "status": "ok"
+  },
+  "case_id": "ema-validation",
+  "nature": "real_component_validation_summary",
+  "purpose": "EMA/订单独立核对覆盖和方法，摘要不能替代全部窗口输入",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch19/20261005-ema55/ema55-long-verification.json",
+    "sha256": "9d972e8f81b54c9335b955b4b92d9c63067227d7057a0be3ab533bd70150198f"
+  }
+}

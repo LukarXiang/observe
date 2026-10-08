@@ -1,0 +1,2432 @@
+{
+ "status": "ok",
+ "run_id": "20261005-155452-dd3361-strategy-e72f",
+ "reproduction": {
+  "run_id": "20261005-155614-dd3361-strategy-2e7d",
+  "output": "data/runs/20261005-155614-dd3361-strategy-2e7d",
+  "status": "success_limited",
+  "subruns": {
+   "backtests": [
+    {
+     "model": "svm_lagged_shape_corrected_v1",
+     "scenario": "base",
+     "run_id": "20261005-155621-1f7f76-base-45d2",
+     "output": "data/runs/20261005-155614-dd3361-strategy-2e7d/variants/20261005-155621-1f7f76-base-45d2",
+     "status": "success_limited",
+     "manifest_sha256": "7ccd372f124bcb156efd169b7fd4092fc7bb9fc8c793d01feaed8f56e18a6d14"
+    },
+    {
+     "model": "svm_lagged_shape_corrected_v1",
+     "scenario": "fees_x2",
+     "run_id": "20261005-155630-e2f724-fees_x2-ce69",
+     "output": "data/runs/20261005-155614-dd3361-strategy-2e7d/variants/20261005-155630-e2f724-fees_x2-ce69",
+     "status": "success_limited",
+     "manifest_sha256": "f5929382b2fe941339a1954b0ab5981645374dee5b5ca76018f31be57b0813c1"
+    },
+    {
+     "model": "svm_lagged_shape_corrected_v1",
+     "scenario": "slippage_x2",
+     "run_id": "20261005-155638-98c8c6-slippage_x2-042c",
+     "output": "data/runs/20261005-155614-dd3361-strategy-2e7d/variants/20261005-155638-98c8c6-slippage_x2-042c",
+     "status": "success_limited",
+     "manifest_sha256": "7a50dd992f62e7c57de2fe0d5956efd2b21030243b2a91d537d2a4c9ca4759b0"
+    }
+   ]
+  },
+  "reproduction": {
+   "of": "/mnt/d/projects/observe/data/runs/20261005-155452-dd3361-strategy-e72f",
+   "result": "match",
+   "differences": 0
+  }
+ },
+ "source_sha256": "0aba6027a1f433627ff7903c0b5a8df3094bde7013ca1231cc3b498d2efed572",
+ "freeze": {
+  "config": {
+   "name": "同仁堂SVM仅修输入形状、保留滞后（周频近似）",
+   "implementation": "svm_lagged_shape_corrected_v1",
+   "source_path": "repo/量化策略源代码/2020年度精选策略/98 机器学习SVM用法示例策略.txt",
+   "snapshot": "20261005-152153-eb05",
+   "start": "2022-01-17",
+   "end": "2026-09-29",
+   "universe": {
+    "boards": [
+     "main"
+    ],
+    "min_listed_sessions": 1,
+    "exclude_st": false,
+    "suspend_window": 1,
+    "max_suspended": 1,
+    "liquidity_window": 1,
+    "min_avg_amount": 0.0
+   },
+   "index_universe": null,
+   "portfolio": {
+    "construction": "target_weights",
+    "n": 1,
+    "max_weight": 1.0,
+    "rebalance_every": 1,
+    "rebalance_frequency": "weekly",
+    "rebalance_session": 3,
+    "buffer": 0,
+    "max_sell": null,
+    "participation": 0.05,
+    "open_cash_policy": "sell_then_buy",
+    "refill_between_rebalance": false
+   },
+   "parameters": {
+    "history": 252,
+    "feature_window": 22,
+    "label_horizon": 5,
+    "prediction_shape": "one_row_v1",
+    "price_basis": "frozen_back_adjusted_v1",
+    "volume_basis": "raw_shares_v1",
+    "svc_parameters": {
+     "C": 1.0,
+     "break_ties": false,
+     "cache_size": 200,
+     "class_weight": null,
+     "coef0": 0.0,
+     "decision_function_shape": "ovr",
+     "degree": 3,
+     "gamma": "scale",
+     "kernel": "rbf",
+     "max_iter": -1,
+     "probability": "deprecated",
+     "random_state": null,
+     "shrinking": true,
+     "tol": 0.001,
+     "verbose": false
+    }
+   },
+   "instrument": "600085.SH",
+   "initial_cash": 1000000.0,
+   "rules": "configs/rule_profiles/main_board.yaml",
+   "execution": {
+    "slippage": 0.001,
+    "liquidity_window": 20,
+    "liquidity_override": null,
+    "fee_multiplier": 1.0
+   },
+   "cost_scenarios": [
+    "base",
+    "fees_x2",
+    "slippage_x2"
+   ],
+   "benchmark": "600085.SH",
+   "cache": true,
+   "execution_instruments": [
+    "600085.SH"
+   ],
+   "benchmark_kind": "stock"
+  },
+  "source_sha256": "0aba6027a1f433627ff7903c0b5a8df3094bde7013ca1231cc3b498d2efed572",
+  "purpose": "fixed parameters and initial-cash contrast, not parameter selection"
+ },
+ "hand_check": {
+  "sessions_checked": 1140,
+  "fits_checked": 232,
+  "samples_checked": 52200,
+  "prediction_counts": {
+   "0": 134,
+   "1": 98
+  },
+  "fits": [
+   {
+    "decision_date": "2022-01-18",
+    "feature_date": "2022-01-11",
+    "train_label_end": "2022-01-17",
+    "execution_day": "2022-01-19",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-01-25",
+    "feature_date": "2022-01-18",
+    "train_label_end": "2022-01-24",
+    "execution_day": "2022-01-26",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-02-08",
+    "feature_date": "2022-01-25",
+    "train_label_end": "2022-02-07",
+    "execution_day": "2022-02-09",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-02-15",
+    "feature_date": "2022-02-08",
+    "train_label_end": "2022-02-14",
+    "execution_day": "2022-02-16",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-02-22",
+    "feature_date": "2022-02-15",
+    "train_label_end": "2022-02-21",
+    "execution_day": "2022-02-23",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-03-01",
+    "feature_date": "2022-02-22",
+    "train_label_end": "2022-02-28",
+    "execution_day": "2022-03-02",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-03-08",
+    "feature_date": "2022-03-01",
+    "train_label_end": "2022-03-07",
+    "execution_day": "2022-03-09",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-03-15",
+    "feature_date": "2022-03-08",
+    "train_label_end": "2022-03-14",
+    "execution_day": "2022-03-16",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-03-22",
+    "feature_date": "2022-03-15",
+    "train_label_end": "2022-03-21",
+    "execution_day": "2022-03-23",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-03-29",
+    "feature_date": "2022-03-22",
+    "train_label_end": "2022-03-28",
+    "execution_day": "2022-03-30",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-04-07",
+    "feature_date": "2022-03-29",
+    "train_label_end": "2022-04-06",
+    "execution_day": "2022-04-08",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-04-12",
+    "feature_date": "2022-04-01",
+    "train_label_end": "2022-04-11",
+    "execution_day": "2022-04-13",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-04-19",
+    "feature_date": "2022-04-12",
+    "train_label_end": "2022-04-18",
+    "execution_day": "2022-04-20",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-04-26",
+    "feature_date": "2022-04-19",
+    "train_label_end": "2022-04-25",
+    "execution_day": "2022-04-27",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-05-10",
+    "feature_date": "2022-04-28",
+    "train_label_end": "2022-05-09",
+    "execution_day": "2022-05-11",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-05-17",
+    "feature_date": "2022-05-10",
+    "train_label_end": "2022-05-16",
+    "execution_day": "2022-05-18",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-05-24",
+    "feature_date": "2022-05-17",
+    "train_label_end": "2022-05-23",
+    "execution_day": "2022-05-25",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-05-31",
+    "feature_date": "2022-05-24",
+    "train_label_end": "2022-05-30",
+    "execution_day": "2022-06-01",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-06-07",
+    "feature_date": "2022-05-30",
+    "train_label_end": "2022-06-06",
+    "execution_day": "2022-06-08",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-06-14",
+    "feature_date": "2022-06-07",
+    "train_label_end": "2022-06-13",
+    "execution_day": "2022-06-15",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-06-21",
+    "feature_date": "2022-06-14",
+    "train_label_end": "2022-06-20",
+    "execution_day": "2022-06-22",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-06-28",
+    "feature_date": "2022-06-21",
+    "train_label_end": "2022-06-27",
+    "execution_day": "2022-06-29",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-07-05",
+    "feature_date": "2022-06-28",
+    "train_label_end": "2022-07-04",
+    "execution_day": "2022-07-06",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-07-12",
+    "feature_date": "2022-07-05",
+    "train_label_end": "2022-07-11",
+    "execution_day": "2022-07-13",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-07-19",
+    "feature_date": "2022-07-12",
+    "train_label_end": "2022-07-18",
+    "execution_day": "2022-07-20",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-07-26",
+    "feature_date": "2022-07-19",
+    "train_label_end": "2022-07-25",
+    "execution_day": "2022-07-27",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-08-02",
+    "feature_date": "2022-07-26",
+    "train_label_end": "2022-08-01",
+    "execution_day": "2022-08-03",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-08-09",
+    "feature_date": "2022-08-02",
+    "train_label_end": "2022-08-08",
+    "execution_day": "2022-08-10",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-08-16",
+    "feature_date": "2022-08-09",
+    "train_label_end": "2022-08-15",
+    "execution_day": "2022-08-17",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-08-23",
+    "feature_date": "2022-08-16",
+    "train_label_end": "2022-08-22",
+    "execution_day": "2022-08-24",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-08-30",
+    "feature_date": "2022-08-23",
+    "train_label_end": "2022-08-29",
+    "execution_day": "2022-08-31",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-09-06",
+    "feature_date": "2022-08-30",
+    "train_label_end": "2022-09-05",
+    "execution_day": "2022-09-07",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-09-14",
+    "feature_date": "2022-09-06",
+    "train_label_end": "2022-09-13",
+    "execution_day": "2022-09-15",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-09-20",
+    "feature_date": "2022-09-13",
+    "train_label_end": "2022-09-19",
+    "execution_day": "2022-09-21",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-09-27",
+    "feature_date": "2022-09-20",
+    "train_label_end": "2022-09-26",
+    "execution_day": "2022-09-28",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-10-11",
+    "feature_date": "2022-09-27",
+    "train_label_end": "2022-10-10",
+    "execution_day": "2022-10-12",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-10-18",
+    "feature_date": "2022-10-11",
+    "train_label_end": "2022-10-17",
+    "execution_day": "2022-10-19",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-10-25",
+    "feature_date": "2022-10-18",
+    "train_label_end": "2022-10-24",
+    "execution_day": "2022-10-26",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-11-01",
+    "feature_date": "2022-10-25",
+    "train_label_end": "2022-10-31",
+    "execution_day": "2022-11-02",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-11-08",
+    "feature_date": "2022-11-01",
+    "train_label_end": "2022-11-07",
+    "execution_day": "2022-11-09",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-11-15",
+    "feature_date": "2022-11-08",
+    "train_label_end": "2022-11-14",
+    "execution_day": "2022-11-16",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-11-22",
+    "feature_date": "2022-11-15",
+    "train_label_end": "2022-11-21",
+    "execution_day": "2022-11-23",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-11-29",
+    "feature_date": "2022-11-22",
+    "train_label_end": "2022-11-28",
+    "execution_day": "2022-11-30",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-12-06",
+    "feature_date": "2022-11-29",
+    "train_label_end": "2022-12-05",
+    "execution_day": "2022-12-07",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-12-13",
+    "feature_date": "2022-12-06",
+    "train_label_end": "2022-12-12",
+    "execution_day": "2022-12-14",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-12-20",
+    "feature_date": "2022-12-13",
+    "train_label_end": "2022-12-19",
+    "execution_day": "2022-12-21",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2022-12-27",
+    "feature_date": "2022-12-20",
+    "train_label_end": "2022-12-26",
+    "execution_day": "2022-12-28",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-01-04",
+    "feature_date": "2022-12-27",
+    "train_label_end": "2023-01-03",
+    "execution_day": "2023-01-05",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-01-10",
+    "feature_date": "2023-01-03",
+    "train_label_end": "2023-01-09",
+    "execution_day": "2023-01-11",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-01-17",
+    "feature_date": "2023-01-10",
+    "train_label_end": "2023-01-16",
+    "execution_day": "2023-01-18",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-01-31",
+    "feature_date": "2023-01-17",
+    "train_label_end": "2023-01-30",
+    "execution_day": "2023-02-01",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-02-07",
+    "feature_date": "2023-01-31",
+    "train_label_end": "2023-02-06",
+    "execution_day": "2023-02-08",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-02-14",
+    "feature_date": "2023-02-07",
+    "train_label_end": "2023-02-13",
+    "execution_day": "2023-02-15",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-02-21",
+    "feature_date": "2023-02-14",
+    "train_label_end": "2023-02-20",
+    "execution_day": "2023-02-22",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-02-28",
+    "feature_date": "2023-02-21",
+    "train_label_end": "2023-02-27",
+    "execution_day": "2023-03-01",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-03-07",
+    "feature_date": "2023-02-28",
+    "train_label_end": "2023-03-06",
+    "execution_day": "2023-03-08",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-03-14",
+    "feature_date": "2023-03-07",
+    "train_label_end": "2023-03-13",
+    "execution_day": "2023-03-15",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-03-21",
+    "feature_date": "2023-03-14",
+    "train_label_end": "2023-03-20",
+    "execution_day": "2023-03-22",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-03-28",
+    "feature_date": "2023-03-21",
+    "train_label_end": "2023-03-27",
+    "execution_day": "2023-03-29",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-04-04",
+    "feature_date": "2023-03-28",
+    "train_label_end": "2023-04-03",
+    "execution_day": "2023-04-06",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-04-11",
+    "feature_date": "2023-04-03",
+    "train_label_end": "2023-04-10",
+    "execution_day": "2023-04-12",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-04-18",
+    "feature_date": "2023-04-11",
+    "train_label_end": "2023-04-17",
+    "execution_day": "2023-04-19",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-04-25",
+    "feature_date": "2023-04-18",
+    "train_label_end": "2023-04-24",
+    "execution_day": "2023-04-26",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-05-09",
+    "feature_date": "2023-04-27",
+    "train_label_end": "2023-05-08",
+    "execution_day": "2023-05-10",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-05-16",
+    "feature_date": "2023-05-09",
+    "train_label_end": "2023-05-15",
+    "execution_day": "2023-05-17",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-05-23",
+    "feature_date": "2023-05-16",
+    "train_label_end": "2023-05-22",
+    "execution_day": "2023-05-24",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-05-30",
+    "feature_date": "2023-05-23",
+    "train_label_end": "2023-05-29",
+    "execution_day": "2023-05-31",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-06-06",
+    "feature_date": "2023-05-30",
+    "train_label_end": "2023-06-05",
+    "execution_day": "2023-06-07",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-06-13",
+    "feature_date": "2023-06-06",
+    "train_label_end": "2023-06-12",
+    "execution_day": "2023-06-14",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-06-20",
+    "feature_date": "2023-06-13",
+    "train_label_end": "2023-06-19",
+    "execution_day": "2023-06-21",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-06-27",
+    "feature_date": "2023-06-16",
+    "train_label_end": "2023-06-26",
+    "execution_day": "2023-06-28",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-07-04",
+    "feature_date": "2023-06-27",
+    "train_label_end": "2023-07-03",
+    "execution_day": "2023-07-05",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-07-11",
+    "feature_date": "2023-07-04",
+    "train_label_end": "2023-07-10",
+    "execution_day": "2023-07-12",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-07-18",
+    "feature_date": "2023-07-11",
+    "train_label_end": "2023-07-17",
+    "execution_day": "2023-07-19",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-07-25",
+    "feature_date": "2023-07-18",
+    "train_label_end": "2023-07-24",
+    "execution_day": "2023-07-26",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-08-01",
+    "feature_date": "2023-07-25",
+    "train_label_end": "2023-07-31",
+    "execution_day": "2023-08-02",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-08-08",
+    "feature_date": "2023-08-01",
+    "train_label_end": "2023-08-07",
+    "execution_day": "2023-08-09",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-08-15",
+    "feature_date": "2023-08-08",
+    "train_label_end": "2023-08-14",
+    "execution_day": "2023-08-16",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-08-22",
+    "feature_date": "2023-08-15",
+    "train_label_end": "2023-08-21",
+    "execution_day": "2023-08-23",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-08-29",
+    "feature_date": "2023-08-22",
+    "train_label_end": "2023-08-28",
+    "execution_day": "2023-08-30",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-09-05",
+    "feature_date": "2023-08-29",
+    "train_label_end": "2023-09-04",
+    "execution_day": "2023-09-06",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-09-12",
+    "feature_date": "2023-09-05",
+    "train_label_end": "2023-09-11",
+    "execution_day": "2023-09-13",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-09-19",
+    "feature_date": "2023-09-12",
+    "train_label_end": "2023-09-18",
+    "execution_day": "2023-09-20",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-09-26",
+    "feature_date": "2023-09-19",
+    "train_label_end": "2023-09-25",
+    "execution_day": "2023-09-27",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-10-10",
+    "feature_date": "2023-09-25",
+    "train_label_end": "2023-10-09",
+    "execution_day": "2023-10-11",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-10-17",
+    "feature_date": "2023-10-10",
+    "train_label_end": "2023-10-16",
+    "execution_day": "2023-10-18",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-10-24",
+    "feature_date": "2023-10-17",
+    "train_label_end": "2023-10-23",
+    "execution_day": "2023-10-25",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-10-31",
+    "feature_date": "2023-10-24",
+    "train_label_end": "2023-10-30",
+    "execution_day": "2023-11-01",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-11-07",
+    "feature_date": "2023-10-31",
+    "train_label_end": "2023-11-06",
+    "execution_day": "2023-11-08",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-11-14",
+    "feature_date": "2023-11-07",
+    "train_label_end": "2023-11-13",
+    "execution_day": "2023-11-15",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-11-21",
+    "feature_date": "2023-11-14",
+    "train_label_end": "2023-11-20",
+    "execution_day": "2023-11-22",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-11-28",
+    "feature_date": "2023-11-21",
+    "train_label_end": "2023-11-27",
+    "execution_day": "2023-11-29",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-12-05",
+    "feature_date": "2023-11-28",
+    "train_label_end": "2023-12-04",
+    "execution_day": "2023-12-06",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-12-12",
+    "feature_date": "2023-12-05",
+    "train_label_end": "2023-12-11",
+    "execution_day": "2023-12-13",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-12-19",
+    "feature_date": "2023-12-12",
+    "train_label_end": "2023-12-18",
+    "execution_day": "2023-12-20",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2023-12-26",
+    "feature_date": "2023-12-19",
+    "train_label_end": "2023-12-25",
+    "execution_day": "2023-12-27",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-01-03",
+    "feature_date": "2023-12-26",
+    "train_label_end": "2024-01-02",
+    "execution_day": "2024-01-04",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-01-09",
+    "feature_date": "2024-01-02",
+    "train_label_end": "2024-01-08",
+    "execution_day": "2024-01-10",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-01-16",
+    "feature_date": "2024-01-09",
+    "train_label_end": "2024-01-15",
+    "execution_day": "2024-01-17",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-01-23",
+    "feature_date": "2024-01-16",
+    "train_label_end": "2024-01-22",
+    "execution_day": "2024-01-24",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-01-30",
+    "feature_date": "2024-01-23",
+    "train_label_end": "2024-01-29",
+    "execution_day": "2024-01-31",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-02-06",
+    "feature_date": "2024-01-30",
+    "train_label_end": "2024-02-05",
+    "execution_day": "2024-02-07",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-02-20",
+    "feature_date": "2024-02-05",
+    "train_label_end": "2024-02-19",
+    "execution_day": "2024-02-21",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-02-27",
+    "feature_date": "2024-02-20",
+    "train_label_end": "2024-02-26",
+    "execution_day": "2024-02-28",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-03-05",
+    "feature_date": "2024-02-27",
+    "train_label_end": "2024-03-04",
+    "execution_day": "2024-03-06",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-03-12",
+    "feature_date": "2024-03-05",
+    "train_label_end": "2024-03-11",
+    "execution_day": "2024-03-13",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-03-19",
+    "feature_date": "2024-03-12",
+    "train_label_end": "2024-03-18",
+    "execution_day": "2024-03-20",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-03-26",
+    "feature_date": "2024-03-19",
+    "train_label_end": "2024-03-25",
+    "execution_day": "2024-03-27",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-04-02",
+    "feature_date": "2024-03-26",
+    "train_label_end": "2024-04-01",
+    "execution_day": "2024-04-03",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-04-09",
+    "feature_date": "2024-03-29",
+    "train_label_end": "2024-04-08",
+    "execution_day": "2024-04-10",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-04-16",
+    "feature_date": "2024-04-09",
+    "train_label_end": "2024-04-15",
+    "execution_day": "2024-04-17",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-04-23",
+    "feature_date": "2024-04-16",
+    "train_label_end": "2024-04-22",
+    "execution_day": "2024-04-24",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-05-07",
+    "feature_date": "2024-04-25",
+    "train_label_end": "2024-05-06",
+    "execution_day": "2024-05-08",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-05-14",
+    "feature_date": "2024-05-07",
+    "train_label_end": "2024-05-13",
+    "execution_day": "2024-05-15",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-05-21",
+    "feature_date": "2024-05-14",
+    "train_label_end": "2024-05-20",
+    "execution_day": "2024-05-22",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-05-28",
+    "feature_date": "2024-05-21",
+    "train_label_end": "2024-05-27",
+    "execution_day": "2024-05-29",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-06-04",
+    "feature_date": "2024-05-28",
+    "train_label_end": "2024-06-03",
+    "execution_day": "2024-06-05",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-06-12",
+    "feature_date": "2024-06-04",
+    "train_label_end": "2024-06-11",
+    "execution_day": "2024-06-13",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-06-18",
+    "feature_date": "2024-06-11",
+    "train_label_end": "2024-06-17",
+    "execution_day": "2024-06-19",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-06-25",
+    "feature_date": "2024-06-18",
+    "train_label_end": "2024-06-24",
+    "execution_day": "2024-06-26",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-07-02",
+    "feature_date": "2024-06-25",
+    "train_label_end": "2024-07-01",
+    "execution_day": "2024-07-03",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-07-09",
+    "feature_date": "2024-07-02",
+    "train_label_end": "2024-07-08",
+    "execution_day": "2024-07-10",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-07-16",
+    "feature_date": "2024-07-09",
+    "train_label_end": "2024-07-15",
+    "execution_day": "2024-07-17",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-07-23",
+    "feature_date": "2024-07-16",
+    "train_label_end": "2024-07-22",
+    "execution_day": "2024-07-24",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-07-30",
+    "feature_date": "2024-07-23",
+    "train_label_end": "2024-07-29",
+    "execution_day": "2024-07-31",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-08-06",
+    "feature_date": "2024-07-30",
+    "train_label_end": "2024-08-05",
+    "execution_day": "2024-08-07",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-08-13",
+    "feature_date": "2024-08-06",
+    "train_label_end": "2024-08-12",
+    "execution_day": "2024-08-14",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-08-20",
+    "feature_date": "2024-08-13",
+    "train_label_end": "2024-08-19",
+    "execution_day": "2024-08-21",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-08-27",
+    "feature_date": "2024-08-20",
+    "train_label_end": "2024-08-26",
+    "execution_day": "2024-08-28",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-09-03",
+    "feature_date": "2024-08-27",
+    "train_label_end": "2024-09-02",
+    "execution_day": "2024-09-04",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-09-10",
+    "feature_date": "2024-09-03",
+    "train_label_end": "2024-09-09",
+    "execution_day": "2024-09-11",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-09-19",
+    "feature_date": "2024-09-10",
+    "train_label_end": "2024-09-18",
+    "execution_day": "2024-09-20",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-09-24",
+    "feature_date": "2024-09-13",
+    "train_label_end": "2024-09-23",
+    "execution_day": "2024-09-25",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-10-09",
+    "feature_date": "2024-09-25",
+    "train_label_end": "2024-10-08",
+    "execution_day": "2024-10-10",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-10-15",
+    "feature_date": "2024-10-08",
+    "train_label_end": "2024-10-14",
+    "execution_day": "2024-10-16",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-10-22",
+    "feature_date": "2024-10-15",
+    "train_label_end": "2024-10-21",
+    "execution_day": "2024-10-23",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-10-29",
+    "feature_date": "2024-10-22",
+    "train_label_end": "2024-10-28",
+    "execution_day": "2024-10-30",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-11-05",
+    "feature_date": "2024-10-29",
+    "train_label_end": "2024-11-04",
+    "execution_day": "2024-11-06",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-11-12",
+    "feature_date": "2024-11-05",
+    "train_label_end": "2024-11-11",
+    "execution_day": "2024-11-13",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-11-19",
+    "feature_date": "2024-11-12",
+    "train_label_end": "2024-11-18",
+    "execution_day": "2024-11-20",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-11-26",
+    "feature_date": "2024-11-19",
+    "train_label_end": "2024-11-25",
+    "execution_day": "2024-11-27",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-12-03",
+    "feature_date": "2024-11-26",
+    "train_label_end": "2024-12-02",
+    "execution_day": "2024-12-04",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-12-10",
+    "feature_date": "2024-12-03",
+    "train_label_end": "2024-12-09",
+    "execution_day": "2024-12-11",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-12-17",
+    "feature_date": "2024-12-10",
+    "train_label_end": "2024-12-16",
+    "execution_day": "2024-12-18",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-12-24",
+    "feature_date": "2024-12-17",
+    "train_label_end": "2024-12-23",
+    "execution_day": "2024-12-25",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2024-12-31",
+    "feature_date": "2024-12-24",
+    "train_label_end": "2024-12-30",
+    "execution_day": "2025-01-02",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-01-07",
+    "feature_date": "2024-12-30",
+    "train_label_end": "2025-01-06",
+    "execution_day": "2025-01-08",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-01-14",
+    "feature_date": "2025-01-07",
+    "train_label_end": "2025-01-13",
+    "execution_day": "2025-01-15",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-01-21",
+    "feature_date": "2025-01-14",
+    "train_label_end": "2025-01-20",
+    "execution_day": "2025-01-22",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-02-06",
+    "feature_date": "2025-01-22",
+    "train_label_end": "2025-02-05",
+    "execution_day": "2025-02-07",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-02-11",
+    "feature_date": "2025-01-27",
+    "train_label_end": "2025-02-10",
+    "execution_day": "2025-02-12",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-02-18",
+    "feature_date": "2025-02-11",
+    "train_label_end": "2025-02-17",
+    "execution_day": "2025-02-19",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-02-25",
+    "feature_date": "2025-02-18",
+    "train_label_end": "2025-02-24",
+    "execution_day": "2025-02-26",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-03-04",
+    "feature_date": "2025-02-25",
+    "train_label_end": "2025-03-03",
+    "execution_day": "2025-03-05",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-03-11",
+    "feature_date": "2025-03-04",
+    "train_label_end": "2025-03-10",
+    "execution_day": "2025-03-12",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-03-18",
+    "feature_date": "2025-03-11",
+    "train_label_end": "2025-03-17",
+    "execution_day": "2025-03-19",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-03-25",
+    "feature_date": "2025-03-18",
+    "train_label_end": "2025-03-24",
+    "execution_day": "2025-03-26",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-04-01",
+    "feature_date": "2025-03-25",
+    "train_label_end": "2025-03-31",
+    "execution_day": "2025-04-02",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-04-08",
+    "feature_date": "2025-03-31",
+    "train_label_end": "2025-04-07",
+    "execution_day": "2025-04-09",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-04-15",
+    "feature_date": "2025-04-08",
+    "train_label_end": "2025-04-14",
+    "execution_day": "2025-04-16",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-04-22",
+    "feature_date": "2025-04-15",
+    "train_label_end": "2025-04-21",
+    "execution_day": "2025-04-23",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-04-29",
+    "feature_date": "2025-04-22",
+    "train_label_end": "2025-04-28",
+    "execution_day": "2025-04-30",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-05-07",
+    "feature_date": "2025-04-25",
+    "train_label_end": "2025-05-06",
+    "execution_day": "2025-05-08",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-05-13",
+    "feature_date": "2025-05-06",
+    "train_label_end": "2025-05-12",
+    "execution_day": "2025-05-14",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-05-20",
+    "feature_date": "2025-05-13",
+    "train_label_end": "2025-05-19",
+    "execution_day": "2025-05-21",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-05-27",
+    "feature_date": "2025-05-20",
+    "train_label_end": "2025-05-26",
+    "execution_day": "2025-05-28",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-06-04",
+    "feature_date": "2025-05-27",
+    "train_label_end": "2025-06-03",
+    "execution_day": "2025-06-05",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-06-10",
+    "feature_date": "2025-06-03",
+    "train_label_end": "2025-06-09",
+    "execution_day": "2025-06-11",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-06-17",
+    "feature_date": "2025-06-10",
+    "train_label_end": "2025-06-16",
+    "execution_day": "2025-06-18",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-06-24",
+    "feature_date": "2025-06-17",
+    "train_label_end": "2025-06-23",
+    "execution_day": "2025-06-25",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-07-01",
+    "feature_date": "2025-06-24",
+    "train_label_end": "2025-06-30",
+    "execution_day": "2025-07-02",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-07-08",
+    "feature_date": "2025-07-01",
+    "train_label_end": "2025-07-07",
+    "execution_day": "2025-07-09",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-07-15",
+    "feature_date": "2025-07-08",
+    "train_label_end": "2025-07-14",
+    "execution_day": "2025-07-16",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-07-22",
+    "feature_date": "2025-07-15",
+    "train_label_end": "2025-07-21",
+    "execution_day": "2025-07-23",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-07-29",
+    "feature_date": "2025-07-22",
+    "train_label_end": "2025-07-28",
+    "execution_day": "2025-07-30",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-08-05",
+    "feature_date": "2025-07-29",
+    "train_label_end": "2025-08-04",
+    "execution_day": "2025-08-06",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-08-12",
+    "feature_date": "2025-08-05",
+    "train_label_end": "2025-08-11",
+    "execution_day": "2025-08-13",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-08-19",
+    "feature_date": "2025-08-12",
+    "train_label_end": "2025-08-18",
+    "execution_day": "2025-08-20",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-08-26",
+    "feature_date": "2025-08-19",
+    "train_label_end": "2025-08-25",
+    "execution_day": "2025-08-27",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-09-02",
+    "feature_date": "2025-08-26",
+    "train_label_end": "2025-09-01",
+    "execution_day": "2025-09-03",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-09-09",
+    "feature_date": "2025-09-02",
+    "train_label_end": "2025-09-08",
+    "execution_day": "2025-09-10",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-09-16",
+    "feature_date": "2025-09-09",
+    "train_label_end": "2025-09-15",
+    "execution_day": "2025-09-17",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-09-23",
+    "feature_date": "2025-09-16",
+    "train_label_end": "2025-09-22",
+    "execution_day": "2025-09-24",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-10-14",
+    "feature_date": "2025-09-29",
+    "train_label_end": "2025-10-13",
+    "execution_day": "2025-10-15",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-10-21",
+    "feature_date": "2025-10-14",
+    "train_label_end": "2025-10-20",
+    "execution_day": "2025-10-22",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-10-28",
+    "feature_date": "2025-10-21",
+    "train_label_end": "2025-10-27",
+    "execution_day": "2025-10-29",
+    "prediction": 1,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-11-04",
+    "feature_date": "2025-10-28",
+    "train_label_end": "2025-11-03",
+    "execution_day": "2025-11-05",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-11-11",
+    "feature_date": "2025-11-04",
+    "train_label_end": "2025-11-10",
+    "execution_day": "2025-11-12",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-11-18",
+    "feature_date": "2025-11-11",
+    "train_label_end": "2025-11-17",
+    "execution_day": "2025-11-19",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-11-25",
+    "feature_date": "2025-11-18",
+    "train_label_end": "2025-11-24",
+    "execution_day": "2025-11-26",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-12-02",
+    "feature_date": "2025-11-25",
+    "train_label_end": "2025-12-01",
+    "execution_day": "2025-12-03",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-12-09",
+    "feature_date": "2025-12-02",
+    "train_label_end": "2025-12-08",
+    "execution_day": "2025-12-10",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-12-16",
+    "feature_date": "2025-12-09",
+    "train_label_end": "2025-12-15",
+    "execution_day": "2025-12-17",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-12-23",
+    "feature_date": "2025-12-16",
+    "train_label_end": "2025-12-22",
+    "execution_day": "2025-12-24",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2025-12-30",
+    "feature_date": "2025-12-23",
+    "train_label_end": "2025-12-29",
+    "execution_day": "2025-12-31",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-01-06",
+    "feature_date": "2025-12-26",
+    "train_label_end": "2026-01-05",
+    "execution_day": "2026-01-07",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-01-13",
+    "feature_date": "2026-01-06",
+    "train_label_end": "2026-01-12",
+    "execution_day": "2026-01-14",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-01-20",
+    "feature_date": "2026-01-13",
+    "train_label_end": "2026-01-19",
+    "execution_day": "2026-01-21",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-01-27",
+    "feature_date": "2026-01-20",
+    "train_label_end": "2026-01-26",
+    "execution_day": "2026-01-28",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-02-03",
+    "feature_date": "2026-01-27",
+    "train_label_end": "2026-02-02",
+    "execution_day": "2026-02-04",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-02-10",
+    "feature_date": "2026-02-03",
+    "train_label_end": "2026-02-09",
+    "execution_day": "2026-02-11",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-02-25",
+    "feature_date": "2026-02-10",
+    "train_label_end": "2026-02-24",
+    "execution_day": "2026-02-26",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-03-03",
+    "feature_date": "2026-02-24",
+    "train_label_end": "2026-03-02",
+    "execution_day": "2026-03-04",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-03-10",
+    "feature_date": "2026-03-03",
+    "train_label_end": "2026-03-09",
+    "execution_day": "2026-03-11",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-03-17",
+    "feature_date": "2026-03-10",
+    "train_label_end": "2026-03-16",
+    "execution_day": "2026-03-18",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-03-24",
+    "feature_date": "2026-03-17",
+    "train_label_end": "2026-03-23",
+    "execution_day": "2026-03-25",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-03-31",
+    "feature_date": "2026-03-24",
+    "train_label_end": "2026-03-30",
+    "execution_day": "2026-04-01",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-04-08",
+    "feature_date": "2026-03-31",
+    "train_label_end": "2026-04-07",
+    "execution_day": "2026-04-09",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-04-14",
+    "feature_date": "2026-04-07",
+    "train_label_end": "2026-04-13",
+    "execution_day": "2026-04-15",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-04-21",
+    "feature_date": "2026-04-14",
+    "train_label_end": "2026-04-20",
+    "execution_day": "2026-04-22",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-04-28",
+    "feature_date": "2026-04-21",
+    "train_label_end": "2026-04-27",
+    "execution_day": "2026-04-29",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-05-07",
+    "feature_date": "2026-04-27",
+    "train_label_end": "2026-05-06",
+    "execution_day": "2026-05-08",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-05-12",
+    "feature_date": "2026-04-30",
+    "train_label_end": "2026-05-11",
+    "execution_day": "2026-05-13",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-05-19",
+    "feature_date": "2026-05-12",
+    "train_label_end": "2026-05-18",
+    "execution_day": "2026-05-20",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-05-26",
+    "feature_date": "2026-05-19",
+    "train_label_end": "2026-05-25",
+    "execution_day": "2026-05-27",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-06-02",
+    "feature_date": "2026-05-26",
+    "train_label_end": "2026-06-01",
+    "execution_day": "2026-06-03",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-06-09",
+    "feature_date": "2026-06-02",
+    "train_label_end": "2026-06-08",
+    "execution_day": "2026-06-10",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-06-16",
+    "feature_date": "2026-06-09",
+    "train_label_end": "2026-06-15",
+    "execution_day": "2026-06-17",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-06-23",
+    "feature_date": "2026-06-15",
+    "train_label_end": "2026-06-22",
+    "execution_day": "2026-06-24",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-06-30",
+    "feature_date": "2026-06-23",
+    "train_label_end": "2026-06-29",
+    "execution_day": "2026-07-01",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-07-07",
+    "feature_date": "2026-06-30",
+    "train_label_end": "2026-07-06",
+    "execution_day": "2026-07-08",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-07-14",
+    "feature_date": "2026-07-07",
+    "train_label_end": "2026-07-13",
+    "execution_day": "2026-07-15",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-07-21",
+    "feature_date": "2026-07-14",
+    "train_label_end": "2026-07-20",
+    "execution_day": "2026-07-22",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-07-28",
+    "feature_date": "2026-07-21",
+    "train_label_end": "2026-07-27",
+    "execution_day": "2026-07-29",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-08-04",
+    "feature_date": "2026-07-28",
+    "train_label_end": "2026-08-03",
+    "execution_day": "2026-08-05",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-08-11",
+    "feature_date": "2026-08-04",
+    "train_label_end": "2026-08-10",
+    "execution_day": "2026-08-12",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-08-18",
+    "feature_date": "2026-08-11",
+    "train_label_end": "2026-08-17",
+    "execution_day": "2026-08-19",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-08-25",
+    "feature_date": "2026-08-18",
+    "train_label_end": "2026-08-24",
+    "execution_day": "2026-08-26",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-09-01",
+    "feature_date": "2026-08-25",
+    "train_label_end": "2026-08-31",
+    "execution_day": "2026-09-02",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-09-08",
+    "feature_date": "2026-09-01",
+    "train_label_end": "2026-09-07",
+    "execution_day": "2026-09-09",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-09-15",
+    "feature_date": "2026-09-08",
+    "train_label_end": "2026-09-14",
+    "execution_day": "2026-09-16",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2026-09-22",
+    "feature_date": "2026-09-15",
+    "train_label_end": "2026-09-21",
+    "execution_day": "2026-09-23",
+    "prediction": 0,
+    "train_samples": 224
+   }
+  ],
+  "orders": [
+   {
+    "scenario": "base",
+    "orders_checked": 19
+   },
+   {
+    "scenario": "fees_x2",
+    "orders_checked": 18
+   },
+   {
+    "scenario": "slippage_x2",
+    "orders_checked": 18
+   }
+  ],
+  "method": "Independent math.fsum feature arithmetic/date windows/labels, fresh sklearn SVC per archived sample set; original feature lag kept"
+ },
+ "period": {
+  "start": "2022-01-17",
+  "end": "2026-09-29"
+ },
+ "results": [
+  {
+   "scenario": "base",
+   "status": "success_limited",
+   "metrics": {
+    "total_return": 0.0813914899999999,
+    "annual_return": 0.016749398049034747,
+    "annual_vol": 0.22213824094429022,
+    "sharpe": 0.18564837789465835,
+    "max_drawdown": -0.29627955744290857,
+    "drawdown_peak": 312,
+    "drawdown_trough": 920
+   },
+   "trading": {
+    "cash_share_mean": 0.5752336507187383,
+    "fee_ratio_to_initial": 0.01058951,
+    "fees": {
+     "commission": 4615.56,
+     "fee": 10589.51,
+     "stamp_tax": 5779.79,
+     "transfer_fee": 194.16
+    },
+    "fill_rate": 1.0,
+    "filled_orders": 19,
+    "max_single_weight_mean": 0.42476634928126167,
+    "orders": 19,
+    "partial_fills": 0,
+    "reject_reasons": {},
+    "stale_price_days": 0,
+    "top5_weight_mean": 0.42476634928126167,
+    "turnover_half_daily_mean": 0.007014770903325903,
+    "turnover_two_sided_daily_mean": 0.014029541806651806
+   },
+   "yearly": [
+    {
+     "year": 2022,
+     "sessions": 233,
+     "metrics": {
+      "annual_return": 0.1281924834340642,
+      "annual_vol": 0.4031495355915462,
+      "drawdown_peak": 28,
+      "drawdown_trough": 65,
+      "max_drawdown": -0.2648521425736181,
+      "sharpe": 0.5005821635593095,
+      "total_return": 0.12314303000000004
+     }
+    },
+    {
+     "year": 2023,
+     "sessions": 242,
+     "metrics": {
+      "annual_return": 0.09666993170050642,
+      "annual_vol": 0.2607122025003798,
+      "drawdown_peak": 79,
+      "drawdown_trough": 227,
+      "max_drawdown": -0.23928666836162205,
+      "sharpe": 0.4826989575714425,
+      "total_return": 0.09666993170050642
+     }
+    },
+    {
+     "year": 2024,
+     "sessions": 242,
+     "metrics": {
+      "annual_return": -0.06445407326011254,
+      "annual_vol": 0.07220560456949339,
+      "drawdown_peak": 3,
+      "drawdown_trough": 43,
+      "max_drawdown": -0.12167092748991915,
+      "sharpe": -0.8866027244927934,
+      "total_return": -0.06445407326011254
+     }
+    },
+    {
+     "year": 2025,
+     "sessions": 243,
+     "metrics": {
+      "annual_return": -0.061313904284363785,
+      "annual_vol": 0.057680399220470906,
+      "drawdown_peak": 157,
+      "drawdown_trough": 203,
+      "max_drawdown": -0.08710768188216211,
+      "sharpe": -1.068095762080304,
+      "total_return": -0.06155930429530476
+     }
+    },
+    {
+     "year": 2026,
+     "sessions": 180,
+     "metrics": {
+      "annual_return": 0.0,
+      "annual_vol": 0.0,
+      "drawdown_peak": 0,
+      "drawdown_trough": 0,
+      "max_drawdown": 0.0,
+      "sharpe": null,
+      "total_return": 0.0
+     }
+    }
+   ],
+   "blocked": null
+  },
+  {
+   "scenario": "fees_x2",
+   "status": "success_limited",
+   "metrics": {
+    "total_return": 0.07114974000000007,
+    "annual_return": 0.014697565927123568,
+    "annual_vol": 0.22198029751872803,
+    "sharpe": 0.17652121093116652,
+    "max_drawdown": -0.3003389478628905,
+    "drawdown_peak": 312,
+    "drawdown_trough": 920
+   },
+   "trading": {
+    "cash_share_mean": 0.5754434904291915,
+    "fee_ratio_to_initial": 0.02104826,
+    "fees": {
+     "commission": 9167.71,
+     "fee": 21048.26,
+     "stamp_tax": 11494.5,
+     "transfer_fee": 386.05
+    },
+    "fill_rate": 1.0,
+    "filled_orders": 18,
+    "max_single_weight_mean": 0.42455650957080854,
+    "orders": 18,
+    "partial_fills": 1,
+    "reject_reasons": {},
+    "stale_price_days": 0,
+    "top5_weight_mean": 0.42455650957080854,
+    "turnover_half_daily_mean": 0.007005953971200715,
+    "turnover_two_sided_daily_mean": 0.01401190794240143
+   },
+   "yearly": [
+    {
+     "year": 2022,
+     "sessions": 233,
+     "metrics": {
+      "annual_return": 0.12615420178094783,
+      "annual_vol": 0.4027773148620605,
+      "drawdown_peak": 28,
+      "drawdown_trough": 65,
+      "max_drawdown": -0.26491763118168044,
+      "sharpe": 0.4961789555411176,
+      "total_return": 0.12118927000000013
+     }
+    },
+    {
+     "year": 2023,
+     "sessions": 242,
+     "metrics": {
+      "annual_return": 0.09247424388925873,
+      "annual_vol": 0.2605970517742912,
+      "drawdown_peak": 79,
+      "drawdown_trough": 227,
+      "max_drawdown": -0.24073651220183967,
+      "sharpe": 0.4680833754283112,
+      "total_return": 0.09247424388925873
+     }
+    },
+    {
+     "year": 2024,
+     "sessions": 242,
+     "metrics": {
+      "annual_return": -0.06619684009018412,
+      "annual_vol": 0.07222290435305487,
+      "drawdown_peak": 3,
+      "drawdown_trough": 43,
+      "max_drawdown": -0.12262370407234957,
+      "sharpe": -0.9121811541702749,
+      "total_return": -0.06619684009018412
+     }
+    },
+    {
+     "year": 2025,
+     "sessions": 243,
+     "metrics": {
+      "annual_return": -0.06325373015908031,
+      "annual_vol": 0.05782353212264301,
+      "drawdown_peak": 157,
+      "drawdown_trough": 203,
+      "max_drawdown": -0.08879899458984741,
+      "sharpe": -1.1010744652749533,
+      "total_return": -0.06350662843638366
+     }
+    },
+    {
+     "year": 2026,
+     "sessions": 180,
+     "metrics": {
+      "annual_return": 0.0,
+      "annual_vol": 0.0,
+      "drawdown_peak": 0,
+      "drawdown_trough": 0,
+      "max_drawdown": 0.0,
+      "sharpe": null,
+      "total_return": 0.0
+     }
+    }
+   ],
+   "blocked": null
+  },
+  {
+   "scenario": "slippage_x2",
+   "status": "success_limited",
+   "metrics": {
+    "total_return": 0.06407578999999997,
+    "annual_return": 0.013271329403429233,
+    "annual_vol": 0.22194445223907824,
+    "sharpe": 0.17017959715680073,
+    "max_drawdown": -0.3034888729144938,
+    "drawdown_peak": 312,
+    "drawdown_trough": 920
+   },
+   "trading": {
+    "cash_share_mean": 0.5754653656310101,
+    "fee_ratio_to_initial": 0.01049321,
+    "fees": {
+     "commission": 4570.78,
+     "fee": 10493.21,
+     "stamp_tax": 5729.87,
+     "transfer_fee": 192.56
+    },
+    "fill_rate": 1.0,
+    "filled_orders": 18,
+    "max_single_weight_mean": 0.42453463436898986,
+    "orders": 18,
+    "partial_fills": 0,
+    "reject_reasons": {},
+    "stale_price_days": 0,
+    "top5_weight_mean": 0.42453463436898986,
+    "turnover_half_daily_mean": 0.007008002765717116,
+    "turnover_two_sided_daily_mean": 0.014016005531434231
+   },
+   "yearly": [
+    {
+     "year": 2022,
+     "sessions": 233,
+     "metrics": {
+      "annual_return": 0.12572447920487684,
+      "annual_vol": 0.40292851199665297,
+      "drawdown_peak": 28,
+      "drawdown_trough": 65,
+      "max_drawdown": -0.2650781294567328,
+      "sharpe": 0.495201212361837,
+      "total_return": 0.12077735
+     }
+    },
+    {
+     "year": 2023,
+     "sessions": 242,
+     "metrics": {
+      "annual_return": 0.08882129889580637,
+      "annual_vol": 0.260278644880984,
+      "drawdown_peak": 79,
+      "drawdown_trough": 227,
+      "max_drawdown": -0.24192503927087294,
+      "sharpe": 0.4554718417545317,
+      "total_return": 0.08882129889580637
+     }
+    },
+    {
+     "year": 2024,
+     "sessions": 242,
+     "metrics": {
+      "annual_return": -0.06709152572928756,
+      "annual_vol": 0.07216734400033162,
+      "drawdown_peak": 3,
+      "drawdown_trough": 43,
+      "max_drawdown": -0.1233553729110578,
+      "sharpe": -0.9262184393213082,
+      "total_return": -0.06709152572928756
+     }
+    },
+    {
+     "year": 2025,
+     "sessions": 243,
+     "metrics": {
+      "annual_return": -0.0650716665341805,
+      "annual_vol": 0.057665061988837925,
+      "drawdown_peak": 157,
+      "drawdown_trough": 203,
+      "max_drawdown": -0.08979089110156202,
+      "sharpe": -1.1379347981078773,
+      "total_return": -0.06533157679717383
+     }
+    },
+    {
+     "year": 2026,
+     "sessions": 180,
+     "metrics": {
+      "annual_return": 0.0,
+      "annual_vol": 0.0,
+      "drawdown_peak": 0,
+      "drawdown_trough": 0,
+      "max_drawdown": 0.0,
+      "sharpe": null,
+      "total_return": 0.0
+     }
+    }
+   ],
+   "blocked": null
+  }
+ ],
+ "benchmark": {
+  "scenario": "base",
+  "index": {
+   "index": "600085.SH",
+   "description": "600085.SH 后复权股票价格基准",
+   "anchor_date": "2022-01-14",
+   "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+   "missing_levels": 0,
+   "kind": "stock",
+   "adjustment": "冻结后复权因子；非含现金分红再投资的买入持有账本"
+  },
+  "metrics": {
+   "active_annualization_basis": "matched_daily_returns_compounded",
+   "active_return_mean": 0.0005532971953554044,
+   "annual_return_diff": 0.14687496379773912,
+   "available": true,
+   "benchmark_common_days": 1140,
+   "benchmark_missing_days": 0,
+   "common_benchmark_annual_return": -0.13012556574870393,
+   "common_end": "2026-09-29",
+   "common_start": "2022-01-17",
+   "common_strategy_annual_return": 0.01674939804903519,
+   "information_ratio": 0.6390051311947549,
+   "missing_dates": [],
+   "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+  }
+ },
+ "validation_file": "data/staging/strategies-batch6/20261005-svm-lagged/svm_lagged_shape_batch6-verification.json",
+ "validation_sha256": "3fe9d28e1608366c676271c1b2bee38db5e02ba4adbe5858b63d991fdcd5805e",
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 2074,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 244,
+  "old_calendar_rows_unchanged": 2095,
+  "old_index_rows_unchanged": 1392,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "56a9c8ab93b197dee59885513198a16f8d62e20decefe7ef541fd16323a1a41f"
+ },
+ "fees": {
+  "status": "ok",
+  "fills_checked": 55,
+  "checks": [
+   {
+    "run_id": "20261005-155452-dd3361-strategy-e72f",
+    "child": "20261005-155500-742be7-base-f4fb",
+    "scenario": "base",
+    "fills_checked": 19,
+    "fee_regime_counts": {
+     "2015-08-01": 1,
+     "2022-04-29": 7,
+     "2023-08-28": 11
+    },
+    "fee_total": 10589.51
+   },
+   {
+    "run_id": "20261005-155452-dd3361-strategy-e72f",
+    "child": "20261005-155508-348fa0-fees_x2-fcdb",
+    "scenario": "fees_x2",
+    "fills_checked": 18,
+    "fee_regime_counts": {
+     "2015-08-01": 1,
+     "2022-04-29": 6,
+     "2023-08-28": 11
+    },
+    "fee_total": 21048.26
+   },
+   {
+    "run_id": "20261005-155452-dd3361-strategy-e72f",
+    "child": "20261005-155516-677638-slippage_x2-5e26",
+    "scenario": "slippage_x2",
+    "fills_checked": 18,
+    "fee_regime_counts": {
+     "2015-08-01": 1,
+     "2022-04-29": 6,
+     "2023-08-28": 11
+    },
+    "fee_total": 10493.21
+   }
+  ],
+  "method": "Independent multiplication from frozen YAML date ranges and Decimal half-up cents; verifies arithmetic, not external fee accuracy"
+ },
+ "original_strategy_complete": false,
+ "progress": {
+  "checkpoint": "20261005-155726-1241",
+  "note": "第六批SVM滞后形状修正验收完成；三成本、禁网复现及旧资产保护通过",
+  "catalog_id": "500d86e0c17c8219a968",
+  "catalog_sha256": "acc8b84ed1f067e61dc3e49010143af69412c87ff0baf042d2274a4061f3b114",
+  "published_batch": "20261005-152040-e16e",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 493,
+   "已验证": 7,
+   "暂不可复现": 34,
+   "待审查": 54,
+   "非交易研究脚本": 65,
+   "实现中": 1,
+   "重复版本": 41
+  },
+  "manually_reviewed": 19,
+  "locally_backtested_sources": 8,
+  "locally_reproduced_sources": 8,
+  "local_strategy_runs": 24,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261005-155726-1241"
+ },
+ "limitations": [
+  "用户确认只把最后预测样本变成二维，保留22/252/5、原始特征量纲与窗口第一日分母",
+  "预测特征截至决策日5交易日前；224训练样本的最后标签截至决策日前一交易日，预测样本的已成熟标签不参与拟合",
+  "现有后复权OHLC与原始成交量；不加标准化，不做新特征，不改滞后；复权尺度影响标准差与gamma，平台等价未证明",
+  "固定当前sklearn 1.9.1 SVC默认参数；周内第三交易日开盘成交，前一交易日收盘决策，唯一Book处理成本/整手约束",
+  "起始现金无仓，股票复权价格基准；缺必要训练数据或单类别训练直接阻断，不补值或替代模型",
+  "原一维predict在当前sklearn不可运行，修正不代表原代码可运行",
+  "平台复权价/成交量口径与历史默认SVC版本未证明等价",
+  "日线撮合与费用为近似"
+ ]
+}

@@ -1,0 +1,1201 @@
+{
+ "status": "ok",
+ "snapshot": "20261006-145049-e06c",
+ "reviews": {
+  "snapshot": "20261006-145049-e06c",
+  "sources": [
+   {
+    "source_path": "repo/量化策略源代码/2021年度精选策略/61.【复现】扩散指标择时.txt",
+    "source_copy": "data/staging/strategies-batch61/20261007-diffusion-leader-02/source-reviews/S-c6fe57d02852.source",
+    "source_sha256": "0b8bd5bc5814d4831f3fa86b534624cddd2c4552d082296eb0f38cc15b6c8ef9",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 283,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "历史沪深300正ROC流通市值加权扩散与510300择时",
+     "fidelity": "原ROC端点真实十股长区间算术与合成权重/平滑/状态诊断；全池信号及ETF交易未复现",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "schedule": "open交易；真实价/避免未来数据；ETF上市前不交易，初始化120交易日逐日历史成员准备",
+      "ROC": "N100为含观察日在内100交易日首尾收盘比减1，实际99间隔；只查询两个单日端点",
+      "weights": "默认mktcap：正ROC幅度乘全体流通市值归一化权重后np.sum；avg为正ROC数量",
+      "smoothing": "cumsum先90再30平滑，120值得到31/2输出；严格fast末>slow末",
+      "state": "begin_date不追加；其他日期append前日指标后丢首值，初始化后首交易可重复previous_date",
+      "orders": "目标不在long_positions才按总权益买入，持仓不再平衡；持仓才清0",
+      "cost": "零滑点；>2009/2011/2013元旦四期PerTrade，最低5；不是现有账本成本复现"
+     },
+     "gaps": [
+      "缺逐日平台历史300成员、全池价格端点及历史可见流通市值版本；交接周频成分strict=false且短区间，本机当前未登记该表",
+      "510300历史起始/事件/状态/价格/执行未齐，不能用沪深300或十股代替交易资产/选股池",
+      "过滤表达式实际先~isna&close再!=0；当前浮点样本正常，不宣称必然异常或静默改写",
+      "缺权重会对齐NaN并跳过，cumsum受NaN全后缀污染；默认权重不是上涨成员市值占比",
+      "N/N1/N2原作者声明全样本调优；复权/平台成交等价未证，算术/合成诊断不是回测"
+     ],
+     "next_step": "全文283行/14定义与参考SHA冻结，99间隔端点禁网核对；补齐成员/流通市值/ETF再确认重要变体"
+    },
+    "newly_reviewed": true,
+    "definition_ast": {
+     "initialize": "FunctionDef(name='initialize', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Name(id='set_params', ctx=Load()), args=[], keywords=[])), Expr(value=Call(func=Name(id='set_variables', ctx=Load()), args=[], keywords=[])), Expr(value=Call(func=Name(id='set_backtest', ctx=Load()), args=[], keywords=[])), Expr(value=Call(func=Name(id='Preprocessing', ctx=Load()), args=[Name(id='context', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='Trade', ctx=Load())], keywords=[keyword(arg='time', value=Constant(value='open')), keyword(arg='reference_security', value=Constant(value='000300.XSHG'))]))], decorator_list=[], type_params=[])",
+     "set_params": "FunctionDef(name='set_params', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='index_symbol', ctx=Store())], value=Constant(value='000300.XSHG')), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='target', ctx=Store())], value=Constant(value='510300.XSHG')), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='weight_method', ctx=Store())], value=Constant(value='mktcap')), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='N', ctx=Store())], value=Constant(value=100)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='N1', ctx=Store())], value=Constant(value=90)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='N2', ctx=Store())], value=Constant(value=30))], decorator_list=[], type_params=[])",
+     "set_variables": "FunctionDef(name='set_variables', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='singal', ctx=Store())], value=List(elts=[], ctx=Load()))], decorator_list=[], type_params=[])",
+     "set_backtest": "FunctionDef(name='set_backtest', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='avoid_future_data'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='use_real_price'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_benchmark', ctx=Load()), args=[Constant(value='000300.XSHG')], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='set_level', ctx=Load()), args=[Constant(value='order'), Constant(value='error')], keywords=[]))], decorator_list=[], type_params=[])",
+     "before_trading_start": "FunctionDef(name='before_trading_start', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Name(id='set_slippage', ctx=Load()), args=[Call(func=Name(id='FixedSlippage', ctx=Load()), args=[Constant(value=0)], keywords=[])], keywords=[])), Assign(targets=[Name(id='dt', ctx=Store())], value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load())), If(test=Compare(left=Name(id='dt', ctx=Load()), ops=[Gt()], comparators=[Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='datetime', ctx=Load()), args=[Constant(value=2013), Constant(value=1), Constant(value=1)], keywords=[])]), body=[Expr(value=Call(func=Name(id='set_commission', ctx=Load()), args=[Call(func=Name(id='PerTrade', ctx=Load()), args=[], keywords=[keyword(arg='buy_cost', value=Constant(value=0.0003)), keyword(arg='sell_cost', value=Constant(value=0.0013)), keyword(arg='min_cost', value=Constant(value=5))])], keywords=[]))], orelse=[If(test=Compare(left=Name(id='dt', ctx=Load()), ops=[Gt()], comparators=[Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='datetime', ctx=Load()), args=[Constant(value=2011), Constant(value=1), Constant(value=1)], keywords=[])]), body=[Expr(value=Call(func=Name(id='set_commission', ctx=Load()), args=[Call(func=Name(id='PerTrade', ctx=Load()), args=[], keywords=[keyword(arg='buy_cost', value=Constant(value=0.001)), keyword(arg='sell_cost', value=Constant(value=0.002)), keyword(arg='min_cost', value=Constant(value=5))])], keywords=[]))], orelse=[If(test=Compare(left=Name(id='dt', ctx=Load()), ops=[Gt()], comparators=[Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='datetime', ctx=Load()), args=[Constant(value=2009), Constant(value=1), Constant(value=1)], keywords=[])]), body=[Expr(value=Call(func=Name(id='set_commission', ctx=Load()), args=[Call(func=Name(id='PerTrade', ctx=Load()), args=[], keywords=[keyword(arg='buy_cost', value=Constant(value=0.002)), keyword(arg='sell_cost', value=Constant(value=0.003)), keyword(arg='min_cost', value=Constant(value=5))])], keywords=[]))], orelse=[Expr(value=Call(func=Name(id='set_commission', ctx=Load()), args=[Call(func=Name(id='PerTrade', ctx=Load()), args=[], keywords=[keyword(arg='buy_cost', value=Constant(value=0.003)), keyword(arg='sell_cost', value=Constant(value=0.004)), keyword(arg='min_cost', value=Constant(value=5))])], keywords=[]))])])])], decorator_list=[], type_params=[])",
+     "Preprocessing": "FunctionDef(name='Preprocessing', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='bar_time', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='date', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='target_info', ctx=Store())], value=Call(func=Name(id='get_security_info', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='target', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='begin_date', ctx=Store())], value=Attribute(value=Name(id='target_info', ctx=Load()), attr='start_date', ctx=Load())), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[BinOp(left=Constant(value='标的:%s,标的类型:%s,成立时间:%s'), op=Mod(), right=Tuple(elts=[Attribute(value=Name(id='target_info', ctx=Load()), attr='name', ctx=Load()), Attribute(value=Name(id='target_info', ctx=Load()), attr='type', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='begin_date', ctx=Load())], ctx=Load()))], keywords=[])), If(test=BoolOp(op=Or(), values=[Compare(left=Name(id='bar_time', ctx=Load()), ops=[GtE()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='begin_date', ctx=Load())]), Compare(left=Attribute(value=Name(id='target_info', ctx=Load()), attr='type', ctx=Load()), ops=[Eq()], comparators=[Constant(value='index')])]), body=[Expr(value=Call(func=Name(id='PrepareData', ctx=Load()), args=[Name(id='context', ctx=Load())], keywords=[]))], orelse=[])], decorator_list=[], type_params=[])",
+     "PrepareData": "FunctionDef(name='PrepareData', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[Constant(value='计算前序期指标....')], keywords=[])), Assign(targets=[Name(id='pre_date', ctx=Store())], value=Attribute(value=Name(id='context', ctx=Load()), attr='previous_date', ctx=Load())), Assign(targets=[Name(id='limit', ctx=Store())], value=BinOp(left=Attribute(value=Name(id='g', ctx=Load()), attr='N1', ctx=Load()), op=Add(), right=Attribute(value=Name(id='g', ctx=Load()), attr='N2', ctx=Load()))), Assign(targets=[Name(id='date_range', ctx=Store())], value=Call(func=Name(id='get_trade_days', ctx=Load()), args=[], keywords=[keyword(arg='end_date', value=Name(id='pre_date', ctx=Load())), keyword(arg='count', value=Name(id='limit', ctx=Load()))])), If(test=Compare(left=Subscript(value=Name(id='date_range', ctx=Load()), slice=Constant(value=0), ctx=Load()), ops=[Lt()], comparators=[Call(func=Attribute(value=Name(id='datetime', ctx=Load()), attr='date', ctx=Load()), args=[Constant(value=2005), Constant(value=1), Constant(value=1)], keywords=[])]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[Constant(value='前序期不足,jqdata最多再2005-01-01')], keywords=[]))], orelse=[]), Assign(targets=[Name(id='roc_indicator', ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='zeros', ctx=Load()), args=[Call(func=Name(id='len', ctx=Load()), args=[Name(id='date_range', ctx=Load())], keywords=[])], keywords=[])), Assign(targets=[Name(id='pbar', ctx=Store())], value=Call(func=Name(id='tqdm', ctx=Load()), args=[], keywords=[keyword(arg='total', value=Call(func=Name(id='len', ctx=Load()), args=[Name(id='date_range', ctx=Load())], keywords=[]))])), Expr(value=Call(func=Attribute(value=Name(id='pbar', ctx=Load()), attr='set_description', ctx=Load()), args=[Constant(value='Processing')], keywords=[])), For(target=Tuple(elts=[Name(id='i', ctx=Store()), Name(id='trade', ctx=Store())], ctx=Store()), iter=Call(func=Name(id='enumerate', ctx=Load()), args=[Name(id='date_range', ctx=Load())], keywords=[]), body=[Expr(value=Call(func=Attribute(value=Name(id='pbar', ctx=Load()), attr='update', ctx=Load()), args=[Constant(value=1)], keywords=[])), Assign(targets=[Name(id='stocks', ctx=Store())], value=Call(func=Name(id='get_index_stocks', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='index_symbol', ctx=Load())], keywords=[keyword(arg='date', value=Name(id='trade', ctx=Load()))])), Assign(targets=[Subscript(value=Name(id='roc_indicator', ctx=Load()), slice=Name(id='i', ctx=Load()), ctx=Store())], value=Call(func=Name(id='CalROCSingal', ctx=Load()), args=[Name(id='stocks', ctx=Load()), Name(id='trade', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='N', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='weight_method', ctx=Load())], keywords=[]))], orelse=[]), Expr(value=Call(func=Attribute(value=Name(id='pbar', ctx=Load()), attr='close', ctx=Load()), args=[], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='singal', ctx=Store())], value=Name(id='roc_indicator', ctx=Load()))], decorator_list=[], type_params=[])",
+     "GetSingal": "FunctionDef(name='GetSingal', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='date', ctx=Load()), args=[], keywords=[]), ops=[Eq()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='begin_date', ctx=Load())]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[BinOp(left=Constant(value='当日为%s,begin_date为%s'), op=Mod(), right=Tuple(elts=[Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='date', ctx=Load()), args=[], keywords=[]), Attribute(value=Name(id='g', ctx=Load()), attr='begin_date', ctx=Load())], ctx=Load()))], keywords=[])), Assign(targets=[Name(id='fast_ma', ctx=Store())], value=Call(func=Name(id='rolling_average', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='singal', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='N1', ctx=Load())], keywords=[])), Assign(targets=[Name(id='slow_ma', ctx=Store())], value=Call(func=Name(id='rolling_average', ctx=Load()), args=[Name(id='fast_ma', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='N2', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='record', ctx=Load()), args=[], keywords=[keyword(arg='fast', value=Subscript(value=Name(id='fast_ma', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load())), keyword(arg='slow', value=Subscript(value=Name(id='slow_ma', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load()))])), Return(value=Compare(left=Subscript(value=Name(id='fast_ma', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load()), ops=[Gt()], comparators=[Subscript(value=Name(id='slow_ma', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load())]))], orelse=[Assign(targets=[Name(id='bar_time', ctx=Store())], value=Attribute(value=Name(id='context', ctx=Load()), attr='previous_date', ctx=Load())), Assign(targets=[Name(id='stocks', ctx=Store())], value=Call(func=Name(id='get_index_stocks', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='index_symbol', ctx=Load())], keywords=[keyword(arg='date', value=Name(id='bar_time', ctx=Load()))])), Assign(targets=[Name(id='roc_indicator', ctx=Store())], value=Call(func=Name(id='CalROCSingal', ctx=Load()), args=[Name(id='stocks', ctx=Load()), Name(id='bar_time', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='N', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='weight_method', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='singal', ctx=Store())], value=Subscript(value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='append', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='singal', ctx=Load()), Name(id='roc_indicator', ctx=Load())], keywords=[]), slice=Slice(lower=Constant(value=1)), ctx=Load())), Assign(targets=[Name(id='fast_ma', ctx=Store())], value=Call(func=Name(id='rolling_average', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='singal', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='N1', ctx=Load())], keywords=[])), Assign(targets=[Name(id='slow_ma', ctx=Store())], value=Call(func=Name(id='rolling_average', ctx=Load()), args=[Name(id='fast_ma', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='N2', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='record', ctx=Load()), args=[], keywords=[keyword(arg='fast', value=Subscript(value=Name(id='fast_ma', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load())), keyword(arg='slow', value=Subscript(value=Name(id='slow_ma', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load()))])), Return(value=Compare(left=Subscript(value=Name(id='fast_ma', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load()), ops=[Gt()], comparators=[Subscript(value=Name(id='slow_ma', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load())]))])], decorator_list=[], type_params=[])",
+     "CalROCSingal": "FunctionDef(name='CalROCSingal', args=arguments(posonlyargs=[], args=[arg(arg='stocks', annotation=Name(id='list', ctx=Load())), arg(arg='watch_date', annotation=Attribute(value=Name(id='datetime', ctx=Load()), attr='date', ctx=Load())), arg(arg='N', annotation=Name(id='int', ctx=Load())), arg(arg='weight_method', annotation=Name(id='str', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='roc_ser', ctx=Store())], value=Call(func=Name(id='GetROC', ctx=Load()), args=[Name(id='stocks', ctx=Load()), Name(id='watch_date', ctx=Load()), Name(id='N', ctx=Load())], keywords=[])), If(test=Compare(left=Name(id='weight_method', ctx=Load()), ops=[Eq()], comparators=[Constant(value='avg')]), body=[Return(value=Call(func=Name(id='len', ctx=Load()), args=[Subscript(value=Name(id='roc_ser', ctx=Load()), slice=Compare(left=Name(id='roc_ser', ctx=Load()), ops=[Gt()], comparators=[Constant(value=0)]), ctx=Load())], keywords=[]))], orelse=[If(test=Compare(left=Name(id='weight_method', ctx=Load()), ops=[Eq()], comparators=[Constant(value='mktcap')]), body=[Assign(targets=[Name(id='mkt_cap', ctx=Store())], value=Call(func=Name(id='get_valuation', ctx=Load()), args=[Name(id='stocks', ctx=Load())], keywords=[keyword(arg='end_date', value=Name(id='watch_date', ctx=Load())), keyword(arg='fields', value=Constant(value='circulating_market_cap')), keyword(arg='count', value=Constant(value=1))])), Expr(value=Call(func=Attribute(value=Name(id='mkt_cap', ctx=Load()), attr='set_index', ctx=Load()), args=[Constant(value='code')], keywords=[keyword(arg='inplace', value=Constant(value=True))])), Assign(targets=[Name(id='weights', ctx=Store())], value=BinOp(left=Subscript(value=Name(id='mkt_cap', ctx=Load()), slice=Constant(value='circulating_market_cap'), ctx=Load()), op=Div(), right=Call(func=Attribute(value=Subscript(value=Name(id='mkt_cap', ctx=Load()), slice=Constant(value='circulating_market_cap'), ctx=Load()), attr='sum', ctx=Load()), args=[], keywords=[]))), Assign(targets=[Name(id='mkt_roc', ctx=Store())], value=BinOp(left=Subscript(value=Name(id='roc_ser', ctx=Load()), slice=Compare(left=Name(id='roc_ser', ctx=Load()), ops=[Gt()], comparators=[Constant(value=0)]), ctx=Load()), op=Mult(), right=Name(id='weights', ctx=Load()))), Return(value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='sum', ctx=Load()), args=[Name(id='mkt_roc', ctx=Load())], keywords=[]))], orelse=[])])], decorator_list=[], returns=Name(id='int', ctx=Load()), type_params=[])",
+     "GetROC": "FunctionDef(name='GetROC', args=arguments(posonlyargs=[], args=[arg(arg='stocks', annotation=Name(id='list', ctx=Load())), arg(arg='watch_date', annotation=Attribute(value=Name(id='datetime', ctx=Load()), attr='date', ctx=Load())), arg(arg='N', annotation=Name(id='int', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='offset_day', ctx=Store())], value=Subscript(value=Call(func=Name(id='get_trade_days', ctx=Load()), args=[], keywords=[keyword(arg='end_date', value=Name(id='watch_date', ctx=Load())), keyword(arg='count', value=Name(id='N', ctx=Load()))]), slice=Constant(value=0), ctx=Load())), Assign(targets=[Name(id='now', ctx=Store())], value=Call(func=Attribute(value=Call(func=Name(id='get_price', ctx=Load()), args=[Name(id='stocks', ctx=Load())], keywords=[keyword(arg='end_date', value=Name(id='watch_date', ctx=Load())), keyword(arg='count', value=Constant(value=1)), keyword(arg='fields', value=Constant(value='close')), keyword(arg='panel', value=Constant(value=False))]), attr='set_index', ctx=Load()), args=[Constant(value='code')], keywords=[])), Assign(targets=[Name(id='last', ctx=Store())], value=Call(func=Attribute(value=Call(func=Name(id='get_price', ctx=Load()), args=[Name(id='stocks', ctx=Load())], keywords=[keyword(arg='end_date', value=Name(id='offset_day', ctx=Load())), keyword(arg='count', value=Constant(value=1)), keyword(arg='fields', value=Constant(value='close')), keyword(arg='panel', value=Constant(value=False))]), attr='set_index', ctx=Load()), args=[Constant(value='code')], keywords=[])), Assign(targets=[Name(id='last', ctx=Store())], value=Subscript(value=Name(id='last', ctx=Load()), slice=Compare(left=BinOp(left=UnaryOp(op=Invert(), operand=Call(func=Attribute(value=Subscript(value=Name(id='last', ctx=Load()), slice=Constant(value='close'), ctx=Load()), attr='isna', ctx=Load()), args=[], keywords=[])), op=BitAnd(), right=Subscript(value=Name(id='last', ctx=Load()), slice=Constant(value='close'), ctx=Load())), ops=[NotEq()], comparators=[Constant(value=0)]), ctx=Load())), Return(value=Call(func=Attribute(value=BinOp(left=BinOp(left=Subscript(value=Name(id='now', ctx=Load()), slice=Constant(value='close'), ctx=Load()), op=Div(), right=Subscript(value=Name(id='last', ctx=Load()), slice=Constant(value='close'), ctx=Load())), op=Sub(), right=Constant(value=1)), attr='dropna', ctx=Load()), args=[], keywords=[]))], decorator_list=[], returns=Attribute(value=Name(id='pd', ctx=Load()), attr='Series', ctx=Load()), type_params=[])",
+     "rolling_average": "FunctionDef(name='rolling_average', args=arguments(posonlyargs=[], args=[arg(arg='arr', annotation=Attribute(value=Name(id='np', ctx=Load()), attr='array', ctx=Load())), arg(arg='window', annotation=Name(id='int', ctx=Load()))], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='ret', ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='cumsum', ctx=Load()), args=[Name(id='arr', ctx=Load())], keywords=[keyword(arg='dtype', value=Name(id='float', ctx=Load()))])), Assign(targets=[Subscript(value=Name(id='ret', ctx=Load()), slice=Slice(lower=Name(id='window', ctx=Load())), ctx=Store())], value=BinOp(left=Subscript(value=Name(id='ret', ctx=Load()), slice=Slice(lower=Name(id='window', ctx=Load())), ctx=Load()), op=Sub(), right=Subscript(value=Name(id='ret', ctx=Load()), slice=Slice(upper=UnaryOp(op=USub(), operand=Name(id='window', ctx=Load()))), ctx=Load()))), Return(value=BinOp(left=Subscript(value=Name(id='ret', ctx=Load()), slice=Slice(lower=BinOp(left=Name(id='window', ctx=Load()), op=Sub(), right=Constant(value=1))), ctx=Load()), op=Div(), right=Name(id='window', ctx=Load())))], decorator_list=[], returns=Attribute(value=Name(id='np', ctx=Load()), attr='array', ctx=Load()), type_params=[])",
+     "Trade": "FunctionDef(name='Trade', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='bar_time', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='date', ctx=Load()), args=[], keywords=[])), If(test=Compare(left=Name(id='bar_time', ctx=Load()), ops=[GtE()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='begin_date', ctx=Load())]), body=[If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='singal', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value=0)]), body=[Expr(value=Call(func=Name(id='PrepareData', ctx=Load()), args=[Name(id='context', ctx=Load())], keywords=[]))], orelse=[]), Assign(targets=[Name(id='flag', ctx=Store())], value=Call(func=Name(id='GetSingal', ctx=Load()), args=[Name(id='context', ctx=Load())], keywords=[])), If(test=Name(id='flag', ctx=Load()), body=[Expr(value=Call(func=Name(id='StockBuy', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='target', ctx=Load()), Name(id='context', ctx=Load())], keywords=[]))], orelse=[Expr(value=Call(func=Name(id='StockSell', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='target', ctx=Load()), Name(id='context', ctx=Load())], keywords=[]))])], orelse=[])], decorator_list=[], type_params=[])",
+     "StockBuy": "FunctionDef(name='StockBuy', args=arguments(posonlyargs=[], args=[arg(arg='target', annotation=Name(id='str', ctx=Load())), arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='everyStocks', ctx=Store())], value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='total_value', ctx=Load())), If(test=Compare(left=Name(id='target', ctx=Load()), ops=[NotIn()], comparators=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='long_positions', ctx=Load())]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[BinOp(left=Constant(value='开仓买入%s'), op=Mod(), right=Name(id='target', ctx=Load()))], keywords=[])), Expr(value=Call(func=Name(id='order_target_value', ctx=Load()), args=[Name(id='target', ctx=Load()), Name(id='everyStocks', ctx=Load())], keywords=[]))], orelse=[])], decorator_list=[], type_params=[])",
+     "StockSell": "FunctionDef(name='StockSell', args=arguments(posonlyargs=[], args=[arg(arg='target', annotation=Name(id='str', ctx=Load())), arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='target', ctx=Load()), ops=[In()], comparators=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='long_positions', ctx=Load())]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[BinOp(left=Constant(value='平仓卖出%s'), op=Mod(), right=Name(id='target', ctx=Load()))], keywords=[])), Expr(value=Call(func=Name(id='order_target', ctx=Load()), args=[Name(id='target', ctx=Load()), Constant(value=0)], keywords=[]))], orelse=[])], decorator_list=[], type_params=[])"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2021年度精选策略/56.大盘一路向上时，追总龙头2个月3倍.txt",
+    "source_copy": "data/staging/strategies-batch61/20261007-diffusion-leader-02/source-reviews/S-7f7e299f339a.source",
+    "source_sha256": "d0e0dff6d879a1a27cb5e5d85324b35b8d283bf4b414f13da0279ac6e3b1a93d",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 168,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "HY001-HY011月更新池的11日非一字连板龙头分钟交易",
+     "fidelity": "原OLS兼容/连板/过滤/订单循环合成诊断；原历史行业全池与分钟交易未复现",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "初始化及每月首交易日盘前11行业并集转set；排688/ST/停牌/名称退/上市≤150自然日",
+      "leader": "前11日high_limit/close/low；昨日非一字涨停起向前连续计数，取最多板并列",
+      "trend": "上证000001前3日二维OLS，斜率round2>0；非沪深300基准指数",
+      "buy": "最多板严格>3、hour<11、非持仓且现金严格>价格×500；每日默认1但只在循环外检查上限",
+      "sizing": "现金/剩余数，剩余0时仍用全现金；非None订单才记today_bought，None不代表实际失败/成交",
+      "sell": "每分钟先卖后买：14:51至14:59未涨停且可卖数量非0，order_target0；买入上限不阻断卖出",
+      "cost": "真实价；股票佣金.0003/印花税.001/最低5，未显式声明滑点/参与度"
+     },
+     "gaps": [
+      "缺历史HY行业成员/名称/上市状态、全池11日涨停字段与分钟价格/排队成交，日线不能替代",
+      "上证000001原3日数据未登记，不能用沪深300替代；固定set顺序/并列现金顺序未证",
+      "二维回归intercept/coef转float在当前NumPy报TypeError；当前pandas负标签KeyError/链式赋值不生效",
+      "同循环可突破每日1只上限，剩余0仍按全现金意图，订单返回非None不证明成交",
+      "g.x1当日涨停值查询但交易不读取，默认历史频率/复权/滑点与平台等价未证；mock不计回测"
+     ],
+     "next_step": "全文168行/6定义AST及原缺陷冻结；复核既有补数失败/实际库存，缺分钟/历史行业先搁置交易"
+    },
+    "newly_reviewed": true,
+    "definition_ast": {
+     "initialize": "FunctionDef(name='initialize', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='index_security', ctx=Store())], value=Constant(value='000300.XSHG')), Expr(value=Call(func=Name(id='set_benchmark', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='index_security', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='use_real_price'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[Constant(value='初始函数开始运行且全局只运行一次')], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='set_level', ctx=Load()), args=[Constant(value='order'), Constant(value='error')], keywords=[])), Expr(value=Call(func=Name(id='before_market_open', ctx=Load()), args=[Name(id='context', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='set_order_cost', ctx=Load()), args=[Call(func=Name(id='OrderCost', ctx=Load()), args=[], keywords=[keyword(arg='close_tax', value=Constant(value=0.001)), keyword(arg='open_commission', value=Constant(value=0.0003)), keyword(arg='close_commission', value=Constant(value=0.0003)), keyword(arg='min_commission', value=Constant(value=5))])], keywords=[keyword(arg='type', value=Constant(value='stock'))])), Expr(value=Call(func=Name(id='run_monthly', ctx=Load()), args=[Name(id='before_market_open', ctx=Load()), Constant(value=1)], keywords=[keyword(arg='time', value=Constant(value='before_open')), keyword(arg='reference_security', value=Attribute(value=Name(id='g', ctx=Load()), attr='index_security', ctx=Load()))]))], decorator_list=[], type_params=[])",
+     "before_trading_start": "FunctionDef(name='before_trading_start', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='count', ctx=Store())], value=Constant(value=11)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='daily_buy_count', ctx=Store())], value=Constant(value=1)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='today_bought_stocks', ctx=Store())], value=Call(func=Name(id='set', ctx=Load()), args=[], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='high_limit', ctx=Store())], value=Call(func=Name(id='history', ctx=Load()), args=[Name(id='count', ctx=Load()), Constant(value='1d'), Constant(value='high_limit'), Attribute(value=Name(id='g', ctx=Load()), attr='stocks_exsit', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='close', ctx=Store())], value=Call(func=Name(id='history', ctx=Load()), args=[Name(id='count', ctx=Load()), Constant(value='1d'), Constant(value='close'), Attribute(value=Name(id='g', ctx=Load()), attr='stocks_exsit', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='low', ctx=Store())], value=Call(func=Name(id='history', ctx=Load()), args=[Name(id='count', ctx=Load()), Constant(value='1d'), Constant(value='low'), Attribute(value=Name(id='g', ctx=Load()), attr='stocks_exsit', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='x1', ctx=Store())], value=Call(func=Name(id='history', ctx=Load()), args=[Constant(value=1), Constant(value='1d'), Constant(value='high_limit'), Attribute(value=Name(id='g', ctx=Load()), attr='stocks_exsit', ctx=Load())], keywords=[])), For(target=Name(id='security', ctx=Store()), iter=Attribute(value=Name(id='g', ctx=Load()), attr='stocks_exsit', ctx=Load()), body=[Assign(targets=[Name(id='stock_data', ctx=Store())], value=Call(func=Name(id='get_price', ctx=Load()), args=[Name(id='security', ctx=Load())], keywords=[keyword(arg='end_date', value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='date', ctx=Load()), args=[], keywords=[])), keyword(arg='frequency', value=Constant(value='daily')), keyword(arg='fields', value=List(elts=[Constant(value='high_limit')], ctx=Load())), keyword(arg='skip_paused', value=Constant(value=False)), keyword(arg='fq', value=Constant(value='pre')), keyword(arg='count', value=Constant(value=1))])), Assign(targets=[Subscript(value=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='x1', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), slice=Constant(value=0), ctx=Store())], value=Subscript(value=Subscript(value=Name(id='stock_data', ctx=Load()), slice=Constant(value='high_limit'), ctx=Load()), slice=Constant(value=0), ctx=Load()))], orelse=[]), Assign(targets=[Name(id='stocks_zt', ctx=Store())], value=Dict(keys=[], values=[])), For(target=Name(id='security', ctx=Store()), iter=Attribute(value=Name(id='g', ctx=Load()), attr='stocks_exsit', ctx=Load()), body=[If(test=BoolOp(op=And(), values=[Compare(left=Subscript(value=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='close', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load()), ops=[Eq()], comparators=[Subscript(value=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='high_limit', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load())]), Compare(left=Subscript(value=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='low', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load()), ops=[Lt()], comparators=[Subscript(value=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='high_limit', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load())])]), body=[Assign(targets=[Subscript(value=Name(id='stocks_zt', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Store())], value=Constant(value=1))], orelse=[])], orelse=[]), For(target=Name(id='security', ctx=Store()), iter=Name(id='stocks_zt', ctx=Load()), body=[For(target=Name(id='i', ctx=Store()), iter=Call(func=Name(id='range', ctx=Load()), args=[Constant(value=0), BinOp(left=Name(id='count', ctx=Load()), op=Sub(), right=Constant(value=1))], keywords=[]), body=[If(test=BoolOp(op=And(), values=[Compare(left=Subscript(value=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='close', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), slice=BinOp(left=BinOp(left=Name(id='count', ctx=Load()), op=Sub(), right=Constant(value=2)), op=Sub(), right=Name(id='i', ctx=Load())), ctx=Load()), ops=[Eq()], comparators=[Subscript(value=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='high_limit', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), slice=BinOp(left=BinOp(left=Name(id='count', ctx=Load()), op=Sub(), right=Constant(value=2)), op=Sub(), right=Name(id='i', ctx=Load())), ctx=Load())]), Compare(left=Subscript(value=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='low', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), slice=BinOp(left=BinOp(left=Name(id='count', ctx=Load()), op=Sub(), right=Constant(value=2)), op=Sub(), right=Name(id='i', ctx=Load())), ctx=Load()), ops=[Lt()], comparators=[Subscript(value=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='high_limit', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), slice=BinOp(left=BinOp(left=Name(id='count', ctx=Load()), op=Sub(), right=Constant(value=2)), op=Sub(), right=Name(id='i', ctx=Load())), ctx=Load())])]), body=[AugAssign(target=Subscript(value=Name(id='stocks_zt', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Store()), op=Add(), value=Constant(value=1))], orelse=[Break()])], orelse=[])], orelse=[]), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='max_zt_days', ctx=Store())], value=Constant(value=0)), For(target=Name(id='key', ctx=Store()), iter=Name(id='stocks_zt', ctx=Load()), body=[If(test=Compare(left=Subscript(value=Name(id='stocks_zt', ctx=Load()), slice=Name(id='key', ctx=Load()), ctx=Load()), ops=[Gt()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='max_zt_days', ctx=Load())]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='max_zt_days', ctx=Store())], value=Subscript(value=Name(id='stocks_zt', ctx=Load()), slice=Name(id='key', ctx=Load()), ctx=Load()))], orelse=[])], orelse=[]), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='buy_list', ctx=Store())], value=List(elts=[], ctx=Load())), For(target=Name(id='key', ctx=Store()), iter=Name(id='stocks_zt', ctx=Load()), body=[If(test=Compare(left=Subscript(value=Name(id='stocks_zt', ctx=Load()), slice=Name(id='key', ctx=Load()), ctx=Load()), ops=[Eq()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='max_zt_days', ctx=Load())]), body=[Expr(value=Call(func=Attribute(value=Attribute(value=Name(id='g', ctx=Load()), attr='buy_list', ctx=Load()), attr='append', ctx=Load()), args=[Name(id='key', ctx=Load())], keywords=[]))], orelse=[])], orelse=[]), If(test=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='buy_list', ctx=Load())], keywords=[]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[BinOp(left=Constant(value='___'), op=Mult(), right=Constant(value=10))], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[BinOp(left=Constant(value='股票池：%d 最高板：%d'), op=Mod(), right=Tuple(elts=[Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='buy_list', ctx=Load())], keywords=[]), Attribute(value=Name(id='g', ctx=Load()), attr='max_zt_days', ctx=Load())], ctx=Load()))], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='buy_list', ctx=Load())], keywords=[]))], orelse=[])], decorator_list=[], type_params=[])",
+     "handle_data": "FunctionDef(name='handle_data', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='data')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='hour', ctx=Store())], value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='hour', ctx=Load())), Assign(targets=[Name(id='minute', ctx=Store())], value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='minute', ctx=Load())), For(target=Name(id='security', ctx=Store()), iter=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), body=[Assign(targets=[Name(id='closeable_amount', ctx=Store())], value=Attribute(value=Subscript(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), attr='closeable_amount', ctx=Load())), If(test=BoolOp(op=And(), values=[BoolOp(op=And(), values=[Compare(left=Name(id='minute', ctx=Load()), ops=[Gt()], comparators=[Constant(value=50)]), Compare(left=Name(id='hour', ctx=Load()), ops=[Eq()], comparators=[Constant(value=14)]), Compare(left=Attribute(value=Subscript(value=Name(id='data', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), attr='close', ctx=Load()), ops=[Lt()], comparators=[Attribute(value=Subscript(value=Name(id='current', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), attr='high_limit', ctx=Load())])]), Name(id='closeable_amount', ctx=Load())]), body=[Expr(value=Call(func=Name(id='order_target', ctx=Load()), args=[Name(id='security', ctx=Load()), Constant(value=0)], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[BinOp(left=Constant(value='卖出： %s %s'), op=Mod(), right=Tuple(elts=[Attribute(value=Subscript(value=Name(id='current', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), attr='name', ctx=Load()), Name(id='security', ctx=Load())], ctx=Load()))], keywords=[]))], orelse=[])], orelse=[]), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='today_bought_stocks', ctx=Load())], keywords=[]), ops=[GtE()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='daily_buy_count', ctx=Load())]), body=[Return()], orelse=[]), If(test=UnaryOp(op=Not(), operand=BoolOp(op=And(), values=[Compare(left=Call(func=Name(id='fit_linear', ctx=Load()), args=[Name(id='context', ctx=Load()), Constant(value=3)], keywords=[]), ops=[Gt()], comparators=[Constant(value=0)]), Compare(left=Attribute(value=Name(id='g', ctx=Load()), attr='max_zt_days', ctx=Load()), ops=[Gt()], comparators=[Constant(value=3)])])), body=[Return()], orelse=[]), If(test=BoolOp(op=And(), values=[Compare(left=Name(id='hour', ctx=Load()), ops=[Lt()], comparators=[Constant(value=11)]), Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='today_bought_stocks', ctx=Load())], keywords=[]), ops=[Lt()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='daily_buy_count', ctx=Load())])]), body=[For(target=Name(id='security', ctx=Store()), iter=Attribute(value=Name(id='g', ctx=Load()), attr='buy_list', ctx=Load()), body=[If(test=Compare(left=Compare(left=Name(id='security', ctx=Load()), ops=[In()], comparators=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())]), ops=[Eq()], comparators=[Constant(value=0)]), body=[Assign(targets=[Name(id='cash', ctx=Store())], value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load())), Assign(targets=[Name(id='need_count', ctx=Store())], value=BinOp(left=Attribute(value=Name(id='g', ctx=Load()), attr='daily_buy_count', ctx=Load()), op=Sub(), right=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='today_bought_stocks', ctx=Load())], keywords=[]))), Assign(targets=[Name(id='buy_cash', ctx=Store())], value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load())), If(test=Name(id='need_count', ctx=Load()), body=[Assign(targets=[Name(id='buy_cash', ctx=Store())], value=BinOp(left=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load()), op=Div(), right=Name(id='need_count', ctx=Load())))], orelse=[]), If(test=Compare(left=Name(id='buy_cash', ctx=Load()), ops=[Gt()], comparators=[BinOp(left=Attribute(value=Subscript(value=Name(id='data', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), attr='close', ctx=Load()), op=Mult(), right=Constant(value=500))]), body=[Assign(targets=[Name(id='result', ctx=Store())], value=Call(func=Name(id='order_value', ctx=Load()), args=[Name(id='security', ctx=Load()), Name(id='buy_cash', ctx=Load())], keywords=[])), If(test=UnaryOp(op=Not(), operand=Compare(left=Name(id='result', ctx=Load()), ops=[Eq()], comparators=[Constant(value=None)])), body=[Expr(value=Call(func=Attribute(value=Attribute(value=Name(id='g', ctx=Load()), attr='today_bought_stocks', ctx=Load()), attr='add', ctx=Load()), args=[Name(id='security', ctx=Load())], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[BinOp(left=Constant(value='买入： %s %s'), op=Mod(), right=Tuple(elts=[Attribute(value=Subscript(value=Name(id='current', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), attr='name', ctx=Load()), Name(id='security', ctx=Load())], ctx=Load()))], keywords=[]))], orelse=[])], orelse=[])], orelse=[])], orelse=[])], orelse=[])], decorator_list=[], type_params=[])",
+     "fit_linear": "FunctionDef(name='fit_linear', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='count')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Constant(value='\\n    count:拟合天数\\n    ')), ImportFrom(module='sklearn.linear_model', names=[alias(name='LinearRegression')], level=0), Assign(targets=[Name(id='security', ctx=Store())], value=Constant(value='000001.XSHG')), Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Name(id='history', ctx=Load()), args=[], keywords=[keyword(arg='count', value=Name(id='count', ctx=Load())), keyword(arg='unit', value=Constant(value='1d')), keyword(arg='field', value=Constant(value='close')), keyword(arg='security_list', value=Name(id='security', ctx=Load())), keyword(arg='df', value=Constant(value=True)), keyword(arg='skip_paused', value=Constant(value=False)), keyword(arg='fq', value=Constant(value='pre'))])), Assign(targets=[Name(id='model', ctx=Store())], value=Call(func=Name(id='LinearRegression', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='x_train', ctx=Store())], value=Call(func=Attribute(value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='arange', ctx=Load()), args=[Constant(value=0), Call(func=Name(id='len', ctx=Load()), args=[Subscript(value=Name(id='df', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load())], keywords=[])], keywords=[]), attr='reshape', ctx=Load()), args=[UnaryOp(op=USub(), operand=Constant(value=1)), Constant(value=1)], keywords=[])), Assign(targets=[Name(id='y_train', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Subscript(value=Name(id='df', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), attr='values', ctx=Load()), attr='reshape', ctx=Load()), args=[UnaryOp(op=USub(), operand=Constant(value=1)), Constant(value=1)], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='model', ctx=Load()), attr='fit', ctx=Load()), args=[Name(id='x_train', ctx=Load()), Name(id='y_train', ctx=Load())], keywords=[])), Assign(targets=[Name(id='c', ctx=Store())], value=Attribute(value=Name(id='model', ctx=Load()), attr='intercept_', ctx=Load())), Assign(targets=[Name(id='m', ctx=Store())], value=Attribute(value=Name(id='model', ctx=Load()), attr='coef_', ctx=Load())), Assign(targets=[Name(id='c1', ctx=Store())], value=Call(func=Name(id='round', ctx=Load()), args=[Call(func=Name(id='float', ctx=Load()), args=[Name(id='c', ctx=Load())], keywords=[]), Constant(value=2)], keywords=[])), Assign(targets=[Name(id='m1', ctx=Store())], value=Call(func=Name(id='round', ctx=Load()), args=[Call(func=Name(id='float', ctx=Load()), args=[Name(id='m', ctx=Load())], keywords=[]), Constant(value=2)], keywords=[])), Return(value=Name(id='m1', ctx=Load()))], decorator_list=[], type_params=[])",
+     "before_market_open": "FunctionDef(name='before_market_open', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='stocks_exsit', ctx=Store())], value=BinOp(left=BinOp(left=BinOp(left=BinOp(left=BinOp(left=BinOp(left=BinOp(left=BinOp(left=BinOp(left=BinOp(left=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY001')], keywords=[]), op=Add(), right=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY002')], keywords=[])), op=Add(), right=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY003')], keywords=[])), op=Add(), right=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY004')], keywords=[])), op=Add(), right=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY005')], keywords=[])), op=Add(), right=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY006')], keywords=[])), op=Add(), right=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY007')], keywords=[])), op=Add(), right=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY008')], keywords=[])), op=Add(), right=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY009')], keywords=[])), op=Add(), right=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY010')], keywords=[])), op=Add(), right=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Constant(value='HY011')], keywords=[]))), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='stocks_exsit', ctx=Store())], value=Call(func=Name(id='set', ctx=Load()), args=[Call(func=Name(id='filter_special', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='stocks_exsit', ctx=Load())], keywords=[])], keywords=[]))], decorator_list=[], type_params=[])",
+     "filter_special": "FunctionDef(name='filter_special', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='curr_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='stock_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='stock_list', ctx=Load()), ifs=[Compare(left=Subscript(value=Name(id='stock', ctx=Load()), slice=Slice(lower=Constant(value=0), upper=Constant(value=3)), ctx=Load()), ops=[NotEq()], comparators=[Constant(value='688')])], is_async=0)])), Assign(targets=[Name(id='stock_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='stock_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Attribute(value=Subscript(value=Name(id='curr_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='is_st', ctx=Load()))], is_async=0)])), Assign(targets=[Name(id='stock_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='stock_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Attribute(value=Subscript(value=Name(id='curr_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='paused', ctx=Load()))], is_async=0)])), Assign(targets=[Name(id='stock_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='stock_list', ctx=Load()), ifs=[Compare(left=Constant(value='退'), ops=[NotIn()], comparators=[Attribute(value=Subscript(value=Name(id='curr_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load())])], is_async=0)])), Assign(targets=[Name(id='stock_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='stock_list', ctx=Load()), ifs=[Compare(left=Attribute(value=BinOp(left=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='date', ctx=Load()), args=[], keywords=[]), op=Sub(), right=Attribute(value=Call(func=Name(id='get_security_info', ctx=Load()), args=[Name(id='stock', ctx=Load())], keywords=[]), attr='start_date', ctx=Load())), attr='days', ctx=Load()), ops=[Gt()], comparators=[Constant(value=150)])], is_async=0)])), Return(value=Name(id='stock_list', ctx=Load()))], decorator_list=[], type_params=[])"
+    }
+   }
+  ],
+  "references": [
+   {
+    "file": "repo/backtrader/backtrader/indicators/momentum.py",
+    "copy": "data/staging/strategies-batch61/20261007-diffusion-leader-02/references/momentum.py",
+    "sha256": "73a47499e91ea8c1f2e6d7f71f40a51ad80eb1dc4d52552e4258770062e867b8",
+    "commit": "b853d7c90b6721476eb5a5ea3135224e33db1f14",
+    "use": "Read-only ROC period/formula and ETF/industry interface comparison; no alternate ledger or signal substitution"
+   },
+   {
+    "file": "repo/akshare/akshare/fund/fund_etf_em.py",
+    "copy": "data/staging/strategies-batch61/20261007-diffusion-leader-02/references/fund_etf_em.py",
+    "sha256": "0933e388bf082e92a8fea52b08393ad6673e95e8b827fd4332f027ba9280588a",
+    "commit": "0191689d57c667b7c7a198fd0cf97316837ef311",
+    "use": "Read-only ROC period/formula and ETF/industry interface comparison; no alternate ledger or signal substitution"
+   },
+   {
+    "file": "repo/akshare/akshare/stock/stock_industry.py",
+    "copy": "data/staging/strategies-batch61/20261007-diffusion-leader-02/references/stock_industry.py",
+    "sha256": "d6ec28db813285b70199ab23f92c2b0501dba46ef290e71d1e0cf702556c52f9",
+    "commit": "0191689d57c667b7c7a198fd0cf97316837ef311",
+    "use": "Read-only ROC period/formula and ETF/industry interface comparison; no alternate ledger or signal substitution"
+   }
+  ],
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "39e39aab84a16681264e",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 490,
+    "已验证": 11,
+    "待审查": 2,
+    "暂不可复现": 64,
+    "非交易研究脚本": 87,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_history_fundamentals": 18,
+    "get_valuation": 20,
+    "finance.run_query": 87,
+    "macro.run_query": 7,
+    "bond.run_query": 3,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 317,
+    "get_bars": 79,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10,
+    "get_dominant_future": 28,
+    "marginsec_open": 4,
+    "marginsec_close": 4
+   },
+   "reviewed_sources": [
+    "S-25a2ce74300f",
+    "S-a02bd5fb82fa",
+    "S-7dffe8edb923",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-641b9138fa5d",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-7da7fcfec431",
+    "S-af09cfafe6cf",
+    "S-b0df386a9dcf",
+    "S-95b83db2a7bc",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-df677a5ebcd4",
+    "S-e2209e269e29",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-f2e9047924e2",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-1422d134ff75",
+    "S-db01c1c96ded",
+    "S-4daa86e5158f",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-63c706efe95f",
+    "S-12ba1c0d79f5",
+    "S-850132b43dab",
+    "S-147b0cfb49ff",
+    "S-d07877e2c354",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-00007afacbb0",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-57b937da520d",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-d4725a5a21fb",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-5831425175ce",
+    "S-630ebb99f658",
+    "S-cafee3ad464a",
+    "S-e66b1ad7d8fc",
+    "S-560abd656ca0",
+    "S-2c9d2319c7d3",
+    "S-84b17f428272",
+    "S-6b0a4a36011b",
+    "S-88c607586b82",
+    "S-0c2cff0626ee",
+    "S-954b41e5a396",
+    "S-9112d55dd0cc",
+    "S-7f7e299f339a",
+    "S-72e5a8798544",
+    "S-a4c77bd8b44e",
+    "S-bbf9fccbd6eb",
+    "S-c6fe57d02852",
+    "S-4b7dbe8af8ac",
+    "S-d0ecd9406080",
+    "S-bee2c8d71c81",
+    "S-13b988210e42",
+    "S-6c7441327c3f",
+    "S-398e16c90dee",
+    "S-68930ba303f5",
+    "S-f81bb8422f94",
+    "S-848cffb63799",
+    "S-790f0000ed44",
+    "S-38d7f27c1372",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-66d37162df54",
+    "S-bb187e7a4887",
+    "S-faf66e10ba1d",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-979d5187c3ec",
+    "S-daecf5bc2eef",
+    "S-f39f02e3e03f",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-078084d1a6cb",
+    "S-e12e4a8dd5e5",
+    "S-05431e7ae641",
+    "S-de485dcbc1fe",
+    "S-7e6d5e73b9e8",
+    "S-6320a637da54",
+    "S-03e5e601f4cc",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-0dbbecb9eb1d",
+    "S-47d77840ec26",
+    "S-993fc6059661",
+    "S-4cc76c2c420b",
+    "S-2034813a5b91",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-84f3f0c3c784",
+    "S-c02ac3bad6ef",
+    "S-69bfefcb4d1d",
+    "S-653ef41eb685",
+    "S-c55ddc35cce6",
+    "S-c2a42783423c",
+    "S-75af9ddf3d76",
+    "S-f23cf187dc47",
+    "S-64a80805fb8a",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-8294e3469a6d",
+    "S-7ff11583b76b",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-21fdea960e9b",
+    "S-a9596eba9dc5",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-b3cc2dcd8a0d",
+    "S-285c04a4d1ce",
+    "S-bdfd3c6fde91",
+    "S-e0fb958bf2d4",
+    "S-3626c17cbcae",
+    "S-cc41735b8a2d",
+    "S-53655cbaa9bc",
+    "S-b01f3e94a5b8",
+    "S-c28a0c7f5f80",
+    "S-c98372326f58",
+    "S-665c147b3cf0",
+    "S-c5a0e347acdc",
+    "S-69ef2eedcc68",
+    "S-4766560702c0",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-36ea1540cfac",
+    "S-31ff28a9afb2",
+    "S-d6db552a3293",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-976aaefe793c",
+    "S-7f248f5caa7b",
+    "S-84adbe33af88",
+    "S-ee1aa7ba22b3",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-68dd8d2d5eec",
+    "S-926d08fe0ba8",
+    "S-9e752d17571d",
+    "S-624b1cbccd4f",
+    "S-e2462b051f4b",
+    "S-5008146cd1d4",
+    "S-e307438a42e6",
+    "S-f9ab6005c30c",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-ec0ab5ffcecf",
+    "S-2d40c2d698f7",
+    "S-6615db0d4e16",
+    "S-1fce2be2b9ec",
+    "S-85aa910ed165",
+    "S-028ef663b462",
+    "S-91dc4ee62715",
+    "S-7f049bb69647",
+    "S-d68e945d07cb",
+    "S-a40276639484",
+    "S-fb06e8894ab7",
+    "S-4cbc5c72990f",
+    "S-c0fb1e63f51d",
+    "S-1e5fd99659cf",
+    "S-4d86dd0d21e5",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-a78d8acd0042",
+    "S-c1bba20dca69",
+    "S-b785d665cf54",
+    "S-73dd3253aaaa",
+    "S-b318f6effe5e",
+    "S-85df9d32a2d9",
+    "S-dbd26615c5f8",
+    "S-8caa8420540b",
+    "S-fa0c56ab417c",
+    "S-5300a99a1779",
+    "S-4730e53b92bc",
+    "S-a55f095fba8d"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/39e39aab84a16681264e"
+  },
+  "previous_catalog_file": "data/catalog/strategies/7850a27df797a5f1a359/catalog.json",
+  "previous_catalog_sha256": "fb6601b71057c1c3488bbb8f7cdf81feecee9c6f8233db89e457e37535875c52",
+  "not_a_backtest": true,
+  "strategy_results": []
+ },
+ "checks": {
+  "status": "passed",
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/review_strategy_batch61.py",
+     "scripts/prepare_handoff.py",
+     "scripts/build_strategy_catalog.py",
+     "scripts/verify_financial_import.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch61/20261007-diffusion-leader-02/check-0.log",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "scripts.verify_offline_tests",
+     "-q",
+     "tests/unit/test_batch61_research.py",
+     "tests/unit/test_batch60_research.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_catalog_schedules.py",
+     "tests/integration/test_strategy_merge.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch61/20261007-diffusion-leader-02/check-1.log",
+    "sha256": "6f8f49b4f91f7ceef27a09319c48d597058e49f7fbfa097245bc3cea0436add8"
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch61/20261007-diffusion-leader-02/check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch20.py": "ef266672928706139987461ea01958a2e530ffe9c044a4952aaafd4a0cb1d8b5",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch29.py": "67c61c77ea6705a3f8f3f630d8f02316bc9c0b5566e066ca142ebf01d85a6948",
+   "scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch33.py": "1eaa6449e26f06b1cadd3a82d595d657776efda5a0ea3c4b351c5ea6c4212935",
+   "scripts/review_strategy_batch34.py": "f1afea9d1ac4619b3f535235f6cd146abba872640c77aa42699cb7e4b05f712e",
+   "scripts/review_strategy_batch35.py": "5bfb4720d62f026881ed1a4423f6b5dc3d001807042b653847603ff1d4294dde",
+   "scripts/review_strategy_batch36.py": "a8df8b0e80629e37fdba34e3734e269c182a1b53f5462ee30d7f4fffd7e22bd9",
+   "scripts/review_strategy_batch39.py": "25bf0a33c7c276f15af6c062cea5244e5d2f48c4e0751c0c44d3c306cf450fc4",
+   "scripts/review_strategy_batch40.py": "d8e209e8eada20191d06d404cfde2d7be808f6b482460fcc7ff5402f2ab8fb6d",
+   "scripts/review_strategy_batch41.py": "19a99d41441a6c97e8c569dc27eb345bc17f9631353b20c5f5f0ce4753d8495d",
+   "scripts/review_strategy_batch42.py": "d80c793eb85f09eda79c3e0b5012dfc4eeb4ec63feef069a978616bbc9f91d68",
+   "scripts/review_strategy_batch43.py": "07e07880afb534ad98662afd069f7f5dc1a73629b9f6fc773e23e5ac99d9322d",
+   "scripts/review_strategy_batch44.py": "5b2f15c8b92908ba7a7545036260122cd207c278b50224b72d869a2c7f55d0fb",
+   "scripts/review_strategy_batch45.py": "f6f421660ec743508bae7ee57373265e9949e04f4e88c66a8c2a63a78c65bc43",
+   "scripts/review_strategy_batch46.py": "13856781d182409050cd9daa4c2f6eaf287c147b7f4eef089dba1c414a68e01d",
+   "scripts/review_strategy_batch47.py": "195f0c3dd06a4245850da62c5cd1adc8d1cba68d2cd6dec5c47f129d09603082",
+   "scripts/review_strategy_batch48.py": "8e5783584aefb9331fbc3f575c10a66c232453b3f7fa3533fe11555f676ab55e",
+   "scripts/review_strategy_batch49.py": "9175dfa5647ebfeeb980390663d7533d11da71afdae950c67cc46b5629dc4b6f",
+   "scripts/review_strategy_batch50.py": "eae20fdfe0e8ac87313451351cf8e439900b02e5eea9fb1de1fc8b3b4226cbac",
+   "scripts/review_strategy_batch51.py": "62018fa81a7f2ace7041838db54ca436b0fa1bce5247212a02844d8cb27c4962",
+   "scripts/review_strategy_batch52.py": "4a94ecb24d33002c9927be68bd422395bb69323cf03a77f932a27774ea3a96cd",
+   "scripts/review_strategy_batch53.py": "95203dd3bf2eb8c4c7dfa915f129bfa4a07b35badbb93a9561235b3f615738d3",
+   "scripts/review_strategy_batch54.py": "c2c94202f967490ca48b52b07df0ec15c41bc6860204b606957dde82054a69b7",
+   "scripts/review_strategy_batch55.py": "d70d2b7b306b3aa27e99bcaf984cf4f059d633a54bb4ec16b2abe47809f8f3c6",
+   "scripts/review_strategy_batch56.py": "c69cc56752f950dbd4b20563baf14efd283e57745853a2d75d55ca3c6b8970e9",
+   "scripts/review_strategy_batch57.py": "356d36d63b773d389e5d6dc046f095504a35fba45b60b74dec7fd9ff719b39a6",
+   "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "scripts/review_strategy_batch60.py": "df4bbd25cbe220ef34bee2d9e499099098da96ab273a1efd7c6afa27ffea81d0",
+   "scripts/review_strategy_batch61.py": "a3be16292aa7a62ec0107ade0ce976b7737b5f3b9de8fc0203d89cc4160566be",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/execution.py": "0c80f1bbde9c27d98a3e08103d8534ce286356a2d85f36494afa0b7c53353357",
+   "src/observe/ledger/book.py": "73d832061bcf7064c7d01da0737f4db9cfdda746de330d0468d2a27ed662cbda",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "24886f89864908f5f6cbea09579496e45f2db769f7d8977e2030818a107bb0db",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "tests/unit/test_batch32_research.py": "47d78954a24d29bcf9358830d6f847a29efa505fbe0a63854a68fb92b076abef",
+   "tests/unit/test_batch33_research.py": "61b6d0ae8c1a0d1947ba5d0a16cd73a2132bb08d4b221546d64ee5ed87ce2bed",
+   "tests/unit/test_batch34_research.py": "b873c05fe67145343e8437b9a5ac88e713e0cb2c39feeb0ce52ac3387a487990",
+   "tests/unit/test_batch35_research.py": "4783426ec74458a819f0305236a722f84cb2352b53696f5567345127bf6fd7ab",
+   "tests/unit/test_batch36_research.py": "02e81703a13a7be8e6442b7cdcf70921260ee0251a5ff20ac9f75e633fbc63d6",
+   "tests/unit/test_batch39_research.py": "3afb25412f3870ee7561e1575d4b1f11adfe2b5e7e1f447d9e45da309a217b11",
+   "tests/unit/test_batch40_research.py": "15548d7030f0a80bb9df6210f35a353fea66ba0b5ef01575426b5e7e3848846f",
+   "tests/unit/test_batch41_research.py": "e9fc5475e621bd919985d48ab3e59775f16cfead3192f099edb2f47b1c9d210d",
+   "tests/unit/test_batch42_research.py": "d2e19a2935d6be2a68c34c5e530bb5d76f0e11862b7088c0e1faeab522a0a242",
+   "tests/unit/test_batch43_research.py": "2cca019afda1cd8a3465e2b0e8ad9a54fc1005e357ce6708d19273be78b8dc9c",
+   "tests/unit/test_batch44_research.py": "5116defb833d1aed1a9357fd1627dee5473e57250cfc475594a403ec43dac112",
+   "tests/unit/test_batch45_research.py": "2a40a092ca8951d84c5c33e893e5c24bdfb34256a96d066a54ac16a349f61b93",
+   "tests/unit/test_batch47_research.py": "c07dac5bb5f85ae6c3e904d9e6b4ea32ade44872e714aaeef7d489e1b4316118",
+   "tests/unit/test_batch50_research.py": "98a11b1bbde1345ee115d30ec6324030e4d6638f86a3f88959f146b39065b104",
+   "tests/unit/test_batch51_research.py": "e3b403c8647ab29a5129074f6399228c0e4fc8066349c85c43e6a19f100fdb42",
+   "tests/unit/test_batch56_research.py": "353949189f166839f6cdede020f3952ed7b60b84fcf8664dd06ec44c790777f4",
+   "tests/unit/test_batch58_research.py": "7e2a08996b60907272b5254b7658d5d36c6fbe4cb7e13de40a0c6242e1302aa9",
+   "tests/unit/test_batch59_research.py": "1bdea851ba6c2c7d138dc9a68e25bda4a68485ec0651307690ce37add02df090",
+   "tests/unit/test_batch60_research.py": "e3ddfdcadb8211558b73ed6020bacf562f0e3beeef42f5464763847c25a8cb28",
+   "tests/unit/test_batch61_research.py": "cefbf59d2919d7347598c5581e7a8a971bb9a0760ee130df1305534634edde83",
+   "tests/unit/test_catalog_bars.py": "d4ae8e9c3ea18d62f2aeabe686ecbc6e5bb0503d641b02cfc2c1c4ab00bdd85e",
+   "tests/unit/test_catalog_bond.py": "535dc0b0b69c4fcb093df54e4bce1b77455cde9e64b4625a19f250c9c7157653",
+   "tests/unit/test_catalog_dependencies.py": "fa80561b760480575f1ce973b582c589c7053080e66c60d873bc3037c7d26ad3",
+   "tests/unit/test_catalog_fund_universe.py": "89723bc21b29c7ac72d5a2fbff29bebb12230994a30e9c290688065932f5fef3",
+   "tests/unit/test_catalog_futures.py": "6bd97570cac512b1efef52eac02014a803c626db7289b2081289439bde0a205e",
+   "tests/unit/test_catalog_macro.py": "2fd3376a37c45cc5dd6f5df9d11c18cda4d6fd654e107978e748d91533525c63",
+   "tests/unit/test_catalog_margin_weekly.py": "df55781740bbda25809349c9ef41f9c7b85455a436c8b72ab12a8a553c900d39",
+   "tests/unit/test_catalog_prefix.py": "90c3721c7da1434acefd4053610c0c22415c98187930456689cd8f0478ce6770",
+   "tests/unit/test_catalog_research_queries.py": "58e723261173fc9f3e6b129f882a089aa79491af56073a010a659fcdd4dfc2cc"
+  },
+  "evidence_sha256": {
+   "baseline.json": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9",
+   "calendar-binding.json": "3b7e312912de7be7bc198cdad2a3bbbe0aa9e5fecb8edf71ac08efa064c1a6ef",
+   "calendar-input.parquet": "b29ce632824660c74ef93d32701ff010cf2626e2007718e2b921b3464cc767f5",
+   "catalog-before.json": "8829b89f88a6726a8dc6be4f76ed3b479190d55a14c196be5542020f0c21075e",
+   "check-0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+   "check-1.log": "6f8f49b4f91f7ceef27a09319c48d597058e49f7fbfa097245bc3cea0436add8",
+   "check-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "component-failure-binding.json": "fa031e37fbc02c49e2a710d98076319af5cbfc1bd9c3063bf8ba5502f60325b2",
+   "component-offline.json": "e5f8bdaeabe39d383e66d43b025c6d32037ca5253a7a5ba0653d8ec96d63c797",
+   "component-research.json": "e5f8bdaeabe39d383e66d43b025c6d32037ca5253a7a5ba0653d8ec96d63c797",
+   "dependency-inventory.json": "39222204accad33871a582ae5516095ec65ea33d655ab0398f73c02d52a1971a",
+   "diagnostic-failure-binding.json": "584dfc6d85a1762d36a2ac963ed8a227edc810b98697ba2c45f381f15c480cc2",
+   "diagnostics-offline.json": "4a1ca37554e2e0c092aac95c31a08b8235fa9b2e9ffbd76b7443a96dd90c8e4c",
+   "diagnostics.json": "4a1ca37554e2e0c092aac95c31a08b8235fa9b2e9ffbd76b7443a96dd90c8e4c",
+   "existing-apis.json": "0d3ad8eaa0a1205a868fa691262f8f50be025e58a5ca16c66c49ae0515c16fd0",
+   "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "input-binding.json": "0a68cbc7b595c5263a920246fbf73997a26643f33e26124ce415440a9ef84c05",
+   "offline-catalog.json": "b42ee135d8f42380f6b1263583b62feab9e3362a17ad60a9e95558a777daf532",
+   "offline-verification.json": "d836c6108b448d98f716e0f4740de816aa63eb6437b29d1418a8f0822c1c544b",
+   "price-input.parquet": "3f564aaaebb2ef1a303c3286287965e239a7e2337608b5675418f1df100def5b",
+   "progress-start.json": "be69e8f6c7f263695b7d9faf0cea22a93e38fd32eb7d9889aac2e2f86e9fddb1",
+   "start-failure-binding.json": "86c8700f124e2129fd439f960aa67a269b2df8dc0c1ef3c3e885f2b6cea36b3a",
+   "strategy_catalog.before.py": "0905e97dc0f3d19717e1a36af8b57a890571a8ccafad5cb5282dc67e2f58bd74",
+   "supplement-decision.json": "36edda9d08c02150b5bc08b21c3432fde4ab3489dc172c0a1315f3336794e12b",
+   "references/fund_etf_em.py": "0933e388bf082e92a8fea52b08393ad6673e95e8b827fd4332f027ba9280588a",
+   "references/momentum.py": "73a47499e91ea8c1f2e6d7f71f40a51ad80eb1dc4d52552e4258770062e867b8",
+   "references/stock_industry.py": "d6ec28db813285b70199ab23f92c2b0501dba46ef290e71d1e0cf702556c52f9",
+   "source-reviews/review.json": "cec3ff75dda1f43ecf996cae574b6cc654cb198243f9eb423204b98cb1c03264",
+   "source-reviews/S-7f7e299f339a.source": "d0e0dff6d879a1a27cb5e5d85324b35b8d283bf4b414f13da0279ac6e3b1a93d",
+   "source-reviews/S-c6fe57d02852.source": "0b8bd5bc5814d4831f3fa86b534624cddd2c4552d082296eb0f38cc15b6c8ef9",
+   "catalog-offline/catalog/strategies/implementation-evidence.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "catalog-offline/catalog/strategies/latest.json": "7c62314afa9249a67320e1fa711fc7a9391a57e77cb1cb567cb292b7f3024281",
+   "catalog-offline/catalog/strategies/39e39aab84a16681264e/catalog.json": "257e079d1ed1524f797eeed605949791577656fcd50d2d41b4c08550613dd773",
+   "catalog-offline/catalog/strategies/39e39aab84a16681264e/catalog.parquet": "9b94abdc68aa07b8cf753ff8c1959a0ffa3fad65b0d63bbddfc21e6b1e61a3b1",
+   "catalog-offline/catalog/strategies/39e39aab84a16681264e/summary.json": "c9f0a1e07ac14c6ead7a6d98f6d9d59277ca74acd529880b3ca87972e6b7a1d1",
+   "implementation-checked/scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "implementation-checked/scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "implementation-checked/scripts/review_strategy_batch20.py": "ef266672928706139987461ea01958a2e530ffe9c044a4952aaafd4a0cb1d8b5",
+   "implementation-checked/scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "implementation-checked/scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "implementation-checked/scripts/review_strategy_batch29.py": "67c61c77ea6705a3f8f3f630d8f02316bc9c0b5566e066ca142ebf01d85a6948",
+   "implementation-checked/scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "implementation-checked/scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "implementation-checked/scripts/review_strategy_batch33.py": "1eaa6449e26f06b1cadd3a82d595d657776efda5a0ea3c4b351c5ea6c4212935",
+   "implementation-checked/scripts/review_strategy_batch34.py": "f1afea9d1ac4619b3f535235f6cd146abba872640c77aa42699cb7e4b05f712e",
+   "implementation-checked/scripts/review_strategy_batch35.py": "5bfb4720d62f026881ed1a4423f6b5dc3d001807042b653847603ff1d4294dde",
+   "implementation-checked/scripts/review_strategy_batch36.py": "a8df8b0e80629e37fdba34e3734e269c182a1b53f5462ee30d7f4fffd7e22bd9",
+   "implementation-checked/scripts/review_strategy_batch39.py": "25bf0a33c7c276f15af6c062cea5244e5d2f48c4e0751c0c44d3c306cf450fc4",
+   "implementation-checked/scripts/review_strategy_batch40.py": "d8e209e8eada20191d06d404cfde2d7be808f6b482460fcc7ff5402f2ab8fb6d",
+   "implementation-checked/scripts/review_strategy_batch41.py": "19a99d41441a6c97e8c569dc27eb345bc17f9631353b20c5f5f0ce4753d8495d",
+   "implementation-checked/scripts/review_strategy_batch42.py": "d80c793eb85f09eda79c3e0b5012dfc4eeb4ec63feef069a978616bbc9f91d68",
+   "implementation-checked/scripts/review_strategy_batch43.py": "07e07880afb534ad98662afd069f7f5dc1a73629b9f6fc773e23e5ac99d9322d",
+   "implementation-checked/scripts/review_strategy_batch44.py": "5b2f15c8b92908ba7a7545036260122cd207c278b50224b72d869a2c7f55d0fb",
+   "implementation-checked/scripts/review_strategy_batch45.py": "f6f421660ec743508bae7ee57373265e9949e04f4e88c66a8c2a63a78c65bc43",
+   "implementation-checked/scripts/review_strategy_batch46.py": "13856781d182409050cd9daa4c2f6eaf287c147b7f4eef089dba1c414a68e01d",
+   "implementation-checked/scripts/review_strategy_batch47.py": "195f0c3dd06a4245850da62c5cd1adc8d1cba68d2cd6dec5c47f129d09603082",
+   "implementation-checked/scripts/review_strategy_batch48.py": "8e5783584aefb9331fbc3f575c10a66c232453b3f7fa3533fe11555f676ab55e",
+   "implementation-checked/scripts/review_strategy_batch49.py": "9175dfa5647ebfeeb980390663d7533d11da71afdae950c67cc46b5629dc4b6f",
+   "implementation-checked/scripts/review_strategy_batch50.py": "eae20fdfe0e8ac87313451351cf8e439900b02e5eea9fb1de1fc8b3b4226cbac",
+   "implementation-checked/scripts/review_strategy_batch51.py": "62018fa81a7f2ace7041838db54ca436b0fa1bce5247212a02844d8cb27c4962",
+   "implementation-checked/scripts/review_strategy_batch52.py": "4a94ecb24d33002c9927be68bd422395bb69323cf03a77f932a27774ea3a96cd",
+   "implementation-checked/scripts/review_strategy_batch53.py": "95203dd3bf2eb8c4c7dfa915f129bfa4a07b35badbb93a9561235b3f615738d3",
+   "implementation-checked/scripts/review_strategy_batch54.py": "c2c94202f967490ca48b52b07df0ec15c41bc6860204b606957dde82054a69b7",
+   "implementation-checked/scripts/review_strategy_batch55.py": "d70d2b7b306b3aa27e99bcaf984cf4f059d633a54bb4ec16b2abe47809f8f3c6",
+   "implementation-checked/scripts/review_strategy_batch56.py": "c69cc56752f950dbd4b20563baf14efd283e57745853a2d75d55ca3c6b8970e9",
+   "implementation-checked/scripts/review_strategy_batch57.py": "356d36d63b773d389e5d6dc046f095504a35fba45b60b74dec7fd9ff719b39a6",
+   "implementation-checked/scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "implementation-checked/scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "implementation-checked/scripts/review_strategy_batch60.py": "df4bbd25cbe220ef34bee2d9e499099098da96ab273a1efd7c6afa27ffea81d0",
+   "implementation-checked/scripts/review_strategy_batch61.py": "a3be16292aa7a62ec0107ade0ce976b7737b5f3b9de8fc0203d89cc4160566be",
+   "implementation-checked/scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "implementation-checked/scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "implementation-checked/scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "implementation-checked/src/observe/execution.py": "0c80f1bbde9c27d98a3e08103d8534ce286356a2d85f36494afa0b7c53353357",
+   "implementation-checked/src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "implementation-checked/src/observe/strategy_catalog.py": "24886f89864908f5f6cbea09579496e45f2db769f7d8977e2030818a107bb0db",
+   "implementation-checked/src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "implementation-checked/src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "implementation-checked/src/observe/ledger/book.py": "73d832061bcf7064c7d01da0737f4db9cfdda746de330d0468d2a27ed662cbda",
+   "implementation-checked/src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "implementation-checked/tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "implementation-checked/tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "implementation-checked/tests/unit/test_batch32_research.py": "47d78954a24d29bcf9358830d6f847a29efa505fbe0a63854a68fb92b076abef",
+   "implementation-checked/tests/unit/test_batch33_research.py": "61b6d0ae8c1a0d1947ba5d0a16cd73a2132bb08d4b221546d64ee5ed87ce2bed",
+   "implementation-checked/tests/unit/test_batch34_research.py": "b873c05fe67145343e8437b9a5ac88e713e0cb2c39feeb0ce52ac3387a487990",
+   "implementation-checked/tests/unit/test_batch35_research.py": "4783426ec74458a819f0305236a722f84cb2352b53696f5567345127bf6fd7ab",
+   "implementation-checked/tests/unit/test_batch36_research.py": "02e81703a13a7be8e6442b7cdcf70921260ee0251a5ff20ac9f75e633fbc63d6",
+   "implementation-checked/tests/unit/test_batch39_research.py": "3afb25412f3870ee7561e1575d4b1f11adfe2b5e7e1f447d9e45da309a217b11",
+   "implementation-checked/tests/unit/test_batch40_research.py": "15548d7030f0a80bb9df6210f35a353fea66ba0b5ef01575426b5e7e3848846f",
+   "implementation-checked/tests/unit/test_batch41_research.py": "e9fc5475e621bd919985d48ab3e59775f16cfead3192f099edb2f47b1c9d210d",
+   "implementation-checked/tests/unit/test_batch42_research.py": "d2e19a2935d6be2a68c34c5e530bb5d76f0e11862b7088c0e1faeab522a0a242",
+   "implementation-checked/tests/unit/test_batch43_research.py": "2cca019afda1cd8a3465e2b0e8ad9a54fc1005e357ce6708d19273be78b8dc9c",
+   "implementation-checked/tests/unit/test_batch44_research.py": "5116defb833d1aed1a9357fd1627dee5473e57250cfc475594a403ec43dac112",
+   "implementation-checked/tests/unit/test_batch45_research.py": "2a40a092ca8951d84c5c33e893e5c24bdfb34256a96d066a54ac16a349f61b93",
+   "implementation-checked/tests/unit/test_batch47_research.py": "c07dac5bb5f85ae6c3e904d9e6b4ea32ade44872e714aaeef7d489e1b4316118",
+   "implementation-checked/tests/unit/test_batch50_research.py": "98a11b1bbde1345ee115d30ec6324030e4d6638f86a3f88959f146b39065b104",
+   "implementation-checked/tests/unit/test_batch51_research.py": "e3b403c8647ab29a5129074f6399228c0e4fc8066349c85c43e6a19f100fdb42",
+   "implementation-checked/tests/unit/test_batch56_research.py": "353949189f166839f6cdede020f3952ed7b60b84fcf8664dd06ec44c790777f4",
+   "implementation-checked/tests/unit/test_batch58_research.py": "7e2a08996b60907272b5254b7658d5d36c6fbe4cb7e13de40a0c6242e1302aa9",
+   "implementation-checked/tests/unit/test_batch59_research.py": "1bdea851ba6c2c7d138dc9a68e25bda4a68485ec0651307690ce37add02df090",
+   "implementation-checked/tests/unit/test_batch60_research.py": "e3ddfdcadb8211558b73ed6020bacf562f0e3beeef42f5464763847c25a8cb28",
+   "implementation-checked/tests/unit/test_batch61_research.py": "cefbf59d2919d7347598c5581e7a8a971bb9a0760ee130df1305534634edde83",
+   "implementation-checked/tests/unit/test_catalog_bars.py": "d4ae8e9c3ea18d62f2aeabe686ecbc6e5bb0503d641b02cfc2c1c4ab00bdd85e",
+   "implementation-checked/tests/unit/test_catalog_bond.py": "535dc0b0b69c4fcb093df54e4bce1b77455cde9e64b4625a19f250c9c7157653",
+   "implementation-checked/tests/unit/test_catalog_dependencies.py": "fa80561b760480575f1ce973b582c589c7053080e66c60d873bc3037c7d26ad3",
+   "implementation-checked/tests/unit/test_catalog_fund_universe.py": "89723bc21b29c7ac72d5a2fbff29bebb12230994a30e9c290688065932f5fef3",
+   "implementation-checked/tests/unit/test_catalog_futures.py": "6bd97570cac512b1efef52eac02014a803c626db7289b2081289439bde0a205e",
+   "implementation-checked/tests/unit/test_catalog_macro.py": "2fd3376a37c45cc5dd6f5df9d11c18cda4d6fd654e107978e748d91533525c63",
+   "implementation-checked/tests/unit/test_catalog_margin_weekly.py": "df55781740bbda25809349c9ef41f9c7b85455a436c8b72ab12a8a553c900d39",
+   "implementation-checked/tests/unit/test_catalog_prefix.py": "90c3721c7da1434acefd4053610c0c22415c98187930456689cd8f0478ce6770",
+   "implementation-checked/tests/unit/test_catalog_research_queries.py": "58e723261173fc9f3e6b129f882a089aa79491af56073a010a659fcdd4dfc2cc"
+  }
+ },
+ "offline": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch20.py": "ef266672928706139987461ea01958a2e530ffe9c044a4952aaafd4a0cb1d8b5",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch29.py": "67c61c77ea6705a3f8f3f630d8f02316bc9c0b5566e066ca142ebf01d85a6948",
+   "scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch33.py": "1eaa6449e26f06b1cadd3a82d595d657776efda5a0ea3c4b351c5ea6c4212935",
+   "scripts/review_strategy_batch34.py": "f1afea9d1ac4619b3f535235f6cd146abba872640c77aa42699cb7e4b05f712e",
+   "scripts/review_strategy_batch35.py": "5bfb4720d62f026881ed1a4423f6b5dc3d001807042b653847603ff1d4294dde",
+   "scripts/review_strategy_batch36.py": "a8df8b0e80629e37fdba34e3734e269c182a1b53f5462ee30d7f4fffd7e22bd9",
+   "scripts/review_strategy_batch39.py": "25bf0a33c7c276f15af6c062cea5244e5d2f48c4e0751c0c44d3c306cf450fc4",
+   "scripts/review_strategy_batch40.py": "d8e209e8eada20191d06d404cfde2d7be808f6b482460fcc7ff5402f2ab8fb6d",
+   "scripts/review_strategy_batch41.py": "19a99d41441a6c97e8c569dc27eb345bc17f9631353b20c5f5f0ce4753d8495d",
+   "scripts/review_strategy_batch42.py": "d80c793eb85f09eda79c3e0b5012dfc4eeb4ec63feef069a978616bbc9f91d68",
+   "scripts/review_strategy_batch43.py": "07e07880afb534ad98662afd069f7f5dc1a73629b9f6fc773e23e5ac99d9322d",
+   "scripts/review_strategy_batch44.py": "5b2f15c8b92908ba7a7545036260122cd207c278b50224b72d869a2c7f55d0fb",
+   "scripts/review_strategy_batch45.py": "f6f421660ec743508bae7ee57373265e9949e04f4e88c66a8c2a63a78c65bc43",
+   "scripts/review_strategy_batch46.py": "13856781d182409050cd9daa4c2f6eaf287c147b7f4eef089dba1c414a68e01d",
+   "scripts/review_strategy_batch47.py": "195f0c3dd06a4245850da62c5cd1adc8d1cba68d2cd6dec5c47f129d09603082",
+   "scripts/review_strategy_batch48.py": "8e5783584aefb9331fbc3f575c10a66c232453b3f7fa3533fe11555f676ab55e",
+   "scripts/review_strategy_batch49.py": "9175dfa5647ebfeeb980390663d7533d11da71afdae950c67cc46b5629dc4b6f",
+   "scripts/review_strategy_batch50.py": "eae20fdfe0e8ac87313451351cf8e439900b02e5eea9fb1de1fc8b3b4226cbac",
+   "scripts/review_strategy_batch51.py": "62018fa81a7f2ace7041838db54ca436b0fa1bce5247212a02844d8cb27c4962",
+   "scripts/review_strategy_batch52.py": "4a94ecb24d33002c9927be68bd422395bb69323cf03a77f932a27774ea3a96cd",
+   "scripts/review_strategy_batch53.py": "95203dd3bf2eb8c4c7dfa915f129bfa4a07b35badbb93a9561235b3f615738d3",
+   "scripts/review_strategy_batch54.py": "c2c94202f967490ca48b52b07df0ec15c41bc6860204b606957dde82054a69b7",
+   "scripts/review_strategy_batch55.py": "d70d2b7b306b3aa27e99bcaf984cf4f059d633a54bb4ec16b2abe47809f8f3c6",
+   "scripts/review_strategy_batch56.py": "c69cc56752f950dbd4b20563baf14efd283e57745853a2d75d55ca3c6b8970e9",
+   "scripts/review_strategy_batch57.py": "356d36d63b773d389e5d6dc046f095504a35fba45b60b74dec7fd9ff719b39a6",
+   "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "scripts/review_strategy_batch60.py": "df4bbd25cbe220ef34bee2d9e499099098da96ab273a1efd7c6afa27ffea81d0",
+   "scripts/review_strategy_batch61.py": "a3be16292aa7a62ec0107ade0ce976b7737b5f3b9de8fc0203d89cc4160566be",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/execution.py": "0c80f1bbde9c27d98a3e08103d8534ce286356a2d85f36494afa0b7c53353357",
+   "src/observe/ledger/book.py": "73d832061bcf7064c7d01da0737f4db9cfdda746de330d0468d2a27ed662cbda",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "24886f89864908f5f6cbea09579496e45f2db769f7d8977e2030818a107bb0db",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "tests/unit/test_batch32_research.py": "47d78954a24d29bcf9358830d6f847a29efa505fbe0a63854a68fb92b076abef",
+   "tests/unit/test_batch33_research.py": "61b6d0ae8c1a0d1947ba5d0a16cd73a2132bb08d4b221546d64ee5ed87ce2bed",
+   "tests/unit/test_batch34_research.py": "b873c05fe67145343e8437b9a5ac88e713e0cb2c39feeb0ce52ac3387a487990",
+   "tests/unit/test_batch35_research.py": "4783426ec74458a819f0305236a722f84cb2352b53696f5567345127bf6fd7ab",
+   "tests/unit/test_batch36_research.py": "02e81703a13a7be8e6442b7cdcf70921260ee0251a5ff20ac9f75e633fbc63d6",
+   "tests/unit/test_batch39_research.py": "3afb25412f3870ee7561e1575d4b1f11adfe2b5e7e1f447d9e45da309a217b11",
+   "tests/unit/test_batch40_research.py": "15548d7030f0a80bb9df6210f35a353fea66ba0b5ef01575426b5e7e3848846f",
+   "tests/unit/test_batch41_research.py": "e9fc5475e621bd919985d48ab3e59775f16cfead3192f099edb2f47b1c9d210d",
+   "tests/unit/test_batch42_research.py": "d2e19a2935d6be2a68c34c5e530bb5d76f0e11862b7088c0e1faeab522a0a242",
+   "tests/unit/test_batch43_research.py": "2cca019afda1cd8a3465e2b0e8ad9a54fc1005e357ce6708d19273be78b8dc9c",
+   "tests/unit/test_batch44_research.py": "5116defb833d1aed1a9357fd1627dee5473e57250cfc475594a403ec43dac112",
+   "tests/unit/test_batch45_research.py": "2a40a092ca8951d84c5c33e893e5c24bdfb34256a96d066a54ac16a349f61b93",
+   "tests/unit/test_batch47_research.py": "c07dac5bb5f85ae6c3e904d9e6b4ea32ade44872e714aaeef7d489e1b4316118",
+   "tests/unit/test_batch50_research.py": "98a11b1bbde1345ee115d30ec6324030e4d6638f86a3f88959f146b39065b104",
+   "tests/unit/test_batch51_research.py": "e3b403c8647ab29a5129074f6399228c0e4fc8066349c85c43e6a19f100fdb42",
+   "tests/unit/test_batch56_research.py": "353949189f166839f6cdede020f3952ed7b60b84fcf8664dd06ec44c790777f4",
+   "tests/unit/test_batch58_research.py": "7e2a08996b60907272b5254b7658d5d36c6fbe4cb7e13de40a0c6242e1302aa9",
+   "tests/unit/test_batch59_research.py": "1bdea851ba6c2c7d138dc9a68e25bda4a68485ec0651307690ce37add02df090",
+   "tests/unit/test_batch60_research.py": "e3ddfdcadb8211558b73ed6020bacf562f0e3beeef42f5464763847c25a8cb28",
+   "tests/unit/test_batch61_research.py": "cefbf59d2919d7347598c5581e7a8a971bb9a0760ee130df1305534634edde83",
+   "tests/unit/test_catalog_bars.py": "d4ae8e9c3ea18d62f2aeabe686ecbc6e5bb0503d641b02cfc2c1c4ab00bdd85e",
+   "tests/unit/test_catalog_bond.py": "535dc0b0b69c4fcb093df54e4bce1b77455cde9e64b4625a19f250c9c7157653",
+   "tests/unit/test_catalog_dependencies.py": "fa80561b760480575f1ce973b582c589c7053080e66c60d873bc3037c7d26ad3",
+   "tests/unit/test_catalog_fund_universe.py": "89723bc21b29c7ac72d5a2fbff29bebb12230994a30e9c290688065932f5fef3",
+   "tests/unit/test_catalog_futures.py": "6bd97570cac512b1efef52eac02014a803c626db7289b2081289439bde0a205e",
+   "tests/unit/test_catalog_macro.py": "2fd3376a37c45cc5dd6f5df9d11c18cda4d6fd654e107978e748d91533525c63",
+   "tests/unit/test_catalog_margin_weekly.py": "df55781740bbda25809349c9ef41f9c7b85455a436c8b72ab12a8a553c900d39",
+   "tests/unit/test_catalog_prefix.py": "90c3721c7da1434acefd4053610c0c22415c98187930456689cd8f0478ce6770",
+   "tests/unit/test_catalog_research_queries.py": "58e723261173fc9f3e6b129f882a089aa79491af56073a010a659fcdd4dfc2cc"
+  },
+  "diagnostics_sha256": "4a1ca37554e2e0c092aac95c31a08b8235fa9b2e9ffbd76b7443a96dd90c8e4c",
+  "component_sha256": "e5f8bdaeabe39d383e66d43b025c6d32037ca5253a7a5ba0653d8ec96d63c797",
+  "not_a_backtest": true
+ },
+ "offline_catalog": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "catalog_id": "39e39aab84a16681264e",
+  "files": [
+   {
+    "name": "catalog.json",
+    "original_file": "data/catalog/strategies/39e39aab84a16681264e/catalog.json",
+    "repeated_file": "data/staging/strategies-batch61/20261007-diffusion-leader-02/catalog-offline/catalog/strategies/39e39aab84a16681264e/catalog.json",
+    "sha256": "257e079d1ed1524f797eeed605949791577656fcd50d2d41b4c08550613dd773"
+   },
+   {
+    "name": "summary.json",
+    "original_file": "data/catalog/strategies/39e39aab84a16681264e/summary.json",
+    "repeated_file": "data/staging/strategies-batch61/20261007-diffusion-leader-02/catalog-offline/catalog/strategies/39e39aab84a16681264e/summary.json",
+    "sha256": "c9f0a1e07ac14c6ead7a6d98f6d9d59277ca74acd529880b3ca87972e6b7a1d1"
+   },
+   {
+    "name": "catalog.parquet",
+    "original_file": "data/catalog/strategies/39e39aab84a16681264e/catalog.parquet",
+    "repeated_file": "data/staging/strategies-batch61/20261007-diffusion-leader-02/catalog-offline/catalog/strategies/39e39aab84a16681264e/catalog.parquet",
+    "sha256": "9b94abdc68aa07b8cf753ff8c1959a0ffa3fad65b0d63bbddfc21e6b1e61a3b1"
+   }
+  ],
+  "implementation_evidence_sha256": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6"
+ },
+ "component": {
+  "input_sha256": "3f564aaaebb2ef1a303c3286287965e239a7e2337608b5675418f1df100def5b",
+  "calendar_sha256": "b29ce632824660c74ef93d32701ff010cf2626e2007718e2b921b3464cc767f5",
+  "rows": 46781,
+  "pool": [
+   "000333.SZ",
+   "000651.SZ",
+   "002415.SZ",
+   "600036.SH",
+   "600085.SH",
+   "600196.SH",
+   "600519.SH",
+   "600887.SH",
+   "601111.SH",
+   "603288.SH"
+  ],
+  "first": "2005-01-05",
+  "last": "2026-09-29",
+  "calendar_rows": 5280,
+  "endpoint_windows": 44426,
+  "unavailable_endpoint_windows": 7384,
+  "maximum_absolute_error": 4.440892098500626e-16,
+  "result_fingerprint": "70d78967fd3beb091815f968d3bc92c5665f0e940719dac332a056423147429e",
+  "intervals": 99,
+  "windows_by_stock": {
+   "000333.SZ": 2948,
+   "000651.SZ": 4828,
+   "002415.SZ": 3764,
+   "600036.SH": 5045,
+   "600085.SH": 5122,
+   "600196.SH": 5043,
+   "600519.SH": 5046,
+   "600887.SH": 4996,
+   "601111.SH": 4657,
+   "603288.SH": 2977
+  },
+  "first_last_samples": [
+   {
+    "date": "2005-06-09",
+    "offset_date": "2005-01-05",
+    "instrument": "000651.SZ",
+    "last_close_adj": 76.16468289999999,
+    "now_close_adj": 77.82393450000001,
+    "original_ROC": 0.021785052294887475,
+    "independent_ROC": 0.021785052294887454
+   },
+   {
+    "date": "2005-06-09",
+    "offset_date": "2005-01-05",
+    "instrument": "600036.SH",
+    "last_close_adj": 9.98559459,
+    "now_close_adj": 10.780042139999999,
+    "original_ROC": 0.07955936352509174,
+    "independent_ROC": 0.0795593635250917
+   },
+   {
+    "date": "2026-09-29",
+    "offset_date": "2026-05-11",
+    "instrument": "601111.SH",
+    "last_close_adj": 8.17807032,
+    "now_close_adj": 6.6203426400000005,
+    "original_ROC": -0.19047619047619035,
+    "independent_ROC": -0.1904761904761904
+   },
+   {
+    "date": "2026-09-29",
+    "offset_date": "2026-05-11",
+    "instrument": "603288.SH",
+    "last_close_adj": 335.07465460000003,
+    "now_close_adj": 295.70957982,
+    "original_ROC": -0.11748150520961553,
+    "independent_ROC": -0.11748150520961553
+   }
+  ],
+  "not_a_backtest": true,
+  "platform_equivalent": false,
+  "limits": [
+   "Ten frozen stocks are arithmetic operands, not original HS300 members or HY pool",
+   "close_adj input basis is explicit; original query adjustment anchoring remains unproved",
+   "No full-pool weighted diffusion, ETF/leader signal, orders, three-cost or strategy return inferred"
+  ]
+ },
+ "diagnostics": {
+  "cases": [
+   {
+    "case": "ROC100_means_99_calendar_intervals_and_excludes_zero_nan",
+    "mock_dates": [
+     "2020-05-19",
+     "2020-01-01"
+    ],
+    "ROC": {
+     "A": 1.0,
+     "D": -0.5
+    },
+    "intervals": 99,
+    "filter_ast": "Module(body=[Expr(value=Subscript(value=Name(id='last', ctx=Load()), slice=Compare(left=BinOp(left=UnaryOp(op=Invert(), operand=Call(func=Attribute(value=Subscript(value=Name(id='last', ctx=Load()), slice=Constant(value='close'), ctx=Load()), attr='isna', ctx=Load()), args=[], keywords=[])), op=BitAnd(), right=Subscript(value=Name(id='last', ctx=Load()), slice=Constant(value='close'), ctx=Load())), ops=[NotEq()], comparators=[Constant(value=0)]), ctx=Load()))], type_ignores=[])",
+    "current_float_filter_matches_intended_mask": true
+   },
+   {
+    "case": "mktcap_is_positive_ROC_magnitude_not_positive_cap_share",
+    "weighted": 0.3125,
+    "avg_count": 2,
+    "positive_cap_share": 0.5
+   },
+   {
+    "case": "missing_positive_valuation_silently_skipped",
+    "weighted": 0.5,
+    "missing_code": "C"
+   },
+   {
+    "case": "120_values_yield_31_fast_and_2_slow",
+    "fast_last": 74.5,
+    "slow_last": 60.0
+   },
+   {
+    "case": "one_NaN_poisons_all_later_cumulative_means",
+    "nan_outputs": 31
+   },
+   {
+    "case": "initial_prepare_then_first_trade_repeats_previous_date_endpoint",
+    "last_values": [
+     119.0,
+     119.0
+    ],
+    "fixture": "Prepared sequence already includes previous_date; next call is after ETF begin_date"
+   },
+   {
+    "case": "ETF_begin_date_does_not_append",
+    "unchanged": true
+   },
+   {
+    "case": "equal_fast_slow_is_false",
+    "signal": false
+   },
+   {
+    "case": "fee_boundary_is_strict_datetime_comparison",
+    "times": [
+     "2013-01-01T00:00",
+     "2013-01-01T09:30"
+    ],
+    "declarations_only": [
+     {
+      "buy_cost": 0.001,
+      "sell_cost": 0.002,
+      "min_cost": 5
+     },
+     {
+      "buy_cost": 0.0003,
+      "sell_cost": 0.0013,
+      "min_cost": 5
+     }
+    ],
+    "not_cost_backtest": true
+   },
+   {
+    "case": "buy_only_when_absent_and_sell_only_when_held",
+    "mock_orders": [
+     [
+      "B",
+      10000.0
+     ],
+     [
+      "A",
+      0
+     ]
+    ]
+   },
+   {
+    "case": "leader_original_OLS_array_float_fails",
+    "error": "TypeError",
+    "message": "only 0-dimensional arrays can be converted to Python scalars"
+   },
+   {
+    "case": "daily_buy_one_can_submit_two_accepted_orders_in_same_loop",
+    "mock_orders": [
+     [
+      "A",
+      100000.0
+     ],
+     [
+      "B",
+      50000.0
+     ]
+    ],
+    "today_bought": [
+     "A",
+     "B"
+    ],
+    "mock_cash_policy": "Each accepted intent consumes half requested value, not actual ledger fills"
+   },
+   {
+    "case": "14_51_sell_still_runs_after_daily_buy_limit",
+    "mock_orders": [
+     [
+      "A",
+      0
+     ]
+    ]
+   },
+   {
+    "case": "cash_equal_500_shares_does_not_buy",
+    "cash": 5000.0,
+    "price": 10.0,
+    "mock_orders": []
+   },
+   {
+    "case": "leader_counts_at_most_11_non_one_price_limit_days",
+    "max_days": 11,
+    "mock_history_shape": "dict of arrays"
+   },
+   {
+    "case": "leader_negative_label_fails_with_datetime_index",
+    "error": "KeyError",
+    "message": "-1"
+   },
+   {
+    "case": "today_limit_chained_assignment_does_not_update_x1",
+    "intended_limit": 12.0,
+    "retained_limit": 11.0,
+    "warnings": [
+     "ChainedAssignmentError"
+    ],
+    "x1_not_read_by_handle_data": true
+   },
+   {
+    "case": "listing_strictly_over_150_natural_days_and_exclude688",
+    "selected": [
+     "B"
+    ]
+   }
+  ],
+  "synthetic_fixture": true,
+  "real_historical_operand_windows": 0,
+  "not_a_backtest": true,
+  "platform_equivalent": false,
+  "limits": [
+   "Mock queries/orders diagnose original functions only; no fills/costs/NAV",
+   "Original defects retained; no revised trading variant or inferred historical pool"
+  ]
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5223,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9"
+ },
+ "progress": {
+  "checkpoint": "20261007-194247-d8d4",
+  "note": "Batch61 diffusion/leader research accepted; original trading inputs remain gated",
+  "catalog_id": "39e39aab84a16681264e",
+  "catalog_sha256": "257e079d1ed1524f797eeed605949791577656fcd50d2d41b4c08550613dd773",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 490,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 64,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 207,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 67,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261007-194247-d8d4"
+ },
+ "supplements": {
+  "accepted_failed_probes": [
+   {
+    "file": "data/staging/strategies-batch42/20261007-weekly-trend-dqn/probe-results.json",
+    "sha256": "77ea73c2e60df58074a78156d162179c870afb20f5f3727356ac11ce4d5b3d39",
+    "results": [
+     {
+      "endpoint": "hs3002021",
+      "query": {
+       "provider": "baostock",
+       "function": "query_hs300_stocks",
+       "parameters": {
+        "date": "2021-01-04"
+       },
+       "limit": "One dated vendor membership sample cannot prove original weekly decision-date platform pools"
+      },
+      "api_sha256": "ee063f872022f64801feeabddb16dedcd38b75b3c596eb16b86a3f72d6cfe942",
+      "status": "failed",
+      "published": false,
+      "files": [],
+      "wire": [],
+      "error": "UnboundLocalError: cannot access local variable 'mySockect' where it is not associated with a value"
+     },
+     {
+      "endpoint": "index_daily",
+      "query": {
+       "provider": "akshare",
+       "function": "stock_zh_index_daily_em",
+       "parameters": {
+        "symbol": "sh000001",
+        "start_date": "20050101",
+        "end_date": "20260929"
+       },
+       "limit": "Daily index prices cannot prove include_now bars at weekly09:30"
+      },
+      "api_sha256": "ee063f872022f64801feeabddb16dedcd38b75b3c596eb16b86a3f72d6cfe942",
+      "status": "failed",
+      "published": false,
+      "files": [],
+      "wire": [],
+      "error": "ConnectionError: HTTPSConnectionPool(host='push2his.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/stock/kline/get?secid=1.000001&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58&klt=101&fqt=0&beg=20050101&end=20260929 (Caused by NameResolutionError(\"HTTPSConnection(host='push2his.eastmoney.com', port=443): Failed to resolve 'push2his.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+     },
+     {
+      "endpoint": "stock_minute",
+      "query": {
+       "provider": "akshare",
+       "function": "stock_zh_a_hist_min_em",
+       "parameters": {
+        "symbol": "000065",
+        "start_date": "2026-09-28 09:30:00",
+        "end_date": "2026-09-29 15:00:00",
+        "period": "1",
+        "adjust": ""
+       },
+       "limit": "Recent minute sample cannot supply missing pretrained weights or platform history defaults"
+      },
+      "api_sha256": "ee063f872022f64801feeabddb16dedcd38b75b3c596eb16b86a3f72d6cfe942",
+      "status": "failed",
+      "published": false,
+      "files": [],
+      "wire": [],
+      "error": "ConnectionError: HTTPSConnectionPool(host='push2his.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/stock/trends2/get?fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6%2Cf7%2Cf8%2Cf9%2Cf10%2Cf11%2Cf12%2Cf13&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58&ut=7eea3edcaed734bea9cbfc24409ed989&ndays=5&iscr=0&secid=0.000065 (Caused by NameResolutionError(\"HTTPSConnection(host='push2his.eastmoney.com', port=443): Failed to resolve 'push2his.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+     }
+    ]
+   },
+   {
+    "file": "data/staging/strategies-batch53/20261007-fund-intraday/probe-results.json",
+    "sha256": "2e51383b850fb4531301586c2a843f87763b6eac94c65c179587951722680698",
+    "results": [
+     {
+      "endpoint": "fund_pool",
+      "function": "fund_etf_category_sina",
+      "parameters": {
+       "symbol": "ETF基金"
+      },
+      "status": "failed",
+      "files": [],
+      "wire_responses": [],
+      "published": false,
+      "strict_usable": false,
+      "api_sha256": "ff77db761b75f5c799a226732e2ac064313ccf34f157d4de4f1908881d8327c3",
+      "error": "ConnectionError: HTTPSConnectionPool(host='vip.stock.finance.sina.com.cn', port=443): Max retries exceeded with url: /quotes_service/api/jsonp.php/IO.XSRV2.CallbackList%5B'da_yPT46_Ll7K6WD'%5D/Market_Center.getHQNodeDataSimple?page=1&num=5000&sort=symbol&asc=0&node=etf_hq_fund&%5Bobject+HTMLDivElement%5D=qvvne (Caused by NameResolutionError(\"HTTPSConnection(host='vip.stock.finance.sina.com.cn', port=443): Failed to resolve 'vip.stock.finance.sina.com.cn' ([Errno -2] Name or service not known)\"))"
+     },
+     {
+      "endpoint": "index_halfhour",
+      "function": "index_zh_a_hist_min_em",
+      "parameters": {
+       "symbol": "000300",
+       "period": "30",
+       "start_date": "2014-01-01 09:30:00",
+       "end_date": "2020-04-24 15:00:00"
+      },
+      "status": "failed",
+      "files": [],
+      "wire_responses": [],
+      "published": false,
+      "strict_usable": false,
+      "api_sha256": "ff77db761b75f5c799a226732e2ac064313ccf34f157d4de4f1908881d8327c3",
+      "error": "ConnectionError: HTTPSConnectionPool(host='80.push2.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/clist/get?pn=1&pz=100&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281&fltt=2&invt=2&fid=f3&fs=b%3AMK0010%2Cm%3A1%2Bt%3A1%2Cm%3A0+t%3A5%2Cm%3A1%2Bs%3A3%2Cm%3A0%2Bt%3A5%2Cm%3A2&fields=f3%2Cf12%2Cf13 (Caused by NameResolutionError(\"HTTPSConnection(host='80.push2.eastmoney.com', port=443): Failed to resolve '80.push2.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+     },
+     {
+      "endpoint": "stock_minute",
+      "function": "stock_zh_a_hist_min_em",
+      "parameters": {
+       "symbol": "000001",
+       "period": "1",
+       "adjust": "",
+       "start_date": "2024-03-29 09:30:00",
+       "end_date": "2024-03-29 11:30:00"
+      },
+      "status": "failed",
+      "files": [],
+      "wire_responses": [],
+      "published": false,
+      "strict_usable": false,
+      "api_sha256": "ff77db761b75f5c799a226732e2ac064313ccf34f157d4de4f1908881d8327c3",
+      "error": "ConnectionError: HTTPSConnectionPool(host='push2his.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/stock/trends2/get?fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6%2Cf7%2Cf8%2Cf9%2Cf10%2Cf11%2Cf12%2Cf13&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58&ut=7eea3edcaed734bea9cbfc24409ed989&ndays=5&iscr=0&secid=0.000001 (Caused by NameResolutionError(\"HTTPSConnection(host='push2his.eastmoney.com', port=443): Failed to resolve 'push2his.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+     }
+    ]
+   },
+   {
+    "file": "data/staging/strategies-batch54/20261007-breadth-forecast-bond/probe-results.json",
+    "sha256": "535b44f775cd5d2cfd671ef46f0a01277f7dc477033a9275fe0f5011438e82c8",
+    "results": [
+     {
+      "endpoint": "industry",
+      "function": "stock_board_industry_name_em",
+      "parameters": {},
+      "status": "failed",
+      "files": [],
+      "wire_responses": [],
+      "published": false,
+      "strict_usable": false,
+      "api_sha256": "7ad6eff359636203da8d88956e589312412adcc7223b7f7fdc4ed2dc93aca0f7",
+      "error": "ConnectionError: HTTPSConnectionPool(host='17.push2.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/clist/get?pn=1&pz=100&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281&fltt=2&invt=2&fid=f3&fs=m%3A90+t%3A2+f%3A%2150&fields=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6%2Cf7%2Cf8%2Cf9%2Cf10%2Cf12%2Cf13%2Cf14%2Cf15%2Cf16%2Cf17%2Cf18%2Cf20%2Cf21%2Cf23%2Cf24%2Cf25%2Cf26%2Cf22%2Cf33%2Cf11%2Cf62%2Cf128%2Cf136%2Cf115%2Cf152%2Cf124%2Cf107%2Cf104%2Cf105%2Cf140%2Cf141%2Cf207%2Cf208%2Cf209%2Cf222 (Caused by NameResolutionError(\"HTTPSConnection(host='17.push2.eastmoney.com', port=443): Failed to resolve '17.push2.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+     },
+     {
+      "endpoint": "forecast",
+      "function": "stock_yjyg_em",
+      "parameters": {
+       "date": "20230630"
+      },
+      "status": "failed",
+      "files": [],
+      "wire_responses": [],
+      "published": false,
+      "strict_usable": false,
+      "api_sha256": "7ad6eff359636203da8d88956e589312412adcc7223b7f7fdc4ed2dc93aca0f7",
+      "error": "ConnectionError: HTTPSConnectionPool(host='datacenter.eastmoney.com', port=443): Max retries exceeded with url: /securities/api/data/v1/get?sortColumns=NOTICE_DATE%2CSECURITY_CODE&sortTypes=-1%2C-1&pageSize=500&pageNumber=1&reportName=RPT_PUBLIC_OP_NEWPREDICT&columns=ALL&filter=+%28REPORT_DATE%3D%272023-06-30%27%29 (Caused by NameResolutionError(\"HTTPSConnection(host='datacenter.eastmoney.com', port=443): Failed to resolve 'datacenter.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+     },
+     {
+      "endpoint": "convertible",
+      "function": "bond_zh_hs_cov_daily",
+      "parameters": {
+       "symbol": "sh113053"
+      },
+      "status": "failed",
+      "files": [],
+      "wire_responses": [],
+      "published": false,
+      "strict_usable": false,
+      "api_sha256": "7ad6eff359636203da8d88956e589312412adcc7223b7f7fdc4ed2dc93aca0f7",
+      "error": "ConnectionError: HTTPSConnectionPool(host='finance.sina.com.cn', port=443): Max retries exceeded with url: /realstock/company/sh113053/hisdata/klc_kl.js?d=2026_10_07 (Caused by NameResolutionError(\"HTTPSConnection(host='finance.sina.com.cn', port=443): Failed to resolve 'finance.sina.com.cn' ([Errno -2] Name or service not known)\"))"
+     }
+    ]
+   }
+  ],
+  "new_requests": 0,
+  "new_samples": 0,
+  "published": false,
+  "not_a_backtest": true,
+  "decision": "Reuse dated HS300 login failure and verified same-host Eastmoney DNS failures; no current industry substitution",
+  "missing": [
+   "Daily historical HS300 members and circulating-cap visible versions and all-member price endpoints",
+   "510300 start/event/status/price/execution evidence",
+   "Historical HY001-HY011 pools/names/listing/status/high_limit",
+   "Original Shanghai000001 three-day close and leader minute prices/fills/limit queues"
+  ],
+  "limits": [
+   "A prior failed request is evidence of that attempt, not proof data does not exist at the provider",
+   "Changing symbols or parser on a DNS-failing host does not resolve name resolution"
+  ]
+ },
+ "not_a_backtest": true,
+ "original_strategy_complete": false,
+ "newly_reviewed": 2
+}

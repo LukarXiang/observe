@@ -1,0 +1,59 @@
+[
+  {
+    "action": "完成只读元数据导出、入口、追踪白名单及仅Git阅读验证",
+    "done_when": "元数据、代码指纹、引用及隔离阅读测试通过，关联文件完成审查",
+    "id": "T-git-metadata",
+    "plan": "docs/tasks/2026-10-08-Git追踪与跨机数据管理计划.md",
+    "status": "in_progress"
+  },
+  {
+    "action": "在可写独立检出提交，保存Git bundle，恢复网络后同步远端",
+    "blockers": [
+      "B-git-write",
+      "B-network"
+    ],
+    "done_when": "远端master明确包含审查通过的提交；原仓库Git目录可写后再同步本机登记",
+    "id": "T-git-publication",
+    "status": "blocked"
+  },
+  {
+    "action": "完成第64批正式checks、冻结终审和finish；已有study/offline不覆盖重跑",
+    "done_when": "正式验收凭据及最终读回通过；研究组件不计新增交易回测",
+    "id": "T-batch64",
+    "plan": "docs/tasks/2026-10-07-第六十四批价格形态与K线识别研究.md",
+    "status": "in_progress"
+  },
+  {
+    "action": "补首次披露值、修订版本与来源公告证据",
+    "blockers": [
+      "B-financial-version"
+    ],
+    "done_when": "可证明决策时点可用的历史财务版本进入新快照并通过时点门禁",
+    "id": "T-financial-version",
+    "status": "blocked"
+  },
+  {
+    "action": "核实历史股本事件、PCF、名称及专属股票池，优先解除微盘400/小盘价值100依赖",
+    "blockers": [
+      "B-shares-pool"
+    ],
+    "done_when": "时点证据、单位与覆盖核实后新增不可变分区；年度控制市值不作替代",
+    "id": "T-shares-pcf-names",
+    "status": "blocked"
+  },
+  {
+    "action": "补退市转板权益、换股待上市权益并开发唯一Book的相应结算",
+    "blockers": [
+      "B-settlement"
+    ],
+    "done_when": "所选策略依赖结算有证据、模块测试和新实验验收，BP原blocked实验保持只读",
+    "id": "T-settlement",
+    "status": "blocked"
+  },
+  {
+    "action": "继续人工审查剩余482份来源，缺数据逐项留档",
+    "done_when": "695来源均有人工规则/研究性质/重复关系/依赖结论；统计与目录一致",
+    "id": "T-source-reviews",
+    "status": "in_progress"
+  }
+]

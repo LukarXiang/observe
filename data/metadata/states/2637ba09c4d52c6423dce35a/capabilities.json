@@ -1,0 +1,66 @@
+[
+  {
+    "code": [
+      "src/observe/data/financials.py",
+      "src/observe/data/financial_history.py"
+    ],
+    "id": "C-financial",
+    "limits": "严格历史输入0，不借公告日期、不以实收资本金额替股数",
+    "status": "implemented_limited",
+    "supports": "完整归档、字典、时点门禁、探索滞后、单季/TTM/同比"
+  },
+  {
+    "code": [
+      "src/observe/strategies.py",
+      "src/observe/portfolio.py",
+      "src/observe/loop.py"
+    ],
+    "id": "C-rule-strategy",
+    "limits": "日频与原即时成交不等价，固定池事后选择保留",
+    "status": "verified_limited",
+    "supports": "目标权重/现金、真实日历周月调仓、状态机、固定金额、槽位现金、唯一Book"
+  },
+  {
+    "code": [
+      "src/observe/ledger/book.py",
+      "src/observe/execution.py"
+    ],
+    "id": "C-ledger",
+    "limits": "退市/换股待上市权益仍有策略阻断；不是期货/期权/全分钟撮合实现",
+    "status": "verified_limited",
+    "supports": "原始价、T+1、数量约束、费用、部分成交、公司行动与转换"
+  },
+  {
+    "code": [
+      "src/observe/research.py",
+      "src/observe/features.py",
+      "src/observe/models.py"
+    ],
+    "evidence": "docs/07-后端研究框架逻辑.md",
+    "id": "C-research",
+    "limits": "已查看区间不是独立最终留出",
+    "status": "verified_limited",
+    "supports": "因子、滚动模型、标签成熟、阶段缓存、三成本与基准"
+  },
+  {
+    "code": [
+      "src/observe/paired.py"
+    ],
+    "evidence": "docs/06-分钟特征成对实验报告.md",
+    "id": "C-minute",
+    "limits": "无可确认增量；缺退市分钟；组合阻断不能作为收益证明",
+    "status": "research_limited",
+    "supports": "主实验Ridge秩IC增量+0.0065，95%区间[-0.0091,+0.0234]包含0"
+  },
+  {
+    "code": [
+      "src/observe/replay.py",
+      "src/observe/strategies.py",
+      "src/observe/runs.py"
+    ],
+    "id": "C-reproduce",
+    "limits": "本机缺失的旧输入须按原SHA迁移，不能替代",
+    "status": "verified_limited",
+    "supports": "冻结输入、禁网重算、逐值比较、迁移后重建索引"
+  }
+]

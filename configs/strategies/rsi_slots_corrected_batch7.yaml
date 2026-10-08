@@ -1,0 +1,54 @@
+name: RSI40修正近似变体（事后固定股票池工程回放）
+implementation: rsi_slots_corrected_v1
+source_path: repo/量化策略源代码/2024年度精选策略2/40.RSI学习贴.txt
+snapshot: 20261005-152153-eb05
+start: 2021-04-09
+end: 2026-09-29
+initial_cash: 1000000
+execution_instruments:
+  [603799.SH, 300750.SZ, 601633.SH, 603659.SH, 002594.SZ, 603259.SH,
+   601012.SH, 000661.SZ, 600763.SH, 300359.SZ, 300347.SZ, 300014.SZ,
+   300661.SZ, 300073.SZ, 002050.SZ, 002714.SZ, 601888.SH, 002407.SZ,
+   002456.SZ, 300782.SZ, 000333.SZ, 002088.SZ, 600660.SH, 002597.SZ,
+   002821.SZ, 600276.SH, 600196.SH, 002371.SZ, 300595.SZ,
+   600309.SH, 002352.SZ, 300357.SZ, 300009.SZ, 300702.SZ, 002595.SZ,
+   300036.SZ, 300037.SZ, 601058.SH, 601677.SH, 601222.SH, 002286.SZ]
+parameters:
+  pool: [603799.SH, 300750.SZ, 601633.SH, 603659.SH, 002594.SZ, 603259.SH,
+         601012.SH, 000661.SZ, 600763.SH, 300359.SZ, 300347.SZ, 300014.SZ,
+         300661.SZ, 300073.SZ, 002050.SZ, 002714.SZ, 601888.SH, 002407.SZ,
+         002456.SZ, 300782.SZ, 000333.SZ, 002088.SZ, 600660.SH, 002597.SZ,
+         002821.SZ, 600276.SH, 600196.SH, 002371.SZ, 300595.SZ, 300750.SZ,
+         600309.SH, 002352.SZ, 300357.SZ, 300009.SZ, 300702.SZ, 002595.SZ,
+         300036.SZ, 300037.SZ, 601058.SH, 601677.SH, 601222.SH, 002286.SZ]
+  history: 61
+  period: 6
+  max_positions: 9
+  price_basis: frozen_back_adjusted_v1
+  window_policy: skip_known_pauses_v1
+universe:
+  boards: [main, gem]
+  min_listed_sessions: 1
+  exclude_st: false
+  suspend_window: 1
+  max_suspended: 1
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: signal_slots
+  n: 9
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: daily
+  rebalance_session: 1
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.05
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+cost_scenarios: [base, fees_x2, slippage_x2]
+benchmark: 000300.SH
+cache: true

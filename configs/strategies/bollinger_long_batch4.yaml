@@ -1,0 +1,38 @@
+name: 茅台布林修正变体长区间（日频执行近似）
+implementation: bollinger_breakout_corrected_v1
+source_path: repo/量化策略源代码/2020年度精选策略/52 布林带1.txt
+snapshot: 20261005-152153-eb05
+start: 2021-02-02
+end: 2026-09-29
+instrument: 600519.SH
+execution_instruments: [600519.SH]
+initial_cash: 1000000
+parameters:
+  boll_window: 20
+  boll_std_multiplier: 2
+universe:
+  boards: [main]
+  min_listed_sessions: 1
+  exclude_st: false
+  suspend_window: 1
+  max_suspended: 1
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: target_weights
+  n: 1
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: daily
+  rebalance_session: 1
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.05
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+cost_scenarios: [base, fees_x2, slippage_x2]
+benchmark: 000300.SH
+cache: true

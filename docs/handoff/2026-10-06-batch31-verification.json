@@ -1,0 +1,4660 @@
+{
+ "status": "ok",
+ "reviews": {
+  "sources": [
+   {
+    "source_path": "repo/量化策略源代码/2020年度精选策略/71 【投资学】CAPM单因子回归模型+ROE股票池（含止损）.txt",
+    "source_copy": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/source-reviews/S-12ba1c0d79f5.source",
+    "source_sha256": "6a812af5a6d5ef36b7893d4de3b3d61023a9bec85f257cfd3f815f67ca9127e5",
+    "encoding": "gb18030",
+    "complete_lines_read": 229,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "全市场ROE前千与CAPM逆alpha权重",
+     "fidelity": "原SciPy收益/回归/分配组件；ROE历史版本及平台兼容未证明",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "全市场ROE>10，ROE降序前1000；不取沪深300成分，000300仅回归基准",
+      "history": "121价格对应120收益，股票和市场均减.04/252；SciPy linregress",
+      "selection": "alpha升序最后16；权重=(max-alpha)/(max-min)后归一，最高alpha权重0；空池空目标，等alpha/单只存在数值或除零边界",
+      "clock": "盘前计数从0开始每10日允许handle_data调仓，首次卖买后if_trade=False；频率未声明",
+      "eligibility": "只检查当前未停牌和skip_paused历史首值非NaN，不证明121足长或过去121日未停牌",
+      "execution": "先卖后买；已有市值按可卖数量*last_sale_price，不是全部持仓；按portfolio_value配资",
+      "stop": "盘后price/avg_cost严格<.7清仓后把可用现金目标下到000012国债指数，不可静默映射ETF",
+      "cost": "零固定滑点；严格晚于2013/2011/2009年元旦时佣金买.0003/.001/.002，否则.003，卖各加.001，最低5"
+     },
+     "gaps": [
+      "缺平台历史ROE披露/修订版本、原全市场筛选池及即时执行",
+      "Series整数索引、isnan/datetime平台注入及Python2 print兼容未证明",
+      "跳过停牌可能使股票/市场收益按位置配对不同日期；保留并单独记录",
+      "国债指数不可交易，原止损后买入不能直接运行"
+     ],
+     "next_step": "冻结原函数数值/状态与日期错配诊断；ROE和可交易止损标的未满足前阻断原策略，经济替换另确认"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2021年度精选策略/88.基于动量因子的ETF轮动加上RSRS择时.txt",
+    "source_copy": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/source-reviews/S-66d37162df54.source",
+    "source_sha256": "450adeb696071244a7d0e05d7303152d61bd8bb377f9f3e13e978899d716d56f",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 167,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "七指数动量选两ETF与周频RSRS混合种子",
+     "fidelity": "沪深300原动量/RSRS组件及订单意图；缺全部ETF执行依赖",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pairs": "000016/510050、000300/510300、399905/510500、399006/159915、000015/510880、399932/159928、399913/512010",
+      "momentum": "15条close的log线性拟合，(exp(slope)^250-1)*R²，正分降序",
+      "rsrs": "18条high对low的np.polyfit，600条斜率总体标准分*slope*R²，20均值与前移3行20均值比较；严格±.7",
+      "seed": "取618行但只循环600个18窗，末行未用；初始化再[:-1]成599，末两输入行未用于保留种子",
+      "clock": "run_weekly weekday=3；初始化后每周get_signal才追加一次斜率，原周调度节假日语义未证明",
+      "trade": "非空池且信号非SELL允许买；原有持仓排名0—3可保留，排名>3或池外才全部卖后买前2；KEEP可建仓",
+      "allocation": "全部卖后按当时可用现金/实际目标数，前2等目标金额；不再平衡合格旧持仓",
+      "cost": "fund双向佣金.0005、最低5，零税/固定滑点"
+     },
+     "gaps": [
+      "缺七指数共同完整历史及七ETF事件、交易状态和执行规则",
+      "math未显式导入，平台注入及暂停/周调度/即时成交等价未证明",
+      "常量价格/低价回归/斜率方差零会产生警告或非有限值，不能替代为0"
+     ],
+     "next_step": "用冻结沪深300核算原混合599日种子/后续周追加及动量，保留状态；不得改成每日滚动或称七ETF回测"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2023年度精选策略/83.韶华研究之一，布林突破+均线金叉，四年五倍.txt",
+    "source_copy": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/source-reviews/S-36ea1540cfac.source",
+    "source_sha256": "2b199cb1b5d383726875fad2e1bde1ed939be289ec1e9338ffc2fe200529dfde",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 515,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "股票BOLL收窄突破与当日eye/brain持久流程",
+     "fidelity": "原技术信号/文件流程/风险订单诊断；平台指标及披露依赖缺失",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "asset": "实际股票策略，510300仅调度说明注释；基准000852",
+      "eye": "当前股票池排暂停/ST/退、已持有、上市<=600自然日、过去10交易日eye重复；60日BOLL宽度<=.1且价格>=上轨，TRIX或MACD=1",
+      "brain": "只读当日eye，按cir_m升序；000852/000300各30行涨幅和末日涨幅分四阶段，CYF/PE/F10/流通市值过滤后写翌日清单",
+      "dependencies": "get_valuation位置列2/3/4，CYF10，原finance.STK_SHAREHOLDER_FLOATING_TOP10 pub_date>前60交易日并limit10后share_ratio求和，历史版本/查询顺序未证明",
+      "technical": "TRIX12/9、MACD12/26/9、EMV14/9、KD9/3/3；前日是自然日减1；TRIX将成条件同时要求matrix-trix>=0及<=-.03，数值正常时不可达",
+      "clock": "开盘前载入昨日brain；open卖买，14:55风控/补买，20:00日志，21:00 eye、22:00 brain",
+      "open": "现金<1万退出；一信号全现金、多个现金/2但遍历全部；按持仓遍历删除buylist会跳项",
+      "risk": "ret<-10%或>50%，持有>3交易日且ret<-5%；慢盈利率<.015需有新买信号并按年龄豁免，688/300在2020-09-01后速度减半；brain另含回撤、高换手及死叉",
+      "cost": "stock佣金.0003、卖税.001、最低5；默认滑点/参与度未声明"
+     },
+     "gaps": [
+      "缺bug_eye.csv/bug_brain.csv原初始化文件与跨日状态",
+      "缺原TRIX/MACD/EMV/KD/CYF指标取数和种子，及历史前十流通股东披露/版本",
+      "缺历史全池/名称/市值、000852长历史与14:55分钟撮合",
+      "原不可达TRIX将成分支、列表删项及原始浮点严格比较保留，不自行修正规则"
+     ],
+     "next_step": "归档原流程和缺陷；探测公告字段与配套模块，补数据前搁置交易，阈值或初始化替换另确认"
+    }
+   }
+  ],
+  "references": [
+   {
+    "file": "repo/backtrader/backtrader/indicators/ols.py",
+    "copy": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/references/ols.py",
+    "sha256": "cc228c5133bf1e27a36290c2fb5756cdc371f57e868e6fa9784c7db6ea9a81f4",
+    "commit": "b853d7c90b6721476eb5a5ea3135224e33db1f14",
+    "use": "OLS conventions, quarterly ROE and holder date/schema availability; not platform-equivalent substitution"
+   },
+   {
+    "file": "repo/baostock/baostock/demo/demo_profit_data.py",
+    "copy": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/references/demo_profit_data.py",
+    "sha256": "75d6128d24b79edfcb427f1ca34fddbcbd6c3ed2ec42442e06515e26c8fabfdb",
+    "commit": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+    "use": "OLS conventions, quarterly ROE and holder date/schema availability; not platform-equivalent substitution"
+   },
+   {
+    "file": "repo/akshare/akshare/stock_fundamental/stock_finance_sina.py",
+    "copy": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/references/stock_finance_sina.py",
+    "sha256": "984aeee41671fbafb83cb81e3665fe8f0d2306c4efef361b6ea93b19c9588e28",
+    "commit": "0191689d57c667b7c7a198fd0cf97316837ef311",
+    "use": "OLS conventions, quarterly ROE and holder date/schema availability; not platform-equivalent substitution"
+   }
+  ],
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "00afe567952cff5923ec",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 506,
+    "已验证": 11,
+    "待审查": 2,
+    "暂不可复现": 62,
+    "非交易研究脚本": 73,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_valuation": 20,
+    "finance.run_query": 87,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 315,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10
+   },
+   "reviewed_sources": [
+    "S-25a2ce74300f",
+    "S-a02bd5fb82fa",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-af09cfafe6cf",
+    "S-95b83db2a7bc",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-df677a5ebcd4",
+    "S-e2209e269e29",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-db01c1c96ded",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-12ba1c0d79f5",
+    "S-850132b43dab",
+    "S-147b0cfb49ff",
+    "S-d07877e2c354",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-00007afacbb0",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-57b937da520d",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-cafee3ad464a",
+    "S-560abd656ca0",
+    "S-2c9d2319c7d3",
+    "S-84b17f428272",
+    "S-88c607586b82",
+    "S-0c2cff0626ee",
+    "S-954b41e5a396",
+    "S-72e5a8798544",
+    "S-a4c77bd8b44e",
+    "S-4b7dbe8af8ac",
+    "S-bee2c8d71c81",
+    "S-f81bb8422f94",
+    "S-790f0000ed44",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-66d37162df54",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-979d5187c3ec",
+    "S-daecf5bc2eef",
+    "S-f39f02e3e03f",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-e12e4a8dd5e5",
+    "S-05431e7ae641",
+    "S-de485dcbc1fe",
+    "S-03e5e601f4cc",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-47d77840ec26",
+    "S-2034813a5b91",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-84f3f0c3c784",
+    "S-c02ac3bad6ef",
+    "S-69bfefcb4d1d",
+    "S-653ef41eb685",
+    "S-c55ddc35cce6",
+    "S-c2a42783423c",
+    "S-75af9ddf3d76",
+    "S-f23cf187dc47",
+    "S-64a80805fb8a",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-bdfd3c6fde91",
+    "S-e0fb958bf2d4",
+    "S-53655cbaa9bc",
+    "S-b01f3e94a5b8",
+    "S-c98372326f58",
+    "S-665c147b3cf0",
+    "S-c5a0e347acdc",
+    "S-69ef2eedcc68",
+    "S-4766560702c0",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-36ea1540cfac",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-976aaefe793c",
+    "S-84adbe33af88",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-68dd8d2d5eec",
+    "S-926d08fe0ba8",
+    "S-9e752d17571d",
+    "S-624b1cbccd4f",
+    "S-5008146cd1d4",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-2d40c2d698f7",
+    "S-028ef663b462",
+    "S-d68e945d07cb",
+    "S-1e5fd99659cf",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-c1bba20dca69",
+    "S-4730e53b92bc"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/00afe567952cff5923ec"
+  },
+  "previous_catalog_file": "data/catalog/strategies/a2a5c5e41dca190898df/catalog.json",
+  "previous_catalog_sha256": "38f74ad0aecdfdbf69f206f9c0402be8b30ecc9378bf24f866ff9609bd121db9",
+  "snapshot": "20261006-145049-e06c",
+  "dependency_search": {
+   "command": [
+    "rg",
+    "--files",
+    "repo",
+    "-g",
+    "*bug_eye*",
+    "-g",
+    "*bug_brain*",
+    "-g",
+    "*technical_analysis*"
+   ],
+   "returncode": 1,
+   "matches": []
+  },
+  "installed_modules": {
+   "jqdata": false,
+   "jqlib": false,
+   "jqfactor": false
+  },
+  "not_a_backtest": true,
+  "strategy_results": []
+ },
+ "progress": {
+  "checkpoint": "20261006-171854-a52d",
+  "note": "Batch31 original CAPM/weekly-RSRS/momentum components and API corrections accepted; original trading gaps retained",
+  "catalog_id": "00afe567952cff5923ec",
+  "catalog_sha256": "92d98aef57b71ebacdaca15e043598e0ce43eb3b1190fbde53099df8c70b3191",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 506,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 62,
+   "非交易研究脚本": 73,
+   "重复版本": 41
+  },
+  "manually_reviewed": 138,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 67,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261006-171854-a52d"
+ },
+ "snapshot": "20261006-145049-e06c",
+ "scan": {
+  "status": "ok",
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "a2a5c5e41dca190898df",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 506,
+    "已验证": 11,
+    "待审查": 2,
+    "暂不可复现": 62,
+    "非交易研究脚本": 73,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_valuation": 20,
+    "finance.run_query": 87,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 315,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10
+   },
+   "reviewed_sources": [
+    "S-25a2ce74300f",
+    "S-a02bd5fb82fa",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-af09cfafe6cf",
+    "S-95b83db2a7bc",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-df677a5ebcd4",
+    "S-e2209e269e29",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-db01c1c96ded",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-850132b43dab",
+    "S-147b0cfb49ff",
+    "S-d07877e2c354",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-00007afacbb0",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-57b937da520d",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-cafee3ad464a",
+    "S-560abd656ca0",
+    "S-2c9d2319c7d3",
+    "S-84b17f428272",
+    "S-88c607586b82",
+    "S-0c2cff0626ee",
+    "S-954b41e5a396",
+    "S-72e5a8798544",
+    "S-a4c77bd8b44e",
+    "S-4b7dbe8af8ac",
+    "S-bee2c8d71c81",
+    "S-f81bb8422f94",
+    "S-790f0000ed44",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-979d5187c3ec",
+    "S-daecf5bc2eef",
+    "S-f39f02e3e03f",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-e12e4a8dd5e5",
+    "S-05431e7ae641",
+    "S-de485dcbc1fe",
+    "S-03e5e601f4cc",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-47d77840ec26",
+    "S-2034813a5b91",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-84f3f0c3c784",
+    "S-c02ac3bad6ef",
+    "S-69bfefcb4d1d",
+    "S-653ef41eb685",
+    "S-c55ddc35cce6",
+    "S-c2a42783423c",
+    "S-75af9ddf3d76",
+    "S-f23cf187dc47",
+    "S-64a80805fb8a",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-bdfd3c6fde91",
+    "S-e0fb958bf2d4",
+    "S-53655cbaa9bc",
+    "S-b01f3e94a5b8",
+    "S-c98372326f58",
+    "S-665c147b3cf0",
+    "S-c5a0e347acdc",
+    "S-69ef2eedcc68",
+    "S-4766560702c0",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-976aaefe793c",
+    "S-84adbe33af88",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-68dd8d2d5eec",
+    "S-926d08fe0ba8",
+    "S-9e752d17571d",
+    "S-624b1cbccd4f",
+    "S-5008146cd1d4",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-2d40c2d698f7",
+    "S-028ef663b462",
+    "S-d68e945d07cb",
+    "S-1e5fd99659cf",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-c1bba20dca69",
+    "S-4730e53b92bc"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/a2a5c5e41dca190898df"
+  },
+  "catalog_file": "data/catalog/strategies/a2a5c5e41dca190898df/catalog.json",
+  "catalog_sha256": "38f74ad0aecdfdbf69f206f9c0402be8b30ecc9378bf24f866ff9609bd121db9",
+  "changes": [
+   {
+    "path": "2020年度精选策略/73 跟着港资（北向资金）买A股.txt",
+    "source_sha256": "26cc8a6f92143e1c20d5cdd00f9f9e83ba248f222650101d50bf75cdb7ad05c2",
+    "changes": {
+     "apis": {
+      "before": [
+       "history",
+       "get_current_data",
+       "order_target_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "history",
+       "get_current_data",
+       "order_target_value"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/85 【第一次玩】我就是要买便宜股系列.txt",
+    "source_sha256": "1235682e2502ecfdf91c50ef7087885d46cd60f3713239f782d053d7536dcb28",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "history",
+       "run_monthly",
+       "order_target",
+       "order"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "history",
+       "run_monthly",
+       "order_target",
+       "order"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/17.基金跟随策略，19年年化60%.txt",
+    "source_sha256": "8451752af4e5b6e1f07771b7eb166a83317ee60f7a7227f914626f3d38200b85",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_industry_stocks",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_index_stocks",
+       "get_industry_stocks",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/26.稳定高回报周期股策略2.txt",
+    "source_sha256": "6f46c3e6ed3c37a962170fc4b5a13dc05054ad863d2202e5069b6e3aee2843df",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "run_monthly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "run_monthly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/29.北上资金（北向资金港资外资）因子分析与策略分享.txt",
+    "source_sha256": "92f18864f41f9ba58e26901bca315efc8f580318eaa2819f2e19ac5f6a423aba",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_price",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "order_target_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "order_target_value"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/31.RSRS择时+货币基金--6年8倍行业周期股策略.txt",
+    "source_sha256": "10616b089bcd46f4a635957838c6a2f2040ba0d4c3d3cc05723fd3819c387e8f",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "attribute_history",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "attribute_history",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/32.北向资金A股择时策略（5年16倍）.txt",
+    "source_sha256": "58bcb4f189e4db816325c312efea4ae49cd3dbd16f8debde3023c4ac66a9d425",
+    "changes": {
+     "apis": {
+      "before": [
+       "run_daily",
+       "order_target",
+       "order_value",
+       "get_future_contracts"
+      ],
+      "after": [
+       "finance.run_query",
+       "run_daily",
+       "order_target",
+       "order_value",
+       "get_future_contracts"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/33.【研报复现】基于风险溢价的沪深300择时-目前依然有效.txt",
+    "source_sha256": "641b219905260ea94ac86c70828f10170c6c5109e483d1a92fc591dcf933cf4c",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_price"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/4.红利搬砖，年化29%.txt",
+    "source_sha256": "917e420080bef6cb57794cec57c7f2946eb50ae5537ceba4940bb39bea1be2ae",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_current_data",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_current_data",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/49.根据北上资金买股票的最佳持股时间探讨.txt",
+    "source_sha256": "2edd4281002d9bd21d385d3f2416435fb00ab760ff6cd2684165c75e1c097e53",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "history",
+       "get_current_data",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "history",
+       "get_current_data",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/51.北上资金持股比选股策略（北向、港资、外资）.txt",
+    "source_sha256": "5c1e9fddfabbcb4177d962e1eece850a94534486a58da581c0a2c3d215b00a15",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_index_stocks",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/52.根据北上资金买A股策略Python3版（北向、港资、外资）.txt",
+    "source_sha256": "3d55aa41fbe47218db2392b387662a5c2ba19895b7b4e6ac3c25a0f03167c36e",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/53.基于大盘PE标准差偏离度的聪明基金定投策略.txt",
+    "source_sha256": "4b49483b6ffd92e9596da5a8eeb4faf836bf8df029798fb644848783d1bc1300",
+    "changes": {
+     "apis": {
+      "before": [
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/61.【复现】扩散指标择时.txt",
+    "source_sha256": "0b8bd5bc5814d4831f3fa86b534624cddd2c4552d082296eb0f38cc15b6c8ef9",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_price",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_valuation",
+       "get_index_stocks",
+       "get_price",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/62.【复现】北向资金交易能力一定强吗.txt",
+    "source_sha256": "b0727d2bdc0100366aaf0d36a8d157e1ba8549c98bae012c4eca6327fec4996c",
+    "changes": {
+     "apis": {
+      "before": [
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "finance.run_query",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/70.超稳的股息率+均线选股策略.txt",
+    "source_sha256": "d519c60fc103d030fd4b84482543c90765853fae863a880123a4f1ba90f235cb",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "attribute_history",
+       "get_current_data",
+       "run_monthly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "attribute_history",
+       "get_current_data",
+       "run_monthly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/77.超强单因子策略（EBIT,EV）.txt",
+    "source_sha256": "77fc7abe51eadecde96db59ea4d4043e126815c61e1d6b2f8c3033bfc81e98be",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_current_data",
+       "get_factor_values",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_index_stocks",
+       "get_current_data",
+       "get_factor_values",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/80.公募基金抱团.txt",
+    "source_sha256": "870d544c5f576d8b5f7ac250a133ae2b655a59b73ce6b395223526119d8dee50",
+    "changes": {
+     "apis": {
+      "before": [
+       "run_daily",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "run_daily",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则",
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "ETF行情/公司行动/执行规则",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/86.北上詹姆斯.txt",
+    "source_sha256": "aaabeccc33655c12913699b5bab180f7b4c6166d074e88a0ae2bcc7a81d044a4",
+    "changes": {
+     "apis": {
+      "before": [
+       "run_daily",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "run_daily",
+       "order_target",
+       "order_value"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/93北向Boll带_ETF组合宝付费策略.txt",
+    "source_sha256": "ca37ef9d570c9efc2ef970c98f044ec4266af16e456c207aec7a6aee6c5458ab",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "finance.run_query",
+       "attribute_history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/97.稳定高回报周期股策略2-RSRS择时.txt",
+    "source_sha256": "1734cd2023e69eeff77c96f0feb5ac5770a8e0792f5ee5ab1fa2b87c38ac2076",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/13.利用股息率长线选股【超稳】.txt",
+    "source_sha256": "f2bb4917cd2efb4194bd7cebf4603dce9f487904e1a081ad678cd9d211914d22",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "attribute_history",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "attribute_history",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/4.自带仓位控制的股息率策略，超稳.txt",
+    "source_sha256": "704a2e2240bcc4302981b33865820a3d3a03c926644ddecb38948328793f85e0",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "run_monthly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "run_monthly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/40.第三期研报复现——Eden666.txt",
+    "source_sha256": "2e1eba1dd37a19cac2f06140f118bd661af05ef7587b2ec45ca8705270e23148",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals_continuously",
+       "get_index_stocks",
+       "get_industry_stocks",
+       "get_price"
+      ],
+      "after": [
+       "get_fundamentals_continuously",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_industry_stocks",
+       "get_price"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "历史行业"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/43.股指期货&quot;蜘蛛网策略&quot; ——从成交持仓表中捕捉知情投资者行为.txt",
+    "source_sha256": "65d1c386719eeeb0e3b284ce76463ccb686c20557ec04b55336d219b2dc76dab",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price",
+       "get_extras",
+       "run_daily",
+       "order_target"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_price",
+       "get_extras",
+       "run_daily",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/58.100%胜率！历史PE估值价值投资择时交易.txt",
+    "source_sha256": "a06f2a63fdb07976b913067d51dedaf0617bd5a55e2e6335ac74bc36a669bb0e",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price",
+       "run_daily",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_price",
+       "run_daily",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/13.胜率65%之缩量分歧反包战法.txt",
+    "source_sha256": "847dbd36257b3d72e0ef5fb4db6992f4583ddca65943a122c6ea2ca719df37f7",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_ticks",
+       "get_price",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_ticks",
+       "get_price",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/18.【复现】FFScore财务模型.txt",
+    "source_sha256": "67873dc4ab259eb22bb79fcf98d506eb7dd285b1c54f89afa6ddefb2cf89f01b",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_industry",
+       "get_price",
+       "get_extras",
+       "get_all_securities",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_valuation",
+       "get_index_stocks",
+       "get_industry",
+       "get_price",
+       "get_extras",
+       "get_all_securities",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/2.多策略融合-80倍-无未来函数.txt",
+    "source_sha256": "e4d0d66d07ada30a87a8e354cc429db3d9ac8b2bdcd0493ca570e23ebdc7a55d",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_ticks",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_ticks",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/20.北向资金股票轮动-优质策略可直接实盘.txt",
+    "source_sha256": "4cf0557251d53d18eebb1c7732dfa04f6eb2e377cd756cdb144cb0e51d832e40",
+    "changes": {
+     "apis": {
+      "before": [
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "finance.run_query",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/23.低AH溢价选股.txt",
+    "source_sha256": "f51b43b76309213411979dd1868f3c90cccb1b919943971155d9399446c4cf1f",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_current_data",
+       "run_weekly",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_current_data",
+       "run_weekly",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/28.F_Score 选股，年化80%+.txt",
+    "source_sha256": "966a166272aa920c14688e1c0fedc302baa2f3a3f76412b2ae418c42cd6e93cb",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_money_flow",
+       "get_index_stocks",
+       "run_weekly",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_money_flow",
+       "get_index_stocks",
+       "run_weekly",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史资金流字段/供应商口径和可用时点待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史资金流字段/供应商口径和可用时点待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/30.跟着基金报团！！！174% 回撤 7.33%.txt",
+    "source_sha256": "30290425ab0baedb0b0eebe31e39e0c5386e4ac1de2bba617edf9443d75c7a22",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_index_stocks",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/31.北向Boll带_ETF组合宝付费策略.txt",
+    "source_sha256": "ca37ef9d570c9efc2ef970c98f044ec4266af16e456c207aec7a6aee6c5458ab",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "finance.run_query",
+       "attribute_history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/44.海龟突破系统，19-21年化150，无未来函数和过拟合.txt",
+    "source_sha256": "970fd85b2dc48a7d65e0ff6df61ffbe6fb9c5f7d73d495a7420c03b474d8a4d5",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_valuation",
+       "get_index_stocks",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/46.年化46%的北向资金+20日涨幅的创业板策略.txt",
+    "source_sha256": "be59d54418039e1286f85b02b0d949cb691d182bb15008cbec4e6ac3cf674d6c",
+    "changes": {
+     "apis": {
+      "before": [
+       "run_daily",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "run_daily",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/52.筹码选股.txt",
+    "source_sha256": "8e347f65a005970a39593cdb5e1aaa7d3e6491118f492a4f14f91db5c46ccf43",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/53.利用聚宽的数据库，研究基金.txt",
+    "source_sha256": "6bfe2ec23721d83c4862994f5caa0978eafbdf0f15a043846e2e1d8d94b1b01d",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_price"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/57.韶华研究之四-菲阿里四阶在T+1的短线策略应用.txt",
+    "source_sha256": "b3cbb8cb957298328a09e4fa9f632d907d27956644634640bec5015a253eb974",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order"
+      ],
+      "after": [
+       "get_valuation",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/58.北向RSRS与布林带择时.txt",
+    "source_sha256": "1ca06cbc4d95a15dd646bb1aa73b50fbf5503252071f9ed0a1461d08aa3c1e69",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_price",
+       "attribute_history",
+       "run_daily",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "attribute_history",
+       "run_daily",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/74.勾股神器2代码40行，年化一百点.txt",
+    "source_sha256": "9d6649fdf909a1d911ef1dbf60b6aad88106c1a6bc9f512ede2e524a2ae5ed08",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "run_daily",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_index_stocks",
+       "run_daily",
+       "order_target",
+       "order_value"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/83.韶华研究之一，布林突破+均线金叉，四年五倍.txt",
+    "source_sha256": "2b199cb1b5d383726875fad2e1bde1ed939be289ec1e9338ffc2fe200529dfde",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_valuation",
+       "finance.run_query",
+       "get_price",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/88.韶华研究之二，顺势而为，年化140.txt",
+    "source_sha256": "f3adfad816558144a5c58d9fccb1a1c1277fdbd7a8563e6cb96e2534013bbd13",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_industry",
+       "get_price",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_valuation",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_industry",
+       "get_price",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "历史行业",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "历史行业",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/90.一个月轮动股票换仓，内日做T，相对高频交易.txt",
+    "source_sha256": "b090b10b4b22f6363bfedcf35a7560e7e7bdd492aeb23fc30da04dc3a92f1e0e",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_industry",
+       "get_price",
+       "get_current_data",
+       "get_extras",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_valuation",
+       "get_index_stocks",
+       "get_industry",
+       "get_price",
+       "get_current_data",
+       "get_extras",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/98.欧奈尔CANSLIM策略初探三.txt",
+    "source_sha256": "34c4f67e567954bbcaf1d1345ac3a3bdc9ed42f0e611bd2bb527a3c2281a70db",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "attribute_history",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "attribute_history",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/13.5年15倍的收益，年化79.93%，可实盘，拿走不谢！.txt",
+    "source_sha256": "99ded26ab7e374741ba0c6f5a06f6b63130efd1f8212a01494ba27a0358e4cc7",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/19.高股息低市盈率高增长的价投策略.txt",
+    "source_sha256": "9431a8e7d65d08f08fc46a12ca260569ce6871824c5172ad1f6afda8c95ead83",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/22.菜场大妈皇城大妈年化108大妈吉祥.txt",
+    "source_sha256": "81d88be862e0b901d4abd96cd099bfe55931dbb5ed7de531fd7ef8d8f12de8a2",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/26.【深度解析 六】高股息率-低PEG-低股价 模型.txt",
+    "source_sha256": "4b6026d94cda1af72dbf51af409214db241c069b7b6d03049ed9c6d17a389687",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/28.正黄旗大妈选股法，修改版，年化92%.txt",
+    "source_sha256": "75c5558cb0e759c2d3eef5879ea958f032453b8cd3ae2c0cfebfc2a3f996da72",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/30.挖掘中国特色的估值体系投资机会，年化150%+.txt",
+    "source_sha256": "87c80d57417b34c54d9dd4b49bccb86035691bf35fd33001ec32c2e9796d7aed",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_industry",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_valuation",
+       "get_industry",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/32.非线性市值（非小市值）组合4只.txt",
+    "source_sha256": "e3bb3402afe70b0933d40f6962edda66c595cf2aed33ba256eae3314752eb970",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/34.韶华研究之十八，201系列.txt",
+    "source_sha256": "7ddbc9716edc868e3e9a40f08b815c7ec732a990083d2a1ea00df88203dcf2e6",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_money_flow",
+       "get_index_stocks",
+       "get_call_auction",
+       "get_price",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value"
+      ],
+      "after": [
+       "get_valuation",
+       "get_money_flow",
+       "get_index_stocks",
+       "get_call_auction",
+       "get_price",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史资金流字段/供应商口径和可用时点待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史资金流字段/供应商口径和可用时点待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/36.【菜场大妈】股息率小市值策略,10年206倍,5年10.8倍.txt",
+    "source_sha256": "10bc142e232e5b613572d9cb8db6dffd243c5d6d6d511cda03d268b10e222990",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/45.[原创]价值投资+期货对冲V4.0,无惧市场大跌.txt",
+    "source_sha256": "0421d4f69fcfe37e9248bfb7d5dde8b8aacd6bb38a6c4e81eb07e4bf965d3227",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order_value",
+       "order",
+       "get_future_contracts"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order_value",
+       "order",
+       "get_future_contracts"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/6.高股息低杠杆小市值轮动策略.txt",
+    "source_sha256": "172d9f3c458546dedd274ff322bcc9a6582c96481fa9ae7d1d668c6cbe04c72c",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/68.业绩预告小工具--已更新.txt",
+    "source_sha256": "a665307b7afe38d1bb4eb90e170f4bb874eb5ddb639472f627c40b7e53e438dc",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_industry"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_industry"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史行业",
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史行业",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/79.SVR选股的小市值策略.txt",
+    "source_sha256": "7f84435b97b9ef8a1176ae1d31c38911c04c427ca3248a03ee766008acef25c9",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_extras",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_extras",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/86.根据连续亏损预判st股票.txt",
+    "source_sha256": "fc7743b373d4cabc22b21df702c32fdf79c53e7bd2a071a77b6c91d56f267d1b",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_extras",
+       "get_all_securities"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_extras",
+       "get_all_securities"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/87.山寨红利.txt",
+    "source_sha256": "397609995523c05e8067715ebf7e3a076528fe2285d228042195246ae0830c48",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_current_data",
+       "get_all_securities",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_current_data",
+       "get_all_securities",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/95.基金的最爱与最恶.txt",
+    "source_sha256": "b9116ee8c90245deecb1f5ac2b5dfdf2681c24414a3f1881c1a858620dc39179",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_index_stocks"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/97.大周期顶底判断：FED指标+格雷厄姆指数一次搞定.txt",
+    "source_sha256": "2a5937ac10d523f2b872841fc7d95e591d045fffd2a008678818d10ac31f75a3",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_industry_stocks",
+       "get_price"
+      ],
+      "after": [
+       "get_valuation",
+       "get_index_stocks",
+       "get_industry_stocks",
+       "get_price"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "历史行业",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/98.FScore9因子模型改进——RFScore7因子.txt",
+    "source_sha256": "f3edf033a5b0c9e215b73a06867a3c602335e18d63d9d4aede133c82630e2895",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_industry",
+       "get_price",
+       "get_extras",
+       "get_all_securities"
+      ],
+      "after": [
+       "get_fundamentals",
+       "get_valuation",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_industry",
+       "get_price",
+       "get_extras",
+       "get_all_securities"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "历史行业"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/15.高股息低杠杆小市值轮动策略.txt",
+    "source_sha256": "172d9f3c458546dedd274ff322bcc9a6582c96481fa9ae7d1d668c6cbe04c72c",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/22.菜场大妈选股法.txt",
+    "source_sha256": "0c8b51bacbb18f6efbf66c6ebe0d342ae57e8c14dc373ff8e1cc2819619f4029",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/38.ETF动量轮动RSRS择时-魔改3-北向资金择时-再优化.txt",
+    "source_sha256": "8350192d07fab400037254802531366a4358d1661c80c72b3f20a8f5e10302b2",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price",
+       "attribute_history",
+       "run_daily",
+       "order_target_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_price",
+       "attribute_history",
+       "run_daily",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/53.超跌网格交易大法V1.2：稳健跑赢大盘-年化13%回撤7%.txt",
+    "source_sha256": "f57535920ae96bde072df34d923b31ef7d63e56753d0eaf3ea19d5fd8d4a8769",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "attribute_history",
+       "get_current_data",
+       "get_extras",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "attribute_history",
+       "get_current_data",
+       "get_extras",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/55.【复现】技术指标形态识别.txt",
+    "source_sha256": "8ea88ccc58a8c5a40f5bb501ac23b7e8178838370c6e60c91d36b03dd6f66556",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_price"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/58.ETF动量轮动RSRS与北上择时-股债平衡-盘中止损.txt",
+    "source_sha256": "906132e25c4aca3dc47a2d785737b16af5ca5c9711d3aa3c6606a89305d30d9e",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/75.ETF轮动策略-入门2.0.txt",
+    "source_sha256": "e7cb27fa4b75d72c09e4f12e0f0c9d9d8faa3f60e6ea49dc8793a379cdac2654",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order"
+      ],
+      "after": [
+       "finance.run_query",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/78.ffscore选股加rsrs择时.txt",
+    "source_sha256": "30c8c0f1ca0d0c5f61fabdc30e7fc15158cbd24a3998d3f35c885941fd0fcd9a",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_industry_stocks",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_factor_values",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_industry_stocks",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_factor_values",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "历史行业"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/84.多大规模的基金收益最好？偏股基金规模研究.txt",
+    "source_sha256": "f53b4f99ec742ce015700ec253adccea19d6d532668eb3d8d4ae8ef9838713ed",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_extras",
+       "run_monthly"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_extras",
+       "run_monthly"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/85.价值策略重开，再次向Jqz1226致敬.txt",
+    "source_sha256": "188c031920d94efb982e7d9ba8b4236022281a4129fa0c43b4f5c593b762e7d8",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_price",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/87.北上净买入策略.txt",
+    "source_sha256": "1a47761ddc0c9eec361669d2324e235782e372ac094b88c5708abe044e70adf9",
+    "changes": {
+     "apis": {
+      "before": [
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "finance.run_query",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/94.FoF, all in.txt",
+    "source_sha256": "83fa41001965d26d5749c2ad3ead4449f7c652ff806c7e77ebf5cfcd81da4ed1",
+    "changes": {
+     "apis": {
+      "before": [
+       "history",
+       "get_all_securities"
+      ],
+      "after": [
+       "finance.run_query",
+       "history",
+       "get_all_securities"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/96.集合竞价量比策略V1.txt",
+    "source_sha256": "ecb71043b4cf1c750a06fa142e2de0a3703e8e4cdcc29830ce3751699a3f1c0e",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_industry_stocks",
+       "get_ticks",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value"
+      ],
+      "after": [
+       "get_valuation",
+       "get_index_stocks",
+       "get_industry_stocks",
+       "get_ticks",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/12用子账户模拟多策略分仓.txt",
+    "source_sha256": "a6d4bfb27f324527508793380f1dacbf4913e98bc4ccff1e49c67dfdcec85ccd",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/13首板高开-低开-弱转强混合策略（今年收益1138.61）.txt",
+    "source_sha256": "cc5a5110dcae348d05f7c3f1ce2640e3c8fe599ed17cbe684a2c229ceb1f38af",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_call_auction",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "get_valuation",
+       "get_call_auction",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/15小市值排除3个bug版，22年至今收益506.txt",
+    "source_sha256": "1e32cb58d389644dd96866eb1448fd1577bec36db56dcbf16ad3240710d6e7a1",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/16集合竞价三合一，今年收益1067.txt",
+    "source_sha256": "d8d2e920b82c77555044b53060ad9ae57cce3f8d4cd8be733294f34d72c702af",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_call_auction",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_extras",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "get_valuation",
+       "get_call_auction",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_extras",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/21【原创】年化123涨停弱转强竞价战法.txt",
+    "source_sha256": "67eb01b0dacce661551158ad436241447965c1991a4d28abb3c485bd88d474c4",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_call_auction",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_extras",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "get_valuation",
+       "get_call_auction",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_extras",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/35【菜场大妈】股息率小市值策略,10年206倍,5年10.8倍.txt",
+    "source_sha256": "10bc142e232e5b613572d9cb8db6dffd243c5d6d6d511cda03d268b10e222990",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/3、5年15倍的收益，年化79.93，可实盘，拿走不谢！.txt",
+    "source_sha256": "99ded26ab7e374741ba0c6f5a06f6b63130efd1f8212a01494ba27a0358e4cc7",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/40高股息策略.txt",
+    "source_sha256": "db94d586057d8d00eb7e61af212d2e534d371a8af44fa0fe7b5b460a5850fc84",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_industry",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_industry",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "order_target_value",
+       "order_target"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/42国九条：三年分红5千万以下且占净利润30以下将被ST.txt",
+    "source_sha256": "64275cb977a04806b959e3da3d662911163912a3bb76a4ef90193fa23bc119fb",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/44国九条 年化130.74% 回撤11% 众神Debug版.txt",
+    "source_sha256": "6acc20730770ec33480b439a42845a250d0d7283b63fee6ba474e9ea88bac719",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/4高股息低市盈率高增长的价投策略.txt",
+    "source_sha256": "9431a8e7d65d08f08fc46a12ca260569ce6871824c5172ad1f6afda8c95ead83",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/56基于趋势、拥挤、景气的行业轮动，及行业强势个股的选择.txt",
+    "source_sha256": "6cd568aef4764286aa103df69fc965e893a096a6e3370a09a1ffba2d28260cb3",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "attribute_history",
+       "get_extras",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "get_valuation",
+       "finance.run_query",
+       "get_price",
+       "attribute_history",
+       "get_extras",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/57韶华研究之十八，201系列.txt",
+    "source_sha256": "7ddbc9716edc868e3e9a40f08b815c7ec732a990083d2a1ea00df88203dcf2e6",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_money_flow",
+       "get_index_stocks",
+       "get_call_auction",
+       "get_price",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value"
+      ],
+      "after": [
+       "get_valuation",
+       "get_money_flow",
+       "get_index_stocks",
+       "get_call_auction",
+       "get_price",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史资金流字段/供应商口径和可用时点待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史资金流字段/供应商口径和可用时点待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/59追板策略，今年收益已翻倍，低操作低回撤高收益可实盘.txt",
+    "source_sha256": "0d789e0bd9fc116101763336a42366b0dbc9f1bc0994f0a1593faa3a5d451e8b",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_call_auction",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_extras",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "get_valuation",
+       "get_call_auction",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_extras",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/60高股息V1.0（小程序公开股池）.txt",
+    "source_sha256": "daaf73f27eee2cc499094abee38296091374fae34839ffd035bcdab8bf4b11d9",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/67大市值价投高股息爱国者策略（爱我中华）.txt",
+    "source_sha256": "4822c6f09969e80946b23627042223ea332655d49c7b66eb4aa1c1e982f9f05d",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/6国九小市值策略【年化100.5】.txt",
+    "source_sha256": "cee4acc64d6528b2556f4242d563f4030ba19c7cdef762beb7058e30c189b020",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/70动态保形回归小市值策略改进.txt",
+    "source_sha256": "0956b4d3dfe36f329b292b9a021e467f543888c565afe3f9ecbecb26be5a5d67",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/71（乱改一版）股票加“钱粮”ETF组合.txt",
+    "source_sha256": "15147b997b358f235ce72cdccbb2a08d68cce8a1a1a6e8e5cc16dc7cdf9b1abe",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "get_extras",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "attribute_history",
+       "history",
+       "get_current_data",
+       "get_extras",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/77研报三因子II-新规高分红小市值-年化60回撤19.txt",
+    "source_sha256": "5e3e86be6940c14c218dfa0d23bc4deba9e0faf95c56878f8d9ab67895cf77d6",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/79国九条-新的红利因子，修正「审计意见」函数.txt",
+    "source_sha256": "a33a5fff5872f72f67fc5a3899005dfc2e582d0185ac244366457b6dfb0e0c55",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/7追首板涨停 过去两年年化304%.txt",
+    "source_sha256": "18dab475abf4f217e51a7982be8e60a04ab5561bf38841a1971a001c9d91cbc9",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_call_auction",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "get_valuation",
+       "get_call_auction",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/84正黄旗大妈选股改进-加入涨停卖出后的买入，提高资金利用率.txt",
+    "source_sha256": "32ddf148276293cea449aca6518d094bbaff99700a826535a9b97af1d76f5b7c",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "history",
+       "get_current_data",
+       "get_all_securities",
+       "run_daily",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/87山寨红利.txt",
+    "source_sha256": "397609995523c05e8067715ebf7e3a076528fe2285d228042195246ae0830c48",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_current_data",
+       "get_all_securities",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_current_data",
+       "get_all_securities",
+       "run_monthly",
+       "order_target",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/8国九条后中小板微盘小改，年化135.40.txt",
+    "source_sha256": "b1231d178313c6e3ecb330b78558f61b586ac321cb412ba11d6a3fe35a3b0ddb",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_index_stocks",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "run_weekly",
+       "order_target_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/93.234板介入-2023年14倍-无未来.txt",
+    "source_sha256": "dadd640e2cd91f1582fc5a64c685cca7dc1bc0bf5faecc9b29f71f07398c635c",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_fundamentals",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_extras",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ],
+      "after": [
+       "get_fundamentals",
+       "finance.run_query",
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "get_extras",
+       "get_factor_values",
+       "get_all_securities",
+       "run_daily",
+       "order_target_value",
+       "order_value"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/96首版+2版龙虎榜挖掘V2.0，年化1400.txt",
+    "source_sha256": "ff8f0f57a646151325458724bdf4f8ed33a51c82407ed7d8fbcf6fb673c471b6",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order"
+      ],
+      "after": [
+       "get_valuation",
+       "get_price",
+       "history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   }
+  ],
+  "not_a_backtest": true,
+  "strategy_results": [],
+  "limits": [
+   "Text call candidates include comments and strings; qualified API names do not prove platform injection",
+   "Generic finance table gap is distinct from accounting ROE/financial statements"
+  ]
+ },
+ "checks": {
+  "status": "passed",
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/review_strategy_batch31.py",
+     "scripts/prepare_handoff.py",
+     "scripts/build_strategy_catalog.py",
+     "scripts/verify_financial_import.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/check-0.log",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "scripts.verify_offline_tests",
+     "-q",
+     "tests/unit/test_batch31_research.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_catalog_schedules.py",
+     "tests/unit/test_batch17_archive.py",
+     "tests/unit/test_signal_slots.py",
+     "tests/integration/test_strategy_merge.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/check-1.log",
+    "sha256": "64145c8089c5452ef426b570f40145e6a8b32b5ebcfabd5ad41b71023ee0209e"
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "f4e2728e8b58d272c8a2fe0bfbb5f4209878c35e3979ee76ab9bb260cc654f84",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "tests/unit/test_catalog_dependencies.py": "c4b8bc6c387d3b84034e9d62f6fe34370dc21f8e61d5937bcc26d189c5621ef5"
+  },
+  "evidence_sha256": {
+   "api-scan.json": "26c0901f958d310fbc60687f9427d2a46adddc8410dfed844c6a4976e87c6295",
+   "baseline.json": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9",
+   "calendar-input.parquet": "b29ce632824660c74ef93d32701ff010cf2626e2007718e2b921b3464cc767f5",
+   "catalog-before.json": "5f2de8ba4e41b9bd587b8f6a70851aba12dc512db263b28beb6a93cb208d61cc",
+   "check-0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+   "check-1.log": "64145c8089c5452ef426b570f40145e6a8b32b5ebcfabd5ad41b71023ee0209e",
+   "check-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "component-offline.json": "9e6d706fd9657e0232a9ad459506636785264e2ef517f14fe163e193d12f2c9e",
+   "component-research.json": "9e6d706fd9657e0232a9ad459506636785264e2ef517f14fe163e193d12f2c9e",
+   "diagnostics.json": "9c2d1581add38e5864c3cfc12ea2579afe0adbf167808ff8459c1cfd6f4312b0",
+   "existing-apis.json": "3ab7a2ff6cc8f76cf4423bed0d9e0e0735bf8ab1975292971fb690d698991ca0",
+   "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "index-input.parquet": "b37fb1497f5cc21b4c11a3cb7d0a823b91661a63ab3e94579c0d639105372928",
+   "input-analysis.json": "05c27fc0e94ee89162ac8c19457e532335ec1e71c6a91d8397405406e6c24349",
+   "input-binding.json": "d928a255ae12aec41fb7b5f019f2d1220753226ace2430764ab9ba534b8aa840",
+   "offline-catalog.json": "397d2756b34bbdf57755a0dd64caa266e24953b6ae96238f0747ccc4452ee717",
+   "offline-verification.json": "52ac39cff172ae435b30e15a269e77106fc52e3d844f43ddd3d9ce09ff541d06",
+   "price-input.parquet": "3f564aaaebb2ef1a303c3286287965e239a7e2337608b5675418f1df100def5b",
+   "probe-etf.json": "b010c81daee6c72b6d4fb639e4ecf2fb5a298d5f401c6da22df67735c1412ce8",
+   "probe-etf.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "probe-etf.stdout": "77248c4ef5e3d23529497d3d790d7938c7d5cc5dde7f4e6ee5b488ce5be714db",
+   "probe-holder.json": "835f02b56d9fb0a97e7174b10597d859a89ace31c65ec91c781b46a58c565361",
+   "probe-holder.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "probe-holder.stdout": "a5acc88cfcb32831322d77ebf1dc13490d74441b0bf6ba7611b63d71f32eaa69",
+   "probe-results.json": "9703085e17fb3d362b1438aa0aa087b58d7d4c956a9686282fe5ceb40c3e2238",
+   "probe-roe.json": "353643400efe7e909af277ef941bf40e639e11eddc288148b6a9df9d5a3d3a09",
+   "probe-roe.stderr": "c971abd8885ffa8e69d3baa2c595bb12ea8298771b138ad2f65ec881dd70bbe6",
+   "probe-roe.stdout": "355d4efa48e965c0fdababc6ee9d1603851dd5a9669d7689f516204be09c7c06",
+   "progress-start.json": "9b5e35e0665ffe6d06ba5ddca16b06447d8dfcb512955950e132f95422f41aef",
+   "red-regression.json": "6e2cd8aed475dfb06b78b5e84773c54ccca6d44ddacf894fb7d6f825432c03e4",
+   "code-before/strategy_catalog.py": "30e4455ef393cf0d0b2df702d1fb47768a0636867e1cddd081606a446e6ddead",
+   "references/demo_profit_data.py": "75d6128d24b79edfcb427f1ca34fddbcbd6c3ed2ec42442e06515e26c8fabfdb",
+   "references/ols.py": "cc228c5133bf1e27a36290c2fb5756cdc371f57e868e6fa9784c7db6ea9a81f4",
+   "references/stock_finance_sina.py": "984aeee41671fbafb83cb81e3665fe8f0d2306c4efef361b6ea93b19c9588e28",
+   "source-reviews/review.json": "126ce928c29c210d4081853317b138ba2d9d43cf0a4ab1f462b77a8dc526f6e7",
+   "source-reviews/S-12ba1c0d79f5.source": "6a812af5a6d5ef36b7893d4de3b3d61023a9bec85f257cfd3f815f67ca9127e5",
+   "source-reviews/S-36ea1540cfac.source": "2b199cb1b5d383726875fad2e1bde1ed939be289ec1e9338ffc2fe200529dfde",
+   "source-reviews/S-66d37162df54.source": "450adeb696071244a7d0e05d7303152d61bd8bb377f9f3e13e978899d716d56f",
+   "catalog-offline-api/catalog/strategies/implementation-evidence.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "catalog-offline-api/catalog/strategies/latest.json": "bfd5a23025e336a9906d1801b57cb881c439fe3b584fe22694238811a4da525e",
+   "catalog-offline-api/catalog/strategies/a2a5c5e41dca190898df/catalog.json": "38f74ad0aecdfdbf69f206f9c0402be8b30ecc9378bf24f866ff9609bd121db9",
+   "catalog-offline-api/catalog/strategies/a2a5c5e41dca190898df/catalog.parquet": "6411301add709510ff946be5f30c0781b3d0bd736b7f3babadb664c7a2336d1f",
+   "catalog-offline-api/catalog/strategies/a2a5c5e41dca190898df/summary.json": "17a0e8c318ddf4d1e0170531539944c290540a2e7713f588b724d94789862287",
+   "catalog-offline-final/catalog/strategies/implementation-evidence.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "catalog-offline-final/catalog/strategies/latest.json": "1ce299cd95a011aa32c5e8852260d6f38148304833b59bf8092514ee0503b7f7",
+   "catalog-offline-final/catalog/strategies/00afe567952cff5923ec/catalog.json": "92d98aef57b71ebacdaca15e043598e0ce43eb3b1190fbde53099df8c70b3191",
+   "catalog-offline-final/catalog/strategies/00afe567952cff5923ec/catalog.parquet": "87f1d42f50aaa3d386608435d44a071d4b6e3fe35dc389d6e524c0815789a832",
+   "catalog-offline-final/catalog/strategies/00afe567952cff5923ec/summary.json": "007adffdf03cbf493d07abcd0a762e5eb190595ed58e3867467fb17c0bc91051",
+   "implementation-checked/scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "implementation-checked/scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "implementation-checked/scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "implementation-checked/scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "implementation-checked/scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "implementation-checked/scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "implementation-checked/scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "implementation-checked/scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "implementation-checked/src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "implementation-checked/src/observe/strategy_catalog.py": "f4e2728e8b58d272c8a2fe0bfbb5f4209878c35e3979ee76ab9bb260cc654f84",
+   "implementation-checked/src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "implementation-checked/src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "implementation-checked/src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "implementation-checked/tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "implementation-checked/tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "implementation-checked/tests/unit/test_catalog_dependencies.py": "c4b8bc6c387d3b84034e9d62f6fe34370dc21f8e61d5937bcc26d189c5621ef5"
+  }
+ },
+ "offline": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "sha256": "9e6d706fd9657e0232a9ad459506636785264e2ef517f14fe163e193d12f2c9e",
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "f4e2728e8b58d272c8a2fe0bfbb5f4209878c35e3979ee76ab9bb260cc654f84",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "tests/unit/test_catalog_dependencies.py": "c4b8bc6c387d3b84034e9d62f6fe34370dc21f8e61d5937bcc26d189c5621ef5"
+  },
+  "not_a_backtest": true
+ },
+ "offline_catalog": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "implementation_evidence_sha256": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+  "catalogs": [
+   {
+    "stage": "api",
+    "catalog_id": "a2a5c5e41dca190898df",
+    "files": [
+     {
+      "name": "catalog.json",
+      "original_file": "data/catalog/strategies/a2a5c5e41dca190898df/catalog.json",
+      "repeated_file": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/catalog-offline-api/catalog/strategies/a2a5c5e41dca190898df/catalog.json",
+      "sha256": "38f74ad0aecdfdbf69f206f9c0402be8b30ecc9378bf24f866ff9609bd121db9"
+     },
+     {
+      "name": "summary.json",
+      "original_file": "data/catalog/strategies/a2a5c5e41dca190898df/summary.json",
+      "repeated_file": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/catalog-offline-api/catalog/strategies/a2a5c5e41dca190898df/summary.json",
+      "sha256": "17a0e8c318ddf4d1e0170531539944c290540a2e7713f588b724d94789862287"
+     },
+     {
+      "name": "catalog.parquet",
+      "original_file": "data/catalog/strategies/a2a5c5e41dca190898df/catalog.parquet",
+      "repeated_file": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/catalog-offline-api/catalog/strategies/a2a5c5e41dca190898df/catalog.parquet",
+      "sha256": "6411301add709510ff946be5f30c0781b3d0bd736b7f3babadb664c7a2336d1f"
+     }
+    ]
+   },
+   {
+    "stage": "final",
+    "catalog_id": "00afe567952cff5923ec",
+    "files": [
+     {
+      "name": "catalog.json",
+      "original_file": "data/catalog/strategies/00afe567952cff5923ec/catalog.json",
+      "repeated_file": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/catalog-offline-final/catalog/strategies/00afe567952cff5923ec/catalog.json",
+      "sha256": "92d98aef57b71ebacdaca15e043598e0ce43eb3b1190fbde53099df8c70b3191"
+     },
+     {
+      "name": "summary.json",
+      "original_file": "data/catalog/strategies/00afe567952cff5923ec/summary.json",
+      "repeated_file": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/catalog-offline-final/catalog/strategies/00afe567952cff5923ec/summary.json",
+      "sha256": "007adffdf03cbf493d07abcd0a762e5eb190595ed58e3867467fb17c0bc91051"
+     },
+     {
+      "name": "catalog.parquet",
+      "original_file": "data/catalog/strategies/00afe567952cff5923ec/catalog.parquet",
+      "repeated_file": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/catalog-offline-final/catalog/strategies/00afe567952cff5923ec/catalog.parquet",
+      "sha256": "87f1d42f50aaa3d386608435d44a071d4b6e3fe35dc389d6e524c0815789a832"
+     }
+    ]
+   }
+  ]
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5223,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9"
+ },
+ "probes": {
+  "results": [
+   {
+    "endpoint": "roe",
+    "query": {
+     "provider": "baostock",
+     "function": "query_profit_data",
+     "parameters": {
+      "code": "sh.600519",
+      "year": 2020,
+      "quarter": 1
+     },
+     "limit": "Quarterly final ROE/publication sample is not platform ROE vintage or the whole original pool"
+    },
+    "api_sha256": "3ab7a2ff6cc8f76cf4423bed0d9e0e0735bf8ab1975292971fb690d698991ca0",
+    "status": "failed",
+    "published": false,
+    "files": [],
+    "wire": [],
+    "error": "UnboundLocalError: cannot access local variable 'mySockect' where it is not associated with a value"
+   },
+   {
+    "endpoint": "holder",
+    "query": {
+     "provider": "akshare",
+     "function": "stock_circulate_stock_holder",
+     "parameters": {
+      "symbol": "600519"
+     },
+     "limit": "May provide only five holders; announcement dates do not prove original top10 table revisions"
+    },
+    "api_sha256": "3ab7a2ff6cc8f76cf4423bed0d9e0e0735bf8ab1975292971fb690d698991ca0",
+    "status": "failed",
+    "published": false,
+    "files": [],
+    "wire": [],
+    "error": "ConnectionError: HTTPSConnectionPool(host='vip.stock.finance.sina.com.cn', port=443): Max retries exceeded with url: /corp/go.php/vCI_CirculateStockHolder/stockid/600519.phtml (Caused by NameResolutionError(\"HTTPSConnection(host='vip.stock.finance.sina.com.cn', port=443): Failed to resolve 'vip.stock.finance.sina.com.cn' ([Errno -2] Name or service not known)\"))"
+   },
+   {
+    "endpoint": "etf",
+    "query": {
+     "provider": "akshare",
+     "function": "fund_etf_hist_sina",
+     "parameters": {
+      "symbol": "sh510050"
+     },
+     "limit": "One fund price sample does not supply seven funds/events/states or seven index histories"
+    },
+    "api_sha256": "3ab7a2ff6cc8f76cf4423bed0d9e0e0735bf8ab1975292971fb690d698991ca0",
+    "status": "failed",
+    "published": false,
+    "files": [],
+    "wire": [],
+    "error": "ConnectionError: HTTPSConnectionPool(host='finance.sina.com.cn', port=443): Max retries exceeded with url: /realstock/company/sh510050/hisdata_klc2/klc_kl.js (Caused by NameResolutionError(\"HTTPSConnection(host='finance.sina.com.cn', port=443): Failed to resolve 'finance.sina.com.cn' ([Errno -2] Name or service not known)\"))"
+   }
+  ],
+  "published": false
+ },
+ "not_a_backtest": true,
+ "original_strategy_complete": false
+}

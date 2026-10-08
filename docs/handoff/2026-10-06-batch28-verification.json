@@ -1,0 +1,531 @@
+{
+ "status": "ok",
+ "reviews": {
+  "sources": [
+   {
+    "source_path": "repo/量化策略源代码/2021年度精选策略/44.借助JqData搭建简易回测框架.txt",
+    "source_sha256": "9f9d9ec32e4a7572c64c9cfc3919245811d2fe3dc9652018c134d7defa12cb4d",
+    "source_copy": "data/staging/strategies-batch28/20261006-rsrs-mesa-northbound/source-reviews/S-954b41e5a396.source",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 407,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "未附策略的简易回测框架与指标研究",
+     "fidelity": "仅隔离合成缺陷诊断，未移植第二账本",
+     "implementations": [],
+     "status": "非交易研究脚本",
+     "rules": {
+      "framework": "Context/Order/Trade、默认10万元与2016年；交易函数由外部调用者提供，本来源未附",
+      "orders": "只检现金与重复标的，买入忽略其他仓位总值、卖出后总值直接等于现金；无费用/T+1/整手/状态约束",
+      "metrics": "Sharpe以累计收益水平标准差计算；beta样本协方差除总体方差，年化交易252日与基准250日不同"
+     },
+     "gaps": [
+      "没有实际交易策略，不可把框架默认参数当成策略",
+      "负数买入数量可增加现金并生成负仓；多持仓估值错误",
+      "旧Series[-1]在当前pandas报错、空universe索引失败，交易配对及零分母未防护"
+     ],
+     "next_step": "冻结原方法合成诊断；真实策略与指标继续复用唯一Book，不运行原简化账本回测"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2021年度精选策略/59.【复现】RSRS择时改进.txt",
+    "source_sha256": "226e1166421e68331cb796cfda81d47765761e37d0164b7ab41cf37956ea9ad3",
+    "source_copy": "data/staging/strategies-batch28/20261006-rsrs-mesa-northbound/source-reviews/S-72e5a8798544.source",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 962,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "五指数RSRS钝化/右偏/成交量加权研究框架",
+     "fidelity": "原成交量权重、波动/排名算术及状态诊断，非完整RSRS信号或交易",
+     "implementations": [],
+     "status": "非交易研究脚本",
+     "rules": {
+      "regression": "low解释high，OLS及WLS均必算；WLS实际volume/sum(volume)，不是叙述成交额",
+      "windows": "按最大N+M选self.N/M；回归和波动排名用全局参数，get_RSRS局部M仅用于beta样本zscore",
+      "dampening": "ret_std为N行nanstd ddof0，M行末值平均并列分位；zscore ddof1乘R方**(2*分位)",
+      "state": "首行固定严格>0.7，无买入标记；后续>UP进入、>DN保持、<=DN退出，持仓遇NaN变0无卖标记",
+      "example": "下方创业板加权案例实际查询000905.XSHG；指数次日收益乘仓位简化净值不含成本"
+     },
+     "gaps": [
+      "statsmodels未安装，完整原OLS/WLS信号未执行；其余指数长历史不在本批绑定范围",
+      "日期索引rank(pct=True)[-1]在当前pandas报错；三同参数信号分组嵌套",
+      "无可交易产品和Book执行映射，原玩具净值不能当交易回测；未证明原平台行情版本"
+     ],
+     "next_step": "沪深300真实volume及ret组件独立核算，原状态/窗口覆盖留证；修完整信号与产品映射须另定变体"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2021年度精选策略/83.识别趋势震荡之神器 MESA最大熵谱分析（一）：滤波器建立.txt",
+    "source_sha256": "a2720eecb7d7067a14ef2f4743c16ac871157008acdbe28c5d8ff015622720a6",
+    "source_copy": "data/staging/strategies-batch28/20261006-rsrs-mesa-northbound/source-reviews/S-790f0000ed44.source",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 561,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "一分钟指数AR2谱与周期研究，无交易规则",
+     "fidelity": "仅原示例系数1000频点谱公式验证及兼容诊断",
+     "implementations": [],
+     "status": "非交易研究脚本",
+     "rules": {
+      "data": "沪深300一分钟2020-06-01至2020-07-02；Filter最近四自然周，每6行抽样拟合AR2",
+      "spectrum": "忽略拟合截距，以两个AR系数总体标准差sigma而非残差方差，谱为2*sigma/abs(1-phi1*z-phi2*z*z)**2",
+      "period": "1000点linspace(0,.5)；峰索引/1000*.5而非网格999分母，零频返回inf；示例phi=.05/-.1"
+     },
+     "gaps": [
+      "缺原一分钟指数历史；AKShare一分钟只取最近5天再按日期裁剪，不可补原2020区间",
+      "statsmodels/arch/jqdatasdk/tushare未安装，旧AR与DataFrame.append不可用",
+      "无下单策略；不执行顶层认证占位符或以日线/五分钟替代一分钟"
+     ],
+     "next_step": "归档示例谱独立核算、原Filter失败与接口限制；原拟合滤波器继续搁置"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2023年度精选策略/74.勾股神器2代码40行，年化一百点.txt",
+    "source_sha256": "9d6649fdf909a1d911ef1dbf60b6aad88106c1a6bc9f512ede2e524a2ae5ed08",
+    "source_copy": "data/staging/strategies-batch28/20261006-rsrs-mesa-northbound/source-reviews/S-4766560702c0.source",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 44,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "北向逐股持股比例变化加RSI14",
+     "fidelity": "仅真实100交易行RSI14组件与合成订单意图诊断",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "初始化沪深300一次固定；昨日沪深通link_id310001/310002，share_ratio严格>3",
+      "change": "仅遍历当前过滤字典且前日存在者；变化严格<-.3清仓、>.3未持有且RSI在[40,80]买入",
+      "rsi": "TA-Lib默认14，最近100行close重算；首次调用仅建基线，跌破3消失时不主动卖",
+      "orders": "每笔总资产20%；holds开头一次快照，>=10检查不随本轮意图更新，成交返回不检查"
+     },
+     "gaps": [
+      "缺原初始化日期/历史沪深300池及每日逐股share_ratio、发布时间；北向总净流量不能替代",
+      "东方财富机构持股占A股比例不能直接等价平台逐股share_ratio；RSI动态复权/停牌窗口仍未证明平台等价",
+      "原固定池事后偏差、浮点严格阈值和同轮多个20%买单风险保留；开盘即时成交语义未知"
+     ],
+     "next_step": "探测原区间单股比例接口并留原档；日线RSI独立核算不生成虚拟北向交易/收益"
+    }
+   }
+  ],
+  "references": [
+   {
+    "file": "repo/hikyuu/hikyuu_cpp/hikyuu/indicator/imp/IRSRSBeta.cpp",
+    "copy": "data/staging/strategies-batch28/20261006-rsrs-mesa-northbound/references/IRSRSBeta.cpp",
+    "sha256": "9ecae74e0d4778f941bf9c3e6f6db16303985780ab35ddadaccce535c07ae349",
+    "commit": "27210d669e77bca2d0e366d120ea20cfda05f86b",
+    "use": "RSRS slope reference only, not WLS replacement; provider ratio schema and recent-only minute restriction"
+   },
+   {
+    "file": "repo/akshare/akshare/stock_feature/stock_hsgt_em.py",
+    "copy": "data/staging/strategies-batch28/20261006-rsrs-mesa-northbound/references/stock_hsgt_em.py",
+    "sha256": "abcd346fe916dc739800ffdaf54a9233558b01548994aaf6a78845c55211ffe9",
+    "commit": "0191689d57c667b7c7a198fd0cf97316837ef311",
+    "use": "RSRS slope reference only, not WLS replacement; provider ratio schema and recent-only minute restriction"
+   },
+   {
+    "file": "repo/akshare/akshare/index/index_zh_em.py",
+    "copy": "data/staging/strategies-batch28/20261006-rsrs-mesa-northbound/references/index_zh_em.py",
+    "sha256": "031883207899c4d251d61bc5f7e980c2e71f34c4b48df112a0a726e917e25114",
+    "commit": "0191689d57c667b7c7a198fd0cf97316837ef311",
+    "use": "RSRS slope reference only, not WLS replacement; provider ratio schema and recent-only minute restriction"
+   }
+  ],
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "874ec800b29163f5b8f7",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 506,
+    "已验证": 11,
+    "待审查": 2,
+    "暂不可复现": 62,
+    "非交易研究脚本": 73,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 315,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10
+   },
+   "reviewed_sources": [
+    "S-25a2ce74300f",
+    "S-a02bd5fb82fa",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-af09cfafe6cf",
+    "S-95b83db2a7bc",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-db01c1c96ded",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-147b0cfb49ff",
+    "S-d07877e2c354",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-57b937da520d",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-cafee3ad464a",
+    "S-560abd656ca0",
+    "S-84b17f428272",
+    "S-88c607586b82",
+    "S-954b41e5a396",
+    "S-72e5a8798544",
+    "S-a4c77bd8b44e",
+    "S-4b7dbe8af8ac",
+    "S-bee2c8d71c81",
+    "S-f81bb8422f94",
+    "S-790f0000ed44",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-979d5187c3ec",
+    "S-daecf5bc2eef",
+    "S-f39f02e3e03f",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-e12e4a8dd5e5",
+    "S-05431e7ae641",
+    "S-de485dcbc1fe",
+    "S-03e5e601f4cc",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-47d77840ec26",
+    "S-2034813a5b91",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-84f3f0c3c784",
+    "S-c02ac3bad6ef",
+    "S-69bfefcb4d1d",
+    "S-653ef41eb685",
+    "S-c55ddc35cce6",
+    "S-c2a42783423c",
+    "S-75af9ddf3d76",
+    "S-f23cf187dc47",
+    "S-64a80805fb8a",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-bdfd3c6fde91",
+    "S-e0fb958bf2d4",
+    "S-53655cbaa9bc",
+    "S-b01f3e94a5b8",
+    "S-c98372326f58",
+    "S-c5a0e347acdc",
+    "S-69ef2eedcc68",
+    "S-4766560702c0",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-976aaefe793c",
+    "S-84adbe33af88",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-68dd8d2d5eec",
+    "S-926d08fe0ba8",
+    "S-9e752d17571d",
+    "S-624b1cbccd4f",
+    "S-5008146cd1d4",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-2d40c2d698f7",
+    "S-028ef663b462",
+    "S-d68e945d07cb",
+    "S-1e5fd99659cf",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-c1bba20dca69",
+    "S-4730e53b92bc"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/874ec800b29163f5b8f7"
+  },
+  "previous_catalog_file": "data/catalog/strategies/9911ea8dcb72e030f105/catalog.json",
+  "previous_catalog_sha256": "b60f97dc5faec5c9fe1e5cf45569170962a6ba458c1659f43a411c339372e86b",
+  "snapshot": "20261006-145049-e06c",
+  "not_a_backtest": true,
+  "strategy_results": []
+ },
+ "progress": {
+  "checkpoint": "20261006-155331-b38f",
+  "note": "Batch28 four source reviews/components/probes/offline accepted; no original trade reconstruction",
+  "catalog_id": "874ec800b29163f5b8f7",
+  "catalog_sha256": "c17d9eda8e9f21c9714312323024e341fe249daa2a9c1bcfe2fa6ee09a81cf96",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 506,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 62,
+   "非交易研究脚本": 73,
+   "重复版本": 41
+  },
+  "manually_reviewed": 128,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 67,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261006-155331-b38f"
+ },
+ "snapshot": "20261006-145049-e06c",
+ "checks": {
+  "status": "passed",
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/review_strategy_batch28.py",
+     "scripts/prepare_handoff.py",
+     "scripts/build_strategy_catalog.py",
+     "scripts/verify_financial_import.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch28/20261006-rsrs-mesa-northbound/check-0.log",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "scripts.verify_offline_tests",
+     "-q",
+     "tests/unit/test_batch28_research.py",
+     "tests/unit/test_batch27_research.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_catalog_schedules.py",
+     "tests/unit/test_batch23_research.py",
+     "tests/unit/test_batch21_research.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch28/20261006-rsrs-mesa-northbound/check-1.log",
+    "sha256": "a0a0824609fd976a5f83f17e1aff7cfb0970b65cf51cb8911ce4eb7fed785be2"
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch28/20261006-rsrs-mesa-northbound/check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch28.py": "65f5376b72fc62e5e8dbbb7f697003a21533a4f9d7f944beb14bf2ee47b49321",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "b6505132ec9a88e7cbc20eb12ce2de3ab1c0aa9d9b7d11fb615b6e93663e99f0",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch28_research.py": "86c511e47fde1b97bd2b5e305fb9a6ce70df2b23b66642aaab686b606d8e0e37"
+  },
+  "evidence_sha256": {
+   "baseline.json": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9",
+   "check-0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+   "check-1.log": "a0a0824609fd976a5f83f17e1aff7cfb0970b65cf51cb8911ce4eb7fed785be2",
+   "check-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "component-offline.json": "c920798cb26e53f415336eed9ad1c2e40fea4424f3bd3c1e402a034f3cceb5df",
+   "component-research.json": "c920798cb26e53f415336eed9ad1c2e40fea4424f3bd3c1e402a034f3cceb5df",
+   "diagnostics.json": "0b348def9041f3d070d8e876759efdf808c68795d830907cc6b632c15d07286b",
+   "existing-apis.json": "b573e7d44b94daa84bc276dfc056c114594e0d0dde85c0d23630775e8e41ade6",
+   "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "index-input.parquet": "ee2f6940250862c4165a727de4d4ffaf7b67f4498c1dbdeb7db302477b199e5d",
+   "input-analysis.json": "12d1c724cd043867fc6cd504ab6763597acc628355750a12d9b406f01bcad235",
+   "input-binding.json": "d55dc274eea1fbecc49e41436aeea5b215ed32c9d3ca4bebb47585dc3408890b",
+   "offline-verification.json": "d923405be87de49beac725b319ec8cef7ff49202f4bbec65d1aeb0731bf35827",
+   "price-input.parquet": "2084026fe481d7bf7c1495588039a1b3079ca2168365f7851025fd2f05c38c39",
+   "probe-minute_index.json": "be1ede0333e28cfc1ab18a1518448769116346b82cd0dfb821c8017b8026a230",
+   "probe-minute_index.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "probe-minute_index.stdout": "e5092be74b9d12a814a572dd2dd12ab4b200245224ebf4dc0bd0f431b03bba85",
+   "probe-northbound.json": "d65c4d2a95cac9af5dfbb10852145d54374e54154845eb9f05fdabcdcb8961d7",
+   "probe-northbound.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "probe-northbound.stdout": "039a10fc6c2d36a33365d135ce6cdad967c4dd8cbf3637c8fa474844eae83788",
+   "probe-results.json": "70506ec0e3412caab21327c2189e1b4e8ee4a32f3d88f3011572ce311218f15c",
+   "progress-start.json": "7d1383db73ca6678cfa2771a742e391333e37514f325d706abe160980b35e3e5",
+   "references/index_zh_em.py": "031883207899c4d251d61bc5f7e980c2e71f34c4b48df112a0a726e917e25114",
+   "references/IRSRSBeta.cpp": "9ecae74e0d4778f941bf9c3e6f6db16303985780ab35ddadaccce535c07ae349",
+   "references/stock_hsgt_em.py": "abcd346fe916dc739800ffdaf54a9233558b01548994aaf6a78845c55211ffe9",
+   "source-reviews/review.json": "036d2ef90d7047a0ced2c572ca71199c4e1771e826de3e8498481f10e695affc",
+   "source-reviews/S-4766560702c0.source": "9d6649fdf909a1d911ef1dbf60b6aad88106c1a6bc9f512ede2e524a2ae5ed08",
+   "source-reviews/S-72e5a8798544.source": "226e1166421e68331cb796cfda81d47765761e37d0164b7ab41cf37956ea9ad3",
+   "source-reviews/S-790f0000ed44.source": "a2720eecb7d7067a14ef2f4743c16ac871157008acdbe28c5d8ff015622720a6",
+   "source-reviews/S-954b41e5a396.source": "9f9d9ec32e4a7572c64c9cfc3919245811d2fe3dc9652018c134d7defa12cb4d",
+   "implementation-checked/scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "implementation-checked/scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "implementation-checked/scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "implementation-checked/scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "implementation-checked/scripts/review_strategy_batch28.py": "65f5376b72fc62e5e8dbbb7f697003a21533a4f9d7f944beb14bf2ee47b49321",
+   "implementation-checked/scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "implementation-checked/scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "implementation-checked/scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "implementation-checked/src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "implementation-checked/src/observe/strategy_catalog.py": "b6505132ec9a88e7cbc20eb12ce2de3ab1c0aa9d9b7d11fb615b6e93663e99f0",
+   "implementation-checked/src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "implementation-checked/src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "implementation-checked/src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "implementation-checked/tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "implementation-checked/tests/unit/test_batch28_research.py": "86c511e47fde1b97bd2b5e305fb9a6ce70df2b23b66642aaab686b606d8e0e37"
+  }
+ },
+ "offline": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "sha256": "c920798cb26e53f415336eed9ad1c2e40fea4424f3bd3c1e402a034f3cceb5df",
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch28.py": "65f5376b72fc62e5e8dbbb7f697003a21533a4f9d7f944beb14bf2ee47b49321",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "b6505132ec9a88e7cbc20eb12ce2de3ab1c0aa9d9b7d11fb615b6e93663e99f0",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch28_research.py": "86c511e47fde1b97bd2b5e305fb9a6ce70df2b23b66642aaab686b606d8e0e37"
+  },
+  "not_a_backtest": true
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5223,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9"
+ },
+ "probes": {
+  "results": [
+   {
+    "endpoint": "northbound",
+    "query": {
+     "function": "stock_hsgt_individual_detail_em",
+     "parameters": {
+      "symbol": "600519",
+      "start_date": "20200601",
+      "end_date": "20200702"
+     },
+     "limit": "Institution-level A-share percentage is not proven equivalent to aggregate platform share_ratio"
+    },
+    "api_sha256": "b573e7d44b94daa84bc276dfc056c114594e0d0dde85c0d23630775e8e41ade6",
+    "status": "failed",
+    "published": false,
+    "files": [],
+    "wire": [],
+    "error": "ConnectionError: HTTPSConnectionPool(host='datacenter-web.eastmoney.com', port=443): Max retries exceeded with url: /api/data/v1/get?sortColumns=HOLD_DATE&sortTypes=-1&pageSize=500&pageNumber=1&reportName=RPT_MUTUAL_HOLD_DET&columns=ALL&source=WEB&client=WEB&filter=%28SECURITY_CODE%3D%22600519%22%29%28MARKET_CODE%3D%22003%22%29%28HOLD_DATE%0A++++++++%3E%3D%272020-06-01%27%29%28HOLD_DATE%0A++++++++%3C%3D%272020-07-02%27%29 (Caused by NameResolutionError(\"HTTPSConnection(host='datacenter-web.eastmoney.com', port=443): Failed to resolve 'datacenter-web.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+   },
+   {
+    "endpoint": "minute_index",
+    "query": {
+     "function": "index_zh_a_hist_min_em",
+     "parameters": {
+      "symbol": "000300",
+      "period": "1",
+      "start_date": "2020-06-01 09:30:00",
+      "end_date": "2020-07-02 15:00:00"
+     },
+     "limit": "One-minute endpoint only requests latest five days; historical date arguments are local filters"
+    },
+    "api_sha256": "b573e7d44b94daa84bc276dfc056c114594e0d0dde85c0d23630775e8e41ade6",
+    "status": "failed",
+    "published": false,
+    "files": [],
+    "wire": [],
+    "error": "ConnectionError: HTTPSConnectionPool(host='80.push2.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/clist/get?pn=1&pz=100&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281&fltt=2&invt=2&fid=f3&fs=b%3AMK0010%2Cm%3A1%2Bt%3A1%2Cm%3A0+t%3A5%2Cm%3A1%2Bs%3A3%2Cm%3A0%2Bt%3A5%2Cm%3A2&fields=f3%2Cf12%2Cf13 (Caused by NameResolutionError(\"HTTPSConnection(host='80.push2.eastmoney.com', port=443): Failed to resolve '80.push2.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+   }
+  ],
+  "published": false
+ },
+ "not_a_backtest": true,
+ "original_strategy_complete": false
+}

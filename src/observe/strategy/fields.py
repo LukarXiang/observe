@@ -11,7 +11,7 @@ import pandas as pd
 from ..data.prices import with_adjusted
 from ..data.standardize import board as board_of, flag
 
-RAW = ('open', 'high', 'low', 'close', 'preclose', 'volume', 'amount', 'turnover', 'pe_ttm', 'pb_mrq')
+RAW = ('open', 'high', 'low', 'close', 'preclose', 'volume', 'amount', 'turnover', 'pe_ttm', 'pb_mrq', 'ps_ttm', 'pcf_ncf_ttm')
 ADJ = ('open_adj', 'high_adj', 'low_adj', 'close_adj', 'ret')
 DERIVED = ('float_shares', 'float_mcap', 'is_st', 'paused', 'listed_days', 'limit_up', 'limit_down', 'limit_up_price', 'limit_down_price')
 FIELDS = frozenset(RAW + ADJ + DERIVED)
@@ -43,7 +43,10 @@ class StockPanel(Mapping):
 
     def _compute(self, name):
         t = self.trading
-        if name in RAW: return self._pivot(name).apply(pd.to_numeric, errors = 'coerce').astype(float).where(t)
+        if name in RAW:
+            if name in ('ps_ttm', 'pcf_ncf_ttm') and name not in self._bars:
+                return pd.DataFrame(np.nan, index=self.days, columns=self.cols)
+            return self._pivot(name).apply(pd.to_numeric, errors = 'coerce').astype(float).where(t)
         if name in ADJ:
             if 'close_adj' not in self._cache:
                 v = with_adjusted(self._bars, self._adj, self._coverage); v['date'] = pd.to_datetime(v.date).dt.date

@@ -1,0 +1,1013 @@
+{
+ "status": "ok_with_blocked_experiments",
+ "scope": "Source reviews and valuation optimization accepted; successful long attempts verified, blocked attempts held for settlement evidence",
+ "snapshot": "20261005-152153-eb05",
+ "published_batch": "20261005-152040-e16e",
+ "experiments": [
+  {
+   "component": "bp",
+   "short_verification": "data/staging/strategies-batch11/20261005-daily-stock-reviews/final-short-verifications/bp-short-verification.json",
+   "short_verification_sha256": "a744705201c2512577a17fe88cd52905012a77a434382c35358aa98343877844",
+   "long_attempt": {
+    "run_id": "20261005-174435-f7e566-strategy-2326",
+    "output": "data/runs/20261005-174435-f7e566-strategy-2326",
+    "status": "blocked",
+    "subruns": {
+     "backtests": [
+      {
+       "model": "bp_component_v1",
+       "scenario": "base",
+       "run_id": "20261005-174532-aac35a-base-7826",
+       "output": "data/runs/20261005-174435-f7e566-strategy-2326/variants/20261005-174532-aac35a-base-7826",
+       "status": "blocked",
+       "manifest_sha256": "133805b53825df40fbd7c7561e2aca93f6fa830871430f3e1d60b93fd83a0038"
+      },
+      {
+       "model": "bp_component_v1",
+       "scenario": "fees_x2",
+       "run_id": "20261005-174854-f22df0-fees_x2-6141",
+       "output": "data/runs/20261005-174435-f7e566-strategy-2326/variants/20261005-174854-f22df0-fees_x2-6141",
+       "status": "blocked",
+       "manifest_sha256": "5154c3825b31d80ff2f9dcd4f74e8dbba75cb449d43b68aef609fe298564e5d3"
+      },
+      {
+       "model": "bp_component_v1",
+       "scenario": "slippage_x2",
+       "run_id": "20261005-175231-6be7f6-slippage_x2-2dfb",
+       "output": "data/runs/20261005-174435-f7e566-strategy-2326/variants/20261005-175231-6be7f6-slippage_x2-2dfb",
+       "status": "blocked",
+       "manifest_sha256": "a87a44ec4d5f2f51fb4f023f3be290202daead08bf25cbd6866ba281d4db7fef"
+      }
+     ]
+    },
+    "elapsed_seconds": 703.8649132199353,
+    "peak_rss_mib": 7234.3359375
+   },
+   "children": [
+    {
+     "scenario": "base",
+     "status": "blocked",
+     "status_sha256": "ca6db525e65db7f8c1a93ba29645c38eff3c2acf64354c81104db61eff537884",
+     "issue_counts": {
+      "delisted_holding": 9431
+     },
+     "first_issues": [
+      {
+       "kind": "delisted_holding",
+       "instrument": "000662.SZ",
+       "first": {
+        "date": "2021-04-13",
+        "instrument": "000662.SZ",
+        "kind": "delisted_holding",
+        "qty": 16100
+       },
+       "occurrences": 1327
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "601258.SH",
+       "first": {
+        "date": "2023-07-03",
+        "instrument": "601258.SH",
+        "kind": "delisted_holding",
+        "qty": 4000
+       },
+       "occurrences": 789
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000667.SZ",
+       "first": {
+        "date": "2023-07-17",
+        "instrument": "000667.SZ",
+        "kind": "delisted_holding",
+        "qty": 3400
+       },
+       "occurrences": 779
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600077.SH",
+       "first": {
+        "date": "2023-07-26",
+        "instrument": "600077.SH",
+        "kind": "delisted_holding",
+        "qty": 1700
+       },
+       "occurrences": 772
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000671.SZ",
+       "first": {
+        "date": "2023-08-17",
+        "instrument": "000671.SZ",
+        "kind": "delisted_holding",
+        "qty": 2600
+       },
+       "occurrences": 756
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000666.SZ",
+       "first": {
+        "date": "2023-10-27",
+        "instrument": "000666.SZ",
+        "kind": "delisted_holding",
+        "qty": 500
+       },
+       "occurrences": 711
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000961.SZ",
+       "first": {
+        "date": "2024-07-12",
+        "instrument": "000961.SZ",
+        "kind": "delisted_holding",
+        "qty": 4000
+       },
+       "occurrences": 539
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600277.SH",
+       "first": {
+        "date": "2024-07-19",
+        "instrument": "600277.SH",
+        "kind": "delisted_holding",
+        "qty": 1800
+       },
+       "occurrences": 534
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "002435.SZ",
+       "first": {
+        "date": "2024-08-16",
+        "instrument": "002435.SZ",
+        "kind": "delisted_holding",
+        "qty": 1300
+       },
+       "occurrences": 514
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600297.SH",
+       "first": {
+        "date": "2024-08-29",
+        "instrument": "600297.SH",
+        "kind": "delisted_holding",
+        "qty": 5400
+       },
+       "occurrences": 505
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "002505.SZ",
+       "first": {
+        "date": "2024-09-02",
+        "instrument": "002505.SZ",
+        "kind": "delisted_holding",
+        "qty": 9100
+       },
+       "occurrences": 503
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000861.SZ",
+       "first": {
+        "date": "2024-09-19",
+        "instrument": "000861.SZ",
+        "kind": "delisted_holding",
+        "qty": 5200
+       },
+       "occurrences": 492
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000413.SZ",
+       "first": {
+        "date": "2024-10-14",
+        "instrument": "000413.SZ",
+        "kind": "delisted_holding",
+        "qty": 2400
+       },
+       "occurrences": 480
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600837.SH",
+       "first": {
+        "date": "2025-03-05",
+        "instrument": "600837.SH",
+        "kind": "delisted_holding",
+        "qty": 400
+       },
+       "occurrences": 385
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600811.SH",
+       "first": {
+        "date": "2025-05-06",
+        "instrument": "600811.SH",
+        "kind": "delisted_holding",
+        "qty": 2700
+       },
+       "occurrences": 345
+      }
+     ],
+     "blocked": null,
+     "returns_usable": false
+    },
+    {
+     "scenario": "fees_x2",
+     "status": "blocked",
+     "status_sha256": "6352668eefb4c28017be0b65b61240933551d71a0b063d7bad386c9c0c8c6152",
+     "issue_counts": {
+      "delisted_holding": 9431
+     },
+     "first_issues": [
+      {
+       "kind": "delisted_holding",
+       "instrument": "000662.SZ",
+       "first": {
+        "date": "2021-04-13",
+        "instrument": "000662.SZ",
+        "kind": "delisted_holding",
+        "qty": 16100
+       },
+       "occurrences": 1327
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "601258.SH",
+       "first": {
+        "date": "2023-07-03",
+        "instrument": "601258.SH",
+        "kind": "delisted_holding",
+        "qty": 3900
+       },
+       "occurrences": 789
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000667.SZ",
+       "first": {
+        "date": "2023-07-17",
+        "instrument": "000667.SZ",
+        "kind": "delisted_holding",
+        "qty": 3300
+       },
+       "occurrences": 779
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600077.SH",
+       "first": {
+        "date": "2023-07-26",
+        "instrument": "600077.SH",
+        "kind": "delisted_holding",
+        "qty": 1700
+       },
+       "occurrences": 772
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000671.SZ",
+       "first": {
+        "date": "2023-08-17",
+        "instrument": "000671.SZ",
+        "kind": "delisted_holding",
+        "qty": 2500
+       },
+       "occurrences": 756
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000666.SZ",
+       "first": {
+        "date": "2023-10-27",
+        "instrument": "000666.SZ",
+        "kind": "delisted_holding",
+        "qty": 500
+       },
+       "occurrences": 711
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000961.SZ",
+       "first": {
+        "date": "2024-07-12",
+        "instrument": "000961.SZ",
+        "kind": "delisted_holding",
+        "qty": 4000
+       },
+       "occurrences": 539
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600277.SH",
+       "first": {
+        "date": "2024-07-19",
+        "instrument": "600277.SH",
+        "kind": "delisted_holding",
+        "qty": 1700
+       },
+       "occurrences": 534
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "002435.SZ",
+       "first": {
+        "date": "2024-08-16",
+        "instrument": "002435.SZ",
+        "kind": "delisted_holding",
+        "qty": 1300
+       },
+       "occurrences": 514
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600297.SH",
+       "first": {
+        "date": "2024-08-29",
+        "instrument": "600297.SH",
+        "kind": "delisted_holding",
+        "qty": 5300
+       },
+       "occurrences": 505
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "002505.SZ",
+       "first": {
+        "date": "2024-09-02",
+        "instrument": "002505.SZ",
+        "kind": "delisted_holding",
+        "qty": 8900
+       },
+       "occurrences": 503
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000861.SZ",
+       "first": {
+        "date": "2024-09-19",
+        "instrument": "000861.SZ",
+        "kind": "delisted_holding",
+        "qty": 5100
+       },
+       "occurrences": 492
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000413.SZ",
+       "first": {
+        "date": "2024-10-14",
+        "instrument": "000413.SZ",
+        "kind": "delisted_holding",
+        "qty": 2300
+       },
+       "occurrences": 480
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600837.SH",
+       "first": {
+        "date": "2025-03-05",
+        "instrument": "600837.SH",
+        "kind": "delisted_holding",
+        "qty": 400
+       },
+       "occurrences": 385
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600811.SH",
+       "first": {
+        "date": "2025-05-06",
+        "instrument": "600811.SH",
+        "kind": "delisted_holding",
+        "qty": 2600
+       },
+       "occurrences": 345
+      }
+     ],
+     "blocked": null,
+     "returns_usable": false
+    },
+    {
+     "scenario": "slippage_x2",
+     "status": "blocked",
+     "status_sha256": "83b8e8c349b1dbe2e56ea317ed43b46ff08339a8395b28ba23b81c158b86aa01",
+     "issue_counts": {
+      "delisted_holding": 9431
+     },
+     "first_issues": [
+      {
+       "kind": "delisted_holding",
+       "instrument": "000662.SZ",
+       "first": {
+        "date": "2021-04-13",
+        "instrument": "000662.SZ",
+        "kind": "delisted_holding",
+        "qty": 16100
+       },
+       "occurrences": 1327
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "601258.SH",
+       "first": {
+        "date": "2023-07-03",
+        "instrument": "601258.SH",
+        "kind": "delisted_holding",
+        "qty": 4000
+       },
+       "occurrences": 789
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000667.SZ",
+       "first": {
+        "date": "2023-07-17",
+        "instrument": "000667.SZ",
+        "kind": "delisted_holding",
+        "qty": 3400
+       },
+       "occurrences": 779
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600077.SH",
+       "first": {
+        "date": "2023-07-26",
+        "instrument": "600077.SH",
+        "kind": "delisted_holding",
+        "qty": 1700
+       },
+       "occurrences": 772
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000671.SZ",
+       "first": {
+        "date": "2023-08-17",
+        "instrument": "000671.SZ",
+        "kind": "delisted_holding",
+        "qty": 2500
+       },
+       "occurrences": 756
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000666.SZ",
+       "first": {
+        "date": "2023-10-27",
+        "instrument": "000666.SZ",
+        "kind": "delisted_holding",
+        "qty": 500
+       },
+       "occurrences": 711
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000961.SZ",
+       "first": {
+        "date": "2024-07-12",
+        "instrument": "000961.SZ",
+        "kind": "delisted_holding",
+        "qty": 4000
+       },
+       "occurrences": 539
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600277.SH",
+       "first": {
+        "date": "2024-07-19",
+        "instrument": "600277.SH",
+        "kind": "delisted_holding",
+        "qty": 1700
+       },
+       "occurrences": 534
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "002435.SZ",
+       "first": {
+        "date": "2024-08-16",
+        "instrument": "002435.SZ",
+        "kind": "delisted_holding",
+        "qty": 1300
+       },
+       "occurrences": 514
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600297.SH",
+       "first": {
+        "date": "2024-08-29",
+        "instrument": "600297.SH",
+        "kind": "delisted_holding",
+        "qty": 5300
+       },
+       "occurrences": 505
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "002505.SZ",
+       "first": {
+        "date": "2024-09-02",
+        "instrument": "002505.SZ",
+        "kind": "delisted_holding",
+        "qty": 9000
+       },
+       "occurrences": 503
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000861.SZ",
+       "first": {
+        "date": "2024-09-19",
+        "instrument": "000861.SZ",
+        "kind": "delisted_holding",
+        "qty": 5200
+       },
+       "occurrences": 492
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "000413.SZ",
+       "first": {
+        "date": "2024-10-14",
+        "instrument": "000413.SZ",
+        "kind": "delisted_holding",
+        "qty": 2300
+       },
+       "occurrences": 480
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600837.SH",
+       "first": {
+        "date": "2025-03-05",
+        "instrument": "600837.SH",
+        "kind": "delisted_holding",
+        "qty": 400
+       },
+       "occurrences": 385
+      },
+      {
+       "kind": "delisted_holding",
+       "instrument": "600811.SH",
+       "first": {
+        "date": "2025-05-06",
+        "instrument": "600811.SH",
+        "kind": "delisted_holding",
+        "qty": 2700
+       },
+       "occurrences": 345
+      }
+     ],
+     "blocked": null,
+     "returns_usable": false
+    }
+   ],
+   "long_returns_usable": false,
+   "long_signal_hand_check": {
+    "factor_rows_checked": 4132777,
+    "sessions_checked": 1371,
+    "rebalance_days_checked": 67,
+    "method": "Raw valuation join, reciprocal and sorted cross-section; between-rebalance targets held"
+   },
+   "long_reproduction": "not run while settlement evidence is missing"
+  },
+  {
+   "component": "ep",
+   "short_verification": "data/staging/strategies-batch11/20261005-daily-stock-reviews/final-short-verifications/ep-short-verification.json",
+   "short_verification_sha256": "ebf2932d1138b65df5027d114bc2faa8605087f4c6270f1aab1872ab63d52b57",
+   "long_attempt": {
+    "run_id": "20261005-175633-e631d4-strategy-d3be",
+    "output": "data/runs/20261005-175633-e631d4-strategy-d3be",
+    "status": "success_limited",
+    "subruns": {
+     "backtests": [
+      {
+       "model": "ep_component_v1",
+       "scenario": "base",
+       "run_id": "20261005-175730-eb6435-base-67ba",
+       "output": "data/runs/20261005-175633-e631d4-strategy-d3be/variants/20261005-175730-eb6435-base-67ba",
+       "status": "success_limited",
+       "manifest_sha256": "789870cf200b0a94f343c9a4335a9cfca14c3c4ec225b3c58a38fc6062ce8b57"
+      },
+      {
+       "model": "ep_component_v1",
+       "scenario": "fees_x2",
+       "run_id": "20261005-180048-18d621-fees_x2-e6d2",
+       "output": "data/runs/20261005-175633-e631d4-strategy-d3be/variants/20261005-180048-18d621-fees_x2-e6d2",
+       "status": "success_limited",
+       "manifest_sha256": "9f535493038557747d444e1536aa0f9d18673e4cb984fe9cfad60fd0d78bfe9c"
+      },
+      {
+       "model": "ep_component_v1",
+       "scenario": "slippage_x2",
+       "run_id": "20261005-180420-4c5933-slippage_x2-3553",
+       "output": "data/runs/20261005-175633-e631d4-strategy-d3be/variants/20261005-180420-4c5933-slippage_x2-3553",
+       "status": "success_limited",
+       "manifest_sha256": "4025e4eb6a7df126be258328c10254b7ad15d9618ab6e00c3131a5f066e40dc6"
+      }
+     ]
+    },
+    "elapsed_seconds": 670.0705998520134,
+    "peak_rss_mib": 7214.25
+   },
+   "children": [
+    {
+     "scenario": "base",
+     "status": "success_limited",
+     "status_sha256": "b0a4addd8c3457818264b9143d1bbfde854b243641fceccf1a95c10fe2e4babb",
+     "issue_counts": {},
+     "first_issues": [],
+     "blocked": null,
+     "returns_usable": true
+    },
+    {
+     "scenario": "fees_x2",
+     "status": "success_limited",
+     "status_sha256": "d043722c8e53d66f0295f7c77812cec3d885afae2cce274a8fe9c01f6166ae67",
+     "issue_counts": {},
+     "first_issues": [],
+     "blocked": null,
+     "returns_usable": true
+    },
+    {
+     "scenario": "slippage_x2",
+     "status": "success_limited",
+     "status_sha256": "170748eb646ba002b4df9bb66891a17c038280617a0c991b5b9295e360e8bd4b",
+     "issue_counts": {},
+     "first_issues": [],
+     "blocked": null,
+     "returns_usable": true
+    }
+   ],
+   "long_returns_usable": true,
+   "long_signal_hand_check": {
+    "factor_rows_checked": 4132777,
+    "sessions_checked": 1371,
+    "rebalance_days_checked": 67,
+    "method": "Raw valuation join, reciprocal and sorted cross-section; between-rebalance targets held"
+   },
+   "long_reproduction": {
+    "run_id": "20261005-180828-e631d4-strategy-762a",
+    "output": "data/runs/20261005-180828-e631d4-strategy-762a",
+    "status": "success_limited",
+    "subruns": {
+     "backtests": [
+      {
+       "model": "ep_component_v1",
+       "scenario": "base",
+       "run_id": "20261005-180923-101e74-base-94b4",
+       "output": "data/runs/20261005-180828-e631d4-strategy-762a/variants/20261005-180923-101e74-base-94b4",
+       "status": "success_limited",
+       "manifest_sha256": "cbde908835b2d007b0db5a19b7a9f69012ca418bfe5150b703b5dbaf31c4e6a5"
+      },
+      {
+       "model": "ep_component_v1",
+       "scenario": "fees_x2",
+       "run_id": "20261005-181243-150ebd-fees_x2-c3e3",
+       "output": "data/runs/20261005-180828-e631d4-strategy-762a/variants/20261005-181243-150ebd-fees_x2-c3e3",
+       "status": "success_limited",
+       "manifest_sha256": "603aa2796253d3cfc59dce142d9435475c3d57769c4805562ef8207df1c5ac7f"
+      },
+      {
+       "model": "ep_component_v1",
+       "scenario": "slippage_x2",
+       "run_id": "20261005-181621-8b06a6-slippage_x2-2592",
+       "output": "data/runs/20261005-180828-e631d4-strategy-762a/variants/20261005-181621-8b06a6-slippage_x2-2592",
+       "status": "success_limited",
+       "manifest_sha256": "8c4d7b69c264f142b43b05590fe0d86a2fa0254b71cc131e3668c74dc586e833"
+      }
+     ]
+    },
+    "reproduction": {
+     "of": "/mnt/d/projects/observe/data/runs/20261005-175633-e631d4-strategy-d3be",
+     "result": "match",
+     "differences": 0
+    }
+   }
+  }
+ ],
+ "checks": {
+  "origin": "Final implementation verification outputs from this session, transcribed without rerunning the passing suites",
+  "commands": [
+   {
+    "command": "/home/zuozhe/envs/quant/.venv/bin/python -m pytest -q tests/unit/test_feature_panel.py tests/integration/test_strategies.py tests/integration/test_strategy_scope.py tests/integration/test_multi_ma_strategy.py tests/integration/test_bollinger_strategy.py tests/integration/test_rsi_strategy.py tests/integration/test_rotation_strategy.py tests/integration/test_svm_strategy.py tests/integration/test_pair_strategy.py",
+    "returncode": 0,
+    "output_summary": "72 passed, 1 warning in 148.55s (0:02:28)",
+    "warning": "Existing Starlette/httpx deprecation warning"
+   },
+   {
+    "command": "/home/zuozhe/envs/quant/.venv/bin/ruff check src tests scripts/prepare_handoff.py scripts/build_strategy_catalog.py scripts/verify_financial_import.py scripts/run_strategy_batch11.py scripts/review_strategy_batch11.py scripts/verify_strategy_batch11.py scripts/research_joinquant_ema.py",
+    "returncode": 0,
+    "output_summary": "All checks passed!"
+   },
+   {
+    "command": "git diff --check",
+    "returncode": 0,
+    "output_summary": "No output; passed"
+   }
+  ],
+  "implementation_sha256": {
+   "src/observe/features.py": "5ea591cdc15aa43eaa2b661ebcf4a3eacbde3b58e019cf717d3ab730f9c00f7e",
+   "src/observe/strategies.py": "3cb8ba721028d0fbd5c535506f0d8c1012f652d051c7dc1e7fc459861d1ad86b",
+   "src/observe/replay.py": "319455a0031ce2d8b6d1e08595fbb0288f5fc65d9b67533b39bcfcc80db8b9e4"
+  },
+  "earlier_checks": [
+   "Selected-field regression before implementation: 1 failed (unsupported fields keyword)",
+   "First optimization pass: 22 passed, 1 warning in 84.42s",
+   "Date-set cache targeted checks: 2 passed, 1 warning in 2.88s"
+  ],
+  "specialists": {
+   "security": "Initial and incremental review: no confirmed remaining issue",
+   "architecture": "Initial and incremental review: no confirmed remaining issue"
+  }
+ },
+ "supplemental_checks": {
+  "origin": "Automatically captured supplemental verification in this session",
+  "commands": [
+   {
+    "argv": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "pytest",
+     "-q",
+     "tests/unit/test_batch11_archive.py"
+    ],
+    "returncode": 0,
+    "stdout": "......                                                                   [100%]\n6 passed in 2.72s\n",
+    "stderr": ""
+   },
+   {
+    "argv": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "scripts/archive_strategy_batch11_blocked.py",
+     "tests/unit/test_batch11_archive.py",
+     "scripts/research_delisting_evidence.py",
+     "scripts/research_joinquant_ema.py",
+     "scripts/run_strategy_batch11.py",
+     "scripts/review_strategy_batch11.py",
+     "scripts/verify_strategy_batch11.py"
+    ],
+    "returncode": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+   },
+   {
+    "argv": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_batch11_blocked.py": "cc204d7bde4ecc77ef9a9c32873439c33a90d826058170ee26826b08a44e9bb9",
+   "tests/unit/test_batch11_archive.py": "d7118f11e88bd0f14468db2b0ba5eade82a560820fc17e4bfd73b55f67eceeeb",
+   "scripts/research_delisting_evidence.py": "19e0361165bfae9ae165b5eb203f2073f8f18235870621cf4bbe46ad56c82143",
+   "scripts/research_joinquant_ema.py": "bee25975b70595163f5521061e892f9177ebefeeaf7f2e3ab420ddea36593bd1",
+   "scripts/run_strategy_batch11.py": "e8781137c4b8c8a4f012538c0fe6548bf3f2b66870713770a7bb318442ffd96e",
+   "scripts/review_strategy_batch11.py": "8120f47814c58f23c5d4a2548b81984e6d4bf45bf0acc78e74bccbb69c799efd",
+   "scripts/verify_strategy_batch11.py": "47d353f99655e30a4af29e5fa2582f22e4be8f5f5ace594652efc8eed56589df"
+  }
+ },
+ "fees": {
+  "status": "ok",
+  "fills_checked": 42251,
+  "checks": [
+   {
+    "run_id": "20261005-174435-f7e566-strategy-2326",
+    "child": "20261005-174532-aac35a-base-7826",
+    "scenario": "base",
+    "fills_checked": 7428,
+    "fee_regime_counts": {
+     "2015-08-01": 1749,
+     "2022-04-29": 1553,
+     "2023-08-28": 4126
+    },
+    "fee_total": 43063.27
+   },
+   {
+    "run_id": "20261005-174435-f7e566-strategy-2326",
+    "child": "20261005-174854-f22df0-fees_x2-6141",
+    "scenario": "fees_x2",
+    "fills_checked": 7306,
+    "fee_regime_counts": {
+     "2015-08-01": 1739,
+     "2022-04-29": 1524,
+     "2023-08-28": 4043
+    },
+    "fee_total": 84715.49
+   },
+   {
+    "run_id": "20261005-174435-f7e566-strategy-2326",
+    "child": "20261005-175231-6be7f6-slippage_x2-2dfb",
+    "scenario": "slippage_x2",
+    "fills_checked": 7412,
+    "fee_regime_counts": {
+     "2015-08-01": 1746,
+     "2022-04-29": 1548,
+     "2023-08-28": 4118
+    },
+    "fee_total": 42948.17
+   },
+   {
+    "run_id": "20261005-173126-82f83d-strategy-fbaf",
+    "child": "20261005-173255-fda7ad-base-5c28",
+    "scenario": "base",
+    "fills_checked": 519,
+    "fee_regime_counts": {
+     "2023-08-28": 519
+    },
+    "fee_total": 2678.83
+   },
+   {
+    "run_id": "20261005-173126-82f83d-strategy-fbaf",
+    "child": "20261005-173307-056d35-fees_x2-f26f",
+    "scenario": "fees_x2",
+    "fills_checked": 518,
+    "fee_regime_counts": {
+     "2023-08-28": 518
+    },
+    "fee_total": 5347.77
+   },
+   {
+    "run_id": "20261005-173126-82f83d-strategy-fbaf",
+    "child": "20261005-173320-4eb8e1-slippage_x2-26fc",
+    "scenario": "slippage_x2",
+    "fills_checked": 520,
+    "fee_regime_counts": {
+     "2023-08-28": 520
+    },
+    "fee_total": 2683.81
+   },
+   {
+    "run_id": "20261005-175633-e631d4-strategy-d3be",
+    "child": "20261005-175730-eb6435-base-67ba",
+    "scenario": "base",
+    "fills_checked": 5720,
+    "fee_regime_counts": {
+     "2015-08-01": 1447,
+     "2022-04-29": 1228,
+     "2023-08-28": 3045
+    },
+    "fee_total": 34474.85
+   },
+   {
+    "run_id": "20261005-175633-e631d4-strategy-d3be",
+    "child": "20261005-180048-18d621-fees_x2-e6d2",
+    "scenario": "fees_x2",
+    "fills_checked": 5696,
+    "fee_regime_counts": {
+     "2015-08-01": 1441,
+     "2022-04-29": 1224,
+     "2023-08-28": 3031
+    },
+    "fee_total": 68556.57
+   },
+   {
+    "run_id": "20261005-175633-e631d4-strategy-d3be",
+    "child": "20261005-180420-4c5933-slippage_x2-3553",
+    "scenario": "slippage_x2",
+    "fills_checked": 5724,
+    "fee_regime_counts": {
+     "2015-08-01": 1445,
+     "2022-04-29": 1230,
+     "2023-08-28": 3049
+    },
+    "fee_total": 34448.12
+   },
+   {
+    "run_id": "20261005-173340-1b80e2-strategy-1c20",
+    "child": "20261005-173508-dca875-base-13df",
+    "scenario": "base",
+    "fills_checked": 471,
+    "fee_regime_counts": {
+     "2023-08-28": 471
+    },
+    "fee_total": 2532.47
+   },
+   {
+    "run_id": "20261005-173340-1b80e2-strategy-1c20",
+    "child": "20261005-173520-37d46d-fees_x2-852a",
+    "scenario": "fees_x2",
+    "fills_checked": 468,
+    "fee_regime_counts": {
+     "2023-08-28": 468
+    },
+    "fee_total": 5033.71
+   },
+   {
+    "run_id": "20261005-173340-1b80e2-strategy-1c20",
+    "child": "20261005-173533-ce150a-slippage_x2-83f6",
+    "scenario": "slippage_x2",
+    "fills_checked": 469,
+    "fee_regime_counts": {
+     "2023-08-28": 469
+    },
+    "fee_total": 2522.03
+   }
+  ],
+  "method": "Independent multiplication from frozen YAML date ranges and Decimal half-up cents; verifies arithmetic, not external fee accuracy"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 2567,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 244,
+  "old_calendar_rows_unchanged": 2095,
+  "old_index_rows_unchanged": 1392,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "324606c427dfb943a6a924bd5d695f3830fd627be27d03e0d8ca0337324cc227"
+ },
+ "source_review": {
+  "file": "data/staging/strategies-batch11/20261005-daily-stock-reviews/source-reviews/review.json",
+  "sha256": "859ebe1b9e272d7fb02197b54cf5c0c999ef8fe399c52c5c77d3c209708eb42e",
+  "count": 8
+ },
+ "settlement_evidence": {
+  "manifests": [
+   {
+    "file": "data/staging/strategies-batch11/20261005-delisting-evidence/destination/manifest.json",
+    "sha256": "be30c5d1f913e5df70f91f426353af60d13a69015e263a3e28178fb5973c3c7c"
+   },
+   {
+    "file": "data/staging/strategies-batch11/20261005-delisting-evidence/manifest.json",
+    "sha256": "c12f47a33b7ddfc713332f17c15626bf0ef0401ad81b1f150e6ef790757fe468"
+   }
+  ],
+  "raw_responses_verified": 29,
+  "failed_attempts_preserved": 1,
+  "published": false
+ },
+ "implementation_sha256": {
+  "scripts/archive_strategy_batch11_blocked.py": "cc204d7bde4ecc77ef9a9c32873439c33a90d826058170ee26826b08a44e9bb9",
+  "scripts/research_delisting_evidence.py": "19e0361165bfae9ae165b5eb203f2073f8f18235870621cf4bbe46ad56c82143",
+  "scripts/research_joinquant_ema.py": "bee25975b70595163f5521061e892f9177ebefeeaf7f2e3ab420ddea36593bd1",
+  "scripts/review_strategy_batch11.py": "8120f47814c58f23c5d4a2548b81984e6d4bf45bf0acc78e74bccbb69c799efd",
+  "scripts/run_strategy_batch11.py": "e8781137c4b8c8a4f012538c0fe6548bf3f2b66870713770a7bb318442ffd96e",
+  "scripts/verify_strategy_batch11.py": "47d353f99655e30a4af29e5fa2582f22e4be8f5f5ace594652efc8eed56589df",
+  "src/observe/features.py": "5ea591cdc15aa43eaa2b661ebcf4a3eacbde3b58e019cf717d3ab730f9c00f7e",
+  "src/observe/replay.py": "319455a0031ce2d8b6d1e08595fbb0288f5fc65d9b67533b39bcfcc80db8b9e4",
+  "src/observe/strategies.py": "3cb8ba721028d0fbd5c535506f0d8c1012f652d051c7dc1e7fc459861d1ad86b",
+  "src/observe/strategy_catalog.py": "b018b0263420690c89fe9d09beb9d5584998558df1232b794e6d8c73179cd787",
+  "tests/unit/test_batch11_archive.py": "d7118f11e88bd0f14468db2b0ba5eade82a560820fc17e4bfd73b55f67eceeeb",
+  "tests/unit/test_feature_panel.py": "e7ffbcccb848664240e59870654fe7aa4bfc8da71800e3e50b06d700b15efc64"
+ },
+ "review": {
+  "depth": "deep",
+  "scope": "on target",
+  "specialists": [
+   "architecture",
+   "security"
+  ],
+  "remaining_confirmed_findings": []
+ },
+ "limitations": [
+  "Delisting settlement and share-conversion evidence incomplete; no last-price liquidation assumption",
+  "Long blocked equity curves/metrics are not valid investment outcomes",
+  "No long blocked replay until dependencies are resolved",
+  "Main-board component approximation; original source incomplete",
+  "Strict financial usable rows remain zero; 332 prior daily warnings remain",
+  "Partition protection checks size/mtime only"
+ ],
+ "progress": {
+  "checkpoint": "20261005-182416-7fb2",
+  "note": "第十一批61份累计审查、72项测试/短窗口禁网匹配；BP/EP长区间成功项验收、退市阻断项存档，结算待补",
+  "catalog_id": "0e39c00d5c202b00087b",
+  "catalog_sha256": "c7693ec5f574fbad15e4912c83735612d8de7cc860521605a15752279f5b052d",
+  "published_batch": "20261005-152040-e16e",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 487,
+   "已验证": 9,
+   "待审查": 39,
+   "暂不可复现": 50,
+   "非交易研究脚本": 68,
+   "实现中": 1,
+   "重复版本": 41
+  },
+  "manually_reviewed": 61,
+  "locally_backtested_sources": 11,
+  "locally_reproduced_sources": 11,
+  "local_strategy_runs": 38,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261005-182416-7fb2"
+ }
+}

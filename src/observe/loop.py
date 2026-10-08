@@ -1,6 +1,6 @@
 """逐日循环：盘前公司行动 → 开盘执行上一决策的订单（先卖后买）→ 撤单 → 收盘估值勾稽 → 决策生成下一交易日订单。"""
 from .ledger.book import Book
-from .portfolio import DEFAULT_PARTICIPATION, equal_weight_orders, plan_rebalance, rebalance_orders, refill_orders, target_weight_orders
+from .portfolio import DEFAULT_PARTICIPATION, conditional_value_orders, equal_weight_orders, plan_rebalance, rebalance_orders, refill_orders, target_weight_orders, slot_value_orders, validate_slot_batch, cash_rotation_orders, validate_cash_rotation
 from .schedule import rebalance_dates
 
 POLICIES = ('sell_then_buy', 'preopen_cash_only')
@@ -8,19 +8,42 @@ POLICIES = ('sell_then_buy', 'preopen_cash_only')
 
 def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_date = None, actions = None, rebalance_every = 5,
              open_cash_policy = 'sell_then_buy', slippage = 0.0, n = 20, buffer = 10, max_sell = 5, max_weight = 0.10, refill_between_rebalance = True, calendar = None,
-             participation = DEFAULT_PARTICIPATION, on_close = None, construction = 'topn', targets_by_date = None, rebalance_frequency = 'sessions', rebalance_session = 1):
+             participation = DEFAULT_PARTICIPATION, on_close = None, construction = 'topn', targets_by_date = None, rebalance_frequency = 'sessions', rebalance_session = 1,
+             conditional_values_by_date = None, slot_signals_by_date = None, cash_rotations_by_date = None):
     """market: {日: {证券: {'open','close','preclose','suspended','avg_amount_20d',...}}}；返回 (账本, 订单记录)。
     on_close(日, 账本, 当日净值行) 在收盘勾稽之后、决策之前调用，用于记录逐日持仓等状态；抛出异常即中止循环"""
     if open_cash_policy not in POLICIES: raise ValueError(f'open_cash_policy must be one of {POLICIES}')
-    if construction not in ('topn', 'universe_equal', 'target_weights'): raise ValueError('未知组合构建方式')
+    if construction not in ('topn', 'universe_equal', 'target_weights', 'conditional_values', 'signal_slots', 'signal_cash_rotation'): raise ValueError('未知组合构建方式')
+    if construction == 'signal_cash_rotation':
+        if cash_rotations_by_date is None or set(cash_rotations_by_date) != set(dates): raise ValueError('signal_cash_rotation 必须完整覆盖决策日')
+        if open_cash_policy != 'sell_then_buy' or refill_between_rebalance: raise ValueError('signal_cash_rotation 须先卖后买且不补单')
+        for batch in cash_rotations_by_date.values(): validate_cash_rotation(batch)
+    if construction == 'signal_slots':
+        if slot_signals_by_date is None or set(slot_signals_by_date) != set(dates): raise ValueError('signal_slots 必须完整覆盖决策日')
+        if open_cash_policy != 'sell_then_buy' or refill_between_rebalance: raise ValueError('signal_slots 须先卖后买且不补单')
+        for batch in slot_signals_by_date.values(): validate_slot_batch(batch)
     if construction == 'target_weights' and targets_by_date is None: raise ValueError('target_weights 必须提供逐日明确目标')
+    if construction == 'conditional_values':
+        if conditional_values_by_date is None or set(conditional_values_by_date) != set(dates):
+            raise ValueError('conditional_values 必须完整覆盖决策日')
+        for signals in conditional_values_by_date.values(): conditional_value_orders(signals, {}, participation)
     rebalance = rebalance_dates(dates, calendar or dates, rebalance_frequency, rebalance_every, rebalance_session)
     book = Book(initial_cash, calendar = calendar or dates); actions = actions or {}; pending, orders = [], []   # calendar 用于推断缺失日期
     target, target_amount, target_filled, sell_reason, rank = set(), {}, {}, {}, {}
+    pending_slots = None; slot_decision = None
+    pending_rotation = None; rotation_decision = None
     for k, day in enumerate(dates):
         quotes = market.get(day, {}); book.start_day(day, actions.get(day, ()), quotes)
         budget = book.cash if open_cash_policy == 'preopen_cash_only' else None
         remaining = []
+        if pending_rotation is not None:
+            for intent in cash_rotation_orders(pending_rotation, book, participation):
+                r = book.execute({**intent, 'decision_date': rotation_decision}, quotes.get(intent['instrument'], {}), day, rules, slippage)
+                orders.append({**r, 'exec_date': day})
+        if pending_slots is not None:
+            for intent in slot_value_orders(pending_slots, book, quotes, rules, day, participation):
+                r = book.execute({**intent, 'decision_date': slot_decision}, quotes.get(intent['instrument'], {}), day, rules, slippage)
+                orders.append({**r, 'exec_date': day})
         for o in pending:
             r = book.execute(o, quotes.get(o['instrument'], {}), day, rules, slippage, budget)
             if budget is not None and o['side'] == 'buy' and r['qty_filled']: budget -= r['value'] + r['fee']
@@ -38,6 +61,18 @@ def run_loop(dates, market, scores_by_date, initial_cash, rules, eligible_by_dat
         row = book.close_day(day, quotes)
         if on_close: on_close(day, book, row)
         held = {i for i, p in book.positions.items() if p.qty}
+        if construction == 'signal_cash_rotation':
+            pending_rotation = cash_rotations_by_date[day] if day in rebalance else None
+            rotation_decision = day
+            continue
+        if construction == 'signal_slots':
+            pending_slots = slot_signals_by_date[day] if day in rebalance else None
+            slot_decision = day
+            continue
+        if construction == 'conditional_values':
+            intents = conditional_value_orders(conditional_values_by_date[day], book.positions, participation) if day in rebalance else []
+            pending = [{**o, 'decision_date': day} for o in intents]
+            continue
         if construction in ('universe_equal', 'target_weights'):
             if day in rebalance:
                 if construction == 'target_weights':

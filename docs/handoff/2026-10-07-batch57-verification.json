@@ -1,0 +1,1296 @@
+{
+ "status": "ok",
+ "snapshot": "20261006-145049-e06c",
+ "progress": {
+  "checkpoint": "20261007-181652-e6e5",
+  "note": "Batch57 futures dependency recognition accepted; all-strategy research continues",
+  "catalog_id": "4cbd06350659d150cb48",
+  "catalog_sha256": "df6c746a594b7eead48ca4bffe12e98e7254e64c1b8fca56768d7d5dae136c1a",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 490,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 64,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 199,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 67,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261007-181652-e6e5"
+ },
+ "checks": {
+  "status": "passed",
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/review_strategy_batch57.py",
+     "scripts/prepare_handoff.py",
+     "scripts/build_strategy_catalog.py",
+     "scripts/verify_financial_import.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch57/20261007-futures-dependency/check-0.log",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "scripts.verify_offline_tests",
+     "-q",
+     "tests/unit/test_catalog_futures.py",
+     "tests/unit/test_catalog_bond.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_catalog_research_queries.py",
+     "tests/unit/test_catalog_fund_universe.py",
+     "tests/unit/test_catalog_schedules.py",
+     "tests/unit/test_batch56_research.py",
+     "tests/integration/test_strategy_merge.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch57/20261007-futures-dependency/check-1.log",
+    "sha256": "64ed3b86e26356bd89b958e8393b560e67c62c71b79e4bf4529eb83532b7061d"
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch57/20261007-futures-dependency/check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch20.py": "ef266672928706139987461ea01958a2e530ffe9c044a4952aaafd4a0cb1d8b5",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch29.py": "67c61c77ea6705a3f8f3f630d8f02316bc9c0b5566e066ca142ebf01d85a6948",
+   "scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch33.py": "1eaa6449e26f06b1cadd3a82d595d657776efda5a0ea3c4b351c5ea6c4212935",
+   "scripts/review_strategy_batch34.py": "f1afea9d1ac4619b3f535235f6cd146abba872640c77aa42699cb7e4b05f712e",
+   "scripts/review_strategy_batch35.py": "5bfb4720d62f026881ed1a4423f6b5dc3d001807042b653847603ff1d4294dde",
+   "scripts/review_strategy_batch36.py": "a8df8b0e80629e37fdba34e3734e269c182a1b53f5462ee30d7f4fffd7e22bd9",
+   "scripts/review_strategy_batch39.py": "25bf0a33c7c276f15af6c062cea5244e5d2f48c4e0751c0c44d3c306cf450fc4",
+   "scripts/review_strategy_batch40.py": "d8e209e8eada20191d06d404cfde2d7be808f6b482460fcc7ff5402f2ab8fb6d",
+   "scripts/review_strategy_batch41.py": "19a99d41441a6c97e8c569dc27eb345bc17f9631353b20c5f5f0ce4753d8495d",
+   "scripts/review_strategy_batch42.py": "d80c793eb85f09eda79c3e0b5012dfc4eeb4ec63feef069a978616bbc9f91d68",
+   "scripts/review_strategy_batch43.py": "07e07880afb534ad98662afd069f7f5dc1a73629b9f6fc773e23e5ac99d9322d",
+   "scripts/review_strategy_batch44.py": "5b2f15c8b92908ba7a7545036260122cd207c278b50224b72d869a2c7f55d0fb",
+   "scripts/review_strategy_batch45.py": "f6f421660ec743508bae7ee57373265e9949e04f4e88c66a8c2a63a78c65bc43",
+   "scripts/review_strategy_batch46.py": "13856781d182409050cd9daa4c2f6eaf287c147b7f4eef089dba1c414a68e01d",
+   "scripts/review_strategy_batch47.py": "195f0c3dd06a4245850da62c5cd1adc8d1cba68d2cd6dec5c47f129d09603082",
+   "scripts/review_strategy_batch48.py": "8e5783584aefb9331fbc3f575c10a66c232453b3f7fa3533fe11555f676ab55e",
+   "scripts/review_strategy_batch49.py": "9175dfa5647ebfeeb980390663d7533d11da71afdae950c67cc46b5629dc4b6f",
+   "scripts/review_strategy_batch50.py": "eae20fdfe0e8ac87313451351cf8e439900b02e5eea9fb1de1fc8b3b4226cbac",
+   "scripts/review_strategy_batch51.py": "62018fa81a7f2ace7041838db54ca436b0fa1bce5247212a02844d8cb27c4962",
+   "scripts/review_strategy_batch52.py": "4a94ecb24d33002c9927be68bd422395bb69323cf03a77f932a27774ea3a96cd",
+   "scripts/review_strategy_batch53.py": "95203dd3bf2eb8c4c7dfa915f129bfa4a07b35badbb93a9561235b3f615738d3",
+   "scripts/review_strategy_batch54.py": "c2c94202f967490ca48b52b07df0ec15c41bc6860204b606957dde82054a69b7",
+   "scripts/review_strategy_batch55.py": "d70d2b7b306b3aa27e99bcaf984cf4f059d633a54bb4ec16b2abe47809f8f3c6",
+   "scripts/review_strategy_batch56.py": "c69cc56752f950dbd4b20563baf14efd283e57745853a2d75d55ca3c6b8970e9",
+   "scripts/review_strategy_batch57.py": "356d36d63b773d389e5d6dc046f095504a35fba45b60b74dec7fd9ff719b39a6",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "fc108b82072019fa309f4efdacdd19a44e1dfca94f349b635f2790e944cde85c",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "tests/unit/test_batch32_research.py": "47d78954a24d29bcf9358830d6f847a29efa505fbe0a63854a68fb92b076abef",
+   "tests/unit/test_batch33_research.py": "61b6d0ae8c1a0d1947ba5d0a16cd73a2132bb08d4b221546d64ee5ed87ce2bed",
+   "tests/unit/test_batch34_research.py": "b873c05fe67145343e8437b9a5ac88e713e0cb2c39feeb0ce52ac3387a487990",
+   "tests/unit/test_batch35_research.py": "4783426ec74458a819f0305236a722f84cb2352b53696f5567345127bf6fd7ab",
+   "tests/unit/test_batch36_research.py": "02e81703a13a7be8e6442b7cdcf70921260ee0251a5ff20ac9f75e633fbc63d6",
+   "tests/unit/test_batch39_research.py": "3afb25412f3870ee7561e1575d4b1f11adfe2b5e7e1f447d9e45da309a217b11",
+   "tests/unit/test_batch40_research.py": "15548d7030f0a80bb9df6210f35a353fea66ba0b5ef01575426b5e7e3848846f",
+   "tests/unit/test_batch41_research.py": "e9fc5475e621bd919985d48ab3e59775f16cfead3192f099edb2f47b1c9d210d",
+   "tests/unit/test_batch42_research.py": "d2e19a2935d6be2a68c34c5e530bb5d76f0e11862b7088c0e1faeab522a0a242",
+   "tests/unit/test_batch43_research.py": "2cca019afda1cd8a3465e2b0e8ad9a54fc1005e357ce6708d19273be78b8dc9c",
+   "tests/unit/test_batch44_research.py": "5116defb833d1aed1a9357fd1627dee5473e57250cfc475594a403ec43dac112",
+   "tests/unit/test_batch45_research.py": "2a40a092ca8951d84c5c33e893e5c24bdfb34256a96d066a54ac16a349f61b93",
+   "tests/unit/test_batch47_research.py": "c07dac5bb5f85ae6c3e904d9e6b4ea32ade44872e714aaeef7d489e1b4316118",
+   "tests/unit/test_batch50_research.py": "98a11b1bbde1345ee115d30ec6324030e4d6638f86a3f88959f146b39065b104",
+   "tests/unit/test_batch51_research.py": "e3b403c8647ab29a5129074f6399228c0e4fc8066349c85c43e6a19f100fdb42",
+   "tests/unit/test_batch56_research.py": "353949189f166839f6cdede020f3952ed7b60b84fcf8664dd06ec44c790777f4",
+   "tests/unit/test_catalog_bars.py": "d4ae8e9c3ea18d62f2aeabe686ecbc6e5bb0503d641b02cfc2c1c4ab00bdd85e",
+   "tests/unit/test_catalog_bond.py": "535dc0b0b69c4fcb093df54e4bce1b77455cde9e64b4625a19f250c9c7157653",
+   "tests/unit/test_catalog_dependencies.py": "fa80561b760480575f1ce973b582c589c7053080e66c60d873bc3037c7d26ad3",
+   "tests/unit/test_catalog_fund_universe.py": "89723bc21b29c7ac72d5a2fbff29bebb12230994a30e9c290688065932f5fef3",
+   "tests/unit/test_catalog_futures.py": "6bd97570cac512b1efef52eac02014a803c626db7289b2081289439bde0a205e",
+   "tests/unit/test_catalog_macro.py": "2fd3376a37c45cc5dd6f5df9d11c18cda4d6fd654e107978e748d91533525c63",
+   "tests/unit/test_catalog_margin_weekly.py": "df55781740bbda25809349c9ef41f9c7b85455a436c8b72ab12a8a553c900d39",
+   "tests/unit/test_catalog_prefix.py": "90c3721c7da1434acefd4053610c0c22415c98187930456689cd8f0478ce6770",
+   "tests/unit/test_catalog_research_queries.py": "58e723261173fc9f3e6b129f882a089aa79491af56073a010a659fcdd4dfc2cc"
+  },
+  "evidence_sha256": {
+   "baseline.json": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9",
+   "catalog-before.json": "63c3d5cb7af17c58742d6c26146294ccdd80b37956c764478622133ca8206a48",
+   "check-0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+   "check-1.log": "64ed3b86e26356bd89b958e8393b560e67c62c71b79e4bf4529eb83532b7061d",
+   "check-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "dependency-state.json": "3b98f8b8c038fdf065acdd8adbb4f9b2dcaabab3aee9d0bba8f5d4a2e6bfabd5",
+   "futures-source-evidence.json": "933ded245e9a3d430fc17d4fbdc15640b88f296d7eb3bab8325e0beeb81c2d2c",
+   "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "input-binding.json": "73ef8b0706271a580eec53027240b75d3d946cb77d8081d042589e765f245de1",
+   "offline-catalog.json": "49fca397bc05c83900b9a8ea4ed15f348c7169ca5f511421484af124449aefb6",
+   "progress-start.json": "5d4efc2eb16e064cb89b956dd6abf0e8f918c4c39d7849ca35c47439b3427449",
+   "red-regression.json": "15cf846ab68ec2e37fa9ee48ad6a80045883f0ec7e034324f7766360434d3f37",
+   "scan-impact.json": "1116ff3fd384cba5a7c3a2f6563fd1570d72d361cb5f38dae1b8a157726f60f6",
+   "strategy_catalog.before.py": "ecff712ef64b5c58f29fe9a3696cc609146f7c8eb31442daf56ec795f10f1b2d",
+   "test_catalog_futures.frozen.py": "6bd97570cac512b1efef52eac02014a803c626db7289b2081289439bde0a205e",
+   "futures-sources/S-026d83a19a65.source": "f2b21c220f62a9456061ec5aea2724061e799fcd0c8b44930b1893e9061b3d14",
+   "futures-sources/S-078084d1a6cb.source": "b853d47a00c90780501aeb32c1bd112374628c830e0ca70a16cdbbf6058aa582",
+   "futures-sources/S-0bb553274e86.source": "c661bea4502229d0f000cc41d43f1fceae033d7a7be2af5bfea37559b2b42ec7",
+   "futures-sources/S-0f807a05245b.source": "9ca0a893c323ddfccf0fb9f23ce415f1ba92230c0fbc21b91bea439ff277111f",
+   "futures-sources/S-118f6f254937.source": "b2051102a114a49d6179cc5c451485eb0ef0f08406ad22f36a6c48c768bdd60c",
+   "futures-sources/S-18d2868df809.source": "7b0c7ee966f0fa2c5cbc7ad497c173f40361488caca648e5b0395eb7bd123f33",
+   "futures-sources/S-25323642c457.source": "f67926aa99770a2ca6de716e6ec4f081af32c3102c85206ce05313e850cc25e2",
+   "futures-sources/S-398e16c90dee.source": "0402ab122e750fdf8ccee93faff4c71f25d07afd98cb59ad866ecf2a7dbfddc2",
+   "futures-sources/S-3a5bd9a2fbe1.source": "726d3aa867bc5492101087fbe08813ab63ae3d4143b829ac28af9446e336c070",
+   "futures-sources/S-3efb5b1c699e.source": "ef94d3b3da703a69fd31fa1d4a7303d438e49cd3e1586bed6ff6e1dbaf23f37e",
+   "futures-sources/S-406d14f199b9.source": "58bcb4f189e4db816325c312efea4ae49cd3dbd16f8debde3023c4ac66a9d425",
+   "futures-sources/S-52372c264e0a.source": "b07ac441c311135554148da8c9df5bf5a33560ba5ed99113774c4916f432cac1",
+   "futures-sources/S-66eefedcf0df.source": "c0102d437625c6b6b522b4f816d5b6a4cb3b6b48df37448632978a1141e3178e",
+   "futures-sources/S-6c7441327c3f.source": "b2051102a114a49d6179cc5c451485eb0ef0f08406ad22f36a6c48c768bdd60c",
+   "futures-sources/S-7da7fcfec431.source": "e727755c408c9b6cafebd3a0113f611219cb0625b16a7280e590c8168bf5eedd",
+   "futures-sources/S-7dffe8edb923.source": "f9cd21141068d0de24a6c474e60249d354aed0f1ae3a0eb00a8637a77847936e",
+   "futures-sources/S-7e6d5e73b9e8.source": "ceb3104eef975f3b2c465de33f7c691114c3b10175832d5a4fb6751887d6fb76",
+   "futures-sources/S-7fc777423ab1.source": "de731c1ad920d97c0994ae8b9e6fca0b53ca7071d222bd2cc1543076ab630f56",
+   "futures-sources/S-81582bb1bb2d.source": "fadcc6a0c9842db6e2556e28021b25273b9bd67e05a98b1db73c10e2b742394e",
+   "futures-sources/S-88c9a65f386c.source": "65d1c386719eeeb0e3b284ce76463ccb686c20557ec04b55336d219b2dc76dab",
+   "futures-sources/S-aa26bbc4c522.source": "eef12754fb9ce461300e2529f0ecb75cc2404faec6110bcf68a591acd273cc37",
+   "futures-sources/S-acbb5f9cf09f.source": "3b1b81d92397c967b3d3e8b0b264f488183017f330bebefe749cfb4bf127640d",
+   "futures-sources/S-b0df386a9dcf.source": "9c4de2f241ff8bb293a96ebd9cf042c0f1dfca68b6895add41f4936aabbac1bf",
+   "futures-sources/S-bcd947018a9c.source": "2263acf4cd61f815fd61c0d21f700712e5d76ded961bca169e5f990cf41e3fec",
+   "futures-sources/S-bde2a6eb855b.source": "ef8decb52c98d6eb4767588b396ac185c5c0af27837d7a91983365d139cbef20",
+   "futures-sources/S-c15d500ac3cb.source": "8cfbe525ba5674c3fd04f2b851ecc79cfe7542ada9caffd747033f8c682fe259",
+   "futures-sources/S-c2a42783423c.source": "8edfa1550e2fdff5a45c7f729d507c24b19eb28c47e2e8de8f986a3064fe26c5",
+   "futures-sources/S-cdf79041f0e4.source": "0421d4f69fcfe37e9248bfb7d5dde8b8aacd6bb38a6c4e81eb07e4bf965d3227",
+   "futures-sources/S-e13bf141d407.source": "caf882639dbe3618d34fd7f99c3fc9655f9a8893fc9d5c7cfa4eb37926d4d7f9",
+   "futures-sources/S-e84bd8c8eecb.source": "c0102d437625c6b6b522b4f816d5b6a4cb3b6b48df37448632978a1141e3178e",
+   "futures-sources/S-fb1d82b6d46a.source": "8cfbe525ba5674c3fd04f2b851ecc79cfe7542ada9caffd747033f8c682fe259",
+   "futures-sources/S-fe666d52ccfe.source": "bc1c92b36492a6fbbc159a761f2b8ab16dec46f440f5182a8589e30a682d6f51",
+   "futures-sources/S-feb20cb1470e.source": "0b4668dccaab75c3ce6ac674280c6792f17356b698c1a2de786f08a872d48514",
+   "source-reviews/review.json": "bdf71199f036185299a351ec14b3d151d7c8b908855a01b9e5661840c71d6a13",
+   "catalog-offline/catalog/strategies/implementation-evidence.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "catalog-offline/catalog/strategies/latest.json": "916ecf46aafb1345ae7308d46cfb4fda6f6d54ae702241c0c1208801090f5336",
+   "catalog-offline/catalog/strategies/4cbd06350659d150cb48/catalog.json": "df6c746a594b7eead48ca4bffe12e98e7254e64c1b8fca56768d7d5dae136c1a",
+   "catalog-offline/catalog/strategies/4cbd06350659d150cb48/catalog.parquet": "755b48898757facb6904dc151f7a50858e15ec9f7aea43d97ccc658640b5a27e",
+   "catalog-offline/catalog/strategies/4cbd06350659d150cb48/summary.json": "82c9506587020717efcb5cb094d61d8abe7bf382cdb58d491c4b7a5ce57ab6c7",
+   "implementation-checked/scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "implementation-checked/scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "implementation-checked/scripts/review_strategy_batch20.py": "ef266672928706139987461ea01958a2e530ffe9c044a4952aaafd4a0cb1d8b5",
+   "implementation-checked/scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "implementation-checked/scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "implementation-checked/scripts/review_strategy_batch29.py": "67c61c77ea6705a3f8f3f630d8f02316bc9c0b5566e066ca142ebf01d85a6948",
+   "implementation-checked/scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "implementation-checked/scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "implementation-checked/scripts/review_strategy_batch33.py": "1eaa6449e26f06b1cadd3a82d595d657776efda5a0ea3c4b351c5ea6c4212935",
+   "implementation-checked/scripts/review_strategy_batch34.py": "f1afea9d1ac4619b3f535235f6cd146abba872640c77aa42699cb7e4b05f712e",
+   "implementation-checked/scripts/review_strategy_batch35.py": "5bfb4720d62f026881ed1a4423f6b5dc3d001807042b653847603ff1d4294dde",
+   "implementation-checked/scripts/review_strategy_batch36.py": "a8df8b0e80629e37fdba34e3734e269c182a1b53f5462ee30d7f4fffd7e22bd9",
+   "implementation-checked/scripts/review_strategy_batch39.py": "25bf0a33c7c276f15af6c062cea5244e5d2f48c4e0751c0c44d3c306cf450fc4",
+   "implementation-checked/scripts/review_strategy_batch40.py": "d8e209e8eada20191d06d404cfde2d7be808f6b482460fcc7ff5402f2ab8fb6d",
+   "implementation-checked/scripts/review_strategy_batch41.py": "19a99d41441a6c97e8c569dc27eb345bc17f9631353b20c5f5f0ce4753d8495d",
+   "implementation-checked/scripts/review_strategy_batch42.py": "d80c793eb85f09eda79c3e0b5012dfc4eeb4ec63feef069a978616bbc9f91d68",
+   "implementation-checked/scripts/review_strategy_batch43.py": "07e07880afb534ad98662afd069f7f5dc1a73629b9f6fc773e23e5ac99d9322d",
+   "implementation-checked/scripts/review_strategy_batch44.py": "5b2f15c8b92908ba7a7545036260122cd207c278b50224b72d869a2c7f55d0fb",
+   "implementation-checked/scripts/review_strategy_batch45.py": "f6f421660ec743508bae7ee57373265e9949e04f4e88c66a8c2a63a78c65bc43",
+   "implementation-checked/scripts/review_strategy_batch46.py": "13856781d182409050cd9daa4c2f6eaf287c147b7f4eef089dba1c414a68e01d",
+   "implementation-checked/scripts/review_strategy_batch47.py": "195f0c3dd06a4245850da62c5cd1adc8d1cba68d2cd6dec5c47f129d09603082",
+   "implementation-checked/scripts/review_strategy_batch48.py": "8e5783584aefb9331fbc3f575c10a66c232453b3f7fa3533fe11555f676ab55e",
+   "implementation-checked/scripts/review_strategy_batch49.py": "9175dfa5647ebfeeb980390663d7533d11da71afdae950c67cc46b5629dc4b6f",
+   "implementation-checked/scripts/review_strategy_batch50.py": "eae20fdfe0e8ac87313451351cf8e439900b02e5eea9fb1de1fc8b3b4226cbac",
+   "implementation-checked/scripts/review_strategy_batch51.py": "62018fa81a7f2ace7041838db54ca436b0fa1bce5247212a02844d8cb27c4962",
+   "implementation-checked/scripts/review_strategy_batch52.py": "4a94ecb24d33002c9927be68bd422395bb69323cf03a77f932a27774ea3a96cd",
+   "implementation-checked/scripts/review_strategy_batch53.py": "95203dd3bf2eb8c4c7dfa915f129bfa4a07b35badbb93a9561235b3f615738d3",
+   "implementation-checked/scripts/review_strategy_batch54.py": "c2c94202f967490ca48b52b07df0ec15c41bc6860204b606957dde82054a69b7",
+   "implementation-checked/scripts/review_strategy_batch55.py": "d70d2b7b306b3aa27e99bcaf984cf4f059d633a54bb4ec16b2abe47809f8f3c6",
+   "implementation-checked/scripts/review_strategy_batch56.py": "c69cc56752f950dbd4b20563baf14efd283e57745853a2d75d55ca3c6b8970e9",
+   "implementation-checked/scripts/review_strategy_batch57.py": "356d36d63b773d389e5d6dc046f095504a35fba45b60b74dec7fd9ff719b39a6",
+   "implementation-checked/scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "implementation-checked/scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "implementation-checked/scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "implementation-checked/src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "implementation-checked/src/observe/strategy_catalog.py": "fc108b82072019fa309f4efdacdd19a44e1dfca94f349b635f2790e944cde85c",
+   "implementation-checked/src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "implementation-checked/src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "implementation-checked/src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "implementation-checked/tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "implementation-checked/tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "implementation-checked/tests/unit/test_batch32_research.py": "47d78954a24d29bcf9358830d6f847a29efa505fbe0a63854a68fb92b076abef",
+   "implementation-checked/tests/unit/test_batch33_research.py": "61b6d0ae8c1a0d1947ba5d0a16cd73a2132bb08d4b221546d64ee5ed87ce2bed",
+   "implementation-checked/tests/unit/test_batch34_research.py": "b873c05fe67145343e8437b9a5ac88e713e0cb2c39feeb0ce52ac3387a487990",
+   "implementation-checked/tests/unit/test_batch35_research.py": "4783426ec74458a819f0305236a722f84cb2352b53696f5567345127bf6fd7ab",
+   "implementation-checked/tests/unit/test_batch36_research.py": "02e81703a13a7be8e6442b7cdcf70921260ee0251a5ff20ac9f75e633fbc63d6",
+   "implementation-checked/tests/unit/test_batch39_research.py": "3afb25412f3870ee7561e1575d4b1f11adfe2b5e7e1f447d9e45da309a217b11",
+   "implementation-checked/tests/unit/test_batch40_research.py": "15548d7030f0a80bb9df6210f35a353fea66ba0b5ef01575426b5e7e3848846f",
+   "implementation-checked/tests/unit/test_batch41_research.py": "e9fc5475e621bd919985d48ab3e59775f16cfead3192f099edb2f47b1c9d210d",
+   "implementation-checked/tests/unit/test_batch42_research.py": "d2e19a2935d6be2a68c34c5e530bb5d76f0e11862b7088c0e1faeab522a0a242",
+   "implementation-checked/tests/unit/test_batch43_research.py": "2cca019afda1cd8a3465e2b0e8ad9a54fc1005e357ce6708d19273be78b8dc9c",
+   "implementation-checked/tests/unit/test_batch44_research.py": "5116defb833d1aed1a9357fd1627dee5473e57250cfc475594a403ec43dac112",
+   "implementation-checked/tests/unit/test_batch45_research.py": "2a40a092ca8951d84c5c33e893e5c24bdfb34256a96d066a54ac16a349f61b93",
+   "implementation-checked/tests/unit/test_batch47_research.py": "c07dac5bb5f85ae6c3e904d9e6b4ea32ade44872e714aaeef7d489e1b4316118",
+   "implementation-checked/tests/unit/test_batch50_research.py": "98a11b1bbde1345ee115d30ec6324030e4d6638f86a3f88959f146b39065b104",
+   "implementation-checked/tests/unit/test_batch51_research.py": "e3b403c8647ab29a5129074f6399228c0e4fc8066349c85c43e6a19f100fdb42",
+   "implementation-checked/tests/unit/test_batch56_research.py": "353949189f166839f6cdede020f3952ed7b60b84fcf8664dd06ec44c790777f4",
+   "implementation-checked/tests/unit/test_catalog_bars.py": "d4ae8e9c3ea18d62f2aeabe686ecbc6e5bb0503d641b02cfc2c1c4ab00bdd85e",
+   "implementation-checked/tests/unit/test_catalog_bond.py": "535dc0b0b69c4fcb093df54e4bce1b77455cde9e64b4625a19f250c9c7157653",
+   "implementation-checked/tests/unit/test_catalog_dependencies.py": "fa80561b760480575f1ce973b582c589c7053080e66c60d873bc3037c7d26ad3",
+   "implementation-checked/tests/unit/test_catalog_fund_universe.py": "89723bc21b29c7ac72d5a2fbff29bebb12230994a30e9c290688065932f5fef3",
+   "implementation-checked/tests/unit/test_catalog_futures.py": "6bd97570cac512b1efef52eac02014a803c626db7289b2081289439bde0a205e",
+   "implementation-checked/tests/unit/test_catalog_macro.py": "2fd3376a37c45cc5dd6f5df9d11c18cda4d6fd654e107978e748d91533525c63",
+   "implementation-checked/tests/unit/test_catalog_margin_weekly.py": "df55781740bbda25809349c9ef41f9c7b85455a436c8b72ab12a8a553c900d39",
+   "implementation-checked/tests/unit/test_catalog_prefix.py": "90c3721c7da1434acefd4053610c0c22415c98187930456689cd8f0478ce6770",
+   "implementation-checked/tests/unit/test_catalog_research_queries.py": "58e723261173fc9f3e6b129f882a089aa79491af56073a010a659fcdd4dfc2cc"
+  }
+ },
+ "scan": {
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "4cbd06350659d150cb48",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 490,
+    "已验证": 11,
+    "待审查": 2,
+    "暂不可复现": 64,
+    "非交易研究脚本": 87,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_history_fundamentals": 18,
+    "get_valuation": 20,
+    "finance.run_query": 87,
+    "macro.run_query": 7,
+    "bond.run_query": 3,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 317,
+    "get_bars": 79,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10,
+    "get_dominant_future": 28,
+    "marginsec_open": 4,
+    "marginsec_close": 4
+   },
+   "reviewed_sources": [
+    "S-25a2ce74300f",
+    "S-a02bd5fb82fa",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-641b9138fa5d",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-7da7fcfec431",
+    "S-af09cfafe6cf",
+    "S-95b83db2a7bc",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-df677a5ebcd4",
+    "S-e2209e269e29",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-f2e9047924e2",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-1422d134ff75",
+    "S-db01c1c96ded",
+    "S-4daa86e5158f",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-63c706efe95f",
+    "S-12ba1c0d79f5",
+    "S-850132b43dab",
+    "S-147b0cfb49ff",
+    "S-d07877e2c354",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-00007afacbb0",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-57b937da520d",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-d4725a5a21fb",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-5831425175ce",
+    "S-630ebb99f658",
+    "S-cafee3ad464a",
+    "S-e66b1ad7d8fc",
+    "S-560abd656ca0",
+    "S-2c9d2319c7d3",
+    "S-84b17f428272",
+    "S-6b0a4a36011b",
+    "S-88c607586b82",
+    "S-0c2cff0626ee",
+    "S-954b41e5a396",
+    "S-9112d55dd0cc",
+    "S-72e5a8798544",
+    "S-a4c77bd8b44e",
+    "S-bbf9fccbd6eb",
+    "S-4b7dbe8af8ac",
+    "S-d0ecd9406080",
+    "S-bee2c8d71c81",
+    "S-13b988210e42",
+    "S-6c7441327c3f",
+    "S-68930ba303f5",
+    "S-f81bb8422f94",
+    "S-848cffb63799",
+    "S-790f0000ed44",
+    "S-38d7f27c1372",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-66d37162df54",
+    "S-bb187e7a4887",
+    "S-faf66e10ba1d",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-979d5187c3ec",
+    "S-daecf5bc2eef",
+    "S-f39f02e3e03f",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-e12e4a8dd5e5",
+    "S-05431e7ae641",
+    "S-de485dcbc1fe",
+    "S-7e6d5e73b9e8",
+    "S-6320a637da54",
+    "S-03e5e601f4cc",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-0dbbecb9eb1d",
+    "S-47d77840ec26",
+    "S-993fc6059661",
+    "S-4cc76c2c420b",
+    "S-2034813a5b91",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-84f3f0c3c784",
+    "S-c02ac3bad6ef",
+    "S-69bfefcb4d1d",
+    "S-653ef41eb685",
+    "S-c55ddc35cce6",
+    "S-c2a42783423c",
+    "S-75af9ddf3d76",
+    "S-f23cf187dc47",
+    "S-64a80805fb8a",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-8294e3469a6d",
+    "S-7ff11583b76b",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-21fdea960e9b",
+    "S-a9596eba9dc5",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-b3cc2dcd8a0d",
+    "S-285c04a4d1ce",
+    "S-bdfd3c6fde91",
+    "S-e0fb958bf2d4",
+    "S-cc41735b8a2d",
+    "S-53655cbaa9bc",
+    "S-b01f3e94a5b8",
+    "S-c28a0c7f5f80",
+    "S-c98372326f58",
+    "S-665c147b3cf0",
+    "S-c5a0e347acdc",
+    "S-69ef2eedcc68",
+    "S-4766560702c0",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-36ea1540cfac",
+    "S-31ff28a9afb2",
+    "S-d6db552a3293",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-976aaefe793c",
+    "S-7f248f5caa7b",
+    "S-84adbe33af88",
+    "S-ee1aa7ba22b3",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-68dd8d2d5eec",
+    "S-926d08fe0ba8",
+    "S-9e752d17571d",
+    "S-624b1cbccd4f",
+    "S-5008146cd1d4",
+    "S-e307438a42e6",
+    "S-f9ab6005c30c",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-ec0ab5ffcecf",
+    "S-2d40c2d698f7",
+    "S-6615db0d4e16",
+    "S-1fce2be2b9ec",
+    "S-85aa910ed165",
+    "S-028ef663b462",
+    "S-91dc4ee62715",
+    "S-7f049bb69647",
+    "S-d68e945d07cb",
+    "S-a40276639484",
+    "S-fb06e8894ab7",
+    "S-4cbc5c72990f",
+    "S-c0fb1e63f51d",
+    "S-1e5fd99659cf",
+    "S-4d86dd0d21e5",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-a78d8acd0042",
+    "S-c1bba20dca69",
+    "S-b785d665cf54",
+    "S-73dd3253aaaa",
+    "S-b318f6effe5e",
+    "S-85df9d32a2d9",
+    "S-dbd26615c5f8",
+    "S-8caa8420540b",
+    "S-fa0c56ab417c",
+    "S-5300a99a1779",
+    "S-4730e53b92bc",
+    "S-a55f095fba8d"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/4cbd06350659d150cb48"
+  },
+  "catalog_sha256": "df6c746a594b7eead48ca4bffe12e98e7254e64c1b8fca56768d7d5dae136c1a",
+  "old_catalog_file": "data/catalog/strategies/e34f1ac88b7545905264/catalog.json",
+  "old_catalog_sha256": "cb1741c6eec51591c914ca9fdc86b7feae9dff98ca16b20c5d0488b0c1b8a31f",
+  "changes": [
+   {
+    "path": "2020年度精选策略/01 AdaptiveMA自适应均线 过滤器 期货多品种模型 收益稳定增长.txt",
+    "source_sha256": "2263acf4cd61f815fd61c0d21f700712e5d76ded961bca169e5f990cf41e3fec",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "run_daily",
+       "order_target"
+      ],
+      "after": [
+       "attribute_history",
+       "run_daily",
+       "order_target",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/04 趋势交易能赚钱吗？商品期货动量效应挖掘初探.txt",
+    "source_sha256": "de731c1ad920d97c0994ae8b9e6fca0b53ca7071d222bd2cc1543076ab630f56",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "run_daily",
+       "run_weekly",
+       "order_target"
+      ],
+      "after": [
+       "attribute_history",
+       "run_daily",
+       "run_weekly",
+       "order_target",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/09 商品期货 多品种日频双均线模型 作为给入门者的小礼物.txt",
+    "source_sha256": "f9cd21141068d0de24a6c474e60249d354aed0f1ae3a0eb00a8637a77847936e",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "run_daily",
+       "order_target"
+      ],
+      "after": [
+       "attribute_history",
+       "run_daily",
+       "order_target",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/17 商品期货截面动量模型，真的靠谱吗？.txt",
+    "source_sha256": "7b0c7ee966f0fa2c5cbc7ad497c173f40361488caca648e5b0395eb7bd123f33",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target"
+      ],
+      "after": [
+       "attribute_history",
+       "run_daily",
+       "run_weekly",
+       "run_monthly",
+       "order_target",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/20 分钟K线数据重构 ATR自适应通道 请高手来迭代.txt",
+    "source_sha256": "e727755c408c9b6cafebd3a0113f611219cb0625b16a7280e590c8168bf5eedd",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "run_daily",
+       "order_target"
+      ],
+      "after": [
+       "attribute_history",
+       "run_daily",
+       "order_target",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/22 海龟交易法则升级版---（分钟级回测+合约变更移仓）.txt",
+    "source_sha256": "9c4de2f241ff8bb293a96ebd9cf042c0f1dfca68b6895add41f4936aabbac1bf",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_bars",
+       "attribute_history",
+       "history",
+       "run_daily",
+       "order_target",
+       "order"
+      ],
+      "after": [
+       "get_bars",
+       "attribute_history",
+       "history",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/49 海龟克隆优化.txt",
+    "source_sha256": "3b1b81d92397c967b3d3e8b0b264f488183017f330bebefe749cfb4bf127640d",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "get_all_securities",
+       "run_daily",
+       "order_target",
+       "order"
+      ],
+      "after": [
+       "attribute_history",
+       "get_all_securities",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/19.简单到发指的股指策略(2013到现在收益10949%).txt",
+    "source_sha256": "c0102d437625c6b6b522b4f816d5b6a4cb3b6b48df37448632978a1141e3178e",
+    "changes": {
+     "apis": {
+      "before": [
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "run_daily",
+       "order_target_value",
+       "order_target",
+       "get_dominant_future"
+      ]
+     },
+     "asset_scope": {
+      "before": [
+       "股票候选"
+      ],
+      "after": [
+       "衍生品候选",
+       "股票候选"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/32.北向资金A股择时策略（5年16倍）.txt",
+    "source_sha256": "58bcb4f189e4db816325c312efea4ae49cd3dbd16f8debde3023c4ac66a9d425",
+    "changes": {
+     "apis": {
+      "before": [
+       "finance.run_query",
+       "run_daily",
+       "order_target",
+       "order_value",
+       "get_future_contracts"
+      ],
+      "after": [
+       "finance.run_query",
+       "run_daily",
+       "order_target",
+       "order_value",
+       "get_future_contracts",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/71.【股指策略】【研报复现】周内与日内结合CTA.txt",
+    "source_sha256": "bc1c92b36492a6fbbc159a761f2b8ab16dec46f440f5182a8589e30a682d6f51",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_ticks",
+       "attribute_history",
+       "run_daily",
+       "order_target",
+       "order"
+      ],
+      "after": [
+       "get_ticks",
+       "attribute_history",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/72.【股指期货】收盘折溢价策略.txt",
+    "source_sha256": "b2051102a114a49d6179cc5c451485eb0ef0f08406ad22f36a6c48c768bdd60c",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_bars",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order"
+      ],
+      "after": [
+       "get_bars",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/73.基于期权PCR与标的波动率价差的股指期货套利.txt",
+    "source_sha256": "caf882639dbe3618d34fd7f99c3fc9655f9a8893fc9d5c7cfa4eb37926d4d7f9",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_future_contracts"
+      ],
+      "after": [
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_future_contracts",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/90.超稳+翻倍，贝塔值只有0.048的期指策略.txt",
+    "source_sha256": "8cfbe525ba5674c3fd04f2b851ecc79cfe7542ada9caffd747033f8c682fe259",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_ticks",
+       "get_price",
+       "get_bars",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_future_contracts"
+      ],
+      "after": [
+       "get_ticks",
+       "get_price",
+       "get_bars",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_future_contracts",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/10.期货macd简单择时，atp止损.txt",
+    "source_sha256": "ef8decb52c98d6eb4767588b396ac185c5c0af27837d7a91983365d139cbef20",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price",
+       "get_bars",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order_value",
+       "get_future_contracts"
+      ],
+      "after": [
+       "get_price",
+       "get_bars",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order_value",
+       "get_future_contracts",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/31.再次抛砖.txt",
+    "source_sha256": "b853d47a00c90780501aeb32c1bd112374628c830e0ca70a16cdbbf6058aa582",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_bars",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order_target",
+       "get_future_contracts"
+      ],
+      "after": [
+       "get_bars",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target_value",
+       "order_target",
+       "get_future_contracts",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/38.【期货策略】钢厂利润模型-螺纹钢铁矿石焦炭套利.txt",
+    "source_sha256": "f2b21c220f62a9456061ec5aea2724061e799fcd0c8b44930b1893e9061b3d14",
+    "changes": {
+     "apis": {
+      "before": [
+       "history",
+       "run_daily",
+       "order_target_value"
+      ],
+      "after": [
+       "history",
+       "run_daily",
+       "order_target_value",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/43.股指期货&quot;蜘蛛网策略&quot; ——从成交持仓表中捕捉知情投资者行为.txt",
+    "source_sha256": "65d1c386719eeeb0e3b284ce76463ccb686c20557ec04b55336d219b2dc76dab",
+    "changes": {
+     "apis": {
+      "before": [
+       "finance.run_query",
+       "get_price",
+       "get_extras",
+       "run_daily",
+       "order_target"
+      ],
+      "after": [
+       "finance.run_query",
+       "get_price",
+       "get_extras",
+       "run_daily",
+       "order_target",
+       "get_dominant_future"
+      ]
+     },
+     "asset_scope": {
+      "before": [
+       "股票候选"
+      ],
+      "after": [
+       "衍生品候选",
+       "股票候选"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "finance平台表/历史披露版本与字段口径待核实",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/62.商品期货多因子 全市场对冲模型.txt",
+    "source_sha256": "f67926aa99770a2ca6de716e6ec4f081af32c3102c85206ce05313e850cc25e2",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "get_extras",
+       "run_daily",
+       "run_weekly",
+       "order_target"
+      ],
+      "after": [
+       "attribute_history",
+       "get_extras",
+       "run_daily",
+       "run_weekly",
+       "order_target",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/63.螺纹钢供需轮动策略（带止损）.txt",
+    "source_sha256": "ef94d3b3da703a69fd31fa1d4a7303d438e49cd3e1586bed6ff6e1dbaf23f37e",
+    "changes": {
+     "apis": {
+      "before": [
+       "run_daily",
+       "order_target_value"
+      ],
+      "after": [
+       "run_daily",
+       "order_target_value",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/89.MACD+波动率过滤+追踪止损 期货择时汇总.txt",
+    "source_sha256": "8edfa1550e2fdff5a45c7f729d507c24b19eb28c47e2e8de8f986a3064fe26c5",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "run_daily",
+       "order_target"
+      ],
+      "after": [
+       "attribute_history",
+       "run_daily",
+       "order_target",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/9.高频Tick频率策略分享.txt",
+    "source_sha256": "726d3aa867bc5492101087fbe08813ab63ae3d4143b829ac28af9446e336c070",
+    "changes": {
+     "apis": {
+      "before": [
+       "run_daily",
+       "order_target",
+       "order"
+      ],
+      "after": [
+       "run_daily",
+       "order_target",
+       "order",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/91.基于主成分分析 沪深300个股一致性IF股指交易策略.txt",
+    "source_sha256": "b07ac441c311135554148da8c9df5bf5a33560ba5ed99113774c4916f432cac1",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_index_stocks",
+       "get_price",
+       "get_bars",
+       "attribute_history",
+       "run_daily",
+       "order_target",
+       "order_value",
+       "order"
+      ],
+      "after": [
+       "get_index_stocks",
+       "get_price",
+       "get_bars",
+       "attribute_history",
+       "run_daily",
+       "order_target",
+       "order_value",
+       "order",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/22.简单到发指的股指策略(2013到现在收益10949%).txt",
+    "source_sha256": "c0102d437625c6b6b522b4f816d5b6a4cb3b6b48df37448632978a1141e3178e",
+    "changes": {
+     "apis": {
+      "before": [
+       "run_daily",
+       "order_target_value",
+       "order_target"
+      ],
+      "after": [
+       "run_daily",
+       "order_target_value",
+       "order_target",
+       "get_dominant_future"
+      ]
+     },
+     "asset_scope": {
+      "before": [
+       "股票候选"
+      ],
+      "after": [
+       "衍生品候选",
+       "股票候选"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/34.超稳+翻倍，贝塔值只有0.048的期指策略.txt",
+    "source_sha256": "8cfbe525ba5674c3fd04f2b851ecc79cfe7542ada9caffd747033f8c682fe259",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_ticks",
+       "get_price",
+       "get_bars",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_future_contracts"
+      ],
+      "after": [
+       "get_ticks",
+       "get_price",
+       "get_bars",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_future_contracts",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/39.低风险高收益的期货策略.txt",
+    "source_sha256": "fadcc6a0c9842db6e2556e28021b25273b9bd67e05a98b1db73c10e2b742394e",
+    "changes": {
+     "apis": {
+      "before": [
+       "attribute_history",
+       "run_daily",
+       "order_target_value"
+      ],
+      "after": [
+       "attribute_history",
+       "run_daily",
+       "order_target_value",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/87.【股指期货】收盘折溢价策略.txt",
+    "source_sha256": "b2051102a114a49d6179cc5c451485eb0ef0f08406ad22f36a6c48c768bdd60c",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_bars",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order"
+      ],
+      "after": [
+       "get_bars",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_dominant_future"
+      ]
+     },
+     "asset_scope": {
+      "before": [
+       "股票候选"
+      ],
+      "after": [
+       "衍生品候选",
+       "股票候选"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/63.生猪期货CTA策略.txt",
+    "source_sha256": "eef12754fb9ce461300e2529f0ecb75cc2404faec6110bcf68a591acd273cc37",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order"
+      ],
+      "after": [
+       "get_price",
+       "attribute_history",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order",
+       "get_dominant_future"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/71.期货日内策略三价均线结合ATR指标.txt",
+    "source_sha256": "0b4668dccaab75c3ce6ac674280c6792f17356b698c1a2de786f08a872d48514",
+    "changes": {
+     "apis": {
+      "before": [
+       "get_price",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order_value"
+      ],
+      "after": [
+       "get_price",
+       "get_current_data",
+       "run_daily",
+       "order_target",
+       "order_value",
+       "get_dominant_future"
+      ]
+     },
+     "asset_scope": {
+      "before": [
+       "股票候选"
+      ],
+      "after": [
+       "衍生品候选",
+       "股票候选"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   }
+  ],
+  "changed_sources": 28,
+  "field_counts": {
+   "apis": 28,
+   "asset_scope": 5,
+   "gaps": 3
+  },
+  "not_a_backtest": true
+ },
+ "offline_catalog": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "catalog_id": "4cbd06350659d150cb48",
+  "files": [
+   {
+    "name": "catalog.json",
+    "original_file": "data/catalog/strategies/4cbd06350659d150cb48/catalog.json",
+    "repeated_file": "data/staging/strategies-batch57/20261007-futures-dependency/catalog-offline/catalog/strategies/4cbd06350659d150cb48/catalog.json",
+    "sha256": "df6c746a594b7eead48ca4bffe12e98e7254e64c1b8fca56768d7d5dae136c1a"
+   },
+   {
+    "name": "summary.json",
+    "original_file": "data/catalog/strategies/4cbd06350659d150cb48/summary.json",
+    "repeated_file": "data/staging/strategies-batch57/20261007-futures-dependency/catalog-offline/catalog/strategies/4cbd06350659d150cb48/summary.json",
+    "sha256": "82c9506587020717efcb5cb094d61d8abe7bf382cdb58d491c4b7a5ce57ab6c7"
+   },
+   {
+    "name": "catalog.parquet",
+    "original_file": "data/catalog/strategies/4cbd06350659d150cb48/catalog.parquet",
+    "repeated_file": "data/staging/strategies-batch57/20261007-futures-dependency/catalog-offline/catalog/strategies/4cbd06350659d150cb48/catalog.parquet",
+    "sha256": "755b48898757facb6904dc151f7a50858e15ec9f7aea43d97ccc658640b5a27e"
+   }
+  ],
+  "implementation_evidence_sha256": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5223,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9"
+ },
+ "not_a_backtest": true,
+ "original_strategy_complete": false,
+ "newly_reviewed": 0
+}

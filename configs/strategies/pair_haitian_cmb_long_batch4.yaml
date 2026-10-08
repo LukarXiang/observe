@@ -1,0 +1,43 @@
+name: 海天招行120日配对（动态锚定及目标权重近似）
+implementation: pair_haitian_cmb_anchored_v1
+source_path: repo/量化策略源代码/2020年度精选策略/19 招行_海天配对策略（学习招行伊利配对）.txt
+snapshot: 20261005-152153-eb05
+start: 2021-07-06
+end: 2026-09-29
+instrument: 603288.SH
+execution_instruments: [603288.SH, 600036.SH]
+initial_cash: 1000000
+parameters:
+  instrument1: 603288.SH
+  instrument2: 600036.SH
+  test_days: 120
+  regression_ratio: 1
+  threshold: 1
+  price_basis: decision_close_anchor_v1
+universe:
+  boards: [main]
+  min_listed_sessions: 1
+  exclude_st: false
+  suspend_window: 1
+  max_suspended: 1
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: target_weights
+  n: 2
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: daily
+  rebalance_session: 1
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.05
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+cost_scenarios: [base, fees_x2, slippage_x2]
+benchmark: 600036.SH
+benchmark_kind: stock
+cache: true

@@ -1,0 +1,741 @@
+{
+  "benchmark": [
+    {
+      "index": {
+        "anchor_date": "2020-03-04",
+        "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+        "description": "沪深 300 价格指数，不含分红",
+        "index": "000300.SH",
+        "missing_levels": 0
+      },
+      "metrics": {
+        "active_annualization_basis": "matched_daily_returns_compounded",
+        "active_return_mean": 9.478115776267127e-05,
+        "annual_return_diff": 0.0030505250875114687,
+        "available": true,
+        "benchmark_common_days": 1596,
+        "benchmark_missing_days": 0,
+        "common_benchmark_annual_return": 0.008286150935145065,
+        "common_end": "2026-09-29",
+        "common_start": "2020-03-05",
+        "common_strategy_annual_return": 0.011336676022656533,
+        "information_ratio": 0.0978664051620015,
+        "missing_dates": [],
+        "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+      },
+      "scenario": "base"
+    },
+    {
+      "index": {
+        "anchor_date": "2020-03-04",
+        "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+        "description": "沪深 300 价格指数，不含分红",
+        "index": "000300.SH",
+        "missing_levels": 0
+      },
+      "metrics": {
+        "active_annualization_basis": "matched_daily_returns_compounded",
+        "active_return_mean": 8.532881565431116e-05,
+        "annual_return_diff": 0.0006736934560669372,
+        "available": true,
+        "benchmark_common_days": 1596,
+        "benchmark_missing_days": 0,
+        "common_benchmark_annual_return": 0.008286150935145065,
+        "common_end": "2026-09-29",
+        "common_start": "2020-03-05",
+        "common_strategy_annual_return": 0.008959844391212002,
+        "information_ratio": 0.0880356765122983,
+        "missing_dates": [],
+        "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+      },
+      "scenario": "fees_x2"
+    },
+    {
+      "index": {
+        "anchor_date": "2020-03-04",
+        "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+        "description": "沪深 300 价格指数，不含分红",
+        "index": "000300.SH",
+        "missing_levels": 0
+      },
+      "metrics": {
+        "active_annualization_basis": "matched_daily_returns_compounded",
+        "active_return_mean": 8.028436265213404e-05,
+        "annual_return_diff": -0.0005340184655255875,
+        "available": true,
+        "benchmark_common_days": 1596,
+        "benchmark_missing_days": 0,
+        "common_benchmark_annual_return": 0.008286150935145065,
+        "common_end": "2026-09-29",
+        "common_start": "2020-03-05",
+        "common_strategy_annual_return": 0.007752132469619477,
+        "information_ratio": 0.08282928225285799,
+        "missing_dates": [],
+        "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+      },
+      "scenario": "slippage_x2"
+    }
+  ],
+  "configuration": {
+    "benchmark": "000300.SH",
+    "cache": false,
+    "cost_scenarios": [
+      "base",
+      "fees_x2",
+      "slippage_x2"
+    ],
+    "end": "2026-09-29",
+    "execution": {
+      "fee_multiplier": 1.0,
+      "liquidity_override": null,
+      "liquidity_window": 20,
+      "slippage": 0.001
+    },
+    "execution_instruments": [
+      "002415.SZ",
+      "000651.SZ"
+    ],
+    "implementation": "pair_zscore_rotation_corrected_v1",
+    "index_universe": null,
+    "initial_cash": 1000000.0,
+    "instrument": "002415.SZ",
+    "name": "海康格力60行zscore修正日频近似轮换",
+    "parameters": {
+      "ddof": 1,
+      "history": 60,
+      "instrument1": "002415.SZ",
+      "instrument2": "000651.SZ",
+      "price_basis": "decision_close_anchor_v1",
+      "round_digits": 4,
+      "threshold": 2.0
+    },
+    "portfolio": {
+      "buffer": 0,
+      "construction": "signal_cash_rotation",
+      "max_sell": null,
+      "max_weight": 1.0,
+      "n": 2,
+      "open_cash_policy": "sell_then_buy",
+      "participation": 0.05,
+      "rebalance_every": 1,
+      "rebalance_frequency": "daily",
+      "rebalance_session": 1,
+      "refill_between_rebalance": false
+    },
+    "rules": "configs/rule_profiles/main_board.yaml",
+    "snapshot": "20261005-191431-aa71",
+    "source_path": "repo/量化策略源代码/2022年度精选策略/66.【配对交易】基于zscore的配对交易策略（胜率88.2%）.txt",
+    "start": "2020-03-05",
+    "universe": {
+      "boards": [
+        "main"
+      ],
+      "exclude_st": false,
+      "liquidity_window": 1,
+      "max_suspended": 1,
+      "min_avg_amount": 0.0,
+      "min_listed_sessions": 1,
+      "suspend_window": 1
+    }
+  },
+  "coverage": {
+    "detail_policy": "daily coverage remains in source report payload; these are boundary examples",
+    "first": {
+      "candidates": 2,
+      "date": "2020-03-05",
+      "finite_factors": 1,
+      "state": 0,
+      "switch": false
+    },
+    "last": {
+      "candidates": 2,
+      "date": "2026-09-29",
+      "finite_factors": 1,
+      "state": 2,
+      "switch": false
+    },
+    "rows": 1596
+  },
+  "decision_time": "收盘数据确认可用后",
+  "evidence_status": "archived_unreviewed",
+  "execution_status": "success_limited",
+  "execution_time": "下一交易日开盘",
+  "implementation": "pair_zscore_rotation_corrected_v1",
+  "kind": "strategy",
+  "limitations": [
+    {
+      "detail": "海康威视/格力60行zscore修正日频轮换",
+      "differences": [
+        "用户确认修正datetime.timedelta导入与末值位置索引，保留60行、样本标准差和Python round四位小数",
+        "每个决策日分别动态锚定两条历史价格到当日真实尺度；收盘决策次日开盘，未证明every_bar平台等价",
+        "信号状态在切换时立即更新，与实际成交分离；无均值退出，不重试此前失败订单或日常满仓再平衡",
+        "每次切换先清理另一股票，再按成交后实际现金order_value买入；部分卖出可能留下双持仓，保留该语义",
+        "费用、整手、T+1、涨跌停、参与度和三组成本继续复用唯一Book，平台成本和初始化等价未证明"
+      ],
+      "fidelity": "用户确认的兼容修正与日频/动态锚定近似",
+      "gaps": [
+        "from datetime import datetime后调用datetime.timedelta必报AttributeError",
+        "sub[-1]的日期索引末值语义需修为显式位置索引",
+        "get_price多标的平台返回结构、复权价格尺度和every_bar频率未证明等价"
+      ],
+      "kind": "strategy_port"
+    },
+    {
+      "detail": "固定参数工程验证；此区间已查看，不作为独立最终留出，不据此判断策略有效",
+      "kind": "evaluation_scope"
+    },
+    {
+      "audit": {
+        "audit_id": "20261005-191431-ec22",
+        "audited_at": "2026-10-05T19:14:31.905078",
+        "batch_id": "20261005-191431-a38b",
+        "input_range": [
+          "2005-01-05",
+          "2020-12-31"
+        ],
+        "scope": "selected_history",
+        "source": "audit 20261005-191431-ec22",
+        "status": "problem"
+      },
+      "detail": "快照批次审计状态为 problem（范围 selected_history），不是全快照审计通过",
+      "kind": "data_audit"
+    },
+    {
+      "audit": {
+        "audit_id": "20261005-191431-ec22",
+        "audited_at": "2026-10-05T19:14:31.905078",
+        "batch_id": "20261005-191431-a38b",
+        "input_range": [
+          "2005-01-05",
+          "2020-12-31"
+        ],
+        "scope": "selected_history",
+        "source": "audit 20261005-191431-ec22",
+        "status": "problem"
+      },
+      "detail": "快照批次审计状态为 problem（范围 selected_history），不是全快照审计通过",
+      "kind": "data_audit"
+    },
+    {
+      "audit": {
+        "audit_id": "20261005-191431-ec22",
+        "audited_at": "2026-10-05T19:14:31.905078",
+        "batch_id": "20261005-191431-a38b",
+        "input_range": [
+          "2005-01-05",
+          "2020-12-31"
+        ],
+        "scope": "selected_history",
+        "source": "audit 20261005-191431-ec22",
+        "status": "problem"
+      },
+      "detail": "快照批次审计状态为 problem（范围 selected_history），不是全快照审计通过",
+      "kind": "data_audit"
+    }
+  ],
+  "metrics": null,
+  "original_strategy_complete": false,
+  "parameters": {
+    "ddof": 1,
+    "history": 60,
+    "instrument1": "002415.SZ",
+    "instrument2": "000651.SZ",
+    "price_basis": "decision_close_anchor_v1",
+    "round_digits": 4,
+    "threshold": 2.0
+  },
+  "payload_verification": "not_reaudited",
+  "period": {
+    "end": "2026-09-29",
+    "start": "2020-03-05"
+  },
+  "portfolio": {
+    "buffer": 0,
+    "construction": "signal_cash_rotation",
+    "max_sell": null,
+    "max_weight": 1.0,
+    "n": 2,
+    "open_cash_policy": "sell_then_buy",
+    "participation": 0.05,
+    "rebalance_every": 1,
+    "rebalance_frequency": "daily",
+    "rebalance_session": 1,
+    "refill_between_rebalance": false
+  },
+  "recorded_environment": {
+    "git_commit": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+    "git_dirty": true,
+    "lock_sha256": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382",
+    "packages": {
+      "lightgbm": "4.7.0",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1"
+    },
+    "python": "3.12.12"
+  },
+  "references": [
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261005-193437-b5b8aa-strategy-88a8/config.json",
+      "sha256": "d247f8cd77287e4ec00668404bf0806d92a446868af958ef41a27f531d17bb69"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261005-193437-b5b8aa-strategy-88a8/status.json",
+      "sha256": "be35044688a3ef224088537f84c29b69c2a787bfa52fc87ca4599b189195ad3a"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261005-193437-b5b8aa-strategy-88a8/report.json",
+      "sha256": "cf4a8bdb2af77c7d36b01bf23bb4378ce356c06adf28a82cad206a9afe19141b"
+    }
+  ],
+  "reproduction": {
+    "differences": 0,
+    "of": "/mnt/d/projects/observe/data/runs/20261005-193354-b5b8aa-strategy-1f41",
+    "result": "match"
+  },
+  "results": [
+    {
+      "blocked": null,
+      "metrics": {
+        "annual_return": 0.01133667602265609,
+        "annual_vol": 0.2708040445158341,
+        "drawdown_peak": 212,
+        "drawdown_trough": 611,
+        "max_drawdown": -0.6288087032066689,
+        "sharpe": 0.1765872333398443,
+        "total_return": 0.07717861000000004
+      },
+      "scenario": "base",
+      "status": "success_limited",
+      "trading": {
+        "cash_share_mean": 0.048360753552538646,
+        "fee_ratio_to_initial": 0.01641439,
+        "fees": {
+          "commission": 6331.04,
+          "fee": 16414.39,
+          "stamp_tax": 9708.36,
+          "transfer_fee": 374.99
+        },
+        "fill_rate": 1.0,
+        "filled_orders": 23,
+        "max_single_weight_mean": 0.9516392464474615,
+        "orders": 23,
+        "partial_fills": 1,
+        "reject_reasons": {},
+        "stale_price_days": 0,
+        "top5_weight_mean": 0.9516392464474615,
+        "turnover_half_daily_mean": 0.007130602734183431,
+        "turnover_two_sided_daily_mean": 0.014261205468366862
+      },
+      "yearly": [
+        {
+          "metrics": {
+            "annual_return": 0.6667106286047184,
+            "annual_vol": 0.3013712051368297,
+            "drawdown_peak": 85,
+            "drawdown_trough": 96,
+            "max_drawdown": -0.1210908974629945,
+            "sharpe": 1.8446455676856546,
+            "total_return": 0.5382348700000001
+          },
+          "sessions": 204,
+          "year": 2020
+        },
+        {
+          "metrics": {
+            "annual_return": -0.28009778026978616,
+            "annual_vol": 0.28345305708597207,
+            "drawdown_peak": 8,
+            "drawdown_trough": 220,
+            "max_drawdown": -0.4211954499807311,
+            "sharpe": -1.0187161636295976,
+            "total_return": -0.28107475550856564
+          },
+          "sessions": 243,
+          "year": 2021
+        },
+        {
+          "metrics": {
+            "annual_return": -0.26973707935469204,
+            "annual_vol": 0.34205916352108306,
+            "drawdown_peak": 2,
+            "drawdown_trough": 164,
+            "max_drawdown": -0.42710865376268337,
+            "sharpe": -0.7462947334621022,
+            "total_return": -0.26973707935469204
+          },
+          "sessions": 242,
+          "year": 2022
+        },
+        {
+          "metrics": {
+            "annual_return": 0.09641299380624946,
+            "annual_vol": 0.27942381963152013,
+            "drawdown_peak": 72,
+            "drawdown_trough": 106,
+            "max_drawdown": -0.21548676265482414,
+            "sharpe": 0.46853554561817884,
+            "total_return": 0.09641299380624946
+          },
+          "sessions": 242,
+          "year": 2023
+        },
+        {
+          "metrics": {
+            "annual_return": 0.05534107808854705,
+            "annual_vol": 0.26602204058695383,
+            "drawdown_peak": 38,
+            "drawdown_trough": 172,
+            "max_drawdown": -0.2712829741184286,
+            "sharpe": 0.33415467137372445,
+            "total_return": 0.05534107808854705
+          },
+          "sessions": 242,
+          "year": 2024
+        },
+        {
+          "metrics": {
+            "annual_return": 0.028330081679006414,
+            "annual_vol": 0.18626970225175268,
+            "drawdown_peak": 42,
+            "drawdown_trough": 61,
+            "max_drawdown": -0.16586708505176895,
+            "sharpe": 0.24258951749311866,
+            "total_return": 0.02844879779406484
+          },
+          "sessions": 243,
+          "year": 2025
+        },
+        {
+          "metrics": {
+            "annual_return": 0.16579030778813797,
+            "annual_vol": 0.1857888340288073,
+            "drawdown_peak": 76,
+            "drawdown_trough": 109,
+            "max_drawdown": -0.09244825526271361,
+            "sharpe": 0.9175128705552089,
+            "total_return": 0.12086263975968525
+          },
+          "sessions": 180,
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "blocked": null,
+      "metrics": {
+        "annual_return": 0.008959844391212668,
+        "annual_vol": 0.2710370229066947,
+        "drawdown_peak": 212,
+        "drawdown_trough": 611,
+        "max_drawdown": -0.6298085300667065,
+        "sharpe": 0.16799575836450556,
+        "total_return": 0.060592159999999895
+      },
+      "scenario": "fees_x2",
+      "status": "success_limited",
+      "trading": {
+        "cash_share_mean": 0.047732361292986775,
+        "fee_ratio_to_initial": 0.03257384,
+        "fees": {
+          "commission": 12553.86,
+          "fee": 32573.84,
+          "stamp_tax": 19275.67,
+          "transfer_fee": 744.31
+        },
+        "fill_rate": 1.0,
+        "filled_orders": 23,
+        "max_single_weight_mean": 0.9522676387070133,
+        "orders": 23,
+        "partial_fills": 2,
+        "reject_reasons": {},
+        "stale_price_days": 0,
+        "top5_weight_mean": 0.9522676387070133,
+        "turnover_half_daily_mean": 0.00712413664821174,
+        "turnover_two_sided_daily_mean": 0.01424827329642348
+      },
+      "yearly": [
+        {
+          "metrics": {
+            "annual_return": 0.6582071317961602,
+            "annual_vol": 0.3007231741159884,
+            "drawdown_peak": 85,
+            "drawdown_trough": 96,
+            "max_drawdown": -0.12081399682442395,
+            "sharpe": 1.830950099147274,
+            "total_return": 0.53161653
+          },
+          "sessions": 204,
+          "year": 2020
+        },
+        {
+          "metrics": {
+            "annual_return": -0.28089270452472614,
+            "annual_vol": 0.28291762481342386,
+            "drawdown_peak": 8,
+            "drawdown_trough": 220,
+            "max_drawdown": -0.42071451496616297,
+            "sharpe": -1.0250699341523726,
+            "total_return": -0.2818718795102062
+          },
+          "sessions": 243,
+          "year": 2021
+        },
+        {
+          "metrics": {
+            "annual_return": -0.27273075321877893,
+            "annual_vol": 0.3433228966087779,
+            "drawdown_peak": 2,
+            "drawdown_trough": 164,
+            "max_drawdown": -0.429006048847305,
+            "sharpe": -0.7542221465723262,
+            "total_return": -0.27273075321877893
+          },
+          "sessions": 242,
+          "year": 2022
+        },
+        {
+          "metrics": {
+            "annual_return": 0.09423830865138116,
+            "annual_vol": 0.27956977308653475,
+            "drawdown_peak": 72,
+            "drawdown_trough": 106,
+            "max_drawdown": -0.21642825741308125,
+            "sharpe": 0.46133902315400477,
+            "total_return": 0.09423830865138116
+          },
+          "sessions": 242,
+          "year": 2023
+        },
+        {
+          "metrics": {
+            "annual_return": 0.054331475377805916,
+            "annual_vol": 0.26672145768113137,
+            "drawdown_peak": 38,
+            "drawdown_trough": 172,
+            "max_drawdown": -0.2718242017186633,
+            "sharpe": 0.3303812456506614,
+            "total_return": 0.054331475377805916
+          },
+          "sessions": 242,
+          "year": 2024
+        },
+        {
+          "metrics": {
+            "annual_return": 0.026315795284449495,
+            "annual_vol": 0.18673915547394146,
+            "drawdown_peak": 42,
+            "drawdown_trough": 61,
+            "max_drawdown": -0.16620902033790608,
+            "sharpe": 0.23194914411725298,
+            "total_return": 0.026425962592697694
+          },
+          "sessions": 243,
+          "year": 2025
+        },
+        {
+          "metrics": {
+            "annual_return": 0.16410291605635807,
+            "annual_vol": 0.18572082147350713,
+            "drawdown_peak": 76,
+            "drawdown_trough": 109,
+            "max_drawdown": -0.09249223177364885,
+            "sharpe": 0.9099784560983115,
+            "total_return": 0.11965570005454107
+          },
+          "sessions": 180,
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "blocked": null,
+      "metrics": {
+        "annual_return": 0.007752132469618811,
+        "annual_vol": 0.27095393501863096,
+        "drawdown_peak": 212,
+        "drawdown_trough": 611,
+        "max_drawdown": -0.6299567051314126,
+        "sharpe": 0.16354186765545306,
+        "total_return": 0.05224763999999982
+      },
+      "scenario": "slippage_x2",
+      "status": "success_limited",
+      "trading": {
+        "cash_share_mean": 0.048125626170663766,
+        "fee_ratio_to_initial": 0.016236360000000002,
+        "fees": {
+          "commission": 6257.82,
+          "fee": 16236.36,
+          "stamp_tax": 9607.17,
+          "transfer_fee": 371.37
+        },
+        "fill_rate": 1.0,
+        "filled_orders": 23,
+        "max_single_weight_mean": 0.9518743738293362,
+        "orders": 23,
+        "partial_fills": 1,
+        "reject_reasons": {},
+        "stale_price_days": 0,
+        "top5_weight_mean": 0.9518743738293362,
+        "turnover_half_daily_mean": 0.007121636631832495,
+        "turnover_two_sided_daily_mean": 0.01424327326366499
+      },
+      "yearly": [
+        {
+          "metrics": {
+            "annual_return": 0.6553835679297495,
+            "annual_vol": 0.3010722612197803,
+            "drawdown_peak": 85,
+            "drawdown_trough": 96,
+            "max_drawdown": -0.12088060544081536,
+            "sharpe": 1.8234986320032673,
+            "total_return": 0.5294177499999999
+          },
+          "sessions": 204,
+          "year": 2020
+        },
+        {
+          "metrics": {
+            "annual_return": -0.28183132246600395,
+            "annual_vol": 0.283485035232188,
+            "drawdown_peak": 8,
+            "drawdown_trough": 220,
+            "max_drawdown": -0.4214284147877062,
+            "sharpe": -1.0270602378316371,
+            "total_return": -0.28281309014492617
+          },
+          "sessions": 243,
+          "year": 2021
+        },
+        {
+          "metrics": {
+            "annual_return": -0.27275491314948763,
+            "annual_vol": 0.3427319710912711,
+            "drawdown_peak": 2,
+            "drawdown_trough": 164,
+            "max_drawdown": -0.4287087626937619,
+            "sharpe": -0.7562179265311231,
+            "total_return": -0.27275491314948763
+          },
+          "sessions": 242,
+          "year": 2022
+        },
+        {
+          "metrics": {
+            "annual_return": 0.09287671288516153,
+            "annual_vol": 0.2793894191980982,
+            "drawdown_peak": 72,
+            "drawdown_trough": 106,
+            "max_drawdown": -0.216650067778137,
+            "sharpe": 0.4569986539831447,
+            "total_return": 0.09287671288516153
+          },
+          "sessions": 242,
+          "year": 2023
+        },
+        {
+          "metrics": {
+            "annual_return": 0.05328519879945004,
+            "annual_vol": 0.26629790422059246,
+            "drawdown_peak": 38,
+            "drawdown_trough": 172,
+            "max_drawdown": -0.27137828244598217,
+            "sharpe": 0.3267624756352769,
+            "total_return": 0.05328519879945004
+          },
+          "sessions": 242,
+          "year": 2024
+        },
+        {
+          "metrics": {
+            "annual_return": 0.024296721878463767,
+            "annual_vol": 0.18657556640891348,
+            "drawdown_peak": 42,
+            "drawdown_trough": 61,
+            "max_drawdown": -0.1659272953959502,
+            "sharpe": 0.22143911471189312,
+            "total_return": 0.024398336527249764
+          },
+          "sessions": 243,
+          "year": 2025
+        },
+        {
+          "metrics": {
+            "annual_return": 0.1626917327293116,
+            "annual_vol": 0.18571946018264684,
+            "drawdown_peak": 76,
+            "drawdown_trough": 109,
+            "max_drawdown": -0.09251920849435746,
+            "sharpe": 0.9034475785803546,
+            "total_return": 0.11864597957733225
+          },
+          "sessions": 180,
+          "year": 2026
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "differences": [
+      "用户确认修正datetime.timedelta导入与末值位置索引，保留60行、样本标准差和Python round四位小数",
+      "每个决策日分别动态锚定两条历史价格到当日真实尺度；收盘决策次日开盘，未证明every_bar平台等价",
+      "信号状态在切换时立即更新，与实际成交分离；无均值退出，不重试此前失败订单或日常满仓再平衡",
+      "每次切换先清理另一股票，再按成交后实际现金order_value买入；部分卖出可能留下双持仓，保留该语义",
+      "费用、整手、T+1、涨跌停、参与度和三组成本继续复用唯一Book，平台成本和初始化等价未证明"
+    ],
+    "fidelity": "用户确认的兼容修正与日频/动态锚定近似",
+    "gaps": [
+      "from datetime import datetime后调用datetime.timedelta必报AttributeError",
+      "sub[-1]的日期索引末值语义需修为显式位置索引",
+      "get_price多标的平台返回结构、复权价格尺度和every_bar频率未证明等价"
+    ],
+    "implementations": [
+      "pair_zscore_rotation_corrected_v1"
+    ],
+    "next_step": "用户已确认；冻结切换意图而非每日目标权重，完成长区间与禁网验收",
+    "review_status": "人工审查完成",
+    "rules": {
+      "ddof": 1,
+      "history": 60,
+      "initial_state": "empty",
+      "instruments": [
+        "002415.SZ",
+        "000651.SZ"
+      ],
+      "round_digits": 4,
+      "spread": "price1-price2",
+      "thresholds": [
+        -2,
+        2
+      ],
+      "transition": "z<=-2且hold!=1买1；z>=2且hold!=2买2；无均值退出；下单后立即更新hold"
+    },
+    "scope": "海康威视/格力60行zscore修正日频轮换",
+    "status": "实现中"
+  },
+  "run_id": "20261005-193437-b5b8aa-strategy-88a8",
+  "schema": 1,
+  "snapshot": "20261005-191431-aa71",
+  "strategy_id": "S-578d2e730081",
+  "superseded_by": null,
+  "trading": null,
+  "universe": {
+    "boards": [
+      "main"
+    ],
+    "exclude_st": false,
+    "liquidity_window": 1,
+    "max_suspended": 1,
+    "min_avg_amount": 0.0,
+    "min_listed_sessions": 1,
+    "suspend_window": 1
+  },
+  "validation": []
+}

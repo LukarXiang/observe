@@ -3,6 +3,7 @@
 预测只覆盖开发区间的测试窗；最终留出区间（默认最近 252 个交易日）不生成预测、不参与任何选择。
 产物写入新建实验目录（与 run 相同的独占创建、running 状态与 manifest），预测表交给 run 的唯一执行入口做组合与账本回测。"""
 import hashlib, json, shutil
+from bisect import bisect_left
 from datetime import date
 from typing import Annotated, Literal
 from pathlib import Path
@@ -13,11 +14,13 @@ from pydantic import Field, ValidationError
 
 from .data.prices import with_adjusted
 from .data.store import Store, fingerprint
+from .data.valuations import attach_valuations, check_valuation_calendar, load_valuations, required_fields, valuation_lookback
 from .cache import StageCache, code_version, function_version
 from .dataset import cross_sectional_preprocess, dev_labels, plan_splits, samples
-from .execution import InputBlocked, sessions as open_sessions
+from .execution import InputBlocked, check_history_scope, sessions as open_sessions
 from .factors.intraday import INTRADAY_FIELDS, daily_features, gap_reasons
 from .features import factor_frame, load_factor_set, panel
+from .factors.expr import parse
 from .labels import build_labels
 from .evaluation.ranking import rank_ic, rank_ic_table, topn_summary, topn_table, undefined_reasons
 from .models import EqualBlend, LGBMModel, RidgeModel, SingleFactor, day_weights, lightgbm
@@ -83,6 +86,7 @@ class ResearchConfig(_Strict):
     models: ModelConfig = Field(default_factory = ModelConfig)
     minute_pool: bool = False      # 研究候选再限制在分钟股票池内，区间限制在有名单的年份、且不晚于分钟线最后一天；分钟聚合特征因子必须开启
     cache: bool = True
+    valuation_policy: Literal['provider_final'] | None = Field(None, exclude_if=lambda v: v is None)
 
 
 def research_params(file_cfg = None, **cli):
@@ -98,7 +102,7 @@ def run_research(root, output = None, runs_root = None, **params):
 def _pq(out, name, df): df.to_parquet(Path(out) / f'{name}.parquet', index = False)
 
 
-def evidence_level(cfg): return 'exploratory' if cfg.minute_pool else 'development_oos'      # 分钟样本缺退市证券：数据受限，证据级别为探索
+def evidence_level(cfg): return 'exploratory' if cfg.minute_pool or cfg.valuation_policy else 'development_oos'
 
 
 def _minute_inputs(store, state, cfg, need_bars):
@@ -128,15 +132,34 @@ def _research(root, cfg, output = None, runs_root = None, factor_file = None, ta
     shutil.copyfile(factor_file, out / 'factor_set.yaml'); write_json(out / 'config.json', doc); status.stage('config')
     limitations, cache = [], None
     try:
+        calendar_days = open_sessions(store.load_state(state, 'calendar'))
+        warmup = max(cfg.universe.min_listed_sessions, max(f['lookback'] for f in fset['factors']) + 1,
+                     cfg.universe.liquidity_window, cfg.universe.suspend_window)
+        first_day = calendar_days[max(bisect_left(calendar_days, cfg.start) - warmup, 0)] if cfg.start and calendar_days else None
+        check_history_scope(state, first_day, cfg.end)
         used = {n: state['tables'].get(n, {}) for n in TABLES + (('minute_universe',) if cfg.minute_pool else ())}
         minute = _minute_inputs(store, state, cfg, bool(intraday)) if cfg.minute_pool else None
         if minute: used['bars_5m'] = minute['parts']
         t = {name: store.load_state(state, name) for name in TABLES}
+        expressions = [f['expr'] for f in fset['factors']]
+        valuation_fields = required_fields(expressions, parse)
+        if valuation_fields:
+            bar_days = pd.to_datetime(t['bars_1d'].date).dt.date
+            cal = [d for d in calendar_days if len(bar_days) and bar_days.min() <= d <= bar_days.max()]
+            decisions = [d for d in cal[warmup:] if (cfg.start is None or d >= cfg.start) and (cfg.end is None or d <= cfg.end)]
+            if not decisions: raise InputBlocked([{'kind': 'insufficient_history', 'detail': '估值研究没有可用决策日'}])
+            requested_start, requested_end = cfg.start or decisions[0], cfg.end or decisions[-1]
+            check_valuation_calendar(t['calendar'], requested_start, requested_end)
+            price_missing = sorted(set(d for d in calendar_days if requested_start <= d <= requested_end) - set(bar_days))
+            if price_missing: raise InputBlocked([{'kind': 'valuation_price_range', 'detail': '所请求估值研究交易日缺日线，不能缩短请求区间', 'dates': list(map(str, price_missing[:50])), 'count': len(price_missing)}])
+            val_start = cal[max(bisect_left(cal, decisions[0]) - valuation_lookback(expressions, parse), 0)]
+            t['valuations_1d'], valuation_used = load_valuations(store, state, val_start, requested_end, valuation_fields, cfg.valuation_policy)
+            t['valuation_range'] = (val_start, requested_end); used.update(valuation_used)
         data_manifest = {'snapshot_id': doc['snapshot_id'], 'batch_id': doc['batch_id'], 'offline': True, 'tables': state.get('tables', {}),
                          'used': {n: {p: {**v, 'file_sha256': file_sha(store.root / v['file'])} for p, v in parts.items()} for n, parts in used.items()}}
         write_json(out / 'data_manifest.json', data_manifest)
         env = doc['environment']
-        cache = StageCache(root, {'snapshot': doc['snapshot_id'], 'used': data_manifest['used'], 'code': code_version('cache.py'),
+        cache = StageCache(root, {'snapshot': doc['snapshot_id'], 'used': data_manifest['used'], 'code': code_version('cache.py', *(('data/valuations.py',) if valuation_fields else ())),
                                  'runtime': {k: env[k] for k in ('python', 'packages', 'lock_sha256')}}, cfg.cache and reproduce_of is None and not force_recompute)
         if minute:
             minute['pool'] = store.load_state(state, 'minute_universe')
@@ -193,6 +216,10 @@ def _pipeline(cfg, fset, t, out, status, limitations, minute = None, cache = Non
                                   'code': code_version('universe.py', 'data/standardize.py'), 'functions': function_version(_restrict_to_pool)}, out, 'universe', universe)
     elig = uni[uni.eligible]; status.stage('universe', rows = len(uni), eligible = len(elig), days = len(days), warmup = warmup)
     ever = sorted(set(elig.instrument))
+    if 'valuations_1d' in t:
+        fields = required_fields([f['expr'] for f in fset['factors']], parse)
+        bars, detail = attach_valuations(bars[bars.instrument.isin(set(ever))], t['valuations_1d'], fields, *t['valuation_range'])
+        limitations.append(detail)
     view = with_adjusted(bars[bars.instrument.isin(set(ever))], t['adj_factors'], t['adj_coverage'])
     ok = view.merge(elig[['decision_date', 'instrument']], left_on = ['date', 'instrument'], right_on = ['decision_date', 'instrument'])
     unusable = float((ok.adjustment_status != 'usable').mean()) if len(ok) else 1.0

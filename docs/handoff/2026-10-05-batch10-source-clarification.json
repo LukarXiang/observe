@@ -1,0 +1,54 @@
+{
+ "status": "ok",
+ "scope": "Source metadata clarification only; tested execution and test files unchanged",
+ "previous_validation": "docs/handoff/2026-10-05-batch10-verification.json",
+ "previous_validation_sha256": "ce8c1235144b0e56491106d4846131eafabd2389169cca0ef08647405badaea0",
+ "review_file": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-final/review.json",
+ "review_sha256": "9d019b21e27b9ae85267216b0af890f731edaf83ad2d889b5b4eeebfc26827ad",
+ "changed_source_reviews": [
+  "repo/量化策略源代码/聚宽2025年精选/94别人“拿的住”的股票最赚钱.txt"
+ ],
+ "clarification": "Daily value is sqrt(sum((r-mean(r))^2*w)/sum(w)); r=close/open-1, w=log(volume); then 20-day std/mean",
+ "reviewed_source_bytes_unchanged": 19,
+ "implementation_sha256": {
+  "src/observe/strategy_catalog.py": "cd548fe07641631d9ba86d5cc5b707e2a56001297572797feab4861b578fd5ed",
+  "scripts/review_strategy_batch10.py": "e0429c7c91a485baf48da14fda289b2f0da9845344d6b1c3b17aaf0c07d0291e",
+  "scripts/verify_strategy_batch10.py": "ff5dab62e4ba17c4de801c96a174cd984d32b1a5249eeefba2502d324cfb3b50"
+ },
+ "ruff": {
+  "command": [
+   "/home/zuozhe/envs/quant/.venv/bin/ruff",
+   "check",
+   "src",
+   "tests",
+   "scripts/verify_strategy_batch10.py",
+   "scripts/review_strategy_batch10.py"
+  ],
+  "returncode": 0,
+  "log": "data/staging/strategies-batch10/20261005-ledger-conversion/source-clarification/ruff.log",
+  "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+ },
+ "progress": {
+  "checkpoint": "20261005-172017-a78a",
+  "note": "第十批最终来源公式补充存档：94号权重和开平方明确；此前97项测试、旧实验复现与保护证据保留",
+  "catalog_id": "e62c30ec994fc31c7dca",
+  "catalog_sha256": "49b0fd43226de55b416c0ae0e2bcc51987724d3d7ea786ab2f8532d9e01e330e",
+  "published_batch": "20261005-152040-e16e",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 490,
+   "已验证": 9,
+   "待审查": 41,
+   "暂不可复现": 45,
+   "非交易研究脚本": 68,
+   "实现中": 1,
+   "重复版本": 41
+  },
+  "manually_reviewed": 53,
+  "locally_backtested_sources": 10,
+  "locally_reproduced_sources": 10,
+  "local_strategy_runs": 29,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261005-172017-a78a"
+ }
+}

@@ -1,0 +1,43 @@
+name: 三进兵55 TA-Lib近似变体（事后固定池工程回放）
+implementation: ema_slots_talib_approx_v1
+source_path: repo/量化策略源代码/2022年度精选策略/55.【策略研发】三进兵策略（变形版）.txt
+snapshot: 20261005-201432-93d0
+start: 2012-02-01
+end: 2026-09-29
+initial_cash: 1000000
+execution_instruments: [300014.SZ, 300059.SZ, 300168.SZ, 300253.SZ, 300274.SZ, 000651.SZ, 000858.SZ, 600809.SH]
+parameters:
+  pool: [300014.SZ, 300059.SZ, 300168.SZ, 300253.SZ, 300274.SZ, 000651.SZ, 000858.SZ, 600809.SH]
+  periods: [2, 25, 60]
+  max_positions: 5
+  cash_divisor: 1.5
+  history_anchor: '2005-01-05'
+  price_basis: frozen_back_adjusted_v1
+  window_policy: continuous_skip_known_pauses_v1
+  indicator_policy: talib_mean_seed_v1
+universe:
+  boards: [main, gem]
+  min_listed_sessions: 1
+  exclude_st: false
+  suspend_window: 1
+  max_suspended: 1
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: signal_slots
+  n: 5
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: daily
+  rebalance_session: 1
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.25
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.00246
+  liquidity_window: 20
+cost_scenarios: [base, fees_x2, slippage_x2]
+benchmark: 000300.SH
+cache: false

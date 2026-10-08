@@ -1,0 +1,939 @@
+{
+ "status": "ok",
+ "scope": "Conversion ledger fix, source reviews and ETF primary evidence; no new ETF backtest",
+ "environment": {
+  "git_commit": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+  "git_dirty": true,
+  "lock_sha256": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382",
+  "python": "3.12.12",
+  "packages": {
+   "pandas": "3.0.6",
+   "numpy": "2.5.3",
+   "pyarrow": "25.0.1",
+   "pydantic": "2.13.5",
+   "scikit-learn": "1.9.1",
+   "scipy": "1.18.1",
+   "lightgbm": "4.7.0"
+  }
+ },
+ "published_batch": "20261005-152040-e16e",
+ "snapshot": "20261005-152153-eb05",
+ "reviewed_sources": [
+  {
+   "strategy_id": "S-66eefedcf0df",
+   "source_path": "repo/量化策略源代码/2021年度精选策略/19.简单到发指的股指策略(2013到现在收益10949%).txt",
+   "source_sha256": "c0102d437625c6b6b522b4f816d5b6a4cb3b6b48df37448632978a1141e3178e",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 62,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "IF主力隔夜期货多头",
+    "fidelity": "缺合约数据与期货执行账本",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "contract": "get_dominant_future(IF)",
+     "buy_time": "14:55",
+     "sell_time": "10:00",
+     "target_value": "available_cash/2",
+     "margin_rate": 0.15,
+     "slippage_steps": 2
+    },
+    "gaps": [
+     "缺历史主力映射、逐合约盘中价/结算价和乘数",
+     "唯一账本尚无期货保证金、每日结算、平今费与换月语义"
+    ],
+    "next_step": "补历史合约及结算证据后扩展唯一账本；实际半现金不能按注释满仓实现"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-66eefedcf0df.source",
+   "source_copy_sha256": "c0102d437625c6b6b522b4f816d5b6a4cb3b6b48df37448632978a1141e3178e"
+  },
+  {
+   "strategy_id": "S-3be0226c9375",
+   "source_path": "repo/量化策略源代码/2024年度精选策略2/99.计算每日全A市场个股创新高比例(改).txt",
+   "source_sha256": "4fa9607c4645b2ffec91e29924b0dd3e5e477b96884efa1c0892a1932cb8905e",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 43,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "全A创新高比例研究",
+    "fidelity": "非交易研究，池与时点待核实",
+    "implementations": [],
+    "status": "非交易研究脚本",
+    "rules": {
+     "windows": [
+      252,
+      15,
+      60
+     ],
+     "pool": "研究起始日在市股票池"
+    },
+    "gaps": [
+     "无完整下单规则；起始日在市池回溯与逐日历史池不同",
+     "历史名称及研究区间数据仍待完整核实"
+    ],
+    "next_step": "保留指标研究分类与池口径，不将创新高图表冒充策略回测"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-3be0226c9375.source",
+   "source_copy_sha256": "4fa9607c4645b2ffec91e29924b0dd3e5e477b96884efa1c0892a1932cb8905e"
+  },
+  {
+   "strategy_id": "S-cded591ad6be",
+   "source_path": "repo/量化策略源代码/2024年度精选策略1/70.致敬市场(12)——赚钱的策略.txt",
+   "source_sha256": "e8754f26e4de3dd9e3741832c1a9fcd605260208595edabfd4c8b0173ff7cd68",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 53,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "国证50股票/国债指数配置及年度出金",
+    "fidelity": "缺历史池且债券标的不可交易",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "index": "399310.SZ",
+     "withdrawal": "每年首交易日总资产5%",
+     "cash_weight": 0.1,
+     "treasury_weight": 0.4,
+     "treasury": "000012.SH指数",
+     "stock_slots": 50,
+     "time": "10:00"
+    },
+    "gaps": [
+     "原文直接交易国债指数，不能按变量名treasury_fund当ETF",
+     "缺国证50历史成分及盘中执行、出入金收益口径",
+     "年度国债目标单随后也进入名单外卖出循环，可能立即清掉债仓，不能按40%长期债仓实现"
+    ],
+    "next_step": "指数替代与出金收益处理须单独确认，补原历史池；不套当前成分"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-cded591ad6be.source",
+   "source_copy_sha256": "e8754f26e4de3dd9e3741832c1a9fcd605260208595edabfd4c8b0173ff7cd68"
+  },
+  {
+   "strategy_id": "S-4fc6fb337479",
+   "source_path": "repo/量化策略源代码/2020年度精选策略/69 阻力支撑相对强度（RSRS）指标择时策略.txt",
+   "source_sha256": "6ec26b602a0e8649adaee009fdd7ffce2e38a1a5ff93fd52b919a78d64e16117",
+   "encoding": "gb18030",
+   "complete_lines_read": 73,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "510300 ETF小时RSRS非滚动累积状态机",
+    "fidelity": "缺ETF小时数据及运行频率证明",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "instrument": "510300.SH",
+     "regression_window": 18,
+     "history": 400,
+     "daily_seed": "每日盘前追加382个历史beta，beat_list不清空",
+     "trigger": "handle_data累计count%60=0",
+     "thresholds": [
+      -0.7,
+      0.7
+     ],
+     "indicator": "R2*(beta-累积均值)/累积总体标准差"
+    },
+    "gaps": [
+     "缺60分钟OHLC和ETF事件/规则；现有股票5分钟表不满足",
+     "盘前历史重复追加与分钟计数影响序列，非普通滚动400日RSRS"
+    ],
+    "next_step": "保留重复追加和计数语义，先核实历史数据与平台调度，日频变体须另确认"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-4fc6fb337479.source",
+   "source_copy_sha256": "6ec26b602a0e8649adaee009fdd7ffce2e38a1a5ff93fd52b919a78d64e16117"
+  },
+  {
+   "strategy_id": "S-4730e53b92bc",
+   "source_path": "repo/量化策略源代码/聚宽2025年精选/94别人“拿的住”的股票最赚钱.txt",
+   "source_sha256": "26ef47b6b3e6c3c898c53e61b02d756f285eec12b78480d684e036f7ee26b336",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 85,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "沪深300高频波动率变异系数月度选股",
+    "fidelity": "缺分钟数据与长区间历史池",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "index": "000300.SH",
+     "time": "每月第20交易日开盘",
+     "minute_history": 4800,
+     "days": 20,
+     "timing": "250日指数成交量的末20日均量>全250日25分位才选股，否则清仓",
+     "factor": "每天iloc[1:236]的close/open-1，以普通均值居中、log(volume)加权平方偏差，再求20日std/mean",
+     "neutralization": "对20日普通波动率一元回归残差升序取10"
+    },
+    "gaps": [
+     "缺逐股票20日1分钟OHLCV，5分钟不能等价替换",
+     "历史CSI300成分仅短周频窗口，盘前历史分钟边界未证明"
+    ],
+    "next_step": "按分钟因子及历史池补数据；不能从股票名称或标题判断为低依赖日频策略"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-4730e53b92bc.source",
+   "source_copy_sha256": "26ef47b6b3e6c3c898c53e61b02d756f285eec12b78480d684e036f7ee26b336"
+  },
+  {
+   "strategy_id": "S-ccb84ba42e45",
+   "source_path": "repo/量化策略源代码/聚宽2025年精选/14安全摸狗策略.txt",
+   "source_sha256": "8ffe96d2d9b40e5339b08ca061eb0e25eb3f006e3849c679b4820addd1828248",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 89,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "四ETF加权回归动量单标的轮换",
+    "fidelity": "缺ETF输入与依赖兼容证据",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "instruments": [
+      "518880.SH",
+      "513100.SH",
+      "159915.SZ",
+      "510180.SH"
+     ],
+     "history": 25,
+     "score": "(exp(slope)^250-1)*加权R2，polyfit的w从1递增至2",
+     "eligible_score": "0<score<=5",
+     "time": "09:30"
+    },
+    "gaps": [
+     "四资产行情、事件与各自T+0/T+1/涨跌幅/费用未验收",
+     "math未显式导入；回归和R2使用权重方式不同，不能统一改成标准加权回归"
+    ],
+    "next_step": "保留原两种权重公式，补数据并确认兼容修正；不能套510310规则到跨境/黄金ETF"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-ccb84ba42e45.source",
+   "source_copy_sha256": "8ffe96d2d9b40e5339b08ca061eb0e25eb3f006e3849c679b4820addd1828248"
+  },
+  {
+   "strategy_id": "S-dde5d3d3b70e",
+   "source_path": "repo/量化策略源代码/2020年度精选策略/30 基于LSTM模型预测股票价格走势.txt",
+   "source_sha256": "9bfb33c1af09a0cee44bf89ba79978a47d63da4660375bceef4fc75e175a8a0e",
+   "encoding": "gb18030",
+   "complete_lines_read": 58,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "嵌入预测数组的指数方向择时",
+    "fidelity": "缺训练时点且原标的不可交易",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "instrument": "399300.SZ指数",
+     "input": "context.labels嵌入旧预测数组",
+     "buy": "预测值高于上一预测值，投入现金",
+     "sell": "否则清仓"
+    },
+    "gaps": [
+     "无LSTM训练代码、输入、模型版本及预测可用日期映射",
+     "直接交易不可交易指数；每bar推进索引，数组耗尽会越界"
+    ],
+    "next_step": "保留嵌入数组和缺口；自行重训或ETF替换都不是原策略复现"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-dde5d3d3b70e.source",
+   "source_copy_sha256": "9bfb33c1af09a0cee44bf89ba79978a47d63da4660375bceef4fc75e175a8a0e"
+  },
+  {
+   "strategy_id": "S-e336a9e62ff1",
+   "source_path": "repo/量化策略源代码/2020年度精选策略/11 酒股地中短线策略.txt",
+   "source_sha256": "7cdc630620241a99acd8c35416b7716eb363af435c658646dd42797e71589638",
+   "encoding": "gb18030",
+   "complete_lines_read": 58,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "上证综指/深证综指最低市值6股反复金额单",
+    "fidelity": "缺每日市值与历史池，原收益分支有缺陷",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "indices": [
+      "000001.SH",
+      "399106.SZ"
+     ],
+     "select": "两指数成分列表拼接后总市值升序前6",
+     "ordering": "每bar先每股买15000元，再按条件下金额单，非目标权重",
+     "profit_branch": "先if收益>5%，后elif>10%及>15%不可达"
+    },
+    "gaps": [
+     "缺每日股本/总市值及全区间上证综指/深证综指历史成分",
+     "ret分母为position.price当前价而非平均成本；首收益分支吞掉后续分支，不能按注释修正卖出梯度"
+    ],
+    "next_step": "补时点市值/历史池后明确原逻辑或另确认修正；保留金额单语义"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-e336a9e62ff1.source",
+   "source_copy_sha256": "7cdc630620241a99acd8c35416b7716eb363af435c658646dd42797e71589638"
+  },
+  {
+   "strategy_id": "S-71571339e9e6",
+   "source_path": "repo/量化策略源代码/2021年度精选策略/94.小资金短线策略.txt",
+   "source_sha256": "3fc56518a6539ae45354b4ff1d82e0811f15e31582d9f017bfbf0a17087b9757",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 75,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "中证500尾盘30分钟收益/乖离因子",
+    "fidelity": "缺分钟输入与长区间历史池",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "index": "000905.SH",
+     "history_minutes": 30,
+     "bias_window": 12,
+     "select": "bias+return升序第3至5名",
+     "slots": 3,
+     "trade": "先清所有，逐笔available_cash/3买入"
+    },
+    "gaps": [
+     "import numpy as numpy却调用np，需兼容修正",
+     "缺1分钟与历史名称过滤、完整历史中证500池"
+    ],
+    "next_step": "核实尾盘分钟边界及逐笔现金；不以日线收益或一次等权代替"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-71571339e9e6.source",
+   "source_copy_sha256": "3fc56518a6539ae45354b4ff1d82e0811f15e31582d9f017bfbf0a17087b9757"
+  },
+  {
+   "strategy_id": "S-cafee3ad464a",
+   "source_path": "repo/量化策略源代码/2021年度精选策略/23.玩趋势交易的看进来~~~~2.txt",
+   "source_sha256": "d96a5d0826ca0671ef17dd53a91fe9fdc793a668986635e7954a0ae16ef7369c",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 137,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "趋势极值与漂移保护线绘图",
+    "fidelity": "非交易研究，完整波段存在事后端点",
+    "implementations": [],
+    "status": "非交易研究脚本",
+    "rules": {
+     "instrument": "002568.SZ",
+     "history": 500,
+     "ma": 8,
+     "extreme_threshold": 0.04,
+     "end": "系统当前日期",
+     "group_endpoint": "全窗口同方向极值保留最后一条"
+    },
+    "gaps": [
+     "无下单规则；完整分组末端点依赖后续观察",
+     "DataFrame.append及整数索引旧语义在当前pandas不兼容"
+    ],
+    "next_step": "仅保留研究与事后标注，不把保护线当实时可用交易信号"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-cafee3ad464a.source",
+   "source_copy_sha256": "d96a5d0826ca0671ef17dd53a91fe9fdc793a668986635e7954a0ae16ef7369c"
+  },
+  {
+   "strategy_id": "S-3413c5f12dc4",
+   "source_path": "repo/量化策略源代码/2020年度精选策略/50 简单配对交易.txt",
+   "source_sha256": "fd35c965c3cb57c1524ea4dbb5129810876356590b564c84366d1ae1dbe33ba1",
+   "encoding": "gb18030",
+   "complete_lines_read": 151,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "中国银行/002048融资融券配对",
+    "fidelity": "缺融资融券数据与执行能力",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "instruments": [
+      "601988.SH",
+      "002048.SZ"
+     ],
+     "mean": 2.8539,
+     "std": 0.00149,
+     "beta": 0.0567,
+     "interest_rates": [
+      0.08,
+      0.1
+     ],
+     "margin_rates": [
+      1.5,
+      1.5
+     ]
+    },
+    "gaps": [
+     "源码注释将002048错误称作平安银行，应以代码为准",
+     "缺历史借券、授信、融资负债/融券利息和担保品结算"
+    ],
+    "next_step": "保留原参数及代码身份；不能用普通多头轮换近似后声称原版完成"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-3413c5f12dc4.source",
+   "source_copy_sha256": "fd35c965c3cb57c1524ea4dbb5129810876356590b564c84366d1ae1dbe33ba1"
+  },
+  {
+   "strategy_id": "S-f23cf187dc47",
+   "source_path": "repo/量化策略源代码/2022年度精选策略/93.海龟交易体系（股票版）.txt",
+   "source_sha256": "2b603f17bad77cb8e16684eaec48536deaccdae384df278587a12727d9fc489c",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 195,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "茅台分钟海龟加仓/止损状态机",
+    "fidelity": "缺分钟执行且原兼容缺陷未修",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "instrument": "600519.SH",
+     "frequency": "1分钟",
+     "channel_window": 20,
+     "n_days": 20,
+     "risk_per_unit": 0.01,
+     "max_units": 4,
+     "add_n": 0.5,
+     "stop_n": 2,
+     "state": "下单后立即改变g.sys，与成交分离"
+    },
+    "gaps": [
+     "止损写成log,info；import numpy却用np，datetime注入未证明",
+     "short_out_date=10但实际退出低轨由20日计算；缺分钟撮合与递推N初始化证据"
+    ],
+    "next_step": "保留20日实际通道及信号状态；不能擅自改成日频或10日通道退出"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-f23cf187dc47.source",
+   "source_copy_sha256": "2b603f17bad77cb8e16684eaec48536deaccdae384df278587a12727d9fc489c"
+  },
+  {
+   "strategy_id": "S-9a751570080b",
+   "source_path": "repo/量化策略源代码/2024年度精选策略2/92.利用myTT库整合通达信公式——以“飞鹰优选”选股公式为例.txt",
+   "source_sha256": "c62ee46d17bded8ed97aeae9ddcba959a73a4a813f139127f8e050a3c2dca880",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 78,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "myTT通达信信号研究",
+    "fidelity": "非完整交易策略且缺外置指标库",
+    "implementations": [],
+    "status": "非交易研究脚本",
+    "rules": {
+     "dependency": "myTT",
+     "output": "飞鹰优选公式信号"
+    },
+    "gaps": [
+     "缺原myTT实现/版本及原指标初始化口径",
+     "没有完整订单、退出、费用与资金规则"
+    ],
+    "next_step": "搜索原myTT再核实公式，交易扩展须作为独立策略定义"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-9a751570080b.source",
+   "source_copy_sha256": "c62ee46d17bded8ed97aeae9ddcba959a73a4a813f139127f8e050a3c2dca880"
+  },
+  {
+   "strategy_id": "S-7e88bff4dc3a",
+   "source_path": "repo/量化策略源代码/2022年度精选策略/55.【策略研发】三进兵策略（变形版）.txt",
+   "source_sha256": "2ecc7295bec6f264228985e5f08a1dac2f5621e51ff3ecd0234473a4cea9b507",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 174,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "8股EMA2/25/60交叉五槽位策略",
+    "fidelity": "待EMA历史实现及初始化核实",
+    "implementations": [],
+    "status": "待审查",
+    "rules": {
+     "instruments": [
+      "300014.SZ",
+      "300059.SZ",
+      "300168.SZ",
+      "300253.SZ",
+      "300274.SZ",
+      "000651.SZ",
+      "000858.SZ",
+      "600809.SH"
+     ],
+     "ema": [
+      2,
+      25,
+      60
+     ],
+     "slots": 5,
+     "buy_cash": "available_cash/(剩余槽位*1.5)",
+     "buy": "EMA2严格上穿EMA25且EMA25>EMA60",
+     "sell": "EMA2严格下穿EMA25且EMA25>EMA60"
+    },
+    "gaps": [
+     "get_ma未被信号使用，实际调用jqlib EMA，历史窗口/种子/复权/停牌口径未证明",
+     "先卖后买即时成交及零仓positions键与本账本不同；固定事后8股池有选择偏差"
+    ],
+    "next_step": "从官方/原jqlib实现查EMA初始化证据再确认近似方案；不按函数名改成简单均线"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-7e88bff4dc3a.source",
+   "source_copy_sha256": "2ecc7295bec6f264228985e5f08a1dac2f5621e51ff3ecd0234473a4cea9b507"
+  },
+  {
+   "strategy_id": "S-bae5b4fe76e8",
+   "source_path": "repo/量化策略源代码/2024年度精选策略2/33.胜率88.9%之君正集团策略-大阳分歧反包.txt",
+   "source_sha256": "a331c54cde128795561d7fd77a273fd6c8f89441af5cacf3881ead11517ecfac",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 189,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "全市场形态选股及Tick反包交易",
+    "fidelity": "缺Tick与历史池，非单只君正策略",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "frequency": "Tick价格/每bar运行",
+     "pool": "全市场",
+     "debug_instrument": "601519.SH",
+     "seasoning": "计算了1080日过滤结果但没有用于最终池"
+    },
+    "gaps": [
+     "缺逐笔价/盘口、历史名称与池",
+     "标题和debug代码不能代替实际选股；未生效1080日过滤不能擅自应用"
+    ],
+    "next_step": "归档池和未生效过滤，盘中数据到位前搁置，不用日线单股代替"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-bae5b4fe76e8.source",
+   "source_copy_sha256": "a331c54cde128795561d7fd77a273fd6c8f89441af5cacf3881ead11517ecfac"
+  },
+  {
+   "strategy_id": "S-f81bb8422f94",
+   "source_path": "repo/量化策略源代码/2021年度精选策略/76.日内交易策略R-breaker - 300346.XSHE.txt",
+   "source_sha256": "50de55ed9b615907c9d57025ddef7d8d2dd6f93286199b7b160fc1ef08217be9",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 123,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "300346 Tick R-breaker分批日内交易",
+    "fidelity": "缺Tick输入和执行能力",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "instrument": "300346.SZ",
+     "trade_value": "starting_cash/10",
+     "levels": "前日OHLC计算R1/R2/R3/S1/S2/S3"
+    },
+    "gaps": [
+     "subscribe/handle_tick/current/high/low依赖，分钟线不等价",
+     "卖出检查可卖份额严格大于金额折算整手，T+1及逐次成交状态重要"
+    ],
+    "next_step": "补逐笔数据与顺序执行，不以分钟聚合突破或一次目标权重替代"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-f81bb8422f94.source",
+   "source_copy_sha256": "50de55ed9b615907c9d57025ddef7d8d2dd6f93286199b7b160fc1ef08217be9"
+  },
+  {
+   "strategy_id": "S-5c7b2aeec2aa",
+   "source_path": "repo/量化策略源代码/2020年度精选策略/18 均值回归策略分享.txt",
+   "source_sha256": "3cd29da86ab46708040d777560d8205b2968a50a00d056f2c97ab788beaf2886",
+   "encoding": "gb18030",
+   "complete_lines_read": 379,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "固定五股均值回归/MACD及共享高价状态",
+    "fidelity": "多处原程序缺陷及指标时点缺口",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "instruments": [
+      "002241.SZ",
+      "000333.SZ",
+      "002230.SZ",
+      "002747.SZ",
+      "002415.SZ"
+     ],
+     "state": "五股共享高价变量",
+     "signal": "均线偏差和MACD，含当日数据"
+    },
+    "gaps": [
+     "Python2 <>语法；买入循环复用前循环末只股票MA",
+     "高价状态跨标的共享、MACD当日可用时点未证明；固定事后五股池有选择偏差"
+    ],
+    "next_step": "先逐个明确缺陷与原实际行为，修正需用户确认，不合并成通用zscore复现"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-5c7b2aeec2aa.source",
+   "source_copy_sha256": "3cd29da86ab46708040d777560d8205b2968a50a00d056f2c97ab788beaf2886"
+  },
+  {
+   "strategy_id": "S-3811a6d26860",
+   "source_path": "repo/量化策略源代码/2022年度精选策略/67.来自JPMorgan的VaR+EXPMA风险仓位控制.txt",
+   "source_sha256": "a879de45920d91d95103330ef33e6940de0af3a55194d79297320af80d5f97a9",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 95,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "沪深300指数VaR/EXPMA目标仓位",
+    "fidelity": "原标的不可交易且指标语义待核实",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "instrument": "000300.SH指数",
+     "expma": [
+      12,
+      50
+     ],
+     "returns_history": 125,
+     "risk_exposure": [
+      1.5,
+      3.8
+     ],
+     "confidence": [
+      99.5,
+      98
+     ],
+     "position": "-风险敞口/收益分位数，上限100%"
+    },
+    "gaps": [
+     "向不可交易指数下单；Python2 print",
+     "jqlib EXPMA初始化及百分位零值/正值边界未处理"
+    ],
+    "next_step": "归档不可交易阻断；ETF替换和兼容修正须另建批准变体"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-3811a6d26860.source",
+   "source_copy_sha256": "a879de45920d91d95103330ef33e6940de0af3a55194d79297320af80d5f97a9"
+  },
+  {
+   "strategy_id": "S-a4c77bd8b44e",
+   "source_path": "repo/量化策略源代码/2021年度精选策略/6.iAlpha 基金投资策略.txt",
+   "source_sha256": "3f2ba65f4b2f575ca9d9408c2e668b8b067f8e29d6a2ec87213fffd65730a8ed",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 43,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "8ETF月第11交易日阈值再平衡",
+    "fidelity": "缺多资产ETF数据与初始化生命周期证据",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "instruments": [
+      "511260.SH",
+      "518880.SH",
+      "513500.SH",
+      "513100.SH",
+      "513050.SH",
+      "159928.SZ",
+      "512010.SH",
+      "512770.SH"
+     ],
+     "time": "月第11交易日09:35",
+     "trigger": "abs(delta)>max(10%目标金额,100*last_price)，按delta下单"
+    },
+    "gaps": [
+     "仅after_code_changed负责变量和调度，无initialize；生命周期未证明",
+     "含债券/黄金/跨境ETF，各自回转规则与事件不同，09:35需盘中执行"
+    ],
+    "next_step": "补8资产及生命周期证据，负delta卖单/现金条件按原逻辑保留，不套普通日频等权"
+   },
+   "source_copy": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/S-a4c77bd8b44e.source",
+   "source_copy_sha256": "3f2ba65f4b2f575ca9d9408c2e668b8b067f8e29d6a2ec87213fffd65730a8ed"
+  }
+ ],
+ "source_review_file": "data/staging/strategies-batch10/20261005-ledger-conversion/source-reviews-corrected/review.json",
+ "source_review_sha256": "fdd310bc52b5c5a314030337e37602f0df30d6fa54e106a3b4646f2e7b03034a",
+ "checks": [
+  {
+   "command": [
+    "/home/zuozhe/envs/quant/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_conversion.py",
+    "tests/unit/test_ledger.py",
+    "tests/unit/test_portfolio_loop.py",
+    "tests/unit/test_star_execution.py",
+    "tests/integration/test_conversion_execution.py",
+    "tests/integration/test_rotation_strategy.py",
+    "tests/integration/test_multi_ma_strategy.py",
+    "tests/integration/test_public_run.py"
+   ],
+   "returncode": 0,
+   "log": "data/staging/strategies-batch10/20261005-ledger-conversion/checks-final/pytest.log",
+   "sha256": "f7cbaa1087d7b0cff77853a472f0b80ada3f60ee038a555310ab35dcc9692d75"
+  },
+  {
+   "command": [
+    "/home/zuozhe/envs/quant/.venv/bin/ruff",
+    "check",
+    "src",
+    "tests",
+    "scripts/verify_strategy_batch10.py",
+    "scripts/review_strategy_batch10.py",
+    "scripts/research_etf510310_rules.py",
+    "scripts/research_sse_etf_rules.py",
+    "scripts/extract_etf510310_evidence.py",
+    "scripts/research_etf_tax_rules.py"
+   ],
+   "returncode": 0,
+   "log": "data/staging/strategies-batch10/20261005-ledger-conversion/checks-final/ruff.log",
+   "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  {
+   "command": [
+    "git",
+    "diff",
+    "--check"
+   ],
+   "returncode": 0,
+   "log": "data/staging/strategies-batch10/20261005-ledger-conversion/checks-final/diff-check.log",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+ ],
+ "legacy_reproduction": {
+  "status": "ok",
+  "original_run_id": "20261005-163118-44fbd5-strategy-bed8",
+  "reproduction": {
+   "run_id": "20261005-171252-44fbd5-strategy-886b",
+   "output": "data/runs/20261005-171252-44fbd5-strategy-886b",
+   "status": "success_limited",
+   "subruns": {
+    "backtests": [
+     {
+      "model": "pair_zscore_rotation_corrected_v1",
+      "scenario": "base",
+      "run_id": "20261005-171258-d50cc5-base-8dab",
+      "output": "data/runs/20261005-171252-44fbd5-strategy-886b/variants/20261005-171258-d50cc5-base-8dab",
+      "status": "success_limited",
+      "manifest_sha256": "800a875e75f3e815b3737e0aece305e9c3b63a62eaa62881a829de4aadc2a40e"
+     },
+     {
+      "model": "pair_zscore_rotation_corrected_v1",
+      "scenario": "fees_x2",
+      "run_id": "20261005-171306-6be9d4-fees_x2-7877",
+      "output": "data/runs/20261005-171252-44fbd5-strategy-886b/variants/20261005-171306-6be9d4-fees_x2-7877",
+      "status": "success_limited",
+      "manifest_sha256": "375365f3389b7b40e8a78d2f55da9d03b9db89c983362c631d98a146deafa62e"
+     },
+     {
+      "model": "pair_zscore_rotation_corrected_v1",
+      "scenario": "slippage_x2",
+      "run_id": "20261005-171314-2b5cd1-slippage_x2-1457",
+      "output": "data/runs/20261005-171252-44fbd5-strategy-886b/variants/20261005-171314-2b5cd1-slippage_x2-1457",
+      "status": "success_limited",
+      "manifest_sha256": "b1a6d7959c00552e55be6adce3fb271c0feb5362f2bbe8f1dd92b2e9a39e3b9a"
+     }
+    ]
+   },
+   "reproduction": {
+    "of": "/mnt/d/projects/observe/data/runs/20261005-163118-44fbd5-strategy-bed8",
+    "result": "match",
+    "differences": 0
+   }
+  },
+  "original_tree_sha256": {
+   "benchmark_daily.parquet": "55498242098a63f2d11a22a96da61e8abbff0ea1508cbfc6f3372153d0a44852",
+   "benchmark_eval.json": "0ea98350e88937b6834573b3c3f5dac85691b8cdd2500babcdacda387ad1c8d4",
+   "cache.json": "76c1602aff59df86456f9fb081add67b73c2fe6508faa46c48fe530925a74d21",
+   "config.json": "5278384a25d5e98184b1434b2564c76df86b6ecc5f66fb5e67ca4f72230d24e4",
+   "data_manifest.json": "e82fc4540fb39b582ff1771603f91bb96097ccc7923f42eac6e122fca39c849e",
+   "factors.parquet": "2e2aa8512eac40a79e7fdd77f9d7c6a4f6636811536c33f7abfbdc5c8fd527ff",
+   "limitations.json": "8b7d8da077656329a44bd1810a6fc2880d59e2bb5ec380217bc4b3f54ec7e3a6",
+   "manifest.json": "69449a5f462e7aeec92f5b116377e69b5ec6344c4651ed4478c04c9f25c2b45a",
+   "report.json": "d2d74bc2dd4413b9796f50d990913b0d6b4f0825a231f0af1fede1a631e843e2",
+   "rules.yaml": "5f39564edaa1963e8b6242ff84a77b25fa04c22eb9d87829ace460ef2aa0eb7f",
+   "scores.parquet": "f59cf9a7b04103c264198dcfbee3fda17dc6daab0bf18b92044bedb4f292b03a",
+   "signal_coverage.parquet": "79821bc7c91f5d8a8dd53ac4b2c61d4513d49636dfe74f346af4676bac070254",
+   "signals_manifest.json": "e0069425fc09e9d243d2973f27e70de740f6a516522b5f9978a296a3cd336b5d",
+   "source.original": "011bfb2aa689d471d949e1813c53089adce4125ae748b06ce227265a81c842fd",
+   "status.json": "9309a2a11949b0ab9c1a66daf000ebaa452f9e84f5113755919959728cc98e31",
+   "subruns.json": "29911a434acc85907540c1f7fdc571ed3f63a995f49961742ad5db4894e97c81",
+   "targets.parquet": "d978e71ccf21a7eea6079c6b75265b5be08fcd66f2bd2068716f75df579b7598",
+   "universe.parquet": "f4f302df1ac6fc27636d257e3f5c5b7d8bcf362f1f2456a022b1cbed822d74c1",
+   "variants/20261005-163125-2926e3-base-92bd/cache.json": "1d6916cd47f4ce291602b06d40e9ee514b6aafd2f43f0b6a45f2dc7d8bec1508",
+   "variants/20261005-163125-2926e3-base-92bd/cash_events.json": "ecc174eb5465ce5d6ec91461840ac4ec91f7a94d421d1646b61aa5242dab5c4d",
+   "variants/20261005-163125-2926e3-base-92bd/config.json": "d5cee1bff352f50613c56c251e02e2cc036ce2cf3d246315745313a1fc81a4bb",
+   "variants/20261005-163125-2926e3-base-92bd/data_manifest.json": "165cbc8c9008522f946f314997d26e6d965ec5792e443d77b5dbdb65c54dc15e",
+   "variants/20261005-163125-2926e3-base-92bd/equity.json": "bcddd656b00404d98d7caf30bba9acec583002c751d1a60973271d44a2ee89c9",
+   "variants/20261005-163125-2926e3-base-92bd/fills.json": "ca25d69a2f3b13fa0dada6b1cd32166922b757ae42cb3cbabecf2b6de737733b",
+   "variants/20261005-163125-2926e3-base-92bd/limitations.json": "f4e708ca4ea7674579ec7d43a9351f76461fe830a0bc8a477fd16dc4e136d542",
+   "variants/20261005-163125-2926e3-base-92bd/loop_result.json": "74d8557c763f5437927d3bf4967c64334c12ee8e17f5674232c5eaafd4f33c5a",
+   "variants/20261005-163125-2926e3-base-92bd/manifest.json": "d5a96bbb82085c9323812bd7bbb9e0a3d128794dcbf562d66b3995e21b83f163",
+   "variants/20261005-163125-2926e3-base-92bd/metrics.json": "51e074edf6975d3fcb25e62901795bfd63522d58eac814ba78fe6d28fd5130c6",
+   "variants/20261005-163125-2926e3-base-92bd/orders.json": "bd6a5922b780f99274d949a749f84bd8fd97dd7392d361d48767a4951fb61d94",
+   "variants/20261005-163125-2926e3-base-92bd/positions_daily.json": "8efec33fa590e84c9e40abf9b9723c32605e3e21621332272504a7b73b5c54cc",
+   "variants/20261005-163125-2926e3-base-92bd/receivables.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "variants/20261005-163125-2926e3-base-92bd/rules.yaml": "91dcd354de4ef72fdfda54508f57fe90070dd2c0cb01185e1c6a0d3ae2e3b865",
+   "variants/20261005-163125-2926e3-base-92bd/scores.json": "03635930bf9de85eccff223fb66cb4d7ccfac7ce7dd9478557cc6f9f02e0f990",
+   "variants/20261005-163125-2926e3-base-92bd/status.json": "5262dc829f55f39a32f90b5ac20d4860f158cf22d5222001d920003778b0ab34",
+   "variants/20261005-163125-2926e3-base-92bd/trading.json": "e5b2de3b8f566636da42f2065b087990b9121bc26408944c6016d45c7b3e144a",
+   "variants/20261005-163135-46adc8-fees_x2-907f/cache.json": "4e335792b519b511de58339e42937a131aedd1b9a45f020a124fdd8d933a04f5",
+   "variants/20261005-163135-46adc8-fees_x2-907f/cash_events.json": "c2e1ed16c5586866be02ba02d5ac61a2a8fa821820bfac5ea674180734eecfa7",
+   "variants/20261005-163135-46adc8-fees_x2-907f/config.json": "d823693d3a924f221adc54a2f3e70055f0aafa1f1b0091f7d77b554bd81f6806",
+   "variants/20261005-163135-46adc8-fees_x2-907f/data_manifest.json": "165cbc8c9008522f946f314997d26e6d965ec5792e443d77b5dbdb65c54dc15e",
+   "variants/20261005-163135-46adc8-fees_x2-907f/equity.json": "c0de81848ac6f4d4894d4f1028963d1bc9f00fac059dc75699f95d28a8a186bc",
+   "variants/20261005-163135-46adc8-fees_x2-907f/fills.json": "a9f372e8198104c9d82b169b1d0867e84d11c79161d07a25d50cf12d455c7c51",
+   "variants/20261005-163135-46adc8-fees_x2-907f/limitations.json": "f4e708ca4ea7674579ec7d43a9351f76461fe830a0bc8a477fd16dc4e136d542",
+   "variants/20261005-163135-46adc8-fees_x2-907f/loop_result.json": "0be183f3806cc45c2e47b96b057e1246b8c31bb58f9656a71847be8b3c35f712",
+   "variants/20261005-163135-46adc8-fees_x2-907f/manifest.json": "e7de84dc24d2e881cb3668ca46a257f5a022853294629bf615f4a7aa6a0b2005",
+   "variants/20261005-163135-46adc8-fees_x2-907f/metrics.json": "ab5b2673a6d898c240f361d90b3db4843c01c488558110f7833abd1ba5ba5485",
+   "variants/20261005-163135-46adc8-fees_x2-907f/orders.json": "7131c842be018170dda69dd0479fb10e1ee1399bbb9ace92fe55872e92aea2b0",
+   "variants/20261005-163135-46adc8-fees_x2-907f/positions_daily.json": "e43a8beeed2de92c88b080cbb3fad3fc98813a10ffaf7062623665d20a09cdf9",
+   "variants/20261005-163135-46adc8-fees_x2-907f/receivables.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "variants/20261005-163135-46adc8-fees_x2-907f/rules.yaml": "91dcd354de4ef72fdfda54508f57fe90070dd2c0cb01185e1c6a0d3ae2e3b865",
+   "variants/20261005-163135-46adc8-fees_x2-907f/scores.json": "03635930bf9de85eccff223fb66cb4d7ccfac7ce7dd9478557cc6f9f02e0f990",
+   "variants/20261005-163135-46adc8-fees_x2-907f/status.json": "8c1b0600ab54b0c149348be93964938bf5b1bcd6dc6be61cdbb17471cd107435",
+   "variants/20261005-163135-46adc8-fees_x2-907f/trading.json": "6a57421816ebf16b7459217a0b6d74b3313e1decd3d44ac6d4fac50a9723b131",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/cache.json": "225ae8b7ff0f76fa48ca58268e9268b528f9c43644e5b4f0f6f68750ddb37b40",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/cash_events.json": "670684a0c70ce493edc80399999a87961e6b0bf3bd4b62aa0c8ecc400c1afc5b",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/config.json": "4571acda50781bc275ad43ae5ebb2ce1ccee9c58a1fe9f4e7db7549c6b20ba37",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/data_manifest.json": "165cbc8c9008522f946f314997d26e6d965ec5792e443d77b5dbdb65c54dc15e",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/equity.json": "8b2dc324ec55b32bfa1e9a0c60267c2e860a1df5ba543b026001b6ddad544ff2",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/fills.json": "aeb63404438a0bc4c0811e7d1f4355c305bf1c32cd94891ba01c0c2e395b9b82",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/limitations.json": "f4e708ca4ea7674579ec7d43a9351f76461fe830a0bc8a477fd16dc4e136d542",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/loop_result.json": "a6b67878e0a2db19492ad11fa9ae340c8c85352129dda1ad1dc05a77556ca17f",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/manifest.json": "ebfd9830494a1ef73cb48be57e72d2df7e1223d0000903e0902bdb89655ca856",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/metrics.json": "5b604a1f4295346f882efd830de407c997ebb1e8002606c458f8f730c76a2937",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/orders.json": "53086c7cac740525dcff82f1780fe03de48908e2c90bd8a351b6426227f5747a",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/positions_daily.json": "92f1201a04d80e8f3b1690c9d61573e63a8717c19457be233ebc583d1e500d6c",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/receivables.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/rules.yaml": "91dcd354de4ef72fdfda54508f57fe90070dd2c0cb01185e1c6a0d3ae2e3b865",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/scores.json": "03635930bf9de85eccff223fb66cb4d7ccfac7ce7dd9478557cc6f9f02e0f990",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/status.json": "38b78bf43c014fb56d568b56f1638f23859fadac1de043e30334e6761c75434e",
+   "variants/20261005-163146-9d5195-slippage_x2-7705/trading.json": "21c12a862923d24b6c585cd5405b98790d506c1d3d5d15f7749240e776639d07"
+  },
+  "original_unchanged": true,
+  "network_disabled": true,
+  "fee_checks": {
+   "status": "ok",
+   "fills_checked": 51,
+   "checks": [
+    {
+     "run_id": "20261005-163118-44fbd5-strategy-bed8",
+     "child": "20261005-163125-2926e3-base-92bd",
+     "scenario": "base",
+     "fills_checked": 17,
+     "fee_regime_counts": {
+      "2015-08-01": 3,
+      "2022-04-29": 4,
+      "2023-08-28": 10
+     },
+     "fee_total": 6231.89
+    },
+    {
+     "run_id": "20261005-163118-44fbd5-strategy-bed8",
+     "child": "20261005-163135-46adc8-fees_x2-907f",
+     "scenario": "fees_x2",
+     "fills_checked": 17,
+     "fee_regime_counts": {
+      "2015-08-01": 3,
+      "2022-04-29": 4,
+      "2023-08-28": 10
+     },
+     "fee_total": 12423.72
+    },
+    {
+     "run_id": "20261005-163118-44fbd5-strategy-bed8",
+     "child": "20261005-163146-9d5195-slippage_x2-7705",
+     "scenario": "slippage_x2",
+     "fills_checked": 17,
+     "fee_regime_counts": {
+      "2015-08-01": 3,
+      "2022-04-29": 4,
+      "2023-08-28": 10
+     },
+     "fee_total": 6194.12
+    }
+   ],
+   "method": "Independent multiplication from frozen YAML date ranges and Decimal half-up cents; verifies arithmetic, not external fee accuracy"
+  }
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 2497,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 244,
+  "old_calendar_rows_unchanged": 2095,
+  "old_index_rows_unchanged": 1392,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "b40841c6630d4298d7b83d6e0c323aba13b0ba629341a5c782b1031dee40c8e4"
+ },
+ "implementation_sha256": {
+  "src/observe/ledger/book.py": "73d832061bcf7064c7d01da0737f4db9cfdda746de330d0468d2a27ed662cbda",
+  "src/observe/execution.py": "ed3a64ee687f0f417c3baf401bac51260763f0fb42f182286b291b9f2954b278",
+  "src/observe/strategy_catalog.py": "c847aa7e2b4fde658c02221bfbccd5bfe50c91fe91b542f3f7e36271ea39b776",
+  "tests/unit/test_conversion.py": "4e14d577e9b7e5c324635a87d1b0438b53cfca13096f8976a941580ffd69f406",
+  "tests/integration/test_conversion_execution.py": "56e2cd736b915b2c962fc6df4835132cc6b49bfea3459209888f6c2a75c3a3b0",
+  "scripts/verify_strategy_batch10.py": "927877ed5395fc8a9b79e7f27614dcb97feb83065282125ed7e16d52a6742706",
+  "scripts/review_strategy_batch10.py": "e0429c7c91a485baf48da14fda289b2f0da9845344d6b1c3b17aaf0c07d0291e"
+ },
+ "etf_research": {
+  "manifests": [
+   {
+    "file": "data/staging/strategies-batch10/ETF证据/20261005-government-tax/manifest.json",
+    "sha256": "608f25e49e711212750baead643fe6f47fe94229125a7158c520c1a261651330",
+    "responses": 5
+   },
+   {
+    "file": "data/staging/strategies-batch10/ETF证据/20261005-official/manifest.json",
+    "sha256": "a362c4aaf583d308ec79aee70a0d755f6572c8a014da7488719afad89610bbfa",
+    "responses": 18
+   },
+   {
+    "file": "data/staging/strategies-batch10/ETF证据/20261005-sse/manifest.json",
+    "sha256": "fad4c7f9151357a1dee8670e832b720ece6f03f9054d1e29249ea064508f8e19",
+    "responses": 11
+   },
+   {
+    "file": "data/staging/strategies-batch10/ETF证据/20261005-sse-history/manifest.json",
+    "sha256": "f703dcb059518a368d1593cd9a9d04e689fd12d6f5c9ff20997522ae0a950800",
+    "responses": 7
+   },
+   {
+    "file": "data/staging/strategies-batch10/ETF证据/20261005-sse2020/manifest.json",
+    "sha256": "617266d09805327f42366a42de646aabdc49612ecba243bdba715da6359fb1c4",
+    "responses": 8
+   },
+   {
+    "file": "data/staging/strategies-batch10/ETF证据/20261005-tax-failures/manifest.json",
+    "sha256": "a2bbfbc9467a1fae8f667fa5132bd9395791a8ab8b4e5a2a593a60460922aa14",
+    "responses": 2
+   }
+  ],
+  "response_sha256_matches": 51,
+  "differences": 0,
+  "report": "docs/tasks/2026-10-05-ETF510310原始规则核查.md",
+  "report_sha256": "356c617b5821bf1c03799449005e520818085286a9405ced6ce369946246ece2",
+  "data_published": false
+ },
+ "review": {
+  "depth": "deep",
+  "scope": "on target",
+  "specialists": [
+   "security",
+   "architecture"
+  ],
+  "architecture_findings_fixed": [
+   "conversion destination absent from execution inputs",
+   "two source pool identities corrected in a new review archive"
+  ],
+  "security_findings_fixed": [
+   "legacy preflight rejects partial auxiliary archives"
+  ],
+  "remaining_confirmed_findings": []
+ },
+ "diagnosis": {
+  "same_code_root_cause": "old and new aliased; clearing old erased the converted position",
+  "initial_regression": "12 failed, 1 passed before initial fix; tool output only",
+  "numeric_boundary_regression": "4 failed, 16 passed before boundary fix; tool output only",
+  "adapter_regression": "2 failed before destination/combined-event gates; tool output only"
+ },
+ "progress": {
+  "checkpoint": "20261005-171912-c6ec",
+  "note": "第十批19份审查、Book份额转换修复、旧配对禁网复现及资产保护验收完成；ETF完整执行仍待依赖",
+  "catalog_id": "12ccfa49885e0563de7c",
+  "catalog_sha256": "8c1a699545be133e31cda5edbc019591d7db6b71ef8c3edee06ea35dc1a39608",
+  "published_batch": "20261005-152040-e16e",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 490,
+   "已验证": 9,
+   "待审查": 41,
+   "暂不可复现": 45,
+   "非交易研究脚本": 68,
+   "实现中": 1,
+   "重复版本": 41
+  },
+  "manually_reviewed": 53,
+  "locally_backtested_sources": 10,
+  "locally_reproduced_sources": 10,
+  "local_strategy_runs": 29,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261005-171912-c6ec"
+ },
+ "limitations": [
+  "No ETF data publication or ETF strategy backtest",
+  "Dividend record-date entitlement remains unsupported",
+  "ETF tax primary source, provider adjustment formula, daily reference price and historical state remain unproved",
+  "Current stock candidate gate remains stock-only; no asset-kind workaround",
+  "Historical strict financial usable rows remain zero; 332 existing daily audit warnings remain",
+  "Partition protection checks size/mtime, not a fresh full byte hash",
+  "Conversion atomicity is local to _convert; start_day is not an all-events transaction",
+  "Original strategies remain incomplete; no parameter optimization or final holdout claim"
+ ]
+}

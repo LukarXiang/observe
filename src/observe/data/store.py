@@ -13,6 +13,7 @@ KEYS = {'calendar': ['date'], 'instruments': ['instrument'], 'bars_1d': ['date',
 KEYS.update({t: ['source_sha256', 'source_row'] for t in ('financial_annual', 'financial_quarterly', 'company_controls_annual')})
 KEYS.update(financial_availability = ['source_sha256', 'source_row', 'source_group'], financial_fields = ['source_sha256', 'column'])
 KEYS.update(index_constituents = ['date', 'index', 'instrument'])
+KEYS.update(valuations_1d = ['date', 'instrument'], valuation_coverage = ['date'])
 
 
 def _now(): return datetime.now().strftime('%Y%m%d-%H%M%S')
@@ -46,7 +47,7 @@ class Store:
     def write_partition(self, table, part, df):
         """按主键去重排序后写入；返回 {'file','sha','rows'}。内容相同则复用已有文件"""
         key = KEYS[table]
-        if table in ('financial_annual', 'financial_quarterly', 'company_controls_annual', 'financial_availability', 'financial_fields', 'index_constituents') and df.duplicated(key).any():
+        if table in ('financial_annual', 'financial_quarterly', 'company_controls_annual', 'financial_availability', 'financial_fields', 'index_constituents', 'valuations_1d', 'valuation_coverage') and df.duplicated(key).any():
             raise ValueError(f'{table}/{part}: 财务来源主键重复，禁止静默覆盖版本')
         df = df.drop_duplicates(key, keep = 'last').sort_values(key).reset_index(drop = True)
         if df[key].isna().any().any(): raise ValueError(f'{table}/{part}: 主键含空值')
@@ -103,12 +104,12 @@ class Store:
         if not files: return pd.DataFrame(columns = columns)
         return pd.concat([pd.read_parquet(f, columns = columns) for f in files], ignore_index = True)
 
-    def load_state(self, state, table, columns = None, parts = None):
+    def load_state(self, state, table, columns = None, parts = None, filters = None):
         """Read from an already captured published state without re-resolving PUBLISHED."""
         entries = state['tables'].get(table, {})
         files = [self.root / v['file'] for k, v in sorted(entries.items()) if parts is None or k in parts]
         if not files: return pd.DataFrame(columns = columns)
-        return pd.concat([pd.read_parquet(f, columns = columns) for f in files], ignore_index = True)
+        return pd.concat([pd.read_parquet(f, columns = columns, filters = filters) for f in files], ignore_index = True)
 
     # 清理 ---------------------------------------------------------------------
     def pin(self, job_id, snapshot = None):

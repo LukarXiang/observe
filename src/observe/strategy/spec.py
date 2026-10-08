@@ -125,6 +125,7 @@ class StrategySpec(_Strict):
     execution: Execution = Field(default_factory = Execution)
     start: date | None = None                       # 留空用统一回测区间
     end: date | None = None
+    valuation_policy: Literal['provider_final'] | None = Field(None, exclude_if=lambda v: v is None)
 
     def expressions(self):
         out = list(self.universe.filters)

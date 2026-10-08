@@ -1,0 +1,679 @@
+{
+ "status": "ok",
+ "reviews": {
+  "sources": [
+   {
+    "source_path": "repo/量化策略源代码/2023年度精选策略/4.8年10倍，回撤小，有滑点！ETF动量简单轮动策略！.txt",
+    "source_copy": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/source-reviews/S-b3cc2dcd8a0d.source",
+    "source_sha256": "878e3abf80cfc489d614509ffbaa60999e96cbd07338537c0429fcf1b4f847ce",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 286,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "三ETF日频轮动与沪深300修正RSRS/MA择时",
+     "fidelity": "原评分/基准择时组件和订单诊断；基金完整事件/分钟执行不足",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": [
+       "159915.XSHE",
+       "510300.XSHG",
+       "510500.XSHG"
+      ],
+      "rank": "29完整收盘log价格OLS，(exp(slope)^250-1)*r2，降序一只；忽略stock_pool参数，实际使用g.stock_pool，无正评分门禁",
+      "timing": "沪深30018日高低OLS，初始618行/600斜率去最后一条；每次append最新斜率，末600总体z*r2，未乘斜率；23close末20与前20均值严格比较",
+      "signal": "score>.7且MA上升BUY，score<-.7且MA下降SELL，其余KEEP；KEEP实际仍调仓，并非保持原仓",
+      "trade": "11:30排名后仅过滤首选，无回填；ST/涨跌停/停牌，持仓豁免涨跌停；先卖池外，再按实际cash/空槽补买，不等权再平衡",
+      "stop": "open收益<=-80%清仓；非注释0滑点，实际FixedSlippage(.001)，基金佣金.0003/无税/最低5",
+      "future": "avoid_future_data=True，真实价格；时点/平台数据等价未证明"
+     },
+     "gaps": [
+      "缺完整三基金历史事件/状态/规则与11:30一分钟撮合；当前基金行情不证明复权及份额行动",
+      "math未显式导入，平台注入未证明；原日期Series负整数取末值不兼容",
+      "原持仓映射访问新标的依赖平台零持仓对象；初始斜率末条剔除造成种子与首次决策日期缺窗，保留原行为"
+     ],
+     "next_step": "核原600种子/每日递推及KEEP调仓；原池未齐前只验证基准择时和评分算子"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2023年度精选策略/16.8年13倍的ETF动量轮动策略，有滑点，无未来函数，回撤小！.txt",
+    "source_copy": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/source-reviews/S-7ff11583b76b.source",
+    "source_sha256": "017d211341013f15dc1fa99a6cf2130b3bce7f2f99141d244d4834303ab0635e",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 286,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "四ETF修正RSRS/MA日频轮动，15号逐字节副本",
+     "fidelity": "原评分/基准择时组件与规则差异审查；基金/盘中依赖不足",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": [
+       "510180.XSHG",
+       "159915.XSHE",
+       "513100.XSHG",
+       "510500.XSHG"
+      ],
+      "rank": "29日log价格OLS年化*r2，取一只，无正评分门禁，忽略stock_pool参数",
+      "timing": "18高低OLS，618初始取600斜率去末值，每日append；600总体z*r2，23日两20均值移3日，严格±.7联合判断",
+      "trade": "11:30，KEEP也调仓，过滤首选无回填，先卖后按实际现金/空槽补买，持仓不再平衡；open<=-80%止损",
+      "cost": "基金买卖.0003/无税/最低5，FixedSlippage(.001)并非注释0",
+      "future": "avoid_future_data调用被注释，不能因标题无未来函数就断言等价；不同于4号实际启用"
+     },
+     "gaps": [
+      "缺四基金事件/状态/规则、跨境513100交易口径与11:30分钟输入；不能直接使用指数代基金",
+      "math平台注入、零持仓对象与即时成交映射未证明；种子末窗剔除缺口不修正"
+     ],
+     "next_step": "与15逐字节一致但各保留SHA/来源，原4与16池/未来选项不合并；完成长基准组件验算"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2024年度精选策略2/66.ETF动量轮动MA乖离择时.txt",
+    "source_copy": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/source-reviews/S-fb06e8894ab7.source",
+    "source_sha256": "a15036fa8a6ac1e3c648fe71e1a4f3644fd52d5ff8122b9a96a26e2948630630",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 125,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "四ETF20日归一价格斜率与60/10/30乖离择时",
+     "fidelity": "原评分/基准乖离组件及目标形状故障诊断，修正变体待确认",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": [
+       "510050.XSHG",
+       "159928.XSHE",
+       "510300.XSHG",
+       "159949.XSHE"
+      ],
+      "rank": "20close除首值后OLS斜率，取一名；返回[证券代码,数值分数]，非代码列表，无正分门禁",
+      "timing": "沪深300200日close/rolling60均值，ratio再rolling10均值，末30总体z；严格>4 BUY/<-4 SELL，其余KEEP，非ratio减1",
+      "trade": "14:50且原函数再次校时；KEEP也调仓；无ST/暂停/涨跌停过滤；先卖池外后现金/空槽，目标分数会进入下单循环",
+      "stop": "open价格/成本严格<.9清仓，.9相等不卖",
+      "cost": "基金佣金.0003/无税/最低5、FixedSlippage(.001)、基准399006.XSHE；ref_stock实际000300"
+     },
+     "gaps": [
+      "原目标[代码,分数]类型错误，若代码买单未立即形成持仓会向分数下单；修正需用户确认",
+      "缺四基金历史事件/状态/规则及14:50执行，排名首值[0]/标准分末值[-1]日期Series兼容未证明"
+     ],
+     "next_step": "冻结原200日乖离与形状故障，先完成数值/状态诊断；原池和盘中未齐不交易"
+    }
+   },
+   {
+    "source_path": "repo/量化策略源代码/2023年度精选策略/15.动量ETF轮动RSRS择时-升级.txt",
+    "source_copy": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/source-reviews/S-8294e3469a6d.source",
+    "source_sha256": "017d211341013f15dc1fa99a6cf2130b3bce7f2f99141d244d4834303ab0635e",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 286,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "16号逐字节相同的四ETF修正RSRS/MA日频轮动",
+     "fidelity": "与16逐字节一致证据及全文规则审查；组件不替代交易回测",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": [
+       "510180.XSHG",
+       "159915.XSHE",
+       "513100.XSHG",
+       "510500.XSHG"
+      ],
+      "rank": "29日log价格OLS年化*r2，取一只，无正评分门禁，忽略stock_pool参数",
+      "timing": "18高低OLS，618初始取600斜率去末值，每日append；600总体z*r2，23日两20均值移3日，严格±.7联合判断",
+      "trade": "11:30，KEEP也调仓，过滤首选无回填，先卖后按实际现金/空槽补买，持仓不再平衡；open<=-80%止损",
+      "cost": "基金买卖.0003/无税/最低5，FixedSlippage(.001)",
+      "future": "avoid_future_data调用被注释"
+     },
+     "gaps": [
+      "缺四基金事件/状态/规则及11:30分钟；math注入/零持仓/即时成交未证明，原种子缺窗保留"
+     ],
+     "next_step": "与16共用完全相同原核组件，保留原文件和SHA，未齐原依赖不交易"
+    }
+   }
+  ],
+  "references": [
+   {
+    "file": "repo/backtrader/backtrader/indicators/ols.py",
+    "copy": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/references/ols.py",
+    "sha256": "cc228c5133bf1e27a36290c2fb5756cdc371f57e868e6fa9784c7db6ea9a81f4",
+    "commit": "b853d7c90b6721476eb5a5ea3135224e33db1f14",
+    "use": "Read-only SMA formula and finance provider comparison; not a platform replacement"
+   },
+   {
+    "file": "repo/backtrader/backtrader/indicators/sma.py",
+    "copy": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/references/sma.py",
+    "sha256": "898013cd1760ce565b5443ccdc8fed7cb604e1ecc7831cb37b697d9a4b90e830",
+    "commit": "b853d7c90b6721476eb5a5ea3135224e33db1f14",
+    "use": "Read-only SMA formula and finance provider comparison; not a platform replacement"
+   }
+  ],
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "489f9f46cdeef983bada",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 506,
+    "已验证": 11,
+    "待审查": 2,
+    "暂不可复现": 62,
+    "非交易研究脚本": 73,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_valuation": 20,
+    "finance.run_query": 87,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 315,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10
+   },
+   "reviewed_sources": [
+    "S-25a2ce74300f",
+    "S-a02bd5fb82fa",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-af09cfafe6cf",
+    "S-95b83db2a7bc",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-df677a5ebcd4",
+    "S-e2209e269e29",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-f2e9047924e2",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-db01c1c96ded",
+    "S-4daa86e5158f",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-63c706efe95f",
+    "S-12ba1c0d79f5",
+    "S-850132b43dab",
+    "S-147b0cfb49ff",
+    "S-d07877e2c354",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-00007afacbb0",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-57b937da520d",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-d4725a5a21fb",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-5831425175ce",
+    "S-cafee3ad464a",
+    "S-560abd656ca0",
+    "S-2c9d2319c7d3",
+    "S-84b17f428272",
+    "S-88c607586b82",
+    "S-0c2cff0626ee",
+    "S-954b41e5a396",
+    "S-72e5a8798544",
+    "S-a4c77bd8b44e",
+    "S-4b7dbe8af8ac",
+    "S-bee2c8d71c81",
+    "S-f81bb8422f94",
+    "S-790f0000ed44",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-66d37162df54",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-979d5187c3ec",
+    "S-daecf5bc2eef",
+    "S-f39f02e3e03f",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-e12e4a8dd5e5",
+    "S-05431e7ae641",
+    "S-de485dcbc1fe",
+    "S-03e5e601f4cc",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-47d77840ec26",
+    "S-2034813a5b91",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-84f3f0c3c784",
+    "S-c02ac3bad6ef",
+    "S-69bfefcb4d1d",
+    "S-653ef41eb685",
+    "S-c55ddc35cce6",
+    "S-c2a42783423c",
+    "S-75af9ddf3d76",
+    "S-f23cf187dc47",
+    "S-64a80805fb8a",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-8294e3469a6d",
+    "S-7ff11583b76b",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-b3cc2dcd8a0d",
+    "S-bdfd3c6fde91",
+    "S-e0fb958bf2d4",
+    "S-53655cbaa9bc",
+    "S-b01f3e94a5b8",
+    "S-c98372326f58",
+    "S-665c147b3cf0",
+    "S-c5a0e347acdc",
+    "S-69ef2eedcc68",
+    "S-4766560702c0",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-36ea1540cfac",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-976aaefe793c",
+    "S-84adbe33af88",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-68dd8d2d5eec",
+    "S-926d08fe0ba8",
+    "S-9e752d17571d",
+    "S-624b1cbccd4f",
+    "S-5008146cd1d4",
+    "S-f9ab6005c30c",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-2d40c2d698f7",
+    "S-028ef663b462",
+    "S-d68e945d07cb",
+    "S-fb06e8894ab7",
+    "S-1e5fd99659cf",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-c1bba20dca69",
+    "S-4730e53b92bc"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/489f9f46cdeef983bada"
+  },
+  "snapshot": "20261006-145049-e06c",
+  "previous_catalog_file": "data/catalog/strategies/e3b15c60160c23f829c1/catalog.json",
+  "previous_catalog_sha256": "02b16a49df9688debddf891a752a38de5c1082e4813d2b6a5923ac4fc61ecfcf",
+  "dependency_search": {
+   "command": [
+    "rg",
+    "--files",
+    "repo",
+    "-g",
+    "*rsrs*",
+    "-g",
+    "*momentum*"
+   ],
+   "returncode": 0,
+   "matches": [
+    "repo/量化策略源代码/2024年度精选策略2/78.ffscore选股加rsrs择时.txt",
+    "repo/backtrader/tests/test_ind_momentumoscillator.py",
+    "repo/backtrader/tests/test_ind_momentum.py",
+    "repo/polars_ta/tests/ta/test_momentum.py",
+    "repo/polars_ta/polars_ta/ta/momentum.py",
+    "repo/polars_ta/docs/ta/momentum.md",
+    "repo/backtrader/backtrader/indicators/momentum.py",
+    "repo/skfolio/tests/test_descriptor/test_momentum/test_rolling_momentum.py",
+    "repo/skfolio/tests/test_descriptor/test_momentum/test_ew_momentum.py",
+    "repo/zipline-reloaded/src/zipline/examples/momentum_pipeline.py",
+    "repo/skfolio/src/skfolio/descriptor/_momentum/_rolling_momentum.py",
+    "repo/skfolio/src/skfolio/descriptor/_momentum/_ew_momentum.py"
+   ]
+  },
+  "modules": {
+   "jqdata": false,
+   "jqlib": false,
+   "jqfactor": false
+  },
+  "not_a_backtest": true,
+  "strategy_results": []
+ },
+ "progress": {
+  "checkpoint": "20261006-181255-ecb5",
+  "note": "Batch34 momentum/RSRS/bias components accepted; missing original trading dependencies remain blocked",
+  "catalog_id": "489f9f46cdeef983bada",
+  "catalog_sha256": "c48d0625350c16025b6ef1e00ded0c82e086a9457708fe44a69d9894dea5da9b",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 506,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 62,
+   "非交易研究脚本": 73,
+   "重复版本": 41
+  },
+  "manually_reviewed": 148,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 67,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261006-181255-ecb5"
+ },
+ "snapshot": "20261006-145049-e06c",
+ "checks": {
+  "status": "passed",
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/review_strategy_batch34.py",
+     "scripts/prepare_handoff.py",
+     "scripts/build_strategy_catalog.py",
+     "scripts/verify_financial_import.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/check-0.log",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "scripts.verify_offline_tests",
+     "-q",
+     "tests/unit/test_batch34_research.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_catalog_schedules.py",
+     "tests/unit/test_batch33_research.py",
+     "tests/unit/test_signal_slots.py",
+     "tests/integration/test_strategy_merge.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/check-1.log",
+    "sha256": "cb81e45ddff808f63b179a6847650e1fc6b5096acb0fc826f2d001c3b17e5ad2"
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch33.py": "1eaa6449e26f06b1cadd3a82d595d657776efda5a0ea3c4b351c5ea6c4212935",
+   "scripts/review_strategy_batch34.py": "f1afea9d1ac4619b3f535235f6cd146abba872640c77aa42699cb7e4b05f712e",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "17e6d58b86a361e92e4cf346ccb1b6df1575f3f83716da6cc2c8decf85807bca",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "tests/unit/test_batch32_research.py": "47d78954a24d29bcf9358830d6f847a29efa505fbe0a63854a68fb92b076abef",
+   "tests/unit/test_batch33_research.py": "61b6d0ae8c1a0d1947ba5d0a16cd73a2132bb08d4b221546d64ee5ed87ce2bed",
+   "tests/unit/test_batch34_research.py": "b873c05fe67145343e8437b9a5ac88e713e0cb2c39feeb0ce52ac3387a487990",
+   "tests/unit/test_catalog_dependencies.py": "c4b8bc6c387d3b84034e9d62f6fe34370dc21f8e61d5937bcc26d189c5621ef5"
+  },
+  "evidence_sha256": {
+   "baseline.json": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9",
+   "calendar-input.parquet": "b29ce632824660c74ef93d32701ff010cf2626e2007718e2b921b3464cc767f5",
+   "check-0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+   "check-1.log": "cb81e45ddff808f63b179a6847650e1fc6b5096acb0fc826f2d001c3b17e5ad2",
+   "check-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "component-offline.json": "3beef40b90a39b259ccab575d86f40496f9c928ec7c05889ea65de1d951d1622",
+   "component-research.json": "3beef40b90a39b259ccab575d86f40496f9c928ec7c05889ea65de1d951d1622",
+   "diagnostics.json": "611a5436ef8af345725d39970b4d4edd207be1202d12f80bab12f535aff7aeed",
+   "existing-apis.json": "387bc178170fc69c1a5892c1a72d07ea2f5a64c4f6e0960628dcb9037393f045",
+   "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "index-input.parquet": "b37fb1497f5cc21b4c11a3cb7d0a823b91661a63ab3e94579c0d639105372928",
+   "input-analysis.json": "b68c91ba8d7f3981fcdf77afcc6ba42c46b9d7bbccd6bf6f7f6dc8a1df188c28",
+   "input-binding.json": "851a518607aa68c72066159567096950b4236e67f812677ac481f9f06a546d75",
+   "offline-catalog.json": "51097052fcf5c69e8658f761c2793475b3a861f493b9556469bca80cf3c7d8f0",
+   "offline-verification.json": "0e03f478c99da491b3805d6517a4b808bcc9ebed21dbf7078278dde3bd1516e4",
+   "probe-fund50.json": "1a7c47445e42a22d076fd2cd2f34e34fb73fc343fd919c8bda3e03c8f045517c",
+   "probe-fund50.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "probe-fund50.stdout": "229093e85f9b925cb8c16ae1bdeade15878b1cb0daa0fc498183eecada96399c",
+   "probe-fund500.json": "c6f872c6bd57c1051d30f148e6635c7fbd2ba256c725f4be9200dc9eaae87cd3",
+   "probe-fund500.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "probe-fund500.stdout": "fddd9fcebc2088c559f465cb40231622a373027a4d8d75cbd012cbce4026abfd",
+   "probe-index.json": "b19a042e304694514a8c3439dc15ebc89300e4a58bac89b37d729a7627af811d",
+   "probe-index.stderr": "c971abd8885ffa8e69d3baa2c595bb12ea8298771b138ad2f65ec881dd70bbe6",
+   "probe-index.stdout": "8fbcf57f72f246b1e6f29fd419dd6773cb5a9ef24015d7fcb4bd38c17146fb37",
+   "probe-results.json": "f21ea6ab6684086d29cd1095a0180590c335e90c405207eedc53b1b1ca96993d",
+   "progress-start.json": "89d48ba7f27208ad1588a411d79211197f0af9d3e96561b131ce6af011e121b4",
+   "startup-before.py": "679da21a34a3acc6c02d25b3324da7928c483233bbe5e8f8f0c2bf3d6c6a965f",
+   "startup-correction.json": "cdcddfc9475861f5d3d11069b13991c97f36814b81103ba8c3240348c62f1cb5",
+   "references/ols.py": "cc228c5133bf1e27a36290c2fb5756cdc371f57e868e6fa9784c7db6ea9a81f4",
+   "references/sma.py": "898013cd1760ce565b5443ccdc8fed7cb604e1ecc7831cb37b697d9a4b90e830",
+   "source-reviews/review.json": "b107d7fdbb2c4d689acd3eaa4b6a3dcf9fac1e4d933d92ba43421d2aee822b2c",
+   "source-reviews/S-7ff11583b76b.source": "017d211341013f15dc1fa99a6cf2130b3bce7f2f99141d244d4834303ab0635e",
+   "source-reviews/S-8294e3469a6d.source": "017d211341013f15dc1fa99a6cf2130b3bce7f2f99141d244d4834303ab0635e",
+   "source-reviews/S-b3cc2dcd8a0d.source": "878e3abf80cfc489d614509ffbaa60999e96cbd07338537c0429fcf1b4f847ce",
+   "source-reviews/S-fb06e8894ab7.source": "a15036fa8a6ac1e3c648fe71e1a4f3644fd52d5ff8122b9a96a26e2948630630",
+   "catalog-offline/catalog/strategies/implementation-evidence.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "catalog-offline/catalog/strategies/latest.json": "56f859c6f79aa8bc69e9d54b319439f5b59c92e9173bd0f7388d539c5bce9d70",
+   "catalog-offline/catalog/strategies/489f9f46cdeef983bada/catalog.json": "c48d0625350c16025b6ef1e00ded0c82e086a9457708fe44a69d9894dea5da9b",
+   "catalog-offline/catalog/strategies/489f9f46cdeef983bada/catalog.parquet": "27e222891f9aa8a7fe02775ada8bc0dd33b02856ffe1bc588fd982fc13d8c304",
+   "catalog-offline/catalog/strategies/489f9f46cdeef983bada/summary.json": "87d448c435a4c7429ff8bef6f7bc461e3be47d965b8010793e53247a839a1e1f",
+   "implementation-checked/scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "implementation-checked/scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "implementation-checked/scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "implementation-checked/scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "implementation-checked/scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "implementation-checked/scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "implementation-checked/scripts/review_strategy_batch33.py": "1eaa6449e26f06b1cadd3a82d595d657776efda5a0ea3c4b351c5ea6c4212935",
+   "implementation-checked/scripts/review_strategy_batch34.py": "f1afea9d1ac4619b3f535235f6cd146abba872640c77aa42699cb7e4b05f712e",
+   "implementation-checked/scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "implementation-checked/scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "implementation-checked/scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "implementation-checked/src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "implementation-checked/src/observe/strategy_catalog.py": "17e6d58b86a361e92e4cf346ccb1b6df1575f3f83716da6cc2c8decf85807bca",
+   "implementation-checked/src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "implementation-checked/src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "implementation-checked/src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "implementation-checked/tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "implementation-checked/tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "implementation-checked/tests/unit/test_batch32_research.py": "47d78954a24d29bcf9358830d6f847a29efa505fbe0a63854a68fb92b076abef",
+   "implementation-checked/tests/unit/test_batch33_research.py": "61b6d0ae8c1a0d1947ba5d0a16cd73a2132bb08d4b221546d64ee5ed87ce2bed",
+   "implementation-checked/tests/unit/test_batch34_research.py": "b873c05fe67145343e8437b9a5ac88e713e0cb2c39feeb0ce52ac3387a487990",
+   "implementation-checked/tests/unit/test_catalog_dependencies.py": "c4b8bc6c387d3b84034e9d62f6fe34370dc21f8e61d5937bcc26d189c5621ef5"
+  }
+ },
+ "offline": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch21.py": "b06abb47d99d3ccdff783e07a4919717f538461e7bf804473bc0061970645fdc",
+   "scripts/review_strategy_batch27.py": "85d375f076dd52630abcbe50c8440897719c246ca0ae29d4efc7b3730c250a12",
+   "scripts/review_strategy_batch31.py": "a6262860d7e450a46817e54d909b99f0e078e4cd539ce457c5d932214cc420c0",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch33.py": "1eaa6449e26f06b1cadd3a82d595d657776efda5a0ea3c4b351c5ea6c4212935",
+   "scripts/review_strategy_batch34.py": "f1afea9d1ac4619b3f535235f6cd146abba872640c77aa42699cb7e4b05f712e",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_offline_tests.py": "ad7fe42078a0a8d9d19c13f39e4a668b56b0aa6cf0e5ab316b2d9ece1ef97edb",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+   "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+   "src/observe/strategy_catalog.py": "17e6d58b86a361e92e4cf346ccb1b6df1575f3f83716da6cc2c8decf85807bca",
+   "tests/unit/test_batch27_research.py": "b6b0cad5a502dcca693478aa58af60508bb0ba0e2a21dc30391044c00f8b8f84",
+   "tests/unit/test_batch31_research.py": "6e34b74ab24d4b53930e0d48480243375658634deefefba7171f07bb143a739b",
+   "tests/unit/test_batch32_research.py": "47d78954a24d29bcf9358830d6f847a29efa505fbe0a63854a68fb92b076abef",
+   "tests/unit/test_batch33_research.py": "61b6d0ae8c1a0d1947ba5d0a16cd73a2132bb08d4b221546d64ee5ed87ce2bed",
+   "tests/unit/test_batch34_research.py": "b873c05fe67145343e8437b9a5ac88e713e0cb2c39feeb0ce52ac3387a487990",
+   "tests/unit/test_catalog_dependencies.py": "c4b8bc6c387d3b84034e9d62f6fe34370dc21f8e61d5937bcc26d189c5621ef5"
+  },
+  "sha256": "3beef40b90a39b259ccab575d86f40496f9c928ec7c05889ea65de1d951d1622",
+  "not_a_backtest": true
+ },
+ "offline_catalog": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "catalog_id": "489f9f46cdeef983bada",
+  "files": [
+   {
+    "name": "catalog.json",
+    "original_file": "data/catalog/strategies/489f9f46cdeef983bada/catalog.json",
+    "repeated_file": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/catalog-offline/catalog/strategies/489f9f46cdeef983bada/catalog.json",
+    "sha256": "c48d0625350c16025b6ef1e00ded0c82e086a9457708fe44a69d9894dea5da9b"
+   },
+   {
+    "name": "summary.json",
+    "original_file": "data/catalog/strategies/489f9f46cdeef983bada/summary.json",
+    "repeated_file": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/catalog-offline/catalog/strategies/489f9f46cdeef983bada/summary.json",
+    "sha256": "87d448c435a4c7429ff8bef6f7bc461e3be47d965b8010793e53247a839a1e1f"
+   },
+   {
+    "name": "catalog.parquet",
+    "original_file": "data/catalog/strategies/489f9f46cdeef983bada/catalog.parquet",
+    "repeated_file": "data/staging/strategies-batch34/20261006-momentum-rsrs-bias/catalog-offline/catalog/strategies/489f9f46cdeef983bada/catalog.parquet",
+    "sha256": "27e222891f9aa8a7fe02775ada8bc0dd33b02856ffe1bc588fd982fc13d8c304"
+   }
+  ],
+  "implementation_evidence_sha256": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5223,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "b5ae0dd1ec34a9c13b9f798c1e0be33e8facc7ef02821efa6710fb479e5642c9"
+ },
+ "probes": {
+  "results": [
+   {
+    "endpoint": "index",
+    "query": {
+     "provider": "baostock",
+     "function": "query_history_k_data_plus",
+     "parameters": {
+      "code": "sz.399006",
+      "fields": "date,code,open,high,low,close,volume,amount",
+      "start_date": "2005-01-01",
+      "end_date": "2026-09-29",
+      "frequency": "d",
+      "adjustflag": "3"
+     },
+     "limit": "One benchmark sample does not supply fund pool/events or original intraday execution"
+    },
+    "api_sha256": "387bc178170fc69c1a5892c1a72d07ea2f5a64c4f6e0960628dcb9037393f045",
+    "status": "failed",
+    "published": false,
+    "files": [],
+    "wire": [],
+    "error": "UnboundLocalError: cannot access local variable 'mySockect' where it is not associated with a value"
+   },
+   {
+    "endpoint": "fund500",
+    "query": {
+     "provider": "akshare",
+     "function": "fund_etf_hist_sina",
+     "parameters": {
+      "symbol": "sh510500"
+     },
+     "limit": "One fund price sample does not prove original adjustment/events/states/rules or11:30 execution"
+    },
+    "api_sha256": "387bc178170fc69c1a5892c1a72d07ea2f5a64c4f6e0960628dcb9037393f045",
+    "status": "failed",
+    "published": false,
+    "files": [],
+    "wire": [],
+    "error": "ConnectionError: HTTPSConnectionPool(host='finance.sina.com.cn', port=443): Max retries exceeded with url: /realstock/company/sh510500/hisdata_klc2/klc_kl.js (Caused by NameResolutionError(\"HTTPSConnection(host='finance.sina.com.cn', port=443): Failed to resolve 'finance.sina.com.cn' ([Errno -2] Name or service not known)\"))"
+   },
+   {
+    "endpoint": "fund50",
+    "query": {
+     "provider": "akshare",
+     "function": "fund_etf_hist_sina",
+     "parameters": {
+      "symbol": "sz159949"
+     },
+     "limit": "One fund price sample does not prove events/states/rules or14:50 execution"
+    },
+    "api_sha256": "387bc178170fc69c1a5892c1a72d07ea2f5a64c4f6e0960628dcb9037393f045",
+    "status": "failed",
+    "published": false,
+    "files": [],
+    "wire": [],
+    "error": "ConnectionError: HTTPSConnectionPool(host='finance.sina.com.cn', port=443): Max retries exceeded with url: /realstock/company/sz159949/hisdata_klc2/klc_kl.js (Caused by NameResolutionError(\"HTTPSConnection(host='finance.sina.com.cn', port=443): Failed to resolve 'finance.sina.com.cn' ([Errno -2] Name or service not known)\"))"
+   }
+  ],
+  "published": false
+ },
+ "not_a_backtest": true,
+ "original_strategy_complete": false
+}

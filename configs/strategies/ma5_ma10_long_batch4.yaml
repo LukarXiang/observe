@@ -1,0 +1,39 @@
+name: 国航MA5/MA10与价格过滤长区间（日频近似）
+implementation: ma5_ma10_price_v1
+source_path: repo/量化策略源代码/2020年度精选策略/86 5日线穿十日线策略（供初学）.txt
+snapshot: 20261005-152153-eb05
+start: 2021-02-02
+end: 2026-09-29
+instrument: 601111.SH
+execution_instruments: [601111.SH]
+initial_cash: 1000000
+parameters:
+  short: 5
+  long: 10
+  buy_multiplier: 1
+universe:
+  boards: [main]
+  min_listed_sessions: 1
+  exclude_st: false
+  suspend_window: 1
+  max_suspended: 1
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: target_weights
+  n: 1
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: daily
+  rebalance_session: 1
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.05
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+cost_scenarios: [base, fees_x2, slippage_x2]
+benchmark: 000300.SH
+cache: true

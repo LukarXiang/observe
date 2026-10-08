@@ -1,0 +1,6770 @@
+{
+ "status": "ok",
+ "environment": {
+  "git_commit": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+  "git_dirty": true,
+  "lock_sha256": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382",
+  "python": "3.12.12",
+  "packages": {
+   "pandas": "3.0.6",
+   "numpy": "2.5.3",
+   "pyarrow": "25.0.1",
+   "pydantic": "2.13.5",
+   "scikit-learn": "1.9.1",
+   "scipy": "1.18.1",
+   "lightgbm": "4.7.0"
+  }
+ },
+ "scan": {
+  "status": "ok",
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "97c60a9cc2299288c5b9",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 504,
+    "已验证": 10,
+    "待审查": 17,
+    "暂不可复现": 54,
+    "非交易研究脚本": 69,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 315,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10
+   },
+   "reviewed_sources": [
+    "S-25a2ce74300f",
+    "S-a02bd5fb82fa",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-af09cfafe6cf",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-db01c1c96ded",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-147b0cfb49ff",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-cafee3ad464a",
+    "S-560abd656ca0",
+    "S-84b17f428272",
+    "S-a4c77bd8b44e",
+    "S-4b7dbe8af8ac",
+    "S-bee2c8d71c81",
+    "S-f81bb8422f94",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-979d5187c3ec",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-05431e7ae641",
+    "S-03e5e601f4cc",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-47d77840ec26",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-653ef41eb685",
+    "S-f23cf187dc47",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-64bca3ebbca5",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-bdfd3c6fde91",
+    "S-c98372326f58",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-84adbe33af88",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-9e752d17571d",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-2d40c2d698f7",
+    "S-028ef663b462",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-c1bba20dca69",
+    "S-4730e53b92bc"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/97c60a9cc2299288c5b9"
+  },
+  "catalog_file": "data/catalog/strategies/97c60a9cc2299288c5b9/catalog.json",
+  "catalog_sha256": "9e811b4242ceb89a1a518523d92d3a24aed2c4c81deec80ee4435f4c08605e5e",
+  "changes": [
+   {
+    "path": "2020年度精选策略/03 机器学习多因子策略.txt",
+    "source_sha256": "77f0c7ff116e2e83699e092f7fd776667d922ad1aa98b65f92df5f7ee20a9906",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "every_bar"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/05 兄台且慢，去天台排队不如看看这个策略先.txt",
+    "source_sha256": "8b45ae225938b481e162c0378a10bc2b991a5fdda976b20292835aa629df19fa",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "open"
+      ],
+      "after": [
+       "before_open",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/06 为什么股票市值是当前的样子？.txt",
+    "source_sha256": "7ca3b3d502e2cf56f4844938f00513e06d8e6d1366e6230ec0def686ef4e886b",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:50"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/08 MACD单因子多头策略.txt",
+    "source_sha256": "14fb90c03790eb50cebe2cdf77b994e06bd03ab0fdd3ea8091cebd6214d44ab5",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/10 追三板策略.txt",
+    "source_sha256": "24bb5819b50ffdf682d3af7e4441eb0f7342cb99d081522e04be7180d3999e74",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "open"
+      ],
+      "after": []
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/14 抗击熊市的中短期低市值策略.txt",
+    "source_sha256": "6ba9af2985a43723ac0f9e74f6f1f5128485a2d48cb7b2e1565a1c3c36239b51",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/16 投资学作业.txt",
+    "source_sha256": "30cad23157f77f32066ca1244b025b5925030de426812913108319435c814dd5",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/24 自选策略1.txt",
+    "source_sha256": "091fde260a575a74842121abaed504d2b7e30ce505d0311360c33d9748ff8d86",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/25 简单市值轮动策略-学习.txt",
+    "source_sha256": "4bc9fd6704341fd9e0e3af5f99b4040752ad53218a8f84cda98455e8bd2ef29a",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/26 向导式-1.txt",
+    "source_sha256": "1c579a0c14a8dce725985a53896357ee45f30ee9367f314f8eda07e4fad82fa2",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/28 收益策略.txt",
+    "source_sha256": "342669b5cf41ef2519e0a7c13acf0cb18c26ebf95fe078c8573bd931579d2162",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/31 低PB价值投资策略分享.txt",
+    "source_sha256": "5f9bf0f45618e22ecfae05849b576f9e135b8254f9065838284978bb5a9f5987",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/32 测试策略1.txt",
+    "source_sha256": "cc3ab398876bb13bc9abada1a10ef5716418cfc8704b7a66a5086ad536cf248e",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/33 买入每个行业市值最大的股票.txt",
+    "source_sha256": "2592e5955e3c8cdeeb3a32a410b491847236addd2ffe02b058f371b770483131",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "10:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/34 成长策略.txt",
+    "source_sha256": "e3f74772f44d3f9dcbba629fa0e119a143a5f5df00891d1c6e3f8cf85b2bba77",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/35 投资学作业——简单多因子选股策略.txt",
+    "source_sha256": "aa58c9e6ade6a05ebc64b866a5c7b5b82360fd031ecd26a871f939b3fe2bd784",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/36 投资学作业——简单多因子选股策略改进.txt",
+    "source_sha256": "77afc77aa1e043d7c7af95cef14972b3ac58f3be9c7b78449f1a57ad2d8d2b92",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/37 个股止损.txt",
+    "source_sha256": "26566d21047ed5276351bcce52be13833f47b0f9b24969ff85ed263bcdfe2ab3",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/43 无模型评估的多因子模型.txt",
+    "source_sha256": "31f82bd4d547a173365fccc8ad9ecb8fd14b1a920ad6c1bee6414626708b0dc0",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "every_bar"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/44 新手初来，写了一个价值投资策略.txt",
+    "source_sha256": "08ec86252b307efbba8b24af25f205041c2ad0a979b01c3a372761522685e9bd",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/47 次新小盘策略.txt",
+    "source_sha256": "78c20cd09aaa5af64202a38f1ba69b579c469fd9104a73cb00e8c2519f90111b",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/50 简单配对交易.txt",
+    "source_sha256": "fd35c965c3cb57c1524ea4dbb5129810876356590b564c84366d1ae1dbe33ba1",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "open"
+      ],
+      "after": [
+       "after_close",
+       "before_open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/53 小市值策略.txt",
+    "source_sha256": "8464ef531e098a4067ca88a73d6cc196bbcb8ebfba7bdfd12afa746b9ca9704e",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/56 爱神的箭放声大哭.txt",
+    "source_sha256": "71f15e7c3e8be88595404dfb9af711175879109caf9bfa5a445c42096d047cbb",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/57 黄泽森策略.txt",
+    "source_sha256": "39980b3785891b77d79fee287e910dfc2bab82164fec40a5e64d20a0182ea1af",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/58 MACD金叉买入，死叉卖出.txt",
+    "source_sha256": "7ab99e648e08cf907cd7fc849cd577b093193f95b0894f4c4da6d7c94d6f7ae4",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/59 小市值轮动，修改了内容，剔除了停牌股，同时PE要求为正的股票。.txt",
+    "source_sha256": "4ca0e6ef4b7590881f4c3d6864efd521b7b35e75ddf61c471d6cfcd12d01994b",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/60 投资期末作业.txt",
+    "source_sha256": "ddd8506b5f44505604bd3c867b2831b6d90e7624a5310c3ad3635a7fc3bfb1bd",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/61 向导式策略生成器生成的成长股精选策略.txt",
+    "source_sha256": "22281e20a22b8dc8759e0c34fe674b557a1c91bd288890f4fd5e37cf92e2709c",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/62 选股策略.txt",
+    "source_sha256": "e5fd2db8ec3279baf9be8c138c8c7d8e6793d90cc47c4f467d0e7df8eef6eab2",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/63 向导式.txt",
+    "source_sha256": "b6d4568fd5cca7163f808c47b0baa79bb541f0628dbe6894bfaf45255fdea100",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/64 12年年化34%，Sharpe1.2，银行股轮动.txt",
+    "source_sha256": "736c90f6219040284b94f7178215484e29a3e314d8ae29e6accf06b195fe5f02",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/70 蓝筹&均线.txt",
+    "source_sha256": "c8a8cdec59575c7e0c32c24b721f0a544cc4ca3b58c8d0790a389aa4bf812896",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/72 基金定投-沪深300-5年回测.txt",
+    "source_sha256": "40c4560c75f8d1dc104c2f1d36b16c39a51667c597a37fbf776fd4a8e5651608",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/74 基于沪深300的增强.txt",
+    "source_sha256": "506c575be1715d7b9332aac1935b2f5348fd5e7e2abccda3d9581a5fe092566b",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/75 财务因子策略.txt",
+    "source_sha256": "3a12feb0fa8987d1562ec5b0054ee4b152eefa1e33a83338385b52f87bf2fa5d",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/80 向导式 价值分析(一),成功避开股灾,大盘震荡跌时小涨.txt",
+    "source_sha256": "1acf85348ce9bac6d5ea9bf27630d324d2746025b8474e037585f4b2b3ea1180",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/83 沪深300ETF-1060双均线.txt",
+    "source_sha256": "6b93db5ffc4bf83d72aea1970bc774a73b06cfdeb19d920e836adc0d68c84fec",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/84 投资策略说明.txt",
+    "source_sha256": "4257f73061b7f0e15df6df6912b3c8d318c240e87fc0ceafd551bb815f1b2709",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/87 选股策略说明——张燕兰 16318320.txt",
+    "source_sha256": "f38ef7eb90eca27c44563d0eb221835634645eb0bca3bff602bad750ee6073c0",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/88 一位小白编辑的多因子选股策略.txt",
+    "source_sha256": "2b52a0bb5fc4b9d4b90c1e0f0e9e97baaf6e7967f9a3124a5dc8c5d9c2bfdb91",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/90 MA均线金叉买入，死叉卖出.txt",
+    "source_sha256": "9001d735b9727bb4b41171a2bf74c5ca179363e62ee49f71169eb174bd031fd0",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/94 PE和PB策略.txt",
+    "source_sha256": "17614e21b5ae2a773a36bd75fb7f5bcb2570192f5532aab666a7b71f48223096",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/95 资金流策略.txt",
+    "source_sha256": "a6c3dea6c7bd5c302ec2920386e68fc4b84a212c64c98019f540642baf5a8e47",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/97 银行翻倍策略.txt",
+    "source_sha256": "6de76d6773a94e8605d1ff1662505555759ae15fbb1b4d6e7c0cc15632420047",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "before_open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2020年度精选策略/99 一个中信证券的向导策略.txt",
+    "source_sha256": "6a8519356501928bd5fd67bc987449ce05ea69cbbe052da4ce9a8faedbdab719",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/13.7年40倍，模拟超过两年，年化高回撤低.txt",
+    "source_sha256": "354510d37f4f629287a11e976c210c26b32e364ebec34c356e9f52b8156f597c",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:50",
+       "14:55"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/15.小市值策略之再优化，年化接近翻倍.txt",
+    "source_sha256": "2c22a6de17326a8e207de373a8d0b644058a265373dbe04f8f8ea9f89a532614",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:30",
+       "14:40",
+       "after_close"
+      ],
+      "after": [
+       "14:30",
+       "after_close"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/17.基金跟随策略，19年年化60%.txt",
+    "source_sha256": "8451752af4e5b6e1f07771b7eb166a83317ee60f7a7227f914626f3d38200b85",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/18.6年17倍的etf+分级b的轮动趋势策略跟随感悟.txt",
+    "source_sha256": "ea08405b60cddd6470564acff47b77762759aba7818f995ce20408dcdd0fd968",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/21.策略coding吐槽帖——以“网红”ETF轮动为例.txt",
+    "source_sha256": "f57070e964dfe28091e7d55f63a96219387f453fa3698ba2abdb48d24c13805f",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/22.“开弓”ETF轮动模型——改.txt",
+    "source_sha256": "94ebb573284feffd37e6f3eceac23eeca7e3b3773746d5b9cbe7bc7ac534aa8f",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/25.基本不耍六毛的ETF轮动策略.txt",
+    "source_sha256": "d8741c3c839fa0686462abad50b35041bca561b3f3dcae1d77cdb3b1892f9f26",
+    "changes": {
+     "gaps": {
+      "before": [],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     },
+     "status": {
+      "before": "待审查",
+      "after": "待数据"
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/26.稳定高回报周期股策略2.txt",
+    "source_sha256": "6f46c3e6ed3c37a962170fc4b5a13dc05054ad863d2202e5069b6e3aee2843df",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/3.一个简单而持续稳定的懒人超额收益策略.txt",
+    "source_sha256": "235e9019e568f11f5df81a2972722bb6a9db43146a6c177e260a3e39273e2749",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "before_open",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/30.ETF宽基轮动修改版-1.0.txt",
+    "source_sha256": "6448ae64f0343d555e7fc857850e149cf1fb8b0cdf666f74920bc778ac54b427",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/31.RSRS择时+货币基金--6年8倍行业周期股策略.txt",
+    "source_sha256": "10616b089bcd46f4a635957838c6a2f2040ba0d4c3d3cc05723fd3819c387e8f",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/32.北向资金A股择时策略（5年16倍）.txt",
+    "source_sha256": "58bcb4f189e4db816325c312efea4ae49cd3dbd16f8debde3023c4ac66a9d425",
+    "changes": {
+     "gaps": {
+      "before": [
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/4.红利搬砖，年化29%.txt",
+    "source_sha256": "917e420080bef6cb57794cec57c7f2946eb50ae5537ceba4940bb39bea1be2ae",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:45"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/41.均线黏合，突破前三十个交易日最高点选股法.txt",
+    "source_sha256": "44e74b2c6f9159f4592edb2b1792d2b99e69d39645544fe5c4002827d2026f33",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:31",
+       "15:00"
+      ],
+      "after": [
+       "09:31"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/5.价值低波（下）--十年十倍（2020拜年）.txt",
+    "source_sha256": "5248f808910f85ec48e629a27aca27c760b186c6c4d05a5e81cd922d9ad73bb2",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/52.根据北上资金买A股策略Python3版（北向、港资、外资）.txt",
+    "source_sha256": "3d55aa41fbe47218db2392b387662a5c2ba19895b7b4e6ac3c25a0f03167c36e",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/6.iAlpha 基金投资策略.txt",
+    "source_sha256": "3f2ba65f4b2f575ca9d9408c2e668b8b067f8e29d6a2ec87213fffd65730a8ed",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:35"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/67.RSRS择时改进-【成交量加权-钝化-右偏】.txt",
+    "source_sha256": "491607d7f0c7157c5e9a03e77053c35415158db73583f19790f88996bcebc144",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:00",
+       "9:30",
+       "after_close",
+       "before_open"
+      ],
+      "after": [
+       "after_close",
+       "before_open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/68.蒋老师吐槽了之后，我也想说说对ETF轮动策略的看法.txt",
+    "source_sha256": "7c7c15c33c95efa6be6c37cb3a73b1f16b714cdcc203d0da6bccd763d742d869",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/70.超稳的股息率+均线选股策略.txt",
+    "source_sha256": "d519c60fc103d030fd4b84482543c90765853fae863a880123a4f1ba90f235cb",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/71.【股指策略】【研报复现】周内与日内结合CTA.txt",
+    "source_sha256": "bc1c92b36492a6fbbc159a761f2b8ab16dec46f440f5182a8589e30a682d6f51",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:00",
+       "10:00",
+       "14:59",
+       "15:30"
+      ],
+      "after": [
+       "09:00",
+       "10:00",
+       "14:59"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/73.基于期权PCR与标的波动率价差的股指期货套利.txt",
+    "source_sha256": "caf882639dbe3618d34fd7f99c3fc9655f9a8893fc9d5c7cfa4eb37926d4d7f9",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则",
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/74.迪马克TD趋势反转指标.txt",
+    "source_sha256": "0402ab122e750fdf8ccee93faff4c71f25d07afd98cb59ad866ecf2a7dbfddc2",
+    "changes": {
+     "gaps": {
+      "before": [
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/75.最近2年年化100%以上回撤12%的打板策略-验证策略.txt",
+    "source_sha256": "e5490946e348c1cad9745537b6007601470c4e4ff07a9d8dff5a09310b033f95",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "10:30",
+       "11:30",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/81.无杠杆，稳定盈利的etf轮动，06年开始3000%收益.txt",
+    "source_sha256": "541947cc376a3275237ef4a1f18c0eb6cb1a7a7d05b8fe76c416229125b109bc",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/82.无需先验知识，动态选择的etf轮动策略，更具鲁棒性.txt",
+    "source_sha256": "1315283d2c6056d89a9ec065dc22758855b658d3bb634498335468c68c9ef675",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/84.ETF网格交易策略.txt",
+    "source_sha256": "681065583e64b1eee1fab68268a51d74ece264104bfcbef2124e9d17c1762671",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:45:00",
+       "after_close",
+       "every_bar"
+      ],
+      "after": [
+       "14:45:00",
+       "after_close"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/86.北上詹姆斯.txt",
+    "source_sha256": "aaabeccc33655c12913699b5bab180f7b4c6166d074e88a0ae2bcc7a81d044a4",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "07:00"
+      ],
+      "after": [
+       "07:00",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/9.持续跑赢大盘-真蓝筹v2(资金容量千万以上).txt",
+    "source_sha256": "e7144ea0b7f48cb6105fe12ca54fbfb848f99fe54970684892214dbb0fd2f56c",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/91.欧奈尔 RPS选股战法回测.txt",
+    "source_sha256": "04dbf4e772bc7e4b1d1b186528af82f0e5a33b0f003b6ea9189cad3ac3f5b6cb",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则",
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/92.敢于直接实盘的—八仙过海V2.txt",
+    "source_sha256": "305d222a3dfffbc4be22be21195c193c26ef6f07e523c16db18cc15c835bb240",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:00",
+       "14:30",
+       "before_open"
+      ],
+      "after": [
+       "14:30",
+       "before_open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/97.稳定高回报周期股策略2-RSRS择时.txt",
+    "source_sha256": "1734cd2023e69eeff77c96f0feb5ac5770a8e0792f5ee5ab1fa2b87c38ac2076",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2021年度精选策略/98.追涨大师（超额142）.txt",
+    "source_sha256": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "7:00",
+       "9:50"
+      ],
+      "after": [
+       "9:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/1.易方达二八轮动测试.txt",
+    "source_sha256": "383eb75ad9102bca609a0280b5c0a5a2c362317e65bc8d9c1080bde4172f2f43",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "15:00"
+      ],
+      "after": []
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/11.林奇PEG选股轮动，十年20倍，有止损模块.txt",
+    "source_sha256": "dba0198c0ecd90ce2eb4ba7d26e3c7e0a0cfa668dfc28ee5987108eadd081c08",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "open"
+      ],
+      "after": [
+       "09:30",
+       "after_close",
+       "before_open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/12.回馈社区，分享市盈率股息率选股+均线止盈交易策略.txt",
+    "source_sha256": "8d97f08edd62f687ad8eda4a7f3bdfac52ed6fc60968e0c6e15c7c6e503a2460",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/13.利用股息率长线选股【超稳】.txt",
+    "source_sha256": "f2bb4917cd2efb4194bd7cebf4603dce9f487904e1a081ad678cd9d211914d22",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "9:50"
+      ],
+      "after": [
+       "9:50",
+       "every_bar"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/14.银行股价值定投.txt",
+    "source_sha256": "5cc48808295bec155aea323af5272e16229c0ea8a0bb82505b4eb4acbb0c1696",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "every_bar"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/22.多因子系列：基于多因子框架的收益预测模型.txt",
+    "source_sha256": "4e829dcf89f3c2d817512387eeaf758a0d3b1a7f33408cff3d2e865c34acd733",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/26.Xgboost 50ETF 2.0 分钟级回测.txt",
+    "source_sha256": "4947832e5d01a5a15b4408de799c0c4e908d5e91eda996fbc33bb0f3c22c3a8a",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "open"
+      ],
+      "after": [
+       "9:50"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/28.etf轮动的优化，680%收益.txt",
+    "source_sha256": "c140b79604a77fd939128c7ebdc48a4d92ece652a68efc16806957d426bee369",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/30.优质股高抛低吸策略.txt",
+    "source_sha256": "55751b13fc315fd316a5f93d828ec322db8a89e0c14f1211f07fe10c3e963b0a",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "before_open",
+       "every_bar",
+       "open"
+      ],
+      "after": [
+       "before_open",
+       "every_bar"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/31.再次抛砖.txt",
+    "source_sha256": "b853d47a00c90780501aeb32c1bd112374628c830e0ca70a16cdbbf6058aa582",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:00",
+       "09:30",
+       "15:30"
+      ],
+      "after": [
+       "09:00",
+       "15:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/4.自带仓位控制的股息率策略，超稳.txt",
+    "source_sha256": "704a2e2240bcc4302981b33865820a3d3a03c926644ddecb38948328793f85e0",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/52.用指数战胜指数，ETF二八轮动对冲模型.txt",
+    "source_sha256": "b9965d411543db3075a4fa46dddd96e6b13398f6395fab9c90eb838f56681068",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/55.【策略研发】三进兵策略（变形版）.txt",
+    "source_sha256": "2ecc7295bec6f264228985e5f08a1dac2f5621e51ff3ecd0234473a4cea9b507",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/57.宏观指标择时检测.txt",
+    "source_sha256": "4165bfdabda3863180f3c2bc354dd7fe986f8ea4724eeaf2fb62311edf745aad",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/6.择时，还是宏观数据靠谱（宏观择时集合）.txt",
+    "source_sha256": "da7304f60faa5d11a2ddc02f9796b3dcd943886f088b6944f2ba917a46fc6d98",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/60.2019年3月以来的前日涨停昨日未涨停今日大涨的追涨策略.txt",
+    "source_sha256": "dfc61a527cd859c58c31da76c4418a10fac57b07534c5f3ac2cac988bd5f137c",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:34",
+       "09:35",
+       "14:45",
+       "after_close",
+       "before_open"
+      ],
+      "after": [
+       "09:34",
+       "09:35",
+       "after_close",
+       "before_open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/70.年化64%的市值选股策略（有止损模块）.txt",
+    "source_sha256": "7a8015a82fe1eb1895986abd473f5467f13036813cc029aadea50f6fd49c92be",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/71.年化42%的市值选股与阶梯调仓策略.txt",
+    "source_sha256": "b9c5cfe466aa55709f8f3a462d0b66941a0192deaad71d5df41d8f1c810bbb22",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/75.量价MACD组合择时——极速版.txt",
+    "source_sha256": "3c3bc16e3ab7c7e8ee3bf3f62aeddf94f5fe11cacdfb4ec3b098615d5186c515",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:50",
+       "after_close",
+       "before_open"
+      ],
+      "after": [
+       "14:50",
+       "after_close"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/82.RSRS择时+机器学习选股.txt",
+    "source_sha256": "6ce406a93ba15870d084fe2aa979d35a0fc4b35b819ccffb4a9d26c0ca791e14",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "open"
+      ],
+      "after": [
+       "before_open",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/83.穿越十年牛熊：沪深300成分股配合macd的价投择时策略.txt",
+    "source_sha256": "da44ef30f831694ba97022645f1d1248d350567ffff0a244d748d2d1c0ee3f0a",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "15:00",
+       "9:30",
+       "before_open",
+       "open"
+      ],
+      "after": []
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/84.MACD新研究，配合ETF十年稳稳的幸福.txt",
+    "source_sha256": "2c7856c2a172e40da89201444c061f437a6c0d596170d85c5bca5d90220a8e4f",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "15:00",
+       "9:30",
+       "before_open",
+       "open"
+      ],
+      "after": []
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/85.年化20%+的极简指数增强，受RSRS和LLT启发.txt",
+    "source_sha256": "0c6cc11e8595a979e1d88b6d543fc70a95fd25d1c160306f024a043b00ed8f0b",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "15:00",
+       "before_open",
+       "open"
+      ],
+      "after": [
+       "before_open",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/86.长江机器学习股票趋势预测.txt",
+    "source_sha256": "d423180039112b224fb5eeda52376c815538db1b57c754de01c1380b98a39af5",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:40"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/87.RSI衍生指标择时轮动A股ETF.txt",
+    "source_sha256": "7c116b320dfa537310f3b72e8cf527669c89f1112e81e66d9048a6db22e19c2b",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "before_open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/88.一个简单策略，看起来还行。.txt",
+    "source_sha256": "86da58dc672a7783f712065f74cbbd7adf4f193ed5c17e537f13b028b03ed634",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2022年度精选策略/99.量化定投，工薪族逆袭之路(附定投模型）.txt",
+    "source_sha256": "8281336e38a7a91050e85c073dceaaf985cee639cf07750463f709b3314be958",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/0.7年40倍，模拟超过两年，年化高回撤低.txt",
+    "source_sha256": "354510d37f4f629287a11e976c210c26b32e364ebec34c356e9f52b8156f597c",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:50",
+       "14:55"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/10.一个简单而持续稳定的懒人超额收益策略.txt",
+    "source_sha256": "235e9019e568f11f5df81a2972722bb6a9db43146a6c177e260a3e39273e2749",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "before_open",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/12.【不含未来！】宽基etf轮动8年50倍年化60%.txt",
+    "source_sha256": "e1bf34c92007decfc57d42f8cf8e95745c1685805dbc072aab649353e36fc06c",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:15",
+       "14:30",
+       "14:45",
+       "9:15",
+       "9:34"
+      ],
+      "after": [
+       "11:15",
+       "9:15"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/14.2020年 267%年化 13%回撤 上涨趋势策略修改版.txt",
+    "source_sha256": "8c25fa8e099088efd28e76dc42218da025b7a4c79a44ca27f7fec38a07d85bfc",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/18.【复现】FFScore财务模型.txt",
+    "source_sha256": "67873dc4ab259eb22bb79fcf98d506eb7dd285b1c54f89afa6ddefb2cf89f01b",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/20.北向资金股票轮动-优质策略可直接实盘.txt",
+    "source_sha256": "4cf0557251d53d18eebb1c7732dfa04f6eb2e377cd756cdb144cb0e51d832e40",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/26.追涨大师（超额142）.txt",
+    "source_sha256": "3c52f4e9e825d78909baed142ef99ebe11c2527a9926666e30d808c039f16127",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "7:00",
+       "9:50"
+      ],
+      "after": [
+       "9:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/3.苦咖啡-默默赚钱系列-改.txt",
+    "source_sha256": "e9eb4c47cdbd819d9d6200d1ecae58837ca81aa7cc78ec061eac5afd600e7cd3",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/30.跟着基金报团！！！174% 回撤 7.33%.txt",
+    "source_sha256": "30290425ab0baedb0b0eebe31e39e0c5386e4ac1de2bba617edf9443d75c7a22",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/32.最适合上班族的策略-神奇公式策略.txt",
+    "source_sha256": "f209dd7b5172fba01c35eef4cf924d1037146fd521babfb540711c49ce1fcee7",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/37.ETF动量轮动RSRS择时-魔改4-低通滤波.txt",
+    "source_sha256": "344b7d6ce450c51142b2070edef0a4eacb4ce9ce6f41779b0353207ee5ea46cb",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/39.低风险高收益的期货策略.txt",
+    "source_sha256": "fadcc6a0c9842db6e2556e28021b25273b9bd67e05a98b1db73c10e2b742394e",
+    "changes": {
+     "gaps": {
+      "before": [
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/40.再改进可实盘-默默赚钱系列-风险控制-增强版本-V5.0.txt",
+    "source_sha256": "1e6ee2ecb16b0008eecb5f84620a7686c47eae024a7154e907a5ec601cbdbfac",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/42.二板排板战法研究.txt",
+    "source_sha256": "5c768c6a08db2fadf449799ec04de57cfbe70f8d0210c24b96185085db68ca99",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "every_bar"
+      ],
+      "after": [
+       "before_open",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/44.海龟突破系统，19-21年化150，无未来函数和过拟合.txt",
+    "source_sha256": "970fd85b2dc48a7d65e0ff6df61ffbe6fb9c5f7d73d495a7420c03b474d8a4d5",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:31",
+       "10:21",
+       "11:00",
+       "11:11",
+       "11:25",
+       "13:01",
+       "13:51",
+       "14:35",
+       "14:41",
+       "14:53",
+       "after_close",
+       "before_open"
+      ],
+      "after": [
+       "09:31",
+       "10:21",
+       "11:11",
+       "13:01",
+       "13:51",
+       "14:41"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/45.敢于直接实盘的—八仙过海V2.txt",
+    "source_sha256": "305d222a3dfffbc4be22be21195c193c26ef6f07e523c16db18cc15c835bb240",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:00",
+       "14:30",
+       "before_open"
+      ],
+      "after": [
+       "14:30",
+       "before_open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/47.动量ETF轮动-RSRS择时-卡尔曼滤波.txt",
+    "source_sha256": "3bfda3a9fe80661ed94e1a19ed1b214b6576d12b8cf1bdcdaaf58a5d4a2d2805",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/48.【漂亮50 2.0止损版本】为了降低回撤，加入择时止损模块.txt",
+    "source_sha256": "c593fa9979b1ec51acdbce370fe2ee0252817580711bd2911dec1767b17807b1",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:55",
+       "15:30",
+       "9:30"
+      ],
+      "after": [
+       "14:55",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/5.87.5%胜率之分歧反包二板.txt",
+    "source_sha256": "7512a35c934885f13319b18e519e50a36aaf910e856e997b4992c4ef930a54da",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "every_bar"
+      ],
+      "after": [
+       "before_open",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/52.筹码选股.txt",
+    "source_sha256": "8e347f65a005970a39593cdb5e1aaa7d3e6491118f492a4f14f91db5c46ccf43",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/55.【分享】券商金股组合增强.txt",
+    "source_sha256": "6c7edf0ef4bcee88cd335ade773e2edaf5aaf8617300d6b6c22804066a9aeacd",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/56.韶华研究之五-ETF轮动，躺赚，夏普2.txt",
+    "source_sha256": "e60642e66d27ca76257bc82f066857878f68fddc6b8aed974d05ff154f579e63",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:15",
+       "20:00",
+       "21:00",
+       "7:00"
+      ],
+      "after": [
+       "11:15",
+       "20:00",
+       "7:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/57.韶华研究之四-菲阿里四阶在T+1的短线策略应用.txt",
+    "source_sha256": "b3cbb8cb957298328a09e4fa9f632d907d27956644634640bec5015a253eb974",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:30",
+       "14:55",
+       "after_close",
+       "before_open"
+      ],
+      "after": []
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/58.北向RSRS与布林带择时.txt",
+    "source_sha256": "1ca06cbc4d95a15dd646bb1aa73b50fbf5503252071f9ed0a1461d08aa3c1e69",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "07:00"
+      ],
+      "after": [
+       "07:00",
+       "9:35"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/6.21年度6.为了挣点积分自己实盘的策略分享出来.txt",
+    "source_sha256": "b4ffbfb4d757aaa417406591e7d3f1481aee32ef37e0e2f94fd82abb99defeb5",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/62.3年复合200+%收益+超低回撤11%以内，无惧大跌.txt",
+    "source_sha256": "8ba1143f5f4e7bea7c0504f0b2ebadd77dd3adf9425299a3200d18ca1cd546c1",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:35",
+       "09:58",
+       "14:37",
+       "14:38",
+       "14:39",
+       "14:53",
+       "before_open"
+      ],
+      "after": [
+       "09:58",
+       "14:37",
+       "14:38",
+       "14:39",
+       "14:53",
+       "before_open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/64.韶华研究之七--不可多得的基本面三角.txt",
+    "source_sha256": "c878935098e1dff92ddcdb4da39e701581edb9b4fbe4ca72484487b9a20aebf4",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "20:00",
+       "21:00",
+       "7:00",
+       "9:30"
+      ],
+      "after": [
+       "7:00",
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/68.宽基BBI动量追涨，完美避开这波大跌~.txt",
+    "source_sha256": "567821bbdb4ebe34b47f241b36c78b1faafbd57fd6260a77726ed31691a0ee87",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:15",
+       "14:30",
+       "9:15",
+       "9:34"
+      ],
+      "after": [
+       "11:15",
+       "9:15"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/7.ETF动量轮动RSRS择时-魔改3小优化.txt",
+    "source_sha256": "e853b55be636530723810ba09160b80091dfd03a1674f8156681279d080b4938",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/72.优化了一下宽基etf追涨的策略，值得深入研究.txt",
+    "source_sha256": "1ff9511d5e556813d21c55d7cf7b8bfd81f26730ea9df9a03a01e7111b3abc75",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:15",
+       "14:30",
+       "14:45",
+       "9:15",
+       "9:34"
+      ],
+      "after": [
+       "11:15",
+       "9:15"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/73.MACD多周期共振，精准打击！.txt",
+    "source_sha256": "c9627cb5e502dcaadc7de4ee02e48d896b402279762e8bafc5afa125c39c8b50",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "10:30",
+       "11:00",
+       "11:30",
+       "13:00",
+       "13:30",
+       "14:00",
+       "9:30",
+       "after_close",
+       "before_open",
+       "every_bar",
+       "open"
+      ],
+      "after": [
+       "14:00",
+       "after_close",
+       "before_open",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/76.半年6.5倍--次新股排板一式.txt",
+    "source_sha256": "6b80ab6462c35584deaccf303f406f233a2b944b3c6a426197b8e9eb4a901fbc",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "every_bar"
+      ],
+      "after": [
+       "before_open",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/79.过滤两个因子，12年15倍的roa选股500指数增强.txt",
+    "source_sha256": "2bfa6a28c1bf84502f2bd057c47db286e4ea49c9eaec3e46e5bcbf2ae8d2fc4d",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/8.iAlpha 基金投资策略.txt",
+    "source_sha256": "3f2ba65f4b2f575ca9d9408c2e668b8b067f8e29d6a2ec87213fffd65730a8ed",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:35"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/83.韶华研究之一，布林突破+均线金叉，四年五倍.txt",
+    "source_sha256": "2b199cb1b5d383726875fad2e1bde1ed939be289ec1e9338ffc2fe200529dfde",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:05",
+       "14:55",
+       "20:00",
+       "21:00",
+       "22:00",
+       "9:45",
+       "before_open",
+       "open"
+      ],
+      "after": [
+       "14:55",
+       "20:00",
+       "21:00",
+       "22:00",
+       "before_open",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/84.对 二板排板战法 的部分优化.txt",
+    "source_sha256": "fc2114de936c72c448c55dc6d4b78c70c308cc153235dde7e5f2bd6140f9c2c4",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "every_bar"
+      ],
+      "after": [
+       "before_open",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/85.最新解密--追涨龙头打板策略-适合近期实盘行情.txt",
+    "source_sha256": "c1421159e3d1bddfdfc7129e600de10c5b90c115f8f6c5478a12a702112d0e88",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史行业",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/86.【基本面三角3.0】看过之前策略的就略过吧.txt",
+    "source_sha256": "bec7167928cfef0e9166a76ac8aaa53af48622cc57fff4ded3433cc1e5ed98cf",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/89.2019年到现在90多倍的新策略.txt",
+    "source_sha256": "1d132c408b37fdfffcaafe849c3a2d31376cd7480e28c5c68863b6cfb17f1c6f",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/9.10倍-二板排板战法优化-无未来函数.txt",
+    "source_sha256": "2eafd48ebc0179285658f0c68aea5e7df36ccbeda1d63b532ebc329214ca472e",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "every_bar"
+      ],
+      "after": [
+       "before_open",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/90.一个月轮动股票换仓，内日做T，相对高频交易.txt",
+    "source_sha256": "b090b10b4b22f6363bfedcf35a7560e7e7bdd492aeb23fc30da04dc3a92f1e0e",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "every_bar"
+      ],
+      "after": [
+       "every_bar",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/91.致敬市场--4 解析细节.txt",
+    "source_sha256": "b3f42fac13f97877c8e71db640e73e50e70c9097b75cc89f64496a671ca31c84",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:30",
+       "after_close",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/92.【超跌反弹v1.0】3年2.3倍的超跌反弹小牛股.txt",
+    "source_sha256": "58b6e72c506f32355e8c090884719831bea285a3c4ab6f4821d82dac5614bc1c",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/95.【复现】高频价量相关性，意想不到的选股因子.txt",
+    "source_sha256": "24a5fc73eaf8929ec62bd773a83b4b9d81492f7b1514c2b76e372c8b2a52684c",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史指数成分"
+      ],
+      "after": [
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/97.韶华研究之六，简单不一样的发现趋势，3年6倍.txt",
+    "source_sha256": "93fbbdf2a15cfadb7cd622a781b4b031192a5556bd25e1793bdb62ca1f6a6de4",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "07:00",
+       "09:30",
+       "14:55",
+       "20:00",
+       "21:00"
+      ],
+      "after": [
+       "07:00",
+       "09:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/98.欧奈尔CANSLIM策略初探三.txt",
+    "source_sha256": "34c4f67e567954bbcaf1d1345ac3a3bdc9ed42f0e611bd2bb527a3c2281a70db",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "every_bar"
+      ],
+      "after": [
+       "after_close",
+       "before_open",
+       "every_bar",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2023年度精选策略/99.全市场选股？7年5倍不择时，回撤30%左右.txt",
+    "source_sha256": "d8a0ab093c89aad222913ed3a4d2d497ae54b9efaaad4715d0f76307bf850a06",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:30",
+       "9:45"
+      ],
+      "after": [
+       "11:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/1.差不多得了.txt",
+    "source_sha256": "c51a807fb839697b3c582a2377308fb6d37f8177e80b9bb650fd8d3818df0966",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "14:30",
+       "15:10",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/10.多因子宽基ETF择时轮动改进版-高收益大资金低回撤.txt",
+    "source_sha256": "95faba69b82ac6b29bc9d7eb30ced65e02a17f6a4115969bd15818f1ad15bb4c",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:25",
+       "11:27",
+       "15:10",
+       "7:00",
+       "9:30",
+       "9:35",
+       "open"
+      ],
+      "after": [
+       "11:25",
+       "11:27",
+       "7:00",
+       "9:30",
+       "9:35",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/12.致敬聚宽机器学习多因子50只持仓14年37倍.txt",
+    "source_sha256": "0f3fab83cc66a79ccdfbcb69c83907008bb1079990ea04f31b8985b74aaef0a5",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "before_open",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/13.5年15倍的收益，年化79.93%，可实盘，拿走不谢！.txt",
+    "source_sha256": "99ded26ab7e374741ba0c6f5a06f6b63130efd1f8212a01494ba27a0358e4cc7",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:00",
+       "14:55",
+       "9:05",
+       "9:30",
+       "after_close"
+      ],
+      "after": [
+       "14:00",
+       "14:30",
+       "14:55",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/14.四年多翻9倍，年化73%，成长因子评分筛选.txt",
+    "source_sha256": "13660493620379c8a59975579f9bfc6de0e10ab58ec7de587cc76e0e496c599e",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "15:10",
+       "9:30"
+      ],
+      "after": [
+       "14:30",
+       "15:10",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/15.10年52倍，年化59%，全新因子方法超稳定.txt",
+    "source_sha256": "0343d0d4acd8712033b1abeef84ff7d262f548bfe340c323f9475207e33dd6b3",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "14:30",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/16.大市值价值投资，从2005年至今超额稳定.txt",
+    "source_sha256": "6d0113cf0ab4adff7664297b2275bd6c40c042dd48e745397d7832808f1ed9f4",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/17.5年超额收益1055%，K线处理大阴线，无未来.txt",
+    "source_sha256": "9c7dd5a4f118579126f2750b79f5c9383483bf43664e2cf160c343ea996a761e",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/18.微盘股研究.txt",
+    "source_sha256": "201454a3a47cc6135043908a5cec0eae098c6c726f169a92191fbd068898c750",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/21.一种宏观数据的中长线策略，年化15%，最大回撤9%.txt",
+    "source_sha256": "5d55e30ef811ceda9ef64f13f874d38ae84204dcbf2fb248274188563d08c88b",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/23.wywy1995大神机器学习策略年化提升35pt.txt",
+    "source_sha256": "ff5cbcfecdd841e296e9c579a55e3705254719853b17d5cf6f63353e0769e0e8",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "13:00",
+       "15:10",
+       "9:05",
+       "9:26",
+       "9:30"
+      ],
+      "after": [
+       "13:00",
+       "9:05",
+       "9:26",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/24.凑波热闹，也来试试多因子线性回归.txt",
+    "source_sha256": "0c475fdbbadaf6bb7d688c0cf3cf0e514434c13b14ce7ec567924ddfc47a57b3",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "14:30",
+       "15:10",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/27.根据大小盘相对强弱选择合适的板块股票进行交易.txt",
+    "source_sha256": "813712769ddb8ce9c2f20592b12f4306c39b59867259e97ee8382d9873de879b",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/29.高增股池小市值轮动.txt",
+    "source_sha256": "f7dc33b105dcbe9a4bec9e1ecd456ab00ee9cfc541232b3d62f50f5a63fc021a",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:25",
+       "09:30",
+       "14:40"
+      ],
+      "after": [
+       "09:25",
+       "09:30",
+       "14:40",
+       "14:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/3.【回顾3】ETF策略之核心资产轮动.txt",
+    "source_sha256": "437a3f19f060e4c661e55e70a0713a48a348fd8efb4006587f9055c98b9cbb65",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/31.动量因子加RSRS择时和ETF轮动每日调仓.txt",
+    "source_sha256": "8ee830377a447239b901212ec77b4b0ca9331d9d59a406ad57f053da751cc38f",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/32.非线性市值（非小市值）组合4只.txt",
+    "source_sha256": "e3bb3402afe70b0933d40f6962edda66c595cf2aed33ba256eae3314752eb970",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:29",
+       "09:30",
+       "09:31"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/34.韶华研究之十八，201系列.txt",
+    "source_sha256": "7ddbc9716edc868e3e9a40f08b815c7ec732a990083d2a1ea00df88203dcf2e6",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:26",
+       "09:30",
+       "10:30",
+       "13:30",
+       "14:55",
+       "20:00",
+       "21:00",
+       "7:00"
+      ],
+      "after": [
+       "09:26",
+       "14:55",
+       "7:00"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/36.【菜场大妈】股息率小市值策略,10年206倍,5年10.8倍.txt",
+    "source_sha256": "10bc142e232e5b613572d9cb8db6dffd243c5d6d6d511cda03d268b10e222990",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:00",
+       "14:55",
+       "9:05",
+       "9:30",
+       "after_close"
+      ],
+      "after": [
+       "14:00",
+       "14:30",
+       "14:55",
+       "9:05",
+       "9:30",
+       "after_close"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/38.ETF核心资产轮动-添油加醋.txt",
+    "source_sha256": "0e1415cfcb53c25a34c6b25e1480744b59a046b593332c93c4231335e64a826a",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/39.大资金优质股策略，总收益1217%！无小市值因子！.txt",
+    "source_sha256": "f8b6b5b809cf610092c7925771624340bc9e3484f2417928d219cd23d01e18c6",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/4.首板低开策略.txt",
+    "source_sha256": "953a46add178f7cec14c7abe0c55be015ccbf82518aa7bca811dd389b8b1af53",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:30",
+       "11:28",
+       "14:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/41.人工智能强化学习DQN交易智能体（回馈社区公开训练代码）.txt",
+    "source_sha256": "bf4f31552297e6ad232bb780917d926e40a27b55ca48719305f37777d29262b3",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/42.大盘ETF动量轮动RSRS择时策略-无纳指（5年半861%）.txt",
+    "source_sha256": "03236e7dbf922054cd262bde0c1a496835e1f174dfc27101114c5d19a51f5174",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:25",
+       "11:27",
+       "15:10",
+       "7:00",
+       "9:30",
+       "9:35",
+       "open"
+      ],
+      "after": [
+       "11:25",
+       "11:27",
+       "7:00",
+       "9:30",
+       "9:35",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/43.ETF轮动：年化收益82.68%，最大回撤13.54%.txt",
+    "source_sha256": "a8dbf037d749327d94a1fb613ad27fec615c7a278541b0d169933a0832c910dd",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:40"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/45.[原创]价值投资+期货对冲V4.0,无惧市场大跌.txt",
+    "source_sha256": "0421d4f69fcfe37e9248bfb7d5dde8b8aacd6bb38a6c4e81eb07e4bf965d3227",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "10:15",
+       "10:30",
+       "10:45",
+       "11:00",
+       "11:15",
+       "11:25",
+       "13:00",
+       "13:15",
+       "13:30",
+       "13:45",
+       "14:00",
+       "14:15",
+       "14:30",
+       "14:45",
+       "9:00",
+       "9:45"
+      ],
+      "after": [
+       "11:15",
+       "13:45",
+       "9:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/47.随机森林量价多因子选股 短线交易.txt",
+    "source_sha256": "714b1ebadf545759d5461636397dc2b0fa46f41e2b068fe0a35d4ca4ddbe71d9",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/48.低代码迁移成本的实盘方案jqtrade+one quant.txt",
+    "source_sha256": "ee3d5958a17325e81db68af284f33dc0722157520b7b0793a1ff56d74bbf7c24",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:40",
+       "15:30"
+      ],
+      "after": [
+       "09:40"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/50.新策略，一种新思路，超额376%！.txt",
+    "source_sha256": "08b406153fe2f50a704f7f7b0d0a53f93c40510ec8c048b543752f50acecf490",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/52.增强型投资组合优化（EPO）方法试用.txt",
+    "source_sha256": "0baad6159f87bc1cef0160f4eef1c69cda21ff018dc91b1d57a0837440148160",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "10:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/53.微盘400每日再平衡.txt",
+    "source_sha256": "daf43af3d722dcfe9cba02f32aeaaee997544fc528b2314cd8131b0b5051fa0f",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/56.双人工智能配合，样本外夏普3.9.txt",
+    "source_sha256": "4cabe7bc126df1c1dcbe1c7b4118874a72c8bd01e75257ac4fa872bc1bb7543e",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:00"
+      ],
+      "after": [
+       "14:00",
+       "14:50",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/59.基于Gyro^.^大神的小市值策略的因子匹配研究.txt",
+    "source_sha256": "224ac31588d5edec82d5268ab1f2387464916aacde134836e964fc6cb06692b2",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/60.【深度解析 二】资产负债与ROA模型.txt",
+    "source_sha256": "ddfdc8a4c318e43b90adfff2afa7c78a9695cb7d25de27b79290a53dc9885146",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/62.分享一种K线小碎步后突破的分钟级打法.txt",
+    "source_sha256": "3c2724114585de0edef9ab0c7baec1351b8f625d565e3c99126e9d89da96ebb3",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:40",
+       "8:30",
+       "9:30",
+       "every_bar"
+      ],
+      "after": [
+       "14:40",
+       "8:30",
+       "9:05",
+       "9:30",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/65.低开买入小市值策略（剥头皮策略）3.0 总结.txt",
+    "source_sha256": "96e9b5a11ffdcf62b17b0dd45256092b5be1bb8894881ae02984c406efaeb027",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "9:26",
+       "9:27",
+       "9:30"
+      ],
+      "after": [
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/66.SVR机器学习上证综指择时中小板财务选股策略.txt",
+    "source_sha256": "8201a4d68e98c3059f6fa9fd1c39b77c43848d35f81f805658716f29cefbd10a",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/69.人工智能早晨十字星模型反转形态预测.txt",
+    "source_sha256": "8daf059b08a19a63bab9b8a7a6a57507d0b1b8fd8a5277b7747f39294e53c605",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "14:50",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/7.连板龙头策略.txt",
+    "source_sha256": "36d9ab13955f12a666db1bc3d347d4bd2caa7ff7210098fe6d79e40c03d0eb6e",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:30",
+       "14:50",
+       "15:02",
+       "9:01"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/72.桥水 全天候策略 增加一致性度量ES 风险控制.txt",
+    "source_sha256": "b30d9ba30a2e18bc162261a783479d853ff6768b4ae85963d39315fc85683835",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "open"
+      ],
+      "after": [
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/73.稳健趋势策略，回测小，无未来函数.txt",
+    "source_sha256": "5853cffa47914b0b5b6a1c155f120c630b97aa638d0ff1cc867bc97195addb89",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:30",
+       "9:45"
+      ],
+      "after": [
+       "11:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/76.基金溢价（模拟效果好！）.txt",
+    "source_sha256": "66a57814941fd2a1a4c29f7a483f35723c58575185491d85f8caa9d5f770a6f1",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:15",
+       "09:30"
+      ]
+     },
+     "gaps": {
+      "before": [],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     },
+     "status": {
+      "before": "待审查",
+      "after": "待数据"
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/79.SVR选股的小市值策略.txt",
+    "source_sha256": "7f84435b97b9ef8a1176ae1d31c38911c04c427ca3248a03ee766008acef25c9",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "before_open",
+       "close"
+      ],
+      "after": [
+       "14:00",
+       "14:30",
+       "15:10",
+       "9:05",
+       "9:30",
+       "before_open",
+       "close"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/80.【深度解析 一】经典小市值模型.txt",
+    "source_sha256": "382e32ecea8d5dc79f4755eaf2d39606c86db188004359e24a38978e7ce1d9de",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:30",
+       "10:00",
+       "9:45"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/82.实盘模拟的小盘股策略，低频，带基本面优化以及个股风控.txt",
+    "source_sha256": "f6397facbcce441d2a29708c3143dacdb3086bb1acc968524a8afa18bfc8edd7",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:15",
+       "9:16",
+       "after_close",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/85.【深度解析 七】BBI指标-大盘涨跌-宽基轮动模型.txt",
+    "source_sha256": "921cc7e8cc59bb397e5ca7ff9d0accaa4be8828f47bd4d640ceab103feada358",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:15",
+       "14:45",
+       "9:15"
+      ],
+      "after": [
+       "11:15",
+       "9:15"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/87.山寨红利.txt",
+    "source_sha256": "397609995523c05e8067715ebf7e3a076528fe2285d228042195246ae0830c48",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "10:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/88.韶华研究之十六，指数增强.txt",
+    "source_sha256": "441ffdc4d0dadea4aed9ef1d4b4b61fbd894a692bd433f498e65e5f04306de1f",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:30",
+       "14:55",
+       "20:00",
+       "21:00",
+       "7:00"
+      ],
+      "after": [
+       "09:30",
+       "7:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略1/9.持仓95只大容量小市值，媲美金元顺安元启.txt",
+    "source_sha256": "7d93a9baa8e415c85dd9fc38ef08ee9478c4148e4b93d94baa6dc1bb2cbfd7df",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/1.一颗耀眼的星—【回顾2】小市值成长股策略更新—改.txt",
+    "source_sha256": "c96cde9d4e6681028928bb0cbf83e050d38549224eb151e5c250648e76f3d9cb",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/100.【复现】金股组合增强—分析师推荐概率.txt",
+    "source_sha256": "55b4a191313db44f97129d5a0d72f2c38063e32d095115c2df76a37c73866c16",
+    "changes": {
+     "gaps": {
+      "before": [],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     },
+     "status": {
+      "before": "待审查",
+      "after": "待数据"
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/12.全市场选股？7年5倍不择时，回撤30%左右.txt",
+    "source_sha256": "d8a0ab093c89aad222913ed3a4d2d497ae54b9efaaad4715d0f76307bf850a06",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:30",
+       "9:45"
+      ],
+      "after": [
+       "11:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/14.为实盘做的更新：分钟级别和盘中止损.txt",
+    "source_sha256": "d639352d8af0e58a5bf4ce334d52c3ea2c6720a791bff6c6231bd7a36c359d19",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:39",
+       "14:45",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/16.ETF轮动策略升级-多类别-低回撤.txt",
+    "source_sha256": "5bbcf9ffeed955033316c7e533c58b01162f7db8bf865c30209247b4ab1cf5ad",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/18.动量ETF轮动-RSRS择时-卡尔曼滤波.txt",
+    "source_sha256": "3bfda3a9fe80661ed94e1a19ed1b214b6576d12b8cf1bdcdaaf58a5d4a2d2805",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/19.【复现】高频价量相关性，意想不到的选股因子.txt",
+    "source_sha256": "24a5fc73eaf8929ec62bd773a83b4b9d81492f7b1514c2b76e372c8b2a52684c",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史指数成分"
+      ],
+      "after": [
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/2.ETF动量轮动RSRS择时-魔改3小优化.txt",
+    "source_sha256": "e853b55be636530723810ba09160b80091dfd03a1674f8156681279d080b4938",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/24.宽基ETF动量轮动钝化RSRS择时-回撤小.txt",
+    "source_sha256": "d555551d56c029c6b3ffcd12bcbc6b831e86e6822ae65f5def732dcc69b0d6fc",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/25.年初至今4倍，极致的Day Trading，56.8%胜率.txt",
+    "source_sha256": "c5a1c7d68652c6acbec4736c29c3056931094e089b464317b7a0c4c6b4e4ca83",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:31",
+       "10:00",
+       "14:50",
+       "15:05"
+      ],
+      "after": [
+       "09:31",
+       "14:50",
+       "15:05"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/26.近几年一直有效的股票BOLL择时策略.txt",
+    "source_sha256": "be66fc1cb46dc0cd876436309a8bdf113a97b3289ead3a314a69e17f5d6abfc0",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "13:01",
+       "8:30",
+       "9:35",
+       "before_open"
+      ],
+      "after": [
+       "8:30",
+       "9:35"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/27.中证500指增+CTA，胜率52%盈亏比1.9。不输顶尖私募.txt",
+    "source_sha256": "c661bea4502229d0f000cc41d43f1fceae033d7a7be2af5bfea37559b2b42ec7",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "10:15",
+       "10:30",
+       "10:45",
+       "11:00",
+       "11:15",
+       "11:25",
+       "13:00",
+       "13:15",
+       "13:30",
+       "13:45",
+       "14:00",
+       "14:15",
+       "14:30",
+       "14:45",
+       "9:00",
+       "9:30",
+       "9:45"
+      ],
+      "after": [
+       "10:30",
+       "11:00",
+       "11:15",
+       "9:00",
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/30.【超跌反弹v1.0】3年2.3倍的超跌反弹小牛股.txt",
+    "source_sha256": "58b6e72c506f32355e8c090884719831bea285a3c4ab6f4821d82dac5614bc1c",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/33.胜率88.9%之君正集团策略-大阳分歧反包.txt",
+    "source_sha256": "a331c54cde128795561d7fd77a273fd6c8f89441af5cacf3881ead11517ecfac",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "every_bar"
+      ],
+      "after": [
+       "before_open",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/34.【回撤二波2.0】透过一次过拟合的机器学习摸底策略的收益上限.txt",
+    "source_sha256": "8507094ce1468927b8af2194386073158c1ec1c6e1526a98a7bdad192b49c21a",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:30",
+       "14:00",
+       "after_close",
+       "before_open",
+       "every_bar"
+      ],
+      "after": [
+       "09:30",
+       "after_close",
+       "before_open",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/35.自适应量化终极算法2.0 （全新升级).txt",
+    "source_sha256": "37fa7f251f745ed580dbebb3d057401573c7df9ed76351e76df2f326fe80053f",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/37.三阳三阴战法.txt",
+    "source_sha256": "613bd63d6835299e162bd0086c57983ad92a746b876c6a1904e4e8b1f47703df",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "every_bar"
+      ],
+      "after": [
+       "before_open",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/38.ETF动量轮动RSRS择时-魔改3-北向资金择时-再优化.txt",
+    "source_sha256": "8350192d07fab400037254802531366a4358d1661c80c72b3f20a8f5e10302b2",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/40.RSI学习贴.txt",
+    "source_sha256": "5674dbc6d55fbe6cd6d86867831b0e95c8ab8dade4cf49e1da1c02a244544c03",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:30",
+       "9:30"
+      ],
+      "after": [
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/42.实盘出现的问题和解决办法.txt",
+    "source_sha256": "43a7358cc6c3a9b439bff90f30c67e462f5151a743a52b957f52832522fbe9de",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:50",
+       "14:55"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/44.！！！最易上手的网格策略v2.0，设置几个参数就可以直接使用.txt",
+    "source_sha256": "2e578f7c150cee870542ea7a5c9468ae3e039d39f146120ca139b2a755a2139c",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "15:30",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/46.韶华研究之十二--还算可以的竞价研究.txt",
+    "source_sha256": "bad823f9b5af4b5fca4ccbc4a7bf1fa041904fd4f19698d256623b092530d181",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:27",
+       "09:30",
+       "14:55",
+       "20:00",
+       "21:00",
+       "7:00"
+      ],
+      "after": [
+       "09:27",
+       "09:30",
+       "14:55",
+       "7:00"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/47.别人恐惧我贪婪——重视大盘择时.txt",
+    "source_sha256": "0f7df0722cd8418c3e522e3e924785326b8213c38816a4ae438c185857118ddf",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/48.一种宏观数据的中长线策略，年化15%，最大回撤9%.txt",
+    "source_sha256": "5d55e30ef811ceda9ef64f13f874d38ae84204dcbf2fb248274188563d08c88b",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/50.ETF动量轮动RSRS择时-V2.1.txt",
+    "source_sha256": "5dd5e67057be3546b2d6e4328d86ab6ec82924e69a6025688f6249520da00037",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "13:00",
+       "15:30",
+       "9:30",
+       "open"
+      ],
+      "after": [
+       "9:30",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/51.行业反转效应（年化32%回撤8%).txt",
+    "source_sha256": "04bd229f5c03bcc647377d202630e50747a63d83f331ae4029d165eed1192566",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "9:30"
+      ],
+      "after": []
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/53.超跌网格交易大法V1.2：稳健跑赢大盘-年化13%回撤7%.txt",
+    "source_sha256": "f57535920ae96bde072df34d923b31ef7d63e56753d0eaf3ea19d5fd8d4a8769",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "10:30",
+       "11:00",
+       "13:00",
+       "14:00",
+       "14:50",
+       "9:00",
+       "9:05",
+       "9:35"
+      ],
+      "after": [
+       "14:50",
+       "9:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/57.别人恐惧我贪婪3——年化20%的股债组合.txt",
+    "source_sha256": "50b529f7a2898c26c299d327e61ce1b48b3f50fa4ba63dc9eec0e8a82cb7a3ce",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/58.ETF动量轮动RSRS与北上择时-股债平衡-盘中止损.txt",
+    "source_sha256": "906132e25c4aca3dc47a2d785737b16af5ca5c9711d3aa3c6606a89305d30d9e",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "13:00",
+       "15:30",
+       "9:30",
+       "open"
+      ],
+      "after": [
+       "9:30",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/6.PEG+成长+小市值+RSRS择时.txt",
+    "source_sha256": "6dd6faed54b99c9865fa05625604e6de632041c97256aaaae33f5d1ecd2bf7f5",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "00:01",
+       "15:30",
+       "9:30",
+       "9:45"
+      ],
+      "after": [
+       "15:30",
+       "9:45"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/60.ETF动量轮动RSRS择时-v2.txt",
+    "source_sha256": "7de6da9d4efc8e504a73e535393f2dcaf6d46d91de8ceb5618a05bd4acc6c9c6",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "13:00",
+       "15:30",
+       "9:30",
+       "open"
+      ],
+      "after": [
+       "9:30",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/61.简单ETF策略，年化97%.txt",
+    "source_sha256": "9e47ff904080216ab711f70c59b5c514c54eab2585b07e18e4d03c7f658ef63c",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/63.生猪期货CTA策略.txt",
+    "source_sha256": "eef12754fb9ce461300e2529f0ecb75cc2404faec6110bcf68a591acd273cc37",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "15:30",
+       "8:50",
+       "every_bar"
+      ],
+      "after": [
+       "15:30",
+       "8:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/64.ETF轮动策略升级-增加盘中止损.txt",
+    "source_sha256": "47f52dbc69ddf56582b101b7f1a812dbeaf7f38ae9aae4e2ac94cfc37b020d77",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "13:30",
+       "21:00",
+       "9:32"
+      ],
+      "after": [
+       "21:00",
+       "9:32"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/66.ETF动量轮动MA乖离择时.txt",
+    "source_sha256": "a15036fa8a6ac1e3c648fe71e1a4f3644fd52d5ff8122b9a96a26e2948630630",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/69.场内基金定投价值平均增强策略，年化30%+.txt",
+    "source_sha256": "8af59e10a1c1c8810f91bdeb2d76cdc017e8812c058f0fb324aea47cc9d444ee",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "close",
+       "open",
+       "open+30m",
+       "open-30m"
+      ],
+      "after": [
+       "close",
+       "open",
+       "open+30m"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/70.（股票交易模板）小市值-EPS-成长因子选股.txt",
+    "source_sha256": "043305b1c6654d67350aaa2f751427059b39ca6e56f6e11fed31f7f4dd7d1831",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/73.实现净利润跳空策略.txt",
+    "source_sha256": "d22f0f6a58646e50b096cdcb4d95eb57a973702edc1fadee1ab13d686ad38263",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "open"
+      ],
+      "after": [
+       "every_bar"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/76.ETF-控制回撤性能拉满（国债ETF增强).txt",
+    "source_sha256": "4f41bed4afc75de12c83299fcda6e35311015be749d62efa8de9098e88780dbc",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/77.龙头弱转强战法.txt",
+    "source_sha256": "6d9d2f306860bf4c51b39574bfa774100f751c1ba386fbca44b0e026e22f1d97",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "11:00",
+       "13:30",
+       "14:00",
+       "14:30",
+       "14:57",
+       "after_close",
+       "before_open",
+       "open"
+      ],
+      "after": [
+       "11:00",
+       "13:30",
+       "14:00",
+       "14:30",
+       "14:57",
+       "before_open",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/78.ffscore选股加rsrs择时.txt",
+    "source_sha256": "30c8c0f1ca0d0c5f61fabdc30e7fc15158cbd24a3998d3f35c885941fd0fcd9a",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open",
+       "open"
+      ],
+      "after": [
+       "before_open",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/79.实盘一周50%的妖股探测器.txt",
+    "source_sha256": "c840bac85684fb2f255b9620115046824bfb8be6a72ba56195a786604ec03d35",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:31",
+       "10:00",
+       "14:50",
+       "15:05"
+      ],
+      "after": [
+       "09:31",
+       "14:50",
+       "15:05"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/81.低PB小市值低换手策略总结.txt",
+    "source_sha256": "86717283069149897158bf81d70693f91c037bd397b709a8536bf5ccb2b4ede3",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/85.价值策略重开，再次向Jqz1226致敬.txt",
+    "source_sha256": "188c031920d94efb982e7d9ba8b4236022281a4129fa0c43b4f5c593b762e7d8",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:00",
+       "09:05",
+       "09:10",
+       "09:16",
+       "09:26",
+       "09:27",
+       "09:28",
+       "09:29",
+       "09:30",
+       "10:00",
+       "14:50",
+       "after_close"
+      ],
+      "after": []
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/89.年化收益55.7%， 超高胜率 0.799.txt",
+    "source_sha256": "7177de46345ea876ccffbe9053f455ecb32450d17438993f96fe2a1147427e8e",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "10:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/9.分享几个截止2022年3月仍有效的策略.txt",
+    "source_sha256": "ea4a5cd89319e8155f2f844a1bed23bc5fcd8e6b29390a08710399f179d300d7",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:30",
+       "15:10",
+       "15:30",
+       "16:05",
+       "9:15",
+       "9:30"
+      ],
+      "after": [
+       "09:30",
+       "15:30",
+       "16:05",
+       "9:15",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/90.大师策略——柯林·麦克连成长价值优势投资法.txt",
+    "source_sha256": "ac69d107b4d9d97cb381fa853cd9ecddf7a6e5201da8e24fad82199409c69311",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "after_close",
+       "before_open"
+      ],
+      "after": []
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/91.【复现】特征分布建模择时.txt",
+    "source_sha256": "95039a7c5a6a1fc4a9c4b37124ed80c691fe77bfac0a4c22f7c38a1008ecd3ed",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:00",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "2024年度精选策略2/98.【漂亮50】“漂亮50”策略复现以及股息率排序函数.txt",
+    "source_sha256": "16f849a15c1608a90ab68cf588d038009956c817b87c56a1f198a7b82194be44",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:55",
+       "15:30",
+       "9:30"
+      ],
+      "after": [
+       "14:55",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/10.10年52倍，年化59，全新因子方法超稳定.txt",
+    "source_sha256": "0343d0d4acd8712033b1abeef84ff7d262f548bfe340c323f9475207e33dd6b3",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "14:30",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/11低风险中等收益策略.txt",
+    "source_sha256": "b4296eeacfa984cfc5fb4ba413d504efd10b3be6f28bcfefa4655bf2b8e8eba1",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:35",
+       "after_close",
+       "before_open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/12用子账户模拟多策略分仓.txt",
+    "source_sha256": "a6d4bfb27f324527508793380f1dacbf4913e98bc4ccff1e49c67dfdcec85ccd",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:30",
+       "14:00",
+       "14:50",
+       "15:01",
+       "7:30",
+       "7:40",
+       "9:30",
+       "9:35"
+      ],
+      "after": [
+       "10:00",
+       "10:30",
+       "14:00",
+       "14:50",
+       "7:30",
+       "7:40",
+       "9:30",
+       "9:35"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/13首板高开-低开-弱转强混合策略（今年收益1138.61）.txt",
+    "source_sha256": "cc5a5110dcae348d05f7c3f1ce2640e3c8fe599ed17cbe684a2c229ceb1f38af",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:25",
+       "14:50"
+      ],
+      "after": [
+       "09:26",
+       "11:25",
+       "14:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/14安全摸狗策略.txt",
+    "source_sha256": "8ffe96d2d9b40e5339b08ca061eb0e25eb3f006e3849c679b4820addd1828248",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/15小市值排除3个bug版，22年至今收益506.txt",
+    "source_sha256": "1e32cb58d389644dd96866eb1448fd1577bec36db56dcbf16ad3240710d6e7a1",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "14:00",
+       "15:10"
+      ],
+      "after": [
+       "10:00",
+       "14:00",
+       "14:50",
+       "9:05"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/16集合竞价三合一，今年收益1067.txt",
+    "source_sha256": "d8d2e920b82c77555044b53060ad9ae57cce3f8d4cd8be733294f34d72c702af",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:25",
+       "14:50"
+      ],
+      "after": [
+       "09:26",
+       "11:25",
+       "14:50",
+       "9:01"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/17多品种ETF动量轮动+EPO优化.txt",
+    "source_sha256": "ac55a9e0dfcb9b9244c68935b08f1a0dea18a6e9e54ac01baf73346425ed4f98",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/18国庆节献礼：实例说明白马股攻防转换策略.txt",
+    "source_sha256": "dc7d7bcb3e233df32ad8e282882fbedf7da02ef6012cc66a47023976b56cd02e",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/19机器学习线性回归小市值.txt",
+    "source_sha256": "3f9802de10a947caeadee8d74de83cd00014cb2d6bb9e7c1b92c99dd35d8e7ea",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "14:30",
+       "15:10",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/1首板低开策略.txt",
+    "source_sha256": "953a46add178f7cec14c7abe0c55be015ccbf82518aa7bca811dd389b8b1af53",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:30",
+       "11:28",
+       "14:50"
+      ]
+     },
+     "gaps": {
+      "before": [],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/21【原创】年化123涨停弱转强竞价战法.txt",
+    "source_sha256": "67eb01b0dacce661551158ad436241447965c1991a4d28abb3c485bd88d474c4",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:30",
+       "10:30",
+       "13:30",
+       "14:50",
+       "9:01",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/22带上止损的核心资产轮动才更安心，低回撤，高收益率.txt",
+    "source_sha256": "c16bb1d73b4d7f6aa007272426bca766b828452d410890dfd74497a3f4299dc3",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "7:00",
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/23大盘择时，逻辑简单.txt",
+    "source_sha256": "af9587ef944b9d964e62145a02333c2cda5bb4812b042f79be42b59e6ee5dcd5",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:00",
+       "9:05",
+       "9:30",
+       "9:35"
+      ],
+      "after": [
+       "14:00",
+       "15:00",
+       "9:05",
+       "9:30",
+       "9:35"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/25冷饭热吃之三，14年至今年华99.99.txt",
+    "source_sha256": "9cdc8219021369d382b6003406ac38cf50d2e131d27e45284eceeb7cd806e702",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "14:30",
+       "15:10"
+      ],
+      "after": [
+       "10:00",
+       "10:30",
+       "14:30",
+       "14:50",
+       "15:10",
+       "9:05"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/26波动率过滤后相关性最小etf轮动.txt",
+    "source_sha256": "bb629ecfcfe853369ac5d3192c1377688c5626a9be944758801ad945e4ecbf1b",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "10:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/27人工智能强化学习DQN交易智能体（回馈社区公开训练代码）.txt",
+    "source_sha256": "bf4f31552297e6ad232bb780917d926e40a27b55ca48719305f37777d29262b3",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/28韶华研究之十九，一致性用在微盘控制回撤.txt",
+    "source_sha256": "3ced2416138cf61884d297956a0bb3e8001a95bd5b7df1d9794f07473ea97312",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:00",
+       "14:45",
+       "15:10",
+       "6:00",
+       "9:30"
+      ],
+      "after": [
+       "14:00",
+       "14:45",
+       "6:00",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/29穿越牛熊2.0(非小市值)年化50%的cta策略.txt",
+    "source_sha256": "9ca0a893c323ddfccf0fb9f23ce415f1ba92230c0fbc21b91bea439ff277111f",
+    "changes": {
+     "gaps": {
+      "before": [
+       "专用资产行情与交易规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "专用资产行情与交易规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/2连板龙头策略.txt",
+    "source_sha256": "36d9ab13955f12a666db1bc3d347d4bd2caa7ff7210098fe6d79e40c03d0eb6e",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:30",
+       "14:50",
+       "15:02",
+       "9:01"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/30错杀反弹，掌握人性规律，开启投资新纪元.txt",
+    "source_sha256": "97f6f637abfe0d0a56d3a5e260ff9776f2fdae8228c37346f6ac6b52f65378db",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:40",
+       "14:00",
+       "9:15",
+       "9:16"
+      ],
+      "after": [
+       "10:40",
+       "14:00",
+       "14:55",
+       "9:15",
+       "9:16"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/32EPO优化低相关etf组合.txt",
+    "source_sha256": "64074440cb797c6f2dd94bb4063730c632c89b2e9eb59386ded1adaf39a0746e",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "10:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/33回馈社区顺便搞积分《一个完整的机器学习pipeline》.txt",
+    "source_sha256": "e69c0e2b0d49fa7b05e878551a46d619ceff80805064154a9819c2c673b4b515",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "14:30",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/34十年回测 年化103.32% 最大回撤23.89%.txt",
+    "source_sha256": "9d09011863825769721a5996fea931ea36e49ac280d55317de7107b682e8f9c0",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:30",
+       "14:00",
+       "14:30",
+       "15:30"
+      ],
+      "after": [
+       "10:00",
+       "10:30",
+       "14:00",
+       "14:30",
+       "8:00"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/35【菜场大妈】股息率小市值策略,10年206倍,5年10.8倍.txt",
+    "source_sha256": "10bc142e232e5b613572d9cb8db6dffd243c5d6d6d511cda03d268b10e222990",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:00",
+       "14:55",
+       "9:05",
+       "9:30",
+       "after_close"
+      ],
+      "after": [
+       "14:00",
+       "14:30",
+       "14:55",
+       "9:05",
+       "9:30",
+       "after_close"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/36快过年了。不想呆在小市值的，可以拿这个策略躲一躲.txt",
+    "source_sha256": "d04b32513f71be1dfd02b1efb7335b7f9345c71b8b646200aa9bc25f9fdb678e",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:27",
+       "15:10",
+       "7:00",
+       "9:30",
+       "9:35",
+       "open"
+      ],
+      "after": [
+       "11:27",
+       "7:00",
+       "9:30",
+       "9:35",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/37微盘股扩散指数双均线择时.txt",
+    "source_sha256": "f821d095edd256a58df6ad94f179ef4d40106f3de1903f7146b746e4d54264d6",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "15:10",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/38ETF策略之核心资产轮动（线性增加权重）.txt",
+    "source_sha256": "4d00a6e469c5efa19487b328dd234d8d090d2f5333e58824fcb1a30efdd79bf7",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/39干积分-大小盘反复横跳V2.0.txt",
+    "source_sha256": "e4c5a76bc7870d5ca3243643d8c61300081c22ff60f2a3ac276944a425cbdf13",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "14:30",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/3、5年15倍的收益，年化79.93，可实盘，拿走不谢！.txt",
+    "source_sha256": "99ded26ab7e374741ba0c6f5a06f6b63130efd1f8212a01494ba27a0358e4cc7",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:00",
+       "14:55",
+       "9:05",
+       "9:30",
+       "after_close"
+      ],
+      "after": [
+       "14:00",
+       "14:30",
+       "14:55",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/41SVR机器学习上证综指择时中小板财务选股策略.txt",
+    "source_sha256": "8201a4d68e98c3059f6fa9fd1c39b77c43848d35f81f805658716f29cefbd10a",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "历史行业",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/42国九条：三年分红5千万以下且占净利润30以下将被ST.txt",
+    "source_sha256": "64275cb977a04806b959e3da3d662911163912a3bb76a4ef90193fa23bc119fb",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:30",
+       "14:00",
+       "14:30",
+       "15:30"
+      ],
+      "after": [
+       "10:00",
+       "10:30",
+       "14:00",
+       "14:30",
+       "8:00"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/43小市值再优化【年化98 回撤27】无未来函数.txt",
+    "source_sha256": "589ae09ec68a99d0f4e68ee127fcedc4ffd97479185c0f35041c1e22e43250ca",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "14:00",
+       "15:10"
+      ],
+      "after": [
+       "10:00",
+       "14:00",
+       "14:50",
+       "9:05"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/44国九条 年化130.74% 回撤11% 众神Debug版.txt",
+    "source_sha256": "6acc20730770ec33480b439a42845a250d0d7283b63fee6ba474e9ea88bac719",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "14:00",
+       "15:10"
+      ],
+      "after": [
+       "10:00",
+       "14:00",
+       "14:50",
+       "9:05"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/45此消彼长.txt",
+    "source_sha256": "2c988d7207d4e5b0d926f53fefbf14e18c327fea40001ef24548001a7958a082",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:00",
+       "15:10",
+       "9:05"
+      ],
+      "after": [
+       "14:00",
+       "15:10",
+       "9:05",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/46高增股池小市值轮动.txt",
+    "source_sha256": "f7dc33b105dcbe9a4bec9e1ecd456ab00ee9cfc541232b3d62f50f5a63fc021a",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:25",
+       "09:30",
+       "14:40"
+      ],
+      "after": [
+       "09:25",
+       "09:30",
+       "14:40",
+       "14:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/48投资回报率ROIC中等市值.txt",
+    "source_sha256": "42a85e42b8ec48763f6ebbcdf4df5160d90e82247f8feb1f6a23dd4c397adf0a",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "9:05"
+      ],
+      "after": [
+       "9:05",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/50分享一种K线小碎步后突破的分钟级打法.txt",
+    "source_sha256": "3c2724114585de0edef9ab0c7baec1351b8f625d565e3c99126e9d89da96ebb3",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:40",
+       "8:30",
+       "9:30",
+       "every_bar"
+      ],
+      "after": [
+       "14:40",
+       "8:30",
+       "9:05",
+       "9:30",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/51“四大搅屎棍策略”学习笔记-有魔改.txt",
+    "source_sha256": "f19b9ab9f8ef745c28cbd20325087cb7afd109a8611fb847fafe06a9569f9c24",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/52机器学习滚动训练价投策略.txt",
+    "source_sha256": "c980a2448a01ed48b402efa5a8718a84168d8677a29a3365ffd4ebd0920c6fbb",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/53TSmall-100, 微盘三正.txt",
+    "source_sha256": "cedb2a126947ac6e14c1738078959a58b9a4a4f1daf41cc1d9ab5b8628985985",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "after_close",
+       "before_open",
+       "open"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/54发一个学习策略5年70倍，思路可以学习.txt",
+    "source_sha256": "778debe8a0b3b7467552521eda0d5afa25230c1436745cff980ceb6fc22d5bbc",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:15",
+       "09:26",
+       "13:06",
+       "14:50",
+       "9:15",
+       "9:26",
+       "every_bar"
+      ],
+      "after": [
+       "13:06",
+       "9:15",
+       "9:26",
+       "every_bar"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/57韶华研究之十八，201系列.txt",
+    "source_sha256": "7ddbc9716edc868e3e9a40f08b815c7ec732a990083d2a1ea00df88203dcf2e6",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:26",
+       "09:30",
+       "10:30",
+       "13:30",
+       "14:55",
+       "20:00",
+       "21:00",
+       "7:00"
+      ],
+      "after": [
+       "09:26",
+       "14:55",
+       "7:00"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/58Debug-输出信息-多标的版ETF策略(ETF复现之三）.txt",
+    "source_sha256": "e7ff4f030f9549890c3277b2ca7eefbb068893832a12c7d0b685206b2e4f7401",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:25",
+       "15:10",
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/59追板策略，今年收益已翻倍，低操作低回撤高收益可实盘.txt",
+    "source_sha256": "0d789e0bd9fc116101763336a42366b0dbc9f1bc0994f0a1593faa3a5d451e8b",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "00:00:10",
+       "09:26:00",
+       "16:00:10"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/5四大搅屎棍策略.txt",
+    "source_sha256": "e41baa222b882bc3f30341939967ebdded7ed98d02a90de7d77354b9ebfaae6a",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/60高股息V1.0（小程序公开股池）.txt",
+    "source_sha256": "daaf73f27eee2cc499094abee38296091374fae34839ffd035bcdab8bf4b11d9",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "14:30",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/61BiLSTM for ETF.txt",
+    "source_sha256": "d2ec23cd11a70eccbb1e863373d50c4f1a29a2ac6d7f1421ac6d65ee275fb9bf",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:05",
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     },
+     "status": {
+      "before": "待审查",
+      "after": "待数据"
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/62基金溢价（模拟效果好！）.txt",
+    "source_sha256": "66a57814941fd2a1a4c29f7a483f35723c58575185491d85f8caa9d5f770a6f1",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:15",
+       "09:30"
+      ]
+     },
+     "gaps": {
+      "before": [],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/64大小外择时小市值3.0.txt",
+    "source_sha256": "0733c340de7f090b1232d6df2b69ae0053f88b04f2f5d211bb864a1f6cfdaa6f",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "9:00",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/67大市值价投高股息爱国者策略（爱我中华）.txt",
+    "source_sha256": "4822c6f09969e80946b23627042223ea332655d49c7b66eb4aa1c1e982f9f05d",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "14:30",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/68wywy1995 首板低开策略代码优化，提快速度.txt",
+    "source_sha256": "30bf2a422b5ad4acf8b9229254e16078ee3a555c291c25402cab29fec33d5a3b",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:15",
+       "11:28",
+       "14:50",
+       "9:26"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/69“稳定摸狗策略”学习笔记.txt",
+    "source_sha256": "aa703d37a720815758f28a581a1b28ae312a502153f6232af907cd79e17f9790",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/6国九小市值策略【年化100.5】.txt",
+    "source_sha256": "cee4acc64d6528b2556f4242d563f4030ba19c7cdef762beb7058e30c189b020",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "14:00",
+       "15:10"
+      ],
+      "after": [
+       "10:00",
+       "14:00",
+       "14:50",
+       "9:05"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/70动态保形回归小市值策略改进.txt",
+    "source_sha256": "0956b4d3dfe36f329b292b9a021e467f543888c565afe3f9ecbecb26be5a5d67",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/71（乱改一版）股票加“钱粮”ETF组合.txt",
+    "source_sha256": "15147b997b358f235ce72cdccbb2a08d68cce8a1a1a6e8e5cc16dc7cdf9b1abe",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "14:55",
+       "15:01"
+      ],
+      "after": [
+       "13:00",
+       "14:00",
+       "14:30",
+       "14:55",
+       "15:01",
+       "9:05",
+       "9:35"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/72量化进阶学习笔记——打板策略.txt",
+    "source_sha256": "57dc0b58f83862f239760e5d967640eb2b0dc5bbbe47919011beaac4fae4a7a4",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:30",
+       "10:30",
+       "13:00",
+       "14:00",
+       "every_bar"
+      ]
+     },
+     "gaps": {
+      "before": [],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     },
+     "status": {
+      "before": "待审查",
+      "after": "待数据"
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/73微盘400每日再平衡.txt",
+    "source_sha256": "daf43af3d722dcfe9cba02f32aeaaee997544fc528b2314cd8131b0b5051fa0f",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/74趋势筛选后相关性最小etf轮动.txt",
+    "source_sha256": "f3b337a8b235fed948f174590c46c4327dc1000cbc62456f1a09274e14cc19bf",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "10:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/75大市值价值投资优化一波.txt",
+    "source_sha256": "6401435e1967c322c3579fb1c04150f219e5cfbcf14b34c5e4bdc580ce89c611",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/76小市值止损策略【年化104.11】.txt",
+    "source_sha256": "d30988c7fa14531ba8de9e07253a92ff1952b51a4f9e95df300fd264f4f1dd5e",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:30",
+       "14:00",
+       "14:30",
+       "15:30"
+      ],
+      "after": [
+       "10:00",
+       "10:30",
+       "14:00",
+       "14:30",
+       "9:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "历史指数成分",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/77研报三因子II-新规高分红小市值-年化60回撤19.txt",
+    "source_sha256": "5e3e86be6940c14c218dfa0d23bc4deba9e0faf95c56878f8d9ab67895cf77d6",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:30",
+       "14:30",
+       "9:05"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/78首板低开策略-终极版 最大回撤15%，年化50%.txt",
+    "source_sha256": "317641ff8498a7e2893c410aa1a45ab00e0582684d65a3f1fb84efd8e05115ba",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:30",
+       "11:25",
+       "14:30"
+      ]
+     },
+     "gaps": {
+      "before": [],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     },
+     "status": {
+      "before": "待审查",
+      "after": "待数据"
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/79国九条-新的红利因子，修正「审计意见」函数.txt",
+    "source_sha256": "a33a5fff5872f72f67fc5a3899005dfc2e582d0185ac244366457b6dfb0e0c55",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "14:00",
+       "15:10"
+      ],
+      "after": [
+       "10:00",
+       "14:00",
+       "14:50",
+       "9:05"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/7追首板涨停 过去两年年化304%.txt",
+    "source_sha256": "18dab475abf4f217e51a7982be8e60a04ab5561bf38841a1971a001c9d91cbc9",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "11:28",
+       "14:50"
+      ],
+      "after": [
+       "09:28",
+       "11:28",
+       "14:50"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/80基本面01加RSI择时.txt",
+    "source_sha256": "9c7636655e5475681faac86299d577eec561b06081a8c945e87f137ab8a5ff0f",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "9:05",
+       "9:30"
+      ],
+      "after": [
+       "9:05",
+       "9:30",
+       "open"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/81搞市场最靓的仔！指数ETF动量轮动策略-2.txt",
+    "source_sha256": "8d1a703edbb5c173d3f6136da01556d2295d19a8800d5a393927bf1982277210",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/83大小外择时小市值.txt",
+    "source_sha256": "09cccd9f0082d09ddf1d98c3795fe549f7c816d769e814c6950981744170d969",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "9:00",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/85稳健型ETF策略.txt",
+    "source_sha256": "dcae7848a99b7cdffb7a2d99564da319bbe662f0328c5424e7f1e3852b275876",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:35"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/87山寨红利.txt",
+    "source_sha256": "397609995523c05e8067715ebf7e3a076528fe2285d228042195246ae0830c48",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "10:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/88WY大神的“龙头打板”策略小改.txt",
+    "source_sha256": "b630a964ff2e72c2bf525ffab15f5d51b9a5bbc47e5e2ba3d51a48cef32e6f41",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:30",
+       "10:30",
+       "13:00",
+       "14:00",
+       "15:02",
+       "9:01",
+       "every_bar"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/89基于Gyro.大神的小市值策略的因子匹配研究.txt",
+    "source_sha256": "224ac31588d5edec82d5268ab1f2387464916aacde134836e964fc6cb06692b2",
+    "changes": {
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/8国九条后中小板微盘小改，年化135.40.txt",
+    "source_sha256": "b1231d178313c6e3ecb330b78558f61b586ac321cb412ba11d6a3fe35a3b0ddb",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "14:00",
+       "15:10"
+      ],
+      "after": [
+       "10:00",
+       "14:00",
+       "14:50",
+       "9:05"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/90固收+.txt",
+    "source_sha256": "8855383f94fa8a5b28a370263c31f0e1b02fdc0f272e0a602cce7636d5b187e7",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:35"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/91ETF-T0动量策略，年化 18%，回撤3.31%.txt",
+    "source_sha256": "eecd6937c4a473a728c53ffd47f9659003dc3706e2dc88af027ff471c0ecc61e",
+    "changes": {
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/92行业宽度轮动研究.txt",
+    "source_sha256": "966a637bf16e0e188d296ea14b408b0142280b1f54657600a7e2da93941bb416",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/93.234板介入-2023年14倍-无未来.txt",
+    "source_sha256": "dadd640e2cd91f1582fc5a64c685cca7dc1bc0bf5faecc9b29f71f07398c635c",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "09:25",
+       "09:30",
+       "11:29:00",
+       "14:52:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "历史财务版本/公告时间或每日市值/股本待核实"
+      ],
+      "after": [
+       "历史财务版本/公告时间或每日市值/股本待核实",
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/95学习贴《一个完整的-深度学习-神经网络pipeline》.txt",
+    "source_sha256": "cb13a8f4beb4ed820a09b73e970a82433df91398de210070057cb73422f143e2",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "9:05",
+       "9:30"
+      ]
+     },
+     "gaps": {
+      "before": [],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池"
+      ]
+     },
+     "status": {
+      "before": "待审查",
+      "after": "待数据"
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/96首版+2版龙虎榜挖掘V2.0，年化1400.txt",
+    "source_sha256": "ff8f0f57a646151325458724bdf4f8ed33a51c82407ed7d8fbcf6fb673c471b6",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "10:00",
+       "10:30",
+       "11:00",
+       "11:29",
+       "13:00",
+       "13:30",
+       "14:00",
+       "14:30",
+       "14:45",
+       "14:55",
+       "9:15",
+       "9:26",
+       "9:35"
+      ],
+      "after": [
+       "11:00",
+       "11:29",
+       "13:00",
+       "13:30",
+       "14:00",
+       "14:30",
+       "14:45",
+       "14:55",
+       "9:15",
+       "9:26"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/97趋势筛选后相关性最小etf轮动-加速10倍版.txt",
+    "source_sha256": "0a2d130d41420c5f78b13b4f6edbe8ed2b30ed9a8e65a16f3738de17f25737a5",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "10:00",
+       "9:00"
+      ]
+     },
+     "gaps": {
+      "before": [
+       "ETF行情/公司行动/执行规则"
+      ],
+      "after": [
+       "盘中事件/撮合与对应分钟或Tick股票池",
+       "ETF行情/公司行动/执行规则"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/99韶华研究之二十，竞价异动.txt",
+    "source_sha256": "6443af05c24a64750b8613373615c63000506cfabc89b5996bf250c25c49e4cd",
+    "changes": {
+     "scheduled_times": {
+      "before": [
+       "09:26",
+       "14:55",
+       "20:00",
+       "7:00",
+       "9:30"
+      ],
+      "after": [
+       "09:26",
+       "14:55",
+       "7:00",
+       "9:30"
+      ]
+     }
+    }
+   },
+   {
+    "path": "聚宽2025年精选/9干积分-量化策略简易框架.txt",
+    "source_sha256": "653afee185c6c03f2a84b6d8d395c436c9b78c844c0b2c955a24c563df01bdab",
+    "changes": {
+     "scheduled_times": {
+      "before": [],
+      "after": [
+       "14:00",
+       "9:05",
+       "9:30"
+      ]
+     }
+    }
+   }
+  ],
+  "schedule_detection_counts": {
+   "ast_call_candidates": 668,
+   "tokenized_call_candidates": 24,
+   "unparsed_requires_review": 3
+  },
+  "intraday_gap_before": 239,
+  "intraday_gap_after": 420,
+  "strategy_results": [],
+  "limits": [
+   "Static call candidates; not proof of active control flow or platform runtime frequency",
+   "Dynamic times, aliases and tokenization failures still require manual review",
+   "Manual rules and original bytes unchanged; no new backtest or data publication"
+  ]
+ },
+ "offline_scan": {
+  "status": "match",
+  "differences": 0,
+  "files": [
+   {
+    "original_file": "data/catalog/strategies/97c60a9cc2299288c5b9/catalog.json",
+    "recomputed_file": "data/staging/strategies-batch17/20261005-schedule-dependencies/catalog-offline/catalog/strategies/97c60a9cc2299288c5b9/catalog.json",
+    "sha256": "9e811b4242ceb89a1a518523d92d3a24aed2c4c81deec80ee4435f4c08605e5e"
+   },
+   {
+    "original_file": "data/catalog/strategies/97c60a9cc2299288c5b9/summary.json",
+    "recomputed_file": "data/staging/strategies-batch17/20261005-schedule-dependencies/catalog-offline/catalog/strategies/97c60a9cc2299288c5b9/summary.json",
+    "sha256": "e5f1e1fa70a82a85ceda9954a71e1d362274aab1d0c0a0a123337eb3a2037ed3"
+   },
+   {
+    "original_file": "data/catalog/strategies/97c60a9cc2299288c5b9/catalog.parquet",
+    "recomputed_file": "data/staging/strategies-batch17/20261005-schedule-dependencies/catalog-offline/catalog/strategies/97c60a9cc2299288c5b9/catalog.parquet",
+    "sha256": "8456f07407ab5f7a576f2d47c421a61d525659c3b3818e8f9337a5d51ef4d10e"
+   }
+  ],
+  "implementation_evidence_sha256": "b52966bd29d993cb4c0dcf9c83fc92d998ade4da45ce21ad8eb3b396533b08e7",
+  "original_evidence_file": "data/catalog/strategies/implementation-evidence.json",
+  "scan_sha256": "b8cf310d4a02b7818c0bdfacecc31dbef69833c3b4662ecf571a54f7e517df2e",
+  "network": "socket.connect and connect_ex forbidden",
+  "not_a_strategy_reproduction": true
+ },
+ "checks": {
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "pytest",
+     "-q",
+     "tests/unit/test_catalog_schedules.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_batch17_archive.py",
+     "tests/integration/test_strategy_merge.py"
+    ],
+    "returncode": 0,
+    "stdout": ".......................................................                  [100%]\n=============================== warnings summary ===============================\n../../../../home/zuozhe/envs/quant/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1\n  /home/zuozhe/envs/quant/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n55 passed, 1 warning in 6.98s\n",
+    "stderr": ""
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/prepare_handoff.py",
+     "scripts/build_strategy_catalog.py",
+     "scripts/verify_financial_import.py",
+     "scripts/review_strategy_batch17.py"
+    ],
+    "returncode": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/review_strategy_batch17.py": "eed4c353f2a4f3d660d7c0c0bee81d8bc1cfe48c7b4bae32ae29e251205f4074",
+   "src/observe/strategy_catalog.py": "4968fd8548669fffd7be165de6483cab500dbdf3e4738a33b5a0632777a6d94d",
+   "tests/unit/test_batch17_archive.py": "98e6e80ff3150b6b0b28ce174e7018c41046a464c28feeb1de1e1e7f014f1b9f",
+   "tests/unit/test_catalog_schedules.py": "a1c4466e3fbfa1039165fa0884aa3714d42fea075e16649bc1e827e78e1f01b7"
+  },
+  "evidence_sha256": {
+   "baseline.json": "b34c0e69f7fa317562243d975b5105d0e71267a75d9713cf4e74d1fa3a161c29",
+   "catalog-before.json": "5607febcf2754c24437c78a3d7a91ba76fcacc894b47408fc1506b3034b1db3d",
+   "implementation-evidence.before.json": "b52966bd29d993cb4c0dcf9c83fc92d998ade4da45ce21ad8eb3b396533b08e7",
+   "offline-scan.json": "91fd205c4f5651d68a7a57f1081d028bd6fbbee2414ca26ec87f9b311e7a389b",
+   "progress-start.json": "5bf30bbcf8ac7590b0bdfd8d856a1b99e9ae735a94e77cd937dbd46d9d298892",
+   "red-regression.json": "f7a92399dd3e8941eeaf230cff3d715ee646c5da611b6043f95dc3194624ebb0",
+   "scan.json": "b8cf310d4a02b7818c0bdfacecc31dbef69833c3b4662ecf571a54f7e517df2e",
+   "code-before/strategy_catalog.py": "dab59b6db3c671baad493675462010e2e41528307399645e876dd16cec1a2e14",
+   "catalog-offline/catalog/strategies/implementation-evidence.json": "b52966bd29d993cb4c0dcf9c83fc92d998ade4da45ce21ad8eb3b396533b08e7",
+   "catalog-offline/catalog/strategies/latest.json": "4c3aad9742e5d7db0ca3b821bbaca19c96d4625f1c07bcab0463af112a5c6670",
+   "catalog-offline/catalog/strategies/97c60a9cc2299288c5b9/catalog.json": "9e811b4242ceb89a1a518523d92d3a24aed2c4c81deec80ee4435f4c08605e5e",
+   "catalog-offline/catalog/strategies/97c60a9cc2299288c5b9/catalog.parquet": "8456f07407ab5f7a576f2d47c421a61d525659c3b3818e8f9337a5d51ef4d10e",
+   "catalog-offline/catalog/strategies/97c60a9cc2299288c5b9/summary.json": "e5f1e1fa70a82a85ceda9954a71e1d362274aab1d0c0a0a123337eb3a2037ed3"
+  }
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 4868,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 260,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "b34c0e69f7fa317562243d975b5105d0e71267a75d9713cf4e74d1fa3a161c29"
+ },
+ "progress": {
+  "checkpoint": "20261005-205404-3045",
+  "note": "Batch17 schedule dependency correction verified; originals and experiments protected",
+  "catalog_id": "97c60a9cc2299288c5b9",
+  "catalog_sha256": "9e811b4242ceb89a1a518523d92d3a24aed2c4c81deec80ee4435f4c08605e5e",
+  "published_batch": "20261005-201432-dd1d",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 504,
+   "已验证": 10,
+   "待审查": 17,
+   "暂不可复现": 54,
+   "非交易研究脚本": 69,
+   "重复版本": 41
+  },
+  "manually_reviewed": 94,
+  "locally_backtested_sources": 11,
+  "locally_reproduced_sources": 11,
+  "local_strategy_runs": 62,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261005-205404-3045"
+ },
+ "strategy_results": []
+}

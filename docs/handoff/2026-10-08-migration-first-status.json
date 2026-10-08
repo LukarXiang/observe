@@ -1,0 +1,107 @@
+{
+ "run_id": "20261008-104204-13ab51-strategy-6258",
+ "kind": "strategy",
+ "status": "mismatch",
+ "started_at": "2026-10-08T10:42:04",
+ "stages": {
+  "load": {
+   "state": "done"
+  },
+  "signals": {
+   "state": "done"
+  },
+  "base": {
+   "state": "done",
+   "run_id": "20261008-104208-9fbe53-base-cfa6",
+   "output": "data/runs/20261008-104204-13ab51-strategy-6258/variants/20261008-104208-9fbe53-base-cfa6",
+   "status": "success_limited",
+   "manifest_sha256": "2f56247e5022fc402379ac7682895f173be199d2f291a6f8e2fa9fd1a5c190d8"
+  },
+  "fees_x2": {
+   "state": "done",
+   "run_id": "20261008-104214-7062e7-fees_x2-28ca",
+   "output": "data/runs/20261008-104204-13ab51-strategy-6258/variants/20261008-104214-7062e7-fees_x2-28ca",
+   "status": "success_limited",
+   "manifest_sha256": "6d025dbf6e6619fd0201bdac2b93ba527e70c05959d9fa00e50c79cdfd658a11"
+  },
+  "slippage_x2": {
+   "state": "done",
+   "run_id": "20261008-104220-0b5def-slippage_x2-fad5",
+   "output": "data/runs/20261008-104204-13ab51-strategy-6258/variants/20261008-104220-0b5def-slippage_x2-fad5",
+   "status": "success_limited",
+   "manifest_sha256": "20ef6413d9575036ae3432601bc6bd3cca6591102283fef934b1dabc15e72c46"
+  }
+ },
+ "config_hash": "13ab51e5a4ff7e37dcff9464a337423884f74bbf2ded978440934f67e7fedc4e",
+ "evidence": "exploratory",
+ "snapshot_id": "20261005-143509-75b4",
+ "reproduce_of": "/tmp/observe-handoff-verify-20261008/data/runs/20261005-143611-844865-strategy-a327",
+ "finished_at": "2026-10-08T10:42:27",
+ "limitations": [
+  {
+   "kind": "strategy_port",
+   "detail": "茅台20日布林突破修正变体",
+   "fidelity": "经用户确认的源码修正及执行近似",
+   "gaps": [
+    "原文np.mean/np.std结果为标量却以[-1]索引，当前NumPy运行会报错",
+    "聚宽动态复权及skip_paused窗口未证明完全等价"
+   ],
+   "differences": [
+    "2026-10-05用户确认去除上下轨标量的[-1]索引，另建修正变体，原始字节保留",
+    "后复权日线、完整交易日窗口，停牌或缺失不更新状态；不以零补齐",
+    "原文仅空仓时投入可用现金；本实现每日按目标权重再平衡，可能追加整手或再试未成交订单",
+    "原文固定价差滑点0.02；本实现比例滑点0.1%、参与度5%、分日期费率，另跑费用和滑点加倍",
+    "初始状态为空仓，预热只计算指标，不回放区间之前的仓位；收盘决策、下一交易日开盘成交"
+   ]
+  },
+  {
+   "kind": "evaluation_scope",
+   "detail": "固定参数工程验证；此区间已查看，不作为独立最终留出，不据此判断策略有效"
+  },
+  {
+   "kind": "data_audit",
+   "detail": "快照批次审计状态为 not_audited（范围 None），不是全快照审计通过",
+   "audit": {
+    "source": "batch 20261005-143444-56c1",
+    "batch_id": "20261005-143444-56c1",
+    "status": "not_audited",
+    "audit_id": null,
+    "scope": null,
+    "input_range": null,
+    "audited_at": null
+   }
+  },
+  {
+   "kind": "data_audit",
+   "detail": "快照批次审计状态为 not_audited（范围 None），不是全快照审计通过",
+   "audit": {
+    "source": "batch 20261005-143444-56c1",
+    "batch_id": "20261005-143444-56c1",
+    "status": "not_audited",
+    "audit_id": null,
+    "scope": null,
+    "input_range": null,
+    "audited_at": null
+   }
+  },
+  {
+   "kind": "data_audit",
+   "detail": "快照批次审计状态为 not_audited（范围 None），不是全快照审计通过",
+   "audit": {
+    "source": "batch 20261005-143444-56c1",
+    "batch_id": "20261005-143444-56c1",
+    "status": "not_audited",
+    "audit_id": null,
+    "scope": null,
+    "input_range": null,
+    "audited_at": null
+   }
+  }
+ ],
+ "reproduction": {
+  "of": "/tmp/observe-handoff-verify-20261008/data/runs/20261005-143611-844865-strategy-a327",
+  "result": "mismatch",
+  "differences": 7
+ },
+ "execution_status": "success_limited"
+}

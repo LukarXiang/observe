@@ -7,7 +7,8 @@ run、reproduce、队列和公开入口测试都经过这里，没有第二套�
 - 参考成交额来自决策时点之前 N 个交易日的真实成交额，预热区间不足时明确不可用。
 """
 import math
-from bisect import bisect_left
+import re
+from bisect import bisect_left, bisect_right
 from dataclasses import dataclass, field
 
 import pandas as pd
@@ -55,23 +56,80 @@ def sessions(calendar):
     return sorted({_date(d) for d, o in zip(calendar.date, calendar.is_open) if flag(o)})
 
 
-def load(store, state, start = None, end = None, liquidity_window = 20):
+def validate_scope(instruments):
+    if instruments is None: return None
+    if not instruments or len(set(instruments)) != len(instruments): raise ValueError('execution_instruments 须非空且不重复')
+    if any(not isinstance(i, str) or not re.fullmatch(r'\d{6}\.(SH|SZ|BJ)', i) for i in instruments):
+        raise ValueError('execution_instruments 须为标准证券代码，显式包含交易所')
+    return instruments
+
+
+def check_history_scope(state, first_day=None, end=None, instruments=None, parts=None, listings=None):
+    for part, entry in state['tables'].get('bars_1d', {}).items():
+        if parts is not None and part not in parts: continue
+        scope = entry.get('history_scope')
+        if scope is None: continue
+        if not isinstance(scope, dict) or scope.get('policy') != 'selected_instruments_v1' or not scope.get('instruments') or not scope.get('start') or not scope.get('end'):
+            raise InputBlocked([{'kind': 'invalid_history_scope', 'detail': f'Unknown historical coverage: {part}'}])
+        if (first_day is not None and _date(scope['end']) < first_day) or (end is not None and _date(scope['start']) > end): continue
+        missing = set(instruments or ()) - set(scope['instruments'])
+        if listings is not None:
+            boundary = min(_date(scope['end']), end) if end is not None else _date(scope['end'])
+            missing = {i for i in missing if listings.get(i) is None or listings[i] <= boundary}
+        if instruments is None or missing:
+            raise InputBlocked([{'kind': 'partial_market_history', 'detail': f'{part}: historical partition only covers explicitly selected instruments, including warmup'}])
+
+
+def covered_history_warmup(state, days, start, end, instruments):
+    """Bound an unbounded traded-row lookup; its signal engine must still reject incomplete windows."""
+    validate_scope(instruments)
+    check_history_scope(state, start, end, instruments)
+    boundaries = []
+    for entry in state['tables'].get('bars_1d', {}).values():
+        scope = entry.get('history_scope')
+        if scope is not None and _date(scope['end']) < start and (instruments is None or set(instruments) - set(scope['instruments'])):
+            boundaries.append(_date(scope['end']))
+    if not boundaries: return len(days)
+    first = bisect_right(days, max(boundaries))
+    return max(0, bisect_left(days, start) - first)
+
+
+def load(store, state, start = None, end = None, liquidity_window = 20, instruments = None):
     """从同一个已冻结状态读取执行需要的表；日线只读执行区间与预热区间涉及的年份分区"""
+    validate_scope(instruments)
+    filters = [('instrument', 'in', instruments)] if instruments is not None else None
+    master = store.load_state(state, 'instruments', filters = filters)
+    if instruments is not None and set(instruments) - set(master.get('instrument', [])):
+        raise InputBlocked([{'kind': 'instrument_missing', 'detail': ','.join(sorted(set(instruments) - set(master.get('instrument', []))))}])
     cal = store.load_state(state, 'calendar'); days = sessions(cal); parts = None
-    s, e = _date(start), _date(end)
+    s, e = _date(start), _date(end); first_day = None
     if s is not None and days:
-        k = max(bisect_left(days, s) - liquidity_window, 0); first = days[k].year
+        k = max(bisect_left(days, s) - liquidity_window, 0); first_day = days[k]; first = first_day.year
         parts = [p for p in state['tables'].get('bars_1d', {}) if not p.isdigit() or (int(p) >= first and (e is None or int(p) <= e.year))]
     used = {t: {p: v for p, v in state['tables'].get(t, {}).items() if t != 'bars_1d' or parts is None or p in parts} for t in TABLES}
-    return {'calendar': cal, 'bars_1d': store.load_state(state, 'bars_1d', parts = parts), 'instruments': store.load_state(state, 'instruments'),
-            'corp_actions': store.load_state(state, 'corp_actions'), 'partitions': used}
+    listings = master.set_index('instrument').list_date.map(_date).to_dict() if 'list_date' in master else None
+    check_history_scope(state, first_day, e, instruments, parts, listings)
+    return {'calendar': cal, 'bars_1d': store.load_state(state, 'bars_1d', parts = parts, filters = filters), 'instruments': master,
+            'corp_actions': store.load_state(state, 'corp_actions', filters = filters), 'partitions': used}
 
 
 def _action(r):
     num = lambda k: _num(r.get(k)) or 0.0
-    return {'instrument': r['instrument'], 'ex_date': _date(r['ex_date']), 'cash_per_share': num('cash_per_share'), 'bonus_ratio': num('bonus_ratio'),
+    result = {'instrument': r['instrument'], 'ex_date': _date(r['ex_date']), 'cash_per_share': num('cash_per_share'), 'bonus_ratio': num('bonus_ratio'),
             'rights_ratio': num('rights_ratio'), 'rights_price': num('rights_price'), 'record_date': _date(r.get('record_date')),
             'pay_date': _date(r.get('pay_date')), 'bonus_list_date': _date(r.get('bonus_list_date')), 'source': r.get('source')}
+    destination = r.get('convert_to')
+    if destination is not None and pd.notna(destination):
+        ratio = _num(r.get('convert_ratio')); rounding = r.get('convert_rounding')
+        if not isinstance(destination, str) or not re.fullmatch(r'\d{6}\.(SH|SZ|BJ)', destination) or ratio is None or ratio <= 0:
+            raise InputBlocked([{'kind': 'invalid_conversion', 'detail': 'Requires a standard destination code and positive finite ratio'}])
+        if any(result[k] for k in ('cash_per_share', 'bonus_ratio', 'rights_ratio', 'rights_price')):
+            raise InputBlocked([{'kind': 'invalid_conversion', 'detail': 'Combined conversion and distribution actions are not supported'}])
+        result.update(convert_to = destination, convert_ratio = ratio)
+        if rounding is not None and pd.notna(rounding):
+            if rounding not in ('floor', 'ceil'): raise InputBlocked([{'kind': 'invalid_conversion', 'detail': 'Unknown conversion rounding'}])
+            result['convert_rounding'] = rounding
+    return result
 
 
 def build(tables, start = None, end = None, boards = ('main',), liquidity_window = 20, liquidity_override = None):
@@ -168,6 +226,11 @@ def build(tables, start = None, end = None, boards = ('main',), liquidity_window
         if not dates[0] <= a['ex_date'] <= dates[-1]: continue
         if a['ex_date'] not in on_cal:
             limitations.append({'kind': 'action_on_closed_day', 'detail': f"{a['instrument']} 除权除息日 {a['ex_date']} 不是交易日"}); continue
+        if a.get('convert_to'):
+            destination = a['convert_to']
+            missing = [d for d in dates if d >= a['ex_date'] and destination not in market[d]]
+            if destination not in meta.index or missing:
+                raise InputBlocked([{'kind': 'conversion_destination_missing', 'detail': f'{destination} requires master data and valuation quotes after conversion'}])
         for k in ('pay_date', 'bonus_list_date'):
             if a[k] is not None and a[k] < a['ex_date']: raise InputBlocked([{'kind': 'action_dates_invalid', 'detail': f"{a['instrument']} {k} {a[k]} 早于除权除息日 {a['ex_date']}"}])
         acts.setdefault(a['ex_date'], []).append(a)

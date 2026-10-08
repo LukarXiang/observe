@@ -1,0 +1,133 @@
+{
+  "benchmark": null,
+  "configuration": {
+    "end": "2024-06-28",
+    "name": "y2024b-081",
+    "start": "2024-04-01"
+  },
+  "coverage": null,
+  "decision_time": null,
+  "evidence_status": "archived_unreviewed",
+  "execution_status": "success_limited",
+  "execution_time": null,
+  "implementation": "y2024b-081",
+  "kind": "strategy",
+  "limitations": [
+    {
+      "detail": "原文 market_cap 为总市值；这里用流通市值（成交量 ÷ 换手率 × 收盘价）替代，总股本数据入库后改回总市值",
+      "kind": "deviation"
+    },
+    {
+      "detail": "原文 pb_ratio 来自聚宽 valuation 表；这里用 BaoStock 日线的 pbMRQ，口径接近但不保证一致",
+      "kind": "deviation"
+    },
+    {
+      "detail": "原文每月先全部卖出再买入（保留的股票也会卖出再买回，产生双边费用）；这里保留仍在名单内的持仓，只在偏离超过 20% 时调整，费用偏低",
+      "kind": "deviation"
+    },
+    {
+      "detail": "原文股票池含北交所；本地数据没有北交所，只在沪深主板、创业板、科创板中选",
+      "kind": "deviation"
+    },
+    {
+      "detail": "原文无滑点；这里统一按 0.1% 滑点和本项目执行规则集的费用计算",
+      "kind": "deviation"
+    },
+    {
+      "detail": "聚宽策略的声明式改写，非原代码逐行执行；证据级别为探索",
+      "kind": "strategy_port"
+    },
+    {
+      "audit": {
+        "audit_id": "20260930-121951-c0f4",
+        "audited_at": "2026-09-30T12:19:51",
+        "batch_id": "20260930-121727-4c66",
+        "input_range": {
+          "days": 1392,
+          "end": "2026-09-29",
+          "rows": 6848484,
+          "start": "2021-01-04"
+        },
+        "scope": "snapshot",
+        "source": "audit 20260930-121951-c0f4",
+        "status": "expired"
+      },
+      "detail": "快照批次审计状态为 expired",
+      "kind": "data_audit"
+    }
+  ],
+  "metrics": {
+    "annual_return": -0.2514657686222993,
+    "annual_vol": 0.1862935153500454,
+    "drawdown_peak": 33,
+    "drawdown_trough": 55,
+    "max_drawdown": -0.11714322186109771,
+    "sharpe": -1.4616911974283062,
+    "total_return": -0.06817878,
+    "yearly_returns": {
+      "2024": -0.06817878
+    }
+  },
+  "original_strategy_complete": false,
+  "parameters": null,
+  "payload_verification": "not_reaudited",
+  "period": null,
+  "portfolio": null,
+  "recorded_environment": {
+    "git_commit": "78eb9ce3c12965c0d7da41bd358afc2c4470c500",
+    "git_dirty": true,
+    "lock_sha256": "7feb849499392e03669d579880e733ffa9cf462f388d9124b6b19e3040f96bfe",
+    "packages": {
+      "lightgbm": "4.7.0",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1"
+    },
+    "python": "3.12.12"
+  },
+  "references": [
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261005-132927-strategy-y2024b-081-87b5/config.json",
+      "sha256": "d8abe4b1ed83bc739d97246f2d77f04c0b07601c6205bb9bc31f7fb05efc82be"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261005-132927-strategy-y2024b-081-87b5/status.json",
+      "sha256": "fc71137371a42c0d536c8698795a9828bc24c7d426378349a8de126f43a88f36"
+    }
+  ],
+  "reproduction": null,
+  "results": null,
+  "rules": {},
+  "run_id": "20261005-132927-strategy-y2024b-081-87b5",
+  "schema": 1,
+  "snapshot": "20261005-131630-822f",
+  "strategy_id": "S-ee99921ca98d",
+  "superseded_by": null,
+  "trading": {
+    "cash_share_mean": 0.3640773344885567,
+    "fee_ratio_to_initial": 0.00082799,
+    "fees": {
+      "commission": 620.07,
+      "fee": 827.99,
+      "stamp_tax": 190.78,
+      "transfer_fee": 17.14
+    },
+    "fill_rate": 1.0,
+    "filled_orders": 124,
+    "max_single_weight_mean": 0.011859634522102529,
+    "orders": 124,
+    "partial_fills": 0,
+    "reject_reasons": {},
+    "stale_price_days": 0,
+    "top5_weight_mean": 0.053122830453480485,
+    "turnover_half_daily_mean": 0.014570742000710743,
+    "turnover_two_sided_daily_mean": 0.029141484001421487
+  },
+  "universe": null,
+  "validation": []
+}

@@ -1,0 +1,114 @@
+{
+  "case": {
+    "annual_sample": [
+      {
+        "instrument": "000333.SZ",
+        "net_profit_ytd": 33745352000.0,
+        "report_period": "2023-12-31 00:00:00",
+        "source_row": 2260,
+        "source_sha256": "4ab12ab4c4ceed9505348aae788c3683c8f3cda7f4160aab473a14dd0ba75116"
+      }
+    ],
+    "baseline_snapshot": "20261005-131630-822f",
+    "baseline_snapshot_sha256": "4117d92804bebff047f75dc1dfcab23f3ec856032f0c5776e275f1fc205b7ce0",
+    "batch_id": "20261005-135023-630e",
+    "environment": {
+      "git_commit": "78eb9ce3c12965c0d7da41bd358afc2c4470c500",
+      "git_dirty": true,
+      "lock_sha256": "7feb849499392e03669d579880e733ffa9cf462f388d9124b6b19e3040f96bfe",
+      "packages": {
+        "lightgbm": "4.7.0",
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "pyarrow": "25.0.1",
+        "pydantic": "2.13.5",
+        "scikit-learn": "1.9.1",
+        "scipy": "1.18.1"
+      },
+      "python": "3.12.12"
+    },
+    "exploratory_query": {
+      "archive_table": "financial_quarterly",
+      "assumed_date_rows": 376,
+      "decision_time": "2024-06-28T16:00:00+08:00",
+      "input_rows": 376,
+      "lag_days": 120,
+      "mapping_versions": [
+        "external_financials_v1"
+      ],
+      "mode": "exploratory",
+      "note": "最终整理值的滞后探索不构成严格历史证明",
+      "report_type": "A",
+      "requested_fields": [
+        "net_profit_ytd",
+        "total_assets"
+      ],
+      "requested_instruments": 2,
+      "returned_rows": 4,
+      "snapshot": "20261005-135042-6c91",
+      "strict_evidence": false,
+      "visible_rows": 56
+    },
+    "old_partition_references_unchanged": true,
+    "snapshot": "20261005-135042-6c91",
+    "status": "ok",
+    "strict_query": {
+      "archive_table": "financial_quarterly",
+      "decision_time": "2024-06-28T16:00:00+08:00",
+      "excluded_unproven": 376,
+      "input_rows": 376,
+      "lag_days": null,
+      "mapping_versions": [
+        "external_financials_v1"
+      ],
+      "mode": "strict",
+      "note": "最终整理值的滞后探索不构成严格历史证明",
+      "report_type": "A",
+      "requested_fields": [
+        "net_profit_ytd",
+        "total_assets"
+      ],
+      "requested_instruments": 2,
+      "returned_rows": 0,
+      "snapshot": "20261005-135042-6c91",
+      "strict_evidence": true,
+      "visible_rows": 0
+    },
+    "strict_usable_rows": 0,
+    "tables": {
+      "company_controls_annual": {
+        "duplicate_keys": 0,
+        "partitions": 26,
+        "rows": 73738
+      },
+      "financial_annual": {
+        "duplicate_keys": 0,
+        "partitions": 36,
+        "rows": 95486
+      },
+      "financial_availability": {
+        "duplicate_keys": 0,
+        "partitions": 73,
+        "rows": 1460899
+      },
+      "financial_fields": {
+        "duplicate_keys": 0,
+        "partitions": 1,
+        "rows": 1911
+      },
+      "financial_quarterly": {
+        "duplicate_keys": 0,
+        "partitions": 37,
+        "rows": 405867
+      }
+    }
+  },
+  "case_id": "financial-time",
+  "nature": "real_query_case",
+  "purpose": "strict0及探索查询、归档样例、旧输入保护",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/validations/20261005-financial-merge.json",
+    "sha256": "8ebcb54969bbe7d22bde6e53e42097ea3f4b8554bc24ca79212ee0bf62b74454"
+  }
+}

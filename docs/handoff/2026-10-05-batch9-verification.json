@@ -1,0 +1,593 @@
+{
+ "status": "ok",
+ "scope": "Source review and dependency evidence only",
+ "environment": {
+  "git_commit": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+  "git_dirty": true,
+  "lock_sha256": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382",
+  "python": "3.12.12",
+  "packages": {
+   "pandas": "3.0.6",
+   "numpy": "2.5.3",
+   "pyarrow": "25.0.1",
+   "pydantic": "2.13.5",
+   "scikit-learn": "1.9.1",
+   "scipy": "1.18.1",
+   "lightgbm": "4.7.0"
+  }
+ },
+ "published_batch": "20261005-152040-e16e",
+ "snapshot": "20261005-152153-eb05",
+ "reviewed_sources": [
+  {
+   "strategy_id": "S-2fd706bb71d6",
+   "source_path": "repo/量化策略源代码/2023年度精选策略/38.随机森林策略，低换手率，年化近50%.txt",
+   "source_sha256": "331d507fb811e9aac14d16403ca37143fd8d81499cc9fa58ff1900f32474b061",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 89,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "外置预测分数的月末前10%股票调仓",
+    "fidelity": "缺原始预测输入，尚未实现",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "input": "test_predict_300_q.pkl",
+     "rebalance": "每月最后交易日开盘，使用当月键",
+     "selection": "score降序前10%，name列证券",
+     "weights": "等额目标，每个目标连续调用两次order_target_value"
+    },
+    "gaps": [
+     "未随源码提供预测PKL、训练代码、模型与特征版本、分数生成/可用时点",
+     "自行训练随机森林不能复现原预测；月底开盘使用当月预测是否前视无法证明"
+    ],
+    "next_step": "搜寻原输入及生成时点证据；缺失则搁置，不从标题重建模型"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-source-reviews/S-2fd706bb71d6.source",
+   "source_copy_sha256": "331d507fb811e9aac14d16403ca37143fd8d81499cc9fa58ff1900f32474b061"
+  },
+  {
+   "strategy_id": "S-5ec3559109c3",
+   "source_path": "repo/量化策略源代码/2021年度精选策略/85.易方达中小盘（魔改版）.txt",
+   "source_sha256": "c6a9c57e372dbab71292ad8df150350ed26406204d289d340223292396e33e84",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 85,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "110011.OF/000217.OF场外基金申赎",
+    "fidelity": "缺NAV时点与场外基金执行能力",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "instruments": [
+      "110011.OF",
+      "000217.OF"
+     ],
+     "history": 60,
+     "redeem_latency": 3,
+     "purchase_value": 100000,
+     "switch": "累计净值低于60行均值超过3%时赎回110011并申购000217",
+     "reenter": "净值不低于均值时每日申购110011，计数>=7时赎回000217"
+    },
+    "gaps": [
+     "开盘请求截至当日NAV，其实际发布时间与历史可用版本未证明",
+     "缺申赎确认、3日到账、费率与份额规则；A股账本不能直接撮合场外基金"
+    ],
+    "next_step": "取得历史NAV发布时间与基金申赎规则后扩展唯一账本；不以ETF或注释中的30日均线替代"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-source-reviews/S-5ec3559109c3.source",
+   "source_copy_sha256": "c6a9c57e372dbab71292ad8df150350ed26406204d289d340223292396e33e84"
+  },
+  {
+   "strategy_id": "S-653ef41eb685",
+   "source_path": "repo/量化策略源代码/2022年度精选策略/86.长江机器学习股票趋势预测.txt",
+   "source_sha256": "d423180039112b224fb5eeda52376c815538db1b57c754de01c1380b98a39af5",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 61,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "外置16维特征决策树指数择时",
+    "fidelity": "缺原输入且原指数不可交易",
+    "implementations": [],
+    "status": "暂不可复现",
+    "rules": {
+     "inputs": [
+      "Data/Factor1.csv",
+      "Data/HS300.csv"
+     ],
+     "normalization": "每行L1",
+     "model": "DecisionTreeClassifier(criterion=gini)",
+     "window": 30,
+     "trade": "月首09:40直接对000300指数下单"
+    },
+    "gaps": [
+     "未提供CSV字段、日期映射、目标标签及可用时点；训练全滚动窗口不能证明逐月无前视",
+     "原文直接交易不可交易指数",
+     "pred[g.m]先访问后检查，末尾会越界；目标DataFrame能否作分类标签未证明"
+    ],
+    "next_step": "保留阻断；补原CSV后审查时间对齐，ETF替代与越界修正另行确认"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-source-reviews/S-653ef41eb685.source",
+   "source_copy_sha256": "d423180039112b224fb5eeda52376c815538db1b57c754de01c1380b98a39af5"
+  },
+  {
+   "strategy_id": "S-fed6ca288035",
+   "source_path": "repo/量化策略源代码/2020年度精选策略/96 沪港两地上市的银行股翻倍策略报告.txt",
+   "source_sha256": "615a747d89268186c6afe15ad420622d31e2ba2e4d4253a68cb1242b177e9663",
+   "encoding": "gb18030",
+   "complete_lines_read": 57,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "外置每日银行目标名单等额调仓",
+    "fidelity": "缺选股输入，尚未实现",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "input": "new1.csv",
+     "selection": "按当前日期读取列为目标名单",
+     "trade": "每日清理名单外持仓并等额目标调仓"
+    },
+    "gaps": [
+     "原CSV及每日名单生成、历史可用时点缺失；源码未提供A/H价差选股逻辑",
+     "Python2 print语法；首次缺日期时g.buylist可能未初始化，空名单会除零"
+    ],
+    "next_step": "搜寻原CSV及名单证据；不根据标题推导新的A/H策略"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-source-reviews/S-fed6ca288035.source",
+   "source_copy_sha256": "615a747d89268186c6afe15ad420622d31e2ba2e4d4253a68cb1242b177e9663"
+  },
+  {
+   "strategy_id": "S-a5b450847a6e",
+   "source_path": "repo/量化策略源代码/2020年度精选策略/83 沪深300ETF-1060双均线.txt",
+   "source_sha256": "6b93db5ffc4bf83d72aea1970bc774a73b06cfdeb19d920e836adc0d68c84fec",
+   "encoding": "gb18030",
+   "complete_lines_read": 40,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "510310 ETF双均线投入现金",
+    "fidelity": "待ETF数据与执行规则核实",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "instrument": "510310.SH",
+     "windows": [
+      10,
+      60
+     ],
+     "buy": "MA10>MA60时投入当前现金",
+     "sell": "MA10<MA60且可卖份额>0时清仓",
+     "frequency": "every_bar"
+    },
+    "gaps": [
+     "现有发布表为A股，缺ETF原始/复权行情与历史停牌、价格限制、分红及交易规则",
+     "平台每bar运行与日频近似有差异，不能套用股票印花税/100股与价格步长"
+    ],
+    "next_step": "用现有BaoStock/AKShare接口小样本探测，补齐后再发布独立数据批次"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-source-reviews/S-a5b450847a6e.source",
+   "source_copy_sha256": "6b93db5ffc4bf83d72aea1970bc774a73b06cfdeb19d920e836adc0d68c84fec"
+  },
+  {
+   "strategy_id": "S-64bca3ebbca5",
+   "source_path": "repo/量化策略源代码/2023年度精选策略/17.20行代码8年胜率100%躲过了牛年第一场大跌.txt",
+   "source_sha256": "d144e9b3a3b6b9d22f524fc9d8b6c7fde3906dd5af676903ce7ba6fe0cc387f8",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 26,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "上证32行形态驱动股票/国债ETF切换",
+    "fidelity": "待ETF和指数数据、兼容与执行核实",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "signal": "000001.SH指数32行",
+     "instruments": [
+      "510300.SH",
+      "511010.SH"
+     ],
+     "sell_signal": "argmax>22且argmin=0且末两日低于各自均线",
+     "buy_signal": "第3行等于后续最高且MA10>MA20>MA30",
+     "hold_signal": -1
+    },
+    "gaps": [
+     "缺上证指数及两ETF完整冻结行情、历史状态和交易规则",
+     "c[-1]/c[-2]/c[2]需明确位置语义；卖股后用available_cash作债ETF目标，非完全对称现金轮换"
+    ],
+    "next_step": "探测ETF接口并保留非对称订单语义；不得只复用配对轮换代替"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-source-reviews/S-64bca3ebbca5.source",
+   "source_copy_sha256": "d144e9b3a3b6b9d22f524fc9d8b6c7fde3906dd5af676903ce7ba6fe0cc387f8"
+  },
+  {
+   "strategy_id": "S-7bcd889e7b6a",
+   "source_path": "repo/量化策略源代码/2022年度精选策略/54.指数估值自动报表系统——源代码.txt",
+   "source_sha256": "98078e24e9fadf32602962ab4883e52ffb11efc58cd8982c5be3bd249fd4674a",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 22,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "指数估值每日消息报表",
+    "fidelity": "非交易研究且外置模块缺失",
+    "implementations": [],
+    "status": "非交易研究脚本",
+    "rules": {
+     "module": "index_valuation",
+     "schedule": "07:00，与系统当前年月日相同才发送消息"
+    },
+    "gaps": [
+     "缺index_valuation模块；没有交易规则，实时系统日期过滤不适合历史回测"
+    ],
+    "next_step": "保留研究脚本分类及缺模块证据，不生成交易收益或自动发送消息"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-source-reviews/S-7bcd889e7b6a.source",
+   "source_copy_sha256": "98078e24e9fadf32602962ab4883e52ffb11efc58cd8982c5be3bd249fd4674a"
+  },
+  {
+   "strategy_id": "S-bdfd3c6fde91",
+   "source_path": "repo/量化策略源代码/2023年度精选策略/41.大盘拥挤率极速版-180天3秒.txt",
+   "source_sha256": "a708e0c1beaf1a1a89f089d35a42bdcee92e7cce62801e45050eef628c919379",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 45,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "全A前5%成交金额占比图表",
+    "fidelity": "非交易研究，两个股票池口径有差异",
+    "implementations": [],
+    "status": "非交易研究脚本",
+    "rules": {
+     "end": "2021-03-12",
+     "sessions": 180,
+     "measure": "成交金额降序前floor(N/20)金额/总金额*100",
+     "versions": [
+      "逐日历史在市股票池",
+      "末日股票池回溯180日"
+     ]
+    },
+    "gaps": [
+     "含notebook %%time语法，无下单规则；新旧版本的历史股票池不同",
+     "当前行情自2021-01起，不覆盖原180交易日窗口，完整历史证券池仍待证据"
+    ],
+    "next_step": "保留双版本及缺口，后续仅可另建研究指标，不将55/33图表筛选视作完整交易策略"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-source-reviews/S-bdfd3c6fde91.source",
+   "source_copy_sha256": "a708e0c1beaf1a1a89f089d35a42bdcee92e7cce62801e45050eef628c919379"
+  },
+  {
+   "strategy_id": "S-95dbc8b9a124",
+   "source_path": "repo/量化策略源代码/2020年度精选策略/12 【均值回归】基于zscore的均值回归策略（胜率100%）.txt",
+   "source_sha256": "b8498c45c66c4f10df7bfd5d413b9b00f17637ac597fad45f92ae5eddb3265be",
+   "encoding": "gb18030",
+   "complete_lines_read": 82,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "广汽MA20偏差zscore单槽位均值回归",
+    "fidelity": "兼容修正近似方案等待确认",
+    "implementations": [],
+    "status": "待审查",
+    "rules": {
+     "instrument": "601238.SH",
+     "history": 79,
+     "ma_window": 20,
+     "deviations": 60,
+     "ddof": 1,
+     "buy": "z<=-2且空仓",
+     "sell": "z>=1且持仓",
+     "max_positions": 1,
+     "time": "08:00选股，开盘交易"
+    },
+    "gaps": [
+     "pd.rolling_mean已删除，sub[-1]须明确位置末值；修正方案已询问用户",
+     "get_price多股返回结构、平台复权与即时成交等价未证明，positions键与零股记录不同"
+    ],
+    "next_step": "确认只修rolling与末值索引后实现单槽位、实际持仓/现金、三成本和禁网复现；不改阈值"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-next-reviews/S-95dbc8b9a124.source",
+   "source_copy_sha256": "b8498c45c66c4f10df7bfd5d413b9b00f17637ac597fad45f92ae5eddb3265be"
+  },
+  {
+   "strategy_id": "S-03e5e601f4cc",
+   "source_path": "repo/量化策略源代码/2022年度精选策略/49.LLT低延迟趋势线择时交易初探.txt",
+   "source_sha256": "5c72907b34216e0fec94719ea8e428f95d5bf8361090f55635423e7647032970",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 64,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "510300 ETF递推LLT斜率择时",
+    "fidelity": "待ETF输入与初始化时频核实",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "instrument": "510300.SH",
+     "alpha": 0.05,
+     "seed": "初始化10行历史末2个收盘价",
+     "buy": "LLT_today>LLT_previous*1.005且无持仓",
+     "sell": "LLT_today<LLT_previous*0.995且有持仓"
+    },
+    "gaps": [
+     "ETF标准输入与执行规则缺失",
+     "每次handle_data递推一次；运行频率与起始日期决定LLT序列，不能随意预热"
+    ],
+    "next_step": "保留递推起始依赖；ETF补齐后冻结初始化与日频近似边界"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-next-reviews/S-03e5e601f4cc.source",
+   "source_copy_sha256": "5c72907b34216e0fec94719ea8e428f95d5bf8361090f55635423e7647032970"
+  },
+  {
+   "strategy_id": "S-8f3bdcfa8d7f",
+   "source_path": "repo/量化策略源代码/2022年度精选策略/72.年化15.48%，盈亏比3.818的双均线策略.txt",
+   "source_sha256": "3461874bb044a2ca4a511f551c634377609b3cd715a69573ffaa5574cd58bb8a",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 84,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "510310 ETF严格MA5/MA60交叉",
+    "fidelity": "待ETF输入与平台日期语义核实",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "instrument": "510310.SH",
+     "windows": [
+      5,
+      60
+     ],
+     "previous": "previous_date减1自然日截至的5/60行",
+     "buy": "MA5>MA60且previous_MA5<previous_MA60，投入现金",
+     "sell": "MA5<MA60且previous_MA5>previous_MA60且可卖持仓>0"
+    },
+    "gaps": [
+     "ETF标准输入与执行规则缺失",
+     "datetime来自平台注入；注释10日但实际count=5；严格交叉不同于83号持续买入"
+    ],
+    "next_step": "补ETF后按实际MA5/60和自然日截止审查，不从标题复用83号MA10/60"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-next-reviews/S-8f3bdcfa8d7f.source",
+   "source_copy_sha256": "3461874bb044a2ca4a511f551c634377609b3cd715a69573ffaa5574cd58bb8a"
+  },
+  {
+   "strategy_id": "S-1c7b2dac16c6",
+   "source_path": "repo/量化策略源代码/2023年度精选策略/35.最简强者恒强策略.txt",
+   "source_sha256": "49049610ddc9672a7a5bea8d99f9680d4c18a9148f33bb6e2391aa14f7124c5a",
+   "encoding": "utf-8-sig",
+   "complete_lines_read": 78,
+   "review": {
+    "review_status": "人工审查完成",
+    "scope": "五行业各取总市值最大且未重复的一股，月初只补空位",
+    "fidelity": "缺历史行业与每日总市值",
+    "implementations": [],
+    "status": "待数据",
+    "rules": {
+     "industries": [
+      "801124",
+      "801120",
+      "801156",
+      "801150",
+      "801194"
+     ],
+     "seasoning": "上市早于previous_date减60自然日",
+     "select": "各行业总市值前10中的首个尚未入选股",
+     "trade": "月首清名单外，已有>50股扣槽位，现金/剩余槽位买未持仓目标"
+    },
+    "gaps": [
+     "get_industry_stocks/get_all_securities未指定历史日期，实际平台时点语义未知",
+     "缺带生效时点的申万行业历史分类、每日总市值/历史股本；年度控制市值不能替代",
+     "初始化依赖月首09:00 select_stocks，非月首启动时g.stocks未设置"
+    ],
+    "next_step": "补历史行业与股本证据并核实生命周期，不以当前行业或年度市值选股"
+   },
+   "source_copy": "data/staging/strategies-batch9/20261005-next-reviews/S-1c7b2dac16c6.source",
+   "source_copy_sha256": "49049610ddc9672a7a5bea8d99f9680d4c18a9148f33bb6e2391aa14f7124c5a"
+  }
+ ],
+ "source_bytes_checked": 12,
+ "probe_results": [
+  {
+   "endpoint": "bs_etf_day",
+   "status": "empty",
+   "wire_responses": [],
+   "strict_usable": false,
+   "rows": 0,
+   "columns": [
+    "date",
+    "code",
+    "open",
+    "high",
+    "low",
+    "close",
+    "preclose",
+    "volume",
+    "amount",
+    "adjustflag",
+    "turn",
+    "tradestatus",
+    "pctChg",
+    "peTTM",
+    "pbMRQ",
+    "psTTM",
+    "pcfNcfTTM",
+    "isST"
+   ],
+   "raw_file": "data/raw/dependency_probe/bs_etf_day/20261005-source-reviews.parquet",
+   "raw_sha256": "37c5c91b84288b1d41252e04f624aab5d85f6766c72c11a15505f8dd12b3eb9f",
+   "sample": []
+  },
+  {
+   "endpoint": "bs_etf_history",
+   "status": "empty",
+   "wire_responses": [],
+   "strict_usable": false,
+   "rows": 0,
+   "columns": [
+    "date",
+    "code",
+    "open",
+    "high",
+    "low",
+    "close",
+    "preclose",
+    "volume",
+    "amount"
+   ],
+   "raw_file": "data/raw/dependency_probe/bs_etf_history/20261005-source-reviews.parquet",
+   "raw_sha256": "86d21f8e48ae91604923d7d82966360d1da11c3f3b84b020b8cf08b2f61e078e",
+   "sample": []
+  },
+  {
+   "endpoint": "em_etf_raw",
+   "status": "failed",
+   "wire_responses": [],
+   "strict_usable": false,
+   "error": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  },
+  {
+   "endpoint": "em_etf_hfq",
+   "status": "failed",
+   "wire_responses": [],
+   "strict_usable": false,
+   "error": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  },
+  {
+   "endpoint": "sina_etf_history",
+   "status": "success",
+   "wire_responses": [
+    {
+     "url": "https://finance.sina.com.cn/realstock/company/sh510310/hisdata_klc2/klc_kl.js",
+     "status_code": 200,
+     "file": "data/staging/strategies-batch9/20261005-next-reviews/sina_etf_history/response-000.bin",
+     "sha256": "8f1534a0c134dd0ce2a75e970a70a34b81bc3b0fa01c6f9a8ed23739cf986c7a"
+    }
+   ],
+   "strict_usable": false,
+   "rows": 3287,
+   "columns": [
+    "date",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "amount",
+    "postVol",
+    "postAmt"
+   ],
+   "raw_file": "data/raw/dependency_probe/sina_etf_history/20261005-next-reviews.parquet",
+   "raw_sha256": "1fcf1c6eb83f1b61c7d7c45ed4e1d3cf3705610f5caa300b1e4d1abdd515bb67",
+   "sample": [
+    {
+     "amount": 301692352,
+     "close": 1.014,
+     "date": "2013-03-25",
+     "high": 1.021,
+     "low": 1.007,
+     "open": 1.017,
+     "postAmt": null,
+     "postVol": null,
+     "volume": 296973696
+    },
+    {
+     "amount": 123290056,
+     "close": 0.998,
+     "date": "2013-03-26",
+     "high": 1.011,
+     "low": 0.988,
+     "open": 1.01,
+     "postAmt": null,
+     "postVol": null,
+     "volume": 123568872
+    },
+    {
+     "amount": 117004840,
+     "close": 1.002,
+     "date": "2013-03-27",
+     "high": 1.014,
+     "low": 0.997,
+     "open": 0.998,
+     "postAmt": null,
+     "postVol": null,
+     "volume": 116624672
+    }
+   ]
+  },
+  {
+   "endpoint": "sina_etf_dividend_raw",
+   "status": "wire_only",
+   "wire_responses": [
+    {
+     "url": "https://finance.sina.com.cn/realstock/company/sh510310/hfq.js",
+     "status_code": 200,
+     "file": "data/staging/strategies-batch9/20261005-next-reviews/sina_etf_dividend_raw/response-000.bin",
+     "sha256": "d249ca95b4ccbefdca1341480301f4e57c271cc6978da79e1c40b6e5597ad3c3"
+    }
+   ],
+   "strict_usable": false,
+   "status_code": 200,
+   "note": "Raw cumulative dividend response only; do not run installed endpoint eval on remote text; no adjustment semantics or availability proved"
+  }
+ ],
+ "protections": [
+  {
+   "status": "ok",
+   "old_controls_unchanged": 2497,
+   "mutable_registry_files_excluded": 0,
+   "old_partition_metadata_unchanged": 244,
+   "old_calendar_rows_unchanged": 2095,
+   "old_index_rows_unchanged": 1392,
+   "partition_check": "size/mtime only; no fresh full hash",
+   "baseline_sha256": "b40841c6630d4298d7b83d6e0c323aba13b0ba629341a5c782b1031dee40c8e4"
+  },
+  {
+   "status": "ok",
+   "old_controls_unchanged": 2497,
+   "mutable_registry_files_excluded": 0,
+   "old_partition_metadata_unchanged": 244,
+   "old_calendar_rows_unchanged": 2095,
+   "old_index_rows_unchanged": 1392,
+   "partition_check": "size/mtime only; no fresh full hash",
+   "baseline_sha256": "b40841c6630d4298d7b83d6e0c323aba13b0ba629341a5c782b1031dee40c8e4"
+  }
+ ],
+ "artifacts": {
+  "data/staging/strategies-batch9/20261005-source-reviews/review.json": "f76243c36534a55b1364293678b526eafc29b4206602cd61cc8afde629a0c196",
+  "data/staging/strategies-batch9/20261005-source-reviews/probes.json": "444f30c2d36a2480701a260c229e1d16710c6a5b165b78a71b5a4d00f5eeabda",
+  "data/staging/strategies-batch9/20261005-source-reviews/protection.json": "6963a4d7dbce5cfbf8b0b2fd7e2348c5e8fe8fcb00260e18ed2e53b9c6cfe63f",
+  "data/staging/strategies-batch9/20261005-source-reviews/existing-etf-apis.json": "22a25342c439115b44592dcf9421bf758d802aa3018e4e485c13be74ee436e94",
+  "data/staging/strategies-batch9/20261005-next-reviews/review.json": "c4f7db558ad7cba630a3f0d557435ed786e08ff6694a0e62f079c85dbc6fe83e",
+  "data/staging/strategies-batch9/20261005-next-reviews/probes.json": "ad4f6c9ccc14f7ddf60d72f0ac5b8219dd45c37e5fde830733f575f251c7264a",
+  "data/staging/strategies-batch9/20261005-next-reviews/protection.json": "6963a4d7dbce5cfbf8b0b2fd7e2348c5e8fe8fcb00260e18ed2e53b9c6cfe63f",
+  "data/staging/strategies-batch9/20261005-next-reviews/existing-etf-apis.json": "99b9f7f63add7f96794b3ffb76f3d34ac0e9f9e586d3acf555dd454aa745e97f",
+  "data/staging/strategies-batch9/20261005-next-reviews/input-analysis.json": "c62f2f1ea77101ed34a2d0f602c816e39cab287422da93f2375f36776373cfb6"
+ },
+ "progress": {
+  "checkpoint": "20261005-165418-13ea",
+  "note": "第九批12份审查与6项ETF探测验收归档；取得新浪历史行情，交易/复权规则未证明；广汽兼容方案等待确认",
+  "catalog_id": "ab18686f720b8c0542de",
+  "catalog_sha256": "45b0897a31f11be707b120b2d4beaa88396e005e69a413f4da48dc4b5250a3c3",
+  "published_batch": "20261005-152040-e16e",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 495,
+   "已验证": 9,
+   "待审查": 45,
+   "暂不可复现": 37,
+   "非交易研究脚本": 67,
+   "实现中": 1,
+   "重复版本": 41
+  },
+  "manually_reviewed": 34,
+  "locally_backtested_sources": 10,
+  "locally_reproduced_sources": 10,
+  "local_strategy_runs": 28,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261005-165418-13ea"
+ },
+ "missing_remote_handoff_files": 2025,
+ "new_strategy_experiments": [],
+ "original_strategy_complete": false,
+ "verification": {
+  "regressions": "2 passed, 8 deselected, 1 existing Starlette/httpx warning in 2.28s",
+  "command": "python -m pytest -q tests/integration/test_strategy_scope.py -k \"progress_archives or protection_excludes\"",
+  "ruff": "passed",
+  "git_diff_check": "passed",
+  "review": "check standard: base, security and architecture; no confirmed new findings; input analysis additionally reviewed locally"
+ },
+ "next": "Await source12 compatibility decision; retain known pause semantics and no filling unknown inputs. ETF publication awaits event/rule evidence."
+}

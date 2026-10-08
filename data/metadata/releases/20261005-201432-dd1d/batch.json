@@ -1,0 +1,220 @@
+{
+ "batch_id": "20261005-201432-dd1d",
+ "base": "20261005-191431-a38b",
+ "status": "published",
+ "note": "batch15: append RSI39 stock histories to immutable 2019/2020 partitions; retain prior ten stocks exactly",
+ "tables": {
+  "bars_1d": {
+   "2019": {
+    "file": "std/bars_1d/2019__c2da4bf4.parquet",
+    "sha": "c2da4bf4c3de4c7e3fbe2b9ad998e118b3de84c126fb4888f9bc135fc4cd98a8",
+    "rows": 11847,
+    "history_scope": {
+     "policy": "selected_instruments_v1",
+     "instruments": [
+      "000333.SZ",
+      "000651.SZ",
+      "000661.SZ",
+      "002050.SZ",
+      "002088.SZ",
+      "002286.SZ",
+      "002352.SZ",
+      "002371.SZ",
+      "002407.SZ",
+      "002415.SZ",
+      "002456.SZ",
+      "002594.SZ",
+      "002595.SZ",
+      "002597.SZ",
+      "002714.SZ",
+      "002821.SZ",
+      "300009.SZ",
+      "300014.SZ",
+      "300036.SZ",
+      "300037.SZ",
+      "300073.SZ",
+      "300347.SZ",
+      "300357.SZ",
+      "300359.SZ",
+      "300595.SZ",
+      "300661.SZ",
+      "300702.SZ",
+      "300750.SZ",
+      "300782.SZ",
+      "600036.SH",
+      "600085.SH",
+      "600196.SH",
+      "600276.SH",
+      "600309.SH",
+      "600519.SH",
+      "600660.SH",
+      "600763.SH",
+      "600887.SH",
+      "601012.SH",
+      "601058.SH",
+      "601111.SH",
+      "601222.SH",
+      "601633.SH",
+      "601677.SH",
+      "601888.SH",
+      "603259.SH",
+      "603288.SH",
+      "603659.SH",
+      "603799.SH"
+     ],
+     "start": "2019-01-02",
+     "end": "2019-12-31",
+     "full_market": false,
+     "probe_evidence": [
+      {
+       "file": "data/staging/strategies-batch15/20261005-rsi-history/probe-results.json",
+       "sha256": "2c97edde12f818fac6c475f5650b477c294554784345e86ca2cdbcd64cb459c1"
+      },
+      {
+       "file": "data/staging/strategies-batch15/20261005-rsi-history/retry-results.json",
+       "sha256": "e24b76de1779446dd5c17d21ec5f6c2db76a33333470e848a8e171b4c673d173"
+      }
+     ],
+     "retained_entry": {
+      "file": "std/bars_1d/2019__ffa9557e.parquet",
+      "sha": "ffa9557e288ce030664575a5535c760e8b13f3301a578a16e51eb292b46ee69f",
+      "rows": 2440,
+      "history_scope": {
+       "policy": "selected_instruments_v1",
+       "instruments": [
+        "600519.SH",
+        "000333.SZ",
+        "601111.SH",
+        "600036.SH",
+        "600887.SH",
+        "603288.SH",
+        "600196.SH",
+        "600085.SH",
+        "002415.SZ",
+        "000651.SZ"
+       ],
+       "start": "2019-01-02",
+       "end": "2019-12-31",
+       "full_market": false,
+       "probe_evidence": [
+        {
+         "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+         "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+        },
+        {
+         "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+         "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+        }
+       ]
+      }
+     }
+    }
+   },
+   "2020": {
+    "file": "std/bars_1d/2020__834237e1.parquet",
+    "sha": "834237e107ae59fe497e7c9a8bc4797f97590c73a3171cf36ab967006bae30a3",
+    "rows": 11907,
+    "history_scope": {
+     "policy": "selected_instruments_v1",
+     "instruments": [
+      "000333.SZ",
+      "000651.SZ",
+      "000661.SZ",
+      "002050.SZ",
+      "002088.SZ",
+      "002286.SZ",
+      "002352.SZ",
+      "002371.SZ",
+      "002407.SZ",
+      "002415.SZ",
+      "002456.SZ",
+      "002594.SZ",
+      "002595.SZ",
+      "002597.SZ",
+      "002714.SZ",
+      "002821.SZ",
+      "300009.SZ",
+      "300014.SZ",
+      "300036.SZ",
+      "300037.SZ",
+      "300073.SZ",
+      "300347.SZ",
+      "300357.SZ",
+      "300359.SZ",
+      "300595.SZ",
+      "300661.SZ",
+      "300702.SZ",
+      "300750.SZ",
+      "300782.SZ",
+      "600036.SH",
+      "600085.SH",
+      "600196.SH",
+      "600276.SH",
+      "600309.SH",
+      "600519.SH",
+      "600660.SH",
+      "600763.SH",
+      "600887.SH",
+      "601012.SH",
+      "601058.SH",
+      "601111.SH",
+      "601222.SH",
+      "601633.SH",
+      "601677.SH",
+      "601888.SH",
+      "603259.SH",
+      "603288.SH",
+      "603659.SH",
+      "603799.SH"
+     ],
+     "start": "2020-01-02",
+     "end": "2020-12-31",
+     "full_market": false,
+     "probe_evidence": [
+      {
+       "file": "data/staging/strategies-batch15/20261005-rsi-history/probe-results.json",
+       "sha256": "2c97edde12f818fac6c475f5650b477c294554784345e86ca2cdbcd64cb459c1"
+      },
+      {
+       "file": "data/staging/strategies-batch15/20261005-rsi-history/retry-results.json",
+       "sha256": "e24b76de1779446dd5c17d21ec5f6c2db76a33333470e848a8e171b4c673d173"
+      }
+     ],
+     "retained_entry": {
+      "file": "std/bars_1d/2020__8ee3ee9c.parquet",
+      "sha": "8ee3ee9c270c3c655c3b52905c5b9f0224f6dbc0a8214a61cc78dc6e44b7582f",
+      "rows": 2430,
+      "history_scope": {
+       "policy": "selected_instruments_v1",
+       "instruments": [
+        "600519.SH",
+        "000333.SZ",
+        "601111.SH",
+        "600036.SH",
+        "600887.SH",
+        "603288.SH",
+        "600196.SH",
+        "600085.SH",
+        "002415.SZ",
+        "000651.SZ"
+       ],
+       "start": "2020-01-02",
+       "end": "2020-12-31",
+       "full_market": false,
+       "probe_evidence": [
+        {
+         "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+         "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+        },
+        {
+         "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+         "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+        }
+       ]
+      }
+     }
+    }
+   }
+  }
+ }
+}

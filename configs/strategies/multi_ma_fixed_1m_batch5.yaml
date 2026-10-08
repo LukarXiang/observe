@@ -1,0 +1,41 @@
+name: 复星多均线固定2万元（日频近似，初始100万元）
+implementation: multi_ma_fixed_value_v1
+source_path: repo/量化策略源代码/2020年度精选策略/89 test1：简单的多均线择时.txt
+snapshot: 20261005-152153-eb05
+start: 2021-02-24
+end: 2026-09-29
+instrument: 600196.SH
+execution_instruments: [600196.SH]
+initial_cash: 1000000
+parameters:
+  windows: [5, 10, 20, 30]
+  target_value: 20000
+  struggle10_20: 0.003
+  struggle20_30: 0.002
+universe:
+  boards: [main]
+  min_listed_sessions: 1
+  exclude_st: false
+  suspend_window: 1
+  max_suspended: 1
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: conditional_values
+  n: 1
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: daily
+  rebalance_session: 1
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.05
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+cost_scenarios: [base, fees_x2, slippage_x2]
+benchmark: 600196.SH
+benchmark_kind: stock
+cache: true

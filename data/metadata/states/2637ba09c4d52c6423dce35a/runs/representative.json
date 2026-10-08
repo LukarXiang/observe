@@ -1,0 +1,1465 @@
+{
+  "accepted_manual_review_count_through_batch63": 211,
+  "batch64": "components_and_offline_match_completed_formal_acceptance_pending",
+  "blocked_experiments": [
+    {
+      "implementation": "bp_component_v1",
+      "period": {
+        "end": "2026-09-29",
+        "start": "2021-02-02"
+      },
+      "reason": "退市及换股权益结算缺口；涉及15证券",
+      "run_id": "20261005-174435-f7e566-strategy-2326",
+      "status": "blocked",
+      "valid_return": null
+    }
+  ],
+  "catalog_id": "f9f64b3c9a1557eb92b1",
+  "checkpoint": "20261007-205221-0512",
+  "progress_summary": {
+    "catalog_id": "f9f64b3c9a1557eb92b1",
+    "catalog_sha256": "8db20638a682427995323433ce66563bd9b9ea835e1507fc2f90df4f3bf5644a",
+    "catalog_status_counts": {
+      "已验证": 11,
+      "待审查": 2,
+      "待数据": 489,
+      "暂不可复现": 64,
+      "重复版本": 41,
+      "非交易研究脚本": 88
+    },
+    "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+    "checkpoint": "20261007-205221-0512",
+    "local_strategy_runs": 67,
+    "locally_backtested_sources": 12,
+    "locally_reproduced_sources": 12,
+    "manually_reviewed": 213,
+    "note": "Batch64 forbidden-network real components/diagnostics and three catalogs match",
+    "published_batch": "20261006-145049-5ceb",
+    "sources": 695
+  },
+  "published_snapshot": "20261006-145049-e06c",
+  "references": [
+    {
+      "path": "data/catalog/strategies/progress/20261007-205221-0512/summary.json",
+      "sha256": "4642520ab3ecc8fc48e81107d88f06de13e4dcbd5796b4af695f1f7635666121"
+    },
+    {
+      "path": "data/catalog/strategies/progress/20261007-205221-0512/sources.json",
+      "sha256": "ba5909b37558f428a41531a464f403e0d232d012437ae1da318430d6f2c123b4"
+    },
+    {
+      "path": "data/catalog/strategies/progress/20261007-205221-0512/runs.json",
+      "sha256": "91a6a7a69f8eb1243448bc172257166fe32c564e66fcb57141e7c0bdeec8ff76"
+    },
+    {
+      "path": "data/catalog/strategies/implementation-evidence.json",
+      "sha256": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6"
+    },
+    {
+      "path": "data/PUBLISHED.json",
+      "sha256": "58a6cf9478c3f3d12a2f5dfebf02cb88eb5eee73d4103933851d11d390545ad4"
+    },
+    {
+      "path": "docs/tasks/2026-10-08-策略研究阶段汇报.md",
+      "sha256": "dd5617a6f19fd506de134c8ceeb9589051003f800580a2c043c1dfa5a14d6994"
+    }
+  ],
+  "report_date": "2026-10-08",
+  "selected_configurations": [
+    {
+      "differences": 0,
+      "implementation": "bollinger_breakout_corrected_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2005-02-02"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-191525-e4a754-strategy-d910/report.json",
+          "sha256": "35900ad5f1204e5ae9f85b1bac095265e841a0eba93be66c8e41b2bd28a05111"
+        },
+        {
+          "path": "data/runs/20261005-191525-e4a754-strategy-d910/source.original",
+          "sha256": "0bbc8915882fbef9a78c10209248cb131b10c1a72e4c4d639ee1b21aba96efb3"
+        },
+        {
+          "path": "data/staging/strategies-batch14/20261005-long-history/bollinger_long_batch4-extended-verification.json",
+          "sha256": "d472b5dfa1e9c0318d94de5e5d3178b90ace37fbe11dc99ac06db02bb9bb187d"
+        },
+        {
+          "path": "data/runs/20261005-191703-e4a754-strategy-cdf4/comparison.json",
+          "sha256": "80e50006112d6eff898669c8b4c5749000702b08aa10ba7934f955c539a1f213"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-191703-e4a754-strategy-cdf4",
+      "run_id": "20261005-191525-e4a754-strategy-d910",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.4052777230692699,
+          "metrics": {
+            "annual_return": 0.18452388065024872,
+            "annual_vol": 0.24647654515689169,
+            "drawdown_peak": 3896,
+            "drawdown_trough": 5209,
+            "max_drawdown": -0.5702777710651377,
+            "sharpe": 0.8094263695327415,
+            "total_return": 38.67477306
+          },
+          "recent_yearly_returns": {
+            "2022": 0.05314492066414234,
+            "2023": -0.031841626770287346,
+            "2024": -0.15625403179100417,
+            "2025": -0.1742287669062641,
+            "2026": -0.2311652239291212
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.40523914896706414,
+          "metrics": {
+            "annual_return": 0.17947702625330342,
+            "annual_vol": 0.24654432931192757,
+            "drawdown_peak": 3896,
+            "drawdown_trough": 5209,
+            "max_drawdown": -0.578272654582469,
+            "sharpe": 0.7919463587703269,
+            "total_return": 35.15842395
+          },
+          "recent_yearly_returns": {
+            "2022": 0.04985253439297899,
+            "2023": -0.03554600920903317,
+            "2024": -0.1582860854013356,
+            "2025": -0.17743758994248826,
+            "2026": -0.23365909081589986
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.40520892082785265,
+          "metrics": {
+            "annual_return": 0.17935656587154192,
+            "annual_vol": 0.24654341706928554,
+            "drawdown_peak": 3896,
+            "drawdown_trough": 5209,
+            "max_drawdown": -0.5829571804274765,
+            "sharpe": 0.7915310700403532,
+            "total_return": 35.078242329999995
+          },
+          "recent_yearly_returns": {
+            "2022": 0.048846295667699824,
+            "2023": -0.03679410164591401,
+            "2024": -0.16034125794545517,
+            "2025": -0.17980548397402152,
+            "2026": -0.23591823350993635
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "茅台20日布林突破修正变体",
+      "snapshot": "20261005-191431-aa71",
+      "source": "2020年度精选策略/52 布林带1.txt",
+      "strategy_id": "S-38b227d4327a"
+    },
+    {
+      "differences": 0,
+      "implementation": "ma10_ma20_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2013-10-25"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-191805-0c35b2-strategy-1dc6/report.json",
+          "sha256": "d594c32ebd05754324184c389e7cffbd75997c7f624b8b19a41528ddeb5d2184"
+        },
+        {
+          "path": "data/runs/20261005-191805-0c35b2-strategy-1dc6/source.original",
+          "sha256": "0d502476995f15dffd692752410d5d10884d5ec8db0479e27346036207e8a634"
+        },
+        {
+          "path": "data/staging/strategies-batch14/20261005-long-history/ma10_ma20_long_batch4-extended-verification.json",
+          "sha256": "f5267b27f1d30eb5cf80d96a9a2327d40e70251b5ab1f4ffdd8aaa39b769899c"
+        },
+        {
+          "path": "data/runs/20261005-191852-0c35b2-strategy-db03/comparison.json",
+          "sha256": "ccc18d36c6b546874e47a925055cb6d3f6d5baa505794d28146da0c19a7d0bc4"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-191852-0c35b2-strategy-db03",
+      "run_id": "20261005-191805-0c35b2-strategy-1dc6",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.45436548329508203,
+          "metrics": {
+            "annual_return": 0.05067948233278097,
+            "annual_vol": 0.22913880301376863,
+            "drawdown_peak": 1759,
+            "drawdown_trough": 2164,
+            "max_drawdown": -0.5974136022344592,
+            "sharpe": 0.32978617765665863,
+            "total_return": 0.9019626699999999
+          },
+          "recent_yearly_returns": {
+            "2022": 0.0033027192599366373,
+            "2023": -0.10379371269989957,
+            "2024": 0.3259915951368806,
+            "2025": 0.04018519938641196,
+            "2026": 0.03392063370511189
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.454359617431727,
+          "metrics": {
+            "annual_return": 0.033546927009979965,
+            "annual_vol": 0.22942155318450982,
+            "drawdown_peak": 1759,
+            "drawdown_trough": 2164,
+            "max_drawdown": -0.6129179259201201,
+            "sharpe": 0.2579929793102757,
+            "total_return": 0.53586066
+          },
+          "recent_yearly_returns": {
+            "2022": -0.014684347503679973,
+            "2023": -0.12334333458333424,
+            "2024": 0.31464693256609144,
+            "2025": 0.03114180127858135,
+            "2026": 0.02555785826944179
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.45443581792769583,
+          "metrics": {
+            "annual_return": 0.02695160805493768,
+            "annual_vol": 0.22944180368565936,
+            "drawdown_peak": 1759,
+            "drawdown_trough": 2164,
+            "max_drawdown": -0.6174349012200091,
+            "sharpe": 0.23009068125655618,
+            "total_return": 0.4131799199999999
+          },
+          "recent_yearly_returns": {
+            "2022": -0.019061226991385127,
+            "2023": -0.1324103356399864,
+            "2024": 0.3052866374380645,
+            "2025": 0.022948616577847858,
+            "2026": 0.01761085871022061
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "美的集团日频 MA10/MA20 规则",
+      "snapshot": "20261005-191431-aa71",
+      "source": "2020年度精选策略/66 高于MA10买入低于MA20卖出回测半年收益率20.4%.txt",
+      "strategy_id": "S-d32775c4089e"
+    },
+    {
+      "differences": 0,
+      "implementation": "ma5_ma10_price_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2006-09-15"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-194037-53cebd-strategy-3e8a/report.json",
+          "sha256": "3f7e98f44f89282e4c0206cc194c15c31dc0399ce50a0bd04f2e190ea5b29754"
+        },
+        {
+          "path": "data/runs/20261005-194037-53cebd-strategy-3e8a/source.original",
+          "sha256": "52c30458631e22e4f5146c62155cf356b131454329197143de69e7a600a53383"
+        },
+        {
+          "path": "data/staging/strategies-batch14/20261005-long-history/ma5_ma10_long_batch4-extended-stable-verification.json",
+          "sha256": "bd85156a8b66aa6692f0227aadac2683a53cc0d5b4cb02461c080c97379c3bc6"
+        },
+        {
+          "path": "data/runs/20261005-194227-53cebd-strategy-5db3/comparison.json",
+          "sha256": "6c9b04cbf340bc0d22eeb769be1acb8d4693f139be5c57d474fca903d0fbf7c7"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-194227-53cebd-strategy-5db3",
+      "run_id": "20261005-194037-53cebd-strategy-3e8a",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.6740508880964592,
+          "metrics": {
+            "annual_return": -0.07661077672229866,
+            "annual_vol": 0.2466719289640627,
+            "drawdown_peak": 248,
+            "drawdown_trough": 4868,
+            "max_drawdown": -0.8972664084054387,
+            "sharpe": -0.20039887457573807,
+            "total_return": -0.79883708
+          },
+          "recent_yearly_returns": {
+            "2022": -0.22269765881721815,
+            "2023": -0.047572144767750735,
+            "2024": -0.08923880168285059,
+            "2025": -0.19799917374693388,
+            "2026": -0.24246648068276133
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.6741681061221243,
+          "metrics": {
+            "annual_return": -0.10722457774849081,
+            "annual_vol": 0.24724891654179743,
+            "drawdown_peak": 248,
+            "drawdown_trough": 4868,
+            "max_drawdown": -0.9425078954297325,
+            "sharpe": -0.3356297870550069,
+            "total_return": -0.89791975
+          },
+          "recent_yearly_returns": {
+            "2022": -0.24901711294459894,
+            "2023": -0.06430287190894035,
+            "2024": -0.10660681502605751,
+            "2025": -0.2148824500273605,
+            "2026": -0.25429359064427115
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.6741702342314381,
+          "metrics": {
+            "annual_return": -0.11374255936926947,
+            "annual_vol": 0.2469583853771208,
+            "drawdown_peak": 248,
+            "drawdown_trough": 4868,
+            "max_drawdown": -0.9530239051945789,
+            "sharpe": -0.3659605442317821,
+            "total_return": -0.91191261
+          },
+          "recent_yearly_returns": {
+            "2022": -0.25640931311311366,
+            "2023": -0.07420791381626402,
+            "2024": -0.1341684671535215,
+            "2025": -0.23946751096873653,
+            "2026": -0.27644533484800504
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "国航MA5/MA10与价格过滤日频近似（用户批准的逐窗口稳定求和数值修正）",
+      "snapshot": "20261005-191431-aa71",
+      "source": "2020年度精选策略/86 5日线穿十日线策略（供初学）.txt",
+      "strategy_id": "S-b8a8b5e90627"
+    },
+    {
+      "differences": 0,
+      "implementation": "multi_ma_fixed_value_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2005-03-01"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-194345-2712b4-strategy-63c5/report.json",
+          "sha256": "6d6dd6581ec7a01b3af8aa66693423903174352b56ab06e2d87b7a47af0f30d2"
+        },
+        {
+          "path": "data/runs/20261005-194345-2712b4-strategy-63c5/source.original",
+          "sha256": "4f585038a1ae463f7df1b10888e98c65326dc7c6499eaf83bfcd2e608e2c020a"
+        },
+        {
+          "path": "data/staging/strategies-batch14/20261005-long-history/multi_ma_fixed_20k_batch5-extended-stable-verification.json",
+          "sha256": "9eae5a91c3481580dcc11fc536ae8665b552d0c559347947e81f733996f6a89c"
+        },
+        {
+          "path": "data/runs/20261005-194549-2712b4-strategy-1cac/comparison.json",
+          "sha256": "39f54d4e407767731bb26b5a7db1272c9e67ae9178b360427bb5674c2c5981f4"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-194549-2712b4-strategy-1cac",
+      "run_id": "20261005-194345-2712b4-strategy-63c5",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.747419655948809,
+          "metrics": {
+            "annual_return": -0.0400107124698772,
+            "annual_vol": 0.2234494972482185,
+            "drawdown_peak": 10,
+            "drawdown_trough": 2060,
+            "max_drawdown": -0.7169825552690767,
+            "sharpe": -0.07127084245291802,
+            "total_return": -0.5874945
+          },
+          "recent_yearly_returns": {
+            "2022": -0.19806455563487768,
+            "2023": -0.12178051589965821,
+            "2024": -0.133492098499436,
+            "2025": 0.040404349411537144,
+            "2026": -0.029664809528682112
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.7517264641924856,
+          "metrics": {
+            "annual_return": -0.05308454884113112,
+            "annual_vol": 0.22193525021326532,
+            "drawdown_peak": 10,
+            "drawdown_trough": 2060,
+            "max_drawdown": -0.751689847095669,
+            "sharpe": -0.1350752903993054,
+            "total_return": -0.693602
+          },
+          "recent_yearly_returns": {
+            "2022": -0.20202039140766237,
+            "2023": -0.1381369126454436,
+            "2024": -0.13410709340649096,
+            "2025": 0.04852041002323215,
+            "2026": -0.031549136401062716
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.7501499219330758,
+          "metrics": {
+            "annual_return": -0.05105542181481004,
+            "annual_vol": 0.22089177488407982,
+            "drawdown_peak": 10,
+            "drawdown_trough": 2060,
+            "max_drawdown": -0.7386970411361392,
+            "sharpe": -0.12700990912691518,
+            "total_return": -0.6790435
+          },
+          "recent_yearly_returns": {
+            "2022": -0.1965611804574544,
+            "2023": -0.13253162535024177,
+            "2024": -0.12672645814411976,
+            "2025": 0.04794413044684531,
+            "2026": -0.028870068805257554
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "复星医药多均线固定金额日频近似（用户批准的逐窗口稳定求和数值修正）",
+      "snapshot": "20261005-191431-aa71",
+      "source": "2020年度精选策略/89 test1：简单的多均线择时.txt",
+      "strategy_id": "S-d885413f8d35"
+    },
+    {
+      "differences": 0,
+      "implementation": "multi_ma_fixed_value_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2005-03-01"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-194726-58b4fc-strategy-b0a5/report.json",
+          "sha256": "dd18d35a24e2bf41546fa651aa7b202c735b8d77d57edf4ef329a54775f16289"
+        },
+        {
+          "path": "data/runs/20261005-194726-58b4fc-strategy-b0a5/source.original",
+          "sha256": "4f585038a1ae463f7df1b10888e98c65326dc7c6499eaf83bfcd2e608e2c020a"
+        },
+        {
+          "path": "data/staging/strategies-batch14/20261005-long-history/multi_ma_fixed_1m_batch5-extended-stable-verification.json",
+          "sha256": "fe7d8f535ca50425bcd313d8901a22804f77ba257d0dddec574b3542c649b2b4"
+        },
+        {
+          "path": "data/runs/20261005-194856-58b4fc-strategy-9c6c/comparison.json",
+          "sha256": "39f54d4e407767731bb26b5a7db1272c9e67ae9178b360427bb5674c2c5981f4"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-194856-58b4fc-strategy-9c6c",
+      "run_id": "20261005-194726-58b4fc-strategy-b0a5",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.9943947855391138,
+          "metrics": {
+            "annual_return": -0.00013850945647464474,
+            "annual_vol": 0.0052164295827079165,
+            "drawdown_peak": 10,
+            "drawdown_trough": 2060,
+            "max_drawdown": -0.022220870312338437,
+            "sharpe": -0.023947027478454102,
+            "total_return": -0.0029994100000000357
+          },
+          "recent_yearly_returns": {
+            "2022": -0.0037834185626333117,
+            "2023": -0.002751113371506575,
+            "2024": -0.0024491531899677454,
+            "2025": 0.001349800945011248,
+            "2026": -0.0006407723187882297
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.9943800006863087,
+          "metrics": {
+            "annual_return": -0.00035997204278104267,
+            "annual_vol": 0.0052321651351289545,
+            "drawdown_peak": 10,
+            "drawdown_trough": 2060,
+            "max_drawdown": -0.02472092592819397,
+            "sharpe": -0.06619694847438501,
+            "total_return": -0.007777339999999966
+          },
+          "recent_yearly_returns": {
+            "2022": -0.004026464581778466,
+            "2023": -0.0028638019473676835,
+            "2024": -0.0025770109991601897,
+            "2025": 0.0012560812316686487,
+            "2026": -0.0006834013224739088
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.9943917145656216,
+          "metrics": {
+            "annual_return": -0.00036827099783676154,
+            "annual_vol": 0.005220635573522213,
+            "drawdown_peak": 10,
+            "drawdown_trough": 2060,
+            "max_drawdown": -0.02417700264861511,
+            "sharpe": -0.06794490643590222,
+            "total_return": -0.007955959999999984
+          },
+          "recent_yearly_returns": {
+            "2022": -0.004106190480979821,
+            "2023": -0.0028944753496789044,
+            "2024": -0.0026643648853156288,
+            "2025": 0.0011616229530386768,
+            "2026": -0.0007083776648574291
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "复星医药多均线固定金额日频近似（用户批准的逐窗口稳定求和数值修正）",
+      "snapshot": "20261005-191431-aa71",
+      "source": "2020年度精选策略/89 test1：简单的多均线择时.txt",
+      "strategy_id": "S-d885413f8d35"
+    },
+    {
+      "differences": 0,
+      "implementation": "pair_yili_cmb_anchored_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2013-09-06"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-192319-740420-strategy-4938/report.json",
+          "sha256": "8e0ed3e3cb604184374b46da47f2fef4d760aee1f8f2e7b69a15fc34e33ccfda"
+        },
+        {
+          "path": "data/runs/20261005-192319-740420-strategy-4938/source.original",
+          "sha256": "f07782275b866016d4af84b381cb225777fb03ca7de0a6caa8aa72b45e65b7d1"
+        },
+        {
+          "path": "data/staging/strategies-batch14/20261005-long-history/pair_yili_cmb_long_batch4-extended-verification.json",
+          "sha256": "2bbae7a6e0fa729930a9a9bbada6915abc01241def3ab70e17e4f24d75a71d23"
+        },
+        {
+          "path": "data/runs/20261005-192424-740420-strategy-00f0/comparison.json",
+          "sha256": "85975361b1a34a608746852fca734114da20aa37f3b29098c54bc7609c93d80f"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-192424-740420-strategy-00f0",
+      "run_id": "20261005-192319-740420-strategy-4938",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.04238044989082276,
+          "metrics": {
+            "annual_return": 0.2498989770268385,
+            "annual_vol": 0.28170693462385654,
+            "drawdown_peak": 1799,
+            "drawdown_trough": 2224,
+            "max_drawdown": -0.4875595349212297,
+            "sharpe": 0.9322022640507165,
+            "total_return": 17.66305952
+          },
+          "recent_yearly_returns": {
+            "2022": -0.23271886041286916,
+            "2023": -0.10645979414708173,
+            "2024": 0.36019522728385733,
+            "2025": 0.10685548489284202,
+            "2026": 0.1428622867314353
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.042328313205400044,
+          "metrics": {
+            "annual_return": 0.24183218649084437,
+            "annual_vol": 0.2816637408604629,
+            "drawdown_peak": 1799,
+            "drawdown_trough": 2224,
+            "max_drawdown": -0.4923890803343477,
+            "sharpe": 0.9092973433489557,
+            "total_return": 16.143119679999998
+          },
+          "recent_yearly_returns": {
+            "2022": -0.23630261239058092,
+            "2023": -0.1101112230448743,
+            "2024": 0.3565538475401866,
+            "2025": 0.1027156911841205,
+            "2026": 0.13803228911300613
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.04233269548632184,
+          "metrics": {
+            "annual_return": 0.2384063330504067,
+            "annual_vol": 0.28165124624323357,
+            "drawdown_peak": 1799,
+            "drawdown_trough": 2224,
+            "max_drawdown": -0.4940029031150406,
+            "sharpe": 0.8995107825874926,
+            "total_return": 15.532912449999998
+          },
+          "recent_yearly_returns": {
+            "2022": -0.23767371933587156,
+            "2023": -0.11191662451904894,
+            "2024": 0.3530949897548481,
+            "2025": 0.09880569459163224,
+            "2026": 0.13288088162458944
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "伊利/招行配对状态机",
+      "snapshot": "20261005-191431-aa71",
+      "source": "2020年度精选策略/02 我好像破解了聚宽擂台排第一的策略？！.txt",
+      "strategy_id": "S-25a2ce74300f"
+    },
+    {
+      "differences": 0,
+      "implementation": "pair_haitian_cmb_anchored_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2014-08-04"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-192517-f804c1-strategy-0507/report.json",
+          "sha256": "f201f957daa201f574ce21bacfdfbcf5381b43e07a0271a8f602c216da81cb08"
+        },
+        {
+          "path": "data/runs/20261005-192517-f804c1-strategy-0507/source.original",
+          "sha256": "a3cdcecb778b935136aa736f6ab7595548e4251d101bb56781c88522c3500bd5"
+        },
+        {
+          "path": "data/staging/strategies-batch14/20261005-long-history/pair_haitian_cmb_long_batch4-extended-verification.json",
+          "sha256": "6a9dadd20a91ae420c081b8706f895e3eaf61959e2e08e9b0a15bab60e9f4c28"
+        },
+        {
+          "path": "data/runs/20261005-192619-f804c1-strategy-647a/comparison.json",
+          "sha256": "54fd092b38439addac542dd79e733ec9a235e2e314f094b8736f526ff76fc841"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-192619-f804c1-strategy-647a",
+      "run_id": "20261005-192517-f804c1-strategy-0507",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.0008539046689527816,
+          "metrics": {
+            "annual_return": 0.1974784962166265,
+            "annual_vol": 0.28635416594429264,
+            "drawdown_peak": 1593,
+            "drawdown_trough": 2284,
+            "max_drawdown": -0.6108393009315802,
+            "sharpe": 0.7718394016203078,
+            "total_return": 8.03713016
+          },
+          "recent_yearly_returns": {
+            "2022": -0.06353789786631825,
+            "2023": -0.38472717405220724,
+            "2024": 0.4093605188364986,
+            "2025": -0.019893156087056663,
+            "2026": 0.012928931927858711
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.0008609958659497016,
+          "metrics": {
+            "annual_return": 0.19075769395906095,
+            "annual_vol": 0.2864016335550373,
+            "drawdown_peak": 1593,
+            "drawdown_trough": 2284,
+            "max_drawdown": -0.6170095204831723,
+            "sharpe": 0.7520951449228409,
+            "total_return": 7.43671516
+          },
+          "recent_yearly_returns": {
+            "2022": -0.071210071850343,
+            "2023": -0.38828385580952973,
+            "2024": 0.40420409880374875,
+            "2025": -0.023578412415989902,
+            "2026": 0.00707635221106373
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.0008531398233352984,
+          "metrics": {
+            "annual_return": 0.18776641006705908,
+            "annual_vol": 0.28644766690971335,
+            "drawdown_peak": 1593,
+            "drawdown_trough": 2284,
+            "max_drawdown": -0.618883883878939,
+            "sharpe": 0.743233437881557,
+            "total_return": 7.18145189
+          },
+          "recent_yearly_returns": {
+            "2022": -0.0733688313408748,
+            "2023": -0.3897323346413285,
+            "2024": 0.39943531578805347,
+            "2025": -0.02704899319503762,
+            "2026": 0.0012308903775999358
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "海天/招行配对状态机",
+      "snapshot": "20261005-191431-aa71",
+      "source": "2020年度精选策略/19 招行_海天配对策略（学习招行伊利配对）.txt",
+      "strategy_id": "S-2129796d6da6"
+    },
+    {
+      "differences": 0,
+      "implementation": "svm_lagged_shape_corrected_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2013-06-14"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-193108-e8aa23-strategy-ea0b/report.json",
+          "sha256": "12ad1b2e48e341bd10b4801d4ed3a11a7019881579451e7158304075297a8113"
+        },
+        {
+          "path": "data/runs/20261005-193108-e8aa23-strategy-ea0b/source.original",
+          "sha256": "0aba6027a1f433627ff7903c0b5a8df3094bde7013ca1231cc3b498d2efed572"
+        },
+        {
+          "path": "data/staging/strategies-batch14/20261005-long-history/svm_lagged_shape_batch6-extended-verification.json",
+          "sha256": "265a8e1b7baa999ad97d133970af41e3b82b06eb74010b51ac6f51c619509dd3"
+        },
+        {
+          "path": "data/runs/20261005-193254-e8aa23-strategy-4ae3/comparison.json",
+          "sha256": "c9508684a066c721881ccf72ca2de998ba3b3e3a3b2a7aed09d695209fba4260"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-193254-e8aa23-strategy-4ae3",
+      "run_id": "20261005-193108-e8aa23-strategy-ea0b",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.5454794468014483,
+          "metrics": {
+            "annual_return": 0.044965803612254884,
+            "annual_vol": 0.24211357718595033,
+            "drawdown_peak": 490,
+            "drawdown_trough": 540,
+            "max_drawdown": -0.4959920207783166,
+            "sharpe": 0.30226083197815734,
+            "total_return": 0.8003301899999999
+          },
+          "recent_yearly_returns": {
+            "2022": 0.14154294471950246,
+            "2023": 0.09644241674323073,
+            "2024": -0.06440967685073207,
+            "2025": -0.061617049446875516,
+            "2026": 0
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.5455291687314063,
+          "metrics": {
+            "annual_return": 0.0390794867698574,
+            "annual_vol": 0.24215000921623972,
+            "drawdown_peak": 490,
+            "drawdown_trough": 540,
+            "max_drawdown": -0.49830334846989077,
+            "sharpe": 0.2789228441908967,
+            "total_return": 0.66938659
+          },
+          "recent_yearly_returns": {
+            "2022": 0.13800454376546445,
+            "2023": 0.09236386256092044,
+            "2024": -0.06613432436318545,
+            "2025": -0.06356047131233111,
+            "2026": 0
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.545454022901763,
+          "metrics": {
+            "annual_return": 0.037234490964747735,
+            "annual_vol": 0.24216778146183987,
+            "drawdown_peak": 490,
+            "drawdown_trough": 540,
+            "max_drawdown": -0.49898161947978736,
+            "sharpe": 0.27158388652385224,
+            "total_return": 0.6301943799999998
+          },
+          "recent_yearly_returns": {
+            "2022": 0.13700334121913604,
+            "2023": 0.08903366460577633,
+            "2024": -0.06712523257814651,
+            "2025": -0.06544625825938799,
+            "2026": 0
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "同仁堂SVM滞后特征形状修正周频近似",
+      "snapshot": "20261005-191431-aa71",
+      "source": "2020年度精选策略/98 机器学习SVM用法示例策略.txt",
+      "strategy_id": "S-9005dd4b1cba"
+    },
+    {
+      "differences": 0,
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2020-03-05"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-193354-b5b8aa-strategy-1f41/report.json",
+          "sha256": "cf4a8bdb2af77c7d36b01bf23bb4378ce356c06adf28a82cad206a9afe19141b"
+        },
+        {
+          "path": "data/runs/20261005-193354-b5b8aa-strategy-1f41/source.original",
+          "sha256": "011bfb2aa689d471d949e1813c53089adce4125ae748b06ce227265a81c842fd"
+        },
+        {
+          "path": "data/staging/strategies-batch14/20261005-long-history/pair_zscore_rotation_batch8-extended-verification.json",
+          "sha256": "5b00b00e1d952c293878ac40ac90bc0d9272b5b19f0f1a43e5bca32ed91cd759"
+        },
+        {
+          "path": "data/runs/20261005-193437-b5b8aa-strategy-88a8/comparison.json",
+          "sha256": "85223d25049364fe62c8aa6cdfd450aa4d1b0d221630d0c5d780a3edd816bef6"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-193437-b5b8aa-strategy-88a8",
+      "run_id": "20261005-193354-b5b8aa-strategy-1f41",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.048360753552538646,
+          "metrics": {
+            "annual_return": 0.01133667602265609,
+            "annual_vol": 0.2708040445158341,
+            "drawdown_peak": 212,
+            "drawdown_trough": 611,
+            "max_drawdown": -0.6288087032066689,
+            "sharpe": 0.1765872333398443,
+            "total_return": 0.07717861000000004
+          },
+          "recent_yearly_returns": {
+            "2022": -0.26973707935469204,
+            "2023": 0.09641299380624946,
+            "2024": 0.05534107808854705,
+            "2025": 0.02844879779406484,
+            "2026": 0.12086263975968525
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.047732361292986775,
+          "metrics": {
+            "annual_return": 0.008959844391212668,
+            "annual_vol": 0.2710370229066947,
+            "drawdown_peak": 212,
+            "drawdown_trough": 611,
+            "max_drawdown": -0.6298085300667065,
+            "sharpe": 0.16799575836450556,
+            "total_return": 0.060592159999999895
+          },
+          "recent_yearly_returns": {
+            "2022": -0.27273075321877893,
+            "2023": 0.09423830865138116,
+            "2024": 0.054331475377805916,
+            "2025": 0.026425962592697694,
+            "2026": 0.11965570005454107
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.048125626170663766,
+          "metrics": {
+            "annual_return": 0.007752132469618811,
+            "annual_vol": 0.27095393501863096,
+            "drawdown_peak": 212,
+            "drawdown_trough": 611,
+            "max_drawdown": -0.6299567051314126,
+            "sharpe": 0.16354186765545306,
+            "total_return": 0.05224763999999982
+          },
+          "recent_yearly_returns": {
+            "2022": -0.27275491314948763,
+            "2023": 0.09287671288516153,
+            "2024": 0.05328519879945004,
+            "2025": 0.024398336527249764,
+            "2026": 0.11864597957733225
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "海康威视/格力60行zscore修正日频轮换",
+      "snapshot": "20261005-191431-aa71",
+      "source": "2022年度精选策略/66.【配对交易】基于zscore的配对交易策略（胜率88.2%）.txt",
+      "strategy_id": "S-578d2e730081"
+    },
+    {
+      "differences": 0,
+      "implementation": "rsi_slots_corrected_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2019-09-10"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-201648-4c9835-strategy-f8e4/report.json",
+          "sha256": "f774d0f8ab4eb0a859e942ab6f8de5eee0c2340c3306fa94db775f7df3ccb3e6"
+        },
+        {
+          "path": "data/runs/20261005-201648-4c9835-strategy-f8e4/source.original",
+          "sha256": "5674dbc6d55fbe6cd6d86867831b0e95c8ab8dade4cf49e1da1c02a244544c03"
+        },
+        {
+          "path": "data/staging/strategies-batch15/20261005-rsi-history/rsi_slots_corrected_batch7-extended-verification.json",
+          "sha256": "f3ef2d8e4910a891b8dc62c1c48a028426a6f36adc1528b2a1c47d4b9ca7840f"
+        },
+        {
+          "path": "data/runs/20261005-202301-4c9835-strategy-d491/comparison.json",
+          "sha256": "f07ace8d00cd47588c98b8024aa96e3d5892c4c7bc8ff6a8d9da90576cc0b4c7"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-202301-4c9835-strategy-d491",
+      "run_id": "20261005-201648-4c9835-strategy-f8e4",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.05793722419554671,
+          "metrics": {
+            "annual_return": 0.14016925096413235,
+            "annual_vol": 0.22010831181171786,
+            "drawdown_peak": 531,
+            "drawdown_trough": 1069,
+            "max_drawdown": -0.5096675911289007,
+            "sharpe": 0.7060297452549021,
+            "total_return": 1.5266892799999998
+          },
+          "recent_yearly_returns": {
+            "2022": -0.21384886199309305,
+            "2023": -0.18785689384220128,
+            "2024": 0.028511462409091415,
+            "2025": 0.33585975693350845,
+            "2026": -0.03366323571231744
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.05777092875782763,
+          "metrics": {
+            "annual_return": 0.13452102736593252,
+            "annual_vol": 0.22002210670997713,
+            "drawdown_peak": 531,
+            "drawdown_trough": 1069,
+            "max_drawdown": -0.5146121273752784,
+            "sharpe": 0.6836460795581375,
+            "total_return": 1.4395617599999997
+          },
+          "recent_yearly_returns": {
+            "2022": -0.2160500022108478,
+            "2023": -0.19231533029100967,
+            "2024": 0.02137298701538337,
+            "2025": 0.32521547028045306,
+            "2026": -0.03545529141445536
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.057963384936057516,
+          "metrics": {
+            "annual_return": 0.1335383144605904,
+            "annual_vol": 0.22017076291622484,
+            "drawdown_peak": 531,
+            "drawdown_trough": 1069,
+            "max_drawdown": -0.5111404607806416,
+            "sharpe": 0.6793877140723604,
+            "total_return": 1.42466932
+          },
+          "recent_yearly_returns": {
+            "2022": -0.21559637134597276,
+            "2023": -0.1894958240599497,
+            "2024": 0.018280184046627568,
+            "2025": 0.3198807385063638,
+            "2026": -0.037268125375124694
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "固定42项股票池RSI多持仓修正近似变体",
+      "snapshot": "20261005-201432-93d0",
+      "source": "2024年度精选策略2/40.RSI学习贴.txt",
+      "strategy_id": "S-2d40c2d698f7"
+    },
+    {
+      "differences": 0,
+      "implementation": "ema_slots_talib_approx_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2012-02-03"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-212150-ef86d3-strategy-d46c/report.json",
+          "sha256": "918007e33bb01141a79b20672656348258b046a5b2513b174a27ee6909824154"
+        },
+        {
+          "path": "data/runs/20261005-212150-ef86d3-strategy-d46c/source.original",
+          "sha256": "2ecc7295bec6f264228985e5f08a1dac2f5621e51ff3ecd0234473a4cea9b507"
+        },
+        {
+          "path": "data/staging/strategies-batch19/20261005-ema55/ema55-long-verification.json",
+          "sha256": "9d972e8f81b54c9335b955b4b92d9c63067227d7057a0be3ab533bd70150198f"
+        },
+        {
+          "path": "data/runs/20261005-212330-ef86d3-strategy-dee7/comparison.json",
+          "sha256": "4f35dc707d7b76e4bc9c4dacf26e82d7877152fe0ac0d9c53581eab9dfea8ea9"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-212330-ef86d3-strategy-dee7",
+      "run_id": "20261005-212150-ef86d3-strategy-d46c",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.6836218715750733,
+          "metrics": {
+            "annual_return": 0.1396281870546654,
+            "annual_vol": 0.17652669565275447,
+            "drawdown_peak": 2199,
+            "drawdown_trough": 3554,
+            "max_drawdown": -0.3838037430357637,
+            "sharpe": 0.8285859699368543,
+            "total_return": 5.85065834
+          },
+          "recent_yearly_returns": {
+            "2022": -0.10842991583454309,
+            "2023": -0.03953202987569737,
+            "2024": -0.05635718108764809,
+            "2025": 0.00809749475924959,
+            "2026": -0.0494482320562023
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.6835912782554115,
+          "metrics": {
+            "annual_return": 0.1314973453451458,
+            "annual_vol": 0.17655364883973015,
+            "drawdown_peak": 2199,
+            "drawdown_trough": 3554,
+            "max_drawdown": -0.3996148502785839,
+            "sharpe": 0.7879157413359202,
+            "total_return": 5.165220280000001
+          },
+          "recent_yearly_returns": {
+            "2022": -0.11221401591980562,
+            "2023": -0.04487353112967574,
+            "2024": -0.06023268764861123,
+            "2025": 0.004290208111076055,
+            "2026": -0.05086176186495828
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.6837618957151331,
+          "metrics": {
+            "annual_return": 0.11355251628577845,
+            "annual_vol": 0.17652581025496522,
+            "drawdown_peak": 2199,
+            "drawdown_trough": 3554,
+            "max_drawdown": -0.4394281307230695,
+            "sharpe": 0.6974152637904186,
+            "total_return": 3.87223528
+          },
+          "recent_yearly_returns": {
+            "2022": -0.12024170617399565,
+            "2023": -0.057516617933033976,
+            "2024": -0.07427325979787724,
+            "2025": -0.0099070208180293,
+            "2026": -0.055715242401541465
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "用户批准的三进兵55 TA-Lib连续EMA近似变体",
+      "snapshot": "20261005-211958-89b5",
+      "source": "2022年度精选策略/55.【策略研发】三进兵策略（变形版）.txt",
+      "strategy_id": "S-7e88bff4dc3a"
+    },
+    {
+      "differences": 0,
+      "implementation": "ep_component_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2026-09-29",
+        "start": "2021-02-02"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-175633-e631d4-strategy-d3be/report.json",
+          "sha256": "ff06ddd97aab36cc4ddf06f546c1d2d295e5199809c4f1955f0abe73e0efc0c3"
+        },
+        {
+          "path": "data/runs/20261005-175633-e631d4-strategy-d3be/source.original",
+          "sha256": "29509b6032cfe0341e10e0d2decf046a85190a55ff4942dd514528d304c690c4"
+        },
+        {
+          "path": "data/staging/strategies-batch11/20261005-daily-stock-reviews/ep-long-verification.json",
+          "sha256": "b0e33493ec78c730b525a3f7c90a5575ed16103b983ffd6a9fa39afe46952ed2"
+        },
+        {
+          "path": "data/runs/20261005-180828-e631d4-strategy-762a/comparison.json",
+          "sha256": "9f2f5871bbf49885772cee171ff64711310efd6df14aa5b2305bde795e785bc3"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-180828-e631d4-strategy-762a",
+      "run_id": "20261005-175633-e631d4-strategy-d3be",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.08427456437070627,
+          "metrics": {
+            "annual_return": 0.07033458978987173,
+            "annual_vol": 0.15655073497376293,
+            "drawdown_peak": 795,
+            "drawdown_trough": 878,
+            "max_drawdown": -0.1665344643064981,
+            "sharpe": 0.5128063783423952,
+            "total_return": 0.46972760000000013
+          },
+          "recent_yearly_returns": {
+            "2022": -0.03138129937461864,
+            "2023": 0.034385879797160124,
+            "2024": 0.18997081097378787,
+            "2025": 0.14431065618106342,
+            "2026": 0.008765719148219109
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.08478668994866337,
+          "metrics": {
+            "annual_return": 0.0649383134773891,
+            "annual_vol": 0.1562877583632661,
+            "drawdown_peak": 795,
+            "drawdown_trough": 878,
+            "max_drawdown": -0.16773313777186705,
+            "sharpe": 0.48106485965468276,
+            "total_return": 0.4282391200000002
+          },
+          "recent_yearly_returns": {
+            "2022": -0.03692248665631026,
+            "2023": 0.030459161866680073,
+            "2024": 0.18070207085963497,
+            "2025": 0.14041000270444526,
+            "2026": 0.00717314424439941
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.08403269453709529,
+          "metrics": {
+            "annual_return": 0.06745238524309216,
+            "annual_vol": 0.15646911484850343,
+            "drawdown_peak": 795,
+            "drawdown_trough": 878,
+            "max_drawdown": -0.16729810366890152,
+            "sharpe": 0.4957632402594363,
+            "total_return": 0.4474465000000001
+          },
+          "recent_yearly_returns": {
+            "2022": -0.03336833094984826,
+            "2023": 0.033051611303726025,
+            "2024": 0.18390361838806424,
+            "2025": 0.1416807063660499,
+            "2026": 0.007532360629701307
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "BP/EP 组件及主板近似变体",
+      "snapshot": "20261005-152153-eb05",
+      "source": "2022年度精选策略/74.基本面单因子测试——以BP因子为例.txt",
+      "strategy_id": "S-f8eaf0fa2c7c"
+    },
+    {
+      "differences": 0,
+      "implementation": "bp_component_v1",
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2024-06-28",
+        "start": "2024-03-29"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-173126-82f83d-strategy-fbaf/report.json",
+          "sha256": "d53ee3b8e4530918ab647860956a5928bbaed46fad3811b4a3a2d84d198c780e"
+        },
+        {
+          "path": "data/runs/20261005-173126-82f83d-strategy-fbaf/source.original",
+          "sha256": "29509b6032cfe0341e10e0d2decf046a85190a55ff4942dd514528d304c690c4"
+        },
+        {
+          "path": "data/staging/strategies-batch11/20261005-daily-stock-reviews/final-short-verifications/bp-short-verification.json",
+          "sha256": "a744705201c2512577a17fe88cd52905012a77a434382c35358aa98343877844"
+        },
+        {
+          "path": "data/runs/20261005-174211-099e47-strategy-ad4f/comparison.json",
+          "sha256": "fd19eefda234b0ebd51d27e44c5b60c00f82756a0fd612563928aa712c1382c1"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-174211-099e47-strategy-ad4f",
+      "run_id": "20261005-173126-82f83d-strategy-fbaf",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.08315032426330103,
+          "metrics": {
+            "annual_return": -0.35842355199251363,
+            "annual_vol": 0.2082516288307475,
+            "drawdown_peak": 31,
+            "drawdown_trough": 56,
+            "max_drawdown": -0.15560795423727924,
+            "sharpe": -2.0267743713717015,
+            "total_return": -0.10420145999999997
+          },
+          "recent_yearly_returns": {
+            "2024": -0.10420145999999997
+          },
+          "scenario": "base",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.0813979507333693,
+          "metrics": {
+            "annual_return": -0.3657664108721228,
+            "annual_vol": 0.20836058772513216,
+            "drawdown_peak": 31,
+            "drawdown_trough": 56,
+            "max_drawdown": -0.15634848479649355,
+            "sharpe": -2.08074337451863,
+            "total_return": -0.10675440000000003
+          },
+          "recent_yearly_returns": {
+            "2024": -0.10675440000000003
+          },
+          "scenario": "fees_x2",
+          "status": "success_limited"
+        },
+        {
+          "cash_share_mean": 0.0827352148201752,
+          "metrics": {
+            "annual_return": -0.3605451995041795,
+            "annual_vol": 0.2082014959029975,
+            "drawdown_peak": 31,
+            "drawdown_trough": 56,
+            "max_drawdown": -0.15579647463823687,
+            "sharpe": -2.043190303864871,
+            "total_return": -0.10493683999999992
+          },
+          "recent_yearly_returns": {
+            "2024": -0.10493683999999992
+          },
+          "scenario": "slippage_x2",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "BP/EP 组件及主板近似变体",
+      "snapshot": "20261005-152153-eb05",
+      "source": "2022年度精选策略/74.基本面单因子测试——以BP因子为例.txt",
+      "strategy_id": "S-f8eaf0fa2c7c"
+    },
+    {
+      "differences": 0,
+      "implementation": "y2024b-081",
+      "limitations": [
+        {
+          "detail": "原文 market_cap 为总市值；这里用流通市值（成交量 ÷ 换手率 × 收盘价）替代，总股本数据入库后改回总市值",
+          "kind": "deviation"
+        },
+        {
+          "detail": "原文 pb_ratio 来自聚宽 valuation 表；这里用 BaoStock 日线的 pbMRQ，口径接近但不保证一致",
+          "kind": "deviation"
+        },
+        {
+          "detail": "原文每月先全部卖出再买入（保留的股票也会卖出再买回，产生双边费用）；这里保留仍在名单内的持仓，只在偏离超过 20% 时调整，费用偏低",
+          "kind": "deviation"
+        },
+        {
+          "detail": "原文股票池含北交所；本地数据没有北交所，只在沪深主板、创业板、科创板中选",
+          "kind": "deviation"
+        },
+        {
+          "detail": "原文无滑点；这里统一按 0.1% 滑点和本项目执行规则集的费用计算",
+          "kind": "deviation"
+        },
+        {
+          "detail": "聚宽策略的声明式改写，非原代码逐行执行；证据级别为探索",
+          "kind": "strategy_port"
+        },
+        {
+          "audit": {
+            "audit_id": "20260930-121951-c0f4",
+            "audited_at": "2026-09-30T12:19:51",
+            "batch_id": "20260930-121727-4c66",
+            "input_range": {
+              "days": 1392,
+              "end": "2026-09-29",
+              "rows": 6848484,
+              "start": "2021-01-04"
+            },
+            "scope": "snapshot",
+            "source": "audit 20260930-121951-c0f4",
+            "status": "expired"
+          },
+          "detail": "快照批次审计状态为 expired",
+          "kind": "data_audit"
+        }
+      ],
+      "original_strategy_complete": false,
+      "period": {
+        "end": "2024-06-28",
+        "start": "2024-04-01"
+      },
+      "references": [
+        {
+          "path": "data/runs/20261005-132927-strategy-y2024b-081-87b5/metrics.json",
+          "sha256": "641a02105f419fb3eb3df0d4b3eb0028ff61a52728001d2b41b2c3782be89261"
+        },
+        {
+          "path": "data/runs/20261005-132927-strategy-y2024b-081-87b5/status.json",
+          "sha256": "fc71137371a42c0d536c8698795a9828bc24c7d426378349a8de126f43a88f36"
+        },
+        {
+          "path": "data/runs/20261005-132927-strategy-y2024b-081-87b5/config.json",
+          "sha256": "d8abe4b1ed83bc739d97246f2d77f04c0b07601c6205bb9bc31f7fb05efc82be"
+        },
+        {
+          "path": "data/runs/20261005-132927-strategy-y2024b-081-87b5/source.original",
+          "sha256": "86717283069149897158bf81d70693f91c037bd397b709a8536bf5ccb2b4ede3"
+        },
+        {
+          "path": "data/runs/20261005-132927-strategy-y2024b-081-87b5/limitations.json",
+          "sha256": "4d401baa284ca6f97b0d626b77d0d313294cacd771537e07513a364d4466466d"
+        },
+        {
+          "path": "data/runs/20261005-132927-strategy-y2024b-081-87b5/trading.json",
+          "sha256": "313c93662eadef2b2a1198767a437e993b2dfb677d81e270cc41448678987407"
+        },
+        {
+          "path": "data/runs/20261005-133019-strategy-y2024b-081-8075/comparison.json",
+          "sha256": "6c82f6cb76f2cd6e160cc0751ee50575480ff68aa3c156a3fdf25792070c2e19"
+        }
+      ],
+      "reproduction_result": "match",
+      "reproduction_run_id": "20261005-133019-strategy-y2024b-081-8075",
+      "run_id": "20261005-132927-strategy-y2024b-081-87b5",
+      "scenarios": [
+        {
+          "cash_share_mean": 0.3640773344885567,
+          "metrics": {
+            "annual_return": -0.2514657686222993,
+            "annual_vol": 0.1862935153500454,
+            "drawdown_peak": 33,
+            "drawdown_trough": 55,
+            "max_drawdown": -0.11714322186109771,
+            "sharpe": -1.4616911974283062,
+            "total_return": -0.06817878,
+            "yearly_returns": {
+              "2024": -0.06817878
+            }
+          },
+          "scenario": "archived_default_only",
+          "status": "success_limited"
+        }
+      ],
+      "scope": "旧声明式探索；未完成本轮正式人工审查及三成本验收",
+      "snapshot": "20261005-131630-822f",
+      "source": "2024年度精选策略2/81.低PB小市值低换手策略总结.txt",
+      "strategy_id": "S-ee99921ca98d"
+    }
+  ],
+  "verification": {
+    "configurations": 14,
+    "formal_report_matches_embedded_validation": 13,
+    "formal_validation_sha_matches": 13,
+    "full_partition_or_manifest_integrity_reaudit": false,
+    "full_tests_rerun": false,
+    "progress_summary_sha_match": true,
+    "reproduction_match_zero_differences": 14,
+    "source_sha_matches": 14,
+    "unique_sources": 12
+  }
+}

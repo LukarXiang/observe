@@ -1,0 +1,43 @@
+name: 海康格力60行zscore修正日频近似轮换
+implementation: pair_zscore_rotation_corrected_v1
+source_path: repo/量化策略源代码/2022年度精选策略/66.【配对交易】基于zscore的配对交易策略（胜率88.2%）.txt
+snapshot: 20261005-152153-eb05
+start: 2021-04-06
+end: 2026-09-29
+instrument: 002415.SZ
+execution_instruments: [002415.SZ, 000651.SZ]
+initial_cash: 1000000
+parameters:
+  instrument1: 002415.SZ
+  instrument2: 000651.SZ
+  history: 60
+  ddof: 1
+  round_digits: 4
+  threshold: 2
+  price_basis: decision_close_anchor_v1
+universe:
+  boards: [main]
+  min_listed_sessions: 1
+  exclude_st: false
+  suspend_window: 1
+  max_suspended: 1
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: signal_cash_rotation
+  n: 2
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: daily
+  rebalance_session: 1
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.05
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+cost_scenarios: [base, fees_x2, slippage_x2]
+benchmark: 000300.SH
+cache: true

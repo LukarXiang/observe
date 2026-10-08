@@ -3,6 +3,7 @@ from bisect import bisect_right
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import date
+from decimal import Decimal, InvalidOperation, ROUND_CEILING, ROUND_FLOOR
 import math
 
 
@@ -80,15 +81,55 @@ class Book:
             p.last_price = ref if ref is not None else (p.last_price - cash + rights_price * rights_ratio) / (1 + bonus + rights_ratio); p.stale = True
 
     def _convert(self, day, a):
-        """吸收合并换股：旧代码持仓按比例转为新代码，成本整体转移；不足 1 股的零头舍去并记为假设（实际多以现金补偿）"""
+        """Convert holdings in place or into another code, retaining costs and locked shares."""
         old = self.pos(a['instrument'])
         if not old.qty: return
-        new = self.pos(a['convert_to']); r = a['convert_ratio']; q = int(old.qty * r)
-        if old.qty * r - q > 1e-9: self.assumptions.append({'date': day, 'instrument': a['instrument'], 'field': 'conversion_fraction', 'value': old.qty * r - q})
-        total_cost = old.cost * old.qty; new.cost = (new.cost * new.qty + total_cost) / (new.qty + q); new.qty += q
-        if new.last_price is None and old.last_price is not None: new.last_price = old.last_price / r
+        rounding = a.get('convert_rounding', 'floor')
+        if rounding not in ('floor', 'ceil'): raise LedgerError('unknown conversion rounding')
+        try: ratio = Decimal(str(a['convert_ratio']))
+        except (KeyError, InvalidOperation, ValueError) as exc: raise LedgerError('invalid conversion ratio') from exc
+        if not ratio.is_finite() or ratio <= 0 or not math.isfinite(float(ratio)) or float(ratio) <= 0:
+            raise LedgerError('invalid conversion ratio')
+        round_mode = ROUND_CEILING if rounding == 'ceil' else ROUND_FLOOR
+        quantity = lambda value: int((Decimal(value) * ratio).to_integral_value(rounding = round_mode))
+        exact = Decimal(old.qty) * ratio; q = quantity(old.qty)
+        if q <= 0: raise LedgerError('conversion would remove the entire holding as a fraction')
+        queued = [(d, k, count) for d in sorted(self.listing) for k, (i, count) in enumerate(self.listing[d]) if i == a['instrument']]
+        if sum(count for _, _, count in queued) != old.pending:
+            raise LedgerError('conversion pending shares lack listing evidence')
+        pending = quantity(old.pending); today_buy = quantity(old.today_buy)
+        if pending + today_buy > q: raise LedgerError('conversion locks exceed converted holding')
+        counts = [int((Decimal(count) * ratio).to_integral_value(rounding = ROUND_FLOOR)) for _, _, count in queued]
+        # Allocate rounding residue to the last listing date, keeping it locked.
+        if counts: counts[-1] += pending - sum(counts)
+        new = old if a['convert_to'] == a['instrument'] else self.positions.get(a['convert_to'], Position())
+        # Calculate all float-valued results before committing positions or queues.
+        try:
+            total_cost = old.cost * old.qty
+            new_qty = q if new is old else new.qty + q
+            new_cost = (total_cost if new is old else new.cost * new.qty + total_cost) / new_qty
+            new_price = new.last_price
+            if new is old or new_price is None:
+                new_price = old.last_price / float(ratio) if old.last_price is not None else None
+            fraction = float(exact - q)
+        except (OverflowError, ZeroDivisionError) as exc:
+            raise LedgerError('conversion results cannot be represented') from exc
+        if not math.isfinite(new_cost) or not math.isfinite(fraction) or (new_price is not None and (not math.isfinite(new_price) or new_price <= 0)):
+            raise LedgerError('conversion results must be finite with positive valuation price')
+        if new is old:
+            new.qty, new.pending, new.today_buy = q, pending, today_buy
+        else:
+            self.positions[a['convert_to']] = new
+            new.qty = new_qty
+            new.pending += pending; new.today_buy += today_buy
+            old.qty = old.today_buy = old.pending = 0
+        new.cost, new.last_price = new_cost, new_price
+        for (d, k, _), count in zip(queued, counts, strict = True): self.listing[d][k] = (a['convert_to'], count)
+        if abs(fraction) > 1e-9:
+            entry = {'date': day, 'instrument': a['instrument'], 'field': 'conversion_fraction', 'value': fraction}
+            if 'convert_rounding' in a: entry['rounding'] = rounding
+            self.assumptions.append(entry)
         self.issues.append({'date': day, 'instrument': a['instrument'], 'kind': 'converted', 'to': a['convert_to'], 'qty': q})
-        old.qty = old.today_buy = old.pending = 0
 
     def settle_delisted(self, day, i):
         """退市持仓按最后估值价折成现金并记为假设。只由策略回测显式调用；研究回放仍按退市持仓阻断（status = blocked）"""

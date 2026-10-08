@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "status": "ok_implementation_and_migration",
+  "scope": "Git metadata and selected local payload handoff; not strategy batch64 acceptance or remote push acceptance",
+  "platform": "WSL",
+  "python": "/home/zuozhe/envs/quant/.venv/bin/python",
+  "base_git_commit": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+  "code_bindings": {
+    "scripts/export_research_metadata.py": "c0a087a13c9b4797c3d28f55e25408314d0c279aa25d6201793041ab8b7e0d46",
+    "tests/unit/test_research_metadata.py": "e0ef3fb038359ed6b758aa9873e5b44b3f789ccf941210201272cf4cfd9f8f8c"
+  },
+  "tests": {
+    "full_command": "python scripts/verify_offline_tests.py -q",
+    "full_passed": 1650,
+    "warnings": 6,
+    "elapsed_seconds": 872.61,
+    "focused_command": "python -m pytest -q tests/unit/test_research_metadata.py",
+    "focused_passed": 16,
+    "focused_elapsed_seconds": 2.28,
+    "current_unique_test_count": 1651,
+    "note": "one legacy comparison-only regression added after full-suite collection; final exporter audit-control change verified by focused suite",
+    "ordinary_pytest": "stopped after TestClient hang; socketpair.send independently reproduced sandbox EPERM",
+    "pipe_wrapper_scope": "verification process asyncio wakeup transport only; application and network permissions unchanged"
+  },
+  "lint": "ruff_passed",
+  "diff_check": "passed; immutable CRLF metadata preserves bytes using scoped gitattributes",
+  "review": {"depth": "deep", "security": "passed", "architecture": "passed", "credentials_found": 0},
+  "first_metadata_export": {"export_id": "58a94ff307c897b8b2cf55b8", "files": 194, "bytes": 12124016, "git_only_checked": 513, "identical_repeat_export": true},
+  "second_metadata_export": {"export_id": "596bb60db83385af3b817edf", "files": 197, "bytes": 13092717, "git_only_checked": 516, "configured_parents": 114, "comparison_only_parents": 1},
+  "primary_bundle": {
+    "archive": "data/handoff/20261008-local-current-and-bollinger-example.tar.gz",
+    "archive_bytes": 3102567660,
+    "archive_sha256": "b6f76c6857b3ed797cc7d595928a7b26bc370dd8f4b1eb56a7c1be27ed828538",
+    "manifest_sha256": "412dac9d028ad267d5d6b6c0b92d070076646034abfee341aef01ab9e9124ac5",
+    "input_files": 3648,
+    "payload_bytes": 4343841903,
+    "migration_checked_files": 3749,
+    "result": "ok"
+  },
+  "audit_supplement": {
+    "archive": "data/handoff/20261008-audit-controls-supplement.tar.gz",
+    "archive_bytes": 204144,
+    "archive_sha256": "73bbd7ba13757c715789cd42aabf039ed0acf2a52cae9b5701ef1804a1eaf1b6",
+    "manifest_sha256": "9f719cd8e4265b951da4b2de3684c0e214f8308da130b4dded8edeea97bb602a",
+    "input_files": 65,
+    "payload_bytes": 973952,
+    "migration_checked_files": 166,
+    "result": "ok",
+    "provenance": "existing audit controls and historical batch original bytes; standard-library tar, existing prepare_handoff record/project_files/safe/sha helpers and schema1 verification; no source edits"
+  },
+  "reproduction": {
+    "source_run": "20261005-143611-844865-strategy-a327",
+    "first_run": "20261008-104204-13ab51-strategy-6258",
+    "first_result": "mismatch",
+    "first_differences": 7,
+    "first_reason": "audit controls omitted from primary package; expired became not_audited; numerical and trade results unchanged",
+    "first_comparison": "docs/handoff/2026-10-08-migration-first-mismatch.json",
+    "accepted_run": "20261008-104451-13ab51-strategy-33b4",
+    "result": "match",
+    "differences": 0,
+    "comparison": "docs/handoff/2026-10-08-migration-match.json",
+    "status_file": "docs/handoff/2026-10-08-migration-match-status.json",
+    "directory": "/tmp/observe-handoff-verify-20261008/data/runs/20261008-104451-13ab51-strategy-33b4",
+    "cost_scenarios": ["base", "fees_x2", "slippage_x2"],
+    "network": "socket connect/connect_ex/create_connection/getaddrinfo forbidden",
+    "cache": "bypassed",
+    "implementation_drift": true,
+    "environment_drift": "Git context and lock hash differ; comparison preserves evidence; not original-platform equivalence"
+  },
+  "research_counts_unchanged": {"sources": 695, "reviewed": 213, "accepted_reviewed": 211, "backtested_sources": 12, "strategy_parent_runs": 67, "original_equivalent_reproduction": 0, "strict_financial_usable": 0},
+  "git_publication": {"original_git_directory": "read_only", "checkout": "/tmp/observe-git-delivery-20261008", "remote": "https://github.com/LukarXiang/observe.git", "remote_status": "blocked_proxy_then_dns", "force_push": false},
+  "limitations": ["primary and audit supplement must both be restored", "payload archives are local and not uploaded by Git", "old remote handoff remains missing", "original Excel and all historical experiments/staging are outside these bundles", "no batch64 formal acceptance advanced"]
+}

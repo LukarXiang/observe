@@ -1,0 +1,59 @@
+name: 同仁堂SVM仅修输入形状、保留滞后（周频近似）
+implementation: svm_lagged_shape_corrected_v1
+source_path: repo/量化策略源代码/2020年度精选策略/98 机器学习SVM用法示例策略.txt
+snapshot: 20261005-152153-eb05
+start: 2022-01-17
+end: 2026-09-29
+instrument: 600085.SH
+execution_instruments: [600085.SH]
+initial_cash: 1000000
+parameters:
+  history: 252
+  feature_window: 22
+  label_horizon: 5
+  prediction_shape: one_row_v1
+  price_basis: frozen_back_adjusted_v1
+  volume_basis: raw_shares_v1
+  svc_parameters:
+    C: 1.0
+    break_ties: false
+    cache_size: 200
+    class_weight: null
+    coef0: 0.0
+    decision_function_shape: ovr
+    degree: 3
+    gamma: scale
+    kernel: rbf
+    max_iter: -1
+    probability: deprecated
+    random_state: null
+    shrinking: true
+    tol: 0.001
+    verbose: false
+universe:
+  boards: [main]
+  min_listed_sessions: 1
+  exclude_st: false
+  suspend_window: 1
+  max_suspended: 1
+  liquidity_window: 1
+  min_avg_amount: 0
+portfolio:
+  construction: target_weights
+  n: 1
+  max_weight: 1
+  rebalance_every: 1
+  rebalance_frequency: weekly
+  rebalance_session: 3
+  buffer: 0
+  max_sell: null
+  refill_between_rebalance: false
+  participation: 0.05
+  open_cash_policy: sell_then_buy
+execution:
+  slippage: 0.001
+  liquidity_window: 20
+cost_scenarios: [base, fees_x2, slippage_x2]
+benchmark: 600085.SH
+benchmark_kind: stock
+cache: true

@@ -1,0 +1,1372 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "purpose": "Git追踪与LLM跨机理解方案的定向盘点；不是已实施导出或发布",
+  "implementation_status": "planned_only",
+  "gitignore_changed": false,
+  "commit_or_push_performed": false,
+  "recommended_option": "B: curated data/metadata exports tracked by native Git; runtime payload excluded",
+  "current_gitignore": {
+    "path": ".gitignore",
+    "sha256": "d0e75baf7c0a41cb367d9329d4691b61f15c23741fa1afa804866f219f06b600",
+    "data_rule": "/data/",
+    "repo_rule": "/repo"
+  },
+  "measured_scope": "selected metadata, historical catalog/progress files and top-level docs only; full recursive payload scan interrupted and discarded",
+  "baseline_group_measurements_before_new_plan_documents": [
+    {
+      "group": "historical_catalog_json",
+      "files": 92,
+      "bytes": 161874190
+    },
+    {
+      "group": "historical_progress_json",
+      "files": 1593,
+      "bytes": 646492906
+    },
+    {
+      "group": "historical_progress_md",
+      "files": 531,
+      "bytes": 4657693
+    },
+    {
+      "group": "docs/handoff",
+      "files": 67,
+      "bytes": 13108328,
+      "tracked": 4,
+      "untracked": 63
+    },
+    {
+      "group": "docs/tasks",
+      "files": 70,
+      "tracked": 4,
+      "untracked": 66
+    },
+    {
+      "group": "data/snapshots direct JSON",
+      "files": 10,
+      "bytes": 530862
+    },
+    {
+      "group": "data/batches direct JSON",
+      "files": 38,
+      "bytes": 171089
+    }
+  ],
+  "selected_existing_metadata": [
+    {
+      "path": "data/PUBLISHED.json",
+      "bytes": 113287,
+      "sha256": "58a6cf9478c3f3d12a2f5dfebf02cb88eb5eee73d4103933851d11d390545ad4",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "export_selected_original_or_summary_to_data_metadata"
+    },
+    {
+      "path": "data/catalog/strategies/f9f64b3c9a1557eb92b1/catalog.json",
+      "bytes": 1898682,
+      "sha256": "8db20638a682427995323433ce66563bd9b9ea835e1507fc2f90df4f3bf5644a",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "export_selected_original_or_summary_to_data_metadata"
+    },
+    {
+      "path": "data/catalog/strategies/f9f64b3c9a1557eb92b1/catalog.parquet",
+      "bytes": 523228,
+      "sha256": "5e24eb77fe9cef72abe605b0b64d0adc7c2abaa3c8523b00cd1506704091aeb3",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "keep_payload_untracked"
+    },
+    {
+      "path": "data/catalog/strategies/progress/20261007-205221-0512/summary.json",
+      "bytes": 772,
+      "sha256": "4642520ab3ecc8fc48e81107d88f06de13e4dcbd5796b4af695f1f7635666121",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "export_selected_original_or_summary_to_data_metadata"
+    },
+    {
+      "path": "data/catalog/strategies/progress/20261007-205221-0512/sources.json",
+      "bytes": 577662,
+      "sha256": "ba5909b37558f428a41531a464f403e0d232d012437ae1da318430d6f2c123b4",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "export_selected_original_or_summary_to_data_metadata"
+    },
+    {
+      "path": "data/catalog/strategies/progress/20261007-205221-0512/runs.json",
+      "bytes": 837836,
+      "sha256": "91a6a7a69f8eb1243448bc172257166fe32c564e66fcb57141e7c0bdeec8ff76",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "export_selected_original_or_summary_to_data_metadata"
+    },
+    {
+      "path": "data/catalog/strategies/progress/20261007-205221-0512/progress.md",
+      "bytes": 10128,
+      "sha256": "209edf06ea130a656aedf7d2767ee4869f2c328d02bc8f95f7888b64e6cf49c6",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "export_selected_original_or_summary_to_data_metadata"
+    },
+    {
+      "path": "data/catalog/financial-fields-c863b10a0ed2c27df694.json",
+      "bytes": 2547548,
+      "sha256": "462f4a55a1049595b8a54d8750815223f0ac6ae385b622cb7ed62c7cb506135b",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "export_selected_original_or_summary_to_data_metadata"
+    },
+    {
+      "path": "data/raw/external_financials/c863b10a0ed2c27df694.json",
+      "bytes": 615379,
+      "sha256": "95f10ec290593822f7fa23332836891d0f00299b0ad91fc5a7a647fdc9361fdd",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "export_selected_original_or_summary_to_data_metadata"
+    },
+    {
+      "path": "data/audits/financials/c863b10a0ed2c27df694.json",
+      "bytes": 557468,
+      "sha256": "5e29abdc234e0340c9b7ba98b48ebec60804bb3126068a54ad7ae1f97478c7a8",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "export_selected_original_or_summary_to_data_metadata"
+    },
+    {
+      "path": "data/catalog/strategies/implementation-evidence.json",
+      "bytes": 20109,
+      "sha256": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+      "currently_tracked": false,
+      "currently_ignored": true,
+      "proposed_action": "export_selected_original_or_summary_to_data_metadata"
+    }
+  ],
+  "existing_document_inventory": [
+    {
+      "path": "docs/tasks/2026-09-28-契约修正与账本验证-执行提示词.md",
+      "bytes": 28059,
+      "currently_tracked": true,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "cd91a52ab9bdf9a98c974e5a9579b8da089c9be4b5dfebc4a159c4d6bb08e77e"
+    },
+    {
+      "path": "docs/tasks/2026-10-03-财务数据标准化与策略逐批复现-执行计划.md",
+      "bytes": 52755,
+      "currently_tracked": true,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "93b4810ed26c43ee3bd8789a85355611eb94ecc9ffd5b77dacccf3dfca805f9e"
+    },
+    {
+      "path": "docs/tasks/2026-10-04-工作总结与跨机续接.md",
+      "bytes": 16264,
+      "currently_tracked": true,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "d5080f5b173aea70342c912dd2e54af3e1f232ad2b6ea8946075cea37164f395"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-EMA原始实现核查.md",
+      "bytes": 7280,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "1e1e4e44a8c8ae584720f57e2c6b097c353b1141cf912f64d9a67e648ec22a1f"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-ETF510310原始规则核查.md",
+      "bytes": 10236,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "356c617b5821bf1c03799449005e520818085286a9405ced6ce369946246ece2"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-本地与远程融合.md",
+      "bytes": 66081,
+      "currently_tracked": true,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "963fca6045c46113708fd6415dcded5435602921a7036912ac998e46baf46b4b"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第七批RSI槽位修正.md",
+      "bytes": 7745,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "cde65175f118c33d3e2a7e079c7b5b9d865fa574376d1ad3b54a4fde66a782ab"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第三批策略研究与复现.md",
+      "bytes": 10601,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "e8529a978b7c5b3eef3bcf66e7caa39095438868d87541865c89bf6efb045279"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第九批来源审查与ETF补数.md",
+      "bytes": 7088,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "64387d053565b6d137552506e2eacc030a911899794984a1b2784cec2759601d"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第二十一批RSI动量与筹码依赖研究.md",
+      "bytes": 5406,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "bef1aa23c80e3773ded0bb42c1b88f3b7790ab9b0830973b31376f908e107595"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第二十批MACD与形态研究.md",
+      "bytes": 7040,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "79d60beb03008c175b5e675e1a3c46a7f23c287628e114e3a76692799420657c"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第五批固定金额与持仓条件.md",
+      "bytes": 5532,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "662bd393112b9cbc9ce4d6313c8a79dfda4e5e40dd4837b853825cdffcfbd575"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第八批zscore轮换修正.md",
+      "bytes": 5355,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "1ee6471c69df56d803a74cf56514dec0fb495f9105f6b0004072286c82c619fc"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第六批SVM滞后形状修正.md",
+      "bytes": 7245,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "f441fc9537c2ffb6eac46056b24b1b8250c0c01287fc68f8cb46f12135b7399c"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第十一批估值长区间与源码审查.md",
+      "bytes": 15242,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "212015c5c57c7c0b9206303ebf54cfbbb9009c9296a98fec6607d8aebde1f2e9"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第十七批调度依赖识别与清单复核.md",
+      "bytes": 5531,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "0f5b87fb0245f9330ec0b7761ed5c247eb2cda4bdbc9a5f042e02d8021e7ab5d"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第十三批依赖修正与研究复算.md",
+      "bytes": 7017,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "87996b19b7ba7b364d1c7a0f3deb1d936c5c2bd5ed808692794a26990f88a02e"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第十九批三进兵EMA近似复现.md",
+      "bytes": 6093,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "2b42e2c96f032cb59b57c8ff9bb178d817f103e03dc05057b87d1646de8c4042"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第十二批源码审查与数据探测.md",
+      "bytes": 7620,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "b048ad1fa1c14fc47bf33420ddaf851de11d836b0ab5a3059db55b6c98dd5aca"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第十五批RSI历史补齐与延伸.md",
+      "bytes": 8612,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "59cc7efd9741f8a3ba9486a72d133615b91f80f887241221879882224edb6cc3"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第十八批KD与EMA及LOF依赖核查.md",
+      "bytes": 4010,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "6dde3f72cab3cdcdf247aad2910516c523829dc25561f4897c5e7f122d3644c7"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第十六批追涨连板源码与依赖核查.md",
+      "bytes": 5533,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "4b525a71da8a5a7dda569e9f65940a655a5e888e34126e5b0bd4376d41bcb462"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第十四批历史补齐与长区间延伸.md",
+      "bytes": 13635,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "1ff2fcece3699e18c8c2526df184664db547774e9ad50a27981b2fff0141d857"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第十批ETF事件与账本转换.md",
+      "bytes": 10415,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "c6c7b35f21c36abf39ab94e5046775df762c904a5a91a74ad3b71c183beddbdc"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-第四批长区间与策略进度.md",
+      "bytes": 13590,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "4f06d5052dd9f4f2a940d17e1a849641bfae7089d39ead52d1c421a4a3e2a314"
+    },
+    {
+      "path": "docs/tasks/2026-10-05-退市与换股结算核查.md",
+      "bytes": 11297,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "a4859d863e68691cf051f580884281a5e74254d3f4df28d7cd097cd6556a86f9"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第三十一批CAPM周频RSRS与财务依赖研究.md",
+      "bytes": 8075,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "8845b34287939bf180013d69d9155945fbfebcdca71f21786dd2f8019703ca4a"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第三十七批RPS与LOF及追涨研究.md",
+      "bytes": 9417,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "86ec6747268c755997e80e17925bc6f0bbf00990b2edfc0afc683db5eaca1d6b"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第三十三批银行与ETF轮动研究.md",
+      "bytes": 7692,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "17c7745cea2cc2e9eece168ff9c7439c36856f1602c629114ea47d1f10e3c404"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第三十九批网格与ATR仓位研究.md",
+      "bytes": 8164,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "c0c50301156b3f293465011cdf706323cb28d44b4f671f5854eb3c8fad206142"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第三十二批蓝筹TRIX与BOLL研究.md",
+      "bytes": 7831,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "62730da14cf27c6fcb95d70be98a74f38f8305d54ec82d6a21a5075db8f2367b"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第三十五批BBI钝化RSRS与V2.1研究.md",
+      "bytes": 8245,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "6db69cc622150112932b26f662d83f14632f84838e562e93dab0b474a3ed2dd8"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第三十八批趋势与Alpha及股债研究.md",
+      "bytes": 11030,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "fefad6da5a1c0cd346b8f79119f80b73ab582953b0da8b9a41315d5a640fa818"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第三十六批多期限LR与市场宽度研究.md",
+      "bytes": 8828,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "20efece2ffe5514597b4cfa34741ca37ddf2385a3585d9834a5313bd7918ffb6"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第三十四批ETF动量RSRS与MA乖离研究.md",
+      "bytes": 8315,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "c2803639ed977816b94e3c66bf6eb476d4df35f46a3572c8e467650bcc21b629"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第三十批KAMA均线黏合与回踩研究.md",
+      "bytes": 10548,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "4e9dc18926816b7e8209d6f4f197ef946957623ff0b8f4db1e0cc2dbf16e0da8"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第二十七批因子均线与海龟阈值研究.md",
+      "bytes": 7119,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "789ef5ef0511cfc2164f7604b743f0765860b554814f2afd5c56b23036b7fe17"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第二十三批RSRS与反转依赖研究.md",
+      "bytes": 8507,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "2dfefe207869d6f09d55e9f5e70931590965da8b07aff19b7774cf9632abc805"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第二十九批止损聪明钱与北向持股研究.md",
+      "bytes": 8255,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "cf2ca86bebe978eed1b6548407d527778d64598dd4cf7e4b7f9becc5a7a9887c"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第二十二批行业因子与风险溢价研究.md",
+      "bytes": 8223,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "f2d9823365262bfc4b4ba6789b216f3ea2fb897e2492ec087e339eb55a54b2c2"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第二十五批宏观与场外基金依赖研究.md",
+      "bytes": 8087,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "c592f03adf5539f21cf37e815d8030ec792fea695264b76df4376e56238e3c1a"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第二十八批RSRS与MESA及北向比例研究.md",
+      "bytes": 7153,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "8d29e8a73283578387c305d0e33049fabd3a4d997debe9537e1c81edf0edfea9"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第二十六批PS估值字段恢复.md",
+      "bytes": 7692,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "f35379ac8d1c2bfbac9695e741d2b927c35814f4eb86e7889d4363604b5c92fd"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第二十四批波动估值与PS原始数据研究.md",
+      "bytes": 9387,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "02ea62782009ac422e5b3119cba6f42b7bab5e5a65e6f3a33877eb7c94dddb04"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第四十一批ETF止损加权动量与开盘研究.md",
+      "bytes": 9121,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "152e8320299cfa736072c237c849514cfc40615a3c6e789477ccefbcf636c001"
+    },
+    {
+      "path": "docs/tasks/2026-10-06-第四十批期货ATR与混合网格研究.md",
+      "bytes": 9286,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "fc7953937be4209bff85ba46ccf4878ae1d42421b0e660e5fe54060a7bc7a516"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第五十一批周频ETF与成交量情绪研究.md",
+      "bytes": 8588,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "fdbea3b88fe9c0283842aad3dd7c6e3d33f870f1f6c908723e62b177acfda35f"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第五十七批期货主力与合约依赖识别修复.md",
+      "bytes": 6857,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "d8f1d55735b852ad0f0753ce7fdfd66079474af427f1c07a35d9ed861d83ed3b"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第五十三批动态基金与日内动量及打板研究.md",
+      "bytes": 6792,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "6c7b99e53a596d448e345a36da2ad54fe5c62830ac592c92cc21c64d3c06de19"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第五十九批TD状态与IF盘中策略研究.md",
+      "bytes": 9599,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "2da8d7f9b5f1467a13a9bc8edeb97078b01ff4658795158fed6f9315a9e3d207"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第五十二批动态基金池识别修复.md",
+      "bytes": 4988,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "4cc37fa976c52722902ee739fbcd63d24554b84553d73415f8e8d0710706546c"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第五十五批债券查询依赖识别修复.md",
+      "bytes": 4514,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "e6a9be5f251f09b63183b5dc2fd58405bfef4ef0f7790e17f3e6d6b4fee1962e"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第五十八批金股组合与推荐名单研究.md",
+      "bytes": 7507,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "1c9b58805c7b88908dcb0948879a22bc6c9e5eae4b06cdb99175cf0daa45eb4d"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第五十六批可转债因子与期货价差研究.md",
+      "bytes": 7509,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "f3d49058d4457d60a32d6cab17c5a84a8faa188fdd11aecdab7fbaea8d1d4644"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第五十四批市场宽度预告与可转债研究.md",
+      "bytes": 6640,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "4aa3caa7963ca99d9c43f2609387c4c12713d1880fa47ce3002eb8aba3b99750"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第五十批宏观规则与数据依赖研究.md",
+      "bytes": 7124,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "d30e112e69924a9f6640476c552aca21e60dcfea930aab3879855db4fde2e818"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第六十一批扩散择时与连板龙头研究.md",
+      "bytes": 8754,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "d0a16e406e47b063f192e80ab0926d42cb74ebe4ae9a3320296826535b393370"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第六十三批SVR与价值财务研究.md",
+      "bytes": 8235,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "8f6b6abf74d357b8031a4ea730fb87ea45d89996a8e35f9dd99ac86b14c5acb1"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第六十二批动量因子与多任务模型研究.md",
+      "bytes": 7932,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "585a84361714f94be8461cf48a672ec25ce4bbc292a551915daa2bdaa054d43a"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第六十四批价格形态与K线识别研究.md",
+      "bytes": 5806,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "874c0d48a37520007b80803b4cdaf011cb09e2a317dd06f90489f860f4b7c552"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第六十批商品海龟与双均线研究.md",
+      "bytes": 8541,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "5136e5a6ab3351b72aedff04a5308b64b9ee5f105b5322b50c98ac40a2a81100"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第四十七批ETF候选池与动量因子研究.md",
+      "bytes": 6769,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "81195c83636d8317ed80197612e8e8f9379f9ec3884d517ae6eb143f21dabf28"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第四十三批三阳三阴周线突破与融券配对研究.md",
+      "bytes": 10199,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "46dc5e863a70efbba4e78b824595bbeb6f3208a3b9ef1096ba2856db1b217c3c"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第四十九批查询型研究分类修复.md",
+      "bytes": 3814,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "7c3d30603dac66e9678a768d7178bb0d5a6af55e1bed3ca18256d9ce778afb19"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第四十二批周频趋势与DQN依赖研究.md",
+      "bytes": 9711,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "8f640e2654f9ac0211f37a45331df53bae3f4a7f123e11c1c5e8f98f5e560911"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第四十五批动量EPO与趋势缓存研究.md",
+      "bytes": 12873,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "707797a0e398ac7a6a6a60dd1e7455749126df255fbd818a7b396328a8a3b27e"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第四十八批宏观依赖扫描修复.md",
+      "bytes": 5919,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "8a458b7f4d00ea8f6e3cbcdbfdd6f300de8a2651b3310d41ec730b3d50f07bb7"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第四十六批策略全文扫描修复.md",
+      "bytes": 6925,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "cc8ffdd71cb812e0bcc0d5fcbd820f008577f1ab93bb3871e894f54bdaa2f820"
+    },
+    {
+      "path": "docs/tasks/2026-10-07-第四十四批EPO与低相关ETF组合研究.md",
+      "bytes": 10748,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "f1522426ee3855b529052827e0e7bd940a33fea0f3e204613145c0cc55445709"
+    },
+    {
+      "path": "docs/tasks/2026-10-08-Git追踪与跨机数据管理计划.md",
+      "bytes": 20952,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "097ea95f11888c1825ae7c117592c0953c13c0f41c382912317c0121aee358e0"
+    },
+    {
+      "path": "docs/tasks/2026-10-08-LLM项目续接信息规范.md",
+      "bytes": 13793,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "10e4d7129a5c4611f5b17dd198eb0ec79025e14433f67e0927f3f2f5167f45ca"
+    },
+    {
+      "path": "docs/tasks/2026-10-08-策略研究阶段汇报.md",
+      "bytes": 11042,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "dd5617a6f19fd506de134c8ceeb9589051003f800580a2c043c1dfa5a14d6994"
+    },
+    {
+      "path": "docs/handoff/2026-10-04-plan.json",
+      "bytes": 2455,
+      "currently_tracked": true,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "374dc9bcbb5ce1d11bf76ad65ac7bc6614ca1d99481a695fdfa0134a1ba6a06d"
+    },
+    {
+      "path": "docs/handoff/2026-10-04-verification.json",
+      "bytes": 20885,
+      "currently_tracked": true,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "6f4e2b5252324e373286ebaa3ae851bd13515da92f889c8eb4545e384ffc22df"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch10-source-clarification.json",
+      "bytes": 2468,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "a5bddc42853f9fc5367b329c12067995eb6c82a676155c9706aff1af9397112d"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch10-verification.json",
+      "bytes": 43754,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "ce8c1235144b0e56491106d4846131eafabd2389169cca0ef08647405badaea0"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch11-verification.json",
+      "bytes": 30723,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "eb5bf6ebfd056e0a213bfe345132adc9dddd87b38d31049471a358dd9aef034b"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch12-verification.json",
+      "bytes": 67844,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "221c6c5845f38f7ad1653c9aea4e8e4e899a4f516ffa84f6895dbe5a85bf2e00"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch13-verification.json",
+      "bytes": 33238,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "b8c5099e050df7be4e194fb8fc8f5e4775a0e41ad29e2dae6069bc9b8871f181"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch14-verification.json",
+      "bytes": 534136,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "489f12e720f64ec0f94435e4fdf4119560012fdc0860c6ea255d7b0ac0337723"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch15-verification.json",
+      "bytes": 314518,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "79e581185d07695f2031e2b707cba5ace7d9db65df7bef8c62bc4e7bbb99b401"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch16-verification.json",
+      "bytes": 56321,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "c6e0d1ada9b3e5dc4fad121d03f000f9b3ddf95f2cf27187a21de9d790c3a320"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch17-verification.json",
+      "bytes": 175483,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "953e731797ada746196eafbb48cfc5da6a46977f7b36ce4089dc216e82686379"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch18-verification.json",
+      "bytes": 35922,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch19-verification.json",
+      "bytes": 779467,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "b52e9adc81da338a4faf899e7fb6f613952c07a5f8b5b879a0d66f60623f14d1"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch20-verification.json",
+      "bytes": 30255,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "b1fd5599c1f95e48256c935a0aaf3f857df76d8d733b02060f43c6ea34be5162"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch21-verification.json",
+      "bytes": 29519,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "4317fda500153d16fe681f23c4150f43a2fea100b5cfb8cc61b6462bd50625f5"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch3-verification.json",
+      "bytes": 3639,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "f2db19e792c2511dbd0113392f9af37a1e42276e7883fc14a0c86412f658a8b9"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch4-verification.json",
+      "bytes": 37421,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "43589f0d8a6a6c9161f04a91381e9631221d67f925170aa4e7b432396d7a78e8"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch5-verification.json",
+      "bytes": 36324,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "c9efca715f844d95737650cb72a53ee7bfa0c63e9227b0524b63d9405537f157"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch6-verification.json",
+      "bytes": 62848,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "de6a370986d23a6fc1e87ee404db2ec98d6126284c72d794f2b3a4e0e2c5dac7"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch7-verification.json",
+      "bytes": 19589,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "d11c37af6e3dd421ba1f864ff4326b2459bf1fb97ba244f9d705d97527419355"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch8-verification.json",
+      "bytes": 17778,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "17364541be513f6d9c654b760e4b76b51916b25a2dacaaac13a29e912a76e2d8"
+    },
+    {
+      "path": "docs/handoff/2026-10-05-batch9-verification.json",
+      "bytes": 23776,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "2b633f35c5f4dda32b4585872bd80e59532e4dcb6752da47ccc4eb203e5b30e3"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch22-verification.json",
+      "bytes": 1012944,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "301274bb017ba517583bed441ee37d6ee926925283a6b8ffab5445437c253d44"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch23-verification.json",
+      "bytes": 2555732,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "1e92c220d784cc2653b97ba01209a012a0d64753cd941b431dbb815cb91e0250"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch24-verification.json",
+      "bytes": 2956054,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "ae221c937842820fda075385a15f02d1d70297c09ca07bee7fd7903341415ca5"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch25-verification.json",
+      "bytes": 68681,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "765207956d8eb5ccbba860acf0b40df530d01a3484e491325722da72344f22bf"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch26-verification.json",
+      "bytes": 46897,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "ccb36e0fc84c5ba88a6e71e9ce69ad9b9b86806a23e9a0a782d07dfd31426125"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch27-verification.json",
+      "bytes": 24920,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "ee8ff2112a19014066bab6f55f0b652b224e1bd8be35b3a48f503b951a368176"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch28-verification.json",
+      "bytes": 25857,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "b090e0167afe61e151bc25aa20ebfe728d3409fc61acc88a8cd5f92649a318e1"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch29-verification.json",
+      "bytes": 32804,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "2aed6037e8f641946fff473261505b344d57bd3bfa691cdb196489fee69eb550"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch30-verification.json",
+      "bytes": 28542,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "daaca38df53a5d2e4848749b74cd56b9ef01e4dcd211d18c7129bfcf7ac86d64"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch31-verification.json",
+      "bytes": 139759,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "7cade8dd583d636f08ac6f16efb582f0aa006315d434c3d5d56154215b50ff53"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch32-verification.json",
+      "bytes": 29941,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "99ba54a4fc0903d0108448d5a209cc879b8aabebc48c039b31584654a6b90073"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch33-verification.json",
+      "bytes": 29547,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "4636d198b2cf0f08bd0a86a3f071146137085b329fbdda23deb6931779c14a38"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch34-verification.json",
+      "bytes": 32813,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "e9f88a20c379446c34b4dca9d325d40486e1368f2037f2525282ecd702bdb43d"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch35-verification.json",
+      "bytes": 31203,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "935b63be08b93bb7bd61b5c671db590dde48d4a22addc941a9a67d6b94b77826"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch36-verification.json",
+      "bytes": 32145,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "6f024523596621dd43e69659574ba92c3b1f7a5aa01e040706156c45418984bf"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch37-verification.json",
+      "bytes": 30396,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "af62e350d19949c20ec52564baa6434d04c82e5ab00675fd2586710bb8e84c82"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch38-verification.json",
+      "bytes": 32757,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "f1e25baa2f0925168e5359575340862f88324f32fd7b78a68d8069452248d816"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch39-verification.json",
+      "bytes": 34915,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "c05c4119dcbff7317599c4deeafb7aa8651f5587e2a3420147e49629901923ef"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch40-verification.json",
+      "bytes": 36258,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "e7680cf1cdd681aaec2611afcc5901996d21dc2e869f3b3496a2a04a4c2930a1"
+    },
+    {
+      "path": "docs/handoff/2026-10-06-batch41-verification.json",
+      "bytes": 36319,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "f8b26851190164a8e932985e0720c18bf6bfb832f4df3e22b11926e6bc3e69d1"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch42-verification.json",
+      "bytes": 41475,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "3f255b5faa40f286948df318bf4a1361c9731300d057e3ea81587f5c03ffca1d"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch43-verification.json",
+      "bytes": 41944,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "e37a585b333868b4cd0c06d7f45c555621d02fda6046b3ed2573f41cafdfd899"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch44-verification.json",
+      "bytes": 40187,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "da969bcaa807f65a5f80cd41f3a0153831fcc4671b299205d928687b118ed9af"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch45-verification.json",
+      "bytes": 42663,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "510428e1979df3d6b8be5392fb66e97ddf535d3b7d9ef66cb6cf0c8fcd97b98a"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch46-verification.json",
+      "bytes": 309065,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "3b555ff0739376e73a329d4716b2929f4a984b68f097712a8f95882614d9d2df"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch47-verification.json",
+      "bytes": 42820,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "d264db87377416f82bd145c1625213182240ff92a19db53e8297446c7831a91f"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch48-verification.json",
+      "bytes": 31451,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "85779f361cbc930e6cc14e76eda7fba27bba12a4c0e00d78f0e27eb99b9890c7"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch49-verification.json",
+      "bytes": 29536,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "7e329c128a4a3533ac2b2756829a9d0979d64355359a82f987e98078d9c30b34"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch50-verification.json",
+      "bytes": 260916,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "20cac4c7e4ae56aacefa0a17e8e1fa0a7360ee68fbeeb1e1e30e3d90dfe0a2dd"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch51-verification.json",
+      "bytes": 113322,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "edb49026b95d28823fc817a157b1899ce5e3f4d6c637a8b9bf22674eb8e05b2b"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch52-verification.json",
+      "bytes": 64984,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "f4d9e5820214ba71431b282867fa296490ba2a9f9d28807d3acbad5b3897806f"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch53-verification.json",
+      "bytes": 140393,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "fd13e8bb81a41182385376d38503c28f91f629aed0c16f551afbfbb1b5d26d27"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch54-verification.json",
+      "bytes": 145088,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "a94bfdb99d08a22ecd31084a40271a7c5c40b2d23e2dbf40d8bad08fa6a9c91f"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch55-verification.json",
+      "bytes": 29763,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "23fd3603f2d2b98fbc241d9f6f8b6cc8948930954063cf01e0b1c98c26fee1b8"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch56-verification.json",
+      "bytes": 163201,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "98e2315e2fad8262da34f27594f76a44100787770954541e977a179e1ce72192"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch57-verification.json",
+      "bytes": 49527,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "373a772b2f1cd09486dfc3665e7c71b4faa4ebdcdc3bc05cec6af0c480323b6f"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch58-verification.json",
+      "bytes": 170785,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "9c7451fc8bdc7c24514cd4f1194286af4798ccab5f9e9734d7a2377649807cc3"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch59-verification.json",
+      "bytes": 153800,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "1f92548f18ea74a515e616d85584a28302f761e8a5d361d606fff1585d8fd8d9"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch60-verification.json",
+      "bytes": 134828,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "bdd8eaf81c149085da64941e588057470a172fe7693e67999367748e76833450"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch61-verification.json",
+      "bytes": 111560,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "ab8d48522cf8cf24ae6687c330ebc0946149815bf39b8c81117f7faab94abd33"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch62-verification.json",
+      "bytes": 234656,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "5f599dfee6947fce9ac28659e5080e0d40efdc411444c6bd062778e5a556a085"
+    },
+    {
+      "path": "docs/handoff/2026-10-07-batch63-verification.json",
+      "bytes": 126487,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "1e1ab0d6be2e6ef385e8e489f0adcc2ba4f8e9a234b139a45eb16146fa2f4594"
+    },
+    {
+      "path": "docs/handoff/2026-10-08-strategy-progress-report.json",
+      "bytes": 54980,
+      "currently_tracked": false,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "bfa7f021f5f0f75448e29856e2270e4a79655240fefd5490d759fc3483882220"
+    },
+    {
+      "path": "docs/handoff/observe-2026-10-04-batch2.manifest.json",
+      "bytes": 997680,
+      "currently_tracked": true,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "f5c8d8a19b3d7927d3df552afe4f897c7232ce60b5057476f8ef3d4f6fbdcec3"
+    },
+    {
+      "path": "docs/handoff/observe-2026-10-04-batch2.receipt.json",
+      "bytes": 370,
+      "currently_tracked": true,
+      "proposed_action": "review_and_include_relevant_documents_in_associated_commit",
+      "sha256": "c1dac21103fdaf21e6f98e609b8fe621dc2a71f567421f9defc2d499adbd7978"
+    }
+  ],
+  "proposed_git_allowlist": [
+    {
+      "target": "data/metadata/README.md",
+      "purpose": "current project overview and reading pointers",
+      "handling": "generated_view",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/index.json",
+      "purpose": "authoritative project state, accepted/in-progress checkpoints and object indexes",
+      "handling": "canonical_state",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/tasks/",
+      "purpose": "goals, dependencies, priority, actions and completion criteria",
+      "handling": "authored_with_evidence",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/decisions/",
+      "purpose": "approved variants, approval provenance and pending questions",
+      "handling": "authored_with_evidence",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/blockers.json",
+      "purpose": "missing inputs, failed attempts, affected work and release criteria",
+      "handling": "authored_with_evidence",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/capabilities.json",
+      "purpose": "verified module capabilities, unsupported behavior and code/test links",
+      "handling": "derived_and_reviewed",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/catalogs/<catalog_id>/catalog.json",
+      "purpose": "selected immutable source catalog",
+      "handling": "byte_preserving_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/catalogs/<catalog_id>/summary.json",
+      "purpose": "catalog counts and version",
+      "handling": "byte_preserving_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/progress/<checkpoint>/summary.json",
+      "purpose": "accepted milestones and explicitly pending progress",
+      "handling": "derived_or_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/runs/index.json",
+      "purpose": "run/source/snapshot/reproduction relationships",
+      "handling": "derived_summary",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/runs/<run_id>/summary.json",
+      "purpose": "all cost scenarios, yearly results, benchmarks, trading, limitations and validation",
+      "handling": "derived_summary",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/financials/<import_id>/fields.json",
+      "purpose": "full versioned field dictionary",
+      "handling": "byte_preserving_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/financials/<import_id>/import-receipt.json",
+      "purpose": "financial import provenance and partition references",
+      "handling": "byte_preserving_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/financials/<import_id>/audit.json",
+      "purpose": "financial audit and strict historical availability",
+      "handling": "byte_preserving_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/releases/<batch_id>/published.json",
+      "purpose": "frozen published state; no checkout writes to live Store",
+      "handling": "byte_preserving_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/releases/<batch_id>/batches/",
+      "purpose": "required terminal batch records and base chain",
+      "handling": "byte_preserving_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/snapshots/<snapshot_id>.json",
+      "purpose": "existing required snapshot metadata; missing objects explicitly marked",
+      "handling": "byte_preserving_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/assets/index.json",
+      "purpose": "logical fingerprints, verified file SHA, payload scope and package references",
+      "handling": "derived_summary",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/evidence/index.json",
+      "purpose": "validation, review, approval, failure and independent calculation references",
+      "handling": "derived_or_selected_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/examples/<case_id>/case.json",
+      "purpose": "bounded verified input/output cases with real/synthetic labels",
+      "handling": "derived_summary",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "data/metadata/bundles/<bundle_id>/",
+      "purpose": "actual generated plan/manifest/receipt and availability",
+      "handling": "byte_preserving_copy",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "docs/10-项目状态与续接.md",
+      "purpose": "current status page generated from metadata",
+      "handling": "generated_view",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "README.md; AGENTS.md; CONTEXT.md; docs/README.md",
+      "purpose": "short reading entry points, stable rules and terminology",
+      "handling": "review_existing_documents",
+      "status": "planned_not_exported"
+    },
+    {
+      "target": "src/; tests/; scripts/; configs/; strategies/; pyproject.toml; uv.lock",
+      "purpose": "associated implementation, validation, configuration and environment",
+      "handling": "review_existing_worktree",
+      "status": "planned_not_exported"
+    }
+  ],
+  "payload_exclusions": [
+    "repo/**",
+    "data/std/**",
+    "data/raw/**",
+    "data/runs/**",
+    "data/staging/**",
+    "data/cache/**",
+    "data/catalog/strategies/** outside curated exports",
+    "live data/PUBLISHED.json and latest/pins/locks/jobs",
+    "SQLite and WAL/SHM",
+    "compressed handoff archives and raw PDF/image/HTML responses"
+  ],
+  "first_export_scope": {
+    "last_accepted_checkpoint": "20261007-203501-128a",
+    "in_progress_checkpoint": "20261007-205221-0512",
+    "accepted_manual_reviews": 211,
+    "in_progress_manual_reviews": 213,
+    "registered_sources": 695,
+    "local_backtested_sources": 12,
+    "local_parent_strategy_runs": 67,
+    "representative_configurations": 14,
+    "original_strategy_complete_count": 0,
+    "published_batch": "20261006-145049-5ceb",
+    "snapshot": "20261006-145049-e06c",
+    "financial_import": "c863b10a0ed2c27df694",
+    "include_failed_blocked_and_superseded": true,
+    "missing_historical_payload_is_not_replaced": true
+  },
+  "capacity_review_thresholds": {
+    "individual_file_bytes": 5242880,
+    "new_export_batch_bytes": 20971520,
+    "metadata_worktree_target_bytes": 52428800,
+    "automatic_deletion_or_truncation": false,
+    "git_history_size_is_separate": true
+  },
+  "implementation_steps": [
+    "review associated untracked/modified code, docs and configs without reverting existing work",
+    "implement explicit Git allowlist and read-only metadata export/verify script",
+    "export current and last accepted project state, tasks, decisions, catalog, financial dictionary, runs and evidence; update short entry points and generated status page",
+    "register newly generated current payload bundles using existing prepare_handoff.py",
+    "verify Git-only reading, partial-payload refusal and one selected full offline reproduction",
+    "record local commit and remote synchronization separately after authorized publication"
+  ],
+  "llm_reading_requirements": {
+    "entry_points": [
+      "README.md",
+      "AGENTS.md",
+      "CONTEXT.md",
+      "docs/README.md",
+      "docs/10-项目状态与续接.md",
+      "data/metadata/index.json"
+    ],
+    "linked_objects": [
+      "goal",
+      "task",
+      "source_strategy_id",
+      "decision",
+      "implementation",
+      "config",
+      "code",
+      "snapshot",
+      "run",
+      "scenario",
+      "benchmark",
+      "evidence",
+      "limitation",
+      "blocker",
+      "next_action"
+    ],
+    "claim_kinds": [
+      "fact",
+      "inference",
+      "proposal"
+    ],
+    "payload_states": [
+      "metadata_only",
+      "payload_partial",
+      "payload_verified"
+    ],
+    "rules": [
+      "source and configuration counts differ from run counts",
+      "research components and synthetic diagnostics do not count as trading backtests",
+      "summary availability does not prove complete original evidence availability",
+      "Store logical fingerprint differs from file byte SHA256",
+      "historical approvals persist within their stated scope",
+      "metadata checkout does not switch live Store publication",
+      "all factual suggestions cite repository evidence and disclose missing data"
+    ]
+  },
+  "plan_documents": [
+    {
+      "path": "docs/tasks/2026-10-08-Git追踪与跨机数据管理计划.md",
+      "sha256": "097ea95f11888c1825ae7c117592c0953c13c0f41c382912317c0121aee358e0"
+    },
+    {
+      "path": "docs/tasks/2026-10-08-LLM项目续接信息规范.md",
+      "sha256": "10e4d7129a5c4611f5b17dd198eb0ec79025e14433f67e0927f3f2f5167f45ca"
+    }
+  ],
+  "verification_limits": {
+    "full_payload_integrity_audited": false,
+    "export_implemented": false,
+    "git_only_reading_acceptance_executed": false,
+    "pytest_rerun": false
+  }
+}

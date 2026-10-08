@@ -4,6 +4,7 @@ import pandas as pd
 
 from .portfolio import metrics
 from ..runs import canonical
+from ..data.prices import with_adjusted
 
 
 def price_levels(index, calendar, dates, name = '000300.SH'):
@@ -20,6 +21,19 @@ def price_levels(index, calendar, dates, name = '000300.SH'):
     return levels, {'index': name, 'description': '沪深 300 价格指数，不含分红' if name == '000300.SH' else f'{name} 价格指数，不含分红',
                     'anchor_date': str(anchor) if anchor else None, 'convention': '首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日',
                     'missing_levels': int((~np.isfinite(levels)).sum())}
+
+
+def stock_price_levels(bars, adj, coverage, calendar, dates, name):
+    selected = bars[bars.instrument.eq(name)].copy() if 'instrument' in bars else pd.DataFrame()
+    if selected.empty:
+        levels, info = price_levels(pd.DataFrame(), calendar, dates, name)
+    else:
+        view = with_adjusted(selected, adj, coverage)
+        prices = view[['date', 'instrument', 'close_adj']].rename(columns = {'instrument': 'index', 'close_adj': 'close'})
+        levels, info = price_levels(prices, calendar, dates, name)
+    info.update(kind = 'stock', description = f'{name} 后复权股票价格基准',
+                adjustment = '冻结后复权因子；非含现金分红再投资的买入持有账本')
+    return levels, info
 
 
 def benchmark_comparison(equity_rows, initial, levels, benchmark_id, model, scenario):

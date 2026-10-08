@@ -1,0 +1,1490 @@
+{
+ "status": "ok_with_deferred_strategies",
+ "snapshot": "20261005-152153-eb05",
+ "source_reviews": {
+  "sources": [
+   {
+    "strategy_id": "S-a71bf28aa99b",
+    "source_path": "repo/量化策略源代码/2020年度精选策略/91 Stoch（KDJ）——大盘择时.txt",
+    "source_sha256": "be1a6d9c3c14667d87a0986c64d355e5e3672aa4c6bdd3ea42695f7963dcfbf0",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-a71bf28aa99b.source",
+    "source_copy_sha256": "be1a6d9c3c14667d87a0986c64d355e5e3672aa4c6bdd3ea42695f7963dcfbf0",
+    "encoding": "gb18030",
+    "complete_lines_read": 65,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "沪深300指数STOCH择时",
+     "fidelity": "原标的不可交易，运行频率未声明",
+     "implementations": [],
+     "status": "暂不可复现",
+     "rules": {
+      "instrument": "399300.SZ指数",
+      "window": 60,
+      "stoch": [
+       17,
+       9,
+       0,
+       7,
+       0
+      ],
+      "sell": "K下穿80或20<K<80且K<D，卖出优先",
+      "buy": "K上穿20或K>80且K>D，实际空仓才买"
+     },
+     "gaps": [
+      "指数不能直接下单；000300.SH与399300.SZ映射/平台口径需证明",
+      "handle_data频率未声明，现有60日窗口不证明盘中平台等价"
+     ],
+     "next_step": "补原指数映射；可交易载体与日频变体需单独确认，不能按注释10/90替代实际20/80"
+    }
+   },
+   {
+    "strategy_id": "S-4b7dbe8af8ac",
+    "source_path": "repo/量化策略源代码/2021年度精选策略/65.【分享】多因子指数增强.txt",
+    "source_sha256": "9aa23daab5aced7cb04f4e4e989fb71750b16d09937de2eee77263dd2faefe5f",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-4b7dbe8af8ac.source",
+    "source_copy_sha256": "9aa23daab5aced7cb04f4e4e989fb71750b16d09937de2eee77263dd2faefe5f",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 91,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "外部权重CSV月末交易",
+     "fidelity": "缺原权重及生成时点",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "file": "result_df.csv",
+      "time": "每月最后交易日开盘",
+      "columns": [
+       "code",
+       "w"
+      ],
+      "missing_date": "不交易，不前向填充",
+      "target": "名单外清仓，按w*总资产下单"
+     },
+     "gaps": [
+      "原CSV、研究生成代码及权重可用日期未取得",
+      "同日期单行/多行结构与平台即时成交顺序需核实"
+     ],
+     "next_step": "先找原权重及训练证据；不自行重算其他因子冒充该来源"
+    }
+   },
+   {
+    "strategy_id": "S-07472fbc2bde",
+    "source_path": "repo/量化策略源代码/2021年度精选策略/86.北上詹姆斯.txt",
+    "source_sha256": "aaabeccc33655c12913699b5bab180f7b4c6166d074e88a0ae2bcc7a81d044a4",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-07472fbc2bde.source",
+    "source_copy_sha256": "aaabeccc33655c12913699b5bab180f7b4c6166d074e88a0ae2bcc7a81d044a4",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 94,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "北向额度差布林与持股比例前15",
+     "fidelity": "缺历史北向表和披露时点",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "links": [
+       "310001",
+       "310002"
+      ],
+      "timing": "07:00取昨日，09:30交易",
+      "window": 150,
+      "signal": "按日加总quota_daily-quota_daily_balance，样本标准差±2",
+      "selection": "前一交易日share_ratio降序前15行",
+      "buy": "上轨触发，仅新进股买总资产/15*0.99",
+      "sell": "下轨触发清仓"
+     },
+     "gaps": [
+      "缺STK_ML_QUOTA和STK_HK_HOLD_INFO历史值/披露时点",
+      "额度差不等于成交净买额，不能直接替换；datetime平台注入未证明"
+     ],
+     "next_step": "探测北向接口的真实字段和历史覆盖，不把累计或成交净买额当额度差"
+    }
+   },
+   {
+    "strategy_id": "S-5f0fb6c259ee",
+    "source_path": "repo/量化策略源代码/2022年度精选策略/56.胜率为100%，盈亏比90000+的单品种倍投策略.txt",
+    "source_sha256": "1ab46e0cfd73c1654cdb8b4d66c349ffd273a3c530405ba5dff486cda9221292",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-5f0fb6c259ee.source",
+    "source_copy_sha256": "1ab46e0cfd73c1654cdb8b4d66c349ffd273a3c530405ba5dff486cda9221292",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 277,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "万科14:55五档现金递推策略",
+     "fidelity": "缺分钟输入及原递推执行语义",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "instrument": "000002.SZ",
+      "time": "14:55含当前1分钟价",
+      "cash_parts": [
+       0.01,
+       0.02,
+       0.07,
+       0.2,
+       0.7
+      ],
+      "history": "3条跳停牌日收盘与累计high/low",
+      "grid": "price3先用上一price2，再计算price2和price4",
+      "initial": "首日get_init调用两次，现金重算各档；以后每天先get_init再触发盈利重置或补买"
+     },
+     "gaps": [
+      "缺14:55原1分钟价及初始化分钟基准，5分钟不能静默等价",
+      "累计动态复权锚定及下单即更新状态未证明；低现金可出现成本分母为0，isnan平台注入未证明"
+     ],
+     "next_step": "核对分钟覆盖和原递推；不能按标题实现常规倍投或自行修正网格公式"
+    }
+   },
+   {
+    "strategy_id": "S-47d77840ec26",
+    "source_path": "repo/量化策略源代码/2022年度精选策略/58.100%胜率！历史PE估值价值投资择时交易.txt",
+    "source_sha256": "a06f2a63fdb07976b913067d51dedaf0617bd5a55e2e6335ac74bc36a669bb0e",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-47d77840ec26.source",
+    "source_copy_sha256": "a06f2a63fdb07976b913067d51dedaf0617bd5a55e2e6335ac74bc36a669bb0e",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 192,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "交易所平均PE与EXPMA的指数择时",
+     "fidelity": "缺交易所估值表且标的不可交易",
+     "implementations": [],
+     "status": "暂不可复现",
+     "rules": {
+      "instrument": "000300.SH指数",
+      "valuation": "STK_EXCHANGE_TRADE_INFO exchange_code=322002的log10(pe_average)",
+      "thresholds": "月首取最多2500行：中位数+0.25*样本STD、中位数-0.5*样本STD",
+      "trend": "EXPMA5/20>1.01才买，<1才卖"
+     },
+     "gaps": [
+      "缺原交易所PE口径与历史版本，不是沪深300PE；指数不可交易",
+      "EXPMA服务端种子/窗口语义和月首初始化顺序未证明，非月首起始可能缺g.stdH/g.stdL"
+     ],
+     "next_step": "核对市场PE接口但不替代原字段；指标及可交易载体变体另确认"
+    }
+   },
+   {
+    "strategy_id": "S-a8d1fa5a793a",
+    "source_path": "repo/量化策略源代码/2022年度精选策略/68.RSRS模型深入研究3-二八轮动策略及其探究分析.txt",
+    "source_sha256": "5eae7b51160a326a1a7d4282113684f8639ef8a1eebe24354ea8a5845c969a36",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-a8d1fa5a793a.source",
+    "source_copy_sha256": "5eae7b51160a326a1a7d4282113684f8639ef8a1eebe24354ea8a5845c969a36",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 198,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "沪深300/创业板指数右偏RSRS选择",
+     "fidelity": "原标的不可交易且长预热缺失",
+     "implementations": [],
+     "status": "暂不可复现",
+     "rules": {
+      "instruments": [
+       "000300.SH指数",
+       "399006.SZ指数"
+      ],
+      "history_start": "2005-01-05",
+      "rsrs": [
+       18,
+       1100
+      ],
+      "selection": "10日np.gradient(close).sum()/均价最大的指数",
+      "score": "总体zscore*最新beta*R2",
+      "thresholds": [
+       -0.7,
+       0.7
+      ],
+      "exit": "只清当前选中指数，不自动清另一只"
+     },
+     "gaps": [
+      "缺原早期双指数OHLC，指数不能下单",
+      "Series整数末值/赋值兼容及异常分支漏self未修，不能当普通二八全仓轮换"
+     ],
+     "next_step": "补长预热与原状态机证据；指数替代和修正版须确认"
+    }
+   },
+   {
+    "strategy_id": "S-1a1aef9faa9b",
+    "source_path": "repo/量化策略源代码/2022年度精选策略/76.向云帆致敬—— 宏观数据择时策略——极速版代码.txt",
+    "source_sha256": "4c8233d77ba2b8f7fcda13dbdf6dc1ed146837c0d9afb31db2f6ca2c4910a48f",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-1a1aef9faa9b.source",
+    "source_copy_sha256": "4c8233d77ba2b8f7fcda13dbdf6dc1ed146837c0d9afb31db2f6ca2c4910a48f",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 285,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "五类宏观信号月度指数择时",
+     "fidelity": "缺原宏观CSV版本且标的不可交易",
+     "implementations": [],
+     "status": "暂不可复现",
+     "rules": {
+      "instrument": "000300.SH指数",
+      "time": "月首09:30两回调",
+      "monthly_window": 3,
+      "daily_window": 89,
+      "bands": [
+       25,
+       1.8,
+       1.8
+      ],
+      "weight": [
+       1,
+       1,
+       2,
+       1,
+       1
+      ],
+      "normalization": "加权总和/5，非除权重和6",
+      "allocation": ">0.55满仓，其余清仓；0.45至0.55也不保持半仓"
+     },
+     "gaps": [
+      "缺七份原CSV及PMI查询原排序/历史披露版本；最终整理值不是月首可见数据",
+      "指数不可下单；月度布林信号取最后20个状态均值，非单末值"
+     ],
+     "next_step": "优先核实原CSV及宏观可用日期；新接口数据只能作为新批次候选输入"
+    }
+   },
+   {
+    "strategy_id": "S-075d01ac07cf",
+    "source_path": "repo/量化策略源代码/2023年度精选策略/10.一个简单而持续稳定的懒人超额收益策略.txt",
+    "source_sha256": "235e9019e568f11f5df81a2972722bb6a9db43146a6c177e260a3e39273e2749",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-075d01ac07cf.source",
+    "source_copy_sha256": "235e9019e568f11f5df81a2972722bb6a9db43146a6c177e260a3e39273e2749",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 56,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "沪深300权重前10只仅新增持仓",
+     "fidelity": "缺历史权重与初始化生命周期证明",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "index": "000300.SH",
+      "selection": "月首get_index_weights降序前10",
+      "execution": "每天开盘清名单外股，新进股买总资产9.5%，已有持仓不再平衡",
+      "cash_gate": "available_cash>目标金额"
+     },
+     "gaps": [
+      "本机未取得历史指数权重，周频名单不能证明权重",
+      "参数和调度仅在after_code_changed，initialize不调用；启动回调证明缺失"
+     ],
+     "next_step": "补历史权重和生命周期；不能按当前十大权重或每日95%等权目标复现"
+    }
+   },
+   {
+    "strategy_id": "S-e84bd8c8eecb",
+    "source_path": "repo/量化策略源代码/2023年度精选策略/22.简单到发指的股指策略(2013到现在收益10949%).txt",
+    "source_sha256": "c0102d437625c6b6b522b4f816d5b6a4cb3b6b48df37448632978a1141e3178e",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-e84bd8c8eecb.source",
+    "source_copy_sha256": "c0102d437625c6b6b522b4f816d5b6a4cb3b6b48df37448632978a1141e3178e",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 62,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "IF主力隔夜期货多头另一来源",
+     "fidelity": "缺合约数据与期货执行账本",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "contract": "get_dominant_future(IF)",
+      "buy_time": "14:55",
+      "sell_time": "10:00",
+      "target_value": "available_cash/2",
+      "margin_rate": 0.15,
+      "slippage_steps": 2
+     },
+     "gaps": [
+      "缺主力映射、逐合约盘中/结算数据及乘数",
+      "唯一Book缺保证金、每日结算、平今费和换月；不是普通股票"
+     ],
+     "next_step": "与已审2021/19比较但保留独立SHA；不按满仓注释或股票接口移植"
+    }
+   },
+   {
+    "strategy_id": "S-7f91b002698b",
+    "source_path": "repo/量化策略源代码/2020年度精选策略/90 MA均线金叉买入，死叉卖出.txt",
+    "source_sha256": "9001d735b9727bb4b41171a2bf74c5ca179363e62ee49f71169eb174bd031fd0",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-7f91b002698b.source",
+    "source_copy_sha256": "9001d735b9727bb4b41171a2bf74c5ca179363e62ee49f71169eb174bd031fd0",
+    "encoding": "gb18030",
+    "complete_lines_read": 454,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "沪深300两槽MA5/10模板交叉",
+     "fidelity": "缺历史池和wizard指标语义",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "CSI300成分去重后代码升序，无行业过滤和排序因子",
+      "slots": 2,
+      "ma": [
+       5,
+       10
+      ],
+      "time": "开盘卖单重试、选股、先卖后买",
+      "held_filter": "True时未剔除已有持仓，条件在if not g.filter_holded内"
+     },
+     "gaps": [
+      "历史成分/证券名称缺失，MA_judge_jincha/sicha及order_style等wizard实现未取得",
+      "金叉在选股和入场重复调用，现有价格高于均线策略不能替代"
+     ],
+     "next_step": "补wizard实现及历史池，保留两槽和原持仓过滤逻辑"
+    }
+   },
+   {
+    "strategy_id": "S-de82ea4feb32",
+    "source_path": "repo/量化策略源代码/2024年度精选策略2/31.《趋势永存》持续16年跑赢大盘的真正靠谱策略.txt",
+    "source_sha256": "2269ac1c706a04e9fdb0867c31c81f7975a6ae1de521de35d6e7e4d095261bd2",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-de82ea4feb32.source",
+    "source_copy_sha256": "2269ac1c706a04e9fdb0867c31c81f7975a6ae1de521de35d6e7e4d095261bd2",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 149,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "沪深300动量与ATR风险头寸",
+     "fidelity": "缺历史池与09:32/09:35执行语义",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "index": "399300.SZ",
+      "momentum": "90日log价OLS年化收益*R2，先取前60再过滤",
+      "stock_filter": "100日均线及low/high.shift(2)-1最大值<=15%",
+      "market_filter": "指数200日均线",
+      "position": "总资产*0.001*股价/ATR20，缺失ATR窗口原用1",
+      "time": "每周第三交易日09:32交易，隔次09:35调整>10%偏差"
+     },
+     "gaps": [
+      "缺长区间历史CSI300与原指数代码映射，当前只有000300.SH",
+      "开盘盘中价/即时成交和math注入未证明，不能变成普通月度等权动量"
+     ],
+     "next_step": "核指数映射、历史池与ATR头寸执行；日频近似必须明确披露"
+    }
+   },
+   {
+    "strategy_id": "S-028ef663b462",
+    "source_path": "repo/量化策略源代码/2024年度精选策略2/5.随机森林策略，低换手率，年化近50%.txt",
+    "source_sha256": "331d507fb811e9aac14d16403ca37143fd8d81499cc9fa58ff1900f32474b061",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-028ef663b462.source",
+    "source_copy_sha256": "331d507fb811e9aac14d16403ca37143fd8d81499cc9fa58ff1900f32474b061",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 89,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "外部月度预测排序重复目标订单",
+     "fidelity": "缺预测与训练时点",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "file": "test_predict_300_q.pkl",
+      "time": "每月最后交易日开盘",
+      "selection": "score降序前floor(10%行数)",
+      "orders": "名单外清仓；每股连续两次同金额目标单"
+     },
+     "gaps": [
+      "缺预测文件、训练代码/训练窗口/预测可用日期；源码本身不训练随机森林",
+      "双下单不能按近似来源2023/38去重；空选股会除0"
+     ],
+     "next_step": "先核原预测，不执行未知pickle或自行重训替代"
+    }
+   },
+   {
+    "strategy_id": "S-906ef1dfcf9f",
+    "source_path": "repo/量化策略源代码/2022年度精选策略/24.龙头低波市值平均轮动策略.txt",
+    "source_sha256": "beca5a3dc06a4a3642823680b145a646124c98e7a0bd727d1176f7ed123f4881",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-906ef1dfcf9f.source",
+    "source_copy_sha256": "beca5a3dc06a4a3642823680b145a646124c98e7a0bd727d1176f7ed123f4881",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 259,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "固定七股低波选择与持仓市值差再平衡",
+     "fidelity": "待确认失败补卖修正与账本执行近似",
+     "implementations": [],
+     "status": "待审查",
+     "rules": {
+      "pool": [
+       "000858.SZ",
+       "600612.SH",
+       "601318.SH",
+       "600900.SH",
+       "600588.SH",
+       "000651.SZ",
+       "600585.SH"
+      ],
+      "score": "20日close总体方差/均价平方*1000，稳定原地升序前3",
+      "time": "每日开盘",
+      "balance": "最大与最小持仓市值差/最小>5%，卖差额一半，再把实际现金买入最小",
+      "rotation": "初次建仓成功后计数从2开始，原20计数重选；仅新进股分配整数可用现金",
+      "retry": "卖出None时order_target(securitys[i],0)，可能误卖其他股票"
+     },
+     "gaps": [
+      "错误代码补卖和开盘即时成交需确认；不能改成每天三股等权目标",
+      "原首次失败保持计数0并重试，稳定原地池排序及状态更新需保留；事后固定池偏差"
+     ],
+     "next_step": "核七股数据后确认修正变体；复用唯一Book增加按实际现金的执行入口"
+    }
+   },
+   {
+    "strategy_id": "S-cce77eb946a8",
+    "source_path": "repo/量化策略源代码/2024年度精选策略1/41.人工智能强化学习DQN交易智能体（回馈社区公开训练代码）.txt",
+    "source_sha256": "bf4f31552297e6ad232bb780917d926e40a27b55ca48719305f37777d29262b3",
+    "source_copy": "data/staging/strategies-batch12/20261005-daily-candidates/source-reviews/S-cce77eb946a8.source",
+    "source_copy_sha256": "bf4f31552297e6ad232bb780917d926e40a27b55ca48719305f37777d29262b3",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 137,
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "北方国际固定DQN权重推断",
+     "fidelity": "缺原模型与训练时点",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "instrument": "000065.SZ",
+      "model": "tgt_net.pt，Linear6->32、ReLU、Linear32->3",
+      "features": "7日close产生6项pct_change",
+      "actions": "argmax：0保持、1目标金额为当前cash、2清仓",
+      "time": "09:30"
+     },
+     "gaps": [
+      "源码只加载模型，无训练过程；缺权重指纹、训练样本/截止日期和归一化证明",
+      "action1持仓时目标为cash，不是追加买入或总资产满仓；空仓卖出键语义未证明"
+     ],
+     "next_step": "先找模型及训练证据；不安装torch、加载未知权重或用随机模型替代"
+    }
+   }
+  ],
+  "snapshot": "20261005-152153-eb05",
+  "published_batch": "20261005-152040-e16e",
+  "dependency_search": {
+   "argv": [
+    "rg",
+    "--files",
+    "--hidden",
+    "repo",
+    "data",
+    "-g",
+    "result_df.csv",
+    "-g",
+    "test_predict_300_q.pkl",
+    "-g",
+    "tgt_net.pt",
+    "-g",
+    "money_supply_05-19.csv",
+    "-g",
+    "aggretate_signal_data_02_19.csv",
+    "-g",
+    "cpi_ppi_0501_1902.csv",
+    "-g",
+    "shibor.csv",
+    "-g",
+    "huilv_060101_190331.csv",
+    "-g",
+    "guozhai_1m_10y_06_19.csv",
+    "-g",
+    "qiyezhai_1m_06_19.csv"
+   ],
+   "returncode": 1,
+   "matches": [],
+   "pickle_executed": false
+  },
+  "fixed_pool_bars": [
+   {
+    "instrument": "000651.SZ",
+    "rows": 1392,
+    "trading": 1392,
+    "first": "2021-01-04",
+    "last": "2026-09-29"
+   },
+   {
+    "instrument": "000858.SZ",
+    "rows": 1392,
+    "trading": 1392,
+    "first": "2021-01-04",
+    "last": "2026-09-29"
+   },
+   {
+    "instrument": "600585.SH",
+    "rows": 1392,
+    "trading": 1392,
+    "first": "2021-01-04",
+    "last": "2026-09-29"
+   },
+   {
+    "instrument": "600588.SH",
+    "rows": 1392,
+    "trading": 1392,
+    "first": "2021-01-04",
+    "last": "2026-09-29"
+   },
+   {
+    "instrument": "600612.SH",
+    "rows": 1392,
+    "trading": 1392,
+    "first": "2021-01-04",
+    "last": "2026-09-29"
+   },
+   {
+    "instrument": "600900.SH",
+    "rows": 1392,
+    "trading": 1381,
+    "first": "2021-01-04",
+    "last": "2026-09-29"
+   },
+   {
+    "instrument": "601318.SH",
+    "rows": 1392,
+    "trading": 1392,
+    "first": "2021-01-04",
+    "last": "2026-09-29"
+   }
+  ],
+  "vanke_5m": {
+   "rows": 55296,
+   "first": "2021-12-06 09:35:00",
+   "last": "2026-09-04 15:00:00",
+   "not_equivalent_to_original_1m": true
+  },
+  "api_evidence_sha256": "c409c9b92e0113e14a1b641e2d79c86b078f4a9cf7cea2de2ebb3746ef16f6a0",
+  "strategy_results": [],
+  "variant_confirmation": "Low-volatility seven-stock execution correction pending; other existing questions remain pending"
+ },
+ "probes": {
+  "results": [
+   {
+    "endpoint": "bs_399300",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"bs_399300\", \"status\": \"success\", \"wire_responses\": [], \"strict_usable\": false, \"published\": false, \"parameters\": {\"code\": \"sz.399300\", \"start\": \"2005-01-05\", \"end\": \"2026-09-29\", \"adjustflag\": \"3\"}, \"rows\": 5280, \"columns\": [\"date\", \"code\", \"open\", \"high\", \"low\", \"close\", \"preclose\", \"volume\", \"amount\"], \"raw_file\": \"data/raw/dependency_probe_batch12/bs_399300/20261005-daily-candidates.parquet\", \"raw_sha256\": \"daa2da6bf7af812000452d4b6ffc91bb0ea1d8edfe52a4bf419e162a233db769\", \"sample\": [{\"amount\": \"4529208200.0000\", \"close\": \"992.5640\", \"code\": \"sz.399300\", \"date\": \"2005-01-05\", \"high\": \"997.3200\", \"low\": \"979.8800\", \"open\": \"981.5800\", \"preclose\": \"982.7940\", \"volume\": \"711910898\"}, {\"amount\": \"3921015400.0000\", \"close\": \"983.1740\", \"code\": \"sz.399300\", \"date\": \"2005-01-06\", \"high\": \"993.7900\", \"low\": \"980.3300\", \"open\": \"993.3300\", \"preclose\": \"992.5640\", \"volume\": \"628802905\"}, {\"amount\": \"4737469400.0000\", \"close\": \"983.9580\", \"code\": \"sz.399300\", \"date\": \"2005-01-07\", \"high\": \"995.7100\", \"low\": \"979.8100\", \"open\": \"983.0500\", \"preclose\": \"983.1740\", \"volume\": \"729869409\"}]}\n",
+    "stderr": "login success!\nlogout success!\n",
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/bs_399300/result.json",
+      "sha256": "420cd721a606e3f2315715ceb978a9a6f5f5e135b06ad83ba86fa67ce09ef48c"
+     }
+    ],
+    "result": {
+     "endpoint": "bs_399300",
+     "status": "success",
+     "wire_responses": [],
+     "strict_usable": false,
+     "published": false,
+     "parameters": {
+      "code": "sz.399300",
+      "start": "2005-01-05",
+      "end": "2026-09-29",
+      "adjustflag": "3"
+     },
+     "rows": 5280,
+     "columns": [
+      "date",
+      "code",
+      "open",
+      "high",
+      "low",
+      "close",
+      "preclose",
+      "volume",
+      "amount"
+     ],
+     "raw_file": "data/raw/dependency_probe_batch12/bs_399300/20261005-daily-candidates.parquet",
+     "raw_sha256": "daa2da6bf7af812000452d4b6ffc91bb0ea1d8edfe52a4bf419e162a233db769",
+     "sample": [
+      {
+       "amount": "4529208200.0000",
+       "close": "992.5640",
+       "code": "sz.399300",
+       "date": "2005-01-05",
+       "high": "997.3200",
+       "low": "979.8800",
+       "open": "981.5800",
+       "preclose": "982.7940",
+       "volume": "711910898"
+      },
+      {
+       "amount": "3921015400.0000",
+       "close": "983.1740",
+       "code": "sz.399300",
+       "date": "2005-01-06",
+       "high": "993.7900",
+       "low": "980.3300",
+       "open": "993.3300",
+       "preclose": "992.5640",
+       "volume": "628802905"
+      },
+      {
+       "amount": "4737469400.0000",
+       "close": "983.9580",
+       "code": "sz.399300",
+       "date": "2005-01-07",
+       "high": "995.7100",
+       "low": "979.8100",
+       "open": "983.0500",
+       "preclose": "983.1740",
+       "volume": "729869409"
+      }
+     ]
+    }
+   },
+   {
+    "endpoint": "bs_399006",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"bs_399006\", \"status\": \"success\", \"wire_responses\": [], \"strict_usable\": false, \"published\": false, \"parameters\": {\"code\": \"sz.399006\", \"start\": \"2005-01-05\", \"end\": \"2026-09-29\", \"adjustflag\": \"3\"}, \"rows\": 3967, \"columns\": [\"date\", \"code\", \"open\", \"high\", \"low\", \"close\", \"preclose\", \"volume\", \"amount\"], \"raw_file\": \"data/raw/dependency_probe_batch12/bs_399006/20261005-daily-candidates.parquet\", \"raw_sha256\": \"b17838d931f8c8a0ec30e51f1a2557cf0c379374514bbebc3a39103427bf64ed\", \"sample\": [{\"amount\": \"4924176838.9100\", \"close\": \"973.2333\", \"code\": \"sz.399006\", \"date\": \"2010-06-01\", \"high\": \"994.7931\", \"low\": \"948.1186\", \"open\": \"986.0156\", \"preclose\": \"0.0000\", \"volume\": \"135628510\"}, {\"amount\": \"4001206160.7700\", \"close\": \"997.1196\", \"code\": \"sz.399006\", \"date\": \"2010-06-02\", \"high\": \"997.1196\", \"low\": \"952.6116\", \"open\": \"967.6097\", \"preclose\": \"973.2333\", \"volume\": \"107462758\"}, {\"amount\": \"6240835495.9000\", \"close\": \"998.3949\", \"code\": \"sz.399006\", \"date\": \"2010-06-03\", \"high\": \"1026.7020\", \"low\": \"997.7751\", \"open\": \"1002.3550\", \"preclose\": \"997.1196\", \"volume\": \"161680539\"}]}\n",
+    "stderr": "login success!\nlogout success!\n",
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/bs_399006/result.json",
+      "sha256": "8cbb109cbf3a8420e8b3ef974ee8e3ad3d7c86da9d19980f87bc1875e9d47846"
+     }
+    ],
+    "result": {
+     "endpoint": "bs_399006",
+     "status": "success",
+     "wire_responses": [],
+     "strict_usable": false,
+     "published": false,
+     "parameters": {
+      "code": "sz.399006",
+      "start": "2005-01-05",
+      "end": "2026-09-29",
+      "adjustflag": "3"
+     },
+     "rows": 3967,
+     "columns": [
+      "date",
+      "code",
+      "open",
+      "high",
+      "low",
+      "close",
+      "preclose",
+      "volume",
+      "amount"
+     ],
+     "raw_file": "data/raw/dependency_probe_batch12/bs_399006/20261005-daily-candidates.parquet",
+     "raw_sha256": "b17838d931f8c8a0ec30e51f1a2557cf0c379374514bbebc3a39103427bf64ed",
+     "sample": [
+      {
+       "amount": "4924176838.9100",
+       "close": "973.2333",
+       "code": "sz.399006",
+       "date": "2010-06-01",
+       "high": "994.7931",
+       "low": "948.1186",
+       "open": "986.0156",
+       "preclose": "0.0000",
+       "volume": "135628510"
+      },
+      {
+       "amount": "4001206160.7700",
+       "close": "997.1196",
+       "code": "sz.399006",
+       "date": "2010-06-02",
+       "high": "997.1196",
+       "low": "952.6116",
+       "open": "967.6097",
+       "preclose": "973.2333",
+       "volume": "107462758"
+      },
+      {
+       "amount": "6240835495.9000",
+       "close": "998.3949",
+       "code": "sz.399006",
+       "date": "2010-06-03",
+       "high": "1026.7020",
+       "low": "997.7751",
+       "open": "1002.3550",
+       "preclose": "997.1196",
+       "volume": "161680539"
+      }
+     ]
+    }
+   },
+   {
+    "endpoint": "bs_000001",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"bs_000001\", \"status\": \"success\", \"wire_responses\": [], \"strict_usable\": false, \"published\": false, \"parameters\": {\"code\": \"sh.000001\", \"start\": \"2005-01-05\", \"end\": \"2026-09-29\", \"adjustflag\": \"3\"}, \"rows\": 5280, \"columns\": [\"date\", \"code\", \"open\", \"high\", \"low\", \"close\", \"preclose\", \"volume\", \"amount\"], \"raw_file\": \"data/raw/dependency_probe_batch12/bs_000001/20261005-daily-candidates.parquet\", \"raw_sha256\": \"97ee4b3797e689aeff96009c8212622a677211311bc96dafe43dba11321ace91\", \"sample\": [{\"amount\": \"4916589314.0000\", \"close\": \"1251.9370\", \"code\": \"sh.000001\", \"date\": \"2005-01-05\", \"high\": \"1258.5800\", \"low\": \"1235.7460\", \"open\": \"1241.6820\", \"preclose\": \"1242.7740\", \"volume\": \"867865100\"}, {\"amount\": \"4381370333.0000\", \"close\": \"1239.4300\", \"code\": \"sh.000001\", \"date\": \"2005-01-06\", \"high\": \"1252.7350\", \"low\": \"1234.2360\", \"open\": \"1252.4930\", \"preclose\": \"1251.9370\", \"volume\": \"792225400\"}, {\"amount\": \"5040041939.0000\", \"close\": \"1244.7460\", \"code\": \"sh.000001\", \"date\": \"2005-01-07\", \"high\": \"1256.3130\", \"low\": \"1235.5080\", \"open\": \"1239.3230\", \"preclose\": \"1239.4300\", \"volume\": \"894087100\"}]}\n",
+    "stderr": "login success!\nlogout success!\n",
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/bs_000001/result.json",
+      "sha256": "b66a86332bed5af4f1dcefd32ad1bef3aa2d3d924cd558c791db64e21d0ef17c"
+     }
+    ],
+    "result": {
+     "endpoint": "bs_000001",
+     "status": "success",
+     "wire_responses": [],
+     "strict_usable": false,
+     "published": false,
+     "parameters": {
+      "code": "sh.000001",
+      "start": "2005-01-05",
+      "end": "2026-09-29",
+      "adjustflag": "3"
+     },
+     "rows": 5280,
+     "columns": [
+      "date",
+      "code",
+      "open",
+      "high",
+      "low",
+      "close",
+      "preclose",
+      "volume",
+      "amount"
+     ],
+     "raw_file": "data/raw/dependency_probe_batch12/bs_000001/20261005-daily-candidates.parquet",
+     "raw_sha256": "97ee4b3797e689aeff96009c8212622a677211311bc96dafe43dba11321ace91",
+     "sample": [
+      {
+       "amount": "4916589314.0000",
+       "close": "1251.9370",
+       "code": "sh.000001",
+       "date": "2005-01-05",
+       "high": "1258.5800",
+       "low": "1235.7460",
+       "open": "1241.6820",
+       "preclose": "1242.7740",
+       "volume": "867865100"
+      },
+      {
+       "amount": "4381370333.0000",
+       "close": "1239.4300",
+       "code": "sh.000001",
+       "date": "2005-01-06",
+       "high": "1252.7350",
+       "low": "1234.2360",
+       "open": "1252.4930",
+       "preclose": "1251.9370",
+       "volume": "792225400"
+      },
+      {
+       "amount": "5040041939.0000",
+       "close": "1244.7460",
+       "code": "sh.000001",
+       "date": "2005-01-07",
+       "high": "1256.3130",
+       "low": "1235.5080",
+       "open": "1239.3230",
+       "preclose": "1239.4300",
+       "volume": "894087100"
+      }
+     ]
+    }
+   },
+   {
+    "endpoint": "market_pe_sh",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"market_pe_sh\", \"status\": \"success\", \"wire_responses\": [{\"url\": \"https://legulegu.com/stockdata/shanghaiPE\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sh/response-000.bin\", \"sha256\": \"88ad6254a3fd375c12acec07e1227c3a47599d7f68ad2d702ee33ff9c306a525\"}, {\"url\": \"https://legulegu.com/api/stock-data/market-pe?token=a0feca5de78ead9d1af7600781cf7364&marketId=1\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sh/response-001.bin\", \"sha256\": \"5766903d41f8bb5751ea908a9a6a63d74710644f1ba8cea87c7809645a564611\"}], \"strict_usable\": false, \"published\": false, \"rows\": 334, \"columns\": [\"日期\", \"指数\", \"平均市盈率\"], \"raw_file\": \"data/raw/dependency_probe_batch12/market_pe_sh/20261005-daily-candidates.parquet\", \"raw_sha256\": \"6253286f5b06a4e24bf43e2ef1add8e61923b6bedd19b5277f6db1e711b9e573\", \"sample\": [{\"平均市盈率\": 34.03, \"指数\": 1134.67, \"日期\": \"1999-01-29\"}, {\"平均市盈率\": 33.5, \"指数\": 1090.08, \"日期\": \"1999-02-09\"}, {\"平均市盈率\": 34.3, \"指数\": 1158.05, \"日期\": \"1999-03-31\"}]}\n",
+    "stderr": "",
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sh/response-000.bin",
+      "sha256": "88ad6254a3fd375c12acec07e1227c3a47599d7f68ad2d702ee33ff9c306a525"
+     },
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sh/response-001.bin",
+      "sha256": "5766903d41f8bb5751ea908a9a6a63d74710644f1ba8cea87c7809645a564611"
+     },
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sh/result.json",
+      "sha256": "a1ebe05b8324a897af24236a5ee966643df847737b6931bf107a44045968c53d"
+     }
+    ],
+    "result": {
+     "endpoint": "market_pe_sh",
+     "status": "success",
+     "wire_responses": [
+      {
+       "url": "https://legulegu.com/stockdata/shanghaiPE",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sh/response-000.bin",
+       "sha256": "88ad6254a3fd375c12acec07e1227c3a47599d7f68ad2d702ee33ff9c306a525"
+      },
+      {
+       "url": "https://legulegu.com/api/stock-data/market-pe?token=a0feca5de78ead9d1af7600781cf7364&marketId=1",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sh/response-001.bin",
+       "sha256": "5766903d41f8bb5751ea908a9a6a63d74710644f1ba8cea87c7809645a564611"
+      }
+     ],
+     "strict_usable": false,
+     "published": false,
+     "rows": 334,
+     "columns": [
+      "日期",
+      "指数",
+      "平均市盈率"
+     ],
+     "raw_file": "data/raw/dependency_probe_batch12/market_pe_sh/20261005-daily-candidates.parquet",
+     "raw_sha256": "6253286f5b06a4e24bf43e2ef1add8e61923b6bedd19b5277f6db1e711b9e573",
+     "sample": [
+      {
+       "平均市盈率": 34.03,
+       "指数": 1134.67,
+       "日期": "1999-01-29"
+      },
+      {
+       "平均市盈率": 33.5,
+       "指数": 1090.08,
+       "日期": "1999-02-09"
+      },
+      {
+       "平均市盈率": 34.3,
+       "指数": 1158.05,
+       "日期": "1999-03-31"
+      }
+     ]
+    }
+   },
+   {
+    "endpoint": "market_pe_sz",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"market_pe_sz\", \"status\": \"success\", \"wire_responses\": [{\"url\": \"https://legulegu.com/stockdata/shenzhenPE\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sz/response-000.bin\", \"sha256\": \"815fa60bea349a20a44ba4cc9f995698e0bf49b70b2ac43e01172f97b7a1afc9\"}, {\"url\": \"https://legulegu.com/api/stock-data/market-pe?token=a0feca5de78ead9d1af7600781cf7364&marketId=2\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sz/response-001.bin\", \"sha256\": \"9fc8879e850a362f952af45c0f8b71feadf03f2e7d2643884f4926a7531128d9\"}], \"strict_usable\": false, \"published\": false, \"rows\": 346, \"columns\": [\"日期\", \"指数\", \"平均市盈率\"], \"raw_file\": \"data/raw/dependency_probe_batch12/market_pe_sz/20261005-daily-candidates.parquet\", \"raw_sha256\": \"46a9d8a13a23173de08b7f4571f9740c697ef8261de40678faed40044934a31a\", \"sample\": [{\"平均市盈率\": 42.66, \"指数\": 4184.84, \"日期\": \"1997-12-31\"}, {\"平均市盈率\": 42.54, \"指数\": 4165.28, \"日期\": \"1998-01-23\"}, {\"平均市盈率\": 41.31, \"指数\": 4081.69, \"日期\": \"1998-02-27\"}]}\n",
+    "stderr": "",
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sz/response-000.bin",
+      "sha256": "815fa60bea349a20a44ba4cc9f995698e0bf49b70b2ac43e01172f97b7a1afc9"
+     },
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sz/response-001.bin",
+      "sha256": "9fc8879e850a362f952af45c0f8b71feadf03f2e7d2643884f4926a7531128d9"
+     },
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sz/result.json",
+      "sha256": "804f0f74b3f3c00aa1a7379f0bd5fd52e4c88a99f048c5b678ad7c765229d736"
+     }
+    ],
+    "result": {
+     "endpoint": "market_pe_sz",
+     "status": "success",
+     "wire_responses": [
+      {
+       "url": "https://legulegu.com/stockdata/shenzhenPE",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sz/response-000.bin",
+       "sha256": "815fa60bea349a20a44ba4cc9f995698e0bf49b70b2ac43e01172f97b7a1afc9"
+      },
+      {
+       "url": "https://legulegu.com/api/stock-data/market-pe?token=a0feca5de78ead9d1af7600781cf7364&marketId=2",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/market_pe_sz/response-001.bin",
+       "sha256": "9fc8879e850a362f952af45c0f8b71feadf03f2e7d2643884f4926a7531128d9"
+      }
+     ],
+     "strict_usable": false,
+     "published": false,
+     "rows": 346,
+     "columns": [
+      "日期",
+      "指数",
+      "平均市盈率"
+     ],
+     "raw_file": "data/raw/dependency_probe_batch12/market_pe_sz/20261005-daily-candidates.parquet",
+     "raw_sha256": "46a9d8a13a23173de08b7f4571f9740c697ef8261de40678faed40044934a31a",
+     "sample": [
+      {
+       "平均市盈率": 42.66,
+       "指数": 4184.84,
+       "日期": "1997-12-31"
+      },
+      {
+       "平均市盈率": 42.54,
+       "指数": 4165.28,
+       "日期": "1998-01-23"
+      },
+      {
+       "平均市盈率": 41.31,
+       "指数": 4081.69,
+       "日期": "1998-02-27"
+      }
+     ]
+    }
+   },
+   {
+    "endpoint": "macro_money",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"macro_money\", \"status\": \"success\", \"wire_responses\": [{\"url\": \"https://datacenter-web.eastmoney.com/api/data/v1/get?columns=REPORT_DATE%2CTIME%2CBASIC_CURRENCY%2CBASIC_CURRENCY_SAME%2CBASIC_CURRENCY_SEQUENTIAL%2CCURRENCY%2CCURRENCY_SAME%2CCURRENCY_SEQUENTIAL%2CFREE_CASH%2CFREE_CASH_SAME%2CFREE_CASH_SEQUENTIAL&pageNumber=1&pageSize=2000&sortColumns=REPORT_DATE&sortTypes=-1&source=WEB&client=WEB&reportName=RPT_ECONOMY_CURRENCY_SUPPLY&p=1&pageNo=1&pageNum=1\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch12/20261005-daily-candidates/probes/macro_money/response-000.bin\", \"sha256\": \"66cb84c9936097ac04aae6b8c4bd95910d273cb01ceeda5cf56547618f2c88d9\"}], \"strict_usable\": false, \"published\": false, \"rows\": 224, \"columns\": [\"月份\", \"货币和准货币(M2)-数量(亿元)\", \"货币和准货币(M2)-同比增长\", \"货币和准货币(M2)-环比增长\", \"货币(M1)-数量(亿元)\", \"货币(M1)-同比增长\", \"货币(M1)-环比增长\", \"流通中的现金(M0)-数量(亿元)\", \"流通中的现金(M0)-同比增长\", \"流通中的现金(M0)-环比增长\"], \"raw_file\": \"data/raw/dependency_probe_batch12/macro_money/20261005-daily-candidates.parquet\", \"raw_sha256\": \"3ea84b196fbb4959a4d038db1c44750b58f35c61d1f56c37edae988adf2193c4\", \"sample\": [{\"月份\": \"2026年08月份\", \"流通中的现金(M0)-同比增长\": 11.2, \"流通中的现金(M0)-数量(亿元)\": 148311.98, \"流通中的现金(M0)-环比增长\": 0.07362881, \"货币(M1)-同比增长\": 4.1, \"货币(M1)-数量(亿元)\": 1157741.43, \"货币(M1)-环比增长\": 0.2700821, \"货币和准货币(M2)-同比增长\": 7.5, \"货币和准货币(M2)-数量(亿元)\": 3568083.6, \"货币和准货币(M2)-环比增长\": 0.36585309}, {\"月份\": \"2026年07月份\", \"流通中的现金(M0)-同比增长\": 11.6, \"流通中的现金(M0)-数量(亿元)\": 148202.86, \"流通中的现金(M0)-环比增长\": 0.56870437, \"货币(M1)-同比增长\": 4.0, \"货币(M1)-数量(亿元)\": 1154623.0, \"货币(M1)-环比增长\": -2.54499939, \"货币和准货币(M2)-同比增长\": 7.7, \"货币和准货币(M2)-数量(亿元)\": 3555077.24, \"货币和准货币(M2)-环比增长\": -0.33728131}, {\"月份\": \"2026年06月份\", \"流通中的现金(M0)-同比增长\": 11.8, \"流通中的现金(M0)-数量(亿元)\": 147364.79, \"流通中的现金(M0)-环比增长\": 0.34733649, \"货币(M1)-同比增长\": 4.0, \"货币(M1)-数量(亿元)\": 1184775.53, \"货币(M1)-环比增长\": 3.12336916, \"货币和准货币(M2)-同比增长\": 8.0, \"货币和准货币(M2)-数量(亿元)\": 3567108.43, \"货币和准货币(M2)-环比增长\": 0.86011268}]}\n",
+    "stderr": "",
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/macro_money/response-000.bin",
+      "sha256": "66cb84c9936097ac04aae6b8c4bd95910d273cb01ceeda5cf56547618f2c88d9"
+     },
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/macro_money/result.json",
+      "sha256": "54b1cbbe85ff59abfcb1bc355b3b4f8daba496edcd633fdaa0f095598c20f69a"
+     }
+    ],
+    "result": {
+     "endpoint": "macro_money",
+     "status": "success",
+     "wire_responses": [
+      {
+       "url": "https://datacenter-web.eastmoney.com/api/data/v1/get?columns=REPORT_DATE%2CTIME%2CBASIC_CURRENCY%2CBASIC_CURRENCY_SAME%2CBASIC_CURRENCY_SEQUENTIAL%2CCURRENCY%2CCURRENCY_SAME%2CCURRENCY_SEQUENTIAL%2CFREE_CASH%2CFREE_CASH_SAME%2CFREE_CASH_SEQUENTIAL&pageNumber=1&pageSize=2000&sortColumns=REPORT_DATE&sortTypes=-1&source=WEB&client=WEB&reportName=RPT_ECONOMY_CURRENCY_SUPPLY&p=1&pageNo=1&pageNum=1",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/macro_money/response-000.bin",
+       "sha256": "66cb84c9936097ac04aae6b8c4bd95910d273cb01ceeda5cf56547618f2c88d9"
+      }
+     ],
+     "strict_usable": false,
+     "published": false,
+     "rows": 224,
+     "columns": [
+      "月份",
+      "货币和准货币(M2)-数量(亿元)",
+      "货币和准货币(M2)-同比增长",
+      "货币和准货币(M2)-环比增长",
+      "货币(M1)-数量(亿元)",
+      "货币(M1)-同比增长",
+      "货币(M1)-环比增长",
+      "流通中的现金(M0)-数量(亿元)",
+      "流通中的现金(M0)-同比增长",
+      "流通中的现金(M0)-环比增长"
+     ],
+     "raw_file": "data/raw/dependency_probe_batch12/macro_money/20261005-daily-candidates.parquet",
+     "raw_sha256": "3ea84b196fbb4959a4d038db1c44750b58f35c61d1f56c37edae988adf2193c4",
+     "sample": [
+      {
+       "月份": "2026年08月份",
+       "流通中的现金(M0)-同比增长": 11.2,
+       "流通中的现金(M0)-数量(亿元)": 148311.98,
+       "流通中的现金(M0)-环比增长": 0.07362881,
+       "货币(M1)-同比增长": 4.1,
+       "货币(M1)-数量(亿元)": 1157741.43,
+       "货币(M1)-环比增长": 0.2700821,
+       "货币和准货币(M2)-同比增长": 7.5,
+       "货币和准货币(M2)-数量(亿元)": 3568083.6,
+       "货币和准货币(M2)-环比增长": 0.36585309
+      },
+      {
+       "月份": "2026年07月份",
+       "流通中的现金(M0)-同比增长": 11.6,
+       "流通中的现金(M0)-数量(亿元)": 148202.86,
+       "流通中的现金(M0)-环比增长": 0.56870437,
+       "货币(M1)-同比增长": 4.0,
+       "货币(M1)-数量(亿元)": 1154623.0,
+       "货币(M1)-环比增长": -2.54499939,
+       "货币和准货币(M2)-同比增长": 7.7,
+       "货币和准货币(M2)-数量(亿元)": 3555077.24,
+       "货币和准货币(M2)-环比增长": -0.33728131
+      },
+      {
+       "月份": "2026年06月份",
+       "流通中的现金(M0)-同比增长": 11.8,
+       "流通中的现金(M0)-数量(亿元)": 147364.79,
+       "流通中的现金(M0)-环比增长": 0.34733649,
+       "货币(M1)-同比增长": 4.0,
+       "货币(M1)-数量(亿元)": 1184775.53,
+       "货币(M1)-环比增长": 3.12336916,
+       "货币和准货币(M2)-同比增长": 8.0,
+       "货币和准货币(M2)-数量(亿元)": 3567108.43,
+       "货币和准货币(M2)-环比增长": 0.86011268
+      }
+     ]
+    }
+   },
+   {
+    "endpoint": "macro_pmi",
+    "returncode": 0,
+    "stdout": "{\"endpoint\": \"macro_pmi\", \"status\": \"success\", \"wire_responses\": [{\"url\": \"https://datacenter-web.eastmoney.com/api/data/v1/get?columns=REPORT_DATE%2CTIME%2CMAKE_INDEX%2CMAKE_SAME%2CNMAKE_INDEX%2CNMAKE_SAME&pageNumber=1&pageSize=2000&sortColumns=REPORT_DATE&sortTypes=-1&source=WEB&client=WEB&reportName=RPT_ECONOMY_PMI&p=1&pageNo=1&pageNum=1\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch12/20261005-daily-candidates/probes/macro_pmi/response-000.bin\", \"sha256\": \"6b1c8f1b20e9334d6bb1ba6ecc7f982d3cf0ff18bdb4b0ff3c08db308b6b245b\"}], \"strict_usable\": false, \"published\": false, \"rows\": 225, \"columns\": [\"月份\", \"制造业-指数\", \"制造业-同比增长\", \"非制造业-指数\", \"非制造业-同比增长\"], \"raw_file\": \"data/raw/dependency_probe_batch12/macro_pmi/20261005-daily-candidates.parquet\", \"raw_sha256\": \"6121f0fb8f1dba5672b75c24d5d56346a401e0a1b330d9935a5d788430b7d895\", \"sample\": [{\"制造业-同比增长\": 0.60240964, \"制造业-指数\": 50.1, \"月份\": \"2026年09月份\", \"非制造业-同比增长\": 0.4, \"非制造业-指数\": 50.2}, {\"制造业-同比增长\": 0.8097166, \"制造业-指数\": 49.8, \"月份\": \"2026年08月份\", \"非制造业-同比增长\": -2.58449304, \"非制造业-指数\": 49.0}, {\"制造业-同比增长\": -0.20283976, \"制造业-指数\": 49.2, \"月份\": \"2026年07月份\", \"非制造业-同比增长\": -2.19560878, \"非制造业-指数\": 49.0}]}\n",
+    "stderr": "",
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/macro_pmi/response-000.bin",
+      "sha256": "6b1c8f1b20e9334d6bb1ba6ecc7f982d3cf0ff18bdb4b0ff3c08db308b6b245b"
+     },
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/macro_pmi/result.json",
+      "sha256": "2d9ae1bfe5479289695663c2da7613f238de6925f5f5f855c215d04dab4fee76"
+     }
+    ],
+    "result": {
+     "endpoint": "macro_pmi",
+     "status": "success",
+     "wire_responses": [
+      {
+       "url": "https://datacenter-web.eastmoney.com/api/data/v1/get?columns=REPORT_DATE%2CTIME%2CMAKE_INDEX%2CMAKE_SAME%2CNMAKE_INDEX%2CNMAKE_SAME&pageNumber=1&pageSize=2000&sortColumns=REPORT_DATE&sortTypes=-1&source=WEB&client=WEB&reportName=RPT_ECONOMY_PMI&p=1&pageNo=1&pageNum=1",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/macro_pmi/response-000.bin",
+       "sha256": "6b1c8f1b20e9334d6bb1ba6ecc7f982d3cf0ff18bdb4b0ff3c08db308b6b245b"
+      }
+     ],
+     "strict_usable": false,
+     "published": false,
+     "rows": 225,
+     "columns": [
+      "月份",
+      "制造业-指数",
+      "制造业-同比增长",
+      "非制造业-指数",
+      "非制造业-同比增长"
+     ],
+     "raw_file": "data/raw/dependency_probe_batch12/macro_pmi/20261005-daily-candidates.parquet",
+     "raw_sha256": "6121f0fb8f1dba5672b75c24d5d56346a401e0a1b330d9935a5d788430b7d895",
+     "sample": [
+      {
+       "制造业-同比增长": 0.60240964,
+       "制造业-指数": 50.1,
+       "月份": "2026年09月份",
+       "非制造业-同比增长": 0.4,
+       "非制造业-指数": 50.2
+      },
+      {
+       "制造业-同比增长": 0.8097166,
+       "制造业-指数": 49.8,
+       "月份": "2026年08月份",
+       "非制造业-同比增长": -2.58449304,
+       "非制造业-指数": 49.0
+      },
+      {
+       "制造业-同比增长": -0.20283976,
+       "制造业-指数": 49.2,
+       "月份": "2026年07月份",
+       "非制造业-同比增长": -2.19560878,
+       "非制造业-指数": 49.0
+      }
+     ]
+    }
+   },
+   {
+    "endpoint": "northbound_flow",
+    "returncode": 0,
+    "stdout": "{\"url\": \"https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=TRADE_DATE&sortTypes=-1&pageSize=1000&pageNumber=2&reportName=RPT_MUTUAL_DEAL_HISTORY&columns=ALL&source=WEB&client=WEB&filter=%28MUTUAL_TYPE%3D%22005%22%29\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/response-002.bin\", \"sha256\": \"cd46237a0d1970e27fbfab35ea3e03459506f75cc8cf94a7f79d2a2c49c0e8cc\"}, {\"url\": \"https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=TRADE_DATE&sortTypes=-1&pageSize=1000&pageNumber=3&reportName=RPT_MUTUAL_DEAL_HISTORY&columns=ALL&source=WEB&client=WEB&filter=%28MUTUAL_TYPE%3D%22005%22%29\", \"status_code\": 200, \"file\": \"data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/response-003.bin\", \"sha256\": \"c26294fd9fae43b05217a6718f5ac6be19cf95f887e0887e940470bc6207f27d\"}], \"strict_usable\": false, \"published\": false, \"rows\": 2763, \"columns\": [\"日期\", \"当日成交净买额\", \"买入成交额\", \"卖出成交额\", \"历史累计净买额\", \"当日资金流入\", \"当日余额\", \"持股市值\", \"领涨股\", \"领涨股-涨跌幅\", \"沪深300\", \"沪深300-涨跌幅\", \"领涨股-代码\"], \"raw_file\": \"data/raw/dependency_probe_batch12/northbound_flow/20261005-daily-candidates.parquet\", \"raw_sha256\": \"03607825ccb35da06ac8068ecdb810702a737268bf463da98e32253cde4c93d7\", \"sample\": [{\"买入成交额\": 120.8233, \"卖出成交额\": null, \"历史累计净买额\": 0.01208233, \"当日余额\": null, \"当日成交净买额\": 120.8233, \"当日资金流入\": 130.0, \"持股市值\": 0.0, \"日期\": \"2014-11-17\", \"沪深300\": 2474.01, \"沪深300-涨跌幅\": -0.19, \"领涨股\": \"唐山港\", \"领涨股-代码\": \"601000.SH\", \"领涨股-涨跌幅\": 9.98}, {\"买入成交额\": 49.4367, \"卖出成交额\": 2.24, \"历史累计净买额\": 0.016802, \"当日余额\": 81.55, \"当日成交净买额\": 47.1967, \"当日资金流入\": 48.45, \"持股市值\": 0.0, \"日期\": \"2014-11-18\", \"沪深300\": 2456.37, \"沪深300-涨跌幅\": -0.71, \"领涨股\": \"厦门国贸\", \"领涨股-代码\": \"600755.SH\", \"领涨股-涨跌幅\": 10.06}, {\"买入成交额\": 26.695100000000004, \"卖出成交额\": 1.7274, \"历史累计净买额\": 0.019298770000000003, \"当日余额\": 103.88, \"当日成交净买额\": 24.9677, \"当日资金流入\": 26.12, \"持股市值\": 0.0, \"日期\": \"2014-11-19\", \"沪深300\": 2450.99, \"沪深300-涨跌幅\": -0.22, \"领涨股\": \"君正集团\", \"领涨股-代码\": \"601216.SH\", \"领涨股-涨跌幅\": 6.85}]}\n",
+    "stderr": "\n  0%|          | 0/3 [00:00<?, ?it/s]\n 33%|███▎      | 1/3 [00:00<00:00,  2.34it/s]\n 67%|██████▋   | 2/3 [00:00<00:00,  2.63it/s]\n100%|██████████| 3/3 [00:01<00:00,  2.73it/s]\n                                             \n",
+    "evidence_files": [
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/response-000.bin",
+      "sha256": "072c185d3fc30e272c626b826b168ccfb0365dd860da818e72b4570b67969217"
+     },
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/response-001.bin",
+      "sha256": "072c185d3fc30e272c626b826b168ccfb0365dd860da818e72b4570b67969217"
+     },
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/response-002.bin",
+      "sha256": "cd46237a0d1970e27fbfab35ea3e03459506f75cc8cf94a7f79d2a2c49c0e8cc"
+     },
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/response-003.bin",
+      "sha256": "c26294fd9fae43b05217a6718f5ac6be19cf95f887e0887e940470bc6207f27d"
+     },
+     {
+      "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/result.json",
+      "sha256": "df2a09e9c1bc599da8b7af929976748e8eb5f78407fd61889257914070d82934"
+     }
+    ],
+    "result": {
+     "endpoint": "northbound_flow",
+     "status": "success",
+     "wire_responses": [
+      {
+       "url": "https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=TRADE_DATE&sortTypes=-1&pageSize=1000&pageNumber=1&reportName=RPT_MUTUAL_DEAL_HISTORY&columns=ALL&source=WEB&client=WEB&filter=%28MUTUAL_TYPE%3D%22005%22%29",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/response-000.bin",
+       "sha256": "072c185d3fc30e272c626b826b168ccfb0365dd860da818e72b4570b67969217"
+      },
+      {
+       "url": "https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=TRADE_DATE&sortTypes=-1&pageSize=1000&pageNumber=1&reportName=RPT_MUTUAL_DEAL_HISTORY&columns=ALL&source=WEB&client=WEB&filter=%28MUTUAL_TYPE%3D%22005%22%29",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/response-001.bin",
+       "sha256": "072c185d3fc30e272c626b826b168ccfb0365dd860da818e72b4570b67969217"
+      },
+      {
+       "url": "https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=TRADE_DATE&sortTypes=-1&pageSize=1000&pageNumber=2&reportName=RPT_MUTUAL_DEAL_HISTORY&columns=ALL&source=WEB&client=WEB&filter=%28MUTUAL_TYPE%3D%22005%22%29",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/response-002.bin",
+       "sha256": "cd46237a0d1970e27fbfab35ea3e03459506f75cc8cf94a7f79d2a2c49c0e8cc"
+      },
+      {
+       "url": "https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=TRADE_DATE&sortTypes=-1&pageSize=1000&pageNumber=3&reportName=RPT_MUTUAL_DEAL_HISTORY&columns=ALL&source=WEB&client=WEB&filter=%28MUTUAL_TYPE%3D%22005%22%29",
+       "status_code": 200,
+       "file": "data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/response-003.bin",
+       "sha256": "c26294fd9fae43b05217a6718f5ac6be19cf95f887e0887e940470bc6207f27d"
+      }
+     ],
+     "strict_usable": false,
+     "published": false,
+     "rows": 2763,
+     "columns": [
+      "日期",
+      "当日成交净买额",
+      "买入成交额",
+      "卖出成交额",
+      "历史累计净买额",
+      "当日资金流入",
+      "当日余额",
+      "持股市值",
+      "领涨股",
+      "领涨股-涨跌幅",
+      "沪深300",
+      "沪深300-涨跌幅",
+      "领涨股-代码"
+     ],
+     "raw_file": "data/raw/dependency_probe_batch12/northbound_flow/20261005-daily-candidates.parquet",
+     "raw_sha256": "03607825ccb35da06ac8068ecdb810702a737268bf463da98e32253cde4c93d7",
+     "sample": [
+      {
+       "买入成交额": 120.8233,
+       "卖出成交额": null,
+       "历史累计净买额": 0.01208233,
+       "当日余额": null,
+       "当日成交净买额": 120.8233,
+       "当日资金流入": 130.0,
+       "持股市值": 0.0,
+       "日期": "2014-11-17",
+       "沪深300": 2474.01,
+       "沪深300-涨跌幅": -0.19,
+       "领涨股": "唐山港",
+       "领涨股-代码": "601000.SH",
+       "领涨股-涨跌幅": 9.98
+      },
+      {
+       "买入成交额": 49.4367,
+       "卖出成交额": 2.24,
+       "历史累计净买额": 0.016802,
+       "当日余额": 81.55,
+       "当日成交净买额": 47.1967,
+       "当日资金流入": 48.45,
+       "持股市值": 0.0,
+       "日期": "2014-11-18",
+       "沪深300": 2456.37,
+       "沪深300-涨跌幅": -0.71,
+       "领涨股": "厦门国贸",
+       "领涨股-代码": "600755.SH",
+       "领涨股-涨跌幅": 10.06
+      },
+      {
+       "买入成交额": 26.695100000000004,
+       "卖出成交额": 1.7274,
+       "历史累计净买额": 0.019298770000000003,
+       "当日余额": 103.88,
+       "当日成交净买额": 24.9677,
+       "当日资金流入": 26.12,
+       "持股市值": 0.0,
+       "日期": "2014-11-19",
+       "沪深300": 2450.99,
+       "沪深300-涨跌幅": -0.22,
+       "领涨股": "君正集团",
+       "领涨股-代码": "601216.SH",
+       "领涨股-涨跌幅": 6.85
+      }
+     ]
+    }
+   }
+  ],
+  "published": false,
+  "snapshot": "20261005-152153-eb05",
+  "limitations": [
+   "New current retrievals are not original CSV/weights/model versions",
+   "Historical index equivalence and macro publication vintages remain unproven",
+   "Northbound net buying is not proof of quota difference or per-stock share ratios"
+  ]
+ },
+ "input_analysis": {
+  "profiles": [
+   {
+    "endpoint": "bs_399300",
+    "status": "success",
+    "raw_file": "data/raw/dependency_probe_batch12/bs_399300/20261005-daily-candidates.parquet",
+    "raw_sha256": "daa2da6bf7af812000452d4b6ffc91bb0ea1d8edfe52a4bf419e162a233db769",
+    "columns": [
+     "date",
+     "code",
+     "open",
+     "high",
+     "low",
+     "close",
+     "preclose",
+     "volume",
+     "amount"
+    ],
+    "rows": 5280,
+    "date_column": "date",
+    "unparsed_dates": 0,
+    "first": "2005-01-05",
+    "last": "2026-09-29",
+    "duplicate_dates": 0,
+    "distinct_months": 261,
+    "maximum_rows_per_month": 23,
+    "nonfinite_price_cells": 0,
+    "nonpositive_price_cells": 0,
+    "snapshot_000300_comparison": {
+     "common_days": 1392,
+     "frozen_days": 1392,
+     "exact_differences_by_field": {
+      "open": 0,
+      "high": 0,
+      "low": 0,
+      "close": 0,
+      "preclose": 0,
+      "volume": 0,
+      "amount": 30
+     },
+     "scope": "These vendor rows only; no original-platform equivalence or tradability proof"
+    }
+   },
+   {
+    "endpoint": "bs_399006",
+    "status": "success",
+    "raw_file": "data/raw/dependency_probe_batch12/bs_399006/20261005-daily-candidates.parquet",
+    "raw_sha256": "b17838d931f8c8a0ec30e51f1a2557cf0c379374514bbebc3a39103427bf64ed",
+    "columns": [
+     "date",
+     "code",
+     "open",
+     "high",
+     "low",
+     "close",
+     "preclose",
+     "volume",
+     "amount"
+    ],
+    "rows": 3967,
+    "date_column": "date",
+    "unparsed_dates": 0,
+    "first": "2010-06-01",
+    "last": "2026-09-29",
+    "duplicate_dates": 0,
+    "distinct_months": 196,
+    "maximum_rows_per_month": 23,
+    "nonfinite_price_cells": 0,
+    "nonpositive_price_cells": 1
+   },
+   {
+    "endpoint": "bs_000001",
+    "status": "success",
+    "raw_file": "data/raw/dependency_probe_batch12/bs_000001/20261005-daily-candidates.parquet",
+    "raw_sha256": "97ee4b3797e689aeff96009c8212622a677211311bc96dafe43dba11321ace91",
+    "columns": [
+     "date",
+     "code",
+     "open",
+     "high",
+     "low",
+     "close",
+     "preclose",
+     "volume",
+     "amount"
+    ],
+    "rows": 5280,
+    "date_column": "date",
+    "unparsed_dates": 0,
+    "first": "2005-01-05",
+    "last": "2026-09-29",
+    "duplicate_dates": 0,
+    "distinct_months": 261,
+    "maximum_rows_per_month": 23,
+    "nonfinite_price_cells": 0,
+    "nonpositive_price_cells": 0
+   },
+   {
+    "endpoint": "market_pe_sh",
+    "status": "success",
+    "raw_file": "data/raw/dependency_probe_batch12/market_pe_sh/20261005-daily-candidates.parquet",
+    "raw_sha256": "6253286f5b06a4e24bf43e2ef1add8e61923b6bedd19b5277f6db1e711b9e573",
+    "columns": [
+     "日期",
+     "指数",
+     "平均市盈率"
+    ],
+    "rows": 334,
+    "date_column": "日期",
+    "unparsed_dates": 0,
+    "first": "1999-01-29",
+    "last": "2026-09-30",
+    "duplicate_dates": 0,
+    "distinct_months": 333,
+    "maximum_rows_per_month": 2
+   },
+   {
+    "endpoint": "market_pe_sz",
+    "status": "success",
+    "raw_file": "data/raw/dependency_probe_batch12/market_pe_sz/20261005-daily-candidates.parquet",
+    "raw_sha256": "46a9d8a13a23173de08b7f4571f9740c697ef8261de40678faed40044934a31a",
+    "columns": [
+     "日期",
+     "指数",
+     "平均市盈率"
+    ],
+    "rows": 346,
+    "date_column": "日期",
+    "unparsed_dates": 0,
+    "first": "1997-12-31",
+    "last": "2026-09-30",
+    "duplicate_dates": 0,
+    "distinct_months": 346,
+    "maximum_rows_per_month": 1
+   },
+   {
+    "endpoint": "macro_money",
+    "status": "success",
+    "raw_file": "data/raw/dependency_probe_batch12/macro_money/20261005-daily-candidates.parquet",
+    "raw_sha256": "3ea84b196fbb4959a4d038db1c44750b58f35c61d1f56c37edae988adf2193c4",
+    "columns": [
+     "月份",
+     "货币和准货币(M2)-数量(亿元)",
+     "货币和准货币(M2)-同比增长",
+     "货币和准货币(M2)-环比增长",
+     "货币(M1)-数量(亿元)",
+     "货币(M1)-同比增长",
+     "货币(M1)-环比增长",
+     "流通中的现金(M0)-数量(亿元)",
+     "流通中的现金(M0)-同比增长",
+     "流通中的现金(M0)-环比增长"
+    ],
+    "rows": 224,
+    "date_column": "月份",
+    "unparsed_dates": 0,
+    "first": "2008-01-01",
+    "last": "2026-08-01",
+    "duplicate_dates": 0,
+    "distinct_months": 224,
+    "maximum_rows_per_month": 1
+   },
+   {
+    "endpoint": "macro_pmi",
+    "status": "success",
+    "raw_file": "data/raw/dependency_probe_batch12/macro_pmi/20261005-daily-candidates.parquet",
+    "raw_sha256": "6121f0fb8f1dba5672b75c24d5d56346a401e0a1b330d9935a5d788430b7d895",
+    "columns": [
+     "月份",
+     "制造业-指数",
+     "制造业-同比增长",
+     "非制造业-指数",
+     "非制造业-同比增长"
+    ],
+    "rows": 225,
+    "date_column": "月份",
+    "unparsed_dates": 0,
+    "first": "2008-01-01",
+    "last": "2026-09-01",
+    "duplicate_dates": 0,
+    "distinct_months": 225,
+    "maximum_rows_per_month": 1
+   },
+   {
+    "endpoint": "northbound_flow",
+    "status": "success",
+    "raw_file": "data/raw/dependency_probe_batch12/northbound_flow/20261005-daily-candidates.parquet",
+    "raw_sha256": "03607825ccb35da06ac8068ecdb810702a737268bf463da98e32253cde4c93d7",
+    "columns": [
+     "日期",
+     "当日成交净买额",
+     "买入成交额",
+     "卖出成交额",
+     "历史累计净买额",
+     "当日资金流入",
+     "当日余额",
+     "持股市值",
+     "领涨股",
+     "领涨股-涨跌幅",
+     "沪深300",
+     "沪深300-涨跌幅",
+     "领涨股-代码"
+    ],
+    "rows": 2763,
+    "date_column": "日期",
+    "unparsed_dates": 0,
+    "first": "2014-11-17",
+    "last": "2026-09-30",
+    "duplicate_dates": 0,
+    "distinct_months": 143,
+    "maximum_rows_per_month": 23
+   }
+  ],
+  "snapshot": "20261005-152153-eb05",
+  "published": false,
+  "official_get_bars": {
+   "original_file": "data/staging/strategies-batch7/20261005-rsi-slots/joinquant-api-response.json",
+   "copy": "data/staging/strategies-batch12/20261005-daily-candidates/cached-official-api.bin",
+   "sha256": "f375859fb15b1869942e412e220162e891f1031ecffcf612c2bf950eb280276d",
+   "excerpt": "data/staging/strategies-batch12/20261005-daily-candidates/get-bars-official-excerpt.txt",
+   "excerpt_sha256": "3851156bb9245a01b58914a5a9710049e44e4afc5745a63eccecd74c880eb970",
+   "finding": "get_bars excludes suspended bars, does not fill missing bars; include_now defaults False; backtest adjustment basis defaults to current date"
+  },
+  "limitations": [
+   "Retrieval coverage alone does not establish disclosure time or historical revision versions",
+   "Monthly market PE cannot silently replace 2500 daily exchange observations",
+   "Index data do not make the original index orders tradable"
+  ]
+ },
+ "checks": {
+  "verified_at": "2026-10-05 10:43:17 UTC",
+  "commands": [
+   {
+    "command": "/home/zuozhe/envs/quant/.venv/bin/ruff check src/observe/strategy_catalog.py scripts/review_strategy_batch12.py tests/unit/test_batch12_archive.py",
+    "returncode": 0,
+    "output": "All checks passed!\n",
+    "wall_time_seconds": 1.4848e-05
+   },
+   {
+    "command": "/home/zuozhe/envs/quant/.venv/bin/python -m pytest -q tests/unit/test_batch12_archive.py tests/integration/test_strategies.py -k 'catalog or batch12 or implementation_paths or outside_implementation or api_evidence'",
+    "returncode": 0,
+    "output": "........                                                                 [100%]\n=============================== warnings summary ===============================\n../../../../home/zuozhe/envs/quant/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1\n  /home/zuozhe/envs/quant/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n8 passed, 9 deselected, 1 warning in 2.56s\n",
+    "wall_time_seconds": 3.021053291
+   },
+   {
+    "command": "git diff --check",
+    "returncode": 0,
+    "output": "",
+    "wall_time_seconds": 0.370827694
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/review_strategy_batch12.py": "cad5871a75a91db5957ba2869d17c6f97511acf01909fa9fb56d93a75fbd8856",
+   "src/observe/strategy_catalog.py": "a9414973fb438705bfcbd1cd2084a2039f7c247b4fea34f9d719f4b0df2129ff",
+   "tests/unit/test_batch12_archive.py": "c5edfe675ed4b77d63ffe176bb2925ab4d07a12b7d11bda4b4fff49fe61f382b"
+  },
+  "regression_before_fix": {
+   "command": "/home/zuozhe/envs/quant/.venv/bin/python -m pytest -q tests/unit/test_batch12_archive.py",
+   "returncode": 1,
+   "result": "5 failed, 1 passed in 2.52s",
+   "failures": [
+    "absolute in-repository path omitted frozen copy",
+    "relative traversal accepted",
+    "absolute outside path accepted",
+    "missing API evidence accepted",
+    "changed API evidence accepted"
+   ]
+  },
+  "specialist_review": {
+   "security": "Both findings fixed; no additional confirmed findings",
+   "architecture": "Archive path finding fixed; no additional confirmed findings"
+  },
+  "scope": "Batch12 only; existing batches preserved; no new strategy backtest"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 3192,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 244,
+  "old_calendar_rows_unchanged": 2095,
+  "old_index_rows_unchanged": 1392,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "0d04b4fbc279a3a0228067b7cf8c01b632431bbc7495ead4972c9538fa4f86ba"
+ },
+ "scope": "Fourteen source reviews and bounded input probes; no new strategy backtest yet",
+ "progress": {
+  "checkpoint": "20261005-184422-9600",
+  "note": "第十二批14份审查与8接口探测验收；原来源和旧资产保留，七股低波修正待确认，全库继续",
+  "catalog_id": "69ad5b681292010f9ae9",
+  "catalog_sha256": "70b1ae4b96b9d006599d87bdb2b337317251e818fb282d041adda1ea14d251db",
+  "published_batch": "20261005-152040-e16e",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 489,
+   "已验证": 10,
+   "待审查": 33,
+   "暂不可复现": 54,
+   "非交易研究脚本": 68,
+   "重复版本": 41
+  },
+  "manually_reviewed": 75,
+  "locally_backtested_sources": 11,
+  "locally_reproduced_sources": 11,
+  "local_strategy_runs": 38,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261005-184422-9600"
+ }
+}

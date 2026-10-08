@@ -1,0 +1,125 @@
+{
+  "benchmark": null,
+  "configuration": {
+    "backtest_models": [
+      "ridge"
+    ],
+    "end": null,
+    "extended_factor_set": "configs/factor_sets/daily_intraday_v1.yaml",
+    "factor_set": "configs/factor_sets/daily_basic_v1.yaml",
+    "initial_cash": 1000000.0,
+    "label_h": 5,
+    "minute_pool": true,
+    "models": {
+      "baseline_factor": "rev_5",
+      "correlation_threshold": 0.9,
+      "min_names": 30,
+      "penalty_mode": "normalized",
+      "ridge_alphas": [
+        1.0,
+        10.0,
+        100.0,
+        1000.0,
+        10000.0
+      ],
+      "ridge_lambdas": [
+        0.01,
+        0.1,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "top_n": 20
+    },
+    "n_boot": 1000,
+    "portfolio": {
+      "buffer": 10,
+      "max_sell": 5,
+      "max_weight": 0.1,
+      "n": 20,
+      "open_cash_policy": "sell_then_buy",
+      "participation": 0.05,
+      "rebalance_every": 5,
+      "refill_between_rebalance": true
+    },
+    "seed": 20260930,
+    "snapshot": "20260930-121952-b7e8",
+    "split": {
+      "holdout": 252,
+      "test": 63,
+      "train": 252,
+      "valid": 126
+    },
+    "start": null,
+    "universe": {
+      "boards": [
+        "main"
+      ],
+      "exclude_st": true,
+      "liquidity_window": 20,
+      "max_suspended": 10,
+      "min_avg_amount": 20000000.0,
+      "min_listed_sessions": 120,
+      "suspend_window": 20
+    }
+  },
+  "coverage": null,
+  "decision_time": null,
+  "evidence_status": "archived_unreviewed",
+  "execution_status": "success_limited",
+  "execution_time": null,
+  "implementation": null,
+  "kind": "paired",
+  "limitations": [
+    {
+      "detail": "受限样本：缺退市证券的分钟数据",
+      "kind": "minute_sample_restricted"
+    },
+    {
+      "detail": "两侧实验自身的限制类型：['data_audit', 'minute_sample_restricted']",
+      "kind": "arm_limitations"
+    }
+  ],
+  "metrics": null,
+  "original_strategy_complete": false,
+  "parameters": null,
+  "payload_verification": "not_reaudited",
+  "period": null,
+  "portfolio": null,
+  "recorded_environment": {
+    "git_commit": "5e40d5085f723c9a657424291366fe5bbe5e2846",
+    "git_dirty": true,
+    "lock_sha256": "e8383bef3de6bfba163fa3adc7e5738629e6880fa94ff010c80b9016defc78c4",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5"
+    },
+    "python": "3.12.11"
+  },
+  "references": [
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20260930-172339-c1c4fa-paired-a1aa/config.json",
+      "sha256": "1c4f894032af4c314bece1de0b44f96278bb0d067598c44a705a8cca11516394"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20260930-172339-c1c4fa-paired-a1aa/status.json",
+      "sha256": "0c129729847081ef19fc16a6f97a729fc93735b4ffddde4f02afe63573611d75"
+    }
+  ],
+  "reproduction": null,
+  "results": null,
+  "rules": {},
+  "run_id": "20260930-172339-c1c4fa-paired-a1aa",
+  "schema": 1,
+  "snapshot": "20260930-121952-b7e8",
+  "strategy_id": null,
+  "superseded_by": null,
+  "trading": null,
+  "universe": null,
+  "validation": []
+}

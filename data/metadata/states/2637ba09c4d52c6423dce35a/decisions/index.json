@@ -1,0 +1,68 @@
+[
+  {
+    "answer": "推进修正变体（推荐）",
+    "id": "D-bollinger",
+    "provenance": "conversation_confirmed",
+    "scope": "2020/52：去除布林上下轨标量[-1]索引，保留20日均值±2倍总体标准差，日频近似及唯一账本",
+    "status": "approved"
+  },
+  {
+    "answer": "推进动态锚定近似变体（推荐）",
+    "id": "D-pair-anchor",
+    "provenance": "conversation_confirmed",
+    "scope": "伊利/招行与海天/招行按每决策日锚定历史价，保留120日、比例1、±1和状态机；平台不等价",
+    "status": "approved"
+  },
+  {
+    "answer": "只修输入形状，保留滞后（推荐）",
+    "id": "D-svm-shape",
+    "provenance": "conversation_confirmed",
+    "scope": "SVM98预测样本改二维，旧特征、滞后和参数保留",
+    "status": "approved"
+  },
+  {
+    "answer": "推进修正近似变体（推荐）",
+    "id": "D-rsi",
+    "provenance": "conversation_confirmed",
+    "scope": "RSI40缺失窗口阻断；61行重算RSI6、整数阈值、9槽及实际现金分配保留",
+    "status": "approved"
+  },
+  {
+    "answer": "推进修正近似变体（推荐）",
+    "id": "D-rotation66",
+    "provenance": "conversation_confirmed",
+    "scope": "修datetime.timedelta和末值位置索引，保留60行价差/样本标准差/四位z/±2；动态锚定与日频近似",
+    "status": "approved"
+  },
+  {
+    "approval_copy": "data/metadata/decisions/D-numeric-means-approval.json",
+    "approval_file": "data/staging/strategies-batch14/20261005-long-history/numeric-policy-approval.json",
+    "id": "D-numeric-means",
+    "provenance": "archived_approval",
+    "scope": "国航及复星逐窗口math.fsum稳定求和；严格比较、均线参数、每笔2万元和两种资金保留",
+    "status": "approved"
+  },
+  {
+    "approval_copy": "data/metadata/decisions/D-ema55-approval.json",
+    "approval_file": "data/staging/strategies-batch18/20261005-kd-ema-lof/ema-policy-approval.json",
+    "id": "D-ema55",
+    "provenance": "archived_approval",
+    "scope": "三进兵TA-Lib连续EMA2/25/60、均值种子、跳已知停牌、八股顺序、五槽、现金除数及参与/滑点保留；19批已完成",
+    "status": "approved"
+  },
+  {
+    "id": "D-gac12",
+    "scope": "广汽2020/12近似经济规则确认，原问题待回复，不重复询问",
+    "status": "pending"
+  },
+  {
+    "id": "D-lowvol24",
+    "scope": "七股低波2022/24近似经济规则确认，原问题待回复",
+    "status": "pending"
+  },
+  {
+    "id": "D-bp-liquidation",
+    "scope": "BP末价折现探索不能从其他批准推断获批；长区间原实验仍blocked",
+    "status": "evidence_recheck_required"
+  }
+]

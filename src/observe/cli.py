@@ -120,6 +120,12 @@ def main(argv = None):
     fq.add_argument('--snapshot', required = True); fq.add_argument('--fields', required = True); fq.add_argument('--instruments', required = True)
     fq.add_argument('--decision-time', required = True); fq.add_argument('--mode', choices = ['strict', 'exploratory'], default = 'strict'); fq.add_argument('--lag-days', type = int)
     fq.add_argument('--table', choices = ['financial_annual', 'financial_quarterly'], default = 'financial_quarterly')
+    vi = d.add_parser('import-valuations', help = '从SHA256绑定的BaoStock旧原档恢复独立估值表，审计后原子发布')
+    vi.add_argument('--manifest', required=True); vi.add_argument('--manifest-sha256', required=True)
+    vq = d.add_parser('valuation-history', help = '读取冻结估值；默认严格排除未知历史版本')
+    vq.add_argument('--snapshot', required=True); vq.add_argument('--start', required=True); vq.add_argument('--end', required=True)
+    vq.add_argument('--instruments', required=True); vq.add_argument('--fields', default='ps_ttm,pcf_ncf_ttm')
+    vq.add_argument('--mode', choices=['strict', 'provider_final'], default='strict')
     st = sub.add_parser('strategy', help = '策略来源清单、规则配置与声明式规格回测').add_subparsers(dest = 'act', required = True)
     sc = st.add_parser('catalog'); sc.add_argument('--source', default = 'repo/量化策略源代码')
     sr = st.add_parser('run'); sr.add_argument('--config'); sr.add_argument('specs', nargs = '*', help = '声明式规格路径或 strategies/specs 下的编号')
@@ -235,6 +241,13 @@ def main(argv = None):
         from .runs import canonical
         result = query_financial_history(root, a.snapshot, a.fields.split(','), a.instruments.split(','), a.decision_time, a.mode, a.lag_days, archive_table = a.table)
         _json({'coverage': result.coverage, 'data': canonical(result.data.to_dict('records'))}); return
+    if a.cmd == 'data' and a.act == 'import-valuations':
+        from .data.valuations import import_valuations
+        return _json(import_valuations(root, a.manifest, a.manifest_sha256, log=lambda m: print(m, file=sys.stderr, flush=True)))
+    if a.cmd == 'data' and a.act == 'valuation-history':
+        from .data.valuations import query_valuations
+        from .runs import canonical
+        return _json(canonical(query_valuations(root, a.snapshot, a.start, a.end, a.instruments.split(','), a.fields.split(','), a.mode)))
     if a.cmd == 'doctor':
         from .doctor import doctor, EXIT_CODES
         result = doctor(root, a.snapshot, a.config, a.verify_files); _json(result)
