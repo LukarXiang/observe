@@ -1,0 +1,43 @@
+[
+  {
+    "affects": [
+      "PEG",
+      "ROE质量",
+      "财务评分",
+      "SVR价值模型"
+    ],
+    "detail": "最终合并财报历史修订版本不明，严格可用0；滞后不消除修订前视",
+    "id": "B-financial-version",
+    "kind": "historical_evidence"
+  },
+  {
+    "affects": [
+      "微盘400",
+      "小盘价值100"
+    ],
+    "detail": "历史股本事件、每日总市值、PCF、历史名称与专属池未补齐",
+    "id": "B-shares-pool",
+    "kind": "missing_input"
+  },
+  {
+    "detail": "BP长区间15证券退市/换股权益待核实，海通待上市权益结算未完成",
+    "evidence": "docs/tasks/2026-10-05-退市与换股结算核查.md",
+    "id": "B-settlement",
+    "kind": "input_and_feature"
+  },
+  {
+    "detail": "部分远程2026-10-03/04快照、成员表和实验未迁入；禁止新数据替换旧输入",
+    "id": "B-remote-payload",
+    "kind": "missing_handoff"
+  },
+  {
+    "detail": "ETF事件、全池分钟/Tick、期货合约/主力/结算及外置名单/模块依赖缺失；指标组件不是交易验收",
+    "id": "B-special-assets",
+    "kind": "missing_input_and_rules"
+  },
+  {
+    "detail": "Git推送已于2026-10-08恢复；此前补数DNS失败仅为当时记录，不证明供应商无数据，补数前须重新探测",
+    "id": "B-network",
+    "kind": "interface_unreachable"
+  }
+]

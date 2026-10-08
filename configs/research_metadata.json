@@ -11,15 +11,17 @@
   "accepted_receipt": "docs/handoff/2026-10-07-batch63-verification.json",
   "numeric_resolution": "data/staging/strategies-batch14/20261005-long-history/numeric-resolution.json",
   "publication": {
-    "original_git_directory": "read_only_in_current_execution_environment",
-    "local_commit": "delivery_in_separate_writable_checkout_with_git_bundle",
-    "remote_sync": "blocked_proxy_and_dns",
+    "original_git_directory": "writable_aligned_with_origin_master",
+    "local_commit": "worktree_head_equals_origin_master_after_20261008_alignment",
+    "remote_sync": "pushed_private_origin_master_20261008",
+    "evidence": "docs/handoff/2026-10-08-git-publication.json",
     "research_acceptance_is_separate": true
   },
   "tasks": [
     {"id": "T-git-metadata", "status": "completed", "action": "只读元数据、入口、Git白名单和隔离阅读已验收；后续每批继续导出", "done_when": "元数据、代码指纹、引用及隔离阅读测试通过，关联文件完成审查", "plan": "docs/tasks/2026-10-08-Git元数据管理实施与交付.md"},
     {"id": "T-data-handoff", "status": "completed", "action": "当前发布/布林主包与审计控制补充包已生成；迁移3749+166核验及禁网三成本复现match0通过", "done_when": "实际包/manifest/receipt齐全，迁移后SHA与所选复现match通过；当前包范围和旧远程缺失分开记录", "plan": "docs/handoff/2026-10-08-local-plan.json"},
-    {"id": "T-git-publication", "status": "blocked", "action": "在可写独立检出提交，保存Git bundle，恢复网络后同步远端", "done_when": "远端master明确包含审查通过的提交；原仓库Git目录可写后再同步本机登记", "blockers": ["B-git-write", "B-network"]},
+    {"id": "T-git-publication", "status": "completed", "action": "审查通过的提交已快进推送到私有远端master，本机工作区Git已对齐且status干净", "done_when": "ls-remote与本机HEAD一致；元数据verify通过；bundle回执与发布凭据已补记", "plan": "docs/tasks/2026-10-08-工作区整理与Git对齐.md"},
+    {"id": "T-workspace-tidy", "status": "completed", "action": "文档入口收拢、tasks与scripts分组导航；被元数据引用的文件未移动，data载荷未删除", "done_when": "链接无断链，元数据重新导出并verify通过，改动已推送", "plan": "docs/tasks/2026-10-08-工作区整理与Git对齐.md"},
     {"id": "T-batch64", "status": "in_progress", "action": "完成第64批正式checks、冻结终审和finish；已有study/offline不覆盖重跑", "done_when": "正式验收凭据及最终读回通过；研究组件不计新增交易回测", "plan": "docs/tasks/2026-10-07-第六十四批价格形态与K线识别研究.md"},
     {"id": "T-financial-version", "status": "blocked", "action": "补首次披露值、修订版本与来源公告证据", "done_when": "可证明决策时点可用的历史财务版本进入新快照并通过时点门禁", "blockers": ["B-financial-version"]},
     {"id": "T-shares-pcf-names", "status": "blocked", "action": "核实历史股本事件、PCF、名称及专属股票池，优先解除微盘400/小盘价值100依赖", "done_when": "时点证据、单位与覆盖核实后新增不可变分区；年度控制市值不作替代", "blockers": ["B-shares-pool"]},
@@ -44,8 +46,7 @@
     {"id": "B-settlement", "kind": "input_and_feature", "detail": "BP长区间15证券退市/换股权益待核实，海通待上市权益结算未完成", "evidence": "docs/tasks/2026-10-05-退市与换股结算核查.md"},
     {"id": "B-remote-payload", "kind": "missing_handoff", "detail": "部分远程2026-10-03/04快照、成员表和实验未迁入；禁止新数据替换旧输入"},
     {"id": "B-special-assets", "kind": "missing_input_and_rules", "detail": "ETF事件、全池分钟/Tick、期货合约/主力/结算及外置名单/模块依赖缺失；指标组件不是交易验收"},
-    {"id": "B-network", "kind": "interface_unreachable", "detail": "本次Git代理127.0.0.1:7897不可达；仅本命令去代理后github.com DNS失败；近期补数DNS失败不证明供应商无数据"},
-    {"id": "B-git-write", "kind": "execution_environment", "detail": "原仓库.git只读，git add无法创建index.lock；使用独立可写检出形成提交与bundle"}
+    {"id": "B-network", "kind": "interface_unreachable", "detail": "Git推送已于2026-10-08恢复；此前补数DNS失败仅为当时记录，不证明供应商无数据，补数前须重新探测"}
   ],
   "capabilities": [
     {"id": "C-financial", "status": "implemented_limited", "code": ["src/observe/data/financials.py", "src/observe/data/financial_history.py"], "supports": "完整归档、字典、时点门禁、探索滞后、单季/TTM/同比", "limits": "严格历史输入0，不借公告日期、不以实收资本金额替股数"},

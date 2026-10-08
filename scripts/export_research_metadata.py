@@ -244,6 +244,7 @@ def prepare(root):
     b.put('runs/representative.json', representative)
     bundles = []
     for path in sorted(safe(b.root, 'data/handoff').glob('*.receipt.json')) if safe(b.root, 'data/handoff').exists() else []:
+        if path.name.endswith('.bundle.receipt.json'): continue  # Git bundle sidecars are not payload archive receipts.
         name = path.relative_to(b.root).as_posix(); r = b.read(name)
         archive = 'data/handoff/' + r['archive']; manifest = 'data/handoff/' + r['manifest']
         present = safe(b.root, archive).is_file() and safe(b.root, manifest).is_file()
@@ -308,7 +309,7 @@ def render(project, policy, metadata = False):
               '## 使用与核验', '',
               '只读核验元数据：', '', '```bash', 'python scripts/export_research_metadata.py verify --root .', '```', '',
               '载荷核验需要原始策略、分区和实验；缺失会返回blocked并列明路径。metadata不会替换活跃PUBLISHED或初始化运行数据库。', '',
-              'Git上传状态与研究验收状态分开：当前执行环境原.git只读，远端代理/DNS不可达；提交准备与上传验收见本批交付记录。', '']
+              'Git上传状态与研究验收状态分开：2026-10-08已推送到私有远端master，本机工作区Git已对齐；凭据见docs/handoff/2026-10-08-git-publication.json，经过见工作区整理与Git对齐记录。', '']
     if metadata:
         lines += ['[权威索引](../../index.json)、[项目状态](project-state.json)、[任务](tasks/index.json)、[决策](decisions/index.json)、[阻断](blockers.json)、[能力](capabilities.json)、[实验索引](runs/index.json)、[代表结果](runs/representative.json)、[证据索引](evidence/index.json)、[载荷](assets/index.json)、[数据包](bundles/index.json)。', '']
     else: lines += ['[权威索引](../data/metadata/index.json)；按其indexes字段追读具体对象。', '']

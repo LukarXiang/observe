@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "status": "published_remote_aligned",
+  "supersedes_status_of": "docs/handoff/2026-10-08-git-delivery.json",
+  "remote": {
+    "url": "https://github.com/LukarXiang/observe.git",
+    "branch": "master",
+    "visibility": "private (user stated)",
+    "force_push": false,
+    "previous_remote_head": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+    "pushed": [
+      {
+        "commit": "9cfce18e8cd784bb8faf7d8ecf0e90c82eea4e6a",
+        "contains": "bundle history through 3e89b9c plus README reader entry"
+      },
+      {
+        "commit": "35bf53de8c002398823355f7e8bb74dac0e1173c",
+        "contains": "docs index, tasks/scripts navigation, obsolete transfer notice"
+      }
+    ],
+    "ls_remote_matches_local_head_at_35bf53d": true
+  },
+  "bundle": {
+    "path": "data/handoff/observe-git-20261008-final.bundle",
+    "sha256": "86c09205044c23c8d83b39dcc28da72bbd48381124c71c3dbc108a33feb79256",
+    "verify": "passed_complete_history",
+    "head": "3e89b9cd0ef9395d3b783db9e32fe15d88a67dec"
+  },
+  "worktree": {
+    "head_before": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+    "uncommitted_before": {
+      "modified": 28,
+      "untracked": 322
+    },
+    "tracked_files_equal_to_pushed": 989,
+    "differing": [
+      "README.md (reader-entry line only)"
+    ],
+    "missing_vs_pushed": 0,
+    "untracked_not_in_pushed": 0,
+    "alignment_method": "update-ref + read-tree; no file content changed; no reset or clean",
+    "status_after": "clean"
+  },
+  "metadata_verify_before_publication_changes": {
+    "status": "ok",
+    "checked": 518,
+    "issues": []
+  },
+  "constraints_kept": [
+    "no SHA-bound file renamed or moved",
+    "no payload under data/ deleted",
+    "bundle and migration packages stay outside Git"
+  ],
+  "research_acceptance_advanced": false
+}
