@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "status": "local_committed_remote_blocked",
+  "base_commit": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+  "implementation_commit": "9cd8909befbe32344becc111b4f580237f9b269e",
+  "checkout": "/tmp/observe-git-delivery-20261008",
+  "original_worktree_head_updated": false,
+  "original_git_directory": "read_only",
+  "export_id": "047d75b5a4f75a5f480304ff",
+  "export_files": 199,
+  "export_bytes": 13135799,
+  "tracked_data_files_at_implementation_commit": 468,
+  "unexpected_tracked_payload_files": 0,
+  "verification": {
+    "original_metadata_checked": 518,
+    "isolated_git_only_checked": 518,
+    "fresh_autocrlf_true_clone_checked": 518,
+    "source_run_payload_checked": 142,
+    "source_run_id": "20261005-143611-844865-strategy-a327",
+    "issues": [],
+    "staged_diff_check": "passed",
+    "full_suite_passed": 1650,
+    "final_focused_suite_passed": 16,
+    "current_unique_test_count": 1651
+  },
+  "implementation_bundle": {
+    "path": "data/handoff/observe-git-20261008-9cd8909.bundle",
+    "bytes": 6109079,
+    "sha256": "03d8c5bbac32e4fa8785b54e21276b9f931033231dc70de56f058e411a16f58e",
+    "verify": "passed_complete_history"
+  },
+  "final_delivery_bundle_path": "data/handoff/observe-git-20261008-final.bundle",
+  "migration_runs_evidence_archive": {
+    "path": "data/handoff/20261008-migration-validation-runs.tar.gz",
+    "bytes": 221651,
+    "sha256": "871f1b1a1b995871ff5a0fddad5c1018a50285bbb8922b99518bfa97a4bcab51",
+    "run_ids": ["20261008-104204-13ab51-strategy-6258", "20261008-104451-13ab51-strategy-33b4"],
+    "archive_source_comparison": "passed",
+    "role": "full migration validation evidence, additional to both required input archives",
+    "added_to_original_run_registry": false
+  },
+  "remote": {
+    "url": "https://github.com/LukarXiang/observe.git",
+    "push_command": "git push origin master",
+    "push_exit_code": 128,
+    "push_error": "could not read Username for 'https://github.com': No such device or address",
+    "subsequent_read_error": "Failed to connect to 127.0.0.1 port 7897",
+    "previous_direct_error": "github.com DNS failed",
+    "gh_available": false,
+    "updated": false,
+    "force_push": false,
+    "next_step": "restore usable network and GitHub authentication; fetch and check remote branch relationship before normal push"
+  },
+  "research_acceptance_advanced": false,
+  "remaining": ["remote publication", "batch64 formal acceptance", "historical shares, PCF and names evidence", "missing old remote payloads"],
+  "note": "This receipt follows the implementation commit. The final bundle also includes delivery documentation; bundle bytes and SHA are recorded in its local sidecar to avoid a self-referential Git artifact. Root metadata index remains the research-state authority."
+}
