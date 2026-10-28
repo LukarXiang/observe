@@ -1,0 +1,21 @@
+{
+  "case": {
+    "actual_command": "python -m pytest -q tests/unit/test_batch99_namespace_recovery.py",
+    "error": "Expected2.487, actual2.482; synthetic HH-LC=.027 rather than historical .042",
+    "failed": 1,
+    "next": "new recovery-v2 directory with corrected fixture expected bands2.482/2.466",
+    "passed": 2,
+    "prepared_worker_not_executed": true,
+    "recovery_economic_rules_changed": false,
+    "returncode": 1,
+    "test_sha256": "15d8fa82af99624397ae0b8cb3593957822d6e57067f84201ee2cef40843294c"
+  },
+  "case_id": "batch99-recovery-fixture-failure",
+  "nature": "immutable_synthetic_fixture_expectation_failure",
+  "purpose": "1失败2通过，原prepared未执行worker；新v2修夹具期望",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch99/20261011-fresh-namespace-recovery/fixture-failure.json",
+    "sha256": "dc09da2ce6a31ab4d190781ab228ec0929103b88eccb16834547b9ac016c4794"
+  }
+}

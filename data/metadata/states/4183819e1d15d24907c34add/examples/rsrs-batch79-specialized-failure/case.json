@@ -1,0 +1,24 @@
+{
+  "case": {
+    "copies": {
+      "failure.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "review_strategy_batch79.py": "aaaa04cbacdf685fa1adeac49522e84c392a4005648a43a36470cb7a30e79993",
+      "test_batch79_research.py": "e9d838f263f81be5099919f43acc8df1f3fcf2aaeaf6dfb07d2ef8e245c72856"
+    },
+    "not_a_backtest": true,
+    "root_causes": [
+      "WR prefix original has10 statements but research asserted11",
+      "Original DatetimeIndex Series positional access behavior must be verified in actual pandas environment"
+    ],
+    "status": "development_failure",
+    "test_result": "1 failed,5 passed,16 errors"
+  },
+  "case_id": "rsrs-batch79-specialized-failure",
+  "nature": "immutable_development_failure",
+  "purpose": "1失败/5通过/16夹具错误：prefix误断言11而原AST是10；初始化stub未重新载入原函数；日志和修前实现保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/development-failure-specialized/failure.json",
+    "sha256": "8b9747d112113eefce85c8d24d1a12e5dcc02c6205cd72c4da0f0b244820ade1"
+  }
+}

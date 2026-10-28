@@ -1,0 +1,778 @@
+{
+  "case": {
+    "actual_json_roundtrip": true,
+    "case_count": 32,
+    "cases": [
+      {
+        "case": "sector_identity_mapping",
+        "error": null,
+        "value": {
+          "ETFs": {
+            "000819.XSHG": "000819.XSHG",
+            "000913.XSHG": "000913.XSHG",
+            "000932.XSHG": "000932.XSHG",
+            "000993.XSHG": "000993.XSHG",
+            "399967.XSHE": "399967.XSHE",
+            "399971.XSHE": "399971.XSHE",
+            "399975.XSHE": "399975.XSHE"
+          },
+          "bars": 20,
+          "lag": 10,
+          "money": "511880.XSHG",
+          "stocks": [
+            "000932.XSHG",
+            "000913.XSHG",
+            "399967.XSHE",
+            "000993.XSHG",
+            "000819.XSHG",
+            "399975.XSHE",
+            "399971.XSHE"
+          ],
+          "time": [
+            14,
+            15
+          ]
+        }
+      },
+      {
+        "case": "risk_off_empty",
+        "error": null,
+        "value": [
+          [
+            "unused_price",
+            "511880.XSHG"
+          ],
+          [
+            "buy",
+            "511880.XSHG",
+            1234.0
+          ]
+        ]
+      },
+      {
+        "case": "risk_off_money_held",
+        "error": null,
+        "value": []
+      },
+      {
+        "case": "risk_off_two_positions",
+        "error": null,
+        "value": [
+          [
+            "target",
+            "old1",
+            0
+          ],
+          [
+            "unused_price",
+            "511880.XSHG"
+          ],
+          [
+            "target",
+            "old1",
+            0
+          ],
+          [
+            "buy",
+            "511880.XSHG",
+            1234.0
+          ]
+        ]
+      },
+      {
+        "case": "risk_on_same_held",
+        "error": null,
+        "value": [
+          [
+            "unused_price",
+            "511880.XSHG"
+          ]
+        ]
+      },
+      {
+        "case": "risk_on_new_deferred_cash",
+        "error": null,
+        "value": [
+          [
+            "unused_price",
+            "511880.XSHG"
+          ],
+          [
+            "target",
+            "old1",
+            0
+          ],
+          [
+            "buy",
+            "000932.XSHG",
+            1234.0
+          ]
+        ]
+      },
+      {
+        "case": "risk_off_immediate_double_sell",
+        "error": null,
+        "value": [
+          [
+            "target",
+            "old1",
+            0
+          ],
+          [
+            "unused_price",
+            "511880.XSHG"
+          ],
+          [
+            "target",
+            "old1",
+            0
+          ],
+          [
+            "buy",
+            "511880.XSHG",
+            1434.0
+          ]
+        ]
+      },
+      {
+        "case": "wrong_minute_no_action",
+        "error": null,
+        "value": []
+      },
+      {
+        "case": "stable_tie_first_sector_and_minute_counts",
+        "error": null,
+        "value": {
+          "calls": [
+            [
+              "000932.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000913.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "399967.XSHE",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000993.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000819.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "399975.XSHE",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "399971.XSHE",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000932.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000932.XSHG",
+              4800,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ]
+          ],
+          "signal": "000932.XSHG"
+        }
+      },
+      {
+        "case": "strict_mean_equality_risk_off",
+        "error": null,
+        "value": {
+          "calls": [
+            [
+              "000932.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000913.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "399967.XSHE",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000993.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000819.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "399975.XSHE",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "399971.XSHE",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000932.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000932.XSHG",
+              4800,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ]
+          ],
+          "signal": "sell_the_stocks"
+        }
+      },
+      {
+        "case": "all_nan_risk_off",
+        "error": null,
+        "value": {
+          "calls": [
+            [
+              "000932.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000913.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "399967.XSHE",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000993.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000819.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "399975.XSHE",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "399971.XSHE",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000932.XSHG",
+              2400,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ],
+            [
+              "000932.XSHG",
+              4800,
+              {
+                "fields": "close",
+                "skip_paused": true,
+                "unit": "1m"
+              }
+            ]
+          ],
+          "signal": "sell_the_stocks"
+        }
+      },
+      {
+        "case": "empty_minute_price",
+        "error": "IndexError",
+        "message": "index 0 is out of bounds for axis 0 with size 0",
+        "value": null
+      },
+      {
+        "case": "fees_2009-01-01",
+        "error": null,
+        "value": [
+          [
+            "slippage",
+            0
+          ],
+          [
+            "commission",
+            {
+              "buy_cost": 0.003,
+              "min_cost": 5,
+              "sell_cost": 0.004
+            }
+          ]
+        ]
+      },
+      {
+        "case": "fees_2009-01-02",
+        "error": null,
+        "value": [
+          [
+            "slippage",
+            0
+          ],
+          [
+            "commission",
+            {
+              "buy_cost": 0.002,
+              "min_cost": 5,
+              "sell_cost": 0.003
+            }
+          ]
+        ]
+      },
+      {
+        "case": "fees_2011-01-01",
+        "error": null,
+        "value": [
+          [
+            "slippage",
+            0
+          ],
+          [
+            "commission",
+            {
+              "buy_cost": 0.002,
+              "min_cost": 5,
+              "sell_cost": 0.003
+            }
+          ]
+        ]
+      },
+      {
+        "case": "fees_2011-01-02",
+        "error": null,
+        "value": [
+          [
+            "slippage",
+            0
+          ],
+          [
+            "commission",
+            {
+              "buy_cost": 0.001,
+              "min_cost": 5,
+              "sell_cost": 0.002
+            }
+          ]
+        ]
+      },
+      {
+        "case": "fees_2013-01-01",
+        "error": null,
+        "value": [
+          [
+            "slippage",
+            0
+          ],
+          [
+            "commission",
+            {
+              "buy_cost": 0.001,
+              "min_cost": 5,
+              "sell_cost": 0.002
+            }
+          ]
+        ]
+      },
+      {
+        "case": "fees_2013-01-02",
+        "error": null,
+        "value": [
+          [
+            "slippage",
+            0
+          ],
+          [
+            "commission",
+            {
+              "buy_cost": 0.0003,
+              "min_cost": 5,
+              "sell_cost": 0.0013
+            }
+          ]
+        ]
+      },
+      {
+        "case": "rank_returns_series",
+        "error": null,
+        "value": [
+          2.5
+        ]
+      },
+      {
+        "case": "rolling_rank_current_pandas_fails",
+        "error": "TypeError",
+        "message": "must be real number, not Series",
+        "value": null
+      },
+      {
+        "case": "rankeq10_counts_exact_tens",
+        "error": null,
+        "value": 2
+      },
+      {
+        "case": "xgb_buy",
+        "error": null,
+        "value": [
+          [
+            "matrix",
+            [
+              "b",
+              "a"
+            ],
+            [
+              [
+                3.0,
+                1.0
+              ]
+            ]
+          ],
+          [
+            "buy",
+            "510050.XSHG",
+            1234.0
+          ]
+        ]
+      },
+      {
+        "case": "xgb_sell",
+        "error": null,
+        "value": [
+          [
+            "matrix",
+            [
+              "b",
+              "a"
+            ],
+            [
+              [
+                3.0,
+                1.0
+              ]
+            ]
+          ],
+          [
+            "target",
+            "510050.XSHG",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "xgb_upper_equal",
+        "error": null,
+        "value": [
+          [
+            "matrix",
+            [
+              "b",
+              "a"
+            ],
+            [
+              [
+                3.0,
+                1.0
+              ]
+            ]
+          ]
+        ]
+      },
+      {
+        "case": "xgb_lower_equal",
+        "error": null,
+        "value": [
+          [
+            "matrix",
+            [
+              "b",
+              "a"
+            ],
+            [
+              [
+                3.0,
+                1.0
+              ]
+            ]
+          ]
+        ]
+      },
+      {
+        "case": "xgb_ensemble_mean_hold",
+        "error": null,
+        "value": [
+          [
+            "matrix",
+            [
+              "b",
+              "a"
+            ],
+            [
+              [
+                3.0,
+                1.0
+              ]
+            ]
+          ]
+        ]
+      },
+      {
+        "case": "xgb_nan_hold",
+        "error": null,
+        "value": [
+          [
+            "matrix",
+            [
+              "b",
+              "a"
+            ],
+            [
+              [
+                3.0,
+                1.0
+              ]
+            ]
+          ]
+        ]
+      },
+      {
+        "case": "xgb_empty_ensemble_error",
+        "error": "IndexError",
+        "message": "invalid index to scalar variable.",
+        "value": null
+      },
+      {
+        "case": "xgb_missing_col_50etf_20191109.dat",
+        "error": "FileNotFoundError",
+        "message": "col_50etf_20191109.dat",
+        "value": null
+      },
+      {
+        "case": "xgb_missing_model_50etf_20191109.dat",
+        "error": "FileNotFoundError",
+        "message": "model_50etf_20191109.dat",
+        "value": null
+      },
+      {
+        "case": "five_separate_daily_history_calls",
+        "error": null,
+        "value": {
+          "calls": [
+            [
+              "510050.XSHG",
+              400,
+              "1d",
+              "close"
+            ],
+            [
+              "510050.XSHG",
+              400,
+              "1d",
+              "high"
+            ],
+            [
+              "510050.XSHG",
+              400,
+              "1d",
+              "low"
+            ],
+            [
+              "510050.XSHG",
+              400,
+              "1d",
+              "open"
+            ],
+            [
+              "510050.XSHG",
+              400,
+              "1d",
+              "volume"
+            ]
+          ],
+          "return_order_lengths": [
+            400,
+            400,
+            400,
+            400,
+            400
+          ]
+        }
+      },
+      {
+        "case": "xgb_daily_0950_and_stock_cost",
+        "error": null,
+        "value": {
+          "calls": [
+            [
+              "schedule",
+              "trade",
+              [
+                "9:50"
+              ],
+              {
+                "reference_security": "000300.XSHG"
+              }
+            ],
+            [
+              "cost",
+              [
+                {
+                  "close_commission": 0.00025,
+                  "close_tax": 0.001,
+                  "min_commission": 5,
+                  "open_commission": 0.00025
+                }
+              ],
+              {
+                "type": "stock"
+              }
+            ]
+          ],
+          "etf": "510050.XSHG"
+        }
+      }
+    ],
+    "model_predictions_are_stubs": true,
+    "new_trading_backtests": 0,
+    "real_pickle_executed": false,
+    "synthetic_only": true
+  },
+  "case_id": "batch100-source-diagnostics",
+  "nature": "captured_synthetic_original_definitions_and_prediction_stubs",
+  "purpose": "原分钟取数、字典指数映射、严格阈值、部分卖出/cash反馈和原排名兼容缺陷；不执行pickle/训练/真实预测",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch100/20261011-original-feature-stage/diagnostics-preread.json",
+    "sha256": "f50566232921200ae82e0068bab64b8590d44e9385e78385287c4590cff7402f"
+  }
+}

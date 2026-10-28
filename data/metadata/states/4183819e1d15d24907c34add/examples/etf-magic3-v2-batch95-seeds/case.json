@@ -1,0 +1,26 @@
+{
+  "case": {
+    "files_sha256": {
+      "rsrs-magic3.parquet": "95b397733f2f36f51c1ec1eccb24b267db96abc37131d9793867211bef5c5972",
+      "rsrs-v2-reference.parquet": "4cf6a5e239196cb4fbb3eaed5da83c924a78e0febd26c528b142bc687006c882"
+    },
+    "first_identical_date": "2010-01-07",
+    "identical_following_rows": 4063,
+    "last_affected_date": "2010-01-06",
+    "maximum_score_absolute_difference": 0.010895139129748932,
+    "not_a_backtest": true,
+    "rules_changed": false,
+    "score_difference_rows": 599,
+    "shared_decisions": 4662,
+    "signal_rules_differ_independently_of_seed": true,
+    "status": "compared"
+  },
+  "case_id": "etf-magic3-v2-batch95-seeds",
+  "nature": "in_progress_original_seed_difference_assessment",
+  "purpose": "不同599/600种子导致前599分数差，最大0.010895；20100107起4063分数完全相同，买卖规则差异另保留，原规则未改",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/seed-comparison.json",
+    "sha256": "9a74c0042c85a8aadf8f772ca9cb4d5b916f37413e2c3d8c7606e93c456bb329"
+  }
+}

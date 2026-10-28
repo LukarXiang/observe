@@ -1,0 +1,83 @@
+{
+  "case": {
+    "full_suite_claimed": false,
+    "implementation_sha256": {
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+      "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+      "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+      "scripts/review_strategy_batch95.py": "6ae51bcd2fccb1adc46ae72d0120770bb4f00b37f62660dadff2411f9275688d",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "scripts/verify_strategy_batch95.py": "9c6e66e95eaf88dcc59b12662dcc48c9a681d2628e766de342a742cd6fb280ff",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "c82caf370aa5c223209b959850d93b4f6e4a2c5b03d3ed8ec09e7ad2aa80a904",
+      "tests/unit/test_batch95_preparation.py": "6c806bc26987e29b506a1c96172672a0089f175612829c128fa5d4be858339eb",
+      "tests/unit/test_batch95_stage.py": "ed6280f8fbd8831537a7bfb1b888370eed32bf64af6ae5f6d4bb56f508ecf14e"
+    },
+    "independent_reviewer_agents": 3,
+    "isolated_passed": 53,
+    "local_passed": 53,
+    "review_angles": 6,
+    "reviews": [
+      {
+        "file": "data/staging/strategies-batch95/20261010-preparation-review-v3/security/review.json",
+        "findings": [],
+        "review_scope": "preparation only",
+        "role": "security",
+        "sha256": "4b4ebb7e903a15da53234d53efb7446577c9dedde359283f24ecb036fa6eec16"
+      },
+      {
+        "file": "data/staging/strategies-batch95/20261010-preparation-review-v3/architecture/review.json",
+        "findings": [],
+        "review_scope": "preparation only",
+        "role": "architecture",
+        "sha256": "d02280a0bbcfc82438454627dd5402707ac7d2a7f12003be7f05d74d0afacf7a"
+      },
+      {
+        "file": "data/staging/strategies-batch95/20261010-preparation-review-v3/assumptions/review.json",
+        "findings": [],
+        "review_scope": "preparation only",
+        "role": "assumptions",
+        "sha256": "5f3db1b58870f7a862a3c4110a122daabfed4a11e1d9236bbe62620fab7879db"
+      },
+      {
+        "file": "data/staging/strategies-batch95/20261010-preparation-review-v3/composition/review.json",
+        "findings": [],
+        "review_scope": "preparation only",
+        "role": "composition",
+        "sha256": "76c25860609276ad106f4a4982ac9e3eb95f004ea2694e98e4d7d192960f09e6"
+      },
+      {
+        "file": "data/staging/strategies-batch95/20261010-preparation-review-v3/cascade/review.json",
+        "findings": [],
+        "review_scope": "preparation only",
+        "role": "cascade",
+        "sha256": "8b831a9841b055922a18e788b9129f49bd0ff9e6ed0d9dad6d89f1d9b49e59ed"
+      },
+      {
+        "file": "data/staging/strategies-batch95/20261010-preparation-review-v3/abuse/review.json",
+        "findings": [],
+        "review_scope": "preparation only",
+        "role": "abuse",
+        "sha256": "f569ccd66af404e43bfa3d495d207156abe05b10bcef55e08d4c3b8311ce9964"
+      }
+    ],
+    "scope": "preparation only; not formal source/trading acceptance",
+    "status": "completed",
+    "test_receipt": "data/staging/strategies-batch95/20261010-preparation-v3-tests/checks.json",
+    "test_receipt_sha256": "fa39af518da74a437e9cf8040c03289d21cbd97ee58effd5149c2cb04649289b"
+  },
+  "case_id": "etf-magic3-v2-batch95-preparation-review",
+  "nature": "six_angles_three_independent_agents_preparation_only",
+  "purpose": "安全/架构/假设/组合/级联/滥用精确最终SHA终审，无未解决发现；不替代未来正式发布审查",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch95/20261010-magic3-v2-acceptance-preparation-v3/preparation-review-completion.json",
+    "sha256": "567d189f49469a3c97af423e304ea04d8ad1eaed5ceefcbfb0ba322ebf0269c5"
+  }
+}

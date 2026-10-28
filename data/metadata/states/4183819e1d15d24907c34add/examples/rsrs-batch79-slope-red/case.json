@@ -1,0 +1,32 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "scripts.verify_offline_tests",
+      "-q",
+      "tests/unit/test_batch79_research.py",
+      "-k",
+      "slope_only or constant_bias"
+    ],
+    "copies": {
+      "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/development-failure-slope-only/red.log": "b11014128ad035e999d2ade5703a885284cccead7a9f0d30789901ebd0e45d97",
+      "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/development-failure-slope-only/review_strategy_batch79.py": "608a70d971563028893e51835f7aae018eafa731b9ea998230abec2bac252624",
+      "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/development-failure-slope-only/test_batch79_research.py": "59e525fdd9a97814a8a330a5162115be3b55de7af6a848eb3a37110cf93950f6"
+    },
+    "log": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/development-failure-slope-only/red.log",
+    "log_sha256": "b11014128ad035e999d2ade5703a885284cccead7a9f0d30789901ebd0e45d97",
+    "not_a_backtest": true,
+    "returncode": 1,
+    "root_cause": "Slope-only reference improperly reused OLS helper that computes R2 and fails on constant dependent values",
+    "status": "development_failure"
+  },
+  "case_id": "rsrs-batch79-slope-red",
+  "nature": "immutable_slope_only_regression",
+  "purpose": "4失败/24未选；常量BIAS的原斜率有定义，但复用OLS的R2核算除零；新独立fsum斜率覆盖三处纯斜率，不改原算术",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/development-failure-slope-only/failure.json",
+    "sha256": "41ab5d1d73f115fb223343940f0f60d7ff5cd664a1aeddce4cf49ce1d6a3275a"
+  }
+}

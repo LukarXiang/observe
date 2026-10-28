@@ -1,0 +1,54 @@
+{
+  "status": "ok",
+  "scope_alignment": "on_target",
+  "review_depth": "deep",
+  "scope": "Two same-AST all-weather source reviews; synthetic risk and callbacks only. Historical returns and fund trading gated.",
+  "hard_stops": [],
+  "specialist_reviews": {
+    "security": {"agent": "batch89_final_security", "findings": [], "checked_implementation_SHA_verified": true},
+    "architecture": {"agent": "batch89_final_architecture", "findings": [], "checked_implementation_SHA_verified": true}
+  },
+  "adversarial_review": {
+    "findings": [],
+    "examined": [
+      "Parent stage evidence and source SHA immutable; SHA and safe-function validation precede execution",
+      "Full original function uses explicit synthetic returns/API without price or pandas semantics",
+      "Literal float tail selection, original denominator, zero division, negative/infinite risk and non-unit rounded totals retained",
+      "Risk/callback/catalog replay forbids socket and HTTP; not a full independent platform engine",
+      "Check logs, copied code and core SHA bound before acceptance; only two catalog reviews change",
+      "Pending repair, actual 513100 branch and missing events/execution gate trades; 695-source goal retained",
+      "Old controls/partition metadata protected; no new publication or trading run"
+    ]
+  },
+  "accepted_directory": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance",
+  "accepted_checkpoint": "20261009-070511-857e",
+  "receipt_file": "docs/handoff/2026-10-09-batch89-verification.json",
+  "receipt_sha256": "36fd0da95824481d17248034cb6e69f74cfcc5a6ff647b4893749534813c0ba9",
+  "checked_state_file": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/checked-state.json",
+  "checked_state_sha256": "683480b3ea0ea9f8994a324dc3e9e3b1814c8c651a041b1124950722ced284b2",
+  "final_binding_file": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/final-binding-verification.json",
+  "final_binding_sha256": "90ce8232deb60c0194904c4a25f324d25da5f87011a3142b7580f6b8faeb74bb",
+  "catalog_sha256": "a2bcee52fe06371e5fac5fc89bc849678f920ccda90851edc27a514f8f2ba3a0",
+  "risk_diagnostics_file": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/risk-diagnostics.json",
+  "risk_diagnostics_sha256": "9c254ea4516961399877536b6132cd83d930e3bb70c19056afa6af6581e2b11b",
+  "implementation_sha256": {
+    "scripts/verify_strategy_batch89.py": "5fe6f8efdd8e572f5effc6bbd24d74042abbaad3d9c5b4d1e136c85ac9e3aea2",
+    "tests/unit/test_batch89_verification.py": "3f5691fdd32635c98bc1ec7bc40ebdf7a2bf7786e9cd925f0bb992305a5e2217",
+    "src/observe/strategy_catalog.py": "157dc2e871b8679d4201b899a413bf522b46e916a8f9e8bb51706858ece9fc39"
+  },
+  "implementation_files_checked": 9,
+  "evidence_files_checked": 27,
+  "core_files_required": 9,
+  "tests": {"new_verification_tests": 16, "related_total": 147, "warnings": 1, "full_suite_run": false},
+  "risk_cases": 29,
+  "callback_cases": 32,
+  "manually_reviewed_accepted": 260,
+  "source_count": 695,
+  "remaining_sources": 435,
+  "new_real_ES_weights_or_original_signals": 0,
+  "new_trading_backtests": 0,
+  "not_a_backtest": true,
+  "platform_equivalence_proven": false,
+  "original_strategy_complete": false,
+  "library_goal_complete": false
+}

@@ -1,0 +1,93 @@
+{
+  "case": {
+    "checks": {
+      "fits": [
+        {
+          "decision_date": "2008-06-03",
+          "execution_day": "2008-06-04",
+          "feature_date": "2008-05-27",
+          "prediction": 0,
+          "train_label_end": "2008-06-02",
+          "train_samples": 224
+        },
+        {
+          "decision_date": "2008-06-11",
+          "execution_day": "2008-06-12",
+          "feature_date": "2008-06-03",
+          "prediction": 0,
+          "train_label_end": "2008-06-10",
+          "train_samples": 224
+        },
+        {
+          "decision_date": "2008-06-17",
+          "execution_day": "2008-06-18",
+          "feature_date": "2008-06-10",
+          "prediction": 0,
+          "train_label_end": "2008-06-16",
+          "train_samples": 224
+        }
+      ],
+      "fits_checked": 3,
+      "method": "Independent math.fsum feature arithmetic/date windows/labels, fresh sklearn SVC per archived sample set; original feature lag kept",
+      "orders": [],
+      "prediction_counts": {
+        "0": 3,
+        "1": 0
+      },
+      "samples_checked": 675,
+      "sessions_checked": 16
+    },
+    "config_sha256": "d605832c35490d9765b422adf1035e8a0eb6eb1acb3cab6646cee037c9acbf6c",
+    "decision_days": 16,
+    "end": "2008-06-19",
+    "implementation_sha256": {
+      "scripts/preflight_svm98_short_window.py": "3623f1243cb8c7dd48038758cf977ca950e1f1c4c22308033e431eb8b829437b",
+      "scripts/run_strategy_batch6.py": "8f87f807e13aacb58bac3f536069420307fd8fef38bc2d5cbe16f1d46074f41f",
+      "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+      "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+      "src/observe/strategies.py": "eca89fc62bafa71840dc676add9aeac71ea2c18809abe02d7702fba9f1a5b7ae",
+      "src/observe/strategy_svm.py": "3cb24f32d847f06bc939026741cf894f1d49be23e4fa0ac5cbe27141a8fc5878"
+    },
+    "input_sha_evidence": "data/metadata/states/11e52610c1c5fb1cf3dbae62/assets/index.json",
+    "input_sha_evidence_sha256": "9814f72be87a1613ebed657770c22b0148c7c6aefbec95c4d138cfaf48f456cf",
+    "inventory_sha256": "2916f020bf7525a772c37b10bb0998485f524edc89f0f24e3ddd0d2cb2c630bd",
+    "limits": [
+      "No actual open/liquidity/Book/fee/NAV acceptance or fresh-worker reproduction yet",
+      "Independent fsum arithmetic and fresh SVC on archived samples; same sklearn, not platform equivalence",
+      "Original five-session prediction feature lag and frozen back-adjusted input basis retained",
+      "Strict training-price windows checked; target decisions are not confirmed fills; no stitched NAV",
+      "This signal preflight uses an explicitly empty child list to omit transaction checks"
+    ],
+    "network_forbidden": true,
+    "new_trade_backtests": 0,
+    "orders_executed": 0,
+    "outputs_sha256": {
+      "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/config.json": "57afa7dc4c001345cfa51bafc28bfe957a606ee03fbf5097f26cfcaeca6e3f59",
+      "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/data_manifest.json": "b7703ce46c13566e9776001b8b8cbb7d7a02af978a7c29683c0399014cbc2a6f",
+      "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/factors.parquet": "c6b210ddf997135d1b1502f9ee554872cbaf0d9d89c7226c5ec85f8575f5ea09",
+      "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/scores.parquet": "3a898dcfc1729e21938e40fff64c2883b683b1124ede7f3f2080c72540685d07",
+      "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/signal_coverage.parquet": "1433d35fb42969d21141b22ac51305d190d07ccb44cf0cc9ea05107dff704291",
+      "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/subruns.json": "9f1d26b68a88457ee77a265c5ed839ea082d022643f042ba2ac766e86ef63d79",
+      "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/svm_models.json": "7da880d7badc9bf66d53c8838f55bd5731d5e0c2b597408c4ea308d679864cf7",
+      "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/svm_samples.parquet": "083caaee9c49fc9adf073d03700534ad5648c3afaf4e79873bc682d6c9f25664",
+      "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/targets.parquet": "376bf76c2bd1bc9f1d2f7bb2d6486cbda6b3c67c3a6eaa1ca1a89c293b83c87e",
+      "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/universe.parquet": "b11ee1c1aa825740fc693b5a452654c969151f8d732eae66c3b112d0feb1b0c7"
+    },
+    "parameters_changed": false,
+    "potential_positive_target_decisions": [],
+    "scope": "approved_svm98_signal_and_model_preflight_only",
+    "snapshot": "20261006-145049-e06c",
+    "snapshot_sha256": "9449dc18911fe5f27fe65f55f5849602bec0cba998335b74a6d2b1377e19af60",
+    "source_sha256": "0aba6027a1f433627ff7903c0b5a8df3094bde7013ca1231cc3b498d2efed572",
+    "start": "2008-05-28",
+    "status": "ok"
+  },
+  "case_id": "svm98-short-preflight",
+  "nature": "approved_variant_signal_model_preflight_not_trade",
+  "purpose": "同仁堂早期唯一16日岛沿原参数产生0正预测，实际开盘/Book/费用/收益未做",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/preflight.json",
+    "sha256": "776fdd6d4982f327d157fa2c913d11865545a6a145dcaa01f4c93fcb9c1169dd"
+  }
+}

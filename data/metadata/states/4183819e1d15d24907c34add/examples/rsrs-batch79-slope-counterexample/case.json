@@ -1,0 +1,18 @@
+{
+  "case": {
+    "bias_range": 0.0,
+    "not_a_backtest": true,
+    "old_independent_exception": "ZeroDivisionError",
+    "original_score": 2.899805950437848e-14,
+    "positive_nonconstant_prices": true,
+    "synthetic": true
+  },
+  "case_id": "rsrs-batch79-slope-counterexample",
+  "nature": "synthetic_boundary_counterexample_not_history_or_trades",
+  "purpose": "2**arange110为正且非恒定价格，但BIAS20恒定；原score约2.90e-14，旧独立OLS报ZeroDivisionError；只是研究工具边界证据",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/development-failure-slope-only/root-cause-evidence.json",
+    "sha256": "bab3b8eaf1c4ff12619c5f01512fdcf724457fff258e255b5ff6dd6339bd4663"
+  }
+}

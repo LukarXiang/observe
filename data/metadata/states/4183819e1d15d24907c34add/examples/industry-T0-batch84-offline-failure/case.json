@@ -1,0 +1,34 @@
+{
+  "case": {
+    "after_explicit_unit_normalization_exact_rows": 6355,
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "scripts.review_strategy_batch84",
+      "offline"
+    ],
+    "driver_sha256": "463927874fc3f3cfab3348809f7005a07841538fd01e7f5a6c636eea11f715df",
+    "dtype_differences": {
+      "date": [
+        "datetime64[s]",
+        "datetime64[ms]"
+      ],
+      "window_end": [
+        "datetime64[s]",
+        "datetime64[ms]"
+      ]
+    },
+    "dtype_error": "Attributes of DataFrame.iloc[:, 0] (column name=\"date\") are different\n\nAttribute \"dtype\" are different\n[left]:  datetime64[s]\n[right]: datetime64[ms]",
+    "log_sha256": "4686949d1c4c1446192ddbe855585494afb05481350109fab926ed553701e7eb",
+    "not_a_backtest": true,
+    "returncode": 1
+  },
+  "case_id": "industry-T0-batch84-offline-failure",
+  "nature": "immutable_offline_phase_order_and_temporal_precision_failure",
+  "purpose": "目录校验先于生成及日期s/ms提升导致新驱动失败；6355值规范后精确一致，顺序红测试/旧驱动logSHA保留，原载荷未重写",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch84/20261009-industry-ETF-T0/development-offline-attempt01/result.json",
+    "sha256": "8e11349220f22180c595fb9c505aed5e2db26bf180a12ef2a795a939800e0b07"
+  }
+}

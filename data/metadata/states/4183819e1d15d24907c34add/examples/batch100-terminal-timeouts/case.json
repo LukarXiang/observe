@@ -1,0 +1,68 @@
+{
+  "case": {
+    "new_trading_backtests": 0,
+    "observed_at_utc": "2026-10-10 20:10:57 UTC",
+    "original_study_implementation_sha256": "1c9b7a58f53d4533afab765cb1bc8cbca6cb5f321abea56db89a2f8aeb725b20",
+    "recovery": "New directory,100 windows per chunk,all4852 original windows/fresh seeds/1059 columns; no economic correction",
+    "sessions": {
+      "replay": {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-B",
+          "-m",
+          "scripts.research_strategy_batch100",
+          "worker",
+          "--mode",
+          "replay"
+        ],
+        "exception": "subprocess.TimeoutExpired",
+        "exit_code": 1,
+        "original_output_exists": false,
+        "stdout_stderr_capture_recovered": false,
+        "terminal": true,
+        "terminal_command_receipt_exists": false,
+        "timeout_seconds": 1800,
+        "tool_session": 75356
+      },
+      "study": {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-B",
+          "-m",
+          "scripts.research_strategy_batch100",
+          "worker",
+          "--mode",
+          "study"
+        ],
+        "exception": "subprocess.TimeoutExpired",
+        "exit_code": 1,
+        "original_output_exists": false,
+        "stdout_stderr_capture_recovered": false,
+        "terminal": true,
+        "terminal_command_receipt_exists": false,
+        "timeout_seconds": 1800,
+        "tool_session": 37738
+      }
+    },
+    "single_real_window_profile": {
+      "not_unprofiled_throughput_estimate": true,
+      "rolling_calls": 5,
+      "rolling_cumulative_seconds": 0.35,
+      "seconds_under_cprofile": 0.5941468370147049,
+      "shape": [
+        400,
+        1059
+      ]
+    },
+    "status": "original_drivers_terminal_timeout",
+    "tight_reproduction": "Mock subprocess.TimeoutExpired at original run(): exception uncaught, command receipt absent; then actual timeout-stream test exercises new real subprocess."
+  },
+  "case_id": "batch100-terminal-timeouts",
+  "nature": "observed_terminal_original_driver_failures",
+  "purpose": "两1800秒TimeoutExpired实际exit1；旧空目录未假恢复stdout",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch100/20261011-driver-timeout-evidence/failures.json",
+    "sha256": "9ca6c7b119eabfe0c093bba5d4a63563b711ad3055a4c80184be4f080e6f3b56"
+  }
+}

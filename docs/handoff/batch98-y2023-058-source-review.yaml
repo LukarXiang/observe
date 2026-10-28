@@ -1,0 +1,38 @@
+schema: 1
+source: 2023年度精选策略/58.北向RSRS与布林带择时.txt
+source_sha256: 1ca06cbc4d95a15dd646bb1aa73b50fbf5503252071f9ed0a1461d08aa3c1e69
+source_lines: 236
+review_scope: 全文9定义；受控原回调诊断与日线算式参考
+formal_acceptance: see_batch98_receipt
+formal_acceptance_receipt: docs/handoff/2026-10-11-batch98-final-review.json
+original_strategy_complete: false
+rules:
+  universe: 原当时沪深300名单
+  fund: 420002.OF
+  schedule: 07:00额度布林，09:35调仓
+  quotas: STK_ML_QUOTA两link310001/310002每日quota_daily减quota_daily_balance后按day求和
+  BBANDS: 末90行均值±2倍样本标准差；无90行完整性检查；上轨含等号进入，下轨含等号清仓
+  ranking: 前一交易日STK_HK_HOLD_INFO按share_ratio降序取[3:20]，最多17行；不聚合重复代码
+  RSRS_seed: 600自然日内沪深300high/low18行OLS，跳过首完整窗；初始不平方
+  RSRS_stock: 后续每股18行high²/low²OLS；17条收益；全局共享ans/ans_rightdev
+  RSRS_score: 末600beta总体标准化，z乘r2的2倍收益波动分位数次方；首次调用不拟合、r2=0
+  quantile: sqrt(15行收益样本标准差)，再15行末位百分位排序；至少29条收益才能完整
+  filter: 仅score小于-0.4移除；NaN比较为False；buy=-0.1未使用
+  rebalance: 仅当目标set与持仓set不同时执行；先卖，买前赎回fund持仓，按total_value/need_buy数量增量买
+  cost: 买卖佣金0.0003，卖税0.001，最低5；原股票费用不证明场外基金申赎规则
+defects:
+  - 正常18价/17收益的quantile为NaN；r2非1时score为NaN导致过滤失效，但r2精确等于1时1**NaN仍为1、得分可有限，不能声称所有后续得分必NaN
+  - 初始化和所有股票共享beta池；首次得分正常为0，与证券顺序相关；初始/后续变换不同
+  - 目标set相同即跳过调仓，RSRS退出不能生效
+  - 原代码未主动purchase基金，但买入前直接访问基金持仓，空仓触发KeyError；部分卖意图可先发出
+  - 新买金额按总资产而非实际现金分配，且set遍历顺序不固定
+  - datetime和timedelta未显式导入；平台通配符是否提供未证；较长quantile当前Series[-1]有标签兼容问题
+  - get_up_stock的一分钟过滤调用全部被注释，不能擅自激活
+data_gaps:
+  - 两link历史额度及余额、币种单位、额度变化日和JoinQuant表映射未证
+  - 逐日历史CSI300名单、每股share_ratio与可用版本缺失
+  - 场外基金420002身份/持仓/申赎净值时间、到账和费用未放行；股票9:35动态价及平台成交也未证
+  - 旧北向005合并候选仅2763行且存在字段缺失，不以成交净买额替代额度使用额
+allowed_evidence: 原OLS受控定义及日线标量对照、NaN/共享状态/排名/基金KeyError夹具；不是原组合信号或交易
+economic_variant_approved: false
+next: 先补原输入；共享池、窗口、资金分配或基金赎回如需修改须另建明确变体并确认，复用唯一Book

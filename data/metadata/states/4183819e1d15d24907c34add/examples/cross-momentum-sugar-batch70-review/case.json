@@ -1,0 +1,81 @@
+{
+  "case": {
+    "adversarial_pass": {
+      "findings": [],
+      "verified": [
+        "Missing candidates/overlapping ranks retain original failure and buy priority",
+        "Repeated requests rejected and first response preserved",
+        "Bad OHLC windows blocked; cutoff and duplicate dates tested",
+        "Archive directory reuse rejected; failed development bytes retained",
+        "Incomplete pool dates skipped; no position, costs or NAV invented"
+      ]
+    },
+    "batch": 70,
+    "checked_state_sha256": "1a99ee5923ef1a9955534a7a2525e606cd0c869dace1300654035b396c86a502",
+    "failure_archive": {
+      "directory": "data/staging/strategies-batch70/20261008-driver-regression-failure",
+      "files": {
+        "red.log": "214ffe842af4637a37d756eaa3f2d6530c39fa5d27a4ccd05801edfd45d57879",
+        "review_strategy_batch70.py": "776f0cc4f91f8d5fc1b0d0099b2af695b79b74c6c7525654155417adf35ed886",
+        "test_batch70_research.py": "bbc202592639de43620b9ea3f4f71e6a39816ba905f809ba87c5c89d40ac668f"
+      },
+      "red_failed": 4,
+      "red_passed": 7,
+      "referenced_files_sha_rechecked": true
+    },
+    "formal_strategy_acceptance": false,
+    "git_commit_and_push": "user_managed",
+    "limitations": [
+      "Supplier continuous arithmetic and SR2001 response do not prove original 8888 index/main history",
+      "Original futures execution, historical mapping, margin, fees and settlement still gated",
+      "ZC sample ends 2022-12-30; complete26 arithmetic not extended by removing a product",
+      "Component overlaps are not independent trade samples",
+      "Final documentation results independently read back from receipt; specialists reviewed implementation before final prose update"
+    ],
+    "new_trading_backtests": 0,
+    "original_strategy_complete": false,
+    "receipt": "docs/handoff/2026-10-08-batch70-verification.json",
+    "receipt_sha256": "ab87e7348eadb63a117cde986cdcf4fb340bd8cc0b0ab3b928ef7cafb1fe2293",
+    "research_directory": "data/staging/strategies-batch70/20261008-cross-momentum-sugar-turtle",
+    "review_depth": "deep",
+    "reviewed_implementation_sha256": {
+      "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+      "src/observe/strategy_catalog.py": "4d45ad7edc4c8df992435ba516a5eedcf2bc57e731896d4b4576f81090fe3762",
+      "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1"
+    },
+    "scope": "on_target",
+    "specialists": {
+      "architecture": {
+        "agent": "/root/batch70_architecture",
+        "findings": [],
+        "scope": "Original 26-pool ranks, 14 intervals, channel19/simpleATR20, fractional quantity, rollover reset and None order states; no second ledger"
+      },
+      "security": {
+        "agent": "/root/batch70_security",
+        "findings": [],
+        "scope": "Frozen source execution, fixed single-request boundary, no credential flow, exclusive archive paths and offline wire replay"
+      }
+    },
+    "status": "ok",
+    "verification": {
+      "checked_evidence_files": 154,
+      "checked_implementation_files": 21,
+      "diff_check": "passed",
+      "existing_warnings": 1,
+      "offline_differences": 0,
+      "offline_result": "match",
+      "related_tests_passed": 145,
+      "ruff": "passed",
+      "specialist_tests_passed": 13
+    },
+    "whole_library_complete": false
+  },
+  "case_id": "cross-momentum-sugar-batch70-review",
+  "nature": "frozen_final_specialist_scope_and_failure_archive_review",
+  "purpose": "冻结驱动/测试/目录及验收凭据，安全架构无发现；开发红4失败7通过及原档SHA复核保留，不升级组件为期货交易",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-08-batch70-final-review.json",
+    "sha256": "cb27d23f62fabb0839a22779d72c3af13a535f07a4edbca47c47e5a794bcc529"
+  }
+}

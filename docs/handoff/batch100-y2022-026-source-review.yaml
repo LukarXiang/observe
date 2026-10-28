@@ -1,0 +1,31 @@
+schema: 1
+source: 2022年度精选策略/26.Xgboost 50ETF 2.0 分钟级回测.txt
+source_sha256: 4947832e5d01a5a15b4408de799c0c4e908d5e91eda996fbc33bb0f3c22c3a8a
+source_lines: 179
+top_level_definitions: 12
+review_scope: 全文规则、全部原定义、特征前缀和真实兼容异常；不加载不可信pickle，不执行训练替代
+formal_acceptance: false
+original_strategy_complete: false
+economic_variant_approved: false
+rules:
+  underlying: 510050.XSHG
+  schedule: 每日9时50分；reference_security000300.XSHG，标题分钟级不代表分钟特征
+  histories: 自定义get_price遮蔽平台同名函数；五次attribute_history取400条1d的close/high/low/open/volume，返回open/close/high/volume/low
+  seed: 每次独立400条窗内重算TA-Lib，AD和OBV等累计起点随窗移动；平台复权/停牌默认口径未证
+  base: 5价量列及AD/CCI/MACD3列/ATR14/ADOSC/ADX/BBANDS3列/RSI/MA5/10/20/OBV/SAR/log(volume)/上下影线
+  expansions: 全部基础列的5/10/20/30/60日mean/max/min/std/var/median；1/5/10/20/30/60阶差分；1/2/3/5阶滞后；1阶差分再差分
+  extra: 5严格均线标志、aphla001原拼写close与volume十日相关、open除close、负volume除MA20、high除close与volume十日相关、十日价格末值排名、近十日恰等10的次数、high及low十/二十日极值等号标志
+  model_columns: read_file(col_50etf_20191109.dat)；按列清单顺序选择tail1构造DMatrix
+  model: read_file(model_50etf_20191109.dat)；逐模型predict，再axis0取算术均值
+  orders: 预测严格大于0.002才按全部cash买入，严格小于-0.002清仓，中间和相等不动作；不保证仓位重配
+  costs: stock类close_tax0.001、open/close_commission0.00025、最低5；ETF费用语义仍待原平台证据，未用现有股票费自动替代
+defects:
+  - ts_rank返回pd.Series.rank().tail(1)；当前pandas3 rolling.apply要求标量，原create_fea到alpha005即TypeError
+  - 模型列清单、模型集合两外置dat文件缺失；原文无标签、训练区间/超参、模型版本或训练代码，文件名不证明训练截止日
+  - 空模型均值为标量NaN，yvalid[0]越界；NaN预测不下单，未代填
+  - 零volume导致log非有限，缺失特征无dropna/fillna；如何按原列选择进入原模型须取得文件后证明
+data_gaps:
+  - 原两dat、各模型版本/来源/标签和训练时点；本机xgboost未安装，缺模型时不安装或重训
+  - 510050原平台历史复权OHLCV、成交量单位、9时50分可用性/成交/状态/权益事件/基金费用
+allowed_evidence: 旧未发布50ETF候选的400日原特征前缀，严格止于alpha005之前；原完整流水线异常和模型/列序的合成回调；不计预测、净值或三成本交易
+next: 取得原模型文件和元信息后安全审查/锁定版本；修ts_rank为标量需要单独兼容变体记录，不能用新训练代替原预测

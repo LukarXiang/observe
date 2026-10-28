@@ -1,0 +1,78 @@
+{
+  "case": {
+    "coint_reproduced": false,
+    "limits": [
+      "C0/CS0 are supplier continuous candidates; original8888 identity/methodology unproved",
+      "Two ranges overlap; no independent holdout and no forward-filled or interpolated dates",
+      "NumPy interceptOLS cross-checked with centered fsum; not installed statsmodels/coint execution",
+      "Pinned original population zscore only; full-period beta is retrospective, never converted to orders",
+      "No literal notebook trading rules, costs, NAV, titletenfold claim or futures strategy backtest"
+    ],
+    "not_a_backtest": true,
+    "original8888_reproduced": false,
+    "studies": [
+      {
+        "coint_executed": false,
+        "date_max": "2019-06-10",
+        "date_min": "2015-01-05",
+        "independent_z_max_abs_error": 0.0,
+        "intercept_independent": 236.705747822464,
+        "intercept_numpy": 236.70574782246356,
+        "not_a_backtest": true,
+        "original_statsmodels_OLS_executed": false,
+        "range": "original_period_candidate",
+        "retrospective_full_period_fit": true,
+        "rows": 1076,
+        "slope_independent": 1.0762527326839322,
+        "slope_numpy": 1.0762527326839322,
+        "spread_mean": -236.70574782246413,
+        "spread_population_std": 124.41033992084468,
+        "z_above1": 110,
+        "z_below_minus1": 100
+      },
+      {
+        "coint_executed": false,
+        "date_max": "2026-09-29",
+        "date_min": "2014-12-22",
+        "independent_z_max_abs_error": 8.881784197001252e-16,
+        "intercept_independent": 391.572290361406,
+        "intercept_numpy": 391.57229036140626,
+        "not_a_backtest": true,
+        "original_statsmodels_OLS_executed": false,
+        "range": "extended_candidate",
+        "retrospective_full_period_fit": true,
+        "rows": 2859,
+        "slope_independent": 0.9862247303598056,
+        "slope_numpy": 0.9862247303598052,
+        "spread_mean": -391.57229036140666,
+        "spread_population_std": 106.94723897758735,
+        "z_above1": 332,
+        "z_below_minus1": 341
+      }
+    ],
+    "supplier_profiles": [
+      {
+        "date_max": "2026-10-08",
+        "date_min": "2005-01-04",
+        "parsed_rows": 5288,
+        "rows_after_cutoff_excluded": 2,
+        "symbol": "C0"
+      },
+      {
+        "date_max": "2026-10-08",
+        "date_min": "2014-12-22",
+        "parsed_rows": 2862,
+        "rows_after_cutoff_excluded": 2,
+        "symbol": "CS0"
+      }
+    ]
+  },
+  "case_id": "corn-batch91-candidate-statistics",
+  "nature": "retrospective_continuous_candidate_OLS_and_original_population_zscore",
+  "purpose": "2015至2019及2014至2026含常数NumPy/独立fsum校验，斜率1.076253/0.986225；非原8888/statsmodels/协整或交易，范围重叠且事后拟合",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/component-research.json",
+    "sha256": "73b9b083e888a1d4fe008e75bdbd043981096007770436670f85e3812815f00b"
+  }
+}

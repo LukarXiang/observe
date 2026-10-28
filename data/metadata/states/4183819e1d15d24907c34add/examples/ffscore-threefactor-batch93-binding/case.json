@@ -1,0 +1,1385 @@
+{
+  "case": {
+    "dictionary_bytes_sha256": "c1789e0db90f69e53d9e08976b3321517615ab79c786dba193029fdedf9a4635",
+    "financial_import": "data/raw/external_financials/c863b10a0ed2c27df694.json",
+    "financial_import_sha256": "95f10ec290593822f7fa23332836891d0f00299b0ad91fc5a7a647fdc9361fdd",
+    "implementation_sha256": {
+      "scripts/review_strategy_batch93.py": "9567fe49b5f9013da756e1594a1d3c68b71d057ce8c1474886c05a38ccf51611",
+      "tests/unit/test_batch93_stage.py": "2ae6d28a202445888780ce6786af2f37a2b6ebadba39d3dfd0bd6ba5b860b220"
+    },
+    "not_a_backtest": true,
+    "parent": {
+      "checked_evidence_files": 40,
+      "checked_implementation_files": 5,
+      "file": "docs/handoff/2026-10-10-batch92-final-review.json",
+      "sha256": "228e098d52f9bd1c15b21c04627be4043dd51e70444defe15155accc37cdd420"
+    },
+    "partitions": [
+      {
+        "bytes_sha256": "b5781b91b58d1e1495d128ae8e45ca671b1936def332888df5299bc45c66633e",
+        "file": "data/std/financial_annual/1990/c863b10a0ed2c27df694__8b1ce4b5.parquet",
+        "mtime_ns": 1791178041786269700,
+        "rows": 11,
+        "size": 750240,
+        "snapshot_logical_sha": "8b1ce4b53ca9796b6c61936ac3d0ed21e524ad87cfeb90d35334ec05f5cd67bf",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "7ca246d792a074d71ff46f6cbb9019c0065cb6b21debecc4e89a3bcf38756e72",
+        "file": "data/std/financial_annual/1991/c863b10a0ed2c27df694__4897d030.parquet",
+        "mtime_ns": 1791178044275888700,
+        "rows": 17,
+        "size": 776759,
+        "snapshot_logical_sha": "4897d030e37979c857e8564b914717f2ca53ddf99cc85f2d981da480014acad1",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "059a05f10a695364663ad778c9964b70f4e95b70dfd5b0bcdcd17ea38ebe3138",
+        "file": "data/std/financial_annual/1992/c863b10a0ed2c27df694__7fbfcc04.parquet",
+        "mtime_ns": 1791178046562847400,
+        "rows": 78,
+        "size": 891218,
+        "snapshot_logical_sha": "7fbfcc047dd7dd9bb00e0c1c6216bd56cfb3cb2d869b8645effc0010e22c90d2",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "01796ea3de23d6cabd4bd8bb94f56ad3e6b18ace21851286d3d4d716f70c4674",
+        "file": "data/std/financial_annual/1993/c863b10a0ed2c27df694__466e89ad.parquet",
+        "mtime_ns": 1791178049227778900,
+        "rows": 230,
+        "size": 1220771,
+        "snapshot_logical_sha": "466e89ad6d9967752208e5d21fb9f50403bb561855059a15cfdb9a6c1df9cca1",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "050af4598c44804b35948d1b9e9ac789d77e1c91100298f90d03fd34ef062c90",
+        "file": "data/std/financial_annual/1994/c863b10a0ed2c27df694__fdcac6cd.parquet",
+        "mtime_ns": 1791178052907102400,
+        "rows": 361,
+        "size": 1604784,
+        "snapshot_logical_sha": "fdcac6cd2906a7a6229322ca9087679340762c3b7d4efe38172829e113ea7ad7",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "fa9cff0a05eec782dca12503031bf9199e9f8962da597e03b31d8ba2e4ecb42a",
+        "file": "data/std/financial_annual/1995/c863b10a0ed2c27df694__7375bbf6.parquet",
+        "mtime_ns": 1791178056302683800,
+        "rows": 389,
+        "size": 1927229,
+        "snapshot_logical_sha": "7375bbf686595e970e905145f898bae11cf8087a50e74ab2dc21d11cc4063b60",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "96cebc1db0545fe217bdef607722bbdf1d6e331b5a90ee26bb196faf0f92e222",
+        "file": "data/std/financial_annual/1996/c863b10a0ed2c27df694__5a8c3ece.parquet",
+        "mtime_ns": 1791178059903145900,
+        "rows": 606,
+        "size": 2543955,
+        "snapshot_logical_sha": "5a8c3ecea4f464d2afc257d188260d4f7188faad83ca31167f2c34bd2009177d",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "3726ffcab6b92d114eacabe0fc4ab7a76507c905c8f275c4b11c9fcf128dbb9a",
+        "file": "data/std/financial_annual/1997/c863b10a0ed2c27df694__d5f4352e.parquet",
+        "mtime_ns": 1791178063883511600,
+        "rows": 824,
+        "size": 3273333,
+        "snapshot_logical_sha": "d5f4352e7a2ceb99746a37be47d80aa70fe6e99881971b398f33d38fe4eb0005",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "b0a4c69020015aaa93bdf4b18df5e8a20d1fa242b602bb77324b074241b4c139",
+        "file": "data/std/financial_annual/1998/c863b10a0ed2c27df694__66f79f50.parquet",
+        "mtime_ns": 1791178068205798400,
+        "rows": 946,
+        "size": 4814278,
+        "snapshot_logical_sha": "66f79f50951e61d3ae8ed85e6774b3128f0827b825d65884c7320707efc405e4",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "27dbb6265582c98bc8735f7426a359bd8d279ba5cf6f9e91bce809970381439d",
+        "file": "data/std/financial_annual/1999/c863b10a0ed2c27df694__12fe1926.parquet",
+        "mtime_ns": 1791178072094943800,
+        "rows": 1118,
+        "size": 5461808,
+        "snapshot_logical_sha": "12fe1926a02b462ba7528ee5b79ed2e870c88a08d86b4a3ff4476c2df4bf40da",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "65ccc7f6a56cb3eaf2d96e39d60e35d71a1b0e501ff257c0442bd968db0893f9",
+        "file": "data/std/financial_annual/2000/c863b10a0ed2c27df694__fc28c720.parquet",
+        "mtime_ns": 1791178076324742700,
+        "rows": 1324,
+        "size": 7391931,
+        "snapshot_logical_sha": "fc28c7206c8cd92d19b58345509d6d2f289c3c6b40e5644c1740c4eae7ceff49",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "bdc7b3739e17019b2cf958937a7bce748f7d97c2d34c20ab3245a3c75cb0446b",
+        "file": "data/std/financial_annual/2001/c863b10a0ed2c27df694__696a75e7.parquet",
+        "mtime_ns": 1791178080333806800,
+        "rows": 1492,
+        "size": 8101055,
+        "snapshot_logical_sha": "696a75e793d99e4f4871cb6ed0f25d9f8797df1ff091d842934e2ba5c1719386",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "533fd1d826dcfa6b07c6bfe02601337eaa8ab776be2e25b9b75d0c75ef24f874",
+        "file": "data/std/financial_annual/2002/c863b10a0ed2c27df694__7b94fbab.parquet",
+        "mtime_ns": 1791178084252591000,
+        "rows": 1495,
+        "size": 8477067,
+        "snapshot_logical_sha": "7b94fbab7bf6d406ad2c5525a6d78cf4b9277a77926734c1a40faca75f36470a",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "7b657a7028b344f7a14ec9034f7c621a6228bce8936dea85ae506a331ffd5244",
+        "file": "data/std/financial_annual/2003/c863b10a0ed2c27df694__52fdbd0f.parquet",
+        "mtime_ns": 1791178088347271300,
+        "rows": 1584,
+        "size": 8865116,
+        "snapshot_logical_sha": "52fdbd0fbbb6c2b5b3453ffe9db7635d0375b182acea694a2b0af20ee57fdf67",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "dbb23b29404af92f6fc5b9d998fc9ea1afef347af564ea6ca349515a0a35b0b7",
+        "file": "data/std/financial_annual/2004/c863b10a0ed2c27df694__dfb6554a.parquet",
+        "mtime_ns": 1791178092634718900,
+        "rows": 1696,
+        "size": 9418715,
+        "snapshot_logical_sha": "dfb6554a69643d54f79be646fb10b274f3327b11fb68293ca25ee691ef024a92",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "e71300f93ce93302eb7995e85d37ebb0b022908776d091c7e87b43c37db86a2b",
+        "file": "data/std/financial_annual/2005/c863b10a0ed2c27df694__5232f628.parquet",
+        "mtime_ns": 1791178097575293100,
+        "rows": 1731,
+        "size": 9531047,
+        "snapshot_logical_sha": "5232f628d7a3aa4865cc58a25b2a89eea652496889715442f7c7e330b28a3005",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "c28f0bbd70d8d98b3e41daf674e8a15a5007f25c5f3cac77be0b2651529be87d",
+        "file": "data/std/financial_annual/2006/c863b10a0ed2c27df694__b23034e7.parquet",
+        "mtime_ns": 1791178102048425500,
+        "rows": 1885,
+        "size": 10124790,
+        "snapshot_logical_sha": "b23034e7a0a76a27f5fa7ebd08089c6baed7cc069f23a93347db0064012216c0",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "d6ca4dca4378d9fb9e2aff1180ad1431ca8b1bef61d1ebfeafabe4af68a6bb7b",
+        "file": "data/std/financial_annual/2007/c863b10a0ed2c27df694__56fe828d.parquet",
+        "mtime_ns": 1791178107020719000,
+        "rows": 2240,
+        "size": 11588662,
+        "snapshot_logical_sha": "56fe828de4fca7bf5464209ab54d96c9ee1f943456c336a51718f5247347eb7d",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "a7006d32a7b290fe611ac376d63e492848602d26d14f7c0f6c0c523f7a1f0287",
+        "file": "data/std/financial_annual/2008/c863b10a0ed2c27df694__273f8ba6.parquet",
+        "mtime_ns": 1791178112354646100,
+        "rows": 2475,
+        "size": 12581867,
+        "snapshot_logical_sha": "273f8ba666f3f04a5c5c6a9d5dbef8c368017c282a6e33d34da7d5ed10dc37cb",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "63f80f807da93d15150a38d2e92e4b8c873e932ee6918b9fb84aaa761fbb36cc",
+        "file": "data/std/financial_annual/2009/c863b10a0ed2c27df694__1f8c016f.parquet",
+        "mtime_ns": 1791178118028446900,
+        "rows": 2593,
+        "size": 13699169,
+        "snapshot_logical_sha": "1f8c016f5d116146336025b6240dc87614b78552f3ee0aade79214865ca7d47e",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "a38ed4b8c563ace33e67e93fbce5bf0815e9648b9b789bfd36abbcd12e27de07",
+        "file": "data/std/financial_annual/2010/c863b10a0ed2c27df694__a0a2384e.parquet",
+        "mtime_ns": 1791178123928882400,
+        "rows": 2639,
+        "size": 15104586,
+        "snapshot_logical_sha": "a0a2384e16ad9f842e1715252b9449e3dace9c32d8f2cc22a44ffdbe06435f01",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "ba6064d7dcb4f1009d81af2e7f4fb86a319cbe2effaa1a62423184a97e1e84d0",
+        "file": "data/std/financial_annual/2011/c863b10a0ed2c27df694__2156cae2.parquet",
+        "mtime_ns": 1791178129902942500,
+        "rows": 2765,
+        "size": 16233850,
+        "snapshot_logical_sha": "2156cae216e64bc322ebe8f4e25254717f3fdb3f9e65be81e428de8d2f1981a0",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "7d2a6ebed086268884678d0ae7a47da83f11c54a4e919accdcaa02fae3b756ae",
+        "file": "data/std/financial_annual/2012/c863b10a0ed2c27df694__1f8d65d1.parquet",
+        "mtime_ns": 1791178135941581400,
+        "rows": 2950,
+        "size": 17176803,
+        "snapshot_logical_sha": "1f8d65d193b481fa0816ebbc841f7d457cf422bf55508ad73d0e3e4c2a7ac2c9",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "7489bf5192199b0171f0bfea897abbbdc199098157cd5fdbe7982bdaf4f55cbe",
+        "file": "data/std/financial_annual/2013/c863b10a0ed2c27df694__a3694fb9.parquet",
+        "mtime_ns": 1791178142492003200,
+        "rows": 3260,
+        "size": 18158863,
+        "snapshot_logical_sha": "a3694fb9a6bba6e8f4c91ee9692ddad90e7cafe7a472c6ae6a5004d745299384",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "dee99a911c89a6aee4ceee810ec2e979f47fd43be36012528a9e298eabde7d45",
+        "file": "data/std/financial_annual/2014/c863b10a0ed2c27df694__cc41ff8d.parquet",
+        "mtime_ns": 1791178149047418600,
+        "rows": 3679,
+        "size": 19896463,
+        "snapshot_logical_sha": "cc41ff8dec2adcb7df9e4c3fb7b2df4bc88baa76507ac4a963889dcc54e1211b",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "34bfd3dcff9cf4861fdabfe41f4372aa0dfe0005a5656fb7c273e9bc5e6a2d08",
+        "file": "data/std/financial_annual/2015/c863b10a0ed2c27df694__a64ed947.parquet",
+        "mtime_ns": 1791178156052761700,
+        "rows": 3881,
+        "size": 21533509,
+        "snapshot_logical_sha": "a64ed947c35f556505031116f37cb471e0685ba1afb9b1a976aec7a0ef2eff0e",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "eed52d53d8029d8201caa6a271e7ee99ae64afaf3e2bddcd45a683c256a4e984",
+        "file": "data/std/financial_annual/2016/c863b10a0ed2c27df694__10a0daf0.parquet",
+        "mtime_ns": 1791178162750930700,
+        "rows": 4146,
+        "size": 23343804,
+        "snapshot_logical_sha": "10a0daf0a71b0a63de94d6f2c0f9267da6a9860680b9c1fef95c5eeb984b04ee",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "b557b9568480fe2123e4c96a0318c37ad7f1c2cb320c07200ad4887fe6d5ba7d",
+        "file": "data/std/financial_annual/2017/c863b10a0ed2c27df694__87f226bd.parquet",
+        "mtime_ns": 1791178169931450000,
+        "rows": 4648,
+        "size": 25823256,
+        "snapshot_logical_sha": "87f226bd6b3de2b9112fe7b797d504f9bbc96eaeaccf499159268e9bfaf2a3d7",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "4dd50a1cec10b04d3ee66a0b5e9c5639b7986e424e6046449828ba91590201b0",
+        "file": "data/std/financial_annual/2018/c863b10a0ed2c27df694__d967da6d.parquet",
+        "mtime_ns": 1791178177634483600,
+        "rows": 5093,
+        "size": 27700981,
+        "snapshot_logical_sha": "d967da6dcf2163f1f1399e614536dbe7277f483d84a78bea8c02a66ad8c2762a",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "30954d5e8bfe990c896a37bf5bcfd5b2b7b6a1a3ee39556f55199c1d377ddf89",
+        "file": "data/std/financial_annual/2019/c863b10a0ed2c27df694__b2c76232.parquet",
+        "mtime_ns": 1791178185360135600,
+        "rows": 5389,
+        "size": 29629563,
+        "snapshot_logical_sha": "b2c762322bd82b77b10737f578781c70e1121fb24e81b0e17ad0626d2c8d9860",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "4a8a959370cb5091dca3fbf0877b12b25a7991c5247ab04907c14db787cb5c12",
+        "file": "data/std/financial_annual/2020/c863b10a0ed2c27df694__153204cc.parquet",
+        "mtime_ns": 1791178192831891100,
+        "rows": 5574,
+        "size": 32164947,
+        "snapshot_logical_sha": "153204cc23ed9f20036b0f3f466218344b17a6314108c24c1852d0dab6eb4974",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "dc3b05968cb60f7be53e0bca3823ae392781dc7ff113362ef2020dbd196ef941",
+        "file": "data/std/financial_annual/2021/c863b10a0ed2c27df694__fe261911.parquet",
+        "mtime_ns": 1791178200187076400,
+        "rows": 5671,
+        "size": 34412694,
+        "snapshot_logical_sha": "fe261911591587fffd4b4df25880efcfdfaeefdfc7757d2785d22b5d069a8f7c",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "b471415300d0ef1982f6e6fbca4bafbaee619bf429e56986280d4829180fc6e7",
+        "file": "data/std/financial_annual/2022/c863b10a0ed2c27df694__644c0600.parquet",
+        "mtime_ns": 1791178207597881100,
+        "rows": 5738,
+        "size": 35704958,
+        "snapshot_logical_sha": "644c060012dad30f48acb6544070ffe8bd6a3f20af4343c8e90e794d17805d6b",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "52151fb96e301b1f37bb50c3d9083276ae25f6bf0ff007511c1374db19e97cbb",
+        "file": "data/std/financial_annual/2023/c863b10a0ed2c27df694__d82afc3d.parquet",
+        "mtime_ns": 1791178215592721500,
+        "rows": 5699,
+        "size": 36138256,
+        "snapshot_logical_sha": "d82afc3d1ec5bdeef6a825578ed407667e52a7351703349d59f4662ed8ce687c",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "de1d77761f22c1b8cf7a5167f91cde62954ad2fd704560e395ed9077dd76d13c",
+        "file": "data/std/financial_annual/2024/c863b10a0ed2c27df694__89cd1022.parquet",
+        "mtime_ns": 1791178224384436800,
+        "rows": 5644,
+        "size": 36107201,
+        "snapshot_logical_sha": "89cd1022d9abb0335404be4b3f8c1e1381a4d8c3c404517e8e8d3884dd7ac404",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "347b6eb124cd6fe50108a76fd0c0eb6ee584cdcc37fd292f2198ae27aa82de16",
+        "file": "data/std/financial_annual/2025/c863b10a0ed2c27df694__25703d8b.parquet",
+        "mtime_ns": 1791178233193578500,
+        "rows": 5615,
+        "size": 36263714,
+        "snapshot_logical_sha": "25703d8b19e0f1490e248fa790d623fb7328e791561510b9046b13dac6673bb6",
+        "table": "financial_annual"
+      },
+      {
+        "bytes_sha256": "6126f4b63c5bdc0bac187706f5ec86aaf79962fed4855ac60caa12efa8c96c53",
+        "file": "data/std/financial_quarterly/1990/c863b10a0ed2c27df694__42b7387a.parquet",
+        "mtime_ns": 1791178877995610400,
+        "rows": 11,
+        "size": 657069,
+        "snapshot_logical_sha": "42b7387a719b9e8195fc38b40e6bc5b9a89e85da936be27abcec725e9c828dd7",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "2875fc761fc4b57499cde23a3b05c7ee02139f1b63ba6711eb5223df639986d8",
+        "file": "data/std/financial_quarterly/1991/c863b10a0ed2c27df694__2f840bb2.parquet",
+        "mtime_ns": 1791178879714761900,
+        "rows": 17,
+        "size": 682477,
+        "snapshot_logical_sha": "2f840bb2268aecb0d4f5f392f5042fccb4ab6f80c706af21619e9e07c5b10884",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "e53c22e6ba1375d4c485a220d6ccd952a7d07fa6ed7582348b1ea60dfae3af09",
+        "file": "data/std/financial_quarterly/1992/c863b10a0ed2c27df694__39b4b001.parquet",
+        "mtime_ns": 1791178881866893700,
+        "rows": 78,
+        "size": 789951,
+        "snapshot_logical_sha": "39b4b001e490779e62c5b4e0299cb03353d41b92ea6b30fae9a48d57df33f461",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "803d5b8dc1280a256f295f5e8281f5252452ce8d104dcc7ba0888ff69a0248f5",
+        "file": "data/std/financial_quarterly/1993/c863b10a0ed2c27df694__79077678.parquet",
+        "mtime_ns": 1791178884965137700,
+        "rows": 234,
+        "size": 1105643,
+        "snapshot_logical_sha": "790776788b756d88f0359cc4457cca0c974f8b2f82c395fa390541718b2dd68e",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "8ab1e89b150f3e144e0597d27f2f88674a0090c4605e8eaa64c4a5bda5a59234",
+        "file": "data/std/financial_quarterly/1994/c863b10a0ed2c27df694__8243ac87.parquet",
+        "mtime_ns": 1791178888994149700,
+        "rows": 368,
+        "size": 1471218,
+        "snapshot_logical_sha": "8243ac875bf294fef3af466a0b16868f3a87cdd29c605257ced025566dae0b5b",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "5e5208822fcf30c20efa19d2ffef79ac708e5350058d0180dc9ea86f38f88d62",
+        "file": "data/std/financial_quarterly/1995/c863b10a0ed2c27df694__15366a6d.parquet",
+        "mtime_ns": 1791178893227208500,
+        "rows": 775,
+        "size": 2311038,
+        "snapshot_logical_sha": "15366a6d874d3ccef4beca57957ac430d3c9a42ee0217d94ba1c0dec2800cdda",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "654c53c7bafbf88975a645248e768e9afbcfc7d6cf6cc302f06b8de7a989cfc0",
+        "file": "data/std/financial_quarterly/1996/c863b10a0ed2c27df694__9eac7460.parquet",
+        "mtime_ns": 1791178898360309600,
+        "rows": 1132,
+        "size": 3257286,
+        "snapshot_logical_sha": "9eac7460f63a651848c32f57e535064d155885abbfc3be01d3ab5574ea08c9cb",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "81eab0690fa244ad1c128dc53735a73a00901fe3242bd2002455494280a8f159",
+        "file": "data/std/financial_quarterly/1997/c863b10a0ed2c27df694__b5287c59.parquet",
+        "mtime_ns": 1791178904933976400,
+        "rows": 1609,
+        "size": 4452822,
+        "snapshot_logical_sha": "b5287c5972756bea4737ea1c69e52821d279fd34cea7486512f78631de4b1633",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "45e1edf89efe6eff65dab4de1a706d34ae9001770552568c57da74a00fb14f29",
+        "file": "data/std/financial_quarterly/1998/c863b10a0ed2c27df694__0ac627fb.parquet",
+        "mtime_ns": 1791178912170360400,
+        "rows": 1825,
+        "size": 7122962,
+        "snapshot_logical_sha": "0ac627fbbba095276f705b4e9b43bc9166a7fbc37e0acda399bea46402a391d2",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "58dc3613e4371b423e2a0cd3666ae45edd0b090fd715d126f675114f5e6de7b1",
+        "file": "data/std/financial_quarterly/1999/c863b10a0ed2c27df694__44b297da.parquet",
+        "mtime_ns": 1791178920544908200,
+        "rows": 2137,
+        "size": 8316491,
+        "snapshot_logical_sha": "44b297da7f17f7986b7e7b822b69e0e939d6efe30129d0e691d285f90bb4cb0d",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "a6e792b4064b42697e068f5a581f2fe366c6bf39b593d9b725c1678afbfa2a4e",
+        "file": "data/std/financial_quarterly/2000/c863b10a0ed2c27df694__7e19e1dc.parquet",
+        "mtime_ns": 1791178928840726300,
+        "rows": 3636,
+        "size": 11832156,
+        "snapshot_logical_sha": "7e19e1dc94124d8aac93ea9c54598a79a9d58d41f1c937d6d1081b9a694cb14a",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "a55f615ca3cc345a84648fe79460fcb8dc77d12554f8480d64272ac695c778d6",
+        "file": "data/std/financial_quarterly/2001/c863b10a0ed2c27df694__22016304.parquet",
+        "mtime_ns": 1791178938104732500,
+        "rows": 3988,
+        "size": 13148797,
+        "snapshot_logical_sha": "220163046bca1b3472e1f702342dcf8ad96382a38f3bd8f08b1511fa503fe713",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "8b20a493274801d68b75fde9b62a01d6715c9d62bc6118e81584f48863b6b5e7",
+        "file": "data/std/financial_quarterly/2002/c863b10a0ed2c27df694__4e1ad9c5.parquet",
+        "mtime_ns": 1791178947200286700,
+        "rows": 6683,
+        "size": 19796420,
+        "snapshot_logical_sha": "4e1ad9c5159711a5798a0e7b210d3dd5a3be78f47e329be724fd4df3d215b314",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "32bdc20aa969a54969096724975ba75dbb820a851b010341c4c465ddfa48472f",
+        "file": "data/std/financial_quarterly/2003/c863b10a0ed2c27df694__f1ffef09.parquet",
+        "mtime_ns": 1791178957203756900,
+        "rows": 7020,
+        "size": 24429559,
+        "snapshot_logical_sha": "f1ffef0931194981d3576397e3da2b5a9c9b6772137e34beb71a989c3ed78d9d",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "0dfeab6e5fa3ac1342439b108414e3d7cb96ac1f6937be63492e21e66f4eb27b",
+        "file": "data/std/financial_quarterly/2004/c863b10a0ed2c27df694__e439c6df.parquet",
+        "mtime_ns": 1791178967924728000,
+        "rows": 7506,
+        "size": 27063657,
+        "snapshot_logical_sha": "e439c6df62c756c363a98a9f2c86e3e45a686657fd151c7f59a98925461927fe",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "cc393a54e0d45915499917a93d2211ec680043603e716076971b01ed364ba619",
+        "file": "data/std/financial_quarterly/2005/c863b10a0ed2c27df694__31db6b40.parquet",
+        "mtime_ns": 1791178978814354900,
+        "rows": 7659,
+        "size": 27745811,
+        "snapshot_logical_sha": "31db6b40e9e9bd1ed5e0085b6aad253dd32f87ed130fda1c722ada6698d558f3",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "e447a683380b28775800e897254c474d366b5fa8d1a84c3f76240824febb1632",
+        "file": "data/std/financial_quarterly/2006/c863b10a0ed2c27df694__7ba33a53.parquet",
+        "mtime_ns": 1791178990339227600,
+        "rows": 8078,
+        "size": 28907454,
+        "snapshot_logical_sha": "7ba33a531fad76d53cc995fe244443f2273aaccde45d7b0ecbf4ee6e4b852ee4",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "8d846f69f8ec77b5bb5fbc4f85c08af6ab69e800c24cdde5b7a5fbaf60fde723",
+        "file": "data/std/financial_quarterly/2007/c863b10a0ed2c27df694__f78124a6.parquet",
+        "mtime_ns": 1791179003466454700,
+        "rows": 8819,
+        "size": 32411133,
+        "snapshot_logical_sha": "f78124a6d90ea5b784838cb69e33438594cb145cfddc81fc4401caa8f01294db",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "0015a121b61602e9a4937ea177581151f241c97efbcbe92c4bf41edc8d13bcc7",
+        "file": "data/std/financial_quarterly/2008/c863b10a0ed2c27df694__1376716e.parquet",
+        "mtime_ns": 1791179017025750500,
+        "rows": 9327,
+        "size": 34884330,
+        "snapshot_logical_sha": "1376716e746ca5cde627fafc6e13a63624e935bf7477f80b91192626e47f36b0",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "5dd7e6ed8079bfec586f4013ac4d7eef2e46c3607cba2eb2b01d3cff71412b76",
+        "file": "data/std/financial_quarterly/2009/c863b10a0ed2c27df694__5aaed2e6.parquet",
+        "mtime_ns": 1791179031473954300,
+        "rows": 9943,
+        "size": 37380389,
+        "snapshot_logical_sha": "5aaed2e637c65b6b0ce5c2827b9d628c4e73c2121454338f2c6d098ece76dd28",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "96babedfcbf184d8e47279c8c7dea174a83b84438d67c4da03733fd7d7fd2c27",
+        "file": "data/std/financial_quarterly/2010/c863b10a0ed2c27df694__bc68c9e3.parquet",
+        "mtime_ns": 1791179046467541100,
+        "rows": 11266,
+        "size": 43356443,
+        "snapshot_logical_sha": "bc68c9e369eaccbe9add35e197804e3df39b49d10f3c21429cbe59a026ba2e59",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "22fb978b7e39b200a7fce84385b2288cfabd3c5ba473c8a23947789c4457e3e4",
+        "file": "data/std/financial_quarterly/2011/c863b10a0ed2c27df694__58b9caf0.parquet",
+        "mtime_ns": 1791179062918469000,
+        "rows": 12446,
+        "size": 49283851,
+        "snapshot_logical_sha": "58b9caf072f78da181d197617ed562e11c5528a3ad92c4d68ed6637ff73886f4",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "23e3004aaf28af758ad617596d8a28fc4d4381cabb463461c985bd3d85742d9a",
+        "file": "data/std/financial_quarterly/2012/c863b10a0ed2c27df694__ff46a706.parquet",
+        "mtime_ns": 1791179079457578800,
+        "rows": 13240,
+        "size": 53076315,
+        "snapshot_logical_sha": "ff46a706aeed92bf9fccc57b83d0985e14c2aec66e01b06047525ac157c7fa8b",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "5406b7d717f05b6681d73ace27a80e43cdc514c51396ed0e68238fa6afb18741",
+        "file": "data/std/financial_quarterly/2013/c863b10a0ed2c27df694__f5121ea5.parquet",
+        "mtime_ns": 1791179096523122200,
+        "rows": 13697,
+        "size": 55133222,
+        "snapshot_logical_sha": "f5121ea544f1a55f1046d13c0d7521ab8c04c1dc410e36bb8b2160ae605c81b7",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "439314da88d4573e1654e3530b9d36ed6072df1d82eff6c8e7764fe59d6ac134",
+        "file": "data/std/financial_quarterly/2014/c863b10a0ed2c27df694__282be4ec.parquet",
+        "mtime_ns": 1791179114652602400,
+        "rows": 14609,
+        "size": 58690615,
+        "snapshot_logical_sha": "282be4ec2264dd1edc65441515265846dccaecb469b78b84af826fd8f077b244",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "dc4b0dbe667074a65619344208f2f082512f15862ddc06b5acf934f6e1eacf0b",
+        "file": "data/std/financial_quarterly/2015/c863b10a0ed2c27df694__bf79800f.parquet",
+        "mtime_ns": 1791179133544788500,
+        "rows": 15891,
+        "size": 64048807,
+        "snapshot_logical_sha": "bf79800f1519e44c873a9614f235b2fb92586c211d3af4c9441902ec3a3e3b1a",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "022e326c9ca3612587291a36d141b79e3f1acc4dbfc7655ceed75ce05071afc3",
+        "file": "data/std/financial_quarterly/2016/c863b10a0ed2c27df694__0a053f9b.parquet",
+        "mtime_ns": 1791179153045809400,
+        "rows": 17371,
+        "size": 70050328,
+        "snapshot_logical_sha": "0a053f9b7207ba57c9be945fe09776675dab136816c6b3dcea51d7eae79e7a0c",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "dca34f772ad9c18f49d80825a92a0daeaa2b1a16aa4f00e7c4f085d79978f9d6",
+        "file": "data/std/financial_quarterly/2017/c863b10a0ed2c27df694__a5f8077b.parquet",
+        "mtime_ns": 1791179173088909400,
+        "rows": 19327,
+        "size": 78249273,
+        "snapshot_logical_sha": "a5f8077b07ce5978ac2fa40ebbcf3b02cf3e5c8a8c186bd85bd31031bba918f5",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "b7bb8ae91a75c7af92cc07b5f5dc78ae8be8841990e2f8388a5fcd2846bb3ea0",
+        "file": "data/std/financial_quarterly/2018/c863b10a0ed2c27df694__916ccfa2.parquet",
+        "mtime_ns": 1791179194358909200,
+        "rows": 20586,
+        "size": 84307872,
+        "snapshot_logical_sha": "916ccfa28fc37b30c01b75d4e9f1e9d2296dd09f00fdef27c127b05e4e43d7c9",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "4838ba5da1a708ee691216997d87996df032f819bd7880c567a6fc12affaeac6",
+        "file": "data/std/financial_quarterly/2019/c863b10a0ed2c27df694__bc91a6ab.parquet",
+        "mtime_ns": 1791179215631119000,
+        "rows": 21869,
+        "size": 89748626,
+        "snapshot_logical_sha": "bc91a6abebfcdb6e0c06207c5256cbca554bb9d6e5dfb75ac24c43b7293dcfec",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "6578b4733f728ffbac48b49b49995d7d984004269dedc76a3afe2ff053746135",
+        "file": "data/std/financial_quarterly/2020/c863b10a0ed2c27df694__41fe17f0.parquet",
+        "mtime_ns": 1791179238128303300,
+        "rows": 23667,
+        "size": 97715520,
+        "snapshot_logical_sha": "41fe17f0d4c413e5f81a862b2c12e8178003f118189ce873c8226fe5fefb2c63",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "a62933ee555325c40a695cc03b3444aea190e38f3e8c991da212964cbce3f3c8",
+        "file": "data/std/financial_quarterly/2021/c863b10a0ed2c27df694__093a586c.parquet",
+        "mtime_ns": 1791179260401379600,
+        "rows": 25539,
+        "size": 108222190,
+        "snapshot_logical_sha": "093a586c1a4310cc62ba03052f506af82f72bfb4e9350a85be9a95ac7bd6d6f2",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "ffa6401596b8add9e13dbc603762b807e408f01f5b5c972c2032eb421408e682",
+        "file": "data/std/financial_quarterly/2022/c863b10a0ed2c27df694__7491f742.parquet",
+        "mtime_ns": 1791179283687783400,
+        "rows": 26864,
+        "size": 115946101,
+        "snapshot_logical_sha": "7491f742ed2fbd903ac8cc4641e7f065bbf60adb454d2c1cf96ed9cdd5006a1d",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "ecfe5cd2b2448bed17c6cc3efd63553731233d33f0852cad019dd8d29da4d80e",
+        "file": "data/std/financial_quarterly/2023/c863b10a0ed2c27df694__a306e924.parquet",
+        "mtime_ns": 1791179307022356800,
+        "rows": 27528,
+        "size": 120576119,
+        "snapshot_logical_sha": "a306e924717c62c51c747de611fc87c7cd72287b76275ddd64069667beca5b36",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "b8e59a8762ceccc1e3fa01fbd7d13def05562fccd6ac35e4798969bb8afa743d",
+        "file": "data/std/financial_quarterly/2024/c863b10a0ed2c27df694__ff01e918.parquet",
+        "mtime_ns": 1791179330269253200,
+        "rows": 27665,
+        "size": 121608395,
+        "snapshot_logical_sha": "ff01e918572337376e411c9eaf594e2fbd69bdb97d5fdabca2f952721a342ab0",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "c96037bcdf9bbc796169b8a5f6ac0977a36cce8082dc7f6bd5afd3f5acfcacf0",
+        "file": "data/std/financial_quarterly/2025/c863b10a0ed2c27df694__5e4b2fe9.parquet",
+        "mtime_ns": 1791179353535732900,
+        "rows": 27856,
+        "size": 122943640,
+        "snapshot_logical_sha": "5e4b2fe91b08f8c13058c8af3a4306ee5db79f2d40f70c1b2d4cfc80323568e0",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "8b95e82eeb871ea5edba3930f01992150837daaaa17e204dd0d78ec029fbf2c7",
+        "file": "data/std/financial_quarterly/2026/c863b10a0ed2c27df694__0c5e6485.parquet",
+        "mtime_ns": 1791179371068673800,
+        "rows": 5601,
+        "size": 27504292,
+        "snapshot_logical_sha": "0c5e648556909eb390a4d1db9ca232918624cc00a8b5833e6c9eb73ba711053b",
+        "table": "financial_quarterly"
+      },
+      {
+        "bytes_sha256": "c1789e0db90f69e53d9e08976b3321517615ab79c786dba193029fdedf9a4635",
+        "file": "data/std/financial_fields/c863b10a0ed2c27df694__bb932f4a.parquet",
+        "mtime_ns": 1791179423251664500,
+        "rows": 1911,
+        "size": 183949,
+        "snapshot_logical_sha": "bb932f4a6ece77106372102b9b8f4a6fc6a8f426937f448bbc5fb4c2dd6a041f",
+        "table": "financial_fields"
+      },
+      {
+        "bytes_sha256": "55bae61ec0a63909fb08f8d2573cf57a7a840b81cf0e6edfbb6f23a77a82cec3",
+        "file": "data/std/financial_availability/1990/financial_annual-c863b10a0ed2c27df694__f83c5307.parquet",
+        "mtime_ns": 1791178233330370900,
+        "rows": 32,
+        "size": 11768,
+        "snapshot_logical_sha": "f83c5307d7ea2952f585cae875c3e6f820bb317d3c86e8735923f8308ab7e12a",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "0a8a32382cce33efea28d42089aa3c9622e44a0e47721a61fababcfd631d0691",
+        "file": "data/std/financial_availability/1991/financial_annual-c863b10a0ed2c27df694__5be4465d.parquet",
+        "mtime_ns": 1791178233408298100,
+        "rows": 48,
+        "size": 11879,
+        "snapshot_logical_sha": "5be4465dd5e051df87570e3f8805cbf1b29672145f99c25e36dc4d09166fc994",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "a029c9769092d11039a034ef84a4ec429fa2a60f802cbd6fd6b7a519a45e197e",
+        "file": "data/std/financial_availability/1992/financial_annual-c863b10a0ed2c27df694__f70e847e.parquet",
+        "mtime_ns": 1791178233494605700,
+        "rows": 234,
+        "size": 13724,
+        "snapshot_logical_sha": "f70e847ee9a8349b7a5a2790dedb1d227b0a41a77cc20ab6457d0ba3bce8678a",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "affbd370d9f95ca52fab5fa9e5ef00723e06543bb92bf765836ed93e209d9d11",
+        "file": "data/std/financial_availability/1993/financial_annual-c863b10a0ed2c27df694__300e2f60.parquet",
+        "mtime_ns": 1791178233595510400,
+        "rows": 687,
+        "size": 17658,
+        "snapshot_logical_sha": "300e2f60c30b3bb7c29c8996071469b6fe6835bcbc8b1c79d078369a0944bb1f",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "9a664c495b423f4c6b5b1606b9a7c46b880806f44274b78e50a3772961fcc876",
+        "file": "data/std/financial_availability/1994/financial_annual-c863b10a0ed2c27df694__f7b57d8d.parquet",
+        "mtime_ns": 1791178233720640300,
+        "rows": 1083,
+        "size": 21496,
+        "snapshot_logical_sha": "f7b57d8d44e3f4bc6e45bbd6d836a9b9b26cfb7fce9a84346db9c7e361cbb544",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "698453d8b7e244a406dc0f72434c1a9005b4ea5fb740b31c2f0bb98710411995",
+        "file": "data/std/financial_availability/1995/financial_annual-c863b10a0ed2c27df694__6d374ddb.parquet",
+        "mtime_ns": 1791178233850010600,
+        "rows": 1167,
+        "size": 21764,
+        "snapshot_logical_sha": "6d374ddb3607a60ba15577b9deeba464ccee7b7f2ed56812057b55eb7f3c07c9",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "0f542c4286f297efcc189fa2effd514549ba0c69734568ba269d6883d70f477a",
+        "file": "data/std/financial_availability/1996/financial_annual-c863b10a0ed2c27df694__10e8a95e.parquet",
+        "mtime_ns": 1791178233998389800,
+        "rows": 1818,
+        "size": 28465,
+        "snapshot_logical_sha": "10e8a95e7c7ec56f0d0cc1d337caa070287dfdd7f27f9480e03d5f47f6793b00",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "e74d12e37a3c7981bac32d2a36d5a2b01e3c09e26bddd6727f93308c36d52698",
+        "file": "data/std/financial_availability/1997/financial_annual-c863b10a0ed2c27df694__8a2407e3.parquet",
+        "mtime_ns": 1791178234151572400,
+        "rows": 2463,
+        "size": 34155,
+        "snapshot_logical_sha": "8a2407e3596bf83ad66bafbf15a3be7e82a765f66d5112e5f274ef99d9f3f3d5",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "8307aaf008cfc7fd2ad7fe6c5dba6768dcda773930ca03a715db543b9a0b13bb",
+        "file": "data/std/financial_availability/1998/financial_annual-c863b10a0ed2c27df694__3127ac2f.parquet",
+        "mtime_ns": 1791178234337664800,
+        "rows": 3716,
+        "size": 36812,
+        "snapshot_logical_sha": "3127ac2fba2f06e95a33cb13d6a3b8e099d4f1ca2c9135cc382029e868dad23e",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "528f8e98d140fe61fd68d11dad3a6238463e0e8f49eb80e75d22e35f73ccc373",
+        "file": "data/std/financial_availability/1999/financial_annual-c863b10a0ed2c27df694__6b14a1db.parquet",
+        "mtime_ns": 1791178234522440900,
+        "rows": 4117,
+        "size": 41637,
+        "snapshot_logical_sha": "6b14a1dbc8666c7bf5c45881d3f7d801f59f952cb13246507c8bb12bf6145e22",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "f96fbe5e6f3087ffea36c9b5ab593891e1229e2e9177e120419ca613df63f99c",
+        "file": "data/std/financial_availability/2000/financial_annual-c863b10a0ed2c27df694__700f059c.parquet",
+        "mtime_ns": 1791178234681965100,
+        "rows": 4704,
+        "size": 46521,
+        "snapshot_logical_sha": "700f059cc85d5e81a8269e4abf3d1b2c8dbec7faf578d6f14f2180f3aedb5121",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "cd13025bb99c14b854d3a0768e5d10553b232840ec2d7a02f3309ef223c2fa7e",
+        "file": "data/std/financial_availability/2001/financial_annual-c863b10a0ed2c27df694__37a2d592.parquet",
+        "mtime_ns": 1791178234848253600,
+        "rows": 5032,
+        "size": 48725,
+        "snapshot_logical_sha": "37a2d592415b89c62f4c1ba20c984544b014bb9370449104e75735d326c44502",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "100d7ec29c8c6ba417f627504e3f9fadcd5c102ebcc15b6914d6e040b5e77bba",
+        "file": "data/std/financial_availability/2002/financial_annual-c863b10a0ed2c27df694__86c02f1f.parquet",
+        "mtime_ns": 1791178235012390500,
+        "rows": 5276,
+        "size": 50586,
+        "snapshot_logical_sha": "86c02f1f3cb3ab626cc0ec37bd5da5f9b552cd19ad4c40c578ad7a15fe8e43e0",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "4c70bba00b3cbce758e3c41fcb2f5dbd85a579b0b90d3e53ae0a914e358f8de8",
+        "file": "data/std/financial_availability/2003/financial_annual-c863b10a0ed2c27df694__c5ada2b2.parquet",
+        "mtime_ns": 1791178235197656100,
+        "rows": 5524,
+        "size": 52205,
+        "snapshot_logical_sha": "c5ada2b2a24d07412a3d85db3429ce51f6d216557e3a1bf3ee8b765c7bc81b88",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "6d665133fea15ae2b596c105167da8eb0ec3ba30bfb9e70daf84f2ed54e7d0f3",
+        "file": "data/std/financial_availability/2004/financial_annual-c863b10a0ed2c27df694__ccef36f3.parquet",
+        "mtime_ns": 1791178235391201200,
+        "rows": 5872,
+        "size": 54951,
+        "snapshot_logical_sha": "ccef36f3f3e4c91a5b6fdc5cd3cf809ba4cdf338ee66980a7fc97d4bad2afee2",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "8efae78f9c6ae80891f639f7b5cd64d7c465f51a94ac1f2f2478fd40fde605a3",
+        "file": "data/std/financial_availability/2005/financial_annual-c863b10a0ed2c27df694__9bf22547.parquet",
+        "mtime_ns": 1791178235578168400,
+        "rows": 5856,
+        "size": 55156,
+        "snapshot_logical_sha": "9bf22547177c36d651601a745a78e728a29142e118b7a3b549d2a999f2768c29",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "c02d682e8b900856c96b88b85404399842e046ffca612dfe71d90bd16ceafb3e",
+        "file": "data/std/financial_availability/2006/financial_annual-c863b10a0ed2c27df694__299c098d.parquet",
+        "mtime_ns": 1791178235748019600,
+        "rows": 6188,
+        "size": 59110,
+        "snapshot_logical_sha": "299c098d5b3ec29da694cbcb1c55241cd1d5ed3c5ddcb35820abeb0aebba261f",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "92d37dd7dea094c8060b7e88237c7038ceca745b49e0a09e0d9a6610ad9d98ab",
+        "file": "data/std/financial_availability/2007/financial_annual-c863b10a0ed2c27df694__0eff9a44.parquet",
+        "mtime_ns": 1791178235918477300,
+        "rows": 6647,
+        "size": 62887,
+        "snapshot_logical_sha": "0eff9a44bec63decbadadb606f693255c5f57db00da8008e0b9adfd7598e8142",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "9b7adda9399ab713cc083cde7caf5108fdeee47e699264a66caf15fb28e63118",
+        "file": "data/std/financial_availability/2008/financial_annual-c863b10a0ed2c27df694__b9e1ceff.parquet",
+        "mtime_ns": 1791178236080566700,
+        "rows": 6868,
+        "size": 64348,
+        "snapshot_logical_sha": "b9e1ceff484f77de0587d81d4f279456d72002c197e589c657457cc14137ad08",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "087817bc4389e6debd993f5d1159843c5e7917b97f2554e45869cb3ddad52130",
+        "file": "data/std/financial_availability/2009/financial_annual-c863b10a0ed2c27df694__d7eaf765.parquet",
+        "mtime_ns": 1791178236246558000,
+        "rows": 7464,
+        "size": 68149,
+        "snapshot_logical_sha": "d7eaf765d7a6e662422e761175e7b8c5eb02c5c61711dcb59a95713a86e0f816",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "dabb9c99d28b532b5fc0ec5306cd3f0f1e6c8ec4935e91d5f35d3e6911f48fd8",
+        "file": "data/std/financial_availability/2010/financial_annual-c863b10a0ed2c27df694__22de313f.parquet",
+        "mtime_ns": 1791178236413134300,
+        "rows": 8884,
+        "size": 78639,
+        "snapshot_logical_sha": "22de313f1088571257fa959b4447a19da548ea923e8bf5a7faa1165dbd69c2a1",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "ba1ea3d0921dc960bced6b627f755c040b8e7a7f59c3654990b12c11a00ca20d",
+        "file": "data/std/financial_availability/2011/financial_annual-c863b10a0ed2c27df694__2a9847bf.parquet",
+        "mtime_ns": 1791178236597090300,
+        "rows": 9824,
+        "size": 84891,
+        "snapshot_logical_sha": "2a9847bfd4fdf1bfae964ccd337b953a1118e15da5e03eecf109281b9927839a",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "c7d52599e61527cacea8da8b9e7c978853d47ea363dffcaefe56dcff35f6c077",
+        "file": "data/std/financial_availability/2012/financial_annual-c863b10a0ed2c27df694__92ed7234.parquet",
+        "mtime_ns": 1791178236799888800,
+        "rows": 10344,
+        "size": 89129,
+        "snapshot_logical_sha": "92ed7234dcd787a66d0fa1d2657bdd5f1cfe07ad22a90a5fdf0c6d1e06e9dc51",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "e0ce4a73372240e13b5bd2e83bd990e48bd30309a6a99e6ad8ee051ec18c3463",
+        "file": "data/std/financial_availability/2013/financial_annual-c863b10a0ed2c27df694__f15feb86.parquet",
+        "mtime_ns": 1791178237048343800,
+        "rows": 10560,
+        "size": 93628,
+        "snapshot_logical_sha": "f15feb86ffbaa7d19928f939f00f8536f37b88a1f33d28b32c1f771a3d759993",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "8129eda66f95331978fabe703a568523906fdc10f939c59ba3a2ac4c14da79b9",
+        "file": "data/std/financial_availability/2014/financial_annual-c863b10a0ed2c27df694__dc0c3f76.parquet",
+        "mtime_ns": 1791178237267515300,
+        "rows": 11212,
+        "size": 95422,
+        "snapshot_logical_sha": "dc0c3f76a23dbc15df4b1cc7fdfc0719ca8f9bc1ef9619d333450a7b25161c5b",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "21b3cb6041e4d8a716939a1606ec13afdd35d60959d686fda38c25b4e15ff7db",
+        "file": "data/std/financial_availability/2015/financial_annual-c863b10a0ed2c27df694__aef57c70.parquet",
+        "mtime_ns": 1791178237489217100,
+        "rows": 12392,
+        "size": 102178,
+        "snapshot_logical_sha": "aef57c70441f3ecd30e0800a31740e9658d7d96e9036cc41aedc526bb210db0b",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "1ce9311b68d5b6360c4f067b3c69e875c6bcb0713ae66e87f40cba2befdd1751",
+        "file": "data/std/financial_availability/2016/financial_annual-c863b10a0ed2c27df694__e18cf341.parquet",
+        "mtime_ns": 1791178237703979900,
+        "rows": 13740,
+        "size": 114973,
+        "snapshot_logical_sha": "e18cf341e337b3917380958b54997586a0cac120b4ca7e06d94475338d13485d",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "2e195b3f27ff6f8479f185396f315d90cfc1db26145cbb6c5bbe7d3815ccb59e",
+        "file": "data/std/financial_availability/2017/financial_annual-c863b10a0ed2c27df694__c9fb7aee.parquet",
+        "mtime_ns": 1791178237940121700,
+        "rows": 15304,
+        "size": 128705,
+        "snapshot_logical_sha": "c9fb7aeedb32e799ca05f6e1cb1d881f901fab7c8c3f59c47a9f98ea261ebaa8",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "3b0534c30676958f2f2f741b91ece0aed086d37b52ab40638667e7f91e1948d1",
+        "file": "data/std/financial_availability/2018/financial_annual-c863b10a0ed2c27df694__5a0c4aba.parquet",
+        "mtime_ns": 1791178238184641100,
+        "rows": 15720,
+        "size": 129786,
+        "snapshot_logical_sha": "5a0c4aba3d6a6546e815226589806144a06c6d3e4ba4dc32ac011545a5d1e350",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "b0bf2cdf132e20e360a108b03c4d99d4e3df23e90b7492ceddbdf5c4ce51bf8b",
+        "file": "data/std/financial_availability/2019/financial_annual-c863b10a0ed2c27df694__33c6ba2d.parquet",
+        "mtime_ns": 1791178238468187700,
+        "rows": 16540,
+        "size": 140670,
+        "snapshot_logical_sha": "33c6ba2d09fe1aca862a5dd38de16d9c449695f531004980287ae5bd085e010d",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "729d73926a74ddc504fb6db4cb8ce9d03d9834fe3339d2070d07a4e543a45781",
+        "file": "data/std/financial_availability/2020/financial_annual-c863b10a0ed2c27df694__7bf7b8a8.parquet",
+        "mtime_ns": 1791178238720223600,
+        "rows": 18356,
+        "size": 168654,
+        "snapshot_logical_sha": "7bf7b8a8fabe2810eac5723fe781420e584f0ccb1f9abb0b135cce38c54d8d59",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "24616ad9bcfd992dc81d8fd8600c909932b3e0cedc31dab58dd94f770dfa756e",
+        "file": "data/std/financial_availability/2021/financial_annual-c863b10a0ed2c27df694__6d38ceb2.parquet",
+        "mtime_ns": 1791178238997217800,
+        "rows": 20048,
+        "size": 180140,
+        "snapshot_logical_sha": "6d38ceb26815bee442303181e9a3403681211cb19d52ff405e63c1df68f17c21",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "352cba629775e12fd17dfe0d8e4f5b44ea9810e1d8ab754d2a2789e14fe18b87",
+        "file": "data/std/financial_availability/2022/financial_annual-c863b10a0ed2c27df694__8ab281f2.parquet",
+        "mtime_ns": 1791178239263283200,
+        "rows": 21116,
+        "size": 190448,
+        "snapshot_logical_sha": "8ab281f29147ff1f51e527ec008064cfd5136b5f36b113555182f6dbf4deb3d4",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "470fb16ee3031a256a158b88e1cd8dc10a2309619e94e7d0fcf70cde719d5399",
+        "file": "data/std/financial_availability/2023/financial_annual-c863b10a0ed2c27df694__8bcab804.parquet",
+        "mtime_ns": 1791178239514315900,
+        "rows": 21761,
+        "size": 192093,
+        "snapshot_logical_sha": "8bcab804e2b59bbf164e8756737169e045e3efb20489e0518dcbacff27ad3c61",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "9d6ce6d7a8fa849acac5874608693d42b3d6373002e603f16017df83caf2e2c9",
+        "file": "data/std/financial_availability/2024/financial_annual-c863b10a0ed2c27df694__a1fa0eb4.parquet",
+        "mtime_ns": 1791178239786188200,
+        "rows": 21936,
+        "size": 192006,
+        "snapshot_logical_sha": "a1fa0eb4d4dc12c08f341c488dd70ebae023de5d78e727572cc5b4fa1dae97f9",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "7ae5f645ed090a7cb2342bf50810fb09bfc443b97e47fd17e9e036e1fb15cc2e",
+        "file": "data/std/financial_availability/2025/financial_annual-c863b10a0ed2c27df694__d699f6bd.parquet",
+        "mtime_ns": 1791178240074254800,
+        "rows": 22292,
+        "size": 191230,
+        "snapshot_logical_sha": "d699f6bd781db409a16ffedfdfeeb38af3ab01e8551d27cc504282fdcf97c524",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "01a80a8eaddd83e7fb245f37f73337a5811cd8caa2356a23ea6af3b588731173",
+        "file": "data/std/financial_availability/1990/financial_quarterly-c863b10a0ed2c27df694__54600aae.parquet",
+        "mtime_ns": 1791179371347661600,
+        "rows": 21,
+        "size": 11582,
+        "snapshot_logical_sha": "54600aaeddddf2eded1fe9c2d699fd2a48edb8ba25a955e450e008fd61400c71",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "68a2c225034bb885b0c8b42a59ba53d2bf1a2e5c34ab5b507b722bf69c7a5e3e",
+        "file": "data/std/financial_availability/1991/financial_quarterly-c863b10a0ed2c27df694__149dffdf.parquet",
+        "mtime_ns": 1791179371437003600,
+        "rows": 31,
+        "size": 11686,
+        "snapshot_logical_sha": "149dffdf1a694c605289710b11e06d69f6497fc58f2f84b5a3077d55837e6df8",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "9551cf173b76e3da48a72d717714de424923f074a7ef0957677cd14043e6590c",
+        "file": "data/std/financial_availability/1992/financial_quarterly-c863b10a0ed2c27df694__b6d7a064.parquet",
+        "mtime_ns": 1791179371545957800,
+        "rows": 156,
+        "size": 12796,
+        "snapshot_logical_sha": "b6d7a064818f3d33c3e2382b562d928fb2c30931de2a376eb708955365e9ca40",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "b3c142064ce614b698099daefd3a4da713a3ef88f86d829199cf3688e474e02f",
+        "file": "data/std/financial_availability/1993/financial_quarterly-c863b10a0ed2c27df694__5bde82fb.parquet",
+        "mtime_ns": 1791179371683227000,
+        "rows": 465,
+        "size": 15667,
+        "snapshot_logical_sha": "5bde82fb517c00cbc3b6794675fb4e8937c30c20a963f6cf792e7aae387aba98",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "a4f5d92317796bfbd25106f2ad29af0ba0579f80a2172d781722d5b0a8bb1189",
+        "file": "data/std/financial_availability/1994/financial_quarterly-c863b10a0ed2c27df694__8ca4aca0.parquet",
+        "mtime_ns": 1791179371867964800,
+        "rows": 733,
+        "size": 18346,
+        "snapshot_logical_sha": "8ca4aca03bb1b0b3d28472ff84f6921c47128dd739a06b0fc38a44498bcd636b",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "c55f742f7a45f9ee19439941000e28ba9d47f711f5d7cf48dbf8827365a16d1f",
+        "file": "data/std/financial_availability/1995/financial_quarterly-c863b10a0ed2c27df694__b6cff4c6.parquet",
+        "mtime_ns": 1791179372076302600,
+        "rows": 1536,
+        "size": 22921,
+        "snapshot_logical_sha": "b6cff4c60306fc4d175133860ed14ee24037e0c7053343b3e7da1ef70bbdcf0a",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "b10f609f8ba636e067824fce84b9d7660cec9bc18d7ac72a9cd58dd65bf44bff",
+        "file": "data/std/financial_availability/1996/financial_quarterly-c863b10a0ed2c27df694__a8f9b220.parquet",
+        "mtime_ns": 1791179372294361700,
+        "rows": 2262,
+        "size": 29648,
+        "snapshot_logical_sha": "a8f9b220e241c7f14948625d7f965bb4bac360c97a99fc02c726feab2587060a",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "3ad1a941039d071bb1d7e59db38f8e8ce557cc85867769caf4bd40a80a4597e1",
+        "file": "data/std/financial_availability/1997/financial_quarterly-c863b10a0ed2c27df694__b8de9733.parquet",
+        "mtime_ns": 1791179372539754600,
+        "rows": 3213,
+        "size": 36235,
+        "snapshot_logical_sha": "b8de9733d533eb6625d8dba13a703f3062376cd7b3c1e8d5119011130501c6a5",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "651932e08b7e97880e370adc7a4318767684ed3111a51284afaaf9e92f501951",
+        "file": "data/std/financial_availability/1998/financial_quarterly-c863b10a0ed2c27df694__0259535d.parquet",
+        "mtime_ns": 1791179372768557200,
+        "rows": 4816,
+        "size": 42646,
+        "snapshot_logical_sha": "0259535dedce554bc1322094c290618439d8c0a740b19c9bf7bb550c61df0572",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "97d214d841326f0e7818ca43b70c6586913e47641f122ebb03e9ab9070c17854",
+        "file": "data/std/financial_availability/1999/financial_quarterly-c863b10a0ed2c27df694__7c4699f5.parquet",
+        "mtime_ns": 1791179373016962800,
+        "rows": 5460,
+        "size": 47818,
+        "snapshot_logical_sha": "7c4699f5fd8021246ef1e3c246a06191d56f8d9ff95a02d1c813b5adb24dd948",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "993fd4dbf3ab3df3ce5f8c9eba9952d264d69187e24e2831bcd6a914aa569975",
+        "file": "data/std/financial_availability/2000/financial_quarterly-c863b10a0ed2c27df694__2873aed3.parquet",
+        "mtime_ns": 1791179373292708400,
+        "rows": 9276,
+        "size": 65258,
+        "snapshot_logical_sha": "2873aed3ef6605c28d79b2a3d021e919e8f05963140f1c2959ac6614aa633b59",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "7564b90382e2d77495c840ba1f6c31572895307836da445c833c3fefe3004953",
+        "file": "data/std/financial_availability/2001/financial_quarterly-c863b10a0ed2c27df694__5f4b555e.parquet",
+        "mtime_ns": 1791179373621490100,
+        "rows": 9978,
+        "size": 66757,
+        "snapshot_logical_sha": "5f4b555ede7e0c5678106e558fdc00a9465d0e73aebaa272ea8984ec5455636f",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "807c93901b1a18f6265bb16f72c1295ddc11273a28f4778be52baa1e260f4dbc",
+        "file": "data/std/financial_availability/2002/financial_quarterly-c863b10a0ed2c27df694__f813a5af.parquet",
+        "mtime_ns": 1791179373972703500,
+        "rows": 15619,
+        "size": 83313,
+        "snapshot_logical_sha": "f813a5af8dda4af189c410326cc95d8a72443e2c6adebdb95fee2ccff6b7c5e5",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "3a9ea0cbe299a713f72171d3a19f71cfc33b5c6e140a92785e29eefc343286e1",
+        "file": "data/std/financial_availability/2003/financial_quarterly-c863b10a0ed2c27df694__aeaecf3b.parquet",
+        "mtime_ns": 1791179374352226700,
+        "rows": 18940,
+        "size": 90788,
+        "snapshot_logical_sha": "aeaecf3bdcc4dcf50e5f34212bb91a76f8ac3c40ec1a52509309dea2171e35b5",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "26c4d08ebd3389525b24bafed15428b057a64d10b1ad18e840ea34ddaec595f2",
+        "file": "data/std/financial_availability/2004/financial_quarterly-c863b10a0ed2c27df694__ed33726d.parquet",
+        "mtime_ns": 1791179374726988600,
+        "rows": 20230,
+        "size": 96776,
+        "snapshot_logical_sha": "ed33726df26c37d80cf6dd6cc681c23afbc59b059ce1d2b6bc4e47aa2e94a5d9",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "16e58d21809f53e6cded45ac0b9be2871b121ba578ff31abbb5227f24ceaa421",
+        "file": "data/std/financial_availability/2005/financial_quarterly-c863b10a0ed2c27df694__942dd047.parquet",
+        "mtime_ns": 1791179375137036400,
+        "rows": 20474,
+        "size": 97864,
+        "snapshot_logical_sha": "942dd047ee98544597ab5fe4b8911be8722d9ef4c383678e31eff98b8bc753f2",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "b1feda9ba15fbf0b785471474fa39889833f995b6af0444c9d4bca28ba8ffc7b",
+        "file": "data/std/financial_availability/2006/financial_quarterly-c863b10a0ed2c27df694__dbfb391a.parquet",
+        "mtime_ns": 1791179375524109900,
+        "rows": 20953,
+        "size": 105767,
+        "snapshot_logical_sha": "dbfb391a8fa09db7fac52d41632c6bc2f41944abfb469aab14db126d429dc721",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "540998ca11ef5cc8e20cf491458e8954a2dec57d693da65c41f83c00c6e53773",
+        "file": "data/std/financial_availability/2007/financial_quarterly-c863b10a0ed2c27df694__f7fc88e8.parquet",
+        "mtime_ns": 1791179375933698400,
+        "rows": 24154,
+        "size": 117797,
+        "snapshot_logical_sha": "f7fc88e8fda05604394b3d13edfcda3e88061c8b3b058da80fe00668127b3400",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "43844d405ca6a9676047b29b11515b7a5c8903c303baf70c22e107fab2836d5b",
+        "file": "data/std/financial_availability/2008/financial_quarterly-c863b10a0ed2c27df694__5cbbd002.parquet",
+        "mtime_ns": 1791179376434414600,
+        "rows": 25527,
+        "size": 118626,
+        "snapshot_logical_sha": "5cbbd002d14d0919296e4ee2ea8b1d13b560a186bdae79e0f966bab647142684",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "176604f3241d927e23b5926ed59602f62d2d35c8783b123e4341cf9c721f39cd",
+        "file": "data/std/financial_availability/2009/financial_quarterly-c863b10a0ed2c27df694__1574bd96.parquet",
+        "mtime_ns": 1791179376912711800,
+        "rows": 26717,
+        "size": 125675,
+        "snapshot_logical_sha": "1574bd968d78fa6b67233ef86c9f0e4a1261160d942c278e350ab61bc3b6d1ee",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "35d7f5f847d1ae25910fd4e1712a17191eed8ebe7c1e23a3ac4f7931016a8dec",
+        "file": "data/std/financial_availability/2010/financial_quarterly-c863b10a0ed2c27df694__e3b0d80a.parquet",
+        "mtime_ns": 1791179377484432900,
+        "rows": 31282,
+        "size": 144708,
+        "snapshot_logical_sha": "e3b0d80ad7a7a0a1ea01967f7f6ef4be0139ad0259062f89491551ea6f8717f4",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "6dc25269fe4d69e7ef8835cd9f71655ab32f2f7ed4aaae4dea00a4bbb1dd3100",
+        "file": "data/std/financial_availability/2011/financial_quarterly-c863b10a0ed2c27df694__fc7cace7.parquet",
+        "mtime_ns": 1791179377996588600,
+        "rows": 35673,
+        "size": 160116,
+        "snapshot_logical_sha": "fc7cace73ceff5f4978712112d376989deee7054f674d056c4d26a8fca1f29b4",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "59471b63be013fd912522de7e8e4d1531511a43064c15a90ea318523a957189c",
+        "file": "data/std/financial_availability/2012/financial_quarterly-c863b10a0ed2c27df694__557a24b4.parquet",
+        "mtime_ns": 1791179378556393400,
+        "rows": 38358,
+        "size": 171013,
+        "snapshot_logical_sha": "557a24b4383daf647cfc671e18ef5e47a18c271733f02dfdeca241f53d9e326d",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "b7141ddb77454dd53c04299d8d8b2665bfbc616833e61e7ef8c379d63a0b524f",
+        "file": "data/std/financial_availability/2013/financial_quarterly-c863b10a0ed2c27df694__b7895708.parquet",
+        "mtime_ns": 1791179379083721200,
+        "rows": 39066,
+        "size": 179952,
+        "snapshot_logical_sha": "b78957082327fc6e07384212f7a1edfacb4fd739baf62a5ba26ad82672e5fa4b",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "5a21aa425716b859292cbc39e848ef3f2e0a97fc6491228165932217168d40cd",
+        "file": "data/std/financial_availability/2014/financial_quarterly-c863b10a0ed2c27df694__abba7b9d.parquet",
+        "mtime_ns": 1791179379673535100,
+        "rows": 40674,
+        "size": 192387,
+        "snapshot_logical_sha": "abba7b9d7b4e246daad703999754b7a8667abac7d3ed94b56365960ebcba6cce",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "077d014f0047abca433eacdaf1b7ab27e4bd69dcfa9b858ea4b61c48f9db75d6",
+        "file": "data/std/financial_availability/2015/financial_quarterly-c863b10a0ed2c27df694__ed23b8bb.parquet",
+        "mtime_ns": 1791179380294523200,
+        "rows": 44508,
+        "size": 201051,
+        "snapshot_logical_sha": "ed23b8bb3fe7922f0c61e2377d2f76672cdbfeebdc9347b7e7a27d80816edf8d",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "8b2bef1997abb1b370cd534fb3f17b3dc50f02462959747baa12875e691ed9cb",
+        "file": "data/std/financial_availability/2016/financial_quarterly-c863b10a0ed2c27df694__9555a5f8.parquet",
+        "mtime_ns": 1791179380988953900,
+        "rows": 48111,
+        "size": 223743,
+        "snapshot_logical_sha": "9555a5f8750fa07fa492f1e12f05052cc64a123179b8b93ae719feb5ceaab30d",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "ed7e7cd3d465229fd2949fc3bbf5692344f9137ccc237e5c677fe2aeba0cb182",
+        "file": "data/std/financial_availability/2017/financial_quarterly-c863b10a0ed2c27df694__7be39f5d.parquet",
+        "mtime_ns": 1791179381583383100,
+        "rows": 54258,
+        "size": 263212,
+        "snapshot_logical_sha": "7be39f5d9b1084d86cd624daf762b7d2b53552779f765ec47abe7f38712aa0f8",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "9bad4a2e4272b60b1e698259d84e6a8120c5fe51e794bf340824d38299ea02c1",
+        "file": "data/std/financial_availability/2018/financial_quarterly-c863b10a0ed2c27df694__f78668d5.parquet",
+        "mtime_ns": 1791179382231721900,
+        "rows": 57397,
+        "size": 275952,
+        "snapshot_logical_sha": "f78668d5961e6f7e8f5ceada04e371a28ebdbb10c0d5a721f1437dc9051ea227",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "6b3f47cc97d2fad98cf3c948f5edb3ebdf73564700106da4ba82f8444402035f",
+        "file": "data/std/financial_availability/2019/financial_quarterly-c863b10a0ed2c27df694__dacf6edd.parquet",
+        "mtime_ns": 1791179382843917700,
+        "rows": 59670,
+        "size": 281401,
+        "snapshot_logical_sha": "dacf6edd36696f8521a7714c1a99ea5524a27a66c5d811e629d66c62f901fffe",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "ef9329ef6a74c296bdb0fc61cb3e8a265f153dbb03211f09b56805904258431f",
+        "file": "data/std/financial_availability/2020/financial_quarterly-c863b10a0ed2c27df694__a68a7cef.parquet",
+        "mtime_ns": 1791179383565489500,
+        "rows": 64797,
+        "size": 314941,
+        "snapshot_logical_sha": "a68a7cef7d0b6e27a047af76157000246d4f80c40e765af63f1f368b315a8859",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "333add6ef19b92d610b28879df115e9ec4182f46eda68c9f3b1fc81dd506b313",
+        "file": "data/std/financial_availability/2021/financial_quarterly-c863b10a0ed2c27df694__0d6e7bed.parquet",
+        "mtime_ns": 1791179384239236900,
+        "rows": 71924,
+        "size": 340876,
+        "snapshot_logical_sha": "0d6e7bed85a65dc40491b853e38deb558275b45e24a4c3526444e458da36951b",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "38b7015dc970b53195e57c54e1e0bcbccf427f2f96e47e3dcc437a0dae32833a",
+        "file": "data/std/financial_availability/2022/financial_quarterly-c863b10a0ed2c27df694__4ea670e1.parquet",
+        "mtime_ns": 1791179384945737900,
+        "rows": 77393,
+        "size": 357903,
+        "snapshot_logical_sha": "4ea670e17ce8577a63999959b41c9d6a717bb880aceae8ee47230b91117152c1",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "2b9c6570aa3c79b0e5034b3603677e105d3d3594f8bfa7d8cb65c8d1a705f5fd",
+        "file": "data/std/financial_availability/2023/financial_quarterly-c863b10a0ed2c27df694__0c39325a.parquet",
+        "mtime_ns": 1791179385713961900,
+        "rows": 80820,
+        "size": 371936,
+        "snapshot_logical_sha": "0c39325a4a2367ad2a38b3a82ef1239cf605d013fc65158a421b6aed1628a138",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "255705808cf19c191bee1ae6571f6b6ac6cb35857bb5b272daedaf04fb4d4c2a",
+        "file": "data/std/financial_availability/2024/financial_quarterly-c863b10a0ed2c27df694__2f85ce04.parquet",
+        "mtime_ns": 1791179386477641400,
+        "rows": 81853,
+        "size": 368231,
+        "snapshot_logical_sha": "2f85ce04b157b269885740883a1ac78d4b7bbd4fc3df6a55ad7f7e8969bec0ba",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "9d12c95b6db47da7a9889ac2d3f0501144fa4dfb64ab8e707d1b4fc099dc52c4",
+        "file": "data/std/financial_availability/2025/financial_quarterly-c863b10a0ed2c27df694__771f1c0a.parquet",
+        "mtime_ns": 1791179387196758200,
+        "rows": 82962,
+        "size": 361380,
+        "snapshot_logical_sha": "771f1c0aa6756d3b7ef3305d9410291ae308fba5ffaa7d86b663d316fedc8e38",
+        "table": "financial_availability"
+      },
+      {
+        "bytes_sha256": "cf81ee0c65ff0f1af88d8808bc0422cfc98702a1d12e8b0f919daa30f462528a",
+        "file": "data/std/financial_availability/2026/financial_quarterly-c863b10a0ed2c27df694__50299656.parquet",
+        "mtime_ns": 1791179387718858200,
+        "rows": 16767,
+        "size": 154438,
+        "snapshot_logical_sha": "50299656dd0f31515add979aa6d456d03d3ff71eb6db93ff554e3e9a29d068fa",
+        "table": "financial_availability"
+      }
+    ],
+    "projection_bytes_sha256": "ebbfdc41bd15caeb50d56ea06fd4b682d60653b2780cd26eb628ce2d253edfc3",
+    "projection_columns": [
+      "instrument",
+      "source_sha256",
+      "source_row",
+      "report_period",
+      "version_evidence",
+      "经营活动产生的现金流量净额",
+      "资产总计",
+      "营业收入",
+      "流动资产合计",
+      "流动负债合计",
+      "非流动资产合计",
+      "非流动负债合计",
+      "实收资本(或股本)",
+      "利润总额",
+      "财务费用",
+      "总资产净利润率(ROA)A",
+      "总资产净利润率(ROA)B",
+      "总资产净利润率(ROA)C",
+      "总资产净利润率(ROA)TTM",
+      "净资产收益率（ROE）A",
+      "净资产收益率（ROE）B",
+      "净资产收益率（ROE）C",
+      "净资产收益率（ROE）TTM",
+      "营业毛利率",
+      "营业毛利率TTM"
+    ],
+    "snapshot": "20261006-145049-e06c",
+    "snapshot_sha256": "9449dc18911fe5f27fe65f55f5849602bec0cba998335b74a6d2b1377e19af60",
+    "source_sha256": [
+      "67873dc4ab259eb22bb79fcf98d506eb7dd285b1c54f89afa6ddefb2cf89f01b",
+      "53a46f09a3a8a57415a507665e49b7a5c2fbf626489cabd38e8c4fb50939860f"
+    ]
+  },
+  "case_id": "ffscore-threefactor-batch93-binding",
+  "nature": "in_progress_fresh_byte_sha_and_logical_snapshot_identities",
+  "purpose": "147财务分区2205405257字节按导入回执核SHA，快照逻辑指纹另列；候选代码/源码/投影/上游92凭据绑定，不计新发布",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/input-binding.json",
+    "sha256": "596fea2443b8e2a44ad267a0f7da2b2a799a0ccc43b65b3e070159094870e5ac"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "case": {
+    "blocked_dates": [],
+    "blocked_windows": 0,
+    "first": "2010-06-18",
+    "inputs": [
+      {
+        "after_cutoff": 2,
+        "case": "index-sh000016",
+        "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/index-sh000016/parsed.parquet",
+        "rows": 5526,
+        "sha256": "a23e3dba0b646d6f787c6d98f0dcf1ec6ec97f7bb1066490ee69927aa95a7655"
+      },
+      {
+        "after_cutoff": 2,
+        "case": "index-sz399006",
+        "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/index-sz399006/parsed.parquet",
+        "rows": 3969,
+        "sha256": "4809ae5cc0e98a53c6f505ab42c361091c580e3c5ed164e55722a7b72e897d4f"
+      }
+    ],
+    "joined_rows": 3967,
+    "last": "2026-09-29",
+    "limits": [
+      "Vendor historical index reference only; platform versions/default filling unproved",
+      "Common-date complete11-row windows use explicit arrays; current pandas original label failure retained separately",
+      "Daily signal coverage is not monthly15:00 trading, ETF mapping or portfolio return"
+    ],
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "original_signal": false,
+    "return_max_abs_difference": 3.1051550219984847e-16,
+    "signal_counts": {
+      "1": 1000,
+      "2": 1682,
+      "3": 1275
+    },
+    "signal_differences": 0,
+    "status": "ok",
+    "windows": 3957
+  },
+  "case_id": "FOF-two-eight-batch74-index",
+  "nature": "supplier_reference_index_arithmetic",
+  "purpose": "2010-06-18至2026-09-29的3957个11行窗口，独立信号差异0；各自日期必须一致，截止后行排除，不等于15:00交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch74/20261008-FOF-two-eight/index-component-research.json",
+    "sha256": "6bac79a9813ab531e7ece01c4f16b495ad9ff09888cf43dfa34641193f9dfd4f"
+  }
+}

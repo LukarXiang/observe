@@ -1,0 +1,102 @@
+{
+  "case": {
+    "after": {
+      "command": [
+        "/home/zuozhe/envs/quant/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_research_metadata.py"
+      ],
+      "log_sha256": "9434acd0727e41589847bccc0ac02aec548760fdce0558e5c4a1ba03f1c57665",
+      "renderer_sha256": "41b7d5e39acfa1483389866ddd586010382b5b1411c08c1db74a41dd813cb08f",
+      "returncode": 0,
+      "test_sha256": "59893b2183a28851f567fcef016446851af652255dac39ff01e0847e562919da"
+    },
+    "batch66_receipt": {
+      "path": "docs/handoff/2026-10-08-batch66-verification.json",
+      "sha256": "ff20ff4ba2e86d6237c82fbe0ca44aa14d25699e7c01620602a224efd1925f1a"
+    },
+    "before": {
+      "command": [
+        "/home/zuozhe/envs/quant/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_research_metadata.py",
+        "-k",
+        "current_parent_count"
+      ],
+      "log_sha256": "1f538c23edcd4edae2c7bb6f32fc2961f6f2aca96063686361862522b9890f7c",
+      "renderer_sha256": "acdf125ef74556c8396d04f10acb24a37c2980f9e1dc8cad3ce9e4550a2e5af9",
+      "returncode": 1
+    },
+    "cause": "render() explanation hardcoded 67 while current.local_strategy_runs was 68",
+    "checks": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/export_research_metadata.py",
+          "tests/unit/test_research_metadata.py"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "All checks passed!\n"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      }
+    ],
+    "fix": "Read explanation parent count from current.local_strategy_runs",
+    "formal_strategy_acceptance": false,
+    "new_trading_backtests": 0,
+    "payload_references": [
+      {
+        "bytes": 99,
+        "path": "data/staging/strategies-batch66/20261008-metadata-count-recovery/after-pytest.log",
+        "sha256": "9434acd0727e41589847bccc0ac02aec548760fdce0558e5c4a1ba03f1c57665"
+      },
+      {
+        "bytes": 408,
+        "path": "data/staging/strategies-batch66/20261008-metadata-count-recovery/after.json",
+        "sha256": "f5e084e53ec6a0baed678f74eec7ce3466bd8192e8fdc59af6bd28a662cd0111"
+      },
+      {
+        "bytes": 1542,
+        "path": "data/staging/strategies-batch66/20261008-metadata-count-recovery/before-pytest.log",
+        "sha256": "1f538c23edcd4edae2c7bb6f32fc2961f6f2aca96063686361862522b9890f7c"
+      },
+      {
+        "bytes": 358,
+        "path": "data/staging/strategies-batch66/20261008-metadata-count-recovery/before.json",
+        "sha256": "0d277af53a57c348b2ba51635b6a808ab429df46bf146c763e09e518a822c2b3"
+      },
+      {
+        "bytes": 35193,
+        "path": "data/staging/strategies-batch66/20261008-metadata-count-recovery/export_research_metadata.before.py",
+        "sha256": "acdf125ef74556c8396d04f10acb24a37c2980f9e1dc8cad3ce9e4550a2e5af9"
+      }
+    ],
+    "scope": "metadata_status_renderer_regression_only",
+    "status": "ok",
+    "tests_passed": 21
+  },
+  "case_id": "metadata-count-batch66",
+  "nature": "metadata_renderer_regression",
+  "purpose": "修复续接页解释段硬编码67父运行，新增红回归及21元数据测试；冻结旧状态不改写",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-08-batch66-metadata-render-verification.json",
+    "sha256": "6e987b808644bf153a5c2b3e3fbf92ca956c8bbf118b6cb79f45a2119089dcd6"
+  }
+}

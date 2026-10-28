@@ -1,0 +1,29 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/ruff",
+      "check",
+      "scripts/review_strategy_batch79.py",
+      "tests/unit/test_batch79_research.py"
+    ],
+    "copies": {
+      "failure.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "review_strategy_batch79.py": "d244f4ba0d078e8b6ea5882046470643534e958ed33e3a8d24fb4f72e1dbc74f",
+      "ruff.log": "551807d22b1a999e98891273977b745187cc3d23813095b1a961c2dc31713593",
+      "test_batch79_research.py": "e9d838f263f81be5099919f43acc8df1f3fcf2aaeaf6dfb07d2ef8e245c72856"
+    },
+    "log": "data/staging/strategies-batch79/20261009-development-initial/ruff.log",
+    "log_sha256": "551807d22b1a999e98891273977b745187cc3d23813095b1a961c2dc31713593",
+    "not_a_backtest": true,
+    "returncode": 1,
+    "status": "development_failure"
+  },
+  "case_id": "rsrs-batch79-syntax-failure",
+  "nature": "immutable_development_failure",
+  "purpose": "四元return跨行漏括号导致语法错误；初稿脚本/测试及Ruff失败原档保留，不计回测",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch79/20261009-development-initial/failure.json",
+    "sha256": "10681ba3c7920ce5f8dde8ceca5f7bff9310a50314e8f4fa89fc6b3057edb9de"
+  }
+}

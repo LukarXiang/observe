@@ -1,0 +1,162 @@
+{
+  "case": {
+    "fresh_network_blocked_processes": 2,
+    "new_trading_backtests": 0,
+    "offline_differences": 0,
+    "output_files": 4,
+    "protection": {
+      "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f",
+      "mutable_registry_files_excluded": 0,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_unchanged": 6614,
+      "old_index_rows_unchanged": 5280,
+      "old_partition_metadata_unchanged": 398,
+      "partition_check": "size/mtime only; no fresh full hash",
+      "status": "ok"
+    },
+    "stage_only": true,
+    "status": "ok_component_stage",
+    "summary": {
+      "ETF_adjustment_events_and_intraday_execution_proven": false,
+      "annual_decimal_threshold_differences": 0,
+      "annual_scalar_reference_rows": 225,
+      "annual_skipped": 35,
+      "by_year": [
+        {
+          "complete_two_horizons": 0,
+          "rows": 220,
+          "year": 2007
+        },
+        {
+          "complete_two_horizons": 0,
+          "rows": 246,
+          "year": 2008
+        },
+        {
+          "complete_two_horizons": 28,
+          "rows": 244,
+          "year": 2009
+        },
+        {
+          "complete_two_horizons": 242,
+          "rows": 242,
+          "year": 2010
+        },
+        {
+          "complete_two_horizons": 244,
+          "rows": 244,
+          "year": 2011
+        },
+        {
+          "complete_two_horizons": 243,
+          "rows": 243,
+          "year": 2012
+        },
+        {
+          "complete_two_horizons": 238,
+          "rows": 238,
+          "year": 2013
+        },
+        {
+          "complete_two_horizons": 245,
+          "rows": 245,
+          "year": 2014
+        },
+        {
+          "complete_two_horizons": 244,
+          "rows": 244,
+          "year": 2015
+        },
+        {
+          "complete_two_horizons": 244,
+          "rows": 244,
+          "year": 2016
+        },
+        {
+          "complete_two_horizons": 244,
+          "rows": 244,
+          "year": 2017
+        },
+        {
+          "complete_two_horizons": 243,
+          "rows": 243,
+          "year": 2018
+        },
+        {
+          "complete_two_horizons": 244,
+          "rows": 244,
+          "year": 2019
+        },
+        {
+          "complete_two_horizons": 243,
+          "rows": 243,
+          "year": 2020
+        },
+        {
+          "complete_two_horizons": 243,
+          "rows": 243,
+          "year": 2021
+        },
+        {
+          "complete_two_horizons": 242,
+          "rows": 242,
+          "year": 2022
+        },
+        {
+          "complete_two_horizons": 242,
+          "rows": 242,
+          "year": 2023
+        },
+        {
+          "complete_two_horizons": 242,
+          "rows": 242,
+          "year": 2024
+        },
+        {
+          "complete_two_horizons": 243,
+          "rows": 243,
+          "year": 2025
+        },
+        {
+          "complete_two_horizons": 180,
+          "rows": 180,
+          "year": 2026
+        }
+      ],
+      "complete_original_signals": 0,
+      "diagnostic_cases": 29,
+      "first": "2007-02-05",
+      "formal_source_research_acceptance": false,
+      "incomplete_two_horizons_or_zero_range": 682,
+      "independent_extrema_differences": 0,
+      "last": "2026-09-29",
+      "library_goal_complete": false,
+      "new_trading_backtests": 0,
+      "one_year_windows": 4776,
+      "original_69_count_type": "375.0/625.0; explicit integral-float operand adapter, platform acceptance unproven",
+      "original_85_get_zf_reproduced": false,
+      "original_MACD_computed": false,
+      "status": "native_operands_and_original_diagnostics_only",
+      "two_horizon_windows": 4094
+    },
+    "tests": {
+      "actual_imports_checked": 3,
+      "command_sha256": {
+        "data/staging/strategies-batch106/20261011-monthly-slots-value-average-v1/isolated-tests.json": "0fff87eb38224fdbcc02e60c6e6a99d242276792bdb7331beee7a0f03b53ae0f",
+        "data/staging/strategies-batch106/20261011-monthly-slots-value-average-v1/local-tests.json": "90417a0d9ded5cf33f1a3c285621c2d43306da6fd0fcb108c835da39c60373b0"
+      },
+      "implementation_copies": 51,
+      "isolated_tests": 24,
+      "local_tests": 24,
+      "status": "ok"
+    }
+  },
+  "case_id": "batch106-component-stage",
+  "nature": "verified_original_diagnostics_native_operands_not_trading",
+  "purpose": "29诊断、4776/4094极值与225标量，24本机24复制/51副本及旧资产保护；原月MACD与交易0",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch106/20261011-monthly-slots-value-average-v1/checked.json",
+    "sha256": "60bc1cca926f94e334dc5d8ca07bd515034674b30e85ecc50b0b0e21cb0f2051"
+  }
+}

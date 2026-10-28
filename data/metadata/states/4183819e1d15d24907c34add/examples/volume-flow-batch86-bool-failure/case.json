@@ -1,0 +1,28 @@
+{
+  "case": {
+    "command": "~/envs/quant/.venv/bin/python -m scripts.verify_offline_tests -q tests/unit/test_batch86_research.py",
+    "diagnosis": "Formula returns numpy.bool_ on terminal arithmetic comparison and PythonFalse on early branch. Study/diagnostics already normalize both with bool; test incorrectly assumes return identity.",
+    "exit_code": 1,
+    "failure": "test_independent_search_uses_closest_anchor: expectedTrue; actualnumpy.True_; identity assertion fails",
+    "frozen_files": {
+      "review_strategy_batch86.py": "5b36002a8d9dd045d1e7c32c7c55b76c7d2897b15506d0f0114cbdfff85b665d",
+      "test_batch86_research.py": "c285ea22540063aadb40034857f408cfad8596c713d1c69b3129025582986fb0"
+    },
+    "not_a_backtest": true,
+    "repair": "Normalize test assertion with bool. Original source, driver formulas and stage evidence unchanged.",
+    "status": "failed",
+    "tests": {
+      "failed": 1,
+      "passed": 24,
+      "warnings": 1
+    }
+  },
+  "case_id": "volume-flow-batch86-bool-failure",
+  "nature": "immutable_numpy_boolean_identity_test_failure",
+  "purpose": "第二轮1失败24通过：numpy.True_身份断言失效，测试显式bool；study本来已归一化，原公式不变",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/development-failure-bool/failure.json",
+    "sha256": "86997bf8d9015cd93d6a5370a41a10255b4c4571f347694b234fc566b93e4f45"
+  }
+}

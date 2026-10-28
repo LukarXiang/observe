@@ -1,0 +1,46 @@
+{
+  "status": "stage_checks_passed",
+  "formal_acceptance": false,
+  "scope": "Two original same-AST all-weather sources, four historical candidate payloads, exact standard inventory and native compatibility failure; return repair pending.",
+  "directory": "data/staging/strategies-batch89/20261009-all-weather-source-stage",
+  "snapshot": "20261006-145049-e06c",
+  "current_checkpoint": "20261009-062918-e627",
+  "accepted_checkpoint": "20261009-061912-e023",
+  "accepted_source_count": 258,
+  "source_count": 695,
+  "remaining_source_count": 437,
+  "locally_backtested_sources": 12,
+  "strategy_parent_runs": 69,
+  "implementation_sha256": {
+    "scripts/review_strategy_batch89.py": "f69911f74d3df9ba5dff333e73854bce36cf14876bbcdbf1fef1ed371ffc251c",
+    "tests/unit/test_batch89_stage.py": "48dda98cc2cb65f053d517d64bc47268c68842bbdd5130b2b52eef43c6cd703e"
+  },
+  "implementation_copy_sha256": {
+    "data/staging/strategies-batch89/20261009-all-weather-source-stage/implementation-checked/review_strategy_batch89.py": "f69911f74d3df9ba5dff333e73854bce36cf14876bbcdbf1fef1ed371ffc251c",
+    "data/staging/strategies-batch89/20261009-all-weather-source-stage/implementation-checked/test_batch89_stage.py": "48dda98cc2cb65f053d517d64bc47268c68842bbdd5130b2b52eef43c6cd703e"
+  },
+  "evidence_sha256": {
+    "data/staging/strategies-batch89/20261009-all-weather-source-stage/input-binding.json": "a2a6130fed9ed8f9e916f6292be7a47a21f6810f2f57aaac10d6b31e26e0beff",
+    "data/staging/strategies-batch89/20261009-all-weather-source-stage/sources-frozen.json": "3a27e1a882aaab8a59734d5c3cc30b4dc96c5ae2ac7017d5d7ebcd6171d7be09",
+    "data/staging/strategies-batch89/20261009-all-weather-source-stage/reused-inputs.json": "a4b1fe71058ee99e9b402ff9922fcb777b998ac91fca4a2da9a8439bfa751652",
+    "data/staging/strategies-batch89/20261009-all-weather-source-stage/dependency-inventory.json": "396eba499d0b4f27d54f73943410f04c630dad8dbfd47a99a7805b5d898b9832",
+    "data/staging/strategies-batch89/20261009-all-weather-source-stage/candidate-coverage.json": "87af442fd73d13c1226b551db66850412e3d9f22a98fa1a5bc2ff75d874a3459",
+    "data/staging/strategies-batch89/20261009-all-weather-source-stage/compatibility-diagnostics.json": "16fdec9a4da8726f4eab08d28ff241829715fc515af707c3bc89eb6a3960b807",
+    "data/staging/strategies-batch89/20261009-all-weather-source-stage/command-results.json": "fdeb1b2917df3002a21789c832d0b3d8b2373076237cb6c5b3917d488f468723",
+    "data/staging/strategies-batch89/20261009-all-weather-source-stage/protection.json": "82f9880211c040118c41dac0d3bf945caf3241f6d7ae5f59fa6898f56fe415a8",
+    "data/staging/strategies-batch89/20261009-development-first-tests/result.json": "48b27b7394ef79d931d38da51f44d544b08821128f953b7dbb9ea0bd2ac24d78"
+  },
+  "checks": {"related_tests": 149, "new_stage_tests": 6, "warnings": 1, "full_suite_run": false, "ruff": "passed", "git_diff_check": "passed", "raw_pytest_log_archived": false},
+  "specialist_reviews": {"security": {"agent": "batch89_stage_security", "findings": []}, "architecture": {"agent": "batch89_stage_architecture", "findings": []}},
+  "adversarial_review": {"findings": [], "examined": ["SHA-pinned source with no platform/top-level execution", "Candidate cutoff/date uniqueness/positive closes and jump evidence", "No natural-day fill correction while pending", "Candidate date intersection not an ES window count or trade history", "No new HTTP requests, publication, replacement pool or parallel fee/NAV implementation", "Frozen development errors and previous accepted records preserved"]},
+  "old_asset_protection": {"status": "ok", "control_SHA_files": 5363, "partition_size_mtime_files": 398, "calendar_rows": 7938, "index_rows": 5280, "fresh_full_partition_hash": false},
+  "common_candidate_observed_dates": 3201,
+  "common_candidate_range": ["2013-07-31", "2026-09-29"],
+  "return_semantics_decision": "pending_D-allweather-fill",
+  "new_ES_weights_or_original_signals": 0,
+  "new_trading_backtests": 0,
+  "new_requests": 0,
+  "not_a_backtest": true,
+  "platform_equivalence_proven": false,
+  "library_goal_complete": false
+}

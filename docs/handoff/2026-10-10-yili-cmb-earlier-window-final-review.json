@@ -1,0 +1,489 @@
+{
+ "status": "ok",
+ "progress": {
+  "checkpoint": "20261010-205315-172a",
+  "note": "Approved Yili/CMB earlier844sessions three costs,1662orders/1374fills independently checked,offline match0; base-3.598946%; correction of initial progress prose only",
+  "catalog_id": "021347e0816f40d6a6b9",
+  "catalog_sha256": "211bd8c261b55082523bdc123e39f06b81053a919b921cad5f457d21e89ed6ce",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 273,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 77,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261010-205315-172a"
+ },
+ "accepted_checkpoint": "20261010-205315-172a",
+ "formal_trading_acceptance": true,
+ "formal_source_research_acceptance": false,
+ "receipt_file": "docs/handoff/2026-10-10-yili-cmb-earlier-window-verification.json",
+ "receipt_sha256": "ab17bb8fbea79439d55ea715450f5e48015839417d384a9fea5a6baf4d6461be",
+ "final_binding_file": "data/staging/strategies-history-supplement/20261010-yili-cmb-pre2013/final-binding.json",
+ "final_binding_sha256": "612646fe08296f800a1d47bb82806c9553a1baafa3ae3444f47f911ef975d937",
+ "formal_report": "docs/tasks/2026-10-10-伊利招行早期区间补充回测-完成报告.md",
+ "formal_report_sha256": "277673c4a4d235e9b708f7e5eb4a51e3b5637b05d2adb497586e0b2c3051e8b1",
+ "scope": "Existing approved dynamic anchoring/target-weight variant earlier-window supplement; original platform not proven",
+ "source_research_checkpoint": "20261010-203913-69b2",
+ "source_sha256": "f07782275b866016d4af84b381cb225777fb03ca7de0a6caa8aa72b45e65b7d1",
+ "config_sha256": "f2c8159bc254ae968a305c796487db35b89399441833eb341f9483d182d644c6",
+ "run_id": "20261010-204607-48a7e0-strategy-b4fc",
+ "reproduction_run_id": "20261010-204700-48a7e0-strategy-0597",
+ "reproduction": {
+  "of": "/mnt/d/projects/observe/data/runs/20261010-204607-48a7e0-strategy-b4fc",
+  "result": "match",
+  "differences": 0
+ },
+ "sessions": 844,
+ "Book_days_three_costs": 2532,
+ "valid_signal_days": 223,
+ "invalid_hold_state_days": 435,
+ "excluded_zero_valid_sessions": 1139,
+ "independent_orders_checked": 1662,
+ "independent_fills_and_fees_checked": 1374,
+ "independent_prior20_amount_caps_checked": 1374,
+ "results": [
+  {
+   "scenario": "base",
+   "status": "success_limited",
+   "metrics": {
+    "total_return": -0.03598945999999992,
+    "annual_return": -0.010454491958556189,
+    "annual_vol": 0.2204713025365321,
+    "sharpe": 0.06201400348025903,
+    "max_drawdown": -0.24864226454990768,
+    "drawdown_peak": 704,
+    "drawdown_trough": 817
+   },
+   "trading": {
+    "cash_share_mean": 0.2813336268101805,
+    "fee_ratio_to_initial": 0.00677746,
+    "fees": {
+     "commission": 3540.52,
+     "fee": 6777.46,
+     "stamp_tax": 3091.64,
+     "transfer_fee": 145.3
+    },
+    "fill_rate": 0.8339483394833949,
+    "filled_orders": 452,
+    "max_single_weight_mean": 0.4906585056625273,
+    "orders": 542,
+    "partial_fills": 123,
+    "reject_reasons": {
+     "cash": 84,
+     "limit_down": 1,
+     "suspended": 5
+    },
+    "stale_price_days": 18,
+    "top5_weight_mean": 0.7176378402816361,
+    "turnover_half_daily_mean": 0.0041572704805185835,
+    "turnover_two_sided_daily_mean": 0.008314540961037167
+   },
+   "yearly": [
+    {
+     "year": 2010,
+     "sessions": 196,
+     "metrics": {
+      "annual_return": 0.0,
+      "annual_vol": 0.0,
+      "drawdown_peak": 0,
+      "drawdown_trough": 0,
+      "max_drawdown": 0.0,
+      "sharpe": null,
+      "total_return": 0.0
+     }
+    },
+    {
+     "year": 2011,
+     "sessions": 244,
+     "metrics": {
+      "annual_return": -0.0002314474344866646,
+      "annual_vol": 0.21837448880043261,
+      "drawdown_peak": 48,
+      "drawdown_trough": 109,
+      "max_drawdown": -0.1419408674534688,
+      "sharpe": 0.10788374977101609,
+      "total_return": -0.00023335999999996027
+     }
+    },
+    {
+     "year": 2012,
+     "sessions": 243,
+     "metrics": {
+      "annual_return": 0.05092455055644418,
+      "annual_vol": 0.20508026358301845,
+      "drawdown_peak": 45,
+      "drawdown_trough": 136,
+      "max_drawdown": -0.1982035071473094,
+      "sharpe": 0.3442823671626014,
+      "total_return": 0.051140274094362725
+     }
+    },
+    {
+     "year": 2013,
+     "sessions": 161,
+     "metrics": {
+      "annual_return": -0.12165060324880317,
+      "annual_vol": 0.3464274444744164,
+      "drawdown_peak": 21,
+      "drawdown_trough": 134,
+      "max_drawdown": -0.24864226454990768,
+      "sharpe": -0.20378593033498002,
+      "total_return": -0.08267661531697479
+     }
+    }
+   ],
+   "blocked": null
+  },
+  {
+   "scenario": "fees_x2",
+   "status": "success_limited",
+   "metrics": {
+    "total_return": -0.042355240000000016,
+    "annual_return": -0.012332528194508363,
+    "annual_vol": 0.2203324984611248,
+    "sharpe": 0.05329611094294681,
+    "max_drawdown": -0.24857717424697612,
+    "drawdown_peak": 704,
+    "drawdown_trough": 817
+   },
+   "trading": {
+    "cash_share_mean": 0.28138791943927727,
+    "fee_ratio_to_initial": 0.01352624,
+    "fees": {
+     "commission": 7099.44,
+     "fee": 13526.24,
+     "stamp_tax": 6138.3,
+     "transfer_fee": 288.5
+    },
+    "fill_rate": 0.8154121863799283,
+    "filled_orders": 455,
+    "max_single_weight_mean": 0.49058886874019453,
+    "orders": 558,
+    "partial_fills": 124,
+    "reject_reasons": {
+     "cash": 96,
+     "limit_down": 1,
+     "suspended": 6
+    },
+    "stale_price_days": 18,
+    "top5_weight_mean": 0.7175848997215994,
+    "turnover_half_daily_mean": 0.00414097599898057,
+    "turnover_two_sided_daily_mean": 0.00828195199796114
+   },
+   "yearly": [
+    {
+     "year": 2010,
+     "sessions": 196,
+     "metrics": {
+      "annual_return": 0.0,
+      "annual_vol": 0.0,
+      "drawdown_peak": 0,
+      "drawdown_trough": 0,
+      "max_drawdown": 0.0,
+      "sharpe": null,
+      "total_return": 0.0
+     }
+    },
+    {
+     "year": 2011,
+     "sessions": 244,
+     "metrics": {
+      "annual_return": -0.0023009162378453407,
+      "annual_vol": 0.2183725099555353,
+      "drawdown_peak": 48,
+      "drawdown_trough": 109,
+      "max_drawdown": -0.14244434403837447,
+      "sharpe": 0.09839266023396177,
+      "total_return": -0.0023199099999999806
+     }
+    },
+    {
+     "year": 2012,
+     "sessions": 243,
+     "metrics": {
+      "annual_return": 0.04786357640479766,
+      "annual_vol": 0.20489429545002058,
+      "drawdown_peak": 45,
+      "drawdown_trough": 136,
+      "max_drawdown": -0.19872790378902572,
+      "sharpe": 0.33017230234400297,
+      "total_return": 0.04806603888426797
+     }
+    },
+    {
+     "year": 2013,
+     "sessions": 161,
+     "metrics": {
+      "annual_return": -0.12376990248941766,
+      "annual_vol": 0.34613121028037314,
+      "drawdown_peak": 21,
+      "drawdown_trough": 134,
+      "max_drawdown": -0.24857717424697612,
+      "sharpe": -0.21122065118186253,
+      "total_return": -0.08414971952631023
+     }
+    }
+   ],
+   "blocked": null
+  },
+  {
+   "scenario": "slippage_x2",
+   "status": "success_limited",
+   "metrics": {
+    "total_return": -0.042220900000000006,
+    "annual_return": -0.012292803290981924,
+    "annual_vol": 0.2203345515827366,
+    "sharpe": 0.05348037288097739,
+    "max_drawdown": -0.2485718119852509,
+    "drawdown_peak": 704,
+    "drawdown_trough": 817
+   },
+   "trading": {
+    "cash_share_mean": 0.2813658944696833,
+    "fee_ratio_to_initial": 0.0068479,
+    "fees": {
+     "commission": 3610.08,
+     "fee": 6847.9,
+     "stamp_tax": 3092.51,
+     "transfer_fee": 145.31
+    },
+    "fill_rate": 0.8309608540925267,
+    "filled_orders": 467,
+    "max_single_weight_mean": 0.4906257237638786,
+    "orders": 562,
+    "partial_fills": 120,
+    "reject_reasons": {
+     "cash": 88,
+     "limit_down": 1,
+     "suspended": 6
+    },
+    "stale_price_days": 18,
+    "top5_weight_mean": 0.7176069854300573,
+    "turnover_half_daily_mean": 0.004172247715572543,
+    "turnover_two_sided_daily_mean": 0.008344495431145085
+   },
+   "yearly": [
+    {
+     "year": 2010,
+     "sessions": 196,
+     "metrics": {
+      "annual_return": 0.0,
+      "annual_vol": 0.0,
+      "drawdown_peak": 0,
+      "drawdown_trough": 0,
+      "max_drawdown": 0.0,
+      "sharpe": null,
+      "total_return": 0.0
+     }
+    },
+    {
+     "year": 2011,
+     "sessions": 244,
+     "metrics": {
+      "annual_return": -0.0025114703479420797,
+      "annual_vol": 0.2184668893958682,
+      "drawdown_peak": 48,
+      "drawdown_trough": 109,
+      "max_drawdown": -0.14247396799321188,
+      "sharpe": 0.0974776334446427,
+      "total_return": -0.0025321999999999845
+     }
+    },
+    {
+     "year": 2012,
+     "sessions": 243,
+     "metrics": {
+      "annual_return": 0.0482847789519929,
+      "annual_vol": 0.20487264878862818,
+      "drawdown_peak": 45,
+      "drawdown_trough": 136,
+      "max_drawdown": -0.19850292144840953,
+      "sharpe": 0.33214740958644695,
+      "total_return": 0.048489064007880556
+     }
+    },
+    {
+     "year": 2013,
+     "sessions": 161,
+     "metrics": {
+      "annual_return": -0.12383636566056078,
+      "annual_vol": 0.34606654838041306,
+      "drawdown_peak": 21,
+      "drawdown_trough": 134,
+      "max_drawdown": -0.2485718119852509,
+      "sharpe": -0.2115423208801532,
+      "total_return": -0.08419593670154635
+     }
+    }
+   ],
+   "blocked": null
+  }
+ ],
+ "benchmark": [
+  {
+   "scenario": "base",
+   "index": {
+    "index": "600036.SH",
+    "description": "600036.SH 后复权股票价格基准",
+    "anchor_date": "2010-03-15",
+    "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+    "missing_levels": 10,
+    "kind": "stock",
+    "adjustment": "冻结后复权因子；非含现金分红再投资的买入持有账本"
+   },
+   "metrics": {
+    "active_annualization_basis": "matched_daily_returns_compounded",
+    "active_return_mean": 0.0001647224599938465,
+    "annual_return_diff": 0.048972299953044196,
+    "available": true,
+    "benchmark_common_days": 830,
+    "benchmark_missing_days": 14,
+    "common_benchmark_annual_return": -0.05449174274119495,
+    "common_end": "2013-08-27",
+    "common_start": "2010-03-16",
+    "common_strategy_annual_return": -0.005519442788150752,
+    "information_ratio": 0.18893182253063823,
+    "missing_dates": [
+     "2010-06-23",
+     "2010-06-24",
+     "2011-05-30",
+     "2011-05-31",
+     "2011-09-09",
+     "2011-09-13",
+     "2012-05-30",
+     "2012-05-31",
+     "2013-08-28",
+     "2013-08-29",
+     "2013-08-30",
+     "2013-09-02",
+     "2013-09-03",
+     "2013-09-04"
+    ],
+    "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+   }
+  },
+  {
+   "scenario": "fees_x2",
+   "index": {
+    "index": "600036.SH",
+    "description": "600036.SH 后复权股票价格基准",
+    "anchor_date": "2010-03-15",
+    "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+    "missing_levels": 10,
+    "kind": "stock",
+    "adjustment": "冻结后复权因子；非含现金分红再投资的买入持有账本"
+   },
+   "metrics": {
+    "active_annualization_basis": "matched_daily_returns_compounded",
+    "active_return_mean": 0.00015663269576416213,
+    "annual_return_diff": 0.04705755734263972,
+    "available": true,
+    "benchmark_common_days": 830,
+    "benchmark_missing_days": 14,
+    "common_benchmark_annual_return": -0.05449174274119495,
+    "common_end": "2013-08-27",
+    "common_start": "2010-03-16",
+    "common_strategy_annual_return": -0.007434185398555226,
+    "information_ratio": 0.17965341894112907,
+    "missing_dates": [
+     "2010-06-23",
+     "2010-06-24",
+     "2011-05-30",
+     "2011-05-31",
+     "2011-09-09",
+     "2011-09-13",
+     "2012-05-30",
+     "2012-05-31",
+     "2013-08-28",
+     "2013-08-29",
+     "2013-08-30",
+     "2013-09-02",
+     "2013-09-03",
+     "2013-09-04"
+    ],
+    "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+   }
+  },
+  {
+   "scenario": "slippage_x2",
+   "index": {
+    "index": "600036.SH",
+    "description": "600036.SH 后复权股票价格基准",
+    "anchor_date": "2010-03-15",
+    "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+    "missing_levels": 10,
+    "kind": "stock",
+    "adjustment": "冻结后复权因子；非含现金分红再投资的买入持有账本"
+   },
+   "metrics": {
+    "active_annualization_basis": "matched_daily_returns_compounded",
+    "active_return_mean": 0.0001569454624648148,
+    "annual_return_diff": 0.04713187910996264,
+    "available": true,
+    "benchmark_common_days": 830,
+    "benchmark_missing_days": 14,
+    "common_benchmark_annual_return": -0.05449174274119495,
+    "common_end": "2013-08-27",
+    "common_start": "2010-03-16",
+    "common_strategy_annual_return": -0.007359863631232311,
+    "information_ratio": 0.17997079012314451,
+    "missing_dates": [
+     "2010-06-23",
+     "2010-06-24",
+     "2011-05-30",
+     "2011-05-31",
+     "2011-09-09",
+     "2011-09-13",
+     "2012-05-30",
+     "2012-05-31",
+     "2013-08-28",
+     "2013-08-29",
+     "2013-08-30",
+     "2013-09-02",
+     "2013-09-03",
+     "2013-09-04"
+    ],
+    "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+   }
+  }
+ ],
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5780,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26"
+ },
+ "prose_correction": {
+  "old_progress_note_orders": 1632,
+  "correct_orders": 1662,
+  "machine_rows_always_correct": [
+   542,
+   558,
+   562
+  ],
+  "old_files_unchanged": true,
+  "trades_or_returns_changed": false
+ },
+ "new_original_parent_runs": 1,
+ "new_reproduction_parent_runs": 1,
+ "new_source_count": 0,
+ "parent_runs": 77,
+ "locally_backtested_and_matched_sources": 12,
+ "manually_reviewed": 273,
+ "original_strategy_complete": false,
+ "library_goal_complete": false,
+ "Git_publication": "pending_user_commit_and_push"
+}

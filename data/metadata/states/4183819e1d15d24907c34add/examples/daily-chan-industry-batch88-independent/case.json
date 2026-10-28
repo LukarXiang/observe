@@ -1,0 +1,51 @@
+{
+  "case": {
+    "all_states_exact": true,
+    "differences": 0,
+    "evaluation_dates": 1392,
+    "independent_scalar_checks": {
+      "BI_endpoint_mapping_rows": 64294,
+      "XD_endpoint_mapping_rows": 8950,
+      "XD_six_endpoint_predicate_calls": 8012,
+      "independent_raw_gap_rows": 892500,
+      "independent_standardized_rows": 664754
+    },
+    "input_binding": {
+      "not_a_backtest": true,
+      "snapshot": "20261006-145049-e06c",
+      "stage_input_manifest_sha256": "481e647076a7c269877f30c19ac0bfd998f1d151ee18f48cb2c702dfcc95ebfd",
+      "stage_receipt": "docs/handoff/2026-10-09-batch88-stage-verification.json",
+      "stage_receipt_sha256": "da790efec451cc772363f78ed03333172dfa91f3e67025259970652cb27296b7",
+      "stage_state_sha256": "7902501544a36aa5ab9a58e6c7a8c2a12e5a181e362969ea2a01c74c9550519d"
+    },
+    "limits": [
+      "BI/XD full output uses independent loading/execution of unchanged original code, not a second independently derived engine",
+      "Independent scalar derivation covers default inclusion, fractals, raw gaps, endpoint mapping and six-point XD predicate only",
+      "Original int trend truncation, relative tolerance, endpoint assumptions and gap-union defects retained",
+      "Historical industry membership/pool and original platform date/paused/price/plot semantics not proved"
+    ],
+    "momentum_cells": 150,
+    "new_diagnostic_cases": 7,
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "platform_equivalence_proven": false,
+    "repainting": {
+      "bi_removed_endpoint_pairs": 478,
+      "bi_revision_dates": 439,
+      "xd_removed_endpoint_pairs": 197,
+      "xd_revision_dates": 188
+    },
+    "result": "match",
+    "socket_HTTP_disabled": true,
+    "state_values_file": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/independent-daily-values.parquet",
+    "state_values_sha256": "891daa205839da1c7bc2873bbd0cab330797ca9f1a9bfab94b2a5e57a857a65c"
+  },
+  "case_id": "daily-chan-industry-batch88-independent",
+  "nature": "accepted_original_definition_full_replay_and_limited_independent_scalar_derivation",
+  "purpose": "1392日线全状态禁网match0；独立标准化/分型664754、缺口892500、筆映射64294、线映射8950与8012谓词/150行业单元通过；完整BI/XD仍是原代码执行，非独立完整引擎/平台等价/收益",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/independent-replay.json",
+    "sha256": "437531e65d7b7e1956297df470cb7bba466ff41c878a0bf264e65fe883842d62"
+  }
+}

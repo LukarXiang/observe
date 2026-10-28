@@ -1,0 +1,4193 @@
+{
+  "case": {
+    "cases": [
+      {
+        "backwindow": 22,
+        "case": "64_defaults",
+        "costs": [
+          [
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003
+            },
+            {
+              "type": "stock"
+            }
+          ]
+        ],
+        "frequency": 10,
+        "initial_clock": 0,
+        "initial_if_trade": true,
+        "schedules": [
+          [
+            "before_market_open",
+            {
+              "reference_security": "000906.XSHG",
+              "time": "before_open"
+            }
+          ],
+          [
+            "market_open",
+            {
+              "time": "every_bar"
+            }
+          ]
+        ]
+      },
+      {
+        "arguments": [
+          "000906.XSHG",
+          "2020-02-05"
+        ],
+        "case": "64_pool_date"
+      },
+      {
+        "callbacks": 21,
+        "case": "64_callback_clock",
+        "same_synthetic_day": "2020-02-05",
+        "trade_callbacks": [
+          1,
+          10,
+          20
+        ]
+      },
+      {
+        "case": "64_trade_failure_keeps_flag",
+        "clock": 1,
+        "error": {
+          "message": "synthetic_trade_failure",
+          "type": "ValueError"
+        },
+        "if_trade": true
+      },
+      {
+        "array_injected": false,
+        "case": "64_implicit_array",
+        "error": {
+          "message": "name 'array' is not defined",
+          "type": "NameError"
+        },
+        "not_a_backtest": true,
+        "observed": {},
+        "original_signal_or_target_generated": false,
+        "price_calls": [],
+        "sort_observation_adapter": false,
+        "synthetic_only": true
+      },
+      {
+        "array_injected": true,
+        "case": "64_obsolete_sort",
+        "error": {
+          "message": "DataFrame.sort_index() got an unexpected keyword argument 'by'",
+          "type": "TypeError"
+        },
+        "not_a_backtest": true,
+        "observed": {},
+        "original_signal_or_target_generated": false,
+        "price_calls": [
+          {
+            "end": "2020-01-06 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-06 10:30:00"
+          },
+          {
+            "end": "2020-01-06 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-06 15:00:00"
+          },
+          {
+            "end": "2020-01-07 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-07 10:30:00"
+          },
+          {
+            "end": "2020-01-07 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-07 15:00:00"
+          },
+          {
+            "end": "2020-01-08 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-08 10:30:00"
+          },
+          {
+            "end": "2020-01-08 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-08 15:00:00"
+          },
+          {
+            "end": "2020-01-09 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-09 10:30:00"
+          },
+          {
+            "end": "2020-01-09 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-09 15:00:00"
+          },
+          {
+            "end": "2020-01-10 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-10 10:30:00"
+          },
+          {
+            "end": "2020-01-10 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-10 15:00:00"
+          },
+          {
+            "end": "2020-01-13 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-13 10:30:00"
+          },
+          {
+            "end": "2020-01-13 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-13 15:00:00"
+          },
+          {
+            "end": "2020-01-14 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-14 10:30:00"
+          },
+          {
+            "end": "2020-01-14 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-14 15:00:00"
+          },
+          {
+            "end": "2020-01-15 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-15 10:30:00"
+          },
+          {
+            "end": "2020-01-15 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-15 15:00:00"
+          },
+          {
+            "end": "2020-01-16 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-16 10:30:00"
+          },
+          {
+            "end": "2020-01-16 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-16 15:00:00"
+          },
+          {
+            "end": "2020-01-17 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-17 10:30:00"
+          },
+          {
+            "end": "2020-01-17 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-17 15:00:00"
+          },
+          {
+            "end": "2020-01-20 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-20 10:30:00"
+          },
+          {
+            "end": "2020-01-20 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-20 15:00:00"
+          },
+          {
+            "end": "2020-01-21 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-21 10:30:00"
+          },
+          {
+            "end": "2020-01-21 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-21 15:00:00"
+          },
+          {
+            "end": "2020-01-22 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-22 10:30:00"
+          },
+          {
+            "end": "2020-01-22 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-22 15:00:00"
+          },
+          {
+            "end": "2020-01-23 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-23 10:30:00"
+          },
+          {
+            "end": "2020-01-23 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-23 15:00:00"
+          },
+          {
+            "end": "2020-01-24 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-24 10:30:00"
+          },
+          {
+            "end": "2020-01-24 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-24 15:00:00"
+          },
+          {
+            "end": "2020-01-27 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-27 10:30:00"
+          },
+          {
+            "end": "2020-01-27 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-27 15:00:00"
+          },
+          {
+            "end": "2020-01-28 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-28 10:30:00"
+          },
+          {
+            "end": "2020-01-28 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-28 15:00:00"
+          },
+          {
+            "end": "2020-01-29 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-29 10:30:00"
+          },
+          {
+            "end": "2020-01-29 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-29 15:00:00"
+          },
+          {
+            "end": "2020-01-30 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-30 10:30:00"
+          },
+          {
+            "end": "2020-01-30 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-30 15:00:00"
+          },
+          {
+            "end": "2020-01-31 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-31 10:30:00"
+          },
+          {
+            "end": "2020-01-31 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-31 15:00:00"
+          },
+          {
+            "end": "2020-02-03 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-03 10:30:00"
+          },
+          {
+            "end": "2020-02-03 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-03 15:00:00"
+          },
+          {
+            "end": "2020-02-04 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-04 10:30:00"
+          },
+          {
+            "end": "2020-02-04 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-04 15:00:00"
+          }
+        ],
+        "sort_observation_adapter": false,
+        "synthetic_only": true
+      },
+      {
+        "array_injected": true,
+        "case": "64_float_slice",
+        "error": {
+          "message": "Observed original float slice; no integer correction authorized",
+          "type": "TypeError"
+        },
+        "not_a_backtest": true,
+        "observed": {
+          "rates": {
+            "A": 4194304.0,
+            "B": 1.0,
+            "C": 2.384185791015625e-07
+          },
+          "slice": {
+            "start": 0.0,
+            "step": null,
+            "stop": 0.07500000000000001
+          }
+        },
+        "original_signal_or_target_generated": false,
+        "price_calls": [
+          {
+            "end": "2020-01-06 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-06 10:30:00"
+          },
+          {
+            "end": "2020-01-06 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-06 15:00:00"
+          },
+          {
+            "end": "2020-01-07 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-07 10:30:00"
+          },
+          {
+            "end": "2020-01-07 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-07 15:00:00"
+          },
+          {
+            "end": "2020-01-08 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-08 10:30:00"
+          },
+          {
+            "end": "2020-01-08 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-08 15:00:00"
+          },
+          {
+            "end": "2020-01-09 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-09 10:30:00"
+          },
+          {
+            "end": "2020-01-09 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-09 15:00:00"
+          },
+          {
+            "end": "2020-01-10 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-10 10:30:00"
+          },
+          {
+            "end": "2020-01-10 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-10 15:00:00"
+          },
+          {
+            "end": "2020-01-13 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-13 10:30:00"
+          },
+          {
+            "end": "2020-01-13 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-13 15:00:00"
+          },
+          {
+            "end": "2020-01-14 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-14 10:30:00"
+          },
+          {
+            "end": "2020-01-14 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-14 15:00:00"
+          },
+          {
+            "end": "2020-01-15 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-15 10:30:00"
+          },
+          {
+            "end": "2020-01-15 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-15 15:00:00"
+          },
+          {
+            "end": "2020-01-16 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-16 10:30:00"
+          },
+          {
+            "end": "2020-01-16 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-16 15:00:00"
+          },
+          {
+            "end": "2020-01-17 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-17 10:30:00"
+          },
+          {
+            "end": "2020-01-17 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-17 15:00:00"
+          },
+          {
+            "end": "2020-01-20 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-20 10:30:00"
+          },
+          {
+            "end": "2020-01-20 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-20 15:00:00"
+          },
+          {
+            "end": "2020-01-21 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-21 10:30:00"
+          },
+          {
+            "end": "2020-01-21 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-21 15:00:00"
+          },
+          {
+            "end": "2020-01-22 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-22 10:30:00"
+          },
+          {
+            "end": "2020-01-22 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-22 15:00:00"
+          },
+          {
+            "end": "2020-01-23 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-23 10:30:00"
+          },
+          {
+            "end": "2020-01-23 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-23 15:00:00"
+          },
+          {
+            "end": "2020-01-24 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-24 10:30:00"
+          },
+          {
+            "end": "2020-01-24 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-24 15:00:00"
+          },
+          {
+            "end": "2020-01-27 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-27 10:30:00"
+          },
+          {
+            "end": "2020-01-27 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-27 15:00:00"
+          },
+          {
+            "end": "2020-01-28 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-28 10:30:00"
+          },
+          {
+            "end": "2020-01-28 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-28 15:00:00"
+          },
+          {
+            "end": "2020-01-29 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-29 10:30:00"
+          },
+          {
+            "end": "2020-01-29 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-29 15:00:00"
+          },
+          {
+            "end": "2020-01-30 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-30 10:30:00"
+          },
+          {
+            "end": "2020-01-30 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-30 15:00:00"
+          },
+          {
+            "end": "2020-01-31 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-31 10:30:00"
+          },
+          {
+            "end": "2020-01-31 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-31 15:00:00"
+          },
+          {
+            "end": "2020-02-03 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-03 10:30:00"
+          },
+          {
+            "end": "2020-02-03 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-03 15:00:00"
+          },
+          {
+            "end": "2020-02-04 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-04 10:30:00"
+          },
+          {
+            "end": "2020-02-04 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-04 15:00:00"
+          }
+        ],
+        "sort_observation_adapter": true,
+        "synthetic_only": true
+      },
+      {
+        "array_injected": true,
+        "case": "64_missing_skipna",
+        "error": {
+          "message": "Observed original float slice; no integer correction authorized",
+          "type": "TypeError"
+        },
+        "not_a_backtest": true,
+        "observed": {
+          "rates": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 2.384185791015625e-07
+          },
+          "slice": {
+            "start": 0.0,
+            "step": null,
+            "stop": 0.07500000000000001
+          }
+        },
+        "original_signal_or_target_generated": false,
+        "price_calls": [
+          {
+            "end": "2020-01-06 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-06 10:30:00"
+          },
+          {
+            "end": "2020-01-06 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-06 15:00:00"
+          },
+          {
+            "end": "2020-01-07 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-07 10:30:00"
+          },
+          {
+            "end": "2020-01-07 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-07 15:00:00"
+          },
+          {
+            "end": "2020-01-08 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-08 10:30:00"
+          },
+          {
+            "end": "2020-01-08 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-08 15:00:00"
+          },
+          {
+            "end": "2020-01-09 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-09 10:30:00"
+          },
+          {
+            "end": "2020-01-09 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-09 15:00:00"
+          },
+          {
+            "end": "2020-01-10 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-10 10:30:00"
+          },
+          {
+            "end": "2020-01-10 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-10 15:00:00"
+          },
+          {
+            "end": "2020-01-13 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-13 10:30:00"
+          },
+          {
+            "end": "2020-01-13 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-13 15:00:00"
+          },
+          {
+            "end": "2020-01-14 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-14 10:30:00"
+          },
+          {
+            "end": "2020-01-14 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-14 15:00:00"
+          },
+          {
+            "end": "2020-01-15 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-15 10:30:00"
+          },
+          {
+            "end": "2020-01-15 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-15 15:00:00"
+          },
+          {
+            "end": "2020-01-16 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-16 10:30:00"
+          },
+          {
+            "end": "2020-01-16 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-16 15:00:00"
+          },
+          {
+            "end": "2020-01-17 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-17 10:30:00"
+          },
+          {
+            "end": "2020-01-17 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-17 15:00:00"
+          },
+          {
+            "end": "2020-01-20 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-20 10:30:00"
+          },
+          {
+            "end": "2020-01-20 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-20 15:00:00"
+          },
+          {
+            "end": "2020-01-21 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-21 10:30:00"
+          },
+          {
+            "end": "2020-01-21 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-21 15:00:00"
+          },
+          {
+            "end": "2020-01-22 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-22 10:30:00"
+          },
+          {
+            "end": "2020-01-22 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-22 15:00:00"
+          },
+          {
+            "end": "2020-01-23 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-23 10:30:00"
+          },
+          {
+            "end": "2020-01-23 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-23 15:00:00"
+          },
+          {
+            "end": "2020-01-24 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-24 10:30:00"
+          },
+          {
+            "end": "2020-01-24 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-24 15:00:00"
+          },
+          {
+            "end": "2020-01-27 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-27 10:30:00"
+          },
+          {
+            "end": "2020-01-27 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-27 15:00:00"
+          },
+          {
+            "end": "2020-01-28 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-28 10:30:00"
+          },
+          {
+            "end": "2020-01-28 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-28 15:00:00"
+          },
+          {
+            "end": "2020-01-29 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-29 10:30:00"
+          },
+          {
+            "end": "2020-01-29 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-29 15:00:00"
+          },
+          {
+            "end": "2020-01-30 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-30 10:30:00"
+          },
+          {
+            "end": "2020-01-30 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-30 15:00:00"
+          },
+          {
+            "end": "2020-01-31 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-31 10:30:00"
+          },
+          {
+            "end": "2020-01-31 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-31 15:00:00"
+          },
+          {
+            "end": "2020-02-03 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-03 10:30:00"
+          },
+          {
+            "end": "2020-02-03 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-03 15:00:00"
+          },
+          {
+            "end": "2020-02-04 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-04 10:30:00"
+          },
+          {
+            "end": "2020-02-04 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-04 15:00:00"
+          }
+        ],
+        "sort_observation_adapter": true,
+        "synthetic_only": true
+      },
+      {
+        "array_injected": true,
+        "case": "64_zero_divisor",
+        "error": {
+          "message": "Observed original float slice; no integer correction authorized",
+          "type": "TypeError"
+        },
+        "not_a_backtest": true,
+        "observed": {
+          "rates": {
+            "A": "Infinity",
+            "B": 1.0,
+            "C": 2.384185791015625e-07
+          },
+          "slice": {
+            "start": 0.0,
+            "step": null,
+            "stop": 0.07500000000000001
+          }
+        },
+        "original_signal_or_target_generated": false,
+        "price_calls": [
+          {
+            "end": "2020-01-06 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-06 10:30:00"
+          },
+          {
+            "end": "2020-01-06 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-06 15:00:00"
+          },
+          {
+            "end": "2020-01-07 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-07 10:30:00"
+          },
+          {
+            "end": "2020-01-07 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-07 15:00:00"
+          },
+          {
+            "end": "2020-01-08 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-08 10:30:00"
+          },
+          {
+            "end": "2020-01-08 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-08 15:00:00"
+          },
+          {
+            "end": "2020-01-09 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-09 10:30:00"
+          },
+          {
+            "end": "2020-01-09 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-09 15:00:00"
+          },
+          {
+            "end": "2020-01-10 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-10 10:30:00"
+          },
+          {
+            "end": "2020-01-10 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-10 15:00:00"
+          },
+          {
+            "end": "2020-01-13 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-13 10:30:00"
+          },
+          {
+            "end": "2020-01-13 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-13 15:00:00"
+          },
+          {
+            "end": "2020-01-14 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-14 10:30:00"
+          },
+          {
+            "end": "2020-01-14 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-14 15:00:00"
+          },
+          {
+            "end": "2020-01-15 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-15 10:30:00"
+          },
+          {
+            "end": "2020-01-15 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-15 15:00:00"
+          },
+          {
+            "end": "2020-01-16 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-16 10:30:00"
+          },
+          {
+            "end": "2020-01-16 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-16 15:00:00"
+          },
+          {
+            "end": "2020-01-17 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-17 10:30:00"
+          },
+          {
+            "end": "2020-01-17 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-17 15:00:00"
+          },
+          {
+            "end": "2020-01-20 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-20 10:30:00"
+          },
+          {
+            "end": "2020-01-20 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-20 15:00:00"
+          },
+          {
+            "end": "2020-01-21 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-21 10:30:00"
+          },
+          {
+            "end": "2020-01-21 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-21 15:00:00"
+          },
+          {
+            "end": "2020-01-22 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-22 10:30:00"
+          },
+          {
+            "end": "2020-01-22 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-22 15:00:00"
+          },
+          {
+            "end": "2020-01-23 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-23 10:30:00"
+          },
+          {
+            "end": "2020-01-23 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-23 15:00:00"
+          },
+          {
+            "end": "2020-01-24 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-24 10:30:00"
+          },
+          {
+            "end": "2020-01-24 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-24 15:00:00"
+          },
+          {
+            "end": "2020-01-27 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-27 10:30:00"
+          },
+          {
+            "end": "2020-01-27 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-27 15:00:00"
+          },
+          {
+            "end": "2020-01-28 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-28 10:30:00"
+          },
+          {
+            "end": "2020-01-28 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-28 15:00:00"
+          },
+          {
+            "end": "2020-01-29 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-29 10:30:00"
+          },
+          {
+            "end": "2020-01-29 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-29 15:00:00"
+          },
+          {
+            "end": "2020-01-30 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-30 10:30:00"
+          },
+          {
+            "end": "2020-01-30 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-30 15:00:00"
+          },
+          {
+            "end": "2020-01-31 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-31 10:30:00"
+          },
+          {
+            "end": "2020-01-31 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-01-31 15:00:00"
+          },
+          {
+            "end": "2020-02-03 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-03 10:30:00"
+          },
+          {
+            "end": "2020-02-03 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-03 15:00:00"
+          },
+          {
+            "end": "2020-02-04 10:30:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-04 10:30:00"
+          },
+          {
+            "end": "2020-02-04 15:00:00",
+            "fields": [
+              "close"
+            ],
+            "frequency": "1m",
+            "pool": [
+              "A",
+              "B",
+              "C"
+            ],
+            "start": "2020-02-04 15:00:00"
+          }
+        ],
+        "sort_observation_adapter": true,
+        "synthetic_only": true
+      },
+      {
+        "array_injected": true,
+        "case": "64_short_calendar",
+        "error": {
+          "message": "Shape of passed values is (22, 3), indices imply (0, 3)",
+          "type": "ValueError"
+        },
+        "not_a_backtest": true,
+        "observed": {},
+        "original_signal_or_target_generated": false,
+        "price_calls": [],
+        "sort_observation_adapter": false,
+        "synthetic_only": true
+      },
+      {
+        "case": "64_unused_undefined_factor",
+        "error": {
+          "message": "name 'revers_factor_get' is not defined",
+          "type": "NameError"
+        }
+      },
+      {
+        "case": "64_orders_immediate_empty",
+        "error": null,
+        "final_cash": 0.0,
+        "final_holdings": [
+          "A",
+          "B"
+        ],
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_value",
+            "A",
+            50.0
+          ],
+          [
+            "order_value",
+            "B",
+            50.0
+          ]
+        ],
+        "synthetic_only": true
+      },
+      {
+        "case": "64_orders_immediate_OLD",
+        "error": {
+          "message": "dictionary changed size during iteration",
+          "type": "RuntimeError"
+        },
+        "final_cash": 400.0,
+        "final_holdings": [],
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target",
+            "OLD",
+            0.0
+          ]
+        ],
+        "synthetic_only": true
+      },
+      {
+        "case": "64_orders_immediate_A",
+        "error": null,
+        "final_cash": 0.0,
+        "final_holdings": [
+          "A",
+          "B"
+        ],
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_value",
+            "B",
+            100.0
+          ]
+        ],
+        "synthetic_only": true
+      },
+      {
+        "case": "64_orders_delayed_empty",
+        "error": null,
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_value",
+            "A",
+            50.0
+          ],
+          [
+            "order_value",
+            "B",
+            50.0
+          ]
+        ],
+        "synthetic_only": true
+      },
+      {
+        "case": "64_orders_delayed_OLD",
+        "error": null,
+        "final_cash": 100.0,
+        "final_holdings": [
+          "OLD"
+        ],
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target",
+            "OLD",
+            0.0
+          ],
+          [
+            "order_value",
+            "A",
+            100.0
+          ],
+          [
+            "order_value",
+            "B",
+            100.0
+          ]
+        ],
+        "synthetic_only": true
+      },
+      {
+        "case": "64_orders_delayed_A",
+        "error": null,
+        "final_cash": 100.0,
+        "final_holdings": [
+          "A"
+        ],
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_value",
+            "B",
+            100.0
+          ]
+        ],
+        "synthetic_only": true
+      },
+      {
+        "case": "64_orders_failed_empty",
+        "error": null,
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_value",
+            "A",
+            50.0
+          ],
+          [
+            "order_value",
+            "B",
+            50.0
+          ]
+        ],
+        "synthetic_only": true
+      },
+      {
+        "case": "64_orders_failed_OLD",
+        "error": null,
+        "final_cash": 100.0,
+        "final_holdings": [
+          "OLD"
+        ],
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target",
+            "OLD",
+            0.0
+          ],
+          [
+            "order_value",
+            "A",
+            100.0
+          ],
+          [
+            "order_value",
+            "B",
+            100.0
+          ]
+        ],
+        "synthetic_only": true
+      },
+      {
+        "case": "64_orders_failed_A",
+        "error": null,
+        "final_cash": 100.0,
+        "final_holdings": [
+          "A"
+        ],
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_value",
+            "B",
+            100.0
+          ]
+        ],
+        "synthetic_only": true
+      },
+      {
+        "case": "64_empty_targets_sell_only",
+        "orders": [
+          [
+            "order_target",
+            "OLD",
+            0.0
+          ]
+        ]
+      },
+      {
+        "case": "95_initialize_missing_csv",
+        "error": {
+          "message": "cpv.csv",
+          "type": "FileNotFoundError"
+        },
+        "schedules": []
+      },
+      {
+        "case": "95_initialize_synthetic_csv",
+        "factor_name": "pv_corr",
+        "hold_num": 200,
+        "index_names": [
+          "date",
+          "code"
+        ],
+        "is_in_index": null,
+        "rows": 2,
+        "schedules": [
+          [
+            "TradeFunc",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "10:30"
+            }
+          ]
+        ],
+        "synthetic_only": true
+      },
+      {
+        "case": "95_ascending",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target_value",
+            "B",
+            33.333333333333336
+          ],
+          [
+            "order_target_value",
+            "C",
+            33.333333333333336
+          ],
+          [
+            "order_target_value",
+            "A",
+            33.333333333333336
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_date_type",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "previous_date_type": "date",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_absent_date",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_retained_empty_level",
+        "error": {
+          "message": "Timestamp('2020-02-04 00:00:00')",
+          "type": "KeyError"
+        },
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_zero_target_count",
+        "error": {
+          "message": "float division by zero",
+          "type": "ZeroDivisionError"
+        },
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_empty_index_pool",
+        "error": {
+          "message": "float division by zero",
+          "type": "ZeroDivisionError"
+        },
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_nan_under200",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target_value",
+            "B",
+            33.333333333333336
+          ],
+          [
+            "order_target_value",
+            "C",
+            33.333333333333336
+          ],
+          [
+            "order_target_value",
+            "A",
+            33.333333333333336
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_all_nan_under200",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target_value",
+            "A",
+            33.333333333333336
+          ],
+          [
+            "order_target_value",
+            "B",
+            33.333333333333336
+          ],
+          [
+            "order_target_value",
+            "C",
+            33.333333333333336
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_index_subset",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target_value",
+            "B",
+            50.0
+          ],
+          [
+            "order_target_value",
+            "C",
+            50.0
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_index_missing_code",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target_value",
+            "B",
+            50.0
+          ],
+          [
+            "order_target_value",
+            "MISSING",
+            50.0
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_missing_column",
+        "error": {
+          "message": "'missing'",
+          "type": "KeyError"
+        },
+        "factor": "missing",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_pca_fillzero",
+        "error": null,
+        "factor": "pca_pv",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target_value",
+            "C",
+            33.333333333333336
+          ],
+          [
+            "order_target_value",
+            "A",
+            33.333333333333336
+          ],
+          [
+            "order_target_value",
+            "B",
+            33.333333333333336
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_duplicate_codes",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target_value",
+            "A",
+            33.333333333333336
+          ],
+          [
+            "order_target_value",
+            "B",
+            33.333333333333336
+          ],
+          [
+            "order_target_value",
+            "A",
+            33.333333333333336
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_over200",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target_value",
+            "S204",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S203",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S202",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S201",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S200",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S199",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S198",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S197",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S196",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S195",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S194",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S193",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S192",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S191",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S190",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S189",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S188",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S187",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S186",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S185",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S184",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S183",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S182",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S181",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S180",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S179",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S178",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S177",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S176",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S175",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S174",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S173",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S172",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S171",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S170",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S169",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S168",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S167",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S166",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S165",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S164",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S163",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S162",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S161",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S160",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S159",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S158",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S157",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S156",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S155",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S154",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S153",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S152",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S151",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S150",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S149",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S148",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S147",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S146",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S145",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S144",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S143",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S142",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S141",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S140",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S139",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S138",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S137",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S136",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S135",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S134",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S133",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S132",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S131",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S130",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S129",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S128",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S127",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S126",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S125",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S124",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S123",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S122",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S121",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S120",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S119",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S118",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S117",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S116",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S115",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S114",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S113",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S112",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S111",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S110",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S109",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S108",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S107",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S106",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S105",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S104",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S103",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S102",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S101",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S100",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S099",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S098",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S097",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S096",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S095",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S094",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S093",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S092",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S091",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S090",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S089",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S088",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S087",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S086",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S085",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S084",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S083",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S082",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S081",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S080",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S079",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S078",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S077",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S076",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S075",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S074",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S073",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S072",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S071",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S070",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S069",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S068",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S067",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S066",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S065",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S064",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S063",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S062",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S061",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S060",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S059",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S058",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S057",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S056",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S055",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S054",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S053",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S052",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S051",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S050",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S049",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S048",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S047",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S046",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S045",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S044",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S043",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S042",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S041",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S040",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S039",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S038",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S037",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S036",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S035",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S034",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S033",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S032",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S031",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S030",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S029",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S028",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S027",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S026",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S025",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S024",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S023",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S022",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S021",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S020",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S019",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S018",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S017",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S016",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S015",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S014",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S013",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S012",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S011",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S010",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S009",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S008",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S007",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S006",
+            0.5
+          ],
+          [
+            "order_target_value",
+            "S005",
+            0.5
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_orders_immediate",
+        "error": {
+          "message": "dictionary changed size during iteration",
+          "type": "RuntimeError"
+        },
+        "factor": "pv_corr",
+        "final_cash": 400.0,
+        "final_holdings": [],
+        "mode": "immediate",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target",
+            "OLD",
+            0.0
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_orders_delayed",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [
+          "OLD"
+        ],
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target",
+            "OLD",
+            0.0
+          ],
+          [
+            "order_target_value",
+            "B",
+            133.33333333333334
+          ],
+          [
+            "order_target_value",
+            "C",
+            133.33333333333334
+          ],
+          [
+            "order_target_value",
+            "A",
+            133.33333333333334
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_orders_failed",
+        "error": null,
+        "factor": "pv_corr",
+        "final_cash": 100.0,
+        "final_holdings": [
+          "OLD"
+        ],
+        "mode": "failed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "order_target",
+            "OLD",
+            0.0
+          ],
+          [
+            "order_target_value",
+            "B",
+            133.33333333333334
+          ],
+          [
+            "order_target_value",
+            "C",
+            133.33333333333334
+          ],
+          [
+            "order_target_value",
+            "A",
+            133.33333333333334
+          ]
+        ],
+        "previous_date_type": "Timestamp",
+        "synthetic_only": true
+      },
+      {
+        "case": "95_cost_2008-12-31 23:59:59",
+        "commissions": [
+          {
+            "buy_cost": 0.003,
+            "min_cost": 5,
+            "sell_cost": 0.004
+          }
+        ],
+        "fixed_absolute_slippage": [
+          0.002
+        ]
+      },
+      {
+        "case": "95_cost_2009-01-01 00:00:00",
+        "commissions": [
+          {
+            "buy_cost": 0.003,
+            "min_cost": 5,
+            "sell_cost": 0.004
+          }
+        ],
+        "fixed_absolute_slippage": [
+          0.002
+        ]
+      },
+      {
+        "case": "95_cost_2009-01-01 00:00:01",
+        "commissions": [
+          {
+            "buy_cost": 0.002,
+            "min_cost": 5,
+            "sell_cost": 0.003
+          }
+        ],
+        "fixed_absolute_slippage": [
+          0.002
+        ]
+      },
+      {
+        "case": "95_cost_2011-01-01 00:00:00",
+        "commissions": [
+          {
+            "buy_cost": 0.002,
+            "min_cost": 5,
+            "sell_cost": 0.003
+          }
+        ],
+        "fixed_absolute_slippage": [
+          0.002
+        ]
+      },
+      {
+        "case": "95_cost_2011-01-01 00:00:01",
+        "commissions": [
+          {
+            "buy_cost": 0.001,
+            "min_cost": 5,
+            "sell_cost": 0.002
+          }
+        ],
+        "fixed_absolute_slippage": [
+          0.002
+        ]
+      },
+      {
+        "case": "95_cost_2013-01-01 00:00:00",
+        "commissions": [
+          {
+            "buy_cost": 0.001,
+            "min_cost": 5,
+            "sell_cost": 0.002
+          }
+        ],
+        "fixed_absolute_slippage": [
+          0.002
+        ]
+      },
+      {
+        "case": "95_cost_2013-01-01 00:00:01",
+        "commissions": [
+          {
+            "buy_cost": 0.0003,
+            "min_cost": 5,
+            "sell_cost": 0.0013
+          }
+        ],
+        "fixed_absolute_slippage": [
+          0.002
+        ]
+      },
+      {
+        "case": "95_implicit_datetime",
+        "error": {
+          "message": "name 'datetime' is not defined",
+          "type": "NameError"
+        },
+        "slippage_called_before_failure": true
+      }
+    ],
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "policy": "Only frozen function definitions; top-level profile/imports not run; all CSV/prices/portfolio states synthetic; no missing real inputs replaced"
+  },
+  "case_id": "intraday-factor-batch82-diagnostics",
+  "nature": "accepted_original_function_synthetic_state_diagnostics",
+  "purpose": "48原函数/受控状态诊断；回调计数、CSV缺失、日期类型/NaN/重复订单及费用边界保留，44专项/222相关有重叠，非交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/diagnostics.json",
+    "sha256": "5281115f97dbe14636c1638e2ebc8462eb2db13c13eae4fb37505be38c10e598"
+  }
+}

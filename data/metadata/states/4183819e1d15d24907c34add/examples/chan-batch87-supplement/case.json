@@ -1,0 +1,38 @@
+{
+  "case": {
+    "decision": "Installed Eastmoney1m API requests ndays=5; start/end filter response locally and cannot request listing history. Prior same-host DNS failure retained, changing symbol is not a historical capability.",
+    "economic_variants_require_confirmation": true,
+    "new_requests": 0,
+    "new_rows": 0,
+    "not_a_backtest": true,
+    "prior_evidence": {
+      "dependency-inventory.json": {
+        "file": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/dependency-inventory.json",
+        "sha256": "016b2f2029eb893fa3dadbd508a25b1011b8c592e1c6a1366a897b383171c6a6"
+      },
+      "existing-apis.json": {
+        "file": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/existing-apis.json",
+        "sha256": "881dd969a00149c196f31f1b1c3dfdec134abb9e3d42f776fb4d9641bdd09ff8"
+      },
+      "probe-results.json": {
+        "file": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/probe-results.json",
+        "sha256": "79c6a9f8344e91bcc52534f7ea34a61b3d0afb28e148ed55bc4fb4c22ea2c2ff"
+      }
+    },
+    "published": false,
+    "restore_required": [
+      "Original300354 completed1m OHLC with timestamp/adjustment/coverage from explicit initial date",
+      "Original every_bar callback order and get_bars include-now/paused/dynamic-price semantics",
+      "Original signal duplicates/stroke-pop semantics accepted or concrete correction separately approved",
+      "UniqueBook intraday execution: T+1, actual cash/position, events, prices/limits/fees and costs"
+    ]
+  },
+  "case_id": "chan-batch87-supplement",
+  "nature": "prior_recent_only_minute_api_and_dns_evidence_reuse",
+  "purpose": "第82批接口/库存/DNS证据按SHA复核，东方财富ndays5不补原上市历史，无重复HTTP请求",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/supplement-decision.json",
+    "sha256": "70ac8ef6942811b4c5cd00a4b701b3cd93c2bd46add8db42d8b34e938471cb36"
+  }
+}

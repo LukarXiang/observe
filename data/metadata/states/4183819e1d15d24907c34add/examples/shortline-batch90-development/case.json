@@ -1,0 +1,28 @@
+{
+  "case": {
+    "command": "python -m scripts.verify_offline_tests -q tests/unit/test_batch90_stage.py",
+    "failed_test": "test_original_six_conditions_are_strict[p1_ma5_volume-83.33333333333334]",
+    "fix": "Use exactly representable volume fixture110/120 with equality100*1.2=120; add separate retained original floating-boundary test",
+    "full_raw_log_saved": false,
+    "instrument": {
+      "divided_hex": "0x1.4d55555555556p+6",
+      "exact_replacement": "100*1.2 == 120",
+      "product_hex": "0x1.9000000000001p+6"
+    },
+    "old_script_sha256": "5797e1a25bf604b00afe04f961e7bb80e33568acdc7c7260e677fe754fb03899",
+    "old_test_sha256": "6d14d53de18c102cc9518c9d8a2984a601ac9d76736088488e7843514d7e88fa",
+    "other_preflight_correction": "Replace guessed batch82 directory with actual existing minute audit directory before starting stage",
+    "result": "1 failed, 9 passed in 3.18s",
+    "root_cause": "Fixture treated 100/1.2*1.2 as exactly100, but actual float product is100.00000000000001 and the original strict comparison is true",
+    "source_or_economic_rules_modified": false,
+    "status": "failed"
+  },
+  "case_id": "shortline-batch90-development",
+  "nature": "immutable_float_fixture_failed_expectation",
+  "purpose": "首次1失败9通过，100/1.2*1.2略大于100；改精确夹具并保留原浮点回归，旧SHA/失败摘要只读，未修经济规则",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch90/20261009-development-first-tests/failure.json",
+    "sha256": "0a218887de83696ff8230fe44b54dbca64515ef8acf3bb3722dded8711e4a2fe"
+  }
+}

@@ -1,0 +1,124 @@
+{
+ "schema": 1,
+ "status": "ok_phase",
+ "formal_strategy_acceptance": false,
+ "scope": "Full source reading, original arithmetic and input verification; not trading acceptance",
+ "progress": {
+  "checkpoint": "20261011-031212-c3ce",
+  "note": "Batch99 arithmetic phase:44 original diagnostics/5249 ETF bands/recovery offline match0;formal282 unchanged;option trades blocked",
+  "catalog_id": "7be79d4beb81635628dd",
+  "catalog_sha256": "73c6a816348424b06d6c108e6e5c6638a8de831853f5addbda254294d20355ad",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 484,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 282,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-031212-c3ce"
+ },
+ "accepted_checkpoint_unchanged": "20261011-024709-1cdb",
+ "sources": [
+  {
+   "path": "2021年度精选策略/64.【复现】C-VIX 中国版 VIX 编制手册.txt",
+   "sha256": "5483ce9fea22822a8ca84e0f004064c53b384f54bdd0a2a51eee5d162761f983"
+  },
+  {
+   "path": "2022年度精选策略/18.期权突破策略研究 v1.txt",
+   "sha256": "6259fb771cf0bc1a857d10806d4282241053409d5079c5478862a221f6a63e1d"
+  }
+ ],
+ "summary": {
+  "rows": 5249,
+  "input_rows": 5252,
+  "first": "2005-02-28",
+  "last": "2026-09-29",
+  "window": 3,
+  "K_up": 0.3,
+  "K_down": 0.3,
+  "rounding_difference_days": {
+   "scalar": 319,
+   "decimal": 151
+  },
+  "original_numpy_round_preserved": true,
+  "intraday_breakout_not_inferred_from_daily_extrema": true,
+  "source_candidate_strict_usable": false,
+  "new_trading_backtests": 0,
+  "original_strategy_complete": false,
+  "three_cost_scenarios": "not_applicable_to_reference",
+  "scope": "50ETF candidate daily DualThrust bands only; not minute signal, option trade or VIX",
+  "synthetic_cases": 44
+ },
+ "synthetic_diagnostics": 44,
+ "offline": {
+  "status": "match",
+  "differences": 0,
+  "fresh_process": true,
+  "network_blocked": true,
+  "diagnostics_unchanged": true,
+  "economic_rule_changed": false,
+  "new_trading_backtests": 0,
+  "output_sha256": {
+   "diagnostics.json": "91f9c0f06fd18a86d1822c9378e8410b6b6810d87dcc7158d91311fea16d1011",
+   "ETF-range-components.parquet": "9e4c8e37111ca03429038d20752ee94f183b768f887c7f7d56dedb39114edb1c",
+   "summary.json": "2d9c88272e675f0b77f3d3e040195683d92dc9db7910dd21e9722de29d61cb36"
+  },
+  "prepared_sha256": "ccf3e0312462c66b83fa5e6350a35f3bd89ae0d96dd223758515633e054e1fb1"
+ },
+ "validation": {
+  "local_passed": 44,
+  "isolated_passed": 21,
+  "skips": 0,
+  "copied_files": 237,
+  "scope": "Related offline tests and required Ruff/diff only; not full pytest or formal acceptance"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 6614,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+ },
+ "new_trading_backtests": 0,
+ "original_strategy_complete": false,
+ "economic_rule_changes": false,
+ "source_credentials_executed": false,
+ "failed_historical_queries": 2,
+ "new_responses_rows_publications": 0,
+ "evidence_sha256": {
+  "data/staging/strategies-batch99/20261011-original-options-v1/prepared.json": "7abed3a24b7a9c941eb9bdd85e846e53600e5d819d6a17694a6a57da445a35d1",
+  "data/staging/strategies-batch99/20261011-original-options-v1/dependencies.json": "12b736352ba52112107ce327e6bea87074213f62859a882c825cc2ac5e8b41ed",
+  "data/staging/strategies-batch99/20261011-original-options-v1/baseline.json": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f",
+  "data/staging/strategies-batch99/20261011-original-options-v1/protection.json": "fcf33c8de2d54325eec58fc8fa2fb708364a85378a1d5ef339ce34f6feef438f",
+  "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/study/diagnostics.json": "91f9c0f06fd18a86d1822c9378e8410b6b6810d87dcc7158d91311fea16d1011",
+  "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/study/ETF-range-components.parquet": "9e4c8e37111ca03429038d20752ee94f183b768f887c7f7d56dedb39114edb1c",
+  "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/study/summary.json": "2d9c88272e675f0b77f3d3e040195683d92dc9db7910dd21e9722de29d61cb36",
+  "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/prepared.json": "ccf3e0312462c66b83fa5e6350a35f3bd89ae0d96dd223758515633e054e1fb1",
+  "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/offline-verification.json": "80304b82716f058765b1dc2510986f6f2e78fa301199b6e1a52d42851b3da5d3",
+  "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/study-command/command.json": "8422c14aa3dc68eb7d5fcca23c1fb85a109f4fef6b445ee2a98d97d28dd13957",
+  "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/replay-command/command.json": "90cc14ad183d18cfae3b135164aba86da7facd11dc7094a4fd9185f0cf9f0ba3",
+  "data/staging/strategies-batch99/20261011-coverage-reference/coverage.json": "42e6e68ccf3bdbbdec04564d00a83b7b37c738f0974e15af0369d79cfa8bad84",
+  "data/staging/strategies-batch99/20261011-coverage-reference/rounding-audit.json": "a6cac8daa7ff8fdc0e2792fd1590efc9e280aadb7cf581a1c854d29f1312a55c",
+  "data/staging/strategies-batch99/20261011-bounded-option-probes/summary.json": "2359a755a4fc95de632205863f8a54de0709836651ae3db0e32c3b90eb33a02c",
+  "data/staging/strategies-batch99/20261011-test-date-index-failure/failure.json": "f2b00877928a96140d51a5a96b5e833d154e11c544f97e97e295c9c13135f87d",
+  "data/staging/strategies-batch99/20261011-fresh-namespace-recovery/fixture-failure.json": "dc09da2ce6a31ab4d190781ab228ec0929103b88eccb16834547b9ac016c4794",
+  "data/staging/strategies-batch99/20261011-stage-validation-recovery/checked.json": "96c8632366f80faea7751a23bef32761afc6729518c2a0eb206adeeef868f9cf",
+  "docs/handoff/batch99-y2021-064-source-review.yaml": "4f0462b1994c3713c3176c11195182d1c3d3dd1ab432332b673d0cd2abdcf825",
+  "docs/handoff/batch99-y2022-018-source-review.yaml": "29f79c3e64cc7b0523346e8d7679f9eebc69a46f6405bba96e4b750ed5e15d85",
+  "docs/tasks/2026-10-11-第九十九批中国VIX与期权突破-算式与输入阶段记录.md": "1d4e7c059270ec717c1ce4570781612c5ef046a5880819a0514aaac1283b2d90"
+ },
+ "archive_driver_sha256": "e354fa03bcf2f8f341e7feb85b36d6bace35062530e88141c99028747e49b80f",
+ "next_start": "Formal acceptance still pending: independently read rules/exceptions/rounding and immutable failure/recovery bindings, then only two-source catalog delta; recover option minute/SHIBOR/margin inputs before Book trading",
+ "git": "User managed; no commit or push by agent"
+}

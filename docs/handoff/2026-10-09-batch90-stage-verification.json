@@ -1,0 +1,50 @@
+{
+  "status": "stage_checks_passed",
+  "formal_acceptance": false,
+  "accepted_checkpoint": "20261009-070511-857e",
+  "stage_checkpoint": "20261009-071700-961c",
+  "stage_directory": "data/staging/strategies-batch90/20261009-limit-near-high-shortline-stage",
+  "stage_evidence_file": "data/staging/strategies-batch90/20261009-limit-near-high-shortline-stage/stage-evidence.json",
+  "stage_evidence_sha256": "459561e70b313e9729971cd4f4720aef20ba4a8883513ca67737b5faef63b122",
+  "component_file": "data/staging/strategies-batch90/20261009-limit-near-high-shortline-stage/component-research.json",
+  "component_sha256": "90ad07120f9e074fe109494c289e2f74db898452013ab14df2723cb2479b6566",
+  "protection_file": "data/staging/strategies-batch90/20261009-limit-near-high-shortline-stage/protection.json",
+  "protection_sha256": "82f9880211c040118c41dac0d3bf945caf3241f6d7ae5f59fa6898f56fe415a8",
+  "pytest_JUnit_file": "data/staging/strategies-batch90/20261009-code-checks/pytest.xml",
+  "pytest_JUnit_sha256": "49f5e8556af2481035f56f10e07df83ff5294d0109d018794a09c23d94d60146",
+  "raw_stdout_log_saved": false,
+  "implementation_sha256": {
+    "scripts/review_strategy_batch90.py": "6eabc883ae4705e0210cc0c1d50ef146e1598d415430182ab79b09c0aba372ea",
+    "tests/unit/test_batch90_stage.py": "1e02bb358fbdddbd81a61b07bf5a056c1fea4f3d84a88fbfec772ace3893d97e"
+  },
+  "review_depth": "deep",
+  "scope_alignment": "on_target",
+  "specialist_reviews": {
+    "security": {"agent": "batch90_stage_security", "findings": []},
+    "architecture": {"agent": "batch90_stage_architecture", "findings": []}
+  },
+  "adversarial_review": {
+    "findings": [],
+    "examined": ["SHA before original definitions/eval; no platform imports or source top-level execution",
+      "New immutable stage with bound prior receipt/code/evidence and restored price/calendar SHA",
+      "Six-condition AST and NumPy/fsum reference do not become full signals/trades",
+      "13 synthetic and45763 reference windows replay exactly with sockets/HTTP disabled",
+      "One independent numeric disagreement retained; no silent mean repair or dtype substitution",
+      "Original Series membership and pandas negative-label failure retained",
+      "No latest-pool/flow/day-close substitution for missing original minute inputs",
+      "Old control SHA and partition stat protection passed; source count and full goal preserved"]
+  },
+  "synthetic_cases": 13,
+  "reference_windows": 45763,
+  "prefilter_true_windows": 280,
+  "component_independent_condition_differences": 1,
+  "offline_replay_differences": 0,
+  "tests": {"new_stage_tests": 11, "related_total": 158, "warnings": 1, "full_suite_run": false},
+  "new_requests": 0,
+  "original_signal_rows": 0,
+  "new_trading_backtests": 0,
+  "manually_reviewed_accepted": 260,
+  "not_a_backtest": true,
+  "platform_equivalence_proven": false,
+  "library_goal_complete": false
+}

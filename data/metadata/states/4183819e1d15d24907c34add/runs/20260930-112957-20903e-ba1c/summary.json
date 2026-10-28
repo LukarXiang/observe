@@ -1,0 +1,137 @@
+{
+  "benchmark": null,
+  "configuration": {
+    "boards": [
+      "main"
+    ],
+    "end": "2025-08-27",
+    "execution": {
+      "fee_multiplier": 2.0,
+      "liquidity_override": null,
+      "liquidity_window": 20,
+      "slippage": 0.0
+    },
+    "initial_cash": 1000000.0,
+    "portfolio": {
+      "buffer": 10,
+      "max_sell": 5,
+      "max_weight": 0.1,
+      "n": 20,
+      "open_cash_policy": "sell_then_buy",
+      "participation": 0.05,
+      "rebalance_every": 5,
+      "refill_between_rebalance": true
+    },
+    "rules": "configs/rule_profiles/main_board.yaml",
+    "scores": {
+      "model": "ridge",
+      "run": "D:/projects/observe/data/runs/20260930-112455-ffd47d-research-7c2c",
+      "source": "predictions"
+    },
+    "snapshot": "20260930-112447-8d87",
+    "start": "2024-02-02"
+  },
+  "configuration_available": true,
+  "coverage": null,
+  "decision_time": null,
+  "evidence_status": "archived_unreviewed",
+  "execution_status": "blocked",
+  "execution_time": null,
+  "implementation": null,
+  "kind": "run",
+  "limitations": [
+    {
+      "audit": {
+        "audit_id": "20260930-112443-4b27",
+        "audited_at": "2026-09-30T11:24:43",
+        "batch_id": "20260930-072620-b938",
+        "input_range": {
+          "days": 1392,
+          "end": "2026-09-29",
+          "rows": 6848484,
+          "start": "2021-01-04"
+        },
+        "scope": "snapshot",
+        "source": "audit 20260930-112443-4b27",
+        "status": "expired"
+      },
+      "detail": "快照批次审计状态为 expired（范围 snapshot），不是全快照审计通过",
+      "kind": "data_audit"
+    }
+  ],
+  "metrics": {
+    "annual_return": 0.49152351212910395,
+    "annual_vol": 0.33171103895140297,
+    "drawdown_peak": 38,
+    "drawdown_trough": 150,
+    "max_drawdown": -0.29114079568276463,
+    "sharpe": 1.3725436125488701,
+    "total_return": 0.8672709999999999
+  },
+  "original_strategy_complete": false,
+  "parameters": null,
+  "payload_verification": "not_reaudited",
+  "period": null,
+  "portfolio": null,
+  "recorded_environment": {
+    "git_commit": "76941d28c0d48361fb66fdfed5769f29cfe2d401",
+    "git_dirty": true,
+    "lock_sha256": "1275fd87c5be5c97618f9a534e5c288a9e038d068d51cb0892fd034eba11cd5a",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5"
+    },
+    "python": "3.12.11"
+  },
+  "references": [
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20260930-112957-20903e-ba1c/config.json",
+      "sha256": "4ce874ec6decee6459368f45567a75dc2eed008ac254f35be1cdcb3dcdb7039b"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20260930-112957-20903e-ba1c/status.json",
+      "sha256": "b621d2f7043554f86f5d98df31bc34b9f824ce516f036de3f72565738c5c0569"
+    }
+  ],
+  "reproduce_of": null,
+  "reproduction": null,
+  "result_scope": "configured_run",
+  "results": null,
+  "rules": {},
+  "run_id": "20260930-112957-20903e-ba1c",
+  "schema": 1,
+  "snapshot": "20260930-112447-8d87",
+  "strategy_id": null,
+  "superseded_by": null,
+  "trading": {
+    "cash_share_mean": 0.01581582889631671,
+    "fee_ratio_to_initial": 0.0671732,
+    "fees": {
+      "commission": 33352.01,
+      "fee": 67173.2,
+      "stamp_tax": 32501.76,
+      "transfer_fee": 1319.43
+    },
+    "fill_rate": 0.6540136901057871,
+    "filled_orders": 1051,
+    "max_single_weight_mean": 0.05410141450594289,
+    "orders": 1607,
+    "partial_fills": 37,
+    "reject_reasons": {
+      "cash": 117,
+      "limit_down": 49,
+      "limit_up": 1,
+      "suspended": 389
+    },
+    "stale_price_days": 292,
+    "top5_weight_mean": 0.2579391801794051,
+    "turnover_half_daily_mean": 0.06586241426268626,
+    "turnover_two_sided_daily_mean": 0.1317248285253725
+  },
+  "universe": null,
+  "validation": []
+}

@@ -14,6 +14,7 @@ from dataclasses import dataclass, field
 import pandas as pd
 
 from .data.standardize import board as board_of, flag
+from .ledger.book import LedgerError, cash_entitlement_spec
 
 PRICE_TOL = 0.005        # 前收盘与上一有效收盘相差超过半个报价单位，说明发生了除权除息
 TABLES = ('calendar', 'bars_1d', 'instruments', 'corp_actions')
@@ -118,6 +119,9 @@ def _action(r):
     result = {'instrument': r['instrument'], 'ex_date': _date(r['ex_date']), 'cash_per_share': num('cash_per_share'), 'bonus_ratio': num('bonus_ratio'),
             'rights_ratio': num('rights_ratio'), 'rights_price': num('rights_price'), 'record_date': _date(r.get('record_date')),
             'pay_date': _date(r.get('pay_date')), 'bonus_list_date': _date(r.get('bonus_list_date')), 'source': r.get('source')}
+    entitlement = r.get('cash_entitlement')
+    if entitlement is not None and pd.notna(entitlement):
+        result['cash_entitlement'] = entitlement
     destination = r.get('convert_to')
     if destination is not None and pd.notna(destination):
         ratio = _num(r.get('convert_ratio')); rounding = r.get('convert_rounding')
@@ -129,6 +133,9 @@ def _action(r):
         if rounding is not None and pd.notna(rounding):
             if rounding not in ('floor', 'ceil'): raise InputBlocked([{'kind': 'invalid_conversion', 'detail': 'Unknown conversion rounding'}])
             result['convert_rounding'] = rounding
+    try: cash_entitlement_spec(result)
+    except LedgerError as exc:
+        raise InputBlocked([{'kind': 'invalid_dividend_entitlement', 'detail': str(exc)}]) from exc
     return result
 
 
@@ -216,13 +223,25 @@ def build(tables, start = None, end = None, boards = ('main',), liquidity_window
             pick.add(i)
         candidates[d] = pick
 
-    acts, by_inst = {}, {}
+    acts, by_inst, entitlement_keys = {}, {}, set()
     ca = tables.get('corp_actions')
     for r in (ca.to_dict('records') if ca is not None and len(ca) else []):
         a = _action(r)
         if a['ex_date'] is None:
             limitations.append({'kind': 'action_date_missing', 'detail': f"{a['instrument']} 公司行动缺少除权除息日"}); continue
         by_inst.setdefault(a['instrument'], []).append(a['ex_date'])
+        if a.get('cash_entitlement') == 'record_close':
+            key = (a['instrument'], a['ex_date'])
+            if key in entitlement_keys:
+                raise InputBlocked([{'kind': 'duplicate_dividend_entitlement', 'detail': str(key)}])
+            entitlement_keys.add(key)
+            record = a['record_date']
+            relevant = dates[0] <= record <= dates[-1] or dates[0] <= a['ex_date'] <= dates[-1]
+            if relevant and (record not in on_cal or a['ex_date'] not in on_cal):
+                raise InputBlocked([{'kind': 'dividend_on_closed_day', 'detail': str(key)}])
+            if dates[0] <= a['ex_date'] <= dates[-1] and record < dates[0]:
+                raise InputBlocked([{'kind': 'dividend_record_outside_run', 'detail': f'{key}: record close {record} is not replayed'}])
+            if dates[0] <= record <= dates[-1]: acts.setdefault(record, []).append(a)
         if not dates[0] <= a['ex_date'] <= dates[-1]: continue
         if a['ex_date'] not in on_cal:
             limitations.append({'kind': 'action_on_closed_day', 'detail': f"{a['instrument']} 除权除息日 {a['ex_date']} 不是交易日"}); continue
@@ -245,5 +264,7 @@ def build(tables, start = None, end = None, boards = ('main',), liquidity_window
 
     info = {'start': str(dates[0]), 'end': str(dates[-1]), 'sessions': len(dates), 'warmup_start': str(warmup_start), 'boards': sorted(allowed),
             'liquidity': liquidity, 'quotes': sum(len(x) for x in market.values()), 'quotes_without_liquidity_reference': no_ref,
-            'unexplained_price_resets': len(unexplained), 'actions': sum(len(x) for x in acts.values())}
+            'unexplained_price_resets': len(unexplained), 'actions': sum(a['ex_date'] == d for d, rows in acts.items() for a in rows)}
+    records = sum(a.get('cash_entitlement') == 'record_close' and a['record_date'] == d for d, rows in acts.items() for a in rows)
+    if records: info['dividend_record_events'] = records
     return ExecutionInput(dates, cal, market, candidates, acts, unexplained, limitations, info)

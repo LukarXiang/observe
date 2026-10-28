@@ -1,0 +1,681 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "91_defaults",
+        "costs": [
+          {
+            "buy_cost": 0.0003,
+            "min_cost": 5,
+            "sell_cost": 0.0013
+          }
+        ],
+        "csv_dates": [
+          "2020-03-20",
+          "2020-03-20"
+        ],
+        "fast": 30,
+        "schedules": [
+          [
+            "get_signal",
+            [
+              "9:00"
+            ],
+            {
+              "reference_security": "000300.XSHG"
+            }
+          ],
+          [
+            "trade",
+            [
+              "open"
+            ],
+            {
+              "reference_security": "000300.XSHG"
+            }
+          ]
+        ],
+        "slips": [
+          0.002
+        ],
+        "slow": 100,
+        "to_buy": false
+      },
+      {
+        "case": "91_same_day_exit_priority",
+        "to_buy": false
+      },
+      {
+        "case": "91_entry",
+        "to_buy": true
+      },
+      {
+        "case": "91_no_date_keeps_true",
+        "to_buy": true
+      },
+      {
+        "case": "91_exit",
+        "to_buy": false
+      },
+      {
+        "case": "91_no_date_keeps_false",
+        "to_buy": false
+      },
+      {
+        "case": "91_order_True_False",
+        "orders": [
+          [
+            "value",
+            "510300.XSHG",
+            100000.0
+          ]
+        ]
+      },
+      {
+        "case": "91_order_True_True",
+        "orders": []
+      },
+      {
+        "case": "91_order_False_False",
+        "orders": []
+      },
+      {
+        "case": "91_order_False_True",
+        "orders": [
+          [
+            "quantity",
+            "510300.XSHG",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "91_failed_order",
+        "error": "RuntimeError"
+      },
+      {
+        "case": "91_failed_order_state",
+        "to_buy": true
+      },
+      {
+        "case": "91_fee_2009_exact",
+        "fee": {
+          "buy_cost": 0.003,
+          "min_cost": 5,
+          "sell_cost": 0.004
+        },
+        "slippage": 0.002
+      },
+      {
+        "case": "91_fee_2009_later",
+        "fee": {
+          "buy_cost": 0.002,
+          "min_cost": 5,
+          "sell_cost": 0.003
+        },
+        "slippage": 0.002
+      },
+      {
+        "case": "91_fee_2011_exact",
+        "fee": {
+          "buy_cost": 0.002,
+          "min_cost": 5,
+          "sell_cost": 0.003
+        },
+        "slippage": 0.002
+      },
+      {
+        "case": "91_fee_2011_later",
+        "fee": {
+          "buy_cost": 0.001,
+          "min_cost": 5,
+          "sell_cost": 0.002
+        },
+        "slippage": 0.002
+      },
+      {
+        "case": "91_fee_2013_exact",
+        "fee": {
+          "buy_cost": 0.001,
+          "min_cost": 5,
+          "sell_cost": 0.002
+        },
+        "slippage": 0.002
+      },
+      {
+        "case": "91_fee_2013_later",
+        "fee": {
+          "buy_cost": 0.0003,
+          "min_cost": 5,
+          "sell_cost": 0.0013
+        },
+        "slippage": 0.002
+      },
+      {
+        "case": "91_missing_csv",
+        "error": "FileNotFoundError"
+      },
+      {
+        "case": "91_bad_csv_dates",
+        "error": "AttributeError"
+      },
+      {
+        "case": "91_hma_wrong_type",
+        "error": "ValueError"
+      },
+      {
+        "case": "91_hma_missing_talib",
+        "error": "NameError"
+      },
+      {
+        "case": "91_netbuy_recursive",
+        "error": "RecursionError"
+      },
+      {
+        "boundary_index": 3,
+        "case": "40_delta",
+        "result": [
+          0.0,
+          1.0,
+          1.0,
+          7.0,
+          10.0,
+          10.0
+        ]
+      },
+      {
+        "boundary_index": 3,
+        "case": "40_delay",
+        "result": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          10.0,
+          20.0
+        ]
+      },
+      {
+        "boundary_index": 3,
+        "case": "40_square",
+        "result": [
+          1.0,
+          4.0,
+          9.0,
+          100.0,
+          400.0,
+          900.0
+        ]
+      },
+      {
+        "boundary_index": 3,
+        "case": "40_cube",
+        "result": [
+          1.0,
+          8.0,
+          27.0,
+          1000.0,
+          8000.0,
+          27000.0
+        ]
+      },
+      {
+        "case": "40_corr_int",
+        "dtype": "object",
+        "result": [
+          "NaN",
+          "NaN",
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ]
+      },
+      {
+        "case": "40_corr_float",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_corr_nonconstant",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_sum_int",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          6.0,
+          15.0,
+          33.0,
+          60.0
+        ]
+      },
+      {
+        "case": "40_ts_sum_float",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_sum_nonconstant",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_sma_int",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          2.0,
+          5.0,
+          11.0,
+          20.0
+        ]
+      },
+      {
+        "case": "40_sma_float",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_sma_nonconstant",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_stddev_int",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          1.0,
+          4.358898943540674,
+          8.54400374531753,
+          10.0
+        ]
+      },
+      {
+        "case": "40_stddev_float",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          1.0,
+          4.358898943540674,
+          8.54400374531753,
+          10.0
+        ]
+      },
+      {
+        "case": "40_stddev_nonconstant",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_rank_int",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_rank_float",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_rank_nonconstant",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_argmin_int",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "case": "40_ts_argmin_float",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_argmin_nonconstant",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_argmax_int",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ]
+      },
+      {
+        "case": "40_ts_argmax_float",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_argmax_nonconstant",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_min_int",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          10.0
+        ]
+      },
+      {
+        "case": "40_ts_min_float",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_min_nonconstant",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_max_int",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          3.0,
+          10.0,
+          20.0,
+          30.0
+        ]
+      },
+      {
+        "case": "40_ts_max_float",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_max_nonconstant",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_argmaxmin_int",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          2.0,
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "case": "40_ts_argmaxmin_float",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_ts_argmaxmin_nonconstant",
+        "dtype": "float64",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "case": "40_metric_small",
+        "value": "NaN"
+      },
+      {
+        "case": "40_metric_zero_low",
+        "value": "Infinity"
+      },
+      {
+        "case": "40_metric_weights_ignored",
+        "ones": 13.0,
+        "zeros": 13.0
+      },
+      {
+        "case": "40_nan_to_num_label",
+        "result": [
+          0.0,
+          1.7976931348623157e+308,
+          -1.7976931348623157e+308
+        ]
+      },
+      {
+        "case": "40_boundary_singleton_tail",
+        "labels_after_mask": [
+          1.0,
+          2.0,
+          "NaN"
+        ],
+        "labels_after_nan_to_num": [
+          1.0,
+          2.0,
+          0.0
+        ],
+        "length": [
+          2
+        ]
+      },
+      {
+        "case": "40_boundary_repeated_tail",
+        "labels_after_mask": [
+          1.0,
+          2.0,
+          "NaN",
+          "NaN"
+        ],
+        "labels_after_nan_to_num": [
+          1.0,
+          2.0,
+          0.0,
+          0.0
+        ],
+        "length": [
+          2,
+          1
+        ]
+      },
+      {
+        "case": "40_stddev_uses_all_window_values",
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          11.730302638892145
+        ]
+      },
+      {
+        "case": "40_square_missing_arg",
+        "error": "TypeError"
+      },
+      {
+        "case": "40_alpha2_first",
+        "result": [
+          [
+            9.0
+          ],
+          [
+            1.0
+          ]
+        ]
+      },
+      {
+        "case": "40_alpha2_last_missing_sigmoid",
+        "error": "NameError"
+      }
+    ],
+    "loader_policy": "Only selected definitions; inert simple annotations removed; original bodies/defaults retained; both alpha2 occurrences separately selected",
+    "not_a_backtest": true,
+    "original_training": false
+  },
+  "case_id": "external-GP-batch83-diagnostics",
+  "nature": "accepted_original_function_and_notebook_boundary_diagnostics",
+  "purpose": "67原状态/费用/算子/两alpha2及真实length循环诊断；原object NaN保留；注解安全加载，非交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch83/20261009-external-timing-GP/diagnostics.json",
+    "sha256": "4010f2a25e667d99dde31b95d8743e5cca950cb073ed67a608541fc8f19b5d52"
+  }
+}

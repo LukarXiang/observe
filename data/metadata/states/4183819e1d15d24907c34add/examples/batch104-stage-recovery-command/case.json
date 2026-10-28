@@ -1,0 +1,20 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "scripts.recover_strategy_batch104_stage_receipt",
+      "recover"
+    ],
+    "log_sha256": "130e35a2756f13bf12dca0519972cc7dc4603d239c19d740e2a8e6458c7e9e85",
+    "returncode": 0
+  },
+  "case_id": "batch104-stage-recovery-command",
+  "nature": "batch104_component_stage_not_trading",
+  "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch104/20261011-receipt-recovery-development/recover-command.json",
+    "sha256": "e09e43b43ab812cb467442da675853d2c148f979a2e0d189287f8d05e1e306b8"
+  }
+}

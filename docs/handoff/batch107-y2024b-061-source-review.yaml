@@ -1,0 +1,23 @@
+schema: 1
+source: 2024年度精选策略2/61.简单ETF策略，年化97%.txt
+sha256: 9e47ff904080216ab711f70c59b5c514c54eab2585b07e18e4d03c7f658ef63c
+lines: 264
+definitions: 12
+formal_source_research_acceptance: false
+original_strategy_complete: false
+scope: 原24标的MA60回调买入与MA20上穿MA10卖出
+rules:
+  pool: 原顺序399306.XSHE、159608.XSHE、159611.XSHE、159613.XSHE、159619.XSHE、159707.XSHE、159713.XSHE、159731.XSHE、512690.XSHG、516950.XSHG、512880.XSHG、516880.XSHG、515030.XSHG、515220.XSHG、515210.XSHG、512710.XSHG、159870.XSHE、159995.XSHE、512150.XSHG、588080.XSHG、159952.XSHE、512800.XSHG、515950.XSHG、159945.XSHE；max_number=1，不删除或替换
+  schedule: 2:00买入筛选，3:00持仓卖出筛选，10:00先登记buy再登记sell；同刻调度排序和反馈未证明
+  buy: MA60(ref2)小于等于MA60(ref1)小于等于MA60(ref0)，末价严格低于MA60且MA5(ref1)严格低于MA5(ref0)
+  sell: cross(20,10)实际为当前MA20大于等于MA10且上一窗口MA20严格小于MA10；不是直接价格跌破均线
+  windows: ma取n加ref历史行的前n行mean；缺行不阻断，均值可能使用不足n行；min_max定义未被交易调用
+  orders: 固定starting_cash/max_number预算；停牌、已有持仓或槽满跳过；order_value后立即检查has_key；卖order_target零后读取实际数量
+  fees: 仅设置stock佣金0.0003、最低5、close_tax0.001；未显式设置fund费用和滑点，默认值未证明
+  messaging: is_sendmail=0，原邮件分支不执行；get_name有两份同名定义，最后定义覆盖
+gaps:
+  - 原24标的行情与历史身份未齐；399306的可下单资格需核实，不能悄悄删去
+  - 基金事件、动态复权、停牌和10:00成交价格及订单反馈未证明
+  - 当前普通dict没有has_key；部分历史窗口mean会接受缺行，不能当作完整窗口信号
+  - 原只设置stock费用，基金默认费用和滑点未证明；固定预算不能改成全部当前现金
+next: 补完整原池及身份/事件/复权/10:00输入，保留买卖顺序与固定预算；具体修正版获批后唯一Book最长三成本与禁网复现

@@ -1,0 +1,55 @@
+{
+ "status": "ok_supplement_phase",
+ "formal_source_research_acceptance": false,
+ "formal_trading_acceptance": false,
+ "accepted_checkpoint_unchanged": "20261011-032459-0af3",
+ "progress": {
+  "checkpoint": "20261011-034750-0853",
+  "note": "Batch100 supplement:193/1059 volume-unit counterexample;153 prior share/PCF payload SHA and9 request results rechecked;next101 AST only;longest study/replay running;formal284 unchanged",
+  "catalog_id": "8c744c937eaef1666b85",
+  "catalog_sha256": "b4daa64d6a14fbce5321ebf816fc691a33d463d86f77f386fa8bca447521d000",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 484,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 284,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-034750-0853"
+ },
+ "volume_unit_counterexample": {
+  "columns": 1059,
+  "changed": 193,
+  "raw_unit_unproven": true,
+  "model_predictions": 0
+ },
+ "prior_dependency_payloads_hashed": 153,
+ "new_requests": 0,
+ "new_trading_backtests": 0,
+ "live_longest_sessions_observed": [
+  37738,
+  75356
+ ],
+ "longest_outputs_complete": false,
+ "new_source_AST_only": 2,
+ "new_source_acceptances": 0,
+ "evidence_sha256": {
+  "docs/handoff/2026-10-11-batch100-source-stage.json": "466ea0eb8646da71f3272fa37e21d69001049aa5039200fdff4ddcc2c6256a9e",
+  "docs/tasks/2026-10-11-第一百批成交量单位与后续来源-补充检查.md": "3207fc4ea7521077ae9a4d7031ce9128f6fc25fb54cd6e9cc27de101e1fa9fcc",
+  "docs/tasks/2026-10-11-第一百零一批全天候ES与指数期货贴水-执行计划.md": "32c2fcfc9867dd4fc4938f86e3e103cdb26910769a552dd718df2d5bca298f90",
+  "data/staging/strategies-batch100/20261011-volume-unit-counterexample/counterexample.json": "5e549e3086fbd0686b95e844dad7f85b0090cc6e67e7e1fbb9478d943448701d",
+  "data/staging/strategies-batch100/20261011-share-pcf-name-recheck/recheck.json": "fdb296fb1b081c980209db883fbfc6fc0f19cdd4ac289a04355ca9fa82d287b8",
+  "data/staging/strategies-batch100/20261011-share-pcf-name-recheck/pcf-and-shares-recheck.json": "0eda5d42b06aa5eaf39a76c227e5d342d6cf441888edeae7bfe650135a5f26b0",
+  "data/staging/strategies-batch100/20261011-share-pcf-name-recheck/payload-recheck.json": "e1ac6696856202d58d2fff7817777da0ebb3acc00f18d3c68d30f98b222007ea",
+  "data/staging/strategies-batch100/20261011-next-source-preread/preread.json": "d1b24db9e23a5cc9011ae0f8d70d69f964cfd6bd9b424ce721bddb36c9f2cea7"
+ },
+ "next_start": "Poll original longest study/replay handles, then compare persisted full outputs; keep source/trade formal counts unchanged until acceptance; batch101 planned after batch100"
+}

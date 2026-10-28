@@ -1,0 +1,93 @@
+{
+ "status": "ok",
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "library_goal_complete": false,
+ "original_strategy_complete": false,
+ "progress": {
+  "checkpoint": "20261011-032459-0af3",
+  "note": "Batch99 C-VIX64+option18 source research accepted;5249 candidate bands/44+8 original diagnostics/recovery offline match0;option trades blocked",
+  "catalog_id": "8c744c937eaef1666b85",
+  "catalog_sha256": "b4daa64d6a14fbce5321ebf816fc691a33d463d86f77f386fa8bca447521d000",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 484,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 284,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-032459-0af3"
+ },
+ "components": {
+  "ranges": {
+   "rows": 5249,
+   "calendar_price_rows": 5252,
+   "rounding_edges": {
+    "scalar": 319,
+    "decimal": 151
+   },
+   "signal_or_trade": false
+  },
+  "diagnostics": {
+   "cases": 44,
+   "preserved_original_exceptions": 13,
+   "synthetic_only": true,
+   "fills": 0
+  },
+  "callbacks": {
+   "cases": 8,
+   "intents_not_fills": true,
+   "platform_equivalence": false
+  },
+  "offline": "match/0",
+  "local_tests": 66,
+  "isolated_tests": 43,
+  "new_trading_backtests": 0,
+  "original_strategy_complete": false
+ },
+ "source_sha256": [
+  "5483ce9fea22822a8ca84e0f004064c53b384f54bdd0a2a51eee5d162761f983",
+  "6259fb771cf0bc1a857d10806d4282241053409d5079c5478862a221f6a63e1d"
+ ],
+ "evidence_sha256": {
+  "docs/handoff/batch99-y2021-064-source-review.yaml": "4f0462b1994c3713c3176c11195182d1c3d3dd1ab432332b673d0cd2abdcf825",
+  "docs/handoff/batch99-y2022-018-source-review.yaml": "29f79c3e64cc7b0523346e8d7679f9eebc69a46f6405bba96e4b750ed5e15d85",
+  "docs/handoff/2026-10-11-batch99-arithmetic-stage.json": "7323d0565a88e4a199e91710c2f07c0c932533fcb3daf0ee3a504ff0ffe95739",
+  "data/staging/strategies-batch99/20261011-formal-validation-v2/checked.json": "8c6ff510b0a25e35c993c3c426ead008178097b0c9ab33812e504eb5a9a6f8f2",
+  "data/staging/strategies-batch99/20261011-original-timing-callbacks/offline.json": "85844b6abc3e2f32a433cd9c8737aa91a0ccd7d84d1791d07b3f57bcfb055cc5",
+  "data/staging/strategies-batch99/20261011-original-timing-callbacks/study.json": "75b81e1ceaab53abad598b6483fedebc42d0c2f87d93e4d8c11c5344b65e8be3",
+  "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/offline-verification.json": "80304b82716f058765b1dc2510986f6f2e78fa301199b6e1a52d42851b3da5d3",
+  "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/prepared.json": "ccf3e0312462c66b83fa5e6350a35f3bd89ae0d96dd223758515633e054e1fb1",
+  "data/staging/strategies-batch99/20261011-formal-source-acceptance/source-reviews.json": "0a44939678a74ff43588774af75d5f52346b63e4cefaf4c545f221827c4c5848",
+  "scripts/accept_strategy_batch99.py": "6429a3935afa445b44ac3cd5486c9c445691faf14d1306eb111eec4043fe850d",
+  "tests/unit/test_batch99_acceptance.py": "d406520a5e74b7929b3bb053a86e476c99fca5be2c7451bfe336f86b35964cfc",
+  "data/staging/strategies-batch99/20261011-formal-source-acceptance/prepared.json": "aba16f17a7adf9e3b7f2e85b8a95b575f2b23f975c229fe7a62b432dc787ae89",
+  "docs/tasks/2026-10-11-第九十九批中国VIX与期权突破-正式研究验收.md": "b0d9ef769f9dad10c5d56211d7f40a38564f2284f7e7c86e1e01d11a0868d28b",
+  "src/observe/strategy_catalog.py": "f50d0ac0e2d3c634b6026fd13130becb42b1938c22580557d85988c78fcb5504",
+  "data/staging/strategies-batch99/20261011-formal-source-acceptance/protection.json": "fcf33c8de2d54325eec58fc8fa2fb708364a85378a1d5ef339ce34f6feef438f",
+  "data/catalog/strategies/8c744c937eaef1666b85/catalog.json": "b4daa64d6a14fbce5321ebf816fc691a33d463d86f77f386fa8bca447521d000",
+  "data/catalog/strategies/progress/20261011-032459-0af3/summary.json": "abf392dd62e4856bcd0e9644ef7a0ae30cfce126265c3068995bb3a7a8fb9b60"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 6614,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+ },
+ "new_trading_backtests": 0,
+ "new_strategy_parent_runs": 0,
+ "phase_specs_remain_frozen": true,
+ "review_method": "Full source rules, independent scalar arithmetic, actual JSON, fresh blocked-network workers and local/isolated checks; no independent agent review"
+}

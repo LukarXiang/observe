@@ -1,0 +1,216 @@
+{
+ "status": "ok",
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "original_strategy_complete": false,
+ "library_goal_complete": false,
+ "progress": {
+  "checkpoint": "20261011-080516-0903",
+  "note": "Batch107 two full ETF sources accepted;longest native29-row regressions/three-fund rankings and32 local+32 copied/39 formal tests;original ETF trades blocked",
+  "catalog_id": "0dd173dfd03cb7c148a3",
+  "catalog_sha256": "698b1817c5bf48582694c900ff43677fbec87ef911797c3b2189c066a484dfa6",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 300,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-080516-0903"
+ },
+ "components": {
+  "summary": {
+   "status": "literal_native_operands_not_original_platform_signals_or_trades",
+   "diagnostic_cases": 30,
+   "native_windows": 11663,
+   "profiles": {
+    "510180.XSHG": {
+     "rows": 4951,
+     "windows": 4923,
+     "first": "2006-05-18",
+     "last": "2026-09-29",
+     "calendar_missing_dates": [
+      "2009-05-19",
+      "2009-05-20",
+      "2013-12-19",
+      "2013-12-20"
+     ],
+     "nonfinite_windows": 0
+    },
+    "159915.XSHE": {
+     "rows": 3595,
+     "windows": 3567,
+     "first": "2011-12-09",
+     "last": "2026-09-29",
+     "calendar_missing_dates": [
+      "2021-02-08"
+     ],
+     "nonfinite_windows": 0
+    },
+    "513100.XSHG": {
+     "rows": 3201,
+     "windows": 3173,
+     "first": "2013-07-31",
+     "last": "2026-09-29",
+     "calendar_missing_dates": [
+      "2022-01-13"
+     ],
+     "nonfinite_windows": 0
+    }
+   },
+   "common_ranking_windows": 3170,
+   "ranking_first": "2013-09-09",
+   "ranking_last": "2026-09-29",
+   "all_negative_ranking_windows": 527,
+   "cross_gap_native_windows": 112,
+   "cross_gap_ranking_windows": 84,
+   "independent_regression_max_abs_difference": {
+    "slope": 5.767955557622884e-17,
+    "intercept": 2.220446049250313e-15,
+    "annual_return": 4.209578037261963e-07,
+    "r_squared": 1.4765966227514582e-14,
+    "score": 3.0919909477233887e-07
+   },
+   "independent_order_differences": 0,
+   "by_year": [
+    {
+     "year": 2013,
+     "rows": 73,
+     "all_negative": 2,
+     "cross_gap": 7
+    },
+    {
+     "year": 2014,
+     "rows": 245,
+     "all_negative": 12,
+     "cross_gap": 21
+    },
+    {
+     "year": 2015,
+     "rows": 244,
+     "all_negative": 42,
+     "cross_gap": 0
+    },
+    {
+     "year": 2016,
+     "rows": 244,
+     "all_negative": 50,
+     "cross_gap": 0
+    },
+    {
+     "year": 2017,
+     "rows": 244,
+     "all_negative": 4,
+     "cross_gap": 0
+    },
+    {
+     "year": 2018,
+     "rows": 243,
+     "all_negative": 60,
+     "cross_gap": 0
+    },
+    {
+     "year": 2019,
+     "rows": 244,
+     "all_negative": 34,
+     "cross_gap": 0
+    },
+    {
+     "year": 2020,
+     "rows": 243,
+     "all_negative": 28,
+     "cross_gap": 0
+    },
+    {
+     "year": 2021,
+     "rows": 242,
+     "all_negative": 20,
+     "cross_gap": 28
+    },
+    {
+     "year": 2022,
+     "rows": 241,
+     "all_negative": 104,
+     "cross_gap": 28
+    },
+    {
+     "year": 2023,
+     "rows": 242,
+     "all_negative": 47,
+     "cross_gap": 0
+    },
+    {
+     "year": 2024,
+     "rows": 242,
+     "all_negative": 27,
+     "cross_gap": 0
+    },
+    {
+     "year": 2025,
+     "rows": 243,
+     "all_negative": 45,
+     "cross_gap": 0
+    },
+    {
+     "year": 2026,
+     "rows": 180,
+     "all_negative": 52,
+     "cross_gap": 0
+    }
+   ],
+   "original61_actual_pool_windows": 0,
+   "original61_pool_reduced": false,
+   "complete_original_signals": 0,
+   "new_trading_backtests": 0,
+   "original_strategy_complete": false,
+   "formal_source_research_acceptance": false,
+   "library_goal_complete": false
+  },
+  "protection": {
+   "status": "ok",
+   "old_controls_unchanged": 6614,
+   "mutable_registry_files_excluded": 0,
+   "old_partition_metadata_unchanged": 398,
+   "old_calendar_rows_unchanged": 7938,
+   "old_index_rows_unchanged": 5280,
+   "partition_check": "size/mtime only; no fresh full hash",
+   "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+  },
+  "fresh_network_blocked_processes": 2,
+  "offline_differences": 0,
+  "new_trading_backtests": 0,
+  "new_strategy_parent_runs": 0
+ },
+ "source_sha256": [
+  "0e60cde5dfd8f828dc872be2d44aa950c80b22ebc82b395522906ac291eff3fc",
+  "9e47ff904080216ab711f70c59b5c514c54eab2585b07e18e4d03c7f658ef63c"
+ ],
+ "new_trading_backtests": 0,
+ "new_strategy_parent_runs": 0,
+ "evidence_sha256": {
+  "docs/handoff/batch107-y2023-027-source-review.yaml": "c118cbe564c84c83cc2cf392f6f84df68a7c143379fc98ce0e39d27179a3e588",
+  "docs/handoff/batch107-y2024b-061-source-review.yaml": "7b530a841b5fac8ae3314ba0339e9d6a7c208caefcac74679a9360414759a385",
+  "data/staging/strategies-batch107/20261011-ETF-regression-means-v1/checked.json": "a14f2f0eddb9159dfcb95d7895e19e241b679d583b8705f51a6b29f3e286557d",
+  "docs/handoff/2026-10-11-batch106-final-review.json": "c3f6e8e4269b9f0b63005be819a4c183c41f526f50e283517ad2ad80fa933c76",
+  "data/staging/strategies-batch107/20261011-original-pool-probe-v1/checked.json": "909b1b3a1bef3050d6e72cd3667e4e6ebc24531e1386e07c6f319803a04cba7b",
+  "scripts/accept_strategy_batch107.py": "9d6cf410ad69e6b115480d6d25a1995b9b6ba65ffb23552ead4bc6159b621da5",
+  "tests/unit/test_batch107_acceptance.py": "6ebaec5c15bfbe6817ad34de68742af735292e37a3f286ca64aba477b9ccb0f6",
+  "data/staging/strategies-batch107/20261011-ETF-regression-means-v1/copied-tests.json": "f0f0fd3e77bd05e507f269d2e3d13559c5bbf6b2517ead644d56c05189b27b01",
+  "data/staging/strategies-batch107/20261011-gap-scale-identity-v1/checked.json": "2ca9669baecbfa1d21b774adb6fcd07b9cca5162c6ffa65d352ed1e801e27eb5",
+  "docs/tasks/2026-10-11-第一百零七批ETF动量与均线-正式研究验收.md": "932c423932aed7da18306a41cdadd8887eefcbc212dd74387ae5ce7f919b3f5c",
+  "data/staging/strategies-batch107/20261011-formal-source-acceptance-v1/prepared.json": "a13239c232872866aa88981d7d9ec985d97fea92d89bd686acb03e439d863f86",
+  "data/staging/strategies-batch107/20261011-formal-source-acceptance-v1/tests.json": "34cc0d1a2e1091b3e9acb67306e35fbd69dae0aa0840db900d7f7040bfd981ef",
+  "src/observe/strategy_catalog.py": "659ada805b956223da9944497307c93168a08928f0b765614b65f1840d417a5c",
+  "data/catalog/strategies/0dd173dfd03cb7c148a3/catalog.json": "698b1817c5bf48582694c900ff43677fbec87ef911797c3b2189c066a484dfa6",
+  "data/catalog/strategies/progress/20261011-080516-0903/summary.json": "18f8f28c8792902bda3a3edd7fd2b14787169a721531e1964e6c390fca6db1a0"
+ },
+ "review_method": "Full original byte-bound sources;literal diagnostics;full saved operands/independent scalar regression;fresh offline and copied import checks;no independent agent review"
+}

@@ -1,0 +1,35 @@
+{
+  "case": {
+    "command": [
+      "rg",
+      "-l",
+      "511260|510170",
+      "data/staging",
+      "--glob",
+      "*results.json",
+      "--glob",
+      "*reused*.json",
+      "--glob",
+      "*quotes*.json"
+    ],
+    "inventory_sha256": "bc189165e9738b832505b23a9d9aa8fb7dab40cd8170ccddff04226057e55380",
+    "new_requests": 0,
+    "observed_tool_session": 77282,
+    "scope": "Repository staging result/reuse/quote JSON patterns only; no proof of whole-machine absence",
+    "source_sha256": [
+      "b30d9ba30a2e18bc162261a783479d853ff6768b4ae85963d39315fc85683835",
+      "57d529dce6eb3ba8a76e4e79b1f5340df98d1993118d62b50cc34dec0b7ded4d"
+    ],
+    "status": "no_matching_selected_result_files",
+    "stdout": "",
+    "terminal_returncode": 1
+  },
+  "case_id": "batch101-extended-registry-search",
+  "nature": "observed_pattern_scoped_rg_exit1_not_whole_machine_absence",
+  "purpose": "staging结果/reuse/quote JSON模式未匹配511260/510170，不证明供应商缺失",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch101/20261011-extended-registry-search/checked.json",
+    "sha256": "03a8fd00d1a0dd9ef61d3588cc42f9dc69bc5d9cbbb9e89f3281f00b55ea295e"
+  }
+}

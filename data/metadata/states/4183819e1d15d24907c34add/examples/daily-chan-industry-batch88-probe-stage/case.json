@@ -1,0 +1,41 @@
+{
+  "case": {
+    "error": "ConnectionError: HTTPSConnectionPool(host='push2his.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/stock/kline/get?fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61%2Cf116&ut=7eea3edcaed734bea9cbfc24409ed989&klt=101&fqt=0&secid=0.300058&beg=20100226&end=20260929 (Caused by NameResolutionError(\"HTTPSConnection(host='push2his.eastmoney.com', port=443): Failed to resolve 'push2his.eastmoney.com' ([Errno -2] Name or service not known)\"))",
+    "new_rows": 0,
+    "not_a_backtest": true,
+    "policy": "One native raw daily GET from listing; no retry/redirect/proxy; candidate cannot silently replace frozen input",
+    "prior_industry_probe": {
+      "file": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/candidate-audit.json",
+      "reason": "Same SW2021 API previously DNS-failed; retain precise evidence, no retry or current-member substitution",
+      "sha256": "37e068fd9c67d87ef97d8c62e6a4fa6c117409129727cbdc27675577ef41ac16"
+    },
+    "published": false,
+    "request_intents": [
+      {
+        "method": "get",
+        "params": {
+          "beg": "20100226",
+          "end": "20260929",
+          "fields1": "f1,f2,f3,f4,f5,f6",
+          "fields2": "f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61,f116",
+          "fqt": "0",
+          "klt": "101",
+          "secid": "0.300058",
+          "ut": "7eea3edcaed734bea9cbfc24409ed989"
+        },
+        "url": "https://push2his.eastmoney.com/api/qt/stock/kline/get"
+      }
+    ],
+    "requested_at": "2026-10-08T21:52:13.341897+00:00",
+    "status": "failed",
+    "wire_responses": []
+  },
+  "case_id": "daily-chan-industry-batch88-probe-stage",
+  "nature": "in_progress_bounded_native_daily_failure",
+  "purpose": "蓝色光标20100226至20260929一次原生GET DNS失败0响应/新增/发布；SW2021旧DNS证据SHA复用，不回填当前行业",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/daily-history-probe/result.json",
+    "sha256": "8cf92f578683e93e48f1ff39b0ac7ca5a8c6df5d6d6719efbd2e017c85a32147"
+  }
+}

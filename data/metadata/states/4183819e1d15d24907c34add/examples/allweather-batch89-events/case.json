@@ -1,0 +1,59 @@
+{
+  "case": {
+    "attempted_requests": 1,
+    "candidate_pages": 0,
+    "limits": [
+      "Current supplier event tables are candidates; identity/units/effective/available times need primary proof",
+      "No price correction, adjustment-chain construction, standard publication or original ES calculation",
+      "Raw page and parse SHA retained when available; missing payloads never replaced"
+    ],
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "responses": 0,
+    "results": [
+      {
+        "DNS_failure": true,
+        "attempted": true,
+        "exception": "ConnectionError",
+        "message": "HTTPSConnectionPool(host='fundf10.eastmoney.com', port=443): Max retries exceeded with url: /fhsp_513100.html (Caused by NameResolutionError(\"HTTPSConnection(host='fundf10.eastmoney.com', port=443): Failed to resolve 'fundf10.eastmoney.com' ([Errno -2] Name or service not known)\"))",
+        "status": "failed",
+        "strict_usable": false,
+        "symbol": "513100",
+        "url": "https://fundf10.eastmoney.com/fhsp_513100.html"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure; no repeated request",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "510300",
+        "url": "https://fundf10.eastmoney.com/fhsp_510300.html"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure; no repeated request",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "518880",
+        "url": "https://fundf10.eastmoney.com/fhsp_518880.html"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure; no repeated request",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "511010",
+        "url": "https://fundf10.eastmoney.com/fhsp_511010.html"
+      }
+    ],
+    "strict_usable": false
+  },
+  "case_id": "allweather-batch89-events",
+  "nature": "bounded_direct_event_page_request_failure_and_no_same_domain_retries",
+  "purpose": "参考AKShare事件页URL而未调用先执行JS的SDK；513100一次DNS失败0响应，其余同域三只未请求，缺响应不伪造空表/纠价/事件；strict0及交易0",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch89/20261009-all-weather-events/probe-results.json",
+    "sha256": "86bdfc3fdd7ee95f3ac82653d58d77dee30978325da3d27739d738e19b0d56cb"
+  }
+}

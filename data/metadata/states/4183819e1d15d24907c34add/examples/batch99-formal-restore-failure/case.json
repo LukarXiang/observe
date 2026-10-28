@@ -1,0 +1,23 @@
+{
+  "case": {
+    "command_sha256": "51cf54c0a8c532e4dbffa4bd13612835586ca3f36ececd4e30c4eb60b9d7f883",
+    "failed_command_record": "data/staging/strategies-batch99/20261011-formal-validation/formal-fresh-replay-command.json",
+    "fix": "New validation-v2 restores all frozen implementation bytes, preserves failed directory",
+    "formal_acceptance": false,
+    "isolated_passed": 43,
+    "local_passed": 66,
+    "nature": "fresh_replay_restore_missing_frozen_implementation",
+    "new_trading_backtests": 0,
+    "reason": "Replay prepared.json references implementation files; initial restore copied only operand/prepared. Worker rejects missing implementation before arithmetic.",
+    "stderr": "data/staging/strategies-batch99/20261011-formal-validation/formal-fresh-replay.stderr.log",
+    "stderr_sha256": "ead6b58d5f43aef0c7a5b5a8b1891c51cf1d8bfde3dbda7935805f5151fda422"
+  },
+  "case_id": "batch99-formal-restore-failure",
+  "nature": "immutable_replay_rejection_before_arithmetic",
+  "purpose": "原66/43绿测试后鲜活worker拒绝缺implementation；原目录保留，新v2补全副本",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch99/20261011-formal-validation/failure.json",
+    "sha256": "8b44022871f614d1ecd2e2bf6080d6a86dd5c044acbf628a336c6ccd2c89454a"
+  }
+}

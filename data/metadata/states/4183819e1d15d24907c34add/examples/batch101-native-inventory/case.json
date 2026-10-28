@@ -1,0 +1,281 @@
+{
+  "case": {
+    "DNS_failure_references": [
+      "docs/tasks/2026-10-11-第九十六批原回调与输入核查-阶段记录.md",
+      "docs/tasks/2026-10-10-第九十一批玉米价差与股指跨期-正式验收.md"
+    ],
+    "absence_scope": "Selected SHA-checked registries, not an exhaustive whole-machine absence proof",
+    "active_table_counts": {
+      "adj_coverage": {
+        "000016.SH": 0,
+        "000300.SH": 0,
+        "000852.SH": 0,
+        "000905.SH": 0,
+        "510170.SH": 0,
+        "510310.SH": 0,
+        "511010.SH": 0,
+        "511260.SH": 0,
+        "513100.SH": 0,
+        "513500.SH": 0,
+        "518880.SH": 0
+      },
+      "adj_factors": {
+        "000016.SH": 0,
+        "000300.SH": 0,
+        "000852.SH": 0,
+        "000905.SH": 0,
+        "510170.SH": 0,
+        "510310.SH": 0,
+        "511010.SH": 0,
+        "511260.SH": 0,
+        "513100.SH": 0,
+        "513500.SH": 0,
+        "518880.SH": 0
+      },
+      "bars_1d": {
+        "000016.SH": 0,
+        "000300.SH": 0,
+        "000852.SH": 0,
+        "000905.SH": 0,
+        "510170.SH": 0,
+        "510310.SH": 0,
+        "511010.SH": 0,
+        "511260.SH": 0,
+        "513100.SH": 0,
+        "513500.SH": 0,
+        "518880.SH": 0
+      },
+      "bars_5m": {
+        "000016.SH": 0,
+        "000300.SH": 0,
+        "000852.SH": 0,
+        "000905.SH": 0,
+        "510170.SH": 0,
+        "510310.SH": 0,
+        "511010.SH": 0,
+        "511260.SH": 0,
+        "513100.SH": 0,
+        "513500.SH": 0,
+        "518880.SH": 0
+      },
+      "corp_actions": {
+        "000016.SH": 0,
+        "000300.SH": 0,
+        "000852.SH": 0,
+        "000905.SH": 0,
+        "510170.SH": 0,
+        "510310.SH": 0,
+        "511010.SH": 0,
+        "511260.SH": 0,
+        "513100.SH": 0,
+        "513500.SH": 0,
+        "518880.SH": 0
+      },
+      "index_1d": {
+        "000016.SH": 0,
+        "000300.SH": 5280,
+        "000852.SH": 0,
+        "000905.SH": 0,
+        "510170.SH": 0,
+        "510310.SH": 0,
+        "511010.SH": 0,
+        "511260.SH": 0,
+        "513100.SH": 0,
+        "513500.SH": 0,
+        "518880.SH": 0
+      },
+      "instruments": {
+        "000016.SH": 1,
+        "000300.SH": 1,
+        "000852.SH": 1,
+        "000905.SH": 1,
+        "510170.SH": 0,
+        "510310.SH": 0,
+        "511010.SH": 0,
+        "511260.SH": 0,
+        "513100.SH": 0,
+        "513500.SH": 0,
+        "518880.SH": 0
+      }
+    },
+    "bars_1m_registered": false,
+    "candidate_bindings": {
+      "510310.XSHG": {
+        "file": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_raw/table.parquet",
+        "future_excluded": 0,
+        "native_rows": 3286,
+        "registry": "data/staging/strategies-batch74/20261008-FOF-two-eight/reused-ETF.json",
+        "registry_sha256": "3da0d9d76f3886f83e321cd8da11fbfb274dfda44061ef8d1a7319877cb5f5b5",
+        "sha256": "154a1783d83fa41b9892142adc1d56bf414924a97968a591e7810f6b5931490d",
+        "source_kind": "frozen_batch66_em_raw"
+      },
+      "511010.XSHG": {
+        "file": "data/staging/strategies-batch77/20261009-DCA-index-valuation/probes/fund-511010/parsed.parquet",
+        "future_excluded": 2,
+        "native_rows": 3279,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sh511010"
+          }
+        },
+        "registry": "data/staging/strategies-batch77/20261009-DCA-index-valuation/probe-results.json",
+        "registry_sha256": "ce9de5486bdccbdde43e432f2ac955db854428ae156996329c01596cff0b0823",
+        "sha256": "9416b5c3ee0d3f4fc11c18b2b84e86668feeb48be49b972d22a62582c3bb4230",
+        "source_kind": "frozen_sina_native_close",
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch77/20261009-DCA-index-valuation/probes/fund-511010/response-0.bin",
+            "sha256": "e6122578704bc1ab6643c578c818b84c5f567c4930775a48978e40a2743f01b0",
+            "status_code": 200
+          }
+        ]
+      },
+      "513100.XSHG": {
+        "file": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/probes/fund-513100/parsed.parquet",
+        "future_excluded": 2,
+        "native_rows": 3203,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sh513100"
+          }
+        },
+        "registry": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/probe-results.json",
+        "registry_sha256": "8700758f70a4a4e749669be54632fae53ca0651485795ba0bebcf122f66dac03",
+        "sha256": "4885a44c20002de8f9cf3f2fe436e51f777a1207a6837e84501124aef90c9baf",
+        "source_kind": "frozen_sina_native_close",
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/probes/fund-513100/response.bin",
+            "sha256": "7c8ec738b530a889597d7df6a79f1e0c707a5f37d6f4447cec49724391b8c1c4",
+            "status_code": 200
+          }
+        ]
+      },
+      "513500.XSHG": {
+        "file": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/probes/fund-513500/parsed.parquet",
+        "future_excluded": 2,
+        "native_rows": 3091,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sh513500"
+          }
+        },
+        "registry": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/probe-results.json",
+        "registry_sha256": "a2c0220711dcffcbfb5d5de56ee5e2cfd986cd43e91eb35154c08a1a5afc7382",
+        "sha256": "9a9b4867048b3a1ca39c0bef13584d11e25ebc1a34801570659583dd9f9b3a1d",
+        "source_kind": "frozen_sina_native_close",
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/probes/fund-513500/response.bin",
+            "sha256": "8aa5925fd0fa1b45b91d2990661e618253f4c01f349b925d3fe949d1f5968b74",
+            "status_code": 200
+          }
+        ]
+      },
+      "518880.XSHG": {
+        "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-518880/parsed.parquet",
+        "future_excluded": 2,
+        "native_rows": 3206,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sh518880"
+          }
+        },
+        "registry": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/results.json",
+        "registry_sha256": "d258e2fb847f2441c1f646e15aba2fa98360911e1e63dcefec25729b67b8ac68",
+        "sha256": "d51f5f9c996ab6ec26e999076462c11b677dcfc9f602fea9233cd0e2e39be0fc",
+        "source_kind": "frozen_sina_native_close",
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-518880/response.bin",
+            "sha256": "dffbce2d727e2ff7dee4155cd93719e8db28cc11e7c3bf7e9b3ba32ab72473c0",
+            "status_code": 200
+          }
+        ]
+      }
+    },
+    "candidate_profiles": {
+      "510310.XSHG": {
+        "calendar_extra": [],
+        "calendar_missing": [],
+        "first": "2013-03-25",
+        "history_basis": "candidate native observations; original history pause/adjustment semantics unproven",
+        "last": "2026-09-29",
+        "native120_row_reference_windows": 3167,
+        "rows": 3286,
+        "strict_usable": false
+      },
+      "511010.XSHG": {
+        "calendar_extra": [],
+        "calendar_missing": [],
+        "first": "2013-04-09",
+        "history_basis": "candidate native observations; original history pause/adjustment semantics unproven",
+        "last": "2026-09-29",
+        "native120_row_reference_windows": 3158,
+        "rows": 3277,
+        "strict_usable": false
+      },
+      "513100.XSHG": {
+        "calendar_extra": [],
+        "calendar_missing": [
+          "2022-01-13"
+        ],
+        "first": "2013-07-31",
+        "history_basis": "candidate native observations; original history pause/adjustment semantics unproven",
+        "last": "2026-09-29",
+        "native120_row_reference_windows": 3082,
+        "rows": 3201,
+        "strict_usable": false
+      },
+      "513500.XSHG": {
+        "calendar_extra": [],
+        "calendar_missing": [
+          "2022-03-29"
+        ],
+        "first": "2014-01-15",
+        "history_basis": "candidate native observations; original history pause/adjustment semantics unproven",
+        "last": "2026-09-29",
+        "native120_row_reference_windows": 2970,
+        "rows": 3089,
+        "strict_usable": false
+      },
+      "518880.XSHG": {
+        "calendar_extra": [],
+        "calendar_missing": [],
+        "first": "2013-07-29",
+        "history_basis": "candidate native observations; original history pause/adjustment semantics unproven",
+        "last": "2026-09-29",
+        "native120_row_reference_windows": 3085,
+        "rows": 3204,
+        "strict_usable": false
+      }
+    },
+    "funds_without_candidate_in_selected_registries": [
+      "510170.XSHG",
+      "511260.XSHG"
+    ],
+    "futures_tables_registered": [],
+    "new_requests_responses_publications": 0,
+    "original_futures_trades_admitted": 0,
+    "original_returns_or_fund_trades_admitted": 0,
+    "published_batch": "20261006-145049-5ceb",
+    "snapshot": "20261006-145049-e06c",
+    "snapshot_sha256": "9449dc18911fe5f27fe65f55f5849602bec0cba998335b74a6d2b1377e19af60"
+  },
+  "case_id": "batch101-native-inventory",
+  "nature": "actual_frozen_registry_wire_and_parquet_inventory_not_ES_results",
+  "purpose": "5候选15462原生120行窗口仅库存；范围内两缺日/缺两基金不放行原组合",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch101/20261011-native-candidate-inventory/inventory.json",
+    "sha256": "bc189165e9738b832505b23a9d9aa8fb7dab40cd8170ccddff04226057e55380"
+  }
+}

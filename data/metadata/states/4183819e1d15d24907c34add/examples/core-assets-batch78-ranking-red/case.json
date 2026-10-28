@@ -1,0 +1,29 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "scripts.verify_offline_tests",
+      "-q",
+      "tests/unit/test_batch78_research.py",
+      "-k",
+      "near_tie or finish_rejects"
+    ],
+    "implementation_sha256": {
+      "scripts/review_strategy_batch78.py": "dd51ba84be51ac7c090630801b182f30995291354b660433f5bf38111f8bb511",
+      "tests/unit/test_batch78_research.py": "3e245ebae1d4088767367ee29b642869bb9ce82edac2914fd859eca0ad89108e"
+    },
+    "log": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/development-failure-ranking/tests.log",
+    "not_a_backtest": true,
+    "returncode": 1,
+    "sha256": "ac4ecf1e49b900a9da893dbbafff862eef11b5a6ad211c0b2f994de65d51eed7"
+  },
+  "case_id": "core-assets-batch78-ranking-red",
+  "nature": "immutable_ranking_acceptance_regression",
+  "purpose": "2失败/21未选：完整排名计数缺失与finish未拒绝独立排序差异；原公式/排序不变，修正回归含第一名未变的排名差异",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/development-failure-ranking/failure.json",
+    "sha256": "f296f024ea3f61a9ff1a771d6cc00d45d8f60ad64e9a0c84b7e14973802bf0b2"
+  }
+}

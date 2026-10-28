@@ -1,0 +1,165 @@
+{
+  "accepted": {
+    "catalog_id": "0dd173dfd03cb7c148a3",
+    "catalog_sha256": "698b1817c5bf48582694c900ff43677fbec87ef911797c3b2189c066a484dfa6",
+    "catalog_status_counts": {
+      "已验证": 11,
+      "待审查": 2,
+      "待数据": 483,
+      "暂不可复现": 71,
+      "重复版本": 41,
+      "非交易研究脚本": 87
+    },
+    "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+    "checkpoint": "20261011-080516-0903",
+    "local_strategy_runs": 87,
+    "locally_backtested_sources": 12,
+    "locally_reproduced_sources": 12,
+    "manually_reviewed": 300,
+    "note": "Batch107 two full ETF sources accepted;longest native29-row regressions/three-fund rankings and32 local+32 copied/39 formal tests;original ETF trades blocked",
+    "published_batch": "20261006-145049-5ceb",
+    "sources": 695
+  },
+  "accepted_receipt": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-11-batch107-final-review.json",
+    "sha256": "cccc233f21411fcd39a9e657dec3348e636eae12fa5d132698e5956f9f4fc7cf"
+  },
+  "catalogs": {
+    "0dd173dfd03cb7c148a3": "data/metadata/catalogs/0dd173dfd03cb7c148a3/catalog.json"
+  },
+  "current": {
+    "catalog_id": "0dd173dfd03cb7c148a3",
+    "catalog_sha256": "698b1817c5bf48582694c900ff43677fbec87ef911797c3b2189c066a484dfa6",
+    "catalog_status_counts": {
+      "已验证": 11,
+      "待审查": 2,
+      "待数据": 483,
+      "暂不可复现": 71,
+      "重复版本": 41,
+      "非交易研究脚本": 87
+    },
+    "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+    "checkpoint": "20261011-081112-2e6e",
+    "local_strategy_runs": 87,
+    "locally_backtested_sources": 12,
+    "locally_reproduced_sources": 12,
+    "manually_reviewed": 300,
+    "note": "Batch108 two stock candidates fully preread232/340 lines;current snapshot lacks index_constituents;formal300/trading12/parents87 unchanged;107 catalog/metadata239 regression passed",
+    "published_batch": "20261006-145049-5ceb",
+    "sources": 695
+  },
+  "financial_imports": [
+    {
+      "audit": "data/metadata/financials/c863b10a0ed2c27df694/audit.json",
+      "fields": "data/metadata/financials/c863b10a0ed2c27df694/fields.json",
+      "import_id": "c863b10a0ed2c27df694",
+      "limitations": [
+        "最终合并值缺历史版本证据，严格历史覆盖为 0",
+        "季度无首次公告时间，FAR 年报日期不放行其他来源",
+        "控制变量年度汇总、everSTPT/STPT/marketvalue 不用于历史股票池或每日估值"
+      ],
+      "receipt": "data/metadata/financials/c863b10a0ed2c27df694/import-receipt.json",
+      "rows": {
+        "company_controls_annual": 73738,
+        "financial_annual": 95486,
+        "financial_quarterly": 405867
+      },
+      "strict_usable_rows": 0
+    }
+  ],
+  "goal": {
+    "done_when": "每份来源有人工审查、明确交付或阻断、来源与规则证据；可运行策略完成独立验证、成本与离线复现，不宣称全库已完成",
+    "id": "G-strategy-library",
+    "plan": "docs/tasks/2026-10-03-财务数据标准化与策略逐批复现-执行计划.md",
+    "scope": "研究695份策略来源，按数据可用范围开发、复现、评价及留档；同时维护财务、因子、模型与分钟研究能力",
+    "status": "in_progress"
+  },
+  "in_progress_acceptance": "pending",
+  "indexes": {
+    "assets": "data/metadata/states/4183819e1d15d24907c34add/assets/index.json",
+    "blockers": "data/metadata/states/4183819e1d15d24907c34add/blockers.json",
+    "bundles": "data/metadata/states/4183819e1d15d24907c34add/bundles/index.json",
+    "capabilities": "data/metadata/states/4183819e1d15d24907c34add/capabilities.json",
+    "decisions": "data/metadata/states/4183819e1d15d24907c34add/decisions/index.json",
+    "evidence": "data/metadata/states/4183819e1d15d24907c34add/evidence/index.json",
+    "representative_runs": "data/metadata/states/4183819e1d15d24907c34add/runs/representative.json",
+    "runs": "data/metadata/states/4183819e1d15d24907c34add/runs/index.json",
+    "tasks": "data/metadata/states/4183819e1d15d24907c34add/tasks/index.json"
+  },
+  "metadata_is_runtime_input": false,
+  "payload_integrity_reaudited": false,
+  "publication": {
+    "current_worktree_note": "第107批正式300/695、剩395，12匹配来源87父；第108批两源232/340行初读及库存未正式验收；当前快照缺成员表，原基金缺日/尺度与事件仍阻断；239目录元数据回归通过，新增交易0；Git由用户提交上传",
+    "current_worktree_status": "pending_user_commit_and_push",
+    "evidence": "docs/handoff/2026-10-08-git-publication.json",
+    "local_commit": "26170e0e80abdb6ca0a3e8df7f4d66222186a714",
+    "original_git_directory": "user_managed_read_only_to_agent",
+    "remote_sync": "pushed_private_origin_master_20261008",
+    "research_acceptance_is_separate": true
+  },
+  "published_batch": "20261006-145049-5ceb",
+  "run_kinds": {
+    "diagnostic": 6,
+    "paired": 5,
+    "reeval": 4,
+    "research": 12,
+    "run": 21,
+    "strategy": 87
+  },
+  "schema": 1,
+  "snapshots": [
+    {
+      "batch_id": "20260930-072620-b938",
+      "metadata": "data/metadata/snapshots/20260930-112447-8d87.json",
+      "snapshot_id": "20260930-112447-8d87"
+    },
+    {
+      "batch_id": "20260930-121727-4c66",
+      "metadata": "data/metadata/snapshots/20260930-121952-b7e8.json",
+      "snapshot_id": "20260930-121952-b7e8"
+    },
+    {
+      "batch_id": "20260930-121727-4c66",
+      "metadata": "data/metadata/snapshots/20261005-131630-822f.json",
+      "snapshot_id": "20261005-131630-822f"
+    },
+    {
+      "batch_id": "20261005-135023-630e",
+      "metadata": "data/metadata/snapshots/20261005-135042-6c91.json",
+      "snapshot_id": "20261005-135042-6c91"
+    },
+    {
+      "batch_id": "20261005-143444-56c1",
+      "metadata": "data/metadata/snapshots/20261005-143509-75b4.json",
+      "snapshot_id": "20261005-143509-75b4"
+    },
+    {
+      "batch_id": "20261005-152040-e16e",
+      "metadata": "data/metadata/snapshots/20261005-152153-eb05.json",
+      "snapshot_id": "20261005-152153-eb05"
+    },
+    {
+      "batch_id": "20261005-191431-a38b",
+      "metadata": "data/metadata/snapshots/20261005-191431-aa71.json",
+      "snapshot_id": "20261005-191431-aa71"
+    },
+    {
+      "batch_id": "20261005-201432-dd1d",
+      "metadata": "data/metadata/snapshots/20261005-201432-93d0.json",
+      "snapshot_id": "20261005-201432-93d0"
+    },
+    {
+      "batch_id": "20261005-211958-420e",
+      "metadata": "data/metadata/snapshots/20261005-211958-89b5.json",
+      "snapshot_id": "20261005-211958-89b5"
+    },
+    {
+      "batch_id": "20261006-145049-5ceb",
+      "metadata": "data/metadata/snapshots/20261006-145049-e06c.json",
+      "snapshot_id": "20261006-145049-e06c"
+    }
+  ],
+  "strategy_parent_runs": 87,
+  "total_parent_runs": 135
+}

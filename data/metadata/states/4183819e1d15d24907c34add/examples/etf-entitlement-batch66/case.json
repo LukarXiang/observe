@@ -1,0 +1,629 @@
+{
+  "case": {
+    "accepted_checkpoint": "20261008-175433-35ad",
+    "checks": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/prepare_handoff.py",
+          "scripts/build_strategy_catalog.py",
+          "scripts/verify_financial_import.py",
+          "scripts/verify_strategy_batch66.py"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "All checks passed!\n"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      }
+    ],
+    "component": {
+      "explicit_policy": "cash_entitlement=record_close",
+      "stages": [
+        "record_close_qty",
+        "ex_date_receivable",
+        "pay_date_cash"
+      ],
+      "stock_eligibility_gate_preserved": true,
+      "validation": {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_dividend_entitlements.py",
+          "tests/integration/test_dividend_entitlement_execution.py",
+          "tests/unit/test_ledger.py",
+          "tests/unit/test_conversion.py",
+          "tests/unit/test_portfolio_loop.py",
+          "tests/unit/test_offline_integration.py",
+          "tests/integration/test_conversion_execution.py",
+          "tests/integration/test_public_run.py",
+          "tests/integration/test_strategy_scope.py"
+        ],
+        "implementation_sha256": {
+          "scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+          "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+          "src/observe/ledger/book.py": "6cd48bec61546727a2b4fdb122a1524bf9bc5a9400ba1c18f7da1b2fe6bd9175",
+          "tests/integration/test_dividend_entitlement_execution.py": "82f8f967013a86c7394cbae43c31c35886896df4db60a4b532eb10f40c908dcd",
+          "tests/unit/test_dividend_entitlements.py": "db24fedd42478231e7e7a11a10c483bde7cfb7c0f904aa1ba8f753b5b77a7464"
+        },
+        "legacy_comparison": {
+          "cases": [
+            {
+              "conversion": false,
+              "differences": 0,
+              "sessions": 15,
+              "year": 2013
+            },
+            {
+              "conversion": false,
+              "differences": 0,
+              "sessions": 15,
+              "year": 2024
+            },
+            {
+              "conversion": true,
+              "differences": 0,
+              "sessions": 15,
+              "year": 2024
+            }
+          ],
+          "scope": "synthetic legacy behavior; not platform equivalence",
+          "status": "match"
+        },
+        "log": "data/staging/strategies-batch66/20261008-etf-record-entitlement/after-pytest.log",
+        "log_sha256": "c7e153b3fd0ca548631800211c8b7f547df50a48eb17b6f202a0e10c84309469",
+        "new_trading_backtests": 0,
+        "not_a_backtest": true,
+        "phase": "after",
+        "protection": {
+          "baseline_sha256": "5c70f7e0810fbf9df3210fb93b9ffc2196c61f9f4d6b76af61e65f52b300638c",
+          "mutable_registry_files_excluded": 0,
+          "old_calendar_rows_unchanged": 7938,
+          "old_controls_unchanged": 5223,
+          "old_index_rows_unchanged": 5280,
+          "old_partition_metadata_unchanged": 398,
+          "partition_check": "size/mtime only; no fresh full hash",
+          "status": "ok"
+        },
+        "returncode": 0
+      }
+    },
+    "current_checkpoint": "20261008-184439-d8d0",
+    "formal_strategy_acceptance": false,
+    "git_publication": "pending_user_commit_and_push",
+    "legacy_reproduction": {
+      "implementation_sha256": {
+        "scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+        "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+        "src/observe/ledger/book.py": "6cd48bec61546727a2b4fdb122a1524bf9bc5a9400ba1c18f7da1b2fe6bd9175",
+        "tests/integration/test_dividend_entitlement_execution.py": "82f8f967013a86c7394cbae43c31c35886896df4db60a4b532eb10f40c908dcd",
+        "tests/unit/test_dividend_entitlements.py": "db24fedd42478231e7e7a11a10c483bde7cfb7c0f904aa1ba8f753b5b77a7464"
+      },
+      "network": "forbidden",
+      "new_strategy_sources": 0,
+      "result": {
+        "output": "data/runs/20261008-183943-9f5953-strategy-b3c3",
+        "reproduction": {
+          "differences": 0,
+          "of": "/mnt/d/projects/observe/data/runs/20261005-191525-e4a754-strategy-d910",
+          "result": "match"
+        },
+        "run_id": "20261008-183943-9f5953-strategy-b3c3",
+        "status": "success_limited",
+        "subruns": {
+          "backtests": [
+            {
+              "manifest_sha256": "5437273455f4382718d990df4618494786f3945df772d2fad85be259ffc99f1a",
+              "model": "bollinger_breakout_corrected_v1",
+              "output": "data/runs/20261008-183943-9f5953-strategy-b3c3/variants/20261008-183951-b876a0-base-06c0",
+              "run_id": "20261008-183951-b876a0-base-06c0",
+              "scenario": "base",
+              "status": "success_limited"
+            },
+            {
+              "manifest_sha256": "fee7f5d00e93219339d594b8810229924a997c8a39e9343e216276755b4b1610",
+              "model": "bollinger_breakout_corrected_v1",
+              "output": "data/runs/20261008-183943-9f5953-strategy-b3c3/variants/20261008-184011-62511a-fees_x2-31dc",
+              "run_id": "20261008-184011-62511a-fees_x2-31dc",
+              "scenario": "fees_x2",
+              "status": "success_limited"
+            },
+            {
+              "manifest_sha256": "00921b03c78c8f37266404c59c9db795ecc604a7c7b35f92d4cd5e41c4c12b18",
+              "model": "bollinger_breakout_corrected_v1",
+              "output": "data/runs/20261008-183943-9f5953-strategy-b3c3/variants/20261008-184029-c4d391-slippage_x2-bbe1",
+              "run_id": "20261008-184029-c4d391-slippage_x2-bbe1",
+              "scenario": "slippage_x2",
+              "status": "success_limited"
+            }
+          ]
+        }
+      },
+      "scope": "existing 2005-2026 stock strategy, three-cost compatibility regression",
+      "source_run": "20261005-191525-e4a754-strategy-d910"
+    },
+    "new_etf_trading_backtests": 0,
+    "new_parent_reproductions": 1,
+    "new_strategy_sources": 0,
+    "newly_reviewed_sources": 0,
+    "original_strategy_complete": false,
+    "payload_references": [
+      {
+        "bytes": 7380,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/analyze.py",
+        "sha256": "8fd6fc2386aa33840196247983c40137eb2bc0c0fd32eb8443666d07584ede6d"
+      },
+      {
+        "bytes": 8021,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/comparison.json",
+        "sha256": "82ae410f6892eb0ec2228a4d7b30aa6dc18a8b04cbd06ee382b65508c29196a1"
+      },
+      {
+        "bytes": 2619,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/details.py",
+        "sha256": "92800bdffb460ea180770904746cb4ec608f9313b8f297b471e3ec71d3b301af"
+      },
+      {
+        "bytes": 17595,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_hfq/fund_etf_em.py",
+        "sha256": "e27bca79042081fd7e6e3251e431aae5b2e2dcf0930d3a38818a6009d94ea2fd"
+      },
+      {
+        "bytes": 1431,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_hfq/result.json",
+        "sha256": "b31bb465f1248396fc49c939130caa6750ffe86f93b7a710f881705a3e60658a"
+      },
+      {
+        "bytes": 17595,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_hfq_retry/fund_etf_em.py",
+        "sha256": "e27bca79042081fd7e6e3251e431aae5b2e2dcf0930d3a38818a6009d94ea2fd"
+      },
+      {
+        "bytes": 1443,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_hfq_retry/result.json",
+        "sha256": "097a554c79c0018054ede9f98d092865a4b1652c7ac8224bc9d6c23bd42d699e"
+      },
+      {
+        "bytes": 17595,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_qfq/fund_etf_em.py",
+        "sha256": "e27bca79042081fd7e6e3251e431aae5b2e2dcf0930d3a38818a6009d94ea2fd"
+      },
+      {
+        "bytes": 1431,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_qfq/result.json",
+        "sha256": "e497173a167f1ddb864e2c4a3d288347cdfbabed7e353b7f865ed870a872b0c0"
+      },
+      {
+        "bytes": 17595,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_raw/fund_etf_em.py",
+        "sha256": "e27bca79042081fd7e6e3251e431aae5b2e2dcf0930d3a38818a6009d94ea2fd"
+      },
+      {
+        "bytes": 260308,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_raw/response-000.bin",
+        "sha256": "2dd85887a83c6939f46a1871db142d86be4c5ffec7a15f123a73332c29b7487c"
+      },
+      {
+        "bytes": 4058,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_raw/result.json",
+        "sha256": "512edb24aace44b55b35d7742a6d6c1382518cb6d64954fb138a8e2c72d5b6f5"
+      },
+      {
+        "bytes": 140062,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/em_raw/table.parquet",
+        "sha256": "154a1783d83fa41b9892142adc1d56bf414924a97968a591e7810f6b5931490d"
+      },
+      {
+        "bytes": 3049,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/finalize.py",
+        "sha256": "c5a63d381e27817be6e5e2ff287f051c5af2b5bce307d93df13dd577307651c9"
+      },
+      {
+        "bytes": 464,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/first-comparison-failure.json",
+        "sha256": "9ad8147cb578e81eed6edf7601e1f4353814f6bf194603beda61694bfbbab3fe"
+      },
+      {
+        "bytes": 5009,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/probe.py",
+        "sha256": "064de1f94dae2499bc3568100bcace664f7bfc461a28c68e7a722f012a4dcace"
+      },
+      {
+        "bytes": 1316,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/quote-differences.json",
+        "sha256": "44d1c4966f7f5e4bf181cd75b15fd77ebc94b62a3d4f250c3bc20135031db3e4"
+      },
+      {
+        "bytes": 7383,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/report.md",
+        "sha256": "d1e8d26e5e862cb223b90539089e0ac781992dae14e9cdbf59f230ba3917bd55"
+      },
+      {
+        "bytes": 478,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/second-comparison-failure.json",
+        "sha256": "044eb1e03f56c4002b11ac07ade8a0441e4514c24f09d6488963bada7ddb6d45"
+      },
+      {
+        "bytes": 7058,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_chart_k/fund_etf_sina.py",
+        "sha256": "796a35b1fec179533dffc4a4b9a7b94c5564d8e02aa2e7504fcead1d4735c97b"
+      },
+      {
+        "bytes": 71037,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_chart_k/response-000.bin",
+        "sha256": "85b0116df9a0088a311154f0a2bae191a006263a8fbd3f3297ba77fe8aaf4092"
+      },
+      {
+        "bytes": 1297,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_chart_k/result.json",
+        "sha256": "f00d4f4af0c975c01ccfc299c0b7033b3f972635dbf1b988db33bc9fa1343f26"
+      },
+      {
+        "bytes": 7058,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_datas_k/fund_etf_sina.py",
+        "sha256": "796a35b1fec179533dffc4a4b9a7b94c5564d8e02aa2e7504fcead1d4735c97b"
+      },
+      {
+        "bytes": 14645,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_datas_k/response-000.bin",
+        "sha256": "43dcebed49f17a46b7785e971ad5767c6600bd85bd451ce3439c2cef9570e5fe"
+      },
+      {
+        "bytes": 1291,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_datas_k/result.json",
+        "sha256": "6a92ea19c7bd8f3a5282e7a354bdaccc444a1685da725642063e0c7d9195e6d8"
+      },
+      {
+        "bytes": 7058,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_frontend/fund_etf_sina.py",
+        "sha256": "796a35b1fec179533dffc4a4b9a7b94c5564d8e02aa2e7504fcead1d4735c97b"
+      },
+      {
+        "bytes": 262937,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_frontend/response-000.bin",
+        "sha256": "f3b93578f06d9fb981adae07aeb2c34b86d0f57f6a51cd6fe0d5ebb5f17d3b31"
+      },
+      {
+        "bytes": 1277,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_frontend/result.json",
+        "sha256": "92f385ed708cab84cc620de3a7d5d1d58d1f1452c6229949096b718ddf6faf12"
+      },
+      {
+        "bytes": 7058,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_hfq/fund_etf_sina.py",
+        "sha256": "796a35b1fec179533dffc4a4b9a7b94c5564d8e02aa2e7504fcead1d4735c97b"
+      },
+      {
+        "bytes": 955,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_hfq/response-000.bin",
+        "sha256": "d249ca95b4ccbefdca1341480301f4e57c271cc6978da79e1c40b6e5597ad3c3"
+      },
+      {
+        "bytes": 1292,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_hfq/result.json",
+        "sha256": "e0a0d0b2a8c0a8c3b77304b57c2d00744ecc1590269eac16bebe2f28bda4d365"
+      },
+      {
+        "bytes": 7058,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_new/fund_etf_sina.py",
+        "sha256": "796a35b1fec179533dffc4a4b9a7b94c5564d8e02aa2e7504fcead1d4735c97b"
+      },
+      {
+        "bytes": 40759,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_new/response-000.bin",
+        "sha256": "8f1534a0c134dd0ce2a75e970a70a34b81bc3b0fa01c6f9a8ed23739cf986c7a"
+      },
+      {
+        "bytes": 2870,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_new/result.json",
+        "sha256": "a2a93f1e841f7e010f86d1bd1ecfcf66a5a1a896f3fb757333f30cf969c9a972"
+      },
+      {
+        "bytes": 118231,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_new/table.parquet",
+        "sha256": "e7c5f10151fa970daac180b65ed8e2f67dba5de7f05fe8b05169a21947f3f181"
+      },
+      {
+        "bytes": 7058,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_newcompany_hfq/fund_etf_sina.py",
+        "sha256": "796a35b1fec179533dffc4a4b9a7b94c5564d8e02aa2e7504fcead1d4735c97b"
+      },
+      {
+        "bytes": 246,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_newcompany_hfq/response-000.bin",
+        "sha256": "f06ee8e8a5570a59af7b0617cd48e238fac3f56751ea67a316e6ec1f7fa8b47e"
+      },
+      {
+        "bytes": 1337,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_newcompany_hfq/result.json",
+        "sha256": "76b8840c61173be038696f01fea15691dba4712e615447dacc7ee595a375d39d"
+      },
+      {
+        "bytes": 7058,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_newcompany_qfq/fund_etf_sina.py",
+        "sha256": "796a35b1fec179533dffc4a4b9a7b94c5564d8e02aa2e7504fcead1d4735c97b"
+      },
+      {
+        "bytes": 246,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_newcompany_qfq/response-000.bin",
+        "sha256": "c07b29aef76e2f4debbefda95c298f1c144ebaf93afbc9392c610d303aad87d8"
+      },
+      {
+        "bytes": 1337,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_newcompany_qfq/result.json",
+        "sha256": "866cd9d17c83b4434898638e0c31496a70c552a0e7b9072f341baafb85e7df4e"
+      },
+      {
+        "bytes": 7058,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_sdk/fund_etf_sina.py",
+        "sha256": "796a35b1fec179533dffc4a4b9a7b94c5564d8e02aa2e7504fcead1d4735c97b"
+      },
+      {
+        "bytes": 131643,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_sdk/response-000.bin",
+        "sha256": "804645b741da7969c3f4fb1a4f5f9608d50b312f8efb1a6523d389441eae40b6"
+      },
+      {
+        "bytes": 1277,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/sina_sdk/result.json",
+        "sha256": "7c5ec6d59856a9bbce0e2049e2f31d037c3efb9269e53cfa079e4ea2e45239ca"
+      },
+      {
+        "bytes": 2363,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/supplier-formula-excerpts.json",
+        "sha256": "aa8567270dd8cabbfd084b9adb181e8d165a4289a77f5d7927c8e0a6bc63f497"
+      },
+      {
+        "bytes": 6355,
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/verification.json",
+        "sha256": "c12baf5c3e35cbb3d29522127605e54fa5cbc8aec632e416417d3a7e71998425"
+      },
+      {
+        "bytes": 719,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/after-pytest.log",
+        "sha256": "c7e153b3fd0ca548631800211c8b7f547df50a48eb17b6f202a0e10c84309469"
+      },
+      {
+        "bytes": 2131,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/after.json",
+        "sha256": "1756c9e3eb77560dff49eb6fde4fcc2b2a5f897824781be2aea02088f5314fa3"
+      },
+      {
+        "bytes": 990330,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/baseline.json",
+        "sha256": "5c70f7e0810fbf9df3210fb93b9ffc2196c61f9f4d6b76af61e65f52b300638c"
+      },
+      {
+        "bytes": 12775,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/before-pytest.log",
+        "sha256": "aedb9c046d2437a5dbeaed8402363fc073db2219f709af35a5e844f01acd40aa"
+      },
+      {
+        "bytes": 858,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/before.json",
+        "sha256": "dd2b50dacded9d2dcb04d223e094c7208784b4f1de717ac3e338f8b60a655600"
+      },
+      {
+        "bytes": 14806,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/book.py.before",
+        "sha256": "73d832061bcf7064c7d01da0737f4db9cfdda746de330d0468d2a27ed662cbda"
+      },
+      {
+        "bytes": 16457,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/execution.py.before",
+        "sha256": "0c80f1bbde9c27d98a3e08103d8534ce286356a2d85f36494afa0b7c53353357"
+      },
+      {
+        "bytes": 483,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/fixture-failure.json",
+        "sha256": "d86edc88bf9a7cc1be75eff668f4f9ffefbe57883bc216ae7c3375434c2800ae"
+      },
+      {
+        "bytes": 20109,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/implementation-evidence.before.json",
+        "sha256": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6"
+      },
+      {
+        "bytes": 2268,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/legacy-strategy-reproduction.json",
+        "sha256": "35b404a5e707a51be6832f46fdc675cf5d60a6e58c1f70950f8bf6778b6f875c"
+      },
+      {
+        "bytes": 854,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/progress-start.json",
+        "sha256": "d5df11a386473f699ee576226039c04153cbb9112e6ecfea23bbcdc9b4547be8"
+      },
+      {
+        "bytes": 353,
+        "path": "data/staging/strategies-batch66/20261008-etf-record-entitlement/protection.json",
+        "sha256": "5d3d7f3d322dc44d5b54102459e5374b2dc37fdcf4d6c1e488661223fc276f46"
+      }
+    ],
+    "published_batch": "20261006-145049-5ceb",
+    "quotes": {
+      "amount_comparison": {
+        "exact_mismatch_rows": 235,
+        "max_abs_difference": 8.0
+      },
+      "calendar": {
+        "missing_open_dates": [],
+        "open_days_in_overlap": 3286,
+        "quote_dates_calendar_closed": []
+      },
+      "candidate_decision_start": "2013-06-27",
+      "connection_failures": 3,
+      "http_responses": 9,
+      "limits": [
+        "Candidate raw data only; no ETF Store publication",
+        "Reference prices, historical states, full events, adjustment semantics and fee versions remain gated"
+      ],
+      "manifest": {
+        "path": "data/staging/strategy-dependencies/20261008-batch66-etf-quotes/manifest.json",
+        "sha256": "c51bdaa154268a1dd8637dd1e52d7f6780b4356ec873f8b13bac81ece9a8c5db"
+      },
+      "ohlc_comparison": {
+        "close": {
+          "exact_mismatch_rows": 5,
+          "max_abs_difference": 0.0009999999999998899
+        },
+        "high": {
+          "exact_mismatch_rows": 5,
+          "max_abs_difference": 0.001000000000000334
+        },
+        "low": {
+          "exact_mismatch_rows": 5,
+          "max_abs_difference": 0.001000000000000334
+        },
+        "open": {
+          "exact_mismatch_rows": 5,
+          "max_abs_difference": 0.001000000000000334
+        }
+      },
+      "requests": 12,
+      "tables": {
+        "eastmoney": {
+          "duplicate_dates": 0,
+          "first": "2013-03-25",
+          "last": "2026-09-29",
+          "nonfinite_ohlc": 0,
+          "nonpositive_ohlc": 0,
+          "nonpositive_volume": 0,
+          "ohlc_bound_errors": 0,
+          "rows": 3286,
+          "vwap_outside_ohlc": 0
+        },
+        "sina": {
+          "duplicate_dates": 0,
+          "first": "2013-03-25",
+          "last": "2026-09-30",
+          "nonfinite_ohlc": 0,
+          "nonpositive_ohlc": 0,
+          "nonpositive_volume": 0,
+          "ohlc_bound_errors": 0,
+          "rows": 3287,
+          "vwap_outside_ohlc": 0
+        }
+      },
+      "unadjusted_event_reference_counterexamples": 7,
+      "verified_payload_files": 46,
+      "volume_candidate": {
+        "exact_mismatch_rows": 1506,
+        "max_abs_difference": 52,
+        "max_ratio": 100.00983477576712,
+        "min_ratio": 99.93548387096774
+      }
+    },
+    "references": [
+      {
+        "path": "repo/rqalpha/rqalpha/mod/rqalpha_mod_sys_accounts/position_model.py",
+        "sha256": "0e54904b5fe2aff789990f818dc39c4315da2ae4beb6e091c2bfd3772a5ebe20"
+      },
+      {
+        "path": "repo/zipline-reloaded/src/zipline/finance/ledger.py",
+        "sha256": "58e4989767756864b004ffef7b4eeb66fea3fc3b54f92b68c1b193e5ff843baf"
+      }
+    ],
+    "report": {
+      "path": "docs/tasks/2026-10-08-第六十六批ETF行情与登记权益账本.md",
+      "sha256": "6fb3ce8b90c6b5c30d6bc1cfb697c59e35656938991fc5c161518fdb9b6ac035"
+    },
+    "schema": 1,
+    "scope": "verified_supplier_evidence_and_ledger_component_with_legacy_stock_regression",
+    "snapshot": "20261006-145049-e06c",
+    "sources": [
+      {
+        "review": {
+          "fidelity": "待ETF数据与执行规则核实",
+          "gaps": [
+            "现有发布表为A股，缺ETF原始/复权行情与历史停牌、价格限制、分红及交易规则",
+            "平台每bar运行与日频近似有差异，不能套用股票印花税/100股与价格步长"
+          ],
+          "implementations": [],
+          "next_step": "用现有BaoStock/AKShare接口小样本探测，补齐后再发布独立数据批次",
+          "review_status": "人工审查完成",
+          "rules": {
+            "buy": "MA10>MA60时投入当前现金",
+            "frequency": "every_bar",
+            "instrument": "510310.SH",
+            "sell": "MA10<MA60且可卖份额>0时清仓",
+            "windows": [
+              10,
+              60
+            ]
+          },
+          "scope": "510310 ETF双均线投入现金",
+          "status": "待数据"
+        },
+        "source_copy": "data/staging/strategies-batch9/20261005-source-reviews/S-a5b450847a6e.source",
+        "source_path": "repo/量化策略源代码/2020年度精选策略/83 沪深300ETF-1060双均线.txt",
+        "source_sha256": "6b93db5ffc4bf83d72aea1970bc774a73b06cfdeb19d920e836adc0d68c84fec",
+        "strategy_id": "S-a5b450847a6e"
+      },
+      {
+        "review": {
+          "fidelity": "待ETF输入与平台日期语义核实",
+          "gaps": [
+            "ETF标准输入与执行规则缺失",
+            "datetime来自平台注入；注释10日但实际count=5；严格交叉不同于83号持续买入"
+          ],
+          "implementations": [],
+          "next_step": "补ETF后按实际MA5/60和自然日截止审查，不从标题复用83号MA10/60",
+          "review_status": "人工审查完成",
+          "rules": {
+            "buy": "MA5>MA60且previous_MA5<previous_MA60，投入现金",
+            "instrument": "510310.SH",
+            "previous": "previous_date减1自然日截至的5/60行",
+            "sell": "MA5<MA60且previous_MA5>previous_MA60且可卖持仓>0",
+            "windows": [
+              5,
+              60
+            ]
+          },
+          "scope": "510310 ETF严格MA5/MA60交叉",
+          "status": "待数据"
+        },
+        "source_copy": "data/staging/strategies-batch9/20261005-next-reviews/S-8f3bdcfa8d7f.source",
+        "source_path": "repo/量化策略源代码/2022年度精选策略/72.年化15.48%，盈亏比3.818的双均线策略.txt",
+        "source_sha256": "3461874bb044a2ca4a511f551c634377609b3cd715a69573ffaa5574cd58bb8a",
+        "strategy_id": "S-8f3bdcfa8d7f"
+      }
+    ],
+    "specialists": {
+      "architecture": "no_findings",
+      "scope": "production, tests and final verifier script; read-only review",
+      "security": "no_findings"
+    },
+    "status": "ok",
+    "strict_usable": false,
+    "totals": {
+      "local_strategy_runs": 68,
+      "locally_backtested_sources": 12,
+      "locally_reproduced_sources": 12,
+      "manually_reviewed": 213,
+      "sources": 695
+    }
+  },
+  "case_id": "etf-entitlement-batch66",
+  "nature": "supplier_input_audit_ledger_component_and_existing_stock_regression",
+  "purpose": "3286行ETF候选、七参考价反例、显式登记权益能力、115测试及旧三成本match0；ETF新回测0，来源12、父运行68",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-08-batch66-verification.json",
+    "sha256": "ff20ff4ba2e86d6237c82fbe0ca44aa14d25699e7c01620602a224efd1925f1a"
+  }
+}

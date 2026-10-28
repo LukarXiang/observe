@@ -1,0 +1,26 @@
+{
+  "case": {
+    "causes": [
+      "Two positive-run threshold fixtures lacked a preceding negative volume/MA ratio; original and independent functions correctly returned None.",
+      "The independent positive-run expectation repeated the same missing-cross premise.",
+      "The temporary-directory component fixture omitted the frozen source-reviews copies required by the source-SHA selector."
+    ],
+    "changes": "Add a preceding negative ratio to positive-run threshold fixtures, retain no-cross None explicitly, and copy frozen source inputs into the temporary fixture.",
+    "command": "~/envs/quant/.venv/bin/python -m pytest -q tests/unit/test_batch76_research.py",
+    "failed": 4,
+    "not_a_backtest": true,
+    "original_driver_copy": "driver-before-fixture-correction.py",
+    "original_function_changed": false,
+    "original_test_copy": "test-before-fixture-correction.py",
+    "passed": 26,
+    "status": "failed"
+  },
+  "case_id": "dynamic-emotion-batch76-fixture-failure",
+  "nature": "immutable_development_fixture_failure",
+  "purpose": "首轮4失败26通过，补此前反号及临时冻结源码副本；原函数不变，原驱动/测试保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/initial-test-failure.json",
+    "sha256": "a63332a7b73dcdb2b7ccfdd5070d5a90dd8f1e57b0e2f604c47450cf0e384dd8"
+  }
+}

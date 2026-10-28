@@ -1,0 +1,87 @@
+{
+  "case": {
+    "components": {
+      "complete_original_pool_signals": 0,
+      "fresh_network_blocked_processes": 2,
+      "new_trading_backtests": 0,
+      "offline_differences": 0,
+      "offline_outputs": 5,
+      "original_diagnostics": 15,
+      "original_nhnl_core_reproduced": false,
+      "saved_readback": {
+        "age_count_cells": 10560,
+        "age_count_differences": 0,
+        "age_security_calendar_cells": 32503680,
+        "engine_differences": 0,
+        "fixed40_boundary_differences": 6,
+        "fixed40_rows": 95860,
+        "native_MA20_max_abs_error": 4.547473508864641e-13,
+        "native_boundary_differences": 373,
+        "native_rows": 6811232,
+        "new_trading_backtests": 0
+      },
+      "tests": {
+        "isolated": 22,
+        "local": 22
+      },
+      "window_protocol_differences": 7
+    },
+    "formal_source_research_acceptance": true,
+    "formal_tests": {
+      "isolated": 31,
+      "local": 31
+    },
+    "formal_trading_acceptance": false,
+    "library_goal_complete": false,
+    "new_independent_sources": 2,
+    "new_strategy_parent_runs": 0,
+    "new_trading_backtests": 0,
+    "original_strategy_complete": false,
+    "progress": {
+      "catalog_id": "540aaf4341cac4706de1",
+      "catalog_sha256": "6c84107d2be94e7cbc1cbd3c71003908b3d2cf1cd385530eee0aabeab9d9ab86",
+      "catalog_status_counts": {
+        "已验证": 11,
+        "待审查": 2,
+        "待数据": 483,
+        "暂不可复现": 71,
+        "重复版本": 41,
+        "非交易研究脚本": 87
+      },
+      "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+      "checkpoint": "20261011-072409-6a27",
+      "local_strategy_runs": 87,
+      "locally_backtested_sources": 12,
+      "locally_reproduced_sources": 12,
+      "manually_reviewed": 296,
+      "note": "Batch105 two nontrading sources accepted;6811232 native/95860 fixed40 cells,32503680 listing-age cells;31 local+31 isolated;373/6 boundaries and7 protocol differences preserved;trade inputs blocked",
+      "output": "data/catalog/strategies/progress/20261011-072409-6a27",
+      "published_batch": "20261006-145049-5ceb",
+      "sources": 695
+    },
+    "protection": {
+      "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f",
+      "mutable_registry_files_excluded": 0,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_unchanged": 6614,
+      "old_index_rows_unchanged": 5280,
+      "old_partition_metadata_unchanged": 398,
+      "partition_check": "size/mtime only; no fresh full hash",
+      "status": "ok"
+    },
+    "review_method": "Full sources and copied tests;no independent agent review",
+    "source_sha256": [
+      "99d10bce41b0c7e1c2669c3c0c74afefea384ba6a099673c24e041fde5b89aaf",
+      "f41f457f69e71ddb4b0b22697ca8a9fd329d7ba2954f2c7a4571e7296896f4e8"
+    ],
+    "status": "ok"
+  },
+  "case_id": "batch105-formal-source-acceptance",
+  "nature": "two_nontrading_sources_accepted_without_trading",
+  "purpose": "296来源/12匹配来源87父，原NHNL/完整池/平台仍未证明，来源审查和交易分开",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-11-batch105-final-review.json",
+    "sha256": "6be36344b6ebffd8257fb732d622d2077efbc51a7c7956bdd34a76877859d793"
+  }
+}

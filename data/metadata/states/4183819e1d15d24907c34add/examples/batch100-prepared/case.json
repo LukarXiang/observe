@@ -1,0 +1,46 @@
+{
+  "case": {
+    "dependencies_sha256": "94134d8ae27bac39d3ff16d7fa51826b8f98e8a94c313479468b94bc808ad305",
+    "features_scope": "Original create_fea prefix strictly before alpha005; full original failure preserved",
+    "implementation_sha256": {
+      "pyproject.toml": "2c937c8ac7608c6d84729f1fdb31b14d1ae3b0cfbf6ef1890fd283d3fdf179f4",
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/research_strategy_batch100.py": "1c9b7a58f53d4533afab765cb1bc8cbca6cb5f321abea56db89a2f8aeb725b20",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "f50d0ac0e2d3c634b6026fd13130becb42b1938c22580557d85988c78fcb5504",
+      "tests/unit/test_batch100_research.py": "b5b207dd3dfa7cc6c5c8e7c4ef22832f9e85bb08106727d6c9fe5be389c870fd",
+      "uv.lock": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382"
+    },
+    "not_a_backtest": true,
+    "operand_sha256": "9b45b9493c9b3db3f8ff80b1cd8174cb45c144df73a7eb96b5571c57a227567b",
+    "parent": {
+      "bound_files": 17,
+      "file": "docs/handoff/2026-10-11-batch99-final-review.json",
+      "sha256": "628c7b67ce4194eb577de00f4dd466b12725b674abcce2dbf4018834b9ba2215"
+    },
+    "reference_sha256": {
+      "repo/akshare/akshare/index/index_zh_em.py": "031883207899c4d251d61bc5f7e980c2e71f34c4b48df112a0a726e917e25114",
+      "repo/qlib/qlib/contrib/model/xgboost.py": "1e27774291b79463bd60675e5c8c4542ead32e9f319337ff7b94e263636ad88e",
+      "repo/rqalpha/rqalpha/mod/rqalpha_mod_sys_accounts/api/api_stock.py": "97ff999448027d28d07e7fde19f9b931abe0c5a1914d5143f6bbacd1968eb249"
+    },
+    "source_sha256": [
+      "eee496f1bc636b0372ba32153596d3bb72c9d4f73e2c3520a16c35da532f0e76",
+      "4947832e5d01a5a15b4408de799c0c4e908d5e91eda996fbc33bb0f3c22c3a8a"
+    ]
+  },
+  "case_id": "batch100-prepared",
+  "nature": "frozen_original_400_row_feature_prefix_inputs_and_code",
+  "purpose": "5252旧ETF候选/7表10证券/原模型文件名实际缺失；raw volume单位与平台复权未证，未发布交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch100/20261011-original-feature-stage/prepared.json",
+    "sha256": "1bfbe448cb28124dbcf27d191d8194d39e5c5311756223ec84703da5ba08875a"
+  }
+}

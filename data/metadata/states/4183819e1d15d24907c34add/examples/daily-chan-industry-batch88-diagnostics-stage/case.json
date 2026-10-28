@@ -1,0 +1,175 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "momentum-horizon-1",
+        "columns": [
+          "04-29",
+          "04-30",
+          "05-01",
+          "05-04",
+          "05-05",
+          "05-06",
+          "05-07",
+          "05-08",
+          "05-11",
+          "05-12"
+        ],
+        "leader_count": 7,
+        "momentum": 8.0,
+        "nature": "synthetic_original_function"
+      },
+      {
+        "case": "momentum-horizon-3",
+        "columns": [
+          "04-29",
+          "04-30",
+          "05-01",
+          "05-04",
+          "05-05",
+          "05-06",
+          "05-07",
+          "05-08",
+          "05-11",
+          "05-12"
+        ],
+        "leader_count": 7,
+        "momentum": 8.0,
+        "nature": "synthetic_original_function"
+      },
+      {
+        "case": "momentum-horizon-5",
+        "columns": [
+          "04-29",
+          "04-30",
+          "05-01",
+          "05-04",
+          "05-05",
+          "05-06",
+          "05-07",
+          "05-08",
+          "05-11",
+          "05-12"
+        ],
+        "leader_count": 7,
+        "momentum": 8.0,
+        "nature": "synthetic_original_function"
+      },
+      {
+        "case": "momentum-horizon-10",
+        "columns": [
+          "04-29",
+          "04-30",
+          "05-01",
+          "05-04",
+          "05-05",
+          "05-06",
+          "05-07",
+          "05-08",
+          "05-11",
+          "05-12"
+        ],
+        "leader_count": 7,
+        "momentum": 8.0,
+        "nature": "synthetic_original_function"
+      },
+      {
+        "case": "momentum-horizon-20",
+        "columns": [
+          "04-29",
+          "04-30",
+          "05-01",
+          "05-04",
+          "05-05",
+          "05-06",
+          "05-07",
+          "05-08",
+          "05-11",
+          "05-12"
+        ],
+        "leader_count": 7,
+        "momentum": 8.0,
+        "nature": "synthetic_original_function"
+      },
+      {
+        "case": "unsupported-horizon",
+        "error": "NameError: cannot access free variable 'growth_limit' where it is not associated with a value in enclosing scope"
+      },
+      {
+        "case": "insufficient-20day-lookback",
+        "error": "IndexError: list index out of range"
+      },
+      {
+        "case": "zero-base-close",
+        "error": "ZeroDivisionError: float division by zero"
+      },
+      {
+        "case": "nested-gap-union-shrinks",
+        "input": [
+          [
+            1.0,
+            10.0
+          ],
+          [
+            2.0,
+            3.0
+          ]
+        ],
+        "output": [
+          [
+            1.0,
+            3.0
+          ]
+        ]
+      },
+      {
+        "100.0005-greater-than-100": false,
+        "case": "isclose-relative-tolerance"
+      },
+      {
+        "case": "money-column-unused",
+        "changed_all_money_values": true,
+        "ranking_changed": false
+      },
+      {
+        "case": "round-before-stable-sort",
+        "industries": [
+          "Industry(I)",
+          "Second(J)",
+          "Third(K)"
+        ],
+        "values": [
+          0.11,
+          0.11,
+          0.0
+        ]
+      },
+      {
+        "case": "missing-industry-name-string-list-delete",
+        "error": "TypeError: list indices must be integers or slices, not str",
+        "industry_count_mutated_before_failure": {
+          "I": 1
+        }
+      },
+      {
+        "case": "notebook-max-colwidth",
+        "error": "ValueError: Value must be a nonnegative integer or None"
+      },
+      {
+        "case": "original-pd-datetime-missing",
+        "error": "AttributeError"
+      }
+    ],
+    "count": 15,
+    "formal_acceptance": false,
+    "not_a_backtest": true
+  },
+  "case_id": "daily-chan-industry-batch88-diagnostics-stage",
+  "nature": "in_progress_original_synthetic_diagnostics",
+  "purpose": "15原诊断：五周期/上榜数平方排名、7前排、缺行业名TypeError、lambda NameError、money未用/舍入稳定排序与嵌套缺口缩短，非交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/diagnostics.json",
+    "sha256": "80a9c561117fb6a318bfb5359d44bbb5ef64a74487f8c25a228a97a0ad6a27e2"
+  }
+}

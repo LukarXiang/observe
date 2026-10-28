@@ -1,0 +1,222 @@
+{
+  "case": {
+    "IF_sources": 4,
+    "accepted_checkpoint": "20261010-153017-ee60",
+    "additional_evidence_sha256": {
+      "candidate-coverage-audit.json": "1c3f9241ee6be9373152ece0bf7474eabc7bf8f47e2e230b9918b7e0821d49d0",
+      "notebook-compatibility-review.json": "87de6f2aae52f1aee7880de9323ce92ec1478c6994696450061ece7429c33579"
+    },
+    "adversarial_review": {
+      "examined": [
+        "SHA before selected original and SDK function execution; no notebook top-level execution",
+        "Immutable old90/70 receipts/evidence and candidate parquets bound before use",
+        "Original non-atomic two-leg and last-key close economics retained in synthetic-only diagnoses",
+        "Overlapping full-period intercept fits cannot become forward trading signals; no original8888/coint claim",
+        "One bounded DNS failure and remaining same-host queries skipped; no redirects/proxies/retries",
+        "Actual declared common-date intersection and extra reference-calendar audit preserve missing rows without fill",
+        "Named-Series coefficient incompatibility only synthetic; absent statsmodels not substituted by compatible dependency",
+        "Exact forbidden-network158 diagnostics/3935 candidate rows/two daily parsers; old5780 control SHA/398 partition stat protection"
+      ],
+      "findings": []
+    },
+    "candidate_coverage": {
+      "CS_only_dates": [
+        "2015-02-25"
+      ],
+      "C_only_dates": [
+        "2015-09-03",
+        "2015-10-01",
+        "2015-10-08",
+        "2017-01-02"
+      ],
+      "alignment": "Declared inner intersection only; unmatched dates excluded; no forward fill or interpolation",
+      "calendar_file": "data/std/calendar/all__f35c93a0.parquet",
+      "calendar_identity": "Existing A-share reference calendar, not proof of DCE futures sessions",
+      "calendar_rows": 7938,
+      "calendar_sha256": "3cffa1ee0bdb1442745b8dd330be0d58bafa959c3b04bb997ee26da6997ca020",
+      "futures_calendar_equivalence_proven": false,
+      "not_a_backtest": true,
+      "ranges": [
+        {
+          "closed_reference_dates": [],
+          "common_rows": 2859,
+          "missing_open_reference_dates": [
+            "2015-02-25",
+            "2015-10-08",
+            "2019-04-22"
+          ],
+          "range": "extended_candidate",
+          "unknown_reference_dates": []
+        },
+        {
+          "closed_reference_dates": [],
+          "common_rows": 1076,
+          "missing_open_reference_dates": [
+            "2015-02-25",
+            "2015-10-08",
+            "2019-04-22"
+          ],
+          "range": "original_period_candidate",
+          "unknown_reference_dates": []
+        }
+      ]
+    },
+    "candidate_studies": [
+      {
+        "coint_executed": false,
+        "date_max": "2019-06-10",
+        "date_min": "2015-01-05",
+        "independent_z_max_abs_error": 0.0,
+        "intercept_independent": 236.705747822464,
+        "intercept_numpy": 236.70574782246356,
+        "not_a_backtest": true,
+        "original_statsmodels_OLS_executed": false,
+        "range": "original_period_candidate",
+        "retrospective_full_period_fit": true,
+        "rows": 1076,
+        "slope_independent": 1.0762527326839322,
+        "slope_numpy": 1.0762527326839322,
+        "spread_mean": -236.70574782246413,
+        "spread_population_std": 124.41033992084468,
+        "z_above1": 110,
+        "z_below_minus1": 100
+      },
+      {
+        "coint_executed": false,
+        "date_max": "2026-09-29",
+        "date_min": "2014-12-22",
+        "independent_z_max_abs_error": 8.881784197001252e-16,
+        "intercept_independent": 391.572290361406,
+        "intercept_numpy": 391.57229036140626,
+        "not_a_backtest": true,
+        "original_statsmodels_OLS_executed": false,
+        "range": "extended_candidate",
+        "retrospective_full_period_fit": true,
+        "rows": 2859,
+        "slope_independent": 0.9862247303598056,
+        "slope_numpy": 0.9862247303598052,
+        "spread_mean": -391.57229036140666,
+        "spread_population_std": 106.94723897758735,
+        "z_above1": 332,
+        "z_below_minus1": 341
+      }
+    ],
+    "checked_state_file": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/checked-state.json",
+    "checked_state_sha256": "45a5c86c14565f33bb2d6ffe8bd524ce01f8c36756dc4ec7265a6365e376b577",
+    "formal_acceptance": false,
+    "formal_trading_acceptance": false,
+    "implementation_sha256": {
+      "scripts/review_strategy_batch91.py": "b94028a633eaa023d324676b1ea65ba37ff0a9ac7a2cb3d6d6e91d1da9494a44",
+      "tests/unit/test_batch91_stage.py": "9d0a07bdf322b448c29fe7384f257633fd5678951e39287ae9ca1bc6edd91ada"
+    },
+    "library_goal_complete": false,
+    "local_strategy_parent_runs": 75,
+    "locally_backtested_and_reproduced_sources": 12,
+    "manually_reviewed_accepted": 262,
+    "new_requests": 1,
+    "new_rows": 0,
+    "new_trading_backtests": 0,
+    "next_step": "Formal source reviews/catalog acceptance in a new immutable directory; retain this stage and actual original-input blockers",
+    "not_a_backtest": true,
+    "notebook_compatibility_file": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/notebook-compatibility-review.json",
+    "offline_verification": {
+      "candidate_rows_with_overlapping_ranges": 3935,
+      "diagnostic_cases": 158,
+      "differences": 0,
+      "formal_acceptance": false,
+      "not_a_backtest": true,
+      "socket_HTTP_disabled": true,
+      "status": "match",
+      "supplier_daily_wire_parsers_matched": 2
+    },
+    "original_signal_rows": 0,
+    "platform_equivalence_proven": false,
+    "probe_audit": {
+      "cases": [
+        {
+          "admitted_original_rows": 0,
+          "requests": 1,
+          "responses": 0,
+          "rows": 0,
+          "status": "failed",
+          "symbol": "IF2003"
+        },
+        {
+          "admitted_original_rows": 0,
+          "requests": 0,
+          "responses": 0,
+          "rows": 0,
+          "status": "skipped_transport_failure",
+          "symbol": "IF2006"
+        },
+        {
+          "admitted_original_rows": 0,
+          "requests": 0,
+          "responses": 0,
+          "rows": 0,
+          "status": "skipped_transport_failure",
+          "symbol": "IF2612"
+        },
+        {
+          "admitted_original_rows": 0,
+          "requests": 0,
+          "responses": 0,
+          "rows": 0,
+          "status": "skipped_transport_failure",
+          "symbol": "IF2703"
+        }
+      ],
+      "historical_IF_coverage_admitted": 0,
+      "not_a_backtest": true
+    },
+    "protection": {
+      "baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+      "mutable_registry_files_excluded": 0,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_unchanged": 5780,
+      "old_index_rows_unchanged": 5280,
+      "old_partition_metadata_unchanged": 398,
+      "partition_check": "size/mtime only; no fresh full hash",
+      "status": "ok"
+    },
+    "remaining_unreviewed": 433,
+    "responses": 0,
+    "review_depth": "deep",
+    "scope_alignment": "on_target",
+    "source_count": 5,
+    "specialist_reviews": {
+      "architecture": {
+        "agent": "batch91_stage_architecture",
+        "findings": []
+      },
+      "security": {
+        "agent": "batch91_stage_security",
+        "findings": []
+      }
+    },
+    "stage_checkpoint": "20261010-154902-968f",
+    "stage_directory": "data/staging/strategies-batch91/20261010-corn-quarterly-stage",
+    "stage_evidence_file": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/stage-evidence.json",
+    "stage_evidence_sha256": "cfd2fa037917b712b498448fec2dbc7fda0a4dc9424d9e484f2136ea7f4231cf",
+    "status": "stage_checks_passed",
+    "synthetic_cases": 158,
+    "tests": {
+      "diff": "passed",
+      "full_suite_run": false,
+      "new_tests": 10,
+      "raw_stdout_logs_saved": true,
+      "related_passed": 73,
+      "ruff": "passed"
+    },
+    "unique_IF_executable_bodies": 1,
+    "unique_diagnostic_case_templates": 41
+  },
+  "case_id": "corn-IF-batch91-stage",
+  "nature": "in_progress_source_and_reference_statistics_not_backtest",
+  "purpose": "五来源/四IF同AST；158合成仅41模板，1076/2859重叠候选统计及两原解析禁网match0；73相关/旧资产保护通过，单DNS失败0响应，正式262保持",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-10-batch91-stage-verification.json",
+    "sha256": "7035ffbf1b668306ebaf374d12961ac1113b958472390338f792ee4f9058d463"
+  }
+}

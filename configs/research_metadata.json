@@ -7,60 +7,3860 @@
     "done_when": "每份来源有人工审查、明确交付或阻断、来源与规则证据；可运行策略完成独立验证、成本与离线复现，不宣称全库已完成",
     "plan": "docs/tasks/2026-10-03-财务数据标准化与策略逐批复现-执行计划.md"
   },
-  "accepted_checkpoint": "20261007-203501-128a",
-  "accepted_receipt": "docs/handoff/2026-10-07-batch63-verification.json",
+  "accepted_checkpoint": "20261011-080516-0903",
+  "accepted_receipt": "docs/handoff/2026-10-11-batch107-final-review.json",
   "numeric_resolution": "data/staging/strategies-batch14/20261005-long-history/numeric-resolution.json",
   "publication": {
-    "original_git_directory": "writable_aligned_with_origin_master",
-    "local_commit": "worktree_head_equals_origin_master_after_20261008_alignment",
+    "original_git_directory": "user_managed_read_only_to_agent",
+    "local_commit": "26170e0e80abdb6ca0a3e8df7f4d66222186a714",
     "remote_sync": "pushed_private_origin_master_20261008",
     "evidence": "docs/handoff/2026-10-08-git-publication.json",
-    "research_acceptance_is_separate": true
+    "research_acceptance_is_separate": true,
+    "current_worktree_status": "pending_user_commit_and_push",
+    "current_worktree_note": "第107批正式300/695、剩395，12匹配来源87父；第108批两源232/340行初读及库存未正式验收；当前快照缺成员表，原基金缺日/尺度与事件仍阻断；239目录元数据回归通过，新增交易0；Git由用户提交上传"
   },
   "tasks": [
-    {"id": "T-git-metadata", "status": "completed", "action": "只读元数据、入口、Git白名单和隔离阅读已验收；后续每批继续导出", "done_when": "元数据、代码指纹、引用及隔离阅读测试通过，关联文件完成审查", "plan": "docs/tasks/2026-10-08-Git元数据管理实施与交付.md"},
-    {"id": "T-data-handoff", "status": "completed", "action": "当前发布/布林主包与审计控制补充包已生成；迁移3749+166核验及禁网三成本复现match0通过", "done_when": "实际包/manifest/receipt齐全，迁移后SHA与所选复现match通过；当前包范围和旧远程缺失分开记录", "plan": "docs/handoff/2026-10-08-local-plan.json"},
-    {"id": "T-git-publication", "status": "completed", "action": "审查通过的提交已快进推送到私有远端master，本机工作区Git已对齐且status干净", "done_when": "ls-remote与本机HEAD一致；元数据verify通过；bundle回执与发布凭据已补记", "plan": "docs/tasks/2026-10-08-工作区整理与Git对齐.md"},
-    {"id": "T-workspace-tidy", "status": "completed", "action": "文档入口收拢、tasks与scripts分组导航；被元数据引用的文件未移动，data载荷未删除", "done_when": "链接无断链，元数据重新导出并verify通过，改动已推送", "plan": "docs/tasks/2026-10-08-工作区整理与Git对齐.md"},
-    {"id": "T-batch64", "status": "in_progress", "action": "完成第64批正式checks、冻结终审和finish；已有study/offline不覆盖重跑", "done_when": "正式验收凭据及最终读回通过；研究组件不计新增交易回测", "plan": "docs/tasks/2026-10-07-第六十四批价格形态与K线识别研究.md"},
-    {"id": "T-financial-version", "status": "blocked", "action": "补首次披露值、修订版本与来源公告证据", "done_when": "可证明决策时点可用的历史财务版本进入新快照并通过时点门禁", "blockers": ["B-financial-version"]},
-    {"id": "T-shares-pcf-names", "status": "blocked", "action": "核实历史股本事件、PCF、名称及专属股票池，优先解除微盘400/小盘价值100依赖", "done_when": "时点证据、单位与覆盖核实后新增不可变分区；年度控制市值不作替代", "blockers": ["B-shares-pool"]},
-    {"id": "T-settlement", "status": "blocked", "action": "补退市转板权益、换股待上市权益并开发唯一Book的相应结算", "done_when": "所选策略依赖结算有证据、模块测试和新实验验收，BP原blocked实验保持只读", "blockers": ["B-settlement"]},
-    {"id": "T-source-reviews", "status": "in_progress", "action": "继续人工审查剩余482份来源，缺数据逐项留档", "done_when": "695来源均有人工规则/研究性质/重复关系/依赖结论；统计与目录一致"}
+    {
+      "id": "T-git-metadata",
+      "status": "completed",
+      "action": "只读元数据、入口、Git白名单和隔离阅读已验收；后续每批继续导出",
+      "done_when": "元数据、代码指纹、引用及隔离阅读测试通过，关联文件完成审查",
+      "plan": "docs/tasks/2026-10-08-Git元数据管理实施与交付.md"
+    },
+    {
+      "id": "T-data-handoff",
+      "status": "completed",
+      "action": "当前发布/布林主包与审计控制补充包已生成；迁移3749+166核验及禁网三成本复现match0通过",
+      "done_when": "实际包/manifest/receipt齐全，迁移后SHA与所选复现match通过；当前包范围和旧远程缺失分开记录",
+      "plan": "docs/handoff/2026-10-08-local-plan.json"
+    },
+    {
+      "id": "T-git-publication",
+      "status": "completed",
+      "action": "此前工作区整理提交26170e0已推送并对齐；本任务只记录该历史上传，不涵盖后续改动",
+      "done_when": "该提交ls-remote与本机HEAD一致；元数据verify通过；bundle回执与发布凭据已补记",
+      "plan": "docs/tasks/2026-10-08-工作区整理与Git对齐.md"
+    },
+    {
+      "id": "T-git-next-publication",
+      "status": "pending",
+      "action": "后续来源研究至第107批待用户提交上传；正式300、12匹配来源87父；本轮无Git写操作",
+      "done_when": "用户执行提交与普通push；远端master哈希等于所提交HEAD；另记本批上传证据",
+      "plan": "docs/tasks/2026-10-08-策略续接验收与依赖补数.md"
+    },
+    {
+      "id": "T-workspace-tidy",
+      "status": "completed",
+      "action": "文档入口收拢、tasks与scripts分组导航；被元数据引用的文件未移动，data载荷未删除",
+      "done_when": "链接无断链，元数据重新导出并verify通过，改动已推送",
+      "plan": "docs/tasks/2026-10-08-工作区整理与Git对齐.md"
+    },
+    {
+      "id": "T-batch64",
+      "status": "completed",
+      "action": "恢复目录禁网逐值/三目录match0，82正式测试及安全架构终审通过，213来源已正式验收；组件不计交易回测",
+      "done_when": "正式验收凭据及最终读回通过；研究组件不计新增交易回测",
+      "plan": "docs/tasks/2026-10-07-第六十四批价格形态与K线识别研究.md"
+    },
+    {
+      "id": "T-batch65-dependencies",
+      "status": "in_progress",
+      "action": "股本单位与PCF同类公式已得第一方证据；三证券九请求八成功一失败、180行新旧PCF精确一致；继续补公告正文、历史版本、生效与覆盖",
+      "done_when": "第一方字段单位与可用时间、事件链和覆盖核验完成；足以支持交易的输入发布新批次，否则逐策略记录阻断",
+      "plan": "docs/tasks/2026-10-08-第六十五批股本PCF与历史名称依赖核查.md",
+      "blockers": [
+        "B-shares-pool",
+        "B-network"
+      ]
+    },
+    {
+      "id": "T-batch66-etf",
+      "status": "in_progress",
+      "action": "510310上市以来3286行行情候选、七事件参考价反例与登记权益账本已留档；继续补ETF参考价/状态/完整事件/复权及费用规则",
+      "done_when": "ETF输入及执行规则逐项放行后，原实际均线规则的已确认变体完成三成本与禁网复现；缺失依赖保持逐项记录",
+      "plan": "docs/tasks/2026-10-08-第六十六批ETF行情与登记权益账本.md",
+      "blockers": [
+        "B-special-assets"
+      ]
+    },
+    {
+      "id": "T-batch67",
+      "status": "completed",
+      "action": "215来源研究验收；45,163个91行收益窗、45,312个五行均价窗和19诊断禁网match0，103测试及旧资产保护通过；两原交易明确搁置",
+      "done_when": "来源/重复映射、数值与订单意图边界、补数证据、禁网逐值和旧资产保护通过；原交易按依赖明确搁置",
+      "plan": "docs/tasks/2026-10-08-第六十七批低动量与低价股分钟策略.md",
+      "blockers": [
+        "B-shares-pool",
+        "B-special-assets"
+      ]
+    },
+    {
+      "id": "T-batch68",
+      "status": "completed",
+      "action": "217来源研究验收；68月/4760预筛候选及15诊断、七总市值样本禁网match0，103测试/安全架构/旧资产保护通过；原交易保持数据门禁",
+      "done_when": "完整来源/旧实验差异、月度组件、补数、禁网核验及旧资产保护验收；不能运行的原交易逐项记录阻断，代理交易另待确认",
+      "plan": "docs/tasks/2026-10-08-第六十八批低PB策略与旧实验审查.md",
+      "blockers": [
+        "B-shares-pool",
+        "B-financial-version",
+        "B-special-assets"
+      ]
+    },
+    {
+      "id": "T-lowpb81-trades",
+      "status": "pending",
+      "action": "81号流通市值代理/原清仓流程近似方案待用户回复D-lowpb81-proxy；未批准前不启动交易变体；原总市值版继续补证",
+      "done_when": "收到经济规则确认后冻结具体配置、开发唯一Book的清仓目标执行并完成可用长区间三成本与禁网复现；结算不足保留blocked",
+      "plan": "docs/tasks/2026-10-08-第六十八批低PB策略与旧实验审查.md",
+      "blockers": [
+        "B-shares-pool",
+        "B-settlement"
+      ]
+    },
+    {
+      "id": "T-batch69",
+      "status": "completed",
+      "action": "219来源研究验收；28原函数诊断/18869连续合约组件/三目录禁网match0，三实际请求均200及216行SHFE解析恢复留档；135测试/安全架构/旧资产保护通过，原交易仍阻断",
+      "done_when": "完整来源/参数、原函数诊断、真实补数/失败恢复、禁网逐值与旧资产保护验收；连续合约敏感性不计原信号或交易",
+      "plan": "docs/tasks/2026-10-08-第六十九批自适应均线与商品动量.md",
+      "blockers": [
+        "B-futures-history-execution"
+      ]
+    },
+    {
+      "id": "T-batch70",
+      "status": "completed",
+      "action": "221来源研究验收；22诊断/107682组件/22862排名及三目录禁网match0；25请求均200、新94454行与SR2001候选239行，145测试/安全架构/旧资产保护通过，新增交易0",
+      "done_when": "完整来源、参数、跨品种/数量/订单状态审查与实际输入覆盖证据；可交易时唯一Book三成本/禁网验收，否则来源与组件准确记录阻断",
+      "plan": "docs/tasks/2026-10-08-第七十批商品截面动量与白糖海龟.md",
+      "blockers": [
+        "B-futures-history-execution"
+      ]
+    },
+    {
+      "id": "T-batch71",
+      "status": "completed",
+      "action": "223来源研究验收；21诊断/6919789供应商PE算术/九市值请求案例及三目录禁网match0，123测试/安全架构/旧资产保护通过；双新请求301失败及三开发失败归档，新增交易0",
+      "done_when": "来源/原状态、依赖库存与可计算组件验收；输入及规则缺口逐项记录搁置，经济代理变体先确认；不将来源研究验收计为交易验收",
+      "plan": "docs/tasks/2026-10-08-第七十一批小市值与正PE轮动.md",
+      "blockers": [
+        "B-shares-pool",
+        "B-special-assets"
+      ]
+    },
+    {
+      "id": "T-batch72",
+      "status": "completed",
+      "action": "225来源研究验收；35诊断/6919789证券日PE/45723均值窗口与六分红原解析/三目录禁网match0，35专项/146相关及安全架构/旧资产保护通过；六200取得184双源记录，三失败档和NaN登记修订只读留证，交易0",
+      "done_when": "两来源规则及输入库存、补数/失败证据验收；可运行时唯一Book长区间三成本/禁网复现，缺失则逐策略阻断；重要经济修正先确认",
+      "plan": "docs/tasks/2026-10-08-第七十二批股息率与分红选股.md",
+      "blockers": [
+        "B-dividend-inputs",
+        "B-shares-pool",
+        "B-financial-version",
+        "B-special-assets"
+      ]
+    },
+    {
+      "id": "T-batch73",
+      "status": "completed",
+      "action": "227来源研究验收；33原函数/类诊断、678稀疏PE公式及四200交易所请求禁网match0；两历史空列表解析失败、近期22指标/分类行；22专项/150相关、安全架构/旧资产保护通过，原交易0",
+      "done_when": "两来源规则、输入库存、补数/失败与可计算长历史组件验收；可交易则唯一Book三成本/禁网匹配，缺依赖明确搁置，经济替代先确认",
+      "plan": "docs/tasks/2026-10-08-第七十三批EBIT_EV与市场PE定投.md",
+      "blockers": [
+        "B-financial-version",
+        "B-shares-pool",
+        "B-market-PE-and-flow",
+        "B-special-assets"
+      ]
+    },
+    {
+      "id": "T-batch74",
+      "status": "completed",
+      "action": "229来源研究验收；32诊断/6074ES/3957指数窗、20失败及20成功候选原解析/三目录禁网match0；唯一Book资金流33手算/51专项/148账本及166最终相关通过、旧茅台2005至2026三成本match0，69父运行、12回测来源，原交易0",
+      "done_when": "两来源/原诊断、基金指数库存及补数、长历史参考与禁网、显式入金组件/旧三成本兼容、安全架构和旧资产保护验收；未获交易输入逐策略搁置，不计原回测",
+      "plan": "docs/tasks/2026-10-08-第七十四批FOF与二八轮动.md",
+      "blockers": [
+        "B-special-assets",
+        "B-market-PE-and-flow"
+      ]
+    },
+    {
+      "id": "T-batch75",
+      "status": "completed",
+      "action": "231来源研究验收；33诊断/4663指数窗/3459单ETF窗/3205全池排名及原解析器/三目录禁网match0；两200取6889候选、56窗阻断；172相关测试与安全架构/旧资产保护通过，数值history适配与失败只读留证，交易0",
+      "done_when": "完整来源/规则/原函数诊断、输入库存与补数、可计算长历史及禁网验收；可交易则唯一Book三成本长区间和离线匹配，否则明确搁置；经济修正先确认",
+      "plan": "docs/tasks/2026-10-08-第七十五批ETF资料与轮动入门.md",
+      "blockers": [
+        "B-special-assets"
+      ]
+    },
+    {
+      "id": "T-batch76",
+      "status": "completed",
+      "action": "233来源研究验收；36诊断/39476基金窗/49157指数窗/43033情绪窗/5261配对窗及13原解析/三目录禁网match0；13次200取得58563候选，223量窗阻断；31专项/185相关、安全架构/旧资产保护通过，独立绑定修正及两轮红档保留，原交易0",
+      "done_when": "原来源/状态机诊断、依赖库存/补数、可计算长历史组件及禁网验收；输入放行才开展唯一Book三成本与离线复现，否则准确记录阻断；重要修正先确认",
+      "plan": "docs/tasks/2026-10-09-第七十六批动态情绪与二八轮动.md",
+      "blockers": [
+        "B-special-assets"
+      ]
+    },
+    {
+      "id": "T-batch77",
+      "status": "completed",
+      "action": "235来源研究验收；48诊断/五原解析/库存/三目录禁网match0；7次200取得12363候选行，PE/PB截止过滤后各257行不足1708，真实排名窗口0；29专项/186相关、安全架构与旧资产保护通过，两原交易搁置",
+      "done_when": "完整来源、实际估值/订单/资金流规则、依赖库存与有界补数验收；可核长历史及禁网、必要功能开发或逐策略搁置，重要经济修正先确认",
+      "plan": "docs/tasks/2026-10-09-第七十七批定投与指数估值.md",
+      "blockers": [
+        "B-fund-rotation-inputs",
+        "B-dca-member-valuation"
+      ]
+    },
+    {
+      "id": "T-batch78",
+      "status": "completed",
+      "action": "237来源正式研究验收；单200补513100共3203行，29710单基金版本窗/3102共同排名日/32诊断与原解析/三目录禁网match0；两版本第一名差189日，独立完整排名差0；25专项/180相关、安全架构/旧资产保护及最终SHA通过，价格反例和两红档保留，原交易0",
+      "done_when": "两完整来源与加权回归/评分/状态规则、输入库存及有界补数验收；可核最长组件/禁网/独立算术与旧资产保护；可交易时唯一Book三成本，否则逐策略列解除条件",
+      "plan": "docs/tasks/2026-10-09-第七十八批核心资产与加权动量.md",
+      "blockers": [
+        "B-fund-rotation-inputs"
+      ]
+    },
+    {
+      "id": "T-batch79",
+      "status": "completed",
+      "action": "239来源正式研究验收；22诊断/9318指数组件/25742基金窗/12566排名及三目录禁网match0，31完整信号4663/原排名3102、42完整信号0；单60m连接失败/三红档保留，28专项/179相关、安全架构/旧资产保护及最终SHA通过，交易0",
+      "done_when": "两来源完整规则/原错误和状态边界、历史输入库存及最长可核组件、禁网独立算术/完整排名、检查与旧资产保护验收；数据/执行足够且经济变体确认后长区间三成本与复现，否则逐策略搁置",
+      "plan": "docs/tasks/2026-10-09-第七十九批RSRS与乖离动量.md",
+      "blockers": [
+        "B-fund-rotation-inputs"
+      ]
+    },
+    {
+      "id": "T-batch80",
+      "status": "completed",
+      "action": "241来源正式研究验收；31诊断/14155评分/13955beta/2507完整排名及3201固收参考日禁网match0，六旧行情SHA复用、494日期窗阻断；34专项/188相关、47实现副本/91证据/安全架构和旧资产保护通过，两开发失败档保留，原交易0",
+      "done_when": "完整来源与原缺陷、输入库存/有界补数及最长可核算术/订单状态、禁网独立公式/排名/冻结终审验收；可交易时唯一Book长区间三成本，否则明确依赖解除条件，重要经济变体先确认",
+      "plan": "docs/tasks/2026-10-09-第八十批反转动量与固收组合.md",
+      "blockers": [
+        "B-fund-rotation-inputs"
+      ]
+    },
+    {
+      "id": "T-batch81",
+      "status": "completed",
+      "action": "243来源正式研究验收；47诊断/5221风险窗/5279昨日跌幅/18265基金参考及三原解析/三目录禁网match0，三200补8304行；52专项/212相关、50实现副本/106证据/23CORE及安全架构/旧资产保护通过；三开发证据保留，完整57信号/76真实权益/交易0",
+      "done_when": "完整来源/真实状态与费用规则、输入库存及补数、最长可核组件/独立算术/禁网和冻结终审验收；真实盘中/组合输入齐且必要修正版获确认后才唯一Book长区间三成本与复现，否则明确搁置",
+      "plan": "docs/tasks/2026-10-09-第八十一批股债切换与回撤状态.md",
+      "blockers": [
+        "B-fund-rotation-inputs"
+      ]
+    },
+    {
+      "id": "T-batch82",
+      "status": "completed",
+      "action": "246来源正式研究验收；三来源/两内容/48受控诊断及库存/三目录禁网match0；58个5m分区footer/stat共44571408行，单1m请求DNS失败0响应；44专项/222相关、52实现副本/91证据/16CORE、安全架构与旧资产保护通过；原因子窗/排名/交易0",
+      "done_when": "三完整来源与重复映射、真实回调/原缺陷/费用及输入覆盖证据，最长可核原组件/禁网/冻结终审验收；足够输入且必要修正版批准后唯一Book三成本及复现，否则逐来源搁置，不用日线/自造因子替代",
+      "plan": "docs/tasks/2026-10-09-第八十二批日内反转与价量因子研究.md",
+      "blockers": [
+        "B-intraday-external-factor",
+        "B-remote-payload"
+      ]
+    },
+    {
+      "id": "T-batch83",
+      "status": "completed",
+      "action": "248来源正式研究验收；两全文/两alpha2、67诊断和4936/45874首表达式有效端点独立禁网match0；33专项/203相关、54实现副本/92证据/16CORE与旧资产保护通过，object NaN误断言失败只读留证；原CSV/训练/择时/交易0",
+      "done_when": "两完整来源、外置输入/原缺陷和训练性质明确；可用原组件独立核算、禁网重放及冻结验收；数据与规则足够时唯一Book长区间三成本和复现，否则明确逐项搁置",
+      "plan": "docs/tasks/2026-10-09-第八十三批外置择时与遗传因子研究.md",
+      "blockers": [
+        "B-external-timing-GP",
+        "B-special-assets",
+        "B-remote-payload"
+      ]
+    },
+    {
+      "id": "T-batch84",
+      "status": "completed",
+      "action": "250来源正式研究验收；24原诊断/6355最长单基金25行算术/14DNS失败与库存/三目录禁网match0；25专项含于184相关，56实现副本/128证据/22CORE、开发失败与精度比较回归留证；2/14池、原排名/T0价差/交易0",
+      "done_when": "两完整来源、原25行完整排名与绝对开盘价差/订单状态、原ETF输入补数及最长可核组件验收；数据规则放行且必要变体确认后唯一Book三成本/逐年/离线复现，否则逐项搁置",
+      "plan": "docs/tasks/2026-10-09-第八十四批行业轮动与T0动量研究.md",
+      "blockers": [
+        "B-industry-ETF-T0",
+        "B-special-assets",
+        "B-network"
+      ]
+    },
+    {
+      "id": "T-batch85",
+      "status": "completed",
+      "action": "252来源正式研究验收；两全文458/456行各30函数、48原回调诊断、285财务字典线索及两DNS失败档/库存/三目录禁网match0；23专项含于141相关、58实现副本/92证据/14CORE与旧资产保护通过；未知helper不造MA/资金流信号，原信号/选股/三成本/交易0",
+      "done_when": "两全文/原helper边界与时点核实、现有输入复用和必要有界补数留证；原组件及禁网验收，输入放行且必要变体获确认后唯一Book最长三成本与复现，否则逐来源记录恢复条件",
+      "plan": "docs/tasks/2026-10-09-第八十五批行业向导与资金流筛选研究.md",
+      "blockers": [
+        "B-wizard-industry-flow",
+        "B-financial-version",
+        "B-shares-pool",
+        "B-remote-payload"
+      ]
+    },
+    {
+      "id": "T-batch86",
+      "status": "completed",
+      "action": "254来源正式研究验收；两全文492/459行及25/30函数、30诊断/46053买入窗/45753MA窗与三目录禁网match0，独立条件差0；26专项含于142相关、63实现副本/106证据/17CORE与安全架构/旧资产保护通过；46781实际输入行数更正另档、三失败族保留，原全池信号/95信号/交易0",
+      "done_when": "两全文/实际路径及兼容边界冻结，输入与有界补数证据、最长可核组件/禁网/旧资产保护验收；可交易且必要变体获确认后唯一Book三成本与复现，否则明确逐来源恢复条件",
+      "plan": "docs/tasks/2026-10-09-第八十六批中长线与技术资金流研究.md",
+      "blockers": [
+        "B-wizard-industry-flow",
+        "B-shares-pool",
+        "B-remote-payload"
+      ]
+    },
+    {
+      "id": "T-batch87",
+      "status": "completed",
+      "action": "256来源正式研究验收；两582行同SHA完整类、1392日线三分支4176状态/1392指标及21更正诊断禁网match0；独立状态/转换算术差0、27专项含于146相关、65实现副本/133证据/25CORE及旧资产保护通过。两开发失败/红回归、原20诊断/标签更正与审查夹具失败保留，原1m/5m证券行0、一次TDX权限失败无查询响应，交易0",
+      "done_when": "两完整来源与重复关系/原状态机及订单缺陷明确、输入库存/补数与最长可核组件/独立验算/禁网/旧资产保护验收；原输入可用且重要修正版确认后唯一Book三成本，否则逐项搁置",
+      "plan": "docs/tasks/2026-10-09-第八十七批缠论分钟状态机研究.md",
+      "blockers": [
+        "B-chan-minute",
+        "B-special-assets"
+      ]
+    },
+    {
+      "id": "T-batch88",
+      "status": "completed",
+      "action": "258来源正式研究验收；两非交易原文1887/393行，1392窗口全状态禁网match0，664754标准化/892500缺口/64294笔/8950线映射及8012谓词独立标量差0；150行业单元/7新诊断、143相关测试和安全架构/69实施副本/88证据/10CORE与旧资产保护通过，交易0。原定义重放不是独立完整引擎；摘要11CORE笔误已另档更正为10，阶段档和重绘观察保留",
+      "done_when": "完整来源/实际路径/研究或交易性质、输入与有界补数、最长可核算式/独立验证/禁网/旧资产保护验收；可交易且具体修正确认后唯一Book最长三成本，否则明确逐项恢复条件",
+      "plan": "docs/tasks/2026-10-09-第八十八批缠论工具与板块动量-正式验收.md",
+      "stage_report": "docs/tasks/2026-10-09-第八十八批缠论工具与板块动量-阶段记录.md",
+      "blockers": [
+        "B-daily-chan-industry-notebook"
+      ]
+    },
+    {
+      "id": "T-batch89",
+      "status": "completed",
+      "action": "两同AST全天候来源正式研究验收260/695；29风险/32回调及三目录禁网match0，147相关含16新增/安全架构/9实施副本和旧5363控制/398分区保护通过；D-allweather-fill仍pending，真实ES/权重/交易0",
+      "done_when": "完整来源/重复映射、库存/补数、原算术/独立验证/禁网/旧资产保护验收；交易缺口另保留任务，不能把来源验收计交易",
+      "plan": "docs/tasks/2026-10-09-第八十九批一致性风险与全天候-执行计划.md",
+      "report": "docs/tasks/2026-10-09-第八十九批一致性风险与全天候-正式验收.md",
+      "blockers": [
+        "B-allweather-return-inputs"
+      ]
+    },
+    {
+      "id": "T-allweather-trades",
+      "status": "pending",
+      "action": "等待D-allweather-fill回复并补原四基金事件/复权/身份/状态/费用/开盘执行；来源研究已验收，未算历史ES/真实权重，不盲重试DNS失败",
+      "done_when": "具体收益变体确认后新目录核历史ES/权重；可交易输入放行，唯一Book最长三成本/逐年/成交及observe reproduce禁网验收",
+      "plan": "docs/tasks/2026-10-09-第八十九批一致性风险与全天候-正式验收.md",
+      "blockers": [
+        "B-allweather-return-inputs"
+      ]
+    },
+    {
+      "id": "T-batch90",
+      "status": "completed",
+      "action": "262/695来源研究验收；两原文101/181行、31新生命周期/13旧诊断及45763十股MA参考禁网match0，280前筛非信号、独立fsum1差异保留；114相关含6新增/安全架构/6代码副本25证据与旧5780控制/398分区保护通过。原全池/名称/1m/MACD/流未齐，新增交易0",
+      "done_when": "完整来源/状态/输入和必要补数冻结，最长可核原组件/独立算式/禁网/旧资产保护验收；足够输入才唯一Book三成本/离线复现，否则逐项搁置",
+      "plan": "docs/tasks/2026-10-09-第九十批涨停近高与短线死叉-执行计划.md",
+      "stage_report": "docs/tasks/2026-10-09-第九十批涨停近高与短线死叉-阶段记录.md",
+      "report": "docs/tasks/2026-10-10-第九十批涨停近高与短线死叉-正式验收.md"
+    },
+    {
+      "id": "T-batch91",
+      "status": "completed",
+      "action": "五来源研究正式验收20261010-162223-81d4，累计267；158合成/41模板、3935重叠候选玉米行及两原解析禁网match0；160相关/160隔离测试全部身份绑定，安全架构与四角审查缺口已修，旧5780控制398分区保护通过。原8888/coint和IF1m/结算未齐，新增交易0/来源12父75保持",
+      "done_when": "五完整来源/性质、输入库存及有界补数、原算式/状态/禁网与旧资产保护正式验收；可交易才唯一Book最长三成本/复现，否则逐项搁置，重要修正先确认",
+      "plan": "docs/tasks/2026-10-10-第九十一批玉米价差与股指跨期-执行计划.md",
+      "stage_report": "docs/tasks/2026-10-10-第九十一批玉米价差与股指跨期-阶段记录.md",
+      "report": "docs/tasks/2026-10-10-第九十一批玉米价差与股指跨期-正式验收.md"
+    },
+    {
+      "id": "T-batch92",
+      "status": "completed",
+      "action": "807行趋与势来源正式研究验收20261010-170420-4500，累计268；7181重叠指数纸面状态/7063有限评分与独立评分分位完整状态禁网match0、601388原始17行候选来源核验；191相关及191隔离/五实现40证据、安全架构和四角终审及旧5780控制398分区保护通过。命令/阶段绑定/嵌套清单/隔离身份门禁修正和失败红绿档保留；新增交易0、12来源75父保持",
+      "done_when": "完整来源规则/兼容/输入、原绝对评分和状态、独立算式/禁网/旧资产保护及新目录验收完成；可交易变体须另确认且输入就绪才唯一Book三成本/复现",
+      "plan": "docs/tasks/2026-10-10-第九十二批趋与势定义-执行计划.md",
+      "stage_report": "docs/tasks/2026-10-10-第九十二批趋与势定义-阶段记录.md",
+      "report": "docs/tasks/2026-10-10-第九十二批趋与势定义-正式验收.md"
+    },
+    {
+      "id": "T-batch93",
+      "status": "completed",
+      "action": "正式来源研究验收20261010-181224-4012，累计270；147分区2205405257字节SHA、501353投影和40独立覆盖、30原合成回调/168标量及三目录禁网match0；237相关与237隔离/六角色最终SHA审查、旧5780控制398分区保护通过。规范根/冻结字节发布/最终目录身份三门禁修正和失败红绿档保留；原规则不改，strict财务0/原风格与全池缺，新增交易0。三因子identity spies误称已另档澄清为加10乘2，后续仅修说明",
+      "done_when": "两来源完整规则/单位/身份、库存/有界补数证据、原诊断及独立算式/禁网/旧资产保护正式研究验收；交易未齐逐项记录恢复条件，不能计回测完成",
+      "plan": "docs/tasks/2026-10-10-第九十三批FFScore与三因子-正式研究验收.md"
+    },
+    {
+      "id": "T-ffscore-threefactor-trades",
+      "status": "blocked",
+      "action": "FFScore缺历史财务版本、_1/_4/_5定义和全池/ST/行业/PB；三因子缺五项原风格值、全池与平台执行语义。501353最终整理行和30合成诊断不是原信号或交易输入",
+      "done_when": "原时点输入和执行放行，必要修正版另确认后唯一Book最长三成本/逐年及observe reproduce禁网验收",
+      "plan": "docs/tasks/2026-10-10-第九十三批FFScore与三因子-正式研究验收.md",
+      "blockers": [
+        "B-financial-version",
+        "B-shares-pool"
+      ]
+    },
+    {
+      "id": "T-batch94",
+      "status": "completed",
+      "action": "v5正式来源研究验收20261010-203913-69b2，累计273；4662原RSRS/10467FFT/11157卡尔曼窗、4662实际Series回调和102合成回调，两次鲜活禁网重放match0。121相关/121隔离、六角终审/12实现绑定及旧5780控制398分区保护通过；基金交易仍缺，新增交易0",
+      "done_when": "三全文/重复/原模型与状态、实际输入及有界补数、最长可核参考/独立算式/禁网/旧资产保护正式验收；可交易且必要修正确认后唯一Book最长三成本，否则逐来源搁置",
+      "plan": "docs/tasks/2026-10-10-第九十四批ETF低通与卡尔曼-正式研究验收.md",
+      "stage_receipt": "docs/handoff/2026-10-10-batch94-callback-stage.json",
+      "blockers": [
+        "B-fund-rotation-inputs",
+        "B-etf-filters94"
+      ]
+    },
+    {
+      "id": "T-pair66-earlier-windows",
+      "status": "completed",
+      "action": "已批准配对66的全部早期200日以上连续区间三段共804日/三成本2412账本日，45成交独立核费、禁网match0；新增3原+3复现父运行，12来源/75父运行。2018年基础-10.44%，各段空仓独立不拼接；4续跑回归及安全架构终审通过",
+      "done_when": "事先覆盖选择、冻结参数/来源、独立信号和唯一Book、三成本/逐年/离线复现及旧资产保护验收，保留平台日频近似限制",
+      "plan": "docs/tasks/2026-10-10-配对66早期连续区间补充回测.md"
+    },
+    {
+      "id": "T-metadata-growth",
+      "status": "pending",
+      "action": "第78批后metadata磁盘约228MiB(states187MiB)，超原50MiB审查目标；增长证据已记录，旧states/exports只读保留，后续核逻辑字节/Git增量并设计新导出稳定对象共享去重",
+      "done_when": "新导出减少稳定对象重复，旧元数据兼容与只读保留、仅Git阅读/引用SHA/冲突拒绝验收；累计历史与新增增量预算明确，不能通过删档或重写Git历史解决",
+      "plan": "docs/tasks/2026-10-09-元数据增长审查.md"
+    },
+    {
+      "id": "T-futures-inputs",
+      "status": "in_progress",
+      "action": "已有RB0/CU0长历史候选及SHFE20200102单日216合约；继续核实原8888/9999口径、历史主力/真实合约/到期/乘数/结算/保证金/费用，不将样本直接发布为原输入",
+      "done_when": "原合约/信号输入和历史执行规则覆盖所需范围且时点可证；复用唯一Book扩展期货能力并完成真实三成本/离线复现",
+      "plan": "docs/tasks/2026-10-08-第六十九批自适应均线与商品动量.md",
+      "blockers": [
+        "B-futures-history-execution"
+      ]
+    },
+    {
+      "id": "T-financial-version",
+      "status": "blocked",
+      "action": "补首次披露值、修订版本与来源公告证据",
+      "done_when": "可证明决策时点可用的历史财务版本进入新快照并通过时点门禁",
+      "blockers": [
+        "B-financial-version"
+      ]
+    },
+    {
+      "id": "T-shares-pcf-names",
+      "status": "blocked",
+      "action": "核实历史股本事件、PCF、名称及专属股票池，优先解除微盘400/小盘价值100依赖",
+      "done_when": "时点证据、单位与覆盖核实后新增不可变分区；年度控制市值不作替代",
+      "blockers": [
+        "B-shares-pool"
+      ]
+    },
+    {
+      "id": "T-settlement",
+      "status": "blocked",
+      "action": "补退市转板权益、换股待上市权益并开发唯一Book的相应结算",
+      "done_when": "所选策略依赖结算有证据、模块测试和新实验验收，BP原blocked实验保持只读",
+      "blockers": [
+        "B-settlement"
+      ]
+    },
+    {
+      "id": "T-source-reviews",
+      "status": "in_progress",
+      "action": "正式300/695来源已审查、剩395；继续全文筛选实际依赖，优先可交易来源，组件不计回测",
+      "done_when": "695来源均有人工规则/研究性质/重复关系/依赖结论；统计与目录一致"
+    },
+    {
+      "id": "T-yili-earlier-backtest",
+      "status": "completed",
+      "action": "2010-03-16至2013-09-04的844日三成本/逐年/禁网match0，1374成交费用与流动性、1662订单时机和旧资产保护通过；基础-3.598946%、回撤-24.864226%，父75增至77/来源12。1139日零有效信号不计回测，435日无效持仓状态及14日基准缺口保留",
+      "done_when": "已批准原参数和覆盖选择冻结，旧资产/三成本/独立信号与成交/逐年/禁网复现通过；空窗与缺失保留，不拼接跨配股净值",
+      "plan": "docs/tasks/2026-10-10-伊利招行早期区间补充回测-完成报告.md"
+    },
+    {
+      "id": "T-batch95",
+      "status": "completed",
+      "action": "276来源正式研究验收；三原文/18实现、两次新进程禁网逐值match0、本机和隔离各94测试/5实际导入/六角终审/旧5919控制SHA及398分区stat保护通过。伊利仅补已验收早期证据，新交易0，基金与60m原交易搁置",
+      "done_when": "完整来源与重复映射/原规则/输入和有界补数、最长可核组件/独立算式/禁网及旧资产保护验收；足够交易输入及必要修正版获批准后唯一Book三成本，否则逐项搁置",
+      "plan": "docs/tasks/2026-10-11-第九十五批ETF魔改3与v2-正式研究验收.md",
+      "blockers": [
+        "B-fund-rotation-inputs",
+        "B-etf-magic3-v2-95"
+      ]
+    },
+    {
+      "id": "T-batch96",
+      "status": "completed",
+      "action": "278来源正式研究；39原诊断/5082日线参考两次禁网逐值0；本机75/隔离75、542副本五实际导入/六角终审、5919旧SHA及398stat保护通过；原CSV/长期分钟/基金依赖保持，交易0",
+      "done_when": "完整原文/实际回调/状态边界及原输入库存验收；可支持时唯一Book最长区间三成本/逐年/禁网匹配，缺失则逐策略记录搁置，不替换原预测/参考指数",
+      "plan": "docs/tasks/2026-10-11-第九十六批原预测CSV与顶底趋势-正式研究验收.md"
+    },
+    {
+      "id": "T-pair66-short-windows",
+      "status": "completed",
+      "action": "五有信号岛291日/7意图，唯一Book三成本873账本日/27成交核费，五独立worker禁网match0；43本机/43隔离及六角门禁恢复终审/5919旧SHA和398stats保护通过；29日零信号单列",
+      "done_when": "先核对应输入SHA与实际开盘/流动性/事件；五岛沿已批准配置唯一Book三成本/逐年/独立信号成交及禁网复现，空窗单列、不拼接净值",
+      "plan": "docs/tasks/2026-10-11-配对66短区间补充回测与SVM零买入预检.md",
+      "blockers": []
+    },
+    {
+      "id": "T-svm98-short-preflight",
+      "status": "completed",
+      "action": "2008-05-28至06-19的16日，3拟合/675样本独立核算与10输出新进程禁网逐字节0差；预测全0，无买入目标，仅预检，不创建零交易父运行",
+      "done_when": "沿已批准原参数预检唯一盘点岛并记录时机/特征/标签/模型/状态和禁网证据；明确零信号及未做Book/收益",
+      "plan": "docs/tasks/2026-10-11-配对66短区间补充回测与SVM零买入预检.md"
+    },
+    {
+      "id": "T-batch97",
+      "status": "completed",
+      "action": "两原文423/201行及19/5定义、31受控诊断、44873十股原价窗口/1392日6848484金额观察原统计禁网逐值与字节match0；52相关/223副本19测试及5实际导入、6614旧SHA/398stat保护通过；280来源，交易0",
+      "done_when": "两来源完整规则/身份、实际输入及补数库存、最长可核算式/独立核算/鲜活禁网与旧资产保护验收；原交易不足按具体恢复条件搁置",
+      "plan": "docs/tasks/2026-10-11-第九十七批七日趋势与拥挤率-正式研究验收.md"
+    },
+    {
+      "id": "T-trend49-trades",
+      "status": "blocked",
+      "action": "7日趋势原全池/历史总市值名称、动态前复权价量、当天开盘可用性和持仓1m最高价/反馈缺；12初筛9过评分仅十股原价参考，不创建代理交易",
+      "done_when": "原输入及执行语义放行，必要经济修正版另确认后唯一Book最长三成本/逐年/成交核费和observe reproduce禁网验收",
+      "plan": "docs/tasks/2026-10-11-第九十七批七日趋势与拥挤率-执行计划.md",
+      "blockers": [
+        "B-trend49-inputs",
+        "B-shares-pool",
+        "B-special-assets"
+      ]
+    },
+    {
+      "id": "T-batch98-source",
+      "status": "completed",
+      "action": "两完整来源、原CSI300长区间算式、27+2诊断、新目录Arrow JSON恢复及仅两行目录变化已验收，不放行原交易",
+      "done_when": "原字节/规则、独立算式、实际JSON往返、禁网进程、必要测试与旧资产保护/目录身份绑定通过",
+      "plan": "docs/tasks/2026-10-11-第九十八批牛熊指标与北向RSRS-正式研究验收.md"
+    },
+    {
+      "id": "T-bullbear-northbound-trades",
+      "status": "blocked",
+      "action": "缺原自由流通股本换手率、两link额度/余额/持股、历史CSI300池和420002申赎；三新请求DNS失败0响应，不以净买额/普通换手率替代，共享RSRS/窗口/基金经济修正版未获批准",
+      "done_when": "先核原输入及执行；必要具体变体另确认后唯一Book最长三成本、逐年和observe reproduce禁网验收",
+      "blockers": [
+        "B-bullbear-northbound98"
+      ],
+      "plan": "docs/tasks/2026-10-11-第九十八批牛熊指标与北向RSRS-执行计划.md"
+    },
+    {
+      "id": "T-batch99-source",
+      "status": "completed",
+      "action": "284来源正式研究验收；5249候选轨道/44+8原诊断，恢复及进一步鲜活禁网match0。本机66/隔离43、246副本7实际导入、仅两来源目录delta与旧6614控制/398分区保护通过；期权交易未放行",
+      "done_when": "两原文完整审查、依赖/最长可核输入或阻断、独立算式及实际JSON/禁网证据、必要测试和旧资产保护，正式目录登记",
+      "plan": "docs/tasks/2026-10-11-第九十九批中国VIX与期权突破-正式研究验收.md",
+      "blockers": [
+        "B-options99-inputs-execution"
+      ]
+    },
+    {
+      "id": "T-options99-trades",
+      "status": "blocked",
+      "action": "原VIX缺期权链/到期/调整身份、8期限SHIBOR与ETF执行；原突破另缺标的与期权分钟/历史保证金/卖空/结算。两请求DNS失败0响应，原13异常和319/151舍入边界保留；不以paper循环或当前IV代替Book交易",
+      "done_when": "原时点输入/费用与执行证据放行，必要具体修正版先确认，再扩展唯一Book并做最长三成本/逐年和observe reproduce禁网匹配",
+      "blockers": [
+        "B-options99-inputs-execution"
+      ],
+      "plan": "docs/tasks/2026-10-11-第九十九批中国VIX与期权突破-正式研究验收.md"
+    },
+    {
+      "id": "T-batch100-source",
+      "status": "completed",
+      "action": "286来源正式研究验收；4852原400行前缀/32诊断/5原异常两轮禁网match0，42本机42隔离及6614控制SHA/398分区stat保护通过；原两driver超时只读保留，新增交易0",
+      "done_when": "两原文规则和身份/输入库存与补数、最长可核区间或明确搁置、独立数值/时点/JSON和禁网/旧资产保护验收，来源目录精确登记；可交易时唯一Book三成本与复现",
+      "plan": "docs/tasks/2026-10-11-第一百批行业轮动与50ETF-Xgboost-正式研究验收.md"
+    },
+    {
+      "id": "T-batch101-source",
+      "status": "completed",
+      "action": "288来源正式研究验收；五旧候选15462原生120行窗/两参考30924行与32原诊断两轮禁网match0，50本机50隔离及全保存ES/缺口/分年读回和旧资产保护通过；9008窗ES处理差异、238跨缺日窗口/原生尺度变化原因未证；缺两基金和期货历史执行，原交易0",
+      "done_when": "两来源原规则/输入库存和有界补数、最长可核区间/独立算式/JSON/禁网及旧资产保护正式研究验收；有足够交易输入且必要修正版获批才唯一Book三成本与observe reproduce",
+      "plan": "docs/tasks/2026-10-11-第一百零一批全天候ES与期货贴水-正式研究验收.md"
+    },
+    {
+      "id": "T-batch102-source",
+      "status": "completed",
+      "action": "290/695来源正式研究验收；宏观48保留21全文重复，ETF58仅4/17候选。44原/补充受控诊断与213旧PMI/5161日终/153年度/11095ETF参考禁网差异0，本机34隔离34及全保存值/301副本六实际导入/仅两来源目录delta/6614旧SHA与398分区保护通过；原交易0",
+      "done_when": "两完整来源规则、实际输入库存/有界补数、最长可核组件/独立数值/禁网与旧资产保护验收；交易输入与必要修正版足够后唯一Book三成本/逐年/复现，否则准确逐来源搁置",
+      "plan": "docs/tasks/2026-10-11-第一百零二批宏观周期与ETF调试版-正式研究验收.md",
+      "evidence": "docs/handoff/2026-10-11-batch102-final-review.json"
+    },
+    {
+      "id": "T-batch103-source",
+      "status": "completed",
+      "action": "292来源正式研究；45诊断、28078/17157价格窗与48437热度窗禁网匹配，本机48隔离48及全保存值/530副本/6614旧SHA和398stat保护通过；原dtype未证、35178类型差异保留，交易0",
+      "done_when": "完整原文、规则/实际输入与有界补数、最长可核组件/独立数值/JSON/禁网与旧资产保护来源验收；足够原交易输入及必要具体变体获批后唯一Book最长三成本、逐年和复现，否则逐项记录搁置",
+      "plan": "docs/tasks/2026-10-11-第一百零三批实盘ETF与随机平局动量-正式研究验收.md",
+      "evidence": "docs/handoff/2026-10-11-batch103-final-review.json"
+    },
+    {
+      "id": "T-macro48-ETF58-trades",
+      "status": "blocked",
+      "action": "宏观四分项历史发布与修订、14:55动态指数和510300/511010执行缺；ETF58原17基金只有所选4候选、57窗口跨三缺日，原索引/重复键/默认费用与开盘反馈未修；不得用旧总量/缩池/日终和合成意图造收益",
+      "done_when": "原时点输入、完整池/事件/复权/状态/费用和执行证据放行，必要具体修正版另确认后唯一Book最长可用区间三成本、逐年、独立核费与observe reproduce禁网验收",
+      "plan": "docs/tasks/2026-10-11-第一百零二批宏观周期与ETF调试版-正式研究验收.md",
+      "evidence": "docs/handoff/2026-10-11-batch102-final-review.json"
+    },
+    {
+      "id": "T-ETF6-81-trades",
+      "status": "blocked",
+      "action": "原池7/11和5/11、动态参考8/11；原volume dtype与基金盘中/执行/费用未证，35178类型差异保留，未经批准用于交易",
+      "done_when": "核实完整原池、历史身份/事件/复权/状态、11:30和14:50可用现价与14:40/14:50执行、基金费用和订单反馈；必要具体变体获批后唯一Book最长三成本、逐年/核费及observe reproduce禁网验收",
+      "plan": "docs/tasks/2026-10-11-第一百零三批实盘ETF与随机平局动量-正式研究验收.md",
+      "evidence": "docs/handoff/2026-10-11-batch103-final-review.json",
+      "blockers": [
+        "B-ETF6-81-inputs"
+      ]
+    },
+    {
+      "id": "T-batch104-source",
+      "status": "completed",
+      "action": "两完整来源/46诊断、46481原价MA窗/93132相对位置窗与显式数字资金流禁网匹配；本机39隔离39、185副本/旧6614SHA及398stat保护、最终17绑定SHA/693不变验收，294来源，新增交易0",
+      "done_when": "完整规则/输入库存、有界补数、最长可核组件/独立算式/JSON/禁网与旧资产保护来源验收；可交易时唯一Book最长三成本/逐年/复现，否则逐项搁置",
+      "plan": "docs/tasks/2026-10-11-第一百零四批短线均线与首板低开-正式研究验收.md",
+      "evidence": "docs/handoff/2026-10-11-batch104-final-review.json"
+    },
+    {
+      "id": "T-batch105-source",
+      "status": "completed",
+      "action": "两行业notebook来源研究验收；6811232 native/95860固定40单元与32503680上市年龄单元禁网5文件匹配；22保存值/31正式本机隔离、178副本/29输入SHA和693来源不变最终读回；296来源，新增交易0",
+      "done_when": "完整原规则/外部模块与输入库存、最长可核组件及独立算式/禁网/保存值/旧资产保护来源验收；若有可运行交易才唯一Book三成本/逐年/复现，缺失逐项搁置",
+      "plan": "docs/tasks/2026-10-11-第一百零五批市场宽度与行业新高新低-执行计划.md",
+      "evidence": "docs/handoff/2026-10-11-batch105-final-review.json"
+    },
+    {
+      "id": "T-batch106-source",
+      "status": "completed",
+      "action": "两份完整162/329行来源正式验收298；29原诊断、4776一年/4094双阶段/225年度参考，两个新进程禁网四输出一致、24本机24复制/31正式/239目录元数据回归和最终读回通过；新增交易0",
+      "done_when": "完整来源与规则/重复/依赖、最长可核组件和独立算术、禁网/复制导入、旧资产保护及两源目录正式验收通过",
+      "plan": "docs/tasks/2026-10-11-第一百零六批月度槽位与价值平均-执行计划.md",
+      "report": "docs/tasks/2026-10-11-第一百零六批月度槽位与价值平均-正式研究验收.md",
+      "evidence": "docs/handoff/2026-10-11-batch106-final-review.json"
+    },
+    {
+      "id": "T-batch106-trades",
+      "status": "blocked",
+      "action": "ETF85缺月MACD取数/种子与槽位成交反馈；VA69缺基金/指数原协议、375.0/625.0 count兼容及成交后1分钟价格；8候选不代替基金事件/复权/状态，159905和513100各缺1开市日；一次事件补数DNS失败0响应，停止同域重试",
+      "done_when": "原输入及基金执行准入逐项证明；重要经济变体另确认后唯一Book最长区间、逐年、三成本及observe reproduce禁网验收",
+      "plan": "docs/tasks/2026-10-11-第一百零六批月度槽位与价值平均-正式研究验收.md",
+      "blockers": [
+        "B-monthly-slots-value-average-106"
+      ]
+    },
+    {
+      "id": "T-batch107-source",
+      "status": "completed",
+      "action": "两原文205/264行及13/12定义正式研究验收300；30诊断、11663原生29行回归/3170共同排名，527全负仍选、112/84跨缺日；两禁网四输出一致、32本机32复制/39正式、6614旧SHA与398stat保护和693其他来源不变读回通过；新增交易0",
+      "done_when": "完整原规则/来源身份与实际库存、有界补数、最长可核组件/独立回归/禁网/保存值/旧资产保护及目录正式验收；可交易时唯一Book最长三成本与复现，否则逐项搁置",
+      "plan": "docs/tasks/2026-10-11-第一百零七批ETF动量与均线-执行计划.md",
+      "report": "docs/tasks/2026-10-11-第一百零七批ETF动量与均线-正式研究验收.md",
+      "evidence": "docs/handoff/2026-10-11-batch107-final-review.json"
+    },
+    {
+      "id": "T-batch107-trades",
+      "status": "blocked",
+      "action": "27三候选的六个缺日与三尺度跳变原因未证，原基金事件/动态复权/1m过滤/开盘调度和反馈缺；61含供应商index399306且原23基金候选缺，has_key/固定预算/默认fund费用未核；一次DNS失败0响应，其余22未请求，原池不缩减",
+      "done_when": "完整原池及身份、事件/复权、时点与执行准入；必要具体修正版获批后唯一Book最长可用三成本/逐年/独立核费和observe reproduce禁网验收",
+      "plan": "docs/tasks/2026-10-11-第一百零七批ETF动量与均线-正式研究验收.md",
+      "blockers": [
+        "B-fund-regression-means107"
+      ]
+    },
+    {
+      "id": "T-batch108-source",
+      "status": "in_progress",
+      "action": "232/340行股票候选已完整初读及SHA冻结，不计正式新增；5号国债指数载体、97号月线/初始化与双开盘顺序待核；当前快照无index_constituents，先查原交接与成员SHA",
+      "done_when": "完整原来源和实际依赖库存核验；可交易则唯一Book最长可用区间三成本/逐年/独立核费与禁网复现，否则准确逐项搁置；原经济替代先确认",
+      "plan": "docs/tasks/2026-10-11-第一百零八批价值低波与月三阳-初读与库存.md",
+      "evidence": "docs/handoff/2026-10-11-batch108-preread-stage.json"
+    }
   ],
   "decisions": [
-    {"id": "D-bollinger", "status": "approved", "provenance": "conversation_confirmed", "answer": "推进修正变体（推荐）", "scope": "2020/52：去除布林上下轨标量[-1]索引，保留20日均值±2倍总体标准差，日频近似及唯一账本"},
-    {"id": "D-pair-anchor", "status": "approved", "provenance": "conversation_confirmed", "answer": "推进动态锚定近似变体（推荐）", "scope": "伊利/招行与海天/招行按每决策日锚定历史价，保留120日、比例1、±1和状态机；平台不等价"},
-    {"id": "D-svm-shape", "status": "approved", "provenance": "conversation_confirmed", "answer": "只修输入形状，保留滞后（推荐）", "scope": "SVM98预测样本改二维，旧特征、滞后和参数保留"},
-    {"id": "D-rsi", "status": "approved", "provenance": "conversation_confirmed", "answer": "推进修正近似变体（推荐）", "scope": "RSI40缺失窗口阻断；61行重算RSI6、整数阈值、9槽及实际现金分配保留"},
-    {"id": "D-rotation66", "status": "approved", "provenance": "conversation_confirmed", "answer": "推进修正近似变体（推荐）", "scope": "修datetime.timedelta和末值位置索引，保留60行价差/样本标准差/四位z/±2；动态锚定与日频近似"},
-    {"id": "D-numeric-means", "status": "approved", "provenance": "archived_approval", "approval_file": "data/staging/strategies-batch14/20261005-long-history/numeric-policy-approval.json", "scope": "国航及复星逐窗口math.fsum稳定求和；严格比较、均线参数、每笔2万元和两种资金保留"},
-    {"id": "D-ema55", "status": "approved", "provenance": "archived_approval", "approval_file": "data/staging/strategies-batch18/20261005-kd-ema-lof/ema-policy-approval.json", "scope": "三进兵TA-Lib连续EMA2/25/60、均值种子、跳已知停牌、八股顺序、五槽、现金除数及参与/滑点保留；19批已完成"},
-    {"id": "D-gac12", "status": "pending", "scope": "广汽2020/12近似经济规则确认，原问题待回复，不重复询问"},
-    {"id": "D-lowvol24", "status": "pending", "scope": "七股低波2022/24近似经济规则确认，原问题待回复"},
-    {"id": "D-bp-liquidation", "status": "evidence_recheck_required", "scope": "BP末价折现探索不能从其他批准推断获批；长区间原实验仍blocked"}
+    {
+      "id": "D-bollinger",
+      "status": "approved",
+      "provenance": "conversation_confirmed",
+      "answer": "推进修正变体（推荐）",
+      "scope": "2020/52：去除布林上下轨标量[-1]索引，保留20日均值±2倍总体标准差，日频近似及唯一账本"
+    },
+    {
+      "id": "D-pair-anchor",
+      "status": "approved",
+      "provenance": "conversation_confirmed",
+      "answer": "推进动态锚定近似变体（推荐）",
+      "scope": "伊利/招行与海天/招行按每决策日锚定历史价，保留120日、比例1、±1和状态机；平台不等价"
+    },
+    {
+      "id": "D-svm-shape",
+      "status": "approved",
+      "provenance": "conversation_confirmed",
+      "answer": "只修输入形状，保留滞后（推荐）",
+      "scope": "SVM98预测样本改二维，旧特征、滞后和参数保留"
+    },
+    {
+      "id": "D-rsi",
+      "status": "approved",
+      "provenance": "conversation_confirmed",
+      "answer": "推进修正近似变体（推荐）",
+      "scope": "RSI40缺失窗口阻断；61行重算RSI6、整数阈值、9槽及实际现金分配保留"
+    },
+    {
+      "id": "D-rotation66",
+      "status": "approved",
+      "provenance": "conversation_confirmed",
+      "answer": "推进修正近似变体（推荐）",
+      "scope": "修datetime.timedelta和末值位置索引，保留60行价差/样本标准差/四位z/±2；动态锚定与日频近似"
+    },
+    {
+      "id": "D-numeric-means",
+      "status": "approved",
+      "provenance": "archived_approval",
+      "approval_file": "data/staging/strategies-batch14/20261005-long-history/numeric-policy-approval.json",
+      "scope": "国航及复星逐窗口math.fsum稳定求和；严格比较、均线参数、每笔2万元和两种资金保留"
+    },
+    {
+      "id": "D-ema55",
+      "status": "approved",
+      "provenance": "archived_approval",
+      "approval_file": "data/staging/strategies-batch18/20261005-kd-ema-lof/ema-policy-approval.json",
+      "scope": "三进兵TA-Lib连续EMA2/25/60、均值种子、跳已知停牌、八股顺序、五槽、现金除数及参与/滑点保留；19批已完成"
+    },
+    {
+      "id": "D-gac12",
+      "status": "pending",
+      "scope": "广汽2020/12近似经济规则确认，原问题待回复，不重复询问"
+    },
+    {
+      "id": "D-lowvol24",
+      "status": "pending",
+      "scope": "七股低波2022/24近似经济规则确认，原问题待回复"
+    },
+    {
+      "id": "D-allweather-fill",
+      "status": "pending",
+      "provenance": "conversation_pending",
+      "scope": "2024第二集/7及65全天候近似变体：显式自然日向前填充后pct_change/首值填零，去除fillna(method=None)兼容参数；保留120交易行、原ES尾部选择/分母、四基金和全部状态/交易规则，原平台pandas版本未证明；交易仍须通过基金输入和唯一Book门禁"
+    },
+    {
+      "id": "D-lowpb81-proxy",
+      "status": "pending",
+      "provenance": "conversation_pending",
+      "scope": "81号流通市值代理及现有历史沪深池，原70/35分支和截断后当日过滤、不补满/非正PB，月首先清仓再依实际现金及余仓设等额目标；100万元、2021-02至2026-09、唯一Book三成本，退市结算不足仍阻断；方案见第68批文档"
+    },
+    {
+      "id": "D-bp-liquidation",
+      "status": "evidence_recheck_required",
+      "scope": "BP末价折现探索不能从其他批准推断获批；长区间原实验仍blocked"
+    }
   ],
   "blockers": [
-    {"id": "B-financial-version", "kind": "historical_evidence", "detail": "最终合并财报历史修订版本不明，严格可用0；滞后不消除修订前视", "affects": ["PEG", "ROE质量", "财务评分", "SVR价值模型"]},
-    {"id": "B-shares-pool", "kind": "missing_input", "detail": "历史股本事件、每日总市值、PCF、历史名称与专属池未补齐", "affects": ["微盘400", "小盘价值100"]},
-    {"id": "B-settlement", "kind": "input_and_feature", "detail": "BP长区间15证券退市/换股权益待核实，海通待上市权益结算未完成", "evidence": "docs/tasks/2026-10-05-退市与换股结算核查.md"},
-    {"id": "B-remote-payload", "kind": "missing_handoff", "detail": "部分远程2026-10-03/04快照、成员表和实验未迁入；禁止新数据替换旧输入"},
-    {"id": "B-special-assets", "kind": "missing_input_and_rules", "detail": "ETF事件、全池分钟/Tick、期货合约/主力/结算及外置名单/模块依赖缺失；指标组件不是交易验收"},
-    {"id": "B-network", "kind": "interface_unreachable", "detail": "Git推送已于2026-10-08恢复；此前补数DNS失败仅为当时记录，不证明供应商无数据，补数前须重新探测"}
+    {
+      "id": "B-etf-filters94",
+      "kind": "missing_original_pool_and_platform_execution_equivalence",
+      "detail": "原生10467FFT窗、11157缓存分支smooth窗及4662实际RSRS回调已有禁网数值证据；102原订单合成诊断/86相关测试及六角回调复核完成，仍不证明原平台库及持仓/调度/成交等价。159928缺，四基金历史身份/事件/复权/参考价/状态/费用未放行，399006双源最大收盘差0.514保留。原日期索引、排名二元组/数组作为证券、KEEP轮换及排名失败阻清仓等行为未修经济规则；正式命令/JUnit/鲜活重放/历史目录门禁尚待新验收程序，重要具体变体须确认",
+      "affects": [
+        "2023/37ETF低通轮动",
+        "2023/47ETF卡尔曼轮动",
+        "2024第二集/18ETF卡尔曼轮动"
+      ],
+      "evidence": "docs/handoff/2026-10-10-batch94-callback-stage.json"
+    },
+    {
+      "id": "B-allweather-return-inputs",
+      "kind": "pending_return_semantics_and_missing_fund_trade_inputs",
+      "detail": "第89批来源研究验收，D-allweather-fill pending，原pandas错误/23受控收益差异只读；四基金标准输入0、3201共同观察日不放行交易，513100原生-80.45%跳变无事件证明。29风险/32回调全合成：95%选7、99%选2除约1.2，负/无限风险/零除/NaN权重/总和.999或1.001未修，完整函数假API不算价格/pandas收益。31回调重算/零锚点/形状除零/即时KeyError保留；事件页一次DNS失败0响应。历史事件/复权/状态/费用/开盘执行/平台形状未证，真实ES/权重/交易0",
+      "affects": [
+        "2024第二集/7一致性风险极速版",
+        "2024第二集/65桥水全天候"
+      ],
+      "evidence": "docs/tasks/2026-10-09-第八十九批一致性风险与全天候-正式验收.md"
+    },
+    {
+      "id": "B-daily-chan-industry-notebook",
+      "kind": "research_fidelity_and_missing_historical_industry_versions",
+      "detail": "第88批两非交易原文正式研究验收；1392窗口全状态原定义另加载禁网match0、有限独立标量/150行业单元通过，不等于独立完整笔线引擎或平台日期复现。439日笔/188日线段重绘观察保留，满窗仍受滚动起点影响；历史行业/名称/版本与ST退市池未登记，上市以来补数DNS失败0新增。pd.datetime/pyecharts旧接口、当前bar/停牌/浮点语义未证，不造交易规则或收益",
+      "affects": [
+        "2021/16缠论工具",
+        "2023/63A股最强板块动量"
+      ],
+      "evidence": "docs/tasks/2026-10-09-第八十八批缠论工具与板块动量-正式验收.md"
+    },
+    {
+      "id": "B-chan-minute",
+      "kind": "missing_original_minute_coverage_and_execution",
+      "detail": "两582行同SHA全文冻结，实际300354/1m持续状态、确认与round(3000/close)*100增量数量已核；原1m表未登记且5m筛证券0。1392日线三分支4176状态仅参考，原1m信号/交易0；TDX一次TCP因权限失败、无查询/响应，历史近似逐笔与原分钟不等价。重复/失效无回滚及前笔修正self距离0删笔、动态价格/回调/执行仍需证据或确认变体",
+      "affects": [
+        "2023/50缠论",
+        "2024第二集/11缠论"
+      ],
+      "evidence": "docs/tasks/2026-10-09-第八十七批缠论分钟状态机研究.md"
+    },
+    {
+      "id": "B-wizard-industry-flow",
+      "kind": "missing_original_helper_and_historical_pool_financial_flow",
+      "detail": "第85批13类wizard原helper定义显式repo搜索0，平台模块未安装；285字典候选不证明原字段/单位/可用版本，strict财务0；本机未登记历史CSI300/申万行业和名称链。SW2021表及东方财富近期个股流各单请求DNS失败0响应/新增/发布。MA8/89和上一日net_pct_main算法/时点/边界、资金分配/数量转换与即时成交均未证；48夹具诊断不是原信号，原MA/流/排名/三成本/交易0",
+      "affects": [
+        "2020/32测试策略1",
+        "2020/16投资学作业"
+      ],
+      "evidence": "docs/tasks/2026-10-09-第八十五批行业向导与资金流筛选研究.md"
+    },
+    {
+      "id": "B-industry-ETF-T0",
+      "kind": "incomplete_original_pool_and_intraday_fund_execution",
+      "detail": "第84批精确15基金标准日线/5m/分钟池查询均0；旧518880/513100候选SHA复用，6355窗口独立差0，但仅2/14原池完整排名0。13日线及1分钟原生请求全部DNS失败0响应/新增/发布；period1固定ndays5，不能补2021至2023。原基金身份/事件/状态/动态价格、9:40/14:59/T+0/tick和费用/平台持仓键语义不足，T0价差及交易0",
+      "affects": [
+        "2024精选1/43行业ETF轮动",
+        "2025/91ETF-T0动量"
+      ],
+      "evidence": "docs/tasks/2026-10-09-第八十四批行业轮动与T0动量研究.md"
+    },
+    {
+      "id": "B-external-timing-GP",
+      "kind": "missing_original_user_csv_vintage_and_training_design",
+      "detail": "91缺trade_list.csv/生成模型及available_at；40缺stock_data.csv七字段/八常量/pct10口径、原证券顺序/池/版本及标签成熟。实际文件名和两个包manifest无命中，不证明未知附件不存在；现有行情API无法恢复原预计算日期/标签。67诊断与首alpha2十股长参考非训练，gplearn等原库未安装，原训练/择时/交易0",
+      "affects": [
+        "2024精选2/91特征分布择时",
+        "2021/40遗传因子2"
+      ],
+      "evidence": "docs/tasks/2026-10-09-第八十三批外置择时与遗传因子研究.md"
+    },
+    {
+      "id": "B-intraday-external-factor",
+      "kind": "missing_original_minute_factor_and_historical_pool",
+      "detail": "64需要22交易日各10:30/15:00原1m动态复权价及当日CSI800；快照仅5m，1m接口固定ndays5且单请求DNS失败0响应。95/19缺cpv.csv和默认pv_corr公式/窗口/版本/可用时点；实际文件名与两个包manifest无命中，不证明未知附件不存在。原窗口/排名/交易0",
+      "affects": [
+        "2022/64传统反转",
+        "2023/95高频价量",
+        "2024精选2/19高频价量重复"
+      ],
+      "evidence": "docs/handoff/2026-10-09-batch82-final-review.json"
+    },
+    {
+      "id": "B-dividend-inputs",
+      "kind": "missing_historical_inputs_and_platform_semantics",
+      "detail": "现有59065每股分红缺原总金额/report_date/可用版本；六200双源184记录含重复和日期缺口，缺STK_XR_XD金额单位/历史income.statDate和聚源InnerCode/精确日DividendRatio；历史池/总市值/当时价格与回调语义未证，两原交易搁置",
+      "affects": [
+        "2021/70股息率均线",
+        "2022/12市盈率股息率"
+      ],
+      "evidence": "docs/handoff/2026-10-08-batch72-verification.json"
+    },
+    {
+      "id": "B-market-PE-and-flow",
+      "kind": "original_daily_market_input_and_callback_semantics",
+      "detail": "原322002身份/日频pe_average方法/版本未证；678稀疏参考、近期22指标/分类行不能补原全区间。第74批唯一Book显式资金流/单位净值已验收，148账本及旧茅台三成本match0；资金流能力缺口已解除，不能去掉定投入金或计利润。FOF每回调频率、原初始after_code_changed与周内时点、基金完整输入仍未证",
+      "affects": [
+        "2021/53市场PE定投",
+        "2021/14FOF每回调入金"
+      ],
+      "evidence": "docs/handoff/2026-10-08-batch73-verification.json",
+      "current_evidence": "docs/handoff/2026-10-08-batch74-verification.json"
+    },
+    {
+      "id": "B-fund-rotation-inputs",
+      "kind": "incomplete_history_identity_and_intraday_semantics",
+      "detail": "第74批新浪62321候选行与510310旧3286行已核；515520/161907/备用163210提前终止，原120日成交额、净值/事件/每日状态/费用及身份版本不足；二八激活指数未证明可交易，15:00和FOF每回调语义未证。第76批13次200另取58563候选，150019/150051止于2020末但历史折算/终止身份未证；11:30动态完整排名、14:40/14:53执行和52兼容仍缺。第77批取得160706/159919/511010共11845候选行，历史身份/事件/状态/复权/费用仍缺，不因取得close就放行。第78批四核心资产原9:30执行依赖待核。第79批七旧候选SHA复用，31需9:45、42需WR/60m/11:27现价及三元列表等兼容修正版；单60m连接失败0响应，完整42信号0。第80批六旧基金SHA复用，38的2507完整排名与229窗beta仅明确数学注入参考，90的3201日收盘价参考不能代替9:35/持仓；事件/费用/平台函数和9:30执行未齐，交易0。第81批三200补512100/510220/513500共8304候选，510220止于2022-11-17、512100/513500原生跳变保留；5221价格风险/5279昨日阈值独立禁网match0，但57真实14:55tick/Series兼容、76真实组合权益与两原默认基金费用/事件/执行仍缺；完整57信号/76权益轨迹/交易0",
+      "affects": [
+        "2021/14FOF",
+        "2022/1二八轮动",
+        "2023/54ETF轮动入门",
+        "2022/28动态情绪轮动",
+        "2022/52二八对冲轮动",
+        "2020/72基金定投",
+        "2022/99量化定投",
+        "2024/03核心资产轮动",
+        "2025/38加权核心资产轮动",
+        "2024/31RSRS每日轮动",
+        "2024/42乖离动量WR择时",
+        "2024/38反转动量",
+        "2025/90固收组合",
+        "2024/57股债切换",
+        "2024/76国债增强"
+      ],
+      "evidence": "docs/handoff/2026-10-08-batch74-verification.json",
+      "current_evidence": "docs/handoff/2026-10-09-batch81-verification.json"
+    },
+    {
+      "id": "B-dca-member-valuation",
+      "kind": "missing_historical_member_valuation_and_original_rule_compatibility",
+      "detail": "本机未发布历史成员表；原72按成员len(df)/正PE倒数和、原99严格四分位截尾中位数及当时可用版本未齐。乐咕PE/PB原生各259行、截止过滤后各257行至20260831，日期间隔中位数30日，不足1708行，真实rank窗0；不插值/重复/缩短窗口或代替原成员估值。72旧ix/月别名/bisect边界与99数量order/错卖出tuple/清仓属性缺陷留证，修正变体未实施；唯一Book资金流能力已在74解除",
+      "affects": [
+        "2020/72基金定投",
+        "2022/99量化定投"
+      ],
+      "evidence": "docs/handoff/2026-10-09-batch77-final-review.json"
+    },
+    {
+      "id": "B-futures-history-execution",
+      "kind": "input_and_feature",
+      "detail": "26品种连续及SR2001共104000候选行、单日SHFE216合约已取得；ZC仅至2022末，全26排名1633日；未证明原8888/9999及历史主力/真实合约/到期/乘数/跳点/保证金/费用/结算与唯一Book期货语义，107682组件不是交易",
+      "affects": [
+        "商品AdaptiveMA01",
+        "商品动量04",
+        "商品截面动量17",
+        "白糖海龟49"
+      ],
+      "evidence": "docs/handoff/2026-10-08-batch70-verification.json"
+    },
+    {
+      "id": "B-financial-version",
+      "kind": "historical_evidence",
+      "detail": "最终合并财报历史修订版本不明，严格可用0；滞后不消除修订前视",
+      "affects": [
+        "PEG",
+        "ROE质量",
+        "财务评分",
+        "SVR价值模型"
+      ]
+    },
+    {
+      "id": "B-shares-pool",
+      "kind": "missing_input",
+      "detail": "股本万股/股单位与PCF现金净增加额TTM概念已证；历史版本/生效可用时间、退市覆盖、每日总市值、完整名称身份链与专属池未补齐；七冻结市值样本抽样/非交易日缺口，两平安新请求301，未放行全池",
+      "affects": [
+        "微盘400",
+        "小盘价值100",
+        "wizard小市值53",
+        "正PE市值轮动59"
+      ],
+      "evidence": "docs/handoff/2026-10-08-batch65-dependency-verification.json",
+      "latest_coverage_evidence": "docs/handoff/2026-10-08-batch71-verification.json"
+    },
+    {
+      "id": "B-settlement",
+      "kind": "input_and_feature",
+      "detail": "BP长区间15证券退市/换股权益待核实，海通待上市权益结算未完成",
+      "evidence": "docs/tasks/2026-10-05-退市与换股结算核查.md"
+    },
+    {
+      "id": "B-remote-payload",
+      "kind": "missing_handoff",
+      "detail": "部分远程2026-10-03/04快照、成员表和实验未迁入；禁止新数据替换旧输入"
+    },
+    {
+      "id": "B-special-assets",
+      "kind": "missing_input_and_rules",
+      "detail": "510310已有上市以来3286行原始候选与登记权益能力，ETF每日参考价/状态、历史事件完整性、复权/量额和费用版本仍缺；全池分钟/Tick、期货及外置依赖保留，组件不计回测",
+      "evidence": "docs/tasks/2026-10-08-第六十六批ETF行情与登记权益账本.md"
+    },
+    {
+      "id": "B-network",
+      "kind": "partial_interface_failure",
+      "detail": "股本/PCF及沪市历史公告可达；历史名单接收超时、巨潮海通零记录解析失败、增量业务401、深交所JSON403与沪市PDF返回HTML分别留档",
+      "evidence": "docs/handoff/2026-10-08-batch65-dependency-verification.json"
+    },
+    {
+      "id": "B-etf-magic3-v2-95",
+      "kind": "missing_original_four_fund_and_60m_execution_inputs",
+      "detail": "159928仍缺，三基金原生未复权22044窗仅逐只参考；四基金事件/复权/参考价/状态/费用及回调执行未放行，v2另缺60分钟历史。排名返回证券与数字、Series标签、12均值命名空间及止损下单后打印异常均保留108诊断；没有默改规则或把受控mean/索引注入冒充平台等价。新请求/样本/交易0，原组合按逐项依赖搁置；后续预检实查六表四基金均0行，84相关分区仅大小/mtime核对，候选价格未发布也未替代活跃输入。53相关/53隔离与祖先/运行helper/锁内库存和实际重放门禁已验；正式目录验收仍未完成",
+      "affects": [
+        "2023/7ETF魔改3",
+        "2024第二集/2ETF魔改3",
+        "2024第二集/60ETF动量v2"
+      ],
+      "evidence": "docs/handoff/2026-10-10-batch95-acceptance-preparation.json"
+    },
+    {
+      "id": "B-rf51-original-input",
+      "kind": "missing_original_predictions_modules_and_intraday_execution",
+      "detail": "RF51原pre_result_csv.csv/生成与可用时间、ind/tradestat未恢复；实际14:50用000016/399333盘中20日涨幅，默认不用保留小市值过滤。原CSV不可用新训练替代，平台零持仓/成交更新与兼容需核；39受控诊断不是预测/交易",
+      "affects": [
+        "2020/51随机森林拐点识别"
+      ],
+      "evidence": "docs/tasks/2026-10-11-第九十六批原预测CSV与顶底趋势-正式研究验收.md"
+    },
+    {
+      "id": "B-zhu69-minute-fund",
+      "kind": "missing_original_200_item_intraday_index_and_fund_input",
+      "detail": "Zhu69需199日+原14:30指数1m和199项跨日状态；2017前后000001/399001切换，交易159901基金事件/复权/状态/费用未齐。七活跃表五证券0；5082日线指标不是原信号，原交叉短缺可部分突变状态，不能自动修复或造收益",
+      "affects": [
+        "2021/69朱虽顶底趋势"
+      ],
+      "evidence": "docs/tasks/2026-10-11-第九十六批原预测CSV与顶底趋势-正式研究验收.md"
+    },
+    {
+      "id": "B-trend49-inputs",
+      "kind": "missing_original_daily_cap_universe_names_adjusted_volume_and_minute_execution",
+      "affects": [
+        "2023/49七日趋势"
+      ],
+      "detail": "完整423行/19定义和31原诊断已核；十股原价44873窗、12价量初筛/9评分通过不是原选股，缺原总市值/全池/名称/上市、动态前复权价量及09:30开盘、一分钟持仓高点和订单反馈。第68批七市值样本admitted0，本批没有新有效接口，不插值或改固定池交易",
+      "evidence": "docs/handoff/2026-10-11-batch97-final-review.json"
+    },
+    {
+      "id": "B-bullbear-northbound98",
+      "kind": "missing_original_freefloat_index_turnover_northbound_quota_share_pool_and_fund_redemption",
+      "affects": [
+        "2021/63牛熊指标",
+        "2023/58北向RSRS与布林带"
+      ],
+      "detail": "5280指数日/5263OLS和27+2夹具仅算式。2763旧北向005候选字段不完整，非两link额度差；原freefloat指数换手率、每日成员/持股和场外申赎未登记。三公共请求DNS失败0响应/新增/发布。17收益分位数NaN、r2==1有限例外、共享池/同set阻退出/基金KeyError保留，重要经济修正未批准",
+      "evidence": "docs/handoff/2026-10-11-batch98-final-review.json"
+    },
+    {
+      "id": "B-options99-inputs-execution",
+      "kind": "missing_historical_option_chain_SHIBOR_minute_and_margin_rules",
+      "affects": [
+        "2021/64中国VIX",
+        "2022/18期权突破"
+      ],
+      "detail": "50ETF5252日候选无日历缺口但7活跃表均0，期权合约/链/分钟与SHIBOR未登记。原10001355日线和SSE20180720风险两请求DNS失败0响应/新增/发布。非通常K0/原SHIBOR与pad兼容/原paper保证金等缺陷和319/151舍入边界保留；5249轨道与44诊断不是交易，必要修正版未批准。唯一Book期权卖空/历史保证金/到期结算未放行",
+      "evidence": "docs/handoff/2026-10-11-batch99-final-review.json"
+    },
+    {
+      "id": "B-macro48-ETF58-inputs",
+      "kind": "missing_macro_vintages_original_pool_and_fund_execution",
+      "affects": [
+        "2024第二集/48宏观中长线重复",
+        "2025/58多标的ETF调试版"
+      ],
+      "detail": "宏观缺四分项/历史发布和修订版、14:55动态指数与510300/511010执行；总量225月/213窗是旧历史重复核验。ETF原池17基金仅所选4候选，57窗口跨三缺日；标准行情/复权/事件输入0，原日期索引和重复键/持仓反馈未修。NBS一次curl7套接字权限失败0响应；33诊断/最长参考/20本机20隔离不是交易，原信号与回测0；第102批正式来源研究已验收290，原交易仍0，不计44合成诊断为交易",
+      "evidence": "docs/handoff/2026-10-11-batch102-final-review.json"
+    },
+    {
+      "id": "B-ETF6-81-inputs",
+      "kind": "missing_original_pool_intraday_fund_execution_and_pending_specific_compatibility",
+      "affects": [
+        "2023/6实盘ETF",
+        "2025/81指数ETF动量2"
+      ],
+      "detail": "第103批正式292；原池7/11和5/11、动态参考8/11；48437窗仅参考，原volume类型/调整暂停未证，35178状态差异保留；原盘中/完整池/基金身份事件费用执行仍缺，交易0",
+      "evidence": "docs/handoff/2026-10-11-batch103-final-review.json"
+    },
+    {
+      "id": "B-monthly-slots-value-average-106",
+      "kind": "missing_fund_event_adjustment_intraday_and_platform_semantics",
+      "detail": "85五独立槽与拒单状态、月MACD种子/取数未证明；69实际159905/399324、浮点count和1m反馈/IRR兼容待核。原生8候选在Store无基金准入输入，159905缺2013-12-31/513100缺2022-01-13不能判为停牌。事件一次实际DNS失败0响应，另一同域请求未发。尚无经济修正批准或真实交易。",
+      "affects": [
+        "聚宽2025/85稳健型ETF",
+        "2024第二集/69价值平均"
+      ],
+      "evidence": "docs/handoff/2026-10-11-batch106-final-review.json"
+    },
+    {
+      "id": "B-fund-regression-means107",
+      "kind": "missing_fund_events_adjustment_intraday_and_original_pool",
+      "detail": "27原生尺度跳变-90.23%/+285.96%/-80.45%及六缺日不能造平台信号；527全负仍选且过滤不补位。61首码399306是supplier index，原23基金缺；兼容/时点/预算/默认费用待核。补数一次DNS失败0响应，其余22未请求，无新发布或交易。",
+      "affects": [
+        "2023/27三ETF动量",
+        "2024第二集/61简单ETF"
+      ],
+      "evidence": "docs/handoff/2026-10-11-batch107-final-review.json"
+    }
   ],
   "capabilities": [
-    {"id": "C-financial", "status": "implemented_limited", "code": ["src/observe/data/financials.py", "src/observe/data/financial_history.py"], "supports": "完整归档、字典、时点门禁、探索滞后、单季/TTM/同比", "limits": "严格历史输入0，不借公告日期、不以实收资本金额替股数"},
-    {"id": "C-rule-strategy", "status": "verified_limited", "code": ["src/observe/strategies.py", "src/observe/portfolio.py", "src/observe/loop.py"], "supports": "目标权重/现金、真实日历周月调仓、状态机、固定金额、槽位现金、唯一Book", "limits": "日频与原即时成交不等价，固定池事后选择保留"},
-    {"id": "C-ledger", "status": "verified_limited", "code": ["src/observe/ledger/book.py", "src/observe/execution.py"], "supports": "原始价、T+1、数量约束、费用、部分成交、公司行动与转换", "limits": "退市/换股待上市权益仍有策略阻断；不是期货/期权/全分钟撮合实现"},
-    {"id": "C-research", "status": "verified_limited", "code": ["src/observe/research.py", "src/observe/features.py", "src/observe/models.py"], "supports": "因子、滚动模型、标签成熟、阶段缓存、三成本与基准", "evidence": "docs/07-后端研究框架逻辑.md", "limits": "已查看区间不是独立最终留出"},
-    {"id": "C-minute", "status": "research_limited", "code": ["src/observe/paired.py"], "evidence": "docs/06-分钟特征成对实验报告.md", "supports": "主实验Ridge秩IC增量+0.0065，95%区间[-0.0091,+0.0234]包含0", "limits": "无可确认增量；缺退市分钟；组合阻断不能作为收益证明"},
-    {"id": "C-reproduce", "status": "verified_limited", "code": ["src/observe/replay.py", "src/observe/strategies.py", "src/observe/runs.py"], "supports": "冻结输入、禁网重算、逐值比较、迁移后重建索引", "limits": "本机缺失的旧输入须按原SHA迁移，不能替代"}
+    {
+      "id": "C-financial",
+      "status": "implemented_limited",
+      "code": [
+        "src/observe/data/financials.py",
+        "src/observe/data/financial_history.py"
+      ],
+      "supports": "完整归档、字典、时点门禁、探索滞后、单季/TTM/同比",
+      "limits": "严格历史输入0，不借公告日期、不以实收资本金额替股数"
+    },
+    {
+      "id": "C-rule-strategy",
+      "status": "verified_limited",
+      "code": [
+        "src/observe/strategies.py",
+        "src/observe/portfolio.py",
+        "src/observe/loop.py"
+      ],
+      "supports": "目标权重/现金、真实日历周月调仓、状态机、固定金额、槽位现金、唯一Book",
+      "limits": "日频与原即时成交不等价，固定池事后选择保留"
+    },
+    {
+      "id": "C-ledger",
+      "status": "verified_limited",
+      "code": [
+        "src/observe/ledger/book.py",
+        "src/observe/execution.py"
+      ],
+      "supports": "原始价、T+1、数量约束、费用、部分成交、公司行动/转换与显式登记收盘现金红利权益、除息应收及实际到账",
+      "limits": "登记权益仅显式cash_entitlement=record_close现金事件；ETF整体输入仍未放行，退市/换股待上市权益保留阻断；不是期货/期权/全分钟撮合实现"
+    },
+    {
+      "id": "C-external-cash-flow",
+      "status": "verified_limited",
+      "code": [
+        "src/observe/ledger/book.py",
+        "tests/unit/test_external_cash_flows.py"
+      ],
+      "supports": "唯一Book显式external_flows模式、报价估值入金/赎回、份额与单位净值、入金非收益、原子拒绝和全赎回再入金；33手算/148账本与旧长区间三成本兼容match0",
+      "evidence": "docs/handoff/2026-10-08-batch74-verification.json",
+      "limits": "仅当前已开始未收盘日、唯一事件ID及分精度/1万亿元上限；缺估值/退市持仓阻断；未接入缺输入策略或CLI，原盘中回调估值等价性未证"
+    },
+    {
+      "id": "C-research",
+      "status": "verified_limited",
+      "code": [
+        "src/observe/research.py",
+        "src/observe/features.py",
+        "src/observe/models.py"
+      ],
+      "supports": "因子、滚动模型、标签成熟、阶段缓存、三成本与基准",
+      "evidence": "docs/07-后端研究框架逻辑.md",
+      "limits": "已查看区间不是独立最终留出"
+    },
+    {
+      "id": "C-minute",
+      "status": "research_limited",
+      "code": [
+        "src/observe/paired.py"
+      ],
+      "evidence": "docs/06-分钟特征成对实验报告.md",
+      "supports": "主实验Ridge秩IC增量+0.0065，95%区间[-0.0091,+0.0234]包含0",
+      "limits": "无可确认增量；缺退市分钟；组合阻断不能作为收益证明"
+    },
+    {
+      "id": "C-reproduce",
+      "status": "verified_limited",
+      "code": [
+        "src/observe/replay.py",
+        "src/observe/strategies.py",
+        "src/observe/runs.py"
+      ],
+      "supports": "冻结输入、禁网重算、逐值比较、迁移后重建索引",
+      "limits": "本机缺失的旧输入须按原SHA迁移，不能替代"
+    },
+    {
+      "id": "C-monthly-slots-value-average-reference",
+      "status": "verified_component_only",
+      "code": [
+        "scripts/research_strategy_batch106.py",
+        "scripts/probe_strategy_batch106_events.py",
+        "scripts/accept_strategy_batch106.py"
+      ],
+      "supports": "SHA绑定原定义诊断、双阶段极值独立参考、月首年度标量与禁网/复制树/两源目录门禁",
+      "limits": "不是ETF交易模块，月MACD未计算，原生候选不能作为活跃Store输入；旧目录绑定发布前实现图"
+    }
   ],
   "examples": [
-    {"id": "numeric-ma5", "nature": "real_boundary_case", "purpose": "原MA5一ULP误判与稳定求和差异；包含实际窗口值与日期", "source": "data/staging/strategies-batch14/20261005-long-history/ma5-numeric-boundary-blocked.json"},
-    {"id": "numeric-fosun", "nature": "real_boundary_case", "purpose": "复星严格均线相等边界与原意图差异", "source": "data/staging/strategies-batch14/20261005-long-history/multi_ma_fixed_20k_batch5-extended-numeric-boundary-blocked.json"},
-    {"id": "fee-arithmetic", "nature": "real_validation_summary", "purpose": "既有16,418笔费用独立算术核对，不证明费率外部准确性", "source": "data/staging/strategies-batch14/20261005-long-history/fee-hand-checks.json"},
-    {"id": "financial-time", "nature": "real_query_case", "purpose": "strict0及探索查询、归档样例、旧输入保护", "source": "data/validations/20261005-financial-merge.json"},
-    {"id": "ema-validation", "nature": "real_component_validation_summary", "purpose": "EMA/订单独立核对覆盖和方法，摘要不能替代全部窗口输入", "source": "data/staging/strategies-batch19/20261005-ema55/ema55-long-verification.json", "fields": ["status", "hand_check", "source_sha256", "original_unchanged"]}
+    {
+      "id": "etf-filters-batch94-callback-stage",
+      "nature": "verified_synthetic_original_order_callbacks_not_formal_or_trading_acceptance",
+      "purpose": "三原文14函数/34条件各102案例禁网match0；86相关/38复制代码测试、明确单项环境排除、六角回调复核及5780旧控制398分区335配置集合；270正式12回测75父运行保持",
+      "source": "docs/handoff/2026-10-10-batch94-callback-stage.json"
+    },
+    {
+      "id": "etf-filters-batch94-callback-binding",
+      "nature": "immutable_callback_evidence_and_current_archived_implementation_SHA",
+      "purpose": "严格完整实现清单及当前/归档字节和符号链接门禁修正；34载荷文件SHA绑定、红8失败绿38、原历史代码只读，不作平台等价或正式验收",
+      "source": "data/staging/strategies-batch94/20261010-original-order-callbacks/stage-binding.json"
+    },
+    {
+      "id": "etf-filters-batch94-cached-smooth-reference",
+      "nature": "offline_vendored_fork_readiness_without_execution_or_platform_equivalence",
+      "purpose": "uv缓存两份sktime0.38.5内pykalman分支五模块SHA相同，已单独冻结原许可与METADATA；尚未执行或安装，原库版本等价性待证，数值窗口仍0",
+      "source": "docs/handoff/2026-10-10-batch94-cache-readiness.json"
+    },
+    {
+      "id": "etf-filters-batch94-numerical-stage",
+      "nature": "verified_numerical_stage_not_formal_source_or_trading_acceptance",
+      "purpose": "270正式保持；4662日原RSRS/三基金10467个FFT窗/九诊断禁网match0，76相关/25新增与旧资产保护；真实smooth及完整原池交易仍缺",
+      "source": "docs/handoff/2026-10-10-batch94-numerical-stage.json"
+    },
+    {
+      "id": "etf-filters-batch94-stage-binding",
+      "nature": "immutable_stage_implementation_copies_and_evidence_SHA",
+      "purpose": "两新实现副本与31阶段文件SHA绑定；正式来源验收未完成，无新增回测，后续新目录推进",
+      "source": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/stage-binding.json"
+    },
+    {
+      "id": "etf-filters-batch94-native-inputs",
+      "nature": "restored_native_candidates_not_active_Store_or_adjusted_platform_history",
+      "purpose": "510050/510300/159949旧响应与行情SHA/数量/数字字符串/截止日及跳变画像；缺159928，不造四池排名或收益",
+      "source": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/candidate-inputs.json"
+    },
+    {
+      "id": "etf-filters-batch94-benchmark-differences",
+      "nature": "unpublished_independent_vendor_benchmark_counterexamples",
+      "purpose": "399006共同3967日，原OHLC差保留；2016-02-29收盘1880.660对1880.146差0.514，不自动纠价/合并/发布或推算收益",
+      "source": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/benchmark-provider-differences.json"
+    },
+    {
+      "id": "etf-filters-batch94-reference-comparison",
+      "nature": "reference_project_forward_filter_not_original_Kalman_smooth",
+      "purpose": "冻结hikyuu递推实现与commit/SHA，初始p/协方差/forward操作不同；没有替代原pykalman或宣称等价",
+      "source": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/reference-comparison.json"
+    },
+    {
+      "id": "etf-filters-batch94-dns",
+      "nature": "current_missing_symbol_host_resolution_diagnosis_without_HTTP_retry",
+      "purpose": "当前Sina主机gaierror/临时名称解析失败，0 HTTP；已有同域失败单独绑定，不改变159928数据门禁",
+      "source": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/current-network-check.json"
+    },
+    {
+      "id": "financial-batch93-accepted",
+      "nature": "formal_source_research_acceptance_not_trading",
+      "purpose": "270正式来源；147分区/501353投影/40独立覆盖与30原合成/168标量禁网match0，237相关与隔离、旧资产保护；strict财务0/原风格缺，不计交易",
+      "source": "docs/handoff/2026-10-10-batch93-verification.json"
+    },
+    {
+      "id": "financial-batch93-final-review",
+      "nature": "final_exact_SHA_six_roles_and_receipt_readback",
+      "purpose": "两新增目录记录其余693不变；安全架构/四独立角终审、根/目录发布/最终身份三门禁红绿修正与正式凭据读回；三因子监测加10乘2说明澄清，旧目录只读",
+      "source": "docs/handoff/2026-10-10-batch93-final-review.json"
+    },
+    {
+      "id": "financial-batch93-review-ledger",
+      "nature": "review_completion_before_formal_finish",
+      "purpose": "明确六角色返回状态/最终SHA和覆盖，237根/隔离身份一致；不声称平台等价、已提交HEAD或进程强杀验证",
+      "source": "docs/handoff/2026-10-10-batch93-review-completion.json"
+    },
+    {
+      "id": "financial-batch93-guard-development",
+      "nature": "immutable_root_and_catalog_publication_red_green",
+      "purpose": "3失败到3通过；规范根和冻结字节发布/竞争导航拒绝，初次直接脚本导入错误另记；原阶段和真实目录结果不覆盖",
+      "source": "data/staging/strategies-batch93/20261010-development-publication-guards/green.json"
+    },
+    {
+      "id": "financial-batch93-final-catalog-development",
+      "nature": "immutable_same_count_competing_catalog_red_green",
+      "purpose": "1失败到1通过；最终进度目录ID/SHA与导航绑定，DATA_WRITER持锁；不改策略经济规则",
+      "source": "data/staging/strategies-batch93/20261010-development-final-catalog-identity/green.json"
+    },
+    {
+      "id": "etf-filters-batch94-readiness",
+      "nature": "prepared_sources_and_snapshot_coverage_not_accepted",
+      "purpose": "三原文182/189/189与两同SHA来源；四ETF快照输入0、沪深300指数5280行/创业板缺/pykalman未装，候选尚未核；准备不计正式来源或交易",
+      "source": "docs/handoff/2026-10-10-batch94-readiness.json"
+    },
+    {
+      "id": "shortline-batch90-stage",
+      "nature": "in_progress_source_and_reference_kernel_stage_not_backtest",
+      "purpose": "13原合成案例/45763十股MA窗禁网match0；280前筛非完整信号，独立条件1差异留证；158相关含11新增/安全架构/旧资产保护通过，原交易0/来源正式260保持",
+      "source": "docs/handoff/2026-10-09-batch90-stage-verification.json"
+    },
+    {
+      "id": "shortline-batch90-components",
+      "nature": "long_reference_six_condition_AST_and_independent_fsum",
+      "purpose": "2005至2026十股45763双窗口，280前筛；2015-11-06伊利NumPy true/fsum false，不修均值或生成MACD/资金流/全池/分钟信号",
+      "source": "data/staging/strategies-batch90/20261009-limit-near-high-shortline-stage/component-research.json"
+    },
+    {
+      "id": "shortline-batch90-offline",
+      "nature": "socket_HTTP_forbidden_original_synthetic_and_reference_replay",
+      "purpose": "13诊断及45763参考窗逐值match0，不覆盖独立算式1差异；进行中，非平台完整引擎或回测",
+      "source": "data/staging/strategies-batch90/20261009-limit-near-high-shortline-stage/offline-verification.json"
+    },
+    {
+      "id": "shortline-batch90-development",
+      "nature": "immutable_float_fixture_failed_expectation",
+      "purpose": "首次1失败9通过，100/1.2*1.2略大于100；改精确夹具并保留原浮点回归，旧SHA/失败摘要只读，未修经济规则",
+      "source": "data/staging/strategies-batch90/20261009-development-first-tests/failure.json"
+    },
+    {
+      "id": "pair66-earlier-windows",
+      "nature": "approved_approximate_real_trading_supplement_three_independent_windows",
+      "purpose": "事先选择全部200日以上早期连续区间，804信号日/2412成本账本日及45成交；基础28.43%/28.59%/21.86%，2018年-10.44%；独立状态/唯一Book及禁网match0，不拼净值，不新增来源",
+      "source": "docs/handoff/2026-10-09-pair66-earlier-windows-verification.json"
+    },
+    {
+      "id": "pair66-earlier-final-review",
+      "nature": "source_config_results_integrity_and_resume_review_binding",
+      "purpose": "六父运行完整性及SHA/报告/原字节核验；4旧红新绿续跑回归和安全/架构终审，无平台等价声明",
+      "source": "docs/handoff/2026-10-10-pair66-earlier-windows-final-review.json"
+    },
+    {
+      "id": "pair66-readback-development",
+      "nature": "temporary_checker_schema_error_preserved",
+      "purpose": "临时读回把comparison差异列表与摘要数值混淆，实际[]且报告精确一致；修检查为列表为空，原实验/代码未变",
+      "source": "data/staging/strategies-history-supplement/20261010-receipt-readback-first-failure.json"
+    },
+    {
+      "id": "shortline-batch90-accepted",
+      "nature": "formal_source_research_acceptance_not_backtest",
+      "purpose": "262正式来源，31新/13旧受控诊断、45763十股MA参考禁网match0，独立fsum1差异保留；原全池信号/交易0，114相关及冻结终审/旧资产保护通过",
+      "source": "docs/handoff/2026-10-10-batch90-verification.json"
+    },
+    {
+      "id": "shortline-batch90-lifecycle",
+      "nature": "synthetic_original_selection_and_order_feedback_paths",
+      "purpose": "原未过滤1%分母、MACD第二请求无效、异号流/低开、set顺序和延迟/拒单槽位、首单break/现金/普通dict即时删除边界；非平台成交或真实历史选股",
+      "source": "data/staging/strategies-batch90/20261010-intraday-source-acceptance/lifecycle-diagnostics.json"
+    },
+    {
+      "id": "shortline-batch90-final-review",
+      "nature": "frozen_code_and_evidence_review_binding",
+      "purpose": "6实施/25证据及三命令完整日志冻结，安全架构无发现；原组件体不改、catalog前后输入绑定适配明确，参考逐值和目录三文件禁网匹配",
+      "source": "docs/handoff/2026-10-10-batch90-final-review.json"
+    },
+    {
+      "id": "corn-IF-batch91-stage",
+      "nature": "in_progress_source_and_reference_statistics_not_backtest",
+      "purpose": "五来源/四IF同AST；158合成仅41模板，1076/2859重叠候选统计及两原解析禁网match0；73相关/旧资产保护通过，单DNS失败0响应，正式262保持",
+      "source": "docs/handoff/2026-10-10-batch91-stage-verification.json"
+    },
+    {
+      "id": "corn-batch91-candidate-statistics",
+      "nature": "retrospective_continuous_candidate_OLS_and_original_population_zscore",
+      "purpose": "2015至2019及2014至2026含常数NumPy/独立fsum校验，斜率1.076253/0.986225；非原8888/statsmodels/协整或交易，范围重叠且事后拟合",
+      "source": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/component-research.json"
+    },
+    {
+      "id": "corn-batch91-date-coverage",
+      "nature": "declared_inner_intersection_and_reference_calendar_audit",
+      "purpose": "C独有四日/CS独有一日；共同日期相对A股参考日历缺3开市日，期货日历未证，原数据保留且不插值",
+      "source": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/candidate-coverage-audit.json"
+    },
+    {
+      "id": "corn-batch91-notebook-compatibility",
+      "nature": "pinned_coefficient_expression_on_synthetic_named_Series",
+      "purpose": "原params[1]在const/close合成Series上KeyError；本机无statsmodels，未声称实际OLS结果或静默修复",
+      "source": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/notebook-compatibility-review.json"
+    },
+    {
+      "id": "IF-batch91-engine-reference",
+      "nature": "frozen_RQAlpha_future_position_and_order_design_reference",
+      "purpose": "方向持仓/乘数/历史保证金/旧今仓/逐日结算参考两个文件及提交号冻结；唯一Book不变，未采用缺结算时回退收盘价",
+      "source": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/future-engine-reference.json"
+    },
+    {
+      "id": "corn-IF-batch91-accepted",
+      "nature": "formal_source_research_acceptance_not_backtest",
+      "purpose": "267来源研究验收；158原诊断/3935重叠候选统计及两供应商解析禁网match0，五目录记录新增/其余690不变，旧资产保护通过；原交易0",
+      "source": "docs/handoff/2026-10-10-batch91-verification.json"
+    },
+    {
+      "id": "corn-IF-batch91-final-review",
+      "nature": "deep_review_and_exact_test_identity_isolation_proof",
+      "purpose": "160相关和160隔离测试全部身份/八文件计数，5代码/31证据冻结；安全架构/四角最终无发现，上游绑定/基线新鲜度/选择器/递归/重复目录缺口修正并保留旧档",
+      "source": "docs/handoff/2026-10-10-batch91-final-review.json"
+    },
+    {
+      "id": "corn-IF-batch91-development",
+      "nature": "immutable_red_regressions_and_superseded_proofs",
+      "purpose": "部分套件2失败、上游2篡改失败、完整适配递归及一次XML夹具失败留证；恢复v3最终通过，策略经济规则/账本不变",
+      "source": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/diagnosis.json"
+    },
+    {
+      "id": "trend-definition-batch92-checkpoint",
+      "nature": "historical_component_stage_before_formal_acceptance",
+      "purpose": "保留历史检查点20261010-163154-d6e4当时267来源口径，原文807行/7定义、7181重叠组件和13单元档只读；后续正式验收另见batch92-final，不回写旧阶段",
+      "source": "data/staging/strategies-batch92/20261010-trend-definition-stage/stage-checkpoint.json"
+    },
+    {
+      "id": "trend-definition-batch92-final",
+      "nature": "formal_source_and_index_paper_state_research_not_trading",
+      "purpose": "268来源验收/191相关和隔离/5实现40证据/1236副本；7181重叠状态独立评分分位禁网match0及旧5780控制398stats保护，三兼容与17行原始演示身份另核；无ETF映射/费用/NAV/交易",
+      "source": "docs/handoff/2026-10-10-batch92-final-review.json"
+    },
+    {
+      "id": "trend-definition-batch92-offline",
+      "nature": "forbidden_network_original_and_independent_component_catalog_replay",
+      "purpose": "原评分阈值和完整独立状态、三兼容异常、17行演示来源及三目录match0；范围重叠且平台不等价，新增交易0",
+      "source": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/offline-verification.json"
+    },
+    {
+      "id": "trend-definition-batch92-guard-fixes",
+      "nature": "review_findings_fixes_and_preserved_failures",
+      "purpose": "精确命令/阶段资产与新增运行清单/嵌套335配置/隔离候选绑定修正；红1绿2及旧README隔离测试前拒绝另档，不改原规则或旧实验",
+      "source": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/review-findings-and-resolution.json"
+    },
+    {
+      "id": "ffscore-threefactor-batch93-readiness",
+      "nature": "initial_source_readiness_not_manual_or_trading_acceptance",
+      "purpose": "FFScore367/三因子135全文及15定义SHA初读冻结；502行不是回测，历史因子版本/股票池与原函数检查尚待完成，268正式保持",
+      "source": "data/staging/strategies-batch93/20261010-ffscore-threefactor-readiness/source-readiness.json"
+    },
+    {
+      "id": "ffscore-threefactor-batch93-screening",
+      "nature": "static_candidate_prioritization_not_input_admission",
+      "purpose": "350未审查非重复交易候选静态筛查，唯一筛选余项FFScore仍缺原平台财务；不能从空静态字段或过滤结果证明全库数据不可用",
+      "source": "data/staging/strategies-batch93/20261010-ffscore-threefactor-readiness/candidate-screening.json"
+    },
+    {
+      "id": "trend-definition-batch92-components",
+      "nature": "original_absolute_score_and_index_paper_states",
+      "purpose": "1901/5280行、1842/5221评分，原始状态切换32/31及90/90，仅指数纸面标记；两个范围冷启动且重叠，末日未来收益NaN保留，不造净值/订单",
+      "source": "data/staging/strategies-batch92/20261010-trend-definition-stage/component-research.json"
+    },
+    {
+      "id": "trend-definition-batch92-independent",
+      "nature": "fsum_score_and_independent_linear_quantile_state_audit",
+      "purpose": "独立评分差异0，下轨最大误差1.42e-14/上轨0；完整独立评分与独立分位状态差异0，非交易验收",
+      "source": "data/staging/strategies-batch92/20261010-trend-definition-stage/independent-full-signal-audit.json"
+    },
+    {
+      "id": "trend-definition-batch92-compatibility",
+      "nature": "original_current_runtime_and_separate_synthetic_diagnosis",
+      "purpose": "相对评分pandas方法TypeError、日期零标签KeyError及注入两个None后max失败；后者非完整混合函数运行，原绝对日频分支不修",
+      "source": "data/staging/strategies-batch92/20261010-trend-definition-stage/compatibility-diagnostics.json"
+    },
+    {
+      "id": "trend-definition-batch92-demo",
+      "nature": "literal_stock_raw17_row_candidate_not_JQ_equivalence",
+      "purpose": "现有快照601388末17行原始OHLC候选及日期、逻辑指纹、字节SHA另冻；未证明JQ复权/count/停牌语义，未作指数操作数，0网络请求",
+      "source": "data/staging/strategies-batch92/20261010-trend-definition-stage/demo-coverage-audit.json"
+    },
+    {
+      "id": "trend-definition-batch92-development",
+      "nature": "preflight_logical_and_byte_hash_confusion_preserved",
+      "purpose": "初次预检把Store DataFrame指纹误作Parquet字节SHA，未写检查点；提前组件缺binding也未输出。已分开核两种指纹并完成新阶段，不改原数据",
+      "source": "data/staging/strategies-batch92/20261010-development-first-preflight/failure.json"
+    },
+    {
+      "id": "allweather-batch89-final-review",
+      "nature": "formal_source_research_review_not_trading_acceptance",
+      "purpose": "260/695验收、29风险/32回调合成禁网match0、147相关含16新增/9实施副本/27受检证据/9CORE、安全架构/旧资产保护；填充pending，历史ES/权重/交易0",
+      "source": "docs/handoff/2026-10-09-batch89-final-review.json"
+    },
+    {
+      "id": "allweather-batch89-risk",
+      "nature": "synthetic_returns_and_API_original_arithmetic",
+      "purpose": "23原nested helper及6完整函数案例；95%选7/99%选2除约1.2、首键/负风险/无限风险/零除/三位权重；Decimal独立预期，假API不实现价格/pandas语义",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/risk-diagnostics.json"
+    },
+    {
+      "id": "allweather-batch89-final-offline",
+      "nature": "forbidden_network_risk_callback_catalog_replay",
+      "purpose": "29风险/32旧回调及三目录禁网match0，不计独立完整平台引擎/真实信号/交易/收益",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/offline-verification.json"
+    },
+    {
+      "id": "allweather-batch89-final-checks",
+      "nature": "frozen_implementation_copies_and_full_command_logs",
+      "purpose": "9实施SHA/副本、27受检证据、完整Ruff/147相关pytest含1既有警告/diff通过，未全量，旧stage摘要不改写",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/checked-state.json"
+    },
+    {
+      "id": "allweather-batch89-callback-events-review",
+      "nature": "in_progress_frozen_callback_and_bounded_event_failure_stage",
+      "purpose": "四实现SHA、13证据、32禁网合成案例与164不同相关测试/安全架构/旧5363控制及398分区保护；阶段非正式验收，原ES/新增交易0，D-allweather-fill仍pending",
+      "source": "docs/handoff/2026-10-09-batch89-callback-events-verification.json"
+    },
+    {
+      "id": "allweather-batch89-callbacks",
+      "nature": "in_progress_original_function_synthetic_callback_threshold_and_lifecycle_diagnostics",
+      "purpose": "原9函数与QuantLib不改；31次重算、零锚点、15%/25%/1000元/100股、零目标numpy/list差异、延期/清仓KeyError及内部成本；32明确预期，合成权重/订单意图不是实际交易",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-callbacks/diagnostics.json"
+    },
+    {
+      "id": "allweather-batch89-callback-offline",
+      "nature": "in_progress_forbidden_network_original_callback_replay",
+      "purpose": "32合成案例禁网match0，独立金额/次数/状态预期通过；不是独立完整平台引擎或收益复现",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-callbacks/offline-verification.json"
+    },
+    {
+      "id": "allweather-batch89-events",
+      "nature": "bounded_direct_event_page_request_failure_and_no_same_domain_retries",
+      "purpose": "参考AKShare事件页URL而未调用先执行JS的SDK；513100一次DNS失败0响应，其余同域三只未请求，缺响应不伪造空表/纠价/事件；strict0及交易0",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-events/probe-results.json"
+    },
+    {
+      "id": "allweather-batch89-callback-event-checks",
+      "nature": "in_progress_verification_command_summaries",
+      "purpose": "159相关加5事件专项共164不同测试含15新增，1既有警告/Ruff/diff通过；完整pytest原日志未保存，未跑全量",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-callbacks/command-results.json"
+    },
+    {
+      "id": "allweather-batch89-review-stage",
+      "nature": "in_progress_frozen_stage_binding_not_formal_acceptance",
+      "purpose": "两实施SHA/副本、九阶段证据、149相关及安全架构/旧5363控制和398分区stat核验；第88批258正式保持，新ES权重/交易0，填充变体待回复",
+      "source": "docs/handoff/2026-10-09-batch89-stage-verification.json"
+    },
+    {
+      "id": "allweather-batch89-source-stage",
+      "nature": "in_progress_frozen_two_same_AST_sources",
+      "purpose": "467/471行全文仅四行文章头差异，同AST；实际四基金/原ES与状态不替换，尚未正式目录验收，累计258保持",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-source-stage/sources-frozen.json"
+    },
+    {
+      "id": "allweather-batch89-inputs-stage",
+      "nature": "in_progress_original_fund_inventory_and_historical_payload_SHA_reuse",
+      "purpose": "精确四证券日线/身份/因子/覆盖/行动/分钟池均0，旧候选SHA恢复；候选不初始化活跃Store或代替可交易历史",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-source-stage/dependency-inventory.json"
+    },
+    {
+      "id": "allweather-batch89-candidates-stage",
+      "nature": "in_progress_long_native_candidate_coverage_not_ES_windows_or_trades",
+      "purpose": "四候选截止内3487/3204/3277/3201行，共同3201观察日期2013至2026；513100原生-80.45%跳变保留，无纠价/发布/新增网络请求或交易",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-source-stage/candidate-coverage.json"
+    },
+    {
+      "id": "allweather-batch89-compatibility-stage",
+      "nature": "in_progress_original_error_and_synthetic_default_return_difference",
+      "purpose": "原函数fillna(method=None) TypeError，受控120交易/166自然日与23收益差异禁网留档，原平台版本未证；D-allweather-fill pending，不修ES/算原权重",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-source-stage/compatibility-diagnostics.json"
+    },
+    {
+      "id": "allweather-batch89-checks-stage",
+      "nature": "in_progress_code_checks_not_formal_research_acceptance",
+      "purpose": "6专项含于149相关/Ruff/diff、安全架构两文件SHA核验，原始测试输出只摘要记录；尚未正式来源或交易验收",
+      "source": "data/staging/strategies-batch89/20261009-all-weather-source-stage/command-results.json"
+    },
+    {
+      "id": "allweather-batch89-development-stage",
+      "nature": "immutable_test_expectation_failure_and_driver_schema_correction",
+      "purpose": "首版4失败2通过，require实际ValueError、快照无published包装；旧两代码SHA/副本与摘要留档，preflight前修正、原经济规则不改；完整原失败日志未存",
+      "source": "data/staging/strategies-batch89/20261009-development-first-tests/result.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-independent",
+      "nature": "accepted_original_definition_full_replay_and_limited_independent_scalar_derivation",
+      "purpose": "1392日线全状态禁网match0；独立标准化/分型664754、缺口892500、筆映射64294、线映射8950与8012谓词/150行业单元通过；完整BI/XD仍是原代码执行，非独立完整引擎/平台等价/收益",
+      "source": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/independent-replay.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-new-diagnostics",
+      "nature": "accepted_seven_additional_original_notebook_diagnostics",
+      "purpose": "逐行业/周期150单元独立核算，新增7例边界；合成诊断不计历史全市场排名或交易",
+      "source": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/momentum-diagnostics.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-source-final",
+      "nature": "accepted_two_nontrading_source_reviews",
+      "purpose": "两完整原文/目录仅两记录改变，258正式审查/437剩余，原工具无订单规则；不因工具验收扩张交易完成",
+      "source": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/source-reviews/review.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-offline-final",
+      "nature": "accepted_three_catalog_files_byte_identical_forbidden_network_replay",
+      "purpose": "目录JSON/摘要/Parquet原字节禁网相同；完整状态另由independent记录，三目录不是收益复现",
+      "source": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/offline-catalog.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-review-final",
+      "nature": "accepted_frozen_specialist_checks_and_final_binding",
+      "purpose": "143相关含17新验证测试，安全架构/69实施副本/88证据/10CORE、旧5363控制/398stat保护；原摘要11CORE为计数笔误，另档更正；最终SHA绑定，12交易来源/69父运行保持",
+      "source": "docs/handoff/2026-10-09-batch88-final-review.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-core-count-correction",
+      "nature": "immutable_summary_core_count_erratum",
+      "purpose": "原正式文档和final-review的11CORE更正为验证器实际10CORE，绑定旧两SHA/实际名单；不覆盖冻结档，不改变1392重放、143测试、69实施/88证据或验收结果",
+      "source": "docs/handoff/2026-10-09-batch88-core-count-correction.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-source-stage",
+      "nature": "in_progress_frozen_source_review",
+      "purpose": "两原文1887/393行与定义/AST/字节SHA冻结；均无order调用，尚未正式目录验收，不增加256已验收来源",
+      "source": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/sources-frozen.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-inventory-stage",
+      "nature": "in_progress_original_daily_and_industry_dependency_inventory",
+      "purpose": "1392日线/18因子/1覆盖/16行动/1证券原输入SHA；实际300058日线1000根及sw_l3/30日收盘成交额，非财务资金流策略",
+      "source": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/dependency-inventory.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-diagnostics-stage",
+      "nature": "in_progress_original_synthetic_diagnostics",
+      "purpose": "15原诊断：五周期/上榜数平方排名、7前排、缺行业名TypeError、lambda NameError、money未用/舍入稳定排序与嵌套缺口缩短，非交易",
+      "source": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/diagnostics.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-components-stage",
+      "nature": "in_progress_long_daily_original_component_reference",
+      "purpose": "1392逐日期最多1000行动态锚定原KBarChan无异常，末66笔8线；平台原日期/停牌/图表/独立算法未验收，非信号或收益",
+      "source": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/component-research.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-probe-stage",
+      "nature": "in_progress_bounded_native_daily_failure",
+      "purpose": "蓝色光标20100226至20260929一次原生GET DNS失败0响应/新增/发布；SW2021旧DNS证据SHA复用，不回填当前行业",
+      "source": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/daily-history-probe/result.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-offline-stage",
+      "nature": "in_progress_sampled_forbidden_network_replay",
+      "purpose": "10选定前缀全状态和15诊断socket/HTTP禁网match0；明确不证明1392全量重放或独立算法",
+      "source": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/stage-offline-verification.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-development-stage",
+      "nature": "immutable_development_expectation_failure",
+      "purpose": "2失败4通过修前脚本/测试/log；误认require和lambda异常类型，只修预期，原逻辑不改",
+      "source": "data/staging/strategies-batch88/20261009-development-first-tests/result.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-review-stage",
+      "nature": "in_progress_code_checks_not_formal_research_acceptance",
+      "purpose": "126相关/6专项、Ruff/diff、安全架构和5363控制SHA/398分区stat保护；正式仍第87批256，独立算法和完整重放待办",
+      "source": "docs/handoff/2026-10-09-batch88-stage-verification.json"
+    },
+    {
+      "id": "daily-chan-industry-batch88-repainting-stage",
+      "nature": "observed_adjacent_frozen_state_changes_not_confirmed_signals",
+      "purpose": "439日笔和188日线段端点删除；排除移出窗口端点，满窗仍有滚动起点影响，不作独立算法或确认时点证明",
+      "source": "docs/handoff/2026-10-09-batch88-repainting-observation.json"
+    },
+    {
+      "id": "numeric-ma5",
+      "nature": "real_boundary_case",
+      "purpose": "原MA5一ULP误判与稳定求和差异；包含实际窗口值与日期",
+      "source": "data/staging/strategies-batch14/20261005-long-history/ma5-numeric-boundary-blocked.json"
+    },
+    {
+      "id": "numeric-fosun",
+      "nature": "real_boundary_case",
+      "purpose": "复星严格均线相等边界与原意图差异",
+      "source": "data/staging/strategies-batch14/20261005-long-history/multi_ma_fixed_20k_batch5-extended-numeric-boundary-blocked.json"
+    },
+    {
+      "id": "fee-arithmetic",
+      "nature": "real_validation_summary",
+      "purpose": "既有16,418笔费用独立算术核对，不证明费率外部准确性",
+      "source": "data/staging/strategies-batch14/20261005-long-history/fee-hand-checks.json"
+    },
+    {
+      "id": "financial-time",
+      "nature": "real_query_case",
+      "purpose": "strict0及探索查询、归档样例、旧输入保护",
+      "source": "data/validations/20261005-financial-merge.json"
+    },
+    {
+      "id": "ema-validation",
+      "nature": "real_component_validation_summary",
+      "purpose": "EMA/订单独立核对覆盖和方法，摘要不能替代全部窗口输入",
+      "source": "data/staging/strategies-batch19/20261005-ema55/ema55-long-verification.json",
+      "fields": [
+        "status",
+        "hand_check",
+        "source_sha256",
+        "original_unchanged"
+      ]
+    },
+    {
+      "id": "dependency-refresh-20261008",
+      "nature": "real_interface_and_availability_audit",
+      "purpose": "六接口成功/名单超时；相同旧样本、股本一万倍比例及公告生效日差异，不放行历史交易",
+      "source": "docs/handoff/2026-10-08-dependency-refresh.json"
+    },
+    {
+      "id": "dependency-primary-batch65",
+      "nature": "first_party_definitions_and_multi_security_audit",
+      "purpose": "股本单位与PCF概念已证；三证券九请求、180行新旧比较、名称链与具体失败；不计回测且strict0",
+      "source": "docs/handoff/2026-10-08-batch65-dependency-verification.json"
+    },
+    {
+      "id": "etf-entitlement-batch66",
+      "nature": "supplier_input_audit_ledger_component_and_existing_stock_regression",
+      "purpose": "3286行ETF候选、七参考价反例、显式登记权益能力、115测试及旧三成本match0；ETF新回测0，来源12、父运行68",
+      "source": "docs/handoff/2026-10-08-batch66-verification.json"
+    },
+    {
+      "id": "metadata-count-batch66",
+      "nature": "metadata_renderer_regression",
+      "purpose": "修复续接页解释段硬编码67父运行，新增红回归及21元数据测试；冻结旧状态不改写",
+      "source": "docs/handoff/2026-10-08-batch66-metadata-render-verification.json"
+    },
+    {
+      "id": "momentum-lowprice-batch67",
+      "nature": "original_source_diagnostics_and_long_history_numeric_components",
+      "purpose": "两来源含1逐字节重复；91行/五行组件及19诊断禁网match0，208条官方退市记录、5处主数据日期差异与分钟缺口；103测试，新增交易0",
+      "source": "docs/handoff/2026-10-08-batch67-verification.json"
+    },
+    {
+      "id": "momentum-lowprice-batch67-review",
+      "nature": "frozen_final_specialist_and_scope_review",
+      "purpose": "绑定最终驱动/测试/目录及验收凭据；安全架构无发现，来源和组件验收不等于原交易验收",
+      "source": "docs/handoff/2026-10-08-batch67-final-review.json"
+    },
+    {
+      "id": "lowPB-batch68",
+      "nature": "source_legacy_deviation_monthly_candidate_and_totalcap_coverage_audit",
+      "purpose": "两完整来源、68月4760预筛候选和15诊断禁网match0；七总市值样本存在抽样/版本缺口，103测试及旧资产保护通过；新增交易0，代理方案待回复",
+      "source": "docs/handoff/2026-10-08-batch68-verification.json"
+    },
+    {
+      "id": "lowPB-batch68-review",
+      "nature": "frozen_final_specialist_and_scope_review",
+      "purpose": "冻结新驱动/测试/目录模块及验收凭据；安全架构无发现，不将原函数诊断或旧59日探索升级为交易验收",
+      "source": "docs/handoff/2026-10-08-batch68-final-review.json"
+    },
+    {
+      "id": "metadata-export-rejection-batch68",
+      "nature": "tool_terminal_failure_and_serialized_recovery",
+      "purpose": "并发检查点改变触发导出保护拒绝，串行重导出及metadata-only核验通过；未绕过输入保护",
+      "source": "docs/handoff/2026-10-08-batch68-metadata-export-rejection.json"
+    },
+    {
+      "id": "metadata-render-batch68",
+      "nature": "metadata_legacy_review_and_count_regression",
+      "purpose": "修正续接页仍称旧声明式未审查的硬编码文本及目录/回测来源静态数；红2失败21通过、修正后23元数据测试通过，研究凭据不改写",
+      "source": "docs/handoff/2026-10-08-batch68-metadata-render-verification.json"
+    },
+    {
+      "id": "adaptive-momentum-batch69",
+      "nature": "original_diagnostics_supplier_continuous_sensitivity_and_wire_parser_recovery",
+      "purpose": "两完整来源/28合成诊断，18869连续合约算术/28251数值比较禁网逐值match0；三HTTP200、9546候选及216单日合约解析恢复，两开发失败保留；135测试，交易0且平台不等价",
+      "source": "docs/handoff/2026-10-08-batch69-verification.json"
+    },
+    {
+      "id": "adaptive-momentum-batch69-review",
+      "nature": "frozen_final_specialist_and_scope_review",
+      "purpose": "冻结最终驱动/测试/两条新目录审查与验收凭据；安全架构无发现，连续样本不替代原8888指数/主力与结算；旧资产保护通过",
+      "source": "docs/handoff/2026-10-08-batch69-final-review.json"
+    },
+    {
+      "id": "cross-momentum-sugar-batch70",
+      "nature": "original_rank_channel_order_diagnostics_and_supplier_history_arithmetic",
+      "purpose": "两完整来源、22诊断/107682组件/22862全26排名禁网match0；25请求新94454行，SR2001候选239行；42坏OHLC阻断767窗，ZC仅2022末；145测试/旧资产保护，交易0",
+      "source": "docs/handoff/2026-10-08-batch70-verification.json"
+    },
+    {
+      "id": "cross-momentum-sugar-batch70-review",
+      "nature": "frozen_final_specialist_scope_and_failure_archive_review",
+      "purpose": "冻结驱动/测试/目录及验收凭据，安全架构无发现；开发红4失败7通过及原档SHA复核保留，不升级组件为期货交易",
+      "source": "docs/handoff/2026-10-08-batch70-final-review.json"
+    },
+    {
+      "id": "smallcap-PE-batch71-diagnostics",
+      "nature": "accepted_original_function_synthetic_diagnostics",
+      "purpose": "21原回调/缺失helper/同日查询/增量订单及字典变动诊断，18专项/123相关通过；来源研究验收，不计真实交易",
+      "source": "data/staging/strategies-batch71/20261008-smallcap-PE-rotation/diagnostics.json"
+    },
+    {
+      "id": "smallcap-PE-batch71",
+      "nature": "original_source_supplier_PE_arithmetic_and_total_cap_coverage_audit",
+      "purpose": "223来源研究验收；6919789行原PE>1算术、21合成诊断、九市值请求案例/三目录禁网match0；两个新301失败，123测试和旧资产保护；新增交易0",
+      "source": "docs/handoff/2026-10-08-batch71-verification.json"
+    },
+    {
+      "id": "smallcap-PE-batch71-review",
+      "nature": "frozen_final_specialist_scope_and_recovery_review",
+      "purpose": "最终实现、正式凭据及三档71文件SHA核验；安全架构无发现；日期dtype/重复目录/limits文字失败保留，不覆盖旧组件或降低精确比较",
+      "source": "docs/handoff/2026-10-08-batch71-final-review.json"
+    },
+    {
+      "id": "smallcap-PE-batch71-recovery",
+      "nature": "immutable_failed_attempts_and_exact_value_recovery_provenance",
+      "purpose": "原目录及第一恢复/失败档只读，最终恢复保留原所有数值，只统一无损日期dtype并另存覆盖限制更正；三档完整SHA关系便于跨机核验",
+      "source": "data/staging/strategies-batch71/20261008-smallcap-PE-rotation-verified-recovery/recovery-provenance.json"
+    },
+    {
+      "id": "dividend-batch72-diagnostics",
+      "nature": "accepted_original_function_synthetic_diagnostics",
+      "purpose": "35季度/金额阈值/多级名单/重复增量订单/兼容失败诊断；35专项/146相关检查通过，来源研究不计交易回测",
+      "source": "data/staging/strategies-batch72/20261008-dividend-income/diagnostics.json"
+    },
+    {
+      "id": "dividend-batch72-development-failure",
+      "nature": "immutable_development_failure",
+      "purpose": "首轮4失败20通过、GET参数None/列表拷贝/方法大小写原因；保留原驱动测试，不计实验",
+      "source": "data/staging/strategies-batch72/20261008-development-failure/test-failure.json"
+    },
+    {
+      "id": "dividend-batch72-parser-date-failure",
+      "nature": "immutable_native_parser_archive_precision_failure",
+      "purpose": "原解析全NaT秒精度经Parquet转毫秒；独立失败档，后续无损统一且继续精确比较",
+      "source": "data/staging/strategies-batch72/20261008-parser-date-failure/test-failure.json"
+    },
+    {
+      "id": "dividend-batch72-mixed-date-failure",
+      "nature": "immutable_real_sample_missing_representation_failure",
+      "purpose": "真实新浪日期object的NaT/None比较失败、原代码与全目录SHA保留；只统一缺失表示并核对缺失mask与有限值，原parsed不改",
+      "source": "data/staging/strategies-batch72/20261008-mixed-date-audit-failure/audit-failure.json"
+    },
+    {
+      "id": "dividend-batch72",
+      "nature": "original_source_long_supplier_arithmetic_and_six_wire_input_audits",
+      "purpose": "225来源研究验收；35诊断/6919789PE/45723均值/六200双源184记录及三目录禁网match0，146测试/保护；缺原历史金额/聚源/市值/池/时点，交易0",
+      "source": "docs/handoff/2026-10-08-batch72-verification.json"
+    },
+    {
+      "id": "dividend-batch72-review",
+      "nature": "frozen_final_specialist_and_immutable_review_correction",
+      "purpose": "安全架构无未解决发现；25实现/86证据及原56/未变副本48/失败9 SHA一致；NaN登记文案新档纠正，无经济规则修改",
+      "source": "docs/handoff/2026-10-08-batch72-final-review.json"
+    },
+    {
+      "id": "dividend-batch72-recovery",
+      "nature": "immutable_original_to_review_correction_provenance",
+      "purpose": "原目录首轮禁网及三失败档只读，修订只改变2022/12负过滤NaN说明和引用；全部组件/响应与解析字节不变",
+      "source": "data/staging/strategies-batch72/20261008-dividend-income-review-correction/recovery-provenance.json"
+    },
+    {
+      "id": "dividend-batch72-quality",
+      "nature": "reference_only_native_date_and_field_gaps",
+      "purpose": "六双源184行含重叠，新浪平安1900日期占位及登记/派息/到账缺口；无删填或准入交易，原字段/版本门禁保留",
+      "source": "data/staging/strategies-batch72/20261008-dividend-income-review-correction/dividend-data-quality.json"
+    },
+    {
+      "id": "ebit-market-PE-batch73-diagnostics",
+      "nature": "accepted_original_function_synthetic_diagnostics",
+      "purpose": "33原函数/类诊断，负EV/无穷值/重复池/停牌/整手/标签0/调度/每月入金与负目标；22专项/150相关通过，不计交易",
+      "source": "data/staging/strategies-batch73/20261008-ebit-market-PE/diagnostics.json"
+    },
+    {
+      "id": "ebit-market-PE-batch73-component",
+      "nature": "accepted_sparse_supplier_formula_arithmetic",
+      "purpose": "原中位数/样本std阈值在678稀疏记录独立核验；始于1997/1999，止于2026-08-31，不插值、不冒充原交易所日频；交易0",
+      "source": "data/staging/strategies-batch73/20261008-ebit-market-PE/component-research.json"
+    },
+    {
+      "id": "ebit-market-PE-batch73",
+      "nature": "original_source_diagnostics_sparse_reference_and_bounded_exchange_audit",
+      "purpose": "227来源研究验收；33诊断/678稀疏公式/四200及三目录禁网match0，两历史空列表/近期22指标类别行，150测试与旧资产保护；原因子/日频PE/ETF/入金仍缺，交易0",
+      "source": "docs/handoff/2026-10-08-batch73-verification.json"
+    },
+    {
+      "id": "ebit-market-PE-batch73-review",
+      "nature": "frozen_security_architecture_and_adversarial_signoff",
+      "purpose": "27实现/76证据与冻结副本绑定，安全架构无发现；原函数/类立即执行防护、请求白名单/不留headers、稀疏频率和入金收益边界已核验",
+      "source": "docs/handoff/2026-10-08-batch73-final-review.json"
+    },
+    {
+      "id": "ebit-market-PE-batch73-quality",
+      "nature": "reference_only_exchange_empty_history_and_category_difference",
+      "purpose": "两早期空列表字节相同；SSE原日期及PE类别差异、SZSE缺PE字段和22行非22日限制；不放行原交易",
+      "source": "data/staging/strategies-batch73/20261008-ebit-market-PE/exchange-data-quality.json"
+    },
+    {
+      "id": "FOF-two-eight-batch74",
+      "nature": "source_long_reference_and_opt_in_ledger_acceptance",
+      "purpose": "229来源研究验收；32诊断/6074ES/3957指数窗/原解析及三目录禁网match0，20主失败与20fallback成功62321行，166相关/安全架构/旧资产保护；原交易0",
+      "source": "docs/handoff/2026-10-08-batch74-verification.json"
+    },
+    {
+      "id": "FOF-two-eight-batch74-review",
+      "nature": "frozen_specialist_and_immutable_format_recovery_signoff",
+      "purpose": "32实现/207证据最终绑定，原库存与失败只读；Book完整AST及ledger_checks范围不变，最终库存仅更新已证明格式SHA且篡改拒绝；安全架构无发现",
+      "source": "docs/handoff/2026-10-08-batch74-final-review.json"
+    },
+    {
+      "id": "FOF-two-eight-batch74-diagnostics",
+      "nature": "original_function_synthetic_diagnostics",
+      "purpose": "32原函数诊断：每回调400、限幅后排名可32%、严格锁定/解锁/舍入、原错误及增量订单；不计交易",
+      "source": "data/staging/strategies-batch74/20261008-FOF-two-eight/diagnostics-expanded.json"
+    },
+    {
+      "id": "FOF-two-eight-batch74-index",
+      "nature": "supplier_reference_index_arithmetic",
+      "purpose": "2010-06-18至2026-09-29的3957个11行窗口，独立信号差异0；各自日期必须一致，截止后行排除，不等于15:00交易",
+      "source": "data/staging/strategies-batch74/20261008-FOF-two-eight/index-component-research.json"
+    },
+    {
+      "id": "FOF-two-eight-batch74-flow",
+      "nature": "ledger_component_and_existing_strategy_compatibility",
+      "purpose": "33手算/148账本测试、三个旧经济场景match及茅台2005至2026三成本禁网match0；新父运行69，不新增策略来源",
+      "source": "data/staging/strategies-batch74/20261008-FOF-two-eight/ledger-validation.json"
+    },
+    {
+      "id": "FOF-two-eight-batch74-candidates",
+      "nature": "native_parser_replay_and_incomplete_history_audit",
+      "purpose": "20成功62321候选行原解析逐值匹配；515520/161907/163210提前终止，截止后行保留原档但不研究；事件/状态/费用/身份仍缺，未发布",
+      "source": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/audit.json"
+    },
+    {
+      "id": "ETF-info-rotation-batch75",
+      "nature": "source_diagnostics_long_history_reference_and_candidate_rank_arithmetic",
+      "purpose": "231来源研究验收；33诊断/4663指数/3459单ETF/3205全池排名禁网match0，172测试及旧资产保护通过；56窗阻断，交易0",
+      "source": "docs/handoff/2026-10-08-batch75-verification.json"
+    },
+    {
+      "id": "ETF-info-rotation-batch75-review",
+      "nature": "final_specialist_and_recovery_entry_binding",
+      "purpose": "37当前实现及副本、84证据和正式凭据绑定，显式登记数值恢复入口；安全架构未发现问题，原交易仍阻断",
+      "source": "docs/handoff/2026-10-08-batch75-final-review.json"
+    },
+    {
+      "id": "ETF-info-rotation-batch75-diagnostics",
+      "nature": "original_function_synthetic_diagnostics",
+      "purpose": "33HTML/种子跳窗/KEEP调仓/过滤/止损边界与原错误诊断；不计交易",
+      "source": "data/staging/strategies-batch75/20261008-ETF-info-rotation/diagnostics.json"
+    },
+    {
+      "id": "ETF-info-rotation-batch75-candidates",
+      "nature": "bounded_wire_capture_and_native_parser_replay",
+      "purpose": "两200取得3597/3292候选行，各2行截止后记录排除；原解析器禁网逐值一致，未发布原输入",
+      "source": "data/staging/strategies-batch75/20261008-ETF-info-rotation/candidate-audit.json"
+    },
+    {
+      "id": "ETF-info-rotation-batch75-ranking",
+      "nature": "full_pool_supplier_numeric_reference",
+      "purpose": "2013-04-26至2026-09-29的3205个29行全池排名，56窗日期/数据门禁阻断，独立第一名差异0；无分钟过滤/交易",
+      "source": "data/staging/strategies-batch75/20261008-ETF-info-rotation/ranking-research.json"
+    },
+    {
+      "id": "ETF-info-rotation-batch75-recovery",
+      "nature": "immutable_failure_and_numeric_history_adapter_provenance",
+      "purpose": "原510300 close字符串导致np.log失败；新入口仅在history副本转float，原驱动/study/载荷不变，4回归通过，无新请求/公式变化",
+      "source": "data/staging/strategies-batch75/20261008-ETF-info-rotation/numeric-input-recovery.json"
+    },
+    {
+      "id": "ETF-info-rotation-batch75-test-failure",
+      "nature": "immutable_regression_test_missing_representation_failure",
+      "purpose": "红1失败3通过：Pandas构造已把None变NaN，测试改为适配前后深拷贝精确比较；生产适配不改",
+      "source": "data/staging/strategies-batch75/20261008-ETF-info-rotation/recovery-test-failure.json"
+    },
+    {
+      "id": "dynamic-emotion-batch76-candidates",
+      "nature": "accepted_bounded_native_response_parser_and_coverage_audit",
+      "purpose": "13次200/58563新候选行原解析禁网逐值一致；150019/150051均止于2020末，原历史身份/事件与盘中执行不足，严格准入0且未发布",
+      "source": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/candidate-audit.json"
+    },
+    {
+      "id": "dynamic-emotion-batch76-components",
+      "nature": "accepted_long_supplier_history_reference_arithmetic",
+      "purpose": "39476基金13窗/49157指数20窗/43033情绪窗/5261配对窗，动量及情绪独立差异0，223量窗阻断；不造盘中排名或策略收益，禁网逐值match0",
+      "source": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/component-research.json"
+    },
+    {
+      "id": "dynamic-emotion-batch76-fixture-failure",
+      "nature": "immutable_development_fixture_failure",
+      "purpose": "首轮4失败26通过，补此前反号及临时冻结源码副本；原函数不变，原驱动/测试保留",
+      "source": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/initial-test-failure.json"
+    },
+    {
+      "id": "dynamic-emotion-batch76-binding-regression",
+      "nature": "immutable_cross_batch_verifier_contract_red_regression",
+      "purpose": "红1失败30 deselected保留；独立candidate_audit核本批来源/receipt/API并精确原解析重放，旧74实现只读；修正后31专项通过",
+      "source": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probe-binding-red-regression.json"
+    },
+    {
+      "id": "dynamic-emotion-batch76",
+      "nature": "original_source_diagnostics_long_reference_and_bounded_candidate_acceptance",
+      "purpose": "233来源研究验收；36诊断及四类参考/13原解析/三目录禁网match0，185相关测试与旧资产保护；基金身份/事件/盘中输入和52兼容未齐，原交易0",
+      "source": "docs/handoff/2026-10-09-batch76-verification.json"
+    },
+    {
+      "id": "dynamic-emotion-batch76-review",
+      "nature": "frozen_final_security_architecture_and_adversarial_review",
+      "purpose": "39当前实现及副本/130证据/正式receipt与最终绑定SHA已核；安全架构无遗留发现，未把组件或候选计为交易回测",
+      "source": "docs/handoff/2026-10-09-batch76-final-review.json"
+    },
+    {
+      "id": "core-assets-batch78-initial-failure",
+      "nature": "immutable_development_failure",
+      "purpose": "5失败/7通过/11错误：新AST缺type_params及完整排名验收门槛缺失；修前代码/测试与原log/SHA保留，不计回测",
+      "source": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/development-failure-initial/failure.json"
+    },
+    {
+      "id": "core-assets-batch78-ranking-red",
+      "nature": "immutable_ranking_acceptance_regression",
+      "purpose": "2失败/21未选：完整排名计数缺失与finish未拒绝独立排序差异；原公式/排序不变，修正回归含第一名未变的排名差异",
+      "source": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/development-failure-ranking/failure.json"
+    },
+    {
+      "id": "core-assets-batch78-specialized",
+      "nature": "accepted_offline_specialized_tests",
+      "purpose": "修正后25专项通过，原非标准w平方拟合/w一次R2与原订单边界保留；最终180相关通过，两组重叠，不计交易",
+      "source": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/specialized-tests-repaired.json"
+    },
+    {
+      "id": "core-assets-batch78-candidates",
+      "nature": "accepted_native_parser_and_reused_history_audit",
+      "purpose": "一次200取得513100共3203行；三旧候选正式SHA复用，四基金各2条截止后行仅原档保留，未发布交易输入",
+      "source": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/candidate-audit.json"
+    },
+    {
+      "id": "core-assets-batch78-components",
+      "nature": "accepted_long_native_history_reference",
+      "purpose": "29710单基金版本窗/3102共同排名日/6204原排名调用；20130903至20260929，72日期窗阻断；版本第一名差189日，独立算术容差内/完整排名差0，不计交易",
+      "source": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/component-research.json"
+    },
+    {
+      "id": "core-assets-batch78-quality",
+      "nature": "native_price_discontinuity_counterexamples_without_event_proof",
+      "purpose": "513100约-80%与510180约+286%/-90%原生相邻行反例及极大原年化拟合值另档；不推断拆分、纠价或交易收益，事件/复权门禁保留",
+      "source": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/native-history-quality.json"
+    },
+    {
+      "id": "core-assets-batch78-offline",
+      "nature": "accepted_forbidden_network_exact_component_replay",
+      "purpose": "socket/HTTP禁网，32诊断/评分与完整排名/AST/新原解析/库存/三目录match0；研究已验收，不计交易",
+      "source": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/offline-verification.json"
+    },
+    {
+      "id": "core-assets-batch78-final",
+      "nature": "accepted_source_reference_research_and_frozen_specialist_review",
+      "purpose": "237来源研究验收；43当前实现/43副本/90证据及最终receipt/binding SHA闭合；180相关、安全架构/旧5363控制与398分区stat保护通过，新增交易0",
+      "source": "docs/handoff/2026-10-09-batch78-final-review.json"
+    },
+    {
+      "id": "rsrs-batch79-syntax-failure",
+      "nature": "immutable_development_failure",
+      "purpose": "四元return跨行漏括号导致语法错误；初稿脚本/测试及Ruff失败原档保留，不计回测",
+      "source": "data/staging/strategies-batch79/20261009-development-initial/failure.json"
+    },
+    {
+      "id": "rsrs-batch79-specialized-failure",
+      "nature": "immutable_development_failure",
+      "purpose": "1失败/5通过/16夹具错误：prefix误断言11而原AST是10；初始化stub未重新载入原函数；日志和修前实现保留",
+      "source": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/development-failure-specialized/failure.json"
+    },
+    {
+      "id": "rsrs-batch79-slope-red",
+      "nature": "immutable_slope_only_regression",
+      "purpose": "4失败/24未选；常量BIAS的原斜率有定义，但复用OLS的R2核算除零；新独立fsum斜率覆盖三处纯斜率，不改原算术",
+      "source": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/development-failure-slope-only/failure.json"
+    },
+    {
+      "id": "rsrs-batch79-slope-counterexample",
+      "nature": "synthetic_boundary_counterexample_not_history_or_trades",
+      "purpose": "2**arange110为正且非恒定价格，但BIAS20恒定；原score约2.90e-14，旧独立OLS报ZeroDivisionError；只是研究工具边界证据",
+      "source": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/development-failure-slope-only/root-cause-evidence.json"
+    },
+    {
+      "id": "rsrs-batch79-specialized",
+      "nature": "accepted_specialized_research_tests",
+      "purpose": "28专项通过，原seed错位/首次缺口、KEEP、WR优先分支、错三元列表和undefined value保留；179最终相关通过，测试集重叠，不计交易",
+      "source": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/specialized-tests-slope-repaired.json"
+    },
+    {
+      "id": "rsrs-batch79-candidates",
+      "nature": "accepted_reused_daily_history_and_failed_minute_request",
+      "purpose": "七旧日线正式SHA复用、13截止后行保留但排除；单15994960m ConnectionError，1意图/0响应/新增，不虚称分钟原解析匹配",
+      "source": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/candidate-audit.json"
+    },
+    {
+      "id": "rsrs-batch79-components",
+      "nature": "accepted_long_reference_components_not_trading",
+      "purpose": "9318指数组件行与25742基金窗/12566排名；31信号4663及原排名3102，42仅WR前4655/controlled日期2366，完整信号和原完整排名调用0；72异步日期阻断，独立排序/信号差0",
+      "source": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/component-research.json"
+    },
+    {
+      "id": "rsrs-batch79-quality",
+      "nature": "native_price_counterexamples_and_controlled_holding_comparison",
+      "purpose": "七画像/三原生跳变无事件证明或纠价；42三持仓情形相对null赢家差14/34/44，只是算术反事实不是换仓/收益",
+      "source": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/native-history-quality.json"
+    },
+    {
+      "id": "rsrs-batch79-offline",
+      "nature": "accepted_forbidden_network_exact_reference_replay",
+      "purpose": "socket/HTTP禁网，原诊断/三逐值表/AST/库存/失败候选及三目录match0；分钟响应缺失，不计解析成功或交易",
+      "source": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/offline-verification.json"
+    },
+    {
+      "id": "rsrs-batch79-final",
+      "nature": "accepted_source_reference_research_and_frozen_specialist_review",
+      "purpose": "239研究验收；45当前实现/45副本/100证据、22CORE及最终receipt/binding SHA闭合；179相关、安全架构/旧5363控制与398分区stat保护通过，交易0",
+      "source": "docs/handoff/2026-10-09-batch79-final-review.json"
+    },
+    {
+      "id": "reversal-fixed-batch80-source",
+      "nature": "accepted_frozen_original_source_and_reference_rules",
+      "purpose": "两全文121/45行与5/2函数、229个20行beta窗和固定初始权益目标已冻结；只研究验收，交易0",
+      "source": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/source-reviews/review.json"
+    },
+    {
+      "id": "reversal-fixed-batch80-inputs",
+      "nature": "accepted_native_daily_payload_reuse",
+      "purpose": "六基金已有候选按正式SHA复用，无新增请求或原交易准入，不能代替9:30/9:35价格与事件",
+      "source": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/reused-inputs.json"
+    },
+    {
+      "id": "reversal-fixed-batch80-first-failure",
+      "nature": "immutable_test_expectation_development_failure",
+      "purpose": "27通过1失败：原.14*10000产生1400.0000000000002，测试误用精确1400；原策略不改，修前文件/日志/SHA保留",
+      "source": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/development-failure-specialized/failure.json"
+    },
+    {
+      "id": "reversal-fixed-batch80-cache-red",
+      "nature": "immutable_synthetic_completeness_regression",
+      "purpose": "红1失败33未选：18行low恒定但20行有效，旧缓存遗漏后续beta；独立建立20缓存后34专项通过，不改原229窗及现有输入",
+      "source": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/development-failure-window-cache/failure.json"
+    },
+    {
+      "id": "reversal-fixed-batch80-diagnostics",
+      "nature": "accepted_original_function_and_controlled_state_diagnostics",
+      "purpose": "31诊断保留math/mean/std缺失、严格c/beta/15%/100/现金边界及即时/延迟/部分成交；不是交易轨迹",
+      "source": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/diagnostics.json"
+    },
+    {
+      "id": "reversal-fixed-batch80-components",
+      "nature": "accepted_long_native_history_arithmetic_reference",
+      "purpose": "14155评分/13955beta/2507完整排名和3201固收日线参考日，494异步200行窗阻断；独立判断差0，12截止后行排除，原生跳变不纠价，原盘中交易0",
+      "source": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/component-research.json"
+    },
+    {
+      "id": "reversal-fixed-batch80-offline",
+      "nature": "accepted_forbidden_network_exact_replay",
+      "purpose": "禁socket/HTTP，31诊断/四逐值表/库存/三目录match0；不把90收盘价单位名义参考当9:35或组合净值",
+      "source": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/offline-verification.json"
+    },
+    {
+      "id": "reversal-fixed-batch80-final",
+      "nature": "accepted_source_reference_research_and_frozen_specialist_review",
+      "purpose": "241研究验收；47当前实现/47副本/91证据、17CORE和最终receipt/binding SHA闭合；188相关、安全架构及旧5363控制/398分区stat保护通过，交易0",
+      "source": "docs/handoff/2026-10-09-batch80-final-review.json"
+    },
+    {
+      "id": "stock-bond-batch81-source",
+      "nature": "accepted_frozen_original_source_and_reference_rules",
+      "purpose": "两全文133/157行与4/8函数冻结，原计数/19行窗口/顺序回撤与债先订单保留；研究验收，原交易0",
+      "source": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/source-reviews/review.json"
+    },
+    {
+      "id": "stock-bond-batch81-catalog-impact",
+      "nature": "accepted_complete_catalog_tick_detection_impact",
+      "purpose": "全部695条前后SHA/字段/AST比较；9个Tick文本候选、10条变化包含2人工审查，5静态状态变化；旧人工规则和来源保留",
+      "source": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/catalog-impact.json"
+    },
+    {
+      "id": "stock-bond-batch81-candidates",
+      "nature": "accepted_bounded_native_candidate_parser_audit",
+      "purpose": "三HTTP200/8304行，原解析器禁网逐值匹配；510220止于2022-11-17，六基金9截止后行排除、原生跳变不纠价，准入0",
+      "source": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/candidate-audit.json"
+    },
+    {
+      "id": "stock-bond-batch81-components",
+      "nature": "accepted_long_price_arithmetic_reference",
+      "purpose": "5221原cash_management价格风险/5279昨日跌幅/18265基金参考；独立判断差0、禁网逐值match0，57完整信号及76真实权益轨迹0，非交易",
+      "source": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/component-research.json"
+    },
+    {
+      "id": "stock-bond-batch81-diagnostics",
+      "nature": "accepted_original_function_synthetic_state_diagnostics",
+      "purpose": "47原函数/受控状态诊断，52专项/212相关通过且重叠；缺失/计数/阈值/债先失败和收盘高点保留，合成状态不计回测",
+      "source": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/diagnostics.json"
+    },
+    {
+      "id": "stock-bond-batch81-preflight-failure",
+      "nature": "immutable_preflight_registry_shape_development_failure",
+      "purpose": "旧510300登记无status键导致KeyError，保护基线前失败；驱动用已有验收的SHA/行数核验，不改旧登记",
+      "source": "data/staging/strategies-batch81/20261009-stock-bond-drawdown-preflight-failure-01/failure.json"
+    },
+    {
+      "id": "stock-bond-batch81-tick-red",
+      "nature": "immutable_tick_dependency_regression_failure",
+      "purpose": "修前4失败/2通过、修前目录代码/测试/日志SHA保留；补API/盘中/Tick门禁后通过，全695影响另档",
+      "source": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/development-tick-regression/failure.json"
+    },
+    {
+      "id": "stock-bond-batch81-specialized-failure",
+      "nature": "immutable_missing_string_test_expectation_failure",
+      "purpose": "51通过1失败：pandas3缺失下一决策字符串为NaN，测试误用None；改为检查缺失，原算法不改，修前文件/日志SHA保留",
+      "source": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/development-specialized-failure/failure.json"
+    },
+    {
+      "id": "stock-bond-batch81-offline",
+      "nature": "accepted_forbidden_network_exact_reference_replay",
+      "purpose": "禁socket/HTTP，47诊断/三逐值表/三原解析/库存/三目录match0；无真实Tick或权益路径，不计交易",
+      "source": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/offline-verification.json"
+    },
+    {
+      "id": "stock-bond-batch81-final",
+      "nature": "accepted_source_reference_research_and_frozen_specialist_review",
+      "purpose": "243研究验收；50当前实现/50副本/106证据/23CORE与最终SHA闭合；212相关、安全架构及旧5363控制/398分区stat通过，交易0",
+      "source": "docs/handoff/2026-10-09-batch81-final-review.json"
+    },
+    {
+      "id": "intraday-factor-batch82-source",
+      "nature": "accepted_frozen_original_source_and_duplicate_mapping",
+      "purpose": "三全文114/122/122行和8/6/6函数；95/19相同字节与SHA，共用诊断，不计新增独立回测",
+      "source": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/source-reviews/review.json"
+    },
+    {
+      "id": "intraday-factor-batch82-inventory",
+      "nature": "accepted_actual_payload_footer_and_external_factor_search",
+      "purpose": "58个5m分区物理行数/尺寸/mtime与登记核对，共44571408行；完整文件名搜索和两个现有包manifest无cpv，不证明未知包内容/平台附件存在性",
+      "source": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/dependency-inventory.json"
+    },
+    {
+      "id": "intraday-factor-batch82-api-red",
+      "nature": "immutable_calendar_api_detection_red_regression",
+      "purpose": "修前4失败2通过；修前目录代码/测试/日志SHA只读保留；全部695影响54文本候选/56记录变化含三审查，不改原经济规则",
+      "source": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-api-regression/failure.json"
+    },
+    {
+      "id": "intraday-factor-batch82-diagnostic-red",
+      "nature": "immutable_mutable_diagnostic_record_regression",
+      "purpose": "2失败34通过：诊断列表引用被后续调用污染；原实现/测试/log只读，记录方式改为快照，原策略不改，修后44专项通过",
+      "source": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-diagnostic-regression/failure.json"
+    },
+    {
+      "id": "intraday-factor-batch82-diagnostics",
+      "nature": "accepted_original_function_synthetic_state_diagnostics",
+      "purpose": "48原函数/受控状态诊断；回调计数、CSV缺失、日期类型/NaN/重复订单及费用边界保留，44专项/222相关有重叠，非交易",
+      "source": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/diagnostics.json"
+    },
+    {
+      "id": "intraday-factor-batch82-candidates",
+      "nature": "accepted_bounded_native_request_failure",
+      "purpose": "单1m请求DNS失败0响应/新增；固定ndays5不能补22日，原解析未重放，不用5m替代",
+      "source": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/candidate-audit.json"
+    },
+    {
+      "id": "intraday-factor-batch82-summary",
+      "nature": "accepted_original_input_coverage_and_blockers",
+      "purpose": "三来源/两内容，58个5m分区44571408行；原64窗口/95排名/交易0，逐项解除条件留档",
+      "source": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/research-summary.json"
+    },
+    {
+      "id": "intraday-factor-batch82-offline",
+      "nature": "accepted_forbidden_network_exact_replay",
+      "purpose": "禁socket/HTTP重放48诊断/库存/失败登记与三目录match0；0响应不能计原解析或因子成功",
+      "source": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/offline-verification.json"
+    },
+    {
+      "id": "intraday-factor-batch82-final",
+      "nature": "accepted_source_input_research_and_frozen_specialist_review",
+      "purpose": "246正式研究验收；52实现/52副本/91证据/16CORE与最终SHA闭合；222相关、安全架构和旧5363控制/398分区stat通过，交易0",
+      "source": "docs/handoff/2026-10-09-batch82-final-review.json"
+    },
+    {
+      "id": "external-GP-batch83-source",
+      "nature": "accepted_frozen_original_source_and_duplicate_definition_provenance",
+      "purpose": "两全文191/562行和9/20定义含两alpha2；原CSV状态与训练/研究性质保持，不执行认证/图形/训练顶层",
+      "source": "data/staging/strategies-batch83/20261009-external-timing-GP/source-reviews/review.json"
+    },
+    {
+      "id": "external-GP-batch83-inventory",
+      "nature": "accepted_actual_original_csv_search_and_reference_inventory",
+      "purpose": "实际文件名及两个包manifest无原CSV，46,781已验收十股参考行；原训练/交易日期准入0，不以新行情补原未知标签",
+      "source": "data/staging/strategies-batch83/20261009-external-timing-GP/dependency-inventory.json"
+    },
+    {
+      "id": "external-GP-batch83-diagnostics",
+      "nature": "accepted_original_function_and_notebook_boundary_diagnostics",
+      "purpose": "67原状态/费用/算子/两alpha2及真实length循环诊断；原object NaN保留；注解安全加载，非交易",
+      "source": "data/staging/strategies-batch83/20261009-external-timing-GP/diagnostics.json"
+    },
+    {
+      "id": "external-GP-batch83-components",
+      "nature": "accepted_long_hardcoded_expression_arithmetic_reference",
+      "purpose": "首alpha2原500行4936有效/54阻断、延伸5280行45874有效/6916阻断；独立差0，两个范围重叠；不是训练或原CSI800/择时/交易",
+      "source": "data/staging/strategies-batch83/20261009-external-timing-GP/component-research.json"
+    },
+    {
+      "id": "external-GP-batch83-failure",
+      "nature": "immutable_original_object_nan_test_expectation_failure",
+      "purpose": "首轮1失败32通过；代码/测试/log只读SHA归档；原_corr object数组的nan_to_num保留NaN，误断言已修且33专项通过",
+      "source": "data/staging/strategies-batch83/20261009-external-timing-GP/development-specialized-attempt01/result.json"
+    },
+    {
+      "id": "external-GP-batch83-offline",
+      "nature": "accepted_forbidden_network_exact_arithmetic_replay",
+      "purpose": "67诊断/首表达式逐值表/库存/三目录禁网match0；缺原CSV，训练/真实择时/交易0",
+      "source": "data/staging/strategies-batch83/20261009-external-timing-GP/offline-verification.json"
+    },
+    {
+      "id": "external-GP-batch83-final",
+      "nature": "accepted_source_arithmetic_research_and_frozen_specialist_review",
+      "purpose": "248研究验收；54当前实现/54副本/92证据/16CORE与终审绑定闭合；33专项/203相关有重叠，安全架构无发现；原CSV/训练/真实择时/交易0",
+      "source": "docs/handoff/2026-10-09-batch83-final-review.json"
+    },
+    {
+      "id": "industry-T0-batch84-source",
+      "nature": "accepted_frozen_original_source_and_asset_clock_rules",
+      "purpose": "两全文100/84行和3/5函数；14基金25行普通回归/250年化乘R平方与513030绝对价差/9:30及14:59时点和真实费用冻结",
+      "source": "data/staging/strategies-batch84/20261009-industry-ETF-T0/source-reviews/review.json"
+    },
+    {
+      "id": "industry-T0-batch84-coverage",
+      "nature": "accepted_actual_exact_code_snapshot_queries",
+      "purpose": "15基金在标准日线/5m/分钟池精确查询均0，注册总行数不能冒充基金或1m；两原候选SHA复用",
+      "source": "data/staging/strategies-batch84/20261009-industry-ETF-T0/registered-fund-coverage.json"
+    },
+    {
+      "id": "industry-T0-batch84-diagnostics",
+      "nature": "accepted_original_function_controlled_state_diagnostics",
+      "purpose": "24受控原诊断；隐式math/Series日志/持仓键、常量NaN/失败卖出现金及原绝对阈值浮点边界保持，非交易",
+      "source": "data/staging/strategies-batch84/20261009-industry-ETF-T0/diagnostics.json"
+    },
+    {
+      "id": "industry-T0-batch84-candidates",
+      "nature": "accepted_bounded_native_request_failure",
+      "purpose": "13缺失基金日线与513030原1m共14请求均DNS失败0响应/新增；period1固定ndays5只切片，不证明原解析成功或长期盘中覆盖",
+      "source": "data/staging/strategies-batch84/20261009-industry-ETF-T0/candidate-audit.json"
+    },
+    {
+      "id": "industry-T0-batch84-components",
+      "nature": "accepted_long_individual_fund_arithmetic_reference",
+      "purpose": "518880/513100截止2013—2026共6355前25行组件，独立差0；仅2/14池，完整原排名/T0价差/成本/交易0，未来全池路径合成测试不计真实信号",
+      "source": "data/staging/strategies-batch84/20261009-industry-ETF-T0/component-research.json"
+    },
+    {
+      "id": "industry-T0-batch84-fixture-failure",
+      "nature": "immutable_development_fixture_expectation_failure",
+      "purpose": "首轮1失败20通过：positive样例第11只斜率0原分数NaN排末；失败代码/测试/logSHA封存，只改受控样例并单测原常量NaN",
+      "source": "data/staging/strategies-batch84/20261009-industry-ETF-T0/development-specialized-attempt01/result.json"
+    },
+    {
+      "id": "industry-T0-batch84-offline-failure",
+      "nature": "immutable_offline_phase_order_and_temporal_precision_failure",
+      "purpose": "目录校验先于生成及日期s/ms提升导致新驱动失败；6355值规范后精确一致，顺序红测试/旧驱动logSHA保留，原载荷未重写",
+      "source": "data/staging/strategies-batch84/20261009-industry-ETF-T0/development-offline-attempt01/result.json"
+    },
+    {
+      "id": "industry-T0-batch84-offline",
+      "nature": "accepted_forbidden_network_exact_replay",
+      "purpose": "24诊断/14失败档/6355逐值/空价差/真实库存及三目录禁socketHTTP match0；只在比较副本规范时间单位，源载荷保持只读",
+      "source": "data/staging/strategies-batch84/20261009-industry-ETF-T0/offline-verification.json"
+    },
+    {
+      "id": "industry-T0-batch84-final",
+      "nature": "accepted_source_arithmetic_research_and_frozen_specialist_review",
+      "purpose": "250正式研究验收；56当前实现/56副本/128证据/22CORE与最终绑定闭合，25专项含于184相关、安全架构/旧资产保护通过；原排名/T0信号/新增交易0",
+      "source": "docs/handoff/2026-10-09-batch84-final-review.json"
+    },
+    {
+      "id": "wizard-flow-batch85-source",
+      "nature": "accepted_frozen_original_source_and_line_number_provenance",
+      "purpose": "两全文458/456行各30函数，gb18030原字节与第9行起代码AST冻结；不执行原导入/顶层，保留原helper实参与状态",
+      "source": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/source-reviews/review.json"
+    },
+    {
+      "id": "wizard-flow-batch85-inventory",
+      "nature": "accepted_actual_helper_search_and_financial_dictionary_inventory",
+      "purpose": "13类helper定义显式repo搜索0/三平台模块缺失；285相关字典线索、历史池/行业未登记、strict财务0，不放行原字段或信号",
+      "source": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/dependency-inventory.json"
+    },
+    {
+      "id": "wizard-flow-batch85-diagnostics",
+      "nature": "accepted_original_function_controlled_state_diagnostics",
+      "purpose": "48受控原回调/参数/持仓反向布尔、动态keys漏已卖记录、负空槽/失败/部分成交/重复加仓及实际费用顺序；未知helper返回是夹具，非信号或交易",
+      "source": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/diagnostics.json"
+    },
+    {
+      "id": "wizard-flow-batch85-candidates",
+      "nature": "accepted_bounded_native_request_failure",
+      "purpose": "申万SW2021分类历史和茅台近期个股流各一次原生GET均DNS失败0响应/解析/新增/发布；两个接口局限不补原历史版本",
+      "source": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/candidate-audit.json"
+    },
+    {
+      "id": "wizard-flow-batch85-summary",
+      "nature": "accepted_original_signal_interval_and_trading_gate_assessment",
+      "purpose": "未知MA/资金流helper及历史池/财务版本，原MA窗/流窗/完整选股日/三成本/新增交易0；长日线不补未知定义，两交易明确搁置",
+      "source": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/component-research.json"
+    },
+    {
+      "id": "wizard-flow-batch85-offline",
+      "nature": "accepted_forbidden_network_exact_replay",
+      "purpose": "禁socket/HTTP重放48诊断/两失败档/库存/三目录match0，不将0响应说成原解析或长期信号成功",
+      "source": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/offline-verification.json"
+    },
+    {
+      "id": "wizard-flow-batch85-final",
+      "nature": "accepted_source_callback_research_and_frozen_specialist_review",
+      "purpose": "252研究验收；58当前实现/58副本/92证据/14CORE及最终绑定闭合；23专项含于141相关、安全架构/旧5363控制及398分区stat通过，原交易0",
+      "source": "docs/handoff/2026-10-09-batch85-final-review.json"
+    },
+    {
+      "id": "volume-flow-batch86-source",
+      "nature": "accepted_literal_source_and_print_only_adaptation_provenance",
+      "purpose": "54/95全文492/459行、25/30函数与原SHA冻结；54仅fix_print副本、实际放量振幅/MA及未用资金流路径明确；95未知技术/流/非空零权重排序不猜造",
+      "source": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/source-reviews/review.json"
+    },
+    {
+      "id": "volume-flow-batch86-diagnostics",
+      "nature": "accepted_controlled_original_boundary_diagnostics",
+      "purpose": "30原函数诊断：270无长度门禁、30区间/2.5量/10%边界、缺mean/timedelta、自然日周日查询、目标减仓、负空槽、消息错误未发送及95实参/排序/重试；非交易",
+      "source": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/diagnostics.json"
+    },
+    {
+      "id": "volume-flow-batch86-components",
+      "nature": "accepted_long_reference_arithmetic_without_historical_pool_admission",
+      "purpose": "20050106至20260929十股46053买入/45753MA窗、2690不足270窗口、20算式命中及独立布尔差0，MA差7.63e-16；numpy.mean/动态锚定声明参考，原全池/95信号/三成本/交易0",
+      "source": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/component-research.json"
+    },
+    {
+      "id": "volume-flow-batch86-row-correction",
+      "nature": "immutable_initial_inventory_and_actual_payload_count_correction",
+      "purpose": "原交接文字47781错误；同一第47批SHA实际46781(46063交易+718暂停)，初始库存和study失败不覆盖，独立corrected库存及两SHA绑定只改行数字段",
+      "source": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/inventory-row-correction.json"
+    },
+    {
+      "id": "volume-flow-batch86-inventory",
+      "nature": "accepted_corrected_historical_dependency_inventory",
+      "purpose": "实际46781十股参考/11类helper定义搜索0、原54活跃资金流调用0；历史CSI300/银行399951/状态和原换手率分母版本、95技术/资金流/排序helper未齐，strict财务0",
+      "source": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/dependency-inventory-corrected.json"
+    },
+    {
+      "id": "volume-flow-batch86-supplement",
+      "nature": "accepted_prior_dns_failure_and_recent_only_api_reuse",
+      "purpose": "第85批两DNS失败及API源码按SHA复核；近期接口无历史起止，改证券不能补原全区间；新请求/响应/行/发布0，不证明供应商无数据",
+      "source": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/supplement-decision.json"
+    },
+    {
+      "id": "volume-flow-batch86-fixture-failure",
+      "nature": "immutable_development_fixture_failure",
+      "purpose": "初轮1失败24通过：锚点夹具抬高区间均量影响另一门禁；仅降底量隔离锚点条件，原规则不变",
+      "source": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/development-failure-initial/failure.json"
+    },
+    {
+      "id": "volume-flow-batch86-bool-failure",
+      "nature": "immutable_numpy_boolean_identity_test_failure",
+      "purpose": "第二轮1失败24通过：numpy.True_身份断言失效，测试显式bool；study本来已归一化，原公式不变",
+      "source": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/development-failure-bool/failure.json"
+    },
+    {
+      "id": "volume-flow-batch86-row-failure",
+      "nature": "immutable_wrong_prose_count_input_gate_failure",
+      "purpose": "首study在错误47781门禁失败、数值窗0；修前脚本/测试SHA和失败说明保留，更正以真实46781及重复键回归验收",
+      "source": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/development-failure-row-count/failure.json"
+    },
+    {
+      "id": "volume-flow-batch86-offline",
+      "nature": "accepted_forbidden_network_exact_component_and_catalog_replay",
+      "purpose": "30诊断/46053逐值/更正库存/三目录禁socketHTTP match0，不计原95信号或交易",
+      "source": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/offline-verification.json"
+    },
+    {
+      "id": "volume-flow-batch86-final",
+      "nature": "accepted_reference_arithmetic_and_frozen_specialist_review",
+      "purpose": "254正式研究验收、63实施副本/106证据/17CORE；26专项含于142相关、安全架构独立全窗与旧5363控制/398stats通过，失败更正不覆盖、交易0",
+      "source": "docs/handoff/2026-10-09-batch86-final-review.json"
+    },
+    {
+      "id": "chan-batch87-source",
+      "nature": "frozen_complete_original_classes_functions_and_duplicate_mapping",
+      "purpose": "两582行同SHA来源全文，实际300354/1m、原全类/确认时刻/增量约30万元和self距离删笔缺陷，不改原经济规则",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/source-reviews/review.json"
+    },
+    {
+      "id": "chan-batch87-components",
+      "nature": "daily_frequency_reference_not_original_minute_or_trades",
+      "purpose": "1392原价日线三分支4176逐根全状态SHA与1392指标，独立包含/分型/指标差0、15前缀核验；默认2/另4/线0订单意图均非交易",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/component-research.json"
+    },
+    {
+      "id": "chan-batch87-diagnostics",
+      "nature": "accepted_corrected_original_callbacks_state_and_increment_quantity",
+      "purpose": "21原类/回调受控诊断，三every_bar/重复bar、初三无分型、双分型只最后进笔、半偶/0股、失效无回滚、短距3与三笔self距0删笔及确认时刻；原20例另档只读保留",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/diagnostics-corrected.json"
+    },
+    {
+      "id": "chan-batch87-inventory",
+      "nature": "frozen_original_instrument_dependency_inventory",
+      "purpose": "300354日线1392/因子15/行动14；5m实际筛0、分钟池0且无1m表，历史名称/行动日/回调可见性未放行",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/dependency-inventory.json"
+    },
+    {
+      "id": "chan-batch87-supplement",
+      "nature": "prior_recent_only_minute_api_and_dns_evidence_reuse",
+      "purpose": "第82批接口/库存/DNS证据按SHA复核，东方财富ndays5不补原上市历史，无重复HTTP请求",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/supplement-decision.json"
+    },
+    {
+      "id": "chan-batch87-capabilities",
+      "nature": "native_tdx_methods_and_historical_probe_scope_audit",
+      "purpose": "冻结既有实测文档/源码/38主机旧扫描与当前native methods；历史14分时成功/K线0仅旧证据，TDX逐笔仅近似，factory会改全局配置而本次native未改",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/minute-capabilities.json"
+    },
+    {
+      "id": "chan-batch87-tdx",
+      "nature": "bounded_native_transport_failure_not_provider_empty_history",
+      "purpose": "原300354计划1m/上市日/末日快照，单主机一次TCP被权限拒绝、市场查询/响应/新增0，无自动重试和发布，不能推断供应商无历史",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/tdx-probe.json"
+    },
+    {
+      "id": "chan-batch87-date-failure",
+      "nature": "immutable_driver_date32_comparison_failure_with_red_regression",
+      "purpose": "首study在date32与字符串日历比较中止，0状态；旧驱动/测试/输入SHA/堆栈和红回归保留，只规范驱动日期表示",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/development-date-failure/failure.json"
+    },
+    {
+      "id": "chan-batch87-schema-failure",
+      "nature": "immutable_legacy_probe_wrapper_key_failure_with_red_regression",
+      "purpose": "旧scan_hosts指标包装误读触发KeyError，网络尝试0；只修诊断schema读取，旧驱动/测试/堆栈/红回归保留",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/development-capability-schema-failure/failure.json"
+    },
+    {
+      "id": "chan-batch87-label-correction",
+      "nature": "immutable_original_twenty_cases_and_separate_corrected_twenty_one_cases",
+      "purpose": "两SHA关联：原两笔例实际距离8-5=3，误标self0；只改标签并追加三笔self9-9=0例，原数据/状态表/策略不变",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/diagnostic-label-correction.json"
+    },
+    {
+      "id": "chan-batch87-independent",
+      "nature": "independent_original_definition_and_external_transition_formula_review",
+      "purpose": "另编译原定义，4176状态/包含分型、1814笔/1776MACD/1808线/1790中枢/1562趋势及6信号差0，笔线中枢各含2夹具；明确非1m/非穷尽/未独立证明笔内中枢回写与PnL",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/independent-review/summary.json"
+    },
+    {
+      "id": "chan-batch87-reviewer-fixture-failure",
+      "nature": "independent_reviewer_fixture_error_and_authoritative_archived_replay",
+      "purpose": "审查初例首点误写12/6造成比较失败，不是项目缺陷；最终脚本用真实30/15并完整运行退出0，旧失败说明及证据局限保留",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/independent-review/development-reviewer-fixture-failure.json"
+    },
+    {
+      "id": "chan-batch87-stage-metadata-rejection",
+      "nature": "stale_export_rejected_after_concurrent_live_code_change",
+      "purpose": "根代理启动verify后改驱动/测试，旧导出SHA失效被正确拒绝；旧exports/states不改，最终实现冻结后串行export/verify，不绕过",
+      "source": "docs/handoff/2026-10-09-batch87-stage-metadata-rejection.json"
+    },
+    {
+      "id": "chan-batch87-offline",
+      "nature": "accepted_forbidden_socket_http_exact_daily_reference_and_catalog_replay",
+      "purpose": "21更正诊断/4176状态/1392指标、capabilities副本与三目录禁网match0，原1m/交易0",
+      "source": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/offline-verification.json"
+    },
+    {
+      "id": "chan-batch87-final",
+      "nature": "accepted_frozen_specialist_scope_and_binding_review",
+      "purpose": "256正式来源研究验收；65实施副本/133证据/25CORE，146相关及安全架构/独立转换/旧5363控制与398stats通过；原1m数据不足仍搁置交易",
+      "source": "docs/handoff/2026-10-09-batch87-final-review.json"
+    },
+    {
+      "id": "ffscore-threefactor-batch93-operands",
+      "nature": "in_progress_final_financial_candidate_field_inventory_not_PIT_admission",
+      "purpose": "147分区字节SHA/501353最终记录投影、年度季度40候选字段覆盖与单位/版本缺口；strict可用0，不用报告期或实收资本金额替代历史日期/股数",
+      "source": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/operand-inventory.json"
+    },
+    {
+      "id": "ffscore-threefactor-batch93-binding",
+      "nature": "in_progress_fresh_byte_sha_and_logical_snapshot_identities",
+      "purpose": "147财务分区2205405257字节按导入回执核SHA，快照逻辑指纹另列；候选代码/源码/投影/上游92凭据绑定，不计新发布",
+      "source": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/input-binding.json"
+    },
+    {
+      "id": "ffscore-threefactor-batch93-diagnostics",
+      "nature": "in_progress_literal_original_synthetic_callbacks_and_independent_scalar_arithmetic",
+      "purpose": "30原函数受控案例/168独立指标差0；ROA2优先级/负基/金额尺度、日期类型/缺失过滤、空目标与三因子位置拼接/现金除50保留；监测函数不是平台因子引擎或成交",
+      "source": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/diagnostics.json"
+    },
+    {
+      "id": "ffscore-threefactor-batch93-offline",
+      "nature": "in_progress_forbidden_network_exact_callback_replay",
+      "purpose": "30诊断禁socket与requests重放JSON字节相同，差0；没有真实平台因子、交易收益或正式来源验收",
+      "source": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/offline-verification.json"
+    },
+    {
+      "id": "ffscore-threefactor-batch93-supplement",
+      "nature": "in_progress_accepted_failure_reuse_and_reference_definition_audit",
+      "purpose": "核第31批登录/DNS失败及四BaoStock查询源，冻结三skfolio定义作比较；不把TTM/衰减残差替换平台因子，新请求/样本/发布0，旧失败不证明当前网络或供应商缺数据",
+      "source": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/supplement-decision.json"
+    },
+    {
+      "id": "ffscore-threefactor-batch93-fixture-failure",
+      "nature": "immutable_first_three_fixture_expectation_errors",
+      "purpose": "首轮3失败10通过：负利润比仍得分、datetime64比较未剔除哨兵、require抛ValueError；原实现/测试/logSHA保留，仅修测试预期",
+      "source": "data/staging/strategies-batch93/20261010-development-first-fixtures/failure.json"
+    },
+    {
+      "id": "ffscore-threefactor-batch93-stage",
+      "nature": "in_progress_operand_and_callback_stage_checks_not_formal_acceptance",
+      "purpose": "45相关含13新测试/Ruff/禁网与旧5780控制398分区保护通过；阶段20261010-172723-fd80，268正式/12回测来源75父保持，新目录继续正式研究核验",
+      "source": "docs/handoff/2026-10-10-batch93-operands-stage.json"
+    },
+    {
+      "id": "etf-filters-batch94-acceptance-repairs",
+      "nature": "in_progress_gate_repairs_not_formal_acceptance",
+      "purpose": "六类目录/绑定/初始和归档期间更新门禁修复，红绿证据与旧候选只读保留，35专项通过；v4完整验收尚待完成，新增交易0",
+      "source": "docs/handoff/2026-10-10-batch94-acceptance-repairs-stage.json"
+    },
+    {
+      "id": "etf-filters-batch94-baseline-drift",
+      "nature": "immutable_failed_attempt_and_new_context_recovery_plan",
+      "purpose": "v4基线配置变化被正确拒绝，计算与正式验收0；v5仅切新目录，先完成配置导出再冻结执行，旧凭据不覆盖",
+      "source": "docs/handoff/2026-10-10-batch94-baseline-drift-recovery.json"
+    },
+    {
+      "id": "etf-filters-batch94-formal",
+      "nature": "formal_source_research_not_trading",
+      "purpose": "三来源全文、原长RSRS/FFT/Kalman/回调、两次实际禁网重算、121相关及隔离与六角终审，273来源研究验收；基金交易0",
+      "source": "docs/handoff/2026-10-10-batch94-final-review.json"
+    },
+    {
+      "id": "etf-filters-batch94-final-metadata",
+      "nature": "metadata_only_cross_machine_verification",
+      "purpose": "正式第94批export f229c6d0a4fb2bbada049480；当前根和1015文件的隔离Git副本均846检查通过，无研究载荷，使用隔离src",
+      "source": "docs/handoff/2026-10-10-batch94-metadata-final-verification.json"
+    },
+    {
+      "id": "yili-cmb-earlier-2010-2013",
+      "nature": "approved_approximate_trading_supplement",
+      "purpose": "844日三成本/逐年和禁网match0，1374成交/1662订单独立核验；基础-3.598946%负面结果、435无效持仓状态日与14基准缺口保留，父运行77来源12",
+      "source": "docs/handoff/2026-10-10-yili-cmb-earlier-window-final-review.json"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-source",
+      "nature": "in_progress_complete_source_and_duplicate_map",
+      "source": "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/source-reviews.json",
+      "purpose": "三完整原文171/171/249行及13/13/15函数冻结，魔改3同字节；池顺序/佣金/种子/阈值/调度不同，未正式验收95"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-components",
+      "nature": "in_progress_controlled_reference_not_trading",
+      "source": "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/component-research.json",
+      "purpose": "两种RSRS各4662决策日/三基金22044原生动量乖离窗；独立OLS/均值/斜率和离散信号一致，v2 mean与history索引受控注入声明，缺第四基金完整排名0"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-diagnostics",
+      "nature": "in_progress_original_callback_controlled_api_feedback",
+      "source": "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/diagnostics.json",
+      "purpose": "108原函数诊断：Series标签/第12项mean追加后报错/数字评分当证券/排名阻SELL/止损先下单后打印异常/持仓删除反馈；不证明原平台语义或交易"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-seeds",
+      "nature": "in_progress_original_seed_difference_assessment",
+      "source": "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/seed-comparison.json",
+      "purpose": "不同599/600种子导致前599分数差，最大0.010895；20100107起4063分数完全相同，买卖规则差异另保留，原规则未改"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-stage",
+      "nature": "in_progress_forbidden_network_replay_and_checks",
+      "source": "docs/handoff/2026-10-10-batch95-numerical-stage.json",
+      "purpose": "新进程禁网逐值match0，28专项/28隔离/Ruff/5919旧SHA及398分区stat保护；初轮27过1测试求和错只读保留，正式273/交易来源12/父77不增"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-preparation",
+      "nature": "in_progress_acceptance_preparation_not_formal_or_trading",
+      "source": "docs/handoff/2026-10-10-batch95-acceptance-preparation.json",
+      "purpose": "56祖先/16运行文件、鲜活禁网逐值与旧资产保护；273/12/77保持，正式目录与交易待后续"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-live-inventory",
+      "nature": "actual_published_pool_inventory_without_admission",
+      "source": "data/staging/strategies-batch95/20261010-magic3-v2-acceptance-preparation-v3/input-inventory.json",
+      "purpose": "六表四原基金0行，三原生候选各5252/3487/2475行只读，84相关分区stat和五候选byte SHA；基金/60m执行未放行"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-preparation-checks",
+      "nature": "actual_53_local_and_53_isolated_tests",
+      "source": "data/staging/strategies-batch95/20261010-preparation-v3-tests/checks.json",
+      "purpose": "53具体身份本地/隔离一致无跳过，471副本及实际导入核实；全套pytest未宣称通过"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-preparation-review",
+      "nature": "six_angles_three_independent_agents_preparation_only",
+      "source": "data/staging/strategies-batch95/20261010-magic3-v2-acceptance-preparation-v3/preparation-review-completion.json",
+      "purpose": "安全/架构/假设/组合/级联/滥用精确最终SHA终审，无未解决发现；不替代未来正式发布审查"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-formal-development",
+      "nature": "in_progress_formal_driver_development_with_preserved_red_evidence",
+      "source": "docs/handoff/2026-10-11-batch95-formal-development.json",
+      "purpose": "三个真实门禁缺陷与修正、既有交易证据目录同步归档，未正式验收或新增交易"
+    },
+    {
+      "id": "etf-magic3-v2-batch95-formal",
+      "nature": "formal_source_research_not_trading",
+      "source": "docs/handoff/2026-10-11-batch95-final-review.json",
+      "purpose": "三新增来源+既有伊利已验收单字段证据同步，276/12/77；两次实际禁网/94本机94隔离/六角与旧资产保护验收"
+    },
+    {
+      "id": "batch96-source-preread",
+      "nature": "in_progress_source_preread_not_formal_acceptance_or_trading",
+      "source": "data/staging/strategies-batch96/20261011-source-preread/source-preread.json",
+      "purpose": "原文/编码/SHA/定义与初步外置CSV/用户模块/分钟基金依赖，完整审查仍待推进"
+    },
+    {
+      "id": "batch96-preliminary-dependencies",
+      "nature": "in_progress_source_preread_not_formal_acceptance_or_trading",
+      "source": "data/staging/strategies-batch96/20261011-source-preread/preliminary-dependencies.json",
+      "purpose": "原文/编码/SHA/定义与初步外置CSV/用户模块/分钟基金依赖，完整审查仍待推进"
+    },
+    {
+      "id": "batch96-preread-checkpoint",
+      "nature": "in_progress_checkpoint_not_formal_acceptance",
+      "source": "data/staging/strategies-batch96/20261011-source-preread/checkpoint.json",
+      "purpose": "当前预读检查点与正式第95批分离，276/12/77保持，源码与依赖SHA对应"
+    },
+    {
+      "id": "batch95-formal-closed-security",
+      "nature": "immutable_confirmed_failed_gate_and_closed_finding",
+      "source": "data/staging/strategies-batch95/20261010-formal-review-v1/security/review.json",
+      "purpose": "保留已关闭真实门禁发现及红触发，最终v4审查与正式94测试另验证，不覆盖旧失败"
+    },
+    {
+      "id": "batch95-formal-closed-architecture",
+      "nature": "immutable_confirmed_failed_gate_and_closed_finding",
+      "source": "data/staging/strategies-batch95/20261010-formal-review-v1/architecture/review.json",
+      "purpose": "保留已关闭真实门禁发现及红触发，最终v4审查与正式94测试另验证，不覆盖旧失败"
+    },
+    {
+      "id": "batch95-formal-closed-abuse",
+      "nature": "immutable_confirmed_failed_gate_and_closed_finding",
+      "source": "data/staging/strategies-batch95/20261011-formal-review-v2/abuse/review.json",
+      "purpose": "保留已关闭真实门禁发现及红触发，最终v4审查与正式94测试另验证，不覆盖旧失败"
+    },
+    {
+      "id": "batch96-callback-stage",
+      "nature": "in_progress_original_callback_and_daily_arithmetic_not_trading",
+      "source": "docs/handoff/2026-10-11-batch96-callback-stage.json",
+      "purpose": "39原定义诊断/5082个199日指标参考禁网差0；44相关测试与旧资产保护，原分钟/预测/基金未放行，正式276/12/77保持"
+    },
+    {
+      "id": "batch96-complete-rule-read",
+      "nature": "in_progress_complete_source_review_pending_formal",
+      "source": "data/staging/strategies-batch96/20261011-original-callback-stage/source-rule-review.json",
+      "purpose": "两原文808/467行与36/16定义、实际/禁用/休眠路径及原状态边界，不把RF模板当实际选股"
+    },
+    {
+      "id": "batch96-input-inventory",
+      "nature": "in_progress_exact_symbol_inventory_and_existing_candidate_SHA",
+      "source": "data/staging/strategies-batch96/20261011-original-callback-stage/input-inventory.json",
+      "purpose": "七活跃表五证券均0，旧深成指/上证50日线各5280候选核SHA但不发布，不代原1m"
+    },
+    {
+      "id": "batch96-diagnostics",
+      "nature": "in_progress_controlled_original_definition_cases",
+      "source": "data/staging/strategies-batch96/20261011-original-callback-stage/diagnostics.json",
+      "purpose": "CSV重复日期/1%计数/部分成交/虚拟持仓/交叉短缺与部分状态突变；不证明真实成交"
+    },
+    {
+      "id": "batch96-daily-reference",
+      "nature": "in_progress_daily_arithmetic_not_original_signal",
+      "source": "data/staging/strategies-batch96/20261011-original-callback-stage/component-research.json",
+      "purpose": "2005-11-02至2026-09-29的5082窗，原EMA种子和独立完整数组最大差2.18e-11，交叉差0；缺第200项1m，不算原信号"
+    },
+    {
+      "id": "batch96-supplement-capability",
+      "nature": "actual_single_DNS_observation_without_HTTP_or_provider_rows",
+      "source": "data/staging/strategies-batch96/20261011-original-callback-stage/supplement-capability.json",
+      "purpose": "一次新浪DNS失败，0HTTP/新增/发布；不证明供应商缺历史；1m API固定ndays5另冻结"
+    },
+    {
+      "id": "batch96-development-header",
+      "nature": "immutable_failed_first_source_parser_with_red_tests",
+      "source": "data/staging/strategies-batch96/20261011-development-header-failure/failure.json",
+      "purpose": "首次12失败8通过，原RF11行非Python说明；另修空白化入口保留原行号，来源字节未变"
+    },
+    {
+      "id": "batch96-formal",
+      "nature": "formal_source_research_not_trading",
+      "source": "docs/handoff/2026-10-11-batch96-final-review.json",
+      "purpose": "278/695、39诊断5082日线两次禁网/75本机75隔离/六角/旧资产及63最终文件读回；原交易0"
+    },
+    {
+      "id": "batch96-formal-gate-failures",
+      "nature": "immutable_three_confirmed_refusal_regressions",
+      "source": "data/staging/strategies-batch96/20261011-formal-v1-gate-failures/failure.json",
+      "purpose": "三个MEDIUM门禁实际red，v2 green；旧版本/报告不覆盖"
+    },
+    {
+      "id": "approved-history-window-inventory",
+      "nature": "read_only_input_and_77_run_summary_inventory",
+      "source": "docs/handoff/2026-10-11-approved-window-inventory.json",
+      "purpose": "未找到200日以上遗漏早期岛，六配对短岛320日及SVM16日候选，不拼接"
+    },
+    {
+      "id": "pair66-short-signals",
+      "nature": "approved_variant_signal_preflight_not_execution",
+      "source": "data/staging/strategies-history-supplement/20261011-pair66-short-islands-preflight/preflight.json",
+      "purpose": "六岛320日原信号实现与独立fsum状态/目标差0；五岛291日7意图、29日零信号，交易0"
+    },
+    {
+      "id": "pair66-short-signal-verification",
+      "nature": "actual_preflight_identity_readback_not_trading",
+      "source": "data/staging/strategies-history-supplement/20261011-pair66-short-islands-preflight/verification.json",
+      "purpose": "代码/源/快照/因子SHA读回，非完整分区新hash或独立新进程复现；下一步唯一Book"
+    },
+    {
+      "id": "pair66-short-final",
+      "nature": "accepted_approved_variant_five_island_trades",
+      "purpose": "291独立决策日/三成本873账本日/27真实成交和费用/五新进程禁网match0、43本机43隔离、六角SHA、旧保护与精确终态读回",
+      "source": "docs/handoff/2026-10-11-pair66-short-windows-final-review.json"
+    },
+    {
+      "id": "pair66-short-phase-readback",
+      "nature": "accepted_phase_report_and_experiment_readback",
+      "purpose": "正式278来源/12匹配来源87父与报告SHA，SVM只计预检，不宣称全695目标完成",
+      "source": "docs/handoff/2026-10-11-short-window-phase-readback.json"
+    },
+    {
+      "id": "pair66-short-in-progress",
+      "nature": "historical_in_progress_trade_checkpoint_not_final_acceptance",
+      "purpose": "五段实际三成本收益早期检查点；验证仍在进行时的状态和SHA，不能作正式验收",
+      "source": "docs/handoff/2026-10-11-short-window-in-progress.json"
+    },
+    {
+      "id": "pair66-short-review-v1",
+      "nature": "immutable_original_driver_review_findings",
+      "purpose": "六角初版真实反例/终态摘要、输入清单和恢复缺口，原84实施不改",
+      "source": "data/staging/strategies-history-supplement/20261011-pair66-short-review-v1/security/review.json"
+    },
+    {
+      "id": "pair66-short-review-v2",
+      "nature": "accepted_six_returned_current_implementation_reviews",
+      "purpose": "六正文角色/状态/范围/当前两SHA均匹配；open findings为空，不能替代实际交易验收",
+      "source": "data/staging/strategies-history-supplement/20261011-pair66-short-review-v2/review-completion.json"
+    },
+    {
+      "id": "pair66-short-body-regression",
+      "nature": "immutable_review_body_identity_red_green",
+      "purpose": "旧正文角色/范围/状态/旧SHA四失败，当前相关37通过的历史中间版本；最终43另记",
+      "source": "data/staging/strategies-history-supplement/20261011-pair66-short-guard-tests/regression.json"
+    },
+    {
+      "id": "pair66-short-worker-regression",
+      "nature": "accepted_captured_worker_identity_red_green_and_isolated_validation",
+      "purpose": "旧worker正文5失败1正例，当前本机43和430文件隔离43通过，实际五导入来自副本",
+      "source": "data/staging/strategies-history-supplement/20261011-pair66-short-final-guard-tests/regression.json"
+    },
+    {
+      "id": "pair66-short-isolated",
+      "nature": "accepted_actual_import_paths_and_current_43_tests",
+      "purpose": "最终候选430文件副本/五实际导入及43测试日志，额外复制批准冻结YAML，无市场或原来源载荷",
+      "source": "data/staging/strategies-history-supplement/20261011-pair66-short-final-guard-tests/isolated.json"
+    },
+    {
+      "id": "svm98-short-final-preflight",
+      "nature": "accepted_zero_buy_target_model_preflight_only",
+      "purpose": "16日/3拟合/675样本、252训练价格窗口和滞后/支持向量核验；10输出与语义禁网逐字节match0，预测均0、不计交易",
+      "source": "docs/handoff/2026-10-11-svm98-short-window-final-preflight.json"
+    },
+    {
+      "id": "svm98-short-preflight",
+      "nature": "approved_variant_signal_model_preflight_not_trade",
+      "purpose": "同仁堂早期唯一16日岛沿原参数产生0正预测，实际开盘/Book/费用/收益未做",
+      "source": "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/preflight.json"
+    },
+    {
+      "id": "svm98-short-replay",
+      "nature": "approved_variant_all_signal_artifacts_exact_new_process_replay",
+      "purpose": "包含signal_coverage的10输出字节SHA和共同语义，首worker导入失败留档，新worker只修导入上下文",
+      "source": "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/replay-proof/full-replay-binding.json"
+    },
+    {
+      "id": "batch97-final",
+      "nature": "accepted_source_research_not_trading",
+      "purpose": "280/695来源研究、415剩余、12匹配来源87父及16实际绑定文件；不宣称全库/原平台等价或新增交易",
+      "source": "docs/handoff/2026-10-11-batch97-final-review.json"
+    },
+    {
+      "id": "batch97-source-preread",
+      "nature": "full_frozen_original_source_AST_inventory",
+      "purpose": "两原字节SHA、423/201全文与全部19/5定义AST；原顶层未执行",
+      "source": "data/staging/strategies-batch97/20261011-source-preread/source-preread.json"
+    },
+    {
+      "id": "batch97-source-rules",
+      "nature": "accepted_literal_source_rules_and_original_gaps",
+      "purpose": "真实量比8次/1.7、评分/分钟止损与含阈值同额金额；不按标题/注释换规则",
+      "source": "data/staging/strategies-batch97/20261011-formal-source-acceptance/source-reviews.json"
+    },
+    {
+      "id": "batch97-summary",
+      "nature": "accepted_real_input_arithmetic_only",
+      "purpose": "44873原价窗口与1392日拥挤率逐年统计，原全池/当前开盘/分钟执行未验证，不含收益",
+      "source": "data/staging/strategies-batch97/20261011-components-v1/study/summary.json"
+    },
+    {
+      "id": "batch97-prepared",
+      "nature": "frozen_operands_and_separate_logical_byte_identity",
+      "purpose": "24实际分区字节SHA、逻辑指纹、三投影载荷、12实现及冻结限制；metadata不是Store输入",
+      "source": "data/staging/strategies-batch97/20261011-components-v1/prepared.json"
+    },
+    {
+      "id": "batch97-replay",
+      "nature": "captured_fresh_worker_all_four_outputs_match",
+      "purpose": "两表/诊断/摘要四输出在新进程禁网逐值及逐字节一致；不是交易reproduce",
+      "source": "data/staging/strategies-batch97/20261011-components-v1/offline-verification.json"
+    },
+    {
+      "id": "batch97-dependencies",
+      "nature": "archived_cap_share_name_and_minute_gates",
+      "purpose": "七市值样本与原凭据SHA复核，原分钟和名称未齐；无新请求或发布，不把旧请求当新请求",
+      "source": "data/staging/strategies-batch97/20261011-dependencies/inventory.json"
+    },
+    {
+      "id": "batch97-isolated",
+      "nature": "actual_isolated_imports_and_19_tests",
+      "purpose": "223代码/锁文件副本、5实际导入、19测试无skip；本机52另记，不宣称全套pytest",
+      "source": "data/staging/strategies-batch97/20261011-guard-validation/isolated.json"
+    },
+    {
+      "id": "batch97-local-validation",
+      "nature": "observed_local_52_related_tests",
+      "purpose": "本机52相关测试及Ruff观察记录；完整捕获隔离日志另存",
+      "source": "data/staging/strategies-batch97/20261011-guard-validation/local-validation.json"
+    },
+    {
+      "id": "batch97-exception-failure",
+      "nature": "immutable_wrong_test_exception_expectation",
+      "purpose": "初测11失败6通过，require实际ValueError拒绝有效；旧测试与代表红日志保留",
+      "source": "data/staging/strategies-batch97/20261011-test-exception-contract-failure/failure.json"
+    },
+    {
+      "id": "batch97-byte-scope-failure",
+      "nature": "immutable_rejected_logical_byte_fingerprint_mixup",
+      "purpose": "首准备在输出前拒绝，旧程序和两种指纹保留；修正对已归档实际字节SHA验收",
+      "source": "data/staging/strategies-batch97/20261011-logical-byte-scope-failure/failure.json"
+    },
+    {
+      "id": "batch97-phase-readback",
+      "nature": "actual_final_navigation_and_report_readback",
+      "purpose": "正式280/415剩余、12匹配来源87父；实际最终凭据及16绑定读回，Git待用户提交",
+      "source": "docs/handoff/2026-10-11-batch97-phase-readback.json"
+    },
+    {
+      "id": "batch98-final",
+      "nature": "accepted_source_research_not_trading",
+      "purpose": "282/695、剩413，12匹配来源87父；22绑定及旧资产保护，不宣称原交易或全库完成",
+      "source": "docs/handoff/2026-10-11-batch98-final-review.json"
+    },
+    {
+      "id": "batch98-prepared",
+      "nature": "frozen_source_inventory_and_original_index",
+      "purpose": "1495/236原字节、6/9顶层定义清单、5280日线/逻辑与字节SHA、14冻结实现，未执行来源顶层",
+      "source": "data/staging/strategies-batch98/20261011-original-components-v1/prepared.json"
+    },
+    {
+      "id": "batch98-summary",
+      "nature": "original_comparison_leg_and_OLS_arithmetic",
+      "purpose": "2005至2026原CSI3005280日MA/布林0差及5263OLS窗，不含kernel250/原组合或收益",
+      "source": "data/staging/strategies-batch98/20261011-original-components-json-recovery/study/summary.json"
+    },
+    {
+      "id": "batch98-diagnostics",
+      "nature": "controlled_original_cases_not_fills",
+      "purpose": "27原定义合成边界、阈值/共享状态/排名/基金异常均保留，不计交易",
+      "source": "data/staging/strategies-batch98/20261011-original-components-json-recovery/study/diagnostics.json"
+    },
+    {
+      "id": "batch98-perfect-fit",
+      "nature": "finite_exception_at_exact_r2_one",
+      "purpose": "17收益分位数NaN但r2==1得分有限，两合成边界一例退出，未修窗口",
+      "source": "data/staging/strategies-batch98/20261011-RSRS-perfect-fit-boundary/study.json"
+    },
+    {
+      "id": "batch98-recovery",
+      "nature": "arrow_representation_only_recovery",
+      "purpose": "新目录仅规范1排名字段，26其他诊断及两个算式/摘要输出字节不变",
+      "source": "data/staging/strategies-batch98/20261011-original-components-json-recovery/representation-verification.json"
+    },
+    {
+      "id": "batch98-replay",
+      "nature": "actual_fresh_network_blocked_recovery_workers",
+      "purpose": "两个新进程禁网三个输出逐值及字节match0，原未修输出只读保留",
+      "source": "data/staging/strategies-batch98/20261011-original-components-json-recovery/offline-verification.json"
+    },
+    {
+      "id": "batch98-boundary-replay",
+      "nature": "actual_fresh_network_blocked_finite_boundary",
+      "purpose": "额外两例精确边界禁网新进程JSON字节match0",
+      "source": "data/staging/strategies-batch98/20261011-RSRS-perfect-fit-boundary/offline.json"
+    },
+    {
+      "id": "batch98-dependencies",
+      "nature": "missing_tables_and_archived_candidate_sha",
+      "purpose": "原16表登记与2763北向合并候选SHA/余额净买覆盖；不以候选字段替代原输入",
+      "source": "data/staging/strategies-batch98/20261011-original-components-v1/dependencies.json"
+    },
+    {
+      "id": "batch98-probes",
+      "nature": "bounded_public_query_attempts",
+      "purpose": "沪/深额度候选及20200930持股三次DNS失败，响应/新增/发布0；不用来源凭据",
+      "source": "data/staging/strategies-batch98/20261011-bounded-northbound-probes/summary.json"
+    },
+    {
+      "id": "batch98-guard-v2",
+      "nature": "actual_53_related_13_isolated_tests",
+      "purpose": "53本机相关、13隔离0skip，232副本与5导入；Ruff规定范围及6新脚本，非全套pytest",
+      "source": "data/staging/strategies-batch98/20261011-guard-validation-v2/checked.json"
+    },
+    {
+      "id": "batch98-boll-fixture-failure",
+      "nature": "immutable_unexercised_BBANDS_fixture",
+      "purpose": "1失败12通过，线性输入无突破；只修夹具",
+      "source": "data/staging/strategies-batch98/20261011-inversion-fixture-failure/failure.json"
+    },
+    {
+      "id": "batch98-alias-fixture-failure",
+      "nature": "immutable_actual_expected_rules_alias",
+      "purpose": "1失败13通过，期望实际共享rules；深拷贝修复后拒绝测试有效",
+      "source": "data/staging/strategies-batch98/20261011-catalog-fixture-alias-failure/failure.json"
+    },
+    {
+      "id": "batch98-persisted-ranking-failure",
+      "nature": "immutable_actual_persisted_format_rejection",
+      "purpose": "原50+13测试通过却存为162字符而非17项，正式prepare拒绝；旧输出/guard/程序保留",
+      "source": "data/staging/strategies-batch98/20261011-persisted-ranking-failure/failure.json"
+    },
+    {
+      "id": "batch99-stage",
+      "nature": "verified_in_progress_arithmetic_not_formal_or_trading",
+      "purpose": "正式282保持；全文/44诊断/5249轨道与旧资产保护，后续正式验收",
+      "source": "docs/handoff/2026-10-11-batch99-arithmetic-stage.json"
+    },
+    {
+      "id": "batch99-summary",
+      "nature": "longest_candidate_original_Num3_K03_bands",
+      "purpose": "2005至2026的5249轨道，原numpy舍入保留；未推断分钟突破",
+      "source": "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/study/summary.json"
+    },
+    {
+      "id": "batch99-diagnostics",
+      "nature": "synthetic_original_option_definitions_and_paper_callbacks",
+      "purpose": "44受控边界与13原异常；实际JSON值/列表往返，不计Book交易",
+      "source": "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/study/diagnostics.json"
+    },
+    {
+      "id": "batch99-recovery",
+      "nature": "fresh_source_namespace_before_historical_arithmetic",
+      "purpose": "旧恒定3/2轨道保留，恢复不改经济规则，44诊断字节不变",
+      "source": "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/prepared.json"
+    },
+    {
+      "id": "batch99-replay",
+      "nature": "actual_fresh_network_blocked_workers",
+      "purpose": "恢复三输出逐值/字节match0，未以错误相同的旧重放作为正确性证据",
+      "source": "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/offline-verification.json"
+    },
+    {
+      "id": "batch99-coverage",
+      "nature": "candidate_calendar_and_actual_admission_inventory",
+      "purpose": "5254原候选保留5252，排未来2；交易日缺口0，7活跃表均0；repo参考SHA",
+      "source": "data/staging/strategies-batch99/20261011-coverage-reference/coverage.json"
+    },
+    {
+      "id": "batch99-rounding",
+      "nature": "preserved_numpy_vs_scalar_and_decimal_edges",
+      "purpose": "319/151差异日，原文20180720上下轨2.487/2.461匹配，平台等价未证",
+      "source": "data/staging/strategies-batch99/20261011-coverage-reference/rounding-audit.json"
+    },
+    {
+      "id": "batch99-probes",
+      "nature": "two_bounded_expired_option_and_historical_risk_queries",
+      "purpose": "两公共有界GET均DNS失败0响应/新增/发布，不用来源凭据",
+      "source": "data/staging/strategies-batch99/20261011-bounded-option-probes/summary.json"
+    },
+    {
+      "id": "batch99-guard",
+      "nature": "actual_44_related_21_isolated_tests",
+      "purpose": "237复制文件和5实际导入，skip0；仅相关测试与规定Ruff/diff，非全量pytest",
+      "source": "data/staging/strategies-batch99/20261011-stage-validation-recovery/checked.json"
+    },
+    {
+      "id": "batch99-index-test-failure",
+      "nature": "immutable_test_assumption_failure",
+      "purpose": "1失败16通过，日期索引名假设错误，仅修测试",
+      "source": "data/staging/strategies-batch99/20261011-test-date-index-failure/failure.json"
+    },
+    {
+      "id": "batch99-recovery-fixture-failure",
+      "nature": "immutable_synthetic_fixture_expectation_failure",
+      "purpose": "1失败2通过，原prepared未执行worker；新v2修夹具期望",
+      "source": "data/staging/strategies-batch99/20261011-fresh-namespace-recovery/fixture-failure.json"
+    },
+    {
+      "id": "batch99-final",
+      "nature": "accepted_source_research_not_trading",
+      "purpose": "正式284/695、剩411，12来源87父；阶段/失败目录保留，原期权交易阻断",
+      "source": "docs/handoff/2026-10-11-batch99-final-review.json"
+    },
+    {
+      "id": "batch99-timing",
+      "nature": "original_previous_day_holding_and_dated_fee_callbacks",
+      "purpose": "8受控原回调：前日15行、持仓不重配/total_value意图、四佣金；非成交",
+      "source": "data/staging/strategies-batch99/20261011-original-timing-callbacks/study.json"
+    },
+    {
+      "id": "batch99-timing-replay",
+      "nature": "actual_fresh_network_blocked_timing_workers",
+      "purpose": "两实际新进程8时机/费用案例JSON字节match0",
+      "source": "data/staging/strategies-batch99/20261011-original-timing-callbacks/offline.json"
+    },
+    {
+      "id": "batch99-formal-guard",
+      "nature": "actual_66_related_43_isolated_and_further_replay",
+      "purpose": "246副本7导入，skip0；实际第三次恢复重放3输出match0，非全量pytest",
+      "source": "data/staging/strategies-batch99/20261011-formal-validation-v2/checked.json"
+    },
+    {
+      "id": "batch99-formal-fresh",
+      "nature": "restored_original_implementation_and_operand_replay",
+      "purpose": "新工作区完整恢复冻结implementation后worker禁网，3输出字节匹配",
+      "source": "data/staging/strategies-batch99/20261011-formal-validation-v2/fresh-replay.json"
+    },
+    {
+      "id": "batch99-formal-restore-failure",
+      "nature": "immutable_replay_rejection_before_arithmetic",
+      "purpose": "原66/43绿测试后鲜活worker拒绝缺implementation；原目录保留，新v2补全副本",
+      "source": "data/staging/strategies-batch99/20261011-formal-validation/failure.json"
+    },
+    {
+      "id": "batch100-selection",
+      "nature": "static_candidates_and_byte_AST_preread_not_review",
+      "purpose": "先前282目录的7静态候选及下一批171/179原文身份；不证明其余策略不可运行",
+      "source": "data/staging/strategies-batch99/20261011-next-source-screen/selection.json"
+    },
+    {
+      "id": "batch100-source-stage",
+      "nature": "verified_in_progress_original_source_callbacks_not_formal_or_trading",
+      "purpose": "两全文/32原诊断/5原异常，11本机11隔离；4852长窗仅预期且在运行，不计完成，正式284保持",
+      "source": "docs/handoff/2026-10-11-batch100-source-stage.json"
+    },
+    {
+      "id": "batch100-source-diagnostics",
+      "nature": "captured_synthetic_original_definitions_and_prediction_stubs",
+      "purpose": "原分钟取数、字典指数映射、严格阈值、部分卖出/cash反馈和原排名兼容缺陷；不执行pickle/训练/真实预测",
+      "source": "data/staging/strategies-batch100/20261011-original-feature-stage/diagnostics-preread.json"
+    },
+    {
+      "id": "batch100-prepared",
+      "nature": "frozen_original_400_row_feature_prefix_inputs_and_code",
+      "purpose": "5252旧ETF候选/7表10证券/原模型文件名实际缺失；raw volume单位与平台复权未证，未发布交易",
+      "source": "data/staging/strategies-batch100/20261011-original-feature-stage/prepared.json"
+    },
+    {
+      "id": "batch100-dependencies",
+      "nature": "actual_store_counts_candidate_byte_provenance_and_native_api_limits",
+      "purpose": "七指数行情0、0003005280基准行；50ETF/511880均缺输入，ndays5不能恢复4800条；Qlib/RQAlpha参考范围明确",
+      "source": "data/staging/strategies-batch100/20261011-original-feature-stage/dependencies.json"
+    },
+    {
+      "id": "batch100-source-checks",
+      "nature": "actual_11_local_11_isolated_and_four_copied_imports",
+      "purpose": "247副本四实际导入和11专项0skip；规定Ruff与diff通过，非全量pytest/长历史或回测验收",
+      "source": "data/staging/strategies-batch100/20261011-source-stage-validation/checked.json"
+    },
+    {
+      "id": "batch100-prepare-interruption",
+      "nature": "immutable_interrupted_inventory_before_stage_creation",
+      "purpose": "rglob重复遍历在任何阶段写入前exit130；改成一次rg搜索，新prepare成功，无经济或原来源修改",
+      "source": "data/staging/strategies-batch100/20261011-prepare-search-interruption/interruption.json"
+    },
+    {
+      "id": "batch100-supplement-stage",
+      "nature": "verified_in_progress_unit_counterexample_and_prior_payload_recheck",
+      "purpose": "193/1059单位反例、153旧股本/PCF载荷SHA及9结果，下一批字节/AST；长study/replay仍运行，不计正式或交易完成",
+      "source": "docs/handoff/2026-10-11-batch100-supplement-stage.json"
+    },
+    {
+      "id": "batch100-volume-unit",
+      "nature": "real_candidate_window_input_scale_counterexample_not_correction",
+      "purpose": "首400日真实候选两个volume尺度改变193列，均线旗标相同不证明原模型等价；实际尾行JSON/SHA保留",
+      "source": "data/staging/strategies-batch100/20261011-volume-unit-counterexample/counterexample.json"
+    },
+    {
+      "id": "batch100-prior-pcf-payloads",
+      "nature": "actual_sha_recheck_of_153_prior_dependency_payloads",
+      "purpose": "只读核第65批153旧载荷真实字节；未证明事件生效/历史版本或放行strict财报，非新增下载",
+      "source": "data/staging/strategies-batch100/20261011-share-pcf-name-recheck/payload-recheck.json"
+    },
+    {
+      "id": "batch101-preread",
+      "nature": "full_text_and_frozen_byte_AST_inventory_only",
+      "purpose": "72号256行10顶层/13含嵌套，36号67行4函数；尚无系统规则/诊断/输入或交易验收，不增来源计数",
+      "source": "data/staging/strategies-batch100/20261011-next-source-preread/preread.json"
+    },
+    {
+      "id": "batch100-recovery-stage",
+      "nature": "verified_in_progress_full_scope_chunk_recovery_after_observed_terminal_timeouts",
+      "purpose": "原两1800秒超时保留；逐窗原表达式/400行种子与1059列不改；34+34阶段与已完成块SHA，8完整历史未跑，非新交易",
+      "source": "docs/handoff/2026-10-11-batch100-recovery-stage.json"
+    },
+    {
+      "id": "batch100-formal",
+      "nature": "formal_source_research_acceptance_not_trading",
+      "purpose": "4852原400行前缀/32诊断、42本机42隔离、98禁网进程与旧资产保护；286来源不新增交易",
+      "source": "docs/handoff/2026-10-11-batch100-final-review.json"
+    },
+    {
+      "id": "batch100-formal-readback",
+      "nature": "independent_actual_receipt_navigation_and_catalog_readback",
+      "purpose": "正式凭据全部绑定SHA、目录身份和286/12/87实际读回",
+      "source": "data/staging/strategies-batch100/20261011-formal-readback/checked.json"
+    },
+    {
+      "id": "batch100-full-recovery",
+      "nature": "actual_full_scope_fresh_process_original_expression_replay",
+      "purpose": "两轮4852窗/各49块，三个输出字节一致；基础25列复用原库，不称全部指标独立",
+      "source": "data/staging/strategies-batch100/20261011-feature-chunk-recovery/offline-verification.json"
+    },
+    {
+      "id": "batch100-longest-readback",
+      "nature": "actual22_window_saved_feature_independent_derived_check",
+      "purpose": "22年度/末窗23298列读回，非TA指标或原模型证明",
+      "source": "data/staging/strategies-batch100/20261011-study-complete-readback/checked.json"
+    },
+    {
+      "id": "batch100-terminal-timeouts",
+      "nature": "observed_terminal_original_driver_failures",
+      "purpose": "两1800秒TimeoutExpired实际exit1；旧空目录未假恢复stdout",
+      "source": "data/staging/strategies-batch100/20261011-driver-timeout-evidence/failures.json"
+    },
+    {
+      "id": "batch101-preread-stage",
+      "nature": "actual_original_callback_phase_not_formal_source_or_trading",
+      "purpose": "32原诊断/4原异常、21本机21隔离、日期JSON红档，旧resample/生命周期未修",
+      "source": "docs/handoff/2026-10-11-batch101-preread-stage.json"
+    },
+    {
+      "id": "batch101-native-inventory",
+      "nature": "actual_frozen_registry_wire_and_parquet_inventory_not_ES_results",
+      "purpose": "5候选15462原生120行窗口仅库存；范围内两缺日/缺两基金不放行原组合",
+      "source": "data/staging/strategies-batch101/20261011-native-candidate-inventory/inventory.json"
+    },
+    {
+      "id": "batch101-preread-development",
+      "nature": "preserved_archive_encoding_failure_and_red_regression",
+      "purpose": "原datetime归档编码误报已修，未改原函数/经济规则",
+      "source": "data/staging/strategies-batch101/20261011-preread-development/failure.json"
+    },
+    {
+      "id": "batch101-prepared",
+      "nature": "frozen_parent_native_inputs_and_original_sources",
+      "purpose": "286父正式验收后冻结五原生候选/源字节/实现与实际Store库存",
+      "source": "data/staging/strategies-batch101/20261011-allweather-futures-source/prepared.json"
+    },
+    {
+      "id": "batch101-longest-references",
+      "nature": "actual_two_policy_native120_ES_operands_not_original_returns",
+      "purpose": "每种15462窗/30924行，分年/缺口/9008差异，原七基金权重与交易0",
+      "source": "data/staging/strategies-batch101/20261011-longest-ES-reference/study/summary.json"
+    },
+    {
+      "id": "batch101-longest-replay",
+      "nature": "actual_fresh_network_blocked_reference_ES_replay",
+      "purpose": "两实际新进程3输出逐值/字节match0，非交易observe reproduce",
+      "source": "data/staging/strategies-batch101/20261011-longest-ES-reference/offline-verification.json"
+    },
+    {
+      "id": "batch101-full-reference-guard",
+      "nature": "actual50_local50_copied_and_saved_ES_all_rows_readback",
+      "purpose": "6实际导入、0skip、各30924保存ES值/窗/缺口/分年检查；非全仓pytest",
+      "source": "data/staging/strategies-batch101/20261011-longest-reference-validation/checked.json"
+    },
+    {
+      "id": "batch101-price-policy-boundaries",
+      "nature": "actual_native_max_ES_policy_counterexamples_no_event_cause_inferred",
+      "purpose": "五基金尾部价格日期与操作数；513100/513500缺日后尺度变动原因未证，不能选无填充掩盖",
+      "source": "data/staging/strategies-batch101/20261011-reference-policy-boundaries/checked.json"
+    },
+    {
+      "id": "batch101-extended-registry-search",
+      "nature": "observed_pattern_scoped_rg_exit1_not_whole_machine_absence",
+      "purpose": "staging结果/reuse/quote JSON模式未匹配511260/510170，不证明供应商缺失",
+      "source": "data/staging/strategies-batch101/20261011-extended-registry-search/checked.json"
+    },
+    {
+      "id": "batch101-reference-phase",
+      "nature": "verified_in_progress_longest_reference_checkpoint_before_formal288",
+      "purpose": "50+50与30924全读回完成时仍正式286的历史阶段",
+      "source": "data/staging/strategies-batch101/20261011-longest-reference-checkpoint/checked.json"
+    },
+    {
+      "id": "batch101-report-order-failure",
+      "nature": "observed_report_generation_before_protect_terminal_rejection",
+      "purpose": "FileNotFound保护凭据，未写报告，原策略未出错；等既有protect终态后恢复",
+      "source": "data/staging/strategies-batch101/20261011-report-order-failure/failure.json"
+    },
+    {
+      "id": "batch101-formal",
+      "nature": "formal_source_research_not_fund_or_futures_trading",
+      "purpose": "288来源/12交易匹配/87父；原七基金和真实期货交易搁置",
+      "source": "docs/handoff/2026-10-11-batch101-final-review.json"
+    },
+    {
+      "id": "batch101-formal-readback",
+      "nature": "actual_final_receipt_catalog_and_navigation_readback",
+      "purpose": "全绑定SHA、正式288/12/87与候选目录身份读回",
+      "source": "data/staging/strategies-batch101/20261011-formal-readback/checked.json"
+    },
+    {
+      "id": "batch102-preread",
+      "nature": "next_source_full_text_byte_AST_inventory_only",
+      "purpose": "宏观48/ETF58原文字节/13与6函数冻结；未计来源验收或回测",
+      "source": "data/staging/strategies-batch101/20261011-next-source-preread/preread.json"
+    },
+    {
+      "id": "batch101-metadata-helper-import",
+      "nature": "observed_post_acceptance_handoff_tool_failure_not_strategy_error",
+      "purpose": "临时helper缺项目导入路径；命令局部PYTHONPATH修复，无安装/策略变化",
+      "source": "data/staging/strategies-batch101/20261011-metadata-update-import-failure/failure.json"
+    },
+    {
+      "id": "batch101-metadata-export-rejection",
+      "nature": "observed_post_acceptance_handoff_tool_failure_not_strategy_error",
+      "purpose": "实际旧导出拒绝配置中途变化且未切根索引；终态后新导出最终一致状态",
+      "source": "data/staging/strategies-batch101/20261011-metadata-update-import-failure/export-rejection.json"
+    },
+    {
+      "id": "batch103-price-prepared",
+      "nature": "frozen_source_operands_and_actual_import_graph",
+      "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+      "source": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/prepared.json"
+    },
+    {
+      "id": "batch103-price-inventory",
+      "nature": "actual_snapshot_counts_and_five_original_registries_not_whole_machine_absence",
+      "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+      "source": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/dependencies.json"
+    },
+    {
+      "id": "batch103-price-reference",
+      "nature": "longest_native_EOD_operand_references_not_intraday_signals",
+      "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+      "source": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute/summary.json"
+    },
+    {
+      "id": "batch103-price-offline",
+      "nature": "two_fresh_network_blocked_byte_equal_workers",
+      "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+      "source": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/offline-verification.json"
+    },
+    {
+      "id": "batch103-price-validation",
+      "nature": "complete_saved_scope_and_copied_actual_imports",
+      "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+      "source": "data/staging/strategies-batch103/20261011-price-stage-validation/checked.json"
+    },
+    {
+      "id": "batch103-set-trials",
+      "nature": "four_actual_set_processes_with_controlled_equal_price_and_draw",
+      "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+      "source": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/actual-set-trials/results.json"
+    },
+    {
+      "id": "batch103-price-numeric-boundaries",
+      "nature": "original_and_fsum_reference_disagreements_no_production_fix",
+      "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+      "source": "data/staging/strategies-batch103/20261011-price-numeric-boundaries/checked.json"
+    },
+    {
+      "id": "batch103-development-failure",
+      "nature": "observed_AST_selection_and_test_exception_failures_retained",
+      "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+      "source": "data/staging/strategies-batch103/20261011-initial-reference-test-failure/failure.json"
+    },
+    {
+      "id": "batch103-price-phase",
+      "nature": "in_progress_stage_after_formal290_not_source_acceptance",
+      "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+      "source": "data/staging/strategies-batch103/20261011-price-stage-checkpoint/checked.json"
+    },
+    {
+      "id": "batch103-handoff-import-failure",
+      "nature": "observed_temporary_script_import_failure_recovered_without_strategy_changes",
+      "purpose": "归档临时脚本未含项目import路径；命令局部PYTHONPATH恢复，无安装或规则变化",
+      "source": "data/staging/strategies-batch103/20261011-stage-recording-import-failure/failure.json"
+    },
+    {
+      "id": "batch103-volume-prepared",
+      "nature": "frozen_native_volume_graph",
+      "purpose": "原生8候选/沪深300投影、143冻结文件",
+      "source": "data/staging/strategies-batch103/20261011-native-emotion-reference/prepared.json"
+    },
+    {
+      "id": "batch103-volume-reference",
+      "nature": "native_and_explicit_float_only",
+      "purpose": "48437窗/35178类型差异/5667早期日历窗，交易0",
+      "source": "data/staging/strategies-batch103/20261011-native-emotion-reference/compute/summary.json"
+    },
+    {
+      "id": "batch103-volume-offline",
+      "nature": "two_actual_blocked_workers",
+      "purpose": "三输出逐字节0差，非交易复现",
+      "source": "data/staging/strategies-batch103/20261011-native-emotion-reference/offline-verification.json"
+    },
+    {
+      "id": "batch103-formal-checks",
+      "nature": "48_local48_copied_full_readback",
+      "purpose": "530副本五实际导入，两处各1456719单元",
+      "source": "data/staging/strategies-batch103/20261011-formal-validation-v3/checked.json"
+    },
+    {
+      "id": "batch103-formal",
+      "nature": "formal_source_not_trading",
+      "purpose": "仅两来源变化，正式292/12/87",
+      "source": "docs/handoff/2026-10-11-batch103-final-review.json"
+    },
+    {
+      "id": "batch103-formal-readback",
+      "nature": "actual_final_navigation",
+      "purpose": "17绑定SHA/仅两行delta/693不变",
+      "source": "data/staging/strategies-batch103/20261011-formal-readback/checked.json"
+    },
+    {
+      "id": "batch103-isolated-import-failure-v1",
+      "nature": "observed_copy_dependency_failure",
+      "purpose": "v1隔离缺accept100，首次记录器错误归因也保留",
+      "source": "data/staging/strategies-batch103/20261011-formal-validation-import-failure/failure.json"
+    },
+    {
+      "id": "batch103-isolated-import-failure-v2",
+      "nature": "observed_incomplete_first_recovery",
+      "purpose": "v2仍漏accept100/recover100，v3闭合实际导入后通过",
+      "source": "data/staging/strategies-batch103/20261011-formal-validation-v2-import-failure/failure.json"
+    },
+    {
+      "id": "batch104-preread",
+      "nature": "full_bytes_and_AST_only",
+      "purpose": "296/395行与33静态候选，不计验收",
+      "source": "data/staging/strategies-batch103/20261011-next-source-preread/preread.json"
+    },
+    {
+      "id": "batch104-original-diagnostics",
+      "nature": "original_intents_not_fills",
+      "purpose": "46诊断，原异常/反馈/伪ST/时点",
+      "source": "data/staging/strategies-batch104/20261011-original-diagnostic-development/diagnostics.json"
+    },
+    {
+      "id": "batch104-raw-reference-failure",
+      "nature": "native_NaN_driver_rejection",
+      "purpose": "718零量非交易NaN行，失败/红回归留档",
+      "source": "data/staging/strategies-batch104/20261011-raw-reference-failure/failure.json"
+    },
+    {
+      "id": "batch104-input-inventory",
+      "nature": "actual_snapshot_and_one_old_sample",
+      "purpose": "6919789日线/44571408五分钟不证明原执行",
+      "source": "data/staging/strategies-batch104/20261011-input-inventory/inventory.json"
+    },
+    {
+      "id": "batch104-moneyflow-numeric",
+      "nature": "explicit_numeric_reference",
+      "purpose": "119旧行118窗63符号变化，未用于交易",
+      "source": "data/staging/strategies-batch104/20261011-moneyflow-explicit-numeric-reference/compute/summary.json"
+    },
+    {
+      "id": "batch104-moneyflow-recovery",
+      "nature": "preserved_native_string_TypeError",
+      "purpose": "旧probe原文不改，新目录显式数字参考",
+      "source": "data/staging/strategies-batch104/20261011-moneyflow-explicit-numeric-reference/prepared.json"
+    },
+    {
+      "id": "batch104-handoff-path-failure",
+      "nature": "observed_helper_type_error",
+      "purpose": "归档helper需Path，改调用类型，无策略变化",
+      "source": "data/staging/strategies-batch104/20261011-metadata-update-path-failure/failure.json"
+    },
+    {
+      "id": "batch104-v3-prepared",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "data/staging/strategies-batch104/20261011-raw-formula-reference-v3/prepared.json",
+      "fields": [
+        "status",
+        "parent",
+        "snapshot",
+        "snapshot_sha256",
+        "origin",
+        "evidence_sha256",
+        "new_trading_backtests",
+        "formal_source_research_acceptance"
+      ]
+    },
+    {
+      "id": "batch104-v3-reference",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "data/staging/strategies-batch104/20261011-raw-formula-reference-v3/compute/summary.json"
+    },
+    {
+      "id": "batch104-v3-offline",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "data/staging/strategies-batch104/20261011-raw-formula-reference-v3/offline-verification.json"
+    },
+    {
+      "id": "batch104-relative-reference-failure",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "data/staging/strategies-batch104/20261011-relative-threshold-failure/failure.json",
+      "fields": [
+        "status",
+        "source_function_original_unchanged",
+        "original_upper_bounds",
+        "incorrect_reference_second_upper",
+        "false_disagreements",
+        "old_directory",
+        "old_process_terminal_success",
+        "old_byte_replay_differences"
+      ]
+    },
+    {
+      "id": "batch104-stage-receipt-failure",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "data/staging/strategies-batch104/20261011-stage-receipt-recovery/failure.json",
+      "fields": [
+        "status",
+        "error",
+        "original_command_returncode",
+        "saved_counter_type_before_recovery",
+        "source_strategy_modified"
+      ]
+    },
+    {
+      "id": "batch104-stage-receipt-recovered",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "data/staging/strategies-batch104/20261011-stage-receipt-recovery/checked.json"
+    },
+    {
+      "id": "batch104-stage-recovery-command",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "data/staging/strategies-batch104/20261011-receipt-recovery-development/recover-command.json"
+    },
+    {
+      "id": "batch104-original-condition-AST",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "data/staging/strategies-batch104/20261011-short-condition-AST-check/checked.json"
+    },
+    {
+      "id": "batch104-all-schema-inventory",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "data/staging/strategies-batch104/20261011-complete-schema-inventory/checked.json",
+      "fields": [
+        "status",
+        "snapshot",
+        "snapshot_sha256",
+        "partitions_checked",
+        "absence_scope",
+        "original_named_fields_absent",
+        "aliases_or_derived_values_are_not_proven_equivalent",
+        "no_fresh_full_partition_byte_hash",
+        "new_trading_backtests"
+      ]
+    },
+    {
+      "id": "batch104-moneyflow-offline",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "data/staging/strategies-batch104/20261011-moneyflow-explicit-numeric-reference/offline-verification.json"
+    },
+    {
+      "id": "batch104-reference-stage",
+      "nature": "batch104_component_stage_not_trading",
+      "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+      "source": "docs/handoff/2026-10-11-batch104-reference-stage.json",
+      "fields": [
+        "status",
+        "progress",
+        "formal_source_research_acceptance",
+        "formal_trading_acceptance",
+        "original_diagnostics",
+        "tests",
+        "receipt_recovery_tests",
+        "saved_readback",
+        "fresh_old_asset_protection_in_this_stage",
+        "new_trading_backtests",
+        "new_strategy_parent_runs",
+        "evidence_sha256"
+      ]
+    },
+    {
+      "id": "batch104-formal-checks",
+      "nature": "source_research_control_or_initial_read_not_trading",
+      "purpose": "第104批正式294/12/87及新目录读回恢复；第105批仅初读；经济批准不扩大",
+      "source": "data/staging/strategies-batch104/20261011-formal-validation/checked.json"
+    },
+    {
+      "id": "batch104-formal",
+      "nature": "source_research_control_or_initial_read_not_trading",
+      "purpose": "第104批正式294/12/87及新目录读回恢复；第105批仅初读；经济批准不扩大",
+      "source": "docs/handoff/2026-10-11-batch104-final-review.json"
+    },
+    {
+      "id": "batch104-fresh-protection",
+      "nature": "source_research_control_or_initial_read_not_trading",
+      "purpose": "第104批正式294/12/87及新目录读回恢复；第105批仅初读；经济批准不扩大",
+      "source": "data/staging/strategies-batch104/20261011-formal-source-acceptance/protection.json"
+    },
+    {
+      "id": "batch104-final-readback-shape-failure",
+      "nature": "source_research_control_or_initial_read_not_trading",
+      "purpose": "第104批正式294/12/87及新目录读回恢复；第105批仅初读；经济批准不扩大",
+      "source": "data/staging/strategies-batch104/20261011-final-readback-shape-failure/failure.json"
+    },
+    {
+      "id": "batch104-final-readback",
+      "nature": "source_research_control_or_initial_read_not_trading",
+      "purpose": "第104批正式294/12/87及新目录读回恢复；第105批仅初读；经济批准不扩大",
+      "source": "data/staging/strategies-batch104/20261011-formal-readback/checked.json"
+    },
+    {
+      "id": "batch104-final-readback-recovery",
+      "nature": "source_research_control_or_initial_read_not_trading",
+      "purpose": "第104批正式294/12/87及新目录读回恢复；第105批仅初读；经济批准不扩大",
+      "source": "docs/handoff/2026-10-11-batch104-readback-recovery.json"
+    },
+    {
+      "id": "batch105-preread",
+      "nature": "source_research_control_or_initial_read_not_trading",
+      "purpose": "第104批正式294/12/87及新目录读回恢复；第105批仅初读；经济批准不扩大",
+      "source": "data/staging/strategies-batch104/20261011-next-source-preread/preread.json"
+    },
+    {
+      "id": "batch105-module-inventory",
+      "nature": "actual_local_text_search_not_dependency_equivalence",
+      "purpose": "py/ipynb无声明、txt仅原调用；不证明远程/全机不存在，不发明经济规则",
+      "source": "data/staging/strategies-batch105/20261011-initial-module-inventory/checked.json"
+    },
+    {
+      "id": "batch105-initial-stage",
+      "nature": "in_progress_not_formal_source_or_trade",
+      "purpose": "两全文/AST与初始模块库存；全库目标继续294/12/87",
+      "source": "docs/handoff/2026-10-11-batch105-preread-stage.json"
+    },
+    {
+      "id": "batch105-primary-probes",
+      "nature": "original_dependency_requests_zero_responses",
+      "purpose": "两实际请求为代理连接权限失败；原NHNL与历史分类未证明",
+      "source": "data/staging/strategies-batch105/20261011-primary-dependency-probes/checked.json"
+    },
+    {
+      "id": "batch105-compatibility-stage",
+      "nature": "immutable_development_checkpoint",
+      "purpose": "原时间与索引名称错误及16恢复/19当时测试，历史进行中点不算正式",
+      "source": "docs/handoff/2026-10-11-batch105-compatibility-stage.json",
+      "fields": [
+        "status",
+        "progress",
+        "root_cause",
+        "reference_input_validation",
+        "longest_component",
+        "formal_source_research_acceptance",
+        "new_trading_backtests"
+      ]
+    },
+    {
+      "id": "batch105-longest-summary",
+      "nature": "complete_native_raw_and_calendar_operand_arithmetic_not_trading",
+      "purpose": "2005至2026逐年覆盖；原池/行业/40日平台协议不等价；373/6边界保留",
+      "source": "data/staging/strategies-batch105/20261011-longest-operands-v1/compute/summary.json",
+      "fields": [
+        "status",
+        "price_rows",
+        "native_symbols",
+        "native_output_rows",
+        "native_engine_differences",
+        "native_boundary_differences",
+        "first",
+        "last",
+        "years",
+        "fixed40_scope",
+        "fixed40_rows",
+        "fixed40_boundary_differences",
+        "age_scope",
+        "age_output_rows",
+        "age_count_differences",
+        "new_trading_backtests",
+        "original_strategy_complete"
+      ]
+    },
+    {
+      "id": "batch105-date-precision-failure",
+      "nature": "actual_parquet_unit_promotion_control_failure",
+      "purpose": "秒提升毫秒值无损，原校验器与最小失败保留",
+      "source": "data/staging/strategies-batch105/20261011-stage-date-precision-failure/checked.json"
+    },
+    {
+      "id": "batch105-component-recovery",
+      "nature": "all_saved_rows_and_copied_22_tests",
+      "purpose": "全部681万保存值、固定40与年龄统计读回；日期转换无损，1ms改变拒绝",
+      "source": "data/staging/strategies-batch105/20261011-component-stage-recovery/checked.json",
+      "fields": [
+        "status",
+        "tests",
+        "copied_files",
+        "saved_readback",
+        "protection",
+        "formal_source_research_acceptance",
+        "new_trading_backtests"
+      ]
+    },
+    {
+      "id": "batch105-date-recovery",
+      "nature": "immutable_recovery_sidecar",
+      "purpose": "原失败校验器不改；恢复代码SHA与终态绑定",
+      "source": "data/staging/strategies-batch105/20261011-component-stage-recovery/recovery.json"
+    },
+    {
+      "id": "batch105-protocol-boundaries",
+      "nature": "complete_real_boundary_rows_and_window_protocol_differences",
+      "purpose": "373/6严格比较差异，94699重叠中7差异/1161无native输出",
+      "source": "data/staging/strategies-batch105/20261011-real-boundaries-and-protocol/checked.json"
+    },
+    {
+      "id": "batch105-protocol-window-identity",
+      "nature": "actual_same20_operands_with_different_rolling_paths",
+      "purpose": "7个差异逐窗核20行日期/收盘完全同值，ULP误差留档",
+      "source": "data/staging/strategies-batch105/20261011-protocol-window-identity/checked.json"
+    },
+    {
+      "id": "batch105-formal-copy-recovery",
+      "nature": "isolated_missing_helper_failure_and_31_test_recovery",
+      "purpose": "本机31绿但隔离缺模块；新目录178副本/31与31/五实际导入核验",
+      "source": "docs/handoff/2026-10-11-batch105-formal-copy-recovery.json"
+    },
+    {
+      "id": "batch105-formal-source-acceptance",
+      "nature": "two_nontrading_sources_accepted_without_trading",
+      "purpose": "296来源/12匹配来源87父，原NHNL/完整池/平台仍未证明，来源审查和交易分开",
+      "source": "docs/handoff/2026-10-11-batch105-final-review.json",
+      "fields": [
+        "status",
+        "formal_source_research_acceptance",
+        "formal_trading_acceptance",
+        "original_strategy_complete",
+        "library_goal_complete",
+        "progress",
+        "components",
+        "formal_tests",
+        "protection",
+        "source_sha256",
+        "new_independent_sources",
+        "new_trading_backtests",
+        "new_strategy_parent_runs",
+        "review_method"
+      ]
+    },
+    {
+      "id": "batch105-final-readback",
+      "nature": "final_11_bindings_29_actual_inputs_and_693_unchanged_sources",
+      "purpose": "排除辅助output字段核共同检查点；正式31/31及178副本最终读回",
+      "source": "data/staging/strategies-batch105/20261011-formal-readback/checked.json"
+    },
+    {
+      "id": "batch106-selection",
+      "nature": "remaining_source_AST_candidates_not_full_review",
+      "purpose": "399剩余源SHA与实际AST候选、语法失败保留，全文选择85/69；静态扫描不证明可达或可交易",
+      "source": "data/staging/strategies-batch106/20261011-monthly-slots-value-average-v1/selection.json",
+      "fields": [
+        "remaining_sources",
+        "scope",
+        "parse_failure_policy",
+        "full_source_reviews_this_stage"
+      ]
+    },
+    {
+      "id": "batch106-component-stage",
+      "nature": "verified_original_diagnostics_native_operands_not_trading",
+      "purpose": "29诊断、4776/4094极值与225标量，24本机24复制/51副本及旧资产保护；原月MACD与交易0",
+      "source": "data/staging/strategies-batch106/20261011-monthly-slots-value-average-v1/checked.json",
+      "fields": [
+        "status",
+        "summary",
+        "tests",
+        "protection",
+        "output_files",
+        "fresh_network_blocked_processes",
+        "offline_differences",
+        "stage_only",
+        "new_trading_backtests"
+      ]
+    },
+    {
+      "id": "batch106-calendar-profile",
+      "nature": "actual_native_calendar_coverage_not_pause_proof",
+      "purpose": "8原生候选；159905/513100各缺1开市日，不填充或推断停牌",
+      "source": "data/staging/strategies-batch106/20261011-calendar-coverage-v1/checked.json"
+    },
+    {
+      "id": "batch106-event-probe",
+      "nature": "actual_bounded_request_failure",
+      "purpose": "159905一次实际DNS失败0响应，159949同域未请求；参考URL/源码与限制，0发布/交易",
+      "source": "data/staging/strategies-batch106/20261011-fund-event-probe-v1/checked.json"
+    },
+    {
+      "id": "batch106-development-failure",
+      "nature": "archived_failed_fixture_summary",
+      "purpose": "9失败15通过与原实现/测试SHA；没有完整stdout日志，后续修正夹具并保留整手结果",
+      "source": "data/staging/strategies-batch106/20261011-development-fixture-failure/failure.json"
+    },
+    {
+      "id": "batch106-final-readback",
+      "nature": "actual_final_catalog_and_receipt_readback",
+      "purpose": "正式298/剩397、693无关来源不变、目录与检查点指针及所有正式证据SHA读回",
+      "source": "data/staging/strategies-batch106/20261011-final-readback-v1/checked.json"
+    },
+    {
+      "id": "batch106-catalog-metadata-tests",
+      "nature": "actual_catalog_metadata_regression",
+      "purpose": "11项目录模块与元数据相关239回归通过，不计交易回测",
+      "source": "data/staging/strategies-batch106/20261011-formal-source-acceptance-v1/catalog-metadata-tests.json"
+    },
+    {
+      "id": "batch107-selection",
+      "nature": "remaining397_free_function_candidate_graph_only",
+      "purpose": "原剩余SHA已核；类/动态派发/外部helper和分支未解析，不能据图放行交易",
+      "source": "data/staging/strategies-batch107/20261011-ETF-regression-means-v1/selection.json",
+      "fields": [
+        "remaining_sources",
+        "scope",
+        "parse_failure_policy",
+        "full_source_reviews"
+      ]
+    },
+    {
+      "id": "batch107-component-stage",
+      "nature": "immutable_verified_compute_and_tests_not_formal",
+      "purpose": "30原诊断/11663原生回归/3170排名，两进程四输出一致和32复制测试；阶段正式计数仍298，后续凭据覆盖进行中检查",
+      "source": "docs/handoff/2026-10-11-batch107-component-stage.json",
+      "fields": [
+        "status",
+        "current_stage_checkpoint",
+        "formal_reviewed",
+        "remaining_formal",
+        "summary",
+        "copied_tests",
+        "formal_source_research_acceptance",
+        "new_trading_backtests"
+      ]
+    },
+    {
+      "id": "batch107-probe",
+      "nature": "actual_native_interface_failure_no_responses",
+      "purpose": "159608一次DNS失败，余22未请求；399306不当ETF请求，无新发布",
+      "source": "data/staging/strategies-batch107/20261011-original-pool-probe-v1/checked.json"
+    },
+    {
+      "id": "batch107-scale-identity",
+      "nature": "supplier_index_identity_and_three_native_scale_jumps",
+      "purpose": "三跳变原因未证，原评分约1507万与独立误差3.09e-7；58指定层级登记无23基金候选，不能推断远程库存",
+      "source": "data/staging/strategies-batch107/20261011-gap-scale-identity-v1/checked.json",
+      "fields": [
+        "status",
+        "master399306",
+        "large_native_price_jumps_gt50pct",
+        "largest_saved_score_errors",
+        "repaired_prices",
+        "original61_tradeability_proven",
+        "limits",
+        "new_trading_backtests"
+      ]
+    },
+    {
+      "id": "batch107-formal-source",
+      "nature": "two_full_ETF_sources_accepted_without_trading",
+      "purpose": "正式300/剩395，12匹配来源87父；32本机32复制/39正式与旧资产保护、独立回归及排名核验通过",
+      "source": "docs/handoff/2026-10-11-batch107-final-review.json",
+      "fields": [
+        "status",
+        "formal_source_research_acceptance",
+        "formal_trading_acceptance",
+        "original_strategy_complete",
+        "library_goal_complete",
+        "progress",
+        "components",
+        "source_sha256",
+        "new_trading_backtests",
+        "new_strategy_parent_runs",
+        "review_method"
+      ]
+    },
+    {
+      "id": "batch107-final-readback",
+      "nature": "actual_final_catalog_and_receipt_bindings",
+      "purpose": "所有正式证据SHA/两源/693其他来源与指针读回；旧冻结实现不可直接用新代码重跑",
+      "source": "data/staging/strategies-batch107/20261011-final-readback-v1/checked.json"
+    },
+    {
+      "id": "batch107-catalog-metadata-regression",
+      "nature": "actual239_catalog_metadata_tests",
+      "purpose": "真实10目录模块与元数据239通过；此前不存在测试路径造成零执行已更正并记录",
+      "source": "data/staging/strategies-batch107/20261011-catalog-metadata-regression-v1/tests.json"
+    },
+    {
+      "id": "batch108-preread",
+      "nature": "full_source_preread_and_actual_active_table_inventory_not_formal",
+      "purpose": "300正式/395剩余不变；无成员活跃表，国债载体与月线/调度/初始化未核，不造交易",
+      "source": "docs/handoff/2026-10-11-batch108-preread-stage.json",
+      "fields": [
+        "status",
+        "progress",
+        "sources",
+        "active_tables",
+        "index_constituents_in_active_snapshot",
+        "findings",
+        "next_action",
+        "formal_source_research_acceptance",
+        "formal_trading_acceptance",
+        "new_trading_backtests",
+        "library_goal_complete"
+      ]
+    }
   ]
 }

@@ -1,0 +1,264 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "wizard_defaults_five_callbacks_ten_slots",
+        "external_helpers_proved": false,
+        "industry_count": 28,
+        "outer_sort": "desc",
+        "scheduled": [
+          [
+            "sell_every_day",
+            "open"
+          ],
+          [
+            "risk_management",
+            "every_bar"
+          ],
+          [
+            "check_stocks",
+            "open"
+          ],
+          [
+            "trade",
+            "open"
+          ],
+          [
+            "selled_security_list_count",
+            "after_close"
+          ]
+        ],
+        "score_input": {
+          "market_cap": [
+            "asc",
+            50
+          ]
+        }
+      },
+      {
+        "case": "wizard_pool_sorted_deduplicated",
+        "pool": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "case": "wizard_user_security_string_extends_characters",
+        "pool": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "after_limit": [
+          "D"
+        ],
+        "after_names": [
+          "C",
+          "D"
+        ],
+        "case": "wizard_name_star_retirement_and_open_equal_limit_filters"
+      },
+      {
+        "case": "wizard_false_hold_filter_excludes_existing",
+        "remaining": [
+          "C"
+        ]
+      },
+      {
+        "case": "wizard_missing_score_helper_NameError",
+        "error": "NameError",
+        "orders": []
+      },
+      {
+        "case": "wizard_removed_DataFrame_sort",
+        "error": "AttributeError",
+        "orders": []
+      },
+      {
+        "case": "wizard_empty_pool_avoids_unknown_sort",
+        "result": []
+      },
+      {
+        "case": "wizard_selection_callback_numbers_1_6_11",
+        "counter_at_selection": [
+          0,
+          5,
+          5
+        ],
+        "final_counter": 1
+      },
+      {
+        "case": "wizard_None_pending_sell_retained",
+        "orders": [
+          [
+            "target",
+            "D",
+            0
+          ]
+        ],
+        "pending": [
+          "D"
+        ]
+      },
+      {
+        "case": "wizard_missing_sell_helper_NameError",
+        "error": "NameError",
+        "orders": []
+      },
+      {
+        "case": "wizard_dynamic_keys_lose_immediate_sold_history",
+        "sold_counter": {}
+      },
+      {
+        "case": "wizard_missing_order_style_NameError",
+        "error": "NameError",
+        "orders": []
+      },
+      {
+        "case": "wizard_external_size_stubs_only_increment_intent",
+        "orders": [
+          [
+            "increment",
+            "D",
+            100,
+            "synthetic-style"
+          ]
+        ],
+        "real_size_rule_proved": false
+      },
+      {
+        "allocator_candidates": [
+          "20",
+          "21",
+          "22",
+          "23"
+        ],
+        "case": "wizard_overfull_negative_slice_calls_allocator_but_no_order"
+      },
+      {
+        "case": "rotation_same_date_PEgt1_two_indices_increment_retained_cash_div10",
+        "index_calls": [
+          "000001.XSHG",
+          "399106.XSHE"
+        ],
+        "orders": [
+          [
+            "target",
+            "OLD",
+            0
+          ],
+          [
+            "increment_value",
+            "A",
+            100.0
+          ],
+          [
+            "increment_value",
+            "C",
+            100.0
+          ]
+        ],
+        "price_call": {
+          "args": [
+            [
+              "A",
+              "B",
+              "C"
+            ]
+          ],
+          "kwargs": {
+            "end_date": "2024-01-02 09:30:00",
+            "fields": "paused",
+            "frequency": "daily",
+            "start_date": "2024-01-02 09:30:00"
+          }
+        },
+        "query": {
+          "filters": [
+            [
+              "in",
+              "code",
+              [
+                "A",
+                "C"
+              ]
+            ],
+            [
+              "gt",
+              "pe_ratio",
+              1
+            ]
+          ],
+          "kwargs": {
+            "date": "2024-01-02"
+          },
+          "sort": [
+            [
+              "asc",
+              "market_cap"
+            ]
+          ]
+        },
+        "scheduled": [
+          [
+            "daily",
+            {
+              "time": "every_bar"
+            }
+          ]
+        ]
+      },
+      {
+        "case": "rotation_every10_callbacks_not_proved_days",
+        "final_counter": 22,
+        "selected_callbacks": [
+          1,
+          11,
+          21
+        ]
+      },
+      {
+        "case": "rotation_immediate_sell_mutates_iteration_RuntimeError",
+        "error": "RuntimeError",
+        "orders": [
+          [
+            "target",
+            "OLD",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "rotation_exception_preserves_counter",
+        "counter": 1
+      },
+      {
+        "case": "rotation_empty_candidates_no_order_but_counter_advances",
+        "counter": 2,
+        "orders": []
+      },
+      {
+        "case": "rotation_empty_same_day_paused_IndexError",
+        "error": "IndexError",
+        "orders": []
+      }
+    ],
+    "limits": [
+      "Explicit query/history/order stubs only; no platform helper reconstruction or actual fills",
+      "No source59 every_bar-to-trading-day conversion or same-day valuation repair approved"
+    ],
+    "not_a_backtest": true,
+    "platform_equivalent": false,
+    "real_historical_trade_windows": 0,
+    "synthetic_fixture": true
+  },
+  "case_id": "smallcap-PE-batch71-diagnostics",
+  "nature": "accepted_original_function_synthetic_diagnostics",
+  "purpose": "21原回调/缺失helper/同日查询/增量订单及字典变动诊断，18专项/123相关通过；来源研究验收，不计真实交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch71/20261008-smallcap-PE-rotation/diagnostics.json",
+    "sha256": "0d5a0e39420e911330461c66ecf96042cf2a4f2eb668d65b81433d2b33b0aeb1"
+  }
+}

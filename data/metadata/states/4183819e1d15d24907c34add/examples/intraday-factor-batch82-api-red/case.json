@@ -1,0 +1,32 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "scripts.verify_offline_tests",
+      "-q",
+      "tests/unit/test_batch82_research.py"
+    ],
+    "frozen_copies": {
+      "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-api-regression/red.log": "8bcbcd74627b6acaa6b252fe46e45a9e5d6d2f447ffe5b32150cc5236abdff94",
+      "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-api-regression/strategy_catalog.py": "25cfb3712c9a4d505b3a9e33403691388aad0fcf34e693710d5e4f24670a27cd",
+      "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-api-regression/test_batch82_research.py": "eeff6939cf53cf69002d08bdeedc3ac25c26c33e6f142c56fb8aa8d087b7260d"
+    },
+    "implementation_before": {
+      "src/observe/strategy_catalog.py": "25cfb3712c9a4d505b3a9e33403691388aad0fcf34e693710d5e4f24670a27cd",
+      "tests/unit/test_batch82_research.py": "eeff6939cf53cf69002d08bdeedc3ac25c26c33e6f142c56fb8aa8d087b7260d"
+    },
+    "log": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-api-regression/red.log",
+    "not_a_backtest": true,
+    "returncode": 1,
+    "sha256": "8bcbcd74627b6acaa6b252fe46e45a9e5d6d2f447ffe5b32150cc5236abdff94"
+  },
+  "case_id": "intraday-factor-batch82-api-red",
+  "nature": "immutable_calendar_api_detection_red_regression",
+  "purpose": "修前4失败2通过；修前目录代码/测试/日志SHA只读保留；全部695影响54文本候选/56记录变化含三审查，不改原经济规则",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-api-regression/failure.json",
+    "sha256": "28faef46f882200c5e62ee53a1194072a3c2f5ae433278da38490507c6ad21bb"
+  }
+}

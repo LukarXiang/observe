@@ -1,0 +1,203 @@
+{
+ "status": "ok",
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "original_strategy_complete": false,
+ "library_goal_complete": false,
+ "progress": {
+  "checkpoint": "20261011-074705-ed10",
+  "note": "Batch106 two sources accepted;29 original diagnostics,4776 one-year/4094 two-horizon/225 annual scalar references;24 local+24 copied and31 formal tests;ETF trading blocked",
+  "catalog_id": "274b80cd01f537f66ef2",
+  "catalog_sha256": "989d489e6ed281ae625b1076829c85cb283d8d2d97ba46e9ac2d40feacc705fd",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 298,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-074705-ed10"
+ },
+ "components": {
+  "summary": {
+   "status": "native_operands_and_original_diagnostics_only",
+   "diagnostic_cases": 29,
+   "one_year_windows": 4776,
+   "two_horizon_windows": 4094,
+   "incomplete_two_horizons_or_zero_range": 682,
+   "first": "2007-02-05",
+   "last": "2026-09-29",
+   "independent_extrema_differences": 0,
+   "annual_scalar_reference_rows": 225,
+   "annual_skipped": 35,
+   "annual_decimal_threshold_differences": 0,
+   "by_year": [
+    {
+     "year": 2007,
+     "rows": 220,
+     "complete_two_horizons": 0
+    },
+    {
+     "year": 2008,
+     "rows": 246,
+     "complete_two_horizons": 0
+    },
+    {
+     "year": 2009,
+     "rows": 244,
+     "complete_two_horizons": 28
+    },
+    {
+     "year": 2010,
+     "rows": 242,
+     "complete_two_horizons": 242
+    },
+    {
+     "year": 2011,
+     "rows": 244,
+     "complete_two_horizons": 244
+    },
+    {
+     "year": 2012,
+     "rows": 243,
+     "complete_two_horizons": 243
+    },
+    {
+     "year": 2013,
+     "rows": 238,
+     "complete_two_horizons": 238
+    },
+    {
+     "year": 2014,
+     "rows": 245,
+     "complete_two_horizons": 245
+    },
+    {
+     "year": 2015,
+     "rows": 244,
+     "complete_two_horizons": 244
+    },
+    {
+     "year": 2016,
+     "rows": 244,
+     "complete_two_horizons": 244
+    },
+    {
+     "year": 2017,
+     "rows": 244,
+     "complete_two_horizons": 244
+    },
+    {
+     "year": 2018,
+     "rows": 243,
+     "complete_two_horizons": 243
+    },
+    {
+     "year": 2019,
+     "rows": 244,
+     "complete_two_horizons": 244
+    },
+    {
+     "year": 2020,
+     "rows": 243,
+     "complete_two_horizons": 243
+    },
+    {
+     "year": 2021,
+     "rows": 243,
+     "complete_two_horizons": 243
+    },
+    {
+     "year": 2022,
+     "rows": 242,
+     "complete_two_horizons": 242
+    },
+    {
+     "year": 2023,
+     "rows": 242,
+     "complete_two_horizons": 242
+    },
+    {
+     "year": 2024,
+     "rows": 242,
+     "complete_two_horizons": 242
+    },
+    {
+     "year": 2025,
+     "rows": 243,
+     "complete_two_horizons": 243
+    },
+    {
+     "year": 2026,
+     "rows": 180,
+     "complete_two_horizons": 180
+    }
+   ],
+   "original_MACD_computed": false,
+   "complete_original_signals": 0,
+   "new_trading_backtests": 0,
+   "original_69_count_type": "375.0/625.0; explicit integral-float operand adapter, platform acceptance unproven",
+   "original_85_get_zf_reproduced": false,
+   "ETF_adjustment_events_and_intraday_execution_proven": false,
+   "formal_source_research_acceptance": false,
+   "library_goal_complete": false
+  },
+  "tests": {
+   "status": "ok",
+   "local_tests": 24,
+   "isolated_tests": 24,
+   "actual_imports_checked": 3,
+   "implementation_copies": 51,
+   "command_sha256": {
+    "data/staging/strategies-batch106/20261011-monthly-slots-value-average-v1/local-tests.json": "90417a0d9ded5cf33f1a3c285621c2d43306da6fd0fcb108c835da39c60373b0",
+    "data/staging/strategies-batch106/20261011-monthly-slots-value-average-v1/isolated-tests.json": "0fff87eb38224fdbcc02e60c6e6a99d242276792bdb7331beee7a0f03b53ae0f"
+   }
+  },
+  "protection": {
+   "status": "ok",
+   "old_controls_unchanged": 6614,
+   "mutable_registry_files_excluded": 0,
+   "old_partition_metadata_unchanged": 398,
+   "old_calendar_rows_unchanged": 7938,
+   "old_index_rows_unchanged": 5280,
+   "partition_check": "size/mtime only; no fresh full hash",
+   "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+  },
+  "output_files": 4,
+  "fresh_network_blocked_processes": 2,
+  "offline_differences": 0,
+  "new_trading_backtests": 0
+ },
+ "source_sha256": [
+  "dcae7848a99b7cdffb7a2d99564da319bbe662f0328c5424e7f1e3852b275876",
+  "8af59e10a1c1c8810f91bdeb2d76cdc017e8812c058f0fb324aea47cc9d444ee"
+ ],
+ "new_trading_backtests": 0,
+ "new_strategy_parent_runs": 0,
+ "evidence_sha256": {
+  "docs/handoff/batch106-y2025-085-source-review.yaml": "046557e9b99d7cee77430aa185c67a9e38703600c57df7347e20abbdb0cca43f",
+  "docs/handoff/batch106-y2024b-069-source-review.yaml": "f08b45f110b210c152fb717202cbe357044f520c394e095ab09b60c94a8beb1f",
+  "data/staging/strategies-batch106/20261011-monthly-slots-value-average-v1/checked.json": "60bc1cca926f94e334dc5d8ca07bd515034674b30e85ecc50b0b0e21cb0f2051",
+  "docs/handoff/2026-10-11-batch105-final-review.json": "6be36344b6ebffd8257fb732d622d2077efbc51a7c7956bdd34a76877859d793",
+  "data/staging/strategies-batch106/20261011-fund-event-probe-v1/checked.json": "5d175b2a8c27d38c1b54908db04db40ec1d2aaa6ab4337d35f39d60069c90b58",
+  "data/staging/strategies-batch106/20261011-calendar-coverage-v1/checked.json": "6277035c9fd96dc00567c9d247103cf65a3f9d2a01371b50bd21258963268efe",
+  "data/staging/strategies-batch106/20261011-development-fixture-failure/failure.json": "5391156e788ebbd79985fb99ca32ca8b4b51a39d36ff081751a9dd9492f67020",
+  "scripts/accept_strategy_batch106.py": "197ed493132e6d1fc372f61f5120a725b29345d81c4ac5d35d96a02a67a9926c",
+  "tests/unit/test_batch106_acceptance.py": "f2ec68222d3cda363284e9e0ae116a9ba44d2969b7673ab745bfb5c2fdef7e47",
+  "docs/tasks/2026-10-11-第一百零六批月度槽位与价值平均-正式研究验收.md": "7074c0621d0186c954619bfb08a8b4633747220f0c55b1d712d157462930ef24",
+  "data/staging/strategies-batch106/20261011-formal-source-acceptance-v1/prepared.json": "437063f17fd665ebda58f1b09b3cf3d1f7cc5133588eb4c2d62078bb4060455c",
+  "data/staging/strategies-batch106/20261011-formal-source-acceptance-v1/tests.json": "b14c92c983a36fc574190e040415d3a6062d483f33c12c84aa035a1d4ef3a0a2",
+  "src/observe/strategy_catalog.py": "124ab2ffec475681115b4d446c8a9267ce4eb8895f729aa68293681f5621d674",
+  "data/catalog/strategies/274b80cd01f537f66ef2/catalog.json": "989d489e6ed281ae625b1076829c85cb283d8d2d97ba46e9ac2d40feacc705fd",
+  "data/catalog/strategies/progress/20261011-074705-ed10/summary.json": "dac5381f53777293cce61d6925c82243e20ba4d4de71bdff7a0c9b4926d8448b"
+ },
+ "review_method": "Full original sources;literal diagnostics;native operand full exact readback and independent extrema;no independent agent review"
+}

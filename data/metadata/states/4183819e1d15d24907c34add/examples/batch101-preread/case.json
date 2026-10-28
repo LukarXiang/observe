@@ -1,0 +1,113 @@
+{
+  "case": {
+    "manually_reviewed_not_incremented": true,
+    "new_trading_backtests": 0,
+    "next_notes": [
+      "Allweather72 schedules monthday1 but run_count modulo12, configured class rates unused and any listed-date enables the whole group; not the already-pending 7/65 proposal",
+      "Futures36 after_code_changed initializes state but initialize does not call it; selection updated at14:30 even below6%, 09:45 sells yesterday nonselected positions; expiry/multiplier/minute/margin prerequisites remain"
+    ],
+    "scope": "Full text read and byte/AST inventory only; systematic rules/diagnostics/input study still pending",
+    "sources": [
+      {
+        "all_functions": 13,
+        "encoding": "utf-8-sig",
+        "formal_review": false,
+        "frozen_file": "data/staging/strategies-batch100/20261011-next-source-preread/0.source",
+        "lines": 256,
+        "source": "2024年度精选策略1/72.桥水 全天候策略 增加一致性度量ES 风险控制.txt",
+        "source_sha256": "b30d9ba30a2e18bc162261a783479d853ff6768b4ae85963d39315fc85683835",
+        "top_functions": [
+          {
+            "end": 71,
+            "line": 9,
+            "name": "initialize"
+          },
+          {
+            "end": 81,
+            "line": 75,
+            "name": "init_stock_map_asset"
+          },
+          {
+            "end": 93,
+            "line": 84,
+            "name": "before_market_open"
+          },
+          {
+            "end": 111,
+            "line": 95,
+            "name": "get_trade_target"
+          },
+          {
+            "end": 130,
+            "line": 113,
+            "name": "calc_asset_max_raise"
+          },
+          {
+            "end": 145,
+            "line": 133,
+            "name": "market_open"
+          },
+          {
+            "end": 155,
+            "line": 147,
+            "name": "stat_cur_asset"
+          },
+          {
+            "end": 220,
+            "line": 157,
+            "name": "cal_stocks_ratio"
+          },
+          {
+            "end": 245,
+            "line": 222,
+            "name": "rebalance"
+          },
+          {
+            "end": 256,
+            "line": 248,
+            "name": "after_market_close"
+          }
+        ]
+      },
+      {
+        "all_functions": 4,
+        "encoding": "utf-8-sig",
+        "formal_review": false,
+        "frozen_file": "data/staging/strategies-batch100/20261011-next-source-preread/1.source",
+        "lines": 67,
+        "source": "2024年度精选策略2/36.致敬市场(6) ，指数期货贴水.txt",
+        "source_sha256": "57d529dce6eb3ba8a76e4e79b1f5340df98d1993118d62b50cc34dec0b7ded4d",
+        "top_functions": [
+          {
+            "end": 17,
+            "line": 7,
+            "name": "initialize"
+          },
+          {
+            "end": 30,
+            "line": 19,
+            "name": "after_code_changed"
+          },
+          {
+            "end": 59,
+            "line": 32,
+            "name": "Trader_buy"
+          },
+          {
+            "end": 66,
+            "line": 61,
+            "name": "Trader_sell"
+          }
+        ]
+      }
+    ]
+  },
+  "case_id": "batch101-preread",
+  "nature": "full_text_and_frozen_byte_AST_inventory_only",
+  "purpose": "72号256行10顶层/13含嵌套，36号67行4函数；尚无系统规则/诊断/输入或交易验收，不增来源计数",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch100/20261011-next-source-preread/preread.json",
+    "sha256": "d1b24db9e23a5cc9011ae0f8d70d69f964cfd6bd9b424ce721bddb36c9f2cea7"
+  }
+}

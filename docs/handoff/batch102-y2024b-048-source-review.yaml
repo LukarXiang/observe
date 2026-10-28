@@ -1,0 +1,28 @@
+source: 2024年度精选策略2/48.一种宏观数据的中长线策略，年化15%，最大回撤9%.txt
+source_sha256: 5d55e30ef811ceda9ef64f13f874d38ae84204dcbf2fb248274188563d08c88b
+formal_acceptance: false
+original_strategy_complete: false
+economic_variant_approved: false
+review_scope: 全文286行、13顶层定义；与第50批宏观21字节重复；原三模式、宏观查询、状态和订单意图及最长未准入参考，不含原交易
+rules:
+  - 初始mode0、record0、times负1、order_amount0.04；begin_date2013-01，股票510300、债券511010、基准000300，每日14:55
+  - 股票类买卖佣金0.0003、卖税0.001、最低5；不据此替基金执行放行，原文未设置use_real_price与avoid_future_data
+  - mode0或2先取当前统计月之前13个月PMI，二次curve_fit；末端斜率24A加B严格正、末值至少50且末值至少首值
+  - 上一月以前、2013-01以来分项历史降序；生产分位严格小于50、新订单严格大于50、原料库存严格小于50才切mode1；不重置旧倍率
+  - percentile以小于目标数除有效比较数减1，再乘100；NaN不计比较项，单值除零，不用常规百分位替代
+  - mode1首次或严格跌超2%先加times、按总权益乘0.04乘2的times次方发买单并记录新点位；否则自然日差大于2发定投，不按周历重写
+  - mode0以109行月条转换年度字典，Decimal加总固定除10；严格跌破年度均值切mode2、加times、清债并买股票
+  - 同一回调随后继续mode2分支，以年度均值锚点严格跌超5%可再加倍率买入；无成交证明时也可能更新倍率和锚点
+  - mode1或2若MA5严格大于MA10大于MA20大于MA30大于前MA30，按当时available_cash再发买单；现金反馈时机影响意图
+  - 股票在持仓键中才止盈；供需得分生产三分之一加新订单三分之二，严格大于97或已有over_hot锁存才查库存
+  - 原料分位严格大于50且产成品严格小于50切mode2；价格严格高于MA120、前MA5高于MA20且当日MA5低于MA20才清股票
+  - 退出后times负1、mode0、over_hot假，并以总权益发买债单；注释一半未执行，yearMa10全局初始值未参与真实计算
+allowed_evidence: 213旧PMI拟合窗、5161日终均线和153末次观察月条年度参考；价格形状、分项、均线和现金反馈的受控stub诊断，不证明14:55原数据语义、原信号、成交或净值
+data_gaps:
+  - 四制造业分项、实际发布时刻和修订前版本缺失；225月总量是旧历史，统计月不等于可用时间
+  - 14:55 include_now的日/月指数历史、510300与511010身份/行情/事件/复权/状态/费用和平台成交反馈未齐
+defects:
+  - 当前NumPy的float单项一维数组报TypeError；保留原函数，Series价格形状仅为诊断stub
+  - 倍率和记录点先于实际成交更新；年线进入mode2可在同回调买两次，右侧再买取决于现金反馈
+  - percentile单值ZeroDivisionError，重复值和NaN改变有效分母；固定年度除10不是自动滚动十年平均
+next: 共用实现但保留文件映射；核对 canonical_source 状态

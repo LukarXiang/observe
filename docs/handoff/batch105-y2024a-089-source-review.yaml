@@ -1,0 +1,30 @@
+source: 2024年度精选策略1/89.【复现·水】市场情绪指标专题行业指数顶部和底部信号.txt
+source_sha256: f41f457f69e71ddb4b0b22697ca8a9fd329d7ba2954f2c7a4571e7296896f4e8
+review_scope: 全文291行、上市自然天数函数、私有数据库与外部NHNL模块调用、正文反转规则；无完整交易代码
+formal_acceptance: false
+original_strategy_complete: false
+economic_variant_approved: false
+rules:
+  watch_date: '2023-03-03'
+  code_classification: sw_level1
+  classification_policy: 作者承认用最新静态截面反推历史，前序信号可能失真
+  listing_threshold: 上市超过252自然日，严格大于；不改为365天或252交易日
+  listing_counter: 日期减上市日，再按传入分类求和；非原历史分类输入须单独标明
+  industry_price: '2014-01-01至2023-03-03，字段close，sw_level1'
+  stock_price_request: '2013-01-01至watch_date分年，字段high/low，fq=post'
+  NHNL_request: calc_industry_nhnl(load_data.pivot_table,load_data.sw_cons_name,52*5,load_data.classify_num,tradition=False)
+  plot_request: 电子行业、40、布尔True；原函数缺失，不能推断每个参数的语义
+  narrative_only: 正文以收盘与过去52周至一周前极值比较；普通阈值±20/30%，不足40只时±30/40%；阈值回归后次日开盘反转、前5交易日止损、30日退出和一周后移动止损
+defects:
+  - pandas3拒绝astype(np.datetime64)的无单位时间dtype
+  - 仅修datetime64[ns]仍在同值但异名索引对齐时向DatetimeArray.take传入None导致TypeError
+  - applymap和groupby(axis=1)在当前pandas已移除；年末freq=Y也需另证兼容处理
+  - 当前对齐可扩展重复stock_basic代码并重复计数；兼容参考明确拒绝，不去重替代
+  - 正文中信与代码申万、正文收盘价与代码high/low请求不能相互替代
+data_gaps:
+  - knight_scr.scr.sql_service与scr/load_data、calc_industry_nhnl、plot_nhnl_signal本地未找到原实现
+  - 精确静态2023-03-03申万映射、行业行情、作者归档数据和平台后复权high/low未证明
+  - 两实际联网请求因代理连接权限失败，0响应，不是已下载或空数据
+  - 当前证券上市日期缺历史版本证据；交易所受控分组不等于原行业分组
+allowed_evidence: 只对上市天数函数建立显式pandas3兼容参考并独立核算；全证券/实际日历组件不等于NHNL、原行业历史信号或交易回测
+next: 取得原私有模块与作者归档数据、核静态历史映射和价格，再核NHNL；若另写正文交易变体，必须单独确认且复用唯一Book

@@ -1,0 +1,43 @@
+schema: 1
+source: 2021年度精选策略/64.【复现】C-VIX 中国版 VIX 编制手册.txt
+source_sha256: 5483ce9fea22822a8ca84e0f004064c53b384f54bdd0a2a51eee5d162761f983
+source_lines: 613
+top_level_definitions: 10
+class_methods: 17
+review_scope: 全文规则、顶层副作用及受控定义核查；不执行enable_profile、set_variables或config.json凭据读取
+formal_acceptance: false
+original_strategy_complete: false
+economic_variant_approved: false
+rules:
+  asset: 510050.XSHG
+  benchmark: 000016.XSHG
+  schedule: 每日open；前一交易日截止的15交易日，每次从头重算VIX及EMA5/10
+  signal: fast_EMA末值小于等于slow_EMA末值买入；否则卖出。并非首次死叉；相等也买入
+  position: 仅无持仓时按total_value建仓；已有仓位不重配，反向清仓
+  fees: 2015以后原买0.0003卖0.0013最低5、滑点0；基金平台适用性未证明
+  input_contracts: OPT_CONTRACT_INFO按underlying_symbol/list_date/last_trade_date筛选，逐code查OPT_DAILY_PRICE后裁日期
+  maturity: exercise_date减date，除以365自然日；不包含小时
+  near_far: 保留T>=5/365的最短两期限；不是注释所说大于一周
+  duplicate_contracts: 按exercise_price/contract_type pivot_table默认均值；未排调整合约
+  forward: 按abs(call-put)最小的行取K+exp(rT)*(call-put)
+  K0: 先保留strike<=F，再按diff最小取行权价；无符合行则用全池。不是最大strike<=F
+  mid_price: 低于K0取put、高于取call、相等取两者均值
+  deltaK: 首尾单邻差，中间为两邻差的一半
+  sigma: 2/T*sum(deltaK*exp(rT)*mid_p/K²)-(F/K0-1)²/T
+  interpolation: w=(T2-30/365)/(T2-T1)，不限制0至1；负根返回NaN
+  skew: 原epsilon及三个矩公式与近远月权重保留，未增加域保护
+  SHIBOR: 原8期限1/7/14/30/90/180/270/360日，百分率除100，cubic插到1..360日
+defects:
+  - GetShiBor超2000日用n_days//2000作段宽，且append尚未赋值的shibor_df；2001日首次请求单日后UnboundLocalError
+  - GetShiBor注解str却调用strftime；传字符串报AttributeError，未自动转换
+  - 少于两个有效期限仅print，后续近远期限变量未赋值
+  - 缺call或put时向未定义df写值，报NameError；不能默补零
+  - 单行权价cal_k_diff越界；等期限除零；零F/负矩等边界未防护
+  - GetCBOE_VIX的fillna(method=pad)在当前pandas3报TypeError，未做兼容变体
+  - datetime/timedelta可能依赖聚宽通配符注入；受控诊断注入timedelta不证明平台等价
+data_gaps:
+  - 活跃快照未登记历史逐期权合约/到期/调整合约和收盘链、8期限SHIBOR
+  - 50ETF旧日线仅候选，7张相关活跃表本证券均0；事件、状态、复权与费用未放行
+  - 000016基准与平台15日链查询、即时反馈等价性未证明
+allowed_evidence: 合成期权链原VIX/SKEW算式及独立标量核算；EMA/异常分支诊断，不是历史中国VIX或交易
+next: 恢复完整历史期权链与8期限SHIBOR，再确认必要兼容修正版；ETF输入放行后唯一Book最长三成本及observe reproduce

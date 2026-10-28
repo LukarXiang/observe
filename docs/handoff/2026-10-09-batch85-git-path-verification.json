@@ -1,0 +1,23 @@
+{
+ "status": "ok",
+ "tracked_and_candidate_payload_paths": [],
+ "ignored_paths": [
+  "repo/量化策略源代码/2020年度精选策略/32 测试策略1.txt",
+  "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/diagnostics.json",
+  "data/runs/registry.sqlite"
+ ],
+ "check_ignore_command": [
+  "git",
+  "check-ignore",
+  "-z",
+  "--stdin"
+ ],
+ "initial_check": {
+  "status": "assertion_failed",
+  "cause": "Default Git quotePath escaped Chinese filenames; ordinary stdout comparison expected unquoted paths",
+  "tracked_and_candidate_payload_paths": 0,
+  "behavior_change": false,
+  "correction": "Use structured NUL-delimited stdin/stdout"
+ },
+ "staging_commit_push_performed": false
+}

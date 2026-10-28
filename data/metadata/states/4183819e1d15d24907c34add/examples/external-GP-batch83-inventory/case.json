@@ -1,0 +1,111 @@
+{
+  "case": {
+    "installed": {
+      "gplearn": false,
+      "graphviz": false,
+      "jqdatasdk": false,
+      "jqfactor_analyzer": false,
+      "talib": true
+    },
+    "limits": [
+      "Search covers actual filenames and two present handoff manifests, not unknown archive contents/platform files",
+      "No avg/pre_close/pct10 label definitions, original training pool/order/versions or historical index membership proved",
+      "Ten declared reference stocks and adjusted highs are arithmetic inputs, not original GP training or CSI800",
+      "ETF identity/events/reference price/status/fees and open execution remain unproved"
+    ],
+    "not_a_backtest": true,
+    "original_trade_dates_admitted": 0,
+    "original_training_rows_admitted": 0,
+    "reference_columns": [
+      "date",
+      "instrument",
+      "close",
+      "close_adj",
+      "back_factor",
+      "is_trading",
+      "adjustment_status",
+      "high",
+      "low",
+      "high_adj",
+      "low_adj",
+      "open",
+      "volume",
+      "open_adj"
+    ],
+    "reference_dates": [
+      "2005-01-05",
+      "2026-09-29"
+    ],
+    "reference_rows": 46781,
+    "reference_stocks": [
+      "000333.SZ",
+      "000651.SZ",
+      "002415.SZ",
+      "600036.SH",
+      "600085.SH",
+      "600196.SH",
+      "600519.SH",
+      "600887.SH",
+      "601111.SH",
+      "603288.SH"
+    ],
+    "registered_tables": [
+      "adj_coverage",
+      "adj_factors",
+      "bars_1d",
+      "bars_5m",
+      "calendar",
+      "company_controls_annual",
+      "corp_actions",
+      "financial_annual",
+      "financial_availability",
+      "financial_fields",
+      "financial_quarterly",
+      "index_1d",
+      "instruments",
+      "minute_universe",
+      "valuation_coverage",
+      "valuations_1d"
+    ],
+    "search": {
+      "command": [
+        "rg",
+        "--files",
+        "--hidden",
+        "--no-ignore",
+        "repo",
+        "data",
+        "-g",
+        "*[tT][rR][aA][dD][eE]_[lL][iI][sS][tT]*",
+        "-g",
+        "*[sS][tT][oO][cC][kK]_[dD][aA][tT][aA]*",
+        "-g",
+        "!**/.git/**"
+      ],
+      "handoff_manifests": [
+        {
+          "file": "data/handoff/20261008-audit-controls-supplement.manifest.json",
+          "matches": [],
+          "sha256": "9f719cd8e4265b951da4b2de3684c0e214f8308da130b4dded8edeea97bb602a"
+        },
+        {
+          "file": "data/handoff/20261008-local-current-and-bollinger-example.manifest.json",
+          "matches": [],
+          "sha256": "412dac9d028ad267d5d6b6c0b92d070076646034abfee341aef01ab9e9124ac5"
+        }
+      ],
+      "matched_file_sha256": {},
+      "matches": [],
+      "returncode": 1
+    },
+    "snapshot": "20261006-145049-e06c"
+  },
+  "case_id": "external-GP-batch83-inventory",
+  "nature": "accepted_actual_original_csv_search_and_reference_inventory",
+  "purpose": "实际文件名及两个包manifest无原CSV，46,781已验收十股参考行；原训练/交易日期准入0，不以新行情补原未知标签",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch83/20261009-external-timing-GP/dependency-inventory.json",
+    "sha256": "11f46498161a6dc64c3638262c4568cf11928f27a7034c8c93a759b117443267"
+  }
+}

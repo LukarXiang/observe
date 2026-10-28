@@ -1,0 +1,38 @@
+{
+  "case": {
+    "authoritative_implementation": "scripts/verify_strategy_batch88.py",
+    "authoritative_implementation_sha256": "68fae11900297f0513463be6eedffb260cb9012c8eedb5a01057f3311c8f9f90",
+    "core_files": [
+      "baseline.json",
+      "catalog-before.json",
+      "checked-state.json",
+      "independent-daily-values.parquet",
+      "independent-replay.json",
+      "input-binding.json",
+      "momentum-diagnostics.json",
+      "offline-catalog.json",
+      "source-reviews/review.json",
+      "strategy_catalog.before.py"
+    ],
+    "correct_core_files_required": 10,
+    "historical_records_preserved": true,
+    "incorrect_core_files_required": 11,
+    "new_trading_backtests": 0,
+    "original_document": "docs/tasks/2026-10-09-第八十八批缠论工具与板块动量-正式验收.md",
+    "original_document_sha256": "e0691d80a6d0a8a9a0c00183886e2870a4707b8203b642e39cbd3b9487719a64",
+    "original_review": "docs/handoff/2026-10-09-batch88-final-review.json",
+    "original_review_sha256": "3b50b5968ce332fc168246bee795cb36241a4adae3dc5a25756b31aa1f703c14",
+    "scope": "Summary-only count typo. Verifier actually checked all ten CORE entries (checked-state handled separately before writing itself); 69 implementation and 88 evidence bindings remain unchanged.",
+    "source_logic_changed": false,
+    "status": "archived_summary_count_correction",
+    "verification_result_changed": false
+  },
+  "case_id": "daily-chan-industry-batch88-core-count-correction",
+  "nature": "immutable_summary_core_count_erratum",
+  "purpose": "原正式文档和final-review的11CORE更正为验证器实际10CORE，绑定旧两SHA/实际名单；不覆盖冻结档，不改变1392重放、143测试、69实施/88证据或验收结果",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-09-batch88-core-count-correction.json",
+    "sha256": "c6766c5954dd06a32e8785bdd10eab896d8a161c383ed3587a9885252b9f67d6"
+  }
+}

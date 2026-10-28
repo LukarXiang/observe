@@ -1,0 +1,55 @@
+{
+  "case": {
+    "actual_requests": 1,
+    "candidate_pages": 0,
+    "direct_page_only": true,
+    "limits": {
+      "max_page_bytes": 2097152,
+      "overall_seconds": 30,
+      "proxy_env": false,
+      "redirects": false,
+      "retries": 0,
+      "timeout": [
+        4,
+        8
+      ]
+    },
+    "new_publications": 0,
+    "new_trading_backtests": 0,
+    "no_candidate_promoted_to_Store": true,
+    "no_provider_JS_or_SDK_executed": true,
+    "reference": "repo/akshare/akshare/fund/fund_em.py",
+    "reference_sha256": "bbd17ed2ff2d97b199fb7f91dbe07725feb4842fe075ca9c1cc1e59f38335a30",
+    "requests": [
+      {
+        "DNS_failure": true,
+        "attempted": true,
+        "exception": "ConnectionError",
+        "message": "HTTPSConnectionPool(host='fundf10.eastmoney.com', port=443): Max retries exceeded with url: /fhsp_159905.html (Caused by NameResolutionError(\"HTTPSConnection(host='fundf10.eastmoney.com', port=443): Failed to resolve 'fundf10.eastmoney.com' ([Errno -2] Name or service not known)\"))",
+        "status": "failed",
+        "strict_usable": false,
+        "symbol": "159905",
+        "url": "https://fundf10.eastmoney.com/fhsp_159905.html"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain name-resolution failure or overall time limit",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159949",
+        "url": "https://fundf10.eastmoney.com/fhsp_159949.html"
+      }
+    ],
+    "responses": 0,
+    "script_sha256": "156cf6831d456b65c1cc1e2ba5fcb8d0465dcca4c744d1657937905ea68f56c5",
+    "status": "dependency_probe_only"
+  },
+  "case_id": "batch106-event-probe",
+  "nature": "actual_bounded_request_failure",
+  "purpose": "159905一次实际DNS失败0响应，159949同域未请求；参考URL/源码与限制，0发布/交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch106/20261011-fund-event-probe-v1/checked.json",
+    "sha256": "5d175b2a8c27d38c1b54908db04db40ec1d2aaa6ab4337d35f39d60069c90b58"
+  }
+}

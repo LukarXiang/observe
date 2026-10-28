@@ -1,0 +1,334 @@
+{
+  "case": {
+    "all_synthetic": true,
+    "case_count": 27,
+    "cases": [
+      {
+        "case": "kernel_population_std",
+        "error": null,
+        "value": [
+          {
+            "nonfinite": "nan"
+          },
+          {
+            "nonfinite": "nan"
+          },
+          0.408248290463863,
+          0.408248290463863,
+          0.408248290463863
+        ]
+      },
+      {
+        "case": "kernel_zero_denominator",
+        "error": null,
+        "value": [
+          {
+            "nonfinite": "nan"
+          },
+          {
+            "nonfinite": "nan"
+          },
+          {
+            "nonfinite": "inf"
+          },
+          {
+            "nonfinite": "inf"
+          },
+          {
+            "nonfinite": "inf"
+          }
+        ]
+      },
+      {
+        "case": "kernel_empty_periods",
+        "error": "ValueError",
+        "value": null
+      },
+      {
+        "case": "forward_labels_mixed_units",
+        "error": null,
+        "value": [
+          {
+            "kernel_3": 1.0,
+            "pct_chg": 1.0,
+            "未来1日收益率": 2.0,
+            "未来2日收益率": 0.020000000000000018
+          },
+          {
+            "kernel_3": 1.0,
+            "pct_chg": 2.0,
+            "未来1日收益率": 3.0,
+            "未来2日收益率": 0.01980198019801982
+          },
+          {
+            "kernel_3": 1.0,
+            "pct_chg": 3.0,
+            "未来1日收益率": 4.0,
+            "未来2日收益率": 0.019607843137254832
+          },
+          {
+            "kernel_3": 1.0,
+            "pct_chg": 4.0,
+            "未来1日收益率": 5.0,
+            "未来2日收益率": {
+              "nonfinite": "nan"
+            }
+          },
+          {
+            "kernel_3": 1.0,
+            "pct_chg": 5.0,
+            "未来1日收益率": {
+              "nonfinite": "nan"
+            },
+            "未来2日收益率": {
+              "nonfinite": "nan"
+            }
+          }
+        ]
+      },
+      {
+        "case": "threshold_strict",
+        "error": null,
+        "value": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "case": "interval_inclusive",
+        "error": null,
+        "value": [
+          0,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "case": "hold_signal_resets_count",
+        "error": null,
+        "value": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "case": "single_signal_summary_name_error",
+        "error": "NameError",
+        "value": null
+      },
+      {
+        "case": "stat_std_field_is_median",
+        "error": null,
+        "value": {
+          "-1_Standard_Deviation": 0.4409739159895629,
+          "1_Standard_Deviation": 7.559026084010437,
+          "Max": 9.0,
+          "Min": 1.0,
+          "avgRet": 4.0,
+          "medianRet": 2.0,
+          "skewRet": 0.6654688661238353,
+          "stdRet": 2.0
+        }
+      },
+      {
+        "case": "inversion_MA_close_kernel",
+        "error": null,
+        "value": {
+          "close_MARK": 60,
+          "kernel_MARK": 60
+        }
+      },
+      {
+        "case": "inversion_MA_kernel_close",
+        "error": null,
+        "value": {
+          "close_MARK": 60,
+          "kernel_MARK": 0
+        }
+      },
+      {
+        "case": "inversion_BBANDS_close_kernel",
+        "error": null,
+        "value": {
+          "close_MARK": 70,
+          "kernel_MARK": 70
+        }
+      },
+      {
+        "case": "inversion_BBANDS_kernel_close",
+        "error": null,
+        "value": {
+          "close_MARK": 70,
+          "kernel_MARK": 80
+        }
+      },
+      {
+        "case": "turnover3001_duplicate_boundary",
+        "error": null,
+        "value": {
+          "calls": [
+            [
+              "20000101",
+              "20080319"
+            ],
+            [
+              "20080319",
+              "20080319"
+            ]
+          ],
+          "duplicated": 2
+        }
+      },
+      {
+        "case": "quantile17_always_nan",
+        "error": null,
+        "value": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "case": "quantile29_current_integer_index_error",
+        "error": "KeyError",
+        "value": null
+      },
+      {
+        "case": "first_RSRS_zero_no_stock_history",
+        "error": null,
+        "value": 0.0
+      },
+      {
+        "case": "second_RSRS_nan_shared_state",
+        "error": null,
+        "value": {
+          "history_calls": [
+            "B"
+          ],
+          "score": {
+            "nonfinite": "nan"
+          },
+          "shared_length": 4
+        }
+      },
+      {
+        "case": "constant_OLS_nonfinite",
+        "error": null,
+        "value": [
+          {
+            "nonfinite": "nan"
+          },
+          {
+            "nonfinite": "nan"
+          }
+        ]
+      },
+      {
+        "case": "empty_OLS_zero",
+        "error": null,
+        "value": [
+          0,
+          0
+        ]
+      },
+      {
+        "case": "date_namespace_unbound",
+        "error": "NameError",
+        "value": null
+      },
+      {
+        "case": "boll_two_days_sample_std_without90",
+        "error": null,
+        "value": [
+          7.0,
+          10.65685424949238,
+          -0.6568542494923806
+        ]
+      },
+      {
+        "case": "boll_empty_error",
+        "error": "IndexError",
+        "value": null
+      },
+      {
+        "case": "rank_excludes_top3_selects17",
+        "error": null,
+        "value": [
+          "C18",
+          "C17",
+          "C16",
+          "C15",
+          "C14",
+          "C13",
+          "C12",
+          "C11",
+          "C10",
+          "C9",
+          "C8",
+          "C7",
+          "C6",
+          "C5",
+          "C4",
+          "C3",
+          "C2"
+        ]
+      },
+      {
+        "case": "same_target_set_blocks_RSRS_exit",
+        "error": null,
+        "value": [
+          null,
+          []
+        ]
+      },
+      {
+        "case": "nan_passes_filter_then_missing_fund_keyerror",
+        "error": "KeyError",
+        "value": null
+      },
+      {
+        "case": "full_asset_per_new_stock_incremental_intents",
+        "error": null,
+        "value": [
+          null,
+          [
+            [
+              "buy",
+              "A",
+              500.0
+            ],
+            [
+              "buy",
+              "B",
+              500.0
+            ],
+            [
+              "redeem",
+              "420002.OF",
+              100.0
+            ],
+            [
+              "sell",
+              "420002.OF",
+              0
+            ]
+          ]
+        ]
+      }
+    ],
+    "intents_are_not_orders_or_fills": true,
+    "new_trading_backtests": 0
+  },
+  "case_id": "batch98-diagnostics",
+  "nature": "controlled_original_cases_not_fills",
+  "purpose": "27原定义合成边界、阈值/共享状态/排名/基金异常均保留，不计交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch98/20261011-original-components-json-recovery/study/diagnostics.json",
+    "sha256": "21bee1489d85b78751c9dd4fcac60c24c78288fe239dcbeea23a3dae83edbe3b"
+  }
+}

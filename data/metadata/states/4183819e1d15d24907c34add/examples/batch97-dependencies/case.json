@@ -1,0 +1,106 @@
+{
+  "case": {
+    "daily_total_market_cap_admitted": false,
+    "minute_5m_is_not_original_minute_high": true,
+    "missing_tables": [
+      "shares",
+      "historical_names",
+      "bars_1m",
+      "historical_all_stock_universe"
+    ],
+    "new_supplier_requests": 0,
+    "original_crowd_population_proven": false,
+    "original_trading_backtests": 0,
+    "prior_supplement_evidence": {
+      "data/staging/strategies-batch68/20261008-low-PB/dense-probe-results.json": {
+        "keys": [
+          "probes",
+          "published",
+          "not_a_backtest",
+          "limits"
+        ],
+        "sha256": "6a245ed86202f01c541679f535b785ef00e31f8c133977b70fb5db3a2bbef55e",
+        "status": null
+      },
+      "data/staging/strategies-batch68/20261008-low-PB/probe-results.json": {
+        "keys": [
+          "probes",
+          "published",
+          "not_a_backtest",
+          "limits"
+        ],
+        "sha256": "e8124e91cebde5b5bd12dc39f2154b55076b1893d154491ceab1d7d5b4e05965",
+        "status": null
+      },
+      "data/staging/strategies-batch68/20261008-low-PB/total-cap-audit.json": {
+        "keys": [
+          "samples",
+          "not_a_backtest",
+          "admitted_rows",
+          "limits"
+        ],
+        "sha256": "ada58dc70b21aeae833db67ddb195005fa8cd75e6b656a612fb859870f5ef239",
+        "status": null
+      },
+      "docs/handoff/2026-10-08-batch68-verification.json": {
+        "keys": [
+          "status",
+          "snapshot",
+          "reviews",
+          "checks",
+          "offline",
+          "component",
+          "diagnostics",
+          "supplements",
+          "dense_supplements",
+          "total_cap_audit",
+          "daily_partition_full_byte_checks",
+          "protection",
+          "progress",
+          "newly_reviewed",
+          "not_a_backtest",
+          "original_strategy_complete",
+          "formal_strategy_acceptance"
+        ],
+        "sha256": "86387126a3f857d52a4c46c43b64cbf6b827d757679b7fbe5b9d80f6ffc65bb0",
+        "status": "ok"
+      }
+    },
+    "raw_turnover_is_not_proven_original_turnover_ratio": true,
+    "reason_no_new_requests": "Reuse actual prior bounded total-market-cap and share/name evidence; no newly discovered endpoint supplying required event/version/full-universe/minute coverage",
+    "registered_tables": [
+      "adj_coverage",
+      "adj_factors",
+      "bars_1d",
+      "bars_5m",
+      "calendar",
+      "company_controls_annual",
+      "corp_actions",
+      "financial_annual",
+      "financial_availability",
+      "financial_fields",
+      "financial_quarterly",
+      "index_1d",
+      "instruments",
+      "minute_universe",
+      "valuation_coverage",
+      "valuations_1d"
+    ],
+    "restoration_conditions": [
+      "Daily total-market-cap units/version and historical stock universe/names/list dates verified",
+      "Original dynamic pre-adjusted price and volume rules and current-open visibility verified",
+      "Original held-period one-minute highs, position prices and inclusive holding-day/platform order feedback verified"
+    ],
+    "snapshot": "20261006-145049-e06c",
+    "snapshot_sha256": "9449dc18911fe5f27fe65f55f5849602bec0cba998335b74a6d2b1377e19af60",
+    "status": "blocked_original_trade_inputs"
+  },
+  "case_id": "batch97-dependencies",
+  "nature": "archived_cap_share_name_and_minute_gates",
+  "purpose": "七市值样本与原凭据SHA复核，原分钟和名称未齐；无新请求或发布，不把旧请求当新请求",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch97/20261011-dependencies/inventory.json",
+    "sha256": "ae1e9759f8d8029de41dc33e8657b1a6f5f3ee4142d34b42b33d6d5d92c25b5f"
+  }
+}

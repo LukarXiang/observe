@@ -1,0 +1,31 @@
+{
+  "case": {
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "original_input_rows_admitted": 0,
+    "profiles": [
+      {
+        "case": "industry-history",
+        "error": "ConnectionError: HTTPSConnectionPool(host='www.swsresearch.com', port=443): Max retries exceeded with url: /swindex/pdf/SwClass2021/StockClassifyUse_stock.xls (Caused by NameResolutionError(\"HTTPSConnection(host='www.swsresearch.com', port=443): Failed to resolve 'www.swsresearch.com' ([Errno -2] Name or service not known)\"))",
+        "status": "failed",
+        "strict_usable": false,
+        "wire_responses": 0
+      },
+      {
+        "case": "money-flow-600519",
+        "error": "ConnectionError: HTTPSConnectionPool(host='push2his.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/stock/fflow/daykline/get?lmt=0&klt=101&secid=1.600519&fields1=f1%2Cf2%2Cf3%2Cf7&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61%2Cf62%2Cf63%2Cf64%2Cf65&ut=b2884a393a59ad64002292a3e90d46a5&_=1791491252451 (Caused by NameResolutionError(\"HTTPSConnection(host='push2his.eastmoney.com', port=443): Failed to resolve 'push2his.eastmoney.com' ([Errno -2] Name or service not known)\"))",
+        "status": "failed",
+        "strict_usable": false,
+        "wire_responses": 0
+      }
+    ]
+  },
+  "case_id": "wizard-flow-batch85-candidates",
+  "nature": "accepted_bounded_native_request_failure",
+  "purpose": "申万SW2021分类历史和茅台近期个股流各一次原生GET均DNS失败0响应/解析/新增/发布；两个接口局限不补原历史版本",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/candidate-audit.json",
+    "sha256": "37e068fd9c67d87ef97d8c62e6a4fa6c117409129727cbdc27675577ef41ac16"
+  }
+}

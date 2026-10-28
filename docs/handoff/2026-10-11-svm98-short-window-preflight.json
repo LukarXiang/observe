@@ -1,0 +1,69 @@
+{
+ "status": "ok",
+ "scope": "approved_existing_variant_zero_buy_signal_preflight",
+ "formal_trading_acceptance": false,
+ "formal_source_research_acceptance": false,
+ "new_trade_backtests": 0,
+ "orders_executed": 0,
+ "signal_only_coverage_days": 16,
+ "checks": {
+  "sessions_checked": 16,
+  "fits_checked": 3,
+  "samples_checked": 675,
+  "prediction_counts": {
+   "0": 3,
+   "1": 0
+  },
+  "fits": [
+   {
+    "decision_date": "2008-06-03",
+    "feature_date": "2008-05-27",
+    "train_label_end": "2008-06-02",
+    "execution_day": "2008-06-04",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2008-06-11",
+    "feature_date": "2008-06-03",
+    "train_label_end": "2008-06-10",
+    "execution_day": "2008-06-12",
+    "prediction": 0,
+    "train_samples": 224
+   },
+   {
+    "decision_date": "2008-06-17",
+    "feature_date": "2008-06-10",
+    "train_label_end": "2008-06-16",
+    "execution_day": "2008-06-18",
+    "prediction": 0,
+    "train_samples": 224
+   }
+  ],
+  "orders": [],
+  "method": "Independent math.fsum feature arithmetic/date windows/labels, fresh sklearn SVC per archived sample set; original feature lag kept"
+ },
+ "preflight_file": "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/preflight.json",
+ "preflight_sha256": "776fdd6d4982f327d157fa2c913d11865545a6a145dcaa01f4c93fcb9c1169dd",
+ "replay_file": "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/replay-proof/replay.json",
+ "replay_sha256": "d2cbc87d37c59dfd6a0e039d7ae67d9f28f57ef3d6bc5b23144cfbde5b5567a8",
+ "source_sha256": "0aba6027a1f433627ff7903c0b5a8df3094bde7013ca1231cc3b498d2efed572",
+ "config_sha256": "d605832c35490d9765b422adf1035e8a0eb6eb1acb3cab6646cee037c9acbf6c",
+ "implementation_sha256": {
+  "scripts/preflight_svm98_short_window.py": "3623f1243cb8c7dd48038758cf977ca950e1f1c4c22308033e431eb8b829437b",
+  "scripts/run_strategy_batch6.py": "8f87f807e13aacb58bac3f536069420307fd8fef38bc2d5cbe16f1d46074f41f",
+  "src/observe/strategy_svm.py": "3cb24f32d847f06bc939026741cf894f1d49be23e4fa0ac5cbe27141a8fc5878",
+  "src/observe/strategies.py": "eca89fc62bafa71840dc676add9aeac71ea2c18809abe02d7702fba9f1a5b7ae",
+  "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+  "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58"
+ },
+ "next_step": "No buy targets from empty initial state; archive zero-signal island without creating a trading parent; proceed to unreviewed strategy sources or real input dependencies",
+ "limits": [
+  "No actual open/liquidity/Book/fee/NAV acceptance or fresh-worker reproduction yet",
+  "Independent fsum arithmetic and fresh SVC on archived samples; same sklearn, not platform equivalence",
+  "Original five-session prediction feature lag and frozen back-adjusted input basis retained",
+  "Strict training-price windows checked; target decisions are not confirmed fills; no stitched NAV",
+  "This signal preflight uses an explicitly empty child list to omit transaction checks"
+ ],
+ "library_goal_complete": false
+}

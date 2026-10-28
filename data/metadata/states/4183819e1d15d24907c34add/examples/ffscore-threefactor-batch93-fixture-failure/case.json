@@ -1,0 +1,29 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-o",
+      "addopts=",
+      "tests/unit/test_batch93_stage.py"
+    ],
+    "files": {
+      "data/staging/strategies-batch93/20261010-development-first-fixtures/review_strategy_batch93.py.original": "7b2407936db47e1e11c09ba3d381727f4e49482e6dee95dabec03fcf17cdb4ae",
+      "data/staging/strategies-batch93/20261010-development-first-fixtures/test_batch93_stage.py.original": "ad53329549c699c7f871156666c0169c6775d10a3102f209e0eba479942710ec"
+    },
+    "formal_acceptance": false,
+    "log_sha256": "591c5655abaee2d3dd40f43e3c8aff8652fca575f8ce2e1ee42154239528b336",
+    "returncode": 1,
+    "scope": "Before operand stage; three mistaken fixture expectations, original arithmetic unchanged; actual pandas query dtype and negative-base ratio retained"
+  },
+  "case_id": "ffscore-threefactor-batch93-fixture-failure",
+  "nature": "immutable_first_three_fixture_expectation_errors",
+  "purpose": "首轮3失败10通过：负利润比仍得分、datetime64比较未剔除哨兵、require抛ValueError；原实现/测试/logSHA保留，仅修测试预期",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch93/20261010-development-first-fixtures/failure.json",
+    "sha256": "2d13dbb4681feb897ffe8fc18f1749c5a1728aa0d929a626dd494f00cb3e7cfa"
+  }
+}

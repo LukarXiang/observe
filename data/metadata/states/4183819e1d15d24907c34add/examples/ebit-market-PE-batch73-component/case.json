@@ -1,0 +1,46 @@
+{
+  "case": {
+    "limits": [
+      "Sparse vendor observations, not daily code322002; no fill or frequency substitution",
+      "Original std formula checked at each saved observation; weekly carry/trades not reconstructed",
+      "Class Q replaced by explicit saved reference rows, not a JoinQuant query reproduction; now label0 unchanged in diagnostics"
+    ],
+    "max_independent_threshold_difference": 2.220446049250313e-16,
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "original_signal_reproduced": false,
+    "profiles": [
+      {
+        "after_cutoff": 1,
+        "case": "market_pe_sh",
+        "distinct_months": 332,
+        "first": "1999-01-29",
+        "last": "2026-08-31",
+        "max_gap_calendar_days": 50,
+        "original_daily_series": false,
+        "stored_rows": 334,
+        "used_rows": 333
+      },
+      {
+        "after_cutoff": 1,
+        "case": "market_pe_sz",
+        "distinct_months": 345,
+        "first": "1997-12-31",
+        "last": "2026-08-31",
+        "max_gap_calendar_days": 50,
+        "original_daily_series": false,
+        "stored_rows": 346,
+        "used_rows": 345
+      }
+    ],
+    "rows": 678
+  },
+  "case_id": "ebit-market-PE-batch73-component",
+  "nature": "accepted_sparse_supplier_formula_arithmetic",
+  "purpose": "原中位数/样本std阈值在678稀疏记录独立核验；始于1997/1999，止于2026-08-31，不插值、不冒充原交易所日频；交易0",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch73/20261008-ebit-market-PE/component-research.json",
+    "sha256": "7f58469346eb12c892c108fd00f8b0796c834a95f0e7abdbaeaf925161169a77"
+  }
+}

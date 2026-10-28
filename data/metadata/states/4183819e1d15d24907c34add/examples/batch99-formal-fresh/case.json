@@ -1,0 +1,41 @@
+{
+  "case": {
+    "command": {
+      "command": [
+        "/home/zuozhe/envs/quant/.venv/bin/python",
+        "-B",
+        "-c",
+        "import json; from pathlib import Path; from scripts import recover_strategy_batch99_namespace as worker; worker.DIRECTORY=Path('data/staging/strategies-batch99/20261011-formal-validation-v2/fresh-replay'); print(json.dumps(worker.worker(\"replay\")))"
+      ],
+      "cwd": "/mnt/d/projects/observe",
+      "logs": {
+        "stderr": {
+          "file": "data/staging/strategies-batch99/20261011-formal-validation-v2/formal-fresh-replay.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "file": "data/staging/strategies-batch99/20261011-formal-validation-v2/formal-fresh-replay.stdout.log",
+          "sha256": "617594cb1365f48c5b29988c14e32a770d9387f2e78e96036bb027285f8433dd"
+        }
+      },
+      "returncode": 0
+    },
+    "differences": 0,
+    "fresh_process": true,
+    "network_blocked": true,
+    "output_sha256": {
+      "ETF-range-components.parquet": "9e4c8e37111ca03429038d20752ee94f183b768f887c7f7d56dedb39114edb1c",
+      "diagnostics.json": "91f9c0f06fd18a86d1822c9378e8410b6b6810d87dcc7158d91311fea16d1011",
+      "summary.json": "2d9c88272e675f0b77f3d3e040195683d92dc9db7910dd21e9722de29d61cb36"
+    },
+    "status": "match"
+  },
+  "case_id": "batch99-formal-fresh",
+  "nature": "restored_original_implementation_and_operand_replay",
+  "purpose": "新工作区完整恢复冻结implementation后worker禁网，3输出字节匹配",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch99/20261011-formal-validation-v2/fresh-replay.json",
+    "sha256": "a786585e201dd338cfb3be7503cf18a112e1f318e03d6a22c6d11c7b8e99b68e"
+  }
+}

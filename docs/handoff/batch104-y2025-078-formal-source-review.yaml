@@ -1,0 +1,33 @@
+source: 聚宽2025年精选/78首板低开策略-终极版 最大回撤15%，年化50%.txt
+source_sha256: 317641ff8498a7e2893c410aa1a45ab00e0582684d65a3f1fb84efd8e05115ba
+formal_acceptance: false
+original_strategy_complete: false
+economic_variant_approved: false
+review_scope: 全文395行、20顶层函数；两涨幅代理分支、限价/相对位置/开盘、日期和风控/成交意图；正式来源研究，不含交易验收
+rules:
+- 基准000300，use_real_price及avoid_future_data真；09:30先sell_if_limit_down_yesterday再buy，11:25与14:30调用sell
+- 两原全股票池均取昨日get_all_securities，昨日close等于high_limit才保留，dropna包含请求的high字段
+- 两分支均要求昨日减上市日严格超过60自然日；filter_paused_stock存在但未由选股链调用，不擅加过滤
+- 第一分支仅用两日价格proxy筛ST，涨幅严格在4至6百分点且close大于2.5；不查询ST字段
+- 第一分支当日open相对pre_close在0至1百分点含端点，各板块分支行为相同，代码并非负低开
+- 第二分支昨日涨幅严格在9至22百分点，昨日close相对昨日open涨幅严格大于5百分点；不查询ST字段
+- 第二分支当日open相对pre_close在负4至负3百分点含端点
+- 前日无涨停参数1，只检查前日一个交易日；昨日最高高/最低低相对位置第一分支15行/0至0.3、第二分支30行/0至0.5，均含端点
+- 合并两买表不去重，cash在回调开始取一次，每项order_target_value为cash除合并表长度，不按持仓数或即时成交余额重算
+- 09:30风控昨日close和low均等于low_limit或昨日close相对avg_cost亏损至少4百分点就发目标0；读取closeable_amount但没用于门禁
+- 11:25可卖量非零、last_price严格低于high_limit且严格高于成本才卖；14:30可卖且非涨停均发目标0
+- 原文未设置费用、滑点或订单反馈处理；日期helper请求100个交易日，n大于长度返回None，n等于长度仍越界
+defects:
+- 日期/RangeIndex负整数价格访问兼容问题可被except吞掉并丢候选；显式负标签只用于诊断，不是已批准修正
+- 相对位置分母0产生NaN/RuntimeWarning并不入表；不补替代位置值
+- 新股过滤取证券信息未显式历史date，限价与上市事件时点需证据
+- 09:30同日get_price读取open/pre_close是否允许及取数边界未证明，不能用整根之后日线代替当时数据
+- 合并重复项可重复发目标单，不证明加倍成交；上午风控并未实际阻断不可卖股票
+data_gaps:
+- 原历史全池/证券身份、原生high_limit和low_limit、动态复权与暂停取数语义未证明
+- 标准表preclose/is_st不自动等价原pre_close或历史名称；代码实际未查询ST
+- 已有5m不证明全候选、回调last_price与09:30/11:25/14:30执行/现金持仓反馈
+- 原平台默认股票费用和滑点版本缺，未批准代理执行或收益变体
+next: 原交易按本份data_gaps逐项搁置；补齐历史身份/原限价与全池/平台指标/可用时点和费用执行证据，必要具体修正版另确认后唯一Book最长区间三成本、逐年、独立核费及observe
+  reproduce禁网匹配
+allowed_evidence: 完整原文/受控原函数诊断与冻结十股原价算式参考；非完整股票池信号、非平台等价、非交易回测；原生缺值/数值边界/反馈缺陷和开发失败保留

@@ -1,0 +1,113 @@
+{
+  "case": {
+    "active_buy_back_callback": false,
+    "formal_source_research_acceptance": false,
+    "source_strategy_count": 3,
+    "sources": [
+      {
+        "duplicate_of": null,
+        "encoding": "utf-8-sig",
+        "functions": [
+          "initialize",
+          "get_rank",
+          "get_ols",
+          "initial_slope_series",
+          "get_zscore",
+          "get_timing_signal",
+          "order_target_value_",
+          "open_position",
+          "close_position",
+          "adjust_position",
+          "my_trade",
+          "check_lose",
+          "print_trade_info"
+        ],
+        "lines": 171,
+        "minimum_commission": 5,
+        "original_platform_equivalence_proven": false,
+        "path": "2023年度精选策略/7.ETF动量轮动RSRS择时-魔改3小优化.txt",
+        "pool_order": [
+          "510050.XSHG",
+          "159928.XSHE",
+          "510300.XSHG",
+          "159949.XSHE"
+        ],
+        "sha256": "e853b55be636530723810ba09160b80091dfd03a1674f8156681279d080b4938",
+        "source_copy": "sources/0.source"
+      },
+      {
+        "duplicate_of": 0,
+        "encoding": "utf-8-sig",
+        "functions": [
+          "initialize",
+          "get_rank",
+          "get_ols",
+          "initial_slope_series",
+          "get_zscore",
+          "get_timing_signal",
+          "order_target_value_",
+          "open_position",
+          "close_position",
+          "adjust_position",
+          "my_trade",
+          "check_lose",
+          "print_trade_info"
+        ],
+        "lines": 171,
+        "minimum_commission": 5,
+        "original_platform_equivalence_proven": false,
+        "path": "2024年度精选策略2/2.ETF动量轮动RSRS择时-魔改3小优化.txt",
+        "pool_order": [
+          "510050.XSHG",
+          "159928.XSHE",
+          "510300.XSHG",
+          "159949.XSHE"
+        ],
+        "sha256": "e853b55be636530723810ba09160b80091dfd03a1674f8156681279d080b4938",
+        "source_copy": "sources/1.source"
+      },
+      {
+        "duplicate_of": null,
+        "encoding": "utf-8-sig",
+        "functions": [
+          "initialize",
+          "hold_check",
+          "get_rank",
+          "get_ols",
+          "get_zscore",
+          "initial_slope_series",
+          "get_rsrs_score_mean",
+          "get_timing_signal",
+          "order_target_value_",
+          "open_position",
+          "close_position",
+          "adjust_position",
+          "my_trade",
+          "check_lose",
+          "print_trade_info"
+        ],
+        "lines": 249,
+        "minimum_commission": 0,
+        "original_platform_equivalence_proven": false,
+        "path": "2024年度精选策略2/60.ETF动量轮动RSRS择时-v2.txt",
+        "pool_order": [
+          "510050.XSHG",
+          "510300.XSHG",
+          "159949.XSHE",
+          "159928.XSHE"
+        ],
+        "sha256": "7de6da9d4efc8e504a73e535393f2dcaf6d46d91de8ceb5618a05bd4acc6c9c6",
+        "source_copy": "sources/2.source"
+      }
+    ],
+    "unique_source_bytes": 2
+  },
+  "case_id": "etf-magic3-v2-batch95-source",
+  "nature": "in_progress_complete_source_and_duplicate_map",
+  "purpose": "三完整原文171/171/249行及13/13/15函数冻结，魔改3同字节；池顺序/佣金/种子/阈值/调度不同，未正式验收95",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/source-reviews.json",
+    "sha256": "1cce469496198116c07b978d961c760003edfe4c999162dfbbdaeb4c588bffc3"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "case": {
+    "cause": "Temporary absolute script path lacks repository import path",
+    "economic_rule_changes": false,
+    "error": "ModuleNotFoundError",
+    "message": "No module named 'scripts'",
+    "original_strategy_error": false,
+    "recovery": "Command-local PYTHONPATH=src:. with same existing interpreter; no install/global changes",
+    "returncode": 1,
+    "source_sha256": "e281abcbdb88353c0749f3d9cb225d7791bcf6f84b9b12edc361f0a103ae11f2",
+    "stage_record_written": false,
+    "status": "observed_handoff_tool_failure"
+  },
+  "case_id": "batch103-handoff-import-failure",
+  "nature": "observed_temporary_script_import_failure_recovered_without_strategy_changes",
+  "purpose": "归档临时脚本未含项目import路径；命令局部PYTHONPATH恢复，无安装或规则变化",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch103/20261011-stage-recording-import-failure/failure.json",
+    "sha256": "9e2071ab0993a264c8f0f2c34bb0585d6ca5c237f8d7588675f2fef7eef91b49"
+  }
+}

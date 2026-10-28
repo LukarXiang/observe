@@ -285,14 +285,17 @@ def prepare(root):
 
 def render(project, policy, metadata = False):
     c = project['current']; a = project['accepted']
+    verified = c.get('catalog_status_counts', {}).get('已验证', '未登记')
     prefix = '../../../../' if metadata else '../'
     lines = ['# observe 项目状态与续接', '', f"状态检查点：`{c['checkpoint']}`；正式验收检查点：`{a['checkpoint']}`。", '',
              '本页由元数据导出生成。研究结果与数据载荷分开管理；仅Git文件足以阅读，完整离线复现需要迁移所需输入。', '',
              f"来源登记{c['sources']}；人工审查{c['manually_reviewed']}（正式验收范围{a['manually_reviewed']}）；本机真实回测及匹配复现来源{c['locally_backtested_sources']}；策略父运行{c['local_strategy_runs']}。原策略完整等价复现0。", '',
-             '14个代表配置不是14份来源；67个策略父运行含短长窗口、复现和失败。目录“已验证11”与本机回测来源12口径不同，旧声明式来源仍未正式审查。', '',
+             f"14个代表配置不是14份来源；{c['local_strategy_runs']}个策略父运行含短长窗口、复现和失败。目录“已验证{verified}”与本机回测来源{c['locally_backtested_sources']}口径不同；来源审查与交易验收分别记录。", '',
              f"发布`{project['published_batch']}`。年度财务95,486行、季度405,867行、年度控制变量73,738行；严格历史财务可用0。", '',
              '## 当前结论', '',
-             '第63批SVR/价值财务研究已验收，但真实模型/交易回测0；第64批价格形态/K线组件和禁网匹配完成，正式检查/冻结终审待做。', '',
+             f"最近正式验收：{a['note']}。",
+             (f"当前进度：{c['note']}；当前检查点尚未正式验收。" if c['checkpoint'] != a['checkpoint'] else
+              '当前检查点已完成正式验收；组件诊断不计交易回测。'), '',
              'EP主板组件累计+46.97%、回撤-16.65%；伊利/招行累计+1766.31%、回撤-48.76%。固定池、平台语义及非独立留出限制保留。', '',
              '茅台布林累计收益高，但2023年至今各年亏损；三进兵近期也有连续亏损，滑点加倍累计收益从585.07%降至387.22%。国航和复星2万元版本为负面结果；复星100万元低回撤对应99.44%平均现金。', '',
              'BP长区间被退市/换股结算阻断，收益不可用。旧滚动均值三实验已标为数值验收失效并关联稳定修正版。', '',
@@ -309,7 +312,7 @@ def render(project, policy, metadata = False):
               '## 使用与核验', '',
               '只读核验元数据：', '', '```bash', 'python scripts/export_research_metadata.py verify --root .', '```', '',
               '载荷核验需要原始策略、分区和实验；缺失会返回blocked并列明路径。metadata不会替换活跃PUBLISHED或初始化运行数据库。', '',
-              'Git上传状态与研究验收状态分开：2026-10-08已推送到私有远端master，本机工作区Git已对齐；凭据见docs/handoff/2026-10-08-git-publication.json，经过见工作区整理与Git对齐记录。', '']
+              f"Git上传状态与研究验收状态分开：{policy.get('publication', {}).get('current_worktree_note', '本次工作区上传状态尚未核验')}；历史上传凭据见docs/handoff/2026-10-08-git-publication.json。", '']
     if metadata:
         lines += ['[权威索引](../../index.json)、[项目状态](project-state.json)、[任务](tasks/index.json)、[决策](decisions/index.json)、[阻断](blockers.json)、[能力](capabilities.json)、[实验索引](runs/index.json)、[代表结果](runs/representative.json)、[证据索引](evidence/index.json)、[载荷](assets/index.json)、[数据包](bundles/index.json)。', '']
     else: lines += ['[权威索引](../data/metadata/index.json)；按其indexes字段追读具体对象。', '']

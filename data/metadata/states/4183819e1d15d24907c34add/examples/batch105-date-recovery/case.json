@@ -1,0 +1,28 @@
+{
+  "case": {
+    "checked_sha256": "34e0bf602b633a89353a1be58a29cdfe4f26bc7fecc6cb29817204b108182426",
+    "date_unit_conversion": "lossless nanosecond representation solely for exact readback equality",
+    "evidence_sha256": {
+      "data/staging/strategies-batch105/20261011-stage-date-precision-failure/checked.json": "d0e8b2bc46915ec8417f7b0a8ea6952b721ef9b8e394b9ecababd7407b4d983f",
+      "scripts/recover_strategy_batch105_stage.py": "15e11b6af68c299cf172b2fb2de1ff7416a557ea452c375b76fe707ce6f1fee9",
+      "scripts/verify_strategy_batch105_stage.py": "1b8b4910f71891ffc6a60c149efba3ac093d739f991794d2a73a77ef884ccdfa"
+    },
+    "historical_outputs_modified": false,
+    "original_failure": "data/staging/strategies-batch105/20261011-stage-date-precision-failure/checked.json",
+    "original_verifier_unchanged": true,
+    "other_dtypes_and_values_checked_exactly": true,
+    "status": "ok",
+    "tests": {
+      "isolated": 22,
+      "local": 22
+    }
+  },
+  "case_id": "batch105-date-recovery",
+  "nature": "immutable_recovery_sidecar",
+  "purpose": "原失败校验器不改；恢复代码SHA与终态绑定",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch105/20261011-component-stage-recovery/recovery.json",
+    "sha256": "d1ac050a1b236d7140dfeaf330772d9b7e6c55267f9476c9037a1fc59a547bf7"
+  }
+}

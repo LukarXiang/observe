@@ -1,0 +1,162 @@
+{
+  "case": {
+    "accepted_directory": "data/staging/strategies-batch72/20261008-dividend-income-review-correction",
+    "adversarial_review": {
+      "examined": [
+        "Source SHA and AST selected-function guards",
+        "Fixed single request and disabled proxy/redirect; no auth headers in artifacts",
+        "Precision-loss rejection, unchanged missing masks and finite values, exact Parquet replay",
+        "Partial output/copy corruption rejection and frozen original/failed archives",
+        "Original NaN negative filter and corrected metadata without rewriting source",
+        "Component-only scopes, missing historical amounts/JY/pools/cap/timing gates; no new fees or NAV"
+      ],
+      "findings": []
+    },
+    "checked_state_sha256": "a7902f28fb6bef7402536b45376d9f790f4050b809a1ce598dd577584421c5c2",
+    "final_binding_sha256": "cd193195f97664885c4c7d669a003912822834c415b83966e60f24679069e5e7",
+    "hard_stops": [],
+    "implementation_sha256": {
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+      "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+      "scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+      "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+      "scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+      "scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+      "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+      "scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+      "scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+      "src/observe/ledger/book.py": "6cd48bec61546727a2b4fdb122a1524bf9bc5a9400ba1c18f7da1b2fe6bd9175",
+      "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+      "src/observe/strategy_catalog.py": "44c67f2ddc18800191515e74d4d92dd56e046a5cb5e0624a28258d206b0dff28",
+      "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+      "tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+      "tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+      "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+      "tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+      "tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a"
+    },
+    "limitations": [
+      "184 rows include paired provider overlaps and date gaps;none admitted to trading",
+      "Current value versions cannot prove historical total dividends/JY yields or platform timing",
+      "Partition protection is recorded size/mtime plus corp SHA, not a fresh hash of all large payloads"
+    ],
+    "not_a_backtest": true,
+    "post_acceptance_integrity": {
+      "catalog_id": "e34c0fa14132bf43ad2c",
+      "checked_evidence_files": 86,
+      "checked_state_sha256": "a7902f28fb6bef7402536b45376d9f790f4050b809a1ce598dd577584421c5c2",
+      "failure_files_checked": 9,
+      "implementation_files": 25,
+      "not_a_backtest": true,
+      "original_archive_files_checked": 56,
+      "raw_cninfo_all_three_field_scope_verified": true,
+      "receipt_sha256": "feca86603559effaff8d02b8b218a7575cd4f4da17a43fcbcea3da4faf30d707",
+      "snapshot": "20261006-145049-e06c",
+      "status": "ok",
+      "unchanged_copies_checked": 48
+    },
+    "post_acceptance_integrity_sha256": "7d68c19006832337e71f705de2ec0f6f8875000359e261bcf8a694b97225285e",
+    "quality_summary_sha256": "9e43507bd81fe023effaa76d23daab143f391337a042f978ea2df37f46481923",
+    "receipt_sha256": "feca86603559effaff8d02b8b218a7575cd4f4da17a43fcbcea3da4faf30d707",
+    "recovery_provenance_sha256": "c3047f6523259e4fc7eb9bc5760bea0846a85b0c069d1c6319ce6e783ca0ad8d",
+    "resolved_findings": [
+      {
+        "id": "prepare-partial-overwrite",
+        "resolution": "All6 expected outputs checked absent before reading or writing;6 regressions keep partial evidence SHA",
+        "severity": "P2"
+      },
+      {
+        "id": "local-price-binding",
+        "resolution": "Copied input price SHA equals accepted47 price;changed-copy regression rejects",
+        "severity": "P2"
+      },
+      {
+        "id": "negative-yield-filter-wording",
+        "resolution": "Original negative filter retainsNaN;explicit review rule in fresh directory, old56 files unchanged, original-function boundary test",
+        "severity": "P3"
+      }
+    ],
+    "review_depth": "deep",
+    "scope": "two complete dividend sources, original synthetic diagnostics, long supplier PE/mean arithmetic, six bounded wire samples and immutable review correction; no trading acceptance",
+    "scope_alignment": "on_target",
+    "specialist_reviews": {
+      "architecture": {
+        "agent": "batch72_architecture",
+        "catalog_changed_only": [
+          "2022年度精选策略/12.回馈社区，分享市盈率股息率选股+均线止盈交易策略.txt"
+        ],
+        "findings": [],
+        "not_a_backtest_verified": true
+      },
+      "security": {
+        "agent": "batch72_security",
+        "failure_files_checked": 9,
+        "findings": [],
+        "original_files_checked": 56,
+        "six_wire_and_encoding_and_no_header_retention_verified": true,
+        "unchanged_copies_checked": 48
+      }
+    },
+    "status": "ok",
+    "test_counts": {
+      "formal_related": 146,
+      "new_specialized": 35
+    },
+    "verification": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/review_strategy_batch72.py"
+        ],
+        "log": "data/staging/strategies-batch72/20261008-dividend-income-review-correction/check-0.log",
+        "returncode": 0,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.verify_offline_tests",
+          "-q",
+          "tests/unit/test_batch72_research.py",
+          "tests/unit/test_batch71_research.py",
+          "tests/unit/test_catalog_dependencies.py",
+          "tests/unit/test_catalog_schedules.py",
+          "tests/unit/test_research_metadata.py",
+          "tests/integration/test_strategy_merge.py"
+        ],
+        "log": "data/staging/strategies-batch72/20261008-dividend-income-review-correction/check-1.log",
+        "returncode": 0,
+        "sha256": "28baf884d07f9c3cc8839c8ad12421e9d3fe093d7d85b4e5f9b8535d7a40654e"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "log": "data/staging/strategies-batch72/20261008-dividend-income-review-correction/check-2.log",
+        "returncode": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "case_id": "dividend-batch72-review",
+  "nature": "frozen_final_specialist_and_immutable_review_correction",
+  "purpose": "安全架构无未解决发现；25实现/86证据及原56/未变副本48/失败9 SHA一致；NaN登记文案新档纠正，无经济规则修改",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-08-batch72-final-review.json",
+    "sha256": "1083a1e5c16caa1d797b922d3e3f6b39aa6e12644305b3e9734ef372ffbb0a57"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "case": {
+    "chunks_per_mode": 49,
+    "differences": 0,
+    "fresh_process_per_chunk": true,
+    "network_blocked": true,
+    "new_trading_backtests": 0,
+    "original_strategy_complete": false,
+    "output_sha256": {
+      "diagnostics.json": "f50566232921200ae82e0068bab64b8590d44e9385e78385287c4590cff7402f",
+      "feature-prefix.parquet": "42fe754f22c88724f9333c1df4fad146e355cbdafe770059a61cfe27a221ebd5",
+      "summary.json": "43dac88ef18e5cc06213939ec5c040241b72b96c34bbea847b60603087647d80"
+    },
+    "recovery_prepared_sha256": "c09f9b0e9ea0d70ef60481439df137fbf7280b94812b73196d66b1b4c983bdb2",
+    "status": "match",
+    "windows_per_mode": 4852
+  },
+  "case_id": "batch100-full-recovery",
+  "nature": "actual_full_scope_fresh_process_original_expression_replay",
+  "purpose": "两轮4852窗/各49块，三个输出字节一致；基础25列复用原库，不称全部指标独立",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch100/20261011-feature-chunk-recovery/offline-verification.json",
+    "sha256": "165416aee3119b27f99ba62318027cd65abc172f9d394548532537352e6b4cbd"
+  }
+}

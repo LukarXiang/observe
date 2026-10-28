@@ -1,0 +1,28 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_batch88_research.py"
+    ],
+    "implementation_sha256": {
+      "scripts/review_strategy_batch88.py": "b98b5d7b9e4beea4cc52115ef2ac2879479525615c5b01f1cf6e59e5b4bd9814",
+      "tests/unit/test_batch88_research.py": "c83bf7c5d83fa370c3bdb140cbca280070e1f2a9495fe528aaf9109ee0e8fd3f"
+    },
+    "log_sha256": "2aa00d15dfde76a5099d85db312f22993667c770c376a91e924550cc511c3f29",
+    "not_a_backtest": true,
+    "returncode": 1,
+    "root_cause": "Validation helper raises ValueError; unsupported horizon lambda raises NameError for free variable, not UnboundLocalError",
+    "status": "failed"
+  },
+  "case_id": "daily-chan-industry-batch88-development-stage",
+  "nature": "immutable_development_expectation_failure",
+  "purpose": "2失败4通过修前脚本/测试/log；误认require和lambda异常类型，只修预期，原逻辑不改",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch88/20261009-development-first-tests/result.json",
+    "sha256": "edccd757a1a4a4d9215a010dd0b90aee633138433c7d2d8b6f1f5325c5c458d8"
+  }
+}

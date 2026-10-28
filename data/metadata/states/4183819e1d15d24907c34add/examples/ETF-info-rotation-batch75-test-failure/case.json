@@ -1,0 +1,22 @@
+{
+  "case": {
+    "cause": "Pandas constructs the source string Series with NaN for None; the test incorrectly compared its initial missing representation against None.",
+    "command": "~/envs/quant/.venv/bin/python -m pytest -q tests/unit/test_batch75_recovery.py",
+    "failed": 1,
+    "fix": "Compare against a deep copy taken before adaptation, preserving exact source dtype and missing representation.",
+    "not_a_backtest": true,
+    "original_test": "recovery-test-before-missing-assertion.py",
+    "passed": 3,
+    "production_adapter_changed": false,
+    "status": "failed",
+    "test": "test_adapter_preserves_dates_missing_values_and_original_numeric_precision"
+  },
+  "case_id": "ETF-info-rotation-batch75-test-failure",
+  "nature": "immutable_regression_test_missing_representation_failure",
+  "purpose": "红1失败3通过：Pandas构造已把None变NaN，测试改为适配前后深拷贝精确比较；生产适配不改",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch75/20261008-ETF-info-rotation/recovery-test-failure.json",
+    "sha256": "926b87632442d7e75fcdc4ea4b10afee96a0e026b03e0a5301be382eaac244b1"
+  }
+}

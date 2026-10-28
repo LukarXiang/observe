@@ -1,0 +1,186 @@
+{
+  "case": {
+    "bars_1m_registered": false,
+    "candidate": {
+      "api_sha256": "95e4d23f95af3bbbe56a4bb8d19965e3cd1cfbd519db744d51b7d782dee7ddc1",
+      "attempts": [
+        {
+          "method": "GET",
+          "parameters": null,
+          "url": "https://finance.sina.com.cn/realstock/company/sh510050/hisdata_klc2/klc_kl.js"
+        }
+      ],
+      "case": "fund-510050",
+      "columns": [
+        "date",
+        "prevclose",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "amount",
+        "postVol",
+        "postAmt"
+      ],
+      "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/parsed.parquet",
+      "published": false,
+      "query": {
+        "function": "fund_etf_hist_sina",
+        "parameters": {
+          "symbol": "sh510050"
+        }
+      },
+      "rows": 5254,
+      "sha256": "17897aa46f5d66ba2878ad90f537ddd6c2d3d2d1baaf2b321cdc333d6b4237f2",
+      "status": "success",
+      "strict_usable": false,
+      "wire_responses": [
+        {
+          "encoding": null,
+          "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/response.bin",
+          "sha256": "8b6a76e92933b1f19b96c8273162aa953ad9edc1fea81b85886c7d7c0c24f323",
+          "status_code": 200
+        }
+      ]
+    },
+    "candidate_calendar_missing_extra": [
+      0,
+      0
+    ],
+    "candidate_retained": 5252,
+    "carrier_limit": "Original ETF dictionary maps every sector to the same index code; RQAlpha explicitly supports synthetic index orders, which does not prove JoinQuant execution or an exchange-traded ETF mapping",
+    "future_excluded": 2,
+    "minute_api_limit": "AKShare index period1 trends2 asks ndays=5; slicing start/end cannot recover 4800 bars or old history",
+    "model_search": {
+      "command": [
+        "rg",
+        "--files",
+        "--hidden",
+        "--no-ignore",
+        "-g",
+        "col_50etf_20191109.dat",
+        "-g",
+        "model_50etf_20191109.dat",
+        "-g",
+        "!data/metadata/**",
+        "repo",
+        "data"
+      ],
+      "returncode": 1,
+      "stderr": ""
+    },
+    "new_requests": 0,
+    "new_trading_backtests": 0,
+    "original_models_found": {
+      "col_50etf_20191109.dat": [],
+      "model_50etf_20191109.dat": []
+    },
+    "published_batch": "20261006-145049-5ceb",
+    "published_rows": 0,
+    "reference_sha256": {
+      "repo/akshare/akshare/index/index_zh_em.py": "031883207899c4d251d61bc5f7e980c2e71f34c4b48df112a0a726e917e25114",
+      "repo/qlib/qlib/contrib/model/xgboost.py": "1e27774291b79463bd60675e5c8c4542ead32e9f319337ff7b94e263636ad88e",
+      "repo/rqalpha/rqalpha/mod/rqalpha_mod_sys_accounts/api/api_stock.py": "97ff999448027d28d07e7fde19f9b931abe0c5a1914d5143f6bbacd1968eb249"
+    },
+    "snapshot": "20261006-145049-e06c",
+    "snapshot_sha256": "9449dc18911fe5f27fe65f55f5849602bec0cba998335b74a6d2b1377e19af60",
+    "strict_usable": false,
+    "tables": {
+      "adj_coverage": {
+        "000300.SH": 0,
+        "000819.SH": 0,
+        "000913.SH": 0,
+        "000932.SH": 0,
+        "000993.SH": 0,
+        "399967.SZ": 0,
+        "399971.SZ": 0,
+        "399975.SZ": 0,
+        "510050.SH": 0,
+        "511880.SH": 0
+      },
+      "adj_factors": {
+        "000300.SH": 0,
+        "000819.SH": 0,
+        "000913.SH": 0,
+        "000932.SH": 0,
+        "000993.SH": 0,
+        "399967.SZ": 0,
+        "399971.SZ": 0,
+        "399975.SZ": 0,
+        "510050.SH": 0,
+        "511880.SH": 0
+      },
+      "bars_1d": {
+        "000300.SH": 0,
+        "000819.SH": 0,
+        "000913.SH": 0,
+        "000932.SH": 0,
+        "000993.SH": 0,
+        "399967.SZ": 0,
+        "399971.SZ": 0,
+        "399975.SZ": 0,
+        "510050.SH": 0,
+        "511880.SH": 0
+      },
+      "bars_5m": {
+        "000300.SH": 0,
+        "000819.SH": 0,
+        "000913.SH": 0,
+        "000932.SH": 0,
+        "000993.SH": 0,
+        "399967.SZ": 0,
+        "399971.SZ": 0,
+        "399975.SZ": 0,
+        "510050.SH": 0,
+        "511880.SH": 0
+      },
+      "corp_actions": {
+        "000300.SH": 0,
+        "000819.SH": 0,
+        "000913.SH": 0,
+        "000932.SH": 0,
+        "000993.SH": 0,
+        "399967.SZ": 0,
+        "399971.SZ": 0,
+        "399975.SZ": 0,
+        "510050.SH": 0,
+        "511880.SH": 0
+      },
+      "index_1d": {
+        "000300.SH": 5280,
+        "000819.SH": 0,
+        "000913.SH": 0,
+        "000932.SH": 0,
+        "000993.SH": 0,
+        "399967.SZ": 0,
+        "399971.SZ": 0,
+        "399975.SZ": 0,
+        "510050.SH": 0,
+        "511880.SH": 0
+      },
+      "instruments": {
+        "000300.SH": 1,
+        "000819.SH": 1,
+        "000913.SH": 1,
+        "000932.SH": 1,
+        "000993.SH": 1,
+        "399967.SZ": 1,
+        "399971.SZ": 0,
+        "399975.SZ": 0,
+        "510050.SH": 0,
+        "511880.SH": 0
+      }
+    },
+    "volume_unit_and_platform_adjustment_equivalence": "unproven; raw vendor volume, no rescaling",
+    "xgboost_installed": false
+  },
+  "case_id": "batch100-dependencies",
+  "nature": "actual_store_counts_candidate_byte_provenance_and_native_api_limits",
+  "purpose": "七指数行情0、0003005280基准行；50ETF/511880均缺输入，ndays5不能恢复4800条；Qlib/RQAlpha参考范围明确",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch100/20261011-original-feature-stage/dependencies.json",
+    "sha256": "94134d8ae27bac39d3ff16d7fa51826b8f98e8a94c313479468b94bc808ad305"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "case": {
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.reference_strategy_batch104",
+          "compute"
+        ],
+        "log": "data/staging/strategies-batch104/20261011-raw-formula-reference-v3/compute.log",
+        "log_sha256": "811c201558b6c014df08b1d7dbc9def0308499ba6e3d87592b3b49438452af78",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.reference_strategy_batch104",
+          "replay"
+        ],
+        "log": "data/staging/strategies-batch104/20261011-raw-formula-reference-v3/replay.log",
+        "log_sha256": "811c201558b6c014df08b1d7dbc9def0308499ba6e3d87592b3b49438452af78",
+        "returncode": 0
+      }
+    ],
+    "differences": [],
+    "formal_trading_acceptance": false,
+    "fresh_network_blocked_processes": 2,
+    "new_trading_backtests": 0,
+    "outputs_sha256": {
+      "data/staging/strategies-batch104/20261011-raw-formula-reference-v3/compute/diagnostics.json": "8646e1d4fccb089dbca3702f856648088d7bbac74e6fef4a9b6e1f53e258f9f9",
+      "data/staging/strategies-batch104/20261011-raw-formula-reference-v3/compute/relative-position-reference.parquet": "1b5b4c0e2a3e9c574bd0c4bd24a9afbe8b7bcf94e200eb354b3d150027928255",
+      "data/staging/strategies-batch104/20261011-raw-formula-reference-v3/compute/short-MA-reference.parquet": "afcda02b832882daf2d624f4d043677a225d50a0a45959fa0a0164f4f497fa77",
+      "data/staging/strategies-batch104/20261011-raw-formula-reference-v3/compute/summary.json": "148310f4924d75554163b83779d5167111f651833ce064eea65212f4d562075c"
+    },
+    "status": "ok"
+  },
+  "case_id": "batch104-v3-offline",
+  "nature": "batch104_component_stage_not_trading",
+  "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch104/20261011-raw-formula-reference-v3/offline-verification.json",
+    "sha256": "c7e7d324cb54fb70f82d642f31142660bfcc697be6118a0691339d0d1245eeec"
+  }
+}

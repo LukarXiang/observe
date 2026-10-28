@@ -1,0 +1,25 @@
+{
+  "case": {
+    "action": "initial study and controlled reproduction of date comparison",
+    "error": "Invalid comparison between dtype=str and date",
+    "frozen_input_sha256": "78bec1736ec56ad9e3d805e4a449c554c3f86ff8c3d34e8730e2db669e932273",
+    "implementation_before": {
+      "scripts/review_strategy_batch87.py": "14a46e2aa33c3591c5fe67f4dbb49c0055155df64f107622812a8a2a16d65d03",
+      "tests/unit/test_batch87_research.py": "32935d54a30f1de8ee77a0978341a1077eabde3cf98c13a359e8174c22028a16"
+    },
+    "log": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/development-date-failure/traceback.log",
+    "log_sha256": "8462eda1f4befd0ddebfd8aaa16a28d889a6bfdc09a2521eb91c96ff979514a9",
+    "new_trading_backtests": 0,
+    "state_rows_written": 0,
+    "status": "failed",
+    "type": "TypeError"
+  },
+  "case_id": "chan-batch87-date-failure",
+  "nature": "immutable_driver_date32_comparison_failure_with_red_regression",
+  "purpose": "首study在date32与字符串日历比较中止，0状态；旧驱动/测试/输入SHA/堆栈和红回归保留，只规范驱动日期表示",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/development-date-failure/failure.json",
+    "sha256": "c86e23b848aed2727b831bf3911b314ec861bbbf06d73b72b3784ce52365c13e"
+  }
+}

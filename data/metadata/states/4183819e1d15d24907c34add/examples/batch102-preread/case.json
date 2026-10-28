@@ -1,0 +1,71 @@
+{
+  "case": {
+    "catalog_id": "19050ed2ae2028e31e87",
+    "catalog_sha256": "358be36593d8536ebdd735bed71d9a30dc1a6081b88a6a40814af837b542e954",
+    "new_trading_backtests": 0,
+    "scope": "Frozen next-source byte/AST inventory only; not formal source review or trading",
+    "sources": [
+      {
+        "apis": [
+          "macro.run_query",
+          "get_bars",
+          "run_daily",
+          "order_target",
+          "order_value"
+        ],
+        "encoding": "utf-8-sig",
+        "fully_reviewed": false,
+        "functions": [
+          "initialize",
+          "handle",
+          "get_PMI",
+          "calc_provide_and_need",
+          "calc_save",
+          "order_func",
+          "sell_stock_security",
+          "change_to_yeak_k",
+          "year_move_average",
+          "day_move_average",
+          "percentile",
+          "calc_last_month",
+          "func"
+        ],
+        "lines": 286,
+        "sha256": "5d55e30ef811ceda9ef64f13f874d38ae84204dcbf2fb248274188563d08c88b",
+        "source": "2024年度精选策略2/48.一种宏观数据的中长线策略，年化15%，最大回撤9%.txt",
+        "source_copy": "data/staging/strategies-batch101/20261011-next-source-preread/0.source",
+        "top_level_functions": 13
+      },
+      {
+        "apis": [
+          "attribute_history",
+          "run_daily",
+          "order_target_value"
+        ],
+        "encoding": "utf-8-sig",
+        "fully_reviewed": false,
+        "functions": [
+          "initialize",
+          "calculate_etf_metrics",
+          "check_etf",
+          "check_etf_2",
+          "trade",
+          "print_position_info"
+        ],
+        "lines": 159,
+        "sha256": "e7ff4f030f9549890c3277b2ca7eefbb068893832a12c7d0b685206b2e4f7401",
+        "source": "聚宽2025年精选/58Debug-输出信息-多标的版ETF策略(ETF复现之三）.txt",
+        "source_copy": "data/staging/strategies-batch101/20261011-next-source-preread/1.source",
+        "top_level_functions": 6
+      }
+    ]
+  },
+  "case_id": "batch102-preread",
+  "nature": "next_source_full_text_byte_AST_inventory_only",
+  "purpose": "宏观48/ETF58原文字节/13与6函数冻结；未计来源验收或回测",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch101/20261011-next-source-preread/preread.json",
+    "sha256": "db815b9b217e1a47d440cdfe0d5b18d4554fe0888272a70812a0203f9cb0dac7"
+  }
+}

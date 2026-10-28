@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "status": "rejected_then_reexported",
+  "kind": "tool_terminal_error_record",
+  "failed_session": 69795,
+  "failed_command": "python scripts/export_research_metadata.py export --root .",
+  "exit_code": 1,
+  "error": "ValueError: Input changed during export: data/catalog/strategies/progress/latest.json",
+  "cause": "The bounded probe completed and archived a new checkpoint while metadata export was reading its prior checkpoint.",
+  "correction": "Wait for research checkpoint writes to finish; serialize export and all input mutations; verify before continuing.",
+  "successful_retry_export": "29b617f0fbc80082ebc0b48c",
+  "successful_retry_verify": {
+    "status": "ok",
+    "scope": "metadata_only",
+    "checked": 535,
+    "issues": [],
+    "payload_verified": false
+  },
+  "latest_index_may_advance": true,
+  "original_artifacts_overwritten": false,
+  "not_a_backtest": true
+}

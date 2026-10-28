@@ -1,0 +1,30 @@
+source: 2024年度精选策略2/52.市场宽度——简洁版.txt
+source_sha256: 99d10bce41b0c7e1c2669c3c0c74afefea384ba6a099673c24e041fde5b89aaf
+review_scope: 全文186行、两绘图函数、顶层取数与三种行业汇总方案；无交易入口
+formal_acceptance: false
+original_strategy_complete: false
+economic_variant_approved: false
+rules:
+  end_date: '2022-09-02'
+  count_: 20
+  query_rows: 40
+  security_pool: get_all_securities(date=40个交易日窗口首日)，原请求未显式指定types
+  close_query: get_price(stock_list,end_date=end_date,count=40,fields=close,panel=False).pivot(time,code)
+  bias: df_close.iloc[20:] > df_close.rolling(20).mean().iloc[20:]
+  industry_classification: get_industries(sw_l1,date=end_date)
+  industry_members: get_industry_stocks(idx,date=end_date)，与pivot列集合交集去重
+  industry_percentage: 每行业100×True数量/交集证券数，先astype(int)截断
+  scheme1: 先截断的各行业整数百分比求和；vmax为实际保留下来的行业列数×100
+  scheme2: 先截断的行业百分比求和/行业列数，再截断
+  scheme3: 100×全部pivot列True数/全部pivot列数，再截断
+  ordering: 行业结果sort_index降序；原df_bias方案3仍按索引对齐
+defects:
+  - NaN比较False，仍进入已存在的证券列分母；不能悄悄dropna
+  - 重复(time,code)的pivot报错；同名行业覆盖前一列；集合成员本身去重
+  - 首19行以后已经存在MA20，但原固定从位置20开始输出；不能提前一行
+data_gaps:
+  - 原平台窗口首日完整证券列表及截止日申万分类、成分未证明
+  - 原平台默认复权、停牌、证券类型与现有供应商原价的等价性未证明
+  - 现有早年日线仅少量证券，不能固定6156只分母声称早期全市场宽度
+allowed_evidence: 原AST和已有白名单表达式在冻结原价上的算术核验；固定40日可用证券和长native-row组件均显式声明不是原完整取数协议
+next: 恢复精确历史证券池与行业映射、核平台价格协议后才能报告原市场宽度；没有下单入口，交易回测不计完成

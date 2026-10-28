@@ -1,0 +1,153 @@
+{
+  "case": {
+    "FFT": {
+      "boundary_bins_60_190_kept": true,
+      "full_original_pool_ranking_rows": 0,
+      "kept_bins": 121,
+      "last_observation_has_no_supported_next_execution_day": true,
+      "missing_pool": [
+        "159928.XSHE"
+      ],
+      "not_a_trading_backtest": true,
+      "original_adjustment_equivalence_proven": false,
+      "profiles": [
+        {
+          "first_last_input": "2006-03-06",
+          "last_last_input": "2026-09-29",
+          "maximum_independent_error": 6.895525817007808e-16,
+          "symbol": "510050.XSHG",
+          "windows": 5003
+        },
+        {
+          "first_last_input": "2013-06-06",
+          "last_last_input": "2026-09-29",
+          "maximum_independent_error": 6.353424730765056e-16,
+          "symbol": "510300.XSHG",
+          "windows": 3238
+        },
+        {
+          "first_last_input": "2017-08-01",
+          "last_last_input": "2026-09-29",
+          "maximum_independent_error": 1.0200174038743626e-15,
+          "symbol": "159949.XSHE",
+          "windows": 2226
+        }
+      ],
+      "removed_bins": 129,
+      "windows": 10467
+    },
+    "Git_publication": "pending_user_commit_and_push",
+    "Kalman_numerical_windows": 0,
+    "RSRS": {
+      "discarded_window_start": 599,
+      "first": "2007-07-27",
+      "first_appended_window_start": 600,
+      "ignored_seed_last_row": "2007-07-26",
+      "last": "2026-09-29",
+      "last_input_date": "2026-09-28",
+      "literal_history_calls": 4663,
+      "maximum_independent_errors": {
+        "intercept": 2.3783286451362073e-10,
+        "r2": 3.11972669919669e-14,
+        "score": 3.5216274341109965e-13,
+        "slope": 6.195044477408373e-14,
+        "zscore": 4.831690603168681e-13
+      },
+      "not_a_trading_backtest": true,
+      "original_initial_gap_preserved": true,
+      "rows": 4662,
+      "seed_rows": 618,
+      "seed_slopes_after_discard": 599,
+      "seed_slopes_before_discard": 600,
+      "signals": {
+        "BUY": 941,
+        "KEEP": 2869,
+        "SELL": 852
+      }
+    },
+    "accepted_checkpoint": "20261010-181224-4012",
+    "benchmark399006_candidates": {
+      "baostock_rows": 3967,
+      "not_published": true,
+      "provider_close_difference_maximum": 0.514,
+      "sina_rows": 3969,
+      "sina_rows_to_cutoff": 3967
+    },
+    "checkpoint": "20261010-183705-25b4",
+    "formal_source_research_acceptance": false,
+    "formal_trading_acceptance": false,
+    "implementation_sha256": {
+      "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+      "tests/unit/test_batch94_stage.py": "3e632fffe9417f5a4b8cacd9b58c8d7ee9c83fa89fbd8e7c8182a94f803823f6"
+    },
+    "library_goal_complete": false,
+    "limits": [
+      "Native ETF prices do not prove original adjusted prices/events/state/fees/open execution",
+      "Original pandas date-index close[0] errors retained; no approved corrected trading variant",
+      "pykalman missing; smooth call spies are not Kalman numerical reproduction",
+      "Two Kalman source files are byte-identical duplicates; no independent economic sample"
+    ],
+    "manually_reviewed_formally": 270,
+    "missing_original_fund": "159928.XSHE",
+    "native_fund_candidates": 3,
+    "new_trading_backtests": 0,
+    "next_plan": "docs/tasks/2026-10-10-第九十四批ETF低通与卡尔曼轮动-执行计划.md",
+    "offline": {
+      "FFT_rows": 10467,
+      "RSRS_rows": 4662,
+      "diagnostics": 9,
+      "differences": 0,
+      "literal_RSRS_source_numbers_compared": [
+        0,
+        1,
+        2
+      ],
+      "network_forbidden": true,
+      "not_a_trading_backtest": true,
+      "original_full_strategy_reproduction": false,
+      "same_SHA_duplicate_is_independent_economic_sample": false,
+      "status": "match"
+    },
+    "protection": {
+      "baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+      "mutable_registry_files_excluded": 0,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_unchanged": 5780,
+      "old_index_rows_unchanged": 5280,
+      "old_partition_metadata_unchanged": 398,
+      "partition_check": "size/mtime only; no fresh full hash",
+      "status": "ok"
+    },
+    "real_backtested_and_reproduced_sources": 12,
+    "remaining_unreviewed": 425,
+    "report": "docs/tasks/2026-10-10-第九十四批ETF低通与卡尔曼轮动-数值阶段记录.md",
+    "report_sha256": "302825110a9f1fca8c3011742702b4a3bf8898a099df46ed0232f662b015c9e5",
+    "review": {
+      "formal_independent_review_complete": false,
+      "next_action": "Independent stage/code review and original order/position lifecycle diagnostics before source acceptance"
+    },
+    "schema": 1,
+    "stage_binding": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/stage-binding.json",
+    "stage_binding_sha256": "d4cbda8e9aefe87e71fad87e9449a915e5344692c3e6a749c94e7959daaf2727",
+    "stage_directory": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage",
+    "status": "numerical_stage_verified_not_formally_accepted",
+    "strategy_parent_runs": 75,
+    "synthetic_diagnostics": 9,
+    "tests": {
+      "full_logs": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/command-results.json",
+      "full_logs_sha256": "cc134a6c17dae26a4f77916daf5dfb3043b28cae2977a683e3f78d6ac15169b2",
+      "isolated_cross_machine_tests_run": false,
+      "new": 25,
+      "passed": 76,
+      "whole_repository_pytest_run": false
+    }
+  },
+  "case_id": "etf-filters-batch94-numerical-stage",
+  "nature": "verified_numerical_stage_not_formal_source_or_trading_acceptance",
+  "purpose": "270正式保持；4662日原RSRS/三基金10467个FFT窗/九诊断禁网match0，76相关/25新增与旧资产保护；真实smooth及完整原池交易仍缺",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-10-batch94-numerical-stage.json",
+    "sha256": "08516e45f755db0b1be5cfa5177309440d2545bcc80d65948886f57932b3498e"
+  }
+}

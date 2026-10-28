@@ -1,0 +1,54 @@
+{
+  "case": {
+    "absence_scope": "Named declarations in local repo py/ipynb and textual callers in txt;not installed packages,remote repositories,Google Drive or executable equivalents",
+    "commands": [
+      {
+        "command": [
+          "rg",
+          "-l",
+          "--glob",
+          "*.py",
+          "--glob",
+          "*.ipynb",
+          "def calc_industry_nhnl|def get_ind_overthreshold_num",
+          "repo"
+        ],
+        "matches": [],
+        "returncode": 1,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "rg",
+          "-l",
+          "--glob",
+          "*.txt",
+          "calc_industry_nhnl|get_ind_overthreshold_num",
+          "repo"
+        ],
+        "matches": [
+          "repo/量化策略源代码/2024年度精选策略1/89.【复现·水】市场情绪指标专题行业指数顶部和底部信号.txt"
+        ],
+        "returncode": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "8215e989ad059a2d2d5f6d3558ecddf39e52f812ea685904be4e4e4f20ef1d4f"
+      }
+    ],
+    "formal_sources_remain": 294,
+    "new_requests": 0,
+    "new_responses": 0,
+    "new_trading_backtests": 0,
+    "original_nhnl_implementation_proven": false,
+    "source89_private_database_protocol_proven": false,
+    "status": "initial_textual_module_inventory_only"
+  },
+  "case_id": "batch105-module-inventory",
+  "nature": "actual_local_text_search_not_dependency_equivalence",
+  "purpose": "py/ipynb无声明、txt仅原调用；不证明远程/全机不存在，不发明经济规则",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch105/20261011-initial-module-inventory/checked.json",
+    "sha256": "a2111947af9e7feb7721da9fba496fd1629a7bcdd3ee5f776baea634a9fb6a41"
+  }
+}

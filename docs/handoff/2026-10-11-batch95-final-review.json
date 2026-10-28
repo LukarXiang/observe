@@ -1,0 +1,104 @@
+{
+ "status": "ok",
+ "progress": {
+  "checkpoint": "20261011-002049-869a",
+  "note": "Batch95 three sources formally researched;9324RSRS/22044native windows/108diagnostics;no trades",
+  "catalog_id": "09bee9b103454931c9c9",
+  "catalog_sha256": "0045b4eb9b7f483a10b93258e315930bedcd5f3d892b426eb35d3a3720a18f28",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 276,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 77,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-002049-869a"
+ },
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "receipt_file": "docs/handoff/2026-10-11-batch95-verification.json",
+ "receipt_sha256": "a7b5e8abf3f1ad9b5d7203dde8c77871731e7bba7609e4a9d2c6fe210c1b3630",
+ "final_binding_file": "data/staging/strategies-batch95/20261011-magic3-v2-formal-acceptance/final-binding.json",
+ "final_binding_sha256": "2df7dc3ff5b0e93af5506526e14f9d4fb5c2d9e62c7240f668808b1b37e4e2c9",
+ "readback_all_bound_files": 68,
+ "implementation_sha256": {
+  "src/observe/strategy_catalog.py": "509ddb00d8394643eec30f5d609ae6a1356319a033545eb4990ee2f527b3e216",
+  "scripts/accept_strategy_batch95.py": "47dded65bde45d29208759682f2687647bde62d26ddc8d8ad79f0b8cfad2e0eb",
+  "tests/unit/test_batch95_acceptance.py": "653ec8bb4559e4963255f9215ccd545242b4d2325fa770bf9053595cc8bb82da",
+  "scripts/verify_strategy_batch95.py": "9c6e66e95eaf88dcc59b12662dcc48c9a681d2628e766de342a742cd6fb280ff",
+  "tests/unit/test_batch95_preparation.py": "6c806bc26987e29b506a1c96172672a0089f175612829c128fa5d4be858339eb",
+  "scripts/review_strategy_batch95.py": "6ae51bcd2fccb1adc46ae72d0120770bb4f00b37f62660dadff2411f9275688d",
+  "tests/unit/test_batch95_stage.py": "ed6280f8fbd8831537a7bfb1b888370eed32bf64af6ae5f6d4bb56f508ecf14e",
+  "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+  "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+  "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+  "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+  "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+  "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+  "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+  "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+  "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+  "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+  "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034"
+ },
+ "source_sha256": [
+  "e853b55be636530723810ba09160b80091dfd03a1674f8156681279d080b4938",
+  "e853b55be636530723810ba09160b80091dfd03a1674f8156681279d080b4938",
+  "7de6da9d4efc8e504a73e535393f2dcaf6d46d91de8ceb5618a05bd4acc6c9c6"
+ ],
+ "local_tests": {
+  "passed": 94,
+  "skipped": 0,
+  "files": {
+   "tests.unit.test_batch95_stage": 28,
+   "tests.unit.test_batch95_preparation": 25,
+   "tests.unit.test_batch95_acceptance": 41
+  }
+ },
+ "isolated_tests": {
+  "passed": 94,
+  "skipped": 0,
+  "files": {
+   "tests.unit.test_batch95_stage": 28,
+   "tests.unit.test_batch95_preparation": 25,
+   "tests.unit.test_batch95_acceptance": 41
+  }
+ },
+ "isolated_copied_files": 518,
+ "actual_import_origins_checked": 5,
+ "review_completion_file": "data/staging/strategies-batch95/20261011-magic3-v2-formal-acceptance/review-completion.json",
+ "review_completion_sha256": "747205141775378b09bad2d30468860e0a2de3c5e8613e866bd27dbc6a90ff6c",
+ "fresh_replays": 2,
+ "actual_component_counts": [
+  4662,
+  4662,
+  22044,
+  108
+ ],
+ "newly_reviewed_sources": 3,
+ "existing_trading_evidence_synchronized": "2020年度精选策略/02 我好像破解了聚宽擂台排第一的策略？！.txt",
+ "new_trading_backtests": 0,
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5919,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "6793e056b0cf0ba9423cad26ef95855269e8a5ca9b8a654ac15ee945a396d88d"
+ },
+ "full_test_suite_claimed": false,
+ "original_strategy_complete": false,
+ "library_goal_complete": false,
+ "Git_publication": "user_managed_pending",
+ "report": "docs/tasks/2026-10-11-第九十五批ETF魔改3与v2-正式研究验收.md"
+}

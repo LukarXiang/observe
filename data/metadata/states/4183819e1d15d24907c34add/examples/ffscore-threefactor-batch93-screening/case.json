@@ -1,0 +1,35 @@
+{
+  "case": {
+    "catalog_file": "data/catalog/strategies/b78307612c203962d425/catalog.json",
+    "catalog_sha256": "bac3a0a8490002eb5a9fc21e73832da447007ea0398dd2de86f99a38c2e0e89f",
+    "filter": "Exclude recorded financial fields/fundamentals/moneyflow/factor/tick/auction/finance APIs, intraday gap labels and ETF/futures asset candidates",
+    "limitations": [
+      "Text/static candidates can include missed fields or mixed assets; this is not proof that all remaining strategies lack usable trading inputs",
+      "Do not infer whole-pool financial availability from empty static financial_fields; FFScore is the remaining filtered candidate but depends on platform financial/valuation data"
+    ],
+    "new_trading_backtests": 0,
+    "selected_filter_candidates": [
+      {
+        "asset_scope": [
+          "股票候选"
+        ],
+        "gaps": [
+          "历史财务版本/公告时间或每日市值/股本待核实",
+          "历史指数成分",
+          "历史行业"
+        ],
+        "path": "2023年度精选策略/18.【复现】FFScore财务模型.txt"
+      }
+    ],
+    "status": "static_prioritization_only",
+    "unreviewed_nonduplicate_trading_candidates": 350
+  },
+  "case_id": "ffscore-threefactor-batch93-screening",
+  "nature": "static_candidate_prioritization_not_input_admission",
+  "purpose": "350未审查非重复交易候选静态筛查，唯一筛选余项FFScore仍缺原平台财务；不能从空静态字段或过滤结果证明全库数据不可用",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch93/20261010-ffscore-threefactor-readiness/candidate-screening.json",
+    "sha256": "6d6cb554815561231131d0af3acb2de976431254f1d60f0e1465279b2ec04e62"
+  }
+}

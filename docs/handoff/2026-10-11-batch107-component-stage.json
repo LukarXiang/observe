@@ -1,0 +1,182 @@
+{
+ "status": "verified_compute_and_tests_not_formal_acceptance",
+ "accepted_parent": "docs/handoff/2026-10-11-batch106-final-review.json",
+ "current_stage_checkpoint": "20261011-080018-c6ec",
+ "formal_reviewed": 298,
+ "remaining_formal": 397,
+ "locally_backtested_sources": 12,
+ "strategy_parent_runs": 87,
+ "full_source_reads_this_stage": 2,
+ "summary": {
+  "status": "literal_native_operands_not_original_platform_signals_or_trades",
+  "diagnostic_cases": 30,
+  "native_windows": 11663,
+  "profiles": {
+   "510180.XSHG": {
+    "rows": 4951,
+    "windows": 4923,
+    "first": "2006-05-18",
+    "last": "2026-09-29",
+    "calendar_missing_dates": [
+     "2009-05-19",
+     "2009-05-20",
+     "2013-12-19",
+     "2013-12-20"
+    ],
+    "nonfinite_windows": 0
+   },
+   "159915.XSHE": {
+    "rows": 3595,
+    "windows": 3567,
+    "first": "2011-12-09",
+    "last": "2026-09-29",
+    "calendar_missing_dates": [
+     "2021-02-08"
+    ],
+    "nonfinite_windows": 0
+   },
+   "513100.XSHG": {
+    "rows": 3201,
+    "windows": 3173,
+    "first": "2013-07-31",
+    "last": "2026-09-29",
+    "calendar_missing_dates": [
+     "2022-01-13"
+    ],
+    "nonfinite_windows": 0
+   }
+  },
+  "common_ranking_windows": 3170,
+  "ranking_first": "2013-09-09",
+  "ranking_last": "2026-09-29",
+  "all_negative_ranking_windows": 527,
+  "cross_gap_native_windows": 112,
+  "cross_gap_ranking_windows": 84,
+  "independent_regression_max_abs_difference": {
+   "slope": 5.767955557622884e-17,
+   "intercept": 2.220446049250313e-15,
+   "annual_return": 4.209578037261963e-07,
+   "r_squared": 1.4765966227514582e-14,
+   "score": 3.0919909477233887e-07
+  },
+  "independent_order_differences": 0,
+  "by_year": [
+   {
+    "year": 2013,
+    "rows": 73,
+    "all_negative": 2,
+    "cross_gap": 7
+   },
+   {
+    "year": 2014,
+    "rows": 245,
+    "all_negative": 12,
+    "cross_gap": 21
+   },
+   {
+    "year": 2015,
+    "rows": 244,
+    "all_negative": 42,
+    "cross_gap": 0
+   },
+   {
+    "year": 2016,
+    "rows": 244,
+    "all_negative": 50,
+    "cross_gap": 0
+   },
+   {
+    "year": 2017,
+    "rows": 244,
+    "all_negative": 4,
+    "cross_gap": 0
+   },
+   {
+    "year": 2018,
+    "rows": 243,
+    "all_negative": 60,
+    "cross_gap": 0
+   },
+   {
+    "year": 2019,
+    "rows": 244,
+    "all_negative": 34,
+    "cross_gap": 0
+   },
+   {
+    "year": 2020,
+    "rows": 243,
+    "all_negative": 28,
+    "cross_gap": 0
+   },
+   {
+    "year": 2021,
+    "rows": 242,
+    "all_negative": 20,
+    "cross_gap": 28
+   },
+   {
+    "year": 2022,
+    "rows": 241,
+    "all_negative": 104,
+    "cross_gap": 28
+   },
+   {
+    "year": 2023,
+    "rows": 242,
+    "all_negative": 47,
+    "cross_gap": 0
+   },
+   {
+    "year": 2024,
+    "rows": 242,
+    "all_negative": 27,
+    "cross_gap": 0
+   },
+   {
+    "year": 2025,
+    "rows": 243,
+    "all_negative": 45,
+    "cross_gap": 0
+   },
+   {
+    "year": 2026,
+    "rows": 180,
+    "all_negative": 52,
+    "cross_gap": 0
+   }
+  ],
+  "original61_actual_pool_windows": 0,
+  "original61_pool_reduced": false,
+  "complete_original_signals": 0,
+  "new_trading_backtests": 0,
+  "original_strategy_complete": false,
+  "formal_source_research_acceptance": false,
+  "library_goal_complete": false
+ },
+ "copied_tests": {
+  "status": "ok",
+  "local_tests": 32,
+  "isolated_tests": 32,
+  "implementation_copies": 54,
+  "actual_imports_checked": 4
+ },
+ "fresh_network_blocked_processes": 2,
+ "offline_output_files_byte_equal": 4,
+ "source_sha256": [
+  "0e60cde5dfd8f828dc872be2d44aa950c80b22ebc82b395522906ac291eff3fc",
+  "9e47ff904080216ab711f70c59b5c514c54eab2585b07e18e4d03c7f658ef63c"
+ ],
+ "old_asset_protection_status": "check_in_progress_handle94561",
+ "formal_source_research_acceptance": false,
+ "formal_trading_acceptance": false,
+ "new_trading_backtests": 0,
+ "library_goal_complete": false,
+ "evidence_sha256": {
+  "data/staging/strategies-batch107/20261011-ETF-regression-means-v1/compute/summary.json": "6900af8cde2654591abb16944a95401563c405c9b3f142d55d51ea9bea8bf066",
+  "data/staging/strategies-batch107/20261011-ETF-regression-means-v1/copied-tests.json": "f0f0fd3e77bd05e507f269d2e3d13559c5bbf6b2517ead644d56c05189b27b01",
+  "data/staging/strategies-batch107/20261011-original-pool-probe-v1/checked.json": "909b1b3a1bef3050d6e72cd3667e4e6ebc24531e1386e07c6f319803a04cba7b",
+  "data/staging/strategies-batch107/20261011-gap-scale-identity-v1/checked.json": "2ca9669baecbfa1d21b774adb6fcd07b9cca5162c6ffa65d352ed1e801e27eb5",
+  "docs/tasks/2026-10-11-第一百零七批ETF动量与均线-执行计划.md": "7560e588ea23ec3c7c7bd4371431459727b8034dee77cee5510f6e4f3a241675"
+ }
+}

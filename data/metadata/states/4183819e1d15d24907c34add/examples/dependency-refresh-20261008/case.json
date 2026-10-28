@@ -1,0 +1,167 @@
+{
+  "case": {
+    "analysis": {
+      "cninfo_announcement_after_effective": 43,
+      "cninfo_announcement_before_effective": 11,
+      "cninfo_announcement_minus_effective_days": {
+        "maximum": 113,
+        "minimum": -7
+      },
+      "cninfo_announcement_missing": 5,
+      "cninfo_announcement_same_day": 0,
+      "failed_probes": 1,
+      "full_market_historical_share_coverage_proven": false,
+      "heterogeneous_raw_rows": 7629,
+      "new_name_event_after_current_price_cutoff": true,
+      "pcf_historical_versions_proven": false,
+      "price_cutoff": "2026-09-29",
+      "raw_rows_are_independent_trade_samples": false,
+      "shares_empirical_em_to_cninfo_ratio": 10000,
+      "shares_same_effective_date_matches": 12,
+      "shares_unit_officially_proven": false,
+      "successful_probes": 6,
+      "sz_names_duplicate_code_date_rows": 0,
+      "sz_names_new_events": [
+        {
+          "code": "001246",
+          "date": "2026-10-08",
+          "new_name": "C力勤资源",
+          "old_name": "N力勤资源"
+        }
+      ]
+    },
+    "command_template": "timeout 60s /home/zuozhe/envs/quant/.venv/bin/python -m scripts.probe_strategy_dependencies --output data/staging/strategy-dependencies/20261008-resume-network --worker <endpoint>",
+    "directory": "data/staging/strategy-dependencies/20261008-resume-network",
+    "driver": "scripts/probe_strategy_dependencies.py",
+    "driver_sha256": "4ae6a2db406f61566876e9e1e364e7a7ccf7049b004f2e20e05d11c30039967a",
+    "external_worker_timeout_seconds": 60,
+    "http_timeout_seconds": 20,
+    "limits": [
+      "new responses do not replace old frozen inputs",
+      "current/late announcement values cannot be used at earlier event dates",
+      "empirical unit ratio is not official field documentation",
+      "six reachable interfaces do not imply all supplier interfaces are reachable",
+      "strict financial usable records remain zero",
+      "micro400 and small-value100 remain incomplete"
+    ],
+    "new_manually_reviewed_sources": 0,
+    "new_strategy_backtests": 0,
+    "next": [
+      "first-party share unit and event-type evidence",
+      "announcement/effective/revision availability",
+      "multiple-stock sample and full-market coverage",
+      "Shanghai dated name/ST/delisting event counterpart",
+      "ETF raw data and event-rule gaps before real ETF backtests"
+    ],
+    "not_a_backtest": true,
+    "old_directory": "data/staging/strategies-batch3/20261005-dependencies",
+    "probes": [
+      {
+        "endpoint": "cninfo_shares",
+        "raw_sha256": "078ade0f6a836c53ae9f7e202e38f515530f560319a3c1d28f5e39e0e9cb2cdc",
+        "request": {
+          "end": "20240628",
+          "start": "20010101",
+          "symbol": "600519"
+        },
+        "result_sha256": "f3533e1c88f2ae313626319cd833025f9ca037c5cf57d1e1c95d34779fd095f2",
+        "rows": 59,
+        "same_old_frame_values_and_order": true,
+        "same_old_raw_sha": true,
+        "status": "success"
+      },
+      {
+        "endpoint": "em_shares",
+        "raw_sha256": "f4f57116a621f9618e8f55d3ec7c8a164d1c854fe7850a912117918a0acf58c3",
+        "request": {
+          "symbol": "600519.SH"
+        },
+        "result_sha256": "ffc97ef4022c737ec8f7370b9d3136f1210cb2303f3e98376a0d45074fce5681",
+        "rows": 16,
+        "same_old_frame_values_and_order": true,
+        "same_old_raw_sha": true,
+        "status": "success"
+      },
+      {
+        "endpoint": "sz_names",
+        "old_rows": 7489,
+        "raw_sha256": "21027dcd9413fa6ccda81ec2e5aaaf3595726f9a39de2ec0084311a530094e40",
+        "request": {
+          "symbol": "简称变更"
+        },
+        "result_sha256": "7d2c6fe13c4c60708b21222fbfa72d9cad562cfea94f92526d3f7494e60da9b0",
+        "rows": 7490,
+        "same_old_frame_values_and_order": false,
+        "same_old_raw_sha": false,
+        "status": "success"
+      },
+      {
+        "endpoint": "sina_names",
+        "raw_sha256": "aebf51045fdeac311906b0596cd9dc303813939497f75085d39a1dd7d87a6329",
+        "request": {
+          "symbol": "000001"
+        },
+        "result_sha256": "2d627e282a8d0c2da6f69c64552f1a7913aa77abc7d14f24c141d4bca40f5461",
+        "rows": 3,
+        "same_old_frame_values_and_order": true,
+        "same_old_raw_sha": true,
+        "status": "success"
+      },
+      {
+        "endpoint": "bs_pcf",
+        "raw_sha256": "3dbaf5c7bf4ccde0bb8270369a7cfe725cf8dd0bb65a73e4c4a9c268f3eaf11c",
+        "request": {
+          "end": "2024-06-28",
+          "fields": "date,code,close,peTTM,pbMRQ,pcfNcfTTM",
+          "start": "2024-03-29",
+          "symbol": "sh.600519"
+        },
+        "result_sha256": "b18195a97d0e6a9e72cb1d9f86b998d597d0d899fd7e6273515ff5ff89c850e1",
+        "rows": 60,
+        "same_old_frame_values_and_order": true,
+        "same_old_raw_sha": true,
+        "status": "success"
+      },
+      {
+        "endpoint": "bs_profit",
+        "raw_sha256": "586dba4494406b06077ff058e91efccaa7d851d144556945a22c7e9d7e43e269",
+        "request": {
+          "quarter": 1,
+          "symbol": "sh.600519",
+          "year": 2024
+        },
+        "result_sha256": "e1737430fd14b06e5300f9b9fd60d08f2b81eb3cbc01d03805084f4e0c45a634",
+        "rows": 1,
+        "same_old_frame_values_and_order": true,
+        "same_old_raw_sha": true,
+        "status": "success"
+      },
+      {
+        "endpoint": "bs_universe",
+        "error": "BaoStockError: query_all_stock 10002007 网络接收错误。",
+        "new_universe_rows": 0,
+        "request": {
+          "day": "2024-03-29"
+        },
+        "result_sha256": "f5c7eb88228fdfeeb0f8e27f00e9e3b801a3aee007a2dffda48202465fb927e9",
+        "rows": null,
+        "status": "failed"
+      }
+    ],
+    "publication_changed": false,
+    "published_batch": "20261006-145049-5ceb",
+    "schema": 1,
+    "snapshot": "20261006-145049-e06c",
+    "socket_timeout_seconds": 15,
+    "status": "ok_limited_dependency_refresh",
+    "strict_usable": false
+  },
+  "case_id": "dependency-refresh-20261008",
+  "nature": "real_interface_and_availability_audit",
+  "purpose": "六接口成功/名单超时；相同旧样本、股本一万倍比例及公告生效日差异，不放行历史交易",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-08-dependency-refresh.json",
+    "sha256": "365c4d8e8bdbca7df789f2aadff521b4afe44aa05ce39b6162570c85bf638873"
+  }
+}

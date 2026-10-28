@@ -1,0 +1,3830 @@
+{
+  "case": {
+    "candidate_byte_sha256": {
+      "data/raw/macd_patterns_probe_batch20/etf510300/20261005-macd-patterns.parquet": "40f3a5a24e70d1fc90517139d73982b08fdec9ee35a777a79e78ae959abb59ed",
+      "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/parsed.parquet": "17897aa46f5d66ba2878ad90f537ddd6c2d3d2d1baaf2b321cdc333d6b4237f2",
+      "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/response.bin": "8b6a76e92933b1f19b96c8273162aa953ad9edc1fea81b85886c7d7c0c24f323",
+      "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-159949/parsed.parquet": "ea41672d91f581543f057f9e79c061cb5c16a46507233447463b4b830bcc2d9d",
+      "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-159949/response.bin": "b809570de431aa0031744f319ddc7b2910ce35e041a2a4894708005f401a7e7d"
+    },
+    "candidate_profiles": [
+      {
+        "candidate": {
+          "api_sha256": "95e4d23f95af3bbbe56a4bb8d19965e3cd1cfbd519db744d51b7d782dee7ddc1",
+          "attempts": [
+            {
+              "method": "GET",
+              "parameters": null,
+              "url": "https://finance.sina.com.cn/realstock/company/sh510050/hisdata_klc2/klc_kl.js"
+            }
+          ],
+          "case": "fund-510050",
+          "columns": [
+            "date",
+            "prevclose",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "amount",
+            "postVol",
+            "postAmt"
+          ],
+          "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/parsed.parquet",
+          "published": false,
+          "query": {
+            "function": "fund_etf_hist_sina",
+            "parameters": {
+              "symbol": "sh510050"
+            }
+          },
+          "rows": 5254,
+          "sha256": "17897aa46f5d66ba2878ad90f537ddd6c2d3d2d1baaf2b321cdc333d6b4237f2",
+          "status": "success",
+          "strict_usable": false,
+          "wire_responses": [
+            {
+              "encoding": null,
+              "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/response.bin",
+              "sha256": "8b6a76e92933b1f19b96c8273162aa953ad9edc1fea81b85886c7d7c0c24f323",
+              "status_code": 200
+            }
+          ]
+        },
+        "event_explanation_proven": false,
+        "excluded_after_cutoff": 2,
+        "first": "2005-02-23",
+        "last": "2026-09-29",
+        "native_prices_only": true,
+        "numeric_source_dtypes": {
+          "close": "float64",
+          "high": "float64",
+          "low": "float64",
+          "open": "float64"
+        },
+        "price_jump_examples": [],
+        "raw_rows": 5254,
+        "rows_to_cutoff": 5252,
+        "strict_usable": false,
+        "symbol": "510050.XSHG"
+      },
+      {
+        "candidate": {
+          "columns": [
+            "date",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "amount",
+            "postVol",
+            "postAmt"
+          ],
+          "file": "data/raw/macd_patterns_probe_batch20/etf510300/20261005-macd-patterns.parquet",
+          "parameters": {
+            "symbol": "sh510300"
+          },
+          "rows": 3488,
+          "sha256": "40f3a5a24e70d1fc90517139d73982b08fdec9ee35a777a79e78ae959abb59ed",
+          "status": "success"
+        },
+        "event_explanation_proven": false,
+        "excluded_after_cutoff": 1,
+        "first": "2012-05-28",
+        "last": "2026-09-29",
+        "native_prices_only": true,
+        "numeric_source_dtypes": {
+          "close": "str",
+          "high": "str",
+          "low": "str",
+          "open": "str"
+        },
+        "price_jump_examples": [],
+        "raw_rows": 3488,
+        "rows_to_cutoff": 3487,
+        "strict_usable": false,
+        "symbol": "510300.XSHG"
+      },
+      {
+        "candidate": {
+          "api_sha256": "88b2896dad2c4063e0bb5713dd2faae63672609b209382aaaffbce5a1ff4a5a1",
+          "attempts": [
+            {
+              "method": "GET",
+              "parameters": null,
+              "url": "https://finance.sina.com.cn/realstock/company/sz159949/hisdata_klc2/klc_kl.js"
+            }
+          ],
+          "case": "fund-159949",
+          "columns": [
+            "date",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "amount",
+            "postVol",
+            "postAmt"
+          ],
+          "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-159949/parsed.parquet",
+          "published": false,
+          "query": {
+            "function": "fund_etf_hist_sina",
+            "parameters": {
+              "symbol": "sz159949"
+            }
+          },
+          "rows": 2477,
+          "sha256": "ea41672d91f581543f057f9e79c061cb5c16a46507233447463b4b830bcc2d9d",
+          "status": "success",
+          "strict_usable": false,
+          "wire_responses": [
+            {
+              "encoding": null,
+              "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-159949/response.bin",
+              "sha256": "b809570de431aa0031744f319ddc7b2910ce35e041a2a4894708005f401a7e7d",
+              "status_code": 200
+            }
+          ]
+        },
+        "event_explanation_proven": false,
+        "excluded_after_cutoff": 2,
+        "first": "2016-07-22",
+        "last": "2026-09-29",
+        "native_prices_only": true,
+        "numeric_source_dtypes": {
+          "close": "float64",
+          "high": "float64",
+          "low": "float64",
+          "open": "float64"
+        },
+        "price_jump_examples": [
+          {
+            "close": 1.211,
+            "date": "2024-10-08",
+            "native_close_change": 0.2001982160555007
+          }
+        ],
+        "raw_rows": 2477,
+        "rows_to_cutoff": 2475,
+        "strict_usable": false,
+        "symbol": "159949.XSHE"
+      }
+    ],
+    "fund_60m_admitted": false,
+    "index": {
+      "calendar_sessions": 5280,
+      "columns": [
+        "date",
+        "index",
+        "open",
+        "high",
+        "low",
+        "close",
+        "preclose",
+        "volume",
+        "amount"
+      ],
+      "first": "2005-01-05",
+      "last": "2026-09-29",
+      "limits": [
+        "Index daily bars are original signal operands only; indices cannot be traded as IF contracts",
+        "Pre-IF-listing2005 data remain arithmetic samples; no IF portfolio/execution history inferred"
+      ],
+      "local_index": "000300.SH",
+      "no_internal_missing_dates": true,
+      "not_a_backtest": true,
+      "original_index": "000300.XSHG",
+      "partitions": [
+        {
+          "content_fingerprint": "2843c31b8faaa9401b2f527b4671750bb7d551e1a3c53b2efc54cfd6c268e8a6",
+          "file": "data/std/index_1d/all__2843c31b.parquet",
+          "partition": "all",
+          "rows": 5280,
+          "sha256": "28a1ccbb565895091aa8f1cb865254f5626d3514a7ba035073113d95d8e6c406"
+        }
+      ],
+      "rows": 5280,
+      "snapshot": "20261006-145049-e06c"
+    },
+    "missing_native_pool": [
+      "159928.XSHE"
+    ],
+    "new_provider_rows": 0,
+    "new_requests": 0,
+    "new_trading_backtests": 0,
+    "original_platform_equivalence_proven": false,
+    "partition_check": "size/mtime only; not a fresh full partition hash",
+    "partition_controls": {
+      "data/std/adj_coverage/all__de373d9c.parquet": {
+        "mtime_ns": 1790724231970314500,
+        "size": 41234
+      },
+      "data/std/adj_factors/all__5517c69d.parquet": {
+        "mtime_ns": 1790724223168280100,
+        "size": 769022
+      },
+      "data/std/bars_1d/2005__504cc3b0.parquet": {
+        "mtime_ns": 1791206396924719600,
+        "size": 119261
+      },
+      "data/std/bars_1d/2006__ad89bd2b.parquet": {
+        "mtime_ns": 1791206396989487100,
+        "size": 123795
+      },
+      "data/std/bars_1d/2007__5eac65d1.parquet": {
+        "mtime_ns": 1791206397057255200,
+        "size": 152679
+      },
+      "data/std/bars_1d/2008__f525d073.parquet": {
+        "mtime_ns": 1791206397133700200,
+        "size": 155123
+      },
+      "data/std/bars_1d/2009__7f5e4c89.parquet": {
+        "mtime_ns": 1791206397210723500,
+        "size": 154695
+      },
+      "data/std/bars_1d/2010__8c83d6fa.parquet": {
+        "mtime_ns": 1791206397283441600,
+        "size": 193788
+      },
+      "data/std/bars_1d/2011__7f7031a5.parquet": {
+        "mtime_ns": 1791206397356423300,
+        "size": 225193
+      },
+      "data/std/bars_1d/2012__12c31a58.parquet": {
+        "mtime_ns": 1791206397437568000,
+        "size": 238558
+      },
+      "data/std/bars_1d/2013__ed723da2.parquet": {
+        "mtime_ns": 1791206397509407000,
+        "size": 241873
+      },
+      "data/std/bars_1d/2014__3f851599.parquet": {
+        "mtime_ns": 1791206397587057200,
+        "size": 259705
+      },
+      "data/std/bars_1d/2015__00ea4b83.parquet": {
+        "mtime_ns": 1791206397667872400,
+        "size": 263964
+      },
+      "data/std/bars_1d/2016__d28c0f1e.parquet": {
+        "mtime_ns": 1791206397741512400,
+        "size": 254401
+      },
+      "data/std/bars_1d/2017__7ae23bfb.parquet": {
+        "mtime_ns": 1791206397813902500,
+        "size": 275802
+      },
+      "data/std/bars_1d/2018__4ca659a9.parquet": {
+        "mtime_ns": 1791206397883871900,
+        "size": 285516
+      },
+      "data/std/bars_1d/2019__01e86d44.parquet": {
+        "mtime_ns": 1791206397981764900,
+        "size": 863200
+      },
+      "data/std/bars_1d/2020__47e82775.parquet": {
+        "mtime_ns": 1791206398083145000,
+        "size": 902924
+      },
+      "data/std/bars_1d/2021__a6b6023d.parquet": {
+        "mtime_ns": 1790662190629820200,
+        "size": 48100074
+      },
+      "data/std/bars_1d/2022__a250d824.parquet": {
+        "mtime_ns": 1790671165576877000,
+        "size": 52414958
+      },
+      "data/std/bars_1d/2023__c64a31fb.parquet": {
+        "mtime_ns": 1790707337766381600,
+        "size": 54759284
+      },
+      "data/std/bars_1d/2024__e363911a.parquet": {
+        "mtime_ns": 1790714280750435200,
+        "size": 55942175
+      },
+      "data/std/bars_1d/2025__557a8b0c.parquet": {
+        "mtime_ns": 1790718857496469500,
+        "size": 58685266
+      },
+      "data/std/bars_1d/2026__aeb0c08f.parquet": {
+        "mtime_ns": 1790724208648559700,
+        "size": 43292552
+      },
+      "data/std/bars_5m/202112__ccdbc4ce.parquet": {
+        "mtime_ns": 1790739859405074000,
+        "size": 13206538
+      },
+      "data/std/bars_5m/202201__1c09a1df.parquet": {
+        "mtime_ns": 1790739881703787200,
+        "size": 12306154
+      },
+      "data/std/bars_5m/202202__f3e333de.parquet": {
+        "mtime_ns": 1790739899921713800,
+        "size": 10486217
+      },
+      "data/std/bars_5m/202203__4de319b4.parquet": {
+        "mtime_ns": 1790739923328598400,
+        "size": 14772407
+      },
+      "data/std/bars_5m/202204__bba609eb.parquet": {
+        "mtime_ns": 1790739945283621300,
+        "size": 12295989
+      },
+      "data/std/bars_5m/202205__4ac4ddb4.parquet": {
+        "mtime_ns": 1790739966866274000,
+        "size": 12146633
+      },
+      "data/std/bars_5m/202206__e875938d.parquet": {
+        "mtime_ns": 1790739989601548700,
+        "size": 13569855
+      },
+      "data/std/bars_5m/202207__f6a45f13.parquet": {
+        "mtime_ns": 1790740014251830900,
+        "size": 13400116
+      },
+      "data/std/bars_5m/202208__d9cc8464.parquet": {
+        "mtime_ns": 1790740038735747000,
+        "size": 14753683
+      },
+      "data/std/bars_5m/202209__56cc3a9d.parquet": {
+        "mtime_ns": 1790740061356015800,
+        "size": 13235242
+      },
+      "data/std/bars_5m/202210__beafd663.parquet": {
+        "mtime_ns": 1790740078346724800,
+        "size": 10305141
+      },
+      "data/std/bars_5m/202211__2d44ef26.parquet": {
+        "mtime_ns": 1790740101731421500,
+        "size": 14009461
+      },
+      "data/std/bars_5m/202212__67a4412c.parquet": {
+        "mtime_ns": 1790740132715287900,
+        "size": 18378697
+      },
+      "data/std/bars_5m/202301__a386e893.parquet": {
+        "mtime_ns": 1790740149838272200,
+        "size": 10274853
+      },
+      "data/std/bars_5m/202302__b3fb5ba7.parquet": {
+        "mtime_ns": 1790740171949741100,
+        "size": 12695575
+      },
+      "data/std/bars_5m/202303__ae4112a1.parquet": {
+        "mtime_ns": 1790740195202631500,
+        "size": 14440149
+      },
+      "data/std/bars_5m/202304__1ccea292.parquet": {
+        "mtime_ns": 1790740217346835000,
+        "size": 12028812
+      },
+      "data/std/bars_5m/202305__2ae05fb4.parquet": {
+        "mtime_ns": 1790740239561211900,
+        "size": 12608066
+      },
+      "data/std/bars_5m/202306__56f92e66.parquet": {
+        "mtime_ns": 1790740264763269900,
+        "size": 12520763
+      },
+      "data/std/bars_5m/202307__fe64ba4f.parquet": {
+        "mtime_ns": 1790740287365970500,
+        "size": 13036108
+      },
+      "data/std/bars_5m/202308__8347cb13.parquet": {
+        "mtime_ns": 1790740311622482900,
+        "size": 14222142
+      },
+      "data/std/bars_5m/202309__fa0656db.parquet": {
+        "mtime_ns": 1790740336566249100,
+        "size": 12346491
+      },
+      "data/std/bars_5m/202310__0cddbe8e.parquet": {
+        "mtime_ns": 1790740356371905900,
+        "size": 10503475
+      },
+      "data/std/bars_5m/202311__59fd987e.parquet": {
+        "mtime_ns": 1790740383531982200,
+        "size": 13524833
+      },
+      "data/std/bars_5m/202312__2e3f161f.parquet": {
+        "mtime_ns": 1790740415453231500,
+        "size": 17054637
+      },
+      "data/std/bars_5m/202401__76edd46d.parquet": {
+        "mtime_ns": 1790740439968478100,
+        "size": 13730666
+      },
+      "data/std/bars_5m/202402__fe56efad.parquet": {
+        "mtime_ns": 1790740457583353200,
+        "size": 9566761
+      },
+      "data/std/bars_5m/202403__32219991.parquet": {
+        "mtime_ns": 1790740484105178800,
+        "size": 13246033
+      },
+      "data/std/bars_5m/202404__ef0d760c.parquet": {
+        "mtime_ns": 1790740508677932700,
+        "size": 12624990
+      },
+      "data/std/bars_5m/202405__263cd724.parquet": {
+        "mtime_ns": 1790740542591837000,
+        "size": 12530798
+      },
+      "data/std/bars_5m/202406__353d534b.parquet": {
+        "mtime_ns": 1790740574940475700,
+        "size": 11853531
+      },
+      "data/std/bars_5m/202407__a0b5b732.parquet": {
+        "mtime_ns": 1790740610371058300,
+        "size": 14287775
+      },
+      "data/std/bars_5m/202408__f52738c7.parquet": {
+        "mtime_ns": 1790740639553749100,
+        "size": 13462775
+      },
+      "data/std/bars_5m/202409__18b4d655.parquet": {
+        "mtime_ns": 1790740672540084700,
+        "size": 11752708
+      },
+      "data/std/bars_5m/202410__aa1d30da.parquet": {
+        "mtime_ns": 1790740699586305800,
+        "size": 11625715
+      },
+      "data/std/bars_5m/202411__a1f07f53.parquet": {
+        "mtime_ns": 1790740731094282300,
+        "size": 13366912
+      },
+      "data/std/bars_5m/202412__311a044c.parquet": {
+        "mtime_ns": 1790740772820917100,
+        "size": 17289421
+      },
+      "data/std/bars_5m/202501__12d33cdb.parquet": {
+        "mtime_ns": 1790740798276036600,
+        "size": 11522628
+      },
+      "data/std/bars_5m/202502__21008406.parquet": {
+        "mtime_ns": 1790740823745274000,
+        "size": 11625942
+      },
+      "data/std/bars_5m/202503__8168ef41.parquet": {
+        "mtime_ns": 1790740852638321500,
+        "size": 13437934
+      },
+      "data/std/bars_5m/202504__10bb21d1.parquet": {
+        "mtime_ns": 1790740887507430100,
+        "size": 13233958
+      },
+      "data/std/bars_5m/202505__b98513ae.parquet": {
+        "mtime_ns": 1790740922956608600,
+        "size": 11995599
+      },
+      "data/std/bars_5m/202506__047dc6ae.parquet": {
+        "mtime_ns": 1790740953650085900,
+        "size": 12696531
+      },
+      "data/std/bars_5m/202507__d12a3d4b.parquet": {
+        "mtime_ns": 1790740986374330100,
+        "size": 14657388
+      },
+      "data/std/bars_5m/202508__1bab1ec9.parquet": {
+        "mtime_ns": 1790741017976415900,
+        "size": 13548176
+      },
+      "data/std/bars_5m/202509__ff2d43c8.parquet": {
+        "mtime_ns": 1790741045001279000,
+        "size": 14363626
+      },
+      "data/std/bars_5m/202510__448663c9.parquet": {
+        "mtime_ns": 1790741062632934000,
+        "size": 11222146
+      },
+      "data/std/bars_5m/202511__4ba60f22.parquet": {
+        "mtime_ns": 1790741086502517600,
+        "size": 12930347
+      },
+      "data/std/bars_5m/202512__43f8622e.parquet": {
+        "mtime_ns": 1790741846955928700,
+        "size": 19316134
+      },
+      "data/std/bars_5m/202601__0f5b4ff2.parquet": {
+        "mtime_ns": 1790741148138989400,
+        "size": 13333010
+      },
+      "data/std/bars_5m/202602__47a118c8.parquet": {
+        "mtime_ns": 1790741167105552000,
+        "size": 9410232
+      },
+      "data/std/bars_5m/202603__2009857a.parquet": {
+        "mtime_ns": 1790741193065624800,
+        "size": 14416391
+      },
+      "data/std/bars_5m/202604__984163af.parquet": {
+        "mtime_ns": 1790741218871623100,
+        "size": 13704779
+      },
+      "data/std/bars_5m/202605__4289f4cf.parquet": {
+        "mtime_ns": 1790741283222861800,
+        "size": 12087923
+      },
+      "data/std/bars_5m/202606__e9dfbaa4.parquet": {
+        "mtime_ns": 1790741311641166000,
+        "size": 13958838
+      },
+      "data/std/bars_5m/202607__bda6199c.parquet": {
+        "mtime_ns": 1790741339927850400,
+        "size": 15164974
+      },
+      "data/std/bars_5m/202608__ffd4a84a.parquet": {
+        "mtime_ns": 1790741365907674400,
+        "size": 13793805
+      },
+      "data/std/bars_5m/202609__3a34204d.parquet": {
+        "mtime_ns": 1790741391375201000,
+        "size": 3024543
+      },
+      "data/std/corp_actions/all__2d71fd46.parquet": {
+        "mtime_ns": 1790724380327566500,
+        "size": 324755
+      },
+      "data/std/instruments/all__6dbb75b5.parquet": {
+        "mtime_ns": 1790700642522923400,
+        "size": 133704
+      }
+    },
+    "published": {
+      "batch_id": "20261006-145049-5ceb",
+      "published_at": "20261006-145049",
+      "tables": {
+        "adj_coverage": {
+          "all": {
+            "file": "std/adj_coverage/all__de373d9c.parquet",
+            "rows": 5560,
+            "sha": "de373d9c1feb542a2d34316bea09b15ea9335f69186416bb049d315a24b7cfa3"
+          }
+        },
+        "adj_factors": {
+          "all": {
+            "file": "std/adj_factors/all__5517c69d.parquet",
+            "rows": 64980,
+            "sha": "5517c69d90f74cd393a41a18c09c62fa33d2cffae3ee472f4efb24b93ef50810"
+          }
+        },
+        "bars_1d": {
+          "2005": {
+            "file": "std/bars_1d/2005__504cc3b0.parquet",
+            "history_scope": {
+              "end": "2005-12-30",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000651.SZ",
+                "000858.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [
+                "000333.SZ",
+                "002415.SZ",
+                "601111.SH",
+                "603288.SH"
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2005__ced6bbfa.parquet",
+                "history_scope": {
+                  "end": "2005-12-30",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2005-01-05"
+                },
+                "rows": 1446,
+                "sha": "ced6bbfac814b71b931cf1525d37cfbc3d908540e1f112a811684d1f5a8c20f4"
+              },
+              "start": "2005-01-05"
+            },
+            "rows": 1928,
+            "sha": "504cc3b0d82a176ede98f3debb3685597bae3f90efc0098392139c1860a2673e"
+          },
+          "2006": {
+            "file": "std/bars_1d/2006__ad89bd2b.parquet",
+            "history_scope": {
+              "end": "2006-12-29",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000651.SZ",
+                "000858.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [
+                "000333.SZ",
+                "002415.SZ",
+                "603288.SH"
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2006__1a0cff9e.parquet",
+                "history_scope": {
+                  "end": "2006-12-29",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2006-01-04"
+                },
+                "rows": 1537,
+                "sha": "1a0cff9ecb59295d8bd39d140bc2f9a59dc248c984be3de1ea9e537436e3947a"
+              },
+              "start": "2006-01-04"
+            },
+            "rows": 2019,
+            "sha": "ad89bd2bcc4cc3f394e581c468bd3ede22948392f528e7ce5825819877b3cf2f"
+          },
+          "2007": {
+            "file": "std/bars_1d/2007__5eac65d1.parquet",
+            "history_scope": {
+              "end": "2007-12-28",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000651.SZ",
+                "000858.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [
+                "000333.SZ",
+                "002415.SZ",
+                "603288.SH"
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2007__3c9a0db1.parquet",
+                "history_scope": {
+                  "end": "2007-12-28",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2007-01-04"
+                },
+                "rows": 1694,
+                "sha": "3c9a0db165dcef40e49d0a8a186c8ebaecd6cdc67b6a6d09433c2e42d633a8a0"
+              },
+              "start": "2007-01-04"
+            },
+            "rows": 2178,
+            "sha": "5eac65d1b4ee937b99afc6d47236177887058feced2954c612108c08ba61327d"
+          },
+          "2008": {
+            "file": "std/bars_1d/2008__f525d073.parquet",
+            "history_scope": {
+              "end": "2008-12-31",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000651.SZ",
+                "000858.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [
+                "000333.SZ",
+                "002415.SZ",
+                "603288.SH"
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2008__a2b87ee8.parquet",
+                "history_scope": {
+                  "end": "2008-12-31",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2008-01-02"
+                },
+                "rows": 1722,
+                "sha": "a2b87ee88b958f2128c6273ce5f097eef40cc5bc307f84f971969fe3d7c4f07c"
+              },
+              "start": "2008-01-02"
+            },
+            "rows": 2214,
+            "sha": "f525d07389715cfe8656134c48890fe9b605b21bd7bd916223c54192a28d37cc"
+          },
+          "2009": {
+            "file": "std/bars_1d/2009__7f5e4c89.parquet",
+            "history_scope": {
+              "end": "2009-12-31",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000651.SZ",
+                "000858.SZ",
+                "300014.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [
+                "000333.SZ",
+                "002415.SZ",
+                "603288.SH"
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2009__b61e4e51.parquet",
+                "history_scope": {
+                  "end": "2009-12-31",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2009-01-05"
+                },
+                "rows": 1708,
+                "sha": "b61e4e519814842b4ca136aca684e24b429705dee3b4b1cc92c07244988cbd19"
+              },
+              "start": "2009-01-05"
+            },
+            "rows": 2241,
+            "sha": "7f5e4c899ad0dfc8fe68593a0962fe55f185df0e9ed4f5a6a3c5f94e405c0205"
+          },
+          "2010": {
+            "file": "std/bars_1d/2010__8c83d6fa.parquet",
+            "history_scope": {
+              "end": "2010-12-31",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000651.SZ",
+                "000858.SZ",
+                "002415.SZ",
+                "300014.SZ",
+                "300059.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [
+                "000333.SZ",
+                "603288.SH"
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2010__79eb4fe1.parquet",
+                "history_scope": {
+                  "end": "2010-12-31",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2010-01-04"
+                },
+                "rows": 1839,
+                "sha": "79eb4fe1ff6d09135dc1558439581289fd30c2ce5e9f9cc3e41a94f6456c68fa"
+              },
+              "start": "2010-01-04"
+            },
+            "rows": 2758,
+            "sha": "8c83d6faf925f2bf5868181039e80848e776df421c77c80e065d1add5722ab52"
+          },
+          "2011": {
+            "file": "std/bars_1d/2011__7f7031a5.parquet",
+            "history_scope": {
+              "end": "2011-12-30",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000651.SZ",
+                "000858.SZ",
+                "002415.SZ",
+                "300014.SZ",
+                "300059.SZ",
+                "300168.SZ",
+                "300253.SZ",
+                "300274.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [
+                "000333.SZ",
+                "603288.SH"
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2011__82683f8e.parquet",
+                "history_scope": {
+                  "end": "2011-12-30",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2011-01-04"
+                },
+                "rows": 1952,
+                "sha": "82683f8e15a802e2e48df280c0f9e81717be2f6d96fe7ea6d308fe82ba41747c"
+              },
+              "start": "2011-01-04"
+            },
+            "rows": 3291,
+            "sha": "7f7031a5d68cd039042d0e9d258b17f8a34cd03572d34891fcd1feff5bac3796"
+          },
+          "2012": {
+            "file": "std/bars_1d/2012__12c31a58.parquet",
+            "history_scope": {
+              "end": "2012-12-31",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000651.SZ",
+                "000858.SZ",
+                "002415.SZ",
+                "300014.SZ",
+                "300059.SZ",
+                "300168.SZ",
+                "300253.SZ",
+                "300274.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [
+                "000333.SZ",
+                "603288.SH"
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2012__01eaa45d.parquet",
+                "history_scope": {
+                  "end": "2012-12-31",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2012-01-04"
+                },
+                "rows": 1944,
+                "sha": "01eaa45d6a67944e2953cf109e701483e20a69599d5e4457e43aa97b8089f246"
+              },
+              "start": "2012-01-04"
+            },
+            "rows": 3645,
+            "sha": "12c31a58940f0d0405eb63e15eb7cf9c960ee15cf3fdb6c7e3a545b348da8ff0"
+          },
+          "2013": {
+            "file": "std/bars_1d/2013__ed723da2.parquet",
+            "history_scope": {
+              "end": "2013-12-31",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000333.SZ",
+                "000651.SZ",
+                "000858.SZ",
+                "002415.SZ",
+                "300014.SZ",
+                "300059.SZ",
+                "300168.SZ",
+                "300253.SZ",
+                "300274.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [
+                "603288.SH"
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2013__7845f79a.parquet",
+                "history_scope": {
+                  "end": "2013-12-31",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2013-01-04"
+                },
+                "rows": 1972,
+                "sha": "7845f79a0816667a25911d8fc3048416d54fdc3cb1f407aadb259bc9abb69dfa"
+              },
+              "start": "2013-01-04"
+            },
+            "rows": 3638,
+            "sha": "ed723da28c6180092cee167dc10350fc032d493bf8c9859f6a538e90d1f74b02"
+          },
+          "2014": {
+            "file": "std/bars_1d/2014__3f851599.parquet",
+            "history_scope": {
+              "end": "2014-12-31",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000333.SZ",
+                "000651.SZ",
+                "000858.SZ",
+                "002415.SZ",
+                "300014.SZ",
+                "300059.SZ",
+                "300168.SZ",
+                "300253.SZ",
+                "300274.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH",
+                "603288.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [],
+              "retained_entry": {
+                "file": "std/bars_1d/2014__f2b1d1a2.parquet",
+                "history_scope": {
+                  "end": "2014-12-31",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2014-01-02"
+                },
+                "rows": 2427,
+                "sha": "f2b1d1a2eae3aa9457dfe0cd56917553d05c60c5d499a338fe9b7c70dab24378"
+              },
+              "start": "2014-01-02"
+            },
+            "rows": 4142,
+            "sha": "3f8515996e422803c146845e5d5e91ea4743e8723ece8e586c09d96e0e04c1e6"
+          },
+          "2015": {
+            "file": "std/bars_1d/2015__00ea4b83.parquet",
+            "history_scope": {
+              "end": "2015-12-31",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000333.SZ",
+                "000651.SZ",
+                "000858.SZ",
+                "002415.SZ",
+                "300014.SZ",
+                "300059.SZ",
+                "300168.SZ",
+                "300253.SZ",
+                "300274.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH",
+                "603288.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [],
+              "retained_entry": {
+                "file": "std/bars_1d/2015__de1057a1.parquet",
+                "history_scope": {
+                  "end": "2015-12-31",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2015-01-05"
+                },
+                "rows": 2440,
+                "sha": "de1057a1fb427ddb674714bcaa3f61c050933ce70ee66f27aa51b5ba590b8776"
+              },
+              "start": "2015-01-05"
+            },
+            "rows": 4148,
+            "sha": "00ea4b8359658a8d87c31452da89551627062a105435ece9371b02875c5264b9"
+          },
+          "2016": {
+            "file": "std/bars_1d/2016__d28c0f1e.parquet",
+            "history_scope": {
+              "end": "2016-12-30",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000333.SZ",
+                "000651.SZ",
+                "000858.SZ",
+                "002415.SZ",
+                "300014.SZ",
+                "300059.SZ",
+                "300168.SZ",
+                "300253.SZ",
+                "300274.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH",
+                "603288.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [],
+              "retained_entry": {
+                "file": "std/bars_1d/2016__eb7e7f1f.parquet",
+                "history_scope": {
+                  "end": "2016-12-30",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2016-01-04"
+                },
+                "rows": 2440,
+                "sha": "eb7e7f1f277197b05febf693331fdb5bbaddda2e9058d25ec23a7d60ed57ef20"
+              },
+              "start": "2016-01-04"
+            },
+            "rows": 4148,
+            "sha": "d28c0f1e5553d61227c7ee9d2c92aafdb4eed4ae28694551844e6f59b5c5e3c7"
+          },
+          "2017": {
+            "file": "std/bars_1d/2017__7ae23bfb.parquet",
+            "history_scope": {
+              "end": "2017-12-29",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000333.SZ",
+                "000651.SZ",
+                "000858.SZ",
+                "002415.SZ",
+                "300014.SZ",
+                "300059.SZ",
+                "300168.SZ",
+                "300253.SZ",
+                "300274.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH",
+                "603288.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [],
+              "retained_entry": {
+                "file": "std/bars_1d/2017__b704409b.parquet",
+                "history_scope": {
+                  "end": "2017-12-29",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2017-01-03"
+                },
+                "rows": 2440,
+                "sha": "b704409b09f78c129ae5fed162323bbe3ceda356d9c7e776118b7c33da99f7da"
+              },
+              "start": "2017-01-03"
+            },
+            "rows": 4148,
+            "sha": "7ae23bfb6d57e64b78f3ccc3f482196b30077569c36dd191e9a30ce55a367193"
+          },
+          "2018": {
+            "file": "std/bars_1d/2018__4ca659a9.parquet",
+            "history_scope": {
+              "end": "2018-12-28",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000333.SZ",
+                "000651.SZ",
+                "000858.SZ",
+                "002415.SZ",
+                "300014.SZ",
+                "300059.SZ",
+                "300168.SZ",
+                "300253.SZ",
+                "300274.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600519.SH",
+                "600809.SH",
+                "600887.SH",
+                "601111.SH",
+                "603288.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [],
+              "retained_entry": {
+                "file": "std/bars_1d/2018__4be06d79.parquet",
+                "history_scope": {
+                  "end": "2018-12-28",
+                  "full_market": false,
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ],
+                  "start": "2018-01-02"
+                },
+                "rows": 2430,
+                "sha": "4be06d793c96f0cebc3bc9d818800c12d977cdc56e43c44e419c1125758bf9f3"
+              },
+              "start": "2018-01-02"
+            },
+            "rows": 4131,
+            "sha": "4ca659a91230ee0f02bc136156f8231915658a1469ecf6c033b549c87201f0f2"
+          },
+          "2019": {
+            "file": "std/bars_1d/2019__01e86d44.parquet",
+            "history_scope": {
+              "end": "2019-12-31",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000333.SZ",
+                "000651.SZ",
+                "000661.SZ",
+                "000858.SZ",
+                "002050.SZ",
+                "002088.SZ",
+                "002286.SZ",
+                "002352.SZ",
+                "002371.SZ",
+                "002407.SZ",
+                "002415.SZ",
+                "002456.SZ",
+                "002594.SZ",
+                "002595.SZ",
+                "002597.SZ",
+                "002714.SZ",
+                "002821.SZ",
+                "300009.SZ",
+                "300014.SZ",
+                "300036.SZ",
+                "300037.SZ",
+                "300059.SZ",
+                "300073.SZ",
+                "300168.SZ",
+                "300253.SZ",
+                "300274.SZ",
+                "300347.SZ",
+                "300357.SZ",
+                "300359.SZ",
+                "300595.SZ",
+                "300661.SZ",
+                "300702.SZ",
+                "300750.SZ",
+                "300782.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600276.SH",
+                "600309.SH",
+                "600519.SH",
+                "600660.SH",
+                "600763.SH",
+                "600809.SH",
+                "600887.SH",
+                "601012.SH",
+                "601058.SH",
+                "601111.SH",
+                "601222.SH",
+                "601633.SH",
+                "601677.SH",
+                "601888.SH",
+                "603259.SH",
+                "603288.SH",
+                "603659.SH",
+                "603799.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [],
+              "retained_entry": {
+                "file": "std/bars_1d/2019__c2da4bf4.parquet",
+                "history_scope": {
+                  "end": "2019-12-31",
+                  "full_market": false,
+                  "instruments": [
+                    "000333.SZ",
+                    "000651.SZ",
+                    "000661.SZ",
+                    "002050.SZ",
+                    "002088.SZ",
+                    "002286.SZ",
+                    "002352.SZ",
+                    "002371.SZ",
+                    "002407.SZ",
+                    "002415.SZ",
+                    "002456.SZ",
+                    "002594.SZ",
+                    "002595.SZ",
+                    "002597.SZ",
+                    "002714.SZ",
+                    "002821.SZ",
+                    "300009.SZ",
+                    "300014.SZ",
+                    "300036.SZ",
+                    "300037.SZ",
+                    "300073.SZ",
+                    "300347.SZ",
+                    "300357.SZ",
+                    "300359.SZ",
+                    "300595.SZ",
+                    "300661.SZ",
+                    "300702.SZ",
+                    "300750.SZ",
+                    "300782.SZ",
+                    "600036.SH",
+                    "600085.SH",
+                    "600196.SH",
+                    "600276.SH",
+                    "600309.SH",
+                    "600519.SH",
+                    "600660.SH",
+                    "600763.SH",
+                    "600887.SH",
+                    "601012.SH",
+                    "601058.SH",
+                    "601111.SH",
+                    "601222.SH",
+                    "601633.SH",
+                    "601677.SH",
+                    "601888.SH",
+                    "603259.SH",
+                    "603288.SH",
+                    "603659.SH",
+                    "603799.SH"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch15/20261005-rsi-history/probe-results.json",
+                      "sha256": "2c97edde12f818fac6c475f5650b477c294554784345e86ca2cdbcd64cb459c1"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch15/20261005-rsi-history/retry-results.json",
+                      "sha256": "e24b76de1779446dd5c17d21ec5f6c2db76a33333470e848a8e171b4c673d173"
+                    }
+                  ],
+                  "retained_entry": {
+                    "file": "std/bars_1d/2019__ffa9557e.parquet",
+                    "history_scope": {
+                      "end": "2019-12-31",
+                      "full_market": false,
+                      "instruments": [
+                        "600519.SH",
+                        "000333.SZ",
+                        "601111.SH",
+                        "600036.SH",
+                        "600887.SH",
+                        "603288.SH",
+                        "600196.SH",
+                        "600085.SH",
+                        "002415.SZ",
+                        "000651.SZ"
+                      ],
+                      "policy": "selected_instruments_v1",
+                      "probe_evidence": [
+                        {
+                          "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                          "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                        },
+                        {
+                          "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                          "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                        }
+                      ],
+                      "start": "2019-01-02"
+                    },
+                    "rows": 2440,
+                    "sha": "ffa9557e288ce030664575a5535c760e8b13f3301a578a16e51eb292b46ee69f"
+                  },
+                  "start": "2019-01-02"
+                },
+                "rows": 11847,
+                "sha": "c2da4bf4c3de4c7e3fbe2b9ad998e118b3de84c126fb4888f9bc135fc4cd98a8"
+              },
+              "start": "2019-01-02"
+            },
+            "rows": 13311,
+            "sha": "01e86d445512116045dd8abdd9b88baaa95a3efc2c477de0c7dcee4b898799bc"
+          },
+          "2020": {
+            "file": "std/bars_1d/2020__47e82775.parquet",
+            "history_scope": {
+              "end": "2020-12-31",
+              "full_market": false,
+              "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+              "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+              "instruments": [
+                "000333.SZ",
+                "000651.SZ",
+                "000661.SZ",
+                "000858.SZ",
+                "002050.SZ",
+                "002088.SZ",
+                "002286.SZ",
+                "002352.SZ",
+                "002371.SZ",
+                "002407.SZ",
+                "002415.SZ",
+                "002456.SZ",
+                "002594.SZ",
+                "002595.SZ",
+                "002597.SZ",
+                "002714.SZ",
+                "002821.SZ",
+                "300009.SZ",
+                "300014.SZ",
+                "300036.SZ",
+                "300037.SZ",
+                "300059.SZ",
+                "300073.SZ",
+                "300168.SZ",
+                "300253.SZ",
+                "300274.SZ",
+                "300347.SZ",
+                "300357.SZ",
+                "300359.SZ",
+                "300595.SZ",
+                "300661.SZ",
+                "300702.SZ",
+                "300750.SZ",
+                "300782.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600276.SH",
+                "600309.SH",
+                "600519.SH",
+                "600660.SH",
+                "600763.SH",
+                "600809.SH",
+                "600887.SH",
+                "601012.SH",
+                "601058.SH",
+                "601111.SH",
+                "601222.SH",
+                "601633.SH",
+                "601677.SH",
+                "601888.SH",
+                "603259.SH",
+                "603288.SH",
+                "603659.SH",
+                "603799.SH"
+              ],
+              "policy": "selected_instruments_v1",
+              "prior_declared_prelisting_names": [],
+              "retained_entry": {
+                "file": "std/bars_1d/2020__834237e1.parquet",
+                "history_scope": {
+                  "end": "2020-12-31",
+                  "full_market": false,
+                  "instruments": [
+                    "000333.SZ",
+                    "000651.SZ",
+                    "000661.SZ",
+                    "002050.SZ",
+                    "002088.SZ",
+                    "002286.SZ",
+                    "002352.SZ",
+                    "002371.SZ",
+                    "002407.SZ",
+                    "002415.SZ",
+                    "002456.SZ",
+                    "002594.SZ",
+                    "002595.SZ",
+                    "002597.SZ",
+                    "002714.SZ",
+                    "002821.SZ",
+                    "300009.SZ",
+                    "300014.SZ",
+                    "300036.SZ",
+                    "300037.SZ",
+                    "300073.SZ",
+                    "300347.SZ",
+                    "300357.SZ",
+                    "300359.SZ",
+                    "300595.SZ",
+                    "300661.SZ",
+                    "300702.SZ",
+                    "300750.SZ",
+                    "300782.SZ",
+                    "600036.SH",
+                    "600085.SH",
+                    "600196.SH",
+                    "600276.SH",
+                    "600309.SH",
+                    "600519.SH",
+                    "600660.SH",
+                    "600763.SH",
+                    "600887.SH",
+                    "601012.SH",
+                    "601058.SH",
+                    "601111.SH",
+                    "601222.SH",
+                    "601633.SH",
+                    "601677.SH",
+                    "601888.SH",
+                    "603259.SH",
+                    "603288.SH",
+                    "603659.SH",
+                    "603799.SH"
+                  ],
+                  "policy": "selected_instruments_v1",
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch15/20261005-rsi-history/probe-results.json",
+                      "sha256": "2c97edde12f818fac6c475f5650b477c294554784345e86ca2cdbcd64cb459c1"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch15/20261005-rsi-history/retry-results.json",
+                      "sha256": "e24b76de1779446dd5c17d21ec5f6c2db76a33333470e848a8e171b4c673d173"
+                    }
+                  ],
+                  "retained_entry": {
+                    "file": "std/bars_1d/2020__8ee3ee9c.parquet",
+                    "history_scope": {
+                      "end": "2020-12-31",
+                      "full_market": false,
+                      "instruments": [
+                        "600519.SH",
+                        "000333.SZ",
+                        "601111.SH",
+                        "600036.SH",
+                        "600887.SH",
+                        "603288.SH",
+                        "600196.SH",
+                        "600085.SH",
+                        "002415.SZ",
+                        "000651.SZ"
+                      ],
+                      "policy": "selected_instruments_v1",
+                      "probe_evidence": [
+                        {
+                          "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                          "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                        },
+                        {
+                          "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                          "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                        }
+                      ],
+                      "start": "2020-01-02"
+                    },
+                    "rows": 2430,
+                    "sha": "8ee3ee9c270c3c655c3b52905c5b9f0224f6dbc0a8214a61cc78dc6e44b7582f"
+                  },
+                  "start": "2020-01-02"
+                },
+                "rows": 11907,
+                "sha": "834237e107ae59fe497e7c9a8bc4797f97590c73a3171cf36ab967006bae30a3"
+              },
+              "start": "2020-01-02"
+            },
+            "rows": 13365,
+            "sha": "47e827755259e5f0aa68d6a33809524882ec61e4d54040acf146ee3d71ab80f8"
+          },
+          "2021": {
+            "file": "std/bars_1d/2021__a6b6023d.parquet",
+            "rows": 1062633,
+            "sha": "a6b6023d88830eda7c06b76ae6e9e4bf651869763268722e87709a1d023a94d9"
+          },
+          "2022": {
+            "file": "std/bars_1d/2022__a250d824.parquet",
+            "rows": 1149504,
+            "sha": "a250d824a538d9927a6ed6e95373e30289f1c4ba87fccea52c6100b380d01c58"
+          },
+          "2023": {
+            "file": "std/bars_1d/2023__c64a31fb.parquet",
+            "rows": 1212196,
+            "sha": "c64a31fb26bb2c77214d0ade416539284ece0e9a66922a713c506002d8598850"
+          },
+          "2024": {
+            "file": "std/bars_1d/2024__e363911a.parquet",
+            "rows": 1236574,
+            "sha": "e363911a1104476b7b20e3770d763bea25c2605a393d850f0b872fb283ba29ea"
+          },
+          "2025": {
+            "file": "std/bars_1d/2025__557a8b0c.parquet",
+            "rows": 1251474,
+            "sha": "557a8b0cb7f20a1a6395afa1e5a705a7c51e729e1ed22d17f3a48c06f97f141e"
+          },
+          "2026": {
+            "file": "std/bars_1d/2026__aeb0c08f.parquet",
+            "rows": 936103,
+            "sha": "aeb0c08fccec7ca2fd1595db6bf3b11b8fa7a37c148a34135ce01108240a517a"
+          }
+        },
+        "bars_5m": {
+          "202112": {
+            "file": "std/bars_5m/202112__ccdbc4ce.parquet",
+            "rows": 753312,
+            "sha": "ccdbc4ce592562cecec9f91f7eda175ed1bd6c8c3dd63bb05e5cc86f46e667fc"
+          },
+          "202201": {
+            "file": "std/bars_5m/202201__1c09a1df.parquet",
+            "rows": 714720,
+            "sha": "1c09a1df214feea9da2cfeccc3c46a58a8efce6135e024a3636f448851699c2c"
+          },
+          "202202": {
+            "file": "std/bars_5m/202202__f3e333de.parquet",
+            "rows": 602976,
+            "sha": "f3e333de07efacf361427f7f9b49be324669cacb0ad5f44eb374cc0cb84e9d24"
+          },
+          "202203": {
+            "file": "std/bars_5m/202203__4de319b4.parquet",
+            "rows": 867408,
+            "sha": "4de319b4817fb8abc81a2faedf7644c26c91ed194da966eb50b973f0d5143769"
+          },
+          "202204": {
+            "file": "std/bars_5m/202204__bba609eb.parquet",
+            "rows": 715296,
+            "sha": "bba609ebf07bb4cdab9b3d97d2fe4ee20551ef6027bbce9c415aa2c618ae427d"
+          },
+          "202205": {
+            "file": "std/bars_5m/202205__4ac4ddb4.parquet",
+            "rows": 715152,
+            "sha": "4ac4ddb42bc8dab93637c5ddf4a2a4eaf5a0346af9dffa272a40c71f18a47a30"
+          },
+          "202206": {
+            "file": "std/bars_5m/202206__e875938d.parquet",
+            "rows": 790608,
+            "sha": "e875938d177dc51c4a6ccef4400c785566ffcc79cc0332abf3adcefc5fdc74b7"
+          },
+          "202207": {
+            "file": "std/bars_5m/202207__f6a45f13.parquet",
+            "rows": 791328,
+            "sha": "f6a45f13dc9d442a4fe8686a447ca792083cda6fd4004943a2bb61cf72c74450"
+          },
+          "202208": {
+            "file": "std/bars_5m/202208__d9cc8464.parquet",
+            "rows": 866352,
+            "sha": "d9cc84641c75b3fe61dcd05fd5b7e89a47ebf8ab57aace72fe898d99d7d6fcf1"
+          },
+          "202209": {
+            "file": "std/bars_5m/202209__56cc3a9d.parquet",
+            "rows": 792192,
+            "sha": "56cc3a9d1b198e44c1f9deeb81fe6de7a190858f2853e3d23ecd51c800e3bb20"
+          },
+          "202210": {
+            "file": "std/bars_5m/202210__beafd663.parquet",
+            "rows": 602688,
+            "sha": "beafd66320bfdb9738f8fc51a6d766b4a260beebc0f257f43c264c1aad34a0f5"
+          },
+          "202211": {
+            "file": "std/bars_5m/202211__2d44ef26.parquet",
+            "rows": 829632,
+            "sha": "2d44ef2645f5f79a985f21be0a5f0ce9c8a126c22039b5b321aced0d9dbeb73e"
+          },
+          "202212": {
+            "file": "std/bars_5m/202212__67a4412c.parquet",
+            "rows": 1061952,
+            "sha": "67a4412ca0378594d7dbb5e84a9e0ee5c41f41cee801e655b911c9e95fc82a13"
+          },
+          "202301": {
+            "file": "std/bars_5m/202301__a386e893.parquet",
+            "rows": 601632,
+            "sha": "a386e8939aa1476dafa54259349f9a91c6f6158e73cb0eb65a6a6a44e844ec81"
+          },
+          "202302": {
+            "file": "std/bars_5m/202302__b3fb5ba7.parquet",
+            "rows": 752208,
+            "sha": "b3fb5ba7af1fbfde5cfe0380d60fce10d8cf14addf408bb8c99f2f82cc4442d6"
+          },
+          "202303": {
+            "file": "std/bars_5m/202303__ae4112a1.parquet",
+            "rows": 865296,
+            "sha": "ae4112a1a43923f436d6991f297d193a9cb4eebf473d7d9946d44f9055459f35"
+          },
+          "202304": {
+            "file": "std/bars_5m/202304__1ccea292.parquet",
+            "rows": 714960,
+            "sha": "1ccea292389a0ddde507e439c2a80477781f92b032ab90ed36b6868883be7a32"
+          },
+          "202305": {
+            "file": "std/bars_5m/202305__2ae05fb4.parquet",
+            "rows": 752016,
+            "sha": "2ae05fb4b18d10734b337336f12e11774535dec33f997057be647c30ca737a72"
+          },
+          "202306": {
+            "file": "std/bars_5m/202306__56f92e66.parquet",
+            "rows": 752064,
+            "sha": "56f92e6614c574001d5061aa449f4b21ba2030bf2f905e1b47b0d9af1d16c29d"
+          },
+          "202307": {
+            "file": "std/bars_5m/202307__fe64ba4f.parquet",
+            "rows": 790128,
+            "sha": "fe64ba4fcf7762a661da1d4b95fedfc814cb338145dd19e165bc03250d833d08"
+          },
+          "202308": {
+            "file": "std/bars_5m/202308__8347cb13.parquet",
+            "rows": 865392,
+            "sha": "8347cb13103d4916c3392d55f0801ff13f99f638a026972bf13f2f030d3410fa"
+          },
+          "202309": {
+            "file": "std/bars_5m/202309__fa0656db.parquet",
+            "rows": 752064,
+            "sha": "fa0656db28163fdc3ed20c0662b733f22166c8d4b37b20048ab68b12ddbf5085"
+          },
+          "202310": {
+            "file": "std/bars_5m/202310__0cddbe8e.parquet",
+            "rows": 639648,
+            "sha": "0cddbe8ebf37e159aee586dee21262e2ab849971b51b773776d02def32b8de54"
+          },
+          "202311": {
+            "file": "std/bars_5m/202311__59fd987e.parquet",
+            "rows": 827328,
+            "sha": "59fd987e1353ac5b945f5129053653735dc58893ff3c2031ef722383376e8975"
+          },
+          "202312": {
+            "file": "std/bars_5m/202312__2e3f161f.parquet",
+            "rows": 1039776,
+            "sha": "2e3f161fd410bba78ed206109039add739ff7518e5c45878f6e246b6b3bacdcd"
+          },
+          "202401": {
+            "file": "std/bars_5m/202401__76edd46d.parquet",
+            "rows": 835248,
+            "sha": "76edd46d035ee19585654056d68acdacd8ebb79a36d8a2d803f7b1e326742a3a"
+          },
+          "202402": {
+            "file": "std/bars_5m/202402__fe56efad.parquet",
+            "rows": 569520,
+            "sha": "fe56efad7fef4a1c98731bb19943020bae2feaa7e30f0d500544b9790cc05e8a"
+          },
+          "202403": {
+            "file": "std/bars_5m/202403__32219991.parquet",
+            "rows": 797088,
+            "sha": "322199917d230a2e0d4829f8ab42e22cd70f48ace5c9f2c319e6ca1856452850"
+          },
+          "202404": {
+            "file": "std/bars_5m/202404__ef0d760c.parquet",
+            "rows": 758832,
+            "sha": "ef0d760ced275cb886a1d78f289d4ad3fc8a48961f0eb40932f1a916cf4c17b2"
+          },
+          "202405": {
+            "file": "std/bars_5m/202405__263cd724.parquet",
+            "rows": 758928,
+            "sha": "263cd72492915ba38aec71739e361f28b8124f46a4020e46ba16b12760e325af"
+          },
+          "202406": {
+            "file": "std/bars_5m/202406__353d534b.parquet",
+            "rows": 721392,
+            "sha": "353d534b35dcdc80829f25dd014426024bc757ac5cf07aad27a4e6f6bab1de27"
+          },
+          "202407": {
+            "file": "std/bars_5m/202407__a0b5b732.parquet",
+            "rows": 872592,
+            "sha": "a0b5b73234b6964ed15359d8208c07da7137964947240dcf579fe1266c2a7219"
+          },
+          "202408": {
+            "file": "std/bars_5m/202408__f52738c7.parquet",
+            "rows": 834720,
+            "sha": "f52738c723de4d8e8fb601adc9deae845062c082e512988128639f9f9a440aa4"
+          },
+          "202409": {
+            "file": "std/bars_5m/202409__18b4d655.parquet",
+            "rows": 720144,
+            "sha": "18b4d655d301b97ef9bd9b7994fd822d60a0fe1b9af05ee40edb2e7181ae02dc"
+          },
+          "202410": {
+            "file": "std/bars_5m/202410__aa1d30da.parquet",
+            "rows": 676848,
+            "sha": "aa1d30da0aba9906fc4074d90d8b47f2d49ab0043dbd5464ecf139b0fa2e7d0c"
+          },
+          "202411": {
+            "file": "std/bars_5m/202411__a1f07f53.parquet",
+            "rows": 789360,
+            "sha": "a1f07f531cce21fdac0b13792086df36fb59c42eb1e7b040293474d725ec7e84"
+          },
+          "202412": {
+            "file": "std/bars_5m/202412__311a044c.parquet",
+            "rows": 1036512,
+            "sha": "311a044c1ea485460f3a979a81e18507a86fddf93e59ebf09b72b252b6d296e5"
+          },
+          "202501": {
+            "file": "std/bars_5m/202501__12d33cdb.parquet",
+            "rows": 683280,
+            "sha": "12d33cdb47110cd3b6f969a0a8407bf079eb903f2687eb087d05594d4922bdca"
+          },
+          "202502": {
+            "file": "std/bars_5m/202502__21008406.parquet",
+            "rows": 684480,
+            "sha": "21008406f8dbef7a97f402b56c9a1481fa8af342229228ac41e56757da1c3590"
+          },
+          "202503": {
+            "file": "std/bars_5m/202503__8168ef41.parquet",
+            "rows": 797568,
+            "sha": "8168ef41463a55b30962e50201db878640594ddcbb7ea5109996828cfee95e0a"
+          },
+          "202504": {
+            "file": "std/bars_5m/202504__10bb21d1.parquet",
+            "rows": 798528,
+            "sha": "10bb21d1a154e1fdbeb3f6e750c81e249862d03ddb5d1eaf08349964063859ec"
+          },
+          "202505": {
+            "file": "std/bars_5m/202505__b98513ae.parquet",
+            "rows": 721296,
+            "sha": "b98513ae0449b49929d778f429e180a877f897369e0a9fbebefa425711e424b5"
+          },
+          "202506": {
+            "file": "std/bars_5m/202506__047dc6ae.parquet",
+            "rows": 760944,
+            "sha": "047dc6aef765848054bc549e262c77d3457af3064f35d6134849903175a618e6"
+          },
+          "202507": {
+            "file": "std/bars_5m/202507__d12a3d4b.parquet",
+            "rows": 874656,
+            "sha": "d12a3d4b62b9ee978572bd3f753374b36ac56ee3a9fc739a54c9f7cd374c040a"
+          },
+          "202508": {
+            "file": "std/bars_5m/202508__1bab1ec9.parquet",
+            "rows": 798000,
+            "sha": "1bab1ec9d7f95e41c1d1c31f3bb5f4a422402a86a034c5d56e0589b04b11307f"
+          },
+          "202509": {
+            "file": "std/bars_5m/202509__ff2d43c8.parquet",
+            "rows": 836544,
+            "sha": "ff2d43c8674c1dd58679c49d28f68c3fe3db7eacea4da87a75960d27c547d3d3"
+          },
+          "202510": {
+            "file": "std/bars_5m/202510__448663c9.parquet",
+            "rows": 646320,
+            "sha": "448663c9b25b7689861054d53515469eb5126ede7be9f522bce11b9d06bfa48d"
+          },
+          "202511": {
+            "file": "std/bars_5m/202511__4ba60f22.parquet",
+            "rows": 759984,
+            "sha": "4ba60f22ff7490dc654b194e9f8e49b969429058c42d4955141aea1e8fc243b0"
+          },
+          "202512": {
+            "file": "std/bars_5m/202512__43f8622e.parquet",
+            "rows": 1098816,
+            "sha": "43f8622e4f73dd0a901031d40e1a3fa050d03eb735f087b3ceb9073b893bbb91"
+          },
+          "202601": {
+            "file": "std/bars_5m/202601__0f5b4ff2.parquet",
+            "rows": 765168,
+            "sha": "0f5b4ff289321ebd32d95c991755da8bccaf9e46f810b1969cb9ccf48300ba25"
+          },
+          "202602": {
+            "file": "std/bars_5m/202602__47a118c8.parquet",
+            "rows": 536160,
+            "sha": "47a118c83fda9fa24b935411ddcf32011e487f66fcd1d7eff1ac852cfb027b24"
+          },
+          "202603": {
+            "file": "std/bars_5m/202603__2009857a.parquet",
+            "rows": 842544,
+            "sha": "2009857a7b854893ec96769b187dd9c1e94489031679def9f2aa53a833df9e76"
+          },
+          "202604": {
+            "file": "std/bars_5m/202604__984163af.parquet",
+            "rows": 804288,
+            "sha": "984163af8e884a012588649837bdfef30de271544946fbe373e0c0d90fe64c8e"
+          },
+          "202605": {
+            "file": "std/bars_5m/202605__4289f4cf.parquet",
+            "rows": 690288,
+            "sha": "4289f4cf34adbff2f5b6d7cc24c851fb782d052d2d9d0c3301797b6fbe025181"
+          },
+          "202606": {
+            "file": "std/bars_5m/202606__e9dfbaa4.parquet",
+            "rows": 805104,
+            "sha": "e9dfbaa49a995a9b8f4af9d81d79d26e2ce987775995d751b295ee8bed201886"
+          },
+          "202607": {
+            "file": "std/bars_5m/202607__bda6199c.parquet",
+            "rows": 881808,
+            "sha": "bda6199ca52e997c0a7c844c47968c956820ef3762b899bc953f5c616d9244cf"
+          },
+          "202608": {
+            "file": "std/bars_5m/202608__ffd4a84a.parquet",
+            "rows": 804960,
+            "sha": "ffd4a84a8a083c485d3281721198f1dcb4f7de5f5d13a71f7a67a83738204085"
+          },
+          "202609": {
+            "file": "std/bars_5m/202609__3a34204d.parquet",
+            "rows": 153360,
+            "sha": "3a34204d141798446833caa2e1bfe13ff4951309566ec8e405ac45067a06cc95"
+          }
+        },
+        "calendar": {
+          "all": {
+            "file": "std/calendar/all__f35c93a0.parquet",
+            "rows": 7938,
+            "sha": "f35c93a009bd92574c0d8e58a70f370d09e1ab8c34391b7c6f9272e0112deb78"
+          }
+        },
+        "company_controls_annual": {
+          "2000/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2000/c863b10a0ed2c27df694__a359906d.parquet",
+            "rows": 1060,
+            "sha": "a359906d8e9662dd3227cec5a5bed7b423ce6df0856d1b8eff29c62c58e15cf8"
+          },
+          "2001/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2001/c863b10a0ed2c27df694__c8f2ef49.parquet",
+            "rows": 1141,
+            "sha": "c8f2ef4922d47c42169bf4868d85ce4c27e3638a987b4debab724624cebf9f94"
+          },
+          "2002/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2002/c863b10a0ed2c27df694__39bf8b38.parquet",
+            "rows": 1199,
+            "sha": "39bf8b38c87f791c3e64076d760918c32153c4704389f155d69d48a947c119f3"
+          },
+          "2003/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2003/c863b10a0ed2c27df694__56a0c65e.parquet",
+            "rows": 1269,
+            "sha": "56a0c65ece1970c70172ef1192e4ca0cb47ac2c2871e6d5def2fb1c57ec78cd4"
+          },
+          "2004/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2004/c863b10a0ed2c27df694__9a21242b.parquet",
+            "rows": 1355,
+            "sha": "9a21242b0334cbb3fb6e7f24ee16351222b5eb93d9148388cfceef7f4a15752e"
+          },
+          "2005/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2005/c863b10a0ed2c27df694__a3f6d659.parquet",
+            "rows": 1351,
+            "sha": "a3f6d6595ab5cbfc58c9f12ff7a920a0ea42f390ed6f501c8d8eef56a2b8fcee"
+          },
+          "2006/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2006/c863b10a0ed2c27df694__50c13e63.parquet",
+            "rows": 1435,
+            "sha": "50c13e632fcecff9d9238f79bfb31bde29ab1f6ef6df1c8d17931a00d4f95183"
+          },
+          "2007/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2007/c863b10a0ed2c27df694__1e0c89a2.parquet",
+            "rows": 1548,
+            "sha": "1e0c89a2345af31f4f5f44a1342092e838518f07a3e805dbf674ac0fc39cc983"
+          },
+          "2008/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2008/c863b10a0ed2c27df694__c34e5c64.parquet",
+            "rows": 1602,
+            "sha": "c34e5c645a050e95f8ecd67a9c220a1b2324c69fa955d5803f24096b18442384"
+          },
+          "2009/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2009/c863b10a0ed2c27df694__ef9fd1d9.parquet",
+            "rows": 1752,
+            "sha": "ef9fd1d92a3ba03f2ac60d2811c6a8aa45b317d8a232fdcb19d642bb010ffb3f"
+          },
+          "2010/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2010/c863b10a0ed2c27df694__50fb3c23.parquet",
+            "rows": 2107,
+            "sha": "50fb3c23c1d47a70c3f8b008256649e6226855ef5e7ad657161ab5627c2eb284"
+          },
+          "2011/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2011/c863b10a0ed2c27df694__39f6dedc.parquet",
+            "rows": 2341,
+            "sha": "39f6dedcd97b7deff0705d2cb29613f7f62663da7b16eceb50df2108e80f526a"
+          },
+          "2012/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2012/c863b10a0ed2c27df694__7b66c2de.parquet",
+            "rows": 2472,
+            "sha": "7b66c2de111f7858a61bdbb02c80924c01206a4ac28ab6c914b4704ce0dc9d15"
+          },
+          "2013/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2013/c863b10a0ed2c27df694__212b7e98.parquet",
+            "rows": 2515,
+            "sha": "212b7e983b54c43203adf53ee0f51b9dfeb0248cca5dacc317e4cabb64a7d61a"
+          },
+          "2014/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2014/c863b10a0ed2c27df694__1194c560.parquet",
+            "rows": 2631,
+            "sha": "1194c5601c1d703d9a4df1f107c9b732fd0abf5f33bbca4bbca2cd4867369812"
+          },
+          "2015/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2015/c863b10a0ed2c27df694__aea27ab8.parquet",
+            "rows": 2823,
+            "sha": "aea27ab8787286d148b14ee9bb08a9a78294040e1dba8634315a17eab7d75f03"
+          },
+          "2016/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2016/c863b10a0ed2c27df694__382e57aa.parquet",
+            "rows": 3263,
+            "sha": "382e57aa0530887b92abe6299b267a2c5c44367a8d7fada1b9a250379dfcd743"
+          },
+          "2017/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2017/c863b10a0ed2c27df694__b0925a58.parquet",
+            "rows": 3648,
+            "sha": "b0925a58a699ab377bb8ec35607dcf1f7f5b80882722c5c91a9b606e4cba9539"
+          },
+          "2018/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2018/c863b10a0ed2c27df694__f3046af9.parquet",
+            "rows": 3750,
+            "sha": "f3046af9246e3ebbb36f9b1ccbebb642f17556841f9179795c4112078dc290aa"
+          },
+          "2019/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2019/c863b10a0ed2c27df694__9304f16d.parquet",
+            "rows": 3959,
+            "sha": "9304f16d3cdde000d430f1fe6f5f210748937e6f6ee9282d105dff9e44caaca7"
+          },
+          "2020/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2020/c863b10a0ed2c27df694__3985c1a9.parquet",
+            "rows": 4410,
+            "sha": "3985c1a93bf29623de85ec89a765af6b43cd9fda2365b46d729509c7c3ff5dda"
+          },
+          "2021/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2021/c863b10a0ed2c27df694__ca6218b7.parquet",
+            "rows": 4830,
+            "sha": "ca6218b75665edf43bbe1a04f23948d4cc773dc37819e3c7c23c3f445301dd60"
+          },
+          "2022/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2022/c863b10a0ed2c27df694__93547a85.parquet",
+            "rows": 5129,
+            "sha": "93547a85a7cdee8144fba2ad417dbea9f38a85d6c8903d38fa28a463b726deb8"
+          },
+          "2023/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2023/c863b10a0ed2c27df694__a6283ba3.parquet",
+            "rows": 5348,
+            "sha": "a6283ba3737eedd695c0c226a1625c9e06a501b8e15bf47c2219c42a251fd480"
+          },
+          "2024/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2024/c863b10a0ed2c27df694__0cfe7da3.parquet",
+            "rows": 5394,
+            "sha": "0cfe7da34e6dd261658dd8b388f264e276349ef44a5a834ff90f63f077a732ed"
+          },
+          "2025/c863b10a0ed2c27df694": {
+            "file": "std/company_controls_annual/2025/c863b10a0ed2c27df694__6bcf2002.parquet",
+            "rows": 5406,
+            "sha": "6bcf2002bec69036d675d3c207544667f0325419ed255331d4d834a9ba0e7c46"
+          }
+        },
+        "corp_actions": {
+          "all": {
+            "file": "std/corp_actions/all__2d71fd46.parquet",
+            "rows": 59065,
+            "sha": "2d71fd465f4c195287421562e62cbed8ae19d981f2906abe264afabb1bc20bb3"
+          }
+        },
+        "financial_annual": {
+          "1990/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/1990/c863b10a0ed2c27df694__8b1ce4b5.parquet",
+            "rows": 11,
+            "sha": "8b1ce4b53ca9796b6c61936ac3d0ed21e524ad87cfeb90d35334ec05f5cd67bf"
+          },
+          "1991/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/1991/c863b10a0ed2c27df694__4897d030.parquet",
+            "rows": 17,
+            "sha": "4897d030e37979c857e8564b914717f2ca53ddf99cc85f2d981da480014acad1"
+          },
+          "1992/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/1992/c863b10a0ed2c27df694__7fbfcc04.parquet",
+            "rows": 78,
+            "sha": "7fbfcc047dd7dd9bb00e0c1c6216bd56cfb3cb2d869b8645effc0010e22c90d2"
+          },
+          "1993/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/1993/c863b10a0ed2c27df694__466e89ad.parquet",
+            "rows": 230,
+            "sha": "466e89ad6d9967752208e5d21fb9f50403bb561855059a15cfdb9a6c1df9cca1"
+          },
+          "1994/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/1994/c863b10a0ed2c27df694__fdcac6cd.parquet",
+            "rows": 361,
+            "sha": "fdcac6cd2906a7a6229322ca9087679340762c3b7d4efe38172829e113ea7ad7"
+          },
+          "1995/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/1995/c863b10a0ed2c27df694__7375bbf6.parquet",
+            "rows": 389,
+            "sha": "7375bbf686595e970e905145f898bae11cf8087a50e74ab2dc21d11cc4063b60"
+          },
+          "1996/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/1996/c863b10a0ed2c27df694__5a8c3ece.parquet",
+            "rows": 606,
+            "sha": "5a8c3ecea4f464d2afc257d188260d4f7188faad83ca31167f2c34bd2009177d"
+          },
+          "1997/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/1997/c863b10a0ed2c27df694__d5f4352e.parquet",
+            "rows": 824,
+            "sha": "d5f4352e7a2ceb99746a37be47d80aa70fe6e99881971b398f33d38fe4eb0005"
+          },
+          "1998/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/1998/c863b10a0ed2c27df694__66f79f50.parquet",
+            "rows": 946,
+            "sha": "66f79f50951e61d3ae8ed85e6774b3128f0827b825d65884c7320707efc405e4"
+          },
+          "1999/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/1999/c863b10a0ed2c27df694__12fe1926.parquet",
+            "rows": 1118,
+            "sha": "12fe1926a02b462ba7528ee5b79ed2e870c88a08d86b4a3ff4476c2df4bf40da"
+          },
+          "2000/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2000/c863b10a0ed2c27df694__fc28c720.parquet",
+            "rows": 1324,
+            "sha": "fc28c7206c8cd92d19b58345509d6d2f289c3c6b40e5644c1740c4eae7ceff49"
+          },
+          "2001/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2001/c863b10a0ed2c27df694__696a75e7.parquet",
+            "rows": 1492,
+            "sha": "696a75e793d99e4f4871cb6ed0f25d9f8797df1ff091d842934e2ba5c1719386"
+          },
+          "2002/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2002/c863b10a0ed2c27df694__7b94fbab.parquet",
+            "rows": 1495,
+            "sha": "7b94fbab7bf6d406ad2c5525a6d78cf4b9277a77926734c1a40faca75f36470a"
+          },
+          "2003/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2003/c863b10a0ed2c27df694__52fdbd0f.parquet",
+            "rows": 1584,
+            "sha": "52fdbd0fbbb6c2b5b3453ffe9db7635d0375b182acea694a2b0af20ee57fdf67"
+          },
+          "2004/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2004/c863b10a0ed2c27df694__dfb6554a.parquet",
+            "rows": 1696,
+            "sha": "dfb6554a69643d54f79be646fb10b274f3327b11fb68293ca25ee691ef024a92"
+          },
+          "2005/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2005/c863b10a0ed2c27df694__5232f628.parquet",
+            "rows": 1731,
+            "sha": "5232f628d7a3aa4865cc58a25b2a89eea652496889715442f7c7e330b28a3005"
+          },
+          "2006/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2006/c863b10a0ed2c27df694__b23034e7.parquet",
+            "rows": 1885,
+            "sha": "b23034e7a0a76a27f5fa7ebd08089c6baed7cc069f23a93347db0064012216c0"
+          },
+          "2007/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2007/c863b10a0ed2c27df694__56fe828d.parquet",
+            "rows": 2240,
+            "sha": "56fe828de4fca7bf5464209ab54d96c9ee1f943456c336a51718f5247347eb7d"
+          },
+          "2008/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2008/c863b10a0ed2c27df694__273f8ba6.parquet",
+            "rows": 2475,
+            "sha": "273f8ba666f3f04a5c5c6a9d5dbef8c368017c282a6e33d34da7d5ed10dc37cb"
+          },
+          "2009/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2009/c863b10a0ed2c27df694__1f8c016f.parquet",
+            "rows": 2593,
+            "sha": "1f8c016f5d116146336025b6240dc87614b78552f3ee0aade79214865ca7d47e"
+          },
+          "2010/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2010/c863b10a0ed2c27df694__a0a2384e.parquet",
+            "rows": 2639,
+            "sha": "a0a2384e16ad9f842e1715252b9449e3dace9c32d8f2cc22a44ffdbe06435f01"
+          },
+          "2011/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2011/c863b10a0ed2c27df694__2156cae2.parquet",
+            "rows": 2765,
+            "sha": "2156cae216e64bc322ebe8f4e25254717f3fdb3f9e65be81e428de8d2f1981a0"
+          },
+          "2012/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2012/c863b10a0ed2c27df694__1f8d65d1.parquet",
+            "rows": 2950,
+            "sha": "1f8d65d193b481fa0816ebbc841f7d457cf422bf55508ad73d0e3e4c2a7ac2c9"
+          },
+          "2013/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2013/c863b10a0ed2c27df694__a3694fb9.parquet",
+            "rows": 3260,
+            "sha": "a3694fb9a6bba6e8f4c91ee9692ddad90e7cafe7a472c6ae6a5004d745299384"
+          },
+          "2014/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2014/c863b10a0ed2c27df694__cc41ff8d.parquet",
+            "rows": 3679,
+            "sha": "cc41ff8dec2adcb7df9e4c3fb7b2df4bc88baa76507ac4a963889dcc54e1211b"
+          },
+          "2015/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2015/c863b10a0ed2c27df694__a64ed947.parquet",
+            "rows": 3881,
+            "sha": "a64ed947c35f556505031116f37cb471e0685ba1afb9b1a976aec7a0ef2eff0e"
+          },
+          "2016/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2016/c863b10a0ed2c27df694__10a0daf0.parquet",
+            "rows": 4146,
+            "sha": "10a0daf0a71b0a63de94d6f2c0f9267da6a9860680b9c1fef95c5eeb984b04ee"
+          },
+          "2017/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2017/c863b10a0ed2c27df694__87f226bd.parquet",
+            "rows": 4648,
+            "sha": "87f226bd6b3de2b9112fe7b797d504f9bbc96eaeaccf499159268e9bfaf2a3d7"
+          },
+          "2018/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2018/c863b10a0ed2c27df694__d967da6d.parquet",
+            "rows": 5093,
+            "sha": "d967da6dcf2163f1f1399e614536dbe7277f483d84a78bea8c02a66ad8c2762a"
+          },
+          "2019/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2019/c863b10a0ed2c27df694__b2c76232.parquet",
+            "rows": 5389,
+            "sha": "b2c762322bd82b77b10737f578781c70e1121fb24e81b0e17ad0626d2c8d9860"
+          },
+          "2020/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2020/c863b10a0ed2c27df694__153204cc.parquet",
+            "rows": 5574,
+            "sha": "153204cc23ed9f20036b0f3f466218344b17a6314108c24c1852d0dab6eb4974"
+          },
+          "2021/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2021/c863b10a0ed2c27df694__fe261911.parquet",
+            "rows": 5671,
+            "sha": "fe261911591587fffd4b4df25880efcfdfaeefdfc7757d2785d22b5d069a8f7c"
+          },
+          "2022/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2022/c863b10a0ed2c27df694__644c0600.parquet",
+            "rows": 5738,
+            "sha": "644c060012dad30f48acb6544070ffe8bd6a3f20af4343c8e90e794d17805d6b"
+          },
+          "2023/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2023/c863b10a0ed2c27df694__d82afc3d.parquet",
+            "rows": 5699,
+            "sha": "d82afc3d1ec5bdeef6a825578ed407667e52a7351703349d59f4662ed8ce687c"
+          },
+          "2024/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2024/c863b10a0ed2c27df694__89cd1022.parquet",
+            "rows": 5644,
+            "sha": "89cd1022d9abb0335404be4b3f8c1e1381a4d8c3c404517e8e8d3884dd7ac404"
+          },
+          "2025/c863b10a0ed2c27df694": {
+            "file": "std/financial_annual/2025/c863b10a0ed2c27df694__25703d8b.parquet",
+            "rows": 5615,
+            "sha": "25703d8b19e0f1490e248fa790d623fb7328e791561510b9046b13dac6673bb6"
+          }
+        },
+        "financial_availability": {
+          "1990/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1990/financial_annual-c863b10a0ed2c27df694__f83c5307.parquet",
+            "rows": 32,
+            "sha": "f83c5307d7ea2952f585cae875c3e6f820bb317d3c86e8735923f8308ab7e12a"
+          },
+          "1990/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1990/financial_quarterly-c863b10a0ed2c27df694__54600aae.parquet",
+            "rows": 21,
+            "sha": "54600aaeddddf2eded1fe9c2d699fd2a48edb8ba25a955e450e008fd61400c71"
+          },
+          "1991/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1991/financial_annual-c863b10a0ed2c27df694__5be4465d.parquet",
+            "rows": 48,
+            "sha": "5be4465dd5e051df87570e3f8805cbf1b29672145f99c25e36dc4d09166fc994"
+          },
+          "1991/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1991/financial_quarterly-c863b10a0ed2c27df694__149dffdf.parquet",
+            "rows": 31,
+            "sha": "149dffdf1a694c605289710b11e06d69f6497fc58f2f84b5a3077d55837e6df8"
+          },
+          "1992/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1992/financial_annual-c863b10a0ed2c27df694__f70e847e.parquet",
+            "rows": 234,
+            "sha": "f70e847ee9a8349b7a5a2790dedb1d227b0a41a77cc20ab6457d0ba3bce8678a"
+          },
+          "1992/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1992/financial_quarterly-c863b10a0ed2c27df694__b6d7a064.parquet",
+            "rows": 156,
+            "sha": "b6d7a064818f3d33c3e2382b562d928fb2c30931de2a376eb708955365e9ca40"
+          },
+          "1993/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1993/financial_annual-c863b10a0ed2c27df694__300e2f60.parquet",
+            "rows": 687,
+            "sha": "300e2f60c30b3bb7c29c8996071469b6fe6835bcbc8b1c79d078369a0944bb1f"
+          },
+          "1993/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1993/financial_quarterly-c863b10a0ed2c27df694__5bde82fb.parquet",
+            "rows": 465,
+            "sha": "5bde82fb517c00cbc3b6794675fb4e8937c30c20a963f6cf792e7aae387aba98"
+          },
+          "1994/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1994/financial_annual-c863b10a0ed2c27df694__f7b57d8d.parquet",
+            "rows": 1083,
+            "sha": "f7b57d8d44e3f4bc6e45bbd6d836a9b9b26cfb7fce9a84346db9c7e361cbb544"
+          },
+          "1994/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1994/financial_quarterly-c863b10a0ed2c27df694__8ca4aca0.parquet",
+            "rows": 733,
+            "sha": "8ca4aca03bb1b0b3d28472ff84f6921c47128dd739a06b0fc38a44498bcd636b"
+          },
+          "1995/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1995/financial_annual-c863b10a0ed2c27df694__6d374ddb.parquet",
+            "rows": 1167,
+            "sha": "6d374ddb3607a60ba15577b9deeba464ccee7b7f2ed56812057b55eb7f3c07c9"
+          },
+          "1995/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1995/financial_quarterly-c863b10a0ed2c27df694__b6cff4c6.parquet",
+            "rows": 1536,
+            "sha": "b6cff4c60306fc4d175133860ed14ee24037e0c7053343b3e7da1ef70bbdcf0a"
+          },
+          "1996/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1996/financial_annual-c863b10a0ed2c27df694__10e8a95e.parquet",
+            "rows": 1818,
+            "sha": "10e8a95e7c7ec56f0d0cc1d337caa070287dfdd7f27f9480e03d5f47f6793b00"
+          },
+          "1996/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1996/financial_quarterly-c863b10a0ed2c27df694__a8f9b220.parquet",
+            "rows": 2262,
+            "sha": "a8f9b220e241c7f14948625d7f965bb4bac360c97a99fc02c726feab2587060a"
+          },
+          "1997/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1997/financial_annual-c863b10a0ed2c27df694__8a2407e3.parquet",
+            "rows": 2463,
+            "sha": "8a2407e3596bf83ad66bafbf15a3be7e82a765f66d5112e5f274ef99d9f3f3d5"
+          },
+          "1997/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1997/financial_quarterly-c863b10a0ed2c27df694__b8de9733.parquet",
+            "rows": 3213,
+            "sha": "b8de9733d533eb6625d8dba13a703f3062376cd7b3c1e8d5119011130501c6a5"
+          },
+          "1998/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1998/financial_annual-c863b10a0ed2c27df694__3127ac2f.parquet",
+            "rows": 3716,
+            "sha": "3127ac2fba2f06e95a33cb13d6a3b8e099d4f1ca2c9135cc382029e868dad23e"
+          },
+          "1998/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1998/financial_quarterly-c863b10a0ed2c27df694__0259535d.parquet",
+            "rows": 4816,
+            "sha": "0259535dedce554bc1322094c290618439d8c0a740b19c9bf7bb550c61df0572"
+          },
+          "1999/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1999/financial_annual-c863b10a0ed2c27df694__6b14a1db.parquet",
+            "rows": 4117,
+            "sha": "6b14a1dbc8666c7bf5c45881d3f7d801f59f952cb13246507c8bb12bf6145e22"
+          },
+          "1999/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/1999/financial_quarterly-c863b10a0ed2c27df694__7c4699f5.parquet",
+            "rows": 5460,
+            "sha": "7c4699f5fd8021246ef1e3c246a06191d56f8d9ff95a02d1c813b5adb24dd948"
+          },
+          "2000/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2000/financial_annual-c863b10a0ed2c27df694__700f059c.parquet",
+            "rows": 4704,
+            "sha": "700f059cc85d5e81a8269e4abf3d1b2c8dbec7faf578d6f14f2180f3aedb5121"
+          },
+          "2000/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2000/financial_quarterly-c863b10a0ed2c27df694__2873aed3.parquet",
+            "rows": 9276,
+            "sha": "2873aed3ef6605c28d79b2a3d021e919e8f05963140f1c2959ac6614aa633b59"
+          },
+          "2001/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2001/financial_annual-c863b10a0ed2c27df694__37a2d592.parquet",
+            "rows": 5032,
+            "sha": "37a2d592415b89c62f4c1ba20c984544b014bb9370449104e75735d326c44502"
+          },
+          "2001/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2001/financial_quarterly-c863b10a0ed2c27df694__5f4b555e.parquet",
+            "rows": 9978,
+            "sha": "5f4b555ede7e0c5678106e558fdc00a9465d0e73aebaa272ea8984ec5455636f"
+          },
+          "2002/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2002/financial_annual-c863b10a0ed2c27df694__86c02f1f.parquet",
+            "rows": 5276,
+            "sha": "86c02f1f3cb3ab626cc0ec37bd5da5f9b552cd19ad4c40c578ad7a15fe8e43e0"
+          },
+          "2002/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2002/financial_quarterly-c863b10a0ed2c27df694__f813a5af.parquet",
+            "rows": 15619,
+            "sha": "f813a5af8dda4af189c410326cc95d8a72443e2c6adebdb95fee2ccff6b7c5e5"
+          },
+          "2003/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2003/financial_annual-c863b10a0ed2c27df694__c5ada2b2.parquet",
+            "rows": 5524,
+            "sha": "c5ada2b2a24d07412a3d85db3429ce51f6d216557e3a1bf3ee8b765c7bc81b88"
+          },
+          "2003/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2003/financial_quarterly-c863b10a0ed2c27df694__aeaecf3b.parquet",
+            "rows": 18940,
+            "sha": "aeaecf3bdcc4dcf50e5f34212bb91a76f8ac3c40ec1a52509309dea2171e35b5"
+          },
+          "2004/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2004/financial_annual-c863b10a0ed2c27df694__ccef36f3.parquet",
+            "rows": 5872,
+            "sha": "ccef36f3f3e4c91a5b6fdc5cd3cf809ba4cdf338ee66980a7fc97d4bad2afee2"
+          },
+          "2004/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2004/financial_quarterly-c863b10a0ed2c27df694__ed33726d.parquet",
+            "rows": 20230,
+            "sha": "ed33726df26c37d80cf6dd6cc681c23afbc59b059ce1d2b6bc4e47aa2e94a5d9"
+          },
+          "2005/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2005/financial_annual-c863b10a0ed2c27df694__9bf22547.parquet",
+            "rows": 5856,
+            "sha": "9bf22547177c36d651601a745a78e728a29142e118b7a3b549d2a999f2768c29"
+          },
+          "2005/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2005/financial_quarterly-c863b10a0ed2c27df694__942dd047.parquet",
+            "rows": 20474,
+            "sha": "942dd047ee98544597ab5fe4b8911be8722d9ef4c383678e31eff98b8bc753f2"
+          },
+          "2006/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2006/financial_annual-c863b10a0ed2c27df694__299c098d.parquet",
+            "rows": 6188,
+            "sha": "299c098d5b3ec29da694cbcb1c55241cd1d5ed3c5ddcb35820abeb0aebba261f"
+          },
+          "2006/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2006/financial_quarterly-c863b10a0ed2c27df694__dbfb391a.parquet",
+            "rows": 20953,
+            "sha": "dbfb391a8fa09db7fac52d41632c6bc2f41944abfb469aab14db126d429dc721"
+          },
+          "2007/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2007/financial_annual-c863b10a0ed2c27df694__0eff9a44.parquet",
+            "rows": 6647,
+            "sha": "0eff9a44bec63decbadadb606f693255c5f57db00da8008e0b9adfd7598e8142"
+          },
+          "2007/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2007/financial_quarterly-c863b10a0ed2c27df694__f7fc88e8.parquet",
+            "rows": 24154,
+            "sha": "f7fc88e8fda05604394b3d13edfcda3e88061c8b3b058da80fe00668127b3400"
+          },
+          "2008/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2008/financial_annual-c863b10a0ed2c27df694__b9e1ceff.parquet",
+            "rows": 6868,
+            "sha": "b9e1ceff484f77de0587d81d4f279456d72002c197e589c657457cc14137ad08"
+          },
+          "2008/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2008/financial_quarterly-c863b10a0ed2c27df694__5cbbd002.parquet",
+            "rows": 25527,
+            "sha": "5cbbd002d14d0919296e4ee2ea8b1d13b560a186bdae79e0f966bab647142684"
+          },
+          "2009/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2009/financial_annual-c863b10a0ed2c27df694__d7eaf765.parquet",
+            "rows": 7464,
+            "sha": "d7eaf765d7a6e662422e761175e7b8c5eb02c5c61711dcb59a95713a86e0f816"
+          },
+          "2009/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2009/financial_quarterly-c863b10a0ed2c27df694__1574bd96.parquet",
+            "rows": 26717,
+            "sha": "1574bd968d78fa6b67233ef86c9f0e4a1261160d942c278e350ab61bc3b6d1ee"
+          },
+          "2010/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2010/financial_annual-c863b10a0ed2c27df694__22de313f.parquet",
+            "rows": 8884,
+            "sha": "22de313f1088571257fa959b4447a19da548ea923e8bf5a7faa1165dbd69c2a1"
+          },
+          "2010/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2010/financial_quarterly-c863b10a0ed2c27df694__e3b0d80a.parquet",
+            "rows": 31282,
+            "sha": "e3b0d80ad7a7a0a1ea01967f7f6ef4be0139ad0259062f89491551ea6f8717f4"
+          },
+          "2011/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2011/financial_annual-c863b10a0ed2c27df694__2a9847bf.parquet",
+            "rows": 9824,
+            "sha": "2a9847bfd4fdf1bfae964ccd337b953a1118e15da5e03eecf109281b9927839a"
+          },
+          "2011/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2011/financial_quarterly-c863b10a0ed2c27df694__fc7cace7.parquet",
+            "rows": 35673,
+            "sha": "fc7cace73ceff5f4978712112d376989deee7054f674d056c4d26a8fca1f29b4"
+          },
+          "2012/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2012/financial_annual-c863b10a0ed2c27df694__92ed7234.parquet",
+            "rows": 10344,
+            "sha": "92ed7234dcd787a66d0fa1d2657bdd5f1cfe07ad22a90a5fdf0c6d1e06e9dc51"
+          },
+          "2012/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2012/financial_quarterly-c863b10a0ed2c27df694__557a24b4.parquet",
+            "rows": 38358,
+            "sha": "557a24b4383daf647cfc671e18ef5e47a18c271733f02dfdeca241f53d9e326d"
+          },
+          "2013/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2013/financial_annual-c863b10a0ed2c27df694__f15feb86.parquet",
+            "rows": 10560,
+            "sha": "f15feb86ffbaa7d19928f939f00f8536f37b88a1f33d28b32c1f771a3d759993"
+          },
+          "2013/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2013/financial_quarterly-c863b10a0ed2c27df694__b7895708.parquet",
+            "rows": 39066,
+            "sha": "b78957082327fc6e07384212f7a1edfacb4fd739baf62a5ba26ad82672e5fa4b"
+          },
+          "2014/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2014/financial_annual-c863b10a0ed2c27df694__dc0c3f76.parquet",
+            "rows": 11212,
+            "sha": "dc0c3f76a23dbc15df4b1cc7fdfc0719ca8f9bc1ef9619d333450a7b25161c5b"
+          },
+          "2014/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2014/financial_quarterly-c863b10a0ed2c27df694__abba7b9d.parquet",
+            "rows": 40674,
+            "sha": "abba7b9d7b4e246daad703999754b7a8667abac7d3ed94b56365960ebcba6cce"
+          },
+          "2015/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2015/financial_annual-c863b10a0ed2c27df694__aef57c70.parquet",
+            "rows": 12392,
+            "sha": "aef57c70441f3ecd30e0800a31740e9658d7d96e9036cc41aedc526bb210db0b"
+          },
+          "2015/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2015/financial_quarterly-c863b10a0ed2c27df694__ed23b8bb.parquet",
+            "rows": 44508,
+            "sha": "ed23b8bb3fe7922f0c61e2377d2f76672cdbfeebdc9347b7e7a27d80816edf8d"
+          },
+          "2016/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2016/financial_annual-c863b10a0ed2c27df694__e18cf341.parquet",
+            "rows": 13740,
+            "sha": "e18cf341e337b3917380958b54997586a0cac120b4ca7e06d94475338d13485d"
+          },
+          "2016/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2016/financial_quarterly-c863b10a0ed2c27df694__9555a5f8.parquet",
+            "rows": 48111,
+            "sha": "9555a5f8750fa07fa492f1e12f05052cc64a123179b8b93ae719feb5ceaab30d"
+          },
+          "2017/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2017/financial_annual-c863b10a0ed2c27df694__c9fb7aee.parquet",
+            "rows": 15304,
+            "sha": "c9fb7aeedb32e799ca05f6e1cb1d881f901fab7c8c3f59c47a9f98ea261ebaa8"
+          },
+          "2017/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2017/financial_quarterly-c863b10a0ed2c27df694__7be39f5d.parquet",
+            "rows": 54258,
+            "sha": "7be39f5d9b1084d86cd624daf762b7d2b53552779f765ec47abe7f38712aa0f8"
+          },
+          "2018/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2018/financial_annual-c863b10a0ed2c27df694__5a0c4aba.parquet",
+            "rows": 15720,
+            "sha": "5a0c4aba3d6a6546e815226589806144a06c6d3e4ba4dc32ac011545a5d1e350"
+          },
+          "2018/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2018/financial_quarterly-c863b10a0ed2c27df694__f78668d5.parquet",
+            "rows": 57397,
+            "sha": "f78668d5961e6f7e8f5ceada04e371a28ebdbb10c0d5a721f1437dc9051ea227"
+          },
+          "2019/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2019/financial_annual-c863b10a0ed2c27df694__33c6ba2d.parquet",
+            "rows": 16540,
+            "sha": "33c6ba2d09fe1aca862a5dd38de16d9c449695f531004980287ae5bd085e010d"
+          },
+          "2019/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2019/financial_quarterly-c863b10a0ed2c27df694__dacf6edd.parquet",
+            "rows": 59670,
+            "sha": "dacf6edd36696f8521a7714c1a99ea5524a27a66c5d811e629d66c62f901fffe"
+          },
+          "2020/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2020/financial_annual-c863b10a0ed2c27df694__7bf7b8a8.parquet",
+            "rows": 18356,
+            "sha": "7bf7b8a8fabe2810eac5723fe781420e584f0ccb1f9abb0b135cce38c54d8d59"
+          },
+          "2020/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2020/financial_quarterly-c863b10a0ed2c27df694__a68a7cef.parquet",
+            "rows": 64797,
+            "sha": "a68a7cef7d0b6e27a047af76157000246d4f80c40e765af63f1f368b315a8859"
+          },
+          "2021/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2021/financial_annual-c863b10a0ed2c27df694__6d38ceb2.parquet",
+            "rows": 20048,
+            "sha": "6d38ceb26815bee442303181e9a3403681211cb19d52ff405e63c1df68f17c21"
+          },
+          "2021/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2021/financial_quarterly-c863b10a0ed2c27df694__0d6e7bed.parquet",
+            "rows": 71924,
+            "sha": "0d6e7bed85a65dc40491b853e38deb558275b45e24a4c3526444e458da36951b"
+          },
+          "2022/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2022/financial_annual-c863b10a0ed2c27df694__8ab281f2.parquet",
+            "rows": 21116,
+            "sha": "8ab281f29147ff1f51e527ec008064cfd5136b5f36b113555182f6dbf4deb3d4"
+          },
+          "2022/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2022/financial_quarterly-c863b10a0ed2c27df694__4ea670e1.parquet",
+            "rows": 77393,
+            "sha": "4ea670e17ce8577a63999959b41c9d6a717bb880aceae8ee47230b91117152c1"
+          },
+          "2023/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2023/financial_annual-c863b10a0ed2c27df694__8bcab804.parquet",
+            "rows": 21761,
+            "sha": "8bcab804e2b59bbf164e8756737169e045e3efb20489e0518dcbacff27ad3c61"
+          },
+          "2023/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2023/financial_quarterly-c863b10a0ed2c27df694__0c39325a.parquet",
+            "rows": 80820,
+            "sha": "0c39325a4a2367ad2a38b3a82ef1239cf605d013fc65158a421b6aed1628a138"
+          },
+          "2024/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2024/financial_annual-c863b10a0ed2c27df694__a1fa0eb4.parquet",
+            "rows": 21936,
+            "sha": "a1fa0eb4d4dc12c08f341c488dd70ebae023de5d78e727572cc5b4fa1dae97f9"
+          },
+          "2024/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2024/financial_quarterly-c863b10a0ed2c27df694__2f85ce04.parquet",
+            "rows": 81853,
+            "sha": "2f85ce04b157b269885740883a1ac78d4b7bbd4fc3df6a55ad7f7e8969bec0ba"
+          },
+          "2025/financial_annual-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2025/financial_annual-c863b10a0ed2c27df694__d699f6bd.parquet",
+            "rows": 22292,
+            "sha": "d699f6bd781db409a16ffedfdfeeb38af3ab01e8551d27cc504282fdcf97c524"
+          },
+          "2025/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2025/financial_quarterly-c863b10a0ed2c27df694__771f1c0a.parquet",
+            "rows": 82962,
+            "sha": "771f1c0aa6756d3b7ef3305d9410291ae308fba5ffaa7d86b663d316fedc8e38"
+          },
+          "2026/financial_quarterly-c863b10a0ed2c27df694": {
+            "file": "std/financial_availability/2026/financial_quarterly-c863b10a0ed2c27df694__50299656.parquet",
+            "rows": 16767,
+            "sha": "50299656dd0f31515add979aa6d456d03d3ff71eb6db93ff554e3e9a29d068fa"
+          }
+        },
+        "financial_fields": {
+          "c863b10a0ed2c27df694": {
+            "file": "std/financial_fields/c863b10a0ed2c27df694__bb932f4a.parquet",
+            "rows": 1911,
+            "sha": "bb932f4a6ece77106372102b9b8f4a6fc6a8f426937f448bbc5fb4c2dd6a041f"
+          }
+        },
+        "financial_quarterly": {
+          "1990/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/1990/c863b10a0ed2c27df694__42b7387a.parquet",
+            "rows": 11,
+            "sha": "42b7387a719b9e8195fc38b40e6bc5b9a89e85da936be27abcec725e9c828dd7"
+          },
+          "1991/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/1991/c863b10a0ed2c27df694__2f840bb2.parquet",
+            "rows": 17,
+            "sha": "2f840bb2268aecb0d4f5f392f5042fccb4ab6f80c706af21619e9e07c5b10884"
+          },
+          "1992/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/1992/c863b10a0ed2c27df694__39b4b001.parquet",
+            "rows": 78,
+            "sha": "39b4b001e490779e62c5b4e0299cb03353d41b92ea6b30fae9a48d57df33f461"
+          },
+          "1993/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/1993/c863b10a0ed2c27df694__79077678.parquet",
+            "rows": 234,
+            "sha": "790776788b756d88f0359cc4457cca0c974f8b2f82c395fa390541718b2dd68e"
+          },
+          "1994/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/1994/c863b10a0ed2c27df694__8243ac87.parquet",
+            "rows": 368,
+            "sha": "8243ac875bf294fef3af466a0b16868f3a87cdd29c605257ced025566dae0b5b"
+          },
+          "1995/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/1995/c863b10a0ed2c27df694__15366a6d.parquet",
+            "rows": 775,
+            "sha": "15366a6d874d3ccef4beca57957ac430d3c9a42ee0217d94ba1c0dec2800cdda"
+          },
+          "1996/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/1996/c863b10a0ed2c27df694__9eac7460.parquet",
+            "rows": 1132,
+            "sha": "9eac7460f63a651848c32f57e535064d155885abbfc3be01d3ab5574ea08c9cb"
+          },
+          "1997/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/1997/c863b10a0ed2c27df694__b5287c59.parquet",
+            "rows": 1609,
+            "sha": "b5287c5972756bea4737ea1c69e52821d279fd34cea7486512f78631de4b1633"
+          },
+          "1998/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/1998/c863b10a0ed2c27df694__0ac627fb.parquet",
+            "rows": 1825,
+            "sha": "0ac627fbbba095276f705b4e9b43bc9166a7fbc37e0acda399bea46402a391d2"
+          },
+          "1999/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/1999/c863b10a0ed2c27df694__44b297da.parquet",
+            "rows": 2137,
+            "sha": "44b297da7f17f7986b7e7b822b69e0e939d6efe30129d0e691d285f90bb4cb0d"
+          },
+          "2000/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2000/c863b10a0ed2c27df694__7e19e1dc.parquet",
+            "rows": 3636,
+            "sha": "7e19e1dc94124d8aac93ea9c54598a79a9d58d41f1c937d6d1081b9a694cb14a"
+          },
+          "2001/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2001/c863b10a0ed2c27df694__22016304.parquet",
+            "rows": 3988,
+            "sha": "220163046bca1b3472e1f702342dcf8ad96382a38f3bd8f08b1511fa503fe713"
+          },
+          "2002/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2002/c863b10a0ed2c27df694__4e1ad9c5.parquet",
+            "rows": 6683,
+            "sha": "4e1ad9c5159711a5798a0e7b210d3dd5a3be78f47e329be724fd4df3d215b314"
+          },
+          "2003/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2003/c863b10a0ed2c27df694__f1ffef09.parquet",
+            "rows": 7020,
+            "sha": "f1ffef0931194981d3576397e3da2b5a9c9b6772137e34beb71a989c3ed78d9d"
+          },
+          "2004/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2004/c863b10a0ed2c27df694__e439c6df.parquet",
+            "rows": 7506,
+            "sha": "e439c6df62c756c363a98a9f2c86e3e45a686657fd151c7f59a98925461927fe"
+          },
+          "2005/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2005/c863b10a0ed2c27df694__31db6b40.parquet",
+            "rows": 7659,
+            "sha": "31db6b40e9e9bd1ed5e0085b6aad253dd32f87ed130fda1c722ada6698d558f3"
+          },
+          "2006/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2006/c863b10a0ed2c27df694__7ba33a53.parquet",
+            "rows": 8078,
+            "sha": "7ba33a531fad76d53cc995fe244443f2273aaccde45d7b0ecbf4ee6e4b852ee4"
+          },
+          "2007/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2007/c863b10a0ed2c27df694__f78124a6.parquet",
+            "rows": 8819,
+            "sha": "f78124a6d90ea5b784838cb69e33438594cb145cfddc81fc4401caa8f01294db"
+          },
+          "2008/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2008/c863b10a0ed2c27df694__1376716e.parquet",
+            "rows": 9327,
+            "sha": "1376716e746ca5cde627fafc6e13a63624e935bf7477f80b91192626e47f36b0"
+          },
+          "2009/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2009/c863b10a0ed2c27df694__5aaed2e6.parquet",
+            "rows": 9943,
+            "sha": "5aaed2e637c65b6b0ce5c2827b9d628c4e73c2121454338f2c6d098ece76dd28"
+          },
+          "2010/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2010/c863b10a0ed2c27df694__bc68c9e3.parquet",
+            "rows": 11266,
+            "sha": "bc68c9e369eaccbe9add35e197804e3df39b49d10f3c21429cbe59a026ba2e59"
+          },
+          "2011/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2011/c863b10a0ed2c27df694__58b9caf0.parquet",
+            "rows": 12446,
+            "sha": "58b9caf072f78da181d197617ed562e11c5528a3ad92c4d68ed6637ff73886f4"
+          },
+          "2012/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2012/c863b10a0ed2c27df694__ff46a706.parquet",
+            "rows": 13240,
+            "sha": "ff46a706aeed92bf9fccc57b83d0985e14c2aec66e01b06047525ac157c7fa8b"
+          },
+          "2013/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2013/c863b10a0ed2c27df694__f5121ea5.parquet",
+            "rows": 13697,
+            "sha": "f5121ea544f1a55f1046d13c0d7521ab8c04c1dc410e36bb8b2160ae605c81b7"
+          },
+          "2014/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2014/c863b10a0ed2c27df694__282be4ec.parquet",
+            "rows": 14609,
+            "sha": "282be4ec2264dd1edc65441515265846dccaecb469b78b84af826fd8f077b244"
+          },
+          "2015/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2015/c863b10a0ed2c27df694__bf79800f.parquet",
+            "rows": 15891,
+            "sha": "bf79800f1519e44c873a9614f235b2fb92586c211d3af4c9441902ec3a3e3b1a"
+          },
+          "2016/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2016/c863b10a0ed2c27df694__0a053f9b.parquet",
+            "rows": 17371,
+            "sha": "0a053f9b7207ba57c9be945fe09776675dab136816c6b3dcea51d7eae79e7a0c"
+          },
+          "2017/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2017/c863b10a0ed2c27df694__a5f8077b.parquet",
+            "rows": 19327,
+            "sha": "a5f8077b07ce5978ac2fa40ebbcf3b02cf3e5c8a8c186bd85bd31031bba918f5"
+          },
+          "2018/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2018/c863b10a0ed2c27df694__916ccfa2.parquet",
+            "rows": 20586,
+            "sha": "916ccfa28fc37b30c01b75d4e9f1e9d2296dd09f00fdef27c127b05e4e43d7c9"
+          },
+          "2019/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2019/c863b10a0ed2c27df694__bc91a6ab.parquet",
+            "rows": 21869,
+            "sha": "bc91a6abebfcdb6e0c06207c5256cbca554bb9d6e5dfb75ac24c43b7293dcfec"
+          },
+          "2020/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2020/c863b10a0ed2c27df694__41fe17f0.parquet",
+            "rows": 23667,
+            "sha": "41fe17f0d4c413e5f81a862b2c12e8178003f118189ce873c8226fe5fefb2c63"
+          },
+          "2021/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2021/c863b10a0ed2c27df694__093a586c.parquet",
+            "rows": 25539,
+            "sha": "093a586c1a4310cc62ba03052f506af82f72bfb4e9350a85be9a95ac7bd6d6f2"
+          },
+          "2022/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2022/c863b10a0ed2c27df694__7491f742.parquet",
+            "rows": 26864,
+            "sha": "7491f742ed2fbd903ac8cc4641e7f065bbf60adb454d2c1cf96ed9cdd5006a1d"
+          },
+          "2023/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2023/c863b10a0ed2c27df694__a306e924.parquet",
+            "rows": 27528,
+            "sha": "a306e924717c62c51c747de611fc87c7cd72287b76275ddd64069667beca5b36"
+          },
+          "2024/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2024/c863b10a0ed2c27df694__ff01e918.parquet",
+            "rows": 27665,
+            "sha": "ff01e918572337376e411c9eaf594e2fbd69bdb97d5fdabca2f952721a342ab0"
+          },
+          "2025/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2025/c863b10a0ed2c27df694__5e4b2fe9.parquet",
+            "rows": 27856,
+            "sha": "5e4b2fe91b08f8c13058c8af3a4306ee5db79f2d40f70c1b2d4cfc80323568e0"
+          },
+          "2026/c863b10a0ed2c27df694": {
+            "file": "std/financial_quarterly/2026/c863b10a0ed2c27df694__0c5e6485.parquet",
+            "rows": 5601,
+            "sha": "0c5e648556909eb390a4d1db9ca232918624cc00a8b5833e6c9eb73ba711053b"
+          }
+        },
+        "index_1d": {
+          "all": {
+            "file": "std/index_1d/all__2843c31b.parquet",
+            "rows": 5280,
+            "sha": "2843c31b8faaa9401b2f527b4671750bb7d551e1a3c53b2efc54cfd6c268e8a6"
+          }
+        },
+        "instruments": {
+          "all": {
+            "file": "std/instruments/all__6dbb75b5.parquet",
+            "rows": 6156,
+            "sha": "6dbb75b50ef46ccfa23a1faa170942ec9396ccfcafffefc2cf9bdbfd38fabc1e"
+          }
+        },
+        "minute_universe": {
+          "all": {
+            "file": "std/minute_universe/all__02ecf18c.parquet",
+            "rows": 4000,
+            "sha": "02ecf18c361e13c5f0f51cd6f47eccdbe5b6f4b517fc444dbe6f94634057d288"
+          }
+        },
+        "valuation_coverage": {
+          "202101": {
+            "file": "std/valuation_coverage/202101__96203514.parquet",
+            "rows": 20,
+            "sha": "96203514ec7ee57e867f9f9409179ff722e578275dc881f1698cc8e5fa03a40a"
+          },
+          "202102": {
+            "file": "std/valuation_coverage/202102__4f034e43.parquet",
+            "rows": 15,
+            "sha": "4f034e43c44293bccf6d42ba2e93e612b78a962d3afbe2366756579b28530ebb"
+          },
+          "202103": {
+            "file": "std/valuation_coverage/202103__22b9892c.parquet",
+            "rows": 23,
+            "sha": "22b9892c74a4b3459f26d0548cbbdfdc5bdf21dad5092aeacff8c87e231b6c24"
+          },
+          "202104": {
+            "file": "std/valuation_coverage/202104__419cf6ba.parquet",
+            "rows": 21,
+            "sha": "419cf6ba2a7651f2dfbb57471126f18e85672fcf45d3291a792af31132adbe5e"
+          },
+          "202105": {
+            "file": "std/valuation_coverage/202105__9ccf0989.parquet",
+            "rows": 18,
+            "sha": "9ccf09897d36355b0ef6de5cfe0aad021d042b7c200a10d6911be1ea3f736c08"
+          },
+          "202106": {
+            "file": "std/valuation_coverage/202106__f81a790a.parquet",
+            "rows": 21,
+            "sha": "f81a790a2b8d90da428ecb945a56785ed80be953f2b4fe5099463ed315199697"
+          },
+          "202107": {
+            "file": "std/valuation_coverage/202107__eab36d06.parquet",
+            "rows": 22,
+            "sha": "eab36d06fb42c00c2d40b1c8713f06de23eab1799496f11e146f80aa85218fdb"
+          },
+          "202108": {
+            "file": "std/valuation_coverage/202108__fdd161e2.parquet",
+            "rows": 22,
+            "sha": "fdd161e2454a01eaa21929d678862ceab805002bc7598c36aafa86beaeb84ccb"
+          },
+          "202109": {
+            "file": "std/valuation_coverage/202109__3e885331.parquet",
+            "rows": 20,
+            "sha": "3e885331c04559e1aa4eecec82b46ed58b168e9e4ede97ee1b0c54cc71291dec"
+          },
+          "202110": {
+            "file": "std/valuation_coverage/202110__11a820fb.parquet",
+            "rows": 16,
+            "sha": "11a820fba7a13ef18c78dbc22cd330c1776eefe209613502db1ad0dc496d2ec8"
+          },
+          "202111": {
+            "file": "std/valuation_coverage/202111__60563813.parquet",
+            "rows": 22,
+            "sha": "6056381365f981bbabe8aca1ca4cf5200f1b433d48ea87c9d3d9de87ec756e39"
+          },
+          "202112": {
+            "file": "std/valuation_coverage/202112__8b916415.parquet",
+            "rows": 23,
+            "sha": "8b916415bf54e8d328c6e8e0c099f3714547d7270381bbdd70d473ea260e0458"
+          },
+          "202201": {
+            "file": "std/valuation_coverage/202201__2b824134.parquet",
+            "rows": 19,
+            "sha": "2b824134e67766211568c0fc1303bb97fbd931d465666b3fd9a9b9266a683637"
+          },
+          "202202": {
+            "file": "std/valuation_coverage/202202__c07d1c28.parquet",
+            "rows": 16,
+            "sha": "c07d1c282f9f6cb51c617ec4b117eb790e625042a48afbe8b0c847205c728f31"
+          },
+          "202203": {
+            "file": "std/valuation_coverage/202203__a791cc62.parquet",
+            "rows": 23,
+            "sha": "a791cc623672f0810b166a0d83367a863441adb30329519e3180fa1af30a9ef7"
+          },
+          "202204": {
+            "file": "std/valuation_coverage/202204__9c81eaf3.parquet",
+            "rows": 19,
+            "sha": "9c81eaf3858c4caa32a03a09f63ba50025019368547295a2175c9b4fa9aa4e61"
+          },
+          "202205": {
+            "file": "std/valuation_coverage/202205__17383dba.parquet",
+            "rows": 19,
+            "sha": "17383dbaadb27bbc8fd6971e7647139c562dd6f47c82d8900ea8f1f4ba17d75d"
+          },
+          "202206": {
+            "file": "std/valuation_coverage/202206__f864a1f4.parquet",
+            "rows": 21,
+            "sha": "f864a1f4bc2632f4533bc85080f15d33d376ccfb5c6bbb17e979064a1ea4ef00"
+          },
+          "202207": {
+            "file": "std/valuation_coverage/202207__bcbb1fac.parquet",
+            "rows": 21,
+            "sha": "bcbb1facc313bac793bba6d55c0cdc3be4fc88a3a56ce542f832d12ad8d9ddc7"
+          },
+          "202208": {
+            "file": "std/valuation_coverage/202208__1e04dcee.parquet",
+            "rows": 23,
+            "sha": "1e04dceed1fe991b262f82f4a2f465209109f6e4a5dcbdeb7c00340d4c7a3276"
+          },
+          "202209": {
+            "file": "std/valuation_coverage/202209__0f2e0950.parquet",
+            "rows": 21,
+            "sha": "0f2e0950de46f6d08718ac65f6e88bd828c6b9c7d0086b9a5c3eafb20496408f"
+          },
+          "202210": {
+            "file": "std/valuation_coverage/202210__d35da0d4.parquet",
+            "rows": 16,
+            "sha": "d35da0d486603e8077161e4892b41b437754d81bc585f1552602cf0828d56495"
+          },
+          "202211": {
+            "file": "std/valuation_coverage/202211__4d895318.parquet",
+            "rows": 22,
+            "sha": "4d8953181c57988459d7f967c1e16e7b9a058a940fb73a70805e7ac4432c61fb"
+          },
+          "202212": {
+            "file": "std/valuation_coverage/202212__a1d0174c.parquet",
+            "rows": 22,
+            "sha": "a1d0174c2c5068db365b19f8e5286068ed9eaa1095fee28e02c10e8e63a376b2"
+          },
+          "202301": {
+            "file": "std/valuation_coverage/202301__ec230b5c.parquet",
+            "rows": 16,
+            "sha": "ec230b5cd2f8b5e3fa2e5e29781ce377f87ccb40f4e1fd2e728dffc47ccdf19d"
+          },
+          "202302": {
+            "file": "std/valuation_coverage/202302__076743e7.parquet",
+            "rows": 20,
+            "sha": "076743e750ba1f366ab8fc3542fddfefc95226b89af3068fca9c484f5a44b011"
+          },
+          "202303": {
+            "file": "std/valuation_coverage/202303__585b50d4.parquet",
+            "rows": 23,
+            "sha": "585b50d481ab1aef95ebf78d4d3f5f78707bb5e68772bce32d89c1898051a1cf"
+          },
+          "202304": {
+            "file": "std/valuation_coverage/202304__2a47e2ee.parquet",
+            "rows": 19,
+            "sha": "2a47e2eed5c9cb98cab9d1fe125097037319a4c23a328f6b8c048d739186e858"
+          },
+          "202305": {
+            "file": "std/valuation_coverage/202305__4ea2c10f.parquet",
+            "rows": 20,
+            "sha": "4ea2c10f55dcadb292fa471e577f8d924896fc6fead6e136bf55e17250995eaa"
+          },
+          "202306": {
+            "file": "std/valuation_coverage/202306__d8f53690.parquet",
+            "rows": 20,
+            "sha": "d8f5369054d2b8290508e6b5bbcc8ec3b7b1f590357128d2d71a19ad240dcda2"
+          },
+          "202307": {
+            "file": "std/valuation_coverage/202307__7e81bccc.parquet",
+            "rows": 21,
+            "sha": "7e81bccc54e17532a16912e2f9c63446c8294ca2de43e4778fd9082bd47eb29b"
+          },
+          "202308": {
+            "file": "std/valuation_coverage/202308__e9c00065.parquet",
+            "rows": 23,
+            "sha": "e9c0006586e6a6fce55d96636b265a32d49d7a7d616a17747682f246218c26ab"
+          },
+          "202309": {
+            "file": "std/valuation_coverage/202309__03ca17d8.parquet",
+            "rows": 20,
+            "sha": "03ca17d8cac50e8a031ec977370724b2704d68f7505279c0a9ec58b05f49fff6"
+          },
+          "202310": {
+            "file": "std/valuation_coverage/202310__8635fa30.parquet",
+            "rows": 17,
+            "sha": "8635fa30f657cd7894df5b77bdfc2bcb8e7229afa36f15f95eefa7e8cad6a3c0"
+          },
+          "202311": {
+            "file": "std/valuation_coverage/202311__f4904955.parquet",
+            "rows": 22,
+            "sha": "f49049554b54a0d08c19ed40b6d44d116f674f34f610a51a6389134293574527"
+          },
+          "202312": {
+            "file": "std/valuation_coverage/202312__f052058f.parquet",
+            "rows": 21,
+            "sha": "f052058f2e686ea1824fdf802d28b9272815f6ccba5596848057de7407f3e3fb"
+          },
+          "202401": {
+            "file": "std/valuation_coverage/202401__a730c8ac.parquet",
+            "rows": 22,
+            "sha": "a730c8ac5d508009c4817fadfc3f2fd2eec7fdd749382f0bfe42f6183c035252"
+          },
+          "202402": {
+            "file": "std/valuation_coverage/202402__7fa587f3.parquet",
+            "rows": 15,
+            "sha": "7fa587f3d5532ee5e97719302974d5a2450c567833dc525195ec89778221f534"
+          },
+          "202403": {
+            "file": "std/valuation_coverage/202403__0dfb56ff.parquet",
+            "rows": 21,
+            "sha": "0dfb56ffecae228c34319c87440b03092fd3b6d1149c428c2386d16783977718"
+          },
+          "202404": {
+            "file": "std/valuation_coverage/202404__f44e0b7d.parquet",
+            "rows": 20,
+            "sha": "f44e0b7da0fd469d2891217efe6387cd32e93125c1f3335468f2c761b4630e23"
+          },
+          "202405": {
+            "file": "std/valuation_coverage/202405__fe50788e.parquet",
+            "rows": 20,
+            "sha": "fe50788e73e7d1060277a4357b0c6d892fa727f5732173a8bddfaf51e4f8f064"
+          },
+          "202406": {
+            "file": "std/valuation_coverage/202406__731ead6f.parquet",
+            "rows": 19,
+            "sha": "731ead6f52f2a0df73f7e57df2141b1da20dd79f87906e53f28f6e9925ac1a0b"
+          },
+          "202407": {
+            "file": "std/valuation_coverage/202407__8dd957f1.parquet",
+            "rows": 23,
+            "sha": "8dd957f1be0c0959313d8312444718511dbc8dff8516e40a39b72645490baba7"
+          },
+          "202408": {
+            "file": "std/valuation_coverage/202408__c5219646.parquet",
+            "rows": 22,
+            "sha": "c5219646a9e76459e2e4bb431a66a4b9de20a94d320b40d7504824ececb41faf"
+          },
+          "202409": {
+            "file": "std/valuation_coverage/202409__bd5549e5.parquet",
+            "rows": 19,
+            "sha": "bd5549e5d0ec3a9f23555281ea4fc60a83461328c530a46092a55bd00e8cf3fe"
+          },
+          "202410": {
+            "file": "std/valuation_coverage/202410__4e2685b8.parquet",
+            "rows": 18,
+            "sha": "4e2685b8dee92a8889e306e8604a2313f0c24394a772e61276941c363dc1752c"
+          },
+          "202411": {
+            "file": "std/valuation_coverage/202411__68a05930.parquet",
+            "rows": 21,
+            "sha": "68a05930a1ca387674997a175cd217c925e03ba1dae9e7ca7b01390e95bbb138"
+          },
+          "202412": {
+            "file": "std/valuation_coverage/202412__4e63908a.parquet",
+            "rows": 22,
+            "sha": "4e63908ad83f50d71b3d29513c6572e91edc0ae6827858177b0962c1061fd1cc"
+          },
+          "202501": {
+            "file": "std/valuation_coverage/202501__f4686e8f.parquet",
+            "rows": 18,
+            "sha": "f4686e8f05b2cf70ff14513e0a074b34a71a0e6edafca04ac7556a7ef1d890bf"
+          },
+          "202502": {
+            "file": "std/valuation_coverage/202502__758b5a19.parquet",
+            "rows": 18,
+            "sha": "758b5a1960a9cb4f8d281ce5968b8cf785719a924b574bcb72877872b4edf6d2"
+          },
+          "202503": {
+            "file": "std/valuation_coverage/202503__b3b33397.parquet",
+            "rows": 21,
+            "sha": "b3b33397b6c8eecd47f96182ba575b99acbd3be6cf5e1794390e5dd556e33a7d"
+          },
+          "202504": {
+            "file": "std/valuation_coverage/202504__1437cde2.parquet",
+            "rows": 21,
+            "sha": "1437cde2241ab23753f37c0401c521f4c7eb1a005340bf69e79f9ce57678f096"
+          },
+          "202505": {
+            "file": "std/valuation_coverage/202505__f431ad3a.parquet",
+            "rows": 19,
+            "sha": "f431ad3a27d8cf48e511149f252f04e67423715d80e3c6f131a024c3a413d501"
+          },
+          "202506": {
+            "file": "std/valuation_coverage/202506__430b2a92.parquet",
+            "rows": 20,
+            "sha": "430b2a9217652815e1ff30f6e3c201d67ce80f05bbd52a4ca7ccac843b846a17"
+          },
+          "202507": {
+            "file": "std/valuation_coverage/202507__a5250ca1.parquet",
+            "rows": 23,
+            "sha": "a5250ca1dadaeb25a1b1e2c003c8b1a79c34a83d28111cecfcfbcbf6582f3382"
+          },
+          "202508": {
+            "file": "std/valuation_coverage/202508__a2ffb0a5.parquet",
+            "rows": 21,
+            "sha": "a2ffb0a5ed379a0e3eab42d1d1bbd20dcaf5c3f8bbdd7a8fb788334b8a8ed4e9"
+          },
+          "202509": {
+            "file": "std/valuation_coverage/202509__d0f71026.parquet",
+            "rows": 22,
+            "sha": "d0f710266c0dc5e212b79911cefbb6a8c828aef7e51d67bb5808018c71d59b93"
+          },
+          "202510": {
+            "file": "std/valuation_coverage/202510__f3e1c60e.parquet",
+            "rows": 17,
+            "sha": "f3e1c60e8f920ac940a308eea4bfc277c1a5e7ce0c43e73f86caa4e77c74a82d"
+          },
+          "202511": {
+            "file": "std/valuation_coverage/202511__0157637f.parquet",
+            "rows": 20,
+            "sha": "0157637ff92d5c9dc0da3d4c69cd33c420260fd1735b50a3480afba7dd423c26"
+          },
+          "202512": {
+            "file": "std/valuation_coverage/202512__7d6792d3.parquet",
+            "rows": 23,
+            "sha": "7d6792d32c84ed3af3c571cc45d6eb2f6b46c0b914f3af2818c4d31912c10a3e"
+          },
+          "202601": {
+            "file": "std/valuation_coverage/202601__5282abba.parquet",
+            "rows": 20,
+            "sha": "5282abbabf92c4a9d547fbe1ea266d4ef2148fcf473c56ade0e3fa6441401497"
+          },
+          "202602": {
+            "file": "std/valuation_coverage/202602__ab50df8c.parquet",
+            "rows": 14,
+            "sha": "ab50df8c3e713e23878822f4d42ba69bfb8549ca4a82f25c27f7fa8cec8ad9c5"
+          },
+          "202603": {
+            "file": "std/valuation_coverage/202603__dcff5c5a.parquet",
+            "rows": 22,
+            "sha": "dcff5c5a68df84dd3ede1678eafcd8c412cbf63a8a1dc9b93febdc8c0f6254b2"
+          },
+          "202604": {
+            "file": "std/valuation_coverage/202604__5450ac33.parquet",
+            "rows": 21,
+            "sha": "5450ac33fc7c49536b6ac5d5556d0240c01ca0f19e4b800c997e9454f9074ed3"
+          },
+          "202605": {
+            "file": "std/valuation_coverage/202605__ebc50047.parquet",
+            "rows": 18,
+            "sha": "ebc50047d1bb2421937ac58843344da0aad0473eb09269651a7e64b0e754a634"
+          },
+          "202606": {
+            "file": "std/valuation_coverage/202606__9dd859da.parquet",
+            "rows": 21,
+            "sha": "9dd859dae2ad65868bb23cb587ed5a3a881b99717eec331f8950fa7f65946f93"
+          },
+          "202607": {
+            "file": "std/valuation_coverage/202607__a287a3b5.parquet",
+            "rows": 23,
+            "sha": "a287a3b5570b21a0c7e751b2b01f374d1bd2cf3b57712765ca6071584edaff84"
+          },
+          "202608": {
+            "file": "std/valuation_coverage/202608__e1d48509.parquet",
+            "rows": 21,
+            "sha": "e1d48509932ce42971b0b364740e9365bffbaa44aacad8f04841a714d97d223a"
+          },
+          "202609": {
+            "file": "std/valuation_coverage/202609__2da18ad0.parquet",
+            "rows": 20,
+            "sha": "2da18ad0f42016cd516b2cf4337bb9058a4ddc5feaa8e912e99b38b409d590be"
+          }
+        },
+        "valuations_1d": {
+          "202101": {
+            "file": "std/valuations_1d/202101__26f01135.parquet",
+            "rows": 83114,
+            "sha": "26f01135fa6df0ad207d46847b348b1b6eac3c6b58194cd24d5be40409eeeb95"
+          },
+          "202102": {
+            "file": "std/valuations_1d/202102__63eb4a64.parquet",
+            "rows": 62814,
+            "sha": "63eb4a64c3f1c1cd533f93218fe3a2ba24cf3be74f000d47f604e152bfec0eb4"
+          },
+          "202103": {
+            "file": "std/valuations_1d/202103__8d7db315.parquet",
+            "rows": 96976,
+            "sha": "8d7db31554322eb9420091a71ee4a9a22ed701181ca343884bec70a72411ee88"
+          },
+          "202104": {
+            "file": "std/valuations_1d/202104__0ad48124.parquet",
+            "rows": 89509,
+            "sha": "0ad48124253a5d3b4565cb124eb10e397e6f2535c937d3a0b5233babd66f4cb9"
+          },
+          "202105": {
+            "file": "std/valuations_1d/202105__f35dc1cc.parquet",
+            "rows": 77551,
+            "sha": "f35dc1cceccb131f01b5b33790942ef84e173a8d9083a0fdedcaf1bdf6a2e0a1"
+          },
+          "202106": {
+            "file": "std/valuations_1d/202106__58d67e99.parquet",
+            "rows": 91324,
+            "sha": "58d67e99fc3d05ae2800f15f55b48980fd799adbe1ac9af497505ba4c8289e74"
+          },
+          "202107": {
+            "file": "std/valuations_1d/202107__0367a684.parquet",
+            "rows": 96708,
+            "sha": "0367a684c69d4e411282f726c1b39871b561a62ba55a9f2981c3f224f6dbbcea"
+          },
+          "202108": {
+            "file": "std/valuations_1d/202108__59aff959.parquet",
+            "rows": 97680,
+            "sha": "59aff9593bfe957dcb2ce5998408401d4c2c6e3d81483428a5a3a8a9784bfd90"
+          },
+          "202109": {
+            "file": "std/valuations_1d/202109__c1a1a11c.parquet",
+            "rows": 89513,
+            "sha": "c1a1a11c31607cdcf181067345370b8109a6d4266f90cff2d1c98d3c778ebf42"
+          },
+          "202110": {
+            "file": "std/valuations_1d/202110__0fefe2d0.parquet",
+            "rows": 72132,
+            "sha": "0fefe2d0a3e92ba4adc45d126cf62cb2595607271bed831fda0894ddda2df2bd"
+          },
+          "202111": {
+            "file": "std/valuations_1d/202111__99e54ee3.parquet",
+            "rows": 99940,
+            "sha": "99e54ee34f0e3a4ece1953289c6b0ace4b6651cbfdd4b3dee48c1c0fe5b8b4e3"
+          },
+          "202112": {
+            "file": "std/valuations_1d/202112__e2bf31bc.parquet",
+            "rows": 105372,
+            "sha": "e2bf31bca320e9026d99fee1a80cb9a54079792e2641969d722152069ef9c3f6"
+          },
+          "202201": {
+            "file": "std/valuations_1d/202201__9f7073c4.parquet",
+            "rows": 87724,
+            "sha": "9f7073c4104df7a795a17fa925ef3b3d0fa17e7940c8086f7bd5bdc30d2f6ce8"
+          },
+          "202202": {
+            "file": "std/valuations_1d/202202__776fb2d3.parquet",
+            "rows": 74241,
+            "sha": "776fb2d302605fd3a6edc8961c1dac93cb6ed0ff91409bfcc2d87c4dd15896cc"
+          },
+          "202203": {
+            "file": "std/valuations_1d/202203__468186ea.parquet",
+            "rows": 107240,
+            "sha": "468186ea4f07c66f3b1589be70725a71e3462b6db534a101c234ff8c1cff683a"
+          },
+          "202204": {
+            "file": "std/valuations_1d/202204__3ee30d04.parquet",
+            "rows": 89268,
+            "sha": "3ee30d04456984c0ba74897e31f30042127f47e9924afe633b3494a687b9bb8c"
+          },
+          "202205": {
+            "file": "std/valuations_1d/202205__fe6de36c.parquet",
+            "rows": 89683,
+            "sha": "fe6de36c2ad5dde630f6d584387e1a3ce45ca0e25120f9e4014b1c134a4b5c97"
+          },
+          "202206": {
+            "file": "std/valuations_1d/202206__159d8ed2.parquet",
+            "rows": 99343,
+            "sha": "159d8ed25293d499d77c965bfe821d9269feb2b1f1c7499169a15d8a2909e0de"
+          },
+          "202207": {
+            "file": "std/valuations_1d/202207__27843fe4.parquet",
+            "rows": 99327,
+            "sha": "27843fe41cd2ce4d56bb0d9559188eab21a492375e870e3361a3461af6d7dec3"
+          },
+          "202208": {
+            "file": "std/valuations_1d/202208__0fc4620c.parquet",
+            "rows": 109581,
+            "sha": "0fc4620c9ad5ccac947cd1bb8f7e7a7166956ac16e190627a4faf60da26d8ec4"
+          },
+          "202209": {
+            "file": "std/valuations_1d/202209__2e0d5324.parquet",
+            "rows": 100950,
+            "sha": "2e0d53241ba08e9c59a6599a3871c0840b0f88f00ce7ac3212597fde500a709f"
+          },
+          "202210": {
+            "file": "std/valuations_1d/202210__17da9641.parquet",
+            "rows": 77472,
+            "sha": "17da964175bd765db11ace8e477538a5fbe14e70b6ef93298ae7cf966453b4b5"
+          },
+          "202211": {
+            "file": "std/valuations_1d/202211__961288d9.parquet",
+            "rows": 107080,
+            "sha": "961288d978071939d1d3eae9b27178f99158a032a7b1450cb05322e9adacc46d"
+          },
+          "202212": {
+            "file": "std/valuations_1d/202212__1ab99b55.parquet",
+            "rows": 107595,
+            "sha": "1ab99b55a22696f4f526c29602dff94f08d407865fad8f843308f5a1ba08eba3"
+          },
+          "202301": {
+            "file": "std/valuations_1d/202301__e3b9a32a.parquet",
+            "rows": 78525,
+            "sha": "e3b9a32a78625aebed32c54bf46680a2f43d525bab0174e617aa06cf9ea1fef5"
+          },
+          "202302": {
+            "file": "std/valuations_1d/202302__bdc3bf64.parquet",
+            "rows": 98388,
+            "sha": "bdc3bf6450c94f18e03a21c12e7df4ad1d5d68e4865555090d5aef88bca365eb"
+          },
+          "202303": {
+            "file": "std/valuations_1d/202303__0f9e0ef7.parquet",
+            "rows": 113598,
+            "sha": "0f9e0ef74a44d61dc902cfb35f98608a036da0ed8bfd8d048fff5de8b67e8307"
+          },
+          "202304": {
+            "file": "std/valuations_1d/202304__05d2a640.parquet",
+            "rows": 94334,
+            "sha": "05d2a640e2d9c66430a43a9033d74b263188b269ca317f1e41e9b11be39c3f63"
+          },
+          "202305": {
+            "file": "std/valuations_1d/202305__a37974d1.parquet",
+            "rows": 99726,
+            "sha": "a37974d10ee5e9b81a54670de3fe2401fe49d51212c47f2494cfca6f045d31ff"
+          },
+          "202306": {
+            "file": "std/valuations_1d/202306__dd35a9bc.parquet",
+            "rows": 100189,
+            "sha": "dd35a9bc2b0853ce418f6bee8a21776cb54fc838f2fb84b5116cb12f775538d9"
+          },
+          "202307": {
+            "file": "std/valuations_1d/202307__ef13b40b.parquet",
+            "rows": 105499,
+            "sha": "ef13b40bd77bbc5de32b552c0603c63bfdeff96f2dd310ed08843c969cd6a3e3"
+          },
+          "202308": {
+            "file": "std/valuations_1d/202308__9a32585e.parquet",
+            "rows": 115983,
+            "sha": "9a32585e2a1b0e40a7b956a0d74c4f8a6013909dbb02efffcb8b7e5fd7b88f91"
+          },
+          "202309": {
+            "file": "std/valuations_1d/202309__9d44c6f1.parquet",
+            "rows": 101169,
+            "sha": "9d44c6f1e95b8e4427ddfc3dab7f2a50e6fa921e307623b06843e1d5be7ee78d"
+          },
+          "202310": {
+            "file": "std/valuations_1d/202310__afa25349.parquet",
+            "rows": 86188,
+            "sha": "afa25349ba62554da6db9a604ee5678d352b14a693fe35597e67256706081c69"
+          },
+          "202311": {
+            "file": "std/valuations_1d/202311__8c61205a.parquet",
+            "rows": 111722,
+            "sha": "8c61205ae3adf0ee9fa3c6f087f4a5f405104ad46635b7d406495848f47e64ad"
+          },
+          "202312": {
+            "file": "std/valuations_1d/202312__2c6e995b.parquet",
+            "rows": 106875,
+            "sha": "2c6e995be47f96333beec0188d9aa105c67208c5c5f7d350247bc11a3ab91c72"
+          },
+          "202401": {
+            "file": "std/valuations_1d/202401__69d481bb.parquet",
+            "rows": 112231,
+            "sha": "69d481bbebce2bd668d6d9f4b98d8d946d1e2339248a4ea5d9c1c5f9459e8f41"
+          },
+          "202402": {
+            "file": "std/valuations_1d/202402__15e023d7.parquet",
+            "rows": 76612,
+            "sha": "15e023d7858ce848eb7e20086ed7ed21b8ad32576665f06ea6ec7cd09e1862ab"
+          },
+          "202403": {
+            "file": "std/valuations_1d/202403__b71fb4b2.parquet",
+            "rows": 107328,
+            "sha": "b71fb4b21b0769ae086302b23fe864253f92d10ffe9599f24bf19602718ced7d"
+          },
+          "202404": {
+            "file": "std/valuations_1d/202404__4d8bbf2c.parquet",
+            "rows": 102309,
+            "sha": "4d8bbf2c5716118436648bbd89570a9eeef7acea769c4c46070c256c04925b68"
+          },
+          "202405": {
+            "file": "std/valuations_1d/202405__6eb6f0a5.parquet",
+            "rows": 102312,
+            "sha": "6eb6f0a5b88d3a25b855fd6bfce47644c13ab8a31e3b19f7dc566a37357710ca"
+          },
+          "202406": {
+            "file": "std/valuations_1d/202406__7abe846b.parquet",
+            "rows": 97217,
+            "sha": "7abe846b0b7da819f898239db849d2cc7225ce6223c31f446f98581592239cad"
+          },
+          "202407": {
+            "file": "std/valuations_1d/202407__66a26925.parquet",
+            "rows": 117557,
+            "sha": "66a269252d6a5032c6cab1e0dd8dcb8693bc7e2bfb35facc4f440c61974e4f46"
+          },
+          "202408": {
+            "file": "std/valuations_1d/202408__73b01e1f.parquet",
+            "rows": 112304,
+            "sha": "73b01e1f665df33d234153987bdde702f91caf44f4786ca90f87689f63a73ecd"
+          },
+          "202409": {
+            "file": "std/valuations_1d/202409__66622321.parquet",
+            "rows": 96912,
+            "sha": "66622321b0d36162225be0510cb48450c89099cde80921d7d4d80fd38430d8d7"
+          },
+          "202410": {
+            "file": "std/valuations_1d/202410__0e8e8dab.parquet",
+            "rows": 91871,
+            "sha": "0e8e8dab063817a3fef41e018d133c5521507bca934d4abe255c0bbedbd3b8f9"
+          },
+          "202411": {
+            "file": "std/valuations_1d/202411__e5f64c9e.parquet",
+            "rows": 107321,
+            "sha": "e5f64c9e1cfe69079e10182c2a961bbb099e6ab7abe61a5c04a45c38eb85f67d"
+          },
+          "202412": {
+            "file": "std/valuations_1d/202412__57cb92f8.parquet",
+            "rows": 112600,
+            "sha": "57cb92f80c49f0d39206c94c64038db8c62f5333bcd859cb4d2e9c30c5fc9b3b"
+          },
+          "202501": {
+            "file": "std/valuations_1d/202501__d66c266e.parquet",
+            "rows": 92285,
+            "sha": "d66c266e8e2f125a89d632e3f288b5bbfee1dd71a7cb8e671af3b218da2885bc"
+          },
+          "202502": {
+            "file": "std/valuations_1d/202502__cf9e41b0.parquet",
+            "rows": 92371,
+            "sha": "cf9e41b0503e0069ffdf2e631168407946a432f5b6d357e497eba091d057dd52"
+          },
+          "202503": {
+            "file": "std/valuations_1d/202503__5b3625aa.parquet",
+            "rows": 107833,
+            "sha": "5b3625aa784957a5852e1251199569fb6008df112e91a538c0f653af5594df49"
+          },
+          "202504": {
+            "file": "std/valuations_1d/202504__2f54e750.parquet",
+            "rows": 108054,
+            "sha": "2f54e750117c586cdeea5c839c38b92e3c8931208b88ace4f9d2f91d6dfffce5"
+          },
+          "202505": {
+            "file": "std/valuations_1d/202505__cbf5996c.parquet",
+            "rows": 97801,
+            "sha": "cbf5996cf7e3fa04de94af6964c642927dd0311091741134176dcaa3e822a1ce"
+          },
+          "202506": {
+            "file": "std/valuations_1d/202506__76e7a46d.parquet",
+            "rows": 103015,
+            "sha": "76e7a46d2df620f9051941e4a2fd099f0a7f5f5ce06c400c67f12b8419714681"
+          },
+          "202507": {
+            "file": "std/valuations_1d/202507__0a0b611a.parquet",
+            "rows": 118454,
+            "sha": "0a0b611abaab80680744239cb3a90dea8fdb66bcfb0311d0133cf19aa8179463"
+          },
+          "202508": {
+            "file": "std/valuations_1d/202508__1869e7b2.parquet",
+            "rows": 108198,
+            "sha": "1869e7b26f74ef99d9a4db1df060c1950bfa534c52414c46eb0c36070c50a194"
+          },
+          "202509": {
+            "file": "std/valuations_1d/202509__72c42d76.parquet",
+            "rows": 113399,
+            "sha": "72c42d76db61c0e19bbf5fea628654ff5ee4f243b415898547af3d986524d9ff"
+          },
+          "202510": {
+            "file": "std/valuations_1d/202510__66683d07.parquet",
+            "rows": 87726,
+            "sha": "66683d075b0d78bd7b981c56a924ae84bc6ee9990eda15cd413fd77b0e7b84c9"
+          },
+          "202511": {
+            "file": "std/valuations_1d/202511__c0216dbf.parquet",
+            "rows": 103339,
+            "sha": "c0216dbfc16be8f056cddf3e8c09b9d075580508524e9be5a1bc2c815710b722"
+          },
+          "202512": {
+            "file": "std/valuations_1d/202512__1f569567.parquet",
+            "rows": 118999,
+            "sha": "1f569567cf196a102bdf1d696878ce284147516662422de99146dd328312631b"
+          },
+          "202601": {
+            "file": "std/valuations_1d/202601__705f26fc.parquet",
+            "rows": 103669,
+            "sha": "705f26fce8485370b67ea93e07034466eef24e03de5cdf0f1c43cd0da4ad665b"
+          },
+          "202602": {
+            "file": "std/valuations_1d/202602__e933e6aa.parquet",
+            "rows": 72637,
+            "sha": "e933e6aa3dacc506795a4630113c3c109e29bad3151504804104200ab9ff2cf0"
+          },
+          "202603": {
+            "file": "std/valuations_1d/202603__c25ef04c.parquet",
+            "rows": 114206,
+            "sha": "c25ef04cc4f21ad40bd39ca58928267c4bf00894fc64bbf195dd4895973f2584"
+          },
+          "202604": {
+            "file": "std/valuations_1d/202604__2edb3e6d.parquet",
+            "rows": 109150,
+            "sha": "2edb3e6dce136ad04887f334a4448b139fab7599aa1f6870160457ab0ac4e983"
+          },
+          "202605": {
+            "file": "std/valuations_1d/202605__e29eefd5.parquet",
+            "rows": 93684,
+            "sha": "e29eefd5bcb6e37dad4afeae1750b0c74b1b9deeec2f78e3e9150b5696c0163f"
+          },
+          "202606": {
+            "file": "std/valuations_1d/202606__17de3e1c.parquet",
+            "rows": 109348,
+            "sha": "17de3e1c45adc078be32912ddd3967bd38614eeb744b0616fd298630852c4938"
+          },
+          "202607": {
+            "file": "std/valuations_1d/202607__6094cd96.parquet",
+            "rows": 119652,
+            "sha": "6094cd968b64ddf3b3ef1ba56f03a442a8c626f4fbb39a8422a16cd57dc41256"
+          },
+          "202608": {
+            "file": "std/valuations_1d/202608__652e87a5.parquet",
+            "rows": 109380,
+            "sha": "652e87a58d804e2c9ae832e54c479ad544e871189c61fc7a9eba9eabd7bd60d0"
+          },
+          "202609": {
+            "file": "std/valuations_1d/202609__7b1f22a7.parquet",
+            "rows": 104377,
+            "sha": "7b1f22a7643f9f06fd585245314357d95738f18c435a8dab8508add3973a0b68"
+          }
+        }
+      }
+    },
+    "tables": {
+      "adj_coverage": {
+        "observed_original_pool_rows": {
+          "159928.SZ": 0,
+          "159949.SZ": 0,
+          "510050.SH": 0,
+          "510300.SH": 0
+        },
+        "published_rows_manifest": 5560
+      },
+      "adj_factors": {
+        "observed_original_pool_rows": {
+          "159928.SZ": 0,
+          "159949.SZ": 0,
+          "510050.SH": 0,
+          "510300.SH": 0
+        },
+        "published_rows_manifest": 64980
+      },
+      "bars_1d": {
+        "observed_original_pool_rows": {
+          "159928.SZ": 0,
+          "159949.SZ": 0,
+          "510050.SH": 0,
+          "510300.SH": 0
+        },
+        "published_rows_manifest": 6919789
+      },
+      "bars_5m": {
+        "observed_original_pool_rows": {
+          "159928.SZ": 0,
+          "159949.SZ": 0,
+          "510050.SH": 0,
+          "510300.SH": 0
+        },
+        "published_rows_manifest": 44571408
+      },
+      "corp_actions": {
+        "observed_original_pool_rows": {
+          "159928.SZ": 0,
+          "159949.SZ": 0,
+          "510050.SH": 0,
+          "510300.SH": 0
+        },
+        "published_rows_manifest": 59065
+      },
+      "instruments": {
+        "observed_original_pool_rows": {
+          "159928.SZ": 0,
+          "159949.SZ": 0,
+          "510050.SH": 0,
+          "510300.SH": 0
+        },
+        "published_rows_manifest": 6156
+      }
+    }
+  },
+  "case_id": "etf-magic3-v2-batch95-live-inventory",
+  "nature": "actual_published_pool_inventory_without_admission",
+  "purpose": "六表四原基金0行，三原生候选各5252/3487/2475行只读，84相关分区stat和五候选byte SHA；基金/60m执行未放行",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch95/20261010-magic3-v2-acceptance-preparation-v3/input-inventory.json",
+    "sha256": "e323e62ae3919f28b555c8dfaf800cb1beff4071b91deb3baeb7e528a063312c"
+  }
+}

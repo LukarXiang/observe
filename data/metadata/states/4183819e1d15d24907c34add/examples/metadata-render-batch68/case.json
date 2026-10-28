@@ -1,0 +1,63 @@
+{
+  "case": {
+    "checks": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.verify_offline_tests",
+          "-q",
+          "tests/unit/test_research_metadata.py"
+        ],
+        "log": "data/staging/strategies-batch68/20261008-metadata-legacy-status-verification/check-0.log",
+        "returncode": 0,
+        "sha256": "35ef63c7d7d9d0ae7d938559de8e72cc654659f2887a58f5572d69dbf4679724"
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "scripts/export_research_metadata.py",
+          "tests/unit/test_research_metadata.py"
+        ],
+        "log": "data/staging/strategies-batch68/20261008-metadata-legacy-status-verification/check-1.log",
+        "returncode": 0,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "log": "data/staging/strategies-batch68/20261008-metadata-legacy-status-verification/check-2.log",
+        "returncode": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "implementation_sha256": {
+      "scripts/export_research_metadata.py": "ca596e801b092299eedf2a6f52b86316ba25da3c60782ad10be865fc8e2e0cbc",
+      "tests/unit/test_research_metadata.py": "1f2085f77b11ae5231f465e597ce152d4406cf4e985f8e905491df1858f0b612"
+    },
+    "not_a_backtest": true,
+    "red_evidence_sha256": "68610e7c011aec914d5738b0024576cc3053e494af887cf9600b5f6211fbd7b9",
+    "red_tests_failed": 2,
+    "red_tests_passed": 21,
+    "review": {
+      "depth": "quick",
+      "findings": [],
+      "skill": "check"
+    },
+    "scope": "Metadata text only; batch68 research artifacts stay frozen",
+    "status": "ok",
+    "unit_tests_passed": 23
+  },
+  "case_id": "metadata-render-batch68",
+  "nature": "metadata_legacy_review_and_count_regression",
+  "purpose": "修正续接页仍称旧声明式未审查的硬编码文本及目录/回测来源静态数；红2失败21通过、修正后23元数据测试通过，研究凭据不改写",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-08-batch68-metadata-render-verification.json",
+    "sha256": "a7498db70013e3df644960b694a2ce5055db8ba52779d1de593e98f2bd22200b"
+  }
+}

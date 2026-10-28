@@ -1,0 +1,25 @@
+{
+  "case": {
+    "cause": "Report read launched before confirmed-live protect25075 reached terminal completion",
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "/tmp/write_observe_batch101_formal_report.py"
+    ],
+    "error": "FileNotFoundError",
+    "frozen_writer_sha256": "eb47aaf21c251d4c456807ae92a4cfe4fbc1e615ca899474a0447e2700f312d4",
+    "missing": "data/staging/strategies-batch101/20261011-formal-source-acceptance/protection.json",
+    "observed_returncode": 1,
+    "recovery": "Poll existing protect25075 to terminal success, then run same writer; no protect restart or old artifact overwrite",
+    "report_written": false,
+    "source_code_or_strategy_error": false,
+    "status": "observed_report_generation_rejection"
+  },
+  "case_id": "batch101-report-order-failure",
+  "nature": "observed_report_generation_before_protect_terminal_rejection",
+  "purpose": "FileNotFound保护凭据，未写报告，原策略未出错；等既有protect终态后恢复",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch101/20261011-report-order-failure/failure.json",
+    "sha256": "88d5365525c3387c6d7f683ef35b1acbfbad768173a29ff5c2d893bbe639f219"
+  }
+}

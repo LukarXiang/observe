@@ -1,0 +1,88 @@
+{
+  "case": {
+    "large_native_price_jumps_gt50pct": [
+      {
+        "cause_proven": false,
+        "close": 0.604,
+        "date": "2009-05-21",
+        "instrument": "510180.XSHG",
+        "previous_close": 6.18,
+        "previous_native_date": "2009-05-18",
+        "return": -0.9022653721682847
+      },
+      {
+        "cause_proven": false,
+        "close": 1.98,
+        "date": "2013-12-23",
+        "instrument": "510180.XSHG",
+        "previous_close": 0.513,
+        "previous_native_date": "2013-12-18",
+        "return": 2.8596491228070176
+      },
+      {
+        "cause_proven": false,
+        "close": 1.015,
+        "date": "2022-01-14",
+        "instrument": "513100.XSHG",
+        "previous_close": 5.192,
+        "previous_native_date": "2022-01-12",
+        "return": -0.8045069337442219
+      }
+    ],
+    "largest_saved_score_errors": [
+      {
+        "history_end": "2014-01-10",
+        "history_start": "2013-11-28",
+        "independent_score": 15071384.490147462,
+        "instrument": "510180.XSHG",
+        "score": 15071384.490147771,
+        "score_abs_difference": 3.0919909477233887e-07
+      },
+      {
+        "history_end": "2014-01-09",
+        "history_start": "2013-11-27",
+        "independent_score": 13516934.773595454,
+        "instrument": "510180.XSHG",
+        "score": 13516934.773595156,
+        "score_abs_difference": 2.980232238769531e-07
+      },
+      {
+        "history_end": "2014-01-13",
+        "history_start": "2013-11-29",
+        "independent_score": 14376742.712974088,
+        "instrument": "510180.XSHG",
+        "score": 14376742.712973839,
+        "score_abs_difference": 2.4959444999694824e-07
+      }
+    ],
+    "limits": [
+      "Native scale jump causes not proven;do not infer split/dividend/suspension",
+      "399306 is supplier-classified index,not an admitted ETF carrier",
+      "Scalar regression tolerances do not establish platform adjusted-price equivalence"
+    ],
+    "master399306": [
+      {
+        "board": "index",
+        "delist_date": null,
+        "exchange": "SZ",
+        "instrument": "399306.SZ",
+        "kind": "index",
+        "list_date": "2011-12-02T00:00:00.000",
+        "listed": true,
+        "name": "深证ETF指数"
+      }
+    ],
+    "new_trading_backtests": 0,
+    "original61_tradeability_proven": false,
+    "repaired_prices": 0,
+    "status": "ok_operand_identity_only"
+  },
+  "case_id": "batch107-scale-identity",
+  "nature": "supplier_index_identity_and_three_native_scale_jumps",
+  "purpose": "三跳变原因未证，原评分约1507万与独立误差3.09e-7；58指定层级登记无23基金候选，不能推断远程库存",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch107/20261011-gap-scale-identity-v1/checked.json",
+    "sha256": "2ca9669baecbfa1d21b774adb6fcd07b9cca5162c6ffa65d352ed1e801e27eb5"
+  }
+}

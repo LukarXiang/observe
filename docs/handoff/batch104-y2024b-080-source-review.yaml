@@ -1,0 +1,28 @@
+source: 2024年度精选策略2/80.短线策略-2022年两个半月收益45%-无未来函数.txt
+source_sha256: 780c0a0c8d22c12c6f27a3ddb91127b72d80e71da96152fde47b237b64071829
+formal_acceptance: false
+original_strategy_complete: false
+economic_variant_approved: false
+review_scope: 全文296行、11顶层及4嵌套函数；全池名称、31行均线、MACD、资金流、盘前开盘筛选与每回调订单意图；进行中研究，不含交易验收
+rules:
+- 基准000300，use_real_price真，avoid_future_data设置被注释；buy_stock_limit为1，盘前重置buy_list
+- 昨日get_all_securities股票池，display_name匹配ST或星号或退则排除；前缀30/688/8排除，原文未排689/4
+- 原get_price昨日截止31行close与volume，panel假、skip_paused假；pivot按time/code，pandas均值默认跳NaN
+- 先前日MA5大于MA10且昨日MA5小于MA10，再昨日MA20和MA30分别高于前日，再前日量MA5大于MA10且昨日量MA5乘1.2大于MA10；均为严格比较
+- MACD12/26/9的DIF与DEA均正且DIF减DEA严格在0至0.1之间；不按返回MACD柱值筛选
+- 昨日截止两行get_money_flow的change_pct乘积严格负；pivot零行或列数非2时返回None，空入池返回空列表
+- 盘前current_data.day_open严格低于昨日close才入表；最终买表按代码排序，未证明当日开盘在盘前可用
+- handle_data先卖非买表持仓；可卖量0或现价等于涨跌停价则跳过，再在单次回调入口检查持仓槽位
+- 买循环跳已持仓、现金不够100股或现价等于涨跌停；每笔现金等于当时available_cash除剩余槽位，不检查订单返回和成交
+- order_target按股数清仓，order_value买；零滑点与0.001卖税/0.0003佣金/最低5被设置为fund类型，不能据此证明股票实际费用
+defects:
+- 空31行表或中间筛选为空可能导致pandas列赋值ValueError；缺值均值不是完整窗口证据
+- 即时清仓可能修改活跃positions.keys而RuntimeError；延迟成交反馈可在1槽下发多笔全现金意图
+- stock_filter3返回None后下一层len(stock_pool)可能TypeError；不默修为空表
+- 盘前读取开盘价及实际handle_data运行频率未证；标题无未来函数不能放行
+data_gaps:
+- 历史display_name和完整原全池版本、平台MACD种子/取数/停牌口径尚缺
+- 原get_money_flow的历史全池change_pct与可用时点缺；旧600000近期Eastmoney样本只是明确字段参考
+- 原动态复权close/volume及平台暂停处理、盘前开盘可用性和每回调现价/执行反馈未证明
+- 原fund费用设置不证明股票默认费用，成本与滑点版本需另核
+next: 完成原输入覆盖/最长参考与隔离保存值核验；缺依赖则逐项搁置，具体兼容或时点经济变体确认后才唯一Book最长三成本/逐年/成交核费和禁网复现

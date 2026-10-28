@@ -1,0 +1,2583 @@
+{
+  "schema": 1,
+  "status": "read_only_inventory",
+  "scope": "Approved existing variants historical input coverage and observed77parent summaries; not new trading acceptance",
+  "observed_formal_counts": {
+    "sources_reviewed": 276,
+    "locally_reproduced_sources": 12,
+    "strategy_parent_runs": 77
+  },
+  "formal_source_research_acceptance": false,
+  "new_trading_backtests": 0,
+  "new_trade_signal_preflights": 0,
+  "new_supplier_requests": 0,
+  "parameters_changed": false,
+  "snapshot": "20261006-145049-e06c",
+  "evidence_sha256": {
+    "data/metadata/states/0bde0e749f27d26bd66e8cee/project-state.json": "0e77c3a3993401e96bc69ad0f8d0a31fd974f43443ce3396ba473b353e6cfe4a",
+    "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/index.json": "b9aefd01f486b5586573636c2ee759b77f16dc1fa10d15611dba40b6afbdf617",
+    "data/metadata/states/0bde0e749f27d26bd66e8cee/decisions/index.json": "f8dd4e36987fff101552dbbe8ca67ca3c7facdcadeb105da5e15e457237c40cc",
+    "data/snapshots/20261006-145049-e06c.json": "9449dc18911fe5f27fe65f55f5849602bec0cba998335b74a6d2b1377e19af60",
+    "data/staging/strategies-history-supplement/20261009-pair66-pre2020/prepared-windows.json": "1e9351a94cc5964691919e88019dc4be6c13419c81ab2793de37df04cf45b093",
+    "data/staging/strategies-history-supplement/20261010-yili-cmb-pre2013/continuous-islands-preflight.json": "fb38c99ebd399ee986d10b277feae39d7cc92561ee656f749c1826518e707ff3",
+    "data/staging/strategies-history-supplement/20261010-yili-cmb-pre2013/rights-preflight.json": "6d7ac54df2b8b3e158fc43edbef7f4b485de9966539f3469c71686b106bd5312",
+    "scripts/supplement_pair66_history.py": "15aa92dc9fa75a166100680fb91f3da7756db71cfaeceb9a0bf4c2b596065fbb",
+    "scripts/run_strategy_batch14.py": "9fb8f20fff1b165f240d21100746d16cf858f2a89c83e204295d2458c95c3e6a"
+  },
+  "input_identity_manifest": {
+    "bars_1d": {
+      "2026": {
+        "file": "std/bars_1d/2026__aeb0c08f.parquet",
+        "sha": "aeb0c08fccec7ca2fd1595db6bf3b11b8fa7a37c148a34135ce01108240a517a",
+        "rows": 936103
+      },
+      "2021": {
+        "file": "std/bars_1d/2021__a6b6023d.parquet",
+        "sha": "a6b6023d88830eda7c06b76ae6e9e4bf651869763268722e87709a1d023a94d9",
+        "rows": 1062633
+      },
+      "2022": {
+        "file": "std/bars_1d/2022__a250d824.parquet",
+        "sha": "a250d824a538d9927a6ed6e95373e30289f1c4ba87fccea52c6100b380d01c58",
+        "rows": 1149504
+      },
+      "2023": {
+        "file": "std/bars_1d/2023__c64a31fb.parquet",
+        "sha": "c64a31fb26bb2c77214d0ade416539284ece0e9a66922a713c506002d8598850",
+        "rows": 1212196
+      },
+      "2024": {
+        "file": "std/bars_1d/2024__e363911a.parquet",
+        "sha": "e363911a1104476b7b20e3770d763bea25c2605a393d850f0b872fb283ba29ea",
+        "rows": 1236574
+      },
+      "2025": {
+        "file": "std/bars_1d/2025__557a8b0c.parquet",
+        "sha": "557a8b0cb7f20a1a6395afa1e5a705a7c51e729e1ed22d17f3a48c06f97f141e",
+        "rows": 1251474
+      },
+      "2005": {
+        "file": "std/bars_1d/2005__504cc3b0.parquet",
+        "sha": "504cc3b0d82a176ede98f3debb3685597bae3f90efc0098392139c1860a2673e",
+        "rows": 1928,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000651.SZ",
+            "000858.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH"
+          ],
+          "start": "2005-01-05",
+          "end": "2005-12-30",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2005__ced6bbfa.parquet",
+            "sha": "ced6bbfac814b71b931cf1525d37cfbc3d908540e1f112a811684d1f5a8c20f4",
+            "rows": 1446,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2005-01-05",
+              "end": "2005-12-30",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": [
+            "000333.SZ",
+            "002415.SZ",
+            "601111.SH",
+            "603288.SH"
+          ]
+        }
+      },
+      "2006": {
+        "file": "std/bars_1d/2006__ad89bd2b.parquet",
+        "sha": "ad89bd2bcc4cc3f394e581c468bd3ede22948392f528e7ce5825819877b3cf2f",
+        "rows": 2019,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000651.SZ",
+            "000858.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH"
+          ],
+          "start": "2006-01-04",
+          "end": "2006-12-29",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2006__1a0cff9e.parquet",
+            "sha": "1a0cff9ecb59295d8bd39d140bc2f9a59dc248c984be3de1ea9e537436e3947a",
+            "rows": 1537,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2006-01-04",
+              "end": "2006-12-29",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": [
+            "000333.SZ",
+            "002415.SZ",
+            "603288.SH"
+          ]
+        }
+      },
+      "2007": {
+        "file": "std/bars_1d/2007__5eac65d1.parquet",
+        "sha": "5eac65d1b4ee937b99afc6d47236177887058feced2954c612108c08ba61327d",
+        "rows": 2178,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000651.SZ",
+            "000858.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH"
+          ],
+          "start": "2007-01-04",
+          "end": "2007-12-28",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2007__3c9a0db1.parquet",
+            "sha": "3c9a0db165dcef40e49d0a8a186c8ebaecd6cdc67b6a6d09433c2e42d633a8a0",
+            "rows": 1694,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2007-01-04",
+              "end": "2007-12-28",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": [
+            "000333.SZ",
+            "002415.SZ",
+            "603288.SH"
+          ]
+        }
+      },
+      "2008": {
+        "file": "std/bars_1d/2008__f525d073.parquet",
+        "sha": "f525d07389715cfe8656134c48890fe9b605b21bd7bd916223c54192a28d37cc",
+        "rows": 2214,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000651.SZ",
+            "000858.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH"
+          ],
+          "start": "2008-01-02",
+          "end": "2008-12-31",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2008__a2b87ee8.parquet",
+            "sha": "a2b87ee88b958f2128c6273ce5f097eef40cc5bc307f84f971969fe3d7c4f07c",
+            "rows": 1722,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2008-01-02",
+              "end": "2008-12-31",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": [
+            "000333.SZ",
+            "002415.SZ",
+            "603288.SH"
+          ]
+        }
+      },
+      "2009": {
+        "file": "std/bars_1d/2009__7f5e4c89.parquet",
+        "sha": "7f5e4c899ad0dfc8fe68593a0962fe55f185df0e9ed4f5a6a3c5f94e405c0205",
+        "rows": 2241,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000651.SZ",
+            "000858.SZ",
+            "300014.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH"
+          ],
+          "start": "2009-01-05",
+          "end": "2009-12-31",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2009__b61e4e51.parquet",
+            "sha": "b61e4e519814842b4ca136aca684e24b429705dee3b4b1cc92c07244988cbd19",
+            "rows": 1708,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2009-01-05",
+              "end": "2009-12-31",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": [
+            "000333.SZ",
+            "002415.SZ",
+            "603288.SH"
+          ]
+        }
+      },
+      "2010": {
+        "file": "std/bars_1d/2010__8c83d6fa.parquet",
+        "sha": "8c83d6faf925f2bf5868181039e80848e776df421c77c80e065d1add5722ab52",
+        "rows": 2758,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000651.SZ",
+            "000858.SZ",
+            "002415.SZ",
+            "300014.SZ",
+            "300059.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH"
+          ],
+          "start": "2010-01-04",
+          "end": "2010-12-31",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2010__79eb4fe1.parquet",
+            "sha": "79eb4fe1ff6d09135dc1558439581289fd30c2ce5e9f9cc3e41a94f6456c68fa",
+            "rows": 1839,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2010-01-04",
+              "end": "2010-12-31",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": [
+            "000333.SZ",
+            "603288.SH"
+          ]
+        }
+      },
+      "2011": {
+        "file": "std/bars_1d/2011__7f7031a5.parquet",
+        "sha": "7f7031a5d68cd039042d0e9d258b17f8a34cd03572d34891fcd1feff5bac3796",
+        "rows": 3291,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000651.SZ",
+            "000858.SZ",
+            "002415.SZ",
+            "300014.SZ",
+            "300059.SZ",
+            "300168.SZ",
+            "300253.SZ",
+            "300274.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH"
+          ],
+          "start": "2011-01-04",
+          "end": "2011-12-30",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2011__82683f8e.parquet",
+            "sha": "82683f8e15a802e2e48df280c0f9e81717be2f6d96fe7ea6d308fe82ba41747c",
+            "rows": 1952,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2011-01-04",
+              "end": "2011-12-30",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": [
+            "000333.SZ",
+            "603288.SH"
+          ]
+        }
+      },
+      "2012": {
+        "file": "std/bars_1d/2012__12c31a58.parquet",
+        "sha": "12c31a58940f0d0405eb63e15eb7cf9c960ee15cf3fdb6c7e3a545b348da8ff0",
+        "rows": 3645,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000651.SZ",
+            "000858.SZ",
+            "002415.SZ",
+            "300014.SZ",
+            "300059.SZ",
+            "300168.SZ",
+            "300253.SZ",
+            "300274.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH"
+          ],
+          "start": "2012-01-04",
+          "end": "2012-12-31",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2012__01eaa45d.parquet",
+            "sha": "01eaa45d6a67944e2953cf109e701483e20a69599d5e4457e43aa97b8089f246",
+            "rows": 1944,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2012-01-04",
+              "end": "2012-12-31",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": [
+            "000333.SZ",
+            "603288.SH"
+          ]
+        }
+      },
+      "2013": {
+        "file": "std/bars_1d/2013__ed723da2.parquet",
+        "sha": "ed723da28c6180092cee167dc10350fc032d493bf8c9859f6a538e90d1f74b02",
+        "rows": 3638,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000333.SZ",
+            "000651.SZ",
+            "000858.SZ",
+            "002415.SZ",
+            "300014.SZ",
+            "300059.SZ",
+            "300168.SZ",
+            "300253.SZ",
+            "300274.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH"
+          ],
+          "start": "2013-01-04",
+          "end": "2013-12-31",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2013__7845f79a.parquet",
+            "sha": "7845f79a0816667a25911d8fc3048416d54fdc3cb1f407aadb259bc9abb69dfa",
+            "rows": 1972,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2013-01-04",
+              "end": "2013-12-31",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": [
+            "603288.SH"
+          ]
+        }
+      },
+      "2014": {
+        "file": "std/bars_1d/2014__3f851599.parquet",
+        "sha": "3f8515996e422803c146845e5d5e91ea4743e8723ece8e586c09d96e0e04c1e6",
+        "rows": 4142,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000333.SZ",
+            "000651.SZ",
+            "000858.SZ",
+            "002415.SZ",
+            "300014.SZ",
+            "300059.SZ",
+            "300168.SZ",
+            "300253.SZ",
+            "300274.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH",
+            "603288.SH"
+          ],
+          "start": "2014-01-02",
+          "end": "2014-12-31",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2014__f2b1d1a2.parquet",
+            "sha": "f2b1d1a2eae3aa9457dfe0cd56917553d05c60c5d499a338fe9b7c70dab24378",
+            "rows": 2427,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2014-01-02",
+              "end": "2014-12-31",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": []
+        }
+      },
+      "2015": {
+        "file": "std/bars_1d/2015__00ea4b83.parquet",
+        "sha": "00ea4b8359658a8d87c31452da89551627062a105435ece9371b02875c5264b9",
+        "rows": 4148,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000333.SZ",
+            "000651.SZ",
+            "000858.SZ",
+            "002415.SZ",
+            "300014.SZ",
+            "300059.SZ",
+            "300168.SZ",
+            "300253.SZ",
+            "300274.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH",
+            "603288.SH"
+          ],
+          "start": "2015-01-05",
+          "end": "2015-12-31",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2015__de1057a1.parquet",
+            "sha": "de1057a1fb427ddb674714bcaa3f61c050933ce70ee66f27aa51b5ba590b8776",
+            "rows": 2440,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2015-01-05",
+              "end": "2015-12-31",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": []
+        }
+      },
+      "2016": {
+        "file": "std/bars_1d/2016__d28c0f1e.parquet",
+        "sha": "d28c0f1e5553d61227c7ee9d2c92aafdb4eed4ae28694551844e6f59b5c5e3c7",
+        "rows": 4148,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000333.SZ",
+            "000651.SZ",
+            "000858.SZ",
+            "002415.SZ",
+            "300014.SZ",
+            "300059.SZ",
+            "300168.SZ",
+            "300253.SZ",
+            "300274.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH",
+            "603288.SH"
+          ],
+          "start": "2016-01-04",
+          "end": "2016-12-30",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2016__eb7e7f1f.parquet",
+            "sha": "eb7e7f1f277197b05febf693331fdb5bbaddda2e9058d25ec23a7d60ed57ef20",
+            "rows": 2440,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2016-01-04",
+              "end": "2016-12-30",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": []
+        }
+      },
+      "2017": {
+        "file": "std/bars_1d/2017__7ae23bfb.parquet",
+        "sha": "7ae23bfb6d57e64b78f3ccc3f482196b30077569c36dd191e9a30ce55a367193",
+        "rows": 4148,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000333.SZ",
+            "000651.SZ",
+            "000858.SZ",
+            "002415.SZ",
+            "300014.SZ",
+            "300059.SZ",
+            "300168.SZ",
+            "300253.SZ",
+            "300274.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH",
+            "603288.SH"
+          ],
+          "start": "2017-01-03",
+          "end": "2017-12-29",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2017__b704409b.parquet",
+            "sha": "b704409b09f78c129ae5fed162323bbe3ceda356d9c7e776118b7c33da99f7da",
+            "rows": 2440,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2017-01-03",
+              "end": "2017-12-29",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": []
+        }
+      },
+      "2018": {
+        "file": "std/bars_1d/2018__4ca659a9.parquet",
+        "sha": "4ca659a91230ee0f02bc136156f8231915658a1469ecf6c033b549c87201f0f2",
+        "rows": 4131,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000333.SZ",
+            "000651.SZ",
+            "000858.SZ",
+            "002415.SZ",
+            "300014.SZ",
+            "300059.SZ",
+            "300168.SZ",
+            "300253.SZ",
+            "300274.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600519.SH",
+            "600809.SH",
+            "600887.SH",
+            "601111.SH",
+            "603288.SH"
+          ],
+          "start": "2018-01-02",
+          "end": "2018-12-28",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2018__4be06d79.parquet",
+            "sha": "4be06d793c96f0cebc3bc9d818800c12d977cdc56e43c44e419c1125758bf9f3",
+            "rows": 2430,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "600519.SH",
+                "000333.SZ",
+                "601111.SH",
+                "600036.SH",
+                "600887.SH",
+                "603288.SH",
+                "600196.SH",
+                "600085.SH",
+                "002415.SZ",
+                "000651.SZ"
+              ],
+              "start": "2018-01-02",
+              "end": "2018-12-28",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                  "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                },
+                {
+                  "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                  "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                }
+              ]
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": []
+        }
+      },
+      "2019": {
+        "file": "std/bars_1d/2019__01e86d44.parquet",
+        "sha": "01e86d445512116045dd8abdd9b88baaa95a3efc2c477de0c7dcee4b898799bc",
+        "rows": 13311,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000333.SZ",
+            "000651.SZ",
+            "000661.SZ",
+            "000858.SZ",
+            "002050.SZ",
+            "002088.SZ",
+            "002286.SZ",
+            "002352.SZ",
+            "002371.SZ",
+            "002407.SZ",
+            "002415.SZ",
+            "002456.SZ",
+            "002594.SZ",
+            "002595.SZ",
+            "002597.SZ",
+            "002714.SZ",
+            "002821.SZ",
+            "300009.SZ",
+            "300014.SZ",
+            "300036.SZ",
+            "300037.SZ",
+            "300059.SZ",
+            "300073.SZ",
+            "300168.SZ",
+            "300253.SZ",
+            "300274.SZ",
+            "300347.SZ",
+            "300357.SZ",
+            "300359.SZ",
+            "300595.SZ",
+            "300661.SZ",
+            "300702.SZ",
+            "300750.SZ",
+            "300782.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600276.SH",
+            "600309.SH",
+            "600519.SH",
+            "600660.SH",
+            "600763.SH",
+            "600809.SH",
+            "600887.SH",
+            "601012.SH",
+            "601058.SH",
+            "601111.SH",
+            "601222.SH",
+            "601633.SH",
+            "601677.SH",
+            "601888.SH",
+            "603259.SH",
+            "603288.SH",
+            "603659.SH",
+            "603799.SH"
+          ],
+          "start": "2019-01-02",
+          "end": "2019-12-31",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2019__c2da4bf4.parquet",
+            "sha": "c2da4bf4c3de4c7e3fbe2b9ad998e118b3de84c126fb4888f9bc135fc4cd98a8",
+            "rows": 11847,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "000333.SZ",
+                "000651.SZ",
+                "000661.SZ",
+                "002050.SZ",
+                "002088.SZ",
+                "002286.SZ",
+                "002352.SZ",
+                "002371.SZ",
+                "002407.SZ",
+                "002415.SZ",
+                "002456.SZ",
+                "002594.SZ",
+                "002595.SZ",
+                "002597.SZ",
+                "002714.SZ",
+                "002821.SZ",
+                "300009.SZ",
+                "300014.SZ",
+                "300036.SZ",
+                "300037.SZ",
+                "300073.SZ",
+                "300347.SZ",
+                "300357.SZ",
+                "300359.SZ",
+                "300595.SZ",
+                "300661.SZ",
+                "300702.SZ",
+                "300750.SZ",
+                "300782.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600276.SH",
+                "600309.SH",
+                "600519.SH",
+                "600660.SH",
+                "600763.SH",
+                "600887.SH",
+                "601012.SH",
+                "601058.SH",
+                "601111.SH",
+                "601222.SH",
+                "601633.SH",
+                "601677.SH",
+                "601888.SH",
+                "603259.SH",
+                "603288.SH",
+                "603659.SH",
+                "603799.SH"
+              ],
+              "start": "2019-01-02",
+              "end": "2019-12-31",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch15/20261005-rsi-history/probe-results.json",
+                  "sha256": "2c97edde12f818fac6c475f5650b477c294554784345e86ca2cdbcd64cb459c1"
+                },
+                {
+                  "file": "data/staging/strategies-batch15/20261005-rsi-history/retry-results.json",
+                  "sha256": "e24b76de1779446dd5c17d21ec5f6c2db76a33333470e848a8e171b4c673d173"
+                }
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2019__ffa9557e.parquet",
+                "sha": "ffa9557e288ce030664575a5535c760e8b13f3301a578a16e51eb292b46ee69f",
+                "rows": 2440,
+                "history_scope": {
+                  "policy": "selected_instruments_v1",
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "start": "2019-01-02",
+                  "end": "2019-12-31",
+                  "full_market": false,
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": []
+        }
+      },
+      "2020": {
+        "file": "std/bars_1d/2020__47e82775.parquet",
+        "sha": "47e827755259e5f0aa68d6a33809524882ec61e4d54040acf146ee3d71ab80f8",
+        "rows": 13365,
+        "history_scope": {
+          "policy": "selected_instruments_v1",
+          "instruments": [
+            "000333.SZ",
+            "000651.SZ",
+            "000661.SZ",
+            "000858.SZ",
+            "002050.SZ",
+            "002088.SZ",
+            "002286.SZ",
+            "002352.SZ",
+            "002371.SZ",
+            "002407.SZ",
+            "002415.SZ",
+            "002456.SZ",
+            "002594.SZ",
+            "002595.SZ",
+            "002597.SZ",
+            "002714.SZ",
+            "002821.SZ",
+            "300009.SZ",
+            "300014.SZ",
+            "300036.SZ",
+            "300037.SZ",
+            "300059.SZ",
+            "300073.SZ",
+            "300168.SZ",
+            "300253.SZ",
+            "300274.SZ",
+            "300347.SZ",
+            "300357.SZ",
+            "300359.SZ",
+            "300595.SZ",
+            "300661.SZ",
+            "300702.SZ",
+            "300750.SZ",
+            "300782.SZ",
+            "600036.SH",
+            "600085.SH",
+            "600196.SH",
+            "600276.SH",
+            "600309.SH",
+            "600519.SH",
+            "600660.SH",
+            "600763.SH",
+            "600809.SH",
+            "600887.SH",
+            "601012.SH",
+            "601058.SH",
+            "601111.SH",
+            "601222.SH",
+            "601633.SH",
+            "601677.SH",
+            "601888.SH",
+            "603259.SH",
+            "603288.SH",
+            "603659.SH",
+            "603799.SH"
+          ],
+          "start": "2020-01-02",
+          "end": "2020-12-31",
+          "full_market": false,
+          "retained_entry": {
+            "file": "std/bars_1d/2020__834237e1.parquet",
+            "sha": "834237e107ae59fe497e7c9a8bc4797f97590c73a3171cf36ab967006bae30a3",
+            "rows": 11907,
+            "history_scope": {
+              "policy": "selected_instruments_v1",
+              "instruments": [
+                "000333.SZ",
+                "000651.SZ",
+                "000661.SZ",
+                "002050.SZ",
+                "002088.SZ",
+                "002286.SZ",
+                "002352.SZ",
+                "002371.SZ",
+                "002407.SZ",
+                "002415.SZ",
+                "002456.SZ",
+                "002594.SZ",
+                "002595.SZ",
+                "002597.SZ",
+                "002714.SZ",
+                "002821.SZ",
+                "300009.SZ",
+                "300014.SZ",
+                "300036.SZ",
+                "300037.SZ",
+                "300073.SZ",
+                "300347.SZ",
+                "300357.SZ",
+                "300359.SZ",
+                "300595.SZ",
+                "300661.SZ",
+                "300702.SZ",
+                "300750.SZ",
+                "300782.SZ",
+                "600036.SH",
+                "600085.SH",
+                "600196.SH",
+                "600276.SH",
+                "600309.SH",
+                "600519.SH",
+                "600660.SH",
+                "600763.SH",
+                "600887.SH",
+                "601012.SH",
+                "601058.SH",
+                "601111.SH",
+                "601222.SH",
+                "601633.SH",
+                "601677.SH",
+                "601888.SH",
+                "603259.SH",
+                "603288.SH",
+                "603659.SH",
+                "603799.SH"
+              ],
+              "start": "2020-01-02",
+              "end": "2020-12-31",
+              "full_market": false,
+              "probe_evidence": [
+                {
+                  "file": "data/staging/strategies-batch15/20261005-rsi-history/probe-results.json",
+                  "sha256": "2c97edde12f818fac6c475f5650b477c294554784345e86ca2cdbcd64cb459c1"
+                },
+                {
+                  "file": "data/staging/strategies-batch15/20261005-rsi-history/retry-results.json",
+                  "sha256": "e24b76de1779446dd5c17d21ec5f6c2db76a33333470e848a8e171b4c673d173"
+                }
+              ],
+              "retained_entry": {
+                "file": "std/bars_1d/2020__8ee3ee9c.parquet",
+                "sha": "8ee3ee9c270c3c655c3b52905c5b9f0224f6dbc0a8214a61cc78dc6e44b7582f",
+                "rows": 2430,
+                "history_scope": {
+                  "policy": "selected_instruments_v1",
+                  "instruments": [
+                    "600519.SH",
+                    "000333.SZ",
+                    "601111.SH",
+                    "600036.SH",
+                    "600887.SH",
+                    "603288.SH",
+                    "600196.SH",
+                    "600085.SH",
+                    "002415.SZ",
+                    "000651.SZ"
+                  ],
+                  "start": "2020-01-02",
+                  "end": "2020-12-31",
+                  "full_market": false,
+                  "probe_evidence": [
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/probe-results.json",
+                      "sha256": "da06d74973998a13eb9bb625569e85dcf2ce5c6936b4974d37bab42fd12c8098"
+                    },
+                    {
+                      "file": "data/staging/strategies-batch14/20261005-long-history/retry-results.json",
+                      "sha256": "d0fc6eae03784f17cf09c08ef30eac0c9c16f25ea85e3607d2510730ba97dbbe"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "input_receipt": "docs/handoff/2026-10-05-batch18-verification.json",
+          "input_receipt_sha256": "b750a1789513cf2a947213aa23dbaa266d2a57fb3e44a02167981ffe1020c321",
+          "prior_declared_prelisting_names": []
+        }
+      }
+    },
+    "adj_factors": {
+      "all": {
+        "file": "std/adj_factors/all__5517c69d.parquet",
+        "sha": "5517c69d90f74cd393a41a18c09c62fa33d2cffae3ee472f4efb24b93ef50810",
+        "rows": 64980
+      }
+    },
+    "adj_coverage": {
+      "all": {
+        "file": "std/adj_coverage/all__de373d9c.parquet",
+        "sha": "de373d9c1feb542a2d34316bea09b15ea9335f69186416bb049d315a24b7cfa3",
+        "rows": 5560
+      }
+    },
+    "corp_actions": {
+      "all": {
+        "file": "std/corp_actions/all__2d71fd46.parquet",
+        "sha": "2d71fd465f4c195287421562e62cbed8ae19d981f2906abe264afabb1bc20bb3",
+        "rows": 59065
+      }
+    },
+    "calendar": {
+      "all": {
+        "file": "std/calendar/all__f35c93a0.parquet",
+        "sha": "f35c93a009bd92574c0d8e58a70f370d09e1ab8c34391b7c6f9272e0112deb78",
+        "rows": 7938
+      }
+    },
+    "instruments": {
+      "all": {
+        "file": "std/instruments/all__6dbb75b5.parquet",
+        "sha": "6dbb75b50ef46ccfa23a1faa170942ec9396ccfcafffefc2cf9bdbfd38fabc1e",
+        "rows": 6156
+      }
+    }
+  },
+  "payload_sha_reaudited": false,
+  "payload_check_limit": "Loaded relevant selected stock rows, factors, coverage/actions and master/calendar from frozen snapshot; complete byte SHA sweep was not performed by this inventory.",
+  "observed_parent_runs": [
+    {
+      "run_id": "20261003-100446-strategy-y2024b-081-6fee",
+      "implementation": "y2024b-081",
+      "snapshot": null,
+      "start": "2022-01-04",
+      "end": "2026-09-29",
+      "initial_cash": null,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261003-100446-strategy-y2024b-081-6fee/summary.json",
+      "summary_sha256": "951165e2aab195bfea417f793587b659b6b51cd02660689a4fedd00a731cc30b"
+    },
+    {
+      "run_id": "20261003-100830-strategy-y2024b-081-ce4a",
+      "implementation": "y2024b-081",
+      "snapshot": null,
+      "start": "2022-01-04",
+      "end": "2026-09-29",
+      "initial_cash": null,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261003-100830-strategy-y2024b-081-ce4a/summary.json",
+      "summary_sha256": "96291a9de007e58e4b2a498920d2fda410c0dd18868465b59081f3bc96aeab77"
+    },
+    {
+      "run_id": "20261005-132927-strategy-y2024b-081-87b5",
+      "implementation": "y2024b-081",
+      "snapshot": "20261005-131630-822f",
+      "start": "2024-04-01",
+      "end": "2024-06-28",
+      "initial_cash": null,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-132927-strategy-y2024b-081-87b5/summary.json",
+      "summary_sha256": "67ae676960a4b2ae65f4f8805b85c64c2c356bf37728e4ab63afab288070385e"
+    },
+    {
+      "run_id": "20261005-133019-strategy-y2024b-081-8075",
+      "implementation": "y2024b-081",
+      "snapshot": "20261005-131630-822f",
+      "start": "2024-04-01",
+      "end": "2024-06-28",
+      "initial_cash": null,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-133019-strategy-y2024b-081-8075/summary.json",
+      "summary_sha256": "6534a28bb2cd600facc0f6887db5ae12d1a6ab7c7853445a01efa5644c731a7f"
+    },
+    {
+      "run_id": "20261005-143611-844865-strategy-a327",
+      "implementation": "bollinger_breakout_corrected_v1",
+      "snapshot": "20261005-143509-75b4",
+      "start": "2024-03-29",
+      "end": "2024-06-28",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-143611-844865-strategy-a327/summary.json",
+      "summary_sha256": "f7469e0d580eac07920b373ae7abdc67432092934dbd5121448bdb999aa8c338"
+    },
+    {
+      "run_id": "20261005-143759-c6e006-strategy-233b",
+      "implementation": "ma10_ma20_v1",
+      "snapshot": "20261005-143509-75b4",
+      "start": "2024-03-29",
+      "end": "2024-06-28",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-143759-c6e006-strategy-233b/summary.json",
+      "summary_sha256": "b992fe01cec5ab852f47bcbc7b785911b4fd8cd9f1ed43ab33a50806ec06bed6"
+    },
+    {
+      "run_id": "20261005-144026-844865-strategy-cc25",
+      "implementation": "bollinger_breakout_corrected_v1",
+      "snapshot": "20261005-143509-75b4",
+      "start": "2024-03-29",
+      "end": "2024-06-28",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-144026-844865-strategy-cc25/summary.json",
+      "summary_sha256": "9a888d63265ce9e379de9a7ec7b95a7955076e4eef4a3a3b834f8d02a95de857"
+    },
+    {
+      "run_id": "20261005-144223-c6e006-strategy-d9a2",
+      "implementation": "ma10_ma20_v1",
+      "snapshot": "20261005-143509-75b4",
+      "start": "2024-03-29",
+      "end": "2024-06-28",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-144223-c6e006-strategy-d9a2/summary.json",
+      "summary_sha256": "556d8a527f6bf092f53e43f653d847b919abef557ac1ebb0bf0168400026413f"
+    },
+    {
+      "run_id": "20261005-152232-afacad-strategy-802a",
+      "implementation": "ma10_ma20_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-152232-afacad-strategy-802a/summary.json",
+      "summary_sha256": "71942c92ba626c8fa8234a7a3b333cb5437714a24367bf583a72618c02fe2880"
+    },
+    {
+      "run_id": "20261005-152321-afacad-strategy-e1b1",
+      "implementation": "ma10_ma20_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-152321-afacad-strategy-e1b1/summary.json",
+      "summary_sha256": "fee394e2c5894d143ad34d6c70730d867fea4f91bbb0bad99856dc0cd530d369"
+    },
+    {
+      "run_id": "20261005-152419-d08ee4-strategy-b012",
+      "implementation": "bollinger_breakout_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-152419-d08ee4-strategy-b012/summary.json",
+      "summary_sha256": "fd2804a6eb57779072f0b514cbe2fcd43dff88b0620d5a3c6aeb9bb1edff1f2a"
+    },
+    {
+      "run_id": "20261005-152726-c66824-strategy-287c",
+      "implementation": "bollinger_breakout_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-152726-c66824-strategy-287c/summary.json",
+      "summary_sha256": "575c79d175e2e8e4155304f8bdc6d0d28d511d723de8fbbba985c980767fa976"
+    },
+    {
+      "run_id": "20261005-152823-fb5bd5-strategy-5994",
+      "implementation": "ma5_ma10_price_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-152823-fb5bd5-strategy-5994/summary.json",
+      "summary_sha256": "ba37f0023bce75fab6542087fb6d78f10f3cdc7328251d48edfea1a55720be1c"
+    },
+    {
+      "run_id": "20261005-152945-5ef4e7-strategy-f0d9",
+      "implementation": "pair_yili_cmb_anchored_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-07-06",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-152945-5ef4e7-strategy-f0d9/summary.json",
+      "summary_sha256": "c6a4a1e53de80c198dc506566bc6ef3a03aaed26cffc7ecb1bb63e1484932dc0"
+    },
+    {
+      "run_id": "20261005-152953-fb5bd5-strategy-e17d",
+      "implementation": "ma5_ma10_price_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-152953-fb5bd5-strategy-e17d/summary.json",
+      "summary_sha256": "33758e13f5a544dbaf7265f1cdca3ee532533173d3acf8613d36030f4fac4621"
+    },
+    {
+      "run_id": "20261005-153056-bbac45-strategy-11a8",
+      "implementation": "pair_haitian_cmb_anchored_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-07-06",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-153056-bbac45-strategy-11a8/summary.json",
+      "summary_sha256": "193d04503f8bd6b0a1fc8dff4e445afe66b519c806ffd814d8f60b5e9a62df62"
+    },
+    {
+      "run_id": "20261005-153112-5ef4e7-strategy-ebce",
+      "implementation": "pair_yili_cmb_anchored_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-07-06",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-153112-5ef4e7-strategy-ebce/summary.json",
+      "summary_sha256": "11bd1cece5e0e7a37d217ac91db8740c2ca92c47d019211917d95c67289e6ef1"
+    },
+    {
+      "run_id": "20261005-153254-bbac45-strategy-e7c3",
+      "implementation": "pair_haitian_cmb_anchored_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-07-06",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-153254-bbac45-strategy-e7c3/summary.json",
+      "summary_sha256": "15ff5d3b6c77b5d2c8561f87c5eb989d1386006dd2e937511667592c17afde9f"
+    },
+    {
+      "run_id": "20261005-154505-be96a8-strategy-59ab",
+      "implementation": "multi_ma_fixed_value_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-24",
+      "end": "2026-09-29",
+      "initial_cash": 20000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-154505-be96a8-strategy-59ab/summary.json",
+      "summary_sha256": "7fa70f50ea527bd938d63dde39cdc54966b263c1f6941f80000b88e8a2218646"
+    },
+    {
+      "run_id": "20261005-154607-2b56a9-strategy-1bfd",
+      "implementation": "multi_ma_fixed_value_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-24",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-154607-2b56a9-strategy-1bfd/summary.json",
+      "summary_sha256": "e18a9299a82cd7ecf871841cc739360a043253daa88eb55d78682967fc71ce36"
+    },
+    {
+      "run_id": "20261005-154615-be96a8-strategy-5510",
+      "implementation": "multi_ma_fixed_value_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-24",
+      "end": "2026-09-29",
+      "initial_cash": 20000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-154615-be96a8-strategy-5510/summary.json",
+      "summary_sha256": "797eb320462cd5d68cae5d6c29be51839b367a1930edbea7d3c7153ff6460191"
+    },
+    {
+      "run_id": "20261005-154716-2b56a9-strategy-9f5f",
+      "implementation": "multi_ma_fixed_value_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-24",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-154716-2b56a9-strategy-9f5f/summary.json",
+      "summary_sha256": "cf719579f5e38b854378712f59887cbf8b48cf58f0015cf034f938a26adeefd1"
+    },
+    {
+      "run_id": "20261005-155452-dd3361-strategy-e72f",
+      "implementation": "svm_lagged_shape_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2022-01-17",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-155452-dd3361-strategy-e72f/summary.json",
+      "summary_sha256": "5a086aebc4410e4ac0c1a087dc335dedfaa41c5676650fba0b6df555a1879f29"
+    },
+    {
+      "run_id": "20261005-155614-dd3361-strategy-2e7d",
+      "implementation": "svm_lagged_shape_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2022-01-17",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-155614-dd3361-strategy-2e7d/summary.json",
+      "summary_sha256": "f6f0a54bb6081e5e01aa2c6c3b0316e6733453c80c9915f2650cea9a68af2d19"
+    },
+    {
+      "run_id": "20261005-161628-8f273d-strategy-89f3",
+      "implementation": "rsi_slots_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-04-09",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-161628-8f273d-strategy-89f3/summary.json",
+      "summary_sha256": "6992f90a1748e13dd71240a76c1224d5f27aa59475805dbc873c85cc0f58218d"
+    },
+    {
+      "run_id": "20261005-163118-44fbd5-strategy-bed8",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-04-06",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-163118-44fbd5-strategy-bed8/summary.json",
+      "summary_sha256": "567e574e8bd013f9f64be5eac5fee8dd4a3e77424c69320116d0e0c08911119a"
+    },
+    {
+      "run_id": "20261005-163331-44fbd5-strategy-29a5",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-04-06",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-163331-44fbd5-strategy-29a5/summary.json",
+      "summary_sha256": "b646c2b2278b552d09f777db4c2e2a5f5def348f4f663a7306d2081206677583"
+    },
+    {
+      "run_id": "20261005-163554-c45003-strategy-164e",
+      "implementation": "rsi_slots_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-04-09",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-163554-c45003-strategy-164e/summary.json",
+      "summary_sha256": "6d7b7de3fdbdb4d9cc0d2616aaf125966cab352da108fe6001187cb683cdcf7c"
+    },
+    {
+      "run_id": "20261005-171252-44fbd5-strategy-886b",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-04-06",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-171252-44fbd5-strategy-886b/summary.json",
+      "summary_sha256": "85c36d928ae004a2f5717b6e74f390cf5893e771ae11d3305f20f29ac73aef84"
+    },
+    {
+      "run_id": "20261005-173126-82f83d-strategy-fbaf",
+      "implementation": "bp_component_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2024-03-29",
+      "end": "2024-06-28",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-173126-82f83d-strategy-fbaf/summary.json",
+      "summary_sha256": "311fbcc929de60176cd3b2bd95cf17d6efc007d332d76ef2bd379998bb2ec31e"
+    },
+    {
+      "run_id": "20261005-173340-1b80e2-strategy-1c20",
+      "implementation": "ep_component_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2024-03-29",
+      "end": "2024-06-28",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-173340-1b80e2-strategy-1c20/summary.json",
+      "summary_sha256": "894820d3fa97f3a6d880e8410b094a1483067cc24079b77af3a83c19ff4e795d"
+    },
+    {
+      "run_id": "20261005-173624-071398-strategy-025f",
+      "implementation": "bp_component_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2024-03-29",
+      "end": "2024-06-28",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-173624-071398-strategy-025f/summary.json",
+      "summary_sha256": "2af04a8fc210e5d0e2db210c4c6e2b0cef7218551a0cdc0359f5c690d43b8e8e"
+    },
+    {
+      "run_id": "20261005-173903-33153b-strategy-4ddc",
+      "implementation": "ep_component_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2024-03-29",
+      "end": "2024-06-28",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-173903-33153b-strategy-4ddc/summary.json",
+      "summary_sha256": "52b7e86a96ac40472fe2df7861f8a47cc03eb27da7b4c1d473c46a8ca1a6924c"
+    },
+    {
+      "run_id": "20261005-174211-099e47-strategy-ad4f",
+      "implementation": "bp_component_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2024-03-29",
+      "end": "2024-06-28",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-174211-099e47-strategy-ad4f/summary.json",
+      "summary_sha256": "dd2a2b2c2f6efa5d463709ccc55141b9fac46f73d6bcf66e5b5a6b8dd69ecaff"
+    },
+    {
+      "run_id": "20261005-174309-d7dae9-strategy-4162",
+      "implementation": "ep_component_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2024-03-29",
+      "end": "2024-06-28",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-174309-d7dae9-strategy-4162/summary.json",
+      "summary_sha256": "bc1cf855ada90bc4047e6d8849168e9eb2fd83c6bc0706d2c1a2d4fe91ff877f"
+    },
+    {
+      "run_id": "20261005-174435-f7e566-strategy-2326",
+      "implementation": "bp_component_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "blocked",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-174435-f7e566-strategy-2326/summary.json",
+      "summary_sha256": "34f56baf5f97836f687e256291cb9e157eaf652832b64e32fe46b2843ddcc0e2"
+    },
+    {
+      "run_id": "20261005-175633-e631d4-strategy-d3be",
+      "implementation": "ep_component_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-175633-e631d4-strategy-d3be/summary.json",
+      "summary_sha256": "ec9f76f8e1f25c52284fff2792c5ca5ec00e474c0ae925032504b9f10a7d7c10"
+    },
+    {
+      "run_id": "20261005-180828-e631d4-strategy-762a",
+      "implementation": "ep_component_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-180828-e631d4-strategy-762a/summary.json",
+      "summary_sha256": "2bc4023f899c27abcf629db00b25468f0d03c4109d0c10f36a73d7cbb3eb9fdb"
+    },
+    {
+      "run_id": "20261005-191525-e4a754-strategy-d910",
+      "implementation": "bollinger_breakout_corrected_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2005-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-191525-e4a754-strategy-d910/summary.json",
+      "summary_sha256": "4ba5de3cd5f498644bf0b5c60ce363c7e985312488c6c8c408b6e94cd2dcbe1e"
+    },
+    {
+      "run_id": "20261005-191703-e4a754-strategy-cdf4",
+      "implementation": "bollinger_breakout_corrected_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2005-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-191703-e4a754-strategy-cdf4/summary.json",
+      "summary_sha256": "c41928dca9177f617eef55fc52a340446b694b8a46c4e990c88d45fbc0cdd279"
+    },
+    {
+      "run_id": "20261005-191805-0c35b2-strategy-1dc6",
+      "implementation": "ma10_ma20_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2013-10-25",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-191805-0c35b2-strategy-1dc6/summary.json",
+      "summary_sha256": "4bc584f2749f413c994f180930a44777ed479274ebeeae6162295b06b756839f"
+    },
+    {
+      "run_id": "20261005-191852-0c35b2-strategy-db03",
+      "implementation": "ma10_ma20_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2013-10-25",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-191852-0c35b2-strategy-db03/summary.json",
+      "summary_sha256": "0b7ca4ee0df9ba0b3c30a447178ae7acd373ace62f7c2a14d67abd5308e080ee"
+    },
+    {
+      "run_id": "20261005-191942-5e68e1-strategy-73e5",
+      "implementation": "ma5_ma10_price_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2006-09-15",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "superseded_numeric_validation_failed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-191942-5e68e1-strategy-73e5/summary.json",
+      "summary_sha256": "bce64bea9f289750c7f0720b0298b1c2249b07a140776acd44d4170020221aac"
+    },
+    {
+      "run_id": "20261005-192319-740420-strategy-4938",
+      "implementation": "pair_yili_cmb_anchored_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2013-09-06",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-192319-740420-strategy-4938/summary.json",
+      "summary_sha256": "d26ae40fd41064d30a3dbcc275aa9a4012cbba1f16566fdaf74e93b43d442872"
+    },
+    {
+      "run_id": "20261005-192424-740420-strategy-00f0",
+      "implementation": "pair_yili_cmb_anchored_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2013-09-06",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-192424-740420-strategy-00f0/summary.json",
+      "summary_sha256": "77bfc361d89b62fe45e1bac2663454b5059f6489d5ff824b58958fdb3783c1f6"
+    },
+    {
+      "run_id": "20261005-192517-f804c1-strategy-0507",
+      "implementation": "pair_haitian_cmb_anchored_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2014-08-04",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-192517-f804c1-strategy-0507/summary.json",
+      "summary_sha256": "132b6b1d26b67343bb776f8a720067328fe06a2242e370a27b1438ecef742d61"
+    },
+    {
+      "run_id": "20261005-192619-f804c1-strategy-647a",
+      "implementation": "pair_haitian_cmb_anchored_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2014-08-04",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-192619-f804c1-strategy-647a/summary.json",
+      "summary_sha256": "960540d6adf68e2f384d6eefb0b6c15bdace1a9fdacdeb123a5a9b318ae54cb2"
+    },
+    {
+      "run_id": "20261005-192710-9469f6-strategy-fb0a",
+      "implementation": "multi_ma_fixed_value_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2005-03-01",
+      "end": "2026-09-29",
+      "initial_cash": 20000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "superseded_numeric_validation_failed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-192710-9469f6-strategy-fb0a/summary.json",
+      "summary_sha256": "deb1325ef09ee12b804e18903e4c2a3c0a561d694a05f797e26df736e69fb72d"
+    },
+    {
+      "run_id": "20261005-192957-2b921b-strategy-da50",
+      "implementation": "multi_ma_fixed_value_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2005-03-01",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "superseded_numeric_validation_failed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-192957-2b921b-strategy-da50/summary.json",
+      "summary_sha256": "b6d73da57d0990fec31b0231127a6190eefd7ebff2fb18f9ceafc0462a308a4c"
+    },
+    {
+      "run_id": "20261005-193108-e8aa23-strategy-ea0b",
+      "implementation": "svm_lagged_shape_corrected_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2013-06-14",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-193108-e8aa23-strategy-ea0b/summary.json",
+      "summary_sha256": "56e8a45286f5dc9a8392e781d3ca4393e987814a982137759b55bdaee702e5e1"
+    },
+    {
+      "run_id": "20261005-193254-e8aa23-strategy-4ae3",
+      "implementation": "svm_lagged_shape_corrected_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2013-06-14",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-193254-e8aa23-strategy-4ae3/summary.json",
+      "summary_sha256": "9fa701460423f74324b600614fa559295caa5e140d0038b8f532773696068fe6"
+    },
+    {
+      "run_id": "20261005-193354-b5b8aa-strategy-1f41",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2020-03-05",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-193354-b5b8aa-strategy-1f41/summary.json",
+      "summary_sha256": "d23ef0c3057b4019dd6d558e6606d92403c4f36f38cd1c4276472cd74ba6d5e2"
+    },
+    {
+      "run_id": "20261005-193437-b5b8aa-strategy-88a8",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2020-03-05",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-193437-b5b8aa-strategy-88a8/summary.json",
+      "summary_sha256": "d86b0d212965de768f6e391fd2e9763a07d5a11dea5e7fbb28bd7a74fd9fe18f"
+    },
+    {
+      "run_id": "20261005-194037-53cebd-strategy-3e8a",
+      "implementation": "ma5_ma10_price_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2006-09-15",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-194037-53cebd-strategy-3e8a/summary.json",
+      "summary_sha256": "92c8d4c43213e4d87825a120dc564435a14d3b3dfc636b4cc3582aafba85edcf"
+    },
+    {
+      "run_id": "20261005-194227-53cebd-strategy-5db3",
+      "implementation": "ma5_ma10_price_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2006-09-15",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-194227-53cebd-strategy-5db3/summary.json",
+      "summary_sha256": "b7d2644bc568c6a9a6ca00e91967183721806140d33665c635730a420d980637"
+    },
+    {
+      "run_id": "20261005-194345-2712b4-strategy-63c5",
+      "implementation": "multi_ma_fixed_value_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2005-03-01",
+      "end": "2026-09-29",
+      "initial_cash": 20000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-194345-2712b4-strategy-63c5/summary.json",
+      "summary_sha256": "af85116440354dcde3e95462d1e461628836992bfc39381058d79d6f9b7f4fbd"
+    },
+    {
+      "run_id": "20261005-194549-2712b4-strategy-1cac",
+      "implementation": "multi_ma_fixed_value_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2005-03-01",
+      "end": "2026-09-29",
+      "initial_cash": 20000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-194549-2712b4-strategy-1cac/summary.json",
+      "summary_sha256": "32960e0f801c25b0e9361164700da9de13f5d9babd4720d0e883d19862751ab1"
+    },
+    {
+      "run_id": "20261005-194726-58b4fc-strategy-b0a5",
+      "implementation": "multi_ma_fixed_value_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2005-03-01",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-194726-58b4fc-strategy-b0a5/summary.json",
+      "summary_sha256": "6c3922bfad79af75a98033fca9532c8e4a73189515129a61fc7d80b594da795a"
+    },
+    {
+      "run_id": "20261005-194856-58b4fc-strategy-9c6c",
+      "implementation": "multi_ma_fixed_value_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2005-03-01",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-194856-58b4fc-strategy-9c6c/summary.json",
+      "summary_sha256": "367ad06ffa0792ebd6ae85ff326b7a907e28d28c7417ede0e9e5b638717675a1"
+    },
+    {
+      "run_id": "20261005-201508-69a519-strategy-8f4e",
+      "implementation": "rsi_slots_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-04-09",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-201508-69a519-strategy-8f4e/summary.json",
+      "summary_sha256": "32b0b17685278dab2e7d9f2b194b68dbf7d40ca2046082ff0e8bec092eeadba3"
+    },
+    {
+      "run_id": "20261005-201648-4c9835-strategy-f8e4",
+      "implementation": "rsi_slots_corrected_v1",
+      "snapshot": "20261005-201432-93d0",
+      "start": "2019-09-10",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-201648-4c9835-strategy-f8e4/summary.json",
+      "summary_sha256": "2fddc1a999f255e710719b1b0d59af196a33671d1c3bdd2a135f1dfbd52685ab"
+    },
+    {
+      "run_id": "20261005-202301-4c9835-strategy-d491",
+      "implementation": "rsi_slots_corrected_v1",
+      "snapshot": "20261005-201432-93d0",
+      "start": "2019-09-10",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-202301-4c9835-strategy-d491/summary.json",
+      "summary_sha256": "63e8b05c9ed84dfb26782aa657117a73b973b0ad8d810888593f10edc6f3473a"
+    },
+    {
+      "run_id": "20261005-212048-dac913-strategy-a0ca",
+      "implementation": "ema_slots_talib_approx_v1",
+      "snapshot": "20261005-211958-89b5",
+      "start": "2012-02-03",
+      "end": "2012-05-03",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-212048-dac913-strategy-a0ca/summary.json",
+      "summary_sha256": "9ccdf80eb3e1ef6fdab41c97fe36f66537cd9f7269381a8de5a10a6d06e4b4f7"
+    },
+    {
+      "run_id": "20261005-212110-dac913-strategy-71d7",
+      "implementation": "ema_slots_talib_approx_v1",
+      "snapshot": "20261005-211958-89b5",
+      "start": "2012-02-03",
+      "end": "2012-05-03",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-212110-dac913-strategy-71d7/summary.json",
+      "summary_sha256": "51f8316e9344c8416611098183240329c35ca40538273a1d6d9692561a1740a5"
+    },
+    {
+      "run_id": "20261005-212150-ef86d3-strategy-d46c",
+      "implementation": "ema_slots_talib_approx_v1",
+      "snapshot": "20261005-211958-89b5",
+      "start": "2012-02-03",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-212150-ef86d3-strategy-d46c/summary.json",
+      "summary_sha256": "4a548aa07d8e4514e3ff123e47680905ecfaeb3d0cc4b11dff012d773d5da0f1"
+    },
+    {
+      "run_id": "20261005-212209-2d6c13-strategy-5825",
+      "implementation": "rsi_slots_corrected_v1",
+      "snapshot": "20261005-152153-eb05",
+      "start": "2021-04-09",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-212209-2d6c13-strategy-5825/summary.json",
+      "summary_sha256": "3a1bb4532f710c59c0cd038e0ec5f00f839182816d970f2746fe9b16f4500ef6"
+    },
+    {
+      "run_id": "20261005-212330-ef86d3-strategy-dee7",
+      "implementation": "ema_slots_talib_approx_v1",
+      "snapshot": "20261005-211958-89b5",
+      "start": "2012-02-03",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261005-212330-ef86d3-strategy-dee7/summary.json",
+      "summary_sha256": "1cd430243b2192d0096d26c643a96bfda6cea47dbfd1d8d24e9d3c4fb807b412"
+    },
+    {
+      "run_id": "20261008-183943-9f5953-strategy-b3c3",
+      "implementation": "bollinger_breakout_corrected_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2005-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261008-183943-9f5953-strategy-b3c3/summary.json",
+      "summary_sha256": "6bca62423d73ebb8df35bd14d164baf94ca66ef090b0c46516d4539c6465174b"
+    },
+    {
+      "run_id": "20261008-231126-9f5953-strategy-9ea0",
+      "implementation": "bollinger_breakout_corrected_v1",
+      "snapshot": "20261005-191431-aa71",
+      "start": "2005-02-02",
+      "end": "2026-09-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261008-231126-9f5953-strategy-9ea0/summary.json",
+      "summary_sha256": "4ac379804f505918ea2eb326aa6f2435f1108469fdee4c5fb727b4f75b99ef7d"
+    },
+    {
+      "run_id": "20261009-071852-74e05b-strategy-6ab4",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261006-145049-e06c",
+      "start": "2012-08-21",
+      "end": "2013-09-12",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261009-071852-74e05b-strategy-6ab4/summary.json",
+      "summary_sha256": "9ad524e91a23bdf8bb97ce83679741873b7e4c0fa20bda6ef8d6923fd3e1ba53"
+    },
+    {
+      "run_id": "20261009-071907-e5e1fb-strategy-47e9",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261006-145049-e06c",
+      "start": "2013-12-18",
+      "end": "2014-12-05",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261009-071907-e5e1fb-strategy-47e9/summary.json",
+      "summary_sha256": "289790075e68fa643d20db0eeb416d54640862d01ca7de310aca7af3c49c1a58"
+    },
+    {
+      "run_id": "20261009-071922-5272d3-strategy-cd8a",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261006-145049-e06c",
+      "start": "2017-12-19",
+      "end": "2019-03-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261009-071922-5272d3-strategy-cd8a/summary.json",
+      "summary_sha256": "3d2f8fccf7caebd6d585537c5bf2b487c6dfcc2cf81f275c6ea60a824ad09bc9"
+    },
+    {
+      "run_id": "20261009-072126-74e05b-strategy-b4c9",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261006-145049-e06c",
+      "start": "2012-08-21",
+      "end": "2013-09-12",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261009-072126-74e05b-strategy-b4c9/summary.json",
+      "summary_sha256": "0f44fd8bbdaff57366a8a7ac68371817a67d9926ca46e47ded1b53ed615671e5"
+    },
+    {
+      "run_id": "20261009-072202-e5e1fb-strategy-2df6",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261006-145049-e06c",
+      "start": "2013-12-18",
+      "end": "2014-12-05",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261009-072202-e5e1fb-strategy-2df6/summary.json",
+      "summary_sha256": "0b914a3750b452b026f65334f0bde701d26e2fdd635a1eb5fcd32820cee5bf3b"
+    },
+    {
+      "run_id": "20261009-072236-5272d3-strategy-d7b5",
+      "implementation": "pair_zscore_rotation_corrected_v1",
+      "snapshot": "20261006-145049-e06c",
+      "start": "2017-12-19",
+      "end": "2019-03-29",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261009-072236-5272d3-strategy-d7b5/summary.json",
+      "summary_sha256": "8930616ecdc1702ea1b910006f43d5f43e96206f5720b80584b163ef58947498"
+    },
+    {
+      "run_id": "20261010-204607-48a7e0-strategy-b4fc",
+      "implementation": "pair_yili_cmb_anchored_v1",
+      "snapshot": "20261006-145049-e06c",
+      "start": "2010-03-16",
+      "end": "2013-09-04",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "accepted_limited",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261010-204607-48a7e0-strategy-b4fc/summary.json",
+      "summary_sha256": "ce79b6d7e820237fc38059adb83c6d0f50eb6ba551ba27a4304bbc72c2b94472"
+    },
+    {
+      "run_id": "20261010-204700-48a7e0-strategy-0597",
+      "implementation": "pair_yili_cmb_anchored_v1",
+      "snapshot": "20261006-145049-e06c",
+      "start": "2010-03-16",
+      "end": "2013-09-04",
+      "initial_cash": 1000000.0,
+      "execution_status": "success_limited",
+      "evidence_status": "archived_unreviewed",
+      "summary": "data/metadata/states/0bde0e749f27d26bd66e8cee/runs/20261010-204700-48a7e0-strategy-0597/summary.json",
+      "summary_sha256": "f5f43d8c6f17c94f96967cbacdc0040269fdf7a86be1698a6e7e2b41a09839a4"
+    }
+  ],
+  "approved_decisions_observed": [
+    {
+      "answer": "推进修正变体（推荐）",
+      "id": "D-bollinger",
+      "provenance": "conversation_confirmed",
+      "scope": "2020/52：去除布林上下轨标量[-1]索引，保留20日均值±2倍总体标准差，日频近似及唯一账本",
+      "status": "approved"
+    },
+    {
+      "answer": "推进动态锚定近似变体（推荐）",
+      "id": "D-pair-anchor",
+      "provenance": "conversation_confirmed",
+      "scope": "伊利/招行与海天/招行按每决策日锚定历史价，保留120日、比例1、±1和状态机；平台不等价",
+      "status": "approved"
+    },
+    {
+      "answer": "只修输入形状，保留滞后（推荐）",
+      "id": "D-svm-shape",
+      "provenance": "conversation_confirmed",
+      "scope": "SVM98预测样本改二维，旧特征、滞后和参数保留",
+      "status": "approved"
+    },
+    {
+      "answer": "推进修正近似变体（推荐）",
+      "id": "D-rsi",
+      "provenance": "conversation_confirmed",
+      "scope": "RSI40缺失窗口阻断；61行重算RSI6、整数阈值、9槽及实际现金分配保留",
+      "status": "approved"
+    },
+    {
+      "answer": "推进修正近似变体（推荐）",
+      "id": "D-rotation66",
+      "provenance": "conversation_confirmed",
+      "scope": "修datetime.timedelta和末值位置索引，保留60行价差/样本标准差/四位z/±2；动态锚定与日频近似",
+      "status": "approved"
+    },
+    {
+      "approval_copy": "data/metadata/decisions/D-numeric-means-approval.json",
+      "approval_file": "data/staging/strategies-batch14/20261005-long-history/numeric-policy-approval.json",
+      "id": "D-numeric-means",
+      "provenance": "archived_approval",
+      "scope": "国航及复星逐窗口math.fsum稳定求和；严格比较、均线参数、每笔2万元和两种资金保留",
+      "status": "approved"
+    },
+    {
+      "approval_copy": "data/metadata/decisions/D-ema55-approval.json",
+      "approval_file": "data/staging/strategies-batch18/20261005-kd-ema-lof/ema-policy-approval.json",
+      "id": "D-ema55",
+      "provenance": "archived_approval",
+      "scope": "三进兵TA-Lib连续EMA2/25/60、均值种子、跳已知停牌、八股顺序、五槽、现金除数及参与/滑点保留；19批已完成",
+      "status": "approved"
+    },
+    {
+      "id": "D-gac12",
+      "scope": "广汽2020/12近似经济规则确认，原问题待回复，不重复询问",
+      "status": "pending"
+    },
+    {
+      "id": "D-lowvol24",
+      "scope": "七股低波2022/24近似经济规则确认，原问题待回复",
+      "status": "pending"
+    },
+    {
+      "id": "D-allweather-fill",
+      "provenance": "conversation_pending",
+      "scope": "2024第二集/7及65全天候近似变体：显式自然日向前填充后pct_change/首值填零，去除fillna(method=None)兼容参数；保留120交易行、原ES尾部选择/分母、四基金和全部状态/交易规则，原平台pandas版本未证明；交易仍须通过基金输入和唯一Book门禁",
+      "status": "pending"
+    },
+    {
+      "id": "D-lowpb81-proxy",
+      "provenance": "conversation_pending",
+      "scope": "81号流通市值代理及现有历史沪深池，原70/35分支和截断后当日过滤、不补满/非正PB，月首先清仓再依实际现金及余仓设等额目标；100万元、2021-02至2026-09、唯一Book三成本，退市结算不足仍阻断；方案见第68批文档",
+      "status": "pending"
+    },
+    {
+      "id": "D-bp-liquidation",
+      "scope": "BP末价折现探索不能从其他批准推断获批；长区间原实验仍blocked",
+      "status": "evidence_recheck_required"
+    }
+  ],
+  "svm98": {
+    "bars_rows": 5280,
+    "adjustment_factor_rows": 34,
+    "coverage": [
+      {
+        "instrument": "600085.SH",
+        "status": "complete",
+        "requested_start": "1990-01-01",
+        "requested_end": "2099-12-31",
+        "verified_from": "1990-01-01",
+        "verified_through": "2026-09-29",
+        "has_gap": false,
+        "has_start_basis": true,
+        "confirmed_no_events": false,
+        "verified_at": "2026-09-30",
+        "source": "baostock.full_adjust_factor",
+        "evidence": "full_adjust_factor_query"
+      }
+    ],
+    "rights_event_dates": [
+      "2001-02-13",
+      "2004-09-23"
+    ],
+    "earlier_252_warmup_islands": [
+      {
+        "input_start": "2005-01-05",
+        "end": "2005-05-17",
+        "input_rows": 83,
+        "post_warmup_sessions": 0,
+        "start": null
+      },
+      {
+        "input_start": "2005-05-19",
+        "end": "2005-10-14",
+        "input_rows": 102,
+        "post_warmup_sessions": 0,
+        "start": null
+      },
+      {
+        "input_start": "2005-10-27",
+        "end": "2005-11-10",
+        "input_rows": 11,
+        "post_warmup_sessions": 0,
+        "start": null
+      },
+      {
+        "input_start": "2005-11-30",
+        "end": "2006-05-25",
+        "input_rows": 113,
+        "post_warmup_sessions": 0,
+        "start": null
+      },
+      {
+        "input_start": "2006-05-29",
+        "end": "2007-05-17",
+        "input_rows": 236,
+        "post_warmup_sessions": 0,
+        "start": null
+      },
+      {
+        "input_start": "2007-05-21",
+        "end": "2008-06-19",
+        "input_rows": 268,
+        "post_warmup_sessions": 16,
+        "start": "2008-05-28"
+      },
+      {
+        "input_start": "2008-06-23",
+        "end": "2009-06-25",
+        "input_rows": 247,
+        "post_warmup_sessions": 0,
+        "start": null
+      },
+      {
+        "input_start": "2009-06-29",
+        "end": "2010-06-21",
+        "input_rows": 239,
+        "post_warmup_sessions": 0,
+        "start": null
+      },
+      {
+        "input_start": "2010-06-23",
+        "end": "2011-06-23",
+        "input_rows": 244,
+        "post_warmup_sessions": 0,
+        "start": null
+      },
+      {
+        "input_start": "2011-06-27",
+        "end": "2011-11-29",
+        "input_rows": 106,
+        "post_warmup_sessions": 0,
+        "start": null
+      },
+      {
+        "input_start": "2011-12-01",
+        "end": "2012-05-24",
+        "input_rows": 114,
+        "post_warmup_sessions": 0,
+        "start": null
+      }
+    ],
+    "eligible_200_plus_earlier_islands": 0,
+    "unbacktested_positive_windows": [
+      {
+        "input_start": "2007-05-21",
+        "end": "2008-06-19",
+        "input_rows": 268,
+        "post_warmup_sessions": 16,
+        "start": "2008-05-28"
+      }
+    ]
+  },
+  "pair66": {
+    "selection_of_existing_supplement": "Only at least200 post60-warmup days previously executed",
+    "unbacktested_short_islands": [
+      {
+        "input_start": "2010-12-14",
+        "end": "2011-04-08",
+        "continuous_rows": 76,
+        "post_warmup_sessions": 16,
+        "selected": false,
+        "start": "2011-03-16"
+      },
+      {
+        "input_start": "2011-05-09",
+        "end": "2011-09-15",
+        "continuous_rows": 92,
+        "post_warmup_sessions": 32,
+        "selected": false,
+        "start": "2011-08-02"
+      },
+      {
+        "input_start": "2015-03-03",
+        "end": "2015-07-08",
+        "continuous_rows": 89,
+        "post_warmup_sessions": 29,
+        "selected": false,
+        "start": "2015-05-28"
+      },
+      {
+        "input_start": "2015-09-09",
+        "end": "2016-02-19",
+        "continuous_rows": 107,
+        "post_warmup_sessions": 47,
+        "selected": false,
+        "start": "2015-12-09"
+      },
+      {
+        "input_start": "2016-12-01",
+        "end": "2017-09-15",
+        "continuous_rows": 196,
+        "post_warmup_sessions": 136,
+        "selected": false,
+        "start": "2017-03-03"
+      },
+      {
+        "input_start": "2019-04-09",
+        "end": "2019-09-30",
+        "continuous_rows": 120,
+        "post_warmup_sessions": 60,
+        "selected": false,
+        "start": "2019-07-08"
+      }
+    ],
+    "total_short_island_days": 320,
+    "original_config_sha256": "1ac0eb44055b594584ae200d411ee75a5fb24b862cf14ee0c268ceda6dcde003",
+    "source_sha256": "011bfb2aa689d471d949e1813c53089adce4125ae748b06ce227265a81c842fd"
+  },
+  "other_earliest_listing_boundaries": [
+    {
+      "configuration_file": "configs/strategies/rsi_slots_corrected_batch7.yaml",
+      "configuration_sha256": "a67225db6f2ea722fbe3d093f478471b15866aa0b4ef511f529abd7c249ca2cd",
+      "latest_listing_date": "2019-06-18",
+      "latest_listed_instruments": [
+        "300782.SZ"
+      ],
+      "already_backtested_earliest_start": "2019-09-10"
+    },
+    {
+      "configuration_file": "configs/strategies/ema_slots_talib_batch19.yaml",
+      "configuration_sha256": "9edc982a4941fb33ebf00f31a257fdbc4b4a3a95eefd00eeaee6bf49c95c0263",
+      "latest_listing_date": "2011-11-02",
+      "latest_listed_instruments": [
+        "300274.SZ"
+      ],
+      "already_backtested_earliest_start": "2012-02-03"
+    },
+    {
+      "configuration_file": "configs/strategies/ma10_ma20_long_batch4.yaml",
+      "configuration_sha256": "d636e1009c4c3dddaa5349b88f51fbf32c1a00a08f80bd0b881a7cb253f065a9",
+      "latest_listing_date": "2013-09-18",
+      "latest_listed_instruments": [
+        "000333.SZ"
+      ],
+      "already_backtested_earliest_start": "2013-10-25"
+    },
+    {
+      "configuration_file": "configs/strategies/pair_haitian_cmb_long_batch4.yaml",
+      "configuration_sha256": "61515d47a2e6ae4f6c57d427f225289da4fd2bfce0b3e781175ff2b7b2ea3602",
+      "latest_listing_date": "2014-02-11",
+      "latest_listed_instruments": [
+        "603288.SH"
+      ],
+      "already_backtested_earliest_start": "2014-08-04"
+    }
+  ],
+  "conclusions": [
+    "No unexecuted200+day earlier continuous window identified among already approved12sources in this check.",
+    "Pair66 six shorter windows and SVM one16-day window can add historical coverage subject to new frozen signal and execution preflight; they are not longer continuous backtests.",
+    "RSI/EMA/Midea/Haitian existing earliest starts match latest required listing plus original valid warmup constraints.",
+    "Bollinger/Fosun existing2005starts and AirChina after-listing long run already reach currently available calendar or listing boundary.",
+    "Before2021 bars remain selected_instruments_v1; selected stock history cannot stand in for EP/BP full-market universe."
+  ],
+  "limits": [
+    "No new original signal/trade feasibility preflight was executed. Input islands alone do not prove actual orders or economic strategy behavior.",
+    "Do not stitch NAV or assume liquidation of carried positions at missing-input boundaries; independently initialize each admitted window.",
+    "Empty/no-signal windows must be labelled separately and not marketed as new trading strategy evidence.",
+    "Archived_unreviewed and superseded runs in77parent inventory are observed historical records, not reapproved implementations.",
+    "Source-stage formal acceptance remains pending; inventory cannot increase276/12/77counts."
+  ]
+}

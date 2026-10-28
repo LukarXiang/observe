@@ -1,0 +1,237 @@
+{
+  "case": {
+    "accepted_parent": "docs/handoff/2026-10-11-batch102-final-review.json",
+    "new_trading_backtests": 0,
+    "not_formal_source_acceptance": true,
+    "selection_sha256": "2dbe5898378385da458f7531a35187aa00838f84976aa7a25fde681dabefcdbf",
+    "source_files_sha256": {
+      "data/staging/strategies-batch103/20261011-next-source-preread/0.source": "780c0a0c8d22c12c6f27a3ddb91127b72d80e71da96152fde47b237b64071829",
+      "data/staging/strategies-batch103/20261011-next-source-preread/1.source": "317641ff8498a7e2893c410aa1a45ab00e0582684d65a3f1fb84efd8e05115ba"
+    },
+    "source_records": [
+      {
+        "duplicate_of": null,
+        "encoding": "utf-8-sig",
+        "formal_acceptance": false,
+        "lines": 296,
+        "nested_function_count": 4,
+        "new_trading_backtests": 0,
+        "path": "2024年度精选策略2/80.短线策略-2022年两个半月收益45%-无未来函数.txt",
+        "sha256": "780c0a0c8d22c12c6f27a3ddb91127b72d80e71da96152fde47b237b64071829",
+        "strategy_id": "S-62592032f3bc",
+        "syntax_error": null,
+        "top_level_functions": [
+          {
+            "ast_sha256": "318ae7eb090c6a9c79bc1d9041fb893f9ff820cf14e55311676460aab2b31bd6",
+            "end_line": 34,
+            "line": 19,
+            "name": "initialize"
+          },
+          {
+            "ast_sha256": "512280db23c82c4dc3e6d0c94f162bd3b62df4e686d1c51aac65efcbc398c9f1",
+            "end_line": 37,
+            "line": 36,
+            "name": "initHandleParam"
+          },
+          {
+            "ast_sha256": "4dd90f6aeedc456cd32b40027dce236b1c0cb00005c9f76b309822e50e2301fe",
+            "end_line": 68,
+            "line": 40,
+            "name": "before_trading_start"
+          },
+          {
+            "ast_sha256": "afce5a5bedf5d58e7920682e2859be362c60176676a82a6f7210dd22620671a2",
+            "end_line": 112,
+            "line": 72,
+            "name": "handle_data"
+          },
+          {
+            "ast_sha256": "aad8bbd452d32a52e6701a436b241f867783c5af33792aefa57a56100fb67bbf",
+            "end_line": 124,
+            "line": 116,
+            "name": "buy_stock"
+          },
+          {
+            "ast_sha256": "6e683f696def0cd8dac6ef09778ca882f8d83e607bac759612ff21d573f7defe",
+            "end_line": 130,
+            "line": 128,
+            "name": "sell_stock"
+          },
+          {
+            "ast_sha256": "3639f00a8fbecf36e87e6a2df7f5c60e7f4bbcfe4ed5f120bbbf48ca56f63d09",
+            "end_line": 152,
+            "line": 137,
+            "name": "get_stock_pool"
+          },
+          {
+            "ast_sha256": "04df83f95ec30a2af559d0315764a283e6f09387ecf78bbbfc4a955714582856",
+            "end_line": 248,
+            "line": 155,
+            "name": "stock_filter1"
+          },
+          {
+            "ast_sha256": "f25c8ec8b80f601f868d645380099e4b9fdca12f094d15f103580c416bcddbbc",
+            "end_line": 263,
+            "line": 250,
+            "name": "stock_filter2"
+          },
+          {
+            "ast_sha256": "e0334d994881c13e2d289bf7c396939fbe91111561a53313abe3b4b529cf0569",
+            "end_line": 276,
+            "line": 265,
+            "name": "stock_filter3"
+          },
+          {
+            "ast_sha256": "7970ec41841bda4063ed35fb3f4bcc1d0e0d6a0d35cc236cf928d98dc7c222c6",
+            "end_line": 291,
+            "line": 278,
+            "name": "stock_filter4"
+          }
+        ]
+      },
+      {
+        "duplicate_of": null,
+        "encoding": "utf-8-sig",
+        "formal_acceptance": false,
+        "lines": 395,
+        "nested_function_count": 0,
+        "new_trading_backtests": 0,
+        "path": "聚宽2025年精选/78首板低开策略-终极版 最大回撤15%，年化50%.txt",
+        "sha256": "317641ff8498a7e2893c410aa1a45ab00e0582684d65a3f1fb84efd8e05115ba",
+        "strategy_id": "S-4bbbd8a37f09",
+        "syntax_error": null,
+        "top_level_functions": [
+          {
+            "ast_sha256": "55adb5b61601419314f8969e2e6843fd69a7f4eb926bb2e3b901e7d116572f79",
+            "end_line": 24,
+            "line": 14,
+            "name": "initialize"
+          },
+          {
+            "ast_sha256": "8273b21cd72fb3dbe48075a1ad114eb9822c560a73baf1c7de05e8d7b5822212",
+            "end_line": 46,
+            "line": 27,
+            "name": "buy"
+          },
+          {
+            "ast_sha256": "d94fada187f5c59becc02a9de171f595b203c1ef4bf6d3e43bec3192299bd1e2",
+            "end_line": 74,
+            "line": 49,
+            "name": "sell"
+          },
+          {
+            "ast_sha256": "364e7cba646b0976b886b99d3ac75cdc6bca9669d70c8f66e5291e773bda2f7e",
+            "end_line": 109,
+            "line": 76,
+            "name": "sell_if_limit_down_yesterday"
+          },
+          {
+            "ast_sha256": "8edb11cfc1968c19037f09d744cdc93b9d9612d7247a4af8301daac73e967cac",
+            "end_line": 133,
+            "line": 112,
+            "name": "prepare_stock_list"
+          },
+          {
+            "ast_sha256": "8e3a15d481979c251686a1ac8d4a91c7d47625e9370c22ff1bf0e1ad5461363a",
+            "end_line": 156,
+            "line": 135,
+            "name": "prepare_stock_list2"
+          },
+          {
+            "ast_sha256": "04f3fdf28eb0e33dcac8887873a5d04c0a5fbb52e9dcb248ca6dbba218ea8e07",
+            "end_line": 165,
+            "line": 160,
+            "name": "get_limit_up_stock"
+          },
+          {
+            "ast_sha256": "9a8d0da6b60812ac3a64d420be62ac3841e244ad7aa72ac913cbfdc2513c6249",
+            "end_line": 170,
+            "line": 169,
+            "name": "filter_new_stock"
+          },
+          {
+            "ast_sha256": "a32e3b46ac3a7398ff92882f477dece79ccd377f75dc23fa184853d92aae05e8",
+            "end_line": 196,
+            "line": 174,
+            "name": "filter_st_stock"
+          },
+          {
+            "ast_sha256": "fe9d6ec37f6ddad446290a09071ad09f05e1257eaaccf4186978a250718360b7",
+            "end_line": 221,
+            "line": 200,
+            "name": "filter_stocks_by_opening_range"
+          },
+          {
+            "ast_sha256": "f92ba8561213f031e4b7b376bbece8f885268ce70b809ab0c0389fb69bbd06dc",
+            "end_line": 246,
+            "line": 225,
+            "name": "get_no_limit_up_stocks"
+          },
+          {
+            "ast_sha256": "813a20ef3080535c26a7498fa33c00b1649bbc46e8ac34a877cbb2be8a4406bf",
+            "end_line": 265,
+            "line": 250,
+            "name": "get_relative_position_stocks"
+          },
+          {
+            "ast_sha256": "9c15215d85ac2770dccf8467c4ebc0b0e1946ca4741b4204ed13940b66a144eb",
+            "end_line": 273,
+            "line": 268,
+            "name": "get_limit_up_stock2"
+          },
+          {
+            "ast_sha256": "6aa8d13d69f84b5ba436c5582763289027ce85988c2df7b2d7604fa667396f79",
+            "end_line": 278,
+            "line": 277,
+            "name": "filter_new_stock2"
+          },
+          {
+            "ast_sha256": "35e3b9992245febc753c8a78585ec52bd059ad1182ef8024271bfbbc43a2848c",
+            "end_line": 304,
+            "line": 282,
+            "name": "filter_st_stock2"
+          },
+          {
+            "ast_sha256": "a8f625e5077804b22ec2deee4dc3b8a96108d3f80a0687755e76ed65042dc640",
+            "end_line": 325,
+            "line": 308,
+            "name": "filter_stocks_by_opening_range2"
+          },
+          {
+            "ast_sha256": "0535ec3970346a36c98122f957e0df720c7c77585b45dc987a8743814ed05b96",
+            "end_line": 350,
+            "line": 329,
+            "name": "get_no_limit_up_stocks2"
+          },
+          {
+            "ast_sha256": "aa6846e988bd6d32ba09fd6b54ee1e2ebb4faba14ebed8d07b7488f93ff8227a",
+            "end_line": 369,
+            "line": 354,
+            "name": "get_relative_position_stocks2"
+          },
+          {
+            "ast_sha256": "3b350423ebf955a02e8c08ef3a4758a7a13e7f5a418485fe25c144907c523b0c",
+            "end_line": 384,
+            "line": 374,
+            "name": "get_previous_trade_day"
+          },
+          {
+            "ast_sha256": "a9ce191338cfe7fa0af60375f8fea31c2126065b102e3880fe55fa7e21d6fc90",
+            "end_line": 393,
+            "line": 388,
+            "name": "filter_paused_stock"
+          }
+        ]
+      }
+    ],
+    "status": "source_text_and_AST_frozen_only"
+  },
+  "case_id": "batch104-preread",
+  "nature": "full_bytes_and_AST_only",
+  "purpose": "296/395行与33静态候选，不计验收",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch103/20261011-next-source-preread/preread.json",
+    "sha256": "d5d7e339553ccd7c70c24e3f3fab0024482b1121f20552fdef98591079009600"
+  }
+}

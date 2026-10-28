@@ -1,0 +1,79 @@
+{
+  "case": {
+    "2023年度精选策略/49.【7日趋势】交易策略.txt": {
+      "fidelity": "原规则全文与受控回调诊断；十股原价日线参考，原全池信号和交易未复现",
+      "future_information_risks": [
+        "无asof名称/全池、当日daily开盘及原前复权成交量/持仓价的历史语义未证"
+      ],
+      "gaps": [
+        "缺可准入历史每日总市值/股本事件和原全池名称、上市身份；现有供应商样本admitted_rows=0",
+        "原120条前复权价量和当前开盘可用性未证；固定十股原价参考不替代完整选股",
+        "缺原持仓一分钟高点、当前持仓价/持有天数、增量报单和即时成交反馈；五分钟表不等价",
+        "原实际规则与五日形态/13日线止损注释不同；不排持仓目标，默认参数保持原样"
+      ],
+      "implementations": [],
+      "next_step": "补齐原交易输入及平台语义后唯一Book最长三成本/逐年/禁网复现；重要修正另确认，日线参考不计交易",
+      "original_strategy_complete": false,
+      "review_status": "人工审查完成",
+      "rules": {
+        "allocation": "held0 cash/3 all,held1 cash/2 first2,held2 cash first1,held>2 none;order_value including held targets",
+        "benchmark": "000905.XSHG",
+        "fees": {
+          "commission": 0.0003,
+          "fixed_slippage": 0,
+          "minimum": 5,
+          "participation": 0.25,
+          "sell_tax": 0.001
+        },
+        "history": "120rows through previous_date; skip_paused=True,fq=pre",
+        "open": "daily count1 at current_dt;1<open/pre_close<1.03;first3",
+        "price_volume": "last6 MA13>21 and21>55 each>=5; eight volume ratios strictly>1.7 count>=3; lastvolume>=1.5previous,lastclose/open>=1.05,lastclose/previousclose>=1",
+        "schedule": [
+          "09:00 prior-day selection",
+          "09:30 stop then open filter then incremental buys"
+        ],
+        "score": "MA13/21/55 median-relative RMS sum(-2..-21) minus bullish-array relative gap sum(last5); ascending(score,code),score>.005",
+        "stop": "minute high init_time..previous_date;loss<-7%;peak>20pct and drawdown/current>3pct;15pct<peak<=20pct and drawdown/current>5pct;inclusive days>=3 gain<5pct;days1 gain<0",
+        "universe": "get_all_securities(stock) without asof; exclude688/<365trade-days/ST/*/退/KeyError",
+        "valuation": "2<turnover_ratio<=10 and 30<market_cap<=500; turnover descending"
+      },
+      "scope": "120交易观察的七日趋势筛选评分、开盘补位与分钟高点退出",
+      "status": "待数据"
+    },
+    "2023年度精选策略/81.拥挤率指标-择时大盘顶底-Clone1-第二版.txt": {
+      "fidelity": "原统计定义在现有日金额观察集复算；未证明原全市场统计，不添加交易规则",
+      "future_information_risks": [
+        "结束日名单向前使用存在幸存者偏差；未证明逐日历史全池/金额口径"
+      ],
+      "gaps": [
+        "原结束日名单及平台金额未证；现有1392日/5432证券是观察集参考",
+        "0起始floor5%含下一排名及所有同额证券，并非恰好前5%；总额0和daycount/piece_count异常未修",
+        "原图表依赖未安装或运行；无交易规则、收益、成本，不能计策略回测"
+      ],
+      "implementations": [],
+      "next_step": "补原结束日证券范围/版本与money口径后核原统计；保留偏差，交易研究需明确新规则另立项",
+      "original_strategy_complete": false,
+      "review_status": "人工审查完成",
+      "rules": {
+        "chart": "pyecharts/snapshot_selenium;clock-valued default and top-level chart not executed",
+        "chunk_days": 100,
+        "crowd": "selected money/total*100 rounded1;zero total invalid",
+        "default_days": 1000,
+        "overlay": "000001.XSHG Shanghai close/100 rounded2,not HS300 despite variable name",
+        "population": "get_all_securities(date=date_now) once for entire backward period",
+        "threshold": "sorted_money[floor(N*.05)] inclusive>= including all ties",
+        "trading_rules": null
+      },
+      "scope": "结束日单名单、分块金额阈值含同额证券的拥挤率图表",
+      "status": "非交易研究脚本"
+    }
+  },
+  "case_id": "batch97-source-rules",
+  "nature": "accepted_literal_source_rules_and_original_gaps",
+  "purpose": "真实量比8次/1.7、评分/分钟止损与含阈值同额金额；不按标题/注释换规则",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch97/20261011-formal-source-acceptance/source-reviews.json",
+    "sha256": "9f56b8d24ba8fe050ad9c689748203d2770e6bd5a8a27a44ec963360e85dfbf1"
+  }
+}

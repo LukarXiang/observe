@@ -1,0 +1,33 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "scripts.verify_offline_tests",
+      "-q",
+      "tests/unit/test_batch82_research.py"
+    ],
+    "frozen_copies": {
+      "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-diagnostic-regression/red.log": "a7e38d302e6eb9c4e5e73765ed199c63d5034ef14ac80f637fe527e18e9778eb",
+      "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-diagnostic-regression/review_strategy_batch82.py": "488d8d0c19c62e54cae6be84536211caeeea4ca9d9691ff8e716da7edf30bc30",
+      "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-diagnostic-regression/test_batch82_research.py": "6ee605570650bbfb33d693068c3733e05a22c90aff03b4e9b6e44b7606e848bd"
+    },
+    "implementation_before": {
+      "scripts/review_strategy_batch82.py": "488d8d0c19c62e54cae6be84536211caeeea4ca9d9691ff8e716da7edf30bc30",
+      "tests/unit/test_batch82_research.py": "6ee605570650bbfb33d693068c3733e05a22c90aff03b4e9b6e44b7606e848bd"
+    },
+    "log": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-diagnostic-regression/red.log",
+    "not_a_backtest": true,
+    "returncode": 1,
+    "root_cause": "diagnostics stores schedule/slippage lists by reference then mutates them in a later controlled call",
+    "sha256": "a7e38d302e6eb9c4e5e73765ed199c63d5034ef14ac80f637fe527e18e9778eb"
+  },
+  "case_id": "intraday-factor-batch82-diagnostic-red",
+  "nature": "immutable_mutable_diagnostic_record_regression",
+  "purpose": "2失败34通过：诊断列表引用被后续调用污染；原实现/测试/log只读，记录方式改为快照，原策略不改，修后44专项通过",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/development-diagnostic-regression/failure.json",
+    "sha256": "b1a2b25d5ca8e3955516aac5b1ee09ff352fea0fd68d62176d2a20ffa7fd78eb"
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "case": {
+    "buy_reference_true": 20,
+    "buy_reference_windows": 46053,
+    "calendar_sha256": "b29ce632824660c74ef93d32701ff010cf2626e2007718e2b921b3464cc767f5",
+    "cost_backtests": [],
+    "excluded": [
+      {
+        "date": "2013-09-18",
+        "instrument": "000333.SZ",
+        "reason": "missing_history"
+      },
+      {
+        "date": "2005-01-05",
+        "instrument": "000651.SZ",
+        "reason": "missing_history"
+      },
+      {
+        "date": "2010-05-28",
+        "instrument": "002415.SZ",
+        "reason": "missing_history"
+      },
+      {
+        "date": "2005-01-05",
+        "instrument": "600036.SH",
+        "reason": "missing_history"
+      },
+      {
+        "date": "2005-01-05",
+        "instrument": "600085.SH",
+        "reason": "missing_history"
+      },
+      {
+        "date": "2005-01-05",
+        "instrument": "600196.SH",
+        "reason": "missing_history"
+      },
+      {
+        "date": "2005-01-05",
+        "instrument": "600519.SH",
+        "reason": "missing_history"
+      },
+      {
+        "date": "2005-01-05",
+        "instrument": "600887.SH",
+        "reason": "missing_history"
+      },
+      {
+        "date": "2006-08-18",
+        "instrument": "601111.SH",
+        "reason": "missing_history"
+      },
+      {
+        "date": "2014-02-11",
+        "instrument": "603288.SH",
+        "reason": "missing_history"
+      }
+    ],
+    "first_decision": "2005-01-06",
+    "independent_boolean_differences": 0,
+    "input_rows": 46781,
+    "input_sha256": "3f564aaaebb2ef1a303c3286287965e239a7e2337608b5675418f1df100def5b",
+    "last_decision": "2026-09-29",
+    "limits": [
+      "Arithmetic uses explicit numpy.mean injection and independently math.fsum; platform mean/volume/real-price equivalence unproved",
+      "Reference decision-day factor basis may differ from platform history; no complete historical universe or turnover admission",
+      "Original money field requested but unread by the selected kernels; no fabricated money provided",
+      "Full95 technical helpers and main-flow history unavailable; no default TA-Lib substitution or invented rank/fills/returns"
+    ],
+    "ma_reference_windows": 45753,
+    "max_MA_difference_absolute_error": 7.632783294297951e-16,
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "numpy": "2.5.3",
+    "original95_flow_windows": 0,
+    "original95_technical_signal_windows": 0,
+    "original_complete_pool_signal_days": 0,
+    "pandas": "3.0.6",
+    "partial_buy_windows": 2690,
+    "profiles": [
+      {
+        "buy_true": 1,
+        "buy_windows": 3104,
+        "first": "2013-09-18",
+        "instrument": "000333.SZ",
+        "last": "2026-09-29",
+        "ma10_true": 95,
+        "ma20_true": 0,
+        "ma_windows": 3074,
+        "partial_buy_windows": 269
+      },
+      {
+        "buy_true": 5,
+        "buy_windows": 5076,
+        "first": "2005-01-05",
+        "instrument": "000651.SZ",
+        "last": "2026-09-29",
+        "ma10_true": 393,
+        "ma20_true": 40,
+        "ma_windows": 5046,
+        "partial_buy_windows": 269
+      },
+      {
+        "buy_true": 0,
+        "buy_windows": 3914,
+        "first": "2010-05-28",
+        "instrument": "002415.SZ",
+        "last": "2026-09-29",
+        "ma10_true": 215,
+        "ma20_true": 13,
+        "ma_windows": 3884,
+        "partial_buy_windows": 269
+      },
+      {
+        "buy_true": 5,
+        "buy_windows": 5210,
+        "first": "2005-01-05",
+        "instrument": "600036.SH",
+        "last": "2026-09-29",
+        "ma10_true": 270,
+        "ma20_true": 4,
+        "ma_windows": 5180,
+        "partial_buy_windows": 269
+      },
+      {
+        "buy_true": 5,
+        "buy_windows": 5249,
+        "first": "2005-01-05",
+        "instrument": "600085.SH",
+        "last": "2026-09-29",
+        "ma10_true": 337,
+        "ma20_true": 53,
+        "ma_windows": 5219,
+        "partial_buy_windows": 269
+      },
+      {
+        "buy_true": 1,
+        "buy_windows": 5209,
+        "first": "2005-01-05",
+        "instrument": "600196.SH",
+        "last": "2026-09-29",
+        "ma10_true": 396,
+        "ma20_true": 68,
+        "ma_windows": 5179,
+        "partial_buy_windows": 269
+      },
+      {
+        "buy_true": 0,
+        "buy_windows": 5211,
+        "first": "2005-01-05",
+        "instrument": "600519.SH",
+        "last": "2026-09-29",
+        "ma10_true": 330,
+        "ma20_true": 29,
+        "ma_windows": 5181,
+        "partial_buy_windows": 269
+      },
+      {
+        "buy_true": 1,
+        "buy_windows": 5186,
+        "first": "2005-01-05",
+        "instrument": "600887.SH",
+        "last": "2026-09-29",
+        "ma10_true": 364,
+        "ma20_true": 19,
+        "ma_windows": 5156,
+        "partial_buy_windows": 269
+      },
+      {
+        "buy_true": 1,
+        "buy_windows": 4819,
+        "first": "2006-08-18",
+        "instrument": "601111.SH",
+        "last": "2026-09-29",
+        "ma10_true": 398,
+        "ma20_true": 89,
+        "ma_windows": 4789,
+        "partial_buy_windows": 269
+      },
+      {
+        "buy_true": 1,
+        "buy_windows": 3075,
+        "first": "2014-02-11",
+        "instrument": "603288.SH",
+        "last": "2026-09-29",
+        "ma10_true": 117,
+        "ma20_true": 10,
+        "ma_windows": 3045,
+        "partial_buy_windows": 269
+      }
+    ],
+    "reference_policy": "Previous observed trading rows only; explicitly paused rows skipped, missing sessions blocked, max270 including partial original history; price anchored by decision-day factor; volume unchanged. MA reference requires31 prior rows."
+  },
+  "case_id": "volume-flow-batch86-components",
+  "nature": "accepted_long_reference_arithmetic_without_historical_pool_admission",
+  "purpose": "20050106至20260929十股46053买入/45753MA窗、2690不足270窗口、20算式命中及独立布尔差0，MA差7.63e-16；numpy.mean/动态锚定声明参考，原全池/95信号/三成本/交易0",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/component-research.json",
+    "sha256": "994a30f92aac2c9a1fbda7fa77cc1b0353946f61dff45819a54502a89460f734"
+  }
+}

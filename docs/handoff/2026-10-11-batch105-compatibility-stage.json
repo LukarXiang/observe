@@ -1,0 +1,60 @@
+{
+ "status": "ok_compatibility_stage_only",
+ "progress": {
+  "checkpoint": "20261011-070927-faa0",
+  "note": "Batch105 compatibility stage:equal-valued differently named datetime indexes minimized;16 recovery/19 current tests;6919789 native rows frozen;longest workers in progress;formal294/trading12/parents87 unchanged",
+  "catalog_id": "d2eb22f379acfbeedb01",
+  "catalog_sha256": "b9dafd67a972a704c9bd743f86be3d62f27be8382adc19c2fb59917cbd4cab8b",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 294,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-070927-faa0"
+ },
+ "observed_at": "2026-10-11T07:09:27.955464",
+ "original_exceptions_preserved": true,
+ "recovery_tests_passed": 16,
+ "current_related_tests_passed": 19,
+ "root_cause": "pandas3 Series._reindex_indexer receives None for equal labels with differing index names;names matching short-circuits,actual label reorder supplies indexer",
+ "reference_input_validation": "selected stock_basic duplicate code rejected explicitly;no silent deduplication",
+ "longest_component": {
+  "status": "in_progress",
+  "observed_live_tool_session": 63019,
+  "directory": "data/staging/strategies-batch105/20261011-longest-operands-v1",
+  "frozen_input_rows": 6919789,
+  "native_symbols": 5432,
+  "frozen_files": 165,
+  "completed_windows_proven_at_checkpoint": 0,
+  "offline_match": "not_yet_verified"
+ },
+ "formal_source_research_acceptance": false,
+ "formal_trading_acceptance": false,
+ "new_trading_backtests": 0,
+ "economic_variant_approved": false,
+ "library_goal_complete": false,
+ "evidence_sha256": {
+  "docs/tasks/2026-10-11-第一百零五批上市天数兼容诊断与最长组件-阶段记录.md": "d3ba209aea5804cebe8b35dc7e33c7dfb804950ad4662540fa3ac50acc811006",
+  "docs/handoff/batch105-y2024b-052-source-review.yaml": "652b2d76dad13ec7678bad8fdc7d40b2a6301b47cabcd486a85d36b7f48d5102",
+  "docs/handoff/batch105-y2024a-089-source-review.yaml": "a847cc245a4f70aae2509c467748cbcf105917f46fabe33bce6b4ab772222ea0",
+  "data/staging/strategies-batch105/20261011-primary-dependency-probes/checked.json": "7208c8711ea36674b3cbfb06ac25a29d671eca4a59dd16b639ac26b34eb1757c",
+  "data/staging/strategies-batch105/20261011-source-extra-compatibility/checked.json": "6f3e1d88cd96844ce0a77ec32ef5fb1900f4d66f48aedcb35e1d60d2aa821147",
+  "data/staging/strategies-batch105/20261011-age-alignment-red/tests.log": "9b1398a05af37a3b08b92d97f2457a000f29f9404fa4ee3a3b2024b284bd4240",
+  "data/staging/strategies-batch105/20261011-age-alignment-red/tests.xml": "2821d104611e96ca9e84f073c096a6fd89a68aee83b9a7745f0fb8b7c701de39",
+  "data/staging/strategies-batch105/20261011-age-alignment-green/tests.log": "e832d14b429b34f22fa51b5eefa76e8155fd5052b6c27bfacfb5439a9ad0f686",
+  "data/staging/strategies-batch105/20261011-age-alignment-recovery/tests.log": "b5b49db3b651108cef17ffd8cc31d8d3e8686e1fce74c6eecb36e86b5094ca4a",
+  "data/staging/strategies-batch105/20261011-age-alignment-index-name/checked.json": "e40c84cd626585a94b3aee8455a7cd81875d6caf0f8c6998a3ed66d1598217ba",
+  "data/staging/strategies-batch105/20261011-longest-operands-v1/prepared.json": "b1de74bc01cb284d9619373819ca2126672ae2536a4ef161d544712fd8841b27"
+ },
+ "next_start": "Poll confirmed live run handle or inspect actual terminal command receipts;then copied tests/full saved readback and fresh old-asset protection;do not overwrite existing directories"
+}

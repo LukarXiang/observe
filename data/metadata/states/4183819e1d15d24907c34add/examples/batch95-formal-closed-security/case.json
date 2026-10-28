@@ -1,0 +1,97 @@
+{
+  "case": {
+    "additional_read_based_notes": [
+      "Archive-after final receipt path lacks another live inventory/published/old-asset check; parent informed, concrete race fixture not run by this reviewer and not reported as verified security finding",
+      "Isolation code does not record actual module __file__ import identities; cwd/PYTHONPATH alone not machine evidence. Parent informed; not reported as verified exploit"
+    ],
+    "confidence": 0.99,
+    "evidence": {
+      "data/staging/strategies-batch95/20261010-formal-review-v1/security/observed-implementation.json": "c9c8041f33c20d9f39fa48ab9b86a03b1c22ad8d90041a925d264976b49d2bf9",
+      "data/staging/strategies-batch95/20261010-formal-review-v1/security/red-fixture-rerun.log": "c919c1c602b3e060505b6a76bc9fcdfac24d7d8ecb2c35b6455d9d9b95d612cc",
+      "data/staging/strategies-batch95/20261010-formal-review-v1/security/red-fixture.py": "3d28bf9226d6840da298c848c58480d0759c73e290db2a915af1ba37d9f65d7d"
+    },
+    "findings": [
+      {
+        "autofix": "manual",
+        "class": "security",
+        "confidence": 0.99,
+        "file": "scripts/accept_strategy_batch95.py",
+        "fix": "Parse each bound JSON and require returned status, correct role, findings=[], exact current 18-file implementation_sha256; compare summary role/status/findings with parsed body and rerun these gates after child replay/under lock before receipt",
+        "guard_analysis": "Outer summary checks and byte SHA/regular containment establish only summary and file identity; they do not check true body values. validate_final_bindings rehashes completion/checked evidence but never interprets real reviewer bodies either",
+        "impact": "A lower-trust aggregation can suppress an actual reviewer finding or reuse reviews for old code, yielding a formally accepted catalog despite failed real review",
+        "line": 290,
+        "mechanism": "The six clean/current-code reviewer entries in review-completion.json can reference SHA-correct JSON bodies containing unresolved HIGH findings and an old implementation manifest; finish hashes those bytes but never parses their findings/status/role/code identity, then proceeds to final replay and catalog publication",
+        "observed": "Isolated red fixture reached final replay sentinel under unchanged frozen finish implementation",
+        "severity": "MEDIUM",
+        "title": "Parse reviewer bodies before accepting aggregated clean summaries",
+        "trigger": "All six summary entries returned/findings=[], with current 18-file summary implementation_sha256; actual bound bodies findings nonempty and manifest old.py only"
+      }
+    ],
+    "implementation_sha256": {
+      "scripts/accept_strategy_batch95.py": "a046e3859ed97b12bb2229f96985b6a23aa0d31f30141c074ce2c94c502d23f0",
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+      "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+      "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+      "scripts/review_strategy_batch95.py": "6ae51bcd2fccb1adc46ae72d0120770bb4f00b37f62660dadff2411f9275688d",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "scripts/verify_strategy_batch95.py": "9c6e66e95eaf88dcc59b12662dcc48c9a681d2628e766de342a742cd6fb280ff",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "509ddb00d8394643eec30f5d609ae6a1356319a033545eb4990ee2f527b3e216",
+      "tests/unit/test_batch95_acceptance.py": "5b3cafc214a24cc92d980c96b81ab2cd0b7ac80efce972bf1d73f96627271a93",
+      "tests/unit/test_batch95_preparation.py": "6c806bc26987e29b506a1c96172672a0089f175612829c128fa5d4be858339eb",
+      "tests/unit/test_batch95_stage.py": "ed6280f8fbd8831537a7bfb1b888370eed32bf64af6ae5f6d4bb56f508ecf14e"
+    },
+    "limits": [
+      "No actual formal prepare/catalog/replay/isolate/checks/finish action run; red fixture mocks unrelated established gates and stops before final replay/publication",
+      "Current worktree tests run only; isolated test/real import identity checks not executed by this specialist",
+      "First direct script fixture launch failed import scripts before the intended gate; rerun with PYTHONPATH=. exercised the actual frozen gate and passed its sentinel",
+      "No claim that all81 combined tests ran in this specialist session"
+    ],
+    "modifications": "Only new review evidence/frozen observed copies and fixture; no project source/test/docs/config/history edits",
+    "observed_checks": {
+      "pytest_command": "/home/zuozhe/envs/quant/.venv/bin/python -B -m pytest -q -p no:cacheprovider tests/unit/test_batch95_acceptance.py",
+      "pytest_returncode": 0,
+      "pytest_summary": "28 passed in 10.42s",
+      "red_fixture_command": "PYTHONPATH=. /home/zuozhe/envs/quant/.venv/bin/python -B data/staging/strategies-batch95/20261010-formal-review-v1/security/red-fixture.py",
+      "red_fixture_observed": {
+        "actual_review_findings": "HIGH in all 6 bodies",
+        "actual_review_implementation": "old.py only",
+        "observed": "entered final replay despite body findings and old code SHA",
+        "receipt_written": false,
+        "reproduced": true,
+        "summary_findings": []
+      },
+      "red_fixture_returncode": 0,
+      "stage_evidence_current_byte_readback": "passed; review completion SHA 567d189f49469a3c97af423e304ea04d8ad1eaed5ceefcbfb0ba322ebf0269c5",
+      "validate_catalog_code_AST": "passed",
+      "validate_sources": "passed"
+    },
+    "reviewed_surfaces": [
+      "New source REVIEWS and nontrading limits/pool/minimum commissions",
+      "Pinned preparation receipt, copied historical code and stage ancestry parser",
+      "Source literal SHA identity and exact frozen catalog-code AST relation",
+      "Candidate content-derived ID, JSON/summary/parquet values, canonical paths, validated-byte publishing and navigation compare",
+      "Parameterized inventory and actual-root guard, exclusive new output creation",
+      "Fresh replay commands/log identity and parsed output value matching",
+      "Exact JUnit identities, code-copy inventory and isolation producer/consumer",
+      "finish reviewer aggregation gate, lock/pre-post-replay evidence checks and archive receipt sinks"
+    ],
+    "role": "security",
+    "scope": "Batch95 new formal source research acceptance v1: three REVIEWS, accept driver, new acceptance tests and direct upstream consumers. This report applies only to frozen observed v1 SHA, not subsequent repairs/publication authorization",
+    "status": "returned"
+  },
+  "case_id": "batch95-formal-closed-security",
+  "nature": "immutable_confirmed_failed_gate_and_closed_finding",
+  "purpose": "保留已关闭真实门禁发现及红触发，最终v4审查与正式94测试另验证，不覆盖旧失败",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch95/20261010-formal-review-v1/security/review.json",
+    "sha256": "41cc42a47ebf8de837dda8db9eb91a09af09370321e65a1d51e202b20357142c"
+  }
+}

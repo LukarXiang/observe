@@ -1,0 +1,35 @@
+schema: 1
+source: 2022年度精选策略/18.期权突破策略研究 v1.txt
+source_sha256: 6259fb771cf0bc1a857d10806d4282241053409d5079c5478862a221f6a63e1d
+source_lines: 626
+top_level_definitions: 5
+review_scope: 全文规则与研究性质核查，未执行顶层批量取数、绘图和参数扫描
+formal_acceptance: false
+original_strategy_complete: false
+economic_variant_approved: false
+rules:
+  source_kind: 研究notebook含纸面资金循环；不是平台实际下单回测
+  underlying: 510050.XSHG；取当天未复权open
+  preopen_contracts: jy.Opt_DailyPreOpen当日50ETF；先选最早ExerciseDate，再筛TradingCode第6位C/P、第11位M标准合约
+  strike_choice: 按行权价排序，以距open绝对差最小者及上下相邻一档选itm/atm/otm；put倒序，等距先取低行权价
+  range: 前Num日HH/HC/LC/LL，R=max(HH-LC,HC-LL)，当天open±K*R后round到3位
+  default: itm，Num3，K_up=K_down=0.3，向上Buy call，向下Sell call
+  timing: 当天50ETF及两期权1分钟close；首次严格突破入场，当天最后分钟close平仓，每日重置，至多一次突破
+  quantity: int(value*0.1/premium/10000)；乘数10000，单边cost0.0005等于5元每张
+  paper_profit: num*10000*(有方向的premium差-2cost)直接累加资金；未调用Book或真实现金/保证金约束
+  samples: inSample2017-01-01..2018-05-20；outSample2018-05-21..2019-05-20；allSample整个区间
+  sample_caveat: 原文已扫描合约、买卖方式、Num、K并报告最优；本批不重调优、不称独立最终留出
+defects:
+  - 边缘行权价不保证3项；原otm及顶层列表索引可能越界
+  - 最早到期仅调整合约时不跳下个期限，可能CP列不存在报KeyError；短TradingCode越界
+  - 空合约返回字符串None，strategy取字符后跳日，但顶层Code列表直接索引字符串
+  - 原卖方90%现金充足的叙述未由历史保证金/追加保证金/成交能力证明
+  - 同分钟触发价作入场价、末分钟close平仓；报价价差、流动性、成交顺序及时间可用性未证明
+  - 零权利金与缺价可报OverflowError/ValueError；未替换价格或吞异常
+  - Indicators未显式导入sqrt，不作为项目收益指标；原有效杠杆研究只排字符串-inf并宽泛except漏日
+data_gaps:
+  - 历史每日标准合约、到期/行权价/调整合约身份，50ETF和两期权1分钟close缺失
+  - 期权历史保证金/卖空/乘数变化/到期结算、价格限制、参与率、手续费及唯一Book执行未放行
+  - 原2018-07-20合约10001355日线与上交所单日风险报告两次有界请求均DNS失败，无新增响应或样本
+allowed_evidence: 50ETF候选长日线Num3/K0.3轨道参考、合约与纸面回调合成诊断；不是分钟信号、期权净值或三成本回测
+next: 补原历史分钟链与执行证据，借鉴参考repo的合约乘数/现金占用接口扩展唯一Book；不得直接套期货保证金或重建纸面NAV引擎

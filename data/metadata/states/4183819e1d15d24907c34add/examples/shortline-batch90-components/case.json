@@ -1,0 +1,37 @@
+{
+  "case": {
+    "differences": [
+      {
+        "date": "2015-11-06",
+        "fsum": false,
+        "instrument": "600887.SH",
+        "numpy": true
+      }
+    ],
+    "independent_condition_differences": 1,
+    "limits": [
+      "Exact original six-condition AST evaluated on ten reference stocks, NumPy window means; not original groupby/platform inputs",
+      "Fsum is an independent diagnostic only; numerical disagreements retained, no original repair",
+      "Verified nonpaused reference rows retained; daily natural-day endpoints have no fabricated extra sessions",
+      "Common positive decision-date anchoring cancels in these price comparisons; volume adjustment semantics unproved",
+      "MACD, change_pct, low-open filter, full historical pool and minute execution absent; true predicate is not a buy signal"
+    ],
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "original_full_signal_rows": 0,
+    "predicate_true": 280,
+    "range": [
+      "2005-02-25",
+      "2026-09-29"
+    ],
+    "reference_windows": 45763
+  },
+  "case_id": "shortline-batch90-components",
+  "nature": "long_reference_six_condition_AST_and_independent_fsum",
+  "purpose": "2005至2026十股45763双窗口，280前筛；2015-11-06伊利NumPy true/fsum false，不修均值或生成MACD/资金流/全池/分钟信号",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch90/20261009-limit-near-high-shortline-stage/component-research.json",
+    "sha256": "90ad07120f9e074fe109494c289e2f74db898452013ab14df2723cb2479b6566"
+  }
+}

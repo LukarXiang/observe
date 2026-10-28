@@ -1,0 +1,25 @@
+{
+  "case": {
+    "cause": "Persisted ArrowStringArray was fallback str; live-diagnostic tests measured 17 native elements but serialized string has length 162",
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "scripts.accept_strategy_batch98",
+      "prepare"
+    ],
+    "economic_rules_changed": false,
+    "old_guard": "data/staging/strategies-batch98/20261011-guard-validation/checked.json",
+    "representative_red_rerun": true,
+    "returncode": 1,
+    "stderr_sha256": "ee6d5be4fee30eb6d38fdc8c3c4a77e915c0bd75b98717e0a03d4bcf8fd50993",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "case_id": "batch98-persisted-ranking-failure",
+  "nature": "immutable_actual_persisted_format_rejection",
+  "purpose": "原50+13测试通过却存为162字符而非17项，正式prepare拒绝；旧输出/guard/程序保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch98/20261011-persisted-ranking-failure/failure.json",
+    "sha256": "a1d1b9ec0339041ae89aba057006788be9c2f6c959a3ec3788b3f74fffe5d768"
+  }
+}

@@ -1,0 +1,50 @@
+{
+ "status": "ok",
+ "scope": "metadata_only_followup_after_in_progress_stage",
+ "export_id": "220fe4531eda15d7c42c6430",
+ "current_checkpoint": "20261010-211228-0ed3",
+ "accepted_checkpoint": "20261010-205315-172a",
+ "root_verification": {
+  "status": "ok",
+  "scope": "metadata_only",
+  "payload_verified": false,
+  "checked": 858,
+  "issues": []
+ },
+ "root_log": "data/staging/strategies-batch95/20261010-metadata-followup/root-verify.log",
+ "root_log_sha256": "286c07e64005600540c61b9b76267a1df869950a77dbf3c04dc3a4579413b38e",
+ "isolated_verification": {
+  "status": "ok",
+  "command": [
+   "/home/zuozhe/envs/quant/.venv/bin/python",
+   "-B",
+   "scripts/export_research_metadata.py",
+   "verify",
+   "--root",
+   "."
+  ],
+  "returncode": 0,
+  "verification": {
+   "status": "ok",
+   "scope": "metadata_only",
+   "payload_verified": false,
+   "checked": 858,
+   "issues": []
+  },
+  "export_id": "220fe4531eda15d7c42c6430",
+  "copied_files": 1031,
+  "copied_payload": false,
+  "identity_stdout": "/tmp/batch95-metadata-only-_e079zkg/src/observe/__init__.py\n",
+  "log_sha256": "286c07e64005600540c61b9b76267a1df869950a77dbf3c04dc3a4579413b38e",
+  "manifest_sha256": "88a5583eb3916eedfac0bb86299a682e81d81908b5df98e54c6c1db4911aa5e5",
+  "current_checkpoint": "20261010-211228-0ed3",
+  "accepted_checkpoint": "20261010-205315-172a"
+ },
+ "evidence_file": "data/staging/strategies-batch95/20261010-metadata-followup/isolated-verification.json",
+ "evidence_sha256": "479a144792ec3cb9c736570b14b18968273c43cf0d51ba3d4d6a15d10593ebdc",
+ "formal_batch95_acceptance": false,
+ "stage_receipt": "docs/handoff/2026-10-10-batch95-numerical-stage.json",
+ "stage_receipt_sha256": "6fccfda65518065fd57ef4eb5cfe1ca6a34cb3bd4fdba514408967cb090e4b44",
+ "payload_verified": false,
+ "Git_publication": "pending_user_commit_and_push"
+}

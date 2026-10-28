@@ -1,0 +1,36 @@
+{
+  "case": {
+    "commands": [
+      {
+        "log": "data/staging/strategies-batch103/20261011-native-emotion-reference/compute.log",
+        "log_sha256": "f2c4ca9e6afa795f1e4b65949bc1a3289ac32f00d7a3e7a6a75807e784a6117d",
+        "mode": "compute",
+        "returncode": 0
+      },
+      {
+        "log": "data/staging/strategies-batch103/20261011-native-emotion-reference/replay.log",
+        "log_sha256": "f2c4ca9e6afa795f1e4b65949bc1a3289ac32f00d7a3e7a6a75807e784a6117d",
+        "mode": "replay",
+        "returncode": 0
+      }
+    ],
+    "differences": [],
+    "float_conversion_reference_only": true,
+    "fresh_network_blocked_processes": 2,
+    "new_trading_backtests": 0,
+    "outputs_sha256": {
+      "data/staging/strategies-batch103/20261011-native-emotion-reference/compute/dtype-diagnostics.json": "3bcefaa209d04fab11cbdf2ad60eb4147dc3c39bd56ec9af9293c7579dc91bd6",
+      "data/staging/strategies-batch103/20261011-native-emotion-reference/compute/emotion-reference.parquet": "b6ccec8050a521a7172857e3c91d842de3f4b0e9be9500ddb224ebb560f2b121",
+      "data/staging/strategies-batch103/20261011-native-emotion-reference/compute/summary.json": "1ae4eb0a651d7b28e03658a4226d9df4809a995083cd5c0aa5aa14ba64cbad36"
+    },
+    "status": "ok"
+  },
+  "case_id": "batch103-volume-offline",
+  "nature": "two_actual_blocked_workers",
+  "purpose": "三输出逐字节0差，非交易复现",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch103/20261011-native-emotion-reference/offline-verification.json",
+    "sha256": "e729b0ba99d91170d0537029c99d45be4ff62125bd6ee6066f0c64d871aa25ff"
+  }
+}

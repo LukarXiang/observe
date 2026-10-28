@@ -1,0 +1,34 @@
+{
+  "case": {
+    "last_forward_return_not_converted_to_zero": true,
+    "not_a_backtest": true,
+    "operand_file": "data/staging/strategies-batch92/20261010-trend-definition-stage/trend-values.parquet",
+    "operand_sha256": "373c99c589c32279bde8ada21994b4da09b0c4e8099168baa11f8e9f6582b309",
+    "raw_close_source": "separately verified score columns from frozen index price endpoints",
+    "rows": [
+      {
+        "all_score_and_quantile_inputs_independent": true,
+        "difference_dates": [],
+        "full_independent_flag_differences": 0,
+        "range": "extended_reference",
+        "rows": 5280
+      },
+      {
+        "all_score_and_quantile_inputs_independent": true,
+        "difference_dates": [],
+        "full_independent_flag_differences": 0,
+        "range": "original_period",
+        "rows": 1901
+      }
+    ],
+    "status": "match"
+  },
+  "case_id": "trend-definition-batch92-independent",
+  "nature": "fsum_score_and_independent_linear_quantile_state_audit",
+  "purpose": "独立评分差异0，下轨最大误差1.42e-14/上轨0；完整独立评分与独立分位状态差异0，非交易验收",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch92/20261010-trend-definition-stage/independent-full-signal-audit.json",
+    "sha256": "3f8d94d4041b2748e24788c252f3bc0696a587829175db954104a00414e9272c"
+  }
+}

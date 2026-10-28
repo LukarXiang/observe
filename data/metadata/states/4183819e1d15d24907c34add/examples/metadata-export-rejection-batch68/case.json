@@ -1,0 +1,32 @@
+{
+  "case": {
+    "cause": "The bounded probe completed and archived a new checkpoint while metadata export was reading its prior checkpoint.",
+    "correction": "Wait for research checkpoint writes to finish; serialize export and all input mutations; verify before continuing.",
+    "error": "ValueError: Input changed during export: data/catalog/strategies/progress/latest.json",
+    "exit_code": 1,
+    "failed_command": "python scripts/export_research_metadata.py export --root .",
+    "failed_session": 69795,
+    "kind": "tool_terminal_error_record",
+    "latest_index_may_advance": true,
+    "not_a_backtest": true,
+    "original_artifacts_overwritten": false,
+    "schema": 1,
+    "status": "rejected_then_reexported",
+    "successful_retry_export": "29b617f0fbc80082ebc0b48c",
+    "successful_retry_verify": {
+      "checked": 535,
+      "issues": [],
+      "payload_verified": false,
+      "scope": "metadata_only",
+      "status": "ok"
+    }
+  },
+  "case_id": "metadata-export-rejection-batch68",
+  "nature": "tool_terminal_failure_and_serialized_recovery",
+  "purpose": "并发检查点改变触发导出保护拒绝，串行重导出及metadata-only核验通过；未绕过输入保护",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-08-batch68-metadata-export-rejection.json",
+    "sha256": "20bc7fc898889967958410bbff9e86efa569d75704b850cfb5821376e606b52f"
+  }
+}

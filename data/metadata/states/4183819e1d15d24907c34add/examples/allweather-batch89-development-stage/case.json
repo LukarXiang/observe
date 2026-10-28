@@ -1,0 +1,32 @@
+{
+  "case": {
+    "cause": "Tests expected AssertionError; existing project require raises ValueError. Native original fillna failure and Monday-return comparison already passed.",
+    "command": "/home/zuozhe/envs/quant/.venv/bin/python -m scripts.verify_offline_tests -q tests/unit/test_batch89_stage.py",
+    "copies": {
+      "review_strategy_batch89.py": "4592b2e831a21af4295b1eff86cfe0c3b478c028eef0a061b7070df3a6ff3a82",
+      "test_batch89_stage.py": "1e712513eef6b30fcfd1345ba831995cc58453f654ce5bb98724fd2800453269"
+    },
+    "driver_schema_correction": "Read actual snapshot keys: batch_id/published_at/tables/snapshot_id/note; the initial inventory check wrongly assumed a published wrapper. No preflight or experiment ran with the initial driver.",
+    "failed": 4,
+    "failed_tests": [
+      "test_native_calc_rejects_changed_source",
+      "test_candidate_invalid_dates_or_prices_are_blocked[dates0-closes0]",
+      "test_candidate_invalid_dates_or_prices_are_blocked[dates1-closes1]",
+      "test_candidate_invalid_dates_or_prices_are_blocked[dates2-closes2]"
+    ],
+    "full_raw_failure_log_saved": false,
+    "new_trading_backtests": 0,
+    "passed": 2,
+    "returncode": 1,
+    "source_logic_changed": false,
+    "status": "failed_test_expectations"
+  },
+  "case_id": "allweather-batch89-development-stage",
+  "nature": "immutable_test_expectation_failure_and_driver_schema_correction",
+  "purpose": "首版4失败2通过，require实际ValueError、快照无published包装；旧两代码SHA/副本与摘要留档，preflight前修正、原经济规则不改；完整原失败日志未存",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch89/20261009-development-first-tests/result.json",
+    "sha256": "48b27b7394ef79d931d38da51f44d544b08821128f953b7dbb9ea0bd2ac24d78"
+  }
+}

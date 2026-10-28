@@ -1,0 +1,34 @@
+{
+  "case": {
+    "accepted_checkpoint": "20261010-181224-4012",
+    "actual_config_sha256_at_diagnosis": "d6647bdbaad1e02ee47d353988f63c2c070e53d3154378500c2a3f5e8d8ee048",
+    "changed_baseline_file": {
+      "availability": "git_document",
+      "path": "configs/research_metadata.json",
+      "sha256": "9a649d65d86ca2e5bd1837cce46947722cfc8afe11ed51f9eb363e6051230fbe"
+    },
+    "code_change": "acceptance_directory_constant_only",
+    "failed_directory": "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v4",
+    "failure_evidence_sha256": {
+      "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v4/replay-command.json": "b13a6e0f90a89722a70358b2396fe04e3a98969adedd4f3f8dec218774bb32a2",
+      "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v4/replay.log": "fe1ca90c908a309a07a6f10bce04292c498afad9a2255c80d799052ecc44b7aa"
+    },
+    "failure_stage": "before_numeric_compute_and_isolated_tests",
+    "formal_source_research_acceptance": false,
+    "formal_trading_acceptance": false,
+    "new_trading_backtests": 0,
+    "recovery_directory": "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v5",
+    "report": "docs/tasks/2026-10-10-第九十四批配置冻结与验收恢复-阶段记录.md",
+    "report_sha256": "b61137e893732370761944a5023410fdd8fddd67c67f046019cc2022946483f1",
+    "status": "failed_attempt_preserved_new_directory_planned",
+    "underlying_strategy_rules_changed": false
+  },
+  "case_id": "etf-filters-batch94-baseline-drift",
+  "nature": "immutable_failed_attempt_and_new_context_recovery_plan",
+  "purpose": "v4基线配置变化被正确拒绝，计算与正式验收0；v5仅切新目录，先完成配置导出再冻结执行，旧凭据不覆盖",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-10-batch94-baseline-drift-recovery.json",
+    "sha256": "87eff03a30e1ed97a5ef54624b652b3bdd01306c131bca9670a91c957da0abb7"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "case": {
+    "cause": [
+      "AST R has both original score and tie perturbation assignments; ambiguous selection correctly refused",
+      "negative-input tests incorrectly expected AssertionError; existing require raises ValueError"
+    ],
+    "files_sha256": {
+      "scripts/reference_strategy_batch103.py": "32762ba13a845044bc4832426a9c5ad701bd6d99ebdd04898f834e0f0f84b448",
+      "tests/unit/test_batch103_reference.py": "ec7698a3dfe92187555498f7d80f658b7a3d3c4699cf6609624f221eaa218d68"
+    },
+    "old_inputs_changed": false,
+    "original_rule_changes": false,
+    "status": "observed_development_failure",
+    "tests_failed": 6,
+    "tests_passed": 20
+  },
+  "case_id": "batch103-development-failure",
+  "nature": "observed_AST_selection_and_test_exception_failures_retained",
+  "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch103/20261011-initial-reference-test-failure/failure.json",
+    "sha256": "90664e17bb731679d9516abfebd120c94e7eceafc136ea394dcc980979d12ba2"
+  }
+}

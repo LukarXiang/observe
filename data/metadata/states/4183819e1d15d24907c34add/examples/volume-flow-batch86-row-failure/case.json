@@ -1,0 +1,25 @@
+{
+  "case": {
+    "command": "~/envs/quant/.venv/bin/python -m scripts.review_strategy_batch86 study",
+    "diagnosis": "Handoff prose said47781; authoritative pinned parquet is46781 rows (46063 trading+718 paused). Input SHA equals original batch47 accepted SHA. Initial86 inventory copied the incorrect prose count.",
+    "exit_code": 1,
+    "failure": "ValueError: Reference input shape changed at component before numeric execution",
+    "frozen_files": {
+      "review_strategy_batch86.py": "6d08480a9d2d9eb3f4b29947b4582f92c4322b4d836824289e29ba4c0d23275e",
+      "test_batch86_research.py": "c8a02331b786adb948f4d34f20dda6f660faaf1a1af9798db9fb911a5a66cec4"
+    },
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "numeric_windows_completed": 0,
+    "repair": "Validate actual46781 rows and duplicate keys; compute inventory count from pinned parquet. Preserve initial inventory and add corrected inventory+SHA-bound correction. No payload/source/formula changes.",
+    "status": "failed"
+  },
+  "case_id": "volume-flow-batch86-row-failure",
+  "nature": "immutable_wrong_prose_count_input_gate_failure",
+  "purpose": "首study在错误47781门禁失败、数值窗0；修前脚本/测试SHA和失败说明保留，更正以真实46781及重复键回归验收",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/development-failure-row-count/failure.json",
+    "sha256": "9dbfb60f0addad0e74f6dce95181aebf1fffe71c712f2c4dee753ce0cdefed05"
+  }
+}

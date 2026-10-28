@@ -1,0 +1,246 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "HTML_two_pairs",
+        "values": {
+          "kind": "index",
+          "name": "ETF",
+          "代码": "515950"
+        }
+      },
+      {
+        "case": "HTML_missing_node",
+        "detail": "'NoneType' object has no attribute 'find_all'",
+        "exception": "AttributeError"
+      },
+      {
+        "case": "HTML_no_separator",
+        "detail": "list index out of range",
+        "exception": "IndexError"
+      },
+      {
+        "case": "HTML_odd_parts",
+        "detail": "list index out of range",
+        "exception": "IndexError"
+      },
+      {
+        "case": "redacted_URL_never_requested",
+        "local_stub_calls": [
+          "http://.../515950.html?spm=search"
+        ]
+      },
+      {
+        "M": 600,
+        "N": 18,
+        "case": "actual_pool_parameters_seed_and_schedules",
+        "costs": [
+          [
+            {
+              "close_commission": 0.0001,
+              "close_tax": 0,
+              "close_today_commission": 0,
+              "min_commission": 5,
+              "open_commission": 0.0001,
+              "open_tax": 0
+            },
+            {
+              "type": "fund"
+            }
+          ]
+        ],
+        "pool": [
+          "159915.XSHE",
+          "510300.XSHG",
+          "510500.XSHG"
+        ],
+        "schedules": [
+          [
+            "my_trade",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "9:30"
+            }
+          ],
+          [
+            "check_lose",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "open"
+            }
+          ],
+          [
+            "print_trade_info",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "15:30"
+            }
+          ]
+        ],
+        "seed_last": 598,
+        "seed_len": 599,
+        "slips": [
+          0.001
+        ]
+      },
+      {
+        "case": "ranking_uses_global_pool",
+        "ignored_argument": [
+          "OTHER"
+        ],
+        "rank": [
+          "159915.XSHE"
+        ]
+      },
+      {
+        "case": "implicit_math_missing",
+        "detail": "name 'math' is not defined",
+        "exception": "NameError"
+      },
+      {
+        "case": "zero_variance_zscore",
+        "finite": false
+      },
+      {
+        "case": "constant_regression_R2",
+        "finite": false
+      },
+      {
+        "case": "timing_boundary_0.7",
+        "signal": "KEEP"
+      },
+      {
+        "case": "timing_boundary_0.7001",
+        "signal": "BUY"
+      },
+      {
+        "case": "timing_boundary_-0.7",
+        "signal": "KEEP"
+      },
+      {
+        "case": "timing_boundary_-0.7001",
+        "signal": "SELL"
+      },
+      {
+        "case": "new_limit_up_excluded",
+        "retained": []
+      },
+      {
+        "case": "held_limit_up_retained",
+        "retained": [
+          "159915.XSHE"
+        ]
+      },
+      {
+        "case": "held_limit_down_retained",
+        "retained": [
+          "159915.XSHE"
+        ]
+      },
+      {
+        "case": "filter_paused",
+        "retained": []
+      },
+      {
+        "case": "filter_is_st",
+        "retained": []
+      },
+      {
+        "case": "filter_name",
+        "retained": []
+      },
+      {
+        "calls": [
+          [
+            "adjust",
+            [
+              "159915.XSHE"
+            ]
+          ]
+        ],
+        "case": "KEEP_still_adjusts"
+      },
+      {
+        "calls": [
+          [
+            "close",
+            "159915.XSHE"
+          ]
+        ],
+        "case": "510300_forces_SELL"
+      },
+      {
+        "calls": [
+          [
+            "adjust",
+            []
+          ]
+        ],
+        "case": "filtered_top_not_replaced"
+      },
+      {
+        "case": "missing_position_key",
+        "detail": "'159915.XSHE'",
+        "exception": "KeyError"
+      },
+      {
+        "case": "immediate_position_delete_during_adjust",
+        "detail": "dictionary changed size during iteration",
+        "exception": "RuntimeError"
+      },
+      {
+        "case": "immediate_position_delete_during_SELL",
+        "detail": "dictionary changed size during iteration",
+        "exception": "RuntimeError"
+      },
+      {
+        "case": "order_state_0",
+        "close": false,
+        "open": false
+      },
+      {
+        "case": "order_state_50",
+        "close": false,
+        "open": true
+      },
+      {
+        "case": "order_state_100",
+        "close": true,
+        "open": true
+      },
+      {
+        "case": "stoploss_80.0",
+        "orders": []
+      },
+      {
+        "case": "stoploss_79.99",
+        "orders": [
+          [
+            "A",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "stoploss_80.01",
+        "orders": []
+      },
+      {
+        "case": "zero_cost_stoploss",
+        "detail": "float division by zero",
+        "exception": "ZeroDivisionError"
+      }
+    ],
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "scope": "Original SHA-bound function definitions only; platform dependencies are explicit synthetic local stubs"
+  },
+  "case_id": "ETF-info-rotation-batch75-diagnostics",
+  "nature": "original_function_synthetic_diagnostics",
+  "purpose": "33HTML/种子跳窗/KEEP调仓/过滤/止损边界与原错误诊断；不计交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch75/20261008-ETF-info-rotation/diagnostics.json",
+    "sha256": "0ae8c5488b756dc014b08e53b796b23ce8204bb061a46cf54e06a159bb4573db"
+  }
+}

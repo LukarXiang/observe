@@ -1,0 +1,59 @@
+{
+  "case": {
+    "capabilities_sha256": "f00731d59a59d7d74cb26346ab078f225b997b09f4de81dad7b9d2c4a74a8526",
+    "connect_timeout_seconds": 5,
+    "error": "PermissionError: [Errno 1] Operation not permitted",
+    "host": [
+      "123.125.108.14",
+      7709
+    ],
+    "new_rows_admitted": 0,
+    "not_a_backtest": true,
+    "original_symbol": "300354",
+    "planned_queries": [
+      {
+        "args": [
+          8,
+          0,
+          "300354",
+          0,
+          800
+        ],
+        "method": "get_security_bars"
+      },
+      {
+        "args": [
+          0,
+          "300354",
+          0,
+          2000,
+          20120920
+        ],
+        "method": "get_history_transaction_data"
+      },
+      {
+        "args": [
+          0,
+          "300354",
+          0,
+          2000,
+          20260929
+        ],
+        "method": "get_history_transaction_data"
+      }
+    ],
+    "published": false,
+    "queries_started": [],
+    "responses": [],
+    "status": "failed",
+    "tcp_attempts": 1
+  },
+  "case_id": "chan-batch87-tdx",
+  "nature": "bounded_native_transport_failure_not_provider_empty_history",
+  "purpose": "原300354计划1m/上市日/末日快照，单主机一次TCP被权限拒绝、市场查询/响应/新增0，无自动重试和发布，不能推断供应商无历史",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/tdx-probe.json",
+    "sha256": "79614778d253ae5b5210bcabf4fc3d5175ea420045d78fc09a665c8c58f9c930"
+  }
+}

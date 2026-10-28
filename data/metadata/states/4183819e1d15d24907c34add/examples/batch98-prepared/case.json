@@ -1,0 +1,215 @@
+{
+  "case": {
+    "implementation_sha256": {
+      "pyproject.toml": "2c937c8ac7608c6d84729f1fdb31b14d1ae3b0cfbf6ef1890fd283d3fdf179f4",
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/research_strategy_batch98.py": "5e1ed04d0a83f6f3e70d0821f496cce6c0c8868435a2c6446bf3bdf61ffdef5f",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "19c7557f03b045c5447b9c75b43f5df8f88eaebd018c9993801d61230940598c",
+      "tests/unit/test_batch98_research.py": "a1d36f830a910fed0e7aa525c5a606cee0c21ef6ed0c217afee2fe6ac4a2f5ff",
+      "uv.lock": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382"
+    },
+    "index": {
+      "calendar_sessions": 5280,
+      "columns": [
+        "date",
+        "index",
+        "open",
+        "high",
+        "low",
+        "close",
+        "preclose",
+        "volume",
+        "amount"
+      ],
+      "first": "2005-01-05",
+      "last": "2026-09-29",
+      "limits": [
+        "Index daily bars are original signal operands only; indices cannot be traded as IF contracts",
+        "Pre-IF-listing2005 data remain arithmetic samples; no IF portfolio/execution history inferred"
+      ],
+      "local_index": "000300.SH",
+      "no_internal_missing_dates": true,
+      "not_a_backtest": true,
+      "original_index": "000300.XSHG",
+      "partitions": [
+        {
+          "content_fingerprint": "2843c31b8faaa9401b2f527b4671750bb7d551e1a3c53b2efc54cfd6c268e8a6",
+          "file": "data/std/index_1d/all__2843c31b.parquet",
+          "partition": "all",
+          "rows": 5280,
+          "sha256": "28a1ccbb565895091aa8f1cb865254f5626d3514a7ba035073113d95d8e6c406"
+        }
+      ],
+      "rows": 5280,
+      "snapshot": "20261006-145049-e06c"
+    },
+    "operand_sha256": "b37fb1497f5cc21b4c11a3cb7d0a823b91661a63ab3e94579c0d639105372928",
+    "parent": "docs/handoff/2026-10-11-batch97-final-review.json",
+    "parent_sha256": "e953d027c19032ef9957a48bbded6fa03aedf9cd03621b1686586643fc406ea9",
+    "source_inventory": [
+      {
+        "definitions": [
+          {
+            "first_line": 54,
+            "kind": "ClassDef",
+            "last_line": 102,
+            "methods": [
+              "__init__",
+              "__getattr__"
+            ],
+            "name": "TuShare"
+          },
+          {
+            "first_line": 429,
+            "kind": "FunctionDef",
+            "last_line": 463,
+            "methods": [],
+            "name": "Cal_index_turnover"
+          },
+          {
+            "first_line": 479,
+            "kind": "ClassDef",
+            "last_line": 727,
+            "methods": [
+              "__init__",
+              "get_data",
+              "get_turnover",
+              "_Calc_func",
+              "get_singal",
+              "_Cal_forward_ret",
+              "forward_distribution_plot",
+              "QuantReg_plot"
+            ],
+            "name": "VT_Factor"
+          },
+          {
+            "first_line": 734,
+            "kind": "ClassDef",
+            "last_line": 1199,
+            "methods": [
+              "__init__",
+              "Choose_Strategy",
+              "Strategy_a",
+              "Strategy_b",
+              "Strategy_c",
+              "Strategy_MA",
+              "Strategy_BBANDS",
+              "_Cal_MA",
+              "_Cal_BBANDS",
+              "back_testing",
+              "plot_net_value",
+              "summary",
+              "risk_indicator"
+            ],
+            "name": "BackTesting"
+          },
+          {
+            "first_line": 1208,
+            "kind": "FunctionDef",
+            "last_line": 1253,
+            "methods": [],
+            "name": "Statistical_indicator"
+          },
+          {
+            "first_line": 1257,
+            "kind": "FunctionDef",
+            "last_line": 1293,
+            "methods": [],
+            "name": "Data_Distribution_Plot"
+          }
+        ],
+        "lines": 1495,
+        "path": "2021年度精选策略/63.【复现】华泰证券-波动率和换手率构建牛熊指标.txt",
+        "sha256": "9dbf27618f8d0285ad9f7602954875e6dd8a6604e7c87def544b75e6055caac9",
+        "top_level_executed": false
+      },
+      {
+        "definitions": [
+          {
+            "first_line": 17,
+            "kind": "FunctionDef",
+            "last_line": 72,
+            "methods": [],
+            "name": "initialize"
+          },
+          {
+            "first_line": 75,
+            "kind": "FunctionDef",
+            "last_line": 78,
+            "methods": [],
+            "name": "before_market_open"
+          },
+          {
+            "first_line": 80,
+            "kind": "FunctionDef",
+            "last_line": 99,
+            "methods": [],
+            "name": "get_boll"
+          },
+          {
+            "first_line": 101,
+            "kind": "FunctionDef",
+            "last_line": 111,
+            "methods": [],
+            "name": "calc_change"
+          },
+          {
+            "first_line": 113,
+            "kind": "FunctionDef",
+            "last_line": 147,
+            "methods": [],
+            "name": "reblance"
+          },
+          {
+            "first_line": 152,
+            "kind": "FunctionDef",
+            "last_line": 188,
+            "methods": [],
+            "name": "calc_zscore_Rdev"
+          },
+          {
+            "first_line": 190,
+            "kind": "FunctionDef",
+            "last_line": 197,
+            "methods": [],
+            "name": "cal_ret_quantile"
+          },
+          {
+            "first_line": 199,
+            "kind": "FunctionDef",
+            "last_line": 206,
+            "methods": [],
+            "name": "get_up_stock"
+          },
+          {
+            "first_line": 207,
+            "kind": "FunctionDef",
+            "last_line": 217,
+            "methods": [],
+            "name": "get_ols"
+          }
+        ],
+        "lines": 236,
+        "path": "2023年度精选策略/58.北向RSRS与布林带择时.txt",
+        "sha256": "1ca06cbc4d95a15dd646bb1aa73b50fbf5503252071f9ed0a1461d08aa3c1e69",
+        "top_level_executed": false
+      }
+    ]
+  },
+  "case_id": "batch98-prepared",
+  "nature": "frozen_source_inventory_and_original_index",
+  "purpose": "1495/236原字节、6/9顶层定义清单、5280日线/逻辑与字节SHA、14冻结实现，未执行来源顶层",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch98/20261011-original-components-v1/prepared.json",
+    "sha256": "5640a4b2204d010df5da8d14faaeadc21b3e26a200e4ba77bb2fcb7203a023b2"
+  }
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "answer": "推进修正变体（推荐）",
+    "id": "D-bollinger",
+    "provenance": "conversation_confirmed",
+    "scope": "2020/52：去除布林上下轨标量[-1]索引，保留20日均值±2倍总体标准差，日频近似及唯一账本",
+    "status": "approved"
+  },
+  {
+    "answer": "推进动态锚定近似变体（推荐）",
+    "id": "D-pair-anchor",
+    "provenance": "conversation_confirmed",
+    "scope": "伊利/招行与海天/招行按每决策日锚定历史价，保留120日、比例1、±1和状态机；平台不等价",
+    "status": "approved"
+  },
+  {
+    "answer": "只修输入形状，保留滞后（推荐）",
+    "id": "D-svm-shape",
+    "provenance": "conversation_confirmed",
+    "scope": "SVM98预测样本改二维，旧特征、滞后和参数保留",
+    "status": "approved"
+  },
+  {
+    "answer": "推进修正近似变体（推荐）",
+    "id": "D-rsi",
+    "provenance": "conversation_confirmed",
+    "scope": "RSI40缺失窗口阻断；61行重算RSI6、整数阈值、9槽及实际现金分配保留",
+    "status": "approved"
+  },
+  {
+    "answer": "推进修正近似变体（推荐）",
+    "id": "D-rotation66",
+    "provenance": "conversation_confirmed",
+    "scope": "修datetime.timedelta和末值位置索引，保留60行价差/样本标准差/四位z/±2；动态锚定与日频近似",
+    "status": "approved"
+  },
+  {
+    "approval_copy": "data/metadata/decisions/D-numeric-means-approval.json",
+    "approval_file": "data/staging/strategies-batch14/20261005-long-history/numeric-policy-approval.json",
+    "id": "D-numeric-means",
+    "provenance": "archived_approval",
+    "scope": "国航及复星逐窗口math.fsum稳定求和；严格比较、均线参数、每笔2万元和两种资金保留",
+    "status": "approved"
+  },
+  {
+    "approval_copy": "data/metadata/decisions/D-ema55-approval.json",
+    "approval_file": "data/staging/strategies-batch18/20261005-kd-ema-lof/ema-policy-approval.json",
+    "id": "D-ema55",
+    "provenance": "archived_approval",
+    "scope": "三进兵TA-Lib连续EMA2/25/60、均值种子、跳已知停牌、八股顺序、五槽、现金除数及参与/滑点保留；19批已完成",
+    "status": "approved"
+  },
+  {
+    "id": "D-gac12",
+    "scope": "广汽2020/12近似经济规则确认，原问题待回复，不重复询问",
+    "status": "pending"
+  },
+  {
+    "id": "D-lowvol24",
+    "scope": "七股低波2022/24近似经济规则确认，原问题待回复",
+    "status": "pending"
+  },
+  {
+    "id": "D-allweather-fill",
+    "provenance": "conversation_pending",
+    "scope": "2024第二集/7及65全天候近似变体：显式自然日向前填充后pct_change/首值填零，去除fillna(method=None)兼容参数；保留120交易行、原ES尾部选择/分母、四基金和全部状态/交易规则，原平台pandas版本未证明；交易仍须通过基金输入和唯一Book门禁",
+    "status": "pending"
+  },
+  {
+    "id": "D-lowpb81-proxy",
+    "provenance": "conversation_pending",
+    "scope": "81号流通市值代理及现有历史沪深池，原70/35分支和截断后当日过滤、不补满/非正PB，月首先清仓再依实际现金及余仓设等额目标；100万元、2021-02至2026-09、唯一Book三成本，退市结算不足仍阻断；方案见第68批文档",
+    "status": "pending"
+  },
+  {
+    "id": "D-bp-liquidation",
+    "scope": "BP末价折现探索不能从其他批准推断获批；长区间原实验仍blocked",
+    "status": "evidence_recheck_required"
+  }
+]

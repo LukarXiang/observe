@@ -1,0 +1,46 @@
+{
+  "case": {
+    "not_a_backtest": true,
+    "original_input_rows_admitted": 0,
+    "profiles": [
+      {
+        "case": "fund-512100",
+        "first": "2016-11-04",
+        "last": "2026-10-08",
+        "native_parser_match": true,
+        "post_cutoff_rows": 2,
+        "rows": 2408,
+        "status": "success",
+        "strict_usable": false
+      },
+      {
+        "case": "fund-510220",
+        "first": "2011-03-28",
+        "last": "2022-11-17",
+        "native_parser_match": true,
+        "post_cutoff_rows": 0,
+        "rows": 2805,
+        "status": "success",
+        "strict_usable": false
+      },
+      {
+        "case": "fund-513500",
+        "first": "2014-01-15",
+        "last": "2026-10-08",
+        "native_parser_match": true,
+        "post_cutoff_rows": 2,
+        "rows": 3091,
+        "status": "success",
+        "strict_usable": false
+      }
+    ]
+  },
+  "case_id": "stock-bond-batch81-candidates",
+  "nature": "accepted_bounded_native_candidate_parser_audit",
+  "purpose": "三HTTP200/8304行，原解析器禁网逐值匹配；510220止于2022-11-17，六基金9截止后行排除、原生跳变不纠价，准入0",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/candidate-audit.json",
+    "sha256": "ca5c27ba7786789833f0a89ebcb328f434d29848cf252cace8c9839d0ec9397f"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "case": {
+    "config_not_written": true,
+    "error": "AttributeError: str object has no attribute exists",
+    "new_trading_backtests": 0,
+    "reason": "save archive helper requires Path;initial diagnostics receipt was passed as str",
+    "recovery": "Pass Path;reuse actual existing checkpoint;no strategy/input change",
+    "status": "observed_handoff_helper_failure"
+  },
+  "case_id": "batch104-handoff-path-failure",
+  "nature": "observed_helper_type_error",
+  "purpose": "归档helper需Path，改调用类型，无策略变化",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch104/20261011-metadata-update-path-failure/failure.json",
+    "sha256": "bb9b5262a5b163118081471d08eb3d492992e8456707e6c63737e0611ab4b822"
+  }
+}

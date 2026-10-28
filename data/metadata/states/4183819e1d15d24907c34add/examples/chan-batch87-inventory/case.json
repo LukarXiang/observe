@@ -1,0 +1,195 @@
+{
+  "case": {
+    "daily_end": "2026-09-29",
+    "daily_start": "2021-01-04",
+    "identity": [
+      {
+        "board": "gem",
+        "delist_date": null,
+        "exchange": "SZ",
+        "instrument": "300354.SZ",
+        "kind": "stock",
+        "list_date": "2012-09-20",
+        "listed": true,
+        "name": "东华测试"
+      }
+    ],
+    "instrument": "300354.SZ",
+    "instrument_tables": {
+      "adj_coverage": {
+        "columns": [
+          "instrument",
+          "status",
+          "requested_start",
+          "requested_end",
+          "verified_from",
+          "verified_through",
+          "has_gap",
+          "has_start_basis",
+          "confirmed_no_events",
+          "verified_at",
+          "source",
+          "evidence"
+        ],
+        "file": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/adj_coverage-input.parquet",
+        "rows": 1,
+        "sha256": "719c610b51e89d502c525e3a7c1daa60273ad2fb8fde27e147c4730dd656f2b1"
+      },
+      "adj_factors": {
+        "columns": [
+          "instrument",
+          "ex_date",
+          "back_factor"
+        ],
+        "file": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/adj_factors-input.parquet",
+        "rows": 15,
+        "sha256": "dfaa71a64a0445dfcff5d677df9e87c3e843af94cb15b17785c33ed10ebce8ef"
+      },
+      "bars_1d": {
+        "columns": [
+          "date",
+          "instrument",
+          "open",
+          "high",
+          "low",
+          "close",
+          "preclose",
+          "volume",
+          "amount",
+          "turnover",
+          "is_trading",
+          "is_st",
+          "pe_ttm",
+          "pb_mrq",
+          "board"
+        ],
+        "file": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/daily-reference.parquet",
+        "rows": 1392,
+        "sha256": "78bec1736ec56ad9e3d805e4a449c554c3f86ff8c3d34e8730e2db669e932273"
+      },
+      "bars_5m": {
+        "columns": [
+          "bar_end",
+          "instrument",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "amount",
+          "source"
+        ],
+        "file": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/bars_5m-input.parquet",
+        "rows": 0,
+        "sha256": "111df8cc876967633cfc6dbfc0173975b5f8e50a4eb33cf400a0a60321dccfc2"
+      },
+      "calendar": {
+        "columns": [
+          "date",
+          "is_open"
+        ],
+        "file": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/calendar-input.parquet",
+        "rows": 7938,
+        "sha256": "3cffa1ee0bdb1442745b8dd330be0d58bafa959c3b04bb997ee26da6997ca020"
+      },
+      "corp_actions": {
+        "columns": [
+          "instrument",
+          "ex_date",
+          "cash_per_share",
+          "bonus_ratio",
+          "rights_ratio",
+          "rights_price",
+          "record_date",
+          "pay_date",
+          "bonus_list_date",
+          "source"
+        ],
+        "file": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/corp_actions-input.parquet",
+        "rows": 14,
+        "sha256": "3b003b537adb8a5974f8096abb5e01fd75850faedd723af9a05da6cee584b1de"
+      },
+      "instruments": {
+        "columns": [
+          "instrument",
+          "name",
+          "kind",
+          "list_date",
+          "delist_date",
+          "listed",
+          "exchange",
+          "board"
+        ],
+        "file": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/instruments-input.parquet",
+        "rows": 1,
+        "sha256": "21cf01b28f19d4ad67947cad928b3b2450c9d628d22285afe45a728d26bb6f9f"
+      },
+      "minute_universe": {
+        "columns": [
+          "year",
+          "instrument",
+          "rank",
+          "avg_amount",
+          "traded_days",
+          "generated_asof"
+        ],
+        "file": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/minute_universe-input.parquet",
+        "rows": 0,
+        "sha256": "e1953a75a7c83d76728daec19812ad606aab8e929aff2fddde5bda5d9158851a"
+      }
+    },
+    "limits": [
+      "No registered1m table; original instrument absent from5m sample and minute_universe",
+      "Daily1392 rows start2021, not listing2012; daily reference does not recover1m or platform adjustment",
+      "Current identity is not a complete historical name/status chain; corporate record/pay/list dates missing",
+      "every_bar callback order/current completed-bar visibility and default slippage/participation unproved"
+    ],
+    "minute_original_rows_admitted": 0,
+    "not_a_backtest": true,
+    "registered_tables": [
+      "adj_coverage",
+      "adj_factors",
+      "bars_1d",
+      "bars_5m",
+      "calendar",
+      "company_controls_annual",
+      "corp_actions",
+      "financial_annual",
+      "financial_availability",
+      "financial_fields",
+      "financial_quarterly",
+      "index_1d",
+      "instruments",
+      "minute_universe",
+      "valuation_coverage",
+      "valuations_1d"
+    ],
+    "snapshot": "20261006-145049-e06c",
+    "table_rows": {
+      "adj_coverage": 5560,
+      "adj_factors": 64980,
+      "bars_1d": 6919789,
+      "bars_5m": 44571408,
+      "calendar": 7938,
+      "company_controls_annual": 73738,
+      "corp_actions": 59065,
+      "financial_annual": 95486,
+      "financial_availability": 1460899,
+      "financial_fields": 1911,
+      "financial_quarterly": 405867,
+      "index_1d": 5280,
+      "instruments": 6156,
+      "minute_universe": 4000,
+      "valuation_coverage": 1392,
+      "valuations_1d": 6848484
+    }
+  },
+  "case_id": "chan-batch87-inventory",
+  "nature": "frozen_original_instrument_dependency_inventory",
+  "purpose": "300354日线1392/因子15/行动14；5m实际筛0、分钟池0且无1m表，历史名称/行动日/回调可见性未放行",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/dependency-inventory.json",
+    "sha256": "29ff955baa8aa2c673208e8ca240690f098c8074322e46e365329de554d05e74"
+  }
+}

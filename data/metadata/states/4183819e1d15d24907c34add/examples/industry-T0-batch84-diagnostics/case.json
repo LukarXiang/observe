@@ -1,0 +1,344 @@
+{
+  "case": {
+    "case_count": 24,
+    "cases": [
+      {
+        "case": "0_defaults",
+        "fees": [
+          [
+            {
+              "close_commission": 0.0002,
+              "close_tax": 0,
+              "close_today_commission": 0,
+              "min_commission": 5,
+              "open_commission": 0.0002,
+              "open_tax": 0
+            },
+            {
+              "type": "fund"
+            }
+          ]
+        ],
+        "schedules": [
+          [
+            "trade",
+            [
+              "9:40"
+            ],
+            {}
+          ]
+        ],
+        "slippage": [
+          0.0
+        ],
+        "state": {
+          "etf_pool": [
+            "161725.XSHE",
+            "159992.XSHE",
+            "560080.XSHG",
+            "515700.XSHG",
+            "515250.XSHG",
+            "515790.XSHG",
+            "515880.XSHG",
+            "159819.XSHE",
+            "512720.XSHG",
+            "159740.XSHE",
+            "159985.XSHE",
+            "162411.XSHE",
+            "518880.XSHG",
+            "513100.XSHG"
+          ],
+          "m_days": 25
+        }
+      },
+      {
+        "case": "rotation_missing_math",
+        "error": "NameError"
+      },
+      {
+        "case": "rotation_positive",
+        "logged_types": [
+          "Series",
+          "Series",
+          "Series",
+          "Series",
+          "Series",
+          "Series",
+          "Series",
+          "Series",
+          "Series",
+          "Series",
+          "Series",
+          "Series",
+          "Series",
+          "Series"
+        ],
+        "ranking": [
+          "161725.XSHE",
+          "159992.XSHE",
+          "560080.XSHG",
+          "515700.XSHG",
+          "515250.XSHG",
+          "515790.XSHG",
+          "515880.XSHG",
+          "159819.XSHE",
+          "512720.XSHG",
+          "159740.XSHE",
+          "159985.XSHE",
+          "162411.XSHE",
+          "518880.XSHG",
+          "513100.XSHG"
+        ]
+      },
+      {
+        "case": "rotation_negative_still_selects",
+        "first": "161725.XSHE"
+      },
+      {
+        "case": "rotation_constant",
+        "logged_scores": [
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN",
+          "NaN"
+        ],
+        "ranking": [
+          "161725.XSHE",
+          "159992.XSHE",
+          "560080.XSHG",
+          "515700.XSHG",
+          "515250.XSHG",
+          "515790.XSHG",
+          "515880.XSHG",
+          "159819.XSHE",
+          "512720.XSHG",
+          "159740.XSHE",
+          "159985.XSHE",
+          "162411.XSHE",
+          "518880.XSHG",
+          "513100.XSHG"
+        ]
+      },
+      {
+        "case": "rotation_empty_dict",
+        "error": "KeyError",
+        "orders": []
+      },
+      {
+        "case": "rotation_zero_missing",
+        "orders": [
+          [
+            "161725.XSHE",
+            1000.0
+          ]
+        ]
+      },
+      {
+        "case": "rotation_held_target",
+        "orders": []
+      },
+      {
+        "case": "rotation_failed_sale",
+        "orders": [
+          [
+            "159992.XSHE",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "rotation_immediate_sale",
+        "orders": [
+          [
+            "159992.XSHE",
+            0
+          ],
+          [
+            "161725.XSHE",
+            1500.0
+          ]
+        ]
+      },
+      {
+        "case": "1_defaults",
+        "fees": [
+          [
+            {
+              "close_commission": 5e-05,
+              "close_tax": 0,
+              "min_commission": 0.1,
+              "open_commission": 5e-05
+            },
+            {
+              "type": "fund"
+            }
+          ]
+        ],
+        "schedules": [
+          [
+            "before_market_open",
+            [],
+            {
+              "time": "before_open"
+            }
+          ],
+          [
+            "market_open",
+            [],
+            {
+              "time": "9:30"
+            }
+          ],
+          [
+            "after_market_close",
+            [],
+            {
+              "time": "14:59"
+            }
+          ],
+          [
+            "after_market_close2",
+            [],
+            {
+              "time": "15:05"
+            }
+          ]
+        ],
+        "slippage": [
+          0.001
+        ],
+        "state": {
+          "open": 1,
+          "security1": "513030.XSHG",
+          "thresholdMax": 0.5,
+          "thresholdMin": 0.003,
+          "yclose": 1
+        }
+      },
+      {
+        "case": "T0_gap_0.0029999999999999996",
+        "gap": 0.0029999999999999996,
+        "orders": []
+      },
+      {
+        "case": "T0_gap_0.003",
+        "gap": 0.003,
+        "orders": [
+          [
+            "513030.XSHG",
+            1000.0
+          ]
+        ]
+      },
+      {
+        "case": "T0_gap_0.0030000000000000005",
+        "gap": 0.0030000000000000005,
+        "orders": [
+          [
+            "513030.XSHG",
+            1000.0
+          ]
+        ]
+      },
+      {
+        "case": "T0_gap_0.1",
+        "gap": 0.1,
+        "orders": [
+          [
+            "513030.XSHG",
+            1000.0
+          ]
+        ]
+      },
+      {
+        "case": "T0_gap_0.49999999999999994",
+        "gap": 0.49999999999999994,
+        "orders": [
+          [
+            "513030.XSHG",
+            1000.0
+          ]
+        ]
+      },
+      {
+        "case": "T0_gap_0.5",
+        "gap": 0.5,
+        "orders": [
+          [
+            "513030.XSHG",
+            1000.0
+          ]
+        ]
+      },
+      {
+        "case": "T0_gap_0.5000000000000001",
+        "gap": 0.5000000000000001,
+        "orders": []
+      },
+      {
+        "case": "T0_gap_-0.01",
+        "gap": -0.01,
+        "orders": []
+      },
+      {
+        "case": "T0_gap_nan",
+        "gap": "NaN",
+        "orders": []
+      },
+      {
+        "actual_gap": 0.0029999999999998916,
+        "case": "T0_decimal_subtraction_boundary",
+        "orders": []
+      },
+      {
+        "case": "T0_exit_21",
+        "keys": [],
+        "orders": []
+      },
+      {
+        "case": "T0_exit_22",
+        "keys": [
+          "unrelated"
+        ],
+        "orders": [
+          [
+            "513030.XSHG",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "T0_exit_23",
+        "keys": [
+          "513030.XSHG"
+        ],
+        "orders": [
+          [
+            "513030.XSHG",
+            0
+          ]
+        ]
+      }
+    ],
+    "not_a_backtest": true,
+    "scope": "Frozen original selected functions with controlled inputs; injected math and zero-missing positions are explicit diagnostic models"
+  },
+  "case_id": "industry-T0-batch84-diagnostics",
+  "nature": "accepted_original_function_controlled_state_diagnostics",
+  "purpose": "24受控原诊断；隐式math/Series日志/持仓键、常量NaN/失败卖出现金及原绝对阈值浮点边界保持，非交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch84/20261009-industry-ETF-T0/diagnostics.json",
+    "sha256": "505a29e88df1786ca9a549f7088ec68166dc663cf844930b37b5b985d9c386c6"
+  }
+}

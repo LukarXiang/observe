@@ -1,0 +1,291 @@
+{
+  "case": {
+    "funds": {
+      "159949.XSHE": {
+        "api_sha256": "88b2896dad2c4063e0bb5713dd2faae63672609b209382aaaffbce5a1ff4a5a1",
+        "attempts": [
+          {
+            "method": "GET",
+            "parameters": null,
+            "url": "https://finance.sina.com.cn/realstock/company/sz159949/hisdata_klc2/klc_kl.js"
+          }
+        ],
+        "case": "fund-159949",
+        "columns": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "amount",
+          "postVol",
+          "postAmt"
+        ],
+        "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-159949/parsed.parquet",
+        "published": false,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sz159949"
+          }
+        },
+        "rows": 2477,
+        "sha256": "ea41672d91f581543f057f9e79c061cb5c16a46507233447463b4b830bcc2d9d",
+        "status": "success",
+        "strict_usable": false,
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-159949/response.bin",
+            "sha256": "b809570de431aa0031744f319ddc7b2910ce35e041a2a4894708005f401a7e7d",
+            "status_code": 200
+          }
+        ]
+      },
+      "510050.XSHG": {
+        "api_sha256": "95e4d23f95af3bbbe56a4bb8d19965e3cd1cfbd519db744d51b7d782dee7ddc1",
+        "attempts": [
+          {
+            "method": "GET",
+            "parameters": null,
+            "url": "https://finance.sina.com.cn/realstock/company/sh510050/hisdata_klc2/klc_kl.js"
+          }
+        ],
+        "case": "fund-510050",
+        "columns": [
+          "date",
+          "prevclose",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "amount",
+          "postVol",
+          "postAmt"
+        ],
+        "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/parsed.parquet",
+        "published": false,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sh510050"
+          }
+        },
+        "rows": 5254,
+        "sha256": "17897aa46f5d66ba2878ad90f537ddd6c2d3d2d1baaf2b321cdc333d6b4237f2",
+        "status": "success",
+        "strict_usable": false,
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/response.bin",
+            "sha256": "8b6a76e92933b1f19b96c8273162aa953ad9edc1fea81b85886c7d7c0c24f323",
+            "status_code": 200
+          }
+        ]
+      },
+      "510300.XSHG": {
+        "columns": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "amount",
+          "postVol",
+          "postAmt"
+        ],
+        "file": "data/raw/macd_patterns_probe_batch20/etf510300/20261005-macd-patterns.parquet",
+        "parameters": {
+          "symbol": "sh510300"
+        },
+        "rows": 3488,
+        "sha256": "40f3a5a24e70d1fc90517139d73982b08fdec9ee35a777a79e78ae959abb59ed",
+        "status": "success"
+      }
+    },
+    "missing_from_known_candidates": [
+      "159928.XSHE"
+    ],
+    "new_requests": 0,
+    "original_adjusted_price_equivalence_proven": false,
+    "profiles": [
+      {
+        "candidate": {
+          "api_sha256": "95e4d23f95af3bbbe56a4bb8d19965e3cd1cfbd519db744d51b7d782dee7ddc1",
+          "attempts": [
+            {
+              "method": "GET",
+              "parameters": null,
+              "url": "https://finance.sina.com.cn/realstock/company/sh510050/hisdata_klc2/klc_kl.js"
+            }
+          ],
+          "case": "fund-510050",
+          "columns": [
+            "date",
+            "prevclose",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "amount",
+            "postVol",
+            "postAmt"
+          ],
+          "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/parsed.parquet",
+          "published": false,
+          "query": {
+            "function": "fund_etf_hist_sina",
+            "parameters": {
+              "symbol": "sh510050"
+            }
+          },
+          "rows": 5254,
+          "sha256": "17897aa46f5d66ba2878ad90f537ddd6c2d3d2d1baaf2b321cdc333d6b4237f2",
+          "status": "success",
+          "strict_usable": false,
+          "wire_responses": [
+            {
+              "encoding": null,
+              "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/response.bin",
+              "sha256": "8b6a76e92933b1f19b96c8273162aa953ad9edc1fea81b85886c7d7c0c24f323",
+              "status_code": 200
+            }
+          ]
+        },
+        "event_explanation_proven": false,
+        "excluded_after_cutoff": 2,
+        "first": "2005-02-23",
+        "last": "2026-09-29",
+        "native_prices_only": true,
+        "numeric_source_dtypes": {
+          "close": "float64",
+          "high": "float64",
+          "low": "float64",
+          "open": "float64"
+        },
+        "price_jump_examples": [],
+        "raw_rows": 5254,
+        "rows_to_cutoff": 5252,
+        "strict_usable": false,
+        "symbol": "510050.XSHG"
+      },
+      {
+        "candidate": {
+          "columns": [
+            "date",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "amount",
+            "postVol",
+            "postAmt"
+          ],
+          "file": "data/raw/macd_patterns_probe_batch20/etf510300/20261005-macd-patterns.parquet",
+          "parameters": {
+            "symbol": "sh510300"
+          },
+          "rows": 3488,
+          "sha256": "40f3a5a24e70d1fc90517139d73982b08fdec9ee35a777a79e78ae959abb59ed",
+          "status": "success"
+        },
+        "event_explanation_proven": false,
+        "excluded_after_cutoff": 1,
+        "first": "2012-05-28",
+        "last": "2026-09-29",
+        "native_prices_only": true,
+        "numeric_source_dtypes": {
+          "close": "str",
+          "high": "str",
+          "low": "str",
+          "open": "str"
+        },
+        "price_jump_examples": [],
+        "raw_rows": 3488,
+        "rows_to_cutoff": 3487,
+        "strict_usable": false,
+        "symbol": "510300.XSHG"
+      },
+      {
+        "candidate": {
+          "api_sha256": "88b2896dad2c4063e0bb5713dd2faae63672609b209382aaaffbce5a1ff4a5a1",
+          "attempts": [
+            {
+              "method": "GET",
+              "parameters": null,
+              "url": "https://finance.sina.com.cn/realstock/company/sz159949/hisdata_klc2/klc_kl.js"
+            }
+          ],
+          "case": "fund-159949",
+          "columns": [
+            "date",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "amount",
+            "postVol",
+            "postAmt"
+          ],
+          "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-159949/parsed.parquet",
+          "published": false,
+          "query": {
+            "function": "fund_etf_hist_sina",
+            "parameters": {
+              "symbol": "sz159949"
+            }
+          },
+          "rows": 2477,
+          "sha256": "ea41672d91f581543f057f9e79c061cb5c16a46507233447463b4b830bcc2d9d",
+          "status": "success",
+          "strict_usable": false,
+          "wire_responses": [
+            {
+              "encoding": null,
+              "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-159949/response.bin",
+              "sha256": "b809570de431aa0031744f319ddc7b2910ce35e041a2a4894708005f401a7e7d",
+              "status_code": 200
+            }
+          ]
+        },
+        "event_explanation_proven": false,
+        "excluded_after_cutoff": 2,
+        "first": "2016-07-22",
+        "last": "2026-09-29",
+        "native_prices_only": true,
+        "numeric_source_dtypes": {
+          "close": "float64",
+          "high": "float64",
+          "low": "float64",
+          "open": "float64"
+        },
+        "price_jump_examples": [
+          {
+            "close": 1.211,
+            "date": "2024-10-08",
+            "native_close_change": 0.2001982160555007
+          }
+        ],
+        "raw_rows": 2477,
+        "rows_to_cutoff": 2475,
+        "strict_usable": false,
+        "symbol": "159949.XSHE"
+      }
+    ]
+  },
+  "case_id": "etf-filters-batch94-native-inputs",
+  "nature": "restored_native_candidates_not_active_Store_or_adjusted_platform_history",
+  "purpose": "510050/510300/159949旧响应与行情SHA/数量/数字字符串/截止日及跳变画像；缺159928，不造四池排名或收益",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/candidate-inputs.json",
+    "sha256": "29bb303ff6fb14b56f7ce77e6d708de1d5717d4270d225d40a007951f96281f7"
+  }
+}

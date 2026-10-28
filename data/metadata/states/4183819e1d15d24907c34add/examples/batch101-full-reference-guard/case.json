@@ -1,0 +1,86 @@
+{
+  "case": {
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/prepare_handoff.py",
+          "scripts/build_strategy_catalog.py",
+          "scripts/verify_financial_import.py",
+          "scripts/research_strategy_batch101.py",
+          "scripts/prepare_strategy_batch101.py",
+          "tests/unit/test_batch101_research.py",
+          "tests/unit/test_batch101_inputs.py",
+          "scripts/reference_strategy_batch101.py",
+          "tests/unit/test_batch101_reference.py",
+          "scripts/verify_strategy_batch101_reference.py",
+          "scripts/accept_strategy_batch101.py"
+        ],
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "returncode": 0
+      }
+    ],
+    "copied_files": 292,
+    "evidence_sha256": {
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/diff.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/isolated/command.json": "c8d382990dff1997f417223088c363157b6b3be78bb092dc728ff637f326cd11",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/isolated/isolation.json": "62a4688cf2054cbab5e2d373fd5ceb7ac1da58530ee937674affbe781e86b00f",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/isolated/readback.log": "b4609c250257959a15be73066e6a8262d8f7e0203f5b756887e2a1cace79a00e",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/isolated/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/isolated/stdout.log": "0ad02f320756230a07a978f87f1774bbb374151aa804a51bad7cdafddf16a97e",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/isolated/tests.xml": "7d749a6c64e4cda52bebe57b032e2b4f66a9690281895979d31f8cd52505426c",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/local/command.json": "695ad8e857339227d1e20f4bc780ce59e13ab6bf667b7ee698e0e657fc628f57",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/local/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/local/stdout.log": "3bfda7b4e7a8a7b843c8ea443633b08e1b5d2af45bda5db7d9e4c8db58668a52",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/local/tests.xml": "6f70fb0b85e99d9098477c9544bb6fa627921ff73e3059d8e067344cd0aa1798",
+      "data/staging/strategies-batch101/20261011-longest-reference-validation/ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "formal_source_research_acceptance": false,
+    "full_readback": {
+      "all_saved_ES_values_checked": 30924,
+      "max_abs_difference": 0.0,
+      "native_gap_crossing_windows_per_policy": 238,
+      "new_trading_backtests": 0,
+      "original_platform_input_proven": false,
+      "return_check": "Explicit natural-day scalar reference from native operands",
+      "status": "ok"
+    },
+    "implementation_sha256": {
+      "scripts/accept_strategy_batch101.py": "ad1b9db11d68c6e075a3caccc4e88f9867576a2ee173eab37f1c9764fb77acb4",
+      "scripts/prepare_strategy_batch101.py": "45db3d26c31f28491771e76c1d67fd22a978d3b523a84bc543ebd3415759658b",
+      "scripts/reference_strategy_batch101.py": "c3fd8c6cd07409204fdff25770747d09cd579d69ae80b552e74942c760b907dd",
+      "scripts/research_strategy_batch101.py": "db244747941bc3c20056587d03fc6059f904ea6873f9463a6cf5e1b9fb4b501a",
+      "scripts/verify_strategy_batch101_reference.py": "9943d58f901dc3d8e05355d8ff0e4cae4edc139d10ed3c808baa291bccab22a5",
+      "tests/unit/test_batch101_acceptance.py": "0d320efff378bbcbe96025c1dd04d1123d3a6ab10f8bb2e918f8251492141622",
+      "tests/unit/test_batch101_inputs.py": "68651b6892c42ffa89b9fd605d81c4a54bd2d22d41f0bf87f52979b039136cde",
+      "tests/unit/test_batch101_reference.py": "2fef5af2f54a455871b557a2feaff5118e385536978f06cd780142b3ce3b0fe6",
+      "tests/unit/test_batch101_reference_readback.py": "815a5646a7799ee1e6abc174c80986af00d8bdba3163f2977d49d04ce4ff5383",
+      "tests/unit/test_batch101_research.py": "b0b39c24d9524907106e4ba9ac1d585c76e463d9dfd398eed64628cd87bf2264"
+    },
+    "isolated_passed": 50,
+    "local_passed": 50,
+    "new_trading_backtests": 0,
+    "skips": 0,
+    "status": "ok_reference_phase"
+  },
+  "case_id": "batch101-full-reference-guard",
+  "nature": "actual50_local50_copied_and_saved_ES_all_rows_readback",
+  "purpose": "6实际导入、0skip、各30924保存ES值/窗/缺口/分年检查；非全仓pytest",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch101/20261011-longest-reference-validation/checked.json",
+    "sha256": "b47e33cad7a776f15d113894f8125210e6abf63cdb42231c745db38d5a075945"
+  }
+}

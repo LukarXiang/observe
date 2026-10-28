@@ -1,0 +1,5063 @@
+{
+ "status": "ok",
+ "snapshot": "20261006-145049-e06c",
+ "reviews": {
+  "sources": [
+   {
+    "source_path": "repo/量化策略源代码/2024年度精选策略1/38.ETF核心资产轮动-添油加醋.txt",
+    "source_copy": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/source-reviews/S-56338f4ceb26.source",
+    "source_sha256": "0e1415cfcb53c25a34c6b25e1480744b59a046b593332c93c4231335e64a826a",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 121,
+    "definition_ast": {
+     "initialize": "FunctionDef(name='initialize', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Name(id='set_benchmark', ctx=Load()), args=[Constant(value='513100.XSHG')], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='use_real_price'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='avoid_future_data'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_slippage', ctx=Load()), args=[Call(func=Name(id='FixedSlippage', ctx=Load()), args=[Constant(value=0.002)], keywords=[])], keywords=[])), Expr(value=Call(func=Name(id='set_order_cost', ctx=Load()), args=[Call(func=Name(id='OrderCost', ctx=Load()), args=[], keywords=[keyword(arg='open_tax', value=Constant(value=0)), keyword(arg='close_tax', value=Constant(value=0)), keyword(arg='open_commission', value=Constant(value=0.0002)), keyword(arg='close_commission', value=Constant(value=0.0002)), keyword(arg='close_today_commission', value=Constant(value=0)), keyword(arg='min_commission', value=Constant(value=5))])], keywords=[keyword(arg='type', value=Constant(value='fund'))])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='set_level', ctx=Load()), args=[Constant(value='system'), Constant(value='error')], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='etf_pool', ctx=Store())], value=List(elts=[Constant(value='518880.XSHG'), Constant(value='513100.XSHG'), Constant(value='159915.XSHE'), Constant(value='510180.XSHG')], ctx=Load())), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='m_days', ctx=Store())], value=Constant(value=25)), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='trade', ctx=Load()), Constant(value='9:30')], keywords=[]))], decorator_list=[], type_params=[])",
+     "get_rank": "FunctionDef(name='get_rank', args=arguments(posonlyargs=[], args=[arg(arg='etf_pool')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='score_list', ctx=Store())], value=List(elts=[], ctx=Load())), For(target=Name(id='etf', ctx=Store()), iter=Name(id='etf_pool', ctx=Load()), body=[Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='etf', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='m_days', ctx=Load()), Constant(value='1d'), List(elts=[Constant(value='close')], ctx=Load())], keywords=[])), Assign(targets=[Name(id='y', ctx=Store()), Subscript(value=Name(id='df', ctx=Load()), slice=Constant(value='log'), ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='log', ctx=Load()), args=[Attribute(value=Name(id='df', ctx=Load()), attr='close', ctx=Load())], keywords=[])), Assign(targets=[Name(id='x', ctx=Store()), Subscript(value=Name(id='df', ctx=Load()), slice=Constant(value='num'), ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='arange', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='df', ctx=Load()), attr='log', ctx=Load()), attr='size', ctx=Load())], keywords=[])), Assign(targets=[Tuple(elts=[Name(id='slope', ctx=Store()), Name(id='intercept', ctx=Store())], ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='polyfit', ctx=Load()), args=[Name(id='x', ctx=Load()), Name(id='y', ctx=Load()), Constant(value=1)], keywords=[])), Assign(targets=[Name(id='annualized_returns', ctx=Store())], value=BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='pow', ctx=Load()), args=[Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[Name(id='slope', ctx=Load())], keywords=[]), Constant(value=250)], keywords=[]), op=Sub(), right=Constant(value=1))), Assign(targets=[Name(id='r_squared', ctx=Store())], value=BinOp(left=Constant(value=1), op=Sub(), right=BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[BinOp(left=BinOp(left=Name(id='y', ctx=Load()), op=Sub(), right=BinOp(left=BinOp(left=Name(id='slope', ctx=Load()), op=Mult(), right=Name(id='x', ctx=Load())), op=Add(), right=Name(id='intercept', ctx=Load()))), op=Pow(), right=Constant(value=2))], keywords=[]), op=Div(), right=BinOp(left=BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='y', ctx=Load())], keywords=[]), op=Sub(), right=Constant(value=1)), op=Mult(), right=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='var', ctx=Load()), args=[Name(id='y', ctx=Load())], keywords=[keyword(arg='ddof', value=Constant(value=1))]))))), Assign(targets=[Name(id='score', ctx=Store())], value=BinOp(left=Name(id='annualized_returns', ctx=Load()), op=Mult(), right=Name(id='r_squared', ctx=Load()))), Assign(targets=[Name(id='df2', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='etf', ctx=Load()), BinOp(left=Attribute(value=Name(id='g', ctx=Load()), attr='m_days', ctx=Load()), op=Mult(), right=Constant(value=8)), Constant(value='1d'), List(elts=[Constant(value='close')], ctx=Load())], keywords=[])), Assign(targets=[Name(id='y2', ctx=Store()), Subscript(value=Name(id='df2', ctx=Load()), slice=Constant(value='log'), ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='log', ctx=Load()), args=[Attribute(value=Name(id='df2', ctx=Load()), attr='close', ctx=Load())], keywords=[])), Assign(targets=[Name(id='x2', ctx=Store()), Subscript(value=Name(id='df2', ctx=Load()), slice=Constant(value='num'), ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='arange', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='df2', ctx=Load()), attr='log', ctx=Load()), attr='size', ctx=Load())], keywords=[])), Assign(targets=[Tuple(elts=[Name(id='slope2', ctx=Store()), Name(id='intercept2', ctx=Store())], ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='polyfit', ctx=Load()), args=[Name(id='x2', ctx=Load()), Name(id='y2', ctx=Load()), Constant(value=1)], keywords=[])), Assign(targets=[Name(id='annualized_returns2', ctx=Store())], value=BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='pow', ctx=Load()), args=[Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[Name(id='slope2', ctx=Load())], keywords=[]), Constant(value=250)], keywords=[]), op=Sub(), right=Constant(value=1))), Assign(targets=[Name(id='r_squared2', ctx=Store())], value=BinOp(left=Constant(value=1), op=Sub(), right=BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[BinOp(left=BinOp(left=Name(id='y2', ctx=Load()), op=Sub(), right=BinOp(left=BinOp(left=Name(id='slope2', ctx=Load()), op=Mult(), right=Name(id='x2', ctx=Load())), op=Add(), right=Name(id='intercept2', ctx=Load()))), op=Pow(), right=Constant(value=2))], keywords=[]), op=Div(), right=BinOp(left=BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='y2', ctx=Load())], keywords=[]), op=Sub(), right=Constant(value=1)), op=Mult(), right=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='var', ctx=Load()), args=[Name(id='y2', ctx=Load())], keywords=[keyword(arg='ddof', value=Constant(value=1))]))))), Assign(targets=[Name(id='score', ctx=Store())], value=BinOp(left=Name(id='score', ctx=Load()), op=Sub(), right=BinOp(left=BinOp(left=Name(id='annualized_returns2', ctx=Load()), op=Mult(), right=Name(id='r_squared2', ctx=Load())), op=Div(), right=Constant(value=6)))), Expr(value=Call(func=Attribute(value=Name(id='score_list', ctx=Load()), attr='append', ctx=Load()), args=[Name(id='score', ctx=Load())], keywords=[]))], orelse=[]), Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Attribute(value=Name(id='pd', ctx=Load()), attr='DataFrame', ctx=Load()), args=[], keywords=[keyword(arg='index', value=Name(id='etf_pool', ctx=Load())), keyword(arg='data', value=Dict(keys=[Constant(value='score')], values=[Name(id='score_list', ctx=Load())]))])), Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Attribute(value=Name(id='df', ctx=Load()), attr='sort_values', ctx=Load()), args=[], keywords=[keyword(arg='by', value=Constant(value='score')), keyword(arg='ascending', value=Constant(value=False))])), Return(value=Name(id='df', ctx=Load()))], decorator_list=[], type_params=[])",
+     "trade": "FunctionDef(name='trade', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='target_num', ctx=Store())], value=Constant(value=1)), Assign(targets=[Name(id='rank_df', ctx=Store())], value=Call(func=Name(id='get_rank', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='etf_pool', ctx=Load())], keywords=[])), Assign(targets=[Name(id='c', ctx=Store())], value=BinOp(left=Call(func=Name(id='max', ctx=Load()), args=[Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Name(id='rank_df', ctx=Load()), attr='score', ctx=Load())], keywords=[])], keywords=[]), op=Sub(), right=Call(func=Name(id='min', ctx=Load()), args=[Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Name(id='rank_df', ctx=Load()), attr='score', ctx=Load())], keywords=[])], keywords=[]))), If(test=BoolOp(op=And(), values=[Compare(left=Name(id='c', ctx=Load()), ops=[Lt()], comparators=[Constant(value=15)]), Compare(left=Name(id='c', ctx=Load()), ops=[Gt()], comparators=[Constant(value=0.1)])]), body=[Assign(targets=[Name(id='target_list', ctx=Store())], value=Subscript(value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Name(id='rank_df', ctx=Load()), attr='index', ctx=Load())], keywords=[]), slice=Slice(lower=Constant(value=0), upper=Name(id='target_num', ctx=Load())), ctx=Load()))], orelse=[Assign(targets=[Name(id='target_list', ctx=Store())], value=List(elts=[], ctx=Load()))]), Assign(targets=[Name(id='real_target_list', ctx=Store())], value=List(elts=[], ctx=Load())), For(target=Name(id='etf', ctx=Store()), iter=Name(id='target_list', ctx=Load()), body=[Assign(targets=[Name(id='hl', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='etf', ctx=Load()), Constant(value=18), Constant(value='1d'), List(elts=[Constant(value='high'), Constant(value='low')], ctx=Load())], keywords=[])), If(test=Compare(left=Subscript(value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='polyfit', ctx=Load()), args=[Attribute(value=Name(id='hl', ctx=Load()), attr='low', ctx=Load()), Attribute(value=Name(id='hl', ctx=Load()), attr='high', ctx=Load()), Constant(value=1)], keywords=[]), slice=Constant(value=0), ctx=Load()), ops=[Gt()], comparators=[Call(func=Name(id='getBeta', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='etf', ctx=Load())], keywords=[])]), body=[Expr(value=Call(func=Attribute(value=Name(id='real_target_list', ctx=Load()), attr='append', ctx=Load()), args=[Name(id='etf', ctx=Load())], keywords=[]))], orelse=[])], orelse=[]), Assign(targets=[Name(id='target_list', ctx=Store())], value=Name(id='real_target_list', ctx=Load())), Assign(targets=[Name(id='hold_list', ctx=Store())], value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[])), For(target=Name(id='etf', ctx=Store()), iter=Name(id='hold_list', ctx=Load()), body=[If(test=Compare(left=Name(id='etf', ctx=Load()), ops=[NotIn()], comparators=[Name(id='target_list', ctx=Load())]), body=[Expr(value=Call(func=Name(id='order_target_value', ctx=Load()), args=[Name(id='etf', ctx=Load()), Constant(value=0)], keywords=[]))], orelse=[])], orelse=[]), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='target_list', ctx=Load())], keywords=[]), ops=[NotEq()], comparators=[Constant(value=0)]), body=[Assign(targets=[Name(id='hold_list', ctx=Store())], value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[])), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='hold_list', ctx=Load())], keywords=[]), ops=[Lt()], comparators=[Name(id='target_num', ctx=Load())]), body=[Assign(targets=[Name(id='value', ctx=Store())], value=BinOp(left=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load()), op=Div(), right=BinOp(left=Name(id='target_num', ctx=Load()), op=Sub(), right=Call(func=Name(id='len', ctx=Load()), args=[Name(id='hold_list', ctx=Load())], keywords=[])))), For(target=Name(id='etf', ctx=Store()), iter=Name(id='target_list', ctx=Load()), body=[If(test=Compare(left=Attribute(value=Subscript(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), slice=Name(id='etf', ctx=Load()), ctx=Load()), attr='total_amount', ctx=Load()), ops=[Eq()], comparators=[Constant(value=0)]), body=[Expr(value=Call(func=Name(id='order_target_value', ctx=Load()), args=[Name(id='etf', ctx=Load()), Name(id='value', ctx=Load())], keywords=[]))], orelse=[])], orelse=[])], orelse=[])], orelse=[])], decorator_list=[], type_params=[])",
+     "getBeta": "FunctionDef(name='getBeta', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='etf')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='beta', ctx=Store())], value=Constant(value=0)), If(test=Compare(left=Name(id='etf', ctx=Load()), ops=[Eq()], comparators=[Constant(value='518880.XSHG')]), body=[Assign(targets=[Name(id='beta', ctx=Store())], value=Call(func=Name(id='countBeta', ctx=Load()), args=[Name(id='context', ctx=Load()), Constant(value='518880.XSHG')], keywords=[]))], orelse=[]), If(test=Compare(left=Name(id='etf', ctx=Load()), ops=[Eq()], comparators=[Constant(value='513100.XSHG')]), body=[Assign(targets=[Name(id='beta', ctx=Store())], value=Call(func=Name(id='countBeta', ctx=Load()), args=[Name(id='context', ctx=Load()), Constant(value='513100.XSHG')], keywords=[]))], orelse=[]), If(test=Compare(left=Name(id='etf', ctx=Load()), ops=[Eq()], comparators=[Constant(value='159915.XSHE')]), body=[Assign(targets=[Name(id='beta', ctx=Store())], value=Call(func=Name(id='countBeta', ctx=Load()), args=[Name(id='context', ctx=Load()), Constant(value='159915.XSHE')], keywords=[]))], orelse=[]), If(test=Compare(left=Name(id='etf', ctx=Load()), ops=[Eq()], comparators=[Constant(value='510180.XSHG')]), body=[Assign(targets=[Name(id='beta', ctx=Store())], value=Call(func=Name(id='countBeta', ctx=Load()), args=[Name(id='context', ctx=Load()), Constant(value='510180.XSHG')], keywords=[]))], orelse=[]), Return(value=Name(id='beta', ctx=Load()))], decorator_list=[], type_params=[])",
+     "countBeta": "FunctionDef(name='countBeta', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='etf')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='etf_data', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='etf', ctx=Load()), Constant(value=250), Constant(value='1d')], keywords=[keyword(arg='fields', value=List(elts=[Constant(value='high'), Constant(value='low')], ctx=Load()))])), Assign(targets=[Name(id='betaList', ctx=Store())], value=List(elts=[], ctx=Load())), For(target=Name(id='i', ctx=Store()), iter=Call(func=Name(id='range', ctx=Load()), args=[Constant(value=0), BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='etf_data', ctx=Load())], keywords=[]), op=Sub(), right=Constant(value=21))], keywords=[]), body=[Assign(targets=[Name(id='df', ctx=Store())], value=Subscript(value=Attribute(value=Name(id='etf_data', ctx=Load()), attr='iloc', ctx=Load()), slice=Tuple(elts=[Slice(lower=Name(id='i', ctx=Load()), upper=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Constant(value=20))), Slice()], ctx=Load()), ctx=Load())), Expr(value=Call(func=Attribute(value=Name(id='betaList', ctx=Load()), attr='append', ctx=Load()), args=[Subscript(value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='polyfit', ctx=Load()), args=[Attribute(value=Name(id='df', ctx=Load()), attr='low', ctx=Load()), Attribute(value=Name(id='df', ctx=Load()), attr='high', ctx=Load()), Constant(value=1)], keywords=[]), slice=Constant(value=0), ctx=Load())], keywords=[]))], orelse=[]), Return(value=BinOp(left=Call(func=Name(id='mean', ctx=Load()), args=[Name(id='betaList', ctx=Load())], keywords=[]), op=Sub(), right=BinOp(left=Constant(value=2), op=Mult(), right=Call(func=Name(id='std', ctx=Load()), args=[Name(id='betaList', ctx=Load())], keywords=[]))))], decorator_list=[], type_params=[])"
+    },
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "四固定ETF短动量减长动量及动态RSRS阈值的9:30单仓轮动",
+     "fidelity": "121行全文/5函数冻结；显式math和NumPy mean/std注入的算术参考，原平台函数和基金交易依赖未齐",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "518880/513100/159915/510180原顺序；25行log年化乘R2减200行同公式的1/6，降序第一只，无正分过滤",
+      "spread": "最高分减最低分严格>.1且<15才选赢家，其他目标为空",
+      "beta": "250行high/low，range(len-21)取229个20行窗，末窗228:248，末两行不参与；mean减2std",
+      "timing": "赢家18行high对low斜率严格大于beta才入目标",
+      "orders": "每日9:30；先卖非目标，再按即时现金和空槽买；已持有赢家不重调，一槽",
+      "cost": "fund买卖.0002/最低5/卖税0，FixedSlippage.002，基准513100"
+     },
+     "gaps": [
+      "math/mean/std未显式导入，平台注入版本未证；参考明确注入，未获批完整交易修正版",
+      "基金历史身份/事件/参考价/状态/复权/费用及9:30成交未齐，原生跳变不能纠价",
+      "默认零Position、卖后即时现金与部分成交依赖未证"
+     ],
+     "future_information_risks": [
+      "事后固定池；供应商当前历史不证明当时复权和身份版本"
+     ],
+     "next_step": "验收最长25/200评分、完整共同日期排名、229窗阈值及禁网；依赖放行才唯一Book长区间三成本"
+    },
+    "newly_reviewed": true,
+    "original_line_numbers_retained": true
+   },
+   {
+    "source_path": "repo/量化策略源代码/聚宽2025年精选/90固收+.txt",
+    "source_copy": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/source-reviews/S-b9e2ea87e056.source",
+    "source_sha256": "8855383f94fa8a5b28a370263c31f0e1b02fdc0f272e0a602cce7636d5b187e7",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 45,
+    "definition_ast": {
+     "initialize": "FunctionDef(name='initialize', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Name(id='set_benchmark', ctx=Load()), args=[Constant(value='511010.XSHG')], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='use_real_price'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='avoid_future_data'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_slippage', ctx=Load()), args=[Call(func=Name(id='FixedSlippage', ctx=Load()), args=[Constant(value=0.002)], keywords=[])], keywords=[])), Expr(value=Call(func=Name(id='set_order_cost', ctx=Load()), args=[Call(func=Name(id='OrderCost', ctx=Load()), args=[], keywords=[keyword(arg='open_tax', value=Constant(value=0)), keyword(arg='close_tax', value=Constant(value=0)), keyword(arg='open_commission', value=Constant(value=0.0002)), keyword(arg='close_commission', value=Constant(value=0.0002)), keyword(arg='close_today_commission', value=Constant(value=0)), keyword(arg='min_commission', value=Constant(value=5))])], keywords=[keyword(arg='type', value=Constant(value='fund'))])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='set_level', ctx=Load()), args=[Constant(value='order'), Constant(value='error')], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='weights', ctx=Store())], value=Dict(keys=[Constant(value='510880.XSHG'), Constant(value='513100.XSHG'), Constant(value='518880.XSHG'), Constant(value='511010.XSHG')], values=[Constant(value=0.08), Constant(value=0.08), Constant(value=0.14), Constant(value=0.7)])), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='trade', ctx=Load()), Constant(value='9:35')], keywords=[]))], decorator_list=[], type_params=[])",
+     "trade": "FunctionDef(name='trade', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='total_value', ctx=Store())], value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='total_value', ctx=Load())), Assign(targets=[Name(id='cdata', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='weights', ctx=Store())], value=Attribute(value=Name(id='g', ctx=Load()), attr='weights', ctx=Load())), Assign(targets=[Name(id='balance', ctx=Store())], value=Dict(keys=[], values=[])), For(target=Name(id='stock', ctx=Store()), iter=Call(func=Attribute(value=Name(id='weights', ctx=Load()), attr='keys', ctx=Load()), args=[], keywords=[]), body=[Assign(targets=[Name(id='value', ctx=Store())], value=BinOp(left=Name(id='total_value', ctx=Load()), op=Mult(), right=Subscript(value=Name(id='weights', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()))), If(test=Compare(left=Name(id='stock', ctx=Load()), ops=[In()], comparators=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())]), body=[Assign(targets=[Name(id='diff', ctx=Store())], value=BinOp(left=Name(id='value', ctx=Load()), op=Sub(), right=Attribute(value=Subscript(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='value', ctx=Load())))], orelse=[Assign(targets=[Name(id='diff', ctx=Store())], value=Name(id='value', ctx=Load()))]), Assign(targets=[Subscript(value=Name(id='balance', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Store())], value=Name(id='diff', ctx=Load()))], orelse=[]), Assign(targets=[Name(id='rebalance', ctx=Store())], value=Call(func=Name(id='dict', ctx=Load()), args=[Call(func=Name(id='sorted', ctx=Load()), args=[Call(func=Attribute(value=Name(id='balance', ctx=Load()), attr='items', ctx=Load()), args=[], keywords=[])], keywords=[keyword(arg='key', value=Lambda(args=arguments(posonlyargs=[], args=[arg(arg='x')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=Subscript(value=Name(id='x', ctx=Load()), slice=Constant(value=1), ctx=Load()))), keyword(arg='reverse', value=Constant(value=False))])], keywords=[])), For(target=Name(id='stock', ctx=Store()), iter=Call(func=Attribute(value=Name(id='rebalance', ctx=Load()), attr='keys', ctx=Load()), args=[], keywords=[]), body=[Assign(targets=[Name(id='value', ctx=Store())], value=BinOp(left=Name(id='total_value', ctx=Load()), op=Mult(), right=Subscript(value=Name(id='weights', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()))), If(test=BoolOp(op=And(), values=[Compare(left=Call(func=Name(id='abs', ctx=Load()), args=[Subscript(value=Name(id='balance', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load())], keywords=[]), ops=[Gt()], comparators=[BinOp(left=Constant(value=0.15), op=Mult(), right=Name(id='value', ctx=Load()))]), Compare(left=Call(func=Name(id='abs', ctx=Load()), args=[BinOp(left=Subscript(value=Name(id='balance', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), op=Div(), right=Attribute(value=Subscript(value=Name(id='cdata', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='last_price', ctx=Load()))], keywords=[]), ops=[Gt()], comparators=[Constant(value=100)])]), body=[If(test=Compare(left=Subscript(value=Name(id='balance', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), ops=[Lt()], comparators=[Constant(value=0)]), body=[Expr(value=Call(func=Name(id='order_target_value', ctx=Load()), args=[Name(id='stock', ctx=Load()), Name(id='value', ctx=Load())], keywords=[]))], orelse=[If(test=Compare(left=BinOp(left=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='cash', ctx=Load()), op=Div(), right=Attribute(value=Subscript(value=Name(id='cdata', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='last_price', ctx=Load())), ops=[Gt()], comparators=[Constant(value=100)]), body=[Expr(value=Call(func=Name(id='order_target_value', ctx=Load()), args=[Name(id='stock', ctx=Load()), Name(id='value', ctx=Load())], keywords=[]))], orelse=[])])], orelse=[])], orelse=[])], decorator_list=[], type_params=[])"
+    },
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "每日9:35四ETF固定权重及偏离和数量阈值再平衡",
+     "fidelity": "45行全文/2函数冻结；原订单意图合成诊断和明确日线价格参考，缺盘中价格不构造真实持仓或收益",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "weights": "510880 .08、513100 .08、518880 .14、511010 .70；原字典并列顺序",
+      "targets": "回调开始冻结总权益和四目标差额；按差额升序逐个处理，后续权益变化不重新算目标",
+      "threshold": "严格绝对差额>目标价值15%，且绝对差额/last_price>100；买入另需当前cash/last_price>100",
+      "orders": "卖出直接order_target_value，买入不按缺口预先缩量；拒单、延迟卖款和部分成交改变后续订单",
+      "cost": "fund买卖.0002/最低5/卖税0，FixedSlippage.002；每日9:35，基准511010"
+     },
+     "gaps": [
+      "四ETF历史身份/完整事件/参考价/复权/状态/费用版本及9:35价格、实际成交轨迹未齐",
+      "缺失实时价与零价保留原错误，不以日线close/open替换last_price",
+      "即时/延迟/失败和部分成交诊断为独立合成情形，不是账本回测；标题不证明无风险收益"
+     ],
+     "future_information_risks": [
+      "固定权重/四池事后偏差；当前原生历史与日频参考不能证明盘中可用信息"
+     ],
+     "next_step": "核510880/511010正式旧输入SHA、原15%/100/现金及目标冻结边界、日线参考覆盖和禁网；盘中依赖未齐则搁置交易"
+    },
+    "newly_reviewed": true,
+    "original_line_numbers_retained": true
+   }
+  ],
+  "references": [
+   {
+    "file": "repo/backtrader/backtrader/indicators/ols.py",
+    "copy": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/references/ols.py",
+    "sha256": "cc228c5133bf1e27a36290c2fb5756cdc371f57e868e6fa9784c7db6ea9a81f4",
+    "commit": "b853d7c90b6721476eb5a5ea3135224e33db1f14"
+   },
+   {
+    "file": "repo/akshare/akshare/fund/fund_etf_em.py",
+    "copy": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/references/fund_etf_em.py",
+    "sha256": "0933e388bf082e92a8fea52b08393ad6673e95e8b827fd4332f027ba9280588a",
+    "commit": "0191689d57c667b7c7a198fd0cf97316837ef311"
+   },
+   {
+    "file": "repo/rqalpha/rqalpha/portfolio/account.py",
+    "copy": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/references/account.py",
+    "sha256": "0df29c6fbbfe15fe15aeab7715ffe322c1074e46004b5a95f4cf14b20665b6b0",
+    "commit": "0d98adefa87956e26f3e7ca5b26b5f3fc7ca834f"
+   }
+  ],
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "89662a6dae9e17b62226",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 488,
+    "已验证": 11,
+    "待审查": 2,
+    "暂不可复现": 65,
+    "非交易研究脚本": 88,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_history_fundamentals": 18,
+    "get_valuation": 20,
+    "finance.run_query": 87,
+    "macro.run_query": 7,
+    "bond.run_query": 3,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 317,
+    "get_bars": 79,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10,
+    "get_dominant_future": 28,
+    "marginsec_open": 4,
+    "marginsec_close": 4
+   },
+   "reviewed_sources": [
+    "S-bcd947018a9c",
+    "S-25a2ce74300f",
+    "S-bc319409eff5",
+    "S-7fc777423ab1",
+    "S-2986239ac760",
+    "S-a02bd5fb82fa",
+    "S-7dffe8edb923",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-641b9138fa5d",
+    "S-18d2868df809",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-7da7fcfec431",
+    "S-af09cfafe6cf",
+    "S-b0df386a9dcf",
+    "S-95b83db2a7bc",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-886271fb6b84",
+    "S-df677a5ebcd4",
+    "S-e2209e269e29",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-f2e9047924e2",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-acbb5f9cf09f",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-68c46bf70920",
+    "S-1422d134ff75",
+    "S-db01c1c96ded",
+    "S-063f47ab3d44",
+    "S-4daa86e5158f",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-63c706efe95f",
+    "S-12ba1c0d79f5",
+    "S-9d9f03067815",
+    "S-850132b43dab",
+    "S-147b0cfb49ff",
+    "S-d07877e2c354",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-00007afacbb0",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-57b937da520d",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-62e8d5c7a1f4",
+    "S-d4725a5a21fb",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-5831425175ce",
+    "S-630ebb99f658",
+    "S-cafee3ad464a",
+    "S-e66b1ad7d8fc",
+    "S-560abd656ca0",
+    "S-2c9d2319c7d3",
+    "S-84b17f428272",
+    "S-6b0a4a36011b",
+    "S-88c607586b82",
+    "S-0c2cff0626ee",
+    "S-51a96eadb4d2",
+    "S-954b41e5a396",
+    "S-9112d55dd0cc",
+    "S-9c1a89daf62c",
+    "S-7f7e299f339a",
+    "S-72e5a8798544",
+    "S-a4c77bd8b44e",
+    "S-bbf9fccbd6eb",
+    "S-c6fe57d02852",
+    "S-4b7dbe8af8ac",
+    "S-d0ecd9406080",
+    "S-bee2c8d71c81",
+    "S-13b988210e42",
+    "S-62e7304a4e91",
+    "S-6c7441327c3f",
+    "S-398e16c90dee",
+    "S-68930ba303f5",
+    "S-f81bb8422f94",
+    "S-87966f00e099",
+    "S-848cffb63799",
+    "S-790f0000ed44",
+    "S-38d7f27c1372",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-66d37162df54",
+    "S-bb187e7a4887",
+    "S-faf66e10ba1d",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-5f14afeecf21",
+    "S-979d5187c3ec",
+    "S-dc57f9049b90",
+    "S-daecf5bc2eef",
+    "S-d1d16967e9c8",
+    "S-f39f02e3e03f",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-3f190493784c",
+    "S-078084d1a6cb",
+    "S-e12e4a8dd5e5",
+    "S-05431e7ae641",
+    "S-de485dcbc1fe",
+    "S-c00703810bd3",
+    "S-7e6d5e73b9e8",
+    "S-6320a637da54",
+    "S-03e5e601f4cc",
+    "S-fc701a6d18eb",
+    "S-c5edb3ef544f",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-0dbbecb9eb1d",
+    "S-47d77840ec26",
+    "S-993fc6059661",
+    "S-4cc76c2c420b",
+    "S-2034813a5b91",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-84f3f0c3c784",
+    "S-c02ac3bad6ef",
+    "S-69bfefcb4d1d",
+    "S-653ef41eb685",
+    "S-c55ddc35cce6",
+    "S-c2a42783423c",
+    "S-75af9ddf3d76",
+    "S-f23cf187dc47",
+    "S-64a80805fb8a",
+    "S-a37c26ce95d6",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-8294e3469a6d",
+    "S-7ff11583b76b",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-21fdea960e9b",
+    "S-a9596eba9dc5",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-b3cc2dcd8a0d",
+    "S-285c04a4d1ce",
+    "S-bdfd3c6fde91",
+    "S-e0fb958bf2d4",
+    "S-da49d185309b",
+    "S-3626c17cbcae",
+    "S-cc41735b8a2d",
+    "S-53655cbaa9bc",
+    "S-b01f3e94a5b8",
+    "S-c28a0c7f5f80",
+    "S-c98372326f58",
+    "S-665c147b3cf0",
+    "S-c5a0e347acdc",
+    "S-69ef2eedcc68",
+    "S-4766560702c0",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-36ea1540cfac",
+    "S-31ff28a9afb2",
+    "S-d6db552a3293",
+    "S-9539de6881cd",
+    "S-31af0ed2018f",
+    "S-baf44b0f6001",
+    "S-56338f4ceb26",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-19c4382df792",
+    "S-976aaefe793c",
+    "S-7f248f5caa7b",
+    "S-84adbe33af88",
+    "S-ee1aa7ba22b3",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-68dd8d2d5eec",
+    "S-926d08fe0ba8",
+    "S-9e752d17571d",
+    "S-624b1cbccd4f",
+    "S-784d8f7e456f",
+    "S-e2462b051f4b",
+    "S-5008146cd1d4",
+    "S-e307438a42e6",
+    "S-f9ab6005c30c",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-ec0ab5ffcecf",
+    "S-2d40c2d698f7",
+    "S-6615db0d4e16",
+    "S-1fce2be2b9ec",
+    "S-85aa910ed165",
+    "S-028ef663b462",
+    "S-91dc4ee62715",
+    "S-7f049bb69647",
+    "S-d68e945d07cb",
+    "S-04dba1d0caaf",
+    "S-a40276639484",
+    "S-fb06e8894ab7",
+    "S-ee99921ca98d",
+    "S-4cbc5c72990f",
+    "S-c0fb1e63f51d",
+    "S-1e5fd99659cf",
+    "S-4d86dd0d21e5",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-a78d8acd0042",
+    "S-c1bba20dca69",
+    "S-b785d665cf54",
+    "S-73dd3253aaaa",
+    "S-b318f6effe5e",
+    "S-85df9d32a2d9",
+    "S-81a0307e6b20",
+    "S-dbd26615c5f8",
+    "S-8caa8420540b",
+    "S-fa0c56ab417c",
+    "S-5300a99a1779",
+    "S-b9e2ea87e056",
+    "S-4730e53b92bc",
+    "S-a55f095fba8d"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/89662a6dae9e17b62226"
+  },
+  "snapshot": "20261006-145049-e06c",
+  "previous_catalog_file": "data/catalog/strategies/c3227ea94614166e83b6/catalog.json",
+  "previous_catalog_sha256": "1127ad6fb2e7cec88d172f8670449e27b182fe0a3968eed7af7a7806b559d328",
+  "not_a_backtest": true
+ },
+ "checks": {
+  "status": "passed",
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/review_strategy_batch80.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/checks/check-0.log",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "scripts.verify_offline_tests",
+     "-q",
+     "tests/unit/test_batch80_research.py",
+     "tests/unit/test_batch79_research.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_catalog_schedules.py",
+     "tests/unit/test_research_metadata.py",
+     "tests/unit/test_external_cash_flows.py",
+     "tests/integration/test_strategy_merge.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/checks/check-1.log",
+    "sha256": "c2e709e2ed023644371bbc67d3648879f52cd82fe7cdcc1a66777af27de4152b"
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/checks/check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "scripts/review_strategy_batch79.py": "08b0198d91092d71074f01d11b0a432fff16db9c7b4cd2a8cd1094fc80e5b0ae",
+   "scripts/review_strategy_batch80.py": "752967621f2eea4de0a7ecb36c26022b289a67a6e235e9204871206dbe983661",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "src/observe/strategy_catalog.py": "6a5fb9dd9d075901feedd6966d1ac50b9cbce781ec5024ac06926bc9ef050b75",
+   "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "tests/unit/test_batch79_research.py": "59e525fdd9a97814a8a330a5162115be3b55de7af6a848eb3a37110cf93950f6",
+   "tests/unit/test_batch80_research.py": "1141fd0bdbe866baa102039f5d0bf1392f7df24be7f358f853901055c02d3de2",
+   "tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91"
+  },
+  "evidence_sha256": {
+   "baseline.json": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4",
+   "beta-components.parquet": "6cb01a976c35cbd0f15d8e171109927c7b058507ecf223d1397b88557da51d35",
+   "catalog-before.json": "bec67241dd888f3f1abda0b479e7f892ccbf12b0bb73bd756047e5c43366442c",
+   "component-research.json": "f50211ed7e371d569941b132b606c1991b03ef4765a1e6f786c5e35964f3e77b",
+   "dependency-inventory.json": "afdec476db4355534358bdc05e4f778b5e87cbc21051e22a143547c602aac458",
+   "diagnostics.json": "1808e49c7abf42550f60c45555e91813aa1a86656e95d4269c3833ebe92e89a7",
+   "fixed-weight-price-reference.parquet": "3f7134cb7538f8b4595fd82b0ad888d56bc90b698e1b4d2e5f66c45294c4b205",
+   "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "input-binding.json": "fd1e156d8b740d3b1350ff72fcece64cc7b4c6e241743e6d9fdb00e91885ad6c",
+   "offline-attempt-1.json": "2408838e930b1c36e9eaf399f60bd9dd16cce7bc93e570636ab0656daf71ca13",
+   "offline-attempt-1.log": "834e4cabbc981d5e754974bc02ea867f10273d27c6f88f76d49367407ef36b76",
+   "offline-catalog.json": "ddeb107dedff7f13f2ffd78e78787986f230cdb2cef544e781825e4c90431ac9",
+   "offline-verification.json": "6271015f9c44ab8fad8809d489d699ed40f75ece9461ced008488efc5577b7eb",
+   "progress-start.json": "5e5145ba268aa832f9e23a1f0a02fb8c4e38aa5613757d7f728cb0d13d415090",
+   "rank-components.parquet": "d4e027189821aa31e35a2e796b9d76cf1663f7ea396cad3fc430ca26f6a9f92a",
+   "reused-inputs.json": "31022fa1c8487cedca667203c9b9f047b4029619d72e925014a9d819a7776df9",
+   "score-components.parquet": "bdee1b09920a452e9c25678691b22dafa5de8676526997067a76575a519766fb",
+   "strategy_catalog.before.py": "ede9dd0fb12a1fd7ff769143fe74860a59bc02ed90a0a5366bb8517b2a0aab4d",
+   "study-attempt-1.json": "53436113911e88da736e2c265a82c092d62a673ecb00cc45bd6fa0f56f3d5b9f",
+   "study-attempt-1.log": "c2e72953c39cca22baeaa34cc8d90612c82fe737bf6881b32604437c4678566b",
+   "checks/check-0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+   "checks/check-1.log": "c2e709e2ed023644371bbc67d3648879f52cd82fe7cdcc1a66777af27de4152b",
+   "checks/check-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "development-failure-specialized/binding.json": "4b879d7a04ae109cc168f317a5649102679980d3104c3077e9c4f07e7fb1c2f3",
+   "development-failure-specialized/failure.json": "1633bf145271edbc3d8a199ea8de82947e05f92a1e6c8d75c9bd6fe255648cf5",
+   "development-failure-specialized/review_strategy_batch80.py": "03c77003c9392b2049f22a8862f446daa87d223fdb5bb2237fc7a4a23c1a25d0",
+   "development-failure-specialized/tests.log": "297100a0cae80dfab8840361d655e45318bad3c8fb7c9824372d021358eb5e54",
+   "development-failure-specialized/test_batch80_research.py": "f861c0a8c2384289e3ede2488804b7a73ded88ea6a7280c4de5cb6c8425401cd",
+   "development-failure-window-cache/binding.json": "3277c522ed61d657311ac7c7553f2339f32755fdeb4896ccf0168e108c36e4f0",
+   "development-failure-window-cache/failure.json": "676d831aada752e8217e08d4e507c758d3a358adf85e5fde40a6ae6110fc3788",
+   "development-failure-window-cache/review_strategy_batch80.py": "4b17c4d380eb758e18120324b0036f8dc930a34c14037470083c065888c2fcc7",
+   "development-failure-window-cache/tests.log": "ce52721f09713c6c59ebb5d2df82f24952cb0d8f52957903fc230fd0a72bd2d0",
+   "development-failure-window-cache/test_batch80_research.py": "ccadd570bacd0c6fd498a86c1d75e68579ccca64cf4ca09f38d520ebbb8277ed",
+   "references/account.py": "0df29c6fbbfe15fe15aeab7715ffe322c1074e46004b5a95f4cf14b20665b6b0",
+   "references/fund_etf_em.py": "0933e388bf082e92a8fea52b08393ad6673e95e8b827fd4332f027ba9280588a",
+   "references/ols.py": "cc228c5133bf1e27a36290c2fb5756cdc371f57e868e6fa9784c7db6ea9a81f4",
+   "source-reviews/review.json": "217d0ace1f91778848722fa54b069eca090d22792f4fef16c00544c1e2278ead",
+   "source-reviews/S-56338f4ceb26.source": "0e1415cfcb53c25a34c6b25e1480744b59a046b593332c93c4231335e64a826a",
+   "source-reviews/S-b9e2ea87e056.source": "8855383f94fa8a5b28a370263c31f0e1b02fdc0f272e0a602cce7636d5b187e7",
+   "catalog-offline/catalog/strategies/implementation-evidence.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "catalog-offline/catalog/strategies/latest.json": "8d25d7e7d98927e8bd354a4ae13f6e978675ede21fdb842cacf6b2b475de86cc",
+   "catalog-offline/catalog/strategies/89662a6dae9e17b62226/catalog.json": "7cc9d34341578224a21a48f43d49ebcb0f9f0ea2a3c4e108f83f36e4a671846d",
+   "catalog-offline/catalog/strategies/89662a6dae9e17b62226/catalog.parquet": "d84e45b94f909a67d851ce143b6cd1843222cf0d88e72e9f9ec898ba1c35eab1",
+   "catalog-offline/catalog/strategies/89662a6dae9e17b62226/summary.json": "56046663df2956529466be7f62c314915ca97d9babba319fc1ddd5ade87dad7d",
+   "implementation-checked/scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "implementation-checked/scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "implementation-checked/scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "implementation-checked/scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "implementation-checked/scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "implementation-checked/scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "implementation-checked/scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "implementation-checked/scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "implementation-checked/scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "implementation-checked/scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "implementation-checked/scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "implementation-checked/scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "implementation-checked/scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "implementation-checked/scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "implementation-checked/scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "implementation-checked/scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "implementation-checked/scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "implementation-checked/scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "implementation-checked/scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "implementation-checked/scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "implementation-checked/scripts/review_strategy_batch79.py": "08b0198d91092d71074f01d11b0a432fff16db9c7b4cd2a8cd1094fc80e5b0ae",
+   "implementation-checked/scripts/review_strategy_batch80.py": "752967621f2eea4de0a7ecb36c26022b289a67a6e235e9204871206dbe983661",
+   "implementation-checked/scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "implementation-checked/scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "implementation-checked/scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "implementation-checked/src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "implementation-checked/src/observe/strategy_catalog.py": "6a5fb9dd9d075901feedd6966d1ac50b9cbce781ec5024ac06926bc9ef050b75",
+   "implementation-checked/src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "implementation-checked/src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "implementation-checked/src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "implementation-checked/src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "implementation-checked/tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "implementation-checked/tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "implementation-checked/tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "implementation-checked/tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "implementation-checked/tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "implementation-checked/tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "implementation-checked/tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "implementation-checked/tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "implementation-checked/tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "implementation-checked/tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "implementation-checked/tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "implementation-checked/tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "implementation-checked/tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "implementation-checked/tests/unit/test_batch79_research.py": "59e525fdd9a97814a8a330a5162115be3b55de7af6a848eb3a37110cf93950f6",
+   "implementation-checked/tests/unit/test_batch80_research.py": "1141fd0bdbe866baa102039f5d0bf1392f7df24be7f358f853901055c02d3de2",
+   "implementation-checked/tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91"
+  }
+ },
+ "offline": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "scripts/review_strategy_batch79.py": "08b0198d91092d71074f01d11b0a432fff16db9c7b4cd2a8cd1094fc80e5b0ae",
+   "scripts/review_strategy_batch80.py": "752967621f2eea4de0a7ecb36c26022b289a67a6e235e9204871206dbe983661",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "src/observe/strategy_catalog.py": "6a5fb9dd9d075901feedd6966d1ac50b9cbce781ec5024ac06926bc9ef050b75",
+   "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "tests/unit/test_batch79_research.py": "59e525fdd9a97814a8a330a5162115be3b55de7af6a848eb3a37110cf93950f6",
+   "tests/unit/test_batch80_research.py": "1141fd0bdbe866baa102039f5d0bf1392f7df24be7f358f853901055c02d3de2",
+   "tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91"
+  },
+  "not_a_backtest": true
+ },
+ "diagnostics": {
+  "cases": [
+   {
+    "case": "0_defaults",
+    "costs": [
+     [
+      {
+       "open_tax": 0,
+       "close_tax": 0,
+       "open_commission": 0.0002,
+       "close_commission": 0.0002,
+       "close_today_commission": 0,
+       "min_commission": 5
+      },
+      {
+       "type": "fund"
+      }
+     ]
+    ],
+    "slippage": [
+     0.002
+    ],
+    "schedules": [
+     [
+      "trade",
+      "9:30"
+     ]
+    ],
+    "pool": [
+     "518880.XSHG",
+     "513100.XSHG",
+     "159915.XSHE",
+     "510180.XSHG"
+    ]
+   },
+   {
+    "case": "1_defaults",
+    "costs": [
+     [
+      {
+       "open_tax": 0,
+       "close_tax": 0,
+       "open_commission": 0.0002,
+       "close_commission": 0.0002,
+       "close_today_commission": 0,
+       "min_commission": 5
+      },
+      {
+       "type": "fund"
+      }
+     ]
+    ],
+    "slippage": [
+     0.002
+    ],
+    "schedules": [
+     [
+      "trade",
+      "9:35"
+     ]
+    ],
+    "pool": {
+     "510880.XSHG": 0.08,
+     "513100.XSHG": 0.08,
+     "518880.XSHG": 0.14,
+     "511010.XSHG": 0.7
+    }
+   },
+   {
+    "case": "38_missing_math",
+    "exception": "NameError",
+    "missing": "math"
+   },
+   {
+    "case": "38_missing_mean",
+    "exception": "NameError",
+    "missing": "mean"
+   },
+   {
+    "case": "38_missing_std",
+    "exception": "NameError",
+    "missing": "std"
+   },
+   {
+    "case": "38_c_equal_lower",
+    "orders": [],
+    "events": [],
+    "initial_total": 1000.0,
+    "final_cash": 1000.0,
+    "final_synthetic_values": {},
+    "mode": "delayed",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_c_below_lower",
+    "orders": [],
+    "events": [],
+    "initial_total": 1000.0,
+    "final_cash": 1000.0,
+    "final_synthetic_values": {},
+    "mode": "delayed",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_c_above_lower",
+    "orders": [
+     [
+      "518880.XSHG",
+      1000.0
+     ]
+    ],
+    "events": [
+     {
+      "stock": "518880.XSHG",
+      "target": 1000.0,
+      "cash_before": 1000.0,
+      "total_before": 1000.0
+     }
+    ],
+    "initial_total": 1000.0,
+    "final_cash": 1000.0,
+    "final_synthetic_values": {
+     "518880.XSHG": 0.0
+    },
+    "mode": "delayed",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_c_equal_upper",
+    "orders": [],
+    "events": [],
+    "initial_total": 1000.0,
+    "final_cash": 1000.0,
+    "final_synthetic_values": {},
+    "mode": "delayed",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_c_above_upper",
+    "orders": [],
+    "events": [],
+    "initial_total": 1000.0,
+    "final_cash": 1000.0,
+    "final_synthetic_values": {},
+    "mode": "delayed",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_c_below_upper",
+    "orders": [
+     [
+      "518880.XSHG",
+      1000.0
+     ]
+    ],
+    "events": [
+     {
+      "stock": "518880.XSHG",
+      "target": 1000.0,
+      "cash_before": 1000.0,
+      "total_before": 1000.0
+     }
+    ],
+    "initial_total": 1000.0,
+    "final_cash": 1000.0,
+    "final_synthetic_values": {
+     "518880.XSHG": 0.0
+    },
+    "mode": "delayed",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_same_holding",
+    "orders": [],
+    "events": [],
+    "initial_total": 1100.0,
+    "final_cash": 100.0,
+    "final_synthetic_values": {
+     "518880.XSHG": 1000.0
+    },
+    "mode": "immediate",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_switch_immediate",
+    "orders": [
+     [
+      "513100.XSHG",
+      0
+     ],
+     [
+      "518880.XSHG",
+      1100.0
+     ]
+    ],
+    "events": [
+     {
+      "stock": "513100.XSHG",
+      "target": 0,
+      "cash_before": 100.0,
+      "total_before": 1100.0
+     },
+     {
+      "stock": "518880.XSHG",
+      "target": 1100.0,
+      "cash_before": 1100.0,
+      "total_before": 1101.0
+     }
+    ],
+    "initial_total": 1100.0,
+    "final_cash": 0.0,
+    "final_synthetic_values": {
+     "518880.XSHG": 1100.0
+    },
+    "mode": "immediate",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_switch_delayed",
+    "orders": [
+     [
+      "513100.XSHG",
+      0
+     ]
+    ],
+    "events": [
+     {
+      "stock": "513100.XSHG",
+      "target": 0,
+      "cash_before": 100.0,
+      "total_before": 1100.0
+     }
+    ],
+    "initial_total": 1100.0,
+    "final_cash": 100.0,
+    "final_synthetic_values": {
+     "513100.XSHG": 1000.0
+    },
+    "mode": "delayed",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_switch_partial",
+    "orders": [
+     [
+      "513100.XSHG",
+      0
+     ]
+    ],
+    "events": [
+     {
+      "stock": "513100.XSHG",
+      "target": 0,
+      "cash_before": 100.0,
+      "total_before": 1100.0
+     }
+    ],
+    "initial_total": 1100.0,
+    "final_cash": 600.0,
+    "final_synthetic_values": {
+     "513100.XSHG": 500.0
+    },
+    "mode": "partial",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_slope_below",
+    "orders": [
+     [
+      "518880.XSHG",
+      0
+     ]
+    ],
+    "events": [
+     {
+      "stock": "518880.XSHG",
+      "target": 0,
+      "cash_before": 100.0,
+      "total_before": 1100.0
+     }
+    ],
+    "initial_total": 1100.0,
+    "final_cash": 100.0,
+    "final_synthetic_values": {
+     "518880.XSHG": 1000.0
+    },
+    "mode": "delayed",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "38_beta_windows",
+    "windows": [
+     [
+      0,
+      19
+     ],
+     [
+      1,
+      20
+     ],
+     [
+      2,
+      21
+     ],
+     [
+      3,
+      22
+     ],
+     [
+      4,
+      23
+     ],
+     [
+      5,
+      24
+     ],
+     [
+      6,
+      25
+     ],
+     [
+      7,
+      26
+     ],
+     [
+      8,
+      27
+     ],
+     [
+      9,
+      28
+     ],
+     [
+      10,
+      29
+     ],
+     [
+      11,
+      30
+     ],
+     [
+      12,
+      31
+     ],
+     [
+      13,
+      32
+     ],
+     [
+      14,
+      33
+     ],
+     [
+      15,
+      34
+     ],
+     [
+      16,
+      35
+     ],
+     [
+      17,
+      36
+     ],
+     [
+      18,
+      37
+     ],
+     [
+      19,
+      38
+     ],
+     [
+      20,
+      39
+     ],
+     [
+      21,
+      40
+     ],
+     [
+      22,
+      41
+     ],
+     [
+      23,
+      42
+     ],
+     [
+      24,
+      43
+     ],
+     [
+      25,
+      44
+     ],
+     [
+      26,
+      45
+     ],
+     [
+      27,
+      46
+     ],
+     [
+      28,
+      47
+     ],
+     [
+      29,
+      48
+     ],
+     [
+      30,
+      49
+     ],
+     [
+      31,
+      50
+     ],
+     [
+      32,
+      51
+     ],
+     [
+      33,
+      52
+     ],
+     [
+      34,
+      53
+     ],
+     [
+      35,
+      54
+     ],
+     [
+      36,
+      55
+     ],
+     [
+      37,
+      56
+     ],
+     [
+      38,
+      57
+     ],
+     [
+      39,
+      58
+     ],
+     [
+      40,
+      59
+     ],
+     [
+      41,
+      60
+     ],
+     [
+      42,
+      61
+     ],
+     [
+      43,
+      62
+     ],
+     [
+      44,
+      63
+     ],
+     [
+      45,
+      64
+     ],
+     [
+      46,
+      65
+     ],
+     [
+      47,
+      66
+     ],
+     [
+      48,
+      67
+     ],
+     [
+      49,
+      68
+     ],
+     [
+      50,
+      69
+     ],
+     [
+      51,
+      70
+     ],
+     [
+      52,
+      71
+     ],
+     [
+      53,
+      72
+     ],
+     [
+      54,
+      73
+     ],
+     [
+      55,
+      74
+     ],
+     [
+      56,
+      75
+     ],
+     [
+      57,
+      76
+     ],
+     [
+      58,
+      77
+     ],
+     [
+      59,
+      78
+     ],
+     [
+      60,
+      79
+     ],
+     [
+      61,
+      80
+     ],
+     [
+      62,
+      81
+     ],
+     [
+      63,
+      82
+     ],
+     [
+      64,
+      83
+     ],
+     [
+      65,
+      84
+     ],
+     [
+      66,
+      85
+     ],
+     [
+      67,
+      86
+     ],
+     [
+      68,
+      87
+     ],
+     [
+      69,
+      88
+     ],
+     [
+      70,
+      89
+     ],
+     [
+      71,
+      90
+     ],
+     [
+      72,
+      91
+     ],
+     [
+      73,
+      92
+     ],
+     [
+      74,
+      93
+     ],
+     [
+      75,
+      94
+     ],
+     [
+      76,
+      95
+     ],
+     [
+      77,
+      96
+     ],
+     [
+      78,
+      97
+     ],
+     [
+      79,
+      98
+     ],
+     [
+      80,
+      99
+     ],
+     [
+      81,
+      100
+     ],
+     [
+      82,
+      101
+     ],
+     [
+      83,
+      102
+     ],
+     [
+      84,
+      103
+     ],
+     [
+      85,
+      104
+     ],
+     [
+      86,
+      105
+     ],
+     [
+      87,
+      106
+     ],
+     [
+      88,
+      107
+     ],
+     [
+      89,
+      108
+     ],
+     [
+      90,
+      109
+     ],
+     [
+      91,
+      110
+     ],
+     [
+      92,
+      111
+     ],
+     [
+      93,
+      112
+     ],
+     [
+      94,
+      113
+     ],
+     [
+      95,
+      114
+     ],
+     [
+      96,
+      115
+     ],
+     [
+      97,
+      116
+     ],
+     [
+      98,
+      117
+     ],
+     [
+      99,
+      118
+     ],
+     [
+      100,
+      119
+     ],
+     [
+      101,
+      120
+     ],
+     [
+      102,
+      121
+     ],
+     [
+      103,
+      122
+     ],
+     [
+      104,
+      123
+     ],
+     [
+      105,
+      124
+     ],
+     [
+      106,
+      125
+     ],
+     [
+      107,
+      126
+     ],
+     [
+      108,
+      127
+     ],
+     [
+      109,
+      128
+     ],
+     [
+      110,
+      129
+     ],
+     [
+      111,
+      130
+     ],
+     [
+      112,
+      131
+     ],
+     [
+      113,
+      132
+     ],
+     [
+      114,
+      133
+     ],
+     [
+      115,
+      134
+     ],
+     [
+      116,
+      135
+     ],
+     [
+      117,
+      136
+     ],
+     [
+      118,
+      137
+     ],
+     [
+      119,
+      138
+     ],
+     [
+      120,
+      139
+     ],
+     [
+      121,
+      140
+     ],
+     [
+      122,
+      141
+     ],
+     [
+      123,
+      142
+     ],
+     [
+      124,
+      143
+     ],
+     [
+      125,
+      144
+     ],
+     [
+      126,
+      145
+     ],
+     [
+      127,
+      146
+     ],
+     [
+      128,
+      147
+     ],
+     [
+      129,
+      148
+     ],
+     [
+      130,
+      149
+     ],
+     [
+      131,
+      150
+     ],
+     [
+      132,
+      151
+     ],
+     [
+      133,
+      152
+     ],
+     [
+      134,
+      153
+     ],
+     [
+      135,
+      154
+     ],
+     [
+      136,
+      155
+     ],
+     [
+      137,
+      156
+     ],
+     [
+      138,
+      157
+     ],
+     [
+      139,
+      158
+     ],
+     [
+      140,
+      159
+     ],
+     [
+      141,
+      160
+     ],
+     [
+      142,
+      161
+     ],
+     [
+      143,
+      162
+     ],
+     [
+      144,
+      163
+     ],
+     [
+      145,
+      164
+     ],
+     [
+      146,
+      165
+     ],
+     [
+      147,
+      166
+     ],
+     [
+      148,
+      167
+     ],
+     [
+      149,
+      168
+     ],
+     [
+      150,
+      169
+     ],
+     [
+      151,
+      170
+     ],
+     [
+      152,
+      171
+     ],
+     [
+      153,
+      172
+     ],
+     [
+      154,
+      173
+     ],
+     [
+      155,
+      174
+     ],
+     [
+      156,
+      175
+     ],
+     [
+      157,
+      176
+     ],
+     [
+      158,
+      177
+     ],
+     [
+      159,
+      178
+     ],
+     [
+      160,
+      179
+     ],
+     [
+      161,
+      180
+     ],
+     [
+      162,
+      181
+     ],
+     [
+      163,
+      182
+     ],
+     [
+      164,
+      183
+     ],
+     [
+      165,
+      184
+     ],
+     [
+      166,
+      185
+     ],
+     [
+      167,
+      186
+     ],
+     [
+      168,
+      187
+     ],
+     [
+      169,
+      188
+     ],
+     [
+      170,
+      189
+     ],
+     [
+      171,
+      190
+     ],
+     [
+      172,
+      191
+     ],
+     [
+      173,
+      192
+     ],
+     [
+      174,
+      193
+     ],
+     [
+      175,
+      194
+     ],
+     [
+      176,
+      195
+     ],
+     [
+      177,
+      196
+     ],
+     [
+      178,
+      197
+     ],
+     [
+      179,
+      198
+     ],
+     [
+      180,
+      199
+     ],
+     [
+      181,
+      200
+     ],
+     [
+      182,
+      201
+     ],
+     [
+      183,
+      202
+     ],
+     [
+      184,
+      203
+     ],
+     [
+      185,
+      204
+     ],
+     [
+      186,
+      205
+     ],
+     [
+      187,
+      206
+     ],
+     [
+      188,
+      207
+     ],
+     [
+      189,
+      208
+     ],
+     [
+      190,
+      209
+     ],
+     [
+      191,
+      210
+     ],
+     [
+      192,
+      211
+     ],
+     [
+      193,
+      212
+     ],
+     [
+      194,
+      213
+     ],
+     [
+      195,
+      214
+     ],
+     [
+      196,
+      215
+     ],
+     [
+      197,
+      216
+     ],
+     [
+      198,
+      217
+     ],
+     [
+      199,
+      218
+     ],
+     [
+      200,
+      219
+     ],
+     [
+      201,
+      220
+     ],
+     [
+      202,
+      221
+     ],
+     [
+      203,
+      222
+     ],
+     [
+      204,
+      223
+     ],
+     [
+      205,
+      224
+     ],
+     [
+      206,
+      225
+     ],
+     [
+      207,
+      226
+     ],
+     [
+      208,
+      227
+     ],
+     [
+      209,
+      228
+     ],
+     [
+      210,
+      229
+     ],
+     [
+      211,
+      230
+     ],
+     [
+      212,
+      231
+     ],
+     [
+      213,
+      232
+     ],
+     [
+      214,
+      233
+     ],
+     [
+      215,
+      234
+     ],
+     [
+      216,
+      235
+     ],
+     [
+      217,
+      236
+     ],
+     [
+      218,
+      237
+     ],
+     [
+      219,
+      238
+     ],
+     [
+      220,
+      239
+     ],
+     [
+      221,
+      240
+     ],
+     [
+      222,
+      241
+     ],
+     [
+      223,
+      242
+     ],
+     [
+      224,
+      243
+     ],
+     [
+      225,
+      244
+     ],
+     [
+      226,
+      245
+     ],
+     [
+      227,
+      246
+     ],
+     [
+      228,
+      247
+     ]
+    ],
+    "value": -18.21195104830727,
+    "synthetic_slope": true
+   },
+   {
+    "case": "90_sell_cash_immediate",
+    "orders": [
+     [
+      "511010.XSHG",
+      7000.0
+     ],
+     [
+      "510880.XSHG",
+      800.0
+     ],
+     [
+      "513100.XSHG",
+      800.0
+     ],
+     [
+      "518880.XSHG",
+      1400.0000000000002
+     ]
+    ],
+    "events": [
+     {
+      "stock": "511010.XSHG",
+      "target": 7000.0,
+      "cash_before": 0.0,
+      "total_before": 10000.0
+     },
+     {
+      "stock": "510880.XSHG",
+      "target": 800.0,
+      "cash_before": 3000.0,
+      "total_before": 10001.0
+     },
+     {
+      "stock": "513100.XSHG",
+      "target": 800.0,
+      "cash_before": 2200.0,
+      "total_before": 10002.0
+     },
+     {
+      "stock": "518880.XSHG",
+      "target": 1400.0000000000002,
+      "cash_before": 1400.0,
+      "total_before": 10003.0
+     }
+    ],
+    "initial_total": 10000.0,
+    "final_cash": 1400.0,
+    "final_synthetic_values": {
+     "511010.XSHG": 7000.0,
+     "510880.XSHG": 800.0,
+     "513100.XSHG": 800.0,
+     "518880.XSHG": 0.0
+    },
+    "mode": "immediate",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "90_empty_immediate",
+    "orders": [
+     [
+      "510880.XSHG",
+      800.0
+     ],
+     [
+      "513100.XSHG",
+      800.0
+     ],
+     [
+      "518880.XSHG",
+      1400.0000000000002
+     ],
+     [
+      "511010.XSHG",
+      7000.0
+     ]
+    ],
+    "events": [
+     {
+      "stock": "510880.XSHG",
+      "target": 800.0,
+      "cash_before": 10000.0,
+      "total_before": 10000.0
+     },
+     {
+      "stock": "513100.XSHG",
+      "target": 800.0,
+      "cash_before": 9200.0,
+      "total_before": 10001.0
+     },
+     {
+      "stock": "518880.XSHG",
+      "target": 1400.0000000000002,
+      "cash_before": 8400.0,
+      "total_before": 10002.0
+     },
+     {
+      "stock": "511010.XSHG",
+      "target": 7000.0,
+      "cash_before": 7000.0,
+      "total_before": 10003.0
+     }
+    ],
+    "initial_total": 10000.0,
+    "final_cash": 0.0,
+    "final_synthetic_values": {
+     "510880.XSHG": 800.0,
+     "513100.XSHG": 800.0,
+     "518880.XSHG": 1400.0000000000002,
+     "511010.XSHG": 7000.0
+    },
+    "mode": "immediate",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "90_sell_cash_delayed",
+    "orders": [
+     [
+      "511010.XSHG",
+      7000.0
+     ]
+    ],
+    "events": [
+     {
+      "stock": "511010.XSHG",
+      "target": 7000.0,
+      "cash_before": 0.0,
+      "total_before": 10000.0
+     }
+    ],
+    "initial_total": 10000.0,
+    "final_cash": 0.0,
+    "final_synthetic_values": {
+     "511010.XSHG": 10000.0
+    },
+    "mode": "delayed",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "90_empty_delayed",
+    "orders": [
+     [
+      "510880.XSHG",
+      800.0
+     ],
+     [
+      "513100.XSHG",
+      800.0
+     ],
+     [
+      "518880.XSHG",
+      1400.0000000000002
+     ],
+     [
+      "511010.XSHG",
+      7000.0
+     ]
+    ],
+    "events": [
+     {
+      "stock": "510880.XSHG",
+      "target": 800.0,
+      "cash_before": 10000.0,
+      "total_before": 10000.0
+     },
+     {
+      "stock": "513100.XSHG",
+      "target": 800.0,
+      "cash_before": 10000.0,
+      "total_before": 10000.0
+     },
+     {
+      "stock": "518880.XSHG",
+      "target": 1400.0000000000002,
+      "cash_before": 10000.0,
+      "total_before": 10000.0
+     },
+     {
+      "stock": "511010.XSHG",
+      "target": 7000.0,
+      "cash_before": 10000.0,
+      "total_before": 10000.0
+     }
+    ],
+    "initial_total": 10000.0,
+    "final_cash": 10000.0,
+    "final_synthetic_values": {},
+    "mode": "delayed",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "90_sell_cash_partial",
+    "orders": [
+     [
+      "511010.XSHG",
+      7000.0
+     ],
+     [
+      "510880.XSHG",
+      800.0
+     ],
+     [
+      "513100.XSHG",
+      800.0
+     ],
+     [
+      "518880.XSHG",
+      1400.0000000000002
+     ]
+    ],
+    "events": [
+     {
+      "stock": "511010.XSHG",
+      "target": 7000.0,
+      "cash_before": 0.0,
+      "total_before": 10000.0
+     },
+     {
+      "stock": "510880.XSHG",
+      "target": 800.0,
+      "cash_before": 1500.0,
+      "total_before": 10001.0
+     },
+     {
+      "stock": "513100.XSHG",
+      "target": 800.0,
+      "cash_before": 1100.0,
+      "total_before": 10002.0
+     },
+     {
+      "stock": "518880.XSHG",
+      "target": 1400.0000000000002,
+      "cash_before": 700.0,
+      "total_before": 10003.0
+     }
+    ],
+    "initial_total": 10000.0,
+    "final_cash": 700.0,
+    "final_synthetic_values": {
+     "511010.XSHG": 8500.0,
+     "510880.XSHG": 400.0,
+     "513100.XSHG": 400.0,
+     "518880.XSHG": 0.0
+    },
+    "mode": "partial",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "90_empty_partial",
+    "orders": [
+     [
+      "510880.XSHG",
+      800.0
+     ],
+     [
+      "513100.XSHG",
+      800.0
+     ],
+     [
+      "518880.XSHG",
+      1400.0000000000002
+     ],
+     [
+      "511010.XSHG",
+      7000.0
+     ]
+    ],
+    "events": [
+     {
+      "stock": "510880.XSHG",
+      "target": 800.0,
+      "cash_before": 10000.0,
+      "total_before": 10000.0
+     },
+     {
+      "stock": "513100.XSHG",
+      "target": 800.0,
+      "cash_before": 9600.0,
+      "total_before": 10001.0
+     },
+     {
+      "stock": "518880.XSHG",
+      "target": 1400.0000000000002,
+      "cash_before": 9200.0,
+      "total_before": 10002.0
+     },
+     {
+      "stock": "511010.XSHG",
+      "target": 7000.0,
+      "cash_before": 8500.0,
+      "total_before": 10003.0
+     }
+    ],
+    "initial_total": 10000.0,
+    "final_cash": 5000.0,
+    "final_synthetic_values": {
+     "510880.XSHG": 400.0,
+     "513100.XSHG": 400.0,
+     "518880.XSHG": 700.0000000000001,
+     "511010.XSHG": 3500.0
+    },
+    "mode": "partial",
+    "error": null,
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "90_deviation_equal",
+    "orders": [],
+    "synthetic_state_only": true
+   },
+   {
+    "case": "90_deviation_above",
+    "orders": [
+     [
+      "510880.XSHG",
+      800.0
+     ]
+    ],
+    "synthetic_state_only": true
+   },
+   {
+    "case": "90_shares_equal",
+    "orders": [],
+    "synthetic_state_only": true
+   },
+   {
+    "case": "90_shares_above",
+    "orders": [
+     [
+      "510880.XSHG",
+      800.0
+     ]
+    ],
+    "synthetic_state_only": true
+   },
+   {
+    "case": "90_cash_equal",
+    "orders": [],
+    "synthetic_state_only": true
+   },
+   {
+    "case": "90_cash_above",
+    "orders": [
+     [
+      "510880.XSHG",
+      800.0
+     ]
+    ],
+    "synthetic_state_only": true
+   },
+   {
+    "case": "90_zero_price",
+    "orders": [],
+    "events": [],
+    "initial_total": 10000.0,
+    "final_cash": 10000.0,
+    "final_synthetic_values": {},
+    "mode": "delayed",
+    "error": "ZeroDivisionError",
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   },
+   {
+    "case": "90_missing_price",
+    "orders": [],
+    "events": [],
+    "initial_total": 10000.0,
+    "final_cash": 10000.0,
+    "final_synthetic_values": {},
+    "mode": "delayed",
+    "error": "KeyError",
+    "synthetic_state_only": true,
+    "not_a_backtest": true
+   }
+  ],
+  "not_a_backtest": true,
+  "injection_policy": "Explicit math and NumPy population mean/std; original platform equivalence unproved"
+ },
+ "components": {
+  "scores": {
+   "rows": 14155,
+   "first_history_end": "2007-03-12",
+   "last_history_end": "2026-09-29",
+   "years": {
+    "2007": 200,
+    "2008": 246,
+    "2009": 242,
+    "2010": 242,
+    "2011": 244,
+    "2012": 303,
+    "2013": 474,
+    "2014": 790,
+    "2015": 976,
+    "2016": 976,
+    "2017": 976,
+    "2018": 972,
+    "2019": 976,
+    "2020": 972,
+    "2021": 971,
+    "2022": 967,
+    "2023": 968,
+    "2024": 968,
+    "2025": 972,
+    "2026": 720
+   }
+  },
+  "beta": {
+   "rows": 13955,
+   "first_history_end": "2007-05-28",
+   "last_history_end": "2026-09-29",
+   "years": {
+    "2007": 150,
+    "2008": 246,
+    "2009": 242,
+    "2010": 242,
+    "2011": 244,
+    "2012": 253,
+    "2013": 474,
+    "2014": 690,
+    "2015": 976,
+    "2016": 976,
+    "2017": 976,
+    "2018": 972,
+    "2019": 976,
+    "2020": 972,
+    "2021": 971,
+    "2022": 967,
+    "2023": 968,
+    "2024": 968,
+    "2025": 972,
+    "2026": 720
+   }
+  },
+  "ranks": {
+   "rows": 2507,
+   "first_history_end": "2014-10-20",
+   "last_history_end": "2026-09-29",
+   "years": {
+    "2014": 53,
+    "2015": 244,
+    "2016": 244,
+    "2017": 244,
+    "2018": 243,
+    "2019": 244,
+    "2020": 243,
+    "2021": 43,
+    "2022": 42,
+    "2023": 242,
+    "2024": 242,
+    "2025": 243,
+    "2026": 180
+   }
+  },
+  "fixed_weight_daily_reference": {
+   "rows": 12804,
+   "first_history_end": "2013-07-31",
+   "last_history_end": "2026-09-29",
+   "years": {
+    "2013": 412,
+    "2014": 980,
+    "2015": 976,
+    "2016": 976,
+    "2017": 976,
+    "2018": 972,
+    "2019": 976,
+    "2020": 972,
+    "2021": 972,
+    "2022": 964,
+    "2023": 968,
+    "2024": 968,
+    "2025": 972,
+    "2026": 720
+   }
+  },
+  "profiles": [
+   {
+    "instrument": "518880.XSHG",
+    "rows": 3206,
+    "first": "2013-07-29",
+    "last": "2026-10-08",
+    "post_cutoff_rows": 2,
+    "strict_usable": false,
+    "invalid_ohlc_dates": [],
+    "raw_close_jumps_over30pct": [],
+    "jump_policy": "No event/adjustment inference, no smoothing or correction"
+   },
+   {
+    "instrument": "513100.XSHG",
+    "rows": 3203,
+    "first": "2013-07-31",
+    "last": "2026-10-08",
+    "post_cutoff_rows": 2,
+    "strict_usable": false,
+    "invalid_ohlc_dates": [],
+    "raw_close_jumps_over30pct": [
+     {
+      "date": "2022-01-14",
+      "close": 1.015,
+      "ratio_to_previous_native_row": 0.1954930662557781
+     }
+    ],
+    "jump_policy": "No event/adjustment inference, no smoothing or correction"
+   },
+   {
+    "instrument": "159915.XSHE",
+    "rows": 3597,
+    "first": "2011-12-09",
+    "last": "2026-10-08",
+    "post_cutoff_rows": 2,
+    "strict_usable": false,
+    "invalid_ohlc_dates": [],
+    "raw_close_jumps_over30pct": [],
+    "jump_policy": "No event/adjustment inference, no smoothing or correction"
+   },
+   {
+    "instrument": "510180.XSHG",
+    "rows": 4953,
+    "first": "2006-05-18",
+    "last": "2026-10-08",
+    "post_cutoff_rows": 2,
+    "strict_usable": false,
+    "invalid_ohlc_dates": [],
+    "raw_close_jumps_over30pct": [
+     {
+      "date": "2009-05-21",
+      "close": 0.604,
+      "ratio_to_previous_native_row": 0.09773462783171522
+     },
+     {
+      "date": "2013-12-23",
+      "close": 1.98,
+      "ratio_to_previous_native_row": 3.8596491228070176
+     }
+    ],
+    "jump_policy": "No event/adjustment inference, no smoothing or correction"
+   },
+   {
+    "instrument": "510880.XSHG",
+    "rows": 4790,
+    "first": "2007-01-18",
+    "last": "2026-10-08",
+    "post_cutoff_rows": 2,
+    "strict_usable": false,
+    "invalid_ohlc_dates": [],
+    "raw_close_jumps_over30pct": [],
+    "jump_policy": "No event/adjustment inference, no smoothing or correction"
+   },
+   {
+    "instrument": "511010.XSHG",
+    "rows": 3279,
+    "first": "2013-04-09",
+    "last": "2026-10-08",
+    "post_cutoff_rows": 2,
+    "strict_usable": false,
+    "invalid_ohlc_dates": [],
+    "raw_close_jumps_over30pct": [],
+    "jump_policy": "No event/adjustment inference, no smoothing or correction"
+   }
+  ],
+  "blocked": [
+   [
+    "ALL",
+    "2014-05-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-05-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-05-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-06-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-07-31",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-08-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-09-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-10-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-10-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-10-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-10-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-10-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-10-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-10-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2014-10-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-31",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-04-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-05-31",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-06-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-07-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-08-31",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-09-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-10-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-11-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-12-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-12-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-12-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-12-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2021-12-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-03-31",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-04-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-05-31",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-06-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-07-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-08-31",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-05",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-06",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-15",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-16",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-22",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-23",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-29",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-09-30",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-11",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-12",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-13",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-14",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-17",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-18",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-19",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-20",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-21",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-24",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-25",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-26",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-27",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-28",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-10-31",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-11-01",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-11-02",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-11-03",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-11-04",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-11-07",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-11-08",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-11-09",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-11-10",
+    "unequal_native_200_dates"
+   ],
+   [
+    "ALL",
+    "2022-11-11",
+    "unequal_native_200_dates"
+   ]
+  ],
+  "original_full_rank_calls": 2507,
+  "original_injected_beta_calls": 2398,
+  "rank_differences": 0,
+  "spread_differences": 0,
+  "beta_decision_differences": 0,
+  "max_abs_difference": {
+   "slope18": 7.038813976123492e-14,
+   "beta": 3.4416913763379853e-15,
+   "score": 5.320180207490921e-08
+  },
+  "target_reference_counts": {
+   "winner_passed": 2332,
+   "spread_rejected": 109,
+   "slope_rejected": 66
+  },
+  "not_a_backtest": true,
+  "new_trading_backtests": 0,
+  "original_input_rows_admitted": 0,
+  "limits": [
+   "Explicit math/NumPy mean/std injection; platform equivalent functions unproved",
+   "Daily close targets are unit notional references;90 original9:35 order trajectories0",
+   "Raw native jumps retained without event proof; no synthetic NAV or strategy returns"
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "scripts/review_strategy_batch79.py": "08b0198d91092d71074f01d11b0a432fff16db9c7b4cd2a8cd1094fc80e5b0ae",
+   "scripts/review_strategy_batch80.py": "752967621f2eea4de0a7ecb36c26022b289a67a6e235e9204871206dbe983661",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "src/observe/strategy_catalog.py": "6a5fb9dd9d075901feedd6966d1ac50b9cbce781ec5024ac06926bc9ef050b75",
+   "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "tests/unit/test_batch79_research.py": "59e525fdd9a97814a8a330a5162115be3b55de7af6a848eb3a37110cf93950f6",
+   "tests/unit/test_batch80_research.py": "1141fd0bdbe866baa102039f5d0bf1392f7df24be7f358f853901055c02d3de2",
+   "tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91"
+  }
+ },
+ "inventory": {
+  "snapshot": "20261006-145049-e06c",
+  "registered_fund_rows": {
+   "instruments": 0,
+   "bars_1d": 0,
+   "adj_factors": 0,
+   "adj_coverage": 0,
+   "corp_actions": 0,
+   "bars_5m": 0,
+   "valuations_1d": 0
+  },
+  "original_input_rows_admitted": 0,
+  "not_a_backtest": true,
+  "gates": [
+   "Six fund identity/events/reference prices/state/adjustment/fee versions and9:30/9:35 execution unproved",
+   "38 implicit math/mean/std platform injection and default Position/immediate cash unproved",
+   "90 daily closes do not establish9:35 prices, holdings, order failures or partial fills"
+  ],
+  "existing_minute_probe": {
+   "file": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/probe-results.json",
+   "sha256": "6078fcffdef348d4dcf8e3b44bd65a739fcb2bc536151030b39558a6e97fadb3",
+   "scope": "15994960m; not any80 original intraday input"
+  },
+  "acquisition_policy": "Reuse accepted native daily files; no redownload; prior recent-minute interface cannot prove long9:35 history"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5363,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4"
+ },
+ "progress": {
+  "checkpoint": "20261009-023715-5590",
+  "note": "Batch80 reversal/fixed-weight source and longest reference research accepted; original trades blocked",
+  "catalog_id": "89662a6dae9e17b62226",
+  "catalog_sha256": "7cc9d34341578224a21a48f43d49ebcb0f9f0ea2a3c4e108f83f36e4a671846d",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 488,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 65,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 241,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 69,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261009-023715-5590"
+ },
+ "newly_reviewed": 2,
+ "not_a_backtest": true,
+ "new_trading_backtests": 0,
+ "original_strategy_complete": false
+}

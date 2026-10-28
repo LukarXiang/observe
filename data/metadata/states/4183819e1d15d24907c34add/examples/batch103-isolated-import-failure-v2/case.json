@@ -1,0 +1,30 @@
+{
+  "case": {
+    "cause": "First repair added price helper but omitted acceptance helper and its recovery dependency",
+    "economic_rule_changes": false,
+    "error": "ModuleNotFoundError",
+    "failed_directory": "data/staging/strategies-batch103/20261011-formal-validation-v2",
+    "failed_files": 544,
+    "failed_manifest": "data/staging/strategies-batch103/20261011-formal-validation-v2-import-failure/failed-file-sha256.json",
+    "failed_manifest_sha256": "8d0f201f7ff8502936612a7431e1e19f1c7772582663585edf03f071b278f6b8",
+    "formal_receipt_written": false,
+    "isolated_returncode": 1,
+    "local_tests": 48,
+    "message": "No module named 'scripts.accept_strategy_batch100'",
+    "original_strategy_error": false,
+    "recovery": "Close copy dependency set over actually loaded project modules before starting validation-v3",
+    "root_cause_from_actual_imports": [
+      "scripts/accept_strategy_batch100.py",
+      "scripts/recover_strategy_batch100.py"
+    ],
+    "status": "observed_formal_handoff_failure"
+  },
+  "case_id": "batch103-isolated-import-failure-v2",
+  "nature": "observed_incomplete_first_recovery",
+  "purpose": "v2仍漏accept100/recover100，v3闭合实际导入后通过",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch103/20261011-formal-validation-v2-import-failure/failure.json",
+    "sha256": "5db5cba7ec0e6126b6a142a4a02bcc5cd91c0c610d84bdf13ec8a135ebd40d7a"
+  }
+}

@@ -1,0 +1,1540 @@
+{
+  "case": {
+    "case_count": 31,
+    "cases": [
+      {
+        "actual": {
+          "calls": [
+            [
+              "trade_days",
+              "2021-01-04",
+              365
+            ],
+            [
+              "securities",
+              "stock",
+              "2019-08-01"
+            ],
+            [
+              "price",
+              [
+                "600000.XSHG",
+                "600001.XSHG"
+              ],
+              120,
+              "2021-01-04"
+            ]
+          ],
+          "members_sorted_for_comparison_only": [],
+          "original_set_order_not_fixed": true,
+          "synthetic_Panel_not_platform_adapter": true
+        },
+        "case": "89_original_denominator_100_equal_one_percent",
+        "expected_members": []
+      },
+      {
+        "actual": {
+          "calls": [
+            [
+              "trade_days",
+              "2021-01-04",
+              365
+            ],
+            [
+              "securities",
+              "stock",
+              "2019-08-01"
+            ],
+            [
+              "price",
+              [
+                "600000.XSHG",
+                "600001.XSHG"
+              ],
+              120,
+              "2021-01-04"
+            ]
+          ],
+          "members_sorted_for_comparison_only": [
+            "600000.XSHG"
+          ],
+          "original_set_order_not_fixed": true,
+          "synthetic_Panel_not_platform_adapter": true
+        },
+        "case": "89_original_denominator_99_above_one_percent",
+        "expected_members": [
+          "600000.XSHG"
+        ]
+      },
+      {
+        "actual": {
+          "calls": [
+            [
+              "trade_days",
+              "2021-01-04",
+              365
+            ],
+            [
+              "securities",
+              "stock",
+              "2019-08-01"
+            ],
+            [
+              "price",
+              [
+                "600000.XSHG",
+                "600001.XSHG"
+              ],
+              120,
+              "2021-01-04"
+            ]
+          ],
+          "members_sorted_for_comparison_only": [],
+          "original_set_order_not_fixed": true,
+          "synthetic_Panel_not_platform_adapter": true
+        },
+        "case": "89_current_maximum_excluded",
+        "expected_members": []
+      },
+      {
+        "actual": {
+          "calls": [
+            [
+              "trade_days",
+              "2021-01-04",
+              365
+            ],
+            [
+              "securities",
+              "stock",
+              "2019-08-01"
+            ],
+            [
+              "price",
+              [
+                "600000.XSHG",
+                "600001.XSHG"
+              ],
+              120,
+              "2021-01-04"
+            ]
+          ],
+          "members_sorted_for_comparison_only": [],
+          "original_set_order_not_fixed": true,
+          "synthetic_Panel_not_platform_adapter": true
+        },
+        "case": "89_near_high_exact_1_07_excluded",
+        "expected_members": []
+      },
+      {
+        "actual": {
+          "calls": [
+            [
+              "trade_days",
+              "2021-01-04",
+              365
+            ],
+            [
+              "securities",
+              "stock",
+              "2019-08-01"
+            ],
+            [
+              "price",
+              [
+                "600000.XSHG",
+                "600001.XSHG"
+              ],
+              120,
+              "2021-01-04"
+            ]
+          ],
+          "members_sorted_for_comparison_only": [
+            "600000.XSHG"
+          ],
+          "original_set_order_not_fixed": true,
+          "synthetic_Panel_not_platform_adapter": true
+        },
+        "case": "89_near_high_just_inside",
+        "expected_members": [
+          "600000.XSHG"
+        ]
+      },
+      {
+        "actual": {
+          "calls": [
+            [
+              "trade_days",
+              "2021-01-04",
+              365
+            ],
+            [
+              "securities",
+              "stock",
+              "2019-08-01"
+            ],
+            [
+              "price",
+              [
+                "600000.XSHG",
+                "600001.XSHG"
+              ],
+              120,
+              "2021-01-04"
+            ]
+          ],
+          "members_sorted_for_comparison_only": [],
+          "original_set_order_not_fixed": true,
+          "synthetic_Panel_not_platform_adapter": true
+        },
+        "case": "89_limit_gain_exact_1_09_excluded",
+        "expected_members": []
+      },
+      {
+        "actual": {
+          "buy_list": [
+            "600000.XSHG",
+            "600001.XSHG"
+          ],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-03"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-03"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_full_injected_selection_sorted",
+        "expected_buy_list": [
+          "600000.XSHG",
+          "600001.XSHG"
+        ]
+      },
+      {
+        "actual": {
+          "buy_list": [
+            "600000.XSHG",
+            "600001.XSHG"
+          ],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-03"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-03"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_second_MACD_values_unused",
+        "expected_buy_list": [
+          "600000.XSHG",
+          "600001.XSHG"
+        ]
+      },
+      {
+        "actual": {
+          "buy_list": [],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [],
+              "2021-01-01"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_MA_strict_equal_blocks",
+        "expected_buy_list": []
+      },
+      {
+        "actual": {
+          "buy_list": [],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_MACD_dif_zero_blocks",
+        "expected_buy_list": []
+      },
+      {
+        "actual": {
+          "buy_list": [],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_MACD_dea_zero_blocks",
+        "expected_buy_list": []
+      },
+      {
+        "actual": {
+          "buy_list": [],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_MACD_difference_zero_blocks",
+        "expected_buy_list": []
+      },
+      {
+        "actual": {
+          "buy_list": [],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_MACD_difference_negative_point1_blocks",
+        "expected_buy_list": []
+      },
+      {
+        "actual": {
+          "buy_list": [
+            "600000.XSHG",
+            "600001.XSHG"
+          ],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-03"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-03"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_flow_reverse_signs_pass",
+        "expected_buy_list": [
+          "600000.XSHG",
+          "600001.XSHG"
+        ]
+      },
+      {
+        "actual": {
+          "buy_list": [],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-03"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-03"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_flow_same_signs_block",
+        "expected_buy_list": []
+      },
+      {
+        "actual": {
+          "buy_list": [],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-03"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-03"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_flow_zero_blocks",
+        "expected_buy_list": []
+      },
+      {
+        "actual": {
+          "buy_list": [],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-03"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-03"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_flow_missing_blocks",
+        "expected_buy_list": []
+      },
+      {
+        "actual": {
+          "buy_list": [],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-03"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-03"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_open_equal_previous_close_blocks",
+        "expected_buy_list": []
+      },
+      {
+        "actual": {
+          "buy_list": [
+            "600000.XSHG",
+            "600001.XSHG"
+          ],
+          "calls": [
+            [
+              "mean",
+              "2021-01-04",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-04",
+              30
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              5
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              10
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              20
+            ],
+            [
+              "mean",
+              "2021-01-03",
+              30
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-04"
+            ],
+            [
+              "MACD",
+              [
+                "600001.XSHG",
+                "600000.XSHG"
+              ],
+              "2021-01-01"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600001.XSHG",
+              "2021-01-03"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-04"
+            ],
+            [
+              "flow",
+              "600000.XSHG",
+              "2021-01-03"
+            ]
+          ],
+          "synthetic_means_MACD_flow_quotes": true
+        },
+        "case": "8_preopen_zero_quote_would_pass_synthetic_only",
+        "expected_buy_list": [
+          "600000.XSHG",
+          "600001.XSHG"
+        ]
+      },
+      {
+        "actual": {
+          "cash": 20000.0,
+          "orders": [
+            [
+              "a",
+              10000.0
+            ],
+            [
+              "b",
+              10000.0
+            ],
+            [
+              "c",
+              10000.0
+            ]
+          ],
+          "positions": [],
+          "rejected": false,
+          "synthetic_mutation_policy": "deferred"
+        },
+        "case": "89_deferred_orders_can_exceed_two_slots",
+        "expected_orders": [
+          [
+            "a",
+            10000.0
+          ],
+          [
+            "b",
+            10000.0
+          ],
+          [
+            "c",
+            10000.0
+          ]
+        ]
+      },
+      {
+        "actual": {
+          "cash": 0.0,
+          "orders": [
+            [
+              "a",
+              10000.0
+            ],
+            [
+              "b",
+              10000.0
+            ]
+          ],
+          "positions": [
+            "a",
+            "b"
+          ],
+          "rejected": false,
+          "synthetic_mutation_policy": "immediate"
+        },
+        "case": "89_immediate_fill_stops_after_two",
+        "expected_orders": [
+          [
+            "a",
+            10000.0
+          ],
+          [
+            "b",
+            10000.0
+          ]
+        ]
+      },
+      {
+        "actual": {
+          "cash": 20000.0,
+          "orders": [
+            [
+              "a",
+              10000.0
+            ],
+            [
+              "b",
+              10000.0
+            ],
+            [
+              "c",
+              10000.0
+            ]
+          ],
+          "positions": [],
+          "rejected": true,
+          "synthetic_mutation_policy": "immediate"
+        },
+        "case": "89_rejection_does_not_reserve_slots",
+        "expected_orders": [
+          [
+            "a",
+            10000.0
+          ],
+          [
+            "b",
+            10000.0
+          ],
+          [
+            "c",
+            10000.0
+          ]
+        ]
+      },
+      {
+        "actual": {
+          "cash": 0.0,
+          "orders": [
+            [
+              "c",
+              10000.0
+            ],
+            [
+              "b",
+              10000.0
+            ]
+          ],
+          "positions": [
+            "c",
+            "b"
+          ],
+          "rejected": false,
+          "synthetic_mutation_policy": "immediate"
+        },
+        "case": "89_set_order_permutation_changes_intents",
+        "expected_orders": [
+          [
+            "c",
+            10000.0
+          ],
+          [
+            "b",
+            10000.0
+          ]
+        ]
+      },
+      {
+        "actual": {
+          "cash": 2000.0,
+          "exception": null,
+          "orders": [
+            [
+              "sell",
+              "held",
+              0
+            ]
+          ],
+          "positions": [
+            "held"
+          ],
+          "synthetic_rejection_or_deferred_orders": true
+        },
+        "case": "8_deferred_sell_holding_blocks_buy",
+        "expected_exception": null,
+        "expected_orders": [
+          [
+            "sell",
+            "held",
+            0
+          ]
+        ]
+      },
+      {
+        "actual": {
+          "cash": 2000.0,
+          "exception": null,
+          "orders": [],
+          "positions": [
+            "held"
+          ],
+          "synthetic_rejection_or_deferred_orders": true
+        },
+        "case": "8_Tplus1_no_sell",
+        "expected_exception": null,
+        "expected_orders": []
+      },
+      {
+        "actual": {
+          "cash": 2000.0,
+          "exception": null,
+          "orders": [],
+          "positions": [
+            "held"
+          ],
+          "synthetic_rejection_or_deferred_orders": true
+        },
+        "case": "8_at_low_limit_no_sell_or_buy",
+        "expected_exception": null,
+        "expected_orders": []
+      },
+      {
+        "actual": {
+          "cash": 2000.0,
+          "exception": null,
+          "orders": [],
+          "positions": [
+            "held"
+          ],
+          "synthetic_rejection_or_deferred_orders": true
+        },
+        "case": "8_at_high_limit_no_sell_or_buy",
+        "expected_exception": null,
+        "expected_orders": []
+      },
+      {
+        "actual": {
+          "cash": 2000.0,
+          "exception": null,
+          "orders": [
+            [
+              "buy",
+              "a",
+              2000.0
+            ]
+          ],
+          "positions": [],
+          "synthetic_rejection_or_deferred_orders": true
+        },
+        "case": "8_rejected_buy_still_breaks_after_first",
+        "expected_exception": null,
+        "expected_orders": [
+          [
+            "buy",
+            "a",
+            2000.0
+          ]
+        ]
+      },
+      {
+        "actual": {
+          "cash": 999.0,
+          "exception": null,
+          "orders": [],
+          "positions": [],
+          "synthetic_rejection_or_deferred_orders": true
+        },
+        "case": "8_cash_below_100shares_blocks",
+        "expected_exception": null,
+        "expected_orders": []
+      },
+      {
+        "actual": {
+          "cash": 1000.0,
+          "exception": null,
+          "orders": [
+            [
+              "buy",
+              "a",
+              1000.0
+            ]
+          ],
+          "positions": [],
+          "synthetic_rejection_or_deferred_orders": true
+        },
+        "case": "8_cash_equal_100shares_submits_all_no_fee_reserve",
+        "expected_exception": null,
+        "expected_orders": [
+          [
+            "buy",
+            "a",
+            1000.0
+          ]
+        ]
+      },
+      {
+        "actual": {
+          "exception": "RuntimeError",
+          "orders": [
+            [
+              "sell",
+              "held",
+              0
+            ]
+          ],
+          "synthetic_dictionary_not_platform_mapping": true
+        },
+        "case": "8_synchronous_plain_dict_removal_raises",
+        "expected_exception": "RuntimeError",
+        "expected_orders": [
+          [
+            "sell",
+            "held",
+            0
+          ]
+        ]
+      }
+    ],
+    "limits": [
+      "Pinned original definitions on explicit synthetic Panel/means/MACD/flow/quote contracts",
+      "No original historical full universe or MACD seed/flow/limit/minute input fabricated",
+      "Set membership sorted only for comparison, actual buy order not stabilized",
+      "Ordinary dictionary mutation demonstrates a boundary, not platform position-map behavior",
+      "Rejected/deferred/immediate API stubs expose control flow, not actual fills or Book accounting"
+    ],
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "original_signal_rows": 0,
+    "platform_equivalence_proven": false,
+    "socket_HTTP_disabled": true,
+    "synthetic_only": true
+  },
+  "case_id": "shortline-batch90-lifecycle",
+  "nature": "synthetic_original_selection_and_order_feedback_paths",
+  "purpose": "原未过滤1%分母、MACD第二请求无效、异号流/低开、set顺序和延迟/拒单槽位、首单break/现金/普通dict即时删除边界；非平台成交或真实历史选股",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch90/20261010-intraday-source-acceptance/lifecycle-diagnostics.json",
+    "sha256": "882452a043b240db7aab63eca57481a5dc94ab6872563d85f054a1da662b2596"
+  }
+}

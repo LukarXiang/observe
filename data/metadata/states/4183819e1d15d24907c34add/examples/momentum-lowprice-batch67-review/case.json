@@ -1,0 +1,59 @@
+{
+  "case": {
+    "accepted_checkpoint": "20261008-191652-00b8",
+    "accepted_receipt": "docs/handoff/2026-10-08-batch67-verification.json",
+    "accepted_receipt_sha256": "317f85bd1a70e91bf32604e8131c3e0257d4aecc2b62c0c7c83a36e745f88660",
+    "architecture": {
+      "findings": [],
+      "reviewer": "/root/batch67_architecture"
+    },
+    "checked_state_sha256": "2d7004978499fe8ff56cead874ef1429fa490fb4c2af6f2e3148ef1bda9adf55",
+    "checks": {
+      "diff_check": "passed",
+      "elapsed_seconds": 14.16,
+      "offline": "match0",
+      "ruff": "passed",
+      "tests_passed": 103,
+      "warnings": 1
+    },
+    "directory": "data/staging/strategies-batch67/20261008-momentum-low-price-json-recovery",
+    "duplicate_files_in_new_reviews": 1,
+    "economic_rules_changed": false,
+    "formal_strategy_acceptance": false,
+    "manually_reviewed": 215,
+    "new_strategy_trade_runs": 0,
+    "not_a_backtest": true,
+    "on_target": true,
+    "protection": {
+      "baseline_sha256": "7f2f3e14cded41b960b43eed0e193a47bceb05eb5d7dcdbb6313d2076b7ec7d8",
+      "mutable_registry_files_excluded": 0,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_unchanged": 5293,
+      "old_index_rows_unchanged": 5280,
+      "old_partition_metadata_unchanged": 398,
+      "partition_check": "size/mtime only; no fresh full hash",
+      "status": "ok"
+    },
+    "review_depth": "deep",
+    "reviewed_implementation_sha256": {
+      "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+      "src/observe/strategy_catalog.py": "510b101e2e3f3edc2004a8eed708703bae6bf9d8c07c384d8750f95592a3b683",
+      "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b"
+    },
+    "schema": 1,
+    "scope": "Batch67 source and component research acceptance; original trades gated",
+    "security": {
+      "findings": [],
+      "reviewer": "/root/batch67_security"
+    },
+    "status": "ok"
+  },
+  "case_id": "momentum-lowprice-batch67-review",
+  "nature": "frozen_final_specialist_and_scope_review",
+  "purpose": "绑定最终驱动/测试/目录及验收凭据；安全架构无发现，来源和组件验收不等于原交易验收",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-08-batch67-final-review.json",
+    "sha256": "086099f329c423b73870148278beef5fb444cacd7e2767a924a4110485901138"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "case": {
+    "actual": {
+      "differences": [],
+      "result": "match"
+    },
+    "experiment_files_changed": false,
+    "failed_assertion": "comparison['result'] == 'match' and comparison['differences'] == 0",
+    "fix": "Require result match, empty differences list, and numeric zero in the frozen verification reproduction summary.",
+    "independent_evidence": "Original receipt/report results and period exactly equal; comparison tables each record zero differences.",
+    "raw_stdout_saved": false,
+    "root_cause": "comparison.json stores a list; the compact reproduction status stores the numeric count. Temporary readback confused these distinct schemas.",
+    "scope": "ephemeral_receipt_readback_not_strategy_or_reproduction",
+    "status": "development_readback_assertion_failed",
+    "strategy_code_changed": false
+  },
+  "case_id": "pair66-readback-development",
+  "nature": "temporary_checker_schema_error_preserved",
+  "purpose": "临时读回把comparison差异列表与摘要数值混淆，实际[]且报告精确一致；修检查为列表为空，原实验/代码未变",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-history-supplement/20261010-receipt-readback-first-failure.json",
+    "sha256": "8737267a77b602631c964325c6769d837f7d6ab6b9df80aa244ea892e9d32d46"
+  }
+}

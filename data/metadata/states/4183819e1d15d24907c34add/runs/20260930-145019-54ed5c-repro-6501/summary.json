@@ -1,0 +1,244 @@
+{
+  "benchmark": null,
+  "comparison": {
+    "code_drift": {},
+    "differences": [],
+    "keys": {
+      "cash_events": [
+        "row"
+      ],
+      "equity": [
+        "date"
+      ],
+      "fills": [
+        "fill_id"
+      ],
+      "limitations": [
+        "row"
+      ],
+      "orders": [
+        "exec_date",
+        "order_id"
+      ],
+      "positions_daily": [
+        "date",
+        "instrument"
+      ],
+      "receivables": [
+        "date",
+        "pay_date"
+      ],
+      "scores": [
+        "decision_date",
+        "instrument"
+      ]
+    },
+    "reproduced": "data\\runs\\20260930-145019-54ed5c-repro-6501",
+    "result": "match",
+    "rules": {
+      "used": "frozen",
+      "workspace_differs": false
+    },
+    "source": "data\\runs\\20260930-143400-54ed5c-dad6",
+    "source_integrity": {
+      "modified_files": []
+    },
+    "tables": {
+      "cash_events": {
+        "differences": 0,
+        "rows_actual": 840,
+        "rows_expected": 840
+      },
+      "equity": {
+        "differences": 0,
+        "rows_actual": 189,
+        "rows_expected": 189
+      },
+      "fills": {
+        "differences": 0,
+        "rows_actual": 414,
+        "rows_expected": 414
+      },
+      "limitations": {
+        "differences": 0,
+        "rows_actual": 1,
+        "rows_expected": 1
+      },
+      "metrics": {
+        "differences": 0
+      },
+      "orders": {
+        "differences": 0,
+        "rows_actual": 415,
+        "rows_expected": 415
+      },
+      "positions_daily": {
+        "differences": 0,
+        "rows_actual": 3761,
+        "rows_expected": 3761
+      },
+      "receivables": {
+        "differences": 0,
+        "rows_actual": 0,
+        "rows_expected": 0
+      },
+      "scores": {
+        "differences": 0,
+        "rows_actual": 148707,
+        "rows_expected": 148707
+      },
+      "status": {
+        "differences": 0
+      },
+      "trading": {
+        "differences": 0
+      }
+    },
+    "tolerance": {
+      "abs": 1e-09,
+      "rel": 0.0
+    }
+  },
+  "configuration": {
+    "boards": [
+      "main"
+    ],
+    "end": "2025-05-26",
+    "execution": {
+      "fee_multiplier": 1.0,
+      "liquidity_override": null,
+      "liquidity_window": 20,
+      "slippage": 0.0
+    },
+    "initial_cash": 1000000.0,
+    "portfolio": {
+      "buffer": 10,
+      "max_sell": 5,
+      "max_weight": 0.1,
+      "n": 20,
+      "open_cash_policy": "sell_then_buy",
+      "participation": 0.05,
+      "rebalance_every": 5,
+      "refill_between_rebalance": true
+    },
+    "rules": "configs/rule_profiles/main_board.yaml",
+    "scores": {
+      "model": "equal_blend",
+      "run": "data\\runs\\20260930-143119-f5e080-pair-extended-15e0",
+      "source": "predictions"
+    },
+    "snapshot": "20260930-121952-b7e8",
+    "start": "2024-08-09"
+  },
+  "configuration_available": true,
+  "coverage": null,
+  "decision_time": null,
+  "evidence_status": "archived_unreviewed",
+  "execution_status": "success_limited",
+  "execution_time": null,
+  "implementation": null,
+  "kind": "run",
+  "limitations": [
+    {
+      "audit": {
+        "audit_id": "20260930-121951-c0f4",
+        "audited_at": "2026-09-30T12:19:51",
+        "batch_id": "20260930-121727-4c66",
+        "input_range": {
+          "days": 1392,
+          "end": "2026-09-29",
+          "rows": 6848484,
+          "start": "2021-01-04"
+        },
+        "scope": "snapshot",
+        "source": "audit 20260930-121951-c0f4",
+        "status": "problem"
+      },
+      "detail": "快照批次审计状态为 problem（范围 snapshot），不是全快照审计通过",
+      "kind": "data_audit"
+    }
+  ],
+  "metrics": {
+    "annual_return": 0.3703136542196177,
+    "annual_vol": 0.2505533518465947,
+    "drawdown_peak": 83,
+    "drawdown_trough": 104,
+    "max_drawdown": -0.1260365521620248,
+    "sharpe": 1.3832542907324064,
+    "total_return": 0.27895504000000004
+  },
+  "original_strategy_complete": false,
+  "parameters": null,
+  "payload_verification": "not_reaudited",
+  "period": null,
+  "portfolio": null,
+  "recorded_environment": {
+    "git_commit": "f584c92d9079c329411b0faf205a59716d339f43",
+    "git_dirty": true,
+    "lock_sha256": "1275fd87c5be5c97618f9a534e5c288a9e038d068d51cb0892fd034eba11cd5a",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5"
+    },
+    "python": "3.12.11"
+  },
+  "references": [
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20260930-145019-54ed5c-repro-6501/config.json",
+      "sha256": "d25c03dd06da3187f8ce122921dc5274de77a940880c2d7f40300e8bc3a15cf4"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20260930-145019-54ed5c-repro-6501/status.json",
+      "sha256": "e179f97666bb7ab310937f26337169b38faefd1d70336a6ecf09cd89e5451686"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20260930-145019-54ed5c-repro-6501/comparison.json",
+      "sha256": "e9887d85d7cb859a76adfdf7693e70e4437c391dec70e999481b650327144636"
+    }
+  ],
+  "reproduce_of": "D:\\projects\\observe\\data\\runs\\20260930-143400-54ed5c-dad6",
+  "reproduction": {
+    "code_drift": [],
+    "differences": 0,
+    "modified_source_files": [],
+    "of": "data\\runs\\20260930-143400-54ed5c-dad6",
+    "result": "match"
+  },
+  "result_scope": "configured_run",
+  "results": null,
+  "rules": {},
+  "run_id": "20260930-145019-54ed5c-repro-6501",
+  "schema": 1,
+  "snapshot": "20260930-121952-b7e8",
+  "strategy_id": null,
+  "superseded_by": null,
+  "trading": {
+    "cash_share_mean": 0.043051678050472324,
+    "fee_ratio_to_initial": 0.011950959999999998,
+    "fees": {
+      "commission": 5996.77,
+      "fee": 11950.96,
+      "stamp_tax": 5715.96,
+      "transfer_fee": 238.23
+    },
+    "fill_rate": 0.9975903614457832,
+    "filled_orders": 414,
+    "max_single_weight_mean": 0.05298850979931451,
+    "orders": 415,
+    "partial_fills": 1,
+    "reject_reasons": {
+      "limit_down": 1
+    },
+    "stale_price_days": 1,
+    "top5_weight_mean": 0.25574517211383124,
+    "turnover_half_daily_mean": 0.052498860761964784,
+    "turnover_two_sided_daily_mean": 0.10499772152392957
+  },
+  "universe": null,
+  "validation": []
+}

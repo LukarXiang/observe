@@ -1,0 +1,476 @@
+{
+  "case": {
+    "case_count": 30,
+    "cases": [
+      {
+        "case": "54_defaults",
+        "events": [
+          [
+            "benchmark",
+            "000300.XSHG"
+          ],
+          [
+            "option",
+            "use_real_price",
+            true
+          ],
+          [
+            "cost",
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003
+            },
+            {
+              "type": "stock"
+            }
+          ],
+          [
+            "schedule",
+            "before_market_open",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "before_open"
+            }
+          ],
+          [
+            "schedule",
+            "market_open",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "open"
+            }
+          ],
+          [
+            "schedule",
+            "after_market_close",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "after_close"
+            }
+          ]
+        ],
+        "state": {
+          "days_history": 60,
+          "days_money_flow": 5,
+          "days_money_flow_2": 60,
+          "days_money_flow_threshold": 4,
+          "mean_diff_30_60_threshold": 0.05,
+          "mean_diff_5_30_threshold": 0.1,
+          "price_amplitude": 0.1,
+          "price_increase_threshold": 0.2,
+          "stock_num": 10,
+          "stock_value_ratio": 0.33
+        }
+      },
+      {
+        "case": "54_buy_exact30",
+        "fixture_only": true,
+        "history_rows": 32,
+        "independent": true,
+        "original": true
+      },
+      {
+        "case": "54_buy_only29",
+        "fixture_only": true,
+        "history_rows": 31,
+        "independent": false,
+        "original": false
+      },
+      {
+        "case": "54_buy_missing_anchor",
+        "fixture_only": true,
+        "history_rows": 32,
+        "independent": false,
+        "original": false
+      },
+      {
+        "case": "54_buy_red_close",
+        "fixture_only": true,
+        "history_rows": 32,
+        "independent": false,
+        "original": false
+      },
+      {
+        "case": "54_buy_doji",
+        "fixture_only": true,
+        "history_rows": 32,
+        "independent": true,
+        "original": true
+      },
+      {
+        "case": "54_buy_volume_below",
+        "fixture_only": true,
+        "history_rows": 32,
+        "independent": false,
+        "original": false
+      },
+      {
+        "case": "54_buy_volume_above",
+        "fixture_only": true,
+        "history_rows": 32,
+        "independent": true,
+        "original": true
+      },
+      {
+        "case": "54_buy_amplitude_equal",
+        "fixture_only": true,
+        "history_rows": 32,
+        "independent": true,
+        "original": true
+      },
+      {
+        "case": "54_buy_amplitude_above",
+        "fixture_only": true,
+        "history_rows": 32,
+        "independent": false,
+        "original": false
+      },
+      {
+        "case": "54_buy_strict_anchor_equal",
+        "fixture_only": true,
+        "history_rows": 32,
+        "independent": false,
+        "original": false
+      },
+      {
+        "case": "54_buy_strict_anchor_above",
+        "fixture_only": true,
+        "history_rows": 32,
+        "independent": true,
+        "original": true
+      },
+      {
+        "case": "54_missing_mean",
+        "error": "NameError"
+      },
+      {
+        "case": "54_empty_history",
+        "error": "IndexError"
+      },
+      {
+        "case": "54_missing_timedelta",
+        "error": "name 'timedelta' is not defined"
+      },
+      {
+        "case": "54_sell_branch_0.1",
+        "fixture_only": true,
+        "result": false,
+        "trace": [
+          0.1,
+          "turnover",
+          0.2
+        ]
+      },
+      {
+        "case": "54_sell_branch_0.2",
+        "fixture_only": true,
+        "result": true,
+        "trace": [
+          0.1,
+          0.2
+        ]
+      },
+      {
+        "case": "54_cash_4999.0_positions_0",
+        "fixture_only": true,
+        "orders": []
+      },
+      {
+        "case": "54_cash_5000.0_positions_0",
+        "fixture_only": true,
+        "orders": [
+          [
+            "s",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "54_cash_10000.0_positions_10",
+        "fixture_only": true,
+        "orders": []
+      },
+      {
+        "case": "54_cash_10000.0_positions_11",
+        "fixture_only": true,
+        "orders": [
+          [
+            "s",
+            -1000
+          ]
+        ]
+      },
+      {
+        "case": "54_add_comment_targets_lower_quantity",
+        "held_quantity": 2000,
+        "orders": [
+          [
+            "s",
+            100
+          ]
+        ]
+      },
+      {
+        "case": "54_message_bytes_type",
+        "error": "TypeError",
+        "messages_sent": 0
+      },
+      {
+        "case": "54_turnover_previous_sunday",
+        "fixture_only": true,
+        "trace": [
+          [
+            [
+              [
+                "code",
+                "s"
+              ],
+              [
+                "gt",
+                15
+              ]
+            ],
+            "2020-01-05"
+          ]
+        ]
+      },
+      {
+        "case": "95_defaults",
+        "events": [
+          [
+            "benchmark",
+            "000300.XSHG"
+          ],
+          [
+            "slippage",
+            0.02
+          ],
+          [
+            "option",
+            "use_real_price",
+            true
+          ],
+          [
+            "option",
+            "order_volume_ratio",
+            1
+          ],
+          [
+            "cost",
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003,
+              "open_tax": 0
+            },
+            {
+              "type": "stock"
+            }
+          ],
+          [
+            "schedule",
+            "sell_every_day",
+            "open"
+          ],
+          [
+            "schedule",
+            "risk_management",
+            "every_bar"
+          ],
+          [
+            "schedule",
+            "check_stocks",
+            "open"
+          ],
+          [
+            "schedule",
+            "trade",
+            "open"
+          ],
+          [
+            "schedule",
+            "selled_security_list_count",
+            "after_close"
+          ]
+        ],
+        "state": {
+          "buy_refresh_rate": 1,
+          "buy_trade_days": 0,
+          "check_out_lists_ascending": "desc",
+          "check_stocks_days": 0,
+          "check_stocks_refresh_rate": 1,
+          "concept_list": [],
+          "daily_risk_management": true,
+          "filter_delisted": true,
+          "filter_holded": false,
+          "filter_paused": true,
+          "filter_st": true,
+          "industry_list": [],
+          "max_buy_amount": null,
+          "max_buy_value": null,
+          "max_hold_stocknum": 5,
+          "only_st": false,
+          "open_sell_securities": [],
+          "order_style_str": "by_cap_mean",
+          "order_style_value": 100,
+          "risk_management_signal": true,
+          "security_max_proportion": 1,
+          "security_universe_index": [
+            "000300.XSHG"
+          ],
+          "security_universe_user_securities": [],
+          "sell_by_amount": null,
+          "sell_by_percent": null,
+          "sell_refresh_rate": 1,
+          "sell_trade_days": 0,
+          "sell_will_buy": true,
+          "selled_security_list": {}
+        }
+      },
+      {
+        "case": "95_technical_arguments",
+        "fixture_only": true,
+        "trace": [
+          [
+            "MACD_judge_jincha",
+            "a",
+            12,
+            26,
+            26
+          ],
+          [
+            "BBands_lowerband_judge_dayu",
+            "a",
+            6,
+            5,
+            2,
+            2
+          ],
+          [
+            "MA_judge_duotou",
+            "a",
+            5,
+            10
+          ]
+        ]
+      },
+      {
+        "case": "95_flow_arguments_and_order",
+        "fixture_only": true,
+        "trace": [
+          [
+            [
+              "a",
+              "net_pct_main",
+              15
+            ],
+            {
+              "which_day": "previous"
+            }
+          ],
+          [
+            [
+              "a",
+              "net_pct_main",
+              10
+            ],
+            {
+              "which_day": "previous"
+            }
+          ],
+          [
+            "sell",
+            [
+              "a"
+            ]
+          ],
+          [
+            "buy",
+            [
+              "a"
+            ]
+          ]
+        ]
+      },
+      {
+        "calls": [
+          [
+            "cap",
+            [
+              "asc",
+              0
+            ]
+          ],
+          [
+            "pe",
+            [
+              "asc",
+              0
+            ]
+          ],
+          [
+            "roe",
+            [
+              "desc",
+              0
+            ]
+          ]
+        ],
+        "case": "95_nonempty_zero_weight_sort",
+        "error": "'DataFrame' object has no attribute 'sort'",
+        "fixture_only": true,
+        "weights": {
+          "cap": [
+            "asc",
+            0
+          ],
+          "pe": [
+            "asc",
+            0
+          ],
+          "roe": [
+            "desc",
+            0
+          ]
+        }
+      },
+      {
+        "case": "95_retry_no_cleanup",
+        "orders": [
+          [
+            "held",
+            0
+          ]
+        ],
+        "retry": [
+          "held",
+          "held",
+          "absent"
+        ]
+      },
+      {
+        "case": "95_holded_false",
+        "result": [
+          "new",
+          "new"
+        ]
+      }
+    ],
+    "limits": [
+      "np.mean is a declared arithmetic reference injection, not proof of original platform mean",
+      "Synthetic state/history/helper returns do not admit original historical pool, signals, fills or messaging"
+    ],
+    "not_a_backtest": true
+  },
+  "case_id": "volume-flow-batch86-diagnostics",
+  "nature": "accepted_controlled_original_boundary_diagnostics",
+  "purpose": "30原函数诊断：270无长度门禁、30区间/2.5量/10%边界、缺mean/timedelta、自然日周日查询、目标减仓、负空槽、消息错误未发送及95实参/排序/重试；非交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/diagnostics.json",
+    "sha256": "57ad5c55acc6cc1a1e41795866bb372edcf3eecb6bbe0d5e6f0f69878ef36089"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "case": {
+    "absence_scope": "Named tables in the exact published snapshot;one archived money-flow registration;not whole-machine/provider absence",
+    "actual_partition_columns": {
+      "adj_coverage": [
+        "instrument",
+        "status",
+        "requested_start",
+        "requested_end",
+        "verified_from",
+        "verified_through",
+        "has_gap",
+        "has_start_basis",
+        "confirmed_no_events",
+        "verified_at",
+        "source",
+        "evidence"
+      ],
+      "adj_factors": [
+        "instrument",
+        "ex_date",
+        "back_factor"
+      ],
+      "bars_1d": [
+        "date",
+        "instrument",
+        "open",
+        "high",
+        "low",
+        "close",
+        "preclose",
+        "volume",
+        "amount",
+        "turnover",
+        "is_trading",
+        "is_st",
+        "pe_ttm",
+        "pb_mrq",
+        "board"
+      ],
+      "bars_5m": [
+        "bar_end",
+        "instrument",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "amount",
+        "source"
+      ],
+      "calendar": [
+        "date",
+        "is_open"
+      ],
+      "corp_actions": [
+        "instrument",
+        "ex_date",
+        "cash_per_share",
+        "bonus_ratio",
+        "rights_ratio",
+        "rights_price",
+        "record_date",
+        "pay_date",
+        "bonus_list_date",
+        "source"
+      ],
+      "instruments": [
+        "instrument",
+        "name",
+        "kind",
+        "list_date",
+        "delist_date",
+        "listed",
+        "exchange",
+        "board"
+      ]
+    },
+    "akshare_version": "1.18.97",
+    "evidence_sha256": {
+      "data/raw/momentum_dependency_batch16/money_flow/20261005-momentum-dependencies.parquet": "d2a6f3f2a13f4f683e2bf626921933a0fb889d439ddd42fbe73f61f3a3291da2",
+      "data/snapshots/20261006-145049-e06c.json": "9449dc18911fe5f27fe65f55f5849602bec0cba998335b74a6d2b1377e19af60",
+      "data/staging/strategies-batch104/20261011-input-inventory/stock_individual_fund_flow.py": "e28ef13bc23899f8884f9f2dd0146bfcba79bcf80f95aace4ac7808e1a13a9f3",
+      "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/money_flow/response-000.bin": "70fc8e36326c04e9fc5aa252c627c9325009d180c8e1d0c3f2d00ffd5872937a",
+      "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/money_flow/result.json": "2b7ba207108c99017831274de6f6ec6d20024d18d20d1336a432be2eac396f7d",
+      "scripts/probe_strategy_batch104.py": "a23abf7105d46094260e225abd7bebfddb28b75b70a37d2d33e32bc98b54e1fc"
+    },
+    "existing_interface_scope": "Single-stock recent Eastmoney fflow;no historical-range parameters",
+    "fields_present_but_equivalence_not_proven": [
+      "bars_1d.preclose vs JoinQuant pre_close",
+      "bars_1d.is_st vs historical display_name",
+      "bars_5m.bar_end vs handle_data frequency and 09:30/11:25/14:30 last_price"
+    ],
+    "manifest_table_rows_not_fresh_full_table_audit": {
+      "adj_coverage": 5560,
+      "adj_factors": 64980,
+      "bars_1d": 6919789,
+      "bars_5m": 44571408,
+      "calendar": 7938,
+      "corp_actions": 59065,
+      "instruments": 6156
+    },
+    "missing_original_fields_in_snapshot": {
+      "get_money_flow_change_pct": true,
+      "historical_display_name": true,
+      "native_high_limit": true,
+      "native_low_limit": true
+    },
+    "moneyflow_original_full_pool_coverage_proven": false,
+    "moneyflow_original_platform_equivalence_proven": false,
+    "moneyflow_registration": "data/staging/strategies-batch16/20261005-momentum-dependencies/probes/money_flow/result.json",
+    "moneyflow_rows": 120,
+    "moneyflow_stock": "600000.SH",
+    "new_publications": 0,
+    "new_requests": 0,
+    "new_responses": 0,
+    "new_trading_backtests": 0,
+    "snapshot": "20261006-145049-e06c",
+    "snapshot_sha256": "9449dc18911fe5f27fe65f55f5849602bec0cba998335b74a6d2b1377e19af60",
+    "source78_actual_ST_field_is_not_used_by_original_gain_filters": true,
+    "source78_default_stock_fees_and_slippage_version_proven": false,
+    "source80_MACD_seed_history_and_pause_protocol_proven": false,
+    "source80_preopen_day_open_availability_proven": false,
+    "status": "inventory_only"
+  },
+  "case_id": "batch104-input-inventory",
+  "nature": "actual_snapshot_and_one_old_sample",
+  "purpose": "6919789日线/44571408五分钟不证明原执行",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch104/20261011-input-inventory/inventory.json",
+    "sha256": "ee6694150638b9e80538eadac395fdc1f86cc03f0b6016c33fb20188a664cfa4"
+  }
+}

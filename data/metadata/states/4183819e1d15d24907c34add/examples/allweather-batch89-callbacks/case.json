@@ -1,0 +1,764 @@
+{
+  "case": {
+    "case_count": 32,
+    "cases": [
+      {
+        "actual": {
+          "confidence": 2.58,
+          "cycle": 30,
+          "pool": [
+            "510300.XSHG",
+            "518880.XSHG",
+            "511010.XSHG",
+            "513100.XSHG"
+          ],
+          "settings": [
+            [
+              "benchmark",
+              "511010.XSHG"
+            ],
+            [
+              "option",
+              "use_real_price",
+              true
+            ],
+            [
+              "log_level",
+              [
+                "order",
+                "error"
+              ]
+            ],
+            [
+              "slippage",
+              0.002
+            ],
+            [
+              "schedule",
+              "before_market_open",
+              {
+                "reference_security": "000300.XSHG",
+                "time": "before_open"
+              }
+            ],
+            [
+              "schedule",
+              "market_open",
+              {
+                "reference_security": "000300.XSHG",
+                "time": "open"
+              }
+            ],
+            [
+              "schedule",
+              "after_market_close",
+              {
+                "reference_security": "000300.XSHG",
+                "time": "after_close"
+              }
+            ]
+          ]
+        },
+        "case": "initialize_and_original_pool",
+        "expected": {
+          "confidence": 2.58,
+          "cycle": 30,
+          "pool": [
+            "510300.XSHG",
+            "518880.XSHG",
+            "511010.XSHG",
+            "513100.XSHG"
+          ],
+          "settings": [
+            [
+              "benchmark",
+              "511010.XSHG"
+            ],
+            [
+              "option",
+              "use_real_price",
+              true
+            ],
+            [
+              "log_level",
+              [
+                "order",
+                "error"
+              ]
+            ],
+            [
+              "slippage",
+              0.002
+            ],
+            [
+              "schedule",
+              "before_market_open",
+              {
+                "reference_security": "000300.XSHG",
+                "time": "before_open"
+              }
+            ],
+            [
+              "schedule",
+              "market_open",
+              {
+                "reference_security": "000300.XSHG",
+                "time": "open"
+              }
+            ],
+            [
+              "schedule",
+              "after_market_close",
+              {
+                "reference_security": "000300.XSHG",
+                "time": "after_close"
+              }
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "anchor": 0.0,
+          "recalcs": [
+            1,
+            32,
+            63
+          ],
+          "trade_calls": 63
+        },
+        "case": "synthetic_weights_63_callback_cycle",
+        "expected": {
+          "anchor": 0.0,
+          "recalcs": [
+            1,
+            32,
+            63
+          ],
+          "trade_calls": 63
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": []
+        },
+        "case": "initial_zero_anchor_skips_price_move",
+        "expected": {
+          "exception": null,
+          "return": null
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": []
+        },
+        "case": "strict_15pct_115.0",
+        "expected": {
+          "exception": null,
+          "return": null
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": true,
+          "warnings": []
+        },
+        "case": "strict_15pct_115.01",
+        "expected": {
+          "exception": null,
+          "return": true
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": []
+        },
+        "case": "strict_15pct_85.0",
+        "expected": {
+          "exception": null,
+          "return": null
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": true,
+          "warnings": []
+        },
+        "case": "strict_15pct_84.99",
+        "expected": {
+          "exception": null,
+          "return": true
+        }
+      },
+      {
+        "actual": {
+          "exception": "KeyError",
+          "message": "'518880.XSHG'",
+          "orders": [],
+          "warnings": []
+        },
+        "case": "untracked_position_anchor_key",
+        "expected": {
+          "exception": "KeyError"
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": []
+        },
+        "case": "delta_1000_equal_block",
+        "expected": {
+          "exception": null,
+          "orders": []
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              4000.0
+            ]
+          ],
+          "return": null,
+          "warnings": []
+        },
+        "case": "delta_1010_buy",
+        "expected": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              4000.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              8000.0
+            ]
+          ],
+          "return": null,
+          "warnings": []
+        },
+        "case": "relative_25pct_and_cash_equal_pass",
+        "expected": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              8000.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": []
+        },
+        "case": "relative_below_25pct_block",
+        "expected": {
+          "exception": null,
+          "orders": []
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": []
+        },
+        "case": "cash_below_quarter_block",
+        "expected": {
+          "exception": null,
+          "orders": []
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": []
+        },
+        "case": "price_equals_internal_cost_block",
+        "expected": {
+          "exception": null,
+          "orders": []
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": []
+        },
+        "case": "price_below_internal_cost_block",
+        "expected": {
+          "exception": null,
+          "orders": []
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              4000.0
+            ]
+          ],
+          "return": null,
+          "warnings": []
+        },
+        "case": "sell_does_not_require_profit_or_cash",
+        "expected": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              4000.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": [
+            "invalid value encountered in scalar divide"
+          ]
+        },
+        "case": "zero_target_numpy_holding0",
+        "expected": {
+          "exception": null,
+          "orders": []
+        }
+      },
+      {
+        "actual": {
+          "exception": "ZeroDivisionError",
+          "message": "float division by zero",
+          "orders": [],
+          "warnings": []
+        },
+        "case": "zero_target_list_holding0",
+        "expected": {
+          "exception": "ZeroDivisionError",
+          "orders": []
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              0.0
+            ]
+          ],
+          "return": null,
+          "warnings": [
+            "divide by zero encountered in scalar divide"
+          ]
+        },
+        "case": "zero_target_numpy_holding1000",
+        "expected": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              0.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": "ZeroDivisionError",
+          "message": "float division by zero",
+          "orders": [],
+          "warnings": []
+        },
+        "case": "zero_target_list_holding1000",
+        "expected": {
+          "exception": "ZeroDivisionError",
+          "orders": []
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": []
+        },
+        "case": "special_delta_100shares_equal_block",
+        "expected": {
+          "exception": null,
+          "orders": []
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [],
+          "return": null,
+          "warnings": []
+        },
+        "case": "special_cash_100shares_equal_block",
+        "expected": {
+          "exception": null,
+          "orders": []
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [
+            [
+              "513100.XSHG",
+              2000.0
+            ]
+          ],
+          "return": null,
+          "warnings": []
+        },
+        "case": "special_cash_above_pass",
+        "expected": {
+          "exception": null,
+          "orders": [
+            [
+              "513100.XSHG",
+              2000.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [
+            [
+              "513100.XSHG",
+              0.0
+            ]
+          ],
+          "return": null,
+          "warnings": []
+        },
+        "case": "special_sell_no_cash_profit_check",
+        "expected": {
+          "exception": null,
+          "orders": [
+            [
+              "513100.XSHG",
+              0.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              20000.0
+            ],
+            [
+              "518880.XSHG",
+              30000.0
+            ]
+          ],
+          "return": null,
+          "warnings": []
+        },
+        "case": "reduction_first_extra_holding_not_liquidated",
+        "expected": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              20000.0
+            ],
+            [
+              "518880.XSHG",
+              30000.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": "KeyError",
+          "message": "'510300.XSHG'",
+          "orders": [
+            [
+              "510300.XSHG",
+              20000.0
+            ]
+          ],
+          "record": {
+            "Margin": 0,
+            "amount": 0.0,
+            "avg_cost": 0.0,
+            "buy_times": 0,
+            "loss": 0,
+            "max_loss": 0,
+            "max_loss_date": 0,
+            "sell_times": 0,
+            "standPrice": 0,
+            "win": 0
+          },
+          "warnings": []
+        },
+        "case": "order_record_deferred_None_20000.0",
+        "expected": {
+          "exception": "KeyError",
+          "orders": [
+            [
+              "510300.XSHG",
+              20000.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              20000.0
+            ]
+          ],
+          "record": {
+            "Margin": 0,
+            "amount": 100.0,
+            "avg_cost": 10.0,
+            "buy_times": 0,
+            "loss": 0,
+            "max_loss": 0,
+            "max_loss_date": 0,
+            "sell_times": 0,
+            "standPrice": 10.0,
+            "win": 0
+          },
+          "return": null,
+          "warnings": []
+        },
+        "case": "order_record_deferred_100.0_20000.0",
+        "expected": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              20000.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              20000.0
+            ]
+          ],
+          "record": {
+            "Margin": 0,
+            "amount": 2000.0,
+            "avg_cost": 10.0,
+            "buy_times": 1,
+            "loss": 0,
+            "max_loss": 0,
+            "max_loss_date": 0,
+            "sell_times": 0,
+            "standPrice": 10.0,
+            "win": 0
+          },
+          "return": null,
+          "warnings": []
+        },
+        "case": "order_record_immediate_keep_zero_None_20000.0",
+        "expected": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              20000.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              0.0
+            ]
+          ],
+          "record": {
+            "Margin": 0.0,
+            "amount": 0.0,
+            "avg_cost": 0.0,
+            "buy_times": 0,
+            "loss": 0,
+            "max_loss": 0,
+            "max_loss_date": 0,
+            "sell_times": 1,
+            "standPrice": 0,
+            "win": 1
+          },
+          "return": null,
+          "warnings": []
+        },
+        "case": "order_record_immediate_keep_zero_100.0_0.0",
+        "expected": {
+          "exception": null,
+          "orders": [
+            [
+              "510300.XSHG",
+              0.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "exception": "KeyError",
+          "message": "'510300.XSHG'",
+          "orders": [
+            [
+              "510300.XSHG",
+              0.0
+            ]
+          ],
+          "record": {
+            "Margin": 0,
+            "amount": 100.0,
+            "avg_cost": 10.0,
+            "buy_times": 0,
+            "loss": 0,
+            "max_loss": 0,
+            "max_loss_date": 0,
+            "sell_times": 0,
+            "standPrice": 0,
+            "win": 0
+          },
+          "warnings": []
+        },
+        "case": "order_record_immediate_delete_zero_100.0_0.0",
+        "expected": {
+          "exception": "KeyError",
+          "orders": [
+            [
+              "510300.XSHG",
+              0.0
+            ]
+          ]
+        }
+      },
+      {
+        "actual": {
+          "buy_times": 1,
+          "costs": [
+            8.0,
+            10.0,
+            0.0
+          ],
+          "final_amount": 0.0,
+          "loss": 1,
+          "margin": -300.0,
+          "max_loss": -300.0,
+          "sell_times": 2
+        },
+        "case": "record_partial_sale_buy_full_loss",
+        "expected": {
+          "buy_times": 1,
+          "costs": [
+            8.0,
+            10.0,
+            0.0
+          ],
+          "final_amount": 0.0,
+          "loss": 1,
+          "margin": -300.0,
+          "max_loss": -300.0,
+          "sell_times": 2
+        }
+      },
+      {
+        "actual": {
+          "hold_before": 100.0,
+          "orders": []
+        },
+        "case": "close_callback_reports_without_orders",
+        "expected": {
+          "hold_before": 100.0,
+          "orders": []
+        }
+      }
+    ],
+    "history_shapes": [
+      "dict[str,numpy.ndarray]",
+      "dict[str,list]"
+    ],
+    "limits": [
+      "Synthetic orders are intentions; immediate cases inject API state only",
+      "No fees/cash settlement/lot rounding/NAV simulation or second ledger",
+      "No historical fund events, adjustment, identity, state or fee gates released",
+      "Native zero-target behavior depends on supplied scalar type and position retention"
+    ],
+    "not_a_backtest": true,
+    "platform_history_shape_proven": false,
+    "platform_immediate_fill_proven": false,
+    "real_ES_or_original_weights_computed": false,
+    "return_semantics": "pending_D-allweather-fill",
+    "socket_HTTP_disabled": true,
+    "synthetic_only": true,
+    "synthetic_weights_injected_only_for_callback_cycle": true
+  },
+  "case_id": "allweather-batch89-callbacks",
+  "nature": "in_progress_original_function_synthetic_callback_threshold_and_lifecycle_diagnostics",
+  "purpose": "原9函数与QuantLib不改；31次重算、零锚点、15%/25%/1000元/100股、零目标numpy/list差异、延期/清仓KeyError及内部成本；32明确预期，合成权重/订单意图不是实际交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch89/20261009-all-weather-callbacks/diagnostics.json",
+    "sha256": "9b46909cdfa202c718460a8151f14a5d1a544d614e5a0f0c1a858ec5298ed511"
+  }
+}

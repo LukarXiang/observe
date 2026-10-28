@@ -1,0 +1,581 @@
+{
+  "case": {
+    "new_trading_backtests": 0,
+    "no_original_inputs_replaced": true,
+    "rules_document": "docs/tasks/2026-10-11-第九十六批原回调与输入核查-阶段记录.md",
+    "scope": "complete_source_reading_with_pending_formal_acceptance",
+    "sources": [
+      {
+        "encoding": "gb18030",
+        "formal_acceptance": false,
+        "frozen_source": "data/staging/strategies-batch96/20261011-original-callback-stage/sources/0.source",
+        "functions": [
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [],
+            "end_line": 76,
+            "line": 68,
+            "name": "get_blacklist"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "print"
+            ],
+            "end_line": 84,
+            "line": 78,
+            "name": "before_trading_start"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "get_open_orders",
+              "reset_day_param"
+            ],
+            "end_line": 97,
+            "line": 87,
+            "name": "after_trading_end"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "PerTrade",
+              "StringIO",
+              "log_param",
+              "read_file",
+              "set_benchmark",
+              "set_commission",
+              "set_option",
+              "set_param",
+              "str"
+            ],
+            "end_line": 153,
+            "line": 99,
+            "name": "initialize"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [],
+            "end_line": 246,
+            "line": 154,
+            "name": "set_param"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "get_blacklist",
+              "get_security_info",
+              "str"
+            ],
+            "end_line": 295,
+            "line": 249,
+            "name": "log_param"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [],
+            "end_line": 317,
+            "line": 298,
+            "name": "reset_day_param"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "do_handle_data",
+              "equity_curve_protect",
+              "market_stop_loss_by_28_index",
+              "market_stop_loss_by_3_black_crows",
+              "market_stop_loss_by_price",
+              "stock_stop_loss",
+              "stock_stop_profit"
+            ],
+            "end_line": 354,
+            "line": 320,
+            "name": "handle_data"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "adjust_position",
+              "clear_position",
+              "get_growth_rate",
+              "get_security_info"
+            ],
+            "end_line": 373,
+            "line": 356,
+            "name": "do_handle_data"
+          },
+          {
+            "default_path_class": "disabled_optional_or_helper",
+            "direct_named_calls": [
+              "attribute_history",
+              "clear_position",
+              "get_security_info"
+            ],
+            "end_line": 396,
+            "line": 375,
+            "name": "market_stop_loss_by_price"
+          },
+          {
+            "default_path_class": "disabled_optional_or_helper",
+            "direct_named_calls": [
+              "clear_position",
+              "len"
+            ],
+            "end_line": 414,
+            "line": 399,
+            "name": "equity_curve_protect"
+          },
+          {
+            "default_path_class": "disabled_optional_or_helper",
+            "direct_named_calls": [
+              "clear_position",
+              "get_growth_rate",
+              "get_security_info"
+            ],
+            "end_line": 432,
+            "line": 416,
+            "name": "market_stop_loss_by_3_black_crows"
+          },
+          {
+            "default_path_class": "disabled_optional_or_helper",
+            "direct_named_calls": [
+              "attribute_history",
+              "len",
+              "list"
+            ],
+            "end_line": 463,
+            "line": 434,
+            "name": "is_3_black_crows"
+          },
+          {
+            "default_path_class": "disabled_optional_or_helper",
+            "direct_named_calls": [
+              "clear_position",
+              "get_growth_rate",
+              "get_security_info"
+            ],
+            "end_line": 493,
+            "line": 466,
+            "name": "market_stop_loss_by_28_index"
+          },
+          {
+            "default_path_class": "disabled_optional_or_helper",
+            "direct_named_calls": [
+              "close_position",
+              "get_stop_loss_threshold"
+            ],
+            "end_line": 511,
+            "line": 496,
+            "name": "stock_stop_loss"
+          },
+          {
+            "default_path_class": "disabled_optional_or_helper",
+            "direct_named_calls": [
+              "close_position",
+              "get_stop_profit_threshold"
+            ],
+            "end_line": 526,
+            "line": 514,
+            "name": "stock_stop_profit"
+          },
+          {
+            "default_path_class": "disabled_optional_or_helper",
+            "direct_named_calls": [
+              "attribute_history"
+            ],
+            "end_line": 538,
+            "line": 530,
+            "name": "get_pct_change"
+          },
+          {
+            "default_path_class": "disabled_optional_or_helper",
+            "direct_named_calls": [
+              "abs",
+              "get_pct_change",
+              "isnan"
+            ],
+            "end_line": 564,
+            "line": 544,
+            "name": "get_stop_loss_threshold"
+          },
+          {
+            "default_path_class": "disabled_optional_or_helper",
+            "direct_named_calls": [
+              "abs",
+              "get_pct_change",
+              "isnan"
+            ],
+            "end_line": 577,
+            "line": 569,
+            "name": "get_stop_profit_threshold"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "get_close_price",
+              "isnan"
+            ],
+            "end_line": 590,
+            "line": 581,
+            "name": "get_growth_rate"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "attribute_history"
+            ],
+            "end_line": 594,
+            "line": 593,
+            "name": "get_close_price"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "get_close_price",
+              "order_target_value_"
+            ],
+            "end_line": 606,
+            "line": 599,
+            "name": "open_position"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "order_target_value_"
+            ],
+            "end_line": 627,
+            "line": 611,
+            "name": "close_position"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "close_position"
+            ],
+            "end_line": 635,
+            "line": 630,
+            "name": "clear_position"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "order_target_value"
+            ],
+            "end_line": 649,
+            "line": 640,
+            "name": "order_target_value_"
+          },
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [
+              "get_current_data"
+            ],
+            "end_line": 655,
+            "line": 653,
+            "name": "filter_paused_stock"
+          },
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [
+              "get_current_data"
+            ],
+            "end_line": 664,
+            "line": 658,
+            "name": "filter_st_stock"
+          },
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [
+              "get_current_data",
+              "history"
+            ],
+            "end_line": 673,
+            "line": 667,
+            "name": "filter_limitup_stock"
+          },
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [
+              "get_current_data",
+              "history"
+            ],
+            "end_line": 683,
+            "line": 678,
+            "name": "filter_limitdown_stock"
+          },
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [
+              "get_blacklist"
+            ],
+            "end_line": 691,
+            "line": 689,
+            "name": "filter_blacklist_stock"
+          },
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [],
+            "end_line": 695,
+            "line": 694,
+            "name": "filter_gem_stock"
+          },
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [
+              "get_growth_rate"
+            ],
+            "end_line": 699,
+            "line": 698,
+            "name": "filter_by_growth_rate"
+          },
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [
+              "attribute_history"
+            ],
+            "end_line": 722,
+            "line": 702,
+            "name": "rank_stocks"
+          },
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [
+              "get_all_securities"
+            ],
+            "end_line": 729,
+            "line": 726,
+            "name": "filter_new_stock"
+          },
+          {
+            "default_path_class": "unused_selection_template",
+            "direct_named_calls": [
+              "filter_blacklist_stock",
+              "filter_gem_stock",
+              "filter_limitdown_stock",
+              "filter_limitup_stock",
+              "filter_paused_stock",
+              "filter_st_stock",
+              "get_fundamentals",
+              "len",
+              "list",
+              "query",
+              "rank_stocks"
+            ],
+            "end_line": 782,
+            "line": 733,
+            "name": "pick_stocks"
+          },
+          {
+            "default_path_class": "default_callback_or_helper",
+            "direct_named_calls": [
+              "close_position",
+              "len",
+              "open_position"
+            ],
+            "end_line": 806,
+            "line": 787,
+            "name": "adjust_position"
+          }
+        ],
+        "lines_read": 808,
+        "path": "2020年度精选策略/51 HS300--随机森林拐点识别.txt",
+        "platform_equivalence_proven": false,
+        "source_sha256": "28b6333c10cf48b6ccc53a3bdfb3ae7dd15a09eabca0362efbb3c425dce8882d"
+      },
+      {
+        "encoding": "utf-8-sig",
+        "formal_acceptance": false,
+        "frozen_source": "data/staging/strategies-batch96/20261011-original-callback-stage/sources/1.source",
+        "functions": [
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "OrderCost",
+              "run_daily",
+              "set_benchmark",
+              "set_option",
+              "set_order_cost"
+            ],
+            "end_line": 36,
+            "line": 14,
+            "name": "initialize"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "len",
+              "range"
+            ],
+            "end_line": 51,
+            "line": 39,
+            "name": "ema"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "ema"
+            ],
+            "end_line": 57,
+            "line": 53,
+            "name": "macdx"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "ema"
+            ],
+            "end_line": 66,
+            "line": 59,
+            "name": "trend"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "len",
+              "macdx",
+              "range"
+            ],
+            "end_line": 82,
+            "line": 68,
+            "name": "hasCross"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "len",
+              "range"
+            ],
+            "end_line": 89,
+            "line": 84,
+            "name": "barslast"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "barslast",
+              "macdx",
+              "max",
+              "min",
+              "print"
+            ],
+            "end_line": 264,
+            "line": 91,
+            "name": "core_ssdd"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "len",
+              "range"
+            ],
+            "end_line": 274,
+            "line": 267,
+            "name": "isContinuous"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "isContinuous"
+            ],
+            "end_line": 281,
+            "line": 277,
+            "name": "findSublist"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "barslast",
+              "findSublist",
+              "len"
+            ],
+            "end_line": 292,
+            "line": 285,
+            "name": "tradeHelper1"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "barslast",
+              "findSublist",
+              "len"
+            ],
+            "end_line": 302,
+            "line": 295,
+            "name": "tradeHelper2"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "macdx",
+              "max"
+            ],
+            "end_line": 316,
+            "line": 304,
+            "name": "isRealT"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "macdx",
+              "min"
+            ],
+            "end_line": 330,
+            "line": 318,
+            "name": "isRealB"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [],
+            "end_line": 346,
+            "line": 334,
+            "name": "before_market_open"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "barslast",
+              "core_ssdd",
+              "get_bars",
+              "hasCross",
+              "isRealB",
+              "isRealT",
+              "min",
+              "order_target_value",
+              "str",
+              "tradeHelper1",
+              "tradeHelper2",
+              "trend"
+            ],
+            "end_line": 453,
+            "line": 349,
+            "name": "market_open"
+          },
+          {
+            "default_path_class": "callback_or_conditional_indicator_state_helper",
+            "direct_named_calls": [
+              "get_trades",
+              "str"
+            ],
+            "end_line": 467,
+            "line": 460,
+            "name": "after_market_close"
+          }
+        ],
+        "lines_read": 467,
+        "path": "2021年度精选策略/69.（12.3更新v1.2）朱虽自用1号（神虽顶底+趋势）.txt",
+        "platform_equivalence_proven": false,
+        "source_sha256": "e88037b85d55b6d9879e0514663ac76ee667ca23cb140985191607216d8b9353"
+      }
+    ],
+    "status": "in_progress"
+  },
+  "case_id": "batch96-complete-rule-read",
+  "nature": "in_progress_complete_source_review_pending_formal",
+  "purpose": "两原文808/467行与36/16定义、实际/禁用/休眠路径及原状态边界，不把RF模板当实际选股",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch96/20261011-original-callback-stage/source-rule-review.json",
+    "sha256": "3ca7d9c2a6bda6a74290cd530edf16a66b0d9a8c93ae1a958425273b08a5f4ee"
+  }
+}

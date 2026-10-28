@@ -1,0 +1,40 @@
+{
+  "case": {
+    "bi": {
+      "full_window_dates": 148,
+      "removed_endpoint_pairs": 478,
+      "revision_dates": 439,
+      "under_1000_row_dates": 291
+    },
+    "first_example": {
+      "evaluation_date": "2021-01-21",
+      "layer": "bi",
+      "removed_endpoint_date": "2021-01-06",
+      "removed_type": 1
+    },
+    "formal_acceptance": false,
+    "input": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/chan-daily-state-values.parquet",
+    "input_sha256": "7902501544a36aa5ab9a58e6c7a8c2a12e5a181e362969ea2a01c74c9550519d",
+    "limits": [
+      "Full-window changes also reflect moving start, not solely new-bar confirmation",
+      "Not an independent algorithm verification or historical confirmed signal proof"
+    ],
+    "method": "Compare adjacent saved states using endpoint date plus tb for kDataFrame_marked and xd_tb for kDataFrame_xd; remove endpoint pairs older than current window_start; no price comparison or final-chart backfill",
+    "nature": "in_progress_observation_from_frozen_original_component_states",
+    "not_a_backtest": true,
+    "xd": {
+      "full_window_dates": 49,
+      "removed_endpoint_pairs": 197,
+      "revision_dates": 188,
+      "under_1000_row_dates": 139
+    }
+  },
+  "case_id": "daily-chan-industry-batch88-repainting-stage",
+  "nature": "observed_adjacent_frozen_state_changes_not_confirmed_signals",
+  "purpose": "439日笔和188日线段端点删除；排除移出窗口端点，满窗仍有滚动起点影响，不作独立算法或确认时点证明",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-09-batch88-repainting-observation.json",
+    "sha256": "8a65f504412bd5d4c95226e090ff61e3d31008ff6b01535dd2873ddb203869a1"
+  }
+}

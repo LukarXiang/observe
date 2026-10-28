@@ -1,0 +1,1726 @@
+{
+  "case": {
+    "case_count": 48,
+    "cases": [
+      {
+        "case": "0_defaults",
+        "events": [
+          [
+            "benchmark",
+            "000300.XSHG"
+          ],
+          [
+            "slippage",
+            0.02
+          ],
+          [
+            "option",
+            "use_real_price",
+            true
+          ],
+          [
+            "option",
+            "order_volume_ratio",
+            1
+          ],
+          [
+            "cost",
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003,
+              "open_tax": 0
+            },
+            {
+              "type": "stock"
+            }
+          ],
+          [
+            "schedule",
+            "sell_every_day",
+            "open"
+          ],
+          [
+            "schedule",
+            "risk_management",
+            "every_bar"
+          ],
+          [
+            "schedule",
+            "check_stocks",
+            "open"
+          ],
+          [
+            "schedule",
+            "trade",
+            "open"
+          ],
+          [
+            "schedule",
+            "selled_security_list_count",
+            "after_close"
+          ]
+        ],
+        "state": {
+          "buy_refresh_rate": 1,
+          "buy_trade_days": 0,
+          "check_out_lists_ascending": "desc",
+          "check_stocks_days": 0,
+          "check_stocks_refresh_rate": 1,
+          "concept_list": [],
+          "daily_risk_management": true,
+          "filter_delisted": true,
+          "filter_holded": false,
+          "filter_paused": true,
+          "filter_st": true,
+          "industry_list": [
+            "801110",
+            "801120",
+            "801150",
+            "801200",
+            "801210",
+            "801750",
+            "801780"
+          ],
+          "max_buy_amount": null,
+          "max_buy_value": null,
+          "max_hold_stocknum": 5,
+          "only_st": false,
+          "open_sell_securities": [],
+          "order_style_str": "by_cap_mean",
+          "order_style_value": 100,
+          "risk_management_signal": true,
+          "security_max_proportion": 1,
+          "security_universe_index": [
+            "000300.XSHG"
+          ],
+          "security_universe_user_securities": [],
+          "sell_by_amount": null,
+          "sell_by_percent": null,
+          "sell_refresh_rate": 1,
+          "sell_trade_days": 0,
+          "sell_will_buy": true,
+          "selled_security_list": {}
+        }
+      },
+      {
+        "case": "0_holded_False",
+        "result": [
+          "new",
+          "new"
+        ]
+      },
+      {
+        "case": "0_holded_True",
+        "result": [
+          "held",
+          "new",
+          "new"
+        ]
+      },
+      {
+        "case": "0_financial_helper_arguments",
+        "fixture_only": true,
+        "trace": [
+          [
+            "financial_data_filter_dayu",
+            [
+              "a",
+              "b"
+            ],
+            "indicator.inc_revenue_year_on_year",
+            3
+          ],
+          [
+            "financial_data_filter_dayu",
+            [
+              "a",
+              "b"
+            ],
+            "indicator.operation_profit_to_total_revenue",
+            3
+          ],
+          [
+            "financial_data_filter_dayu",
+            [
+              "a",
+              "b"
+            ],
+            "valuation.circulating_market_cap",
+            3
+          ],
+          [
+            "financial_data_filter_dayu",
+            [
+              "a",
+              "b"
+            ],
+            "valuation.capitalization",
+            5
+          ]
+        ]
+      },
+      {
+        "case": "0_IPO_helper_arguments",
+        "fixture_only": true,
+        "result": [
+          "a"
+        ],
+        "trace": [
+          [
+            "a",
+            600
+          ],
+          [
+            "b",
+            600
+          ]
+        ]
+      },
+      {
+        "case": "0_pool_order_and_user_string",
+        "concepts": [
+          "a",
+          "b"
+        ],
+        "filtered": [
+          "a"
+        ],
+        "fixture_only": true,
+        "pool": [
+          "a",
+          "b"
+        ],
+        "trace": [
+          [
+            "index",
+            "000300.XSHG"
+          ],
+          [
+            "industry",
+            "801780"
+          ],
+          [
+            "industry",
+            "801110"
+          ]
+        ],
+        "user_string_expansion": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      {
+        "case": "0_empty_sort_keeps_input",
+        "result": [
+          "z",
+          "a",
+          "z"
+        ],
+        "same_object": true
+      },
+      {
+        "case": "0_inactive_nonempty_sort_compatibility",
+        "error": "AttributeError",
+        "inactive": true
+      },
+      {
+        "case": "0_sell_keys_immediate",
+        "fixture_only": true,
+        "positions": {},
+        "retry": [],
+        "sold": {},
+        "trace": [
+          [
+            "exit_predicate",
+            [
+              "a",
+              8,
+              89
+            ],
+            {}
+          ],
+          [
+            "exit_predicate",
+            [
+              "b",
+              8,
+              89
+            ],
+            {}
+          ],
+          [
+            "sell",
+            "a",
+            null,
+            null
+          ],
+          [
+            "sell",
+            "b",
+            null,
+            null
+          ]
+        ]
+      },
+      {
+        "case": "0_sell_keys_failed",
+        "fixture_only": true,
+        "positions": {
+          "a": 100,
+          "b": 100
+        },
+        "retry": [
+          "a",
+          "b"
+        ],
+        "sold": {},
+        "trace": [
+          [
+            "exit_predicate",
+            [
+              "a",
+              8,
+              89
+            ],
+            {}
+          ],
+          [
+            "exit_predicate",
+            [
+              "b",
+              8,
+              89
+            ],
+            {}
+          ],
+          [
+            "sell",
+            "a",
+            null,
+            null
+          ],
+          [
+            "sell",
+            "b",
+            null,
+            null
+          ]
+        ]
+      },
+      {
+        "case": "0_sell_keys_partial",
+        "fixture_only": true,
+        "positions": {
+          "a": 1,
+          "b": 1
+        },
+        "retry": [],
+        "sold": {},
+        "trace": [
+          [
+            "exit_predicate",
+            [
+              "a",
+              8,
+              89
+            ],
+            {}
+          ],
+          [
+            "exit_predicate",
+            [
+              "b",
+              8,
+              89
+            ],
+            {}
+          ],
+          [
+            "sell",
+            "a",
+            null,
+            null
+          ],
+          [
+            "sell",
+            "b",
+            null,
+            null
+          ]
+        ]
+      },
+      {
+        "case": "0_snapshot_sold_and_close_count",
+        "daily_risk": true,
+        "sold": {
+          "a": 1
+        }
+      },
+      {
+        "case": "0_buy_0_False",
+        "fixture_only": true,
+        "positions": [],
+        "trace": [
+          [
+            "allocation",
+            [
+              "p0",
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            5,
+            "by_cap_mean",
+            100
+          ],
+          [
+            "proportion",
+            "p0",
+            10,
+            1
+          ],
+          [
+            "size",
+            "p0",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "p0",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "a",
+            10,
+            1
+          ],
+          [
+            "size",
+            "a",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "a",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "b",
+            10,
+            1
+          ],
+          [
+            "size",
+            "b",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "b",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "c",
+            10,
+            1
+          ],
+          [
+            "size",
+            "c",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "c",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "d",
+            10,
+            1
+          ],
+          [
+            "size",
+            "d",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "d",
+            1,
+            "controlled-market"
+          ]
+        ]
+      },
+      {
+        "case": "0_buy_1_False",
+        "fixture_only": true,
+        "positions": [
+          "p0"
+        ],
+        "trace": [
+          [
+            "allocation",
+            [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            5,
+            "by_cap_mean",
+            100
+          ],
+          [
+            "proportion",
+            "a",
+            10,
+            1
+          ],
+          [
+            "size",
+            "a",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "a",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "b",
+            10,
+            1
+          ],
+          [
+            "size",
+            "b",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "b",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "c",
+            10,
+            1
+          ],
+          [
+            "size",
+            "c",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "c",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "d",
+            10,
+            1
+          ],
+          [
+            "size",
+            "d",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "d",
+            1,
+            "controlled-market"
+          ]
+        ]
+      },
+      {
+        "case": "0_buy_1_True",
+        "fixture_only": true,
+        "positions": [
+          "p0",
+          "a",
+          "b",
+          "c",
+          "d"
+        ],
+        "trace": [
+          [
+            "allocation",
+            [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            5,
+            "by_cap_mean",
+            100
+          ],
+          [
+            "proportion",
+            "a",
+            10,
+            1
+          ],
+          [
+            "size",
+            "a",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "a",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "b",
+            10,
+            1
+          ],
+          [
+            "size",
+            "b",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "b",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "c",
+            10,
+            1
+          ],
+          [
+            "size",
+            "c",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "c",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "d",
+            10,
+            1
+          ],
+          [
+            "size",
+            "d",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "d",
+            1,
+            "controlled-market"
+          ]
+        ]
+      },
+      {
+        "case": "0_buy_5_False",
+        "fixture_only": true,
+        "positions": [
+          "p0",
+          "p1",
+          "p2",
+          "p3",
+          "p4"
+        ],
+        "trace": []
+      },
+      {
+        "case": "0_buy_6_False",
+        "fixture_only": true,
+        "positions": [
+          "p0",
+          "p1",
+          "p2",
+          "p3",
+          "p4",
+          "p5"
+        ],
+        "trace": [
+          [
+            "allocation",
+            [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            5,
+            "by_cap_mean",
+            100
+          ]
+        ]
+      },
+      {
+        "case": "0_buy_gate_risk_management_signal",
+        "no_helpers_required": true
+      },
+      {
+        "case": "0_buy_gate_daily_risk_management",
+        "no_helpers_required": true
+      },
+      {
+        "case": "0_retry_False",
+        "fixture_only": true,
+        "orders": [
+          [
+            "a",
+            0
+          ]
+        ],
+        "retry": [
+          "a"
+        ]
+      },
+      {
+        "case": "0_retry_True",
+        "fixture_only": true,
+        "orders": [
+          [
+            "a",
+            0
+          ]
+        ],
+        "retry": []
+      },
+      {
+        "case": "0_literal_state_filters",
+        "fixture_only": true,
+        "results": {
+          "delisted_filter": [
+            "normal",
+            "paused",
+            "st",
+            "limit"
+          ],
+          "high_limit_filter": [
+            "normal",
+            "paused",
+            "st",
+            "delisted",
+            "star"
+          ],
+          "paused_filter": [
+            "normal",
+            "st",
+            "delisted",
+            "star",
+            "limit"
+          ],
+          "st_filter": [
+            "normal",
+            "paused",
+            "delisted",
+            "star",
+            "limit"
+          ]
+        }
+      },
+      {
+        "buy_days": 1,
+        "case": "0_trade_helper_and_sell_buy_order",
+        "fixture_only": true,
+        "sell_days": 1,
+        "trace": [
+          [
+            "st_filter",
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "paused_filter",
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "delisted_filter",
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "high_limit_filter",
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "MA_entry",
+            "a",
+            8,
+            89
+          ],
+          [
+            "MA_entry",
+            "b",
+            8,
+            89
+          ],
+          [
+            "sell",
+            [
+              "a"
+            ]
+          ],
+          [
+            "buy",
+            [
+              "a"
+            ]
+          ]
+        ]
+      },
+      {
+        "buy_days": 2,
+        "case": "0_trade_skipped_counters",
+        "sell_days": 2,
+        "trace": []
+      },
+      {
+        "case": "1_defaults",
+        "events": [
+          [
+            "benchmark",
+            "000300.XSHG"
+          ],
+          [
+            "slippage",
+            0.02
+          ],
+          [
+            "option",
+            "use_real_price",
+            true
+          ],
+          [
+            "option",
+            "order_volume_ratio",
+            1
+          ],
+          [
+            "cost",
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003,
+              "open_tax": 0
+            },
+            {
+              "type": "stock"
+            }
+          ],
+          [
+            "schedule",
+            "sell_every_day",
+            "open"
+          ],
+          [
+            "schedule",
+            "risk_management",
+            "every_bar"
+          ],
+          [
+            "schedule",
+            "check_stocks",
+            "open"
+          ],
+          [
+            "schedule",
+            "trade",
+            "open"
+          ],
+          [
+            "schedule",
+            "selled_security_list_count",
+            "after_close"
+          ]
+        ],
+        "state": {
+          "buy_refresh_rate": 1,
+          "buy_trade_days": 0,
+          "check_out_lists_ascending": "desc",
+          "check_stocks_days": 0,
+          "check_stocks_refresh_rate": 1,
+          "concept_list": [],
+          "daily_risk_management": true,
+          "filter_delisted": true,
+          "filter_holded": true,
+          "filter_paused": true,
+          "filter_st": true,
+          "industry_list": [
+            "801010",
+            "801020",
+            "801030",
+            "801040",
+            "801050",
+            "801080",
+            "801110",
+            "801120",
+            "801130",
+            "801140",
+            "801150",
+            "801160",
+            "801170",
+            "801180",
+            "801200",
+            "801210",
+            "801230",
+            "801710",
+            "801720",
+            "801730",
+            "801740",
+            "801750",
+            "801760",
+            "801770",
+            "801780",
+            "801790",
+            "801880",
+            "801890"
+          ],
+          "max_buy_amount": null,
+          "max_buy_value": null,
+          "max_hold_stocknum": 5,
+          "only_st": false,
+          "open_sell_securities": [],
+          "order_style_str": "by_cap_mean",
+          "order_style_value": 100,
+          "risk_management_signal": true,
+          "security_max_proportion": 1,
+          "security_universe_index": [
+            "000300.XSHG"
+          ],
+          "security_universe_user_securities": [],
+          "sell_by_amount": null,
+          "sell_by_percent": null,
+          "sell_refresh_rate": 1,
+          "sell_trade_days": 0,
+          "sell_will_buy": true,
+          "selled_security_list": {}
+        }
+      },
+      {
+        "case": "1_holded_False",
+        "result": [
+          "new",
+          "new"
+        ]
+      },
+      {
+        "case": "1_holded_True",
+        "result": [
+          "held",
+          "new",
+          "new"
+        ]
+      },
+      {
+        "case": "1_financial_helper_arguments",
+        "fixture_only": true,
+        "trace": [
+          [
+            "financial_data_filter_xiaoyu",
+            [
+              "a",
+              "b"
+            ],
+            "valuation.pe_ratio_lyr",
+            20
+          ],
+          [
+            "financial_data_filter_qujian",
+            [
+              "a",
+              "b"
+            ],
+            "indicator.roe",
+            [
+              3,
+              40
+            ]
+          ],
+          [
+            "financial_data_filter_qujian",
+            [
+              "a",
+              "b"
+            ],
+            "valuation.pb_ratio",
+            [
+              3,
+              14
+            ]
+          ]
+        ]
+      },
+      {
+        "case": "1_IPO_helper_arguments",
+        "fixture_only": true,
+        "result": [
+          "a",
+          "b"
+        ],
+        "trace": []
+      },
+      {
+        "case": "1_pool_order_and_user_string",
+        "concepts": [
+          "a",
+          "b"
+        ],
+        "filtered": [
+          "a"
+        ],
+        "fixture_only": true,
+        "pool": [
+          "a",
+          "b"
+        ],
+        "trace": [
+          [
+            "index",
+            "000300.XSHG"
+          ],
+          [
+            "industry",
+            "801780"
+          ],
+          [
+            "industry",
+            "801110"
+          ]
+        ],
+        "user_string_expansion": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      {
+        "case": "1_empty_sort_keeps_input",
+        "result": [
+          "z",
+          "a",
+          "z"
+        ],
+        "same_object": true
+      },
+      {
+        "case": "1_inactive_nonempty_sort_compatibility",
+        "error": "AttributeError",
+        "inactive": true
+      },
+      {
+        "case": "1_sell_keys_immediate",
+        "fixture_only": true,
+        "positions": {},
+        "retry": [],
+        "sold": {},
+        "trace": [
+          [
+            "exit_predicate",
+            [
+              "a",
+              "net_pct_main",
+              30
+            ],
+            {
+              "which_day": "previous"
+            }
+          ],
+          [
+            "exit_predicate",
+            [
+              "b",
+              "net_pct_main",
+              30
+            ],
+            {
+              "which_day": "previous"
+            }
+          ],
+          [
+            "sell",
+            "a",
+            null,
+            null
+          ],
+          [
+            "sell",
+            "b",
+            null,
+            null
+          ]
+        ]
+      },
+      {
+        "case": "1_sell_keys_failed",
+        "fixture_only": true,
+        "positions": {
+          "a": 100,
+          "b": 100
+        },
+        "retry": [
+          "a",
+          "b"
+        ],
+        "sold": {},
+        "trace": [
+          [
+            "exit_predicate",
+            [
+              "a",
+              "net_pct_main",
+              30
+            ],
+            {
+              "which_day": "previous"
+            }
+          ],
+          [
+            "exit_predicate",
+            [
+              "b",
+              "net_pct_main",
+              30
+            ],
+            {
+              "which_day": "previous"
+            }
+          ],
+          [
+            "sell",
+            "a",
+            null,
+            null
+          ],
+          [
+            "sell",
+            "b",
+            null,
+            null
+          ]
+        ]
+      },
+      {
+        "case": "1_sell_keys_partial",
+        "fixture_only": true,
+        "positions": {
+          "a": 1,
+          "b": 1
+        },
+        "retry": [],
+        "sold": {},
+        "trace": [
+          [
+            "exit_predicate",
+            [
+              "a",
+              "net_pct_main",
+              30
+            ],
+            {
+              "which_day": "previous"
+            }
+          ],
+          [
+            "exit_predicate",
+            [
+              "b",
+              "net_pct_main",
+              30
+            ],
+            {
+              "which_day": "previous"
+            }
+          ],
+          [
+            "sell",
+            "a",
+            null,
+            null
+          ],
+          [
+            "sell",
+            "b",
+            null,
+            null
+          ]
+        ]
+      },
+      {
+        "case": "1_snapshot_sold_and_close_count",
+        "daily_risk": true,
+        "sold": {
+          "a": 1
+        }
+      },
+      {
+        "case": "1_buy_0_False",
+        "fixture_only": true,
+        "positions": [],
+        "trace": [
+          [
+            "allocation",
+            [
+              "p0",
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            5,
+            "by_cap_mean",
+            100
+          ],
+          [
+            "proportion",
+            "p0",
+            10,
+            1
+          ],
+          [
+            "size",
+            "p0",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "p0",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "a",
+            10,
+            1
+          ],
+          [
+            "size",
+            "a",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "a",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "b",
+            10,
+            1
+          ],
+          [
+            "size",
+            "b",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "b",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "c",
+            10,
+            1
+          ],
+          [
+            "size",
+            "c",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "c",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "d",
+            10,
+            1
+          ],
+          [
+            "size",
+            "d",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "d",
+            1,
+            "controlled-market"
+          ]
+        ]
+      },
+      {
+        "case": "1_buy_1_False",
+        "fixture_only": true,
+        "positions": [
+          "p0"
+        ],
+        "trace": [
+          [
+            "allocation",
+            [
+              "p0",
+              "a",
+              "b",
+              "c"
+            ],
+            5,
+            "by_cap_mean",
+            100
+          ],
+          [
+            "proportion",
+            "p0",
+            10,
+            1
+          ],
+          [
+            "size",
+            "p0",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "p0",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "a",
+            10,
+            1
+          ],
+          [
+            "size",
+            "a",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "a",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "b",
+            10,
+            1
+          ],
+          [
+            "size",
+            "b",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "b",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "c",
+            10,
+            1
+          ],
+          [
+            "size",
+            "c",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "c",
+            1,
+            "controlled-market"
+          ]
+        ]
+      },
+      {
+        "case": "1_buy_1_True",
+        "fixture_only": true,
+        "positions": [
+          "p0",
+          "a",
+          "b",
+          "c"
+        ],
+        "trace": [
+          [
+            "allocation",
+            [
+              "p0",
+              "a",
+              "b",
+              "c"
+            ],
+            5,
+            "by_cap_mean",
+            100
+          ],
+          [
+            "proportion",
+            "p0",
+            10,
+            1
+          ],
+          [
+            "size",
+            "p0",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "p0",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "a",
+            10,
+            1
+          ],
+          [
+            "size",
+            "a",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "a",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "b",
+            10,
+            1
+          ],
+          [
+            "size",
+            "b",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "b",
+            1,
+            "controlled-market"
+          ],
+          [
+            "proportion",
+            "c",
+            10,
+            1
+          ],
+          [
+            "size",
+            "c",
+            10,
+            null,
+            null
+          ],
+          [
+            "order",
+            "c",
+            1,
+            "controlled-market"
+          ]
+        ]
+      },
+      {
+        "case": "1_buy_5_False",
+        "fixture_only": true,
+        "positions": [
+          "p0",
+          "p1",
+          "p2",
+          "p3",
+          "p4"
+        ],
+        "trace": []
+      },
+      {
+        "case": "1_buy_6_False",
+        "fixture_only": true,
+        "positions": [
+          "p0",
+          "p1",
+          "p2",
+          "p3",
+          "p4",
+          "p5"
+        ],
+        "trace": [
+          [
+            "allocation",
+            [
+              "p0",
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            5,
+            "by_cap_mean",
+            100
+          ]
+        ]
+      },
+      {
+        "case": "1_buy_gate_risk_management_signal",
+        "no_helpers_required": true
+      },
+      {
+        "case": "1_buy_gate_daily_risk_management",
+        "no_helpers_required": true
+      },
+      {
+        "case": "1_retry_False",
+        "fixture_only": true,
+        "orders": [
+          [
+            "a",
+            0
+          ]
+        ],
+        "retry": [
+          "a"
+        ]
+      },
+      {
+        "case": "1_retry_True",
+        "fixture_only": true,
+        "orders": [
+          [
+            "a",
+            0
+          ]
+        ],
+        "retry": []
+      },
+      {
+        "case": "1_literal_state_filters",
+        "fixture_only": true,
+        "results": {
+          "delisted_filter": [
+            "normal",
+            "paused",
+            "st",
+            "limit"
+          ],
+          "high_limit_filter": [
+            "normal",
+            "paused",
+            "st",
+            "delisted",
+            "star"
+          ],
+          "paused_filter": [
+            "normal",
+            "st",
+            "delisted",
+            "star",
+            "limit"
+          ],
+          "st_filter": [
+            "normal",
+            "paused",
+            "delisted",
+            "star",
+            "limit"
+          ]
+        }
+      },
+      {
+        "buy_days": 1,
+        "case": "1_trade_helper_and_sell_buy_order",
+        "fixture_only": true,
+        "sell_days": 1,
+        "trace": [
+          [
+            "st_filter",
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "paused_filter",
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "delisted_filter",
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "high_limit_filter",
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "flow_entry",
+            "a",
+            "net_pct_main",
+            20,
+            {
+              "which_day": "previous"
+            }
+          ],
+          [
+            "flow_entry",
+            "b",
+            "net_pct_main",
+            20,
+            {
+              "which_day": "previous"
+            }
+          ],
+          [
+            "sell",
+            [
+              "a"
+            ]
+          ],
+          [
+            "buy",
+            [
+              "a"
+            ]
+          ]
+        ]
+      },
+      {
+        "buy_days": 2,
+        "case": "1_trade_skipped_counters",
+        "sell_days": 2,
+        "trace": []
+      }
+    ],
+    "limits": [
+      "Controlled helper return values are fixtures only; thresholds/units/MA/financial/flow kernels remain unproved",
+      "Plain dictionary immediate/failed/partial scenarios diagnose Python state behavior, not JoinQuant fill equivalence"
+    ],
+    "not_a_backtest": true
+  },
+  "case_id": "wizard-flow-batch85-diagnostics",
+  "nature": "accepted_original_function_controlled_state_diagnostics",
+  "purpose": "48受控原回调/参数/持仓反向布尔、动态keys漏已卖记录、负空槽/失败/部分成交/重复加仓及实际费用顺序；未知helper返回是夹具，非信号或交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/diagnostics.json",
+    "sha256": "f4f193d68df109b9d842e0d777e9d13b4053960c418e91c5d690fbf25957060f"
+  }
+}

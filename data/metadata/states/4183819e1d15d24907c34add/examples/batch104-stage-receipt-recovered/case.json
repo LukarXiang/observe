@@ -1,0 +1,58 @@
+{
+  "case": {
+    "actual_imports": {
+      "observe.strategy_catalog": "/mnt/d/projects/observe/data/staging/strategies-batch104/20261011-stage-validation/isolated/src/observe/strategy_catalog.py",
+      "scripts.reference_strategy_batch104": "/mnt/d/projects/observe/data/staging/strategies-batch104/20261011-stage-validation/isolated/scripts/reference_strategy_batch104.py",
+      "scripts.research_strategy_batch104": "/mnt/d/projects/observe/data/staging/strategies-batch104/20261011-stage-validation/isolated/scripts/research_strategy_batch104.py"
+    },
+    "copied_files": 176,
+    "copy_manifest_sha256": "9767874970371680c214abdb46c1d0e935efdc3195fb3b965471cf994c30e3e6",
+    "evidence_sha256": {
+      "data/staging/strategies-batch104/20261011-stage-validation/checked.json": "77f793efd0183c415b133bd752dde5c29b8ec4d675eb1753c04594593c2a361a",
+      "data/staging/strategies-batch104/20261011-stage-validation/copy-manifest.json": "9767874970371680c214abdb46c1d0e935efdc3195fb3b965471cf994c30e3e6",
+      "data/staging/strategies-batch104/20261011-stage-validation/isolated-command.json": "a33301bb882868e52302776fc3dc52afdaf06a7258b73330a0e99941a17cb3ca",
+      "data/staging/strategies-batch104/20261011-stage-validation/isolated-imports.json": "1d1a7fb1a5a456e6d43fff2168a1778aa9ee0e5719df84ada7acf308dae28fd4",
+      "data/staging/strategies-batch104/20261011-stage-validation/isolated-saved-readback.json": "5c65c3aba5d57f23fa53d032ae4beb9dc5f7309add6b74e7bc141e2e6338f436",
+      "data/staging/strategies-batch104/20261011-stage-validation/isolated-tests.xml": "3528d5e618ce30decef457bfd4f7d5fd9a6b7f55a570af2c91754db841d2f09b",
+      "data/staging/strategies-batch104/20261011-stage-validation/isolated.log": "33e37a562ba3090af974fa3a070c4a2c50bec5876661ba7e0503356795a87013",
+      "data/staging/strategies-batch104/20261011-stage-validation/local-command.json": "4c72da58978247ebf63dab644c355199472a6c74983a72f463979ccc9e9799c5",
+      "data/staging/strategies-batch104/20261011-stage-validation/local-imports.json": "cb18f093cde589596c1d09aff9e06e3abb752e766e319f5d40812854aee03118",
+      "data/staging/strategies-batch104/20261011-stage-validation/local-tests.xml": "8b2f6856db8bfbdd5c93b657d2f28100db428a9c0519f9b0001aa278917e1bd4",
+      "data/staging/strategies-batch104/20261011-stage-validation/local.log": "288ccab505abf151f9a8c2aa8ecb91574ef945c9e96f702dc9e773091f875a2b",
+      "data/staging/strategies-batch104/20261011-stage-validation/saved-readback.json": "5c65c3aba5d57f23fa53d032ae4beb9dc5f7309add6b74e7bc141e2e6338f436",
+      "scripts/recover_strategy_batch104_stage_receipt.py": "963ecdb16918d788ea01cdfb069ae92ab24ecdd76c5b8be81aae95dc98ba4d21",
+      "tests/unit/test_batch104_receipt_recovery.py": "63bea7232abd883eae4b370a736440c596e923f56785ac5e13bc9b7694ae7ef2"
+    },
+    "formal_source_research_acceptance": false,
+    "formal_trading_acceptance": false,
+    "new_trading_backtests": 0,
+    "old_checks_overall_CLI_returncode": 1,
+    "receipt_numeric_types_recovered": true,
+    "recovery_changes_control_receipt_only": true,
+    "saved_readback": {
+      "all_condition_disagreements_preserved": 0,
+      "condition_disagreements_preserved": 35,
+      "mean_max_abs_errors": {
+        "close": 9.094947017729282e-13,
+        "volume": 0.0
+      },
+      "new_trading_backtests": 0,
+      "relative_disagreements": 0,
+      "relative_windows": 93132,
+      "short31_windows": 46481
+    },
+    "status": "ok_stage_only",
+    "tests": {
+      "isolated": 24,
+      "local": 24
+    }
+  },
+  "case_id": "batch104-stage-receipt-recovered",
+  "nature": "batch104_component_stage_not_trading",
+  "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch104/20261011-stage-receipt-recovery/checked.json",
+    "sha256": "081f4f2c4d0a133cf6e42c0bc64f3bdb6617e464990def99c8b65c8e6cf388d0"
+  }
+}

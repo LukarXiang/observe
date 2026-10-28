@@ -1,0 +1,47 @@
+{
+  "case": {
+    "boundary_year_counts": {
+      "2013": 1,
+      "2016": 1,
+      "2021": 67,
+      "2022": 57,
+      "2023": 70,
+      "2024": 66,
+      "2025": 77,
+      "2026": 34
+    },
+    "common_output_cells": 94699,
+    "economic_rule_changes": false,
+    "evidence_sha256": {
+      "data/staging/strategies-batch105/20261011-longest-operands-v1/compute/fixed40-bias.parquet": "9fe91c311247e638b5d84acbcc9acea703a41d37ce27046d5e1b6cb626212165",
+      "data/staging/strategies-batch105/20261011-longest-operands-v1/compute/native-bias.parquet": "52fcd7039e898f5419a5f3776a9558682a2e4ba819ca3e35ea815b9d684120b9",
+      "data/staging/strategies-batch105/20261011-longest-operands-v1/compute/summary.json": "e325b1e4d31a0210baf2782628538bed79a4d33f8a767f424c658c5b3e9a8151",
+      "data/staging/strategies-batch105/20261011-real-boundaries-and-protocol/fixed40-boundaries.parquet": "d4672cf8781b4cc8656e91e706e19b770422aff632ff3c415eabc7b1313e14ca",
+      "data/staging/strategies-batch105/20261011-real-boundaries-and-protocol/native-boundaries.parquet": "94286d8a222db96ae6c17c4104eaca8892bf80e13c3eb84f2f124a8b5a4b7f35",
+      "data/staging/strategies-batch105/20261011-real-boundaries-and-protocol/native-vs-fixed40-differences.parquet": "90255c8f91b329e1c9695d3e4c983ea3f6676d384fec888000424b45c7c33bf1",
+      "scripts/diagnose_strategy_batch105.py": "7ca6e28c1aadf4cc38ff077329aab72c36645fcd725327238aef25d7ed5ae600"
+    },
+    "fixed40_boundary_rows": 6,
+    "fixed40_cells": 95860,
+    "formal_source_research_acceptance": false,
+    "missing_native_output_cells": 1161,
+    "native_boundary_rows": 373,
+    "native_vs_fixed40_original_comparison_differences": 7,
+    "native_window_protocol_is_not_platform_40_calendar_query": true,
+    "new_trading_backtests": 0,
+    "no_signal_variant_approved_by_this_diagnostic": true,
+    "source_sha256": [
+      "99d10bce41b0c7e1c2669c3c0c74afefea384ba6a099673c24e041fde5b89aaf",
+      "f41f457f69e71ddb4b0b22697ca8a9fd329d7ba2954f2c7a4571e7296896f4e8"
+    ],
+    "status": "ok_diagnostic_only"
+  },
+  "case_id": "batch105-protocol-boundaries",
+  "nature": "complete_real_boundary_rows_and_window_protocol_differences",
+  "purpose": "373/6严格比较差异，94699重叠中7差异/1161无native输出",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch105/20261011-real-boundaries-and-protocol/checked.json",
+    "sha256": "43e52312af0e75300e11c35ce35ee03dfb1f1264e931a6f0cf4bb4c6601e0379"
+  }
+}

@@ -1,0 +1,116 @@
+{
+ "status": "ok",
+ "scope": "Two complete core-assets sources,32 original diagnostics and29710 native history scoring windows/3102 common ranking dates; original trades blocked",
+ "scope_alignment": "on_target",
+ "review_depth": "deep",
+ "hard_stops": [],
+ "specialist_reviews": {
+  "security": {
+   "agent": "batch78_security",
+   "findings": [],
+   "final_current_checked_receipt_and_binding_SHA_verified": true,
+   "old_controls_SHA_rechecked": 5363,
+   "partition_size_mtime_rechecked": 398
+  },
+  "architecture": {
+   "agent": "batch78_architecture",
+   "findings": [],
+   "final_current_checked_receipt_and_binding_SHA_verified": true,
+   "old_controls_SHA_rechecked": 5363,
+   "partition_size_mtime_rechecked": 398
+  }
+ },
+ "adversarial_review": {
+  "findings": [],
+  "examined": [
+   "Both source bytes/AST/arithmetic frozen; constructed FunctionDef has explicit Python3.12 type_params",
+   "Original weighted fit uses w squared but R2 uses single w and unweighted mean; no standard formula substitution",
+   "Three candidate histories reuse prior formal SHA registries; one fixed GET adds only513100, no new publication",
+   "Fixed bounded8/10s GET/45s worker, no environment proxy/retry/redirect or credential logging",
+   "Each original25-row window verified independently within rel3e-9/abs3e-10 tolerance; max absolute score error is nonzero at extreme scale",
+   "Full original rankings use exact input date tuples and fixed pool;72 asynchronous windows excluded, no fill",
+   "Leader and complete independent rankings separately counted; finish rejects either mismatch before formal acceptance",
+   "Raw price jumps, event/adjustment gaps and huge original annualization retained as counterexamples, not returns",
+   "Post-cutoff records retained in original payloads but excluded from calculation",
+   "Socket/HTTP forbidden replay exactly matches original functions, scores/ranks, new native parser, inventory and three catalogs",
+   "Both red archives remain read-only and bound in checked-state; checked current/copies/evidence chains close",
+   "Component research is not a trading backtest; unique Book and prior approved/pending decisions unchanged"
+  ]
+ },
+ "accepted_directory": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum",
+ "accepted_checkpoint": "20261009-013336-a77a",
+ "implementation_sha256": {
+  "scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+  "tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+  "src/observe/strategy_catalog.py": "2a6e516a05f538379c74d905da11a6922c7bab59221cf7895dbb0499e2f8b28f"
+ },
+ "implementation_files_checked": 43,
+ "implementation_copies_checked": 43,
+ "evidence_files_checked": 90,
+ "core_files_required": 17,
+ "checked_state_file": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/checked-state.json",
+ "checked_state_sha256": "f1483d1236014036b58bd2677b59902ced55c126f643f41da03c275afb62cf7b",
+ "receipt_file": "docs/handoff/2026-10-09-batch78-verification.json",
+ "receipt_sha256": "ff35077a22e3fe73075edd7b775ac5ddcc53a4414b1d064fabc85554f5faac3e",
+ "final_binding_file": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/final-binding-verification.json",
+ "final_binding_sha256": "0f93240581a9786ebbe4c2c8dca9ea665d19800ae746add7e7f831b1198443cf",
+ "catalog_sha256": "4ff587c76d00f84df573fb43f1be6cdd376d56d2039513520fc02d7d42bd57b8",
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5363,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4"
+ },
+ "verification": {
+  "specialized_tests": 25,
+  "final_related_tests": 180,
+  "test_sets_overlap": true,
+  "full_pytest_run": false,
+  "warnings": "One existing Starlette/httpx deprecation; legacy source catalog SyntaxWarnings retained",
+  "ruff": "passed",
+  "diff_check": "passed",
+  "offline": "match",
+  "differences": 0,
+  "network_disabled": true,
+  "diagnostics": 32,
+  "single_fund_variant_windows": 29710,
+  "common_rank_dates": 3102,
+  "original_rank_calls": 6204,
+  "blocked_windows": 72,
+  "independent_leader_differences": 0,
+  "independent_rank_differences": 0,
+  "variant_leader_differences": 189,
+  "arithmetic_comparison": "per-value relative3e-9/absolute3e-10; scores not bitwise zero differences",
+  "max_independent_abs_differences": {
+   "score": 1.1920928955078125e-07,
+   "slope": 8.435092901937224e-17,
+   "intercept": 1.7763568394002505e-15,
+   "r2": 3.597122599785507e-14,
+   "annualized": 9.825453162193298e-08
+  },
+  "first_history_end": "2013-09-03",
+  "last_history_end": "2026-09-29",
+  "new_requests": 1,
+  "http200_responses": 1,
+  "new_candidate_rows": 3203,
+  "reused_candidates": 3,
+  "new_native_parser_match": true,
+  "post_cutoff_rows_retained_but_excluded": 8,
+  "original_input_rows_admitted": 0
+ },
+ "native_history_quality": {
+  "reference": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/native-history-quality.json",
+  "sha256": "f9852feb159662ffc4332008151e16d55a229955bc658303e0747df4af0cd651",
+  "event_cause_proven": false,
+  "prices_corrected": false,
+  "strategy_returns_computed": false
+ },
+ "not_a_backtest": true,
+ "new_trading_backtests": 0,
+ "original_strategy_complete": false,
+ "goal_status": "in_progress"
+}

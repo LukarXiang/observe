@@ -1,0 +1,52 @@
+{
+  "case": {
+    "compatibility_or_economic_repairs": false,
+    "evidence_sha256": {
+      "data/staging/strategies-batch100/20261011-study-complete-readback/checked.json": "98d66b42fba4ee2da204830c5889b0ad6348928cae78615f1f66e2bd6480080a",
+      "data/staging/strategies-batch101/20261011-preread-development/failure.json": "5290f3c5c34a1e02e45628eea407792f8a2f49c8ca03fe07bd49cbaa254ee98b",
+      "data/staging/strategies-batch101/20261011-source-preread-check/checked.json": "a0d07af69485ccfb9d2bb6340a90a6a58afd917a410de3b5a22902f601f8554b",
+      "data/staging/strategies-batch101/20261011-source-preread-check/diagnostics.json": "5d76b84a42efe4aebab68c27e3faa9df4c8cb6ad6935efd0fb29b96499a4c980",
+      "docs/tasks/2026-10-11-第一百零一批原始回调与ES边界-预审记录.md": "44f7ba46f633e5da4ba3f7695b1b692c6ace7b197deb8905bdcadecf08c40631"
+    },
+    "formal_source_research_acceptance": false,
+    "formal_trading_acceptance": false,
+    "known_original_exceptions": {
+      "empty_contract_pool_index_error": "IndexError",
+      "futures_buy_without_after_code_changed": "AttributeError",
+      "original_daily_resample_how_current_pandas_fails": "TypeError",
+      "zero_future_price_nonfinite_sort": "OverflowError"
+    },
+    "library_goal_complete": false,
+    "new_strategy_parent_runs": 0,
+    "new_trading_backtests": 0,
+    "next_start": "First finish existing batch100 replay/acceptance;then batch101 frozen candidate inventory/longest ES references;7/65 pending does not authorize72",
+    "original_diagnostics": 32,
+    "original_strategy_complete": false,
+    "runtime_source_catalog_may_advance_after_this_historical_frozen_check": true,
+    "scope": "Original full functions/controlled32 callbacks and injected ES operands only; not longest input or original returns, full source acceptance, fees or trading",
+    "source_lines": [
+      256,
+      67
+    ],
+    "source_sha256": [
+      "b30d9ba30a2e18bc162261a783479d853ff6768b4ae85963d39315fc85683835",
+      "57d529dce6eb3ba8a76e4e79b1f5340df98d1993118d62b50cc34dec0b7ded4d"
+    ],
+    "status": "ok_preread_phase",
+    "validation": {
+      "actual_imports": 4,
+      "copied_files": 249,
+      "isolated": 21,
+      "local": 21,
+      "skips": 0
+    }
+  },
+  "case_id": "batch101-preread-stage",
+  "nature": "actual_original_callback_phase_not_formal_source_or_trading",
+  "purpose": "32原诊断/4原异常、21本机21隔离、日期JSON红档，旧resample/生命周期未修",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-11-batch101-preread-stage.json",
+    "sha256": "5cb60a2ead77f86130c44c0ea5a62f008bbfe1ebd252ce1be9e626637f7bc186"
+  }
+}

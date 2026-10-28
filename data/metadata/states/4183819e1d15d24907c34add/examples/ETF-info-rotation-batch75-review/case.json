@@ -1,0 +1,107 @@
+{
+  "case": {
+    "accepted_checkpoint": "20261008-235848-4462",
+    "accepted_directory": "data/staging/strategies-batch75/20261008-ETF-info-rotation",
+    "adversarial_review": {
+      "examined": [
+        "Redacted information URL never inferred or contacted; full source only selected safe AST definitions",
+        "Two native GET requests each bound to a fixed URL with no retries/proxy/redirects and bounded worker duration",
+        "Raw and parsed payload SHAs verified; exact native parser replay and socket/HTTP-denied offline recomputation",
+        "All original 29 per-instrument dates must equal common dates; 56 windows blocked without filling or guessing pauses",
+        "Post-cutoff rows retained as raw evidence and excluded from all components",
+        "Numeric recovery copies history and adapts only close dtype using the original validation conversion; dates/formulas/parameters and raw bytes unchanged",
+        "Recovery implementation and tests included in provenance, checked copies, offline and final checks; repeated output creation rejected",
+        "RSRS initialization gap, strict timing/stoploss boundaries, KEEP adjustment and post-filter 510300 SELL semantics preserved",
+        "Reference arithmetic and synthetic diagnostics remain separate from trading backtests; fund input/execution dependencies still block trades"
+      ],
+      "findings": []
+    },
+    "catalog_sha256": "13a42492452876aace3e6fb1d6c5595d9df0df09077847c574fbb372632b38c0",
+    "checked_state_file": "data/staging/strategies-batch75/20261008-ETF-info-rotation/checked-state.json",
+    "checked_state_sha256": "762bd3e6716ac33a21aa8f94a5452b9ea7107fec52619a799770143843c857e3",
+    "evidence_files_checked": 84,
+    "final_binding_file": "data/staging/strategies-batch75/20261008-ETF-info-rotation/final-binding-verification.json",
+    "final_binding_sha256": "c51c1246228b7cfd3cd390bcab9d3fec9df5b9743249747ce27b6be7940216a1",
+    "goal_status": "in_progress",
+    "hard_stops": [],
+    "implementation_copies_checked": 37,
+    "implementation_files_checked": 37,
+    "implementation_sha256": {
+      "scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+      "scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+      "src/observe/strategy_catalog.py": "57f31c2791c04dcae07d2b986ae60721a5837704fe58a49b7078920730d618c8",
+      "tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+      "tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9"
+    },
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "original_strategy_complete": false,
+    "protection": {
+      "baseline_sha256": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4",
+      "mutable_registry_files_excluded": 0,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_unchanged": 5363,
+      "old_index_rows_unchanged": 5280,
+      "old_partition_metadata_unchanged": 398,
+      "partition_check": "size/mtime only; no fresh full hash",
+      "status": "ok"
+    },
+    "receipt_file": "docs/handoff/2026-10-08-batch75-verification.json",
+    "receipt_sha256": "745feee68b5d6164dd6cced77fa55c599ee982a2049c366804cd832f264960ce",
+    "recovery_provenance": {
+      "file": "data/staging/strategies-batch75/20261008-ETF-info-rotation/numeric-input-recovery.json",
+      "original_failures": [
+        "ranking-input-failure.json",
+        "recovery-test-failure.json"
+      ],
+      "original_final_script_field": "The original final-binding final_script_sha256 points to review_strategy_batch75.py; the recovery entrypoint is explicitly bound above and in the complete checked implementation set",
+      "original_test_copy": "recovery-test-before-missing-assertion.py",
+      "policy": "Original driver/source/study/raw inputs unchanged; only the numeric close history interface adapted; production adapter unchanged after fixing the test missing-value expectation",
+      "required_entrypoint": "python -m scripts.recover_strategy_batch75"
+    },
+    "review_depth": "deep",
+    "scope": "Two complete ETF information/rotation sources,33 synthetic original-function diagnostics,4663 index/3459 single-ETF/3205 full-pool reference windows, two native wire/parser audits and numeric-history recovery; no strategy trade acceptance",
+    "scope_alignment": "on_target",
+    "specialist_reviews": {
+      "architecture": {
+        "agent": "batch75_architecture",
+        "final_current_checked_receipt_and_binding_SHA_verified": true,
+        "findings": []
+      },
+      "security": {
+        "agent": "batch75_security",
+        "final_current_checked_receipt_and_binding_SHA_verified": true,
+        "findings": []
+      }
+    },
+    "status": "ok",
+    "verification": {
+      "blocked_ranking_windows": 56,
+      "diff_check": "passed",
+      "differences": 0,
+      "final_related_tests": 172,
+      "native_parser_match": true,
+      "network_disabled": true,
+      "new_candidate_rows": 6889,
+      "new_requests": 2,
+      "offline": "match",
+      "original_specialized_tests": 24,
+      "rank_differences": 0,
+      "ranking_first_history_end": "2013-04-26",
+      "ranking_last_history_end": "2026-09-29",
+      "ranking_windows": 3205,
+      "recovery_regression_tests": 4,
+      "ruff": "passed",
+      "test_sets_overlap": true,
+      "warnings": "One existing Starlette/httpx deprecation warning"
+    }
+  },
+  "case_id": "ETF-info-rotation-batch75-review",
+  "nature": "final_specialist_and_recovery_entry_binding",
+  "purpose": "37当前实现及副本、84证据和正式凭据绑定，显式登记数值恢复入口；安全架构未发现问题，原交易仍阻断",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-08-batch75-final-review.json",
+    "sha256": "6c129b30c21ad80142617ea7517cde8102fbee9dcbc56c9006d2386599184150"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case": {
+    "command": "~/envs/quant/.venv/bin/python scripts/export_research_metadata.py verify --root .",
+    "export_id": "fce4baa5b1701def1e1bff29",
+    "issues": [
+      {
+        "path": "scripts/review_strategy_batch87.py",
+        "problem": "source_document_missing_or_changed"
+      },
+      {
+        "path": "tests/unit/test_batch87_research.py",
+        "problem": "source_document_missing_or_changed"
+      },
+      {
+        "path": "scripts/review_strategy_batch87.py",
+        "problem": "implementation_missing_or_changed"
+      },
+      {
+        "path": "tests/unit/test_batch87_research.py",
+        "problem": "implementation_missing_or_changed"
+      }
+    ],
+    "not_a_backtest": true,
+    "old_states_exports_unchanged": true,
+    "reason": "The root agent changed the batch87 driver and tests for diagnostic label correction after starting verify. The previously exported live-file SHAs became stale; verification correctly rejected them.",
+    "resolution": "Finish and freeze implementation, then export and verify sequentially before acceptance is reported. No verifier bypass.",
+    "returncode": 1,
+    "status": "rejected"
+  },
+  "case_id": "chan-batch87-stage-metadata-rejection",
+  "nature": "stale_export_rejected_after_concurrent_live_code_change",
+  "purpose": "根代理启动verify后改驱动/测试，旧导出SHA失效被正确拒绝；旧exports/states不改，最终实现冻结后串行export/verify，不绕过",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-09-batch87-stage-metadata-rejection.json",
+    "sha256": "c4739a0808ee2610d3868b40effac9cfadf9edd920f4830d294cb2cf1c8ad52f"
+  }
+}

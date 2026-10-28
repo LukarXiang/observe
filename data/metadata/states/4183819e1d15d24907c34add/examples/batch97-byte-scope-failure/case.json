@@ -1,0 +1,28 @@
+{
+  "case": {
+    "actual_file_sha256": "34b851a8a77fbbb83dcad3330dba7f6ee5c9ffab2eaab6775f2b89d6f45bc464",
+    "cause": "Compared Store logical content fingerprint with file byte SHA; distinct scopes",
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-B",
+      "-m",
+      "scripts.research_strategy_batch97",
+      "prepare"
+    ],
+    "component_directory_created": false,
+    "error": "Partition byte SHA differs: data/std/bars_1d/2026__aeb0c08f.parquet",
+    "logical_fingerprint": "aeb0c08fccec7ca2fd1595db6bf3b11b8fa7a37c148a34135ce01108240a517a",
+    "observed_returncode": 1,
+    "old_program_sha256": "e4a846099c82e5ff0194bbf8a917f552347ae41fa54730e3669a32615d54ed8d",
+    "program_source_defining_scope": "src/observe/data/store.py:39",
+    "status": "prepare_rejected_before_output_creation"
+  },
+  "case_id": "batch97-byte-scope-failure",
+  "nature": "immutable_rejected_logical_byte_fingerprint_mixup",
+  "purpose": "首准备在输出前拒绝，旧程序和两种指纹保留；修正对已归档实际字节SHA验收",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch97/20261011-logical-byte-scope-failure/failure.json",
+    "sha256": "b192078f7f0b478d90939d5190a38bb00a2a27ca4b673eb09e81f4ecaadd11d8"
+  }
+}

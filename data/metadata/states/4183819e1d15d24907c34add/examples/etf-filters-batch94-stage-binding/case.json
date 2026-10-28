@@ -1,0 +1,64 @@
+{
+  "case": {
+    "checkpoint": "20261010-183705-25b4",
+    "evidence_sha256": {
+      "baseline.json": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+      "benchmark-candidates.json": "b5572d481b756ee75817559fa66843d33b84084c8ce990598b70b121db59da64",
+      "benchmark-provider-differences.json": "a2f91837d316634bf3f12ac0343d7e2607e55883c98619414bbe3aeb971ca60c",
+      "candidate-inputs.json": "29bb303ff6fb14b56f7ce77e6d708de1d5717d4270d225d40a007951f96281f7",
+      "command-logs/0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "command-logs/1.log": "c0e7d48a499307f9b9362cad8e82f2b8fdd293a7d9dfd6fe2bc2cf2319168153",
+      "command-logs/2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "command-results.json": "cc134a6c17dae26a4f77916daf5dfb3043b28cae2977a683e3f78d6ac15169b2",
+      "component-research.json": "c0760ef7736a270fc273dafbe17b5716a29a4d8b732189c553e093113f6b9202",
+      "current-network-check.json": "f4979bbad5d5b9c7867ac6e0042c7b9ae145a43644ebaae725215d38e21f503e",
+      "diagnostics.json": "be85bfb64436b3d1d2f8aedb0884df39f0ae2adfd35e067f6213353ae75ceee1",
+      "exploratory-failure-notes.json": "797d8612176719144f721454328b42711d734edb3d2e84bf28651f43b5c313d8",
+      "fft-native-reference.parquet": "48688fe51984869889aa661e73fe6cea0d9ce07a2925f600377a0ae56bbb9cde",
+      "implementation-evidence.before.json": "7d2e219341c6b668361c4cbe67857c9080d3c5b7c64c6fe1f76f15325889205d",
+      "implementation/scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+      "implementation/tests/unit/test_batch94_stage.py": "3e632fffe9417f5a4b8cacd9b58c8d7ee9c83fa89fbd8e7c8182a94f803823f6",
+      "index-binding.json": "699a3343dd4a5f5ebf92eaa82b909f1f06ff44911063494986089083df22f1be",
+      "index-input.parquet": "b37fb1497f5cc21b4c11a3cb7d0a823b91661a63ab3e94579c0d639105372928",
+      "offline-verification.json": "5875a18afc2706b84c232733b3ede71e8d1acf877a38f6c6a48294fbe84d8be3",
+      "parent-binding.json": "c8ac1f5ab86ee5430ff7da465c870766abb9bcc041bcdca5c0cff9696c8a9739",
+      "progress-checkpoint.json": "61726eb6243ba61323fb1144cfd44ea28f93809386ef4ca6e8fb80065e1a1866",
+      "progress-start.json": "bc5c88be34178873212517e64765b822399577a361a9a4054fc0b94f698b26cf",
+      "protection.json": "1e245d48d313bb1aa4e28a83569e208946ba6e41def0d4e5be0d018036046f78",
+      "reference-comparison.json": "f22318f76f24af59c57597a352c6435ccdbf82f6aa9b74d1b9d2c63c8c42b1e4",
+      "references/IKalman.cpp": "fcb5c52a67a2e3d802ba9ec0b64bd7f6b0a6876c57739f7763ea966e442d2b36",
+      "rsrs-reference.parquet": "fa301217a8f5bb09a4b327ac6b26d8c276af298e7d33b02801a3cb7d777caa96",
+      "source-map.json": "493fde5cd45ca6aad11df6de8d15d9d801fc28362bb88b9ddb0b723e1c167782",
+      "sources/0.source": "344b7d6ce450c51142b2070edef0a4eacb4ce9ce6f41779b0353207ee5ea46cb",
+      "sources/1.source": "3bfda3a9fe80661ed94e1a19ed1b214b6576d12b8cf1bdcdaaf58a5d4a2d2805",
+      "sources/2.source": "3bfda3a9fe80661ed94e1a19ed1b214b6576d12b8cf1bdcdaaf58a5d4a2d2805",
+      "supplement-evidence.json": "4b5e44be120d927eb0a0655eec0119851f56e031970a7ea0adfc3c4880677b26"
+    },
+    "full_library_complete": false,
+    "implementation_sha256": {
+      "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+      "tests/unit/test_batch94_stage.py": "3e632fffe9417f5a4b8cacd9b58c8d7ee9c83fa89fbd8e7c8182a94f803823f6"
+    },
+    "new_trading_backtests": 0,
+    "protection": {
+      "baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+      "mutable_registry_files_excluded": 0,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_unchanged": 5780,
+      "old_index_rows_unchanged": 5280,
+      "old_partition_metadata_unchanged": 398,
+      "partition_check": "size/mtime only; no fresh full hash",
+      "status": "ok"
+    },
+    "source_count_formally_accepted": 270,
+    "status": "numerical_stage_verified_not_formally_accepted"
+  },
+  "case_id": "etf-filters-batch94-stage-binding",
+  "nature": "immutable_stage_implementation_copies_and_evidence_SHA",
+  "purpose": "两新实现副本与31阶段文件SHA绑定；正式来源验收未完成，无新增回测，后续新目录推进",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/stage-binding.json",
+    "sha256": "d4cbda8e9aefe87e71fad87e9449a915e5344692c3e6a749c94e7959daaf2727"
+  }
+}

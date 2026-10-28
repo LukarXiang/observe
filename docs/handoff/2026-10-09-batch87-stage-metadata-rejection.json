@@ -1,0 +1,16 @@
+{
+  "status": "rejected",
+  "export_id": "fce4baa5b1701def1e1bff29",
+  "command": "~/envs/quant/.venv/bin/python scripts/export_research_metadata.py verify --root .",
+  "returncode": 1,
+  "reason": "The root agent changed the batch87 driver and tests for diagnostic label correction after starting verify. The previously exported live-file SHAs became stale; verification correctly rejected them.",
+  "issues": [
+    {"path": "scripts/review_strategy_batch87.py", "problem": "source_document_missing_or_changed"},
+    {"path": "tests/unit/test_batch87_research.py", "problem": "source_document_missing_or_changed"},
+    {"path": "scripts/review_strategy_batch87.py", "problem": "implementation_missing_or_changed"},
+    {"path": "tests/unit/test_batch87_research.py", "problem": "implementation_missing_or_changed"}
+  ],
+  "old_states_exports_unchanged": true,
+  "resolution": "Finish and freeze implementation, then export and verify sequentially before acceptance is reported. No verifier bypass.",
+  "not_a_backtest": true
+}

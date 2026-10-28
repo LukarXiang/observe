@@ -1,0 +1,57 @@
+{
+  "case": {
+    "new_published_rows": 0,
+    "new_trading_backtests": 0,
+    "prepared_sha256": "eaaa82b888a63533908f95861ab86b6afc15c65ea2c5925499f6a10702aeff60",
+    "results": [
+      {
+        "admitted_rows": 0,
+        "case": "expired-contract-10001355-daily",
+        "error": "ConnectionError: HTTPSConnectionPool(host='stock.finance.sina.com.cn', port=443): Max retries exceeded with url: /futures/api/jsonp_v2.php//StockOptionDaylineService.getSymbolInfo?symbol=CON_OP_10001355 (Caused by NameResolutionError(\"HTTPSConnection(host='stock.finance.sina.com.cn', port=443): Failed to resolve 'stock.finance.sina.com.cn' ([Errno -2] Name or service not known)\"))",
+        "published": false,
+        "query": {
+          "endpoint": "https://stock.finance.sina.com.cn/futures/api/jsonp_v2.php//StockOptionDaylineService.getSymbolInfo",
+          "meaning": "Expired contract named by original source; daily prices cannot supply historical minute fills",
+          "params": {
+            "symbol": "CON_OP_10001355"
+          },
+          "referer": "https://stock.finance.sina.com.cn/option/quotes.html"
+        },
+        "requests_attempted": 1,
+        "responses": [],
+        "status": "failed",
+        "strict_usable": false
+      },
+      {
+        "admitted_rows": 0,
+        "case": "SSE-20180720-risk-identities",
+        "error": "ConnectionError: HTTPConnectionPool(host='query.sse.com.cn', port=80): Max retries exceeded with url: /commonQuery.do?isPagination=false&trade_date=20180720&sqlId=SSE_ZQPZ_YSP_GGQQZSXT_YSHQ_QQFXZB_DATE_L&contractSymbol= (Caused by NameResolutionError(\"HTTPConnection(host='query.sse.com.cn', port=80): Failed to resolve 'query.sse.com.cn' ([Errno -2] Name or service not known)\"))",
+        "published": false,
+        "query": {
+          "endpoint": "http://query.sse.com.cn/commonQuery.do",
+          "meaning": "Single historical risk report; Greeks/IV and identities are not option-chain close prices",
+          "params": {
+            "contractSymbol": "",
+            "isPagination": "false",
+            "sqlId": "SSE_ZQPZ_YSP_GGQQZSXT_YSHQ_QQFXZB_DATE_L",
+            "trade_date": "20180720"
+          },
+          "referer": "http://www.sse.com.cn/"
+        },
+        "requests_attempted": 1,
+        "responses": [],
+        "status": "failed",
+        "strict_usable": false
+      }
+    ],
+    "source_credentials_used": false
+  },
+  "case_id": "batch99-probes",
+  "nature": "two_bounded_expired_option_and_historical_risk_queries",
+  "purpose": "两公共有界GET均DNS失败0响应/新增/发布，不用来源凭据",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch99/20261011-bounded-option-probes/summary.json",
+    "sha256": "2359a755a4fc95de632205863f8a54de0709836651ae3db0e32c3b90eb33a02c"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "case": {
+    "capture_policy": "Completed tool results transcribed as summaries; no claim of a full raw pytest log",
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_batch89_callbacks.py",
+          "tests/unit/test_batch89_stage.py"
+        ],
+        "returncode": 0,
+        "summary": "16 passed in 4.68s; included again in the related suite, not counted twice"
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.verify_offline_tests",
+          "-q",
+          "tests/unit/test_batch89_callbacks.py",
+          "tests/unit/test_batch89_stage.py",
+          "tests/unit/test_batch88_research.py",
+          "tests/unit/test_batch88_verification.py",
+          "tests/unit/test_batch87_research.py",
+          "tests/unit/test_research_metadata.py",
+          "tests/unit/test_catalog_dependencies.py",
+          "tests/unit/test_catalog_schedules.py",
+          "tests/integration/test_strategy_merge.py"
+        ],
+        "returncode": 0,
+        "summary": "159 passed, 1 warning in 23.84s",
+        "warning": "Existing Starlette/httpx test client deprecation"
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_batch89_events.py"
+        ],
+        "returncode": 0,
+        "summary": "5 passed in 2.89s"
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/prepare_handoff.py",
+          "scripts/build_strategy_catalog.py",
+          "scripts/verify_financial_import.py",
+          "scripts/diagnose_strategy_batch89.py",
+          "scripts/probe_strategy_batch89_events.py"
+        ],
+        "returncode": 0,
+        "stdout": "All checks passed!\n"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "returncode": 0,
+        "stdout": ""
+      }
+    ],
+    "full_suite_run": false,
+    "new_stage_tests": 15,
+    "not_a_backtest": true,
+    "raw_pytest_log_archived": false,
+    "scope": "Batch89 callback and event-page stage checks; not formal source or trading acceptance",
+    "status": "ok",
+    "unique_related_tests": 164
+  },
+  "case_id": "allweather-batch89-callback-event-checks",
+  "nature": "in_progress_verification_command_summaries",
+  "purpose": "159相关加5事件专项共164不同测试含15新增，1既有警告/Ruff/diff通过；完整pytest原日志未保存，未跑全量",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch89/20261009-all-weather-callbacks/command-results.json",
+    "sha256": "e5fa3e314368aefb45dfe9bc663de29cc4f9a6e305dffd9519b3e4c5673a5af4"
+  }
+}

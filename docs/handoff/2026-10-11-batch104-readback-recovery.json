@@ -1,0 +1,43 @@
+{
+ "status": "ok_control_recovery",
+ "formal_receipt": "docs/handoff/2026-10-11-batch104-final-review.json",
+ "formal_receipt_sha256": "9069759fd8a38740f2da4d455981aecffdee40f02118931c1606c28e4d7abac1",
+ "progress": {
+  "checkpoint": "20261011-064610-6d07",
+  "note": "Batch104 source research accepted:short80/limit78 original rules,46 diagnostics,46481 raw MA and93132 relative windows;trade inputs blocked",
+  "catalog_id": "d2eb22f379acfbeedb01",
+  "catalog_sha256": "b9dafd67a972a704c9bd743f86be3d62f27be8382adc19c2fb59917cbd4cab8b",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 294,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-064610-6d07"
+ },
+ "control_recovery_tests": 7,
+ "original_failed_readback_returncode": 1,
+ "recovered_readback_returncode": 0,
+ "formal_publication_changed_for_recovery": false,
+ "new_trading_backtests": 0,
+ "library_goal_complete": false,
+ "evidence_sha256": {
+  "docs/tasks/2026-10-11-第一百零四批验收读回修正与续接.md": "d38bf6f656776cc09695407b58b259bd493cfeca41cc4396e3724cdae5e20586",
+  "data/staging/strategies-batch104/20261011-formal-readback/checked.json": "8a76d9e08e5fba4787ea39815d28e3cc008bba58e2bfff966aacdba034e09bd2",
+  "data/staging/strategies-batch104/20261011-final-readback-shape-failure/failure.json": "9252f536b43f37dce93245c69d89280f5ce7390912a675996b117373bf1421ca",
+  "data/staging/strategies-batch104/20261011-final-readback-shape-failure/shape-tests.xml": "c186f40a3df58ee40d88e521c67e78394cde135ecd3c138c2a65350adeca6e4e",
+  "data/staging/strategies-batch104/20261011-final-readback-shape-failure/shape-tests.log": "847d6db10477443227e009641990f0038ce8b608d89b70e616e1fd7efb8bbc9e",
+  "data/staging/strategies-batch104/20261011-formal-command-records/recovered-readback-command.json": "b27214f360621038858e3ba7b125f7d739608a67e77ddc7f03ea8a9d72462067",
+  "scripts/recover_strategy_batch104_formal_readback.py": "ad26201dd2906a2d37896f9261a925586d5c200fe8ee9fa2c39d850c8c483890",
+  "tests/unit/test_batch104_progress_shape.py": "8a06b046b55dc169192d3384a8258c0b9574f5ccfb5768e372ec15c3988bf29b"
+ }
+}

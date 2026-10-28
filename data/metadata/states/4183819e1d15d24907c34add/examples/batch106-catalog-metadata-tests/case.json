@@ -1,0 +1,28 @@
+{
+  "case": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "........................................................................ [ 30%]\n........................................................................ [ 60%]\n........................................................................ [ 90%]\n.......................                                                  [100%]\n239 passed in 12.04s\n",
+    "tests": [
+      "tests/unit/test_research_metadata.py",
+      "tests/unit/test_catalog_bars.py",
+      "tests/unit/test_catalog_bond.py",
+      "tests/unit/test_catalog_dependencies.py",
+      "tests/unit/test_catalog_fund_universe.py",
+      "tests/unit/test_catalog_futures.py",
+      "tests/unit/test_catalog_macro.py",
+      "tests/unit/test_catalog_margin_weekly.py",
+      "tests/unit/test_catalog_prefix.py",
+      "tests/unit/test_catalog_research_queries.py",
+      "tests/unit/test_catalog_schedules.py"
+    ]
+  },
+  "case_id": "batch106-catalog-metadata-tests",
+  "nature": "actual_catalog_metadata_regression",
+  "purpose": "11项目录模块与元数据相关239回归通过，不计交易回测",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch106/20261011-formal-source-acceptance-v1/catalog-metadata-tests.json",
+    "sha256": "5ce59320768d04e97d357a592fbdb9ec403a3089c5504fe43d3c1e123176141b"
+  }
+}

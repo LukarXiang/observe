@@ -1,0 +1,205 @@
+{
+  "case": {
+    "accepted_checkpoint": "20261009-053923-9e89",
+    "accepted_manually_reviewed": 256,
+    "component": {
+      "dates": [
+        "2021-01-04",
+        "2026-09-29"
+      ],
+      "error_counts": {},
+      "evaluation_dates": 1392,
+      "failed_dates": 0,
+      "formal_acceptance": false,
+      "instrument": "300058.SZ",
+      "last_bi_rows": 66,
+      "last_xd_rows": 8,
+      "limits": [
+        "Historical daily frequency matches unit1d but platform inclusion/paused behavior unproved",
+        "Original notebook end_time unknown; this is a daily component reference, not original chart/date reproduction",
+        "Algorithm retains endpoint assumptions, approximate comparisons and nested-gap behavior",
+        "Independent math/structure checks and complete forbidden-network replay still required for final acceptance"
+      ],
+      "new_trading_backtests": 0,
+      "nonempty_bi_dates": 1383,
+      "nonempty_xd_dates": 1362,
+      "not_a_backtest": true,
+      "platform_equivalence_proven": false,
+      "policy": "Fresh original KBarChan per date; at most1000 rows; adjusted OHLC anchored to each last row factor; no final-chart backfill",
+      "state_file": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/chan-daily-state-values.parquet",
+      "state_sha256": "7902501544a36aa5ab9a58e6c7a8c2a12e5a181e362969ea2a01c74c9550519d"
+    },
+    "current_checkpoint": "20261009-055412-a6d9",
+    "diagnostics_count": 15,
+    "evidence_sha256": {
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/adj_coverage-input.parquet": "03c18b516d7704755ed3f7624c595ca990eb592b9b026120887120094a2a1f34",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/adj_factors-input.parquet": "20eed435b1ea1f70a0bb25442db0415ff19aa2b5e521b6c83aa79bda1bec74b4",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/bars_1d-input.parquet": "89c78cfe7b7de27a344f61c33f23ff3a1d1dfc26686ac6dafebdf3ce2f3f6e16",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/baseline.json": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/chan-daily-state-values.parquet": "7902501544a36aa5ab9a58e6c7a8c2a12e5a181e362969ea2a01c74c9550519d",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/component-research.json": "962e1dddd3180b25623988f421a08d03dbdf34d2e8bf803f568b9fb1b1a4a3b8",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/corp_actions-input.parquet": "bc195680a4a9cccd709d8a911b3a0e30a5af64b9ac83b6cf789bf797602fa542",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/daily-history-probe/api.json": "af1e6d7987a1a1ab4bf2c8dd99c422e593825676e259548a76c013577e322b3f",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/daily-history-probe/result.json": "8cf92f578683e93e48f1ff39b0ac7ca5a8c6df5d6d6719efbd2e017c85a32147",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/dependency-inventory.json": "a32880234c0dc01bb1b58ab0238c3b5278b0bbb7f6ba558e552b34d7593e9766",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/diagnostics.json": "80a9c561117fb6a318bfb5359d44bbb5ef64a74487f8c25a228a97a0ad6a27e2",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/input-binding.json": "729be64ce2333a2de125faafb0fc4096c01bddf23f6092e34f57e8ee57af1834",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/input-manifest.json": "481e647076a7c269877f30c19ac0bfd998f1d151ee18f48cb2c702dfcc95ebfd",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/instruments-input.parquet": "907c5d91f9f6ed71b7cb30c90e33d4532f8e13017a136edc4868ac9c5e0436a9",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/progress-start.json": "b5633fe5aac994647ea50a3c083b827b330f445198a2e133f28d9356dc5bdd55",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/protection.json": "82f9880211c040118c41dac0d3bf945caf3241f6d7ae5f59fa6898f56fe415a8",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/references.json": "59740a2c5f61b462a9d6874cdf534e77baab7d7a6f71358e6d9d6476db03163e",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/references/index_sw.py": "39aff44817db0db2073e9824ab3f24713a21dfc61c9b099036f3c3a1a21bf119",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/references/stock_industry_sw.py": "d1152e519aaacbee7e898b67e41a3f31dd1ab3989d8ecca9cc19742386806ded",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/source-reviews/S-2d13d994c3f7.source": "25c512eef49a1b71cd75c05029c4cc6f26a55dd7c34bddcdecdcda3bc1e0dfad",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/source-reviews/S-8cd0ebff07d7.source": "9565a07a451750a9de2381900a502a24ba13e100ecfd471848de6c887583a6ed",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/sources-frozen.json": "3162166acbe6afb7af0144ff07066fd9d550d72ca52d40acf3bec841157ae91b",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/stage-implementation/review_strategy_batch88.py": "408829fa71994863a84b08fccde7b156c57ce45d24e47774071738e1278202c4",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/stage-implementation/test_batch88_research.py": "ef1cf781afe345f271573bcb543cfe604ecb003253d197a66419586e19428cc1",
+      "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/stage-offline-verification.json": "5a47e50aca529bd286e33bc7ddde52322517b9be572f2a0746e2551db7d20b6e",
+      "data/staging/strategies-batch88/20261009-development-first-tests/result.json": "edccd757a1a4a4d9215a010dd0b90aee633138433c7d2d8b6f1f5325c5c458d8",
+      "data/staging/strategies-batch88/20261009-development-first-tests/review_strategy_batch88.py": "b98b5d7b9e4beea4cc52115ef2ac2879479525615c5b01f1cf6e59e5b4bd9814",
+      "data/staging/strategies-batch88/20261009-development-first-tests/test_batch88_research.py": "c83bf7c5d83fa370c3bdb140cbca280070e1f2a9495fe528aaf9109ee0e8fd3f",
+      "data/staging/strategies-batch88/20261009-development-first-tests/tests.log": "2aa00d15dfde76a5099d85db312f22993667c770c376a91e924550cc511c3f29"
+    },
+    "formal_acceptance": false,
+    "implementation_sha256": {
+      "scripts/review_strategy_batch88.py": "408829fa71994863a84b08fccde7b156c57ce45d24e47774071738e1278202c4",
+      "tests/unit/test_batch88_research.py": "ef1cf781afe345f271573bcb543cfe604ecb003253d197a66419586e19428cc1"
+    },
+    "limits": [
+      "Tests overlap with6 specialized tests, not132 distinct tests",
+      "10 sampled state replays are not full replay or independent algorithm",
+      "Old398 partitions protected by stat only; no fresh full hash",
+      "Git not staged/committed/pushed"
+    ],
+    "locally_backtested_sources": 12,
+    "new_formally_accepted_sources": 0,
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "offline": {
+      "differences": 0,
+      "formal_acceptance": false,
+      "not_a_backtest": true,
+      "result": "match",
+      "sampled_prefixes": [
+        {
+          "rows_consumed": 1,
+          "state_sha256": "e87358fcb9b5d0efb0775468280ad6e4694ce31119efed8a48c0928d38c15458",
+          "window_rows": 1
+        },
+        {
+          "rows_consumed": 2,
+          "state_sha256": "b6951694adc41ffecc2a26d89b42a50ae51d75de70f597f8045fe0015bf1959a",
+          "window_rows": 2
+        },
+        {
+          "rows_consumed": 3,
+          "state_sha256": "d0eb591ec81180dd60cc383f0dfa2eb4a2a1ecd635a7b679b075c1cd14201d47",
+          "window_rows": 3
+        },
+        {
+          "rows_consumed": 7,
+          "state_sha256": "3ec4f23acdf70cba676316ad611e9a3417946c40c1b1608d41e80dcd3ccae51e",
+          "window_rows": 7
+        },
+        {
+          "rows_consumed": 30,
+          "state_sha256": "b1c5004a2b24d98268355334f951661f9171176705bc0c40291c83131d394de5",
+          "window_rows": 30
+        },
+        {
+          "rows_consumed": 100,
+          "state_sha256": "2c873a21b03bc4aa17eee42697407ae70472564b4dab7aba820aa01a3b6093aa",
+          "window_rows": 100
+        },
+        {
+          "rows_consumed": 250,
+          "state_sha256": "bc3635dfeb42a94de3a1c39d4c62d390cf4dcba3f8478fa51a9de3d8fb5de888",
+          "window_rows": 250
+        },
+        {
+          "rows_consumed": 500,
+          "state_sha256": "64bd15052da3610235c4b7e4f46fe8c686febbb8489ef9696df0be94878ec328",
+          "window_rows": 500
+        },
+        {
+          "rows_consumed": 1000,
+          "state_sha256": "0cd367277c778cf6c02ccaf55df2936be363f82c0aea1547759c12a334e43a95",
+          "window_rows": 1000
+        },
+        {
+          "rows_consumed": 1392,
+          "state_sha256": "76cda187a572ce515379e037189a56e95ff24b2f69f1196cc737553fcb765274",
+          "window_rows": 1000
+        }
+      ],
+      "scope": "10 selected prefix states plus all synthetic diagnostics; not full replay or independent algorithm",
+      "socket_HTTP_disabled": true
+    },
+    "pending": [
+      "Independent inclusion/fractal/BI/XD and confirmation-time checks",
+      "Full1392-window forbidden-network replay",
+      "Historical SW3 members/name/vintage and pool gates",
+      "Formal source catalog acceptance and final receipt"
+    ],
+    "protection": {
+      "baseline_sha256": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4",
+      "mutable_registry_files_excluded": 0,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_unchanged": 5363,
+      "old_index_rows_unchanged": 5280,
+      "old_partition_metadata_unchanged": 398,
+      "partition_check": "size/mtime only; no fresh full hash",
+      "status": "ok"
+    },
+    "specialists": [
+      {
+        "findings": [],
+        "implementation_sha256": {
+          "scripts/review_strategy_batch88.py": "408829fa71994863a84b08fccde7b156c57ce45d24e47774071738e1278202c4",
+          "tests/unit/test_batch88_research.py": "ef1cf781afe345f271573bcb543cfe604ecb003253d197a66419586e19428cc1"
+        },
+        "role": "security"
+      },
+      {
+        "findings": [],
+        "implementation_sha256": {
+          "scripts/review_strategy_batch88.py": "408829fa71994863a84b08fccde7b156c57ce45d24e47774071738e1278202c4",
+          "tests/unit/test_batch88_research.py": "ef1cf781afe345f271573bcb543cfe604ecb003253d197a66419586e19428cc1"
+        },
+        "role": "architecture"
+      }
+    ],
+    "status": "stage_checks_passed",
+    "strategy_parent_runs": 69,
+    "total_sources": 695,
+    "verification": [
+      {
+        "command": "~/envs/quant/.venv/bin/ruff check src tests scripts/review_strategy_batch88.py scripts/export_research_metadata.py",
+        "exit_code": 0
+      },
+      {
+        "command": "~/envs/quant/.venv/bin/python -m scripts.verify_offline_tests -q tests/unit/test_batch88_research.py tests/unit/test_batch87_research.py tests/unit/test_research_metadata.py tests/unit/test_catalog_dependencies.py tests/unit/test_catalog_schedules.py tests/integration/test_strategy_merge.py",
+        "elapsed_seconds": 19.19,
+        "exit_code": 0,
+        "passed": 126,
+        "warning": "Existing Starlette/httpx deprecation",
+        "warnings": 1
+      },
+      {
+        "command": "git diff --check",
+        "exit_code": 0
+      }
+    ]
+  },
+  "case_id": "daily-chan-industry-batch88-review-stage",
+  "nature": "in_progress_code_checks_not_formal_research_acceptance",
+  "purpose": "126相关/6专项、Ruff/diff、安全架构和5363控制SHA/398分区stat保护；正式仍第87批256，独立算法和完整重放待办",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-09-batch88-stage-verification.json",
+    "sha256": "da790efec451cc772363f78ed03333172dfa91f3e67025259970652cb27296b7"
+  }
+}

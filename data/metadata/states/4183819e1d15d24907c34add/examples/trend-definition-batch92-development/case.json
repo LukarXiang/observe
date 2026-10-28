@@ -1,0 +1,24 @@
+{
+  "case": {
+    "cause": "Store partition sha is dataframe fingerprint, not Parquet byte SHA256",
+    "checkpoint_written": false,
+    "downstream_error": "component invoked before failed stage was resolved: FileNotFoundError input-binding.json; no output written",
+    "fix": "verify logical fingerprint using Store algorithm and separately bind immutable file-byte SHA; wait for successful stage before component",
+    "implementation_file": "data/staging/strategies-batch92/20261010-development-first-preflight/review_strategy_batch92.py",
+    "implementation_sha256": "0210c0479368a44b031d3e8396b21447448634344587ac520317d6c9661bfdb8",
+    "new_trading_backtests": 0,
+    "observed_parquet_byte_sha256": "28a1ccbb565895091aa8f1cb865254f5626d3514a7ba035073113d95d8e6c406",
+    "snapshot_entry_logical_sha": "2843c31b8faaa9401b2f527b4671750bb7d551e1a3c53b2efc54cfd6c268e8a6",
+    "source_and_index_inputs_modified": false,
+    "stage_error": "ValueError: Original index partition SHA differs",
+    "status": "development_failure"
+  },
+  "case_id": "trend-definition-batch92-development",
+  "nature": "preflight_logical_and_byte_hash_confusion_preserved",
+  "purpose": "初次预检把Store DataFrame指纹误作Parquet字节SHA，未写检查点；提前组件缺binding也未输出。已分开核两种指纹并完成新阶段，不改原数据",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch92/20261010-development-first-preflight/failure.json",
+    "sha256": "82be0cc4fc6d638abf6181d61cd1265a1be506d9fcf3678414a86c12bd62e84b"
+  }
+}

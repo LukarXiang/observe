@@ -1,0 +1,43 @@
+{
+  "case": {
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.recover_strategy_batch104_moneyflow",
+          "compute"
+        ],
+        "log_sha256": "7db64412dc12207e747f22bb4eee275888a127f7049e9d0daa42ce60d0488c2e",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.recover_strategy_batch104_moneyflow",
+          "replay"
+        ],
+        "log_sha256": "7db64412dc12207e747f22bb4eee275888a127f7049e9d0daa42ce60d0488c2e",
+        "returncode": 0
+      }
+    ],
+    "differences": 0,
+    "fresh_network_blocked_processes": 2,
+    "new_trading_backtests": 0,
+    "outputs_sha256": {
+      "data/staging/strategies-batch104/20261011-moneyflow-explicit-numeric-reference/compute/native-type-diagnostic.json": "3df5c432409503fa15474f972177d6b995d157f68a31777fb28a832e6f38b647",
+      "data/staging/strategies-batch104/20261011-moneyflow-explicit-numeric-reference/compute/numeric-change-pct-reference.parquet": "a14d403257c151b60a81350dc277b36b55fc050b11c2ecdbccff43bd4ac1247e",
+      "data/staging/strategies-batch104/20261011-moneyflow-explicit-numeric-reference/compute/summary.json": "0aeff449269c74d9e63728a550c82bc9609cd1d5515cbca0cb16263b1aaf098e"
+    },
+    "status": "ok_component_only"
+  },
+  "case_id": "batch104-moneyflow-offline",
+  "nature": "batch104_component_stage_not_trading",
+  "purpose": "新目录纠正参考与控制凭据；正式292/12/87不变，旧失败保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch104/20261011-moneyflow-explicit-numeric-reference/offline-verification.json",
+    "sha256": "785bb4de0df8de31c86eb951c320ac7371b6e92711336fceef990d21c6ee2ba5"
+  }
+}

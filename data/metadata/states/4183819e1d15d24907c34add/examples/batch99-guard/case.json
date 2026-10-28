@@ -1,0 +1,124 @@
+{
+  "case": {
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/prepare_handoff.py",
+          "scripts/build_strategy_catalog.py",
+          "scripts/verify_financial_import.py",
+          "scripts/research_strategy_batch99.py",
+          "scripts/probe_strategy_batch99.py",
+          "scripts/verify_strategy_batch99.py",
+          "scripts/recover_strategy_batch99_namespace.py"
+        ],
+        "cwd": "/mnt/d/projects/observe",
+        "logs": {
+          "stderr": {
+            "file": "data/staging/strategies-batch99/20261011-stage-validation-recovery/local0.stderr.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "file": "data/staging/strategies-batch99/20261011-stage-validation-recovery/local0.stdout.log",
+            "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+          }
+        },
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-B",
+          "-c",
+          "import sys; from scripts.verify_offline_tests import main; from scripts.recover_strategy_batch94_reference import network_blocked\nwith network_blocked(): sys.exit(main(['-q', 'tests/unit/test_batch99_research.py', 'tests/unit/test_batch99_namespace_recovery.py', 'tests/unit/test_research_metadata.py']))"
+        ],
+        "cwd": "/mnt/d/projects/observe",
+        "logs": {
+          "stderr": {
+            "file": "data/staging/strategies-batch99/20261011-stage-validation-recovery/local1.stderr.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "file": "data/staging/strategies-batch99/20261011-stage-validation-recovery/local1.stdout.log",
+            "sha256": "7bcf8a13d0f1034143d905bfee5c3b3e54cf5c7ad61aeb33bfd6f49567f38aab"
+          }
+        },
+        "returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cwd": "/mnt/d/projects/observe",
+        "logs": {
+          "stderr": {
+            "file": "data/staging/strategies-batch99/20261011-stage-validation-recovery/local2.stderr.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "file": "data/staging/strategies-batch99/20261011-stage-validation-recovery/local2.stdout.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "returncode": 0
+      }
+    ],
+    "copied_files": 237,
+    "evidence_sha256": {
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/isolated-imports-command.json": "9c3bd39d89acb8800cea29588613ce14015759c2dacd039afa86b20911cdc414",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/isolated-imports.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/isolated-imports.stdout.log": "2f6d8b4d3e236e339297aee3741dddc2410a37503cd9f4c6f6b76f0b56501596",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/isolated-tests-command.json": "4e076ae1f6e69e58d897d6f91b8b2c9ff5c1e48fcc256f5ef3659b7b52be0c8b",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/isolated-tests.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/isolated-tests.stdout.log": "e7c4c313d92a117a071ec793df99eaac0f1c1a19cfabbccd21e41413a82b7161",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/isolated.json": "70fc612605daddcae17b5364081c895d29d7688e2041f4b749ec5bf26b51874d",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/local0-command.json": "c522bc06976a6cef9c78a2f9f306f320188617eff26c5e553a34a705c7c2b37e",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/local0.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/local0.stdout.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/local1-command.json": "1974f16bc21200fbd8a56a49f3025096c1f82f1bd00b3ec017f9f0a392d8343b",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/local1.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/local1.stdout.log": "7bcf8a13d0f1034143d905bfee5c3b3e54cf5c7ad61aeb33bfd6f49567f38aab",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/local2-command.json": "97d3b331f069d49aece9be198747ce5de8349c688e1ef694ad6b5a283e5fef77",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/local2.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch99/20261011-stage-validation-recovery/local2.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "implementation_sha256": {
+      "pyproject.toml": "2c937c8ac7608c6d84729f1fdb31b14d1ae3b0cfbf6ef1890fd283d3fdf179f4",
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/probe_strategy_batch99.py": "0656c8f35f294b43cbba82456456a752f6e8288fa62dec9a2b42f8944c473632",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/recover_strategy_batch99_namespace.py": "c51f2c09856a5571b5baa42a67274c4b0bc14ad7f1d59b0e0b2d183b205cddc6",
+      "scripts/research_strategy_batch99.py": "7e85bddf56f5add6d7a6553d74e85a125a0328fb3793d0343af545f36ec27f60",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "scripts/verify_strategy_batch99.py": "6139788f786c992b6cac1ff716e5c198bb7c272508b655d9e15754bc8a937faa",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "3c507dc700d28c165322e19e27254b682e5bf2d991153c4d2ce7d39183fb88dd",
+      "tests/unit/test_batch99_namespace_recovery.py": "4f0a110b7c6c5a0ff9e1b4b529479beef9cfa34194dcd338006d7b8c87280e7f",
+      "tests/unit/test_batch99_research.py": "7618c4764ffec27a2f8c241aaecb3c5584ff71a4d241e366906dae9be1022db7",
+      "uv.lock": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382"
+    },
+    "isolated_passed": 21,
+    "local_passed": 44,
+    "new_trading_backtests": 0,
+    "scope": "Related offline tests and required Ruff/diff only; not full pytest or formal acceptance",
+    "skips": 0,
+    "status": "ok"
+  },
+  "case_id": "batch99-guard",
+  "nature": "actual_44_related_21_isolated_tests",
+  "purpose": "237复制文件和5实际导入，skip0；仅相关测试与规定Ruff/diff，非全量pytest",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch99/20261011-stage-validation-recovery/checked.json",
+    "sha256": "96c8632366f80faea7751a23bef32761afc6729518c2a0eb206adeeef868f9cf"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "case": {
+    "binding": {
+      "data/staging/strategies-batch81/20261009-stock-bond-drawdown/development-specialized-failure/pytest.log": "283482a8313a968d8821d7706dd161a66e1f48d92a2e5df55db68d02eb5389df",
+      "data/staging/strategies-batch81/20261009-stock-bond-drawdown/development-specialized-failure/review_strategy_batch81.py": "ddeb0e3bbfbd7e450199fe517fcb89880ee5bf25ea8b507ffec261780397060b",
+      "data/staging/strategies-batch81/20261009-stock-bond-drawdown/development-specialized-failure/test_batch81_research.py": "8de8622fd80430ceaa8f94b063b53f9d3156e012094d86c8a58c5da586abb8ed"
+    },
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_batch81_research.py"
+    ],
+    "meaning": "51passed/1failed: pandas3 string dtype represents missing next decision as NaN; test expected None",
+    "not_a_backtest": true,
+    "returncode": 1
+  },
+  "case_id": "stock-bond-batch81-specialized-failure",
+  "nature": "immutable_missing_string_test_expectation_failure",
+  "purpose": "51通过1失败：pandas3缺失下一决策字符串为NaN，测试误用None；改为检查缺失，原算法不改，修前文件/日志SHA保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/development-specialized-failure/failure.json",
+    "sha256": "6c3ba97c6827ad8c63353da9d52b3abdb45f9249cd18948082217f06fda5a86c"
+  }
+}

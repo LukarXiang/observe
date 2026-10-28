@@ -1,0 +1,94 @@
+{
+ "status": "ok",
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "library_goal_complete": false,
+ "original_strategy_complete": false,
+ "progress": {
+  "checkpoint": "20261011-044035-fa28",
+  "note": "Batch100 source research accepted:4852 original400-row feature prefixes/32 diagnostics/offline match0;model/minute/fund trading blocked",
+  "catalog_id": "19050ed2ae2028e31e87",
+  "catalog_sha256": "358be36593d8536ebdd735bed71d9a30dc1a6081b88a6a40814af837b542e954",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 286,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-044035-fa28"
+ },
+ "components": {
+  "features": {
+   "windows": 4852,
+   "first": "2006-10-17",
+   "last": "2026-09-29",
+   "features": 1059,
+   "producer_column_comparisons": 5138268,
+   "producer_independent_derived_comparisons": 5016968,
+   "base25_comparisons_reuse_original_function_and_library": true,
+   "separate_readback_windows": 22,
+   "separate_column_comparisons": 23298,
+   "readback_max_relative_error": 3.233777163907371e-11,
+   "model_input_or_trade": false
+  },
+  "diagnostics": {
+   "cases": 32,
+   "original_exceptions": 5,
+   "synthetic_only": true,
+   "real_model_predictions": 0
+  },
+  "offline": "match/0",
+  "local_tests": 42,
+  "isolated_tests": 42,
+  "new_trading_backtests": 0,
+  "original_strategy_complete": false
+ },
+ "source_sha256": [
+  "eee496f1bc636b0372ba32153596d3bb72c9d4f73e2c3520a16c35da532f0e76",
+  "4947832e5d01a5a15b4408de799c0c4e908d5e91eda996fbc33bb0f3c22c3a8a"
+ ],
+ "evidence_sha256": {
+  "docs/handoff/batch100-y2022-032-source-review.yaml": "6be5066f4050c67ebfe9f356866bcdd57c9c49a4b648bab34d9e0e454db37b03",
+  "docs/handoff/batch100-y2022-026-source-review.yaml": "03d9bc949f75dd09e26e3bbeb78138fe8071c0e3afcc70bd4e390ab45d50b153",
+  "docs/handoff/2026-10-11-batch100-source-stage.json": "466ea0eb8646da71f3272fa37e21d69001049aa5039200fdff4ddcc2c6256a9e",
+  "docs/handoff/2026-10-11-batch100-supplement-stage.json": "b6e879f2d1fb6c8e58291c3c17bb9b256db2c4811848730678c348eee0dc9e83",
+  "docs/handoff/2026-10-11-batch100-recovery-stage.json": "8413f03260dceeec88b627528f3230a8eaa2331bb842a7b409c27bfeef313e6b",
+  "data/staging/strategies-batch100/20261011-formal-validation/checked.json": "a4bb3713580a6aadee6d48795e41ca74e6a17a7c9db17d30ed25f6481a3a2aa3",
+  "data/staging/strategies-batch100/20261011-feature-chunk-recovery/offline-verification.json": "165416aee3119b27f99ba62318027cd65abc172f9d394548532537352e6b4cbd",
+  "data/staging/strategies-batch100/20261011-feature-chunk-recovery/prepared.json": "c09f9b0e9ea0d70ef60481439df137fbf7280b94812b73196d66b1b4c983bdb2",
+  "data/staging/strategies-batch100/20261011-original-feature-stage/prepared.json": "1bfbe448cb28124dbcf27d191d8194d39e5c5311756223ec84703da5ba08875a",
+  "data/staging/strategies-batch100/20261011-feature-chunk-recovery/study/assembled/summary.json": "43dac88ef18e5cc06213939ec5c040241b72b96c34bbea847b60603087647d80",
+  "data/staging/strategies-batch100/20261011-formal-source-acceptance/source-reviews.json": "5f39deedc5be7254c5269352f08fa764aca0537a2c9e40273f0cbbbf2eaba06d",
+  "scripts/accept_strategy_batch100.py": "4773dbaa231c9e529dcb092175fa50a25f1c826f21632ec2aeb44561427798b8",
+  "tests/unit/test_batch100_acceptance.py": "b6b3e804a6eb77d413ee2ed57a9e4f1c639b4bba7f371fd11ed36781e75c6ffd",
+  "data/staging/strategies-batch100/20261011-formal-source-acceptance/prepared.json": "2cd896dcec7d3754d845b2aacaeb113b8fb8267ac52883d218c06066cfa04518",
+  "docs/tasks/2026-10-11-第一百批行业轮动与50ETF-Xgboost-正式研究验收.md": "6f503ab31519393886fbdeaf3de1dcf7a1a2a9689b1d748a314d5540886f6457",
+  "src/observe/strategy_catalog.py": "bfab61f46ff02b006485c15a5a545d46e7c38b6fdd8ced2fb18c43b746b2f7b2",
+  "data/staging/strategies-batch100/20261011-formal-source-acceptance/protection.json": "fcf33c8de2d54325eec58fc8fa2fb708364a85378a1d5ef339ce34f6feef438f",
+  "data/catalog/strategies/19050ed2ae2028e31e87/catalog.json": "358be36593d8536ebdd735bed71d9a30dc1a6081b88a6a40814af837b542e954",
+  "data/catalog/strategies/progress/20261011-044035-fa28/summary.json": "55adaada15a5e89812fe3c3ea0ecb217be0baebb0e1885039f419fbb8276271f"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 6614,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+ },
+ "new_trading_backtests": 0,
+ "new_strategy_parent_runs": 0,
+ "phase_specs_remain_frozen": true,
+ "review_method": "Full original rules, derived scalar tails, copied code tests and98 fresh network-blocked original-expression chunks; no independent agent review"
+}

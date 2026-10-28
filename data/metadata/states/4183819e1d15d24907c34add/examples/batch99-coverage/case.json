@@ -1,0 +1,45 @@
+{
+  "case": {
+    "candidate_sha256": "17897aa46f5d66ba2878ad90f537ddd6c2d3d2d1baaf2b321cdc333d6b4237f2",
+    "first": "2005-02-23",
+    "future_excluded": 2,
+    "last": "2026-09-29",
+    "missing_calendar_open_dates": [],
+    "not_a_backtest": true,
+    "reference_limits": [
+      "backtrader fixed/automargin is generic futures-style cash occupation, not Chinese option seller margin",
+      "rqalpha dated futures margin/contract multiplier and account frozen cash are interface references, not proof of historical ETF option rules",
+      "No duplicate fee/NAV engine or Book option extension added while historical option data and rules are unavailable"
+    ],
+    "reference_sha256": {
+      "repo/backtrader/backtrader/comminfo.py": "58b1d2696f0844cf66d354efdff5509ae14b36d0b7bfa5dd56ec0d457de65be6",
+      "repo/rqalpha/rqalpha/model/instrument.py": "1013087e0038f9ce7addfaaa302b49b30bc027d4b1a69310f2e3621b9392592d",
+      "repo/rqalpha/rqalpha/portfolio/account.py": "0df29c6fbbfe15fe15aeab7715ffe322c1074e46004b5a95f4cf14b20665b6b0",
+      "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+      "src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+      "src/observe/ledger/rules.py": "38a5205c2ec22b695d9e4b9d28e71e5a327faee0f1973570d81dd36c9e538551"
+    },
+    "registered_option_input_tables": [],
+    "retained_rows": 5252,
+    "source_rows": 5254,
+    "strict_usable": false,
+    "tables": {
+      "adj_coverage": 0,
+      "adj_factors": 0,
+      "bars_1d": 0,
+      "bars_5m": 0,
+      "corp_actions": 0,
+      "instruments": 0,
+      "valuations_1d": 0
+    },
+    "unexpected_candidate_dates": []
+  },
+  "case_id": "batch99-coverage",
+  "nature": "candidate_calendar_and_actual_admission_inventory",
+  "purpose": "5254原候选保留5252，排未来2；交易日缺口0，7活跃表均0；repo参考SHA",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch99/20261011-coverage-reference/coverage.json",
+    "sha256": "42e6e68ccf3bdbbdec04564d00a83b7b37c738f0974e15af0369d79cfa8bad84"
+  }
+}

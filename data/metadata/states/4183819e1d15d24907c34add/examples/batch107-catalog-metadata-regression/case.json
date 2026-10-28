@@ -1,0 +1,52 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_catalog_bars.py",
+      "tests/unit/test_catalog_bond.py",
+      "tests/unit/test_catalog_dependencies.py",
+      "tests/unit/test_catalog_fund_universe.py",
+      "tests/unit/test_catalog_futures.py",
+      "tests/unit/test_catalog_macro.py",
+      "tests/unit/test_catalog_margin_weekly.py",
+      "tests/unit/test_catalog_prefix.py",
+      "tests/unit/test_catalog_research_queries.py",
+      "tests/unit/test_catalog_schedules.py",
+      "tests/unit/test_research_metadata.py"
+    ],
+    "earlier_selector_error": {
+      "correction": "Discovered actual10 catalog test modules with rg;all actual modules selected",
+      "path": "tests/unit/test_strategy_catalog.py",
+      "returncode": 4,
+      "tests_run": 0
+    },
+    "not_trading_backtest": true,
+    "returncode": 0,
+    "scope": [
+      "tests/unit/test_catalog_bars.py",
+      "tests/unit/test_catalog_bond.py",
+      "tests/unit/test_catalog_dependencies.py",
+      "tests/unit/test_catalog_fund_universe.py",
+      "tests/unit/test_catalog_futures.py",
+      "tests/unit/test_catalog_macro.py",
+      "tests/unit/test_catalog_margin_weekly.py",
+      "tests/unit/test_catalog_prefix.py",
+      "tests/unit/test_catalog_research_queries.py",
+      "tests/unit/test_catalog_schedules.py",
+      "tests/unit/test_research_metadata.py"
+    ],
+    "stderr": "",
+    "stdout": "........................................................................ [ 30%]\n........................................................................ [ 60%]\n........................................................................ [ 90%]\n.......................                                                  [100%]\n239 passed in 13.85s\n"
+  },
+  "case_id": "batch107-catalog-metadata-regression",
+  "nature": "actual239_catalog_metadata_tests",
+  "purpose": "真实10目录模块与元数据239通过；此前不存在测试路径造成零执行已更正并记录",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch107/20261011-catalog-metadata-regression-v1/tests.json",
+    "sha256": "1d8ffcdf43bc824481c7c6f8cc8dcc10f98a0c9f488c8479db0e603122b6f90f"
+  }
+}

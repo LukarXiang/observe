@@ -1,0 +1,106 @@
+{
+  "case": {
+    "formal_source_research_acceptance": false,
+    "magic3_RSRS": {
+      "controlled_mean_injection": false,
+      "first": "2007-07-27",
+      "last": "2026-09-29",
+      "maximum_independent_error": 2.3783286451362073e-10,
+      "not_a_trading_backtest": true,
+      "original_platform_mean_available_proven": false,
+      "rows": 4662,
+      "seed_slopes": 599,
+      "signals": {
+        "BUY": 941,
+        "KEEP": 2869,
+        "SELL": 852
+      }
+    },
+    "native_momentum": {
+      "full_original_pool_ranking_rows": 0,
+      "history_index_labels_controlled": true,
+      "last_input_has_no_proven_next_execution_session": true,
+      "missing_pool": [
+        "159928.XSHE"
+      ],
+      "native_unadjusted_reference": true,
+      "not_a_trading_backtest": true,
+      "original_adjusted_price_equivalence_proven": false,
+      "profiles": [
+        {
+          "first_last_input": "2005-03-22",
+          "last_last_input": "2026-09-29",
+          "maximum_independent_error": 5.0306980803327406e-17,
+          "symbol": "510050.XSHG",
+          "variant": 0,
+          "windows": 5233
+        },
+        {
+          "first_last_input": "2012-06-25",
+          "last_last_input": "2026-09-29",
+          "maximum_independent_error": 4.683753385137379e-17,
+          "symbol": "510300.XSHG",
+          "variant": 0,
+          "windows": 3468
+        },
+        {
+          "first_last_input": "2016-08-18",
+          "last_last_input": "2026-09-29",
+          "maximum_independent_error": 3.642919299551295e-17,
+          "symbol": "159949.XSHE",
+          "variant": 0,
+          "windows": 2456
+        },
+        {
+          "first_last_input": "2005-08-02",
+          "last_last_input": "2026-09-29",
+          "maximum_independent_error": 4.336808689942018e-17,
+          "symbol": "510050.XSHG",
+          "variant": 2,
+          "windows": 5143
+        },
+        {
+          "first_last_input": "2012-11-05",
+          "last_last_input": "2026-09-29",
+          "maximum_independent_error": 4.85722573273506e-17,
+          "symbol": "510300.XSHG",
+          "variant": 2,
+          "windows": 3378
+        },
+        {
+          "first_last_input": "2017-01-03",
+          "last_last_input": "2026-09-29",
+          "maximum_independent_error": 4.597017211338539e-17,
+          "symbol": "159949.XSHE",
+          "variant": 2,
+          "windows": 2366
+        }
+      ],
+      "windows": 22044
+    },
+    "new_trading_backtests": 0,
+    "original_strategy_complete": false,
+    "v2_RSRS_controlled_mean_reference": {
+      "controlled_mean_injection": true,
+      "first": "2007-07-27",
+      "last": "2026-09-29",
+      "maximum_independent_error": 2.3783286451362073e-10,
+      "not_a_trading_backtest": true,
+      "original_platform_mean_available_proven": false,
+      "rows": 4662,
+      "seed_slopes": 600,
+      "signals": {
+        "BUY": 3040,
+        "SELL": 1622
+      }
+    }
+  },
+  "case_id": "etf-magic3-v2-batch95-components",
+  "nature": "in_progress_controlled_reference_not_trading",
+  "purpose": "两种RSRS各4662决策日/三基金22044原生动量乖离窗；独立OLS/均值/斜率和离散信号一致，v2 mean与history索引受控注入声明，缺第四基金完整排名0",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/component-research.json",
+    "sha256": "f0f82683b3867049ad99fd54cdab1fddeb46f9cda7ba304123d964b88d110e6e"
+  }
+}

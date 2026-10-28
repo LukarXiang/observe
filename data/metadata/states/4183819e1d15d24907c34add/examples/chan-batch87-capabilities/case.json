@@ -1,0 +1,38 @@
+{
+  "case": {
+    "files": {
+      "data/probe/tdx/result_scan.json": "cdeb15d75f9f888cf6c70de0e979b042bd5022307d61531eb3a1a1a3a34a0fc4",
+      "docs/01-数据源实测报告.md": "c46c8075c33d7d88e9a42cfbcc6e3587225a102d0e8c6b27791337dd8a8d2f19",
+      "repo/mootdx/mootdx/consts.py": "9ae5536de2b46b11b9bb0d5911db0d19ba676cdf89c4b1633e09cb405afac18f",
+      "repo/mootdx/mootdx/quotes.py": "64c9c6ef93fb0201ce837210774f86d40135afb5374b288456355c9df2e280f0",
+      "scripts/probe/probe_tdx.py": "6e6dfc7617c2022158548712f674878241dada841752bc5d7590e7583f799412",
+      "src/observe/data/sources/tdx.py": "0164fda074562c0d2bfb1e38ef8b7bd4f54d7ea44fb7dc17d9d319092b166d34"
+    },
+    "historical_host_scan": {
+      "n_bars_ok": 0,
+      "n_minutes_ok": 14
+    },
+    "limits": [
+      "BaoStock does not expose1m; Eastmoney latest5days/Sina recent days cannot recover listing history",
+      "TDX historical minutes contain minute price/volume, not original1m OHLC; transaction snapshots can only form a declared approximate series",
+      "Earlier measured minute bar boundaries vary by provider; current original stock/date coverage requires direct audit",
+      "Mootdx Quotes.factory writes global config; this probe uses its existing native tdxpy transport with no config changes",
+      "Old all-server K-line empty evidence is historical, not a fresh claim all servers are still unavailable"
+    ],
+    "native_methods": {
+      "connect": "    def connect(self, ip: str = None, port: int = 7709, time_out=CONNECT_TIMEOUT, bind_port=None, bind_ip=\"0.0.0.0\"):\n        \"\"\"\n        连接服务器\n\n        :param ip:  服务器ip 地址\n        :param port:  服务器端口\n        :param time_out: 连接超时时间\n        :param bind_port: 绑定的本地端口\n        :param bind_ip: 绑定的本地ip\n        :return: 是否连接成功 True/False\n        \"\"\"\n\n        if not ip:\n            raise ValidationException(\"IP Address bad.\")\n\n        self.client = TrafficStatSocket(socket.AF_INET, socket.SOCK_STREAM)\n        self.client.settimeout(time_out)\n\n        logger.debug(f\"connecting to server: {ip} on port: {port}\")\n\n        try:\n            bind_port and self.client.bind((bind_ip, bind_port))\n\n            self.ip, self.port = ip, port\n            self.client.connect((ip, port))\n        except socket.timeout:\n            logger.debug(\"connection expired\")\n\n            if self.raise_exception:\n                raise TdxConnectionError(\"connection timeout error\")\n\n            return False\n        except Exception as e:  # noqa\n            logger.debug(f\"connection {e}\")\n            if self.raise_exception:\n                raise TdxConnectionError(\"other errors\")\n\n            return False\n\n        self.closed = False\n        logger.debug(\"connected!\")\n\n        if self.need_setup:\n            self.setup()\n\n        # 启动心跳包\n        if self.heartbeat:\n            self.stop_event = threading.Event()\n            self.heartbeat_thread = HeartBeatThread(\n                client=self, stop_event=self.stop_event, interval=self.heartbeat_interval\n            )\n            self.heartbeat_thread.start()\n\n        return self\n",
+      "get_history_minute_time_data": "    @last_ack_time\n    def get_history_minute_time_data(self, market, code, date):\n        \"\"\"\n        获取分钟线历史数据\n        :param market:\n        :param code:\n        :param date:\n        :return:\n        \"\"\"\n        cmd = GetHistoryMinuteTimeData(self.client, lock=self.lock)\n        cmd.setParams(market, code, date)\n\n        return cmd.call_api()\n",
+      "get_history_transaction_data": "    @last_ack_time\n    def get_history_transaction_data(self, market, code, start, count, date):\n        \"\"\"\n        分笔历史数据\n        :param market:\n        :param code:\n        :param start:\n        :param count:\n        :param date:\n        :return:\n        \"\"\"\n        cmd = GetHistoryTransactionData(self.client, lock=self.lock)\n        cmd.setParams(market, code, start, count, date)\n\n        return cmd.call_api()\n",
+      "get_security_bars": "    @last_ack_time\n    def get_security_bars(self, category, market, code, start, count):\n        \"\"\"\n        # Notice：，如果一个股票当天停牌，那天的K线还是能取到，成交量为0\n        :param category:\n        :param market:\n        :param code:\n        :param start:\n        :param count:\n        :return:\n        \"\"\"\n        cmd = GetSecurityBarsCmd(self.client, lock=self.lock)\n        cmd.setParams(category, market, code, start, count)\n\n        return cmd.call_api()\n"
+    },
+    "not_a_backtest": true
+  },
+  "case_id": "chan-batch87-capabilities",
+  "nature": "native_tdx_methods_and_historical_probe_scope_audit",
+  "purpose": "冻结既有实测文档/源码/38主机旧扫描与当前native methods；历史14分时成功/K线0仅旧证据，TDX逐笔仅近似，factory会改全局配置而本次native未改",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/minute-capabilities.json",
+    "sha256": "f00731d59a59d7d74cb26346ab078f225b997b09f4de81dad7b9d2c4a74a8526"
+  }
+}

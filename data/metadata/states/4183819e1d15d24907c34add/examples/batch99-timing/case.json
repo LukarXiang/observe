@@ -1,0 +1,204 @@
+{
+  "case": {
+    "case_count": 8,
+    "cases": [
+      {
+        "calls": [
+          [
+            "get_trade_days",
+            {
+              "count": 15,
+              "end_date": "2018-07-20"
+            }
+          ],
+          [
+            "CH_VIX",
+            [
+              "510050.XSHG",
+              "2018-07-02",
+              "2018-07-20"
+            ]
+          ],
+          [
+            "GetCBOE_VIX",
+            "synthetic_fixture_not_option_history"
+          ],
+          [
+            "order_target_value",
+            [
+              "510050.XSHG",
+              123456.0
+            ]
+          ]
+        ],
+        "case": "flat_buy_empty",
+        "scope": "synthetic_original_callback_not_fill"
+      },
+      {
+        "calls": [
+          [
+            "get_trade_days",
+            {
+              "count": 15,
+              "end_date": "2018-07-20"
+            }
+          ],
+          [
+            "CH_VIX",
+            [
+              "510050.XSHG",
+              "2018-07-02",
+              "2018-07-20"
+            ]
+          ],
+          [
+            "GetCBOE_VIX",
+            "synthetic_fixture_not_option_history"
+          ]
+        ],
+        "case": "flat_buy_held",
+        "scope": "synthetic_original_callback_not_fill"
+      },
+      {
+        "calls": [
+          [
+            "get_trade_days",
+            {
+              "count": 15,
+              "end_date": "2018-07-20"
+            }
+          ],
+          [
+            "CH_VIX",
+            [
+              "510050.XSHG",
+              "2018-07-02",
+              "2018-07-20"
+            ]
+          ],
+          [
+            "GetCBOE_VIX",
+            "synthetic_fixture_not_option_history"
+          ]
+        ],
+        "case": "rising_sell_empty",
+        "scope": "synthetic_original_callback_not_fill"
+      },
+      {
+        "calls": [
+          [
+            "get_trade_days",
+            {
+              "count": 15,
+              "end_date": "2018-07-20"
+            }
+          ],
+          [
+            "CH_VIX",
+            [
+              "510050.XSHG",
+              "2018-07-02",
+              "2018-07-20"
+            ]
+          ],
+          [
+            "GetCBOE_VIX",
+            "synthetic_fixture_not_option_history"
+          ],
+          [
+            "order_target",
+            [
+              "510050.XSHG",
+              0
+            ]
+          ]
+        ],
+        "case": "rising_sell_held",
+        "scope": "synthetic_original_callback_not_fill"
+      },
+      {
+        "calls": [
+          [
+            "slippage",
+            0
+          ],
+          [
+            "commission",
+            {
+              "buy_cost": 0.003,
+              "min_cost": 5,
+              "sell_cost": 0.004
+            }
+          ]
+        ],
+        "case": "fees_2008-12-31",
+        "scope": "synthetic_injected_datetime_platform_equivalence_unproven"
+      },
+      {
+        "calls": [
+          [
+            "slippage",
+            0
+          ],
+          [
+            "commission",
+            {
+              "buy_cost": 0.002,
+              "min_cost": 5,
+              "sell_cost": 0.003
+            }
+          ]
+        ],
+        "case": "fees_2010-01-04",
+        "scope": "synthetic_injected_datetime_platform_equivalence_unproven"
+      },
+      {
+        "calls": [
+          [
+            "slippage",
+            0
+          ],
+          [
+            "commission",
+            {
+              "buy_cost": 0.001,
+              "min_cost": 5,
+              "sell_cost": 0.002
+            }
+          ]
+        ],
+        "case": "fees_2012-01-04",
+        "scope": "synthetic_injected_datetime_platform_equivalence_unproven"
+      },
+      {
+        "calls": [
+          [
+            "slippage",
+            0
+          ],
+          [
+            "commission",
+            {
+              "buy_cost": 0.0003,
+              "min_cost": 5,
+              "sell_cost": 0.0013
+            }
+          ]
+        ],
+        "case": "fees_2015-02-09",
+        "scope": "synthetic_injected_datetime_platform_equivalence_unproven"
+      }
+    ],
+    "new_trading_backtests": 0,
+    "real_option_history_used": false,
+    "source_sha256": "5483ce9fea22822a8ca84e0f004064c53b384f54bdd0a2a51eee5d162761f983"
+  },
+  "case_id": "batch99-timing",
+  "nature": "original_previous_day_holding_and_dated_fee_callbacks",
+  "purpose": "8受控原回调：前日15行、持仓不重配/total_value意图、四佣金；非成交",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch99/20261011-original-timing-callbacks/study.json",
+    "sha256": "75b81e1ceaab53abad598b6483fedebc42d0c2f87d93e4d8c11c5344b65e8be3"
+  }
+}

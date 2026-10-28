@@ -1,0 +1,35 @@
+{
+  "case": {
+    "actual_checkpoint": "20261011-064610-6d07",
+    "cause": "archive return contains output auxiliary path; saved summary does not; helper compared full shapes",
+    "common_saved_fields_differ": false,
+    "error": "Actual progress navigation differs",
+    "failed_command": {
+      "command": [
+        "/home/zuozhe/envs/quant/.venv/bin/python",
+        "-m",
+        "scripts.readback_strategy_batch104_formal",
+        "check"
+      ],
+      "log_sha256": "c47aef170905b7685a0ba301dcb478cba916ba459b7199d8e924c81782e1ca5e",
+      "returncode": 1
+    },
+    "formal_publication_changed_for_recovery": false,
+    "keys_only_in_archive_return": [
+      "output"
+    ],
+    "original_command_returncode": 1,
+    "original_helper_copy_sha256": "2169824ead2943ff22b3239d0fdf28956b4fac83842a1635ef4090dbe34a4009",
+    "original_helper_sha256": "2169824ead2943ff22b3239d0fdf28956b4fac83842a1635ef4090dbe34a4009",
+    "receipt_checkpoint": "20261011-064610-6d07",
+    "status": "observed_control_readback_shape_failure"
+  },
+  "case_id": "batch104-final-readback-shape-failure",
+  "nature": "source_research_control_or_initial_read_not_trading",
+  "purpose": "第104批正式294/12/87及新目录读回恢复；第105批仅初读；经济批准不扩大",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch104/20261011-final-readback-shape-failure/failure.json",
+    "sha256": "9252f536b43f37dce93245c69d89280f5ce7390912a675996b117373bf1421ca"
+  }
+}

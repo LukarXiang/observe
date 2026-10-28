@@ -1,0 +1,1119 @@
+{
+ "status": "ok",
+ "nature": "supplement_existing_approved_approximate_backtests",
+ "prepared_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/prepared-windows.json",
+ "prepared_sha256": "1e9351a94cc5964691919e88019dc4be6c13419c81ab2793de37df04cf45b093",
+ "windows": [
+  {
+   "input_start": "2012-05-28",
+   "end": "2013-09-12",
+   "continuous_rows": 317,
+   "post_warmup_sessions": 257,
+   "selected": true,
+   "start": "2012-08-21",
+   "config_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/pair66-earlier-1.yaml",
+   "config_sha256": "c869734b2b41324ed3e137729f819d0df88698e977d079d27ad47d768adcea11",
+   "label": "pair66-earlier-1",
+   "run_id": "20261009-071852-74e05b-strategy-6ab4",
+   "reproduction_run_id": "20261009-072126-74e05b-strategy-b4c9",
+   "validation_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/pair66-earlier-1-verification.json",
+   "validation_sha256": "75a2727f579183dcf26a7e16bad489bcaf4e9c7e6acb1edba05bb1d8f7673d28",
+   "hand_check": {
+    "sessions_checked": 257,
+    "switches": {
+     "1": 1,
+     "2": 1
+    },
+    "orders": [
+     {
+      "scenario": "base",
+      "orders_checked": 3,
+      "sessions_checked": 257
+     },
+     {
+      "scenario": "fees_x2",
+      "orders_checked": 3,
+      "sessions_checked": 257
+     },
+     {
+      "scenario": "slippage_x2",
+      "orders_checked": 3,
+      "sessions_checked": 257
+     }
+    ],
+    "method": "Independent fsum sample std/60-session dynamically anchored spread/NumPy scalar round/source signal state; independent intents via sole Book ledger"
+   },
+   "period": {
+    "start": "2012-08-21",
+    "end": "2013-09-12"
+   },
+   "results": [
+    {
+     "scenario": "base",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.2843398400000001,
+      "annual_return": 0.2657174467623662,
+      "annual_vol": 0.2923019619463294,
+      "sharpe": 0.951949500775973,
+      "max_drawdown": -0.1777777158472873,
+      "drawdown_peak": 147,
+      "drawdown_trough": 200
+     },
+     "trading": {
+      "cash_share_mean": 0.22372792325796012,
+      "fee_ratio_to_initial": 0.00228316,
+      "fees": {
+       "commission": 903.02,
+       "fee": 2283.16,
+       "stamp_tax": 1307.9,
+       "transfer_fee": 72.24
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 3,
+      "max_single_weight_mean": 0.7747494573977134,
+      "orders": 3,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.7747494573977134,
+      "turnover_half_daily_mean": 0.0058239159335529206,
+      "turnover_two_sided_daily_mean": 0.011647831867105841
+     },
+     "yearly": [
+      {
+       "year": 2012,
+       "sessions": 90,
+       "metrics": {
+        "annual_return": 0.3678569755416714,
+        "annual_vol": 0.1765233695904255,
+        "drawdown_peak": 62,
+        "drawdown_trough": 65,
+        "max_drawdown": -0.08541169149983752,
+        "sharpe": 1.8626778685927141,
+        "total_return": 0.12355320999999986
+       }
+      },
+      {
+       "year": 2013,
+       "sessions": 167,
+       "metrics": {
+        "annual_return": 0.21387222877865475,
+        "annual_vol": 0.3391875918024525,
+        "drawdown_peak": 57,
+        "drawdown_trough": 110,
+        "max_drawdown": -0.1777777158472873,
+        "sharpe": 0.7400461722430863,
+        "total_return": 0.14310548763418174
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "fees_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.28210619999999986,
+      "annual_return": 0.2636445661590954,
+      "annual_vol": 0.2923568166786215,
+      "sharpe": 0.9462145844760104,
+      "max_drawdown": -0.17770240322188702,
+      "drawdown_peak": 147,
+      "drawdown_trough": 200
+     },
+     "trading": {
+      "cash_share_mean": 0.22388706605410846,
+      "fee_ratio_to_initial": 0.0045648,
+      "fees": {
+       "commission": 1804.62,
+       "fee": 4564.8,
+       "stamp_tax": 2615.81,
+       "transfer_fee": 144.37
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 3,
+      "max_single_weight_mean": 0.7745910491320935,
+      "orders": 3,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.7745910491320935,
+      "turnover_half_daily_mean": 0.005820492562294293,
+      "turnover_two_sided_daily_mean": 0.011640985124588586
+     },
+     "yearly": [
+      {
+       "year": 2012,
+       "sessions": 90,
+       "metrics": {
+        "annual_return": 0.3669739489598456,
+        "annual_vol": 0.17656265003592328,
+        "drawdown_peak": 62,
+        "drawdown_trough": 65,
+        "max_drawdown": -0.0854342270723073,
+        "sharpe": 1.858639728719799,
+        "total_return": 0.12328340999999998
+       }
+      },
+      {
+       "year": 2013,
+       "sessions": 167,
+       "metrics": {
+        "annual_return": 0.21123569959228128,
+        "annual_vol": 0.3392490224853189,
+        "drawdown_peak": 57,
+        "drawdown_trough": 110,
+        "max_drawdown": -0.17770240322188702,
+        "sharpe": 0.7335597571757424,
+        "total_return": 0.14139155673989712
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "slippage_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.27969787999999984,
+      "annual_return": 0.2614093414441079,
+      "annual_vol": 0.2921192305322151,
+      "sharpe": 0.9406822239743658,
+      "max_drawdown": -0.17765015497968273,
+      "drawdown_peak": 147,
+      "drawdown_trough": 200
+     },
+     "trading": {
+      "cash_share_mean": 0.2245514579027296,
+      "fee_ratio_to_initial": 0.00227512,
+      "fees": {
+       "commission": 900.26,
+       "fee": 2275.12,
+       "stamp_tax": 1302.84,
+       "transfer_fee": 72.02
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 3,
+      "max_single_weight_mean": 0.7739271668140236,
+      "orders": 3,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.7739271668140236,
+      "turnover_half_daily_mean": 0.0058124377644984395,
+      "turnover_two_sided_daily_mean": 0.011624875528996879
+     },
+     "yearly": [
+      {
+       "year": 2012,
+       "sessions": 90,
+       "metrics": {
+        "annual_return": 0.36320515453861435,
+        "annual_vol": 0.17620473070779066,
+        "drawdown_peak": 62,
+        "drawdown_trough": 65,
+        "max_drawdown": -0.08527042813526353,
+        "sharpe": 1.8463729871751706,
+        "total_return": 0.12213065999999984
+       }
+      },
+      {
+       "year": 2013,
+       "sessions": 167,
+       "metrics": {
+        "annual_return": 0.2097387062849423,
+        "annual_vol": 0.3390336122467736,
+        "drawdown_peak": 57,
+        "drawdown_trough": 110,
+        "max_drawdown": -0.17765015497968273,
+        "sharpe": 0.7301629290091493,
+        "total_return": 0.14041789037294472
+       }
+      }
+     ],
+     "blocked": null
+    }
+   ],
+   "benchmark": [
+    {
+     "scenario": "base",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2012-08-20",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.0007127789047887341,
+      "annual_return_diff": 0.18179428216819082,
+      "available": true,
+      "benchmark_common_days": 257,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.08392316459417404,
+      "common_end": "2013-09-12",
+      "common_start": "2012-08-21",
+      "common_strategy_annual_return": 0.26571744676236486,
+      "information_ratio": 0.5977465594629978,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "fees_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2012-08-20",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.0007060664133079296,
+      "annual_return_diff": 0.17972140156492133,
+      "available": true,
+      "benchmark_common_days": 257,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.08392316459417404,
+      "common_end": "2013-09-12",
+      "common_start": "2012-08-21",
+      "common_strategy_annual_return": 0.2636445661590954,
+      "information_ratio": 0.5918367220319372,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "slippage_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2012-08-20",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.0006984593208717047,
+      "annual_return_diff": 0.17748617684993562,
+      "available": true,
+      "benchmark_common_days": 257,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.08392316459417404,
+      "common_end": "2013-09-12",
+      "common_start": "2012-08-21",
+      "common_strategy_annual_return": 0.26140934144410966,
+      "information_ratio": 0.5857590623492881,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    }
+   ],
+   "source_sha256": "011bfb2aa689d471d949e1813c53089adce4125ae748b06ce227265a81c842fd"
+  },
+  {
+   "input_start": "2013-09-16",
+   "end": "2014-12-05",
+   "continuous_rows": 297,
+   "post_warmup_sessions": 237,
+   "selected": true,
+   "start": "2013-12-18",
+   "config_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/pair66-earlier-2.yaml",
+   "config_sha256": "c7af02ee9db7f00b0c31885d667136c4793474da6dad8c40b546b40f3375b7c3",
+   "label": "pair66-earlier-2",
+   "run_id": "20261009-071907-e5e1fb-strategy-47e9",
+   "reproduction_run_id": "20261009-072202-e5e1fb-strategy-2df6",
+   "validation_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/pair66-earlier-2-verification.json",
+   "validation_sha256": "2b41461539289de3bd4fb307747dcd1bda3b4539aa7f8db316d9f1bc5f1acf5c",
+   "hand_check": {
+    "sessions_checked": 237,
+    "switches": {
+     "1": 2,
+     "2": 2
+    },
+    "orders": [
+     {
+      "scenario": "base",
+      "orders_checked": 7,
+      "sessions_checked": 237
+     },
+     {
+      "scenario": "fees_x2",
+      "orders_checked": 7,
+      "sessions_checked": 237
+     },
+     {
+      "scenario": "slippage_x2",
+      "orders_checked": 7,
+      "sessions_checked": 237
+     }
+    ],
+    "method": "Independent fsum sample std/60-session dynamically anchored spread/NumPy scalar round/source signal state; independent intents via sole Book ledger"
+   },
+   "period": {
+    "start": "2013-12-18",
+    "end": "2014-12-05"
+   },
+   "results": [
+    {
+     "scenario": "base",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.28588364,
+      "annual_return": 0.292723082885576,
+      "annual_vol": 0.26300657346351053,
+      "sharpe": 1.106696491872993,
+      "max_drawdown": -0.19242495376495994,
+      "drawdown_peak": 96,
+      "drawdown_trough": 138
+     },
+     "trading": {
+      "cash_share_mean": 0.18402624265910789,
+      "fee_ratio_to_initial": 0.0052733599999999995,
+      "fees": {
+       "commission": 1875.8,
+       "fee": 5273.36,
+       "stamp_tax": 3247.5,
+       "transfer_fee": 150.06
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 7,
+      "max_single_weight_mean": 0.8159737573408922,
+      "orders": 7,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.8159737573408922,
+      "turnover_half_daily_mean": 0.014692977800517084,
+      "turnover_two_sided_daily_mean": 0.02938595560103417
+     },
+     "yearly": [
+      {
+       "year": 2013,
+       "sessions": 10,
+       "metrics": {
+        "annual_return": 0.0,
+        "annual_vol": 0.0,
+        "drawdown_peak": 0,
+        "drawdown_trough": 0,
+        "max_drawdown": 0.0,
+        "sharpe": null,
+        "total_return": 0.0
+       }
+      },
+      {
+       "year": 2014,
+       "sessions": 227,
+       "metrics": {
+        "annual_return": 0.3074275747747184,
+        "annual_vol": 0.26873223283012954,
+        "drawdown_peak": 86,
+        "drawdown_trough": 128,
+        "max_drawdown": -0.19242495376495994,
+        "sharpe": 1.130831414475907,
+        "total_return": 0.28588364
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "fees_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.27957451999999994,
+      "annual_return": 0.28624692949605457,
+      "annual_vol": 0.2630228155088318,
+      "sharpe": 1.0875364140929284,
+      "max_drawdown": -0.19242721216201553,
+      "drawdown_peak": 96,
+      "drawdown_trough": 138
+     },
+     "trading": {
+      "cash_share_mean": 0.184560701847808,
+      "fee_ratio_to_initial": 0.01051948,
+      "fees": {
+       "commission": 3740.95,
+       "fee": 10519.48,
+       "stamp_tax": 6479.26,
+       "transfer_fee": 299.27
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 7,
+      "max_single_weight_mean": 0.8154392981521921,
+      "orders": 7,
+      "partial_fills": 2,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.8154392981521921,
+      "turnover_half_daily_mean": 0.01467461710439628,
+      "turnover_two_sided_daily_mean": 0.02934923420879256
+     },
+     "yearly": [
+      {
+       "year": 2013,
+       "sessions": 10,
+       "metrics": {
+        "annual_return": 0.0,
+        "annual_vol": 0.0,
+        "drawdown_peak": 0,
+        "drawdown_trough": 0,
+        "max_drawdown": 0.0,
+        "sharpe": null,
+        "total_return": 0.0
+       }
+      },
+      {
+       "year": 2014,
+       "sessions": 227,
+       "metrics": {
+        "annual_return": 0.30058997384153163,
+        "annual_vol": 0.2687498614361181,
+        "drawdown_peak": 86,
+        "drawdown_trough": 128,
+        "max_drawdown": -0.19242721216201553,
+        "sharpe": 1.111249221008818,
+        "total_return": 0.27957451999999994
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "slippage_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.27663733,
+      "annual_return": 0.2832322072569766,
+      "annual_vol": 0.26329896429495386,
+      "sharpe": 1.077748039484305,
+      "max_drawdown": -0.19269056776000515,
+      "drawdown_peak": 96,
+      "drawdown_trough": 138
+     },
+     "trading": {
+      "cash_share_mean": 0.18374403597631153,
+      "fee_ratio_to_initial": 0.00525167,
+      "fees": {
+       "commission": 1868.83,
+       "fee": 5251.67,
+       "stamp_tax": 3233.34,
+       "transfer_fee": 149.5
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 7,
+      "max_single_weight_mean": 0.8162559640236886,
+      "orders": 7,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.8162559640236886,
+      "turnover_half_daily_mean": 0.014678752778146406,
+      "turnover_two_sided_daily_mean": 0.029357505556292813
+     },
+     "yearly": [
+      {
+       "year": 2013,
+       "sessions": 10,
+       "metrics": {
+        "annual_return": 0.0,
+        "annual_vol": 0.0,
+        "drawdown_peak": 0,
+        "drawdown_trough": 0,
+        "max_drawdown": 0.0,
+        "sharpe": null,
+        "total_return": 0.0
+       }
+      },
+      {
+       "year": 2014,
+       "sessions": 227,
+       "metrics": {
+        "annual_return": 0.29740751052730774,
+        "annual_vol": 0.26903254437289725,
+        "drawdown_peak": 86,
+        "drawdown_trough": 128,
+        "max_drawdown": -0.19269056776000515,
+        "sharpe": 1.1012452853423929,
+        "total_return": 0.27663733
+       }
+      }
+     ],
+     "blocked": null
+    }
+   ],
+   "benchmark": [
+    {
+     "scenario": "base",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2013-12-17",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -4.666692171541139e-05,
+      "annual_return_diff": -0.041338026859332855,
+      "available": true,
+      "benchmark_common_days": 237,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.3340611097449073,
+      "common_end": "2014-12-05",
+      "common_start": "2013-12-18",
+      "common_strategy_annual_return": 0.29272308288557447,
+      "information_ratio": -0.04603537472207431,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "fees_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2013-12-17",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -6.741718034558843e-05,
+      "annual_return_diff": -0.047814180248851645,
+      "available": true,
+      "benchmark_common_days": 237,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.3340611097449073,
+      "common_end": "2014-12-05",
+      "common_start": "2013-12-18",
+      "common_strategy_annual_return": 0.2862469294960557,
+      "information_ratio": -0.0664848008891364,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "slippage_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2013-12-17",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -7.682605239503563e-05,
+      "annual_return_diff": -0.05082890248792871,
+      "available": true,
+      "benchmark_common_days": 237,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.3340611097449073,
+      "common_end": "2014-12-05",
+      "common_start": "2013-12-18",
+      "common_strategy_annual_return": 0.2832322072569786,
+      "information_ratio": -0.07570682006440116,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    }
+   ],
+   "source_sha256": "011bfb2aa689d471d949e1813c53089adce4125ae748b06ce227265a81c842fd"
+  },
+  {
+   "input_start": "2017-09-19",
+   "end": "2019-03-29",
+   "continuous_rows": 370,
+   "post_warmup_sessions": 310,
+   "selected": true,
+   "start": "2017-12-19",
+   "config_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/pair66-earlier-3.yaml",
+   "config_sha256": "8a5164f10b45b0ae7baa637d614b652491ba788476694dce176029eca79747fb",
+   "label": "pair66-earlier-3",
+   "run_id": "20261009-071922-5272d3-strategy-cd8a",
+   "reproduction_run_id": "20261009-072236-5272d3-strategy-d7b5",
+   "validation_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/pair66-earlier-3-verification.json",
+   "validation_sha256": "67c2538a94208431cc5167db4492e2349e94a9b13cf02f78372e63d60befb58e",
+   "hand_check": {
+    "sessions_checked": 310,
+    "switches": {
+     "1": 2,
+     "2": 1
+    },
+    "orders": [
+     {
+      "scenario": "base",
+      "orders_checked": 5,
+      "sessions_checked": 310
+     },
+     {
+      "scenario": "fees_x2",
+      "orders_checked": 5,
+      "sessions_checked": 310
+     },
+     {
+      "scenario": "slippage_x2",
+      "orders_checked": 5,
+      "sessions_checked": 310
+     }
+    ],
+    "method": "Independent fsum sample std/60-session dynamically anchored spread/NumPy scalar round/source signal state; independent intents via sole Book ledger"
+   },
+   "period": {
+    "start": "2017-12-19",
+    "end": "2019-03-29"
+   },
+   "results": [
+    {
+     "scenario": "base",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.21864608000000008,
+      "annual_return": 0.16691690013646454,
+      "annual_vol": 0.381842630814052,
+      "sharpe": 0.5944413310651155,
+      "max_drawdown": -0.28923446271752995,
+      "drawdown_peak": 116,
+      "drawdown_trough": 181
+     },
+     "trading": {
+      "cash_share_mean": 0.04433529446592604,
+      "fee_ratio_to_initial": 0.00328492,
+      "fees": {
+       "commission": 1228.06,
+       "fee": 3284.92,
+       "stamp_tax": 1958.61,
+       "transfer_fee": 98.25
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 5,
+      "max_single_weight_mean": 0.9556647055340741,
+      "orders": 5,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.9556647055340741,
+      "turnover_half_daily_mean": 0.00802063267397874,
+      "turnover_two_sided_daily_mean": 0.01604126534795748
+     },
+     "yearly": [
+      {
+       "year": 2017,
+       "sessions": 9,
+       "metrics": {
+        "annual_return": 0.0,
+        "annual_vol": 0.0,
+        "drawdown_peak": 0,
+        "drawdown_trough": 0,
+        "max_drawdown": 0.0,
+        "sharpe": null,
+        "total_return": 0.0
+       }
+      },
+      {
+       "year": 2018,
+       "sessions": 243,
+       "metrics": {
+        "annual_return": -0.10400440875470185,
+        "annual_vol": 0.389976199947727,
+        "drawdown_peak": 107,
+        "drawdown_trough": 172,
+        "max_drawdown": -0.28923446271752995,
+        "sharpe": -0.08735946417342191,
+        "total_return": -0.10441092000000007
+       }
+      },
+      {
+       "year": 2019,
+       "sessions": 58,
+       "metrics": {
+        "annual_return": 2.6152539763631815,
+        "annual_vol": 0.3716691085460802,
+        "drawdown_peak": 49,
+        "drawdown_trough": 54,
+        "max_drawdown": -0.07139050514085421,
+        "sharpe": 3.6481882214634562,
+        "total_return": 0.36072011954411076
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "fees_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.2140946399999999,
+      "annual_return": 0.16351326529492605,
+      "annual_vol": 0.38228829840059886,
+      "sharpe": 0.5865557600603771,
+      "max_drawdown": -0.2900020372096529,
+      "drawdown_peak": 116,
+      "drawdown_trough": 209
+     },
+     "trading": {
+      "cash_share_mean": 0.043623617397236025,
+      "fee_ratio_to_initial": 0.00655536,
+      "fees": {
+       "commission": 2450.69,
+       "fee": 6555.36,
+       "stamp_tax": 3908.62,
+       "transfer_fee": 196.05
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 5,
+      "max_single_weight_mean": 0.9563763826027639,
+      "orders": 5,
+      "partial_fills": 1,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.9563763826027639,
+      "turnover_half_daily_mean": 0.00801358064722477,
+      "turnover_two_sided_daily_mean": 0.01602716129444954
+     },
+     "yearly": [
+      {
+       "year": 2017,
+       "sessions": 9,
+       "metrics": {
+        "annual_return": 0.0,
+        "annual_vol": 0.0,
+        "drawdown_peak": 0,
+        "drawdown_trough": 0,
+        "max_drawdown": 0.0,
+        "sharpe": null,
+        "total_return": 0.0
+       }
+      },
+      {
+       "year": 2018,
+       "sessions": 243,
+       "metrics": {
+        "annual_return": -0.10761161643828931,
+        "annual_vol": 0.3904393856894646,
+        "drawdown_peak": 107,
+        "drawdown_trough": 200,
+        "max_drawdown": -0.2900020372096529,
+        "sharpe": -0.09710983329767653,
+        "total_return": -0.10803136000000002
+       }
+      },
+      {
+       "year": 2019,
+       "sessions": 58,
+       "metrics": {
+        "annual_return": 2.6199164026532276,
+        "annual_vol": 0.3720220007122163,
+        "drawdown_peak": 49,
+        "drawdown_trough": 54,
+        "max_drawdown": -0.0714492192313898,
+        "sharpe": 3.648552407701617,
+        "total_return": 0.36114049928930214
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "slippage_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.2113205600000001,
+      "annual_return": 0.16143739424109205,
+      "annual_vol": 0.38238508728023457,
+      "sharpe": 0.5818377439192672,
+      "max_drawdown": -0.2906656867553019,
+      "drawdown_peak": 116,
+      "drawdown_trough": 209
+     },
+     "trading": {
+      "cash_share_mean": 0.043281771310671235,
+      "fee_ratio_to_initial": 0.00327544,
+      "fees": {
+       "commission": 1225.03,
+       "fee": 3275.44,
+       "stamp_tax": 1952.4,
+       "transfer_fee": 98.01
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 5,
+      "max_single_weight_mean": 0.9567182286893289,
+      "orders": 5,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.9567182286893289,
+      "turnover_half_daily_mean": 0.008017573458123763,
+      "turnover_two_sided_daily_mean": 0.016035146916247526
+     },
+     "yearly": [
+      {
+       "year": 2017,
+       "sessions": 9,
+       "metrics": {
+        "annual_return": 0.0,
+        "annual_vol": 0.0,
+        "drawdown_peak": 0,
+        "drawdown_trough": 0,
+        "max_drawdown": 0.0,
+        "sharpe": null,
+        "total_return": 0.0
+       }
+      },
+      {
+       "year": 2018,
+       "sessions": 243,
+       "metrics": {
+        "annual_return": -0.10944798330926331,
+        "annual_vol": 0.39061387570354156,
+        "drawdown_peak": 107,
+        "drawdown_trough": 200,
+        "max_drawdown": -0.2906656867553019,
+        "sharpe": -0.10215648240118852,
+        "total_return": -0.1098744399999999
+       }
+      },
+      {
+       "year": 2019,
+       "sessions": 58,
+       "metrics": {
+        "annual_return": 2.616609175822483,
+        "annual_vol": 0.3717717315777494,
+        "drawdown_peak": 49,
+        "drawdown_trough": 54,
+        "max_drawdown": -0.07140758129401625,
+        "sharpe": 3.6482941349438645,
+        "total_return": 0.36084235127457753
+       }
+      }
+     ],
+     "blocked": null
+    }
+   ],
+   "benchmark": [
+    {
+     "scenario": "base",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2017-12-18",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.0009338164204252231,
+      "annual_return_diff": 0.18911130517107122,
+      "available": true,
+      "benchmark_common_days": 310,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.02219440503460779,
+      "common_end": "2019-03-29",
+      "common_start": "2017-12-19",
+      "common_strategy_annual_return": 0.16691690013646343,
+      "information_ratio": 0.8541172018946404,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "fees_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2017-12-18",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.0009224542787394421,
+      "annual_return_diff": 0.18570767032953384,
+      "available": true,
+      "benchmark_common_days": 310,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.02219440503460779,
+      "common_end": "2019-03-29",
+      "common_start": "2017-12-19",
+      "common_strategy_annual_return": 0.16351326529492605,
+      "information_ratio": 0.8426515041300677,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "slippage_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2017-12-18",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.0009152339194871788,
+      "annual_return_diff": 0.18363179927570117,
+      "available": true,
+      "benchmark_common_days": 310,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.02219440503460779,
+      "common_end": "2019-03-29",
+      "common_start": "2017-12-19",
+      "common_strategy_annual_return": 0.16143739424109338,
+      "information_ratio": 0.835802075023257,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    }
+   ],
+   "source_sha256": "011bfb2aa689d471d949e1813c53089adce4125ae748b06ce227265a81c842fd"
+  }
+ ],
+ "fees": {
+  "status": "ok",
+  "fills_checked": 45,
+  "checks": [
+   {
+    "run_id": "20261009-071852-74e05b-strategy-6ab4",
+    "child": "20261009-071855-af3410-base-aa99",
+    "scenario": "base",
+    "fills_checked": 3,
+    "fee_regime_counts": {
+     "2008-09-19": 3
+    },
+    "fee_total": 2283.16
+   },
+   {
+    "run_id": "20261009-071852-74e05b-strategy-6ab4",
+    "child": "20261009-071858-0bcacd-fees_x2-d05f",
+    "scenario": "fees_x2",
+    "fills_checked": 3,
+    "fee_regime_counts": {
+     "2008-09-19": 3
+    },
+    "fee_total": 4564.8
+   },
+   {
+    "run_id": "20261009-071852-74e05b-strategy-6ab4",
+    "child": "20261009-071901-c684aa-slippage_x2-9a0c",
+    "scenario": "slippage_x2",
+    "fills_checked": 3,
+    "fee_regime_counts": {
+     "2008-09-19": 3
+    },
+    "fee_total": 2275.12
+   },
+   {
+    "run_id": "20261009-071907-e5e1fb-strategy-47e9",
+    "child": "20261009-071910-322bd2-base-717c",
+    "scenario": "base",
+    "fills_checked": 7,
+    "fee_regime_counts": {
+     "2008-09-19": 7
+    },
+    "fee_total": 5273.36
+   },
+   {
+    "run_id": "20261009-071907-e5e1fb-strategy-47e9",
+    "child": "20261009-071913-7c3323-fees_x2-d096",
+    "scenario": "fees_x2",
+    "fills_checked": 7,
+    "fee_regime_counts": {
+     "2008-09-19": 7
+    },
+    "fee_total": 10519.48
+   },
+   {
+    "run_id": "20261009-071907-e5e1fb-strategy-47e9",
+    "child": "20261009-071916-62e6cc-slippage_x2-20f6",
+    "scenario": "slippage_x2",
+    "fills_checked": 7,
+    "fee_regime_counts": {
+     "2008-09-19": 7
+    },
+    "fee_total": 5251.67
+   },
+   {
+    "run_id": "20261009-071922-5272d3-strategy-cd8a",
+    "child": "20261009-071925-bc5eff-base-b0a0",
+    "scenario": "base",
+    "fills_checked": 5,
+    "fee_regime_counts": {
+     "2015-08-01": 5
+    },
+    "fee_total": 3284.92
+   },
+   {
+    "run_id": "20261009-071922-5272d3-strategy-cd8a",
+    "child": "20261009-071930-255d81-fees_x2-1d9c",
+    "scenario": "fees_x2",
+    "fills_checked": 5,
+    "fee_regime_counts": {
+     "2015-08-01": 5
+    },
+    "fee_total": 6555.36
+   },
+   {
+    "run_id": "20261009-071922-5272d3-strategy-cd8a",
+    "child": "20261009-071934-67fbb4-slippage_x2-3c47",
+    "scenario": "slippage_x2",
+    "fills_checked": 5,
+    "fee_regime_counts": {
+     "2015-08-01": 5
+    },
+    "fee_total": 3275.44
+   }
+  ],
+  "method": "Independent multiplication from frozen YAML date ranges and Decimal half-up cents; verifies arithmetic, not external fee accuracy"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5363,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4"
+ },
+ "progress": {
+  "checkpoint": "20261009-072521-7bfa",
+  "note": "Approved pair66 all three earlier200+session continuous windows: three costs, independent state/Book checks and offline match0; no new source",
+  "catalog_id": "82bf5433c84e0d09a3e4",
+  "catalog_sha256": "ad10a0a867a1d8c7c8451a044410be5e5664e56ef57e88cad5daad660b5b49ae",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 260,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 75,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261009-072521-7bfa"
+ },
+ "new_strategy_sources": 0,
+ "new_original_backtest_parent_runs": 3,
+ "new_reproduction_parent_runs": 3,
+ "source_count_unchanged": 695,
+ "manually_reviewed_unchanged": 260,
+ "original_strategy_complete": false,
+ "library_goal_complete": false,
+ "limits": [
+  "Approved dynamic-anchoring daily approximation, not original intraday/platform equivalence",
+  "Independent empty initial state for each eligibility island; do not stitch with each other or existing2020-2026 tail",
+  "Fixed stock pool, historical execution/fee approximations and nonindependent holdout caveats retained",
+  "Book and original signal state reused; no fee/NAV replacement or pause filling"
+ ]
+}

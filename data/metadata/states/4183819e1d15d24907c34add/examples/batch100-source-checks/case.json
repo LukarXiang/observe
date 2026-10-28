@@ -1,0 +1,76 @@
+{
+  "case": {
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/prepare_handoff.py",
+          "scripts/build_strategy_catalog.py",
+          "scripts/verify_financial_import.py",
+          "scripts/research_strategy_batch100.py",
+          "scripts/verify_strategy_batch100_stage.py"
+        ],
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "returncode": 0
+      }
+    ],
+    "copied_files": 247,
+    "evidence_sha256": {
+      "data/staging/strategies-batch100/20261011-source-stage-validation/diff.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch100/20261011-source-stage-validation/isolated/command.json": "255cb9f0be7e893d6d8fdf5c5754a3f9c1aeb264eab528739bc4393e9909fe0a",
+      "data/staging/strategies-batch100/20261011-source-stage-validation/isolated/isolation.json": "e3187a893eb272ef637e72afd723efb0b69c1c67a650f2f2902a344cc0d27482",
+      "data/staging/strategies-batch100/20261011-source-stage-validation/isolated/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch100/20261011-source-stage-validation/isolated/stdout.log": "481307410f6286a502681f69cab58f91d0c3ffa4d6c64ccf4d3eff8b4a9d9bfa",
+      "data/staging/strategies-batch100/20261011-source-stage-validation/isolated/tests.xml": "0110a62574538b2238b668954ea5160ed856055adb1ff6143bcf9afaa6b14ac5",
+      "data/staging/strategies-batch100/20261011-source-stage-validation/local/command.json": "7444e8884533169bfe261077592af95dcbbbf7ac9afe53777356eba2c5361a4b",
+      "data/staging/strategies-batch100/20261011-source-stage-validation/local/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch100/20261011-source-stage-validation/local/stdout.log": "5e80ee8b117dd51a9b4b271d01c0644b68c9e6eb88047407d2b8d744a9c07442",
+      "data/staging/strategies-batch100/20261011-source-stage-validation/local/tests.xml": "0855ccf71283f90ccf0c5b77a35649a841ea6fdada04856b2c69f89031584929",
+      "data/staging/strategies-batch100/20261011-source-stage-validation/ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "formal_acceptance": false,
+    "implementation_sha256": {
+      "pyproject.toml": "2c937c8ac7608c6d84729f1fdb31b14d1ae3b0cfbf6ef1890fd283d3fdf179f4",
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/research_strategy_batch100.py": "1c9b7a58f53d4533afab765cb1bc8cbca6cb5f321abea56db89a2f8aeb725b20",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch100_stage.py": "e81bdf69c00f02031779fe301a6ad5b96875c5ebb1f22ed9ff7a18ec03ad9659",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "f50d0ac0e2d3c634b6026fd13130becb42b1938c22580557d85988c78fcb5504",
+      "tests/unit/test_batch100_research.py": "b5b207dd3dfa7cc6c5c8e7c4ef22832f9e85bb08106727d6c9fe5be389c870fd",
+      "uv.lock": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382"
+    },
+    "isolated_passed": 11,
+    "local_passed": 11,
+    "new_trading_backtests": 0,
+    "scope": "Source loading, original callback/compatibility boundaries, 400-row prefix first window, independent scalar corruption rejection; longest run still separate",
+    "skips": 0,
+    "status": "ok_source_stage"
+  },
+  "case_id": "batch100-source-checks",
+  "nature": "actual_11_local_11_isolated_and_four_copied_imports",
+  "purpose": "247副本四实际导入和11专项0skip；规定Ruff与diff通过，非全量pytest/长历史或回测验收",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch100/20261011-source-stage-validation/checked.json",
+    "sha256": "9d140e9b6d2cb541145b9b8c00873c20491628dec59a59331cd5c6ac0139f7c4"
+  }
+}

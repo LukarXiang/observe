@@ -1,0 +1,1886 @@
+{
+ "status": "ok",
+ "snapshot": "20261006-145049-e06c",
+ "reviews": {
+  "sources": [
+   {
+    "source_path": "repo/量化策略源代码/2020年度精选策略/54 中长线买入卖出点选择.txt",
+    "source_copy": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/source-reviews/S-d1914cbbf6bb.source",
+    "source_sha256": "8c22e7eab356b32b4df1d496cd4bb25430ccd7b355a8f855fd609823a1a58bd0",
+    "encoding": "gb18030",
+    "complete_lines_read": 492,
+    "code_start_line": 9,
+    "adapted_copy": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/source-reviews/S-d1914cbbf6bb.adapted.py",
+    "adapted_sha256": "1a9ea9046c6af26316d2e4cbfe8e0072e453ffbf325ab4a2a0bfd2e6c1045f34",
+    "adaptation": "fix_print only; no imports or economic changes",
+    "definition_ast": [
+     {
+      "name": "initialize",
+      "line": 16,
+      "ast": "FunctionDef(name='initialize', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Name(id='set_benchmark', ctx=Load()), args=[Constant(value='000300.XSHG')], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='use_real_price'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[Constant(value='初始函数开始运行且全局只运行一次')], keywords=[])), Expr(value=Call(func=Name(id='set_order_cost', ctx=Load()), args=[Call(func=Name(id='OrderCost', ctx=Load()), args=[], keywords=[keyword(arg='close_tax', value=Constant(value=0.001)), keyword(arg='open_commission', value=Constant(value=0.0003)), keyword(arg='close_commission', value=Constant(value=0.0003)), keyword(arg='min_commission', value=Constant(value=5))])], keywords=[keyword(arg='type', value=Constant(value='stock'))])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='stock_num', ctx=Store())], value=Constant(value=10)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='stock_value_ratio', ctx=Store())], value=Constant(value=0.33)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='days_history', ctx=Store())], value=Constant(value=60)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='days_money_flow', ctx=Store())], value=Constant(value=5)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='days_money_flow_threshold', ctx=Store())], value=Constant(value=4)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='days_money_flow_2', ctx=Store())], value=Constant(value=60)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='price_amplitude', ctx=Store())], value=Constant(value=0.1)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='mean_diff_5_30_threshold', ctx=Store())], value=Constant(value=0.1)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='mean_diff_30_60_threshold', ctx=Store())], value=Constant(value=0.05)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='price_increase_threshold', ctx=Store())], value=Constant(value=0.2)), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='before_market_open', ctx=Load())], keywords=[keyword(arg='time', value=Constant(value='before_open')), keyword(arg='reference_security', value=Constant(value='000300.XSHG'))])), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='market_open', ctx=Load())], keywords=[keyword(arg='time', value=Constant(value='open')), keyword(arg='reference_security', value=Constant(value='000300.XSHG'))])), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='after_market_close', ctx=Load())], keywords=[keyword(arg='time', value=Constant(value='after_close')), keyword(arg='reference_security', value=Constant(value='000300.XSHG'))]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "before_market_open",
+      "line": 51,
+      "ast": "FunctionDef(name='before_market_open', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='option_list', ctx=Store())], value=Call(func=Name(id='get_index_stocks', ctx=Load()), args=[Constant(value='000300.XSHG')], keywords=[])), Assign(targets=[Name(id='option_list', ctx=Store())], value=Call(func=Name(id='filter_st_stock', ctx=Load()), args=[Name(id='option_list', ctx=Load())], keywords=[])), Assign(targets=[Name(id='option_list', ctx=Store())], value=Call(func=Name(id='filter_paused_stock', ctx=Load()), args=[Name(id='option_list', ctx=Load())], keywords=[])), Assign(targets=[Name(id='option_list', ctx=Store())], value=Call(func=Name(id='filter_bank_stock', ctx=Load()), args=[Name(id='option_list', ctx=Load())], keywords=[])), Assign(targets=[Name(id='option_list', ctx=Store())], value=Call(func=Name(id='filter_300_stock', ctx=Load()), args=[Name(id='option_list', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='buy_list', ctx=Store())], value=List(elts=[], ctx=Load())), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='sell_list', ctx=Store())], value=List(elts=[], ctx=Load())), Assign(targets=[Name(id='today', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='strftime', ctx=Load()), args=[Constant(value='%Y-%m-%d')], keywords=[])), For(target=Name(id='stock', ctx=Store()), iter=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), body=[If(test=Call(func=Name(id='sell_check', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load())], keywords=[]), body=[Expr(value=Call(func=Attribute(value=Attribute(value=Name(id='g', ctx=Load()), attr='sell_list', ctx=Load()), attr='append', ctx=Load()), args=[Name(id='stock', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='%14s%14s%14s%14s'), op=Mod(), right=Tuple(elts=[Name(id='stock', ctx=Load()), Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load()), Name(id='today', ctx=Load()), Constant(value='卖出点')], ctx=Load()))], keywords=[]))], orelse=[])], orelse=[]), For(target=Name(id='stock', ctx=Store()), iter=Name(id='option_list', ctx=Load()), body=[If(test=BoolOp(op=And(), values=[Compare(left=Name(id='stock', ctx=Load()), ops=[NotIn()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='sell_list', ctx=Load())]), Call(func=Name(id='buy_check', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load())], keywords=[])]), body=[Expr(value=Call(func=Attribute(value=Attribute(value=Name(id='g', ctx=Load()), attr='buy_list', ctx=Load()), attr='append', ctx=Load()), args=[Name(id='stock', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='%14s%14s%14s%14s'), op=Mod(), right=Tuple(elts=[Name(id='stock', ctx=Load()), Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load()), Name(id='today', ctx=Load()), Constant(value='买入点')], ctx=Load()))], keywords=[]))], orelse=[])], orelse=[]), Expr(value=Call(func=Name(id='send_wx_msg', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='buy_list', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='sell_list', ctx=Load())], keywords=[]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "market_open",
+      "line": 105,
+      "ast": "FunctionDef(name='market_open', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), For(target=Name(id='stock', ctx=Store()), iter=Attribute(value=Name(id='g', ctx=Load()), attr='sell_list', ctx=Load()), body=[If(test=Compare(left=Name(id='stock', ctx=Load()), ops=[In()], comparators=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())]), body=[Expr(value=Call(func=Name(id='order_target', ctx=Load()), args=[Name(id='stock', ctx=Load()), Constant(value=0)], keywords=[]))], orelse=[])], orelse=[]), If(test=BoolOp(op=Or(), values=[Compare(left=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load()), ops=[Lt()], comparators=[Constant(value=5000)]), Compare(left=Attribute(value=Name(id='g', ctx=Load()), attr='stock_num', ctx=Load()), ops=[Eq()], comparators=[Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[])])]), body=[Return()], orelse=[]), Assign(targets=[Name(id='cash_unit', ctx=Store())], value=BinOp(left=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load()), op=Div(), right=BinOp(left=Attribute(value=Name(id='g', ctx=Load()), attr='stock_num', ctx=Load()), op=Sub(), right=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[])))), For(target=Name(id='stock', ctx=Store()), iter=Attribute(value=Name(id='g', ctx=Load()), attr='buy_list', ctx=Load()), body=[If(test=Compare(left=Name(id='stock', ctx=Load()), ops=[In()], comparators=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())]), body=[Assign(targets=[Name(id='position', ctx=Store())], value=Subscript(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load())), If(test=Compare(left=BinOp(left=Attribute(value=Name(id='position', ctx=Load()), attr='value', ctx=Load()), op=Div(), right=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='total_value', ctx=Load())), ops=[Lt()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='stock_value_ratio', ctx=Load())]), body=[Assign(targets=[Name(id='target_amount', ctx=Store())], value=BinOp(left=Call(func=Name(id='int', ctx=Load()), args=[BinOp(left=Name(id='cash_unit', ctx=Load()), op=Div(), right=BinOp(left=Attribute(value=Name(id='position', ctx=Load()), attr='price', ctx=Load()), op=Mult(), right=Constant(value=100)))], keywords=[]), op=Mult(), right=Constant(value=100))), Expr(value=Call(func=Name(id='order_target', ctx=Load()), args=[Name(id='stock', ctx=Load()), Name(id='target_amount', ctx=Load())], keywords=[]))], orelse=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='%s(%s)的仓位已满'), op=Mod(), right=Tuple(elts=[Name(id='stock', ctx=Load()), Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load())], ctx=Load()))], keywords=[]))])], orelse=[If(test=Compare(left=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load()), ops=[GtE()], comparators=[Name(id='cash_unit', ctx=Load())]), body=[Assign(targets=[Name(id='target_amount', ctx=Store())], value=BinOp(left=Call(func=Name(id='int', ctx=Load()), args=[BinOp(left=Name(id='cash_unit', ctx=Load()), op=Div(), right=BinOp(left=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='last_price', ctx=Load()), op=Mult(), right=Constant(value=100)))], keywords=[]), op=Mult(), right=Constant(value=100))), Expr(value=Call(func=Name(id='order_target', ctx=Load()), args=[Name(id='stock', ctx=Load()), Name(id='target_amount', ctx=Load())], keywords=[]))], orelse=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='没有足够的可用资金来买%s(%s)了'), op=Mod(), right=Tuple(elts=[Name(id='stock', ctx=Load()), Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load())], ctx=Load()))], keywords=[]))])])], orelse=[])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "after_market_close",
+      "line": 141,
+      "ast": "FunctionDef(name='after_market_close', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='trades', ctx=Store())], value=Call(func=Name(id='get_trades', ctx=Load()), args=[], keywords=[])), For(target=Name(id='_trade', ctx=Store()), iter=Call(func=Attribute(value=Name(id='trades', ctx=Load()), attr='values', ctx=Load()), args=[], keywords=[]), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[BinOp(left=Constant(value='成交记录：'), op=Add(), right=Call(func=Name(id='str', ctx=Load()), args=[Name(id='_trade', ctx=Load())], keywords=[]))], keywords=[]))], orelse=[])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "send_wx_msg",
+      "line": 151,
+      "ast": "FunctionDef(name='send_wx_msg', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='buy_list'), arg(arg='sell_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='msg', ctx=Store())], value=Constant(value='今天要卖出的股票:')), If(test=Name(id='sell_list', ctx=Load()), body=[For(target=Name(id='stock', ctx=Store()), iter=Name(id='sell_list', ctx=Load()), body=[AugAssign(target=Name(id='msg', ctx=Store()), op=Add(), value=BinOp(left=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load()), op=Add(), right=Constant(value=' ')))], orelse=[]), AugAssign(target=Name(id='msg', ctx=Store()), op=Add(), value=Constant(value='。'))], orelse=[AugAssign(target=Name(id='msg', ctx=Store()), op=Add(), value=Constant(value='无。'))]), AugAssign(target=Name(id='msg', ctx=Store()), op=Add(), value=Constant(value='今天要买入的股票:')), If(test=Name(id='buy_list', ctx=Load()), body=[Assign(targets=[Name(id='cash_unit', ctx=Store())], value=BinOp(left=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load()), op=Div(), right=Attribute(value=Name(id='g', ctx=Load()), attr='stock_num', ctx=Load()))), If(test=Compare(left=Attribute(value=Name(id='g', ctx=Load()), attr='stock_num', ctx=Load()), ops=[Gt()], comparators=[Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[])]), body=[Assign(targets=[Name(id='cash_unit', ctx=Store())], value=BinOp(left=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load()), op=Div(), right=BinOp(left=Attribute(value=Name(id='g', ctx=Load()), attr='stock_num', ctx=Load()), op=Sub(), right=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[]))))], orelse=[]), For(target=Name(id='stock', ctx=Store()), iter=Name(id='buy_list', ctx=Load()), body=[Assign(targets=[Name(id='target_amount', ctx=Store())], value=BinOp(left=Call(func=Name(id='int', ctx=Load()), args=[BinOp(left=Name(id='cash_unit', ctx=Load()), op=Div(), right=BinOp(left=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='last_price', ctx=Load()), op=Mult(), right=Constant(value=100)))], keywords=[]), op=Mult(), right=Constant(value=100))), AugAssign(target=Name(id='msg', ctx=Store()), op=Add(), value=BinOp(left=BinOp(left=BinOp(left=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load()), op=Add(), right=Constant(value='(')), op=Add(), right=Call(func=Name(id='bytes', ctx=Load()), args=[Name(id='target_amount', ctx=Load())], keywords=[])), op=Add(), right=Constant(value='股) ')))], orelse=[]), AugAssign(target=Name(id='msg', ctx=Store()), op=Add(), value=Constant(value='。'))], orelse=[AugAssign(target=Name(id='msg', ctx=Store()), op=Add(), value=Constant(value='无。'))]), Expr(value=Call(func=Name(id='send_message', ctx=Load()), args=[Name(id='msg', ctx=Load())], keywords=[]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "buy_check",
+      "line": 175,
+      "ast": "FunctionDef(name='buy_check', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Call(func=Name(id='buy_check_volume_increase_and_price_amplitude', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load())], keywords=[]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "sell_check",
+      "line": 179,
+      "ast": "FunctionDef(name='sell_check', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), If(test=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='paused', ctx=Load()), body=[Return(value=Constant(value=False))], orelse=[]), If(test=BoolOp(op=And(), values=[Call(func=Name(id='sell_check_mean_price', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load()), Constant(value=0.1)], keywords=[]), Call(func=Name(id='sell_check_turnover_ratio', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load())], keywords=[])]), body=[Return(value=Constant(value=True))], orelse=[]), If(test=Call(func=Name(id='sell_check_mean_price', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load()), Constant(value=0.2)], keywords=[]), body=[Return(value=Constant(value=True))], orelse=[]), Return(value=Constant(value=False))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "buy_check_price_amplitude",
+      "line": 191,
+      "ast": "FunctionDef(name='buy_check_price_amplitude', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock'), arg(arg='days'), arg(arg='threshold')], kwonlyargs=[], kw_defaults=[], defaults=[Constant(value=60), Constant(value=0.1)]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='today', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='strftime', ctx=Load()), args=[Constant(value='%Y-%m-%d')], keywords=[])), Assign(targets=[Name(id='h', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='stock', ctx=Load()), Name(id='days', ctx=Load()), Constant(value='1d'), List(elts=[Constant(value='open'), Constant(value='close'), Constant(value='high'), Constant(value='low'), Constant(value='volume'), Constant(value='money')], ctx=Load())], keywords=[keyword(arg='df', value=Constant(value=False)), keyword(arg='skip_paused', value=Constant(value=True))])), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='open'), ctx=Load())], keywords=[]), ops=[Lt()], comparators=[Name(id='days', ctx=Load())]), body=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='%s历史数据不足%s天'), op=Mod(), right=Tuple(elts=[Name(id='today', ctx=Load()), Name(id='days', ctx=Load())], ctx=Load()))], keywords=[])), Return(value=Constant(value=False))], orelse=[]), Assign(targets=[Name(id='amplitude', ctx=Store())], value=BinOp(left=BinOp(left=Call(func=Name(id='max', ctx=Load()), args=[Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='high'), ctx=Load())], keywords=[]), op=Sub(), right=Call(func=Name(id='min', ctx=Load()), args=[Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='low'), ctx=Load())], keywords=[])), op=Div(), right=Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='open'), ctx=Load()), slice=Constant(value=0), ctx=Load()))), If(test=Compare(left=Name(id='amplitude', ctx=Load()), ops=[Lt()], comparators=[Name(id='threshold', ctx=Load())]), body=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='%s %s %s 买入点(区间价格波动小), price_amplitude=%s'), op=Mod(), right=Tuple(elts=[Name(id='stock', ctx=Load()), Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load()), Name(id='today', ctx=Load()), Call(func=Name(id='round', ctx=Load()), args=[Name(id='amplitude', ctx=Load()), Constant(value=3)], keywords=[])], ctx=Load()))], keywords=[])), Return(value=Constant(value=True))], orelse=[Return(value=Constant(value=False))])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "buy_check_mean_volume_small",
+      "line": 207,
+      "ast": "FunctionDef(name='buy_check_mean_volume_small', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock'), arg(arg='weeks'), arg(arg='history_weeks'), arg(arg='threshold')], kwonlyargs=[], kw_defaults=[], defaults=[Constant(value=18), Constant(value=150), Constant(value=0.1)]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='today', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='strftime', ctx=Load()), args=[Constant(value='%Y-%m-%d')], keywords=[])), Assign(targets=[Name(id='h', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='stock', ctx=Load()), Name(id='history_weeks', ctx=Load()), Constant(value='5d'), List(elts=[Constant(value='open'), Constant(value='close'), Constant(value='high'), Constant(value='low'), Constant(value='volume'), Constant(value='money')], ctx=Load())], keywords=[keyword(arg='df', value=Constant(value=False)), keyword(arg='skip_paused', value=Constant(value=True))])), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='open'), ctx=Load())], keywords=[]), ops=[Lt()], comparators=[Name(id='weeks', ctx=Load())]), body=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='%s历史数据不足%s周'), op=Mod(), right=Tuple(elts=[Name(id='today', ctx=Load()), Name(id='weeks', ctx=Load())], ctx=Load()))], keywords=[])), Return(value=Constant(value=False))], orelse=[]), Assign(targets=[Name(id='max_volume_latest', ctx=Store())], value=Call(func=Name(id='max', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='volume'), ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Name(id='weeks', ctx=Load()))), ctx=Load())], keywords=[])), Assign(targets=[Name(id='max_volume_history', ctx=Store())], value=Call(func=Name(id='max', ctx=Load()), args=[Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='volume'), ctx=Load())], keywords=[])), If(test=Compare(left=Name(id='max_volume_latest', ctx=Load()), ops=[Lt()], comparators=[BinOp(left=Name(id='max_volume_history', ctx=Load()), op=Mult(), right=Name(id='threshold', ctx=Load()))]), body=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='%s %s %s 买入点(地量), max_volume_latest=%s万, max_volume_history=%s万, ratio=%s'), op=Mod(), right=Tuple(elts=[Name(id='stock', ctx=Load()), Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load()), Name(id='today', ctx=Load()), Call(func=Name(id='int', ctx=Load()), args=[BinOp(left=Name(id='max_volume_latest', ctx=Load()), op=Div(), right=Constant(value=10000))], keywords=[]), Call(func=Name(id='int', ctx=Load()), args=[BinOp(left=Name(id='max_volume_history', ctx=Load()), op=Div(), right=Constant(value=10000))], keywords=[]), Call(func=Name(id='round', ctx=Load()), args=[BinOp(left=Name(id='max_volume_latest', ctx=Load()), op=Div(), right=Name(id='max_volume_history', ctx=Load())), Constant(value=2)], keywords=[])], ctx=Load()))], keywords=[])), Return(value=Constant(value=True))], orelse=[Return(value=Constant(value=False))])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "buy_check_volume_increase",
+      "line": 224,
+      "ast": "FunctionDef(name='buy_check_volume_increase', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='today', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='strftime', ctx=Load()), args=[Constant(value='%Y-%m-%d')], keywords=[])), Assign(targets=[Name(id='h', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='stock', ctx=Load()), Constant(value=11), Constant(value='1d'), List(elts=[Constant(value='open'), Constant(value='close'), Constant(value='high'), Constant(value='low'), Constant(value='volume'), Constant(value='money')], ctx=Load())], keywords=[keyword(arg='df', value=Constant(value=False)), keyword(arg='skip_paused', value=Constant(value=True))])), Assign(targets=[Name(id='volume', ctx=Store())], value=Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='volume'), ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load())), Assign(targets=[Name(id='volume_mean_5', ctx=Store())], value=Call(func=Name(id='mean', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='volume'), ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Constant(value=6)), upper=UnaryOp(op=USub(), operand=Constant(value=1))), ctx=Load())], keywords=[])), Assign(targets=[Name(id='volume_mean_10', ctx=Store())], value=Call(func=Name(id='mean', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='volume'), ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Constant(value=11)), upper=UnaryOp(op=USub(), operand=Constant(value=1))), ctx=Load())], keywords=[])), If(test=BoolOp(op=And(), values=[Compare(left=Name(id='volume', ctx=Load()), ops=[Gt()], comparators=[BinOp(left=Name(id='volume_mean_5', ctx=Load()), op=Mult(), right=Constant(value=2.5))]), Compare(left=Name(id='volume', ctx=Load()), ops=[Gt()], comparators=[BinOp(left=Name(id='volume_mean_10', ctx=Load()), op=Mult(), right=Constant(value=3))])]), body=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='%s %s %s 成交量放大, volume=%sw, mean_5=%sw, mean_10=%sw'), op=Mod(), right=Tuple(elts=[Name(id='stock', ctx=Load()), Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load()), Name(id='today', ctx=Load()), Call(func=Name(id='round', ctx=Load()), args=[BinOp(left=Name(id='volume', ctx=Load()), op=Div(), right=Constant(value=10000)), Constant(value=2)], keywords=[]), Call(func=Name(id='round', ctx=Load()), args=[BinOp(left=Name(id='volume_mean_5', ctx=Load()), op=Div(), right=Constant(value=10000)), Constant(value=2)], keywords=[]), Call(func=Name(id='round', ctx=Load()), args=[BinOp(left=Name(id='volume_mean_10', ctx=Load()), op=Div(), right=Constant(value=10000)), Constant(value=2)], keywords=[])], ctx=Load()))], keywords=[])), Return(value=Constant(value=True))], orelse=[Return(value=Constant(value=False))])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "buy_check_volume_increase_and_price_amplitude",
+      "line": 240,
+      "ast": "FunctionDef(name='buy_check_volume_increase_and_price_amplitude', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), If(test=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='paused', ctx=Load()), body=[Return(value=Constant(value=False))], orelse=[]), Assign(targets=[Name(id='today', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='strftime', ctx=Load()), args=[Constant(value='%Y-%m-%d')], keywords=[])), Assign(targets=[Name(id='h', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='stock', ctx=Load()), Constant(value=270), Constant(value='1d'), List(elts=[Constant(value='open'), Constant(value='close'), Constant(value='high'), Constant(value='low'), Constant(value='volume'), Constant(value='money')], ctx=Load())], keywords=[keyword(arg='df', value=Constant(value=False)), keyword(arg='skip_paused', value=Constant(value=True))])), Assign(targets=[Name(id='volume_yesterday', ctx=Store())], value=Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='volume'), ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load())), If(test=Compare(left=Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='close'), ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load()), ops=[Lt()], comparators=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='open'), ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load())]), body=[Return(value=Constant(value=False))], orelse=[]), Assign(targets=[Name(id='start', ctx=Store())], value=Constant(value=0)), Assign(targets=[Name(id='end', ctx=Store())], value=UnaryOp(op=USub(), operand=Constant(value=1))), For(target=Name(id='i', ctx=Store()), iter=Call(func=Name(id='range', ctx=Load()), args=[Constant(value=1), Attribute(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='volume'), ctx=Load()), attr='size', ctx=Load())], keywords=[]), body=[Assign(targets=[Name(id='index', ctx=Store())], value=UnaryOp(op=USub(), operand=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Constant(value=1)))), If(test=Compare(left=Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='volume'), ctx=Load()), slice=Name(id='index', ctx=Load()), ctx=Load()), ops=[Gt()], comparators=[BinOp(left=Name(id='volume_yesterday', ctx=Load()), op=Mult(), right=Constant(value=0.8))]), body=[Assign(targets=[Name(id='start', ctx=Store())], value=BinOp(left=Name(id='index', ctx=Load()), op=Add(), right=Constant(value=1))), Break()], orelse=[])], orelse=[]), If(test=BoolOp(op=Or(), values=[Compare(left=Name(id='start', ctx=Load()), ops=[Eq()], comparators=[Constant(value=0)]), Compare(left=BinOp(left=Name(id='end', ctx=Load()), op=Sub(), right=Name(id='start', ctx=Load())), ops=[Lt()], comparators=[Constant(value=30)])]), body=[Return(value=Constant(value=False))], orelse=[]), Assign(targets=[Name(id='volume_mean', ctx=Store())], value=Call(func=Name(id='mean', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='volume'), ctx=Load()), slice=Slice(lower=Name(id='start', ctx=Load()), upper=Name(id='end', ctx=Load())), ctx=Load())], keywords=[])), Assign(targets=[Name(id='volume_mean_5', ctx=Store())], value=Call(func=Name(id='mean', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='volume'), ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Constant(value=6)), upper=UnaryOp(op=USub(), operand=Constant(value=1))), ctx=Load())], keywords=[])), If(test=BoolOp(op=Or(), values=[Compare(left=Name(id='volume_yesterday', ctx=Load()), ops=[Lt()], comparators=[BinOp(left=Name(id='volume_mean', ctx=Load()), op=Mult(), right=Constant(value=2.5))]), Compare(left=Name(id='volume_yesterday', ctx=Load()), ops=[Lt()], comparators=[BinOp(left=Name(id='volume_mean_5', ctx=Load()), op=Mult(), right=Constant(value=2.5))])]), body=[Return(value=Constant(value=False))], orelse=[]), Assign(targets=[Name(id='price_max', ctx=Store())], value=Call(func=Name(id='max', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='high'), ctx=Load()), slice=Slice(lower=Name(id='start', ctx=Load()), upper=Name(id='end', ctx=Load())), ctx=Load())], keywords=[])), Assign(targets=[Name(id='price_min', ctx=Store())], value=Call(func=Name(id='min', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='low'), ctx=Load()), slice=Slice(lower=Name(id='start', ctx=Load()), upper=Name(id='end', ctx=Load())), ctx=Load())], keywords=[])), Assign(targets=[Name(id='price_amplitude', ctx=Store())], value=BinOp(left=BinOp(left=Name(id='price_max', ctx=Load()), op=Sub(), right=Name(id='price_min', ctx=Load())), op=Div(), right=Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='open'), ctx=Load()), slice=Name(id='start', ctx=Load()), ctx=Load()))), If(test=Compare(left=Name(id='price_amplitude', ctx=Load()), ops=[Gt()], comparators=[Constant(value=0.1)]), body=[Return(value=Constant(value=False))], orelse=[]), Return(value=Constant(value=True))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "sell_check_mean_price",
+      "line": 285,
+      "ast": "FunctionDef(name='sell_check_mean_price', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock'), arg(arg='threshold')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), If(test=Compare(left=Name(id='stock', ctx=Load()), ops=[NotIn()], comparators=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())]), body=[Return(value=Constant(value=False))], orelse=[]), Assign(targets=[Name(id='h', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='stock', ctx=Load()), Constant(value=31), Constant(value='1d'), List(elts=[Constant(value='open'), Constant(value='close'), Constant(value='high'), Constant(value='low'), Constant(value='volume'), Constant(value='money')], ctx=Load())], keywords=[keyword(arg='df', value=Constant(value=False)), keyword(arg='skip_paused', value=Constant(value=True))])), Assign(targets=[Name(id='mean_5', ctx=Store())], value=Call(func=Name(id='mean', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='close'), ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Constant(value=5))), ctx=Load())], keywords=[])), Assign(targets=[Name(id='mean_10', ctx=Store())], value=Call(func=Name(id='mean', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='close'), ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Constant(value=10))), ctx=Load())], keywords=[])), Assign(targets=[Name(id='mean_30', ctx=Store())], value=Call(func=Name(id='mean', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='close'), ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Constant(value=30))), ctx=Load())], keywords=[])), Assign(targets=[Name(id='diff_5_10', ctx=Store())], value=BinOp(left=BinOp(left=Name(id='mean_5', ctx=Load()), op=Sub(), right=Name(id='mean_10', ctx=Load())), op=Div(), right=Name(id='mean_10', ctx=Load()))), Assign(targets=[Name(id='diff_5_30', ctx=Store())], value=BinOp(left=BinOp(left=Name(id='mean_5', ctx=Load()), op=Sub(), right=Name(id='mean_30', ctx=Load())), op=Div(), right=Name(id='mean_30', ctx=Load()))), Assign(targets=[Name(id='diff_10_30', ctx=Store())], value=BinOp(left=BinOp(left=Name(id='mean_10', ctx=Load()), op=Sub(), right=Name(id='mean_30', ctx=Load())), op=Div(), right=Name(id='mean_30', ctx=Load()))), Assign(targets=[Name(id='yes_mean_5', ctx=Store())], value=Call(func=Name(id='mean', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='close'), ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Constant(value=6)), upper=UnaryOp(op=USub(), operand=Constant(value=1))), ctx=Load())], keywords=[])), Assign(targets=[Name(id='yes_mean_10', ctx=Store())], value=Call(func=Name(id='mean', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='close'), ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Constant(value=11)), upper=UnaryOp(op=USub(), operand=Constant(value=1))), ctx=Load())], keywords=[])), Assign(targets=[Name(id='yes_mean_30', ctx=Store())], value=Call(func=Name(id='mean', ctx=Load()), args=[Subscript(value=Subscript(value=Name(id='h', ctx=Load()), slice=Constant(value='close'), ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Constant(value=31)), upper=UnaryOp(op=USub(), operand=Constant(value=1))), ctx=Load())], keywords=[])), Assign(targets=[Name(id='yes_diff_5_10', ctx=Store())], value=BinOp(left=BinOp(left=Name(id='yes_mean_5', ctx=Load()), op=Sub(), right=Name(id='yes_mean_10', ctx=Load())), op=Div(), right=Name(id='yes_mean_10', ctx=Load()))), Assign(targets=[Name(id='yes_diff_5_30', ctx=Store())], value=BinOp(left=BinOp(left=Name(id='yes_mean_5', ctx=Load()), op=Sub(), right=Name(id='yes_mean_30', ctx=Load())), op=Div(), right=Name(id='yes_mean_30', ctx=Load()))), Assign(targets=[Name(id='yes_diff_10_30', ctx=Store())], value=BinOp(left=BinOp(left=Name(id='yes_mean_10', ctx=Load()), op=Sub(), right=Name(id='yes_mean_30', ctx=Load())), op=Div(), right=Name(id='yes_mean_30', ctx=Load()))), Return(value=Compare(left=Name(id='diff_5_30', ctx=Load()), ops=[Gt()], comparators=[Name(id='threshold', ctx=Load())]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "cal_hold_time",
+      "line": 338,
+      "ast": "FunctionDef(name='cal_hold_time', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='stock', ctx=Load()), ops=[NotIn()], comparators=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())]), body=[Return(value=Constant(value=0))], orelse=[]), Assign(targets=[Name(id='start', ctx=Store())], value=Attribute(value=Subscript(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='init_time', ctx=Load())), Assign(targets=[Name(id='end', ctx=Store())], value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load())), Assign(targets=[Name(id='prices', ctx=Store())], value=Call(func=Name(id='get_price', ctx=Load()), args=[Name(id='stock', ctx=Load())], keywords=[keyword(arg='start_date', value=Name(id='start', ctx=Load())), keyword(arg='end_date', value=Name(id='end', ctx=Load())), keyword(arg='frequency', value=Constant(value='daily')), keyword(arg='skip_paused', value=Constant(value=True))])), Return(value=Attribute(value=Subscript(value=Attribute(value=Name(id='prices', ctx=Load()), attr='iloc', ctx=Load()), slice=Tuple(elts=[Slice(), Constant(value=0)], ctx=Load()), ctx=Load()), attr='size', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "cal_increase_pct",
+      "line": 347,
+      "ast": "FunctionDef(name='cal_increase_pct', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Name(id='stock', ctx=Load()), ops=[NotIn()], comparators=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())]), body=[Return(value=Constant(value=0))], orelse=[]), Assign(targets=[Name(id='current_price', ctx=Store())], value=Attribute(value=Subscript(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='price', ctx=Load())), Assign(targets=[Name(id='avg_cost', ctx=Store())], value=Attribute(value=Subscript(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='avg_cost', ctx=Load())), Return(value=BinOp(left=BinOp(left=Name(id='current_price', ctx=Load()), op=Sub(), right=Name(id='avg_cost', ctx=Load())), op=Div(), right=Name(id='avg_cost', ctx=Load())))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "sell_check_turnover_ratio",
+      "line": 355,
+      "ast": "FunctionDef(name='sell_check_turnover_ratio', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='yesterday', ctx=Store())], value=Call(func=Attribute(value=BinOp(left=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), op=Add(), right=Call(func=Name(id='timedelta', ctx=Load()), args=[], keywords=[keyword(arg='days', value=UnaryOp(op=USub(), operand=Constant(value=1)))])), attr='strftime', ctx=Load()), args=[Constant(value='%Y-%m-%d')], keywords=[])), Assign(targets=[Name(id='q', ctx=Store())], value=Call(func=Attribute(value=Call(func=Name(id='query', ctx=Load()), args=[Name(id='valuation', ctx=Load())], keywords=[]), attr='filter', ctx=Load()), args=[Compare(left=Attribute(value=Name(id='valuation', ctx=Load()), attr='code', ctx=Load()), ops=[Eq()], comparators=[Name(id='stock', ctx=Load())]), Compare(left=Attribute(value=Name(id='valuation', ctx=Load()), attr='turnover_ratio', ctx=Load()), ops=[Gt()], comparators=[Constant(value=15)])], keywords=[])), Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Name(id='get_fundamentals', ctx=Load()), args=[Name(id='q', ctx=Load()), Name(id='yesterday', ctx=Load())], keywords=[])), Return(value=UnaryOp(op=Not(), operand=Attribute(value=Name(id='df', ctx=Load()), attr='empty', ctx=Load())))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "sell_check_rsrs",
+      "line": 368,
+      "ast": "FunctionDef(name='sell_check_rsrs', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='N', ctx=Store())], value=Constant(value=18)), Assign(targets=[Name(id='M', ctx=Store())], value=Constant(value=200)), Assign(targets=[Name(id='threshold', ctx=Store())], value=UnaryOp(op=USub(), operand=Constant(value=0.7))), Assign(targets=[Name(id='ans', ctx=Store())], value=List(elts=[], ctx=Load())), Assign(targets=[Name(id='ans_rightdev', ctx=Store())], value=List(elts=[], ctx=Load())), Assign(targets=[Name(id='prices', ctx=Store())], value=Call(func=Name(id='get_price', ctx=Load()), args=[Name(id='stock', ctx=Load())], keywords=[keyword(arg='count', value=Name(id='M', ctx=Load())), keyword(arg='end_date', value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load())), keyword(arg='frequency', value=Constant(value='1d')), keyword(arg='fields', value=List(elts=[Constant(value='high'), Constant(value='low')], ctx=Load())), keyword(arg='skip_paused', value=Constant(value=True))])), Assign(targets=[Name(id='highs', ctx=Store())], value=Attribute(value=Name(id='prices', ctx=Load()), attr='high', ctx=Load())), Assign(targets=[Name(id='lows', ctx=Store())], value=Attribute(value=Name(id='prices', ctx=Load()), attr='low', ctx=Load())), For(target=Name(id='i', ctx=Store()), iter=Subscript(value=Call(func=Name(id='range', ctx=Load()), args=[Call(func=Name(id='len', ctx=Load()), args=[Name(id='highs', ctx=Load())], keywords=[])], keywords=[]), slice=Slice(lower=Name(id='N', ctx=Load())), ctx=Load()), body=[Assign(targets=[Name(id='data_high', ctx=Store())], value=Subscript(value=Attribute(value=Name(id='highs', ctx=Load()), attr='iloc', ctx=Load()), slice=Slice(lower=BinOp(left=BinOp(left=Name(id='i', ctx=Load()), op=Sub(), right=Name(id='N', ctx=Load())), op=Add(), right=Constant(value=1)), upper=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Constant(value=1))), ctx=Load())), Assign(targets=[Name(id='data_low', ctx=Store())], value=Subscript(value=Attribute(value=Name(id='lows', ctx=Load()), attr='iloc', ctx=Load()), slice=Slice(lower=BinOp(left=BinOp(left=Name(id='i', ctx=Load()), op=Sub(), right=Name(id='N', ctx=Load())), op=Add(), right=Constant(value=1)), upper=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Constant(value=1))), ctx=Load())), Assign(targets=[Name(id='X', ctx=Store())], value=Call(func=Attribute(value=Name(id='sm', ctx=Load()), attr='add_constant', ctx=Load()), args=[Name(id='data_low', ctx=Load())], keywords=[])), Assign(targets=[Name(id='model', ctx=Store())], value=Call(func=Attribute(value=Name(id='sm', ctx=Load()), attr='OLS', ctx=Load()), args=[Name(id='data_high', ctx=Load()), Name(id='X', ctx=Load())], keywords=[])), Assign(targets=[Name(id='results', ctx=Store())], value=Call(func=Attribute(value=Name(id='model', ctx=Load()), attr='fit', ctx=Load()), args=[], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='ans', ctx=Load()), attr='append', ctx=Load()), args=[Subscript(value=Attribute(value=Name(id='results', ctx=Load()), attr='params', ctx=Load()), slice=Constant(value=1), ctx=Load())], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='ans_rightdev', ctx=Load()), attr='append', ctx=Load()), args=[Attribute(value=Name(id='results', ctx=Load()), attr='rsquared', ctx=Load())], keywords=[]))], orelse=[]), Assign(targets=[Name(id='section', ctx=Store())], value=Subscript(value=Name(id='ans', ctx=Load()), slice=Slice(lower=UnaryOp(op=USub(), operand=Name(id='M', ctx=Load()))), ctx=Load())), Assign(targets=[Name(id='mu', ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='mean', ctx=Load()), args=[Name(id='section', ctx=Load())], keywords=[])), Assign(targets=[Name(id='sigma', ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='std', ctx=Load()), args=[Name(id='section', ctx=Load())], keywords=[])), Assign(targets=[Name(id='zscore', ctx=Store())], value=BinOp(left=BinOp(left=Subscript(value=Name(id='section', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load()), op=Sub(), right=Name(id='mu', ctx=Load())), op=Div(), right=Name(id='sigma', ctx=Load()))), Assign(targets=[Name(id='zscore_rightdev', ctx=Store())], value=BinOp(left=BinOp(left=Name(id='zscore', ctx=Load()), op=Mult(), right=Subscript(value=Name(id='ans', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load())), op=Mult(), right=Subscript(value=Name(id='ans_rightdev', ctx=Load()), slice=UnaryOp(op=USub(), operand=Constant(value=1)), ctx=Load()))), If(test=Compare(left=Name(id='zscore_rightdev', ctx=Load()), ops=[Lt()], comparators=[Name(id='threshold', ctx=Load())]), body=[Return(value=Constant(value=True))], orelse=[Return(value=Constant(value=False))])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "sort_by_cow_value",
+      "line": 404,
+      "ast": "FunctionDef(name='sort_by_cow_value', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stocks')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='cow_value_dict', ctx=Store())], value=Call(func=Name(id='dict', ctx=Load()), args=[], keywords=[])), For(target=Name(id='stock', ctx=Store()), iter=Name(id='stocks', ctx=Load()), body=[Assign(targets=[Subscript(value=Name(id='cow_value_dict', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Store())], value=Call(func=Name(id='cow_stock_value', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load())], keywords=[]))], orelse=[]), Assign(targets=[Name(id='tmp', ctx=Store())], value=Call(func=Name(id='sorted', ctx=Load()), args=[Call(func=Attribute(value=Name(id='cow_value_dict', ctx=Load()), attr='items', ctx=Load()), args=[], keywords=[])], keywords=[keyword(arg='key', value=Lambda(args=arguments(posonlyargs=[], args=[arg(arg='item')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=Subscript(value=Name(id='item', ctx=Load()), slice=Constant(value=1), ctx=Load()))), keyword(arg='reverse', value=Constant(value=True))])), Assign(targets=[Name(id='stock_list', ctx=Store())], value=List(elts=[], ctx=Load())), For(target=Name(id='t', ctx=Store()), iter=Name(id='tmp', ctx=Load()), body=[Expr(value=Call(func=Attribute(value=Name(id='stock_list', ctx=Load()), attr='append', ctx=Load()), args=[Subscript(value=Name(id='t', ctx=Load()), slice=Constant(value=0), ctx=Load())], keywords=[]))], orelse=[]), Return(value=Name(id='stock_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "cow_stock_value",
+      "line": 415,
+      "ast": "FunctionDef(name='cow_stock_value', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='today', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='strftime', ctx=Load()), args=[Constant(value='%Y-%m-%d')], keywords=[])), Assign(targets=[Name(id='q', ctx=Store())], value=Call(func=Attribute(value=Call(func=Name(id='query', ctx=Load()), args=[Name(id='valuation', ctx=Load())], keywords=[]), attr='filter', ctx=Load()), args=[Compare(left=Attribute(value=Name(id='valuation', ctx=Load()), attr='code', ctx=Load()), ops=[Eq()], comparators=[Name(id='stock', ctx=Load())])], keywords=[])), Assign(targets=[Name(id='pb', ctx=Store())], value=Subscript(value=Subscript(value=Call(func=Name(id='get_fundamentals', ctx=Load()), args=[Name(id='q', ctx=Load()), Name(id='today', ctx=Load())], keywords=[]), slice=Constant(value='pb_ratio'), ctx=Load()), slice=Constant(value=0), ctx=Load())), Assign(targets=[Name(id='cap', ctx=Store())], value=Subscript(value=Subscript(value=Call(func=Name(id='get_fundamentals', ctx=Load()), args=[Name(id='q', ctx=Load()), Name(id='today', ctx=Load())], keywords=[]), slice=Constant(value='circulating_market_cap'), ctx=Load()), slice=Constant(value=0), ctx=Load())), If(test=Compare(left=Name(id='cap', ctx=Load()), ops=[Gt()], comparators=[Constant(value=100)]), body=[Return(value=Constant(value=0))], orelse=[]), Assign(targets=[Name(id='num_fall', ctx=Store())], value=Call(func=Name(id='fall_money_day_3line', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load()), Constant(value=120), Constant(value=20), Constant(value=60), Constant(value=160)], keywords=[])), Assign(targets=[Name(id='num_cross', ctx=Store())], value=Call(func=Name(id='money_5_cross_60', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load()), Constant(value=120), Constant(value=5), Constant(value=160)], keywords=[])), Return(value=BinOp(left=BinOp(left=Name(id='num_fall', ctx=Load()), op=Mult(), right=Name(id='num_cross', ctx=Load())), op=Div(), right=BinOp(left=Name(id='pb', ctx=Load()), op=Mult(), right=BinOp(left=Name(id='cap', ctx=Load()), op=Pow(), right=Constant(value=0.5)))))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "money_5_cross_60",
+      "line": 427,
+      "ast": "FunctionDef(name='money_5_cross_60', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock'), arg(arg='n'), arg(arg='n1'), arg(arg='n2')], kwonlyargs=[], kw_defaults=[], defaults=[Constant(value=5), Constant(value=60)]), body=[Assign(targets=[Name(id='today', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='strftime', ctx=Load()), args=[Constant(value='%Y-%m-%d')], keywords=[])), If(test=UnaryOp(op=Not(), operand=Compare(left=Name(id='n2', ctx=Load()), ops=[Gt()], comparators=[Name(id='n1', ctx=Load())])), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[Constant(value='fall_money_day 参数错误')], keywords=[])), Return(value=Constant(value=0))], orelse=[]), Assign(targets=[Name(id='stock_m', ctx=Store())], value=Call(func=Name(id='get_price', ctx=Load()), args=[Name(id='stock', ctx=Load())], keywords=[keyword(arg='count', value=BinOp(left=BinOp(left=Name(id='n', ctx=Load()), op=Add(), right=Name(id='n2', ctx=Load())), op=Add(), right=Constant(value=1))), keyword(arg='end_date', value=Name(id='today', ctx=Load())), keyword(arg='frequency', value=Constant(value='daily')), keyword(arg='fields', value=List(elts=[Constant(value='money')], ctx=Load())), keyword(arg='skip_paused', value=Constant(value=True))])), Assign(targets=[Name(id='i', ctx=Store())], value=Constant(value=0)), Assign(targets=[Name(id='count', ctx=Store())], value=Constant(value=0)), While(test=Compare(left=Name(id='i', ctx=Load()), ops=[Lt()], comparators=[Name(id='n', ctx=Load())]), body=[Assign(targets=[Name(id='money_MA60', ctx=Store())], value=Call(func=Attribute(value=Subscript(value=Subscript(value=Name(id='stock_m', ctx=Load()), slice=Constant(value='money'), ctx=Load()), slice=Slice(lower=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Constant(value=1)), upper=BinOp(left=Name(id='n2', ctx=Load()), op=Add(), right=Name(id='i', ctx=Load()))), ctx=Load()), attr='mean', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='money_MA60_before', ctx=Store())], value=Call(func=Attribute(value=Subscript(value=Subscript(value=Name(id='stock_m', ctx=Load()), slice=Constant(value='money'), ctx=Load()), slice=Slice(lower=Name(id='i', ctx=Load()), upper=BinOp(left=BinOp(left=Name(id='n2', ctx=Load()), op=Sub(), right=Constant(value=1)), op=Add(), right=Name(id='i', ctx=Load()))), ctx=Load()), attr='mean', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='money_MA5', ctx=Store())], value=Call(func=Attribute(value=Subscript(value=Subscript(value=Name(id='stock_m', ctx=Load()), slice=Constant(value='money'), ctx=Load()), slice=Slice(lower=BinOp(left=BinOp(left=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Constant(value=1)), op=Add(), right=Name(id='n2', ctx=Load())), op=Sub(), right=Name(id='n1', ctx=Load())), upper=BinOp(left=Name(id='n2', ctx=Load()), op=Add(), right=Name(id='i', ctx=Load()))), ctx=Load()), attr='mean', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='money_MA5_before', ctx=Store())], value=Call(func=Attribute(value=Subscript(value=Subscript(value=Name(id='stock_m', ctx=Load()), slice=Constant(value='money'), ctx=Load()), slice=Slice(lower=BinOp(left=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Name(id='n2', ctx=Load())), op=Sub(), right=Name(id='n1', ctx=Load())), upper=BinOp(left=BinOp(left=Name(id='n2', ctx=Load()), op=Sub(), right=Constant(value=1)), op=Add(), right=Name(id='i', ctx=Load()))), ctx=Load()), attr='mean', ctx=Load()), args=[], keywords=[])), If(test=Compare(left=BinOp(left=BinOp(left=Name(id='money_MA60_before', ctx=Load()), op=Sub(), right=Name(id='money_MA5_before', ctx=Load())), op=Mult(), right=BinOp(left=Name(id='money_MA60', ctx=Load()), op=Sub(), right=Name(id='money_MA5', ctx=Load()))), ops=[Lt()], comparators=[Constant(value=0)]), body=[Assign(targets=[Name(id='count', ctx=Store())], value=BinOp(left=Name(id='count', ctx=Load()), op=Add(), right=Constant(value=1)))], orelse=[]), Assign(targets=[Name(id='i', ctx=Store())], value=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Constant(value=1)))], orelse=[]), Return(value=Name(id='count', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "fall_money_day_3line",
+      "line": 446,
+      "ast": "FunctionDef(name='fall_money_day_3line', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='stock'), arg(arg='n'), arg(arg='n1'), arg(arg='n2'), arg(arg='n3')], kwonlyargs=[], kw_defaults=[], defaults=[Constant(value=20), Constant(value=60), Constant(value=120)]), body=[Assign(targets=[Name(id='today', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='strftime', ctx=Load()), args=[Constant(value='%Y-%m-%d')], keywords=[])), If(test=UnaryOp(op=Not(), operand=BoolOp(op=And(), values=[Compare(left=Name(id='n3', ctx=Load()), ops=[Gt()], comparators=[Name(id='n2', ctx=Load())]), Compare(left=Name(id='n2', ctx=Load()), ops=[Gt()], comparators=[Name(id='n1', ctx=Load())])])), body=[Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='info', ctx=Load()), args=[Constant(value='fall_money_day 参数错误')], keywords=[])), Return(value=Constant(value=0))], orelse=[]), Assign(targets=[Name(id='stock_m', ctx=Store())], value=Call(func=Name(id='get_price', ctx=Load()), args=[Name(id='stock', ctx=Load())], keywords=[keyword(arg='count', value=BinOp(left=Name(id='n', ctx=Load()), op=Add(), right=Name(id='n3', ctx=Load()))), keyword(arg='end_date', value=Name(id='today', ctx=Load())), keyword(arg='frequency', value=Constant(value='daily')), keyword(arg='fields', value=List(elts=[Constant(value='money')], ctx=Load())), keyword(arg='skip_paused', value=Constant(value=True))])), Assign(targets=[Name(id='i', ctx=Store())], value=Constant(value=0)), Assign(targets=[Name(id='count', ctx=Store())], value=Constant(value=0)), While(test=Compare(left=Name(id='i', ctx=Load()), ops=[Lt()], comparators=[Name(id='n', ctx=Load())]), body=[Assign(targets=[Name(id='money_MA200', ctx=Store())], value=Call(func=Attribute(value=Subscript(value=Subscript(value=Name(id='stock_m', ctx=Load()), slice=Constant(value='money'), ctx=Load()), slice=Slice(lower=Name(id='i', ctx=Load()), upper=BinOp(left=BinOp(left=Name(id='n3', ctx=Load()), op=Sub(), right=Constant(value=1)), op=Add(), right=Name(id='i', ctx=Load()))), ctx=Load()), attr='mean', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='money_MA60', ctx=Store())], value=Call(func=Attribute(value=Subscript(value=Subscript(value=Name(id='stock_m', ctx=Load()), slice=Constant(value='money'), ctx=Load()), slice=Slice(lower=BinOp(left=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Name(id='n3', ctx=Load())), op=Sub(), right=Name(id='n2', ctx=Load())), upper=BinOp(left=BinOp(left=Name(id='n3', ctx=Load()), op=Sub(), right=Constant(value=1)), op=Add(), right=Name(id='i', ctx=Load()))), ctx=Load()), attr='mean', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='money_MA20', ctx=Store())], value=Call(func=Attribute(value=Subscript(value=Subscript(value=Name(id='stock_m', ctx=Load()), slice=Constant(value='money'), ctx=Load()), slice=Slice(lower=BinOp(left=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Name(id='n3', ctx=Load())), op=Sub(), right=Name(id='n1', ctx=Load())), upper=BinOp(left=BinOp(left=Name(id='n3', ctx=Load()), op=Sub(), right=Constant(value=1)), op=Add(), right=Name(id='i', ctx=Load()))), ctx=Load()), attr='mean', ctx=Load()), args=[], keywords=[])), If(test=BoolOp(op=And(), values=[Compare(left=Name(id='money_MA20', ctx=Load()), ops=[LtE()], comparators=[Name(id='money_MA60', ctx=Load())]), Compare(left=Name(id='money_MA60', ctx=Load()), ops=[LtE()], comparators=[Name(id='money_MA200', ctx=Load())])]), body=[Assign(targets=[Name(id='count', ctx=Store())], value=BinOp(left=Name(id='count', ctx=Load()), op=Add(), right=Constant(value=1)))], orelse=[]), Assign(targets=[Name(id='i', ctx=Store())], value=BinOp(left=Name(id='i', ctx=Load()), op=Add(), right=Constant(value=1)))], orelse=[]), Return(value=Name(id='count', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "filter_paused_stock",
+      "line": 467,
+      "ast": "FunctionDef(name='filter_paused_stock', args=arguments(posonlyargs=[], args=[arg(arg='stock_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Return(value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='stock_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='paused', ctx=Load()))], is_async=0)]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "filter_limit_up_stock",
+      "line": 473,
+      "ast": "FunctionDef(name='filter_limit_up_stock', args=arguments(posonlyargs=[], args=[arg(arg='stock_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Return(value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='stock_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Compare(left=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='day_open', ctx=Load()), ops=[Gt()], comparators=[BinOp(left=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='high_limit', ctx=Load()), op=Mult(), right=Constant(value=0.985))]))], is_async=0)]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "filter_st_stock",
+      "line": 479,
+      "ast": "FunctionDef(name='filter_st_stock', args=arguments(posonlyargs=[], args=[arg(arg='stock_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Return(value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='stock_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='is_st', ctx=Load()))], is_async=0)]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "filter_bank_stock",
+      "line": 484,
+      "ast": "FunctionDef(name='filter_bank_stock', args=arguments(posonlyargs=[], args=[arg(arg='stock_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='bank_stocks', ctx=Store())], value=Call(func=Name(id='get_index_stocks', ctx=Load()), args=[Constant(value='399951.XSHE')], keywords=[])), Return(value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='stock_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Compare(left=Name(id='stock', ctx=Load()), ops=[In()], comparators=[Name(id='bank_stocks', ctx=Load())]))], is_async=0)]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "filter_300_stock",
+      "line": 489,
+      "ast": "FunctionDef(name='filter_300_stock', args=arguments(posonlyargs=[], args=[arg(arg='stock_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='stock_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Call(func=Attribute(value=Call(func=Attribute(value=Name(id='stock', ctx=Load()), attr='upper', ctx=Load()), args=[], keywords=[]), attr='startswith', ctx=Load()), args=[Constant(value='300')], keywords=[]))], is_async=0)]))], decorator_list=[], type_params=[])"
+     }
+    ],
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "沪深300去银行/创业板的放量窄振幅入场与MA5/30及换手率出场",
+     "fidelity": "492行全文冻结；Python2 print仅副本适配，原价量/均线算术参考独立核验，历史池/平台注入未证",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "000300原顺序；过滤ST/暂停/399951银行成员及300前缀，不调用涨停过滤或庄股排序",
+      "entry": "最多270行skip_paused日OHLCV；昨close<open拒绝；最近前量>昨量*.8后区间>=30；昨量>=区间均量*2.5且>=前5均量*2.5；(maxhigh-minlow)/区间首open<=.1",
+      "history": "原无270行长度门禁；无前量锚点或区间<30拒绝，空历史会索引报错；money虽请求但活跃价量与MA函数不读",
+      "exit": "持仓且不暂停；(MA5-MA30)/MA30>.1且上一自然日turnover_ratio>15，或比值>.2；请求31行，MA10及昨日均线计算但不用",
+      "allocation": "10槽、现金<5000或持仓数恰好10返回；cash/空槽一次冻结，目标数量按100向下取整；持股比例<.33时设置目标可减仓，非增量",
+      "clock": "before_open选卖和买然后通知、open先卖后买、after_close记录成交；真实价格动态复权",
+      "cost": "股票双边佣金.0003/最低5、卖税.001；未显式设置滑点/参与度，平台默认未证",
+      "inactive": "money-flow初始化参数、RSRS/庄股值/成交额排序、涨停过滤均未在活跃选股调用"
+     },
+     "gaps": [
+      "mean/timedelta未显式导入，原Python2 print及pandas.stats.api.ols不兼容；仅诊断副本fix_print和明确numpy.mean注入",
+      "缺完整历史CSI300/银行399951、名称/ST/暂停/涨停与当时完整价量；十股不能替代原池",
+      "供应商换手率分母/版本未证明原valuation.turnover_ratio，上一自然日查询不改成前交易日",
+      "原send_wx_msg的bytes(target_amount)与str拼接Python3报错；只受控本地诊断不实际发送",
+      "平台mean/复权成交量/即时成交及默认费用约束未证；完整信号与交易未放行"
+     ],
+     "future_information_risks": [
+      "动态锚定仅算术参考，固定十股事后池/最终名称不能补原历史全池或版本"
+     ],
+     "next_step": "恢复历史池/状态/换手率与平台均值和价量口径；重要兼容或经济变体确认后唯一Book最长三成本及禁网复现"
+    },
+    "newly_reviewed": true
+   },
+   {
+    "source_path": "repo/量化策略源代码/2020年度精选策略/95 资金流策略.txt",
+    "source_copy": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/source-reviews/S-f5b335357daa.source",
+    "source_sha256": "a6c3dea6c7bd5c302ec2920386e68fc4b84a212c64c98019f540642baf5a8e47",
+    "encoding": "gb18030",
+    "complete_lines_read": 459,
+    "code_start_line": 9,
+    "adapted_copy": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/source-reviews/S-f5b335357daa.adapted.py",
+    "adapted_sha256": "64815491d511490d841ef4b4a44c308c664463a2ee008f43bd4af607cd1e3fee",
+    "adaptation": "preface padding only",
+    "definition_ast": [
+     {
+      "name": "initialize",
+      "line": 17,
+      "ast": "FunctionDef(name='initialize', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Name(id='set_benchmark', ctx=Load()), args=[Constant(value='000300.XSHG')], keywords=[])), Expr(value=Call(func=Name(id='set_slippage', ctx=Load()), args=[Call(func=Name(id='FixedSlippage', ctx=Load()), args=[Constant(value=0.02)], keywords=[])], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='use_real_price'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='order_volume_ratio'), Constant(value=1)], keywords=[])), Expr(value=Call(func=Name(id='set_order_cost', ctx=Load()), args=[Call(func=Name(id='OrderCost', ctx=Load()), args=[], keywords=[keyword(arg='open_tax', value=Constant(value=0)), keyword(arg='close_tax', value=Constant(value=0.001)), keyword(arg='open_commission', value=Constant(value=0.0003)), keyword(arg='close_commission', value=Constant(value=0.0003)), keyword(arg='min_commission', value=Constant(value=5))])], keywords=[keyword(arg='type', value=Constant(value='stock'))])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='security_max_proportion', ctx=Store())], value=Constant(value=1)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_stocks_refresh_rate', ctx=Store())], value=Constant(value=1)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='buy_refresh_rate', ctx=Store())], value=Constant(value=1)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='sell_refresh_rate', ctx=Store())], value=Constant(value=1)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='max_hold_stocknum', ctx=Store())], value=Constant(value=5)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_stocks_days', ctx=Store())], value=Constant(value=0)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='buy_trade_days', ctx=Store())], value=Constant(value=0)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='sell_trade_days', ctx=Store())], value=Constant(value=0)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='open_sell_securities', ctx=Store())], value=List(elts=[], ctx=Load())), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='selled_security_list', ctx=Store())], value=Dict(keys=[], values=[])), Expr(value=Call(func=Name(id='check_stocks_initialize', ctx=Load()), args=[], keywords=[])), Expr(value=Call(func=Name(id='check_stocks_sort_initialize', ctx=Load()), args=[], keywords=[])), Expr(value=Call(func=Name(id='sell_initialize', ctx=Load()), args=[], keywords=[])), Expr(value=Call(func=Name(id='buy_initialize', ctx=Load()), args=[], keywords=[])), Expr(value=Call(func=Name(id='risk_management_initialize', ctx=Load()), args=[], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='set_level', ctx=Load()), args=[Constant(value='order'), Constant(value='error')], keywords=[])), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='sell_every_day', ctx=Load()), Constant(value='open')], keywords=[])), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='risk_management', ctx=Load()), Constant(value='every_bar')], keywords=[])), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='check_stocks', ctx=Load()), Constant(value='open')], keywords=[])), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='trade', ctx=Load()), Constant(value='open')], keywords=[])), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='selled_security_list_count', ctx=Load()), Constant(value='after_close')], keywords=[]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "check_stocks_initialize",
+      "line": 72,
+      "ast": "FunctionDef(name='check_stocks_initialize', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='filter_paused', ctx=Store())], value=Constant(value=True)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='filter_delisted', ctx=Store())], value=Constant(value=True)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='only_st', ctx=Store())], value=Constant(value=False)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='filter_st', ctx=Store())], value=Constant(value=True)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='security_universe_index', ctx=Store())], value=List(elts=[Constant(value='000300.XSHG')], ctx=Load())), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='security_universe_user_securities', ctx=Store())], value=List(elts=[], ctx=Load())), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='industry_list', ctx=Store())], value=List(elts=[], ctx=Load())), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='concept_list', ctx=Store())], value=List(elts=[], ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "check_stocks_sort_initialize",
+      "line": 90,
+      "ast": "FunctionDef(name='check_stocks_sort_initialize', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists_ascending', ctx=Store())], value=Constant(value='desc'))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "sell_initialize",
+      "line": 95,
+      "ast": "FunctionDef(name='sell_initialize', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='sell_will_buy', ctx=Store())], value=Constant(value=True)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='sell_by_amount', ctx=Store())], value=Constant(value=None)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='sell_by_percent', ctx=Store())], value=Constant(value=None))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "buy_initialize",
+      "line": 104,
+      "ast": "FunctionDef(name='buy_initialize', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='filter_holded', ctx=Store())], value=Constant(value=False)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='order_style_str', ctx=Store())], value=Constant(value='by_cap_mean')), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='order_style_value', ctx=Store())], value=Constant(value=100))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "risk_management_initialize",
+      "line": 113,
+      "ast": "FunctionDef(name='risk_management_initialize', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='risk_management_signal', ctx=Store())], value=Constant(value=True)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='daily_risk_management', ctx=Store())], value=Constant(value=True)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='max_buy_value', ctx=Store())], value=Constant(value=None)), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='max_buy_amount', ctx=Store())], value=Constant(value=None))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "sell_every_day",
+      "line": 126,
+      "ast": "FunctionDef(name='sell_every_day', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='open_sell_securities', ctx=Store())], value=ListComp(elt=Name(id='s', ctx=Load()), generators=[comprehension(target=Name(id='s', ctx=Store()), iter=Call(func=Attribute(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), attr='keys', ctx=Load()), args=[], keywords=[]), ifs=[Compare(left=Name(id='s', ctx=Load()), ops=[In()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='open_sell_securities', ctx=Load())])], is_async=0)])), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='open_sell_securities', ctx=Load())], keywords=[]), ops=[Gt()], comparators=[Constant(value=0)]), body=[For(target=Name(id='stock', ctx=Store()), iter=Name(id='open_sell_securities', ctx=Load()), body=[Expr(value=Call(func=Name(id='order_target_value', ctx=Load()), args=[Name(id='stock', ctx=Load()), Constant(value=0)], keywords=[]))], orelse=[])], orelse=[]), Return()], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "risk_management",
+      "line": 134,
+      "ast": "FunctionDef(name='risk_management', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return()], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "check_stocks",
+      "line": 140,
+      "ast": "FunctionDef(name='check_stocks', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=BinOp(left=Attribute(value=Name(id='g', ctx=Load()), attr='check_stocks_days', ctx=Load()), op=Mod(), right=Attribute(value=Name(id='g', ctx=Load()), attr='check_stocks_refresh_rate', ctx=Load())), ops=[NotEq()], comparators=[Constant(value=0)]), body=[AugAssign(target=Attribute(value=Name(id='g', ctx=Load()), attr='check_stocks_days', ctx=Store()), op=Add(), value=Constant(value=1)), Return()], orelse=[]), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='get_security_universe', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='security_universe_index', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='security_universe_user_securities', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='industry_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='industry_list', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='concept_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='concept_list', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='st_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='delisted_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='financial_statements_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='situation_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='technical_indicators_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='pattern_recognition_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='other_func_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load())], keywords=[])), Assign(targets=[Name(id='input_dict', ctx=Store())], value=Call(func=Name(id='get_check_stocks_sort_input_dict', ctx=Load()), args=[], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Store())], value=Call(func=Name(id='check_stocks_sort', ctx=Load()), args=[Name(id='context', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load()), Name(id='input_dict', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists_ascending', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='check_stocks_days', ctx=Store())], value=Constant(value=1)), Return()], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "trade",
+      "line": 175,
+      "ast": "FunctionDef(name='trade', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='buy_lists', ctx=Store())], value=List(elts=[], ctx=Load())), If(test=Compare(left=BinOp(left=Attribute(value=Name(id='g', ctx=Load()), attr='buy_trade_days', ctx=Load()), op=Mod(), right=Attribute(value=Name(id='g', ctx=Load()), attr='buy_refresh_rate', ctx=Load())), ops=[Eq()], comparators=[Constant(value=0)]), body=[Assign(targets=[Name(id='buy_lists', ctx=Store())], value=Attribute(value=Name(id='g', ctx=Load()), attr='check_out_lists', ctx=Load())), Assign(targets=[Name(id='buy_lists', ctx=Store())], value=Call(func=Name(id='st_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='buy_lists', ctx=Load())], keywords=[])), Assign(targets=[Name(id='buy_lists', ctx=Store())], value=Call(func=Name(id='paused_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='buy_lists', ctx=Load())], keywords=[])), Assign(targets=[Name(id='buy_lists', ctx=Store())], value=Call(func=Name(id='delisted_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='buy_lists', ctx=Load())], keywords=[])), Assign(targets=[Name(id='buy_lists', ctx=Store())], value=Call(func=Name(id='high_limit_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='buy_lists', ctx=Load())], keywords=[])), Assign(targets=[Name(id='buy_lists', ctx=Store())], value=ListComp(elt=Name(id='security', ctx=Load()), generators=[comprehension(target=Name(id='security', ctx=Store()), iter=Name(id='buy_lists', ctx=Load()), ifs=[Call(func=Name(id='money_flow_dayu', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='security', ctx=Load()), Constant(value='net_pct_main'), Constant(value=10)], keywords=[keyword(arg='which_day', value=Constant(value='previous'))])], is_async=0)]))], orelse=[]), If(test=Compare(left=BinOp(left=Attribute(value=Name(id='g', ctx=Load()), attr='sell_trade_days', ctx=Load()), op=Mod(), right=Attribute(value=Name(id='g', ctx=Load()), attr='sell_refresh_rate', ctx=Load())), ops=[NotEq()], comparators=[Constant(value=0)]), body=[AugAssign(target=Attribute(value=Name(id='g', ctx=Load()), attr='sell_trade_days', ctx=Store()), op=Add(), value=Constant(value=1))], orelse=[Expr(value=Call(func=Name(id='sell', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='buy_lists', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='sell_trade_days', ctx=Store())], value=Constant(value=1))]), If(test=Compare(left=BinOp(left=Attribute(value=Name(id='g', ctx=Load()), attr='buy_trade_days', ctx=Load()), op=Mod(), right=Attribute(value=Name(id='g', ctx=Load()), attr='buy_refresh_rate', ctx=Load())), ops=[NotEq()], comparators=[Constant(value=0)]), body=[AugAssign(target=Attribute(value=Name(id='g', ctx=Load()), attr='buy_trade_days', ctx=Store()), op=Add(), value=Constant(value=1))], orelse=[Expr(value=Call(func=Name(id='buy', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='buy_lists', ctx=Load())], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='buy_trade_days', ctx=Store())], value=Constant(value=1))])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "selled_security_list_count",
+      "line": 218,
+      "ast": "FunctionDef(name='selled_security_list_count', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='daily_risk_management', ctx=Store())], value=Constant(value=True)), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='selled_security_list', ctx=Load())], keywords=[]), ops=[Gt()], comparators=[Constant(value=0)]), body=[For(target=Name(id='stock', ctx=Store()), iter=Call(func=Attribute(value=Attribute(value=Name(id='g', ctx=Load()), attr='selled_security_list', ctx=Load()), attr='keys', ctx=Load()), args=[], keywords=[]), body=[AugAssign(target=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='selled_security_list', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Store()), op=Add(), value=Constant(value=1))], orelse=[])], orelse=[])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "financial_statements_filter",
+      "line": 227,
+      "ast": "FunctionDef(name='financial_statements_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Name(id='security_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "situation_filter",
+      "line": 235,
+      "ast": "FunctionDef(name='situation_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Name(id='security_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "technical_indicators_filter",
+      "line": 243,
+      "ast": "FunctionDef(name='technical_indicators_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='security', ctx=Load()), generators=[comprehension(target=Name(id='security', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[Call(func=Name(id='MACD_judge_jincha', ctx=Load()), args=[Name(id='security', ctx=Load()), Constant(value=12), Constant(value=26), Constant(value=26)], keywords=[])], is_async=0)])), Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='security', ctx=Load()), generators=[comprehension(target=Name(id='security', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[Call(func=Name(id='BBands_lowerband_judge_dayu', ctx=Load()), args=[Name(id='security', ctx=Load()), Constant(value=6), Constant(value=5), Constant(value=2), Constant(value=2)], keywords=[])], is_async=0)])), Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='security', ctx=Load()), generators=[comprehension(target=Name(id='security', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[Call(func=Name(id='MA_judge_duotou', ctx=Load()), args=[Name(id='security', ctx=Load()), Constant(value=5), Constant(value=10)], keywords=[])], is_async=0)])), Return(value=Name(id='security_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "pattern_recognition_filter",
+      "line": 254,
+      "ast": "FunctionDef(name='pattern_recognition_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Return(value=Name(id='security_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "other_func_filter",
+      "line": 262,
+      "ast": "FunctionDef(name='other_func_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='security', ctx=Load()), generators=[comprehension(target=Name(id='security', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[Call(func=Name(id='money_flow_dayu', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='security', ctx=Load()), Constant(value='net_pct_main'), Constant(value=15)], keywords=[keyword(arg='which_day', value=Constant(value='previous'))])], is_async=0)])), Return(value=Name(id='security_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "get_check_stocks_sort_input_dict",
+      "line": 271,
+      "ast": "FunctionDef(name='get_check_stocks_sort_input_dict', args=arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='input_dict', ctx=Store())], value=Dict(keys=[Attribute(value=Name(id='valuation', ctx=Load()), attr='circulating_market_cap', ctx=Load()), Attribute(value=Name(id='valuation', ctx=Load()), attr='pe_ratio', ctx=Load()), Attribute(value=Name(id='indicator', ctx=Load()), attr='roe', ctx=Load())], values=[Tuple(elts=[Constant(value='asc'), Constant(value=0)], ctx=Load()), Tuple(elts=[Constant(value='asc'), Constant(value=0)], ctx=Load()), Tuple(elts=[Constant(value='desc'), Constant(value=0)], ctx=Load())])), Return(value=Name(id='input_dict', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "sell",
+      "line": 282,
+      "ast": "FunctionDef(name='sell', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='buy_lists')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='init_sl', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), attr='keys', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='sell_lists', ctx=Store())], value=Call(func=Attribute(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), attr='keys', ctx=Load()), args=[], keywords=[])), If(test=UnaryOp(op=Not(), operand=Attribute(value=Name(id='g', ctx=Load()), attr='sell_will_buy', ctx=Load())), body=[Assign(targets=[Name(id='sell_lists', ctx=Store())], value=ListComp(elt=Name(id='security', ctx=Load()), generators=[comprehension(target=Name(id='security', ctx=Store()), iter=Name(id='sell_lists', ctx=Load()), ifs=[Compare(left=Name(id='security', ctx=Load()), ops=[NotIn()], comparators=[Name(id='buy_lists', ctx=Load())])], is_async=0)]))], orelse=[]), Assign(targets=[Name(id='sell_lists', ctx=Store())], value=ListComp(elt=Name(id='security', ctx=Load()), generators=[comprehension(target=Name(id='security', ctx=Store()), iter=Name(id='sell_lists', ctx=Load()), ifs=[Call(func=Name(id='n_day_chg_dayu', ctx=Load()), args=[Name(id='security', ctx=Load()), Constant(value=5), Constant(value=0.05)], keywords=[])], is_async=0)])), Assign(targets=[Name(id='sell_lists', ctx=Store())], value=ListComp(elt=Name(id='security', ctx=Load()), generators=[comprehension(target=Name(id='security', ctx=Store()), iter=Name(id='sell_lists', ctx=Load()), ifs=[Call(func=Name(id='MACD_judge_sicha', ctx=Load()), args=[Name(id='security', ctx=Load()), Constant(value=12), Constant(value=26), Constant(value=26)], keywords=[])], is_async=0)])), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='sell_lists', ctx=Load())], keywords=[]), ops=[Gt()], comparators=[Constant(value=0)]), body=[For(target=Name(id='stock', ctx=Store()), iter=Name(id='sell_lists', ctx=Load()), body=[Expr(value=Call(func=Name(id='sell_by_amount_or_percent_or_none', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='sell_by_amount', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='sell_by_percent', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='open_sell_securities', ctx=Load())], keywords=[]))], orelse=[])], orelse=[]), Expr(value=Call(func=Name(id='selled_security_list_dict', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='init_sl', ctx=Load())], keywords=[])), Return()], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "buy",
+      "line": 307,
+      "ast": "FunctionDef(name='buy', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='buy_lists')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=UnaryOp(op=Not(), operand=Attribute(value=Name(id='g', ctx=Load()), attr='risk_management_signal', ctx=Load())), body=[Return()], orelse=[]), If(test=UnaryOp(op=Not(), operand=Attribute(value=Name(id='g', ctx=Load()), attr='daily_risk_management', ctx=Load())), body=[Return()], orelse=[]), Assign(targets=[Name(id='buy_lists', ctx=Store())], value=Call(func=Name(id='holded_filter', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='buy_lists', ctx=Load())], keywords=[])), Assign(targets=[Name(id='Num', ctx=Store())], value=BinOp(left=Attribute(value=Name(id='g', ctx=Load()), attr='max_hold_stocknum', ctx=Load()), op=Sub(), right=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[]))), Assign(targets=[Name(id='buy_lists', ctx=Store())], value=Subscript(value=Name(id='buy_lists', ctx=Load()), slice=Slice(upper=Name(id='Num', ctx=Load())), ctx=Load())), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='buy_lists', ctx=Load())], keywords=[]), ops=[Gt()], comparators=[Constant(value=0)]), body=[Assign(targets=[Name(id='result', ctx=Store())], value=Call(func=Name(id='order_style', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='buy_lists', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='max_hold_stocknum', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='order_style_str', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='order_style_value', ctx=Load())], keywords=[])), For(target=Name(id='stock', ctx=Store()), iter=Name(id='buy_lists', ctx=Load()), body=[If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[]), ops=[Lt()], comparators=[Attribute(value=Name(id='g', ctx=Load()), attr='max_hold_stocknum', ctx=Load())]), body=[Assign(targets=[Name(id='Cash', ctx=Store())], value=Subscript(value=Name(id='result', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load())), Assign(targets=[Name(id='value', ctx=Store())], value=Call(func=Name(id='judge_security_max_proportion', ctx=Load()), args=[Name(id='context', ctx=Load()), Name(id='stock', ctx=Load()), Name(id='Cash', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='security_max_proportion', ctx=Load())], keywords=[])), Assign(targets=[Name(id='amount', ctx=Store())], value=Call(func=Name(id='max_buy_value_or_amount', ctx=Load()), args=[Name(id='stock', ctx=Load()), Name(id='value', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='max_buy_value', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='max_buy_amount', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='order', ctx=Load()), args=[Name(id='stock', ctx=Load()), Name(id='amount', ctx=Load()), Call(func=Name(id='MarketOrderStyle', ctx=Load()), args=[], keywords=[])], keywords=[]))], orelse=[])], orelse=[])], orelse=[]), Return()], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "check_stocks_sort",
+      "line": 340,
+      "ast": "FunctionDef(name='check_stocks_sort', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list'), arg(arg='input_dict'), arg(arg='ascending')], kwonlyargs=[], kw_defaults=[], defaults=[Constant(value='desc')]), body=[If(test=BoolOp(op=Or(), values=[Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='security_list', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value=0)]), Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='input_dict', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value=0)])]), body=[Return(value=Name(id='security_list', ctx=Load()))], orelse=[Assign(targets=[Name(id='idk', ctx=Store())], value=Call(func=Name(id='list', ctx=Load()), args=[Call(func=Attribute(value=Name(id='input_dict', ctx=Load()), attr='keys', ctx=Load()), args=[], keywords=[])], keywords=[])), Assign(targets=[Name(id='a', ctx=Store())], value=Call(func=Attribute(value=Name(id='pd', ctx=Load()), attr='DataFrame', ctx=Load()), args=[], keywords=[])), For(target=Name(id='i', ctx=Store()), iter=Name(id='idk', ctx=Load()), body=[Assign(targets=[Name(id='b', ctx=Store())], value=Call(func=Name(id='get_sort_dataframe', ctx=Load()), args=[Name(id='security_list', ctx=Load()), Name(id='i', ctx=Load()), Subscript(value=Name(id='input_dict', ctx=Load()), slice=Name(id='i', ctx=Load()), ctx=Load())], keywords=[])), Assign(targets=[Name(id='a', ctx=Store())], value=Call(func=Attribute(value=Name(id='pd', ctx=Load()), attr='concat', ctx=Load()), args=[List(elts=[Name(id='a', ctx=Load()), Name(id='b', ctx=Load())], ctx=Load())], keywords=[keyword(arg='axis', value=Constant(value=1))]))], orelse=[]), Assign(targets=[Subscript(value=Name(id='a', ctx=Load()), slice=Constant(value='score'), ctx=Store())], value=Call(func=Attribute(value=Name(id='a', ctx=Load()), attr='sum', ctx=Load()), args=[Constant(value=1), Constant(value=False)], keywords=[])), If(test=Compare(left=Name(id='ascending', ctx=Load()), ops=[Eq()], comparators=[Constant(value='asc')]), body=[Assign(targets=[Name(id='a', ctx=Store())], value=Call(func=Attribute(value=Name(id='a', ctx=Load()), attr='sort', ctx=Load()), args=[List(elts=[Constant(value='score')], ctx=Load())], keywords=[keyword(arg='ascending', value=Constant(value=True))]))], orelse=[If(test=Compare(left=Name(id='ascending', ctx=Load()), ops=[Eq()], comparators=[Constant(value='desc')]), body=[Assign(targets=[Name(id='a', ctx=Store())], value=Call(func=Attribute(value=Name(id='a', ctx=Load()), attr='sort', ctx=Load()), args=[List(elts=[Constant(value='score')], ctx=Load())], keywords=[keyword(arg='ascending', value=Constant(value=False))]))], orelse=[])]), Return(value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Name(id='a', ctx=Load()), attr='index', ctx=Load())], keywords=[]))])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "filter_n_tradeday_not_buy",
+      "line": 362,
+      "ast": "FunctionDef(name='filter_n_tradeday_not_buy', args=arguments(posonlyargs=[], args=[arg(arg='security'), arg(arg='n')], kwonlyargs=[], kw_defaults=[], defaults=[Constant(value=0)]), body=[Try(body=[If(test=BoolOp(op=And(), values=[Compare(left=Name(id='security', ctx=Load()), ops=[In()], comparators=[Call(func=Attribute(value=Attribute(value=Name(id='g', ctx=Load()), attr='selled_security_list', ctx=Load()), attr='keys', ctx=Load()), args=[], keywords=[])]), Compare(left=Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='selled_security_list', ctx=Load()), slice=Name(id='security', ctx=Load()), ctx=Load()), ops=[Lt()], comparators=[Name(id='n', ctx=Load())])]), body=[Return(value=Constant(value=False))], orelse=[]), Return(value=Constant(value=True))], handlers=[ExceptHandler(body=[Return(value=Constant(value=True))])], orelse=[], finalbody=[])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "holded_filter",
+      "line": 371,
+      "ast": "FunctionDef(name='holded_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=UnaryOp(op=Not(), operand=Attribute(value=Name(id='g', ctx=Load()), attr='filter_holded', ctx=Load())), body=[Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[Compare(left=Name(id='stock', ctx=Load()), ops=[NotIn()], comparators=[Call(func=Attribute(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), attr='keys', ctx=Load()), args=[], keywords=[])])], is_async=0)]))], orelse=[]), Return(value=Name(id='security_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "selled_security_list_dict",
+      "line": 378,
+      "ast": "FunctionDef(name='selled_security_list_dict', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='selled_sl', ctx=Store())], value=ListComp(elt=Name(id='s', ctx=Load()), generators=[comprehension(target=Name(id='s', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[Compare(left=Name(id='s', ctx=Load()), ops=[NotIn()], comparators=[Call(func=Attribute(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), attr='keys', ctx=Load()), args=[], keywords=[])])], is_async=0)])), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='selled_sl', ctx=Load())], keywords=[]), ops=[Gt()], comparators=[Constant(value=0)]), body=[For(target=Name(id='stock', ctx=Store()), iter=Name(id='selled_sl', ctx=Load()), body=[Assign(targets=[Subscript(value=Attribute(value=Name(id='g', ctx=Load()), attr='selled_security_list', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Store())], value=Constant(value=0))], orelse=[])], orelse=[])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "paused_filter",
+      "line": 385,
+      "ast": "FunctionDef(name='paused_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Attribute(value=Name(id='g', ctx=Load()), attr='filter_paused', ctx=Load()), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='paused', ctx=Load()))], is_async=0)]))], orelse=[]), Return(value=Name(id='security_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "delisted_filter",
+      "line": 393,
+      "ast": "FunctionDef(name='delisted_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Attribute(value=Name(id='g', ctx=Load()), attr='filter_delisted', ctx=Load()), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=BoolOp(op=Or(), values=[Compare(left=Constant(value='退'), ops=[In()], comparators=[Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load())]), Compare(left=Constant(value='*'), ops=[In()], comparators=[Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='name', ctx=Load())])]))], is_async=0)]))], orelse=[]), Return(value=Name(id='security_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "st_filter",
+      "line": 402,
+      "ast": "FunctionDef(name='st_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Attribute(value=Name(id='g', ctx=Load()), attr='only_st', ctx=Load()), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='is_st', ctx=Load())], is_async=0)]))], orelse=[If(test=Attribute(value=Name(id='g', ctx=Load()), attr='filter_st', ctx=Load()), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='is_st', ctx=Load()))], is_async=0)]))], orelse=[])]), Return(value=Name(id='security_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "high_limit_filter",
+      "line": 414,
+      "ast": "FunctionDef(name='high_limit_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='current_data', ctx=Store())], value=Call(func=Name(id='get_current_data', ctx=Load()), args=[], keywords=[])), Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Compare(left=Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='day_open', ctx=Load()), ops=[GtE()], comparators=[Attribute(value=Subscript(value=Name(id='current_data', ctx=Load()), slice=Name(id='stock', ctx=Load()), ctx=Load()), attr='high_limit', ctx=Load())]))], is_async=0)])), Return(value=Name(id='security_list', ctx=Load()))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "get_security_universe",
+      "line": 421,
+      "ast": "FunctionDef(name='get_security_universe', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_universe_index'), arg(arg='security_universe_user_securities')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='temp_index', ctx=Store())], value=List(elts=[], ctx=Load())), For(target=Name(id='s', ctx=Store()), iter=Name(id='security_universe_index', ctx=Load()), body=[If(test=Compare(left=Name(id='s', ctx=Load()), ops=[Eq()], comparators=[Constant(value='all_a_securities')]), body=[AugAssign(target=Name(id='temp_index', ctx=Store()), op=Add(), value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Call(func=Name(id='get_all_securities', ctx=Load()), args=[List(elts=[Constant(value='stock')], ctx=Load()), Call(func=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='current_dt', ctx=Load()), attr='date', ctx=Load()), args=[], keywords=[])], keywords=[]), attr='index', ctx=Load())], keywords=[]))], orelse=[AugAssign(target=Name(id='temp_index', ctx=Store()), op=Add(), value=Call(func=Name(id='get_index_stocks', ctx=Load()), args=[Name(id='s', ctx=Load())], keywords=[]))])], orelse=[]), For(target=Name(id='x', ctx=Store()), iter=Name(id='security_universe_user_securities', ctx=Load()), body=[AugAssign(target=Name(id='temp_index', ctx=Store()), op=Add(), value=Name(id='x', ctx=Load()))], orelse=[]), Return(value=Call(func=Name(id='sorted', ctx=Load()), args=[Call(func=Name(id='list', ctx=Load()), args=[Call(func=Name(id='set', ctx=Load()), args=[Name(id='temp_index', ctx=Load())], keywords=[])], keywords=[])], keywords=[]))], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "industry_filter",
+      "line": 433,
+      "ast": "FunctionDef(name='industry_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list'), arg(arg='industry_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='industry_list', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value=0)]), body=[Return(value=Name(id='security_list', ctx=Load()))], orelse=[Assign(targets=[Name(id='securities', ctx=Store())], value=List(elts=[], ctx=Load())), For(target=Name(id='s', ctx=Store()), iter=Name(id='industry_list', ctx=Load()), body=[Assign(targets=[Name(id='temp_securities', ctx=Store())], value=Call(func=Name(id='get_industry_stocks', ctx=Load()), args=[Name(id='s', ctx=Load())], keywords=[])), AugAssign(target=Name(id='securities', ctx=Store()), op=Add(), value=Name(id='temp_securities', ctx=Load()))], orelse=[]), Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[Compare(left=Name(id='stock', ctx=Load()), ops=[In()], comparators=[Name(id='securities', ctx=Load())])], is_async=0)])), Return(value=Name(id='security_list', ctx=Load()))])], decorator_list=[], type_params=[])"
+     },
+     {
+      "name": "concept_filter",
+      "line": 447,
+      "ast": "FunctionDef(name='concept_filter', args=arguments(posonlyargs=[], args=[arg(arg='context'), arg(arg='security_list'), arg(arg='concept_list')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='concept_list', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value=0)]), body=[Return(value=Name(id='security_list', ctx=Load()))], orelse=[Assign(targets=[Name(id='securities', ctx=Store())], value=List(elts=[], ctx=Load())), For(target=Name(id='s', ctx=Store()), iter=Name(id='concept_list', ctx=Load()), body=[Assign(targets=[Name(id='temp_securities', ctx=Store())], value=Call(func=Name(id='get_concept_stocks', ctx=Load()), args=[Name(id='s', ctx=Load())], keywords=[])), AugAssign(target=Name(id='securities', ctx=Store()), op=Add(), value=Name(id='temp_securities', ctx=Load()))], orelse=[]), Assign(targets=[Name(id='security_list', ctx=Store())], value=ListComp(elt=Name(id='stock', ctx=Load()), generators=[comprehension(target=Name(id='stock', ctx=Store()), iter=Name(id='security_list', ctx=Load()), ifs=[Compare(left=Name(id='stock', ctx=Load()), ops=[In()], comparators=[Name(id='securities', ctx=Load())])], is_async=0)])), Return(value=Name(id='security_list', ctx=Load()))])], decorator_list=[], type_params=[])"
+     }
+    ],
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "沪深300技术向导与上一日主力流入筛选、零权重非空排序",
+     "fidelity": "459行全文/30函数及受控参数和重试状态冻结；缺失helper不按名字实现技术信号",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "000300去重排序；空行业/概念、无财务预筛；原ST/退市名称过滤",
+      "technical": "MACD_judge_jincha(12,26,26)、BBands_lowerband_judge_dayu(6,5,2,2)、MA_judge_duotou(5,10)顺序过滤，具体算法未知",
+      "flow": "other_func_filter上一日net_pct_main>15 helper；trade上一日>10 helper，边界/日期/单位未证",
+      "rank": "流通市值asc0、PEasc0、ROEdesc0非空字典；仍逐字段调用get_sort_dataframe/sum/旧DataFrame.sort，不猜零权重结果",
+      "exit": "5日涨幅dayu(.05)与MACD_judge_sicha(12,26,26)，sell_will_buy=True允许卖待买股",
+      "allocation": "5槽、filter_holded=False实际排已持股、by_cap_mean100、最大比例1；增量order数量依赖helper",
+      "retry": "sell_every_day按positions与旧重试列表交集下单，原重试列表不清理/去重；动态keys卖出记录问题保留",
+      "clock": "open注册重试/选股/交易，every_bar空风险函数、after_close卖出日数+1；三刷新率1",
+      "cost": "股票双边佣金.0003/最低5、卖税.001、FixedSlippage .02绝对量、参与度1、动态真实价格"
+     },
+     "gaps": [
+      "缺原wizard技术/资金流/排序/卖出/分配/数量helper及完整CSI300历史池/名称/状态",
+      "近期供应商资金流不恢复原上一日net_pct_main长历史和可用版本；没有默认TA-Lib替代",
+      "非空零权重排序原DataFrame.sort在现pandas报错；不能直接忽略排序或推断并列顺序",
+      "平台即时/失败/部分成交、日内价格与滑点费用具体语义未证"
+     ],
+     "future_information_risks": [
+      "原财务排序虽权重0仍查询，最终字段/当前池/近期资金流不作历史可用输入"
+     ],
+     "next_step": "恢复原helper版本和历史CSI300/资金流，具体必要变体确认后唯一Book长区间三成本和离线复现"
+    },
+    "newly_reviewed": true
+   }
+  ],
+  "references": [
+   {
+    "file": "repo/backtrader/backtrader/indicators/basicops.py",
+    "copy": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/references/basicops.py",
+    "sha256": "ea0ef045ff9c33de2f17094b3be4f52f61700d741f7676cc32b47cdf35360815",
+    "commit": "b853d7c90b6721476eb5a5ea3135224e33db1f14",
+    "use": "Existing moving-average/native flow/incremental-order reference; no alternate ledger or invented wizard helper"
+   },
+   {
+    "file": "repo/akshare/akshare/stock/stock_fund_em.py",
+    "copy": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/references/stock_fund_em.py",
+    "sha256": "d97ae32286e8773f406e8767bababe836191de7ac34a1a3686dd33412b1a7c35",
+    "commit": "0191689d57c667b7c7a198fd0cf97316837ef311",
+    "use": "Existing moving-average/native flow/incremental-order reference; no alternate ledger or invented wizard helper"
+   },
+   {
+    "file": "repo/rqalpha/rqalpha/mod/rqalpha_mod_sys_accounts/api/api_stock.py",
+    "copy": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/references/api_stock.py",
+    "sha256": "97ff999448027d28d07e7fde19f9b931abe0c5a1914d5143f6bbacd1968eb249",
+    "commit": "0d98adefa87956e26f3e7ca5b26b5f3fc7ca834f",
+    "use": "Existing moving-average/native flow/incremental-order reference; no alternate ledger or invented wizard helper"
+   }
+  ],
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "618369e2cd19d94fde50",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 483,
+    "已验证": 11,
+    "待审查": 2,
+    "暂不可复现": 70,
+    "非交易研究脚本": 88,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_history_fundamentals": 18,
+    "get_valuation": 20,
+    "finance.run_query": 87,
+    "macro.run_query": 7,
+    "bond.run_query": 3,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 317,
+    "get_bars": 79,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_current_tick": 9,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "get_all_trade_days": 54,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10,
+    "get_dominant_future": 28,
+    "marginsec_open": 4,
+    "marginsec_close": 4
+   },
+   "reviewed_sources": [
+    "S-bcd947018a9c",
+    "S-25a2ce74300f",
+    "S-bc319409eff5",
+    "S-7fc777423ab1",
+    "S-2986239ac760",
+    "S-a02bd5fb82fa",
+    "S-7dffe8edb923",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-641b9138fa5d",
+    "S-0206000af652",
+    "S-18d2868df809",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-7da7fcfec431",
+    "S-af09cfafe6cf",
+    "S-b0df386a9dcf",
+    "S-95b83db2a7bc",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-886271fb6b84",
+    "S-4630a790c3da",
+    "S-df677a5ebcd4",
+    "S-e2209e269e29",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-f2e9047924e2",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-acbb5f9cf09f",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-68c46bf70920",
+    "S-d1914cbbf6bb",
+    "S-1422d134ff75",
+    "S-db01c1c96ded",
+    "S-063f47ab3d44",
+    "S-4daa86e5158f",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-63c706efe95f",
+    "S-12ba1c0d79f5",
+    "S-9d9f03067815",
+    "S-850132b43dab",
+    "S-147b0cfb49ff",
+    "S-d07877e2c354",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-00007afacbb0",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-57b937da520d",
+    "S-f5b335357daa",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-62e8d5c7a1f4",
+    "S-d4725a5a21fb",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-5831425175ce",
+    "S-630ebb99f658",
+    "S-cafee3ad464a",
+    "S-e66b1ad7d8fc",
+    "S-560abd656ca0",
+    "S-2c9d2319c7d3",
+    "S-84b17f428272",
+    "S-6b0a4a36011b",
+    "S-88c607586b82",
+    "S-f45975e3cd3f",
+    "S-0c2cff0626ee",
+    "S-51a96eadb4d2",
+    "S-954b41e5a396",
+    "S-9112d55dd0cc",
+    "S-9c1a89daf62c",
+    "S-7f7e299f339a",
+    "S-72e5a8798544",
+    "S-a4c77bd8b44e",
+    "S-bbf9fccbd6eb",
+    "S-c6fe57d02852",
+    "S-4b7dbe8af8ac",
+    "S-d0ecd9406080",
+    "S-bee2c8d71c81",
+    "S-13b988210e42",
+    "S-62e7304a4e91",
+    "S-6c7441327c3f",
+    "S-398e16c90dee",
+    "S-68930ba303f5",
+    "S-f81bb8422f94",
+    "S-87966f00e099",
+    "S-848cffb63799",
+    "S-790f0000ed44",
+    "S-38d7f27c1372",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-66d37162df54",
+    "S-bb187e7a4887",
+    "S-faf66e10ba1d",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-5f14afeecf21",
+    "S-979d5187c3ec",
+    "S-dc57f9049b90",
+    "S-daecf5bc2eef",
+    "S-d1d16967e9c8",
+    "S-f39f02e3e03f",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-3f190493784c",
+    "S-078084d1a6cb",
+    "S-e12e4a8dd5e5",
+    "S-05431e7ae641",
+    "S-de485dcbc1fe",
+    "S-c00703810bd3",
+    "S-7e6d5e73b9e8",
+    "S-6320a637da54",
+    "S-03e5e601f4cc",
+    "S-fc701a6d18eb",
+    "S-c5edb3ef544f",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-0dbbecb9eb1d",
+    "S-47d77840ec26",
+    "S-993fc6059661",
+    "S-4cc76c2c420b",
+    "S-2034813a5b91",
+    "S-569f398c08f3",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-84f3f0c3c784",
+    "S-c02ac3bad6ef",
+    "S-69bfefcb4d1d",
+    "S-653ef41eb685",
+    "S-c55ddc35cce6",
+    "S-c2a42783423c",
+    "S-75af9ddf3d76",
+    "S-f23cf187dc47",
+    "S-64a80805fb8a",
+    "S-a37c26ce95d6",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-8294e3469a6d",
+    "S-7ff11583b76b",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-21fdea960e9b",
+    "S-a9596eba9dc5",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-b3cc2dcd8a0d",
+    "S-285c04a4d1ce",
+    "S-bdfd3c6fde91",
+    "S-e0fb958bf2d4",
+    "S-da49d185309b",
+    "S-3626c17cbcae",
+    "S-cc41735b8a2d",
+    "S-53655cbaa9bc",
+    "S-b01f3e94a5b8",
+    "S-c28a0c7f5f80",
+    "S-c98372326f58",
+    "S-665c147b3cf0",
+    "S-c5a0e347acdc",
+    "S-69ef2eedcc68",
+    "S-4766560702c0",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-36ea1540cfac",
+    "S-9e7f49de0893",
+    "S-31ff28a9afb2",
+    "S-d6db552a3293",
+    "S-9539de6881cd",
+    "S-31af0ed2018f",
+    "S-baf44b0f6001",
+    "S-56338f4ceb26",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-19c4382df792",
+    "S-02611c6f5038",
+    "S-976aaefe793c",
+    "S-7f248f5caa7b",
+    "S-84adbe33af88",
+    "S-ee1aa7ba22b3",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-68dd8d2d5eec",
+    "S-926d08fe0ba8",
+    "S-9e752d17571d",
+    "S-624b1cbccd4f",
+    "S-784d8f7e456f",
+    "S-e2462b051f4b",
+    "S-87160c6e564c",
+    "S-5008146cd1d4",
+    "S-e307438a42e6",
+    "S-f9ab6005c30c",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-ec0ab5ffcecf",
+    "S-2d40c2d698f7",
+    "S-6615db0d4e16",
+    "S-1fce2be2b9ec",
+    "S-85aa910ed165",
+    "S-028ef663b462",
+    "S-91dc4ee62715",
+    "S-7f049bb69647",
+    "S-d68e945d07cb",
+    "S-9664bc23b40f",
+    "S-04dba1d0caaf",
+    "S-a40276639484",
+    "S-fb06e8894ab7",
+    "S-7cc61be11aed",
+    "S-ee99921ca98d",
+    "S-4cbc5c72990f",
+    "S-c0fb1e63f51d",
+    "S-1e5fd99659cf",
+    "S-4d86dd0d21e5",
+    "S-2462ad43d90c",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-a78d8acd0042",
+    "S-c1bba20dca69",
+    "S-b785d665cf54",
+    "S-73dd3253aaaa",
+    "S-b318f6effe5e",
+    "S-85df9d32a2d9",
+    "S-81a0307e6b20",
+    "S-dbd26615c5f8",
+    "S-8caa8420540b",
+    "S-fa0c56ab417c",
+    "S-5300a99a1779",
+    "S-b9e2ea87e056",
+    "S-5c175735fe2e",
+    "S-4730e53b92bc",
+    "S-a55f095fba8d"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/618369e2cd19d94fde50"
+  },
+  "previous_catalog_file": "data/catalog/strategies/b478964242229e6aaf23/catalog.json",
+  "previous_catalog_sha256": "28e176adb85d668ba4fec5103e8c978f900864babf72b68977b65eb6c0aeb8a1",
+  "snapshot": "20261006-145049-e06c",
+  "not_a_backtest": true
+ },
+ "checks": {
+  "status": "passed",
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/review_strategy_batch86.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/checks/check-0.log",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "scripts.verify_offline_tests",
+     "-q",
+     "tests/unit/test_batch86_research.py",
+     "tests/unit/test_batch85_research.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_catalog_schedules.py",
+     "tests/unit/test_research_metadata.py",
+     "tests/integration/test_strategy_merge.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/checks/check-1.log",
+    "sha256": "a26f5d266f2b0b042f4454ce1de57d6330fa4479a2a87be08c3fee88539e7c33"
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/checks/check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch24.py": "b16ab9deb7f1b3513bca5b8f4c87e6352df956d141c96d9306d7dc249b0f8875",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch52.py": "4a94ecb24d33002c9927be68bd422395bb69323cf03a77f932a27774ea3a96cd",
+   "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "scripts/review_strategy_batch60.py": "df4bbd25cbe220ef34bee2d9e499099098da96ab273a1efd7c6afa27ffea81d0",
+   "scripts/review_strategy_batch61.py": "a3be16292aa7a62ec0107ade0ce976b7737b5f3b9de8fc0203d89cc4160566be",
+   "scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "scripts/review_strategy_batch79.py": "08b0198d91092d71074f01d11b0a432fff16db9c7b4cd2a8cd1094fc80e5b0ae",
+   "scripts/review_strategy_batch80.py": "752967621f2eea4de0a7ecb36c26022b289a67a6e235e9204871206dbe983661",
+   "scripts/review_strategy_batch81.py": "300c8e1f1bf32862303e332022d63949d90aed361951845da78b1d6fc4d1afb7",
+   "scripts/review_strategy_batch82.py": "635eb84688cf6ed26a80280bb1c0801137059888560f0e9b9bfde0550a2bfde1",
+   "scripts/review_strategy_batch83.py": "17e9c26f32344db0af1a8ad25d5b64c733eece3ca0dc13f21baff448ba07432c",
+   "scripts/review_strategy_batch84.py": "9d7b5ae88ab2833e71fcc70b21a0b024e04463ce008502cb9c8869da07ba3c27",
+   "scripts/review_strategy_batch85.py": "492f68dbb951211b1d82f11ac23d2bedfc2ffbf13df54318e66108d358ba6758",
+   "scripts/review_strategy_batch86.py": "7e1f72c8c36dda24e5d6d7a4ee97957edcfbaf5b6adeff1a5cf63de445a92a3a",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "src/observe/strategy_catalog.py": "91a8a3d768f57f5b66a757e1cada058ed2aa8ed462a6cf5872dc6fb1c9a44fa7",
+   "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "tests/unit/test_batch79_research.py": "59e525fdd9a97814a8a330a5162115be3b55de7af6a848eb3a37110cf93950f6",
+   "tests/unit/test_batch80_research.py": "1141fd0bdbe866baa102039f5d0bf1392f7df24be7f358f853901055c02d3de2",
+   "tests/unit/test_batch81_research.py": "3d72216aa23f8ac9774880f2ddbc822879c480887b22921155d876d75332b642",
+   "tests/unit/test_batch82_research.py": "68cc7d798dba4ce031a26f19618b8915ae904e7c8d4950aa588f0c0e4502b1fe",
+   "tests/unit/test_batch83_research.py": "f9e998220a92e235887725a5fbb14bd6488d1d079d84a2bf8092dd9fc80665ec",
+   "tests/unit/test_batch84_research.py": "8b792f9f7f7108bc1f9c51056dacd6fa7b3ff261776180d09969ec06793c382b",
+   "tests/unit/test_batch85_research.py": "1c066519c90a05cf42075c03c1733e103b6275904e3b194302af2352b0654d49",
+   "tests/unit/test_batch86_research.py": "5e41293dfd1c89bfe4cb6ee81e42e3b14c752d00b0253c1998e987bf5c57c8c0",
+   "tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91"
+  },
+  "evidence_sha256": {
+   "baseline.json": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4",
+   "calendar-input.parquet": "b29ce632824660c74ef93d32701ff010cf2626e2007718e2b921b3464cc767f5",
+   "catalog-before.json": "2ad120bdcab9ef9d90977110f9efb6f49807272e702dc35c75bd1a16c3986872",
+   "component-research.json": "994a30f92aac2c9a1fbda7fa77cc1b0353946f61dff45819a54502a89460f734",
+   "component-values.parquet": "c13b311f4db4cb89aff76de9ec97a3d5ea42120205c2c453d28ca1e0b02d7839",
+   "dependency-inventory-corrected.json": "76703e780bf80d634632e1f47edb3a15ab1b31d6a739e5771677d3f2947d5825",
+   "dependency-inventory.json": "8c2ad40e3f8c207c59cb1933863470c2a022c02273454e297a3abaa42a3db000",
+   "diagnostics.json": "57ad5c55acc6cc1a1e41795866bb372edcf3eecb6bbe0d5e6f0f69878ef36089",
+   "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "input-binding.json": "020c620b83efd75a74c963f4a541c2fc5705eaa79ceab4307a745f09ad960cac",
+   "inventory-row-correction.json": "d3e8417c240c0ed28555c9f03baf8ff78a0e1ba026640b886c94d541ae157eaa",
+   "offline-catalog.json": "92d32991007522ef6709461694707f107c5914b88c75189494da2b44ba281dd0",
+   "offline-verification.json": "63124fd2ec1c3e320c26e24d21bf9bfa7aa2ec90b4734a7d722b37f9098b1371",
+   "price-input.parquet": "3f564aaaebb2ef1a303c3286287965e239a7e2337608b5675418f1df100def5b",
+   "progress-start.json": "bac292eb6fc3067a9fe7f45341a9eef101d57ac9f755784a4090ff6ff469d35e",
+   "sources-frozen.json": "84cbc0086b19530af26f122ad8f5e9a096443f987f8d2cc2c0b746443bb0d93d",
+   "strategy_catalog.before.py": "554d612216b8290c3275275a813969900693d9c1647d72e2eb9d5fc05c06ed85",
+   "supplement-decision.json": "c11a854f30bb47df7fcc74cdf9a1bc3a110637c976b8e136c351ceac2343af9d",
+   "checks/check-0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+   "checks/check-1.log": "a26f5d266f2b0b042f4454ce1de57d6330fa4479a2a87be08c3fee88539e7c33",
+   "checks/check-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "development-failure-bool/failure.json": "86997bf8d9015cd93d6a5370a41a10255b4c4571f347694b234fc566b93e4f45",
+   "development-failure-bool/review_strategy_batch86.py": "5b36002a8d9dd045d1e7c32c7c55b76c7d2897b15506d0f0114cbdfff85b665d",
+   "development-failure-bool/test_batch86_research.py": "c285ea22540063aadb40034857f408cfad8596c713d1c69b3129025582986fb0",
+   "development-failure-initial/failure.json": "ab9c9db3edc7d9dbcb508ca322439844cf58869ffdbf9fff533c8f08fc3122e2",
+   "development-failure-initial/review_strategy_batch86.py": "5b36002a8d9dd045d1e7c32c7c55b76c7d2897b15506d0f0114cbdfff85b665d",
+   "development-failure-initial/test_batch86_research.py": "efdfbdefe9b5d60160ea25c934ee8e7e8fef7a3d90393f033ae35ecaa7e88fbf",
+   "development-failure-row-count/failure.json": "9dbfb60f0addad0e74f6dce95181aebf1fffe71c712f2c4dee753ce0cdefed05",
+   "development-failure-row-count/review_strategy_batch86.py": "6d08480a9d2d9eb3f4b29947b4582f92c4322b4d836824289e29ba4c0d23275e",
+   "development-failure-row-count/test_batch86_research.py": "c8a02331b786adb948f4d34f20dda6f660faaf1a1af9798db9fb911a5a66cec4",
+   "references/api_stock.py": "97ff999448027d28d07e7fde19f9b931abe0c5a1914d5143f6bbacd1968eb249",
+   "references/basicops.py": "ea0ef045ff9c33de2f17094b3be4f52f61700d741f7676cc32b47cdf35360815",
+   "references/stock_fund_em.py": "d97ae32286e8773f406e8767bababe836191de7ac34a1a3686dd33412b1a7c35",
+   "source-reviews/review.json": "e818bf53918d4eecb1effe86dc6ed51a9a34d3092cb453f1f34ffeefb3611b6e",
+   "source-reviews/S-d1914cbbf6bb.adapted.py": "1a9ea9046c6af26316d2e4cbfe8e0072e453ffbf325ab4a2a0bfd2e6c1045f34",
+   "source-reviews/S-d1914cbbf6bb.source": "8c22e7eab356b32b4df1d496cd4bb25430ccd7b355a8f855fd609823a1a58bd0",
+   "source-reviews/S-f5b335357daa.adapted.py": "64815491d511490d841ef4b4a44c308c664463a2ee008f43bd4af607cd1e3fee",
+   "source-reviews/S-f5b335357daa.source": "a6c3dea6c7bd5c302ec2920386e68fc4b84a212c64c98019f540642baf5a8e47",
+   "catalog-offline/catalog/strategies/implementation-evidence.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "catalog-offline/catalog/strategies/latest.json": "6ec2e7b7590f0c7d2145a38e47b86dd2bbb5a92c62ca9d8dd8993e1befb1f291",
+   "catalog-offline/catalog/strategies/618369e2cd19d94fde50/catalog.json": "dd7aeaa7c72a1303098fe4703c0cd71a61337a81fd2e92bcf7a1fbd5595c55d0",
+   "catalog-offline/catalog/strategies/618369e2cd19d94fde50/catalog.parquet": "f8b76c420da13709c6a437bbfa8f7198a1b9a966570ec1ee09811a99f3a6affe",
+   "catalog-offline/catalog/strategies/618369e2cd19d94fde50/summary.json": "87085baec1384d5d975878c9061de544af66e7bfe077b4c3c265418621700910",
+   "implementation-checked/scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "implementation-checked/scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "implementation-checked/scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "implementation-checked/scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "implementation-checked/scripts/review_strategy_batch24.py": "b16ab9deb7f1b3513bca5b8f4c87e6352df956d141c96d9306d7dc249b0f8875",
+   "implementation-checked/scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "implementation-checked/scripts/review_strategy_batch52.py": "4a94ecb24d33002c9927be68bd422395bb69323cf03a77f932a27774ea3a96cd",
+   "implementation-checked/scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "implementation-checked/scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "implementation-checked/scripts/review_strategy_batch60.py": "df4bbd25cbe220ef34bee2d9e499099098da96ab273a1efd7c6afa27ffea81d0",
+   "implementation-checked/scripts/review_strategy_batch61.py": "a3be16292aa7a62ec0107ade0ce976b7737b5f3b9de8fc0203d89cc4160566be",
+   "implementation-checked/scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "implementation-checked/scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "implementation-checked/scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "implementation-checked/scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "implementation-checked/scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "implementation-checked/scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "implementation-checked/scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "implementation-checked/scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "implementation-checked/scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "implementation-checked/scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "implementation-checked/scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "implementation-checked/scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "implementation-checked/scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "implementation-checked/scripts/review_strategy_batch79.py": "08b0198d91092d71074f01d11b0a432fff16db9c7b4cd2a8cd1094fc80e5b0ae",
+   "implementation-checked/scripts/review_strategy_batch80.py": "752967621f2eea4de0a7ecb36c26022b289a67a6e235e9204871206dbe983661",
+   "implementation-checked/scripts/review_strategy_batch81.py": "300c8e1f1bf32862303e332022d63949d90aed361951845da78b1d6fc4d1afb7",
+   "implementation-checked/scripts/review_strategy_batch82.py": "635eb84688cf6ed26a80280bb1c0801137059888560f0e9b9bfde0550a2bfde1",
+   "implementation-checked/scripts/review_strategy_batch83.py": "17e9c26f32344db0af1a8ad25d5b64c733eece3ca0dc13f21baff448ba07432c",
+   "implementation-checked/scripts/review_strategy_batch84.py": "9d7b5ae88ab2833e71fcc70b21a0b024e04463ce008502cb9c8869da07ba3c27",
+   "implementation-checked/scripts/review_strategy_batch85.py": "492f68dbb951211b1d82f11ac23d2bedfc2ffbf13df54318e66108d358ba6758",
+   "implementation-checked/scripts/review_strategy_batch86.py": "7e1f72c8c36dda24e5d6d7a4ee97957edcfbaf5b6adeff1a5cf63de445a92a3a",
+   "implementation-checked/scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "implementation-checked/scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "implementation-checked/scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "implementation-checked/src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "implementation-checked/src/observe/strategy_catalog.py": "91a8a3d768f57f5b66a757e1cada058ed2aa8ed462a6cf5872dc6fb1c9a44fa7",
+   "implementation-checked/src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "implementation-checked/src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "implementation-checked/src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "implementation-checked/src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "implementation-checked/tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "implementation-checked/tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "implementation-checked/tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "implementation-checked/tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "implementation-checked/tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "implementation-checked/tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "implementation-checked/tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "implementation-checked/tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "implementation-checked/tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "implementation-checked/tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "implementation-checked/tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "implementation-checked/tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "implementation-checked/tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "implementation-checked/tests/unit/test_batch79_research.py": "59e525fdd9a97814a8a330a5162115be3b55de7af6a848eb3a37110cf93950f6",
+   "implementation-checked/tests/unit/test_batch80_research.py": "1141fd0bdbe866baa102039f5d0bf1392f7df24be7f358f853901055c02d3de2",
+   "implementation-checked/tests/unit/test_batch81_research.py": "3d72216aa23f8ac9774880f2ddbc822879c480887b22921155d876d75332b642",
+   "implementation-checked/tests/unit/test_batch82_research.py": "68cc7d798dba4ce031a26f19618b8915ae904e7c8d4950aa588f0c0e4502b1fe",
+   "implementation-checked/tests/unit/test_batch83_research.py": "f9e998220a92e235887725a5fbb14bd6488d1d079d84a2bf8092dd9fc80665ec",
+   "implementation-checked/tests/unit/test_batch84_research.py": "8b792f9f7f7108bc1f9c51056dacd6fa7b3ff261776180d09969ec06793c382b",
+   "implementation-checked/tests/unit/test_batch85_research.py": "1c066519c90a05cf42075c03c1733e103b6275904e3b194302af2352b0654d49",
+   "implementation-checked/tests/unit/test_batch86_research.py": "5e41293dfd1c89bfe4cb6ee81e42e3b14c752d00b0253c1998e987bf5c57c8c0",
+   "implementation-checked/tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91"
+  }
+ },
+ "offline": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch24.py": "b16ab9deb7f1b3513bca5b8f4c87e6352df956d141c96d9306d7dc249b0f8875",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch52.py": "4a94ecb24d33002c9927be68bd422395bb69323cf03a77f932a27774ea3a96cd",
+   "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "scripts/review_strategy_batch60.py": "df4bbd25cbe220ef34bee2d9e499099098da96ab273a1efd7c6afa27ffea81d0",
+   "scripts/review_strategy_batch61.py": "a3be16292aa7a62ec0107ade0ce976b7737b5f3b9de8fc0203d89cc4160566be",
+   "scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "scripts/review_strategy_batch79.py": "08b0198d91092d71074f01d11b0a432fff16db9c7b4cd2a8cd1094fc80e5b0ae",
+   "scripts/review_strategy_batch80.py": "752967621f2eea4de0a7ecb36c26022b289a67a6e235e9204871206dbe983661",
+   "scripts/review_strategy_batch81.py": "300c8e1f1bf32862303e332022d63949d90aed361951845da78b1d6fc4d1afb7",
+   "scripts/review_strategy_batch82.py": "635eb84688cf6ed26a80280bb1c0801137059888560f0e9b9bfde0550a2bfde1",
+   "scripts/review_strategy_batch83.py": "17e9c26f32344db0af1a8ad25d5b64c733eece3ca0dc13f21baff448ba07432c",
+   "scripts/review_strategy_batch84.py": "9d7b5ae88ab2833e71fcc70b21a0b024e04463ce008502cb9c8869da07ba3c27",
+   "scripts/review_strategy_batch85.py": "492f68dbb951211b1d82f11ac23d2bedfc2ffbf13df54318e66108d358ba6758",
+   "scripts/review_strategy_batch86.py": "7e1f72c8c36dda24e5d6d7a4ee97957edcfbaf5b6adeff1a5cf63de445a92a3a",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "src/observe/strategy_catalog.py": "91a8a3d768f57f5b66a757e1cada058ed2aa8ed462a6cf5872dc6fb1c9a44fa7",
+   "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "tests/unit/test_batch79_research.py": "59e525fdd9a97814a8a330a5162115be3b55de7af6a848eb3a37110cf93950f6",
+   "tests/unit/test_batch80_research.py": "1141fd0bdbe866baa102039f5d0bf1392f7df24be7f358f853901055c02d3de2",
+   "tests/unit/test_batch81_research.py": "3d72216aa23f8ac9774880f2ddbc822879c480887b22921155d876d75332b642",
+   "tests/unit/test_batch82_research.py": "68cc7d798dba4ce031a26f19618b8915ae904e7c8d4950aa588f0c0e4502b1fe",
+   "tests/unit/test_batch83_research.py": "f9e998220a92e235887725a5fbb14bd6488d1d079d84a2bf8092dd9fc80665ec",
+   "tests/unit/test_batch84_research.py": "8b792f9f7f7108bc1f9c51056dacd6fa7b3ff261776180d09969ec06793c382b",
+   "tests/unit/test_batch85_research.py": "1c066519c90a05cf42075c03c1733e103b6275904e3b194302af2352b0654d49",
+   "tests/unit/test_batch86_research.py": "5e41293dfd1c89bfe4cb6ee81e42e3b14c752d00b0253c1998e987bf5c57c8c0",
+   "tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91"
+  },
+  "catalog": {
+   "result": "match",
+   "differences": 0,
+   "socket_network_disabled": true,
+   "catalog_id": "618369e2cd19d94fde50",
+   "files": [
+    {
+     "name": "catalog.json",
+     "original_file": "data/catalog/strategies/618369e2cd19d94fde50/catalog.json",
+     "repeated_file": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/catalog-offline/catalog/strategies/618369e2cd19d94fde50/catalog.json",
+     "sha256": "dd7aeaa7c72a1303098fe4703c0cd71a61337a81fd2e92bcf7a1fbd5595c55d0"
+    },
+    {
+     "name": "summary.json",
+     "original_file": "data/catalog/strategies/618369e2cd19d94fde50/summary.json",
+     "repeated_file": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/catalog-offline/catalog/strategies/618369e2cd19d94fde50/summary.json",
+     "sha256": "87085baec1384d5d975878c9061de544af66e7bfe077b4c3c265418621700910"
+    },
+    {
+     "name": "catalog.parquet",
+     "original_file": "data/catalog/strategies/618369e2cd19d94fde50/catalog.parquet",
+     "repeated_file": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/catalog-offline/catalog/strategies/618369e2cd19d94fde50/catalog.parquet",
+     "sha256": "f8b76c420da13709c6a437bbfa8f7198a1b9a966570ec1ee09811a99f3a6affe"
+    }
+   ],
+   "implementation_evidence_sha256": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6"
+  },
+  "component_rows": 46053,
+  "new_trading_backtests": 0,
+  "not_a_backtest": true
+ },
+ "diagnostics": {
+  "cases": [
+   {
+    "case": "54_defaults",
+    "state": {
+     "stock_num": 10,
+     "stock_value_ratio": 0.33,
+     "days_history": 60,
+     "days_money_flow": 5,
+     "days_money_flow_threshold": 4,
+     "days_money_flow_2": 60,
+     "price_amplitude": 0.1,
+     "mean_diff_5_30_threshold": 0.1,
+     "mean_diff_30_60_threshold": 0.05,
+     "price_increase_threshold": 0.2
+    },
+    "events": [
+     [
+      "benchmark",
+      "000300.XSHG"
+     ],
+     [
+      "option",
+      "use_real_price",
+      true
+     ],
+     [
+      "cost",
+      {
+       "close_tax": 0.001,
+       "open_commission": 0.0003,
+       "close_commission": 0.0003,
+       "min_commission": 5
+      },
+      {
+       "type": "stock"
+      }
+     ],
+     [
+      "schedule",
+      "before_market_open",
+      {
+       "time": "before_open",
+       "reference_security": "000300.XSHG"
+      }
+     ],
+     [
+      "schedule",
+      "market_open",
+      {
+       "time": "open",
+       "reference_security": "000300.XSHG"
+      }
+     ],
+     [
+      "schedule",
+      "after_market_close",
+      {
+       "time": "after_close",
+       "reference_security": "000300.XSHG"
+      }
+     ]
+    ]
+   },
+   {
+    "case": "54_buy_exact30",
+    "original": true,
+    "independent": true,
+    "history_rows": 32,
+    "fixture_only": true
+   },
+   {
+    "case": "54_buy_only29",
+    "original": false,
+    "independent": false,
+    "history_rows": 31,
+    "fixture_only": true
+   },
+   {
+    "case": "54_buy_missing_anchor",
+    "original": false,
+    "independent": false,
+    "history_rows": 32,
+    "fixture_only": true
+   },
+   {
+    "case": "54_buy_red_close",
+    "original": false,
+    "independent": false,
+    "history_rows": 32,
+    "fixture_only": true
+   },
+   {
+    "case": "54_buy_doji",
+    "original": true,
+    "independent": true,
+    "history_rows": 32,
+    "fixture_only": true
+   },
+   {
+    "case": "54_buy_volume_below",
+    "original": false,
+    "independent": false,
+    "history_rows": 32,
+    "fixture_only": true
+   },
+   {
+    "case": "54_buy_volume_above",
+    "original": true,
+    "independent": true,
+    "history_rows": 32,
+    "fixture_only": true
+   },
+   {
+    "case": "54_buy_amplitude_equal",
+    "original": true,
+    "independent": true,
+    "history_rows": 32,
+    "fixture_only": true
+   },
+   {
+    "case": "54_buy_amplitude_above",
+    "original": false,
+    "independent": false,
+    "history_rows": 32,
+    "fixture_only": true
+   },
+   {
+    "case": "54_buy_strict_anchor_equal",
+    "original": false,
+    "independent": false,
+    "history_rows": 32,
+    "fixture_only": true
+   },
+   {
+    "case": "54_buy_strict_anchor_above",
+    "original": true,
+    "independent": true,
+    "history_rows": 32,
+    "fixture_only": true
+   },
+   {
+    "case": "54_missing_mean",
+    "error": "NameError"
+   },
+   {
+    "case": "54_empty_history",
+    "error": "IndexError"
+   },
+   {
+    "case": "54_missing_timedelta",
+    "error": "name 'timedelta' is not defined"
+   },
+   {
+    "case": "54_sell_branch_0.1",
+    "result": false,
+    "trace": [
+     0.1,
+     "turnover",
+     0.2
+    ],
+    "fixture_only": true
+   },
+   {
+    "case": "54_sell_branch_0.2",
+    "result": true,
+    "trace": [
+     0.1,
+     0.2
+    ],
+    "fixture_only": true
+   },
+   {
+    "case": "54_cash_4999.0_positions_0",
+    "orders": [],
+    "fixture_only": true
+   },
+   {
+    "case": "54_cash_5000.0_positions_0",
+    "orders": [
+     [
+      "s",
+      0
+     ]
+    ],
+    "fixture_only": true
+   },
+   {
+    "case": "54_cash_10000.0_positions_10",
+    "orders": [],
+    "fixture_only": true
+   },
+   {
+    "case": "54_cash_10000.0_positions_11",
+    "orders": [
+     [
+      "s",
+      -1000
+     ]
+    ],
+    "fixture_only": true
+   },
+   {
+    "case": "54_add_comment_targets_lower_quantity",
+    "orders": [
+     [
+      "s",
+      100
+     ]
+    ],
+    "held_quantity": 2000
+   },
+   {
+    "case": "54_message_bytes_type",
+    "error": "TypeError",
+    "messages_sent": 0
+   },
+   {
+    "case": "54_turnover_previous_sunday",
+    "trace": [
+     [
+      [
+       [
+        "code",
+        "s"
+       ],
+       [
+        "gt",
+        15
+       ]
+      ],
+      "2020-01-05"
+     ]
+    ],
+    "fixture_only": true
+   },
+   {
+    "case": "95_defaults",
+    "state": {
+     "security_max_proportion": 1,
+     "check_stocks_refresh_rate": 1,
+     "buy_refresh_rate": 1,
+     "sell_refresh_rate": 1,
+     "max_hold_stocknum": 5,
+     "check_stocks_days": 0,
+     "buy_trade_days": 0,
+     "sell_trade_days": 0,
+     "open_sell_securities": [],
+     "selled_security_list": {},
+     "filter_paused": true,
+     "filter_delisted": true,
+     "only_st": false,
+     "filter_st": true,
+     "security_universe_index": [
+      "000300.XSHG"
+     ],
+     "security_universe_user_securities": [],
+     "industry_list": [],
+     "concept_list": [],
+     "check_out_lists_ascending": "desc",
+     "sell_will_buy": true,
+     "sell_by_amount": null,
+     "sell_by_percent": null,
+     "filter_holded": false,
+     "order_style_str": "by_cap_mean",
+     "order_style_value": 100,
+     "risk_management_signal": true,
+     "daily_risk_management": true,
+     "max_buy_value": null,
+     "max_buy_amount": null
+    },
+    "events": [
+     [
+      "benchmark",
+      "000300.XSHG"
+     ],
+     [
+      "slippage",
+      0.02
+     ],
+     [
+      "option",
+      "use_real_price",
+      true
+     ],
+     [
+      "option",
+      "order_volume_ratio",
+      1
+     ],
+     [
+      "cost",
+      {
+       "open_tax": 0,
+       "close_tax": 0.001,
+       "open_commission": 0.0003,
+       "close_commission": 0.0003,
+       "min_commission": 5
+      },
+      {
+       "type": "stock"
+      }
+     ],
+     [
+      "schedule",
+      "sell_every_day",
+      "open"
+     ],
+     [
+      "schedule",
+      "risk_management",
+      "every_bar"
+     ],
+     [
+      "schedule",
+      "check_stocks",
+      "open"
+     ],
+     [
+      "schedule",
+      "trade",
+      "open"
+     ],
+     [
+      "schedule",
+      "selled_security_list_count",
+      "after_close"
+     ]
+    ]
+   },
+   {
+    "case": "95_technical_arguments",
+    "trace": [
+     [
+      "MACD_judge_jincha",
+      "a",
+      12,
+      26,
+      26
+     ],
+     [
+      "BBands_lowerband_judge_dayu",
+      "a",
+      6,
+      5,
+      2,
+      2
+     ],
+     [
+      "MA_judge_duotou",
+      "a",
+      5,
+      10
+     ]
+    ],
+    "fixture_only": true
+   },
+   {
+    "case": "95_flow_arguments_and_order",
+    "trace": [
+     [
+      [
+       "a",
+       "net_pct_main",
+       15
+      ],
+      {
+       "which_day": "previous"
+      }
+     ],
+     [
+      [
+       "a",
+       "net_pct_main",
+       10
+      ],
+      {
+       "which_day": "previous"
+      }
+     ],
+     [
+      "sell",
+      [
+       "a"
+      ]
+     ],
+     [
+      "buy",
+      [
+       "a"
+      ]
+     ]
+    ],
+    "fixture_only": true
+   },
+   {
+    "case": "95_nonempty_zero_weight_sort",
+    "weights": {
+     "cap": [
+      "asc",
+      0
+     ],
+     "pe": [
+      "asc",
+      0
+     ],
+     "roe": [
+      "desc",
+      0
+     ]
+    },
+    "calls": [
+     [
+      "cap",
+      [
+       "asc",
+       0
+      ]
+     ],
+     [
+      "pe",
+      [
+       "asc",
+       0
+      ]
+     ],
+     [
+      "roe",
+      [
+       "desc",
+       0
+      ]
+     ]
+    ],
+    "error": "'DataFrame' object has no attribute 'sort'",
+    "fixture_only": true
+   },
+   {
+    "case": "95_retry_no_cleanup",
+    "orders": [
+     [
+      "held",
+      0
+     ]
+    ],
+    "retry": [
+     "held",
+     "held",
+     "absent"
+    ]
+   },
+   {
+    "case": "95_holded_false",
+    "result": [
+     "new",
+     "new"
+    ]
+   }
+  ],
+  "case_count": 30,
+  "not_a_backtest": true,
+  "limits": [
+   "np.mean is a declared arithmetic reference injection, not proof of original platform mean",
+   "Synthetic state/history/helper returns do not admit original historical pool, signals, fills or messaging"
+  ]
+ },
+ "research": {
+  "input_rows": 46781,
+  "input_sha256": "3f564aaaebb2ef1a303c3286287965e239a7e2337608b5675418f1df100def5b",
+  "calendar_sha256": "b29ce632824660c74ef93d32701ff010cf2626e2007718e2b921b3464cc767f5",
+  "first_decision": "2005-01-06",
+  "last_decision": "2026-09-29",
+  "profiles": [
+   {
+    "instrument": "000333.SZ",
+    "first": "2013-09-18",
+    "last": "2026-09-29",
+    "buy_true": 1,
+    "ma10_true": 95,
+    "ma20_true": 0,
+    "buy_windows": 3104,
+    "ma_windows": 3074,
+    "partial_buy_windows": 269
+   },
+   {
+    "instrument": "000651.SZ",
+    "first": "2005-01-05",
+    "last": "2026-09-29",
+    "buy_true": 5,
+    "ma10_true": 393,
+    "ma20_true": 40,
+    "buy_windows": 5076,
+    "ma_windows": 5046,
+    "partial_buy_windows": 269
+   },
+   {
+    "instrument": "002415.SZ",
+    "first": "2010-05-28",
+    "last": "2026-09-29",
+    "buy_true": 0,
+    "ma10_true": 215,
+    "ma20_true": 13,
+    "buy_windows": 3914,
+    "ma_windows": 3884,
+    "partial_buy_windows": 269
+   },
+   {
+    "instrument": "600036.SH",
+    "first": "2005-01-05",
+    "last": "2026-09-29",
+    "buy_true": 5,
+    "ma10_true": 270,
+    "ma20_true": 4,
+    "buy_windows": 5210,
+    "ma_windows": 5180,
+    "partial_buy_windows": 269
+   },
+   {
+    "instrument": "600085.SH",
+    "first": "2005-01-05",
+    "last": "2026-09-29",
+    "buy_true": 5,
+    "ma10_true": 337,
+    "ma20_true": 53,
+    "buy_windows": 5249,
+    "ma_windows": 5219,
+    "partial_buy_windows": 269
+   },
+   {
+    "instrument": "600196.SH",
+    "first": "2005-01-05",
+    "last": "2026-09-29",
+    "buy_true": 1,
+    "ma10_true": 396,
+    "ma20_true": 68,
+    "buy_windows": 5209,
+    "ma_windows": 5179,
+    "partial_buy_windows": 269
+   },
+   {
+    "instrument": "600519.SH",
+    "first": "2005-01-05",
+    "last": "2026-09-29",
+    "buy_true": 0,
+    "ma10_true": 330,
+    "ma20_true": 29,
+    "buy_windows": 5211,
+    "ma_windows": 5181,
+    "partial_buy_windows": 269
+   },
+   {
+    "instrument": "600887.SH",
+    "first": "2005-01-05",
+    "last": "2026-09-29",
+    "buy_true": 1,
+    "ma10_true": 364,
+    "ma20_true": 19,
+    "buy_windows": 5186,
+    "ma_windows": 5156,
+    "partial_buy_windows": 269
+   },
+   {
+    "instrument": "601111.SH",
+    "first": "2006-08-18",
+    "last": "2026-09-29",
+    "buy_true": 1,
+    "ma10_true": 398,
+    "ma20_true": 89,
+    "buy_windows": 4819,
+    "ma_windows": 4789,
+    "partial_buy_windows": 269
+   },
+   {
+    "instrument": "603288.SH",
+    "first": "2014-02-11",
+    "last": "2026-09-29",
+    "buy_true": 1,
+    "ma10_true": 117,
+    "ma20_true": 10,
+    "buy_windows": 3075,
+    "ma_windows": 3045,
+    "partial_buy_windows": 269
+   }
+  ],
+  "buy_reference_windows": 46053,
+  "ma_reference_windows": 45753,
+  "buy_reference_true": 20,
+  "partial_buy_windows": 2690,
+  "excluded": [
+   {
+    "instrument": "000333.SZ",
+    "date": "2013-09-18",
+    "reason": "missing_history"
+   },
+   {
+    "instrument": "000651.SZ",
+    "date": "2005-01-05",
+    "reason": "missing_history"
+   },
+   {
+    "instrument": "002415.SZ",
+    "date": "2010-05-28",
+    "reason": "missing_history"
+   },
+   {
+    "instrument": "600036.SH",
+    "date": "2005-01-05",
+    "reason": "missing_history"
+   },
+   {
+    "instrument": "600085.SH",
+    "date": "2005-01-05",
+    "reason": "missing_history"
+   },
+   {
+    "instrument": "600196.SH",
+    "date": "2005-01-05",
+    "reason": "missing_history"
+   },
+   {
+    "instrument": "600519.SH",
+    "date": "2005-01-05",
+    "reason": "missing_history"
+   },
+   {
+    "instrument": "600887.SH",
+    "date": "2005-01-05",
+    "reason": "missing_history"
+   },
+   {
+    "instrument": "601111.SH",
+    "date": "2006-08-18",
+    "reason": "missing_history"
+   },
+   {
+    "instrument": "603288.SH",
+    "date": "2014-02-11",
+    "reason": "missing_history"
+   }
+  ],
+  "independent_boolean_differences": 0,
+  "max_MA_difference_absolute_error": 7.632783294297951e-16,
+  "original_complete_pool_signal_days": 0,
+  "original95_technical_signal_windows": 0,
+  "original95_flow_windows": 0,
+  "new_trading_backtests": 0,
+  "cost_backtests": [],
+  "not_a_backtest": true,
+  "numpy": "2.5.3",
+  "pandas": "3.0.6",
+  "reference_policy": "Previous observed trading rows only; explicitly paused rows skipped, missing sessions blocked, max270 including partial original history; price anchored by decision-day factor; volume unchanged. MA reference requires31 prior rows.",
+  "limits": [
+   "Arithmetic uses explicit numpy.mean injection and independently math.fsum; platform mean/volume/real-price equivalence unproved",
+   "Reference decision-day factor basis may differ from platform history; no complete historical universe or turnover admission",
+   "Original money field requested but unread by the selected kernels; no fabricated money provided",
+   "Full95 technical helpers and main-flow history unavailable; no default TA-Lib substitution or invented rank/fills/returns"
+  ]
+ },
+ "supplement": {
+  "file": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/probe-results.json",
+  "sha256": "8c804184102c1ae1211e09119b95c12d8c37a6f62293885abdcfce6f7cc40f25",
+  "results": [
+   {
+    "case": "industry-history",
+    "query": {
+     "function": "stock_industry_clf_hist_sw",
+     "parameters": {}
+    },
+    "status": "failed",
+    "attempts": [
+     {
+      "method": "GET",
+      "url": "https://www.swsresearch.com/swindex/pdf/SwClass2021/StockClassifyUse_stock.xls",
+      "params": null
+     }
+    ],
+    "wire_responses": [],
+    "api_sha256": "17fbde9c97c21156729e5d4c192f4e8d8244b07f5ab3dc678983b20c361a6611",
+    "strict_usable": false,
+    "published": false,
+    "error": "ConnectionError: HTTPSConnectionPool(host='www.swsresearch.com', port=443): Max retries exceeded with url: /swindex/pdf/SwClass2021/StockClassifyUse_stock.xls (Caused by NameResolutionError(\"HTTPSConnection(host='www.swsresearch.com', port=443): Failed to resolve 'www.swsresearch.com' ([Errno -2] Name or service not known)\"))"
+   },
+   {
+    "case": "money-flow-600519",
+    "query": {
+     "function": "stock_individual_fund_flow",
+     "parameters": {
+      "stock": "600519",
+      "market": "sh"
+     }
+    },
+    "status": "failed",
+    "attempts": [
+     {
+      "method": "GET",
+      "url": "https://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get",
+      "params": {
+       "lmt": "0",
+       "klt": "101",
+       "secid": "1.600519",
+       "fields1": "f1,f2,f3,f7",
+       "fields2": "f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61,f62,f63,f64,f65",
+       "ut": "b2884a393a59ad64002292a3e90d46a5",
+       "_": 1791491252451
+      }
+     }
+    ],
+    "wire_responses": [],
+    "api_sha256": "17fbde9c97c21156729e5d4c192f4e8d8244b07f5ab3dc678983b20c361a6611",
+    "strict_usable": false,
+    "published": false,
+    "error": "ConnectionError: HTTPSConnectionPool(host='push2his.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/stock/fflow/daykline/get?lmt=0&klt=101&secid=1.600519&fields1=f1%2Cf2%2Cf3%2Cf7&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61%2Cf62%2Cf63%2Cf64%2Cf65&ut=b2884a393a59ad64002292a3e90d46a5&_=1791491252451 (Caused by NameResolutionError(\"HTTPSConnection(host='push2his.eastmoney.com', port=443): Failed to resolve 'push2his.eastmoney.com' ([Errno -2] Name or service not known)\"))"
+   }
+  ],
+  "api_evidence_file": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/existing-apis.json",
+  "api_evidence_sha256": "17fbde9c97c21156729e5d4c192f4e8d8244b07f5ab3dc678983b20c361a6611",
+  "new_requests": 0,
+  "new_rows": 0,
+  "published": false,
+  "decision": "Reuse verified same-host DNS failures and recent-only flow API limitation; changing symbol cannot recover original long history. No blind retries.",
+  "missing": [
+   "Original daily CSI300/bank399951 members and history of names/ST/limits",
+   "Original previous-natural-day turnover_ratio query and available denominator/vintage",
+   "Exact wizard technical/flow/ranking/allocation helper version and long previous-day net_pct_main"
+  ],
+  "not_a_backtest": true
+ },
+ "inventory": {
+  "snapshot": "20261006-145049-e06c",
+  "registered_tables": [
+   "adj_coverage",
+   "adj_factors",
+   "bars_1d",
+   "bars_5m",
+   "calendar",
+   "company_controls_annual",
+   "corp_actions",
+   "financial_annual",
+   "financial_availability",
+   "financial_fields",
+   "financial_quarterly",
+   "index_1d",
+   "instruments",
+   "minute_universe",
+   "valuation_coverage",
+   "valuations_1d"
+  ],
+  "table_rows": {
+   "calendar": 7938,
+   "instruments": 6156,
+   "bars_1d": 6919789,
+   "adj_factors": 64980,
+   "corp_actions": 59065,
+   "adj_coverage": 5560,
+   "bars_5m": 44571408,
+   "minute_universe": 4000,
+   "financial_availability": 1460899,
+   "financial_annual": 95486,
+   "financial_quarterly": 405867,
+   "company_controls_annual": 73738,
+   "financial_fields": 1911,
+   "index_1d": 5280,
+   "valuations_1d": 6848484,
+   "valuation_coverage": 1392
+  },
+  "helper_search": {
+   "command": [
+    "rg",
+    "-n",
+    "--hidden",
+    "--no-ignore",
+    "^def (MACD_judge_jincha|BBands_lowerband_judge_dayu|MA_judge_duotou|money_flow_dayu|n_day_chg_dayu|MACD_judge_sicha|get_sort_dataframe|sell_by_amount_or_percent_or_none|order_style|judge_security_max_proportion|max_buy_value_or_amount)\\(",
+    "repo",
+    "-g",
+    "*.py",
+    "-g",
+    "*.txt",
+    "-g",
+    "!**/.git/**"
+   ],
+   "returncode": 1,
+   "matches": [],
+   "matched_file_sha256": {}
+  },
+  "required_helpers95": [
+   "MACD_judge_jincha",
+   "BBands_lowerband_judge_dayu",
+   "MA_judge_duotou",
+   "money_flow_dayu",
+   "n_day_chg_dayu",
+   "MACD_judge_sicha",
+   "get_sort_dataframe",
+   "sell_by_amount_or_percent_or_none",
+   "order_style",
+   "judge_security_max_proportion",
+   "max_buy_value_or_amount"
+  ],
+  "reference_rows": 46781,
+  "54_active_money_flow_calls": 0,
+  "strict_financial_usable_rows": 0,
+  "limits": [
+   "Ten frozen reference stocks are not historical CSI300 or bank399951 members",
+   "Historical ST/names/limits, full universe price-volume and platform skip-paused/adjustment-volume rules not proved",
+   "Source54 lacks mean/timedelta and imports removed pandas.stats.api.ols; platform injections unknown",
+   "Source54 requests money but active volume/MA kernels do not read it; do not synthesize missing money",
+   "Supplier turnover decimal exists in bars_1d; its floating-share denominator/version is not proved original valuation.turnover_ratio",
+   "95 helper seeds/current-bar/threshold/flow vintage and nonempty zero-weight sorting output remain unknown",
+   "Original order_target quantities and incremental wizard orders/fills require unique Book and explicit compatibility review"
+  ]
+ },
+ "inventory_correction": {
+  "original_file": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/dependency-inventory.json",
+  "original_sha256": "8c2ad40e3f8c207c59cb1933863470c2a022c02273454e297a3abaa42a3db000",
+  "corrected_file": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/dependency-inventory-corrected.json",
+  "corrected_sha256": "76703e780bf80d634632e1f47edb3a15ab1b31d6a739e5771677d3f2947d5825",
+  "price_sha256": "3f564aaaebb2ef1a303c3286287965e239a7e2337608b5675418f1df100def5b",
+  "old_count": 47781,
+  "actual_count": 46781,
+  "explanation": "Initial handoff prose count was incorrect; pinned accepted payload did not change",
+  "not_a_backtest": true
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5363,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4"
+ },
+ "progress": {
+  "checkpoint": "20261009-050433-fac7",
+  "note": "Batch86 literal volume/MA and wizard-flow source research accepted; trades blocked",
+  "catalog_id": "618369e2cd19d94fde50",
+  "catalog_sha256": "dd7aeaa7c72a1303098fe4703c0cd71a61337a81fd2e92bcf7a1fbd5595c55d0",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 254,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 69,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261009-050433-fac7"
+ },
+ "newly_reviewed": 2,
+ "not_a_backtest": true,
+ "new_trading_backtests": 0,
+ "original_strategy_complete": false
+}

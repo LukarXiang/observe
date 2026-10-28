@@ -1,0 +1,543 @@
+{
+ "status": "ok_stage_only",
+ "formal_source_research_acceptance": false,
+ "formal_trading_acceptance": false,
+ "library_goal_complete": false,
+ "original_strategy_complete": false,
+ "progress": {
+  "checkpoint": "20261011-054153-6bd0",
+  "note": "Batch103 price/reference stage:45 original diagnostics;28078/17157 native price windows,two offline byte matches,26 local/26 copied;formal290/trading12/parents87 unchanged;2 numeric boundaries and set variability retained",
+  "catalog_id": "953691c92bdb8b85b1d4",
+  "catalog_sha256": "891f9f3959cd8512429c92a00deb65233240342a207ede6c6de3c3f7beec33f7",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 290,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-054153-6bd0"
+ },
+ "accepted_checkpoint": "20261011-052433-1f7b",
+ "source_sha256": [
+  "b4ffbfb4d757aaa417406591e7d3f1481aee32ef37e0e2f94fd82abb99defeb5",
+  "8d1a703edbb5c173d3f6136da01556d2295d19a8800d5a393927bf1982277210"
+ ],
+ "price_reference_summary": {
+  "diagnostics": 45,
+  "real14_row_price_windows": 28078,
+  "momentum31_row_price_windows": 17157,
+  "candidate_profiles": {
+   "159905.XSHE": {
+    "rows": 3818,
+    "first": "2011-01-11",
+    "last": "2026-09-29",
+    "missing_open_dates": [
+     "2013-12-31"
+    ],
+    "calendar_extra": [],
+    "year_windows": {
+     "real": {
+      "2011": 226,
+      "2012": 243,
+      "2013": 237,
+      "2014": 245,
+      "2015": 244,
+      "2016": 244,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     }
+    }
+   },
+   "159915.XSHE": {
+    "rows": 3595,
+    "first": "2011-12-09",
+    "last": "2026-09-29",
+    "missing_open_dates": [
+     "2021-02-08"
+    ],
+    "calendar_extra": [],
+    "year_windows": {
+     "real": {
+      "2011": 3,
+      "2012": 243,
+      "2013": 238,
+      "2014": 245,
+      "2015": 244,
+      "2016": 244,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 242,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     }
+    }
+   },
+   "159949.XSHE": {
+    "rows": 2475,
+    "first": "2016-07-22",
+    "last": "2026-09-29",
+    "missing_open_dates": [],
+    "calendar_extra": [],
+    "year_windows": {
+     "real": {
+      "2016": 96,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     },
+     "momentum": {
+      "2016": 79,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     }
+    }
+   },
+   "510050.XSHG": {
+    "rows": 5252,
+    "first": "2005-02-23",
+    "last": "2026-09-29",
+    "missing_open_dates": [],
+    "calendar_extra": [],
+    "year_windows": {
+     "real": {
+      "2005": 200,
+      "2006": 241,
+      "2007": 242,
+      "2008": 246,
+      "2009": 244,
+      "2010": 242,
+      "2011": 244,
+      "2012": 243,
+      "2013": 238,
+      "2014": 245,
+      "2015": 244,
+      "2016": 244,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     },
+     "momentum": {
+      "2005": 183,
+      "2006": 241,
+      "2007": 242,
+      "2008": 246,
+      "2009": 244,
+      "2010": 242,
+      "2011": 244,
+      "2012": 243,
+      "2013": 238,
+      "2014": 245,
+      "2015": 244,
+      "2016": 244,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     }
+    }
+   },
+   "510180.XSHG": {
+    "rows": 4951,
+    "first": "2006-05-18",
+    "last": "2026-09-29",
+    "missing_open_dates": [
+     "2009-05-19",
+     "2009-05-20",
+     "2013-12-19",
+     "2013-12-20"
+    ],
+    "calendar_extra": [],
+    "year_windows": {
+     "real": {
+      "2006": 144,
+      "2007": 242,
+      "2008": 246,
+      "2009": 242,
+      "2010": 242,
+      "2011": 244,
+      "2012": 243,
+      "2013": 236,
+      "2014": 245,
+      "2015": 244,
+      "2016": 244,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     }
+    }
+   },
+   "510500.XSHG": {
+    "rows": 3290,
+    "first": "2013-03-15",
+    "last": "2026-09-29",
+    "missing_open_dates": [
+     "2015-04-13",
+     "2015-04-14"
+    ],
+    "calendar_extra": [],
+    "year_windows": {
+     "real": {
+      "2013": 180,
+      "2014": 245,
+      "2015": 242,
+      "2016": 244,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     },
+     "momentum": {
+      "2013": 163,
+      "2014": 245,
+      "2015": 242,
+      "2016": 244,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     }
+    }
+   },
+   "510880.XSHG": {
+    "rows": 4788,
+    "first": "2007-01-18",
+    "last": "2026-09-29",
+    "missing_open_dates": [],
+    "calendar_extra": [],
+    "year_windows": {
+     "real": {
+      "2007": 219,
+      "2008": 246,
+      "2009": 244,
+      "2010": 242,
+      "2011": 244,
+      "2012": 243,
+      "2013": 238,
+      "2014": 245,
+      "2015": 244,
+      "2016": 244,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     }
+    }
+   },
+   "511880.XSHG": {
+    "rows": 3270,
+    "first": "2013-04-18",
+    "last": "2026-09-29",
+    "missing_open_dates": [],
+    "calendar_extra": [],
+    "year_windows": {}
+   },
+   "513100.XSHG": {
+    "rows": 3201,
+    "first": "2013-07-31",
+    "last": "2026-09-29",
+    "missing_open_dates": [
+     "2022-01-13"
+    ],
+    "calendar_extra": [],
+    "year_windows": {
+     "momentum": {
+      "2013": 73,
+      "2014": 245,
+      "2015": 244,
+      "2016": 244,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 241,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     }
+    }
+   },
+   "513500.XSHG": {
+    "rows": 3089,
+    "first": "2014-01-15",
+    "last": "2026-09-29",
+    "missing_open_dates": [
+     "2022-03-29"
+    ],
+    "calendar_extra": [],
+    "year_windows": {
+     "momentum": {
+      "2014": 206,
+      "2015": 244,
+      "2016": 244,
+      "2017": 244,
+      "2018": 243,
+      "2019": 244,
+      "2020": 243,
+      "2021": 243,
+      "2022": 241,
+      "2023": 242,
+      "2024": 242,
+      "2025": 243,
+      "2026": 180
+     }
+    }
+   }
+  },
+  "real_gap_crossing_windows": 65,
+  "momentum_gap_crossing_windows": 90,
+  "real_price_eligibility_numeric_disagreements": 2,
+  "momentum_max_independent_score_error": 5.684341886080802e-14,
+  "network_blocked": true,
+  "full_original_pool_signals": 0,
+  "new_trading_backtests": 0,
+  "formal_source_research_acceptance": false,
+  "original_strategy_complete": false,
+  "strict_usable": false
+ },
+ "validation": {
+  "status": "ok_stage_only",
+  "local_tests": 26,
+  "isolated_tests": 26,
+  "copied_files": 333,
+  "copied_manifest_sha256": "3c1dfb6bb340b59c460606ff1eb1c54e87afeba7024595a448ad74257f268b64",
+  "readback": {
+   "windows": {
+    "real": 28078,
+    "momentum": 17157
+   },
+   "saved_cells_checked": 633290,
+   "gap_crossing_windows": {
+    "real": 65,
+    "momentum": 90
+   },
+   "independent_eligibility_disagreements": 2,
+   "diagnostics": 45,
+   "full_original_pool_signals": 0,
+   "new_trading_backtests": 0
+  },
+  "formal_source_research_acceptance": false,
+  "formal_trading_acceptance": false,
+  "new_trading_backtests": 0
+ },
+ "old_asset_protection": {
+  "status": "ok",
+  "old_controls_unchanged": 6614,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+ },
+ "real_pool_candidates": [
+  "159905.XSHE",
+  "159915.XSHE",
+  "159949.XSHE",
+  "510050.XSHG",
+  "510180.XSHG",
+  "510500.XSHG",
+  "510880.XSHG"
+ ],
+ "real_missing_selected_candidates": [
+  "159901.XSHE",
+  "161005.XSHE",
+  "162605.XSHE",
+  "510300.XSHG"
+ ],
+ "momentum_pool_candidates": [
+  "159949.XSHE",
+  "510050.XSHG",
+  "510500.XSHG",
+  "513100.XSHG",
+  "513500.XSHG"
+ ],
+ "momentum_missing_selected_candidates": [
+  "159920.XSHE",
+  "159985.XSHE",
+  "162411.XSHE",
+  "510300.XSHG",
+  "513030.XSHG",
+  "513520.XSHG"
+ ],
+ "actual_set_trials": {
+  "processes": 4,
+  "iteration_orders": 4,
+  "winners": [
+   "513500.XSHG",
+   "513520.XSHG"
+  ],
+  "controlled_operands_only": true
+ },
+ "numeric_boundaries": [
+  {
+   "instrument": "159949.XSHE",
+   "date": "2019-01-22",
+   "window_first": "2019-01-03",
+   "history_prices": [
+    0.425,
+    0.436,
+    0.442,
+    0.441,
+    0.441,
+    0.438,
+    0.439,
+    0.433,
+    0.442,
+    0.442,
+    0.436,
+    0.444,
+    0.448
+   ],
+   "current_EOD_operand": 0.439,
+   "current_hex": "0x1.c189374bc6a7fp-2",
+   "original_mean": 0.43900000000000006,
+   "original_mean_hex": "0x1.c189374bc6a80p-2",
+   "fsum_mean": 0.439,
+   "fsum_mean_hex": "0x1.c189374bc6a7fp-2",
+   "decimal_string_mean": "0.439",
+   "original_deviation_percent": -1.1102230246251565e-14,
+   "fsum_deviation_percent": 0.0,
+   "original_price_eligible_reference": false,
+   "fsum_price_eligible_reference": true,
+   "missing_open_count": 0,
+   "native_input": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/inputs/159949.XSHE.parquet",
+   "native_input_sha256": "ef4ff9c324f877c70133be2b1476c97ad7e6b154c2228bbdadcc9929cd888ecc"
+  },
+  {
+   "instrument": "510180.XSHG",
+   "date": "2017-02-28",
+   "window_first": "2017-02-09",
+   "history_prices": [
+    3.046,
+    3.062,
+    3.077,
+    3.074,
+    3.066,
+    3.079,
+    3.06,
+    3.099,
+    3.107,
+    3.113,
+    3.099,
+    3.097,
+    3.074
+   ],
+   "current_EOD_operand": 3.081,
+   "current_hex": "0x1.8a5e353f7ced9p+1",
+   "original_mean": 3.0810000000000004,
+   "original_mean_hex": "0x1.8a5e353f7cedap+1",
+   "fsum_mean": 3.081,
+   "fsum_mean_hex": "0x1.8a5e353f7ced9p+1",
+   "decimal_string_mean": "3.081",
+   "original_deviation_percent": -1.1102230246251565e-14,
+   "fsum_deviation_percent": 0.0,
+   "original_price_eligible_reference": false,
+   "fsum_price_eligible_reference": true,
+   "missing_open_count": 0,
+   "native_input": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/inputs/510180.XSHG.parquet",
+   "native_input_sha256": "20bb20a0c87e5458816c411cd16214c1ed2a5a68c2db53264355a2dbb03c26e5"
+  }
+ ],
+ "evidence_sha256": {
+  "data/staging/strategies-batch103/20261011-ETF-original-price-stage/prepared.json": "8ee8ca9dd3f14e16e64b6dbf09901453c34ae65fc7c0ce8beaa10cccb0ab3172",
+  "data/staging/strategies-batch103/20261011-price-stage-validation/checked.json": "8857e5c722f32e7d2b353500eae28eebccdef2aedcd94e3ca40fca00d704fa39",
+  "data/staging/strategies-batch103/20261011-ETF-original-price-stage/protection.json": "fcf33c8de2d54325eec58fc8fa2fb708364a85378a1d5ef339ce34f6feef438f",
+  "data/staging/strategies-batch103/20261011-ETF-original-price-stage/offline-verification.json": "cfa1a72b7ae02c44dfbc5b173552f63e79fa59fcec16bfcf1c878554f31d48e8",
+  "data/staging/strategies-batch103/20261011-ETF-original-price-stage/actual-set-trials/results.json": "3cac78bce0eb0e0fdd0473cc09cf7df44342fefdb9e08dbadccdb9e7ecde18e4",
+  "data/staging/strategies-batch103/20261011-price-numeric-boundaries/checked.json": "04d23dd52a35ae8b75d02f328ad14e7397840e228ed9647d74f1e87ee10720d9",
+  "data/staging/strategies-batch103/20261011-initial-reference-test-failure/failure.json": "90664e17bb731679d9516abfebd120c94e7eceafc136ea394dcc980979d12ba2",
+  "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute/diagnostics.json": "5059947dd6d3e7881bc70aec17212752be29e274d2876ac08429cc8b8439ab4a",
+  "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute/momentum-price-reference.parquet": "7335b7e405de2337abe2955731a94aae423ce3b8010e5b0653ccac0f0c5acadf",
+  "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute/real-price-reference.parquet": "05b215b982ff2122b20e6b3412fa1f6f1625abc55d83345ac8fbbf7ab6624d93",
+  "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute/summary.json": "93a3cff956a598077efc719c575efe428f3e6361a885f2f5df94672da369add1",
+  "docs/handoff/batch103-y2023-006-source-review.yaml": "1d9d2c56288b1204f20853769fe3257ef64634e94ff054b4fdec70eba443d000",
+  "docs/handoff/batch103-y2025-081-source-review.yaml": "b741245b8cb001cf73db21a0c90b530660357ee8dabee0e0437f0d91b83a2b77",
+  "scripts/verify_strategy_batch103_stage.py": "6a9ae4bd4f735cf6c7df45b129ee8f7d79e9e41fd2720fd300581ec1e0e5e8b0",
+  "scripts/diagnose_strategy_batch103_numerics.py": "0630791c847058799711fa55c16a90363749918db058434407191e7aa4ce3aa0",
+  "data/staging/strategies-batch103/20261011-price-stage-checkpoint/recording.py": "e281abcbdb88353c0749f3d9cb225d7791bcf6f84b9b12edc361f0a103ae11f2"
+ },
+ "new_trading_backtests": 0,
+ "new_strategy_parent_runs": 0,
+ "new_requests": 0,
+ "new_responses": 0,
+ "published": false,
+ "absence_scope": "Actual active snapshot tables and five selected original registries; not whole-machine absence",
+ "next": "SHA-bind existing index volume candidates; independently check original EmotionMonitor over longest windows and default/exception paths; finish source-research acceptance separately; original pool/intraday/fund execution still required for Book trades"
+}

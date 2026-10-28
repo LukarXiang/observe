@@ -1,0 +1,62 @@
+{
+  "case": {
+    "net_asset_value_computed": false,
+    "new_trading_backtests": 0,
+    "original_60_row_branch": "absolute only; relative/mixed demo failures are not repaired",
+    "overlapping_ranges": true,
+    "platform_equivalence_proven": false,
+    "ranges": [
+      {
+        "entry_transitions": 32,
+        "exit_transitions": 31,
+        "finite_bounds": 1823,
+        "finite_scores": 1842,
+        "first": "2014-01-02",
+        "held_observation_rows": 947,
+        "independent_flags_differences": 0,
+        "independent_score_difference_dates": [],
+        "independent_score_differences": 0,
+        "last": "2021-10-25",
+        "last_next_return_missing": true,
+        "max_independent_quantile_abs_error": {
+          "lower_bound": 1.4210854715202004e-14,
+          "upper_bound": 0.0
+        },
+        "not_a_backtest": true,
+        "range": "original_period",
+        "rows": 1901
+      },
+      {
+        "entry_transitions": 90,
+        "exit_transitions": 90,
+        "finite_bounds": 5202,
+        "finite_scores": 5221,
+        "first": "2005-01-05",
+        "held_observation_rows": 2748,
+        "independent_flags_differences": 0,
+        "independent_score_difference_dates": [],
+        "independent_score_differences": 0,
+        "last": "2026-09-29",
+        "last_next_return_missing": true,
+        "max_independent_quantile_abs_error": {
+          "lower_bound": 1.4210854715202004e-14,
+          "upper_bound": 0.0
+        },
+        "not_a_backtest": true,
+        "range": "extended_reference",
+        "rows": 5280
+      }
+    ],
+    "signal_rows_are_index_paper_states": true,
+    "source_body_changed": false,
+    "status": "component_research"
+  },
+  "case_id": "trend-definition-batch92-components",
+  "nature": "original_absolute_score_and_index_paper_states",
+  "purpose": "1901/5280行、1842/5221评分，原始状态切换32/31及90/90，仅指数纸面标记；两个范围冷启动且重叠，末日未来收益NaN保留，不造净值/订单",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch92/20261010-trend-definition-stage/component-research.json",
+    "sha256": "6de1b12971af5e9ddbe7738b2e733e3ebe1f4cfbdc3f9600d842912c046ded2c"
+  }
+}

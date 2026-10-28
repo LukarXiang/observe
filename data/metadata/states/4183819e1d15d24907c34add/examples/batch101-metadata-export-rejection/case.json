@@ -1,0 +1,22 @@
+{
+  "case": {
+    "cause": "Final config helper succeeded while preceding export from unchanged old policy was still alive",
+    "error": "ValueError",
+    "message": "Input changed during export: configs/research_metadata.json",
+    "observed_returncode": 1,
+    "observed_session": 21344,
+    "recovery": "No live exporter after terminal rejection; add failure evidence, then export consistent final files once and verify current root",
+    "retained_export_id": "ee4cc40a35033c36b1707ab4",
+    "root_index_not_switched": true,
+    "status": "observed_metadata_export_consistency_rejection",
+    "strategy_input_or_output_changed": false
+  },
+  "case_id": "batch101-metadata-export-rejection",
+  "nature": "observed_post_acceptance_handoff_tool_failure_not_strategy_error",
+  "purpose": "实际旧导出拒绝配置中途变化且未切根索引；终态后新导出最终一致状态",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch101/20261011-metadata-update-import-failure/export-rejection.json",
+    "sha256": "d1ee2c5d51f1cfcb555ca835c39e03343f011d7dfb08726d85c2272b0ceb0ac5"
+  }
+}

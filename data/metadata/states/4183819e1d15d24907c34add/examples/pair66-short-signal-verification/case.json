@@ -1,0 +1,27 @@
+{
+  "case": {
+    "active_formal_statistics_unchanged_by_preflight": true,
+    "decision_days": 320,
+    "factors_sha256": "e4872f8465c19e0926ff29a6da815eca3a2cba0ac16f75afc7b654853a57803b",
+    "full_snapshot_partition_rehash": false,
+    "independent_signal_differences": 0,
+    "new_trading_backtests": 0,
+    "offline_context": "network_blocked covers frozen snapshot load and signal calculations",
+    "preflight_sha256": "77f31778c26dbe2cb5f9e3aea29f3b590ae369ccaad31da4973b8db7d69c75ce",
+    "reproduction": "No separate worker replay yet; independent fsum/state pass performed within the original process",
+    "ruff": "All checks passed; actual command recorded in terminal",
+    "scope": "actual_signal_preflight_not_trading",
+    "signals": 7,
+    "status": "ok",
+    "windows_with_signals": 5,
+    "zero_signal_windows": 1
+  },
+  "case_id": "pair66-short-signal-verification",
+  "nature": "actual_preflight_identity_readback_not_trading",
+  "purpose": "代码/源/快照/因子SHA读回，非完整分区新hash或独立新进程复现；下一步唯一Book",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-history-supplement/20261011-pair66-short-islands-preflight/verification.json",
+    "sha256": "7f5d9520d40f64df9a729978fe58cf31982f7f1956ade88d5705a684fd34e9d1"
+  }
+}

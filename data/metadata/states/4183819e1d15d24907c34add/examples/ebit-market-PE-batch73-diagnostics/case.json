@@ -1,0 +1,529 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "ebit_monthly_schedule_and_costs",
+        "costs": [
+          [
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003
+            },
+            {
+              "type": "stock"
+            }
+          ]
+        ],
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "scheduled": [
+          [
+            "monthly",
+            "before_market_open",
+            [],
+            {
+              "monthday": 1,
+              "reference_security": "000300.XSHG",
+              "time": "before_open"
+            }
+          ],
+          [
+            "monthly",
+            "market_open",
+            [],
+            {
+              "monthday": 1,
+              "reference_security": "000300.XSHG",
+              "time": "open"
+            }
+          ],
+          [
+            "monthly",
+            "after_market_close",
+            [],
+            {
+              "monthday": 1,
+              "reference_security": "000300.XSHG",
+              "time": "after_close"
+            }
+          ]
+        ]
+      },
+      {
+        "ST_new_listing_retained": true,
+        "case": "ebit_negative_EV_negative_EBIT_and_infinite_rank",
+        "missing_codes": [
+          "D",
+          "F"
+        ],
+        "negative_EV_ratio": 2.0,
+        "positive_infinity_first": true,
+        "query": [
+          {
+            "count": 1,
+            "end_date": "2023-12-29",
+            "factors": [
+              "market_cap",
+              "financial_liability",
+              "financial_assets",
+              "EBIT"
+            ],
+            "securities": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ]
+          },
+          {
+            "fields": [
+              "code",
+              "name",
+              "start_date"
+            ],
+            "filters": [
+              [
+                "in",
+                "code",
+                [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F"
+                ]
+              ]
+            ]
+          }
+        ],
+        "rank": [
+          "C",
+          "B",
+          "A",
+          "E",
+          "D",
+          "F"
+        ]
+      },
+      {
+        "case": "ebit_missing_factor_KeyError",
+        "error": "KeyError",
+        "orders": []
+      },
+      {
+        "buy_list": [
+          "B",
+          "B",
+          "A",
+          "C"
+        ],
+        "calls": [
+          {
+            "date": "2023-12-29",
+            "index": "000001.XSHG"
+          },
+          {
+            "date": "2023-12-29",
+            "index": "399001.XSHE"
+          },
+          {
+            "security": [
+              "A",
+              "B",
+              "B",
+              "C"
+            ],
+            "watch_date": "2023-12-29"
+          }
+        ],
+        "case": "ebit_index_concat_duplicate_targets_reset_entry_dates",
+        "entry_dates": {
+          "A": null,
+          "B": null,
+          "C": null
+        },
+        "security": [
+          "A",
+          "B",
+          "B",
+          "C"
+        ]
+      },
+      {
+        "case": "ebit_held_paused_target_and_unheld_paused_skipped",
+        "entry_dates": {
+          "A": "2024-01-02 09:30:00",
+          "B": null,
+          "C": "2024-01-02 09:30:00",
+          "Z": null
+        },
+        "orders": [
+          [
+            "target",
+            "B",
+            800.0
+          ],
+          [
+            "target_value",
+            "X",
+            0
+          ],
+          [
+            "target",
+            "A",
+            800.0
+          ],
+          [
+            "target",
+            "C",
+            800.0
+          ]
+        ]
+      },
+      {
+        "case": "ebit_duplicate_unfilled_orders_and_entry_registration",
+        "entry_date": "2024-01-02 09:30:00",
+        "orders": [
+          [
+            "target",
+            "A",
+            1600.0
+          ],
+          [
+            "target",
+            "A",
+            1600.0
+          ]
+        ]
+      },
+      {
+        "case": "ebit_empty_list_sells_only_unpaused",
+        "orders": [
+          [
+            "target_value",
+            "X",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "ebit_zero_lot_still_registers_entry",
+        "entry_date": "2024-01-02 09:30:00",
+        "orders": [
+          [
+            "target",
+            "A",
+            0.0
+          ]
+        ]
+      },
+      {
+        "case": "ebit_zero_open_ZeroDivisionError",
+        "error": "ZeroDivisionError",
+        "orders": []
+      },
+      {
+        "case": "PE_initialize_no_schedule_no_security_weeks",
+        "costs": [
+          [
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003
+            },
+            {
+              "type": "stock"
+            }
+          ],
+          [
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003
+            },
+            {
+              "type": "fund"
+            }
+          ]
+        ],
+        "has_security": false,
+        "has_stdH": false,
+        "has_weeks": false,
+        "scheduled": []
+      },
+      {
+        "case": "PE_trade_before_change_AttributeError",
+        "error": "AttributeError",
+        "orders": []
+      },
+      {
+        "case": "PE_after_change_five_callbacks",
+        "scheduled": [
+          [
+            "daily",
+            "before_market_open",
+            [],
+            {
+              "reference_security": "510300.XSHG",
+              "time": "before_open"
+            }
+          ],
+          [
+            "weekly",
+            "market_open",
+            [
+              -2
+            ],
+            {
+              "reference_security": "510300.XSHG",
+              "time": "open"
+            }
+          ],
+          [
+            "daily",
+            "after_market_close",
+            [],
+            {
+              "reference_security": "510300.XSHG",
+              "time": "after_close"
+            }
+          ],
+          [
+            "weekly",
+            "code_run_weekly",
+            [
+              1
+            ],
+            {
+              "time": "before_open"
+            }
+          ],
+          [
+            "monthly",
+            "wages_monthily",
+            [
+              6
+            ],
+            {
+              "time": "before_open"
+            }
+          ]
+        ],
+        "security": "510300.XSHG",
+        "weeks": 50
+      },
+      {
+        "V": [
+          1.0,
+          2.0
+        ],
+        "case": "PE_query_code322002_desc2500_log10_sample_std",
+        "high": 1.5353553390593273,
+        "low": 1.323223304703363,
+        "now": 1.0,
+        "query": {
+          "count": 2500,
+          "fields": [
+            "STK_EXCHANGE_TRADE_INFO"
+          ],
+          "filters": [
+            [
+              "le",
+              "date",
+              "2023-12-29"
+            ],
+            [
+              "eq",
+              "exchange_code",
+              "322002"
+            ]
+          ],
+          "sort": [
+            [
+              "desc",
+              "date"
+            ]
+          ]
+        }
+      },
+      {
+        "case": "PE_now_label0_KeyError",
+        "error": "KeyError",
+        "orders": []
+      },
+      {
+        "case": "PE_nonpositive_missing_log10_unprotected",
+        "nan_values": 2,
+        "negative_infinity": true
+      },
+      {
+        "case": "PE_single_row_sample_std_nan",
+        "high_is_nan": true,
+        "low_is_nan": true
+      },
+      {
+        "case": "PE_weeks_high_equality",
+        "weeks": 50.0
+      },
+      {
+        "case": "PE_target_high_equality",
+        "orders": [
+          [
+            "target_value",
+            "510300.XSHG",
+            31400.0
+          ]
+        ]
+      },
+      {
+        "case": "PE_weeks_low_equality",
+        "weeks": 50.0
+      },
+      {
+        "case": "PE_target_low_equality",
+        "orders": [
+          [
+            "target_value",
+            "510300.XSHG",
+            31400.0
+          ]
+        ]
+      },
+      {
+        "case": "PE_weeks_above_high",
+        "weeks": -5.0000000000000036
+      },
+      {
+        "case": "PE_target_above_high",
+        "orders": [
+          [
+            "target_value",
+            "510300.XSHG",
+            24000.000000000004
+          ]
+        ]
+      },
+      {
+        "case": "PE_weeks_below_low",
+        "weeks": 25.00000000000002
+      },
+      {
+        "case": "PE_target_below_low",
+        "orders": [
+          [
+            "target_value",
+            "510300.XSHG",
+            32800.0
+          ]
+        ]
+      },
+      {
+        "case": "PE_weeks_deep_low_clamp1",
+        "weeks": 1.0
+      },
+      {
+        "case": "PE_target_deep_low_clamp1",
+        "orders": [
+          [
+            "target_value",
+            "510300.XSHG",
+            100000.0
+          ]
+        ]
+      },
+      {
+        "case": "PE_weeks_extreme_high_negative_target",
+        "weeks": -0.3
+      },
+      {
+        "case": "PE_target_extreme_high_negative_target",
+        "orders": [
+          [
+            "target_value",
+            "510300.XSHG",
+            -70000.0
+          ]
+        ]
+      },
+      {
+        "case": "PE_weeks_NaN_normal50",
+        "weeks": 50.0
+      },
+      {
+        "case": "PE_target_NaN_normal50",
+        "orders": [
+          [
+            "target_value",
+            "510300.XSHG",
+            31400.0
+          ]
+        ]
+      },
+      {
+        "case": "PE_zero_high_ZeroDivisionError",
+        "error": "ZeroDivisionError",
+        "orders": [
+          [
+            "target_value",
+            "510300.XSHG",
+            31400.0
+          ]
+        ]
+      },
+      {
+        "case": "PE_zero_low_ZeroDivisionError",
+        "error": "ZeroDivisionError",
+        "orders": [
+          [
+            "target_value",
+            "510300.XSHG",
+            31400.0
+          ]
+        ]
+      },
+      {
+        "case": "PE_monthly_5000_external_flow",
+        "flows": [
+          [
+            5000,
+            {
+              "pindex": 0
+            }
+          ]
+        ]
+      }
+    ],
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "platform_equivalent": false,
+    "real_historical_trade_windows": 0,
+    "synthetic_fixture": true
+  },
+  "case_id": "ebit-market-PE-batch73-diagnostics",
+  "nature": "accepted_original_function_synthetic_diagnostics",
+  "purpose": "33原函数/类诊断，负EV/无穷值/重复池/停牌/整手/标签0/调度/每月入金与负目标；22专项/150相关通过，不计交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch73/20261008-ebit-market-PE/diagnostics.json",
+    "sha256": "515c4a3ea379441f37e223079c07cc0efbe021a4c74d613815d10028cf95fb49"
+  }
+}

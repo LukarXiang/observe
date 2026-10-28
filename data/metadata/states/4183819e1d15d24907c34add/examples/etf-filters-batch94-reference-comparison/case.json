@@ -1,0 +1,20 @@
+{
+  "case": {
+    "copy": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/references/IKalman.cpp",
+    "equivalence_proven": false,
+    "file": "repo/hikyuu/hikyuu_cpp/hikyuu/indicator/imp/IKalman.cpp",
+    "git_commit": "27210d669e77bca2d0e366d120ea20cfda05f86b",
+    "operation": "forward recursive filter, q=.01/r=.1 and initial p=1",
+    "original_operation": "pykalman smooth, transition covariance=.1, observation/initial covariance=.15",
+    "sha256": "fcb5c52a67a2e3d802ba9ec0b64bd7f6b0a6876c57739f7763ea966e442d2b36",
+    "used_as_numerical_substitute": false
+  },
+  "case_id": "etf-filters-batch94-reference-comparison",
+  "nature": "reference_project_forward_filter_not_original_Kalman_smooth",
+  "purpose": "冻结hikyuu递推实现与commit/SHA，初始p/协方差/forward操作不同；没有替代原pykalman或宣称等价",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/reference-comparison.json",
+    "sha256": "f22318f76f24af59c57597a352c6435ccdbf82f6aa9b74d1b9d2c63c8c42b1e4"
+  }
+}

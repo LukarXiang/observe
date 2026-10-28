@@ -1,0 +1,24 @@
+{
+  "case": {
+    "cause": "Smooth linear BBANDS fixture had no crossing; inversion difference assertion lacked an exercising input",
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_batch98_research.py"
+    ],
+    "production_economic_rule_change": false,
+    "returncode": 1,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "9b704874aa9eebc7b25214d0ca1ad44979980408f5f95312f1313b06f4e63272"
+  },
+  "case_id": "batch98-boll-fixture-failure",
+  "nature": "immutable_unexercised_BBANDS_fixture",
+  "purpose": "1失败12通过，线性输入无突破；只修夹具",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch98/20261011-inversion-fixture-failure/failure.json",
+    "sha256": "a925af233d3bc1c2c624b13afb80c5ce3a136f8fb2f54521fdaaf3cbf6e4f898"
+  }
+}

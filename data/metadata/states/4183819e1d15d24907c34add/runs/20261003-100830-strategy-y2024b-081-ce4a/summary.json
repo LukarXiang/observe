@@ -1,0 +1,313 @@
+{
+  "benchmark": null,
+  "configuration": {
+    "end": "2026-09-29",
+    "name": "y2024b-081",
+    "start": "2022-01-04"
+  },
+  "configuration_available": true,
+  "coverage": null,
+  "decision_time": null,
+  "evidence_status": "archived_unreviewed",
+  "execution_status": "success_limited",
+  "execution_time": null,
+  "implementation": "y2024b-081",
+  "kind": "strategy",
+  "limitations": [
+    {
+      "detail": "原文 market_cap 为总市值；这里用流通市值（成交量 ÷ 换手率 × 收盘价）替代，总股本数据入库后改回总市值",
+      "kind": "deviation"
+    },
+    {
+      "detail": "原文 pb_ratio 来自聚宽 valuation 表；这里用 BaoStock 日线的 pbMRQ，口径接近但不保证一致",
+      "kind": "deviation"
+    },
+    {
+      "detail": "原文每月先全部卖出再买入（保留的股票也会卖出再买回，产生双边费用）；这里保留仍在名单内的持仓，只在偏离超过 20% 时调整，费用偏低",
+      "kind": "deviation"
+    },
+    {
+      "detail": "原文股票池含北交所；本地数据没有北交所，只在沪深主板、创业板、科创板中选",
+      "kind": "deviation"
+    },
+    {
+      "detail": "原文无滑点；这里统一按 0.1% 滑点和本项目执行规则集的费用计算",
+      "kind": "deviation"
+    },
+    {
+      "detail": "聚宽策略的声明式改写，非原代码逐行执行；证据级别为探索",
+      "kind": "strategy_port"
+    },
+    {
+      "audit": {
+        "audit_id": "20260930-121951-c0f4",
+        "audited_at": "2026-09-30T12:19:51",
+        "batch_id": "20260930-121727-4c66",
+        "input_range": {
+          "days": 1392,
+          "end": "2026-09-29",
+          "rows": 6848484,
+          "start": "2021-01-04"
+        },
+        "scope": "snapshot",
+        "source": "audit 20260930-121951-c0f4",
+        "status": "expired"
+      },
+      "detail": "快照批次审计状态为 expired",
+      "kind": "data_audit"
+    },
+    {
+      "detail": "23 笔退市持仓按最后估值价折现",
+      "kind": "delisted_settlement",
+      "rows": [
+        {
+          "date": "2022-05-25",
+          "field": "delisted_settlement",
+          "instrument": "603157.SH",
+          "price": 0.59,
+          "qty": 22800,
+          "value": 13452.0
+        },
+        {
+          "date": "2022-06-15",
+          "field": "delisted_settlement",
+          "instrument": "600695.SH",
+          "price": 0.51,
+          "qty": 26200,
+          "value": 13362.0
+        },
+        {
+          "date": "2022-06-20",
+          "field": "delisted_settlement",
+          "instrument": "000687.SZ",
+          "price": 0.29,
+          "qty": 44200,
+          "value": 12818.0
+        },
+        {
+          "date": "2022-06-22",
+          "field": "delisted_settlement",
+          "instrument": "600091.SH",
+          "price": 0.76,
+          "qty": 17400,
+          "value": 13224.0
+        },
+        {
+          "date": "2022-06-22",
+          "field": "delisted_settlement",
+          "instrument": "600890.SH",
+          "price": 0.36,
+          "qty": 42900,
+          "value": 15444.0
+        },
+        {
+          "date": "2022-06-23",
+          "field": "delisted_settlement",
+          "instrument": "600209.SH",
+          "price": 1.18,
+          "qty": 15000,
+          "value": 17700.0
+        },
+        {
+          "date": "2022-06-23",
+          "field": "delisted_settlement",
+          "instrument": "600856.SH",
+          "price": 0.27,
+          "qty": 44200,
+          "value": 11934.0
+        },
+        {
+          "date": "2022-06-24",
+          "field": "delisted_settlement",
+          "instrument": "600093.SH",
+          "price": 0.5,
+          "qty": 32100,
+          "value": 16050.0
+        },
+        {
+          "date": "2023-07-06",
+          "field": "delisted_settlement",
+          "instrument": "002781.SZ",
+          "price": 0.42,
+          "qty": 36900,
+          "value": 15498.0
+        },
+        {
+          "date": "2023-07-06",
+          "field": "delisted_settlement",
+          "instrument": "300336.SZ",
+          "price": 0.25,
+          "qty": 63600,
+          "value": 15900.0
+        },
+        {
+          "date": "2023-07-07",
+          "field": "delisted_settlement",
+          "instrument": "000806.SZ",
+          "price": 0.43,
+          "qty": 34500,
+          "value": 14835.0
+        },
+        {
+          "date": "2023-07-07",
+          "field": "delisted_settlement",
+          "instrument": "300273.SZ",
+          "price": 0.38,
+          "qty": 37800,
+          "value": 14364.0
+        },
+        {
+          "date": "2023-07-11",
+          "field": "delisted_settlement",
+          "instrument": "002417.SZ",
+          "price": 0.45,
+          "qty": 37800,
+          "value": 17010.0
+        },
+        {
+          "date": "2023-07-11",
+          "field": "delisted_settlement",
+          "instrument": "300392.SZ",
+          "price": 0.21,
+          "qty": 61100,
+          "value": 12831.0
+        },
+        {
+          "date": "2023-07-13",
+          "field": "delisted_settlement",
+          "instrument": "000038.SZ",
+          "price": 0.52,
+          "qty": 26000,
+          "value": 13520.0
+        },
+        {
+          "date": "2023-07-14",
+          "field": "delisted_settlement",
+          "instrument": "300089.SZ",
+          "price": 0.19,
+          "qty": 66200,
+          "value": 12578.0
+        },
+        {
+          "date": "2024-07-19",
+          "field": "delisted_settlement",
+          "instrument": "600277.SH",
+          "price": 0.38,
+          "qty": 6600,
+          "value": 2508.0
+        },
+        {
+          "date": "2024-10-14",
+          "field": "delisted_settlement",
+          "instrument": "000413.SZ",
+          "price": 0.37,
+          "qty": 8800,
+          "value": 3256.0
+        },
+        {
+          "date": "2025-07-04",
+          "field": "delisted_settlement",
+          "instrument": "002336.SZ",
+          "price": 0.36,
+          "qty": 56100,
+          "value": 20196.0
+        },
+        {
+          "date": "2025-07-11",
+          "field": "delisted_settlement",
+          "instrument": "600387.SH",
+          "price": 0.94,
+          "qty": 21900,
+          "value": 20586.0
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "annual_return": 0.10374579074716261,
+    "annual_vol": 0.19015541609553552,
+    "drawdown_peak": 381,
+    "drawdown_trough": 509,
+    "max_drawdown": -0.24566875001026423,
+    "sharpe": 0.6148468924745623,
+    "total_return": 0.59786272,
+    "yearly_returns": {
+      "2022": 0.013377500000000042,
+      "2023": 0.12071319917799639,
+      "2024": 0.09687252207997488,
+      "2025": 0.29004879250158266,
+      "2026": -0.005713766571564638
+    }
+  },
+  "original_strategy_complete": false,
+  "parameters": null,
+  "payload_verification": "not_reaudited",
+  "period": null,
+  "portfolio": null,
+  "recorded_environment": {
+    "git_commit": "8961f51ebe63fe31d910aa6614f837f15529533f",
+    "git_dirty": true,
+    "lock_sha256": "7feb849499392e03669d579880e733ffa9cf462f388d9124b6b19e3040f96bfe",
+    "packages": {
+      "lightgbm": "4.7.0",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1"
+    },
+    "python": "3.12.11"
+  },
+  "references": [
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261003-100830-strategy-y2024b-081-ce4a/config.json",
+      "sha256": "3b1efb55b8eb9e0419d296522fc71224e8a76c2adf5cac9f81622a12f77f5a0f"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261003-100830-strategy-y2024b-081-ce4a/status.json",
+      "sha256": "fd970dc43a839072da25abceb69a7c4aea8d562002f5355708e32726ab235aa8"
+    }
+  ],
+  "reproduce_of": null,
+  "reproduction": null,
+  "result_scope": "configured_run",
+  "results": null,
+  "rules": {},
+  "run_id": "20261003-100830-strategy-y2024b-081-ce4a",
+  "schema": 1,
+  "snapshot": null,
+  "strategy_id": null,
+  "superseded_by": null,
+  "trading": {
+    "cash_share_mean": 0.09051494490088524,
+    "fee_ratio_to_initial": 0.03040385,
+    "fees": {
+      "commission": 15212.55,
+      "fee": 30403.85,
+      "stamp_tax": 14690.9,
+      "transfer_fee": 500.4
+    },
+    "fill_rate": 0.9670365535248042,
+    "filled_orders": 2963,
+    "max_single_weight_mean": 0.016660415642935862,
+    "orders": 3064,
+    "partial_fills": 0,
+    "reject_reasons": {
+      "cash": 71,
+      "limit_down": 3,
+      "limit_up": 15,
+      "no_liquidity_reference": 1,
+      "slippage_outside_limit": 1,
+      "suspended": 10
+    },
+    "stale_price_days": 160,
+    "top5_weight_mean": 0.07718718915986866,
+    "turnover_half_daily_mean": 0.0168218279434536,
+    "turnover_two_sided_daily_mean": 0.0336436558869072
+  },
+  "universe": null,
+  "validation": []
+}

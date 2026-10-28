@@ -1,0 +1,19 @@
+{
+  "case": {
+    "baseline_created": false,
+    "command": "python -m scripts.review_strategy_batch81 preflight",
+    "error": "KeyError: status in reused_inputs; accepted510300 registry has no status field",
+    "not_a_backtest": true,
+    "original_script": "data/staging/strategies-batch81/20261009-stock-bond-drawdown-preflight-failure-01/review_strategy_batch81.original.py",
+    "sha256": "8effd1b4dd047cb26c632a5e16f87069c4cd1f120ac4cc1345f5175506052beb",
+    "status": "failed_before_baseline"
+  },
+  "case_id": "stock-bond-batch81-preflight-failure",
+  "nature": "immutable_preflight_registry_shape_development_failure",
+  "purpose": "旧510300登记无status键导致KeyError，保护基线前失败；驱动用已有验收的SHA/行数核验，不改旧登记",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch81/20261009-stock-bond-drawdown-preflight-failure-01/failure.json",
+    "sha256": "80570c548e262df98066cd1fd7f6de0b4f54d4ff6c0fca165913d4a16d51c8bc"
+  }
+}

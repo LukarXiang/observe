@@ -1,0 +1,21 @@
+{
+  "case": {
+    "copied_sha256": {
+      "data/staging/strategies-batch101/20261011-preread-development/research_strategy_batch101.py": "c1ad098503fac42a692a8ae3f1f3af2cea27eacea2c6bde151953b42095cb776",
+      "data/staging/strategies-batch101/20261011-preread-development/test_batch101_research.py": "6621a4dd8b233e0a8c58dbf8aa9e2750090a9b93b124655e3c1d10a1b9decedb"
+    },
+    "new_trading_backtests": 0,
+    "original_strategy_or_economic_rule_changed": false,
+    "red_command": "python -m pytest -q --disable-warnings tests/unit/test_batch101_research.py -k pool_datetimes",
+    "status": "development_harness_failure",
+    "symptom": "Original initialization pool contains datetime objects; shared batch100 canonical rejects datetime, caught as a synthetic-case TypeError. This is a new archive-harness defect, not an original strategy failure."
+  },
+  "case_id": "batch101-preread-development",
+  "nature": "preserved_archive_encoding_failure_and_red_regression",
+  "purpose": "原datetime归档编码误报已修，未改原函数/经济规则",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch101/20261011-preread-development/failure.json",
+    "sha256": "5290f3c5c34a1e02e45628eea407792f8a2f49c8ca03fe07bd49cbaa254ee98b"
+  }
+}

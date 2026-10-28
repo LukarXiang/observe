@@ -1,0 +1,34 @@
+schema: 1
+source: 2022年度精选策略/32.行业指数轮动.txt
+source_sha256: eee496f1bc636b0372ba32153596d3bb72c9d4f73e2c3520a16c35da532f0e76
+source_lines: 171
+top_level_definitions: 14
+review_scope: 全文及全部原定义；不执行来源顶层、不替换下单标的
+formal_acceptance: false
+original_strategy_complete: false
+economic_variant_approved: false
+rules:
+  benchmark: 000300.XSHG
+  ordered_pool: [000932.XSHG, 000913.XSHG, 399967.XSHE, 000993.XSHG, 000819.XSHG, 399975.XSHE, 399971.XSHE]
+  mapping: 七个ETF映射均为指数自身代码；不能按注释自行换成跟踪基金
+  money_fund: 511880.XSHG；原注释称银华日利，不作为证券身份依据
+  timing: handle_data仅14时15分；日频调用能否触发未证明
+  ranking: lag10，attribute_history(interval*240,1m,close,skip_paused=True)；首末分钟价差除以首价；字典降序，平手保留原池顺序
+  filter: 第一名最后分钟close严格大于前4800条分钟close均值才持有；相等/NaN比较均进sell_the_stocks
+  risk_off: 未持511880时先sell_the_stocks，再buy_the_stocks(511880)；已持511880直接返回，其他残留仓位不处理
+  buy: 先查询511880一分钟close但不使用，已持目标直接返回；否则再次sell_the_stocks并按当时cash发order_value
+  sell: for循环体直接return，仅处理positions.keys的第一个键，含可能零仓位键
+  fees: FixedSlippage0；严格日期大于2013/2011/2009年1月1日，买卖费率分别0.0003/0.0013、0.001/0.002、0.002/0.003、0.003/0.004；最低5
+defects:
+  - ETF字典实际为指数代码；指数可否在原平台模拟下单、成交与实际可交易载体均待证明
+  - 只卖第一持仓，避险分支可能两次对同一键发卖单；原cash依即时或延迟成交变化，不能当作已成交
+  - 原依赖注入datetime，来源无显式import；全部回调按受控平台namespace验证
+  - 空分钟窗口索引越界，零首价/NaN排序与全NaN风险分支保留；未替换信号
+data_gaps:
+  - 七行业指数原2400/4800一分钟历史及14时15分可用性，历史指数身份与平台执行
+  - 511880价格/权益事件/状态/净收益和历史费用准入，唯一Book基金执行尚未放行
+  - 现有AKShare一分钟接口ndays5，日期参数只切片，不能补出4800分钟或长期历史
+reference_caveats:
+  - RQAlpha的order_target_portfolio明确支持INDX；这只能证明该参考平台提供合成指数订单，不证明聚宽等价或指数可在交易所直接成交
+allowed_evidence: 原分钟取数/排序/严格阈值、部分卖出和现金反馈合成诊断；不是真实排名或交易回测
+next: 先核原载体及分钟历史；若改为具体ETF映射或修清仓循环，须另建明确经济变体并请用户确认

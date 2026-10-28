@@ -1,0 +1,19 @@
+schema: 1
+source: 聚宽2025年精选/85稳健型ETF策略.txt
+sha256: dcae7848a99b7cdffb7a2d99564da319bbe662f0328c5424e7f1e3852b275876
+lines: 162
+definitions: 5
+stage: full_source_read_and_component_study
+formal_source_research_acceptance: false
+original_strategy_complete: false
+schedule: 月首交易日9:35；年度首交易日先清仓；注释每周不生效
+signals: 四标的月MACD12/26/9，include_now=false；510880年度涨幅round两位且严格大于-6
+slots: 独立五槽12.5%/12.5%/25%/25%/25%，允许重复基金；159949、513100、510880、511010、518880、511880
+orders: 年初清仓后是否视为空仓依赖即时成交；换槽卖原数量后按当时全部cash买入，再写入意图数量
+fees: FixedSlippage0.002；fund买卖佣金0.0002、最低5、无印花税
+gaps:
+  - 原MACD月度取数与EMA种子未证明，不继承EMA55批准
+  - 原Series负标签索引在当前pandas失败；math与datetime依赖平台隐式注入
+  - 槽位记录可能与拒单或部分成交不一致，同基金重复槽位不能改成聚合目标权重
+  - 基金历史身份、事件、动态复权、状态、9:35执行和适用规则未放行
+next: 先核平台指标与槽位成交反馈、基金输入；必要经济变体另确认，唯一Book三成本与禁网复现

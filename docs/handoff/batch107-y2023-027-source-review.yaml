@@ -1,0 +1,23 @@
+schema: 1
+source: 2023年度精选策略/27.从相关系数角度探讨etf轮动的可行性.txt
+sha256: 0e60cde5dfd8f828dc872be2d44aa950c80b22ebc82b395522906ac291eff3fc
+lines: 205
+definitions: 13
+formal_source_research_acceptance: false
+original_strategy_complete: false
+scope: 三ETF29行对数回归年化收益乘R²轮动
+rules:
+  pool: 实际510180、159915、513100；其他标的仅注释；stock_num=1
+  schedule: 每日9:30调仓、open止损、15:30打印；两个开盘回调排序未证明
+  score: 29条close取log和polyfit；年化pow(exp(slope),250)-1乘R²；R²分母为28乘样本方差
+  ranking: 忽略get_rank参数，使用g.stock_pool；按原池稳定排序取第一；无正评分门槛
+  filtering: 先截断第一名，再ST/名称、1m涨停、1m跌停、停牌过滤；已持仓豁免涨跌停；不补选第二名
+  orders: 先清仓名单外；已持赢家不再平衡；只按cash与剩余仓位数分配；直接访问未持仓key；开仓filled大于0、平仓held且全成
+  stop: 持仓价格除成本收益率乘100，小于等于-80清仓
+  fees: FixedSlippage0；fund佣金买卖0.0003、最低5、税0
+gaps:
+  - 基金完整历史身份、分红拆并份额事件、动态复权、日状态、基金成交规则未准入
+  - 原1m过滤价格、9:30与open顺序及即时订单反馈未证明；持仓映射缺失key语义未知
+  - math未显式导入；当前pandas的Series负标签可能报错；常量价窗口除零和非有限评分未阻断
+  - 原生三候选不证明平台同口径；跨缺日窗口单列，不填充或推断停牌
+next: 先放行基金输入和原执行协议；必要具体经济修正版另确认，再唯一Book最长三成本、逐年及observe reproduce禁网验收

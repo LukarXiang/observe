@@ -1,0 +1,104 @@
+{
+  "case": {
+    "adversarial_review": {
+      "examined": [
+        "All earlier eligibility islands selected before returns; no pause fill or outcome selection",
+        "Approval and frozen config/source SHA enforcement; economic parameters unchanged",
+        "Independent cash/empty state per island; no stitching of NAV or original tail",
+        "One frozen --label selected before execution; unknown/path-like labels rejected",
+        "Immutable output refusal preserved; selected later window skips completed first window",
+        "Sole Book reused for intents and execution, frozen-date fee arithmetic independently checked",
+        "Receipt/config/report and all six parent integrity checks passed on continuation",
+        "2018 loss and platform/fixed-pool/nonindependent-holdout limits retained"
+      ],
+      "findings": []
+    },
+    "continuation_checks": {
+      "frozen_config_and_source_bindings": "passed",
+      "full_suite_run": false,
+      "per_window_validation_sha": "passed",
+      "raw_stdout_file_saved": false,
+      "receipt_and_original_report_exact_results_and_period": "passed",
+      "resume_tests": {
+        "duration_seconds": 3.27,
+        "failed": 0,
+        "passed": 4
+      },
+      "ruff": "passed",
+      "six_parent_integrity_checks": "ok",
+      "three_comparison_difference_lists": "empty",
+      "three_comparison_results": "match",
+      "three_frozen_verification_difference_counts": 0
+    },
+    "cost_scenarios": 9,
+    "factor_sessions": 804,
+    "fills_independently_fee_checked": 45,
+    "formal_source_acceptance": false,
+    "implementation_sha256": {
+      "scripts/supplement_pair66_history.py": "15aa92dc9fa75a166100680fb91f3da7756db71cfaeceb9a0bf4c2b596065fbb",
+      "tests/unit/test_pair66_history_resume.py": "40e431fef4766323228e71f5156d846692e507f38feb371023294df88e14b61a"
+    },
+    "ledger_session_rows": 2412,
+    "library_goal_complete": false,
+    "local_strategy_parent_runs": 75,
+    "locally_backtested_sources": 12,
+    "new_original_parent_runs": 3,
+    "new_reproduction_parent_runs": 3,
+    "next": "Continue batch90 original intraday source paths and dependency evidence; pending economic variants stay pending; Git publication user-operated",
+    "platform_equivalence_proven": false,
+    "prepared_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/prepared-windows.json",
+    "prepared_sha256": "1e9351a94cc5964691919e88019dc4be6c13419c81ab2793de37df04cf45b093",
+    "protection_scope": {
+      "fresh_full_partition_hash": false,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_full_SHA_unchanged": 5363,
+      "old_index_rows_unchanged": 5280,
+      "old_partitions_size_mtime_unchanged": 398
+    },
+    "readback_failure": {
+      "cause": "Temporary checker expected integer0 for comparison.json differences, actually an empty list; frozen summary integer0 verified separately",
+      "file": "data/staging/strategies-history-supplement/20261010-receipt-readback-first-failure.json",
+      "resolved": true,
+      "strategy_or_experiment_changed": false
+    },
+    "real_trading_windows": 3,
+    "receipt_file": "docs/handoff/2026-10-09-pair66-earlier-windows-verification.json",
+    "receipt_sha256": "9bfc93f94620ae6ecf1fe90fd2b222ffd8fb5f45695d396bae3bc71dad877569",
+    "resume_regression": {
+      "green_junit_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/resume-regression-green.xml",
+      "green_junit_sha256": "62c1458f84e35bc6996212a835e03665ddf2e15c5f9c23faabb0235867be2d5f",
+      "green_passed": 4,
+      "old_runner_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/runner-before-resume.py",
+      "old_runner_sha256": "402622a30d641cc012ddcbddf729f366a0f1ca14a09c9c2cf62e980c6ae383af",
+      "red_failed": 4,
+      "red_junit_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/resume-regression-red.xml",
+      "red_junit_sha256": "39429644e2a44a62ebd35b7a15fc604855976a15b591f445c11adc25f51092d6"
+    },
+    "review_depth": "deep",
+    "scope": "existing_approved_pair66_real_backtest_supplement",
+    "scope_alignment": "on_target",
+    "source_accepted": 260,
+    "source_accepted_checkpoint": "20261009-070511-857e",
+    "source_total": 695,
+    "specialist_reviews": {
+      "architecture": {
+        "agent": "pair66_final_architecture",
+        "findings": []
+      },
+      "security": {
+        "agent": "pair66_final_security",
+        "findings": []
+      }
+    },
+    "status": "ok",
+    "trading_supplement_checkpoint": "20261009-072521-7bfa"
+  },
+  "case_id": "pair66-earlier-final-review",
+  "nature": "source_config_results_integrity_and_resume_review_binding",
+  "purpose": "六父运行完整性及SHA/报告/原字节核验；4旧红新绿续跑回归和安全/架构终审，无平台等价声明",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-10-pair66-earlier-windows-final-review.json",
+    "sha256": "f954d0bc5dc0a7e6b65b1471a62ea1a2b50897e52d8f87d8f4b8011ef72a94d9"
+  }
+}

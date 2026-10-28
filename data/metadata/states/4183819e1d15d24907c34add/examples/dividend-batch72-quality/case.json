@@ -1,0 +1,141 @@
+{
+  "case": {
+    "limits": [
+      "Sina1900 date is a placeholder candidate, not historical availability proof",
+      "Raw cninfo response only has the11 fields extracted by the installed parser; no total dividend amount or JY daily yield",
+      "Report descriptions and per10-share text do not prove STK_XR_XD amount units or historical total shares"
+    ],
+    "method": "Count missing native date fields and announcement<=1900-01-01 without replacing, dropping or publishing rows; paired providers overlap and are not independent events",
+    "not_a_backtest": true,
+    "samples": [
+      {
+        "announcement_le_1900_rows": 1,
+        "case": "sina-000001",
+        "earliest_announcement_after_1900": "1991-03-03",
+        "file": "data/staging/strategies-batch72/20261008-dividend-income/probes/sina-000001/parsed.parquet",
+        "missing_date_fields": {
+          "公告日期": 0,
+          "红股上市日": 36,
+          "股权登记日": 9,
+          "除权除息日": 8
+        },
+        "original_fields_missing": [
+          "bonus_amount_rmb",
+          "JY_daily_DividendRatio",
+          "historical_daily_total_cap"
+        ],
+        "rows": 38,
+        "sha256": "41df8d64deae6b1cfb2d49cd3d953a4b26e119a80859046c7a258236248e18db"
+      },
+      {
+        "announcement_le_1900_rows": 0,
+        "case": "cninfo-000001",
+        "earliest_announcement_after_1900": "1992-03-14",
+        "file": "data/staging/strategies-batch72/20261008-dividend-income/probes/cninfo-000001/parsed.parquet",
+        "missing_date_fields": {
+          "实施方案公告日期": 0,
+          "派息日": 3,
+          "股份到账日": 23,
+          "股权登记日": 0,
+          "除权日": 0
+        },
+        "original_fields_missing": [
+          "bonus_amount_rmb",
+          "JY_daily_DividendRatio",
+          "historical_daily_total_cap"
+        ],
+        "rows": 29,
+        "sha256": "5eb53c7924d47fb33c49f30abcb863b27a5615096f4a0e68a111d50117e0797b"
+      },
+      {
+        "announcement_le_1900_rows": 0,
+        "case": "sina-600036",
+        "earliest_announcement_after_1900": "2003-07-08",
+        "file": "data/staging/strategies-batch72/20261008-dividend-income/probes/sina-600036/parsed.parquet",
+        "missing_date_fields": {
+          "公告日期": 0,
+          "红股上市日": 27,
+          "股权登记日": 1,
+          "除权除息日": 1
+        },
+        "original_fields_missing": [
+          "bonus_amount_rmb",
+          "JY_daily_DividendRatio",
+          "historical_daily_total_cap"
+        ],
+        "rows": 28,
+        "sha256": "396f7cda1d208d26c935f9bbf043ae8eca71961dcf254ed599d63de92a5bd3cc"
+      },
+      {
+        "announcement_le_1900_rows": 0,
+        "case": "cninfo-600036",
+        "earliest_announcement_after_1900": "2003-07-08",
+        "file": "data/staging/strategies-batch72/20261008-dividend-income/probes/cninfo-600036/parsed.parquet",
+        "missing_date_fields": {
+          "实施方案公告日期": 0,
+          "派息日": 1,
+          "股份到账日": 26,
+          "股权登记日": 0,
+          "除权日": 0
+        },
+        "original_fields_missing": [
+          "bonus_amount_rmb",
+          "JY_daily_DividendRatio",
+          "historical_daily_total_cap"
+        ],
+        "rows": 27,
+        "sha256": "76a8d8585213a2a11eb881c3ce27f9e85a381417c053c723eb053b9ccdeb5819"
+      },
+      {
+        "announcement_le_1900_rows": 0,
+        "case": "sina-600519",
+        "earliest_announcement_after_1900": "2002-07-18",
+        "file": "data/staging/strategies-batch72/20261008-dividend-income/probes/sina-600519/parsed.parquet",
+        "missing_date_fields": {
+          "公告日期": 0,
+          "红股上市日": 29,
+          "股权登记日": 0,
+          "除权除息日": 0
+        },
+        "original_fields_missing": [
+          "bonus_amount_rmb",
+          "JY_daily_DividendRatio",
+          "historical_daily_total_cap"
+        ],
+        "rows": 31,
+        "sha256": "a985eaf363f5f5a7f9ac81ab63bb61e593ddb5e7eb15d8c606e01a71c2e99cc7"
+      },
+      {
+        "announcement_le_1900_rows": 0,
+        "case": "cninfo-600519",
+        "earliest_announcement_after_1900": "2002-07-18",
+        "file": "data/staging/strategies-batch72/20261008-dividend-income/probes/cninfo-600519/parsed.parquet",
+        "missing_date_fields": {
+          "实施方案公告日期": 0,
+          "派息日": 1,
+          "股份到账日": 29,
+          "股权登记日": 0,
+          "除权日": 0
+        },
+        "original_fields_missing": [
+          "bonus_amount_rmb",
+          "JY_daily_DividendRatio",
+          "historical_daily_total_cap"
+        ],
+        "rows": 31,
+        "sha256": "a11e84c1eb7f22aa4298fa30ecb03180fb9698fe8a357885aa650be7f862c930"
+      }
+    ],
+    "source_rows_total": 184,
+    "status": "reference_only",
+    "unique_events_deduplicated": false
+  },
+  "case_id": "dividend-batch72-quality",
+  "nature": "reference_only_native_date_and_field_gaps",
+  "purpose": "六双源184行含重叠，新浪平安1900日期占位及登记/派息/到账缺口；无删填或准入交易，原字段/版本门禁保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch72/20261008-dividend-income-review-correction/dividend-data-quality.json",
+    "sha256": "9e43507bd81fe023effaa76d23daab143f391337a042f978ea2df37f46481923"
+  }
+}

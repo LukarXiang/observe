@@ -1,0 +1,45 @@
+{
+  "case": {
+    "candidate_profiles": [
+      {
+        "case": "industry-history",
+        "error": "ConnectionError: HTTPSConnectionPool(host='www.swsresearch.com', port=443): Max retries exceeded with url: /swindex/pdf/SwClass2021/StockClassifyUse_stock.xls (Caused by NameResolutionError(\"HTTPSConnection(host='www.swsresearch.com', port=443): Failed to resolve 'www.swsresearch.com' ([Errno -2] Name or service not known)\"))",
+        "status": "failed",
+        "strict_usable": false,
+        "wire_responses": 0
+      },
+      {
+        "case": "money-flow-600519",
+        "error": "ConnectionError: HTTPSConnectionPool(host='push2his.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/stock/fflow/daykline/get?lmt=0&klt=101&secid=1.600519&fields1=f1%2Cf2%2Cf3%2Cf7&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61%2Cf62%2Cf63%2Cf64%2Cf65&ut=b2884a393a59ad64002292a3e90d46a5&_=1791491252451 (Caused by NameResolutionError(\"HTTPSConnection(host='push2his.eastmoney.com', port=443): Failed to resolve 'push2his.eastmoney.com' ([Errno -2] Name or service not known)\"))",
+        "status": "failed",
+        "strict_usable": false,
+        "wire_responses": 0
+      }
+    ],
+    "cost_backtests": [],
+    "financial_dictionary_candidate_rows": 285,
+    "limits": [
+      "No registered index_constituents or historical SW industry membership/name chain on this machine",
+      "Final annual/quarterly financial records have no proven revision availability; strict usable0",
+      "Capitalization shares are not paid-in capital amount; annual marketvalue is not daily cap",
+      "Supplier peTTM is not pe_ratio_lyr; ROE/revenue growth/profit ratio definitions and helper endpoints are unknown",
+      "MA8/89 helper price/seed/current-bar/inequality semantics unknown; no invented long MA signals",
+      "Previous net_pct_main helper date/units/vendor/version unavailable; native recent sample cannot restore full history",
+      "Incremental allocation, immediate/failed fills, .02 absolute slippage and platform callback order remain unproved"
+    ],
+    "longest_interval_conclusion": "No original signal intervals admitted; unknown external helpers and historical pool/financial/flow inputs block signals and trades",
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "original_MA_windows": 0,
+    "original_money_flow_windows": 0,
+    "original_pool_financial_rank_days": 0
+  },
+  "case_id": "wizard-flow-batch85-summary",
+  "nature": "accepted_original_signal_interval_and_trading_gate_assessment",
+  "purpose": "未知MA/资金流helper及历史池/财务版本，原MA窗/流窗/完整选股日/三成本/新增交易0；长日线不补未知定义，两交易明确搁置",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/component-research.json",
+    "sha256": "276d4288f020683a6238671f4a5be8094dc237aade5ad432e0e0f71a6faf8564"
+  }
+}

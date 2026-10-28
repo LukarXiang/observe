@@ -1,0 +1,68 @@
+{
+  "case": {
+    "backtested_sources": 12,
+    "confirmed_v1_findings": [
+      "review body not parsed",
+      "post-publication failure leaves new navigation"
+    ],
+    "development_checks": "90 related tests passed before final minor SHA-capture move; formal checks pending",
+    "evidence_sha256": {
+      "data/staging/strategies-batch95/20261010-formal-development-checks/final-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "data/staging/strategies-batch95/20261010-formal-development-checks/final-tests.log": "e2a011074b190ab526d2f1b80cac9d31f4a435f1d11deb3f696592955e4ae01e",
+      "data/staging/strategies-batch95/20261010-formal-development-checks/final-tests.xml": "36fef571b070b8179419065f7f8c1a719d28681ec35da681f0b560d995e428eb",
+      "data/staging/strategies-batch95/20261010-formal-development-checks/fixed-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "data/staging/strategies-batch95/20261010-formal-development-checks/initial-ruff.log": "9b577d8dd83b198fddff00e74b104169db2d4c17b216bf655f42918ba3678d52",
+      "data/staging/strategies-batch95/20261010-formal-development-checks/repaired-tests.log": "c4e0f7e31dc4ac5e5e3fcb1e2cb44d4157a226492e79309da95c8abfec217b77",
+      "data/staging/strategies-batch95/20261010-formal-development-checks/repaired-tests.xml": "1ea61567febd2c211fbf68768f5734f4751556891bb7048eb66500bcc4fb8caf",
+      "data/staging/strategies-batch95/20261010-formal-development-checks/review-parser-red.log": "d4ef4f9be0e2abee79eb4178e9c2907f41f0812ee7f79c27de86650ca6f1eb8b",
+      "data/staging/strategies-batch95/20261010-formal-development-checks/tests.log": "ed82b0263c22d6297f0d9953e9e976dd44a72db0183d425ff834dd8193dd0b8a",
+      "data/staging/strategies-batch95/20261010-formal-development-checks/tests.xml": "5ddff58f42e3875db1d06316ba6e78fbac8c441dcb9c21147897f0c2320a7918",
+      "data/staging/strategies-batch95/20261010-formal-review-v1/architecture/review.json": "be9a15a16f5c391284d9fe132bbeeb1ecd6986f436595e20eae887389f1a370e",
+      "data/staging/strategies-batch95/20261010-formal-review-v1/security/review.json": "41cc42a47ebf8de837dda8db9eb91a09af09370321e65a1d51e202b20357142c"
+    },
+    "failed_attempts_preserved": true,
+    "formal_directory": "data/staging/strategies-batch95/20261011-magic3-v2-formal-acceptance",
+    "formal_reviewed_sources": 273,
+    "formal_source_research_acceptance": false,
+    "formal_trading_acceptance": false,
+    "implementation_sha256": {
+      "scripts/accept_strategy_batch95.py": "63fdf4d5222574f6563d67c3b55a267f02a74c66f5559a082b87d258e795ffcb",
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+      "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+      "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+      "scripts/review_strategy_batch95.py": "6ae51bcd2fccb1adc46ae72d0120770bb4f00b37f62660dadff2411f9275688d",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "scripts/verify_strategy_batch95.py": "9c6e66e95eaf88dcc59b12662dcc48c9a681d2628e766de342a742cd6fb280ff",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "509ddb00d8394643eec30f5d609ae6a1356319a033545eb4990ee2f527b3e216",
+      "tests/unit/test_batch95_acceptance.py": "d4a03d836efbed600e18d8173ca5b27b27c8d452e54fead980c9bc136c8b29ff",
+      "tests/unit/test_batch95_preparation.py": "6c806bc26987e29b506a1c96172672a0089f175612829c128fa5d4be858339eb",
+      "tests/unit/test_batch95_stage.py": "ed6280f8fbd8831537a7bfb1b888370eed32bf64af6ae5f6d4bb56f508ecf14e"
+    },
+    "new_trading_backtests": 0,
+    "repairs": [
+      "parse and rebind all six review bodies",
+      "conditional restoration of two mutable navigation files",
+      "success receipt written last",
+      "actual isolated import origins",
+      "postarchive inventory and old-asset revalidation"
+    ],
+    "scope": "formal_acceptance_driver_development_only",
+    "status": "in_progress",
+    "strategy_parent_runs": 77
+  },
+  "case_id": "etf-magic3-v2-batch95-formal-development",
+  "nature": "in_progress_formal_driver_development_with_preserved_red_evidence",
+  "purpose": "三个真实门禁缺陷与修正、既有交易证据目录同步归档，未正式验收或新增交易",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-11-batch95-formal-development.json",
+    "sha256": "2e5f53be0d71b2711b6e11787d147c790c01b32c22036294e893255d9660b810"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "case": {
+    "common_observed_dates": 3201,
+    "common_range": [
+      "2013-07-31",
+      "2026-09-29"
+    ],
+    "inputs": {
+      "510300.XSHG": {
+        "range": [
+          "2012-05-28",
+          "2026-09-29"
+        ],
+        "raw_jumps_over_50pct": [],
+        "rows_in_archive": 3488,
+        "rows_through_cutoff": 3487,
+        "trade_usable": false
+      },
+      "511010.XSHG": {
+        "range": [
+          "2013-04-09",
+          "2026-09-29"
+        ],
+        "raw_jumps_over_50pct": [],
+        "rows_in_archive": 3279,
+        "rows_through_cutoff": 3277,
+        "trade_usable": false
+      },
+      "513100.XSHG": {
+        "range": [
+          "2013-07-31",
+          "2026-09-29"
+        ],
+        "raw_jumps_over_50pct": [
+          {
+            "date": "2022-01-14",
+            "raw_relative_change": -0.8045069337442219
+          }
+        ],
+        "rows_in_archive": 3203,
+        "rows_through_cutoff": 3201,
+        "trade_usable": false
+      },
+      "518880.XSHG": {
+        "range": [
+          "2013-07-29",
+          "2026-09-29"
+        ],
+        "raw_jumps_over_50pct": [],
+        "rows_in_archive": 3206,
+        "rows_through_cutoff": 3204,
+        "trade_usable": false
+      }
+    },
+    "limits": [
+      "Observed-date intersection is not verified exchange-calendar coverage or an ES120 window count",
+      "Raw jumps retained; no split/event/correction inferred",
+      "No strategy signals or weights calculated pending return-semantics decision"
+    ],
+    "not_a_backtest": true
+  },
+  "case_id": "allweather-batch89-candidates-stage",
+  "nature": "in_progress_long_native_candidate_coverage_not_ES_windows_or_trades",
+  "purpose": "四候选截止内3487/3204/3277/3201行，共同3201观察日期2013至2026；513100原生-80.45%跳变保留，无纠价/发布/新增网络请求或交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch89/20261009-all-weather-source-stage/candidate-coverage.json",
+    "sha256": "87af442fd73d13c1226b551db66850412e3d9f22a98fa1a5bc2ff75d874a3459"
+  }
+}

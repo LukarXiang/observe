@@ -1,0 +1,3289 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "initialize",
+        "error": null,
+        "events": [
+          [
+            "benchmark",
+            "000300.XSHG"
+          ],
+          [
+            "option",
+            "use_real_price",
+            true
+          ],
+          [
+            "option",
+            "avoid_future_data",
+            true
+          ],
+          [
+            "slippage",
+            {
+              "FixedSlippage": 0.001
+            }
+          ],
+          [
+            "cost",
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0,
+              "close_today_commission": 0,
+              "min_commission": 5,
+              "open_commission": 0.0003,
+              "open_tax": 0
+            },
+            {
+              "type": "fund"
+            }
+          ],
+          [
+            "log_level",
+            "order",
+            "error"
+          ],
+          [
+            "schedule",
+            "my_trade",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "9:30"
+            }
+          ],
+          [
+            "schedule",
+            "check_lose",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "open"
+            }
+          ],
+          [
+            "schedule",
+            "print_trade_info",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "15:30"
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": {
+          "hold": "",
+          "pool": [
+            "510050.XSHG",
+            "159928.XSHE",
+            "510300.XSHG",
+            "159949.XSHE"
+          ],
+          "seed_length": 599
+        },
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_datetime",
+        "error": {
+          "message": "0",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_range",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159928.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "510300.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159949.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "info",
+            "         close\n17  117.894737\n18  118.947368\n19  120.000000"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": [
+          "510050.XSHG",
+          0.010526315789473668
+        ],
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_controlled_positional",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159928.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "510300.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159949.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "info",
+            "         close\n17  117.894737\n18  118.947368\n19  120.000000"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": [
+          "510050.XSHG",
+          0.010526315789473668
+        ],
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_equal_scores",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159928.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "510300.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159949.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "info",
+            "    close\n17  100.0\n18  100.0\n19  100.0"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": [
+          "510050.XSHG",
+          2.8998059504378483e-18
+        ],
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_plain_empty",
+        "error": {
+          "message": "'510050.XSHG'",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_reject_numeric",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          },
+          {
+            "security": 0.123,
+            "value": 1000.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_partial_masks_numeric",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_full_masks_numeric",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "SELL_mutating",
+        "error": {
+          "message": "dictionary changed size during iteration",
+          "type": "RuntimeError"
+        },
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] SELL\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_error_before_SELL",
+        "error": {
+          "message": "0",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "KEEP_rotates",
+        "error": {
+          "message": "dictionary changed size during iteration",
+          "type": "RuntimeError"
+        },
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ],
+          [
+            "info",
+            "[510300.XSHG]已不在应买入列表中"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510300.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] KEEP\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "partial_sell_blocks_rotation",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ],
+          [
+            "info",
+            "[510300.XSHG]已不在应买入列表中"
+          ]
+        ],
+        "held": [
+          "510300.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510300.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "deferred_sell_blocks_rotation",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ],
+          [
+            "info",
+            "[510300.XSHG]已不在应买入列表中"
+          ]
+        ],
+        "held": [
+          "510300.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510300.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "stop_exact_minus90",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "！！！！！！触发止损信号: 标的=510050.XSHG,标的价值=10000.00,浮动盈亏=-90.00% ！！！！！！\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "stop_above_minus90",
+        "error": null,
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "stop_zero_cost",
+        "error": {
+          "message": "float division by zero",
+          "type": "ZeroDivisionError"
+        },
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "time_0929",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "time_0931",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "positive_below_mean",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "positive_equal_mean",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_zero",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_minus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_above_minus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_plus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_above_plus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "BUY",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_below_minus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "SELL",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "open_reject",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "open_zero",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "open_partial",
+        "error": null,
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": true,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "close_partial",
+        "error": null,
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "close_full",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": true,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "close_full_canceled",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 0,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "initialize",
+        "error": null,
+        "events": [
+          [
+            "benchmark",
+            "000300.XSHG"
+          ],
+          [
+            "option",
+            "use_real_price",
+            true
+          ],
+          [
+            "option",
+            "avoid_future_data",
+            true
+          ],
+          [
+            "slippage",
+            {
+              "FixedSlippage": 0.001
+            }
+          ],
+          [
+            "cost",
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0,
+              "close_today_commission": 0,
+              "min_commission": 5,
+              "open_commission": 0.0003,
+              "open_tax": 0
+            },
+            {
+              "type": "fund"
+            }
+          ],
+          [
+            "log_level",
+            "order",
+            "error"
+          ],
+          [
+            "schedule",
+            "my_trade",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "9:30"
+            }
+          ],
+          [
+            "schedule",
+            "check_lose",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "open"
+            }
+          ],
+          [
+            "schedule",
+            "print_trade_info",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "15:30"
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": {
+          "hold": "",
+          "pool": [
+            "510050.XSHG",
+            "159928.XSHE",
+            "510300.XSHG",
+            "159949.XSHE"
+          ],
+          "seed_length": 599
+        },
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_datetime",
+        "error": {
+          "message": "0",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_range",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159928.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "510300.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159949.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "info",
+            "         close\n17  117.894737\n18  118.947368\n19  120.000000"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": [
+          "510050.XSHG",
+          0.010526315789473668
+        ],
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_controlled_positional",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159928.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "510300.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159949.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "info",
+            "         close\n17  117.894737\n18  118.947368\n19  120.000000"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": [
+          "510050.XSHG",
+          0.010526315789473668
+        ],
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_equal_scores",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159928.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "510300.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159949.XSHE",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "info",
+            "    close\n17  100.0\n18  100.0\n19  100.0"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": [
+          "510050.XSHG",
+          2.8998059504378483e-18
+        ],
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_plain_empty",
+        "error": {
+          "message": "'510050.XSHG'",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_reject_numeric",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          },
+          {
+            "security": 0.123,
+            "value": 1000.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_partial_masks_numeric",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_full_masks_numeric",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "SELL_mutating",
+        "error": {
+          "message": "dictionary changed size during iteration",
+          "type": "RuntimeError"
+        },
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] SELL\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_error_before_SELL",
+        "error": {
+          "message": "0",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            20,
+            "1d",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "KEEP_rotates",
+        "error": {
+          "message": "dictionary changed size during iteration",
+          "type": "RuntimeError"
+        },
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ],
+          [
+            "info",
+            "[510300.XSHG]已不在应买入列表中"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510300.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] KEEP\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "partial_sell_blocks_rotation",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ],
+          [
+            "info",
+            "[510300.XSHG]已不在应买入列表中"
+          ]
+        ],
+        "held": [
+          "510300.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510300.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "deferred_sell_blocks_rotation",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ],
+          [
+            "info",
+            "[510300.XSHG]已不在应买入列表中"
+          ]
+        ],
+        "held": [
+          "510300.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510300.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "stop_exact_minus90",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "！！！！！！触发止损信号: 标的=510050.XSHG,标的价值=10000.00,浮动盈亏=-90.00% ！！！！！！\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "stop_above_minus90",
+        "error": null,
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "stop_zero_cost",
+        "error": {
+          "message": "float division by zero",
+          "type": "ZeroDivisionError"
+        },
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "time_0929",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "time_0931",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "positive_below_mean",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "positive_equal_mean",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_zero",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_minus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_above_minus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_plus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "KEEP",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_above_plus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "BUY",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_below_minus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            35,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "SELL",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "open_reject",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "open_zero",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "open_partial",
+        "error": null,
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": true,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "close_partial",
+        "error": null,
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "close_full",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": true,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "close_full_canceled",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 1,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "initialize",
+        "error": null,
+        "events": [
+          [
+            "benchmark",
+            "399006.XSHE"
+          ],
+          [
+            "option",
+            "use_real_price",
+            true
+          ],
+          [
+            "option",
+            "avoid_future_data",
+            true
+          ],
+          [
+            "slippage",
+            {
+              "FixedSlippage": 0.001
+            }
+          ],
+          [
+            "cost",
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0,
+              "close_today_commission": 0,
+              "min_commission": 0,
+              "open_commission": 0.0003,
+              "open_tax": 0
+            },
+            {
+              "type": "fund"
+            }
+          ],
+          [
+            "log_level",
+            "order",
+            "error"
+          ],
+          [
+            "schedule",
+            "my_trade",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "9:30"
+            }
+          ],
+          [
+            "schedule",
+            "check_lose",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "open"
+            }
+          ],
+          [
+            "schedule",
+            "hold_check",
+            {
+              "time": "13:00"
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": {
+          "hold": "",
+          "pool": [
+            "510050.XSHG",
+            "510300.XSHG",
+            "159949.XSHE",
+            "159928.XSHE"
+          ],
+          "seed_length": 600
+        },
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_datetime",
+        "error": {
+          "message": "0",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_range",
+        "error": {
+          "message": "0",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_controlled_positional",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "510300.XSHG",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159949.XSHE",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159928.XSHE",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": [
+          "510050.XSHG",
+          -0.00011496765026465766
+        ],
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_equal_scores",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "510300.XSHG",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159949.XSHE",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ],
+          [
+            "history",
+            "159928.XSHE",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": [
+          "510050.XSHG",
+          2.8998059504378483e-18
+        ],
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "mean_11",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": 0,
+        "score_history_length": 11,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "mean_12_missing",
+        "error": {
+          "message": "name 'mean' is not defined",
+          "type": "NameError"
+        },
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 12,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "mean_12_injected",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": 5.5,
+        "score_history_length": 12,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_plain_empty",
+        "error": {
+          "message": "'510050.XSHG'",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_reject_numeric",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          },
+          {
+            "security": 0.123,
+            "value": 1000.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_partial_masks_numeric",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "BUY_full_masks_numeric",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "SELL_mutating",
+        "error": {
+          "message": "dictionary changed size during iteration",
+          "type": "RuntimeError"
+        },
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] SELL\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "rank_error_before_SELL",
+        "error": {
+          "message": "0",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            110,
+            "1d",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "KEEP_rotates",
+        "error": {
+          "message": "dictionary changed size during iteration",
+          "type": "RuntimeError"
+        },
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "159949.XSHE",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] KEEP\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "partial_sell_blocks_rotation",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [
+          "159949.XSHE"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "159949.XSHE",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "deferred_sell_blocks_rotation",
+        "error": null,
+        "events": [
+          [
+            "rank"
+          ],
+          [
+            "timing"
+          ]
+        ],
+        "held": [
+          "159949.XSHE"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "159949.XSHE",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "今日自选及择时信号:['510050.XSHG', 0.123] BUY\n",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "stop_exact_minus90",
+        "error": {
+          "message": "name 'value' is not defined",
+          "type": "NameError"
+        },
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "stop_above_minus90",
+        "error": null,
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "stop_zero_cost",
+        "error": {
+          "message": "float division by zero",
+          "type": "ZeroDivisionError"
+        },
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "time_0929",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "time_0931",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "positive_below_mean",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low",
+              "volume"
+            ]
+          ],
+          [
+            "info",
+            "rsrs_score 0.200 "
+          ],
+          [
+            "record",
+            {
+              "rsrs_mean": 0.5,
+              "rsrs_score": 0.2
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "SELL",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "positive_equal_mean",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low",
+              "volume"
+            ]
+          ],
+          [
+            "info",
+            "rsrs_score 0.200 "
+          ],
+          [
+            "record",
+            {
+              "rsrs_mean": 0.2,
+              "rsrs_score": 0.2
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "BUY",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_zero",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low",
+              "volume"
+            ]
+          ],
+          [
+            "info",
+            "rsrs_score 0.000 "
+          ],
+          [
+            "record",
+            {
+              "rsrs_mean": 0.2,
+              "rsrs_score": 0.0
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "BUY",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_minus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low",
+              "volume"
+            ]
+          ],
+          [
+            "info",
+            "rsrs_score -0.700 "
+          ],
+          [
+            "record",
+            {
+              "rsrs_mean": 0.2,
+              "rsrs_score": -0.7
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "SELL",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_above_minus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low",
+              "volume"
+            ]
+          ],
+          [
+            "info",
+            "rsrs_score -0.700 "
+          ],
+          [
+            "record",
+            {
+              "rsrs_mean": 0.2,
+              "rsrs_score": -0.6999999999999998
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "BUY",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_plus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low",
+              "volume"
+            ]
+          ],
+          [
+            "info",
+            "rsrs_score 0.700 "
+          ],
+          [
+            "record",
+            {
+              "rsrs_mean": 0.2,
+              "rsrs_score": 0.7
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "BUY",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_above_plus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low",
+              "volume"
+            ]
+          ],
+          [
+            "info",
+            "rsrs_score 0.700 "
+          ],
+          [
+            "record",
+            {
+              "rsrs_mean": 0.2,
+              "rsrs_score": 0.7000000000000001
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "BUY",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "score_below_minus07",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "000300.XSHG",
+            18,
+            "1d",
+            [
+              "high",
+              "low",
+              "volume"
+            ]
+          ],
+          [
+            "info",
+            "rsrs_score -0.700 "
+          ],
+          [
+            "record",
+            {
+              "rsrs_mean": 0.2,
+              "rsrs_score": -0.7000000000000001
+            }
+          ]
+        ],
+        "held": [],
+        "hold_state": "",
+        "orders": [],
+        "result": "SELL",
+        "score_history_length": 0,
+        "slope_history_length": 600,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "hold_datetime",
+        "error": {
+          "message": "-1",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            22,
+            "60m",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "hold_range",
+        "error": {
+          "message": "-1",
+          "type": "KeyError"
+        },
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            22,
+            "60m",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "hold_below_injected_label",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            22,
+            "60m",
+            [
+              "close"
+            ]
+          ],
+          [
+            "info",
+            "盘中止损",
+            "510050.XSHG"
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "510050.XSHG",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "hold_equal_injected_label",
+        "error": null,
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            22,
+            "60m",
+            [
+              "close"
+            ]
+          ]
+        ],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "hold_wrong_time",
+        "error": null,
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "hold_two_mutating",
+        "error": {
+          "message": "dictionary changed size during iteration",
+          "type": "RuntimeError"
+        },
+        "events": [
+          [
+            "history",
+            "510050.XSHG",
+            22,
+            "60m",
+            [
+              "close"
+            ]
+          ],
+          [
+            "info",
+            "盘中止损",
+            "510050.XSHG"
+          ]
+        ],
+        "held": [
+          "159949.XSHE"
+        ],
+        "hold_state": "510050.XSHG",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": null,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "open_reject",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "open_zero",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "open_partial",
+        "error": null,
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 1000.0
+          }
+        ],
+        "result": true,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "close_partial",
+        "error": null,
+        "events": [],
+        "held": [
+          "510050.XSHG"
+        ],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "close_full",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": true,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      },
+      {
+        "case": "close_full_canceled",
+        "error": null,
+        "events": [],
+        "held": [],
+        "hold_state": "",
+        "orders": [
+          {
+            "security": "510050.XSHG",
+            "value": 0.0
+          }
+        ],
+        "result": false,
+        "score_history_length": 0,
+        "slope_history_length": 599,
+        "source": 2,
+        "stdout": "",
+        "synthetic_not_backtest": true
+      }
+    ],
+    "controlled_namespace_only": true,
+    "count": 108,
+    "jqdata_mean_export_proven": false,
+    "new_trading_backtests": 0,
+    "platform_position_refresh_semantics_proven": false
+  },
+  "case_id": "etf-magic3-v2-batch95-diagnostics",
+  "nature": "in_progress_original_callback_controlled_api_feedback",
+  "purpose": "108原函数诊断：Series标签/第12项mean追加后报错/数字评分当证券/排名阻SELL/止损先下单后打印异常/持仓删除反馈；不证明原平台语义或交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/diagnostics.json",
+    "sha256": "6529ed0a70068b38505e98c60a8b5944990023bb7c86fc78b6135f76d5ad7e4b"
+  }
+}

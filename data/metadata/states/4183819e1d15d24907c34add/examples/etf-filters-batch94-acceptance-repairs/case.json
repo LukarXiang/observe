@@ -1,0 +1,63 @@
+{
+  "case": {
+    "accepted_checkpoint": "20261010-181224-4012",
+    "current_directory": "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v4",
+    "development_evidence": "data/staging/strategies-batch94/20261010-acceptance-development",
+    "exclusion": "tests/unit/test_batch94_reference_recovery.py::test_socket_methods_blocked_before_transport",
+    "formal_source_research_acceptance": false,
+    "formal_trading_acceptance": false,
+    "implementation_sha256": {
+      "scripts/verify_strategy_batch94.py": "c7b8869894c2a0a321f1ea4b53b4c31083191526864206761194b4f72963f386",
+      "src/observe/strategy_catalog.py": "c82caf370aa5c223209b959850d93b4f6e4a2c5b03d3ed8ec09e7ad2aa80a904",
+      "tests/unit/test_batch94_acceptance.py": "54d16b5f83f7503b7dcdd965d1d373e91a4da5171179a1e34862b40eb6013789"
+    },
+    "latest_final_checks": "pending_current_directory_replay_isolation_checks_review_and_finish",
+    "new_trading_backtests": 0,
+    "old_math_replay_difference_count": 0,
+    "old_stages_not_accepted": [
+      "data/staging/strategies-batch94/20261010-etf-filters-acceptance",
+      "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v2",
+      "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v3"
+    ],
+    "progress": {
+      "catalog_id": "83d74a59b03206fedabd",
+      "catalog_sha256": "b295b7318e1f925f6a9f779db82e2f9b7159e31e194ca6f5478016bb520f36a2",
+      "catalog_status_counts": {
+        "已验证": 11,
+        "待审查": 2,
+        "待数据": 483,
+        "暂不可复现": 70,
+        "重复版本": 41,
+        "非交易研究脚本": 88
+      },
+      "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+      "checkpoint": "20261010-201306-5fe4",
+      "local_strategy_runs": 75,
+      "locally_backtested_sources": 12,
+      "locally_reproduced_sources": 12,
+      "manually_reviewed": 270,
+      "note": "Batch94 formal source research acceptance starts; no trades",
+      "output": "data/catalog/strategies/progress/20261010-201306-5fe4",
+      "published_batch": "20261006-145049-5ceb",
+      "sources": 695
+    },
+    "report": "docs/tasks/2026-10-10-第九十四批正式验收门禁修正-阶段记录.md",
+    "report_sha256": "0af1e29459eb53cd57a2436f251716e70c3eba7f170b50a1eab7c8616054f627",
+    "status": "in_progress_gate_repairs",
+    "unit_tests": {
+      "junit": "data/staging/strategies-batch94/20261010-acceptance-development/initial-binding-fixed/batch94-acceptance-v4-unit.xml",
+      "junit_sha256": "aee8ed33bcaedfe3fa56b3db50e67f23d0418829e0d69cccb5c25e0d6b0392fa",
+      "log": "data/staging/strategies-batch94/20261010-acceptance-development/initial-binding-fixed/batch94-acceptance-v4-unit.log",
+      "log_sha256": "94efc24133f200bbc664032376bbee507f5d0b020d96b61abb4eea46963a3d2f",
+      "passed": 35
+    }
+  },
+  "case_id": "etf-filters-batch94-acceptance-repairs",
+  "nature": "in_progress_gate_repairs_not_formal_acceptance",
+  "purpose": "六类目录/绑定/初始和归档期间更新门禁修复，红绿证据与旧候选只读保留，35专项通过；v4完整验收尚待完成，新增交易0",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-10-batch94-acceptance-repairs-stage.json",
+    "sha256": "99f2e99ff573a692cec73cab933ed61a9c882ae6e4e7f3fe742a152835459ade"
+  }
+}

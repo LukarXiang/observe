@@ -1,0 +1,21 @@
+source:
+  path: repo/量化策略源代码/2023年度精选策略/81.拥挤率指标-择时大盘顶底-Clone1-第二版.txt
+  sha256: d0350173eed29f6464d5a350efea957e876d718479b4ca1cd62dbd4694ef3e86
+  lines: 201
+  functions: 5
+status: non_trading_research
+fidelity: 原统计函数在明确观察集的复算；原全市场名单与平台数据未证明
+rules:
+  population: "一次get_all_securities(date=date_now)，向前取全部历史；未逐日重建名单"
+  window: "默认day_count1000；piece_count100分块；日期由get_trade_days返回"
+  crowd: "按money降序；0起始位置floor(N×.05)为阈值；money>=阈值全部计入；金额占比×100四舍五入1位"
+  ties: "不是恰好前5%；20只均等金额时100%；N<20仍取第一项；总额0产生非有限结果"
+  overlay: "000001.XSHG上证指数收盘/100，round2；hs300变量名不能解释为沪深300"
+  chart: "pyecharts/snapshot_selenium图表；无交易、收益或费用规则"
+limits:
+  - 结束日单名单存在幸存者偏差，原名单范围/历史版本与money口径未证
+  - 零daycount及零piece_count原异常保留，图表时间默认值未执行
+research:
+  directory: data/staging/strategies-batch97/20261011-components-v1
+  population: 现有每日股票金额观察集；不宣称原全市场拥挤率
+  backtest: false

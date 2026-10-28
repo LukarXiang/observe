@@ -1,0 +1,155 @@
+{
+  "case": {
+    "chan_original": {
+      "count": 1000,
+      "df": false,
+      "dynamic_anchor": "fq_ref_date=end_time",
+      "end_time": "pd.datetime.now(); original execution date unknown",
+      "instrument": "300058.XSHE",
+      "unit": "1d"
+    },
+    "daily_dates": [
+      "2021-01-04",
+      "2026-09-29"
+    ],
+    "formal_acceptance": false,
+    "gates": [
+      "No registered historical SW3 membership/name/version or all-market historical ST/delist pool",
+      "Native get_bars include-current/paused semantics and original notebook execution date unproved",
+      "Final extrema/segments revise earlier output; chart endpoints are not historical confirmed signals",
+      "No trading/sizing/exit rules in either original source; economic trading extension requires confirmation"
+    ],
+    "inputs": {
+      "adj_coverage": {
+        "columns": [
+          "instrument",
+          "status",
+          "requested_start",
+          "requested_end",
+          "verified_from",
+          "verified_through",
+          "has_gap",
+          "has_start_basis",
+          "confirmed_no_events",
+          "verified_at",
+          "source",
+          "evidence"
+        ],
+        "file": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/adj_coverage-input.parquet",
+        "rows": 1,
+        "sha256": "03c18b516d7704755ed3f7624c595ca990eb592b9b026120887120094a2a1f34"
+      },
+      "adj_factors": {
+        "columns": [
+          "instrument",
+          "ex_date",
+          "back_factor"
+        ],
+        "file": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/adj_factors-input.parquet",
+        "rows": 18,
+        "sha256": "20eed435b1ea1f70a0bb25442db0415ff19aa2b5e521b6c83aa79bda1bec74b4"
+      },
+      "bars_1d": {
+        "columns": [
+          "date",
+          "instrument",
+          "open",
+          "high",
+          "low",
+          "close",
+          "preclose",
+          "volume",
+          "amount",
+          "turnover",
+          "is_trading",
+          "is_st",
+          "pe_ttm",
+          "pb_mrq",
+          "board"
+        ],
+        "file": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/bars_1d-input.parquet",
+        "rows": 1392,
+        "sha256": "89c78cfe7b7de27a344f61c33f23ff3a1d1dfc26686ac6dafebdf3ce2f3f6e16"
+      },
+      "corp_actions": {
+        "columns": [
+          "instrument",
+          "ex_date",
+          "cash_per_share",
+          "bonus_ratio",
+          "rights_ratio",
+          "rights_price",
+          "record_date",
+          "pay_date",
+          "bonus_list_date",
+          "source"
+        ],
+        "file": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/corp_actions-input.parquet",
+        "rows": 16,
+        "sha256": "bc195680a4a9cccd709d8a911b3a0e30a5af64b9ac83b6cf789bf797602fa542"
+      },
+      "instruments": {
+        "columns": [
+          "instrument",
+          "name",
+          "kind",
+          "list_date",
+          "delist_date",
+          "listed",
+          "exchange",
+          "board"
+        ],
+        "file": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/instruments-input.parquet",
+        "rows": 1,
+        "sha256": "907c5d91f9f6ed71b7cb30c90e33d4532f8e13017a136edc4868ac9c5e0436a9"
+      }
+    },
+    "installed": {
+      "jqdata": false,
+      "jqdatasdk": false,
+      "pyecharts": false,
+      "talib": true
+    },
+    "momentum_original": {
+      "count": 30,
+      "fields": [
+        "close",
+        "money"
+      ],
+      "fq": "pre",
+      "frequency": "daily",
+      "fundamental_or_flow_API": false,
+      "industry": "sw_l3",
+      "skip_paused": false,
+      "trade_callbacks_or_orders": false
+    },
+    "new_trading_backtests": 0,
+    "registered_tables": [
+      "adj_coverage",
+      "adj_factors",
+      "bars_1d",
+      "bars_5m",
+      "calendar",
+      "company_controls_annual",
+      "corp_actions",
+      "financial_annual",
+      "financial_availability",
+      "financial_fields",
+      "financial_quarterly",
+      "index_1d",
+      "instruments",
+      "minute_universe",
+      "valuation_coverage",
+      "valuations_1d"
+    ],
+    "snapshot": "20261006-145049-e06c"
+  },
+  "case_id": "daily-chan-industry-batch88-inventory-stage",
+  "nature": "in_progress_original_daily_and_industry_dependency_inventory",
+  "purpose": "1392日线/18因子/1覆盖/16行动/1证券原输入SHA；实际300058日线1000根及sw_l3/30日收盘成交额，非财务资金流策略",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/dependency-inventory.json",
+    "sha256": "a32880234c0dc01bb1b58ab0238c3b5278b0bbb7f6ba558e552b34d7593e9766"
+  }
+}

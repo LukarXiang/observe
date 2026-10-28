@@ -1,0 +1,305 @@
+{
+  "case": {
+    "cases": [
+      {
+        "bond": "163210.XSHE",
+        "calls": [
+          [
+            400,
+            {
+              "pindex": 0
+            }
+          ],
+          [
+            400,
+            {
+              "pindex": 0
+            }
+          ]
+        ],
+        "case": "each_callback_deposits400",
+        "pool": [
+          "515520.XSHG",
+          "161907.XSHE",
+          "512890.XSHG",
+          "515300.XSHG",
+          "510050.XSHG",
+          "159916.XSHE",
+          "512910.XSHG",
+          "510310.XSHG",
+          "512260.XSHG",
+          "512090.XSHG",
+          "515000.XSHG",
+          "512040.XSHG",
+          "510900.XSHG",
+          "501021.XSHG",
+          "513050.XSHG",
+          "518880.XSHG"
+        ],
+        "reference": "000002.XSHG",
+        "weights": {
+          "159916.XSHE": 10,
+          "161907.XSHE": 10,
+          "501021.XSHG": 10,
+          "510050.XSHG": 10,
+          "510310.XSHG": 10,
+          "510900.XSHG": 10,
+          "512040.XSHG": 10,
+          "512090.XSHG": 10,
+          "512260.XSHG": 10,
+          "512890.XSHG": 10,
+          "512910.XSHG": 10,
+          "513050.XSHG": 10,
+          "515000.XSHG": 10,
+          "515300.XSHG": 10,
+          "515520.XSHG": 10,
+          "518880.XSHG": 4
+        }
+      },
+      {
+        "case": "undefined_ratio_returns50",
+        "value": 50
+      },
+      {
+        "case": "implicit_datetime_missing",
+        "detail": "name 'datetime' is not defined",
+        "exception": "NameError"
+      },
+      {
+        "case": "last_trade_29d_weekday4",
+        "eligible": false
+      },
+      {
+        "case": "last_trade_30d_weekday4",
+        "eligible": true
+      },
+      {
+        "case": "last_trade_31d_weekday5",
+        "eligible": false
+      },
+      {
+        "case": "listing_strict300d",
+        "retained": {
+          "older": 10
+        }
+      },
+      {
+        "case": "absolute_stoploss_2.0",
+        "value": false
+      },
+      {
+        "case": "absolute_stoploss_3.0",
+        "value": true
+      },
+      {
+        "case": "absolute_stoploss_4.0",
+        "value": false
+      },
+      {
+        "case": "absolute_stoploss_-3.0",
+        "value": true
+      },
+      {
+        "case": "pandas3_fillna_method_incompatible",
+        "detail": "NDFrame.fillna() got an unexpected keyword argument 'method'",
+        "exception": "TypeError"
+      },
+      {
+        "ES": 0.010000000000000004,
+        "VaR": 1,
+        "case": "short_fixed_denominator"
+      },
+      {
+        "ES": -0.01,
+        "VaR": 1,
+        "case": "constant_positive_ES"
+      },
+      {
+        "ES": -0.0,
+        "VaR": 1,
+        "case": "zero_ES"
+      },
+      {
+        "N": 11,
+        "case": "active_indices_and_1500_schedule",
+        "codes": [
+          "000016.XSHG",
+          "000016.XSHG",
+          "399006.XSHE",
+          "399006.XSHE",
+          "000012.XSHG",
+          "000012.XSHG"
+        ],
+        "ratio": 0.8,
+        "schedule": [
+          [
+            1,
+            "15:00"
+          ]
+        ]
+      },
+      {
+        "case": "signal_equal_positive",
+        "value": 3
+      },
+      {
+        "case": "signal_winner1",
+        "value": 1
+      },
+      {
+        "case": "signal_winner2",
+        "value": 2
+      },
+      {
+        "case": "signal_both_negative",
+        "value": 3
+      },
+      {
+        "case": "pandas_integer_labels_fail",
+        "detail": "-1",
+        "exception": "KeyError"
+      },
+      {
+        "case": "orders_signal1_incremental",
+        "mocked_immediate_fills": false,
+        "orders": [
+          [
+            "target",
+            "399006.XSHE",
+            0
+          ],
+          [
+            "target",
+            "000012.XSHG",
+            1999.9999999999995
+          ],
+          [
+            "increment",
+            "000016.XSHG",
+            8000.0
+          ],
+          [
+            "increment",
+            "000012.XSHG",
+            3000.0
+          ]
+        ]
+      },
+      {
+        "case": "orders_signal3_incremental",
+        "mocked_immediate_fills": false,
+        "orders": [
+          [
+            "target",
+            "000016.XSHG",
+            0
+          ],
+          [
+            "target",
+            "399006.XSHE",
+            0
+          ],
+          [
+            "increment",
+            "000012.XSHG",
+            3000.0
+          ]
+        ]
+      },
+      {
+        "case": "ranking_adjustment_after_caps",
+        "positions": {
+          "A": 600.0,
+          "B": 300.0,
+          "C": 200.0,
+          "D": 150.0,
+          "E": 120.0,
+          "F": 100.0
+        },
+        "ratios": {
+          "A": 0.32,
+          "B": 0.22,
+          "BOND": 0.22999999999999998,
+          "C": 0.14,
+          "D": 0.09000000000000001,
+          "E": 0,
+          "F": 0.0
+        }
+      },
+      {
+        "case": "state_smoothing80_20",
+        "new_raw_A": 300.0,
+        "previous_A": 600.0,
+        "smoothed_A": 360.0
+      },
+      {
+        "case": "marginal_old_holding_preserved",
+        "ratio_message": " 1.A:600/600(32%/0.0%/0.0%/0.0%/0.00%) A\n 2.B:300/300(23%/0.0%/0.0%/0.0%/0.00%) B\n 3.C:200/200(14%/0.0%/0.0%/0.0%/0.00%) C\n 4.D:150/150(10%/0.0%/0.0%/0.0%/0.00%) D\n 5.E:  0/120( 0%/0.0%/0.0%/0.0%/0.00%) E\n 6.F:100/100( 0%/0.0%/0.0%/0.0%/0.00%) F\n合计： 79%， 60，累计金额：0，可用资金：10000，总资产：10000\n",
+        "ratios": {
+          "A": 0.32,
+          "B": 0.23,
+          "BOND": 0.20999999999999996,
+          "C": 0.14,
+          "D": 0.1,
+          "E": 0.0,
+          "F": 0
+        }
+      },
+      {
+        "at30": 1,
+        "at5": 1,
+        "below5": 0,
+        "case": "growth_lock_strict_unlock",
+        "locked_ratio_A": 0.0,
+        "unlocked_ratio_A": 0.32
+      },
+      {
+        "case": "rounded_delta_1000",
+        "doneTrade": false,
+        "orders": []
+      },
+      {
+        "case": "rounded_delta_1499",
+        "doneTrade": false,
+        "orders": []
+      },
+      {
+        "case": "rounded_delta_1500",
+        "doneTrade": true,
+        "orders": [
+          [
+            "A",
+            1500.0
+          ]
+        ]
+      },
+      {
+        "case": "rounded_delta_2500",
+        "doneTrade": true,
+        "orders": [
+          [
+            "A",
+            2500.0
+          ]
+        ]
+      },
+      {
+        "case": "numpy_single_array_float_incompatible",
+        "detail": "only 0-dimensional arrays can be converted to Python scalars",
+        "exception": "TypeError"
+      }
+    ],
+    "count": 32,
+    "expanded": true,
+    "not_a_backtest": true,
+    "scope": "Original AST function bodies; injected deterministic synthetic inputs, no broker/messages"
+  },
+  "case_id": "FOF-two-eight-batch74-diagnostics",
+  "nature": "original_function_synthetic_diagnostics",
+  "purpose": "32原函数诊断：每回调400、限幅后排名可32%、严格锁定/解锁/舍入、原错误及增量订单；不计交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch74/20261008-FOF-two-eight/diagnostics-expanded.json",
+    "sha256": "e3078d1a54542113891c7f3452708ed08057b0c8867a83c61dc321befe8caf0d"
+  }
+}

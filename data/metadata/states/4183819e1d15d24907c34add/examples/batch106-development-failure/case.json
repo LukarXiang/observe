@@ -1,0 +1,29 @@
+{
+  "case": {
+    "causes": [
+      "Missing current_dt in injected fixture",
+      "profit_month_skip name matched generic profit fixture branch",
+      "Independent expectation omitted final 100-share round-down:5000 at20 becomes4000"
+    ],
+    "command": "python -m pytest -q tests/unit/test_batch106_research.py",
+    "evidence_source": "Observed command output; this is a summary, not a saved full stdout log",
+    "files": {
+      "data/staging/strategies-batch106/20261011-development-fixture-failure/research_strategy_batch106.py": "6a833b1ea1d9c4cc5ea33bcba5a04d6fd1cf038ade5a781e770b51cd80c5432d",
+      "data/staging/strategies-batch106/20261011-development-fixture-failure/test_batch106_research.py": "0502e0ead80f907e636f58ef9507039add4b1ad2881697c1b68ec1c6d8c32b5a"
+    },
+    "new_trading_backtests": 0,
+    "original_sources_changed": false,
+    "ruff_findings": 2,
+    "status": "failed_development_fixture",
+    "tests_failed": 9,
+    "tests_passed": 15
+  },
+  "case_id": "batch106-development-failure",
+  "nature": "archived_failed_fixture_summary",
+  "purpose": "9失败15通过与原实现/测试SHA；没有完整stdout日志，后续修正夹具并保留整手结果",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch106/20261011-development-fixture-failure/failure.json",
+    "sha256": "5391156e788ebbd79985fb99ca32ca8b4b51a39d36ff081751a9dd9492f67020"
+  }
+}

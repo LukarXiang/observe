@@ -1,0 +1,99 @@
+{
+  "case": {
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/verify_strategy_batch89.py",
+          "scripts/diagnose_strategy_batch89.py",
+          "scripts/probe_strategy_batch89_events.py"
+        ],
+        "log": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/checks/0.log",
+        "returncode": 0,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.verify_offline_tests",
+          "-q",
+          "tests/unit/test_batch89_verification.py",
+          "tests/unit/test_batch89_callbacks.py",
+          "tests/unit/test_batch89_events.py",
+          "tests/unit/test_batch89_stage.py",
+          "tests/unit/test_batch88_verification.py",
+          "tests/unit/test_research_metadata.py",
+          "tests/unit/test_catalog_dependencies.py",
+          "tests/unit/test_catalog_schedules.py",
+          "tests/integration/test_strategy_merge.py"
+        ],
+        "log": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/checks/1.log",
+        "returncode": 0,
+        "sha256": "360252e0c7a574c37f776a53fc218d5dc6bc33921b04fa0eeea7ed746669d7c7"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "log": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/checks/2.log",
+        "returncode": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "evidence_sha256": {
+      "baseline.json": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4",
+      "catalog-before.json": "3649b802d2edb6ee0904de72ff7b81f22304ebf998d4734b0108632a0f0c6596",
+      "catalog-offline/catalog/strategies/d8d852894c7391319971/catalog.json": "a2bcee52fe06371e5fac5fc89bc849678f920ccda90851edc27a514f8f2ba3a0",
+      "catalog-offline/catalog/strategies/d8d852894c7391319971/catalog.parquet": "6bf93c4aa9dd31007b0515dee13a6ede0d53ffff09a3da14a872460df5fa6a07",
+      "catalog-offline/catalog/strategies/d8d852894c7391319971/summary.json": "8775899b512aa350dc2fe2d2c9394fa0d0bbcffed1780a3090e216c263739bea",
+      "catalog-offline/catalog/strategies/implementation-evidence.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+      "catalog-offline/catalog/strategies/latest.json": "f9e2e78da62adcba2141642327c626e49334c03f0ac5254e10109f2710ebe40b",
+      "checks/0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "checks/1.log": "360252e0c7a574c37f776a53fc218d5dc6bc33921b04fa0eeea7ed746669d7c7",
+      "checks/2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "implementation-checked/scripts/diagnose_strategy_batch89.py": "5e927b94a89fa3d1cdd861b6bcf60db2dac3705b9174bb27979a7856fe3bc581",
+      "implementation-checked/scripts/probe_strategy_batch89_events.py": "ee402376690931d37c172823ec0dd8710c6d8d1a71d62ba29dabc87ea7fce362",
+      "implementation-checked/scripts/review_strategy_batch89.py": "f69911f74d3df9ba5dff333e73854bce36cf14876bbcdbf1fef1ed371ffc251c",
+      "implementation-checked/scripts/verify_strategy_batch89.py": "5fe6f8efdd8e572f5effc6bbd24d74042abbaad3d9c5b4d1e136c85ac9e3aea2",
+      "implementation-checked/src/observe/strategy_catalog.py": "157dc2e871b8679d4201b899a413bf522b46e916a8f9e8bb51706858ece9fc39",
+      "implementation-checked/tests/unit/test_batch89_callbacks.py": "bde56570d1f13b2021929208c1348e5da251330f809e5660462fbe51b4c82a64",
+      "implementation-checked/tests/unit/test_batch89_events.py": "85bb8e740a434d4a83e476efccdc6886753a85e43d7f013155dbc56495eac210",
+      "implementation-checked/tests/unit/test_batch89_stage.py": "48dda98cc2cb65f053d517d64bc47268c68842bbdd5130b2b52eef43c6cd703e",
+      "implementation-checked/tests/unit/test_batch89_verification.py": "3f5691fdd32635c98bc1ec7bc40ebdf7a2bf7786e9cd925f0bb992305a5e2217",
+      "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+      "input-binding.json": "150b3ed4a3e56d3e1f08c8b2a13335a61d6e636737488bfe7a6c071b0cf9101a",
+      "offline-catalog.json": "160453901beaec635bb621ef15d83857b0e95c4ac3679e5ea26fac31e16ba497",
+      "offline-verification.json": "05fa04de455b9210f39f6339fb6e2c585bcd8fb4576f5c5c9b1da694800e9313",
+      "progress-start.json": "80ed4ad2e9bc6821d86f2980a9d191e342feaecbbd48659199ac4f123ef61431",
+      "risk-diagnostics.json": "9c254ea4516961399877536b6132cd83d930e3bb70c19056afa6af6581e2b11b",
+      "source-reviews/review.json": "e3eb755a8617cc5a83455897ee65ad789b1e86954ae6ae0a25bb688fe7f31191",
+      "strategy_catalog.before.py": "e0071dde8d9a66939e8602d3f90be34c918985734b8eda6886e8a1f89b7413ae"
+    },
+    "implementation_sha256": {
+      "scripts/diagnose_strategy_batch89.py": "5e927b94a89fa3d1cdd861b6bcf60db2dac3705b9174bb27979a7856fe3bc581",
+      "scripts/probe_strategy_batch89_events.py": "ee402376690931d37c172823ec0dd8710c6d8d1a71d62ba29dabc87ea7fce362",
+      "scripts/review_strategy_batch89.py": "f69911f74d3df9ba5dff333e73854bce36cf14876bbcdbf1fef1ed371ffc251c",
+      "scripts/verify_strategy_batch89.py": "5fe6f8efdd8e572f5effc6bbd24d74042abbaad3d9c5b4d1e136c85ac9e3aea2",
+      "src/observe/strategy_catalog.py": "157dc2e871b8679d4201b899a413bf522b46e916a8f9e8bb51706858ece9fc39",
+      "tests/unit/test_batch89_callbacks.py": "bde56570d1f13b2021929208c1348e5da251330f809e5660462fbe51b4c82a64",
+      "tests/unit/test_batch89_events.py": "85bb8e740a434d4a83e476efccdc6886753a85e43d7f013155dbc56495eac210",
+      "tests/unit/test_batch89_stage.py": "48dda98cc2cb65f053d517d64bc47268c68842bbdd5130b2b52eef43c6cd703e",
+      "tests/unit/test_batch89_verification.py": "3f5691fdd32635c98bc1ec7bc40ebdf7a2bf7786e9cd925f0bb992305a5e2217"
+    },
+    "status": "passed"
+  },
+  "case_id": "allweather-batch89-final-checks",
+  "nature": "frozen_implementation_copies_and_full_command_logs",
+  "purpose": "9实施SHA/副本、27受检证据、完整Ruff/147相关pytest含1既有警告/diff通过，未全量，旧stage摘要不改写",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/checked-state.json",
+    "sha256": "683480b3ea0ea9f8994a324dc3e9e3b1814c8c651a041b1124950722ced284b2"
+  }
+}

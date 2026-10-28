@@ -1,0 +1,28 @@
+{
+  "case": {
+    "cross_predicate_differences": 0,
+    "first": "2005-11-02",
+    "full_array_independent_maximum_difference": 2.1827872842550278e-11,
+    "last": "2026-09-29",
+    "limits": [
+      "199 daily rows only; original callback needs 199 daily plus one minute bar (200 values)",
+      "199-row EMA reseeded each window as source helper; TA-Lib would change early seed",
+      "Pre2017 Shenzhen candidate is arithmetic evidence, not the original Shanghai reference index",
+      "No targets, costs, ledger, NAV, or platform-equivalence claim"
+    ],
+    "new_trading_backtests": 0,
+    "original_14_30_signals": 0,
+    "scope": "199_daily_row_indicator_reference_only",
+    "state_machine_history_computed": false,
+    "symbol": "399001.SZ",
+    "windows": 5082
+  },
+  "case_id": "batch96-daily-reference",
+  "nature": "in_progress_daily_arithmetic_not_original_signal",
+  "purpose": "2005-11-02至2026-09-29的5082窗，原EMA种子和独立完整数组最大差2.18e-11，交叉差0；缺第200项1m，不算原信号",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch96/20261011-original-callback-stage/component-research.json",
+    "sha256": "063f664dd4b06d6dc458a4e73c8a815e7a42c29157a6fc7cbc2de03baa0e2c30"
+  }
+}

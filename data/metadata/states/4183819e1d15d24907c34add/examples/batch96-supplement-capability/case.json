@@ -1,0 +1,28 @@
+{
+  "case": {
+    "DNS_observations": 1,
+    "HTTP_attempts": 0,
+    "host": "finance.sina.com.cn",
+    "limits": [
+      "Resolver failure describes this host/environment now, not supplier history availability",
+      "Original predictions and long minute/event/fund inputs remain missing"
+    ],
+    "new_provider_rows": 0,
+    "next_step": "If resolved, make bounded native daily requests in a new directory; otherwise no symbol-only retries",
+    "observation": {
+      "returncode": 1,
+      "status": "resolver_failed",
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/home/zuozhe/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/socket.py\", line 978, in getaddrinfo\n    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsocket.gaierror: [Errno -3] Temporary failure in name resolution\n",
+      "stdout": ""
+    },
+    "published": false
+  },
+  "case_id": "batch96-supplement-capability",
+  "nature": "actual_single_DNS_observation_without_HTTP_or_provider_rows",
+  "purpose": "一次新浪DNS失败，0HTTP/新增/发布；不证明供应商缺历史；1m API固定ndays5另冻结",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch96/20261011-original-callback-stage/supplement-capability.json",
+    "sha256": "ae839e4e77d442c823f25d86c82ee280168c83d8366054f4d8894ba7c322efc5"
+  }
+}

@@ -1,0 +1,697 @@
+{
+ "status": "ok",
+ "progress": {
+  "checkpoint": "20261011-011626-25a6",
+  "note": "Batch96 two sources formally researched;39diagnostics/5082daily reference;no trades",
+  "catalog_id": "5cb91e8f7ab6246b3800",
+  "catalog_sha256": "db1c28b8cdf12839fd0d5a6154458ba07dfa60aae6b91dc275f3bd5207b1ea73",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 278,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 77,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-011626-25a6"
+ },
+ "accepted_directory": "data/staging/strategies-batch96/20261011-formal-source-acceptance-v2",
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "receipt_file": "docs/handoff/2026-10-11-batch96-verification.json",
+ "receipt_sha256": "b4c6fea6d33a7ae97e224f669df550c79d39c3c9c162ec00564d7901904efd3e",
+ "final_binding_file": "data/staging/strategies-batch96/20261011-formal-source-acceptance-v2/final-binding.json",
+ "final_binding_sha256": "b76c01ef5cdee4f21c6a6d04875b5ef1ded59667e58a700782e0c1a36e9c2f18",
+ "readback_all_bound_files": 63,
+ "implementation_sha256": {
+  "src/observe/strategy_catalog.py": "4af3031c01da471016c816d5b80add33631df1319505470940e73725a3b01b38",
+  "scripts/accept_strategy_batch96.py": "2cf237451029cd5a3ee451bcb16a71976faa1cdcfcd6bce121c95d81e2e29955",
+  "tests/unit/test_batch96_acceptance.py": "3ad4acff1bc800935ebee27b611ecd8baee308114f1ca64202ee46bc7c2cb8be",
+  "scripts/review_strategy_batch96.py": "b92158157232c23e248374567d4b3cd2bdec8f2d6efe1f5dd66d2f8c249d9e69",
+  "tests/unit/test_batch96_stage.py": "4b2e65aeb476b205fc99e2a7bf55a2ee071a91f25d79f22a15e2ab489965a098",
+  "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+  "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+  "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+  "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+  "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+  "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+  "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+  "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+  "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+  "scripts/accept_strategy_batch95.py": "47dded65bde45d29208759682f2687647bde62d26ddc8d8ad79f0b8cfad2e0eb",
+  "scripts/verify_strategy_batch95.py": "9c6e66e95eaf88dcc59b12662dcc48c9a681d2628e766de342a742cd6fb280ff",
+  "scripts/review_strategy_batch95.py": "6ae51bcd2fccb1adc46ae72d0120770bb4f00b37f62660dadff2411f9275688d",
+  "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+  "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf"
+ },
+ "source_sha256": [
+  "28b6333c10cf48b6ccc53a3bdfb3ae7dd15a09eabca0362efbb3c425dce8882d",
+  "e88037b85d55b6d9879e0514663ac76ee667ca23cb140985191607216d8b9353"
+ ],
+ "local_tests": {
+  "passed": 75,
+  "skipped": 0,
+  "test_identities": [
+   [
+    "tests.unit.test_batch96_stage",
+    "test_original_csv_order_and_missing_date"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_exact_one_percent_clears_and_resets[-1]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_exact_one_percent_clears_and_resets[0]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_exact_one_percent_clears_and_resets[1]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_exact_one_percent_clears_and_resets[2]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_exact_one_percent_clears_and_resets[3]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_rf_period_and_original_csv_not_truncated"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_nan_growth_injected_into_clock_is_not_auto_clear"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_cross_shortage_and_partial_mutation"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_fixed_barslast_and_strict_24_day_helper"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_original_reference_index_switch"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_zero_cross_boundaries_from_original_helper"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_expanding_seed_is_preserved[9]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_expanding_seed_is_preserved[12]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_expanding_seed_is_preserved[25]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_expanding_seed_is_preserved[26]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_expanding_seed_is_preserved[90]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_tampered_source_rejected_before_execution"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_only_original_adjustment_time_invokes_clock"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_original_adjustment_feedback_and_position_mapping"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_original_fund_callback_requires_minute_and_does_not_guard_flat"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_git_only_and_partial_payload"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_idempotent_and_old_state_immutable"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_unsafe_paths[../escape]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_unsafe_paths[/tmp/escape]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_unsafe_paths[C:\\\\escape]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_unsafe_paths[data/../../escape]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_unsafe_paths[]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_symlink"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_input_change_keeps_index"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_immutable_conflict_keeps_index"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_index_cannot_redirect_outside_manifest"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_validation_binds_run_and_reproduction"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_daily_coverage_keeps_scope_without_exporting_payload"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_failed_install_leaves_no_partial_target"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_selected_run_requires_snapshot_and_only_used_partitions"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_comparison_only_legacy_run_is_not_silently_omitted"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_follows_accepted_and_current_checkpoints[False]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_follows_accepted_and_current_checkpoints[True]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_does_not_reuse_a_historical_publication_claim[\\u5f85\\u7528\\u6237\\u63d0\\u4ea4\\u4e0a\\u4f20\\uff0c\\u672c\\u6279\\u5c1a\\u672a\\u4e0a\\u4f20]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_does_not_reuse_a_historical_publication_claim[\\u672c\\u6279\\u5df2\\u63a8\\u9001\\u5e76\\u6838\\u5bf9\\u8fdc\\u7aef]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_run_explanation_uses_current_parent_count"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_does_not_freeze_legacy_review_or_catalog_counts[11-12]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_does_not_freeze_legacy_review_or_catalog_counts[12-13]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_catalog_additions_only"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_catalog_ast_refuses_other_changes[old_value]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_catalog_ast_refuses_other_changes[old_delete]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_catalog_ast_refuses_other_changes[third_key]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_catalog_ast_refuses_other_changes[other_code]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_false_catalog_rows_refused[sha]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_false_catalog_rows_refused[trade]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_false_catalog_rows_refused[implementation]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_false_catalog_rows_refused[rules]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_false_catalog_rows_refused[unrelated]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[status]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[differences]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[diagnostics]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[windows]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[network]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[trades]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_exact_junit_identity_not_empty_or_skipped"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_environment_clears_selection_and_import_flags"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_source_contract_retains_original_rules"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_old_stage_binding_remains_strict"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_alternate_root_and_symlink_refused"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_implementation_inventory_refuses_subset_or_drift"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_review_body_cannot_hide_findings"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_checked_evidence_drift_refused"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_publication_copies_validated_bytes"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_publication_refuses_foreign_navigation"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_failure_restores_only_owned_navigation"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_runtime_replay_refuses_tampered_output"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_empty_checked_inventory_refused"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_stage_old_asset_drift_cannot_become_new_baseline"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_isolated_manifest_cannot_omit_runtime_files"
+   ]
+  ]
+ },
+ "isolated_tests": {
+  "passed": 75,
+  "skipped": 0,
+  "test_identities": [
+   [
+    "tests.unit.test_batch96_stage",
+    "test_original_csv_order_and_missing_date"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_exact_one_percent_clears_and_resets[-1]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_exact_one_percent_clears_and_resets[0]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_exact_one_percent_clears_and_resets[1]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_exact_one_percent_clears_and_resets[2]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_exact_one_percent_clears_and_resets[3]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_rf_period_and_original_csv_not_truncated"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_nan_growth_injected_into_clock_is_not_auto_clear"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_cross_shortage_and_partial_mutation"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_fixed_barslast_and_strict_24_day_helper"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_original_reference_index_switch"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_zero_cross_boundaries_from_original_helper"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_expanding_seed_is_preserved[9]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_expanding_seed_is_preserved[12]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_expanding_seed_is_preserved[25]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_expanding_seed_is_preserved[26]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_expanding_seed_is_preserved[90]"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_tampered_source_rejected_before_execution"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_only_original_adjustment_time_invokes_clock"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_original_adjustment_feedback_and_position_mapping"
+   ],
+   [
+    "tests.unit.test_batch96_stage",
+    "test_original_fund_callback_requires_minute_and_does_not_guard_flat"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_git_only_and_partial_payload"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_idempotent_and_old_state_immutable"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_unsafe_paths[../escape]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_unsafe_paths[/tmp/escape]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_unsafe_paths[C:\\\\escape]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_unsafe_paths[data/../../escape]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_unsafe_paths[]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_reject_symlink"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_input_change_keeps_index"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_immutable_conflict_keeps_index"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_index_cannot_redirect_outside_manifest"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_validation_binds_run_and_reproduction"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_daily_coverage_keeps_scope_without_exporting_payload"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_failed_install_leaves_no_partial_target"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_selected_run_requires_snapshot_and_only_used_partitions"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_comparison_only_legacy_run_is_not_silently_omitted"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_follows_accepted_and_current_checkpoints[False]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_follows_accepted_and_current_checkpoints[True]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_does_not_reuse_a_historical_publication_claim[\\u5f85\\u7528\\u6237\\u63d0\\u4ea4\\u4e0a\\u4f20\\uff0c\\u672c\\u6279\\u5c1a\\u672a\\u4e0a\\u4f20]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_does_not_reuse_a_historical_publication_claim[\\u672c\\u6279\\u5df2\\u63a8\\u9001\\u5e76\\u6838\\u5bf9\\u8fdc\\u7aef]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_run_explanation_uses_current_parent_count"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_does_not_freeze_legacy_review_or_catalog_counts[11-12]"
+   ],
+   [
+    "tests.unit.test_research_metadata",
+    "test_status_page_does_not_freeze_legacy_review_or_catalog_counts[12-13]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_catalog_additions_only"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_catalog_ast_refuses_other_changes[old_value]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_catalog_ast_refuses_other_changes[old_delete]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_catalog_ast_refuses_other_changes[third_key]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_catalog_ast_refuses_other_changes[other_code]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_false_catalog_rows_refused[sha]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_false_catalog_rows_refused[trade]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_false_catalog_rows_refused[implementation]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_false_catalog_rows_refused[rules]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_false_catalog_rows_refused[unrelated]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[status]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[differences]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[diagnostics]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[windows]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[network]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_replay_scope_refused[trades]"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_exact_junit_identity_not_empty_or_skipped"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_environment_clears_selection_and_import_flags"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_source_contract_retains_original_rules"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_old_stage_binding_remains_strict"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_alternate_root_and_symlink_refused"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_implementation_inventory_refuses_subset_or_drift"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_review_body_cannot_hide_findings"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_checked_evidence_drift_refused"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_publication_copies_validated_bytes"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_publication_refuses_foreign_navigation"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_failure_restores_only_owned_navigation"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_runtime_replay_refuses_tampered_output"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_empty_checked_inventory_refused"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_stage_old_asset_drift_cannot_become_new_baseline"
+   ],
+   [
+    "tests.unit.test_batch96_acceptance",
+    "test_isolated_manifest_cannot_omit_runtime_files"
+   ]
+  ]
+ },
+ "isolated_copied_files": 542,
+ "actual_import_origins_checked": 5,
+ "review_completion_file": "data/staging/strategies-batch96/20261011-formal-source-acceptance-v2/review-completion.json",
+ "review_completion_sha256": "4de48fb57d9f5d533594785286a0df14533627b458f1ed79e815cb91b0e1cff8",
+ "fresh_replays": 2,
+ "actual_component_counts": [
+  39,
+  5082
+ ],
+ "newly_reviewed_sources": 2,
+ "new_trading_backtests": 0,
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5919,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "6793e056b0cf0ba9423cad26ef95855269e8a5ca9b8a654ac15ee945a396d88d"
+ },
+ "full_test_suite_claimed": false,
+ "original_strategy_complete": false,
+ "library_goal_complete": false,
+ "Git_publication": "user_managed_pending",
+ "report": "docs/tasks/2026-10-11-第九十六批原预测CSV与顶底趋势-正式研究验收.md",
+ "report_sha256": "e421ba1b8fa32860203154535a4f5f9e107af2f2d6b1d6d4f55b5b1e160f9140"
+}

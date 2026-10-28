@@ -1,0 +1,145 @@
+{
+  "case": {
+    "accepted_checkpoint": "20261008-212245-ac8e",
+    "accepted_directory": "data/staging/strategies-batch71/20261008-smallcap-PE-rotation-verified-recovery",
+    "adversarial_review": {
+      "examined": [
+        "fixed source SHA before AST compilation",
+        "original PE threshold and missing wizard/pool/timing gates",
+        "single fixed requests and failed301 response preservation",
+        "duplicate/date precision-loss rejection",
+        "partial offline failure requires fresh directory",
+        "old output/provenance equality rather than relaxed comparison"
+      ],
+      "findings": []
+    },
+    "archive_writer_recovery": {
+      "cause": "orchestration caller passed str to save(Path)",
+      "error": "AttributeError: str object has no attribute exists",
+      "first_generation_returncode": 1,
+      "no_file_created": true,
+      "resolved": "caller uses Path explicitly; implementation and evidence unchanged"
+    },
+    "checked_state_sha256": "76c06827ba05ea4d113fa25ecc2c0e5c88abff73430dd5ffc71fa90db886a3c2",
+    "failure_archive_files": {
+      "data/staging/strategies-batch71/20261008-date-serialization-failure/green-regression.json": "ceef3caca18104f1c7a50e609cb3f5e6d7bf4ffce9a07fc361cfbd4cc48fe2d6",
+      "data/staging/strategies-batch71/20261008-date-serialization-failure/offline-directory-rejection.json": "11db160d6785ff3e3ff102119ebb0b92f63efa7a09aa236cbc96976e55bf78a3",
+      "data/staging/strategies-batch71/20261008-date-serialization-failure/offline-evidence-diagnosis.json": "592f4a878fed658c389b0029b6642c87393c5b273d404c016ca3ca542b2424e9",
+      "data/staging/strategies-batch71/20261008-date-serialization-failure/red-regression.json": "ee07b18ba775a4e282dcb9296c9c9e15826624da94109a9b5063bdae4fc1f3e0",
+      "data/staging/strategies-batch71/20261008-date-serialization-failure/review_strategy_batch71.py": "86bf531d617783e6dae60aa95a07b31c7b99c8f214dab998d1cb2996d810ae2b",
+      "data/staging/strategies-batch71/20261008-date-serialization-failure/test_batch71_research.py": "61414cd8ef51fa985e8f2398a04fb06bfa95d476da91b58501b3fa8dde683e77"
+    },
+    "final_binding_sha256": "738147ad7a466720d19349ea164324222c33d0549faf39ca07906389677340dd",
+    "formal_strategy_acceptance": false,
+    "git_candidate_scan": {
+      "files": 3045,
+      "scope": "path/file-size/credential-database filenames only; no claim of exhaustive secret-content scanning",
+      "violations": []
+    },
+    "hard_stops": [],
+    "implementation_sha256": {
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+      "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+      "scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+      "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+      "scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+      "scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+      "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+      "scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+      "src/observe/ledger/book.py": "6cd48bec61546727a2b4fdb122a1524bf9bc5a9400ba1c18f7da1b2fe6bd9175",
+      "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+      "src/observe/strategy_catalog.py": "9a380d7e1abcc62c4d2c2705d94360926442abf8cded92b36253e9a8c3595841",
+      "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+      "tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+      "tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+      "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+      "tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600"
+    },
+    "new_tests": 18,
+    "new_trading_backtests": 0,
+    "original_strategy_complete": false,
+    "protection": {
+      "baseline_sha256": "7f2f3e14cded41b960b43eed0e193a47bceb05eb5d7dcdbb6313d2076b7ec7d8",
+      "mutable_registry_files_excluded": 0,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_unchanged": 5293,
+      "old_index_rows_unchanged": 5280,
+      "old_partition_metadata_unchanged": 398,
+      "partition_check": "size/mtime only; no fresh full hash",
+      "status": "ok"
+    },
+    "receipt_sha256": "f357402e341fe8734031ad15498b2ed46d7098d3f245a61b1d25979d3899833d",
+    "recovery_provenance_sha256": "6cefc68f6be8f77fa0370446b8abb96b4a9f124de863c2c2dd2501895e2ed754",
+    "review_depth": "deep",
+    "scope": "batch71 source reviews, original diagnostics, supplier PE arithmetic, cap coverage and explicit failure recovery; no trading acceptance",
+    "scope_alignment": "on_target",
+    "specialist_reviews": {
+      "architecture": {
+        "agent": "batch71_architecture",
+        "findings": []
+      },
+      "security": {
+        "agent": "batch71_security",
+        "findings": []
+      }
+    },
+    "status": "ok",
+    "tests_passed": 123,
+    "verification": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/review_strategy_batch71.py"
+        ],
+        "log": "data/staging/strategies-batch71/20261008-smallcap-PE-rotation-verified-recovery/check-0.log",
+        "returncode": 0,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.verify_offline_tests",
+          "-q",
+          "tests/unit/test_batch71_research.py",
+          "tests/unit/test_batch68_research.py",
+          "tests/unit/test_catalog_dependencies.py",
+          "tests/unit/test_catalog_schedules.py",
+          "tests/unit/test_research_metadata.py",
+          "tests/integration/test_strategy_merge.py"
+        ],
+        "log": "data/staging/strategies-batch71/20261008-smallcap-PE-rotation-verified-recovery/check-1.log",
+        "returncode": 0,
+        "sha256": "c3116556f2f6d6fa63417dbc99425a1ebdc126b61fc6dbf7844918f4c632d41b"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "log": "data/staging/strategies-batch71/20261008-smallcap-PE-rotation-verified-recovery/check-2.log",
+        "returncode": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "case_id": "smallcap-PE-batch71-review",
+  "nature": "frozen_final_specialist_scope_and_recovery_review",
+  "purpose": "最终实现、正式凭据及三档71文件SHA核验；安全架构无发现；日期dtype/重复目录/limits文字失败保留，不覆盖旧组件或降低精确比较",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-08-batch71-final-review.json",
+    "sha256": "39df1a23f72679b764550ee1239e0fd31887731f35c787df83483b772f4bad38"
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "case": {
+    "bindings_sha256": {
+      "/mnt/d/projects/observe/data/staging/strategies-batch87/20261009-chan-minute-state-machine/daily-reference.parquet": "78bec1736ec56ad9e3d805e4a449c554c3f86ff8c3d34e8730e2db669e932273",
+      "/mnt/d/projects/observe/data/staging/strategies-batch87/20261009-chan-minute-state-machine/diagnostic-label-correction.json": "37abaa7d68e7d44a31aebb9e01fe838f28d755aec53c8705fd15d70b70961eb5",
+      "/mnt/d/projects/observe/data/staging/strategies-batch87/20261009-chan-minute-state-machine/diagnostics-corrected.json": "c4264f812a7ca197515ed50bf7625cb4bc4ac2ba07d79de4c30456ab489f9032",
+      "/mnt/d/projects/observe/data/staging/strategies-batch87/20261009-chan-minute-state-machine/diagnostics.json": "e4d30f614dd11e08ccc215fa7c13f745a2ebfa9514e78b731ea966fa1437c360",
+      "/mnt/d/projects/observe/data/staging/strategies-batch87/20261009-chan-minute-state-machine/indicator-values.parquet": "59c424de34741ff9396eb47dcc60f4a0154bcc46627afa55c80c2877cf52bd38",
+      "/mnt/d/projects/observe/data/staging/strategies-batch87/20261009-chan-minute-state-machine/sources-frozen.json": "4109f4aac477167e94b56e44ba35822869ec0f127c056f2621b1ad87acbd0b5e",
+      "/mnt/d/projects/observe/data/staging/strategies-batch87/20261009-chan-minute-state-machine/state-values.parquet": "b5abbfd274ed2fdbaf058e3ab19b3c189321e1d1c099245c75684b0c484956a3",
+      "scripts/review_strategy_batch87.py": "c7dc4807518bf58c89af8ea06611938b606d6f5e66625fa3eadd753526dfa281",
+      "tests/unit/test_batch87_research.py": "6401cedaedb16db5144791d36973b60ce2954bea4114174111ecca800288da0e"
+    },
+    "checks": {
+      "all_state_SHA_match": 4176,
+      "correction_pop": 11,
+      "inclusion_fractal_state": 4176,
+      "line_transition": 1808,
+      "pivot_create": 27,
+      "pivot_transition": 1790,
+      "segment_MACD": 1776,
+      "signal_confirmation": 6,
+      "stroke_transition": 1814,
+      "trend_transition": 1562
+    },
+    "diagnostic_correction_verified": true,
+    "findings": [],
+    "indicator_maximum_absolute_difference": {
+      "dea": 0.0,
+      "diff": 0.0,
+      "ema5": 0.0,
+      "macd": 0.0,
+      "sma5": 0.0
+    },
+    "limits": [
+      "All three branches use overlapping raw daily input, not original1m or dynamic real-price evidence.",
+      "Original definitions execute bodies unchanged; external formulas check observed transitions only.",
+      "Stroke wrapper verifies stroke output, not a separate independent engine for pivot mutation inside stroke correction.",
+      "No exhaustive synthetic branch proof, complete historical input, platform equivalence or cash/position/PnL verification.",
+      "State digest schema matches the frozen thirteen mutable fields; inactive feature arrays/static configuration are not separately hashed."
+    ],
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "orders": [
+      [
+        "includeTrue-lineFalse",
+        "2021-04-29",
+        [
+          "300354.XSHE",
+          -21800
+        ],
+        "S1",
+        "2021-04-22 00:00:00"
+      ],
+      [
+        "includeTrue-lineFalse",
+        "2021-10-08",
+        [
+          "300354.XSHE",
+          10300
+        ],
+        "B2",
+        "2021-09-06 00:00:00"
+      ],
+      [
+        "includeFalse-lineFalse",
+        "2021-04-29",
+        [
+          "300354.XSHE",
+          -21800
+        ],
+        "S1",
+        "2021-04-22 00:00:00"
+      ],
+      [
+        "includeFalse-lineFalse",
+        "2021-09-22",
+        [
+          "300354.XSHE",
+          9000
+        ],
+        "B2",
+        "2021-08-18 00:00:00"
+      ],
+      [
+        "includeFalse-lineFalse",
+        "2023-05-08",
+        [
+          "300354.XSHE",
+          7400
+        ],
+        "B2",
+        "2023-04-14 00:00:00"
+      ],
+      [
+        "includeFalse-lineFalse",
+        "2025-05-20",
+        [
+          "300354.XSHE",
+          7600
+        ],
+        "B2",
+        "2025-04-29 00:00:00"
+      ]
+    ],
+    "original_1m_rows": 0,
+    "proof": [
+      {
+        "actual_comparison_distance": 3,
+        "final_strokes": [
+          [
+            22,
+            11,
+            "2021-01-04T00:05:00",
+            "up",
+            5
+          ]
+        ],
+        "initial_strokes": 2
+      },
+      {
+        "actual_comparison_distance": 0,
+        "final_strokes": [
+          [
+            30,
+            15,
+            "2021-01-04T00:00:00",
+            "down",
+            0
+          ],
+          [
+            22,
+            11,
+            "2021-01-04T00:09:00",
+            "up",
+            9
+          ]
+        ],
+        "initial_strokes": 3
+      }
+    ],
+    "reviewer_script_sha256": "ccff942d33bc5e8eccca3d9f60fc2348883c2b1f273314cd58ba40fe408ed02f",
+    "source_sha256": "454651949b62a7899aa0e35461a3bcca4bb77e27c012bc8b4d11e8fa7c1e0c77",
+    "status": "ok"
+  },
+  "case_id": "chan-batch87-independent",
+  "nature": "independent_original_definition_and_external_transition_formula_review",
+  "purpose": "另编译原定义，4176状态/包含分型、1814笔/1776MACD/1808线/1790中枢/1562趋势及6信号差0，笔线中枢各含2夹具；明确非1m/非穷尽/未独立证明笔内中枢回写与PnL",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/independent-review/summary.json",
+    "sha256": "8feec6c108db299bc3bd7cc25d6cc85c4163de041fdc7104f0600430367f0c76"
+  }
+}

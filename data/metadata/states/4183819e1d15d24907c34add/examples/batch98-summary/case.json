@@ -1,0 +1,50 @@
+{
+  "case": {
+    "OLS_max_absolute_errors": {
+      "seed_unsquared_beta_error": 8.881784197001252e-16,
+      "seed_unsquared_r2_error": 1.7763568394002505e-15,
+      "stock_squared_beta_error": 1.1102230246251565e-15,
+      "stock_squared_r2_error": 1.5543122344752192e-15
+    },
+    "OLS_windows": 5263,
+    "comparison_price_leg": {
+      "BBANDS": {
+        "complete_windows": 5261,
+        "down_crossings": 131,
+        "long_state_days": 2692,
+        "marks_differences": 0,
+        "up_crossings": 139
+      },
+      "MA": {
+        "complete_windows": 5221,
+        "down_crossings": 49,
+        "long_state_days": 2733,
+        "marks_differences": 0,
+        "up_crossings": 49
+      }
+    },
+    "first": "2005-01-05",
+    "index": "000300.SH",
+    "last": "2026-09-29",
+    "new_trading_backtests": 0,
+    "original_seed_skips_first_complete_window": true,
+    "original_strategy_complete": false,
+    "rows": 5280,
+    "scopes": [
+      "MA/BBANDS marks are original close comparison leg, not bull/bear kernel",
+      "Squared OLS on index is a formula reference, not original individual stock RSRS",
+      "No quota/holding ratios or per-stock shared history; no original portfolio signal",
+      "No economic/numeric variant applied; independent discrepancies must remain visible"
+    ],
+    "synthetic_diagnostic_cases": 27,
+    "three_cost_scenarios": "not_applicable_to_arithmetic"
+  },
+  "case_id": "batch98-summary",
+  "nature": "original_comparison_leg_and_OLS_arithmetic",
+  "purpose": "2005至2026原CSI3005280日MA/布林0差及5263OLS窗，不含kernel250/原组合或收益",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch98/20261011-original-components-json-recovery/study/summary.json",
+    "sha256": "30dd9a0091f225e9bd5b25c8e7488cb2ef3986b418b1ec05d65176e85ead7b02"
+  }
+}

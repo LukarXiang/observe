@@ -1,0 +1,90 @@
+{
+ "status": "ok",
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "original_strategy_complete": false,
+ "library_goal_complete": false,
+ "progress": {
+  "checkpoint": "20261011-072409-6a27",
+  "note": "Batch105 two nontrading sources accepted;6811232 native/95860 fixed40 cells,32503680 listing-age cells;31 local+31 isolated;373/6 boundaries and7 protocol differences preserved;trade inputs blocked",
+  "catalog_id": "540aaf4341cac4706de1",
+  "catalog_sha256": "6c84107d2be94e7cbc1cbd3c71003908b3d2cf1cd385530eee0aabeab9d9ab86",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 296,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-072409-6a27"
+ },
+ "components": {
+  "tests": {
+   "local": 22,
+   "isolated": 22
+  },
+  "saved_readback": {
+   "native_rows": 6811232,
+   "fixed40_rows": 95860,
+   "age_count_cells": 10560,
+   "age_security_calendar_cells": 32503680,
+   "native_boundary_differences": 373,
+   "fixed40_boundary_differences": 6,
+   "native_MA20_max_abs_error": 4.547473508864641e-13,
+   "engine_differences": 0,
+   "age_count_differences": 0,
+   "new_trading_backtests": 0
+  },
+  "fresh_network_blocked_processes": 2,
+  "offline_outputs": 5,
+  "offline_differences": 0,
+  "original_diagnostics": 15,
+  "window_protocol_differences": 7,
+  "new_trading_backtests": 0,
+  "original_nhnl_core_reproduced": false,
+  "complete_original_pool_signals": 0
+ },
+ "formal_tests": {
+  "local": 31,
+  "isolated": 31
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 6614,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+ },
+ "source_sha256": [
+  "99d10bce41b0c7e1c2669c3c0c74afefea384ba6a099673c24e041fde5b89aaf",
+  "f41f457f69e71ddb4b0b22697ca8a9fd329d7ba2954f2c7a4571e7296896f4e8"
+ ],
+ "new_independent_sources": 2,
+ "new_trading_backtests": 0,
+ "new_strategy_parent_runs": 0,
+ "evidence_sha256": {
+  "docs/tasks/2026-10-11-第一百零五批市场宽度与行业新高新低-正式研究验收.md": "32940a8faff821f78294ee3b31f56e0a5accb2977f9ccf16b74dd4d82048e4c4",
+  "docs/handoff/batch105-y2024b-052-source-review.yaml": "652b2d76dad13ec7678bad8fdc7d40b2a6301b47cabcd486a85d36b7f48d5102",
+  "docs/handoff/batch105-y2024a-089-source-review.yaml": "a847cc245a4f70aae2509c467748cbcf105917f46fabe33bce6b4ab772222ea0",
+  "data/staging/strategies-batch105/20261011-component-stage-recovery/checked.json": "34e0bf602b633a89353a1be58a29cdfe4f26bc7fecc6cb29817204b108182426",
+  "data/staging/strategies-batch105/20261011-formal-source-validation-recovery/checked.json": "8515f45dc5c9b304e651bb63143a2583da6bbe79abf81f7a274ab524d09c83f1",
+  "data/staging/strategies-batch105/20261011-formal-source-acceptance/prepared.json": "6d259901f8e088a64ac1852fe40fff49aef20ac8833e1c587aeb0aceb3518ad1",
+  "data/staging/strategies-batch105/20261011-formal-source-acceptance/protection.json": "fcf33c8de2d54325eec58fc8fa2fb708364a85378a1d5ef339ce34f6feef438f",
+  "data/catalog/strategies/540aaf4341cac4706de1/catalog.json": "6c84107d2be94e7cbc1cbd3c71003908b3d2cf1cd385530eee0aabeab9d9ab86",
+  "src/observe/strategy_catalog.py": "985db14d6f6c43b3b3b5cd53ba368668ed4901bea24c995e8e92087ecdc7d717",
+  "scripts/accept_strategy_batch105.py": "c96f94c52a81cb868725d04ac012193c61b445ea01d8d46334f4acc78299eeb7",
+  "docs/handoff/2026-10-11-batch105-compatibility-stage.json": "eaf161de0d091d3c99b805aae7cf5cc4b4f54c6cdd348c86415c32ec58da6764"
+ },
+ "review_method": "Full sources and copied tests;no independent agent review"
+}

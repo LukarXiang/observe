@@ -1,0 +1,93 @@
+{
+  "case": {
+    "54_active_money_flow_calls": 0,
+    "helper_search": {
+      "command": [
+        "rg",
+        "-n",
+        "--hidden",
+        "--no-ignore",
+        "^def (MACD_judge_jincha|BBands_lowerband_judge_dayu|MA_judge_duotou|money_flow_dayu|n_day_chg_dayu|MACD_judge_sicha|get_sort_dataframe|sell_by_amount_or_percent_or_none|order_style|judge_security_max_proportion|max_buy_value_or_amount)\\(",
+        "repo",
+        "-g",
+        "*.py",
+        "-g",
+        "*.txt",
+        "-g",
+        "!**/.git/**"
+      ],
+      "matched_file_sha256": {},
+      "matches": [],
+      "returncode": 1
+    },
+    "limits": [
+      "Ten frozen reference stocks are not historical CSI300 or bank399951 members",
+      "Historical ST/names/limits, full universe price-volume and platform skip-paused/adjustment-volume rules not proved",
+      "Source54 lacks mean/timedelta and imports removed pandas.stats.api.ols; platform injections unknown",
+      "Source54 requests money but active volume/MA kernels do not read it; do not synthesize missing money",
+      "Supplier turnover decimal exists in bars_1d; its floating-share denominator/version is not proved original valuation.turnover_ratio",
+      "95 helper seeds/current-bar/threshold/flow vintage and nonempty zero-weight sorting output remain unknown",
+      "Original order_target quantities and incremental wizard orders/fills require unique Book and explicit compatibility review"
+    ],
+    "reference_rows": 46781,
+    "registered_tables": [
+      "adj_coverage",
+      "adj_factors",
+      "bars_1d",
+      "bars_5m",
+      "calendar",
+      "company_controls_annual",
+      "corp_actions",
+      "financial_annual",
+      "financial_availability",
+      "financial_fields",
+      "financial_quarterly",
+      "index_1d",
+      "instruments",
+      "minute_universe",
+      "valuation_coverage",
+      "valuations_1d"
+    ],
+    "required_helpers95": [
+      "MACD_judge_jincha",
+      "BBands_lowerband_judge_dayu",
+      "MA_judge_duotou",
+      "money_flow_dayu",
+      "n_day_chg_dayu",
+      "MACD_judge_sicha",
+      "get_sort_dataframe",
+      "sell_by_amount_or_percent_or_none",
+      "order_style",
+      "judge_security_max_proportion",
+      "max_buy_value_or_amount"
+    ],
+    "snapshot": "20261006-145049-e06c",
+    "strict_financial_usable_rows": 0,
+    "table_rows": {
+      "adj_coverage": 5560,
+      "adj_factors": 64980,
+      "bars_1d": 6919789,
+      "bars_5m": 44571408,
+      "calendar": 7938,
+      "company_controls_annual": 73738,
+      "corp_actions": 59065,
+      "financial_annual": 95486,
+      "financial_availability": 1460899,
+      "financial_fields": 1911,
+      "financial_quarterly": 405867,
+      "index_1d": 5280,
+      "instruments": 6156,
+      "minute_universe": 4000,
+      "valuation_coverage": 1392,
+      "valuations_1d": 6848484
+    }
+  },
+  "case_id": "volume-flow-batch86-inventory",
+  "nature": "accepted_corrected_historical_dependency_inventory",
+  "purpose": "实际46781十股参考/11类helper定义搜索0、原54活跃资金流调用0；历史CSI300/银行399951/状态和原换手率分母版本、95技术/资金流/排序helper未齐，strict财务0",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/dependency-inventory-corrected.json",
+    "sha256": "76703e780bf80d634632e1f47edb3a15ab1b31d6a739e5771677d3f2947d5825"
+  }
+}

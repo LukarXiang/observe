@@ -1,0 +1,93 @@
+{
+  "case": {
+    "accepted_checkpoint": "20261009-061912-e023",
+    "accepted_source_count": 258,
+    "adversarial_review": {
+      "examined": [
+        "SHA-pinned source with no platform/top-level execution",
+        "Candidate cutoff/date uniqueness/positive closes and jump evidence",
+        "No natural-day fill correction while pending",
+        "Candidate date intersection not an ES window count or trade history",
+        "No new HTTP requests, publication, replacement pool or parallel fee/NAV implementation",
+        "Frozen development errors and previous accepted records preserved"
+      ],
+      "findings": []
+    },
+    "checks": {
+      "full_suite_run": false,
+      "git_diff_check": "passed",
+      "new_stage_tests": 6,
+      "raw_pytest_log_archived": false,
+      "related_tests": 149,
+      "ruff": "passed",
+      "warnings": 1
+    },
+    "common_candidate_observed_dates": 3201,
+    "common_candidate_range": [
+      "2013-07-31",
+      "2026-09-29"
+    ],
+    "current_checkpoint": "20261009-062918-e627",
+    "directory": "data/staging/strategies-batch89/20261009-all-weather-source-stage",
+    "evidence_sha256": {
+      "data/staging/strategies-batch89/20261009-all-weather-source-stage/candidate-coverage.json": "87af442fd73d13c1226b551db66850412e3d9f22a98fa1a5bc2ff75d874a3459",
+      "data/staging/strategies-batch89/20261009-all-weather-source-stage/command-results.json": "fdeb1b2917df3002a21789c832d0b3d8b2373076237cb6c5b3917d488f468723",
+      "data/staging/strategies-batch89/20261009-all-weather-source-stage/compatibility-diagnostics.json": "16fdec9a4da8726f4eab08d28ff241829715fc515af707c3bc89eb6a3960b807",
+      "data/staging/strategies-batch89/20261009-all-weather-source-stage/dependency-inventory.json": "396eba499d0b4f27d54f73943410f04c630dad8dbfd47a99a7805b5d898b9832",
+      "data/staging/strategies-batch89/20261009-all-weather-source-stage/input-binding.json": "a2a6130fed9ed8f9e916f6292be7a47a21f6810f2f57aaac10d6b31e26e0beff",
+      "data/staging/strategies-batch89/20261009-all-weather-source-stage/protection.json": "82f9880211c040118c41dac0d3bf945caf3241f6d7ae5f59fa6898f56fe415a8",
+      "data/staging/strategies-batch89/20261009-all-weather-source-stage/reused-inputs.json": "a4b1fe71058ee99e9b402ff9922fcb777b998ac91fca4a2da9a8439bfa751652",
+      "data/staging/strategies-batch89/20261009-all-weather-source-stage/sources-frozen.json": "3a27e1a882aaab8a59734d5c3cc30b4dc96c5ae2ac7017d5d7ebcd6171d7be09",
+      "data/staging/strategies-batch89/20261009-development-first-tests/result.json": "48b27b7394ef79d931d38da51f44d544b08821128f953b7dbb9ea0bd2ac24d78"
+    },
+    "formal_acceptance": false,
+    "implementation_copy_sha256": {
+      "data/staging/strategies-batch89/20261009-all-weather-source-stage/implementation-checked/review_strategy_batch89.py": "f69911f74d3df9ba5dff333e73854bce36cf14876bbcdbf1fef1ed371ffc251c",
+      "data/staging/strategies-batch89/20261009-all-weather-source-stage/implementation-checked/test_batch89_stage.py": "48dda98cc2cb65f053d517d64bc47268c68842bbdd5130b2b52eef43c6cd703e"
+    },
+    "implementation_sha256": {
+      "scripts/review_strategy_batch89.py": "f69911f74d3df9ba5dff333e73854bce36cf14876bbcdbf1fef1ed371ffc251c",
+      "tests/unit/test_batch89_stage.py": "48dda98cc2cb65f053d517d64bc47268c68842bbdd5130b2b52eef43c6cd703e"
+    },
+    "library_goal_complete": false,
+    "locally_backtested_sources": 12,
+    "new_ES_weights_or_original_signals": 0,
+    "new_requests": 0,
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "old_asset_protection": {
+      "calendar_rows": 7938,
+      "control_SHA_files": 5363,
+      "fresh_full_partition_hash": false,
+      "index_rows": 5280,
+      "partition_size_mtime_files": 398,
+      "status": "ok"
+    },
+    "platform_equivalence_proven": false,
+    "remaining_source_count": 437,
+    "return_semantics_decision": "pending_D-allweather-fill",
+    "scope": "Two original same-AST all-weather sources, four historical candidate payloads, exact standard inventory and native compatibility failure; return repair pending.",
+    "snapshot": "20261006-145049-e06c",
+    "source_count": 695,
+    "specialist_reviews": {
+      "architecture": {
+        "agent": "batch89_stage_architecture",
+        "findings": []
+      },
+      "security": {
+        "agent": "batch89_stage_security",
+        "findings": []
+      }
+    },
+    "status": "stage_checks_passed",
+    "strategy_parent_runs": 69
+  },
+  "case_id": "allweather-batch89-review-stage",
+  "nature": "in_progress_frozen_stage_binding_not_formal_acceptance",
+  "purpose": "两实施SHA/副本、九阶段证据、149相关及安全架构/旧5363控制和398分区stat核验；第88批258正式保持，新ES权重/交易0，填充变体待回复",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-09-batch89-stage-verification.json",
+    "sha256": "650f57343cfecf51f67db7deb44fc9b2bca03918982974a92e3f51a5b38e1486"
+  }
+}

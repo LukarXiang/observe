@@ -1,0 +1,324 @@
+{
+  "case": {
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/verify_strategy_batch95.py",
+          "tests/unit/test_batch95_preparation.py",
+          "scripts/review_strategy_batch95.py",
+          "tests/unit/test_batch95_stage.py",
+          "scripts/review_strategy_batch94.py",
+          "scripts/recover_strategy_batch94_reference.py",
+          "scripts/review_strategy_batch59.py",
+          "scripts/review_strategy_batch73.py",
+          "scripts/archive_strategy_progress.py",
+          "scripts/review_strategy_batch18.py",
+          "scripts/run_strategy_batch4.py",
+          "scripts/verify_strategy_batch3.py",
+          "src/observe/data/store.py",
+          "src/observe/data/locks.py",
+          "src/observe/runs.py",
+          "src/observe/strategy_catalog.py",
+          "scripts/prepare_handoff.py",
+          "scripts/build_strategy_catalog.py",
+          "scripts/verify_financial_import.py"
+        ],
+        "log": "data/staging/strategies-batch95/20261010-preparation-v3-tests/0.log",
+        "returncode": 0,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-B",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "tests/unit/test_batch95_stage.py",
+          "tests/unit/test_batch95_preparation.py",
+          "--junitxml=data/staging/strategies-batch95/20261010-preparation-v3-tests/local.xml"
+        ],
+        "log": "data/staging/strategies-batch95/20261010-preparation-v3-tests/1.log",
+        "returncode": 0,
+        "sha256": "ae6daae9574b62b6a46c4723b50c032fb09c2f75fc8b43336e44f31d5a012878"
+      }
+    ],
+    "evidence_sha256": {
+      "data/staging/strategies-batch95/20261010-preparation-v3-tests/0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "data/staging/strategies-batch95/20261010-preparation-v3-tests/1.log": "ae6daae9574b62b6a46c4723b50c032fb09c2f75fc8b43336e44f31d5a012878",
+      "data/staging/strategies-batch95/20261010-preparation-v3-tests/copied-files.json": "415926db0d67e54014d11ecf265b5817784df3778c08fa7223b48ec07094ed4c",
+      "data/staging/strategies-batch95/20261010-preparation-v3-tests/identity.log": "4a49020f3c6699c700ff1f9eaa3a9433ca5491330be2ac989af6b193c179adc5",
+      "data/staging/strategies-batch95/20261010-preparation-v3-tests/isolated.log": "aa7e6f8c80ba142d39c7e741b1ebdd234bfdc5b2c940cec900a60b5061edfb30",
+      "data/staging/strategies-batch95/20261010-preparation-v3-tests/isolated.xml": "fda0dd8b8d4899b449837a72923e5b544913d1f5f30af8cd17ea5f156056af47",
+      "data/staging/strategies-batch95/20261010-preparation-v3-tests/local.xml": "4cdac8e25f3d18a0e512db8ec845c28b9f3cac96c15077569abae2ac6d62fb51"
+    },
+    "full_suite_claimed": false,
+    "implementation_sha256": {
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+      "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+      "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+      "scripts/review_strategy_batch95.py": "6ae51bcd2fccb1adc46ae72d0120770bb4f00b37f62660dadff2411f9275688d",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "scripts/verify_strategy_batch95.py": "9c6e66e95eaf88dcc59b12662dcc48c9a681d2628e766de342a742cd6fb280ff",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "c82caf370aa5c223209b959850d93b4f6e4a2c5b03d3ed8ec09e7ad2aa80a904",
+      "tests/unit/test_batch95_preparation.py": "6c806bc26987e29b506a1c96172672a0089f175612829c128fa5d4be858339eb",
+      "tests/unit/test_batch95_stage.py": "ed6280f8fbd8831537a7bfb1b888370eed32bf64af6ae5f6d4bb56f508ecf14e"
+    },
+    "isolated_passed": 53,
+    "isolation": {
+      "command": [
+        "/home/zuozhe/envs/quant/.venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_batch95_stage.py",
+        "tests/unit/test_batch95_preparation.py",
+        "--junitxml=/mnt/d/projects/observe/data/staging/strategies-batch95/20261010-preparation-v3-tests/isolated.xml"
+      ],
+      "destination": "/tmp/batch95-preparation-v3-isolated-tlbb3ldp",
+      "import_identity": "/tmp/batch95-preparation-v3-isolated-tlbb3ldp/src/observe/__init__.py\n/tmp/batch95-preparation-v3-isolated-tlbb3ldp/scripts/verify_strategy_batch95.py\n",
+      "returncode": 0
+    },
+    "local_passed": 53,
+    "skipped": 0,
+    "status": "passed",
+    "test_identities": [
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_actual_runtime_network_helper_change_rejected"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_alternate_root_refused_before_inputs"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_ancestry_uses_frozen_catalog_without_live_hash"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_bound_rejects_changed_bytes_and_symlink"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_complete_implementation_and_copy_required[copy]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_complete_implementation_and_copy_required[empty]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_complete_implementation_and_copy_required[extra]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_complete_implementation_and_copy_required[live]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_complete_implementation_and_copy_required[subset]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_complete_refuses_publication_changed_while_waiting_for_lock"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_complete_refuses_replay_changed_while_waiting_for_lock"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_data_symlink_refused"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_environment_removes_test_selection_and_import_overrides"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_preparation_inventory_tamper_refused_before_replay"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_replay_rejects_hollow_or_changed_proof[bytes]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_replay_rejects_hollow_or_changed_proof[command]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_replay_rejects_hollow_or_changed_proof[mean]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_replay_rejects_hollow_or_changed_proof[rows]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_replay_rejects_hollow_or_changed_proof[subset]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_replay_rejects_hollow_or_changed_proof[trading]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_replay_rejects_hollow_or_changed_proof[unrelated_log]"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_self_hashed_non_parquet_replay_rejected"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_self_hashed_valid_parquet_with_changed_values_rejected"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_worker_refuses_existing_output_before_compute"
+      ],
+      [
+        "tests.unit.test_batch95_preparation",
+        "test_worker_requires_fresh_process_flags"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_date_label_rank_fails_before_timing_and_sell[0]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_date_label_rank_fails_before_timing_and_sell[1]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_date_label_rank_fails_before_timing_and_sell[2]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_diagnostics_nonempty_and_duplicate_equal"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_hold_controls_show_rejection_state_and_mutation_boundary"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_hold_last_label_is_not_position[hold_datetime]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_hold_last_label_is_not_position[hold_range]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_independent_scalar_ols_and_z"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_initialize_preserves_pool_cost_seed_schedule[0]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_initialize_preserves_pool_cost_seed_schedule[1]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_initialize_preserves_pool_cost_seed_schedule[2]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_literal_rejects_changed_source"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_literal_thresholds[0]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_literal_thresholds[2]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_mean_namespace_failure_appends_before_error"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_plain_positions_and_mutation_are_not_silently_fixed[0]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_plain_positions_and_mutation_are_not_silently_fixed[1]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_plain_positions_and_mutation_are_not_silently_fixed[2]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_rejected_first_buy_exposes_score_as_security[0]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_rejected_first_buy_exposes_score_as_security[1]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_rejected_first_buy_exposes_score_as_security[2]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_stop_v2_submits_then_print_fails"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_tie_is_stable_original_pool_order[0]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_tie_is_stable_original_pool_order[1]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_tie_is_stable_original_pool_order[2]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_unsold_holding_blocks_rotation[deferred_sell_blocks_rotation]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_unsold_holding_blocks_rotation[partial_sell_blocks_rotation]"
+      ],
+      [
+        "tests.unit.test_batch95_stage",
+        "test_v2_range_index_also_fails_after_tail_slice"
+      ]
+    ]
+  },
+  "case_id": "etf-magic3-v2-batch95-preparation-checks",
+  "nature": "actual_53_local_and_53_isolated_tests",
+  "purpose": "53具体身份本地/隔离一致无跳过，471副本及实际导入核实；全套pytest未宣称通过",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch95/20261010-preparation-v3-tests/checks.json",
+    "sha256": "fa39af518da74a437e9cf8040c03289d21cbd97ee58effd5149c2cb04649289b"
+  }
+}

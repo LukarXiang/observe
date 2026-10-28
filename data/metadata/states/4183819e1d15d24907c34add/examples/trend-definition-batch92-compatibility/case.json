@@ -1,0 +1,38 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "original_relative_score",
+        "exception": "TypeError",
+        "message": "NDFrame.fillna() got an unexpected keyword argument 'method'",
+        "synthetic": true
+      },
+      {
+        "case": "datetime_price_zero_label",
+        "exception": "KeyError",
+        "message": "0",
+        "synthetic": true
+      },
+      {
+        "actual_full_mixed_branch_executed": false,
+        "case": "max_two_None_returns_after_injected_score_calls",
+        "exception": "TypeError",
+        "message": "'>' not supported between instances of 'NoneType' and 'NoneType'",
+        "synthetic": true
+      }
+    ],
+    "missing_Hugos_tools_plot_finance": "repo filename search found no matching module",
+    "not_a_backtest": true,
+    "original_absolute_score_returns_None": true,
+    "relative_branch_repaired": false,
+    "source_sha256": "47f4244f0dd45f37cbb6c30c781d47ca7b20b9324ce69587906961a324f8dadd"
+  },
+  "case_id": "trend-definition-batch92-compatibility",
+  "nature": "original_current_runtime_and_separate_synthetic_diagnosis",
+  "purpose": "相对评分pandas方法TypeError、日期零标签KeyError及注入两个None后max失败；后者非完整混合函数运行，原绝对日频分支不修",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch92/20261010-trend-definition-stage/compatibility-diagnostics.json",
+    "sha256": "41285edf5ed418212100a0998793dffcbfd1fa0d7230b96d288f0e3be5843143"
+  }
+}

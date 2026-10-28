@@ -1,0 +1,88 @@
+{
+  "case": {
+    "final_recovery": "data/staging/strategies-batch91/20261010-corn-quarterly-acceptance-recovery-v3",
+    "findings": [
+      {
+        "fix": "sanitize pytest selectors, clear addopts, require160 exact unique names/eight file counts",
+        "id": "pytest-selection",
+        "red": "2 partial-suite cases did not raise; selector/identity helpers absent"
+      },
+      {
+        "fix": "captured original stage binding under catalog-SHA-only override; repeat live upstream checks at final gates",
+        "id": "upstream-adapter",
+        "red": "2 prior evidence tamper cases did not raise"
+      },
+      {
+        "evidence": "read-only review of original consumer: only FILES rechecked after isolation",
+        "fix": "all noncandidate baseline and isolated manifest/inputs rehashed",
+        "id": "baseline-freshness"
+      },
+      {
+        "fix": "preserve original callable and add full adapted replay regression",
+        "id": "adapter-recursion",
+        "red": "full adapted replay RecursionError,118.68sec"
+      },
+      {
+        "evidence": "reviewer read-only mock observed generator call before source-reviews FileExistsError",
+        "fix": "reject repeated phase before any generation; prevalidate candidate delta in fresh archive root before live update",
+        "id": "repeat-catalog"
+      }
+    ],
+    "fixture_failure_retained": "green-tests.log:1 XML fixture failure/15 passed; XML construction fixed via ElementTree without strategy changes",
+    "logs": {
+      "green-tests-complete-adapter-fixed.log": {
+        "file": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/green-tests-complete-adapter-fixed.log",
+        "sha256": "e01f0e41e6e12aa4df774c934be973e7c7d9d4e60596a410557e15c8b7788f94",
+        "tail": ".................                                                        [100%]\n17 passed in 7.17s\n"
+      },
+      "green-tests-repeat-catalog-fixed.log": {
+        "file": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/green-tests-repeat-catalog-fixed.log",
+        "sha256": "a1ef55228c5cbc6cceb11d6a4d795a628f24ea7d4fd602bb6cdb297b556c16a8",
+        "tail": ".................                                                        [100%]\n17 passed in 5.92s\n"
+      },
+      "green-tests-xml-fixture-fixed.log": {
+        "file": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/green-tests-xml-fixture-fixed.log",
+        "sha256": "83052f076e708335cd7755190da17df1361267b591eb9ee08011b5b7ce16b1dd",
+        "tail": "................                                                         [100%]\n16 passed in 5.21s\n"
+      },
+      "green-tests.log": {
+        "file": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/green-tests.log",
+        "sha256": "b4ebc25ed194469242309c8520f68a340b6445ce7c5e3ed8b2e2c9e7b3393b62",
+        "tail": "         xml.etree.ElementTree.ParseError: not well-formed (invalid token): line 1, column 2815\n\n/home/zuozhe/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/xml/etree/ElementTree.py:569: ParseError\n=========================== short test summary info ============================\nFAILED tests/unit/test_batch91_acceptance.py::test_complete_junit_requires_every_intended_file_and_no_duplicate_cases\n1 failed, 15 passed in 5.92s\n"
+      },
+      "red-adapter-recursion-tests.log": {
+        "file": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/red-adapter-recursion-tests.log",
+        "sha256": "ea1a3e5bcc2e2e1dcef7d031ca0ca0357d96a3c7328ea07cab14abe7f4ec2a1e",
+        "tail": " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\na = 'repo/量化策略源代码', p = ('2021年度精选策略/34.套利三年，我的本金翻了10倍.txt',)\n\n>   ???\nE   RecursionError: maximum recursion depth exceeded\n\n<frozen posixpath>:77: RecursionError\n=========================== short test summary info ============================\nFAILED tests/unit/test_batch91_acceptance.py::test_adapter_catalog_replay_keeps_original_binding_callable\n1 failed, 16 deselected in 118.68s (0:01:58)\n"
+      },
+      "red-tests.log": {
+        "file": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/red-tests.log",
+        "sha256": "88fadeca0a30afe04b83a841871cd733f040dd5973c218e7fa9279eadcda43df",
+        "tail": "::test_partial_isolated_junit_is_rejected_before_checks[tests.unit.test_batch91_acceptance]\nFAILED tests/unit/test_batch91_acceptance.py::test_partial_isolated_junit_is_rejected_before_checks[unrelated.tests]\nFAILED tests/unit/test_batch91_acceptance.py::test_pytest_selection_environment_is_removed\nFAILED tests/unit/test_batch91_acceptance.py::test_complete_junit_requires_every_intended_file_and_no_duplicate_cases\n4 failed, 9 deselected in 5.37s\n"
+      },
+      "red-upstream-tests.log": {
+        "file": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/red-upstream-tests.log",
+        "sha256": "bf922d61ddd1017776164b43c798d44c365289e510563ba71b3129dd0866949a",
+        "tail": "^^\nE       Failed: DID NOT RAISE ValueError\n\ntests/unit/test_batch91_acceptance.py:131: Failed\n=========================== short test summary info ============================\nFAILED tests/unit/test_batch91_acceptance.py::test_adapter_preserves_upstream_accepted_evidence_checks[baseline.json]\nFAILED tests/unit/test_batch91_acceptance.py::test_adapter_preserves_upstream_accepted_evidence_checks[input-binding.json]\n2 failed, 14 deselected in 5.00s\n"
+      }
+    },
+    "new_trading_backtests": 0,
+    "original_verifier_file": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/verify_strategy_batch91.py",
+    "original_verifier_sha256": "7ac1d0a403d74c73aa54bf20b38b39f35b5b3de519a2010f200a6010ae629ce2",
+    "previous_isolations_retained": [
+      "data/staging/strategies-batch91/20261010-corn-quarterly-acceptance",
+      "data/staging/strategies-batch91/20261010-corn-quarterly-acceptance-recovery",
+      "data/staging/strategies-batch91/20261010-corn-quarterly-acceptance-recovery-v2"
+    ],
+    "scope": "acceptance evidence only; no strategy or ledger rule changes",
+    "status": "fixed_and_regression_verified"
+  },
+  "case_id": "corn-IF-batch91-development",
+  "nature": "immutable_red_regressions_and_superseded_proofs",
+  "purpose": "部分套件2失败、上游2篡改失败、完整适配递归及一次XML夹具失败留证；恢复v3最终通过，策略经济规则/账本不变",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/diagnosis.json",
+    "sha256": "69cb234bf288c2c01c7844c9e1ab999cfcd0a5e078615f33cabc995d217f260f"
+  }
+}

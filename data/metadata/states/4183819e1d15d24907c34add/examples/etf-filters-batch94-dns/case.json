@@ -1,0 +1,20 @@
+{
+  "case": {
+    "error": "[Errno -3] Temporary failure in name resolution",
+    "error_type": "gaierror",
+    "host": "finance.sina.com.cn",
+    "http_requests": 0,
+    "method": "socket.getaddrinfo",
+    "observation": "Executed during this stage; no retry by changing missing159928 symbol",
+    "port": 443,
+    "status": "failed"
+  },
+  "case_id": "etf-filters-batch94-dns",
+  "nature": "current_missing_symbol_host_resolution_diagnosis_without_HTTP_retry",
+  "purpose": "当前Sina主机gaierror/临时名称解析失败，0 HTTP；已有同域失败单独绑定，不改变159928数据门禁",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch94/20261010-etf-filters-numerical-stage/current-network-check.json",
+    "sha256": "f4979bbad5d5b9c7867ac6e0042c7b9ae145a43644ebaae725215d38e21f503e"
+  }
+}

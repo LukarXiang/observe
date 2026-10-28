@@ -1,0 +1,38 @@
+{
+  "case": {
+    "commands": [
+      {
+        "log": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute.log",
+        "log_sha256": "811b679010bf7f70ebedd731641171900779276aed440edd5e36e242e930ff51",
+        "mode": "compute",
+        "returncode": 0
+      },
+      {
+        "log": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/replay.log",
+        "log_sha256": "811b679010bf7f70ebedd731641171900779276aed440edd5e36e242e930ff51",
+        "mode": "replay",
+        "returncode": 0
+      }
+    ],
+    "differences": [],
+    "fresh_network_blocked_processes": 2,
+    "full_original_pool_signals": 0,
+    "hash_seed_for_diagnostics_only": 103,
+    "new_trading_backtests": 0,
+    "outputs_sha256": {
+      "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute/diagnostics.json": "5059947dd6d3e7881bc70aec17212752be29e274d2876ac08429cc8b8439ab4a",
+      "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute/momentum-price-reference.parquet": "7335b7e405de2337abe2955731a94aae423ce3b8010e5b0653ccac0f0c5acadf",
+      "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute/real-price-reference.parquet": "05b215b982ff2122b20e6b3412fa1f6f1625abc55d83345ac8fbbf7ab6624d93",
+      "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute/summary.json": "93a3cff956a598077efc719c575efe428f3e6361a885f2f5df94672da369add1"
+    },
+    "status": "ok"
+  },
+  "case_id": "batch103-price-offline",
+  "nature": "two_fresh_network_blocked_byte_equal_workers",
+  "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/offline-verification.json",
+    "sha256": "cfa1a72b7ae02c44dfbc5b173552f63e79fa59fcec16bfcf1c878554f31d48e8"
+  }
+}

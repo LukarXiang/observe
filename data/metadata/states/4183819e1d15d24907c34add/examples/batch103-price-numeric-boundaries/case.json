@@ -1,0 +1,91 @@
+{
+  "case": {
+    "count": 2,
+    "existing_numeric_approval_not_extended": true,
+    "full_original_signals": 0,
+    "implementation_sha256": "0630791c847058799711fa55c16a90363749918db058434407191e7aa4ce3aa0",
+    "new_trading_backtests": 0,
+    "production_rules_changed": false,
+    "reference_file": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/compute/real-price-reference.parquet",
+    "reference_sha256": "05b215b982ff2122b20e6b3412fa1f6f1625abc55d83345ac8fbbf7ab6624d93",
+    "rows": [
+      {
+        "current_EOD_operand": 0.439,
+        "current_hex": "0x1.c189374bc6a7fp-2",
+        "date": "2019-01-22",
+        "decimal_string_mean": "0.439",
+        "fsum_deviation_percent": 0.0,
+        "fsum_mean": 0.439,
+        "fsum_mean_hex": "0x1.c189374bc6a7fp-2",
+        "fsum_price_eligible_reference": true,
+        "history_prices": [
+          0.425,
+          0.436,
+          0.442,
+          0.441,
+          0.441,
+          0.438,
+          0.439,
+          0.433,
+          0.442,
+          0.442,
+          0.436,
+          0.444,
+          0.448
+        ],
+        "instrument": "159949.XSHE",
+        "missing_open_count": 0,
+        "native_input": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/inputs/159949.XSHE.parquet",
+        "native_input_sha256": "ef4ff9c324f877c70133be2b1476c97ad7e6b154c2228bbdadcc9929cd888ecc",
+        "original_deviation_percent": -1.1102230246251565e-14,
+        "original_mean": 0.43900000000000006,
+        "original_mean_hex": "0x1.c189374bc6a80p-2",
+        "original_price_eligible_reference": false,
+        "window_first": "2019-01-03"
+      },
+      {
+        "current_EOD_operand": 3.081,
+        "current_hex": "0x1.8a5e353f7ced9p+1",
+        "date": "2017-02-28",
+        "decimal_string_mean": "3.081",
+        "fsum_deviation_percent": 0.0,
+        "fsum_mean": 3.081,
+        "fsum_mean_hex": "0x1.8a5e353f7ced9p+1",
+        "fsum_price_eligible_reference": true,
+        "history_prices": [
+          3.046,
+          3.062,
+          3.077,
+          3.074,
+          3.066,
+          3.079,
+          3.06,
+          3.099,
+          3.107,
+          3.113,
+          3.099,
+          3.097,
+          3.074
+        ],
+        "instrument": "510180.XSHG",
+        "missing_open_count": 0,
+        "native_input": "data/staging/strategies-batch103/20261011-ETF-original-price-stage/inputs/510180.XSHG.parquet",
+        "native_input_sha256": "20bb20a0c87e5458816c411cd16214c1ed2a5a68c2db53264355a2dbb03c26e5",
+        "original_deviation_percent": -1.1102230246251565e-14,
+        "original_mean": 3.0810000000000004,
+        "original_mean_hex": "0x1.8a5e353f7cedap+1",
+        "original_price_eligible_reference": false,
+        "window_first": "2017-02-09"
+      }
+    ],
+    "status": "observed_reference_boundaries"
+  },
+  "case_id": "batch103-price-numeric-boundaries",
+  "nature": "original_and_fsum_reference_disagreements_no_production_fix",
+  "purpose": "第103批阶段证据；原完整池信号和交易0，正式290不变",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch103/20261011-price-numeric-boundaries/checked.json",
+    "sha256": "04d23dd52a35ae8b75d02f328ad14e7397840e228ed9647d74f1e87ee10720d9"
+  }
+}

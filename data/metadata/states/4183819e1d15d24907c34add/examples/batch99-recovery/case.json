@@ -1,0 +1,45 @@
+{
+  "case": {
+    "economic_rule_changed": false,
+    "formal_acceptance": false,
+    "implementation_sha256": {
+      "pyproject.toml": "2c937c8ac7608c6d84729f1fdb31b14d1ae3b0cfbf6ef1890fd283d3fdf179f4",
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/recover_strategy_batch99_namespace.py": "c51f2c09856a5571b5baa42a67274c4b0bc14ad7f1d59b0e0b2d183b205cddc6",
+      "scripts/research_strategy_batch99.py": "7e85bddf56f5add6d7a6553d74e85a125a0328fb3793d0343af545f36ec27f60",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "3c507dc700d28c165322e19e27254b682e5bf2d991153c4d2ce7d39183fb88dd",
+      "tests/unit/test_batch99_namespace_recovery.py": "4f0a110b7c6c5a0ff9e1b4b529479beef9cfa34194dcd338006d7b8c87280e7f",
+      "tests/unit/test_batch99_research.py": "7618c4764ffec27a2f8c241aaecb3c5584ff71a4d241e366906dae9be1022db7",
+      "uv.lock": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382"
+    },
+    "old_program_outputs_preserved": true,
+    "operand_sha256": "939e9196914885e39ae885434352375870a8c8a40d835117ebae1acfc7378c83",
+    "original_prepared": "data/staging/strategies-batch99/20261011-original-options-v1/prepared.json",
+    "original_prepared_sha256": "7abed3a24b7a9c941eb9bdd85e846e53600e5d819d6a17694a6a57da445a35d1",
+    "original_study_sha256": {
+      "ETF-range-components.parquet": "e8299add110e3242fe5a1852a1287d373dab34a15bc9acbbd3663b94834e77dd",
+      "diagnostics.json": "91f9c0f06fd18a86d1822c9378e8410b6b6810d87dcc7158d91311fea16d1011",
+      "summary.json": "896ed45e50b3d4374e4be95d2306fb6efaa310bcd6be7ce712f619ed754e1027"
+    },
+    "reason": "Paper diagnostics rebound Price_Range to constant3/2; fresh source namespace restores original bands",
+    "source_sha256": [
+      "5483ce9fea22822a8ca84e0f004064c53b384f54bdd0a2a51eee5d162761f983",
+      "6259fb771cf0bc1a857d10806d4282241053409d5079c5478862a221f6a63e1d"
+    ]
+  },
+  "case_id": "batch99-recovery",
+  "nature": "fresh_source_namespace_before_historical_arithmetic",
+  "purpose": "旧恒定3/2轨道保留，恢复不改经济规则，44诊断字节不变",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch99/20261011-fresh-namespace-recovery-v2/prepared.json",
+    "sha256": "ccf3e0312462c66b83fa5e6350a35f3bd89ae0d96dd223758515633e054e1fb1"
+  }
+}

@@ -1,0 +1,688 @@
+{
+  "case": {
+    "case_count": 46,
+    "cases": [
+      {
+        "case": "initialize_0",
+        "error": null,
+        "stdout": "",
+        "value": [
+          [
+            "profile"
+          ],
+          [
+            "benchmark",
+            "000300.XSHG"
+          ],
+          [
+            "option",
+            [
+              "use_real_price",
+              true
+            ]
+          ],
+          [
+            "slippage",
+            [
+              0
+            ]
+          ],
+          [
+            "cost",
+            [
+              {
+                "close_commission": 0.0003,
+                "close_tax": 0.001,
+                "close_today_commission": 0,
+                "min_commission": 5,
+                "open_commission": 0.0003,
+                "open_tax": 0
+              }
+            ],
+            {
+              "type": "fund"
+            }
+          ]
+        ]
+      },
+      {
+        "case": "initialize_1",
+        "error": null,
+        "stdout": "",
+        "value": [
+          [
+            "benchmark",
+            "000300.XSHG"
+          ],
+          [
+            "option",
+            [
+              "use_real_price",
+              true
+            ]
+          ],
+          [
+            "option",
+            [
+              "avoid_future_data",
+              true
+            ]
+          ],
+          [
+            "daily",
+            "sell_if_limit_down_yesterday",
+            [
+              "09:30"
+            ],
+            {}
+          ],
+          [
+            "daily",
+            "buy",
+            [
+              "09:30"
+            ],
+            {}
+          ],
+          [
+            "daily",
+            "sell",
+            [
+              "11:25"
+            ],
+            {}
+          ],
+          [
+            "daily",
+            "sell",
+            [
+              "14:30"
+            ],
+            {}
+          ]
+        ]
+      },
+      {
+        "case": "short_pool_names_and_prefixes",
+        "error": null,
+        "stdout": "",
+        "value": [
+          "000001.XSHE",
+          "689001.XSHG",
+          "430001.XBEI"
+        ]
+      },
+      {
+        "case": "short_moneyflow_opposite",
+        "error": null,
+        "stdout": "",
+        "value": [
+          "A"
+        ]
+      },
+      {
+        "case": "short_moneyflow_zero",
+        "error": null,
+        "stdout": "",
+        "value": []
+      },
+      {
+        "case": "short_moneyflow_same",
+        "error": null,
+        "stdout": "",
+        "value": []
+      },
+      {
+        "case": "short_moneyflow_one_column_returns_None",
+        "error": null,
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "short_open_gap_-0.01",
+        "error": null,
+        "stdout": "",
+        "value": [
+          "A"
+        ]
+      },
+      {
+        "case": "short_open_gap_0.0",
+        "error": null,
+        "stdout": "",
+        "value": []
+      },
+      {
+        "case": "short_open_gap_0.01",
+        "error": null,
+        "stdout": "",
+        "value": []
+      },
+      {
+        "case": "short_MACD_difference_not_returned_histogram",
+        "error": null,
+        "stdout": "",
+        "value": [
+          "positive"
+        ]
+      },
+      {
+        "case": "short_empty31_price_table",
+        "error": {
+          "message": "Columns must be same length as key",
+          "type": "ValueError"
+        },
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "short_two_buys_False",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "calls": [
+            [
+              "buy",
+              "A",
+              1000.0
+            ],
+            [
+              "buy",
+              "B",
+              1000.0
+            ]
+          ],
+          "cash": 1000.0,
+          "error": null,
+          "holding_keys": [],
+          "immediate_feedback_stub": false,
+          "orders_return_None_not_fills": true
+        }
+      },
+      {
+        "case": "short_two_buys_True",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "calls": [
+            [
+              "buy",
+              "A",
+              1000.0
+            ]
+          ],
+          "cash": 0.0,
+          "error": null,
+          "holding_keys": [
+            "A"
+          ],
+          "immediate_feedback_stub": true,
+          "orders_return_None_not_fills": true
+        }
+      },
+      {
+        "case": "short_live_sell_dictionary_mutation",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "calls": [
+            [
+              "sell",
+              "old",
+              0.0
+            ]
+          ],
+          "cash": 1000.0,
+          "error": {
+            "message": "dictionary changed size during iteration",
+            "type": "RuntimeError"
+          },
+          "holding_keys": [],
+          "immediate_feedback_stub": true,
+          "orders_return_None_not_fills": true
+        }
+      },
+      {
+        "case": "short_one_existing_holding_blocks_buys",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "calls": [],
+          "cash": 1000.0,
+          "error": null,
+          "holding_keys": [
+            "A"
+          ],
+          "immediate_feedback_stub": false,
+          "orders_return_None_not_fills": true
+        }
+      },
+      {
+        "case": "short_limit_equal_blocks_buy",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "calls": [],
+          "cash": 1000.0,
+          "error": null,
+          "holding_keys": [],
+          "immediate_feedback_stub": false,
+          "orders_return_None_not_fills": true
+        }
+      },
+      {
+        "case": "limit_sell_11:25:00_10.0_100",
+        "error": null,
+        "stdout": "",
+        "value": []
+      },
+      {
+        "case": "limit_sell_11:25:00_11.0_100",
+        "error": null,
+        "stdout": "",
+        "value": [
+          [
+            "A",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "limit_sell_11:25:00_12.0_100",
+        "error": null,
+        "stdout": "",
+        "value": []
+      },
+      {
+        "case": "limit_sell_14:30:00_9.0_100",
+        "error": null,
+        "stdout": "",
+        "value": [
+          [
+            "A",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "limit_sell_14:30:00_11.0_0",
+        "error": null,
+        "stdout": "",
+        "value": []
+      },
+      {
+        "case": "limit_open_1_100.0",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "queries": [
+            [
+              [
+                "A"
+              ],
+              {
+                "end_date": "2024-04-08",
+                "fields": [
+                  "open",
+                  "pre_close"
+                ],
+                "frequency": "daily",
+                "start_date": "2024-04-08"
+              }
+            ]
+          ],
+          "selected": [
+            "A"
+          ]
+        }
+      },
+      {
+        "case": "limit_open_1_101.0",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "queries": [
+            [
+              [
+                "A"
+              ],
+              {
+                "end_date": "2024-04-08",
+                "fields": [
+                  "open",
+                  "pre_close"
+                ],
+                "frequency": "daily",
+                "start_date": "2024-04-08"
+              }
+            ]
+          ],
+          "selected": [
+            "A"
+          ]
+        }
+      },
+      {
+        "case": "limit_open_1_99.0",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "queries": [
+            [
+              [
+                "A"
+              ],
+              {
+                "end_date": "2024-04-08",
+                "fields": [
+                  "open",
+                  "pre_close"
+                ],
+                "frequency": "daily",
+                "start_date": "2024-04-08"
+              }
+            ]
+          ],
+          "selected": []
+        }
+      },
+      {
+        "case": "limit_open_1_101.01",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "queries": [
+            [
+              [
+                "A"
+              ],
+              {
+                "end_date": "2024-04-08",
+                "fields": [
+                  "open",
+                  "pre_close"
+                ],
+                "frequency": "daily",
+                "start_date": "2024-04-08"
+              }
+            ]
+          ],
+          "selected": []
+        }
+      },
+      {
+        "case": "limit_open_2_96.0",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "queries": [
+            [
+              [
+                "A"
+              ],
+              {
+                "end_date": "2024-04-08",
+                "fields": [
+                  "open",
+                  "pre_close"
+                ],
+                "frequency": "daily",
+                "start_date": "2024-04-08"
+              }
+            ]
+          ],
+          "selected": [
+            "A"
+          ]
+        }
+      },
+      {
+        "case": "limit_open_2_97.0",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "queries": [
+            [
+              [
+                "A"
+              ],
+              {
+                "end_date": "2024-04-08",
+                "fields": [
+                  "open",
+                  "pre_close"
+                ],
+                "frequency": "daily",
+                "start_date": "2024-04-08"
+              }
+            ]
+          ],
+          "selected": [
+            "A"
+          ]
+        }
+      },
+      {
+        "case": "limit_open_2_97.01",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "queries": [
+            [
+              [
+                "A"
+              ],
+              {
+                "end_date": "2024-04-08",
+                "fields": [
+                  "open",
+                  "pre_close"
+                ],
+                "frequency": "daily",
+                "start_date": "2024-04-08"
+              }
+            ]
+          ],
+          "selected": []
+        }
+      },
+      {
+        "case": "limit_open_2_95.99",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "queries": [
+            [
+              [
+                "A"
+              ],
+              {
+                "end_date": "2024-04-08",
+                "fields": [
+                  "open",
+                  "pre_close"
+                ],
+                "frequency": "daily",
+                "start_date": "2024-04-08"
+              }
+            ]
+          ],
+          "selected": []
+        }
+      },
+      {
+        "case": "limit_gain_1_105.0_105.0",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "negative_label_fixture": true,
+          "real_ST_status_queried": false,
+          "selected": [
+            "A"
+          ],
+          "stdout": ""
+        }
+      },
+      {
+        "case": "limit_gain_1_104.0_104.0",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "negative_label_fixture": true,
+          "real_ST_status_queried": false,
+          "selected": [],
+          "stdout": ""
+        }
+      },
+      {
+        "case": "limit_gain_1_106.0_106.0",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "negative_label_fixture": true,
+          "real_ST_status_queried": false,
+          "selected": [],
+          "stdout": ""
+        }
+      },
+      {
+        "case": "limit_gain_2_110.0_104.0",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "negative_label_fixture": true,
+          "real_ST_status_queried": false,
+          "selected": [
+            "A"
+          ],
+          "stdout": ""
+        }
+      },
+      {
+        "case": "limit_gain_2_110.0_110.0",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "negative_label_fixture": true,
+          "real_ST_status_queried": false,
+          "selected": [],
+          "stdout": ""
+        }
+      },
+      {
+        "case": "limit_RangeIndex_negative_labels_swallowed",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "negative_label_fixture": false,
+          "real_ST_status_queried": false,
+          "selected": [],
+          "stdout": "根据涨幅过滤ST出错 A: -1\n"
+        }
+      },
+      {
+        "case": "limit_risk_minus4_and_no_sellable_check",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "calls": [
+            [
+              "A",
+              0
+            ]
+          ],
+          "closeable_amount_fixture": 0
+        }
+      },
+      {
+        "case": "limit_risk_above_minus4",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "calls": [],
+          "closeable_amount_fixture": 0
+        }
+      },
+      {
+        "case": "limit_combined_candidates_not_deduplicated",
+        "error": null,
+        "stdout": "今日待选池为：['A', 'A']\n买入 ['fixture', 'A']\n———————————————————————————————————\n买入 ['fixture', 'A']\n———————————————————————————————————\n",
+        "value": [
+          [
+            "A",
+            500.0
+          ],
+          [
+            "A",
+            500.0
+          ]
+        ]
+      },
+      {
+        "case": "limit_trade_day_n_0",
+        "error": null,
+        "stdout": "",
+        "value": "2024-04-08"
+      },
+      {
+        "case": "limit_trade_day_n_1",
+        "error": null,
+        "stdout": "",
+        "value": "2024-04-05"
+      },
+      {
+        "case": "limit_trade_day_n_2",
+        "error": {
+          "message": "list index out of range",
+          "type": "IndexError"
+        },
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "limit_trade_day_n_3",
+        "error": null,
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "limit_listing_days_60",
+        "error": null,
+        "stdout": "",
+        "value": []
+      },
+      {
+        "case": "limit_listing_days_61",
+        "error": null,
+        "stdout": "",
+        "value": [
+          "A"
+        ]
+      },
+      {
+        "case": "limit_flat_relative_position",
+        "error": null,
+        "stdout": "",
+        "value": []
+      }
+    ],
+    "complete_original_pool_signals": 0,
+    "economic_variant_approved": false,
+    "new_trading_backtests": 0,
+    "original_strategy_complete": false,
+    "source_sha256": [
+      "780c0a0c8d22c12c6f27a3ddb91127b72d80e71da96152fde47b237b64071829",
+      "317641ff8498a7e2893c410aa1a45ab00e0582684d65a3f1fb84efd8e05115ba"
+    ],
+    "status": "original_function_diagnostics_only",
+    "synthetic_operands": true
+  },
+  "case_id": "batch104-original-diagnostics",
+  "nature": "original_intents_not_fills",
+  "purpose": "46诊断，原异常/反馈/伪ST/时点",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch104/20261011-original-diagnostic-development/diagnostics.json",
+    "sha256": "8646e1d4fccb089dbca3702f856648088d7bbac74e6fef4a9b6e1f53e258f9f9"
+  }
+}

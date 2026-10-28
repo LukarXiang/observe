@@ -1,0 +1,41 @@
+{
+  "case": {
+    "implementation_scope": "Restoration design evidence only; soleBook unchanged",
+    "not_a_backtest": true,
+    "observed_contracts": [
+      "Direction-separated futures positions and instrument historical margin rates",
+      "Contract multiplier on market value/PnL; mark-to-market cash plus daily cost-basis reset",
+      "Old/today quantities and explicit close_today effect",
+      "Expiry check against next trading day, distinct from original last-key target orders"
+    ],
+    "platform_equivalence_proven": false,
+    "references": [
+      {
+        "copy": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/references/position_model.py",
+        "file": "repo/rqalpha/rqalpha/mod/rqalpha_mod_sys_accounts/position_model.py",
+        "repository_commit": "0d98adefa87956e26f3e7ca5b26b5f3fc7ca834f",
+        "sha256": "0e54904b5fe2aff789990f818dc39c4315da2ae4beb6e091c2bfd3772a5ebe20"
+      },
+      {
+        "copy": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/references/api_future.py",
+        "file": "repo/rqalpha/rqalpha/mod/rqalpha_mod_sys_accounts/api/api_future.py",
+        "repository_commit": "0d98adefa87956e26f3e7ca5b26b5f3fc7ca834f",
+        "sha256": "341991441ef9cd90e6a2710e2b67b1b3cbbfd0cecbeb2f93188d15cf58568bb5"
+      }
+    ],
+    "restore_before_development": [
+      "Original quarterly1m and daily settlement/expiry/tick/multiplier histories",
+      "Original platform long/short mapping, positions_value semantics, close_today defaults and rejection/partial fills",
+      "Extend soleBook only after real inputs admitted; retain original non-atomic ordering or separately approve economic variant"
+    ],
+    "unadopted_policy": "RQAlpha can fall back to close on missing settlement; no silent fallback approved for observe"
+  },
+  "case_id": "IF-batch91-engine-reference",
+  "nature": "frozen_RQAlpha_future_position_and_order_design_reference",
+  "purpose": "方向持仓/乘数/历史保证金/旧今仓/逐日结算参考两个文件及提交号冻结；唯一Book不变，未采用缺结算时回退收盘价",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/future-engine-reference.json",
+    "sha256": "f67ec6acf614d395c7d09bcbdefba1f572467806b0a21876afa003ebed326899"
+  }
+}

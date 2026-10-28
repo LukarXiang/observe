@@ -1,0 +1,27 @@
+{
+  "case": {
+    "binding": {
+      "data/staging/strategies-batch81/20261009-stock-bond-drawdown/development-tick-regression/pytest.log": "0d3229250c04f8ea6cf0cb5db9c035eaf6eb04a972d35faa9b62b46ef7768789",
+      "data/staging/strategies-batch81/20261009-stock-bond-drawdown/development-tick-regression/strategy_catalog.py": "6a5fb9dd9d075901feedd6966d1ac50b9cbce781ec5024ac06926bc9ef050b75",
+      "data/staging/strategies-batch81/20261009-stock-bond-drawdown/development-tick-regression/test_batch81_research.py": "043773d3f5419238897436db3ad3949957da7c3fe569b35597c56e03abbc9629"
+    },
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_batch81_research.py"
+    ],
+    "meaning": "Current tick API absent from static catalog; four positive regressions expected to fail",
+    "not_a_backtest": true,
+    "returncode": 1
+  },
+  "case_id": "stock-bond-batch81-tick-red",
+  "nature": "immutable_tick_dependency_regression_failure",
+  "purpose": "修前4失败/2通过、修前目录代码/测试/日志SHA保留；补API/盘中/Tick门禁后通过，全695影响另档",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/development-tick-regression/failure.json",
+    "sha256": "090eec66b56ffa95aebf0da975e91da395496c12dd30628be5a2f92c140fc22d"
+  }
+}

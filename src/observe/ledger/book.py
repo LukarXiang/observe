@@ -23,16 +23,132 @@ class Position:
 class LedgerError(RuntimeError): pass
 
 
+def cash_entitlement_spec(action):
+    """Validate opt-in cash-only record-close terms; legacy actions return None."""
+    policy = action.get('cash_entitlement')
+    if policy is None: return None
+    if not isinstance(policy, str) or policy != 'record_close': raise LedgerError('unknown cash dividend entitlement policy')
+    fields = ('instrument', 'record_date', 'ex_date', 'pay_date', 'cash_per_share')
+    terms = {k: action.get(k) for k in fields}
+    if not isinstance(terms['instrument'], str) or not terms['instrument']:
+        raise LedgerError('cash dividend entitlement requires an instrument')
+    if any(type(terms[k]) is not date for k in ('record_date', 'ex_date', 'pay_date')):
+        raise LedgerError('cash dividend entitlement requires explicit record/ex/pay dates')
+    if not terms['record_date'] < terms['ex_date'] <= terms['pay_date']:
+        raise LedgerError('cash dividend entitlement dates must satisfy record < ex <= pay')
+    cash = terms['cash_per_share']
+    try: valid_cash = type(cash) in (int, float) and math.isfinite(cash) and cash > 0
+    except OverflowError: valid_cash = False
+    if not valid_cash:
+        raise LedgerError('cash dividend entitlement requires a positive finite amount')
+    if action.get('convert_to') or any(action.get(k, 0) for k in ('bonus_ratio', 'rights_ratio', 'rights_price')):
+        raise LedgerError('cash dividend entitlement cannot combine conversion, bonus or rights')
+    return terms
+
+
 class Book:
     PAY_SPLIT, PAY_LAG, LIST_LAG = date(2014, 1, 1), 10, 1   # 到账日 / 红股上市日缺失时的从严推断（决策 18）
 
-    def __init__(self, cash, calendar = ()):
+    def __init__(self, cash, calendar = (), *, external_flows = False):
+        if type(external_flows) is not bool: raise LedgerError('external_flows must be boolean')
+        if external_flows: cash = self._flow_amount(cash, allow_zero = True)
         self.initial = self.cash = round(float(cash), 2)
         if not math.isfinite(self.initial) or self.initial < 0: raise LedgerError('initial cash must be finite and non-negative')
         self.calendar = sorted(calendar)
         self.positions, self.receivable, self.listing = {}, defaultdict(float), defaultdict(list)   # listing: {上市日: [(证券, 股数)]}
         self.cash_events, self.fills, self.equity_rows, self.assumptions, self.issues = [], [], [], [], []
         self._order_seq = 0; self._fill_seq = 0
+        self.dividend_entitlements = {}
+        self._record_due, self._record_day = [], None
+        self.external_flows = external_flows
+        self.external_flow_events = []
+        self._flow_day, self._flow_last_day = None, None
+        self._flow_ids = set()
+        self._units = Decimal(str(self.initial))
+        self._unit_nav = Decimal(1)
+        self._external_total = 0.0
+        self._external_day_total = 0.0
+
+    @staticmethod
+    def _flow_amount(amount, *, allow_zero = False):
+        try:
+            valid = type(amount) in (int, float) and math.isfinite(amount) and abs(amount) <= 1e12
+        except OverflowError: valid = False
+        if not valid: raise LedgerError('external amount must be finite numeric within 1e12')
+        amount = round(float(amount), 2)
+        if not allow_zero and not amount: raise LedgerError('external amount rounds to zero')
+        return amount
+
+    def _flow_active(self, day):
+        if not self.external_flows: raise LedgerError('external cash flows not enabled')
+        if type(day) is not date or day != self._flow_day:
+            raise LedgerError('external flow requires the active unclosed day')
+
+    def _flow_valuation(self, quotes, price_field):
+        """Value immediately before a flow without changing marks or settlement state."""
+        values = []
+        for i, p in self.positions.items():
+            if not p.qty: continue
+            q = quotes.get(i, {})
+            price = p.last_price if q.get('suspended') else q.get(price_field)
+            try:
+                valid = type(p.qty) is int and p.qty > 0 and type(price) in (int, float) and \
+                    math.isfinite(price) and price > 0 and math.isfinite(p.qty * price)
+            except OverflowError: valid = False
+            if not valid: raise LedgerError(f'invalid external-flow valuation for {i}')
+            if q.get('delisted'): raise LedgerError(f'delisted external-flow holding {i}')
+            values.append(p.qty * price)
+        try:
+            market = sum(values)
+            receivable = round(sum(self.receivable.values()), 2)
+            equity = round(self.cash + market + receivable, 2)
+        except (OverflowError, ValueError) as exc: raise LedgerError('invalid external-flow equity') from exc
+        if not all(math.isfinite(v) and v >= 0 for v in (self.cash, market, receivable, equity)) or equity > 1e12:
+            raise LedgerError('external-flow equity must be finite, non-negative and within 1e12')
+        return market, receivable, equity
+
+    def _flow_nav(self, equity):
+        if self._units == 0:
+            if equity != 0: raise LedgerError('equity without external-flow units')
+            return self._unit_nav
+        nav = Decimal(str(equity)) / self._units
+        if not nav.is_finite() or not math.isfinite(float(nav)):
+            raise LedgerError('non-finite unit NAV')
+        return nav
+
+    def external_cash_flow(self, day, amount, quotes, *, event_id, price_field = 'open'):
+        """Apply a same-day external deposit/withdrawal using pre-flow unit NAV.
+
+        Amount/equity are limited to 1e12 to retain cent precision in the cash ledger.
+        The caller supplies the observed open/close quotes, never a portfolio total.
+        """
+        self._flow_active(day)
+        if not isinstance(event_id, str) or not event_id.strip() or event_id in self._flow_ids:
+            raise LedgerError('external event_id must be non-empty and unique')
+        if price_field not in ('open', 'close'): raise LedgerError('external valuation must use open or close')
+        amount = self._flow_amount(amount)
+        market, receivable, equity = self._flow_valuation(quotes, price_field)
+        nav = self._flow_nav(equity)
+        if nav <= 0 or float(nav) <= 0: raise LedgerError('external flow requires positive unit NAV')
+        cash_after, equity_after = round(self.cash + amount, 2), round(equity + amount, 2)
+        if cash_after < 0: raise LedgerError('external withdrawal exceeds available cash')
+        if not 0 <= equity_after <= 1e12 or not 0 <= cash_after <= 1e12:
+            raise LedgerError('external flow exceeds supported equity/cash range')
+        units = self._units + Decimal(str(amount)) / nav
+        # Exact full redemption must not leave decimal division residue.
+        if equity_after == 0: units = Decimal(0)
+        if not units.is_finite() or units < 0 or not math.isfinite(float(units)) or (equity_after > 0 and float(units) <= 0):
+            raise LedgerError('invalid external-flow units')
+        event = {'date': day, 'event_id': event_id, 'amount': amount, 'price_field': price_field,
+            'market_value': round(market, 2), 'receivable': receivable, 'equity_before': equity,
+            'equity_after': equity_after, 'unit_nav': float(nav), 'units_before': float(self._units), 'units_after': float(units)}
+        self._cash(day, 'external_cash_flow', amount, event_id = event_id)
+        self._units, self._unit_nav = units, nav
+        self._external_total = round(self._external_total + amount, 2)
+        self._external_day_total = round(self._external_day_total + amount, 2)
+        self._flow_ids.add(event_id)
+        self.external_flow_events.append(event)
+        return dict(event)
 
     # 工具 -----------------------------------------------------------------
     def pos(self, i): return self.positions.setdefault(i, Position())
@@ -49,6 +165,28 @@ class Book:
 
     # 盘前 -----------------------------------------------------------------
     def start_day(self, day, actions = (), quotes = None):
+        if self.external_flows:
+            if type(day) is not date or self._flow_day is not None or (self._flow_last_day is not None and day <= self._flow_last_day):
+                raise LedgerError('external-flow days must start after the previous close')
+        actions = list(actions)
+        if self._record_due: raise LedgerError('previous dividend record day has not closed')
+        due, seen = [], set()
+        # Validate explicit rights before touching cash, positions or settlement queues.
+        for a in actions:
+            terms = cash_entitlement_spec(a)
+            if terms is None: continue
+            key = (terms['instrument'], terms['ex_date'])
+            if key in seen: raise LedgerError('duplicate cash dividend entitlement action')
+            seen.add(key)
+            if terms['record_date'] == day:
+                if key in self.dividend_entitlements: raise LedgerError('duplicate dividend record close')
+                due.append((key, terms))
+            if terms['ex_date'] == day:
+                right = self.dividend_entitlements.get(key)
+                if right is None: raise LedgerError('dividend record-close evidence missing')
+                if right['terms'] != terms: raise LedgerError('cash dividend entitlement terms changed')
+                if right['applied']: raise LedgerError('cash dividend entitlement already applied')
+        self._record_due, self._record_day = due, day if due else None
         quotes = quotes or {}
         for p in self.positions.values(): p.today_buy = 0
         for d in [d for d in self.listing if d <= day]:
@@ -59,17 +197,25 @@ class Book:
             else: self._ex_date(day, a, quotes.get(a['instrument'], {}))
         for d in [d for d in self.receivable if d <= day]:
             self._cash(day, 'dividend_paid', self.receivable.pop(d))
+        if self.external_flows:
+            self._flow_day = day
+            self._external_day_total = 0.0
 
     def _ex_date(self, day, a, quote):
         i = a['instrument']; p = self.pos(i)
-        if not p.qty: return
         cash, bonus = a.get('cash_per_share', 0.0), a.get('bonus_ratio', 0.0); rights_price, rights_ratio = a.get('rights_price', 0.0), a.get('rights_ratio', 0.0)
+        right = self.dividend_entitlements.get((i, day)) if a.get('cash_entitlement') == 'record_close' else None
+        entitled_qty = right['qty'] if right is not None else p.qty
+        if not p.qty and right is None: return
         if cash:
             pay = a.get('pay_date')
             if pay is None:
                 pay = day if day >= self.PAY_SPLIT else self._after(day, self.PAY_LAG)
                 self.assumptions.append({'date': day, 'instrument': i, 'field': 'pay_date', 'value': pay})
-            self.receivable[pay] += round(p.qty * cash, 2)
+            amount = round(entitled_qty * cash, 2)
+            if amount or right is None: self.receivable[pay] += amount
+        if right is not None: right['applied'] = True
+        if not p.qty: return
         if bonus:
             added = int(p.qty * bonus); listed = a.get('bonus_list_date')
             if listed is None:
@@ -141,6 +287,7 @@ class Book:
     # 开盘成交 -------------------------------------------------------------
     def execute(self, order, quote, day, rules, slippage = 0.0, budget = None):
         """order: {'instrument','side','amount'(买)|'qty':'all'(卖)}；budget 为 preopen_cash_only 下本事件可用现金"""
+        if self.external_flows: self._flow_active(day)
         side, i = order['side'], order['instrument']; p = self.pos(i); raw, pre = quote.get('open'), quote.get('preclose'); bd, st = quote.get('board', 'main'), bool(quote.get('is_st', False))
         self._order_seq += 1; oid = order.get('order_id', f'order-{self._order_seq}')
         def reject(why): return {**order, 'order_id': oid, 'qty_filled': 0, 'status': 'rejected', 'reject_reason': why}
@@ -197,6 +344,19 @@ class Book:
 
     # 收盘 -----------------------------------------------------------------
     def close_day(self, day, quotes):
+        if self.external_flows:
+            self._flow_active(day)
+            _, _, flow_equity = self._flow_valuation(quotes, 'close')
+            unit_nav = self._flow_nav(flow_equity)
+        if self._record_due and day != self._record_day: raise LedgerError('dividend record-close date differs from start day')
+        rights = {}
+        for key, terms in self._record_due:
+            p = self.positions.get(terms['instrument']); qty = p.qty if p is not None else 0
+            try: valid_qty = type(qty) is int and qty >= 0 and math.isfinite(qty * terms['cash_per_share'])
+            except OverflowError: valid_qty = False
+            if not valid_qty:
+                raise LedgerError('invalid dividend record-close quantity or amount')
+            rights[key] = {'terms': terms, 'qty': qty, 'applied': False}
         market, stale = 0.0, False
         for i, p in self.positions.items():
             if not p.qty: continue
@@ -213,9 +373,21 @@ class Book:
         prev = self.equity_rows[-1]['equity'] if self.equity_rows else self.initial
         if not math.isfinite(equity): raise LedgerError(f'non-finite equity on {day}')
         row = {'date': day, 'cash': self.cash, 'market_value': round(market, 2), 'receivable': receivable, 'equity': equity, 'daily_return': equity / prev - 1 if prev else None, 'stale_price': stale}
-        self.equity_rows.append(row); return row
+        if self.external_flows:
+            prev_nav = self.equity_rows[-1]['unit_nav'] if self.equity_rows else 1.0
+            row.update(units = float(self._units), unit_nav = float(unit_nav),
+                external_flow = self._external_day_total,
+                external_flow_total = self._external_total, daily_return = float(unit_nav) / prev_nav - 1 if prev_nav else None)
+            self._unit_nav = unit_nav
+            self._flow_day, self._flow_last_day = None, day
+        self.equity_rows.append(row)
+        self.dividend_entitlements.update(rights)
+        self._record_due, self._record_day = [], None
+        return row
 
     @property
     def status(self): return 'blocked' if any(x['kind'] == 'delisted_holding' for x in self.issues) else 'success'
 
-    def equity_curve(self): return [self.initial] + [r['equity'] for r in self.equity_rows]
+    def equity_curve(self):
+        if self.external_flows: return [1.0] + [r['unit_nav'] for r in self.equity_rows]
+        return [self.initial] + [r['equity'] for r in self.equity_rows]

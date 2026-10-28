@@ -1,0 +1,20 @@
+{
+  "case": {
+    "exit_code": 130,
+    "old_driver_sha256": "5fe52d8f28ac764af70004581670b3964a92acb26acecadae2023735ad2d1080",
+    "published_rows": 0,
+    "reason": "Path.rglob repeated directory scans on repo/data took several minutes before any output; replace with a single rg whitelist filename search",
+    "session": 68457,
+    "source_rules_changed": false,
+    "stage_exists": false,
+    "status": "interrupted_before_stage_creation"
+  },
+  "case_id": "batch100-prepare-interruption",
+  "nature": "immutable_interrupted_inventory_before_stage_creation",
+  "purpose": "rglob重复遍历在任何阶段写入前exit130；改成一次rg搜索，新prepare成功，无经济或原来源修改",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch100/20261011-prepare-search-interruption/interruption.json",
+    "sha256": "41a96812d650d51ab244b2af715400554fc9ab5a78b3ff6f92a77cb72cda3375"
+  }
+}

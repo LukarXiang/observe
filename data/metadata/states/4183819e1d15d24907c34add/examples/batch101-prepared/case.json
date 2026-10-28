@@ -1,0 +1,36 @@
+{
+  "case": {
+    "dependencies_sha256": "8c74c9e49cbd850f5ccd590b8183bcb0d452150aa8fa3703c4f97c1d34e4e634",
+    "economic_rule_changes": false,
+    "implementation_sha256": {
+      "scripts/prepare_strategy_batch101.py": "45db3d26c31f28491771e76c1d67fd22a978d3b523a84bc543ebd3415759658b",
+      "scripts/research_strategy_batch101.py": "db244747941bc3c20056587d03fc6059f904ea6873f9463a6cf5e1b9fb4b501a",
+      "tests/unit/test_batch101_inputs.py": "68651b6892c42ffa89b9fd605d81c4a54bd2d22d41f0bf87f52979b039136cde",
+      "tests/unit/test_batch101_research.py": "b0b39c24d9524907106e4ba9ac1d585c76e463d9dfd398eed64628cd87bf2264"
+    },
+    "input_sha256": {
+      "data/staging/strategies-batch101/20261011-allweather-futures-source/inputs/510310.XSHG.parquet": "12b70e428c8921cc8e74b65f285181c07a93602fc093efcb4c5d3b323a928052",
+      "data/staging/strategies-batch101/20261011-allweather-futures-source/inputs/511010.XSHG.parquet": "f78e1fef99223f0bd43a2b994fd22b39ea74756dd653cd27c1fd0a6497cdf1ab",
+      "data/staging/strategies-batch101/20261011-allweather-futures-source/inputs/513100.XSHG.parquet": "daed842cde0c86514e6cfa35860fed2d78f3cb0bb6b25d7287f02e2321ce3c21",
+      "data/staging/strategies-batch101/20261011-allweather-futures-source/inputs/513500.XSHG.parquet": "536aa69c4458451fc86e085813bdf99d69d051846bf51e609697c74f8f7ab77a",
+      "data/staging/strategies-batch101/20261011-allweather-futures-source/inputs/518880.XSHG.parquet": "c99808962c3aabbcd1b212996984a521ac607f32b3121342d4c98f48dacd77e5"
+    },
+    "new_trading_backtests": 0,
+    "parent": "docs/handoff/2026-10-11-batch100-final-review.json",
+    "parent_sha256": "c88f93e049f9c70672d9a11cf4c13d413b780919b8101ca0726822552319b487",
+    "snapshot": "20261006-145049-e06c",
+    "source_sha256": [
+      "b30d9ba30a2e18bc162261a783479d853ff6768b4ae85963d39315fc85683835",
+      "57d529dce6eb3ba8a76e4e79b1f5340df98d1993118d62b50cc34dec0b7ded4d"
+    ],
+    "strict_usable": false
+  },
+  "case_id": "batch101-prepared",
+  "nature": "frozen_parent_native_inputs_and_original_sources",
+  "purpose": "286父正式验收后冻结五原生候选/源字节/实现与实际Store库存",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch101/20261011-allweather-futures-source/prepared.json",
+    "sha256": "e9b83f110d29a70dd8d1a38e49a0bfe55bcc887a163ec3e0d4a2e1217c556b41"
+  }
+}

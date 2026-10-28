@@ -1,0 +1,49 @@
+{
+  "case": {
+    "formal_source_research_acceptance": false,
+    "longest_component": {
+      "completed_windows_proven_at_checkpoint": 0,
+      "directory": "data/staging/strategies-batch105/20261011-longest-operands-v1",
+      "frozen_files": 165,
+      "frozen_input_rows": 6919789,
+      "native_symbols": 5432,
+      "observed_live_tool_session": 63019,
+      "offline_match": "not_yet_verified",
+      "status": "in_progress"
+    },
+    "new_trading_backtests": 0,
+    "progress": {
+      "catalog_id": "d2eb22f379acfbeedb01",
+      "catalog_sha256": "b9dafd67a972a704c9bd743f86be3d62f27be8382adc19c2fb59917cbd4cab8b",
+      "catalog_status_counts": {
+        "已验证": 11,
+        "待审查": 2,
+        "待数据": 483,
+        "暂不可复现": 71,
+        "重复版本": 41,
+        "非交易研究脚本": 87
+      },
+      "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+      "checkpoint": "20261011-070927-faa0",
+      "local_strategy_runs": 87,
+      "locally_backtested_sources": 12,
+      "locally_reproduced_sources": 12,
+      "manually_reviewed": 294,
+      "note": "Batch105 compatibility stage:equal-valued differently named datetime indexes minimized;16 recovery/19 current tests;6919789 native rows frozen;longest workers in progress;formal294/trading12/parents87 unchanged",
+      "output": "data/catalog/strategies/progress/20261011-070927-faa0",
+      "published_batch": "20261006-145049-5ceb",
+      "sources": 695
+    },
+    "reference_input_validation": "selected stock_basic duplicate code rejected explicitly;no silent deduplication",
+    "root_cause": "pandas3 Series._reindex_indexer receives None for equal labels with differing index names;names matching short-circuits,actual label reorder supplies indexer",
+    "status": "ok_compatibility_stage_only"
+  },
+  "case_id": "batch105-compatibility-stage",
+  "nature": "immutable_development_checkpoint",
+  "purpose": "原时间与索引名称错误及16恢复/19当时测试，历史进行中点不算正式",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-11-batch105-compatibility-stage.json",
+    "sha256": "eaf161de0d091d3c99b805aae7cf5cc4b4f54c6cdd348c86415c32ec58da6764"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "status": "archived_summary_count_correction",
+  "original_review": "docs/handoff/2026-10-09-batch88-final-review.json",
+  "original_review_sha256": "3b50b5968ce332fc168246bee795cb36241a4adae3dc5a25756b31aa1f703c14",
+  "original_document": "docs/tasks/2026-10-09-第八十八批缠论工具与板块动量-正式验收.md",
+  "original_document_sha256": "e0691d80a6d0a8a9a0c00183886e2870a4707b8203b642e39cbd3b9487719a64",
+  "incorrect_core_files_required": 11,
+  "correct_core_files_required": 10,
+  "core_files": ["baseline.json", "catalog-before.json", "checked-state.json", "independent-daily-values.parquet", "independent-replay.json", "input-binding.json", "momentum-diagnostics.json", "offline-catalog.json", "source-reviews/review.json", "strategy_catalog.before.py"],
+  "authoritative_implementation": "scripts/verify_strategy_batch88.py",
+  "authoritative_implementation_sha256": "68fae11900297f0513463be6eedffb260cb9012c8eedb5a01057f3311c8f9f90",
+  "scope": "Summary-only count typo. Verifier actually checked all ten CORE entries (checked-state handled separately before writing itself); 69 implementation and 88 evidence bindings remain unchanged.",
+  "historical_records_preserved": true,
+  "verification_result_changed": false,
+  "source_logic_changed": false,
+  "new_trading_backtests": 0
+}

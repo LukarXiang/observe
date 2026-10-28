@@ -1,0 +1,117 @@
+{
+  "case": {
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/prepare_handoff.py",
+          "scripts/build_strategy_catalog.py",
+          "scripts/verify_financial_import.py",
+          "scripts/research_strategy_batch98.py",
+          "scripts/probe_strategy_batch98.py",
+          "scripts/diagnose_strategy_batch98.py",
+          "scripts/accept_strategy_batch98.py",
+          "scripts/verify_strategy_batch98.py",
+          "scripts/recover_strategy_batch98_diagnostics.py"
+        ],
+        "cwd": "/mnt/d/projects/observe",
+        "returncode": 0,
+        "stderr": "data/staging/strategies-batch98/20261011-guard-validation-v2/local0.stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout": "data/staging/strategies-batch98/20261011-guard-validation-v2/local0.stdout.log",
+        "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_batch98_research.py",
+          "tests/unit/test_batch98_acceptance.py",
+          "tests/unit/test_batch98_rsrs_boundary.py",
+          "tests/unit/test_batch98_json_recovery.py",
+          "tests/unit/test_research_metadata.py"
+        ],
+        "cwd": "/mnt/d/projects/observe",
+        "returncode": 0,
+        "stderr": "data/staging/strategies-batch98/20261011-guard-validation-v2/local1.stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout": "data/staging/strategies-batch98/20261011-guard-validation-v2/local1.stdout.log",
+        "stdout_sha256": "8fa13ee9c70176b9733dea989aee1f6115f6e0abf1a29622421fab12964a2ba7"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cwd": "/mnt/d/projects/observe",
+        "returncode": 0,
+        "stderr": "data/staging/strategies-batch98/20261011-guard-validation-v2/local2.stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout": "data/staging/strategies-batch98/20261011-guard-validation-v2/local2.stdout.log",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "copied_files": 232,
+    "evidence_sha256": {
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/isolated-imports-command.json": "2bc2cf078b7259c40a27e3ec08abb1fb8e444c595cdfc6cdffd77d966e0da453",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/isolated-imports.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/isolated-imports.stdout.log": "fe87ee1c4e31c76b216afe8286f773978a33a8c939840c83a234bc094be47305",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/isolated-tests-command.json": "94a1aaaaf71c799168a9142ea2c65eceac2ea09d4a27050f6e26e940516860bc",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/isolated-tests.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/isolated-tests.stdout.log": "59acec7a6a1456ae9cabf936341f3a2aa35494920967606c0c133549ca349be6",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/isolated.json": "c3dc0422e514a6cd879f2b9cc63b7aef72739735a5d80619f0942092bcd44ba9",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/local0-command.json": "fbdb010a010dcbb817b4d33dd0e8bd98417386ae05ac6e89730ecc09fcd3771c",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/local0.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/local0.stdout.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/local1-command.json": "ca7e17b9581b12db675d9b0d80d5a168d0988896a5e71ee65a378c20558b2c40",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/local1.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/local1.stdout.log": "8fa13ee9c70176b9733dea989aee1f6115f6e0abf1a29622421fab12964a2ba7",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/local2-command.json": "9ee052e721b36d95f0ce5445bd610a5387e7826d1da6f69724bea9d895bd90a9",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/local2.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data/staging/strategies-batch98/20261011-guard-validation-v2/local2.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "implementation_sha256": {
+      "pyproject.toml": "2c937c8ac7608c6d84729f1fdb31b14d1ae3b0cfbf6ef1890fd283d3fdf179f4",
+      "scripts/accept_strategy_batch98.py": "06959c9b1634be414a8deecfa059e2ed94dfcfad6ea88dc01778f5f7caec45d2",
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/diagnose_strategy_batch98.py": "66983a771f3b08a92111a9fc75f53705ca15466880a12b3215d10ca29cb85988",
+      "scripts/probe_strategy_batch98.py": "3562af97089fb4fb617fae22eb446ee2b0fdb2f9f2874113a6d4b75e74571a20",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/recover_strategy_batch98_diagnostics.py": "dadc1e5aa28d9580b5f2dd48ff9732adbca89cfba226a2924dfb05b28b2e9cfa",
+      "scripts/research_strategy_batch98.py": "5e1ed04d0a83f6f3e70d0821f496cce6c0c8868435a2c6446bf3bdf61ffdef5f",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "scripts/verify_strategy_batch98.py": "3d89afa03bff16eadb796bf2c897b74f59254a490d2845a83eab0bd8fe0289e9",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "tests/unit/test_batch98_acceptance.py": "b38b770aa4e58b8548bc81c4f4894f17b15e68440779ef3975f04880bce6bacc",
+      "tests/unit/test_batch98_json_recovery.py": "13fd15ef51e3e6c3ffd4b63278a8a9860955145b216ce287f4ee54f726332e9c",
+      "tests/unit/test_batch98_research.py": "a1d36f830a910fed0e7aa525c5a606cee0c21ef6ed0c217afee2fe6ac4a2f5ff",
+      "tests/unit/test_batch98_rsrs_boundary.py": "b55214fab6b68b1e4337f4fc7c509a9c192f79280d64361882fc1c556e9bb512",
+      "uv.lock": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382"
+    },
+    "isolated_passed": 13,
+    "isolated_skipped": 0,
+    "local_passed": 53,
+    "local_skipped": 0,
+    "scope": "Required ruff/diff plus 53 related tests and 13 isolated source tests; not whole pytest suite",
+    "status": "ok"
+  },
+  "case_id": "batch98-guard-v2",
+  "nature": "actual_53_related_13_isolated_tests",
+  "purpose": "53本机相关、13隔离0skip，232副本与5导入；Ruff规定范围及6新脚本，非全套pytest",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch98/20261011-guard-validation-v2/checked.json",
+    "sha256": "22886780eabaaf2ae18c75c4094b3d77c416aa08cd3e03920cac2d9564d23317"
+  }
+}

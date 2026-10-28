@@ -1,0 +1,129 @@
+{
+ "status": "ok",
+ "accepted_checkpoint": "20261010-162223-81d4",
+ "accepted_directory": "data/staging/strategies-batch91/20261010-corn-quarterly-acceptance-recovery-v3",
+ "receipt_file": "docs/handoff/2026-10-10-batch91-verification.json",
+ "receipt_sha256": "3666a31252343dee1ae52bcc2760d2be69ca668fd2141b78408ceea0f82a777d",
+ "checked_state_file": "data/staging/strategies-batch91/20261010-corn-quarterly-acceptance-recovery-v3/checked-state.json",
+ "checked_state_sha256": "b8f060acec1917bee703abd9c5a1e781de6ab70685e2633b69bcb8e290b7aa6a",
+ "final_binding_file": "data/staging/strategies-batch91/20261010-corn-quarterly-acceptance-recovery-v3/final-binding-verification.json",
+ "final_binding_sha256": "9f209eadc2ed415fc64e906f195180e4dd230002a59b7b98f87398c8b47d1d3a",
+ "review_depth": "deep",
+ "scope_alignment": "on_target",
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "specialist_reviews": {
+  "security": {
+   "agent": "batch91_accept_security",
+   "findings": []
+  },
+  "architecture": {
+   "agent": "batch91_accept_architecture",
+   "findings": []
+  }
+ },
+ "adversarial_review": {
+  "angles": [
+   "assumption_violation",
+   "composition_failures",
+   "cascade_construction",
+   "abuse_cases"
+  ],
+  "agents": [
+   "batch91_accept_assumptions",
+   "batch91_accept_composition",
+   "batch91_accept_cascade",
+   "batch91_accept_abuse"
+  ],
+  "final_open_findings": [],
+  "fixed": [
+   "pytest selection could shrink nonempty suite",
+   "adapter dropped upstream accepted evidence",
+   "unrelated baseline could change after isolation",
+   "new adapter recursively called patched binding",
+   "catalog generated/published before repeat/scope guards"
+  ],
+  "diagnosis_file": "data/staging/strategies-batch91/20261010-pytest-proof-diagnosis/diagnosis.json",
+  "diagnosis_sha256": "69cb234bf288c2c01c7844c9e1ab999cfcd0a5e078615f33cabc995d217f260f",
+  "strategy_economics_changed": false
+ },
+ "reviewed_implementation_sha256": {
+  "src/observe/strategy_catalog.py": "a39fca325e87d5588d54a640d84ef9d95e2d8e5ccc1eda1c908e54013bacadf5",
+  "scripts/verify_strategy_batch91.py": "b677ace3fd89dffd2e62230d6dbd8ee56a7a26b69d2def0b7f9addf928519096",
+  "tests/unit/test_batch91_acceptance.py": "ba1ae9e6c330e4eb69117600e3ab4f97fd80eebad6d1f6e57b04bda5feaad3ae",
+  "scripts/review_strategy_batch91.py": "b94028a633eaa023d324676b1ea65ba37ff0a9ac7a2cb3d6d6e91d1da9494a44",
+  "tests/unit/test_batch91_stage.py": "9d0a07bdf322b448c29fe7384f257633fd5678951e39287ae9ca1bc6edd91ada"
+ },
+ "checks": {
+  "implementation_files": 5,
+  "checked_evidence_files": 31,
+  "new_acceptance_tests": 17,
+  "new_stage_tests": 10,
+  "root_related_tests": 160,
+  "root_duration_seconds": 22.08,
+  "isolated_tests": 160,
+  "isolated_duration_seconds": 8.1,
+  "skipped": 0,
+  "errors": 0,
+  "warnings": 1,
+  "full_suite_run": false,
+  "all_intended_test_identities_bound": true,
+  "per_file_test_counts": {
+   "tests.unit.test_batch91_acceptance": 17,
+   "tests.unit.test_batch91_stage": 10,
+   "tests.unit.test_batch70_research": 13,
+   "tests.unit.test_catalog_futures": 27,
+   "tests.unit.test_catalog_dependencies": 29,
+   "tests.unit.test_catalog_schedules": 33,
+   "tests.unit.test_research_metadata": 23,
+   "tests.integration.test_strategy_merge": 8
+  },
+  "frozen_log_and_JUnit_sha256_bound": true,
+  "ruff": "passed",
+  "diff": "passed"
+ },
+ "isolation": {
+  "basis": "392 SHA-pinned preceding metadata code files plus five candidate files;695 SHA-pinned original source files and frozen upstream evidence",
+  "copied_files": 1172,
+  "manifest_file": "data/staging/strategies-batch91/20261010-corn-quarterly-acceptance-recovery-v3/isolated-files.json",
+  "manifest_sha256": "004ee5ccc2d3ce08ad8edce1bf08712a81162457341169d8454c6b4649d8b610",
+  "log_file": "data/staging/strategies-batch91/20261010-corn-quarterly-acceptance-recovery-v3/isolated-tests.log",
+  "log_sha256": "eff7f07678a7913cba0c559d0e8142a4cda27aac6c5f602b43241a4232b0d5e4",
+  "junit_file": "data/staging/strategies-batch91/20261010-corn-quarterly-acceptance-recovery-v3/isolated-tests.xml",
+  "junit_sha256": "511e4ecf5bd1a13cf5a56b2304c6acb36faf798053ebea6137042f9b53cd56b8",
+  "known_commit_equivalence_claimed": false,
+  "old_isolations_retained": true
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5780,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26"
+ },
+ "catalog_changed_sources": 5,
+ "other_catalog_records_unchanged": 690,
+ "source_AST_unique_IF_bodies": 1,
+ "synthetic_cases": 158,
+ "independent_templates": 41,
+ "candidate_rows_overlapping_ranges": 3935,
+ "offline_replay_differences": 0,
+ "candidate_input_identity_equivalence_proven": false,
+ "actual_statsmodels_run": false,
+ "new_requests": 0,
+ "prior_stage_requests": 1,
+ "prior_stage_responses": 0,
+ "new_trading_backtests": 0,
+ "original_signal_rows": 0,
+ "manually_reviewed": 267,
+ "remaining_unreviewed": 428,
+ "locally_backtested_and_reproduced_sources": 12,
+ "local_strategy_parent_runs": 75,
+ "platform_equivalence_proven": false,
+ "library_goal_complete": false,
+ "next_plan": "docs/tasks/2026-10-10-第九十二批趋与势定义-执行计划.md",
+ "Git_publication": "pending_user_commit_and_push"
+}

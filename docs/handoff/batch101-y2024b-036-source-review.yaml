@@ -1,0 +1,20 @@
+source: 2024年度精选策略2/36.致敬市场(6) ，指数期货贴水.txt
+source_sha256: 57d529dce6eb3ba8a76e4e79b1f5340df98d1993118d62b50cc34dec0b7ded4d
+formal_acceptance: false
+original_strategy_complete: false
+economic_variant_approved: false
+review_scope: 全文67行与4定义；原生命周期、合约遍历/非年化分数、跨日选中状态、严格阈值与订单意图受控诊断；不含真实期货信号或交易
+rules:
+  - initialize设置指数期货子账户与14:30买/09:45卖；after_code_changed设置选中空串、杠杆1和IF/IH/IC/IM指数映射
+  - 遍历全部真实期货合约，用每品种指数及每合约1条1m收盘，R=indexPrice/futurePrice*100-100降序，非期限年化
+  - 先更新选中合约，再在R严格大于6且选中键未持时买入；按再次取价、真实乘数与组合总值计算int数量，零数量意图保留
+  - 早盘按此前选中合约退出其他持仓；空选中状态退出所有持仓，不用当日重新排名代替
+allowed_evidence: 受控合约/乘数stub、原方法与真实JSON诊断仅证明代码分支；不证明真实历史状态、保证金、成交或平台生命周期
+data_gaps:
+  - 活跃Store无真实历史期货/1m表；缺四品种历史合约名单及对应指数/合约原时点分钟
+  - 缺历史合约乘数/最小跳点/保证金/费用/到期交割和结算，连续日线不能代替原信号
+  - 原平台是否调用after_code_changed以及positions的即时成交反馈待证
+defects:
+  - 新空g未触发after_code_changed时买回调AttributeError；不能擅自搬初始化参数
+  - 空合约池IndexError，零期货价产生非有限R及int数量OverflowError；原异常保留
+next: 补齐原真实合约、指数和期货分钟及历史执行规则，证明生命周期；若仍大量缺失则继续搁置，不以连续合约或通用保证金估算代替

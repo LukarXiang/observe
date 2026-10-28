@@ -1,0 +1,87 @@
+{
+  "case": {
+    "accepted_checkpoint": "20261010-153017-ee60",
+    "accepted_directory": "data/staging/strategies-batch90/20261010-intraday-source-acceptance",
+    "adversarial_review": {
+      "examined": [
+        "Original source/AST SHA before function loading; source imports/top-level not executed",
+        "Stage code and all frozen inputs bound to prior receipt; two new source entries only",
+        "Original unfiltered1% denominator, strict1.07/1.09 and set-order economics retained",
+        "Synthetic immediate/rejected/deferred feedback does not become actual Book fills",
+        "Plain dict mutation exception explicitly not asserted to equal platform mapping",
+        "MACD/flow/low-open means are injected, never converted to historical full-pool signals",
+        "Pre- and post-catalog reference replay exact, frozen-operand binding adaptation explicit",
+        "One independent fsum disagreement retained separately from zero replay differences",
+        "Current catalog independently rebuilt offline to three byte-identical files",
+        "Immutable checkpoints/logs/code copies and old5780 controls/398 partitions protected"
+      ],
+      "findings": []
+    },
+    "checked_state_file": "data/staging/strategies-batch90/20261010-intraday-source-acceptance/checked-state.json",
+    "checked_state_sha256": "20c21ff07ef0ce99fa7b80d62d8ea38705a39bbd94857beb42dd82caa811ea4e",
+    "checks": {
+      "diff": "passed",
+      "evidence_files": 25,
+      "full_suite_run": false,
+      "implementation_files": 6,
+      "new_tests": 6,
+      "related_tests_passed": 114,
+      "ruff": "passed",
+      "stdout_command_logs_saved": true,
+      "test_duration_seconds": 19.97,
+      "warnings": 1
+    },
+    "final_binding_file": "data/staging/strategies-batch90/20261010-intraday-source-acceptance/final-binding-verification.json",
+    "final_binding_sha256": "138f7ddd689c1ef8582ae6c35813f75ceb459cf91b9cf03d7769567095a02f19",
+    "formal_source_research_acceptance": true,
+    "formal_trading_acceptance": false,
+    "independent_condition_differences_retained": 1,
+    "library_goal_complete": false,
+    "local_strategy_parent_runs": 75,
+    "locally_backtested_and_reproduced_sources": 12,
+    "manually_reviewed": 262,
+    "new_requests": 0,
+    "new_sources_reviewed": 2,
+    "new_synthetic_lifecycle_cases": 31,
+    "new_trading_backtests": 0,
+    "next_plan": "docs/tasks/2026-10-10-第九十一批玉米价差与股指跨期-执行计划.md",
+    "offline_replay_differences": 0,
+    "operand_binding_adapted_for_current_catalog": true,
+    "original_component_body_changed": false,
+    "original_signal_rows": 0,
+    "platform_equivalence_proven": false,
+    "prior_synthetic_cases_replayed": 13,
+    "receipt_file": "docs/handoff/2026-10-10-batch90-verification.json",
+    "receipt_sha256": "f859a93ade94cfc8d529c61b381f775ca8f5c37875abc82c47109e164b42fc34",
+    "reference_prefilter_true": 280,
+    "reference_windows_exactly_replayed": 45763,
+    "remaining_unreviewed": 433,
+    "review_depth": "deep",
+    "reviewed_implementation_sha256": {
+      "scripts/diagnose_strategy_batch90.py": "a146d749036858222d3287ca9d59b130547c9d3a904a3a5e35ea396214d6b451",
+      "scripts/verify_strategy_batch90.py": "aaf0266391c1d27f25bdcb78eff1f9ca15cba2e629761b1a2dc7e754eb82ca07",
+      "src/observe/strategy_catalog.py": "67da4be7f96a4cfb99277a073715e2cb7983909b757038fd922fe0a1affeb941",
+      "tests/unit/test_batch90_lifecycle.py": "b1f5fbe9800e507e4ef698db36e019422c52880b5d6881d6cb4f5a8cf888af8c"
+    },
+    "scope_alignment": "on_target",
+    "specialist_reviews": {
+      "architecture": {
+        "agent": "batch90_accept_architecture",
+        "findings": []
+      },
+      "security": {
+        "agent": "batch90_accept_security",
+        "findings": []
+      }
+    },
+    "status": "ok"
+  },
+  "case_id": "shortline-batch90-final-review",
+  "nature": "frozen_code_and_evidence_review_binding",
+  "purpose": "6实施/25证据及三命令完整日志冻结，安全架构无发现；原组件体不改、catalog前后输入绑定适配明确，参考逐值和目录三文件禁网匹配",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-10-batch90-final-review.json",
+    "sha256": "90914cfbeb5b889a2222a819e40f2efb2df1eb131089e4010a21aec95e138c11"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "case": {
+    "implementation_sha256": {
+      "scripts/complete_pair66_short_windows.py": "8e8daf34bbb6605fefb08764ef7406ef6903dc76eb3f52b00f525cd391a71d62",
+      "tests/unit/test_pair66_short_completion.py": "387e9eae8afb32bcfded154bf350bf5a9d8c58f005098f65ebee36ac2bdd227d"
+    },
+    "remaining": [
+      "Actual five island trades and five fresh workers and final acceptance are separate"
+    ],
+    "reviews": [
+      {
+        "file": "data/staging/strategies-history-supplement/20261011-pair66-short-review-v2/security/review.json",
+        "role": "security",
+        "sha256": "fcc5bca23c8e17dfd7cc61a280014ce06c3a0edb4095bb9ecf6fb6cfe9693331",
+        "status": "ok"
+      },
+      {
+        "file": "data/staging/strategies-history-supplement/20261011-pair66-short-review-v2/abuse/review.json",
+        "role": "abuse",
+        "sha256": "cc5211e656e00b8476b23fe6afbadcd35f6a910fb27c81dbb900c6298ee953e4",
+        "status": "ok"
+      },
+      {
+        "file": "data/staging/strategies-history-supplement/20261011-pair66-short-review-v2/architecture/review.json",
+        "role": "architecture",
+        "sha256": "84dce7473dc199b1557c6ee4e9147103f7466b7ec4fe32d6ce2d588c3ba19234",
+        "status": "ok"
+      },
+      {
+        "file": "data/staging/strategies-history-supplement/20261011-pair66-short-review-v2/composition/review.json",
+        "role": "composition",
+        "sha256": "6d25bdee2b11a14995eaf5505174fa521ac9fffd2bdbaf4eb32853e40b19a92e",
+        "status": "ok"
+      },
+      {
+        "file": "data/staging/strategies-history-supplement/20261011-pair66-short-review-v2/assumptions/review.json",
+        "role": "assumptions",
+        "sha256": "13a8b5611097a725ca8521d0a83302be22ea7528b50463f7f86b6aae8f1a5ba7",
+        "status": "ok"
+      },
+      {
+        "file": "data/staging/strategies-history-supplement/20261011-pair66-short-review-v2/cascade/review.json",
+        "role": "cascade",
+        "sha256": "f329dc878f2fd0b165a8ab91f26ee8343dabc551b28d8bf5a8e325978a50a46c",
+        "status": "ok"
+      }
+    ],
+    "scope": "pair66_short_completion_v2",
+    "status": "ok"
+  },
+  "case_id": "pair66-short-review-v2",
+  "nature": "accepted_six_returned_current_implementation_reviews",
+  "purpose": "六正文角色/状态/范围/当前两SHA均匹配；open findings为空，不能替代实际交易验收",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-history-supplement/20261011-pair66-short-review-v2/review-completion.json",
+    "sha256": "b5faab3aa5a424a2f5076b53db80d4eda9cc9fd5176aa36a72b1d2453975db27"
+  }
+}

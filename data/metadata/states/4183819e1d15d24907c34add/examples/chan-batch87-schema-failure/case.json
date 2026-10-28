@@ -1,0 +1,23 @@
+{
+  "case": {
+    "error": "'n_minutes_ok'",
+    "implementation_before": {
+      "scripts/review_strategy_batch87.py": "c98b2b88620ed6abb250e2d08a2d6b36aaeb223a5ebc7ee065251607b0e59d1a",
+      "tests/unit/test_batch87_research.py": "3e5ecd66281cb1d274042d97270923c55da6feefff5ceef76cfcb8a896d3f147"
+    },
+    "log_sha256": "61a31c2a68ca949c5374fb93ec3ba92fa133b584a955e891b948208587f886bb",
+    "network_attempts": 0,
+    "new_rows": 0,
+    "root_cause": "legacy probe wraps metrics under scan_hosts",
+    "status": "failed",
+    "type": "KeyError"
+  },
+  "case_id": "chan-batch87-schema-failure",
+  "nature": "immutable_legacy_probe_wrapper_key_failure_with_red_regression",
+  "purpose": "旧scan_hosts指标包装误读触发KeyError，网络尝试0；只修诊断schema读取，旧驱动/测试/堆栈/红回归保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/development-capability-schema-failure/failure.json",
+    "sha256": "ceec23080524c5ece0385c85d765182ab6fe5d8edf276ffaa281bd24be894f95"
+  }
+}

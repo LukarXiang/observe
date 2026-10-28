@@ -1,0 +1,36 @@
+{
+  "case": {
+    "actual_statsmodels_result_observed": false,
+    "coefficient_expression_ast": "Subscript(value=Attribute(value=Name(id='result', ctx=Load()), attr='params', ctx=Load()), slice=Constant(value=1), ctx=Load())",
+    "exception": "KeyError",
+    "fidelity": "Original function zscore runs; named-Series coefficient expression diagnosed only under explicit synthetic params; OLS/coint blocked",
+    "missing_label": 1,
+    "no_local_imports_for_environment_dependencies": true,
+    "not_a_backtest": true,
+    "source_calls": [
+      "sm.tsa.stattools.coint(x,y)",
+      "sm.add_constant(x)",
+      "sm.OLS(y,X).fit()"
+    ],
+    "source_sha256": "19a4d5c7545bf34777f0e461e13c16764fdcf59005e08203add143707dc4e23d",
+    "synthetic_named_parameter_labels": [
+      "const",
+      "close"
+    ],
+    "top_level_environment_dependencies": [
+      "datetime",
+      "get_price",
+      "plt",
+      "np",
+      "plot"
+    ]
+  },
+  "case_id": "corn-batch91-notebook-compatibility",
+  "nature": "pinned_coefficient_expression_on_synthetic_named_Series",
+  "purpose": "原params[1]在const/close合成Series上KeyError；本机无statsmodels，未声称实际OLS结果或静默修复",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch91/20261010-corn-quarterly-stage/notebook-compatibility-review.json",
+    "sha256": "87de6f2aae52f1aee7880de9323ce92ec1478c6994696450061ece7429c33579"
+  }
+}

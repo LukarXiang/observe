@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "scope": "Two complete DCA/index-valuation sources,48 original-function diagnostics and five native parser audits; original trades blocked and real 1708-row ranks unavailable",
+  "scope_alignment": "on_target",
+  "review_depth": "deep",
+  "hard_stops": [],
+  "specialist_reviews": {
+    "security": {
+      "agent": "batch77_security",
+      "findings": [],
+      "final_current_checked_receipt_and_binding_SHA_verified": true
+    },
+    "architecture": {
+      "agent": "batch77_architecture",
+      "findings": [],
+      "final_current_checked_receipt_and_binding_SHA_verified": true
+    }
+  },
+  "adversarial_review": {
+    "findings": [],
+    "examined": [
+      "Original source bytes, encodings and AST line numbers frozen; only eight article header lines blanked in AST copy",
+      "Only selected safe functions executed; eager decorators/defaults/annotations rejected and notifications stubbed locally",
+      "Five serial native calls and seven fixed GETs bounded; no proxy/retry/redirect or generated-token/header/cookie logging",
+      "Native APIs and decoder/helper fingerprints fixed, raw/parsed responses SHA-bound and replayed exactly offline",
+      "Original72 harmonic PE counts all constituent rows in numerator, no external cash injected and legacy/bisect defects retained",
+      "Original99 strict quartile medians, 1708-row average rank/dropna, quantity orders and incorrect sale tuple preserved",
+      "All post-cutoff rows excluded from operands; 257-row monthly-like references never expanded into daily history or shortened windows",
+      "Empty component-table match does not prove real historical rank arithmetic; zero real rank windows and zero original valuation inputs admitted",
+      "Unique Book external-flow capability reused as available component; no fund fees/events/execution or returns fabricated",
+      "Exclusive outputs and current/copy/evidence fingerprints verified before acceptance; full695-source goal remains in_progress"
+    ]
+  },
+  "accepted_directory": "data/staging/strategies-batch77/20261009-DCA-index-valuation",
+  "accepted_checkpoint": "20261009-010120-d540",
+  "implementation_sha256": {
+    "scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+    "tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+    "src/observe/strategy_catalog.py": "f97164042ce38871530908106c0c8fc07913ec690b2d285fc3cec22472812383"
+  },
+  "implementation_files_checked": 41,
+  "implementation_copies_checked": 41,
+  "evidence_files_checked": 93,
+  "checked_state_file": "data/staging/strategies-batch77/20261009-DCA-index-valuation/checked-state.json",
+  "checked_state_sha256": "46370445ffffc9ba428c8b63e8f504f43ddb3f8db66bfa35d531f62f327589c8",
+  "receipt_file": "docs/handoff/2026-10-09-batch77-verification.json",
+  "receipt_sha256": "19ead881149f14961542066a475ce2af92663b89900b0bc23ee0e7e9113d816e",
+  "final_binding_file": "data/staging/strategies-batch77/20261009-DCA-index-valuation/final-binding-verification.json",
+  "final_binding_sha256": "27a92acc4c83014aa5c29e24480c90489145e2a06eeb68e51feed3bd7a4c8490",
+  "catalog_sha256": "a878dabda1210c5b6f1cdd862ad340d0dd420225d893e9705b9ae79954b26141",
+  "protection": {
+    "status": "ok",
+    "old_controls_unchanged": 5363,
+    "mutable_registry_files_excluded": 0,
+    "old_partition_metadata_unchanged": 398,
+    "old_calendar_rows_unchanged": 7938,
+    "old_index_rows_unchanged": 5280,
+    "partition_check": "size/mtime only; no fresh full hash",
+    "baseline_sha256": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4"
+  },
+  "verification": {
+    "specialized_tests": 29,
+    "final_related_tests": 186,
+    "test_sets_overlap": true,
+    "full_pytest_run": false,
+    "warnings": "One existing Starlette/httpx deprecation warning; legacy source catalog syntax warnings retained",
+    "ruff": "passed",
+    "diff_check": "passed",
+    "offline": "match",
+    "differences": 0,
+    "network_disabled": true,
+    "diagnostics": 48,
+    "new_candidate_rows": 12363,
+    "new_fund_candidate_rows": 11845,
+    "new_requests": 7,
+    "http200_responses": 7,
+    "native_parser_match": true,
+    "post_cutoff_rows_retained_but_excluded": 10,
+    "original_input_rows_admitted": 0,
+    "original72_historical_windows": 0,
+    "supplier_rank_windows": 0
+  },
+  "rank_readiness": {
+    "status": "blocked",
+    "required_native_rows": 1708,
+    "candidate_PE_rows_through_cutoff": 257,
+    "candidate_PB_rows_through_cutoff": 257,
+    "first_retained_date": "2005-04-29",
+    "last_retained_date": "2026-08-31",
+    "native_date_gap_median_days": 30,
+    "minimum_native_row_shortfall": 1451,
+    "real_rank_arithmetic_validated": false,
+    "original_member_valuation_equivalent": false,
+    "warning": "component blocked_windows=0 counts only mature windows rejected; no mature window exists"
+  },
+  "not_a_backtest": true,
+  "new_trading_backtests": 0,
+  "original_strategy_complete": false,
+  "goal_status": "in_progress"
+}

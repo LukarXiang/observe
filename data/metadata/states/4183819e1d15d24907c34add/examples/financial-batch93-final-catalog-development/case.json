@@ -1,0 +1,29 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-o",
+      "addopts=",
+      "tests/unit/test_batch93_acceptance.py",
+      "-k",
+      "progress_catalog_identity",
+      "--junitxml=data/staging/strategies-batch93/20261010-development-final-catalog-identity/green.xml"
+    ],
+    "implementation_sha256": {
+      "scripts/verify_strategy_batch93.py": "0790913de704df57c6e8270fd00faee0388bc05a4ec720bf532f6f3d07ad5e43",
+      "tests/unit/test_batch93_acceptance.py": "57e9b354cda2633945ee8f9f20a0697fde40f8e19a8972c61ae663f7d2a26d48"
+    },
+    "returncode": 0
+  },
+  "case_id": "financial-batch93-final-catalog-development",
+  "nature": "immutable_same_count_competing_catalog_red_green",
+  "purpose": "1失败到1通过；最终进度目录ID/SHA与导航绑定，DATA_WRITER持锁；不改策略经济规则",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch93/20261010-development-final-catalog-identity/green.json",
+    "sha256": "945449d79757b6a15fe54c09d1d9771cb4237ed2f308bbbf8d57cac35d69c653"
+  }
+}

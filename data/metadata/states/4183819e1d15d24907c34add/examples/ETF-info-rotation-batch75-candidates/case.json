@@ -1,0 +1,42 @@
+{
+  "case": {
+    "limits": [
+      "Native close candidates lack original adjusted-price/events/state/1-minute and fee proof",
+      "Dates after2026-09-29 are retained in raw archive and excluded from all components"
+    ],
+    "not_a_backtest": true,
+    "original_input_rows_admitted": 0,
+    "profiles": [
+      {
+        "after_cutoff": 2,
+        "case": "159915",
+        "first": "2011-12-09",
+        "last": "2026-10-08",
+        "native_parser_match": true,
+        "rows": 3597,
+        "status": "success",
+        "strict_usable": false,
+        "unique_dates": 3597
+      },
+      {
+        "after_cutoff": 2,
+        "case": "510500",
+        "first": "2013-03-15",
+        "last": "2026-10-08",
+        "native_parser_match": true,
+        "rows": 3292,
+        "status": "success",
+        "strict_usable": false,
+        "unique_dates": 3292
+      }
+    ]
+  },
+  "case_id": "ETF-info-rotation-batch75-candidates",
+  "nature": "bounded_wire_capture_and_native_parser_replay",
+  "purpose": "两200取得3597/3292候选行，各2行截止后记录排除；原解析器禁网逐值一致，未发布原输入",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch75/20261008-ETF-info-rotation/candidate-audit.json",
+    "sha256": "b07c15a3b9c04ec4892c732196089c82050df75ba449fa6c75187fecb4800c38"
+  }
+}

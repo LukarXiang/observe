@@ -1,0 +1,62 @@
+{
+  "case": {
+    "actual_requests_attempted": 2,
+    "complete_original_SW_membership_proven": false,
+    "library_goal_complete": false,
+    "new_publications": 0,
+    "new_trading_backtests": 0,
+    "original_nhnl_implementation_proven": false,
+    "references": {
+      "akshare_version": "1.18.97",
+      "existing_function": "stock_industry_clf_hist_sw",
+      "installed_api_sha256": "0b41630e0f7be84034124b114b7b0285b98939998e3c43b3282ac756cd98a938",
+      "missing_local_packages": [
+        "knight_scr",
+        "scr"
+      ],
+      "repo_api_sha256": "d1152e519aaacbee7e898b67e41a3f31dd1ab3989d8ecca9cc19742386806ded",
+      "repo_commit": "0191689d57c667b7c7a198fd0cf97316837ef311",
+      "signature": "() -> pandas.DataFrame"
+    },
+    "requests": [
+      {
+        "error": {
+          "message": "HTTPSConnectionPool(host='drive.google.com', port=443): Max retries exceeded with url: /drive/folders/1AKnaQVwp_DdZ6wl27miQTWwuJAcAPDPv?usp=share_link (Caused by ProxyError('Unable to connect to proxy', NewConnectionError(\"HTTPSConnection(host='127.0.0.1', port=7897): Failed to establish a new connection: [Errno 1] Operation not permitted\")))",
+          "type": "ProxyError"
+        },
+        "follow_redirects": false,
+        "name": "author_folder",
+        "status": "failed",
+        "timeout_seconds": [
+          5,
+          12
+        ],
+        "url": "https://drive.google.com/drive/folders/1AKnaQVwp_DdZ6wl27miQTWwuJAcAPDPv?usp=share_link"
+      },
+      {
+        "error": {
+          "message": "HTTPSConnectionPool(host='www.swsresearch.com', port=443): Max retries exceeded with url: /swindex/pdf/SwClass2021/StockClassifyUse_stock.xls (Caused by ProxyError('Unable to connect to proxy', NewConnectionError(\"HTTPSConnection(host='127.0.0.1', port=7897): Failed to establish a new connection: [Errno 1] Operation not permitted\")))",
+          "type": "ProxyError"
+        },
+        "follow_redirects": false,
+        "name": "sw_history",
+        "status": "failed",
+        "timeout_seconds": [
+          5,
+          12
+        ],
+        "url": "https://www.swsresearch.com/swindex/pdf/SwClass2021/StockClassifyUse_stock.xls"
+      }
+    ],
+    "responses_received": 0,
+    "status": "dependency_inventory_only"
+  },
+  "case_id": "batch105-primary-probes",
+  "nature": "original_dependency_requests_zero_responses",
+  "purpose": "两实际请求为代理连接权限失败；原NHNL与历史分类未证明",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch105/20261011-primary-dependency-probes/checked.json",
+    "sha256": "7208c8711ea36674b3cbfb06ac25a29d671eca4a59dd16b639ac26b34eb1757c"
+  }
+}

@@ -1,0 +1,278 @@
+{
+ "status": "ok",
+ "scope": "Two complete RSRS/BIAS sources,22 diagnostics,9318 index windows,25742 native scoring windows and12566 reference rankings; original trades blocked",
+ "scope_alignment": "on_target",
+ "review_depth": "deep",
+ "hard_stops": [],
+ "resolved_architecture_findings": [
+  "Pure slope checks previously used OLS with R2 and failed on constant dependent values; centered fsum slope and archived regression resolve it without source formula change"
+ ],
+ "specialist_reviews": {
+  "security": {
+   "agent": "batch79_security",
+   "findings": [],
+   "final_current_checked_receipt_and_binding_SHA_verified": true,
+   "old_controls_SHA_rechecked": 5363,
+   "partition_size_mtime_rechecked": 398
+  },
+  "architecture": {
+   "agent": "batch79_architecture",
+   "findings": [],
+   "final_current_checked_receipt_and_binding_SHA_verified": true,
+   "old_controls_SHA_rechecked": 5363,
+   "partition_size_mtime_rechecked": 398
+  }
+ },
+ "adversarial_review": {
+  "findings": [],
+  "examined": [
+   "Source bytes/AST and original seed indices preserved:31skip599;42 shiftedR2 pairs",
+   "Original31RSRS=zscore*R2;KEEP can buy or replace; actual slippage.004",
+   "42 prefix excludesWR and full signal; constant dependent slope is defined and independently verified",
+   "42 originalSeries indexing/numeric-security triple/undefinedvalue defects retained; ndarray score only is labelled reference",
+   "Seven candidates reuse prior formal registry SHA; original510300 string prices converted only in historycopy",
+   "Full ranking requires equal native window date tuples;72 mismatches blocked",
+   "31fullrank calls3102;42controlled dates2366x4,original fullrank calls0; observed nonempty full scope read back",
+   "One fixedGET8/10s,parent45s,no proxy/retry/redirect; vendor marker redacted and intent recorded",
+   "Actual ConnectionError has oneintent/noresponse; no native minute parser success claimed",
+   "Raw native price jumps retained, no eventproof/correction/return claims",
+   "Socket/HTTP disabled replay exact diagnostic/tables/AST/inventory/candidates/three catalogs match0",
+   "Three development failure families immutable and bound; checked artifacts and copies close",
+   "UniqueBook untouched in this batch, earlier decisions and pending requests retained"
+  ]
+ },
+ "accepted_directory": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum",
+ "accepted_checkpoint": "20261009-020654-d4a0",
+ "implementation_sha256": {
+  "scripts/review_strategy_batch79.py": "08b0198d91092d71074f01d11b0a432fff16db9c7b4cd2a8cd1094fc80e5b0ae",
+  "tests/unit/test_batch79_research.py": "59e525fdd9a97814a8a330a5162115be3b55de7af6a848eb3a37110cf93950f6",
+  "src/observe/strategy_catalog.py": "ede9dd0fb12a1fd7ff769143fe74860a59bc02ed90a0a5366bb8517b2a0aab4d"
+ },
+ "implementation_files_checked": 45,
+ "implementation_copies_checked": 45,
+ "evidence_files_checked": 100,
+ "core_files_required": 22,
+ "checked_state_file": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/checked-state.json",
+ "checked_state_sha256": "1539f3100fdc1ae6f9a0b19034c151c4f8dc3db8e9ab987142ce43968093977a",
+ "receipt_file": "docs/handoff/2026-10-09-batch79-verification.json",
+ "receipt_sha256": "e12b0e01e5dec62cc0ceb5b66c0546b1139173d41da283944a0ab10c922d7e71",
+ "final_binding_file": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/final-binding-verification.json",
+ "final_binding_sha256": "c2a0b03d9415361f39f9da249a965c5444b76fe518074fcfde710904181bffc8",
+ "catalog_sha256": "1127ad6fb2e7cec88d172f8670449e27b182fe0a3968eed7af7a7806b559d328",
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5363,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4"
+ },
+ "verification": {
+  "specialized_tests": 28,
+  "final_related_tests": 179,
+  "test_sets_overlap": true,
+  "full_pytest_run": false,
+  "warnings": "One existing Starlette/httpx deprecation; original catalog SyntaxWarnings retained",
+  "ruff": "passed",
+  "diff_check": "passed",
+  "offline": "match",
+  "differences": 0,
+  "network_disabled": true,
+  "diagnostics": 22,
+  "index": {
+   "sources": [
+    {
+     "source": "31",
+     "windows": 4663,
+     "first_history_end": "2007-07-26",
+     "last_history_end": "2026-09-29",
+     "complete_signal": true,
+     "signal_counts": {
+      "KEEP": 3585,
+      "BUY": 629,
+      "SELL": 449
+     },
+     "seed_policy": "618 rows->600 slopes,discard599;append latest start600;skipped start599 retained"
+    },
+    {
+     "source": "42",
+     "windows": 4655,
+     "first_history_end": "2007-08-07",
+     "last_history_end": "2026-09-29",
+     "complete_signal": false,
+     "signal_counts": {},
+     "seed_policy": "626 rows->608 slopes/8 shifted zscore*R2 pairs; append latest, then pop one"
+    }
+   ],
+   "max_abs_difference": {
+    "slope": 6.195044477408373e-14,
+    "r2": 3.11972669919669e-14,
+    "score": 3.523847880160247e-13,
+    "MA": 1.8189894035458565e-12,
+    "rsrs_slope": 5.331846075762314e-14,
+    "index_slope": 7.389644451905042e-13
+   },
+   "signal_differences": 0,
+   "42_complete_signal_windows": 0,
+   "not_a_backtest": true
+  },
+  "single_fund_windows": 25742,
+  "rank_rows": 12566,
+  "coverage": {
+   "31": {
+    "single_fund_windows": 14855,
+    "rank_rows": 3102,
+    "rank_dates": 3102,
+    "first_history_end": "2013-09-03",
+    "last_history_end": "2026-09-29",
+    "original_full_rank_calls": 3102,
+    "years": {
+     "2013": {
+      "rank_dates": 70,
+      "rank_rows": 70
+     },
+     "2014": {
+      "rank_dates": 228,
+      "rank_rows": 228
+     },
+     "2015": {
+      "rank_dates": 244,
+      "rank_rows": 244
+     },
+     "2016": {
+      "rank_dates": 244,
+      "rank_rows": 244
+     },
+     "2017": {
+      "rank_dates": 244,
+      "rank_rows": 244
+     },
+     "2018": {
+      "rank_dates": 243,
+      "rank_rows": 243
+     },
+     "2019": {
+      "rank_dates": 244,
+      "rank_rows": 244
+     },
+     "2020": {
+      "rank_dates": 243,
+      "rank_rows": 243
+     },
+     "2021": {
+      "rank_dates": 218,
+      "rank_rows": 218
+     },
+     "2022": {
+      "rank_dates": 217,
+      "rank_rows": 217
+     },
+     "2023": {
+      "rank_dates": 242,
+      "rank_rows": 242
+     },
+     "2024": {
+      "rank_dates": 242,
+      "rank_rows": 242
+     },
+     "2025": {
+      "rank_dates": 243,
+      "rank_rows": 243
+     },
+     "2026": {
+      "rank_dates": 180,
+      "rank_rows": 180
+     }
+    }
+   },
+   "42": {
+    "single_fund_windows": 10887,
+    "rank_rows": 9464,
+    "rank_dates": 2366,
+    "first_history_end": "2017-01-03",
+    "last_history_end": "2026-09-29",
+    "original_full_rank_calls": 0,
+    "years": {
+     "2017": {
+      "rank_dates": 244,
+      "rank_rows": 976
+     },
+     "2018": {
+      "rank_dates": 243,
+      "rank_rows": 972
+     },
+     "2019": {
+      "rank_dates": 244,
+      "rank_rows": 976
+     },
+     "2020": {
+      "rank_dates": 243,
+      "rank_rows": 972
+     },
+     "2021": {
+      "rank_dates": 243,
+      "rank_rows": 972
+     },
+     "2022": {
+      "rank_dates": 242,
+      "rank_rows": 968
+     },
+     "2023": {
+      "rank_dates": 242,
+      "rank_rows": 968
+     },
+     "2024": {
+      "rank_dates": 242,
+      "rank_rows": 968
+     },
+     "2025": {
+      "rank_dates": 243,
+      "rank_rows": 972
+     },
+     "2026": {
+      "rank_dates": 180,
+      "rank_rows": 720
+     }
+    }
+   }
+  },
+  "blocked_windows": 72,
+  "independent_leader_differences": 0,
+  "independent_rank_differences": 0,
+  "independent_signal_differences": 0,
+  "max_independent_abs_differences": {
+   "log_score": 5.320180207490921e-08,
+   "bias_score": 4.760636329592671e-13
+  },
+  "arithmetic_comparison": "Relative3e-9/absolute3e-10 tolerance; numerical values need not be bitwise equal",
+  "new_requests": 1,
+  "captured_http_responses": 0,
+  "minute_error_category": "ConnectionError",
+  "nested_connection_cause_retained": false,
+  "new_candidate_rows": 0,
+  "reused_daily_candidates": 7,
+  "minute_native_parser_match": false,
+  "post_cutoff_rows_retained_but_excluded": 13,
+  "original_input_rows_admitted": 0
+ },
+ "native_history_quality": {
+  "reference": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/native-history-quality.json",
+  "sha256": "ccdc3c7977d656d6d7bb6995d0dc0b258fcc926479718137e77236859893487e",
+  "event_cause_proven": false,
+  "prices_corrected": false,
+  "strategy_returns_computed": false
+ },
+ "global_progress": {
+  "manually_reviewed": 239,
+  "total_sources": 695,
+  "remaining_reviews": 456,
+  "backtested_and_reproduced_sources": 12,
+  "strategy_parent_runs": 69,
+  "original_platform_complete_equivalence": 0,
+  "goal_status": "in_progress"
+ },
+ "new_trading_backtests": 0,
+ "original_strategy_complete": false
+}

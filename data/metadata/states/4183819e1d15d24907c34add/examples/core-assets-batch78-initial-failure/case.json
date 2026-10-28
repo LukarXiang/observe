@@ -1,0 +1,26 @@
+{
+  "case": {
+    "causes": [
+      "Constructed FunctionDef missing Python3.12 type_params",
+      "Full independent rank difference counter and final zero-difference gate absent"
+    ],
+    "implementation_sha256": {
+      "scripts/review_strategy_batch78.py": "d2b1e4dd33352648b59d0e86a1e445442b2857f48a7250abb5bced68be8df932",
+      "tests/unit/test_batch78_research.py": "3e245ebae1d4088767367ee29b642869bb9ce82edac2914fd859eca0ad89108e"
+    },
+    "log": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/specialized-tests.log",
+    "log_sha256": "c7a8738e4958f6a6e55fc51617e96cbbe8b1e8b5e12e11818bd16d1df93d8ee6",
+    "not_a_backtest": true,
+    "result": "5 failed, 7 passed, 11 errors",
+    "sanity_sha256": "46491b001b2833bb9ec5540f8fa4a19ffd4d2fdc88d4816bfca0d0662762cc46",
+    "status": "failed"
+  },
+  "case_id": "core-assets-batch78-initial-failure",
+  "nature": "immutable_development_failure",
+  "purpose": "5失败/7通过/11错误：新AST缺type_params及完整排名验收门槛缺失；修前代码/测试与原log/SHA保留，不计回测",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/development-failure-initial/failure.json",
+    "sha256": "9049ed5ad9e86952310eaff5e8a1db4f973f0909fe4648967be5e177b046fd66"
+  }
+}

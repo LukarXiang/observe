@@ -1,0 +1,29 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-o",
+      "addopts=",
+      "tests/unit/test_batch93_acceptance.py",
+      "-k",
+      "alternate_root or candidate_publication",
+      "--junitxml=data/staging/strategies-batch93/20261010-development-publication-guards/green.xml"
+    ],
+    "implementation_sha256": {
+      "scripts/verify_strategy_batch93.py": "36cd423d6a26fc55c7b0a15e23346b491b9fc1153941b59b91f1e1133e209450",
+      "tests/unit/test_batch93_acceptance.py": "3d2cfc3cded8224e7dbeaa812f01d34e461fd35a6e0b438b4d72631e889eb5cc"
+    },
+    "returncode": 0
+  },
+  "case_id": "financial-batch93-guard-development",
+  "nature": "immutable_root_and_catalog_publication_red_green",
+  "purpose": "3失败到3通过；规范根和冻结字节发布/竞争导航拒绝，初次直接脚本导入错误另记；原阶段和真实目录结果不覆盖",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch93/20261010-development-publication-guards/green.json",
+    "sha256": "24bde92f53b6e308a71b996db32528c170f201b25cbff31c6c147ffdabab6052"
+  }
+}

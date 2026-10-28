@@ -1,0 +1,195 @@
+{
+  "case": {
+    "actual_requests": 1,
+    "api_sha256": "8db925b5bf570063e0bb6c5aa1673603df60bdc917c7ccb65acfdd08cde99dd2",
+    "index399306_not_requested_as_fund": true,
+    "new_candidate_rows": 0,
+    "new_publications": 0,
+    "new_trading_backtests": 0,
+    "requests": [
+      {
+        "DNS_failure": true,
+        "attempted": true,
+        "attempts": [
+          {
+            "method": "get",
+            "url": "https://finance.sina.com.cn/realstock/company/sz159608/hisdata_klc2/klc_kl.js"
+          }
+        ],
+        "exception": "ConnectionError",
+        "expected_url": "https://finance.sina.com.cn/realstock/company/sz159608/hisdata_klc2/klc_kl.js",
+        "message": "HTTPSConnectionPool(host='finance.sina.com.cn', port=443): Max retries exceeded with url: /realstock/company/sz159608/hisdata_klc2/klc_kl.js (Caused by NameResolutionError(\"HTTPSConnection(host='finance.sina.com.cn', port=443): Failed to resolve 'finance.sina.com.cn' ([Errno -2] Name or service not known)\"))",
+        "published": false,
+        "status": "failed",
+        "strict_usable": false,
+        "symbol": "159608",
+        "wire_responses": []
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159611"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159613"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159619"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159707"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159713"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159731"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "512690"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "516950"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "512880"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "516880"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "515030"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "515220"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "515210"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "512710"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159870"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159995"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "512150"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "588080"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159952"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "512800"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "515950"
+      },
+      {
+        "attempted": false,
+        "reason": "Same-domain DNS failure or total deadline",
+        "status": "not_requested",
+        "strict_usable": false,
+        "symbol": "159945"
+      }
+    ],
+    "responses": 0,
+    "script_sha256": "0e2679177b4ef096c0b11955db71d53edc6ef22a903258cbb769fc47e5d504e6",
+    "status": "dependency_probe_only"
+  },
+  "case_id": "batch107-probe",
+  "nature": "actual_native_interface_failure_no_responses",
+  "purpose": "159608一次DNS失败，余22未请求；399306不当ETF请求，无新发布",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch107/20261011-original-pool-probe-v1/checked.json",
+    "sha256": "909b1b3a1bef3050d6e72cd3667e4e6ebc24531e1386e07c6f319803a04cba7b"
+  }
+}

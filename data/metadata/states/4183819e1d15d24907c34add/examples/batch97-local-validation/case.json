@@ -1,0 +1,35 @@
+{
+  "case": {
+    "check_kind": "Observed terminal output; complete captured isolated logs are separately archived",
+    "code_sha256": {
+      "scripts/accept_strategy_batch97.py": "0377b33a5a8679b5ab9587491c56ab6372b35f7315e0c5b163f23428cc1b3ad2",
+      "scripts/research_strategy_batch97.py": "3b2d5f1d4ba7a1246afd44a1efa6acbac7da0bc1811d7bbdead4077182158594",
+      "tests/unit/test_batch97_acceptance.py": "ff4f298d118e5b4709d781a64b29a19bbad2054f20bbf760700f4cf64ec6d351",
+      "tests/unit/test_batch97_research.py": "d7e364845fa02b1b0b42a23aecbcd97aaacdf42a23e7404a5218d9853b54ce29",
+      "tests/unit/test_research_metadata.py": "1f2085f77b11ae5231f465e597ce152d4406cf4e985f8e905491df1858f0b612"
+    },
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_batch97_research.py",
+      "tests/unit/test_batch97_acceptance.py",
+      "tests/unit/test_research_metadata.py"
+    ],
+    "full_suite_claimed": false,
+    "observed_exit_code": 0,
+    "observed_tests_passed": 52,
+    "ruff_observed_status": "pass",
+    "skips": 0,
+    "status": "ok"
+  },
+  "case_id": "batch97-local-validation",
+  "nature": "observed_local_52_related_tests",
+  "purpose": "本机52相关测试及Ruff观察记录；完整捕获隔离日志另存",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch97/20261011-guard-validation/local-validation.json",
+    "sha256": "2b6a4bb587b25ee38ba3a23d1612ad42a8a974906c424d4ab3d35c3e1218faec"
+  }
+}

@@ -1,0 +1,79 @@
+{
+ "status": "ok",
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "original_strategy_complete": false,
+ "library_goal_complete": false,
+ "progress": {
+  "checkpoint": "20261011-021805-bdce",
+  "note": "Batch97 original7day/crowd81 source research accepted;44873raw windows/1392money days/offline match0;no new trades",
+  "catalog_id": "7c54758ce469ecea6a02",
+  "catalog_sha256": "a6b6e51d6dbf05d6f9281def2e8d9bdfea864df6ef72d41ed83855de01501726",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 280,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-021805-bdce"
+ },
+ "components": {
+  "reference_windows": 44873,
+  "price_volume_prefilter_true": 12,
+  "prefilter_and_score_true": 9,
+  "crowd_days": 1392,
+  "amount_observations": 6848484,
+  "diagnostics": {
+   "cases": 31,
+   "hand_boundaries": "match",
+   "recorded_intents_are_not_fills": true
+  },
+  "offline": "match/0",
+  "new_trading_backtests": 0
+ },
+ "source_sha256": [
+  "4a9e21d05fb014d129ea24928cec287311511cfadc6c5ff8c308e26b52277989",
+  "d0350173eed29f6464d5a350efea957e876d718479b4ca1cd62dbd4694ef3e86"
+ ],
+ "evidence_sha256": {
+  "docs/handoff/batch97-y2023-049-source-review.yaml": "be4bc251d78da1e28ee33730adc4de61483a1ea8f73ad8d29230364dfd1c4a44",
+  "docs/handoff/batch97-y2023-081-source-review.yaml": "f3e8c795e35c1500836caf1aaad07191065fc54ba81aa4555c869bcf6cd6b38e",
+  "scripts/accept_strategy_batch97.py": "0377b33a5a8679b5ab9587491c56ab6372b35f7315e0c5b163f23428cc1b3ad2",
+  "tests/unit/test_batch97_acceptance.py": "ff4f298d118e5b4709d781a64b29a19bbad2054f20bbf760700f4cf64ec6d351",
+  "data/staging/strategies-batch97/20261011-dependencies/inventory.json": "ae1e9759f8d8029de41dc33e8657b1a6f5f3ee4142d34b42b33d6d5d92c25b5f",
+  "data/staging/strategies-batch97/20261011-dependencies/reference-files.json": "74172ed0ce60af7a7fd2325ffcbf58f03e2dc18efd5e3733c27dc4e9091d4849",
+  "data/staging/strategies-batch97/20261011-guard-validation/isolated.json": "4c04af9b1e09669853f761cf713cb0d8a4c09117dce6727cb645a4ba56eb52e0",
+  "data/staging/strategies-batch97/20261011-components-v1/offline-verification.json": "32da05ba609efbced7023c07d0817f39f4cb5b8ddf27eb6cea8e4bf6c67c42c3",
+  "data/staging/strategies-batch97/20261011-formal-source-acceptance/source-reviews.json": "9f56b8d24ba8fe050ad9c689748203d2770e6bd5a8a27a44ec963360e85dfbf1",
+  "data/staging/strategies-batch97/20261011-formal-source-acceptance/component-checks.json": "0804ea9245b7aac474971930afde989f4717a18095504ba619ad93f36af504fe",
+  "data/staging/strategies-batch97/20261011-formal-source-acceptance/prepared.json": "943f2c3554674e08783de82e3fc4e3691baee6081219226ae4f3d3f6c6212bc2",
+  "docs/tasks/2026-10-11-第九十七批七日趋势与拥挤率-正式研究验收.md": "e87e498a5a3ee16b838c7f96298733bd02510fbea2297c17ca1142878019199c",
+  "src/observe/strategy_catalog.py": "19c7557f03b045c5447b9c75b43f5df8f88eaebd018c9993801d61230940598c",
+  "data/staging/strategies-batch97/20261011-source-preread/protection.json": "fcf33c8de2d54325eec58fc8fa2fb708364a85378a1d5ef339ce34f6feef438f",
+  "data/catalog/strategies/7c54758ce469ecea6a02/catalog.json": "a6b6e51d6dbf05d6f9281def2e8d9bdfea864df6ef72d41ed83855de01501726",
+  "data/catalog/strategies/progress/20261011-021805-bdce/summary.json": "214fc4f16a2cb5e5642b01738cf58b2b9d875f9bd138b057bcbe29cde6d64fb9"
+ },
+ "readback_bound_files": 16,
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 6614,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+ },
+ "new_trading_backtests": 0,
+ "new_strategy_parent_runs": 0,
+ "review_method": "Full-source manual review, independent scalar arithmetic, fresh-worker replay, unit and isolated tests; no independent agent review claimed"
+}

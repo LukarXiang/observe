@@ -1,0 +1,84 @@
+{
+  "status": "ok",
+  "scope": "existing_approved_pair66_real_backtest_supplement",
+  "formal_source_acceptance": false,
+  "source_accepted_checkpoint": "20261009-070511-857e",
+  "trading_supplement_checkpoint": "20261009-072521-7bfa",
+  "receipt_file": "docs/handoff/2026-10-09-pair66-earlier-windows-verification.json",
+  "receipt_sha256": "9bfc93f94620ae6ecf1fe90fd2b222ffd8fb5f45695d396bae3bc71dad877569",
+  "prepared_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/prepared-windows.json",
+  "prepared_sha256": "1e9351a94cc5964691919e88019dc4be6c13419c81ab2793de37df04cf45b093",
+  "implementation_sha256": {
+    "scripts/supplement_pair66_history.py": "15aa92dc9fa75a166100680fb91f3da7756db71cfaeceb9a0bf4c2b596065fbb",
+    "tests/unit/test_pair66_history_resume.py": "40e431fef4766323228e71f5156d846692e507f38feb371023294df88e14b61a"
+  },
+  "review_depth": "deep",
+  "scope_alignment": "on_target",
+  "specialist_reviews": {
+    "security": {"agent": "pair66_final_security", "findings": []},
+    "architecture": {"agent": "pair66_final_architecture", "findings": []}
+  },
+  "adversarial_review": {
+    "findings": [],
+    "examined": [
+      "All earlier eligibility islands selected before returns; no pause fill or outcome selection",
+      "Approval and frozen config/source SHA enforcement; economic parameters unchanged",
+      "Independent cash/empty state per island; no stitching of NAV or original tail",
+      "One frozen --label selected before execution; unknown/path-like labels rejected",
+      "Immutable output refusal preserved; selected later window skips completed first window",
+      "Sole Book reused for intents and execution, frozen-date fee arithmetic independently checked",
+      "Receipt/config/report and all six parent integrity checks passed on continuation",
+      "2018 loss and platform/fixed-pool/nonindependent-holdout limits retained"
+    ]
+  },
+  "continuation_checks": {
+    "frozen_config_and_source_bindings": "passed",
+    "per_window_validation_sha": "passed",
+    "receipt_and_original_report_exact_results_and_period": "passed",
+    "six_parent_integrity_checks": "ok",
+    "three_comparison_results": "match",
+    "three_comparison_difference_lists": "empty",
+    "three_frozen_verification_difference_counts": 0,
+    "resume_tests": {"passed": 4, "failed": 0, "duration_seconds": 3.27},
+    "ruff": "passed",
+    "full_suite_run": false,
+    "raw_stdout_file_saved": false
+  },
+  "resume_regression": {
+    "old_runner_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/runner-before-resume.py",
+    "old_runner_sha256": "402622a30d641cc012ddcbddf729f366a0f1ca14a09c9c2cf62e980c6ae383af",
+    "red_junit_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/resume-regression-red.xml",
+    "red_junit_sha256": "39429644e2a44a62ebd35b7a15fc604855976a15b591f445c11adc25f51092d6",
+    "red_failed": 4,
+    "green_junit_file": "data/staging/strategies-history-supplement/20261009-pair66-pre2020/resume-regression-green.xml",
+    "green_junit_sha256": "62c1458f84e35bc6996212a835e03665ddf2e15c5f9c23faabb0235867be2d5f",
+    "green_passed": 4
+  },
+  "readback_failure": {
+    "file": "data/staging/strategies-history-supplement/20261010-receipt-readback-first-failure.json",
+    "cause": "Temporary checker expected integer0 for comparison.json differences, actually an empty list; frozen summary integer0 verified separately",
+    "resolved": true,
+    "strategy_or_experiment_changed": false
+  },
+  "protection_scope": {
+    "old_controls_full_SHA_unchanged": 5363,
+    "old_partitions_size_mtime_unchanged": 398,
+    "old_calendar_rows_unchanged": 7938,
+    "old_index_rows_unchanged": 5280,
+    "fresh_full_partition_hash": false
+  },
+  "real_trading_windows": 3,
+  "cost_scenarios": 9,
+  "factor_sessions": 804,
+  "ledger_session_rows": 2412,
+  "fills_independently_fee_checked": 45,
+  "new_original_parent_runs": 3,
+  "new_reproduction_parent_runs": 3,
+  "locally_backtested_sources": 12,
+  "local_strategy_parent_runs": 75,
+  "source_accepted": 260,
+  "source_total": 695,
+  "platform_equivalence_proven": false,
+  "library_goal_complete": false,
+  "next": "Continue batch90 original intraday source paths and dependency evidence; pending economic variants stay pending; Git publication user-operated"
+}

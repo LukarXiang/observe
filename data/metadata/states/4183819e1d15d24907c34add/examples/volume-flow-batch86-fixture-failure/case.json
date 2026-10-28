@@ -1,0 +1,28 @@
+{
+  "case": {
+    "command": "~/envs/quant/.venv/bin/python -m scripts.verify_offline_tests -q tests/unit/test_batch86_research.py",
+    "diagnosis": "Fixture volume100 and yesterday250 is exactly2.5x base mean. Raising one earlier volume to200 raises interval mean above100, so the separate mean-volume gate correctly rejects. Both chronological reference and literal original agree.",
+    "exit_code": 1,
+    "failure": "test_independent_search_uses_closest_anchor: after anchor volume changes from201 to200, expectedTrue but actualFalse",
+    "frozen_files": {
+      "review_strategy_batch86.py": "5b36002a8d9dd045d1e7c32c7c55b76c7d2897b15506d0f0114cbdfff85b665d",
+      "test_batch86_research.py": "efdfbdefe9b5d60160ea25c934ee8e7e8fef7a3d90393f033ae35ecaa7e88fbf"
+    },
+    "not_a_backtest": true,
+    "repair": "Only lower fixture base volume to80 to isolate strict anchor comparison. Original source and production/reference functions remain unchanged.",
+    "status": "failed",
+    "tests": {
+      "failed": 1,
+      "passed": 24,
+      "warnings": 1
+    }
+  },
+  "case_id": "volume-flow-batch86-fixture-failure",
+  "nature": "immutable_development_fixture_failure",
+  "purpose": "初轮1失败24通过：锚点夹具抬高区间均量影响另一门禁；仅降底量隔离锚点条件，原规则不变",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/development-failure-initial/failure.json",
+    "sha256": "ab9c9db3edc7d9dbcb508ca322439844cf58869ffdbf9fff533c8f08fc3122e2"
+  }
+}

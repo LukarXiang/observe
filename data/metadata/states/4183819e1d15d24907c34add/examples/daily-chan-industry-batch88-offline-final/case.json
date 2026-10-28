@@ -1,0 +1,37 @@
+{
+  "case": {
+    "catalog_id": "c57172c2d82af7b6453e",
+    "differences": 0,
+    "files": [
+      {
+        "name": "catalog.json",
+        "original_file": "data/catalog/strategies/c57172c2d82af7b6453e/catalog.json",
+        "repeated_file": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/catalog-offline/catalog/strategies/c57172c2d82af7b6453e/catalog.json",
+        "sha256": "ecf8e76c2fded3700f4206b902a975437d09d705a6336581583cab8235ab0d0f"
+      },
+      {
+        "name": "summary.json",
+        "original_file": "data/catalog/strategies/c57172c2d82af7b6453e/summary.json",
+        "repeated_file": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/catalog-offline/catalog/strategies/c57172c2d82af7b6453e/summary.json",
+        "sha256": "d8015339951228e857cf3b1937e3e259f55be22485226330fe30a01e55ef6396"
+      },
+      {
+        "name": "catalog.parquet",
+        "original_file": "data/catalog/strategies/c57172c2d82af7b6453e/catalog.parquet",
+        "repeated_file": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/catalog-offline/catalog/strategies/c57172c2d82af7b6453e/catalog.parquet",
+        "sha256": "00d0777635a13a3d0643fdfc32a6050c309405df40d68e13bf44d88cdedb059f"
+      }
+    ],
+    "implementation_evidence_sha256": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+    "result": "match",
+    "socket_network_disabled": true
+  },
+  "case_id": "daily-chan-industry-batch88-offline-final",
+  "nature": "accepted_three_catalog_files_byte_identical_forbidden_network_replay",
+  "purpose": "目录JSON/摘要/Parquet原字节禁网相同；完整状态另由independent记录，三目录不是收益复现",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/offline-catalog.json",
+    "sha256": "954b81e8b66db12c013aae8f1ca0507f8c98d5c50d28144fcc2c004f402febca"
+  }
+}

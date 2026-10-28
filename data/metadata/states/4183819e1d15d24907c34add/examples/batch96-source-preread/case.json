@@ -1,0 +1,144 @@
+{
+  "case": {
+    "existing_approvals_reused": false,
+    "formal_source_research_acceptance": false,
+    "formal_trading_acceptance": false,
+    "library_goal_complete": false,
+    "new_trading_backtests": 0,
+    "scope": "source_preread_only",
+    "source_inputs_replaced": false,
+    "sources": [
+      {
+        "article_urls": [
+          "https://www.joinquant.com/post/12666",
+          "https://www.joinquant.com/post/1667"
+        ],
+        "code_start_line": 12,
+        "encoding": "gb18030",
+        "frozen_source": "data/staging/strategies-batch96/20261011-source-preread/0.source",
+        "full_logic_review_complete": false,
+        "functions": [
+          "get_blacklist",
+          "before_trading_start",
+          "after_trading_end",
+          "initialize",
+          "set_param",
+          "log_param",
+          "reset_day_param",
+          "handle_data",
+          "do_handle_data",
+          "market_stop_loss_by_price",
+          "equity_curve_protect",
+          "market_stop_loss_by_3_black_crows",
+          "is_3_black_crows",
+          "market_stop_loss_by_28_index",
+          "stock_stop_loss",
+          "stock_stop_profit",
+          "get_pct_change",
+          "get_stop_loss_threshold",
+          "get_stop_profit_threshold",
+          "get_growth_rate",
+          "get_close_price",
+          "open_position",
+          "close_position",
+          "clear_position",
+          "order_target_value_",
+          "filter_paused_stock",
+          "filter_st_stock",
+          "filter_limitup_stock",
+          "filter_limitdown_stock",
+          "filter_blacklist_stock",
+          "filter_gem_stock",
+          "filter_by_growth_rate",
+          "rank_stocks",
+          "filter_new_stock",
+          "pick_stocks",
+          "adjust_position"
+        ],
+        "imports": [
+          "import math",
+          "import numpy as np",
+          "import pandas as pd",
+          "from pandas import DataFrame, Series",
+          "import pickle",
+          "import time",
+          "import datetime",
+          "import jqdata",
+          "import talib as tb",
+          "import sklearn",
+          "from sklearn.decomposition import PCA",
+          "from sklearn.tree import DecisionTreeRegressor",
+          "from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier, RandomForestRegressor, RandomForestClassifier",
+          "from sklearn import cross_validation, metrics, svm, preprocessing",
+          "from sklearn.metrics import mean_squared_error",
+          "from sklearn.cross_validation import train_test_split",
+          "from sklearn.grid_search import GridSearchCV",
+          "from sklearn.svm import SVR",
+          "from sklearn.externals import joblib",
+          "from sklearn.model_selection import learning_curve",
+          "from sklearn.linear_model import LinearRegression",
+          "from six import StringIO",
+          "import tradestat",
+          "from ind import *"
+        ],
+        "initial_gaps": [
+          "pre_result_csv.csv original predictions, historical generation/availability and labels",
+          "ind/tradestat user modules and sklearn legacy imports",
+          "original intraday pools/state/execution"
+        ],
+        "lines": 808,
+        "original_review_status": "静态扫描，尚未人工审查",
+        "path": "2020年度精选策略/51 HS300--随机森林拐点识别.txt",
+        "sha256": "28b6333c10cf48b6ccc53a3bdfb3ae7dd15a09eabca0362efbb3c425dce8882d"
+      },
+      {
+        "article_urls": [
+          "https://www.joinquant.com/post/29276"
+        ],
+        "code_start_line": 1,
+        "encoding": "utf-8-sig",
+        "frozen_source": "data/staging/strategies-batch96/20261011-source-preread/1.source",
+        "full_logic_review_complete": false,
+        "functions": [
+          "initialize",
+          "ema",
+          "macdx",
+          "trend",
+          "hasCross",
+          "barslast",
+          "core_ssdd",
+          "isContinuous",
+          "findSublist",
+          "tradeHelper1",
+          "tradeHelper2",
+          "isRealT",
+          "isRealB",
+          "before_market_open",
+          "market_open",
+          "after_market_close"
+        ],
+        "imports": [
+          "from jqdata import *"
+        ],
+        "initial_gaps": [
+          "199 daily plus original 14:30 one-minute index bar",
+          "199-entry global divergence state and cross index/time conventions",
+          "159901 fund identity/events/adjustment/state/fee/execution"
+        ],
+        "lines": 467,
+        "original_review_status": "静态扫描，尚未人工审查",
+        "path": "2021年度精选策略/69.（12.3更新v1.2）朱虽自用1号（神虽顶底+趋势）.txt",
+        "sha256": "e88037b85d55b6d9879e0514663ac76ee667ca23cb140985191607216d8b9353"
+      }
+    ],
+    "status": "in_progress"
+  },
+  "case_id": "batch96-source-preread",
+  "nature": "in_progress_source_preread_not_formal_acceptance_or_trading",
+  "purpose": "原文/编码/SHA/定义与初步外置CSV/用户模块/分钟基金依赖，完整审查仍待推进",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch96/20261011-source-preread/source-preread.json",
+    "sha256": "3253992f1a43f38f12ba869b16c5ac5a7b8249a17cfc07b58e1c8cff0aa175b0"
+  }
+}

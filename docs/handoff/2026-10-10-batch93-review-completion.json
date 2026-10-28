@@ -1,0 +1,111 @@
+{
+  "formal_finish_executed": false,
+  "implementation_sha256": {
+    "scripts/review_strategy_batch93.py": "9567fe49b5f9013da756e1594a1d3c68b71d057ce8c1474886c05a38ccf51611",
+    "scripts/verify_strategy_batch93.py": "0790913de704df57c6e8270fd00faee0388bc05a4ec720bf532f6f3d07ad5e43",
+    "src/observe/strategy_catalog.py": "c22a02559b4691626e5301ea6703154ff433dffbf99a91c0011cf2275f35a1ea",
+    "tests/unit/test_batch93_acceptance.py": "57e9b354cda2633945ee8f9f20a0697fde40f8e19a8972c61ae663f7d2a26d48",
+    "tests/unit/test_batch93_stage.py": "2ae6d28a202445888780ce6786af2f37a2b6ebadba39d3dfd0bd6ba5b860b220"
+  },
+  "isolation": {
+    "complete": true,
+    "errors": 0,
+    "files": {
+      "tests.integration.test_strategy_merge": 8,
+      "tests.unit.test_batch70_research": 13,
+      "tests.unit.test_batch91_acceptance": 17,
+      "tests.unit.test_batch91_stage": 10,
+      "tests.unit.test_batch92_acceptance": 18,
+      "tests.unit.test_batch92_stage": 13,
+      "tests.unit.test_batch93_acceptance": 24,
+      "tests.unit.test_batch93_stage": 13,
+      "tests.unit.test_catalog_dependencies": 29,
+      "tests.unit.test_catalog_futures": 27,
+      "tests.unit.test_catalog_schedules": 33,
+      "tests.unit.test_financials": 9,
+      "tests.unit.test_research_metadata": 23
+    },
+    "passed": 237,
+    "skipped": 0
+  },
+  "limits": [
+    "SHA-bound isolation from verified preceding metadata; known-commit equivalence not claimed",
+    "Review did not prove original platform factors, historical financial versions, full pool or actual fills",
+    "Concurrency tests cover recorded rejection and cooperating writer locks; no process-kill simulation"
+  ],
+  "resolved_findings": [
+    "Custom root unbound to literal financial operands",
+    "Live catalog regenerated and published before byte comparison",
+    "Final progress could bind same-count competing catalog"
+  ],
+  "review_depth": "deep",
+  "reviewers": [
+    {
+      "agent": "/root/batch93_security",
+      "remaining_findings": [],
+      "role": "security",
+      "scope": "trust boundaries and source/receipt/filesystem execution",
+      "status": "complete"
+    },
+    {
+      "agent": "/root/batch93_architecture",
+      "remaining_findings": [],
+      "role": "architecture",
+      "scope": "raw inventory/source economics/catalog AST and693 unchanged",
+      "status": "complete"
+    },
+    {
+      "agent": "/root/batch93_assumptions",
+      "remaining_findings": [],
+      "role": "assumption_violation",
+      "scope": "format/identity/range/dtype invariants",
+      "status": "complete"
+    },
+    {
+      "agent": "/root/batch93_composition",
+      "remaining_findings": [],
+      "role": "composition_failures",
+      "scope": "cross-module/root/publication/progress interactions",
+      "status": "complete"
+    },
+    {
+      "agent": "/root/batch93_cascade",
+      "remaining_findings": [],
+      "role": "cascade_construction",
+      "scope": "valid phase sequences/repeated invocations/candidate-test binding",
+      "status": "complete"
+    },
+    {
+      "agent": "/root/batch93_abuse",
+      "remaining_findings": [],
+      "role": "abuse_cases",
+      "scope": "concurrent publication/same-count competing catalog/repeated requests",
+      "status": "complete"
+    }
+  ],
+  "root_tests": {
+    "complete": true,
+    "errors": 0,
+    "files": {
+      "tests.integration.test_strategy_merge": 8,
+      "tests.unit.test_batch70_research": 13,
+      "tests.unit.test_batch91_acceptance": 17,
+      "tests.unit.test_batch91_stage": 10,
+      "tests.unit.test_batch92_acceptance": 18,
+      "tests.unit.test_batch92_stage": 13,
+      "tests.unit.test_batch93_acceptance": 24,
+      "tests.unit.test_batch93_stage": 13,
+      "tests.unit.test_catalog_dependencies": 29,
+      "tests.unit.test_catalog_futures": 27,
+      "tests.unit.test_catalog_schedules": 33,
+      "tests.unit.test_financials": 9,
+      "tests.unit.test_research_metadata": 23
+    },
+    "passed": 237,
+    "skipped": 0
+  },
+  "skill": "/home/zuozhe/.agents/skills/check/SKILL.md",
+  "status": "all_required_reviews_returned_clean_on_final_SHAs",
+  "trading_acceptance": false,
+  "unreviewed_remainder": []
+}

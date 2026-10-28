@@ -1,0 +1,26 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "scripts.verify_offline_tests",
+      "-q",
+      "tests/unit/test_batch84_research.py"
+    ],
+    "implementation_sha256": {
+      "scripts/review_strategy_batch84.py": "0d668e68ec1245bd06f5308e6217c882153d3bba29c3ba9b54f6f257ca59adfb",
+      "tests/unit/test_batch84_research.py": "52625a68cc9597ec410a907e7282f1be11598d52c4677976e7e0a7076576e06d"
+    },
+    "log_sha256": "e989cfbe783bbdaf9ad8002910957a98ed7eeb4cb9d297e1f100dc6d69ead3f0",
+    "not_a_backtest": true,
+    "returncode": 1
+  },
+  "case_id": "industry-T0-batch84-fixture-failure",
+  "nature": "immutable_development_fixture_expectation_failure",
+  "purpose": "首轮1失败20通过：positive样例第11只斜率0原分数NaN排末；失败代码/测试/logSHA封存，只改受控样例并单测原常量NaN",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch84/20261009-industry-ETF-T0/development-specialized-attempt01/result.json",
+    "sha256": "b122835625f498b17a7e433d4efbf849b4c566fe1e9df26d50ae95d7aae2fcad"
+  }
+}

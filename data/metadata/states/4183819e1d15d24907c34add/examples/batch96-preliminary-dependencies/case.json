@@ -1,0 +1,58 @@
+{
+  "case": {
+    "RF51": {
+      "active_prediction_input": "read_file pre_result_csv.csv; previous_date row; values exactly 1",
+      "cannot_replace_predictions_with_new_model": true,
+      "initial_preread_parameters": {
+        "buy_stock_count": 5,
+        "execution_time": "14:50",
+        "period": 3
+      },
+      "legacy_sklearn_imports_present": true,
+      "not_an_original_training_reproduction": true,
+      "training_and_data_vintage_unproven": true
+    },
+    "ZHU69": {
+      "execution_security": "159901.XSHE",
+      "index_switch": "before 2017 000001.XSHG; 2017 onward 399001.XSHE",
+      "required_index_bars": [
+        "199 daily close/high/low",
+        "one-minute close/high/low"
+      ],
+      "scheduled_time": "14:30",
+      "state_and_boundary_review_pending": true,
+      "stock_cost_config_not_proof_of_fund_cost": true
+    },
+    "actual_filename_search": {
+      "command": [
+        "rg",
+        "--files",
+        "--no-ignore",
+        "repo",
+        "-g",
+        "*pre_result_csv*",
+        "-g",
+        "ind.py",
+        "-g",
+        "tradestat.py"
+      ],
+      "matches": [],
+      "returncode": 1,
+      "scope": "local repo only; does not prove external attachments absent"
+    },
+    "formal_source_research_acceptance": false,
+    "new_requests": 0,
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "source_preread_sha256": "3253992f1a43f38f12ba869b16c5ac5a7b8249a17cfc07b58e1c8cff0aa175b0",
+    "status": "in_progress"
+  },
+  "case_id": "batch96-preliminary-dependencies",
+  "nature": "in_progress_source_preread_not_formal_acceptance_or_trading",
+  "purpose": "原文/编码/SHA/定义与初步外置CSV/用户模块/分钟基金依赖，完整审查仍待推进",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch96/20261011-source-preread/preliminary-dependencies.json",
+    "sha256": "e096c02c3dab219aadf5053bf91e693daca3e361f7ef8882df720af1158eaa08"
+  }
+}

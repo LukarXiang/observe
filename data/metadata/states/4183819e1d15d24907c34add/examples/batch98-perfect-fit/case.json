@@ -1,0 +1,44 @@
+{
+  "case": {
+    "all_synthetic": true,
+    "case_count": 2,
+    "cases": [
+      {
+        "exclude_below_minus_point4": false,
+        "high_multiplier": 2.0,
+        "independent_score": 1.721877146535107,
+        "quantile": {
+          "nonfinite": "nan"
+        },
+        "r2": 1.0,
+        "return_rows": 17,
+        "score": 1.721877146535107,
+        "shared_pool_length": 4
+      },
+      {
+        "exclude_below_minus_point4": true,
+        "high_multiplier": 1.0,
+        "independent_score": -1.3416407864998738,
+        "quantile": {
+          "nonfinite": "nan"
+        },
+        "r2": 1.0,
+        "return_rows": 17,
+        "score": -1.3416407864998738,
+        "shared_pool_length": 4
+      }
+    ],
+    "correction": "17 returns always give NaN quantile; score is NaN for ordinary r2!=1, but exact r2==1 yields a finite score",
+    "new_trading_backtests": 0,
+    "original_rule_changed": false,
+    "original_strategy_complete": false
+  },
+  "case_id": "batch98-perfect-fit",
+  "nature": "finite_exception_at_exact_r2_one",
+  "purpose": "17收益分位数NaN但r2==1得分有限，两合成边界一例退出，未修窗口",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch98/20261011-RSRS-perfect-fit-boundary/study.json",
+    "sha256": "c6237a4af0743ab60ee758dd54509a71f74bd917cf5b3cbbff4bb78e5037366b"
+  }
+}

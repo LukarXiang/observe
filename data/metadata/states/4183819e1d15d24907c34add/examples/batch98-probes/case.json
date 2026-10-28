@@ -1,0 +1,92 @@
+{
+  "case": {
+    "candidate_rows": 0,
+    "limits": [
+      "First-page candidates cannot prove full history or decision-time availability",
+      "No quota_daily version schedule or JoinQuant link/share_ratio mapping verified",
+      "Free-float index turnover, historical CSI300 pool and fund redemption inputs remain absent"
+    ],
+    "new_trading_backtests": 0,
+    "original_quota_mapping_or_unit_proven": false,
+    "published": false,
+    "requests": 3,
+    "results": [
+      {
+        "endpoint": "https://datacenter-web.eastmoney.com/api/data/v1/get",
+        "error": "HTTPSConnectionPool(host='datacenter-web.eastmoney.com', port=443): Max retries exceeded with url: /api/data/v1/get?sortColumns=TRADE_DATE&sortTypes=-1&pageSize=1000&pageNumber=1&columns=ALL&source=WEB&client=WEB&reportName=RPT_MUTUAL_DEAL_HISTORY&filter=%28MUTUAL_TYPE%3D%22001%22%29 (Caused by NameResolutionError(\"HTTPSConnection(host='datacenter-web.eastmoney.com', port=443): Failed to resolve 'datacenter-web.eastmoney.com' ([Errno -2] Name or service not known)\"))",
+        "error_type": "ConnectionError",
+        "name": "quota_shanghai",
+        "parameters": {
+          "client": "WEB",
+          "columns": "ALL",
+          "filter": "(MUTUAL_TYPE=\"001\")",
+          "pageNumber": "1",
+          "pageSize": "1000",
+          "reportName": "RPT_MUTUAL_DEAL_HISTORY",
+          "sortColumns": "TRADE_DATE",
+          "sortTypes": "-1",
+          "source": "WEB"
+        },
+        "published": false,
+        "rows": 0,
+        "status": "failed",
+        "strict_usable": false,
+        "wire_response": false
+      },
+      {
+        "endpoint": "https://datacenter-web.eastmoney.com/api/data/v1/get",
+        "error": "HTTPSConnectionPool(host='datacenter-web.eastmoney.com', port=443): Max retries exceeded with url: /api/data/v1/get?sortColumns=TRADE_DATE&sortTypes=-1&pageSize=1000&pageNumber=1&columns=ALL&source=WEB&client=WEB&reportName=RPT_MUTUAL_DEAL_HISTORY&filter=%28MUTUAL_TYPE%3D%22003%22%29 (Caused by NameResolutionError(\"HTTPSConnection(host='datacenter-web.eastmoney.com', port=443): Failed to resolve 'datacenter-web.eastmoney.com' ([Errno -2] Name or service not known)\"))",
+        "error_type": "ConnectionError",
+        "name": "quota_shenzhen",
+        "parameters": {
+          "client": "WEB",
+          "columns": "ALL",
+          "filter": "(MUTUAL_TYPE=\"003\")",
+          "pageNumber": "1",
+          "pageSize": "1000",
+          "reportName": "RPT_MUTUAL_DEAL_HISTORY",
+          "sortColumns": "TRADE_DATE",
+          "sortTypes": "-1",
+          "source": "WEB"
+        },
+        "published": false,
+        "rows": 0,
+        "status": "failed",
+        "strict_usable": false,
+        "wire_response": false
+      },
+      {
+        "endpoint": "https://datacenter-web.eastmoney.com/api/data/v1/get",
+        "error": "HTTPSConnectionPool(host='datacenter-web.eastmoney.com', port=443): Max retries exceeded with url: /api/data/v1/get?sortColumns=TRADE_DATE&sortTypes=-1&pageSize=1000&pageNumber=1&columns=ALL&source=WEB&client=WEB&reportName=RPT_MUTUAL_STOCK_NORTHSTA&filter=%28INTERVAL_TYPE%3D%221%22%29%28MUTUAL_TYPE+in+%28%22001%22%2C%22003%22%29%29%28TRADE_DATE%3D%222020-09-30%22%29 (Caused by NameResolutionError(\"HTTPSConnection(host='datacenter-web.eastmoney.com', port=443): Failed to resolve 'datacenter-web.eastmoney.com' ([Errno -2] Name or service not known)\"))",
+        "error_type": "ConnectionError",
+        "name": "holding2020",
+        "parameters": {
+          "client": "WEB",
+          "columns": "ALL",
+          "filter": "(INTERVAL_TYPE=\"1\")(MUTUAL_TYPE in (\"001\",\"003\"))(TRADE_DATE=\"2020-09-30\")",
+          "pageNumber": "1",
+          "pageSize": "1000",
+          "reportName": "RPT_MUTUAL_STOCK_NORTHSTA",
+          "sortColumns": "TRADE_DATE",
+          "sortTypes": "-1",
+          "source": "WEB"
+        },
+        "published": false,
+        "rows": 0,
+        "status": "failed",
+        "strict_usable": false,
+        "wire_response": false
+      }
+    ],
+    "status": "archived",
+    "wire_responses": 0
+  },
+  "case_id": "batch98-probes",
+  "nature": "bounded_public_query_attempts",
+  "purpose": "沪/深额度候选及20200930持股三次DNS失败，响应/新增/发布0；不用来源凭据",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch98/20261011-bounded-northbound-probes/summary.json",
+    "sha256": "1de0c76667148fcaebfd8d74b35920361b314322cefc1a290ceaf3b0e8574eb9"
+  }
+}

@@ -1,0 +1,973 @@
+{
+  "case": {
+    "case_count": 29,
+    "cases": [
+      {
+        "actual": 0.011666666666666657,
+        "calendar_return_rows": 166,
+        "case": "ES_confidence_1.96",
+        "denominator_hex": "0x1.8000000000006p+2",
+        "expected": 0.011666666666666657,
+        "expected_selected_count": 7,
+        "history_calls": [
+          {
+            "freq": "1d",
+            "lag": 120,
+            "stock": "510300.XSHG"
+          }
+        ],
+        "lag": 120,
+        "selected_count_from_equal_operands": 7
+      },
+      {
+        "actual": 0.010416666666666657,
+        "calendar_return_rows": 166,
+        "case": "ES_confidence_2.06",
+        "denominator_hex": "0x1.3333333333338p+2",
+        "expected": 0.010416666666666657,
+        "expected_selected_count": 5,
+        "history_calls": [
+          {
+            "freq": "1d",
+            "lag": 120,
+            "stock": "510300.XSHG"
+          }
+        ],
+        "lag": 120,
+        "selected_count_from_equal_operands": 5
+      },
+      {
+        "actual": 0.011111111111111101,
+        "calendar_return_rows": 166,
+        "case": "ES_confidence_2.18",
+        "denominator_hex": "0x1.cccccccccccd4p+1",
+        "expected": 0.011111111111111101,
+        "expected_selected_count": 4,
+        "history_calls": [
+          {
+            "freq": "1d",
+            "lag": 120,
+            "stock": "510300.XSHG"
+          }
+        ],
+        "lag": 120,
+        "selected_count_from_equal_operands": 4
+      },
+      {
+        "actual": 0.012499999999999989,
+        "calendar_return_rows": 166,
+        "case": "ES_confidence_2.34",
+        "denominator_hex": "0x1.3333333333338p+1",
+        "expected": 0.012499999999999989,
+        "expected_selected_count": 3,
+        "history_calls": [
+          {
+            "freq": "1d",
+            "lag": 120,
+            "stock": "510300.XSHG"
+          }
+        ],
+        "lag": 120,
+        "selected_count_from_equal_operands": 3
+      },
+      {
+        "actual": 0.016666666666666653,
+        "calendar_return_rows": 166,
+        "case": "ES_confidence_2.58",
+        "denominator_hex": "0x1.3333333333338p+0",
+        "expected": 0.016666666666666653,
+        "expected_selected_count": 2,
+        "history_calls": [
+          {
+            "freq": "1d",
+            "lag": 120,
+            "stock": "510300.XSHG"
+          }
+        ],
+        "lag": 120,
+        "selected_count_from_equal_operands": 2
+      },
+      {
+        "actual": 8.33333333337126,
+        "calendar_return_rows": 166,
+        "case": "ES_confidence_5.0",
+        "denominator_hex": "0x1.3a92a3054d000p-10",
+        "expected": 8.33333333337126,
+        "expected_selected_count": 1,
+        "history_calls": [
+          {
+            "freq": "1d",
+            "lag": 120,
+            "stock": "510300.XSHG"
+          }
+        ],
+        "lag": 120,
+        "selected_count_from_equal_operands": 1
+      },
+      {
+        "actual": 0.011666666666666657,
+        "calendar_return_rows": 166,
+        "case": "ES_confidence_0.0",
+        "denominator_hex": "0x1.8000000000006p+2",
+        "expected": 0.011666666666666657,
+        "expected_selected_count": 7,
+        "history_calls": [
+          {
+            "freq": "1d",
+            "lag": 120,
+            "stock": "510300.XSHG"
+          }
+        ],
+        "lag": 120,
+        "selected_count_from_equal_operands": 7
+      },
+      {
+        "actual": 0.004999999999999996,
+        "case": "ES_short_array_still_divides_by_lag_probability",
+        "expected": 0.004999999999999996
+      },
+      {
+        "actual": 0.0,
+        "case": "ES_empty_ratio_no_history",
+        "expected": 0.0
+      },
+      {
+        "actual": 0.024999999999999977,
+        "case": "ES_only_first_ratio_key",
+        "expected": 0.024999999999999977,
+        "ratio_weights_ignored": true
+      },
+      {
+        "actual": 0.2499999999999998,
+        "case": "ES_key_order_changes_operand",
+        "expected": 0.24999999999999978
+      },
+      {
+        "actual": 0.024999999999999977,
+        "case": "risk_stock_list_uses_first_only",
+        "expected": 0.024999999999999977,
+        "expected_ratio": {
+          "510300.XSHG": 1
+        },
+        "ratio": {
+          "510300.XSHG": 1
+        }
+      },
+      {
+        "actual": 0.0,
+        "case": "risk_empty_class",
+        "expected": 0.0,
+        "ratio": {}
+      },
+      {
+        "actual": -0.0,
+        "case": "risk_all_zero",
+        "expected": 0.0
+      },
+      {
+        "actual": -0.016666666666666653,
+        "case": "risk_all_positive_is_negative",
+        "expected": -0.016666666666666653
+      },
+      {
+        "actual": 0.0,
+        "case": "risk_nan_is_reset_to_zero",
+        "expected": 0.0
+      },
+      {
+        "actual_hex": "inf",
+        "case": "risk_infinite_is_retained",
+        "expected_hex": "inf",
+        "trade_usable": false
+      },
+      {
+        "actual": {
+          "510300.XSHG": 0.333,
+          "511010.XSHG": 0.333,
+          "513100.XSHG": 0.0,
+          "518880.XSHG": 0.333
+        },
+        "case": "weights_round_total_below_one",
+        "expected": {
+          "510300.XSHG": 0.333,
+          "511010.XSHG": 0.333,
+          "513100.XSHG": 0.0,
+          "518880.XSHG": 0.333
+        },
+        "rounded_total": 0.9990000000000001,
+        "synthetic_positions": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "synthetic_total_position": 3.0
+      },
+      {
+        "actual": {
+          "510300.XSHG": 0.334,
+          "511010.XSHG": 0.333,
+          "513100.XSHG": 0.0,
+          "518880.XSHG": 0.334
+        },
+        "case": "weights_round_total_above_one",
+        "expected": {
+          "510300.XSHG": 0.334,
+          "511010.XSHG": 0.333,
+          "513100.XSHG": 0.0,
+          "518880.XSHG": 0.334
+        },
+        "rounded_total": 1.0010000000000001,
+        "synthetic_positions": [
+          0.3336,
+          0.3336,
+          0.3328,
+          0.0
+        ],
+        "synthetic_total_position": 1.0
+      },
+      {
+        "actual": {
+          "510300.XSHG": 0.5
+        },
+        "case": "weights_existing_key_accumulates",
+        "expected": {
+          "510300.XSHG": 0.5
+        }
+      },
+      {
+        "case": "weights_zero_total_raises",
+        "exception": "ZeroDivisionError",
+        "expected_exception": "ZeroDivisionError",
+        "original_active_pool_multi_stock": false
+      },
+      {
+        "case": "weights_multi_stock_class_mapping_missing",
+        "exception": "KeyError",
+        "expected_exception": "KeyError",
+        "original_active_pool_multi_stock": false
+      },
+      {
+        "actual": {},
+        "case": "weights_empty_class_no_division",
+        "expected": {}
+      },
+      {
+        "actual": {
+          "exception": null,
+          "history_stock_calls": [
+            "510300.XSHG",
+            "518880.XSHG",
+            "511010.XSHG",
+            "513100.XSHG"
+          ],
+          "synthetic_operations": [
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ]
+          ],
+          "warnings": [],
+          "weights": {
+            "510300.XSHG": 0.48,
+            "511010.XSHG": 0.16,
+            "513100.XSHG": 0.12,
+            "518880.XSHG": 0.24
+          }
+        },
+        "case": "full_synthetic_four_class_inverse_risk",
+        "expected_weights": {
+          "510300.XSHG": 0.48,
+          "511010.XSHG": 0.16,
+          "513100.XSHG": 0.12,
+          "518880.XSHG": 0.24
+        },
+        "native_pandas_computation": false,
+        "synthetic_return_values": [
+          -0.01,
+          -0.02,
+          -0.03,
+          -0.04
+        ]
+      },
+      {
+        "actual": {
+          "exception": null,
+          "history_stock_calls": [
+            "510300.XSHG",
+            "518880.XSHG",
+            "511010.XSHG",
+            "513100.XSHG"
+          ],
+          "synthetic_operations": [
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ]
+          ],
+          "warnings": [],
+          "weights": {
+            "510300.XSHG": 0.333,
+            "511010.XSHG": 0.333,
+            "513100.XSHG": 0.0,
+            "518880.XSHG": 0.333
+          }
+        },
+        "case": "full_synthetic_round_below_one",
+        "expected_weights": {
+          "510300.XSHG": 0.333,
+          "511010.XSHG": 0.333,
+          "513100.XSHG": 0.0,
+          "518880.XSHG": 0.333
+        },
+        "native_pandas_computation": false,
+        "synthetic_return_values": [
+          -0.01,
+          -0.01,
+          -0.01,
+          0.0
+        ]
+      },
+      {
+        "actual": {
+          "exception": null,
+          "history_stock_calls": [
+            "510300.XSHG",
+            "518880.XSHG",
+            "511010.XSHG",
+            "513100.XSHG"
+          ],
+          "synthetic_operations": [
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ]
+          ],
+          "warnings": [],
+          "weights": {
+            "510300.XSHG": 0.334,
+            "511010.XSHG": 0.333,
+            "513100.XSHG": 0.0,
+            "518880.XSHG": 0.334
+          }
+        },
+        "case": "full_synthetic_round_above_one",
+        "expected_weights": {
+          "510300.XSHG": 0.334,
+          "511010.XSHG": 0.333,
+          "513100.XSHG": 0.0,
+          "518880.XSHG": 0.334
+        },
+        "native_pandas_computation": false,
+        "synthetic_return_values": [
+          -2.997601918465228,
+          -2.997601918465228,
+          -3.0048076923076925,
+          0.0
+        ]
+      },
+      {
+        "actual": {
+          "exception": null,
+          "history_stock_calls": [
+            "510300.XSHG",
+            "518880.XSHG",
+            "511010.XSHG",
+            "513100.XSHG"
+          ],
+          "synthetic_operations": [
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ]
+          ],
+          "warnings": [],
+          "weights": {
+            "510300.XSHG": 0.48,
+            "511010.XSHG": 0.16,
+            "513100.XSHG": 0.12,
+            "518880.XSHG": 0.24
+          }
+        },
+        "case": "full_synthetic_negative_risks_not_rejected",
+        "expected_weights": {
+          "510300.XSHG": 0.48,
+          "511010.XSHG": 0.16,
+          "513100.XSHG": 0.12,
+          "518880.XSHG": 0.24
+        },
+        "native_pandas_computation": false,
+        "synthetic_return_values": [
+          0.01,
+          0.02,
+          0.03,
+          0.04
+        ]
+      },
+      {
+        "actual": {
+          "exception": "ZeroDivisionError",
+          "history_stock_calls": [
+            "510300.XSHG",
+            "518880.XSHG",
+            "511010.XSHG",
+            "513100.XSHG"
+          ],
+          "message": "division by zero",
+          "synthetic_operations": [
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ]
+          ],
+          "warnings": []
+        },
+        "case": "full_synthetic_zero_risk_raises",
+        "expected_exception": "ZeroDivisionError"
+      },
+      {
+        "actual": {
+          "exception": null,
+          "history_stock_calls": [
+            "510300.XSHG",
+            "518880.XSHG",
+            "511010.XSHG",
+            "513100.XSHG"
+          ],
+          "synthetic_operations": [
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ],
+            [
+              "resample",
+              "D"
+            ],
+            [
+              "last"
+            ],
+            [
+              "pct_change_default"
+            ],
+            [
+              "fillna",
+              0,
+              null,
+              0
+            ],
+            [
+              "iloc",
+              "all_rows",
+              0
+            ]
+          ],
+          "warnings": [
+            "invalid value encountered in scalar divide",
+            "invalid value encountered in scalar divide",
+            "invalid value encountered in scalar divide",
+            "invalid value encountered in scalar divide"
+          ],
+          "weights": {
+            "510300.XSHG": "nan",
+            "511010.XSHG": "nan",
+            "513100.XSHG": "nan",
+            "518880.XSHG": "nan"
+          }
+        },
+        "case": "full_synthetic_infinite_risk_nan_weights",
+        "expected_weight_hex": {
+          "510300.XSHG": "nan",
+          "511010.XSHG": "nan",
+          "513100.XSHG": "nan",
+          "518880.XSHG": "nan"
+        },
+        "trade_usable": false
+      }
+    ],
+    "helper_daily_returns_synthetically_injected": true,
+    "independent_reference": "Explicit selected counts and Decimal.from_float rational arithmetic; literal rounded dictionaries",
+    "limits": [
+      "Isolated helpers and full original function run only on explicit synthetic return/API contracts",
+      "The synthetic API records resample/pct_change/fillna calls without implementing any of their price semantics",
+      "Only original confidence2.58 is active; other confidence branches and multi-stock classes are boundary diagnostics",
+      "No candidate historical returns filled, adjusted, computed or substituted",
+      "Nonfinite/negative risk and rounded totals retained; no unapproved economic repair"
+    ],
+    "not_a_backtest": true,
+    "original_full_weight_function_executed": true,
+    "original_prices_or_pandas_returns_computed": false,
+    "real_ES_or_original_weights_computed": false,
+    "return_semantics": "pending_D-allweather-fill",
+    "socket_HTTP_disabled": true,
+    "source_helpers_body_unmodified": true,
+    "synthetic_only": true,
+    "synthetic_price_return_API_adapter": true
+  },
+  "case_id": "allweather-batch89-risk",
+  "nature": "synthetic_returns_and_API_original_arithmetic",
+  "purpose": "23原nested helper及6完整函数案例；95%选7/99%选2除约1.2、首键/负风险/无限风险/零除/三位权重；Decimal独立预期，假API不实现价格/pandas语义",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch89/20261009-all-weather-source-acceptance/risk-diagnostics.json",
+    "sha256": "9c254ea4516961399877536b6132cd83d930e3bb70c19056afa6af6581e2b11b"
+  }
+}

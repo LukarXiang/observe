@@ -1,0 +1,19 @@
+{
+  "case": {
+    "cause": "RF original text has eleven non-Python header lines; source bytes unchanged, parse offset must use preread contract",
+    "implementation_sha256": {
+      "red.log": "dfc1893b6263f299a29147c3dea1760f2cc93b1579b120015daec11a44b19f61",
+      "scripts/review_strategy_batch96.py": "9121925dc32423f782e47e28453cee3ea30b5ba572613a7023b7857808bfd5ab",
+      "tests/unit/test_batch96_stage.py": "9fe3b30c79532c64395172ae6038cfd3bdd7d9ff8b8399762e20e517fa19a72b"
+    },
+    "returncode": 1
+  },
+  "case_id": "batch96-development-header",
+  "nature": "immutable_failed_first_source_parser_with_red_tests",
+  "purpose": "首次12失败8通过，原RF11行非Python说明；另修空白化入口保留原行号，来源字节未变",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch96/20261011-development-header-failure/failure.json",
+    "sha256": "d141068c1df2f4ee1ef1f4f1f5fe7ad18851aca97e3ce31664b494a9ed3720a2"
+  }
+}

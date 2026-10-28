@@ -1,0 +1,604 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "csv_order",
+        "error": null,
+        "stdout": "2020-01-02 2020-01-02\nTrue\n",
+        "value": [
+          "600519.XSHG",
+          "600036.XSHG"
+        ]
+      },
+      {
+        "case": "csv_missing_date",
+        "error": {
+          "message": "'2020-01-03'",
+          "type": "KeyError"
+        },
+        "stdout": "2020-01-02 2020-01-03\nFalse\n",
+        "value": null
+      },
+      {
+        "case": "csv_duplicate_date",
+        "error": null,
+        "stdout": "2020-01-02 2020-01-02\nTrue\n",
+        "value": []
+      },
+      {
+        "case": "rf_clock_0_[0.01, 0.01]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 0,
+          "events": [
+            "clear"
+          ]
+        }
+      },
+      {
+        "case": "rf_clock_0_[np.float64(0.010000000000000002), 0.01]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 1,
+          "events": [
+            [
+              "adjust",
+              [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F"
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "case": "rf_clock_0_[nan, nan]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 1,
+          "events": [
+            [
+              "adjust",
+              [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F"
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "case": "rf_clock_1_[0.01, 0.01]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 0,
+          "events": [
+            "clear"
+          ]
+        }
+      },
+      {
+        "case": "rf_clock_1_[np.float64(0.010000000000000002), 0.01]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 2,
+          "events": []
+        }
+      },
+      {
+        "case": "rf_clock_1_[nan, nan]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 2,
+          "events": []
+        }
+      },
+      {
+        "case": "rf_clock_2_[0.01, 0.01]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 0,
+          "events": [
+            "clear"
+          ]
+        }
+      },
+      {
+        "case": "rf_clock_2_[np.float64(0.010000000000000002), 0.01]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 3,
+          "events": []
+        }
+      },
+      {
+        "case": "rf_clock_2_[nan, nan]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 3,
+          "events": []
+        }
+      },
+      {
+        "case": "rf_clock_3_[0.01, 0.01]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 0,
+          "events": [
+            "clear"
+          ]
+        }
+      },
+      {
+        "case": "rf_clock_3_[np.float64(0.010000000000000002), 0.01]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 4,
+          "events": [
+            [
+              "adjust",
+              [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F"
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "case": "rf_clock_3_[nan, nan]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 4,
+          "events": [
+            [
+              "adjust",
+              [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F"
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "case": "rf_clock_-1_[0.01, 0.01]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 0,
+          "events": [
+            "clear"
+          ]
+        }
+      },
+      {
+        "case": "rf_clock_-1_[np.float64(0.010000000000000002), 0.01]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 0,
+          "events": []
+        }
+      },
+      {
+        "case": "rf_clock_-1_[nan, nan]",
+        "error": null,
+        "stdout": "",
+        "value": {
+          "count": 0,
+          "events": []
+        }
+      },
+      {
+        "case": "rf_history_datetime",
+        "error": {
+          "message": "0",
+          "type": "KeyError"
+        },
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "rf_history_range",
+        "error": null,
+        "stdout": "",
+        "value": 90.0
+      },
+      {
+        "case": "rf_missing_isnan",
+        "error": {
+          "message": "name 'isnan' is not defined",
+          "type": "NameError"
+        },
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "rf_adjust_plain_empty",
+        "error": {
+          "message": "'A'",
+          "type": "KeyError"
+        },
+        "orders": [],
+        "remaining_positions": [],
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "rf_adjust_reject",
+        "error": null,
+        "orders": [
+          [
+            "A",
+            200.0
+          ],
+          [
+            "B",
+            200.0
+          ],
+          [
+            "C",
+            200.0
+          ],
+          [
+            "D",
+            200.0
+          ],
+          [
+            "E",
+            200.0
+          ],
+          [
+            "F",
+            200.0
+          ]
+        ],
+        "remaining_positions": [],
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "rf_adjust_partial",
+        "error": null,
+        "orders": [
+          [
+            "A",
+            200.0
+          ],
+          [
+            "B",
+            200.0
+          ],
+          [
+            "C",
+            200.0
+          ],
+          [
+            "D",
+            200.0
+          ],
+          [
+            "E",
+            200.0
+          ]
+        ],
+        "remaining_positions": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "rf_adjust_full",
+        "error": null,
+        "orders": [
+          [
+            "A",
+            200.0
+          ],
+          [
+            "B",
+            200.0
+          ],
+          [
+            "C",
+            200.0
+          ],
+          [
+            "D",
+            200.0
+          ],
+          [
+            "E",
+            200.0
+          ]
+        ],
+        "remaining_positions": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "rf_adjust_mutating_sell",
+        "error": {
+          "message": "dictionary changed size during iteration",
+          "type": "RuntimeError"
+        },
+        "orders": [
+          [
+            "OLD",
+            0
+          ]
+        ],
+        "remaining_positions": [],
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "zhu_core_flat",
+        "error": {
+          "message": "list index out of range",
+          "type": "IndexError"
+        },
+        "state_lengths_after": [
+          199,
+          199,
+          199,
+          199
+        ],
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "zhu_core_oscillating",
+        "error": null,
+        "state_lengths_after": [
+          199,
+          199,
+          199,
+          199
+        ],
+        "stdout": "",
+        "value": {
+          "deads": [
+            188,
+            154,
+            123,
+            92,
+            60,
+            29
+          ],
+          "golds": [
+            171,
+            139,
+            107,
+            76,
+            45,
+            13
+          ],
+          "last": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "lengths": [
+            199,
+            199,
+            199,
+            199
+          ]
+        }
+      },
+      {
+        "case": "zhu_partial_state_on_error",
+        "error": {
+          "message": "list index out of range",
+          "type": "IndexError"
+        },
+        "state_lengths_after": [
+          200,
+          200,
+          199,
+          199
+        ],
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "barslast_0",
+        "error": null,
+        "stdout": "",
+        "value": []
+      },
+      {
+        "case": "barslast_199",
+        "error": null,
+        "stdout": "",
+        "value": [
+          1
+        ]
+      },
+      {
+        "case": "barslast_200",
+        "error": null,
+        "stdout": "",
+        "value": [
+          0
+        ]
+      },
+      {
+        "case": "tradeHelper1_23",
+        "error": null,
+        "stdout": "",
+        "value": true
+      },
+      {
+        "case": "tradeHelper1_24",
+        "error": null,
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "tradeHelper_empty",
+        "error": {
+          "message": "list index out of range",
+          "type": "IndexError"
+        },
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "index_switch_2016-12-30",
+        "error": null,
+        "stdout": "",
+        "value": "000001.XSHG"
+      },
+      {
+        "case": "index_switch_2017-01-02",
+        "error": null,
+        "stdout": "",
+        "value": "399001.XSHE"
+      },
+      {
+        "case": "zhu_initialize_stock_cost",
+        "error": null,
+        "events": [
+          [
+            "benchmark",
+            "399001.XSHE"
+          ],
+          [
+            "cost",
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003
+            },
+            {
+              "type": "stock"
+            }
+          ],
+          [
+            "schedule",
+            "before_market_open",
+            {
+              "reference_security": "000001.XSHG",
+              "time": "before_open"
+            }
+          ],
+          [
+            "schedule",
+            "market_open",
+            {
+              "reference_security": "000001.XSHG",
+              "time": "14:30"
+            }
+          ],
+          [
+            "schedule",
+            "after_market_close",
+            {
+              "reference_security": "000001.XSHG",
+              "time": "after_close"
+            }
+          ]
+        ],
+        "stdout": "",
+        "value": null
+      },
+      {
+        "case": "zhu_market_flat_before_orders",
+        "error": {
+          "message": "list index out of range",
+          "type": "IndexError"
+        },
+        "history_queries": [
+          [
+            "399001.XSHE",
+            1,
+            "1m",
+            [
+              "close",
+              "high",
+              "low"
+            ]
+          ],
+          [
+            "399001.XSHE",
+            199,
+            "1d",
+            [
+              "close",
+              "high",
+              "low"
+            ]
+          ]
+        ],
+        "orders": [],
+        "stdout": "",
+        "value": null
+      }
+    ],
+    "injections": [
+      "np/datetime/log/platform feedback supplied explicitly; no ind/tradestat module reconstruction",
+      "RF adjustment and clearing spies are not fills; all CSV rows are synthetic",
+      "RF order feedback/virtual zero positions/deletion are controlled and have no fees/NAV",
+      "Zhu price/flags are synthetic; no minute data or original signal path claimed"
+    ],
+    "new_trading_backtests": 0,
+    "original_platform_equivalence_proven": false,
+    "scope": "controlled_original_definition_diagnostics",
+    "source_sha256": [
+      "28b6333c10cf48b6ccc53a3bdfb3ae7dd15a09eabca0362efbb3c425dce8882d",
+      "e88037b85d55b6d9879e0514663ac76ee667ca23cb140985191607216d8b9353"
+    ]
+  },
+  "case_id": "batch96-diagnostics",
+  "nature": "in_progress_controlled_original_definition_cases",
+  "purpose": "CSV重复日期/1%计数/部分成交/虚拟持仓/交叉短缺与部分状态突变；不证明真实成交",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch96/20261011-original-callback-stage/diagnostics.json",
+    "sha256": "2be0f5f3bb1a13fef271b2a66da1183cce7aa3212fe5e541e9c8cb2af8a7739f"
+  }
+}

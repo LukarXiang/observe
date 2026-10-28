@@ -1,0 +1,117 @@
+{
+  "case": {
+    "checks_observed": [
+      {
+        "command": "pytest stage/preparation/acceptance related files",
+        "limitation": "local worktree test result; no isolation or complete frozen identity claim",
+        "passed": 81,
+        "returncode": 0,
+        "seconds": 15.34
+      },
+      {
+        "classification": "setup/prerequisite failure due concurrently added live validate_reviews; not root-cause red",
+        "command": "pytest test_publication_rollback.py",
+        "returncode": 1
+      },
+      {
+        "classification": "intended red assertion",
+        "command": "pytest test_publication_rollback_frozen.py",
+        "failed": 1,
+        "frozen_driver_sha256": "a046e3859ed97b12bb2229f96985b6a23aa0d31f30141c074ce2c94c502d23f0",
+        "returncode": 1,
+        "seconds": 3.1
+      }
+    ],
+    "evidence": {
+      "data/staging/strategies-batch95/20261010-formal-review-v1/architecture/rollback-frozen-red.log": "6a8ed7182bd7be5d5969f97bcf497c6c4f8b1e683a814701c8693249ea368708",
+      "data/staging/strategies-batch95/20261010-formal-review-v1/architecture/rollback-red.log": "67031e9713080dab2f9728536e5567c49332781943d0b1c133a0c81677a8fa2d",
+      "data/staging/strategies-batch95/20261010-formal-review-v1/architecture/scope-probe.json": "64070a6d9d48dbf810103819b6ba5580f622733da6d16d4078b23494ddab777f",
+      "data/staging/strategies-batch95/20261010-formal-review-v1/architecture/test_publication_rollback.py": "0cc2dcae505813413476911bac0fc56a406312c9ce1e78ea7af0b2ac3265969d",
+      "data/staging/strategies-batch95/20261010-formal-review-v1/architecture/test_publication_rollback_frozen.py": "e971f67021a8809bbb298617bdfdccc43e2d5b851734687488d62cf804f6ef5c"
+    },
+    "findings": [
+      {
+        "autofix": "manual",
+        "class": "architecture",
+        "confidence": 0.99,
+        "file": "scripts/accept_strategy_batch95.py",
+        "fix": "Use a publication transaction under DATA_WRITER that saves both mutable navigation bytes, restores only pointers still owned by this candidate on exception, preserves all new directories/failed evidence, records failure, and writes success receipt last",
+        "id": "A95-FORMAL-HALF-PUBLICATION",
+        "impact": "Consumers using mutable latest navigation observe a failed acceptance as published and continuation cannot safely resume the same immutable run",
+        "line": 301,
+        "outcome": "finish propagates the error without restoring catalog/progress navigation. Active catalog can become276 while no formal success receipt exists; existing final-replay output and protection prevent direct same-directory retry",
+        "proof": "Frozen v1 actual finish order reaches intended postpublication rejection, no receipt is written, but final assertion that latest equals old fails: new-catalog/newsha remains",
+        "red_fixture": "test_publication_rollback_frozen.py",
+        "reviewed_file_sha256": "a046e3859ed97b12bb2229f96985b6a23aa0d31f30141c074ce2c94c502d23f0",
+        "severity": "medium",
+        "trigger": "After publish_candidate_locked switches active catalog latest, archive or the deliberately post-archive validate_final_bindings / final replay check rejects, or an output write fails"
+      }
+    ],
+    "implementation_sha256": {
+      "scripts/accept_strategy_batch95.py": "a046e3859ed97b12bb2229f96985b6a23aa0d31f30141c074ce2c94c502d23f0",
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+      "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+      "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+      "scripts/review_strategy_batch95.py": "6ae51bcd2fccb1adc46ae72d0120770bb4f00b37f62660dadff2411f9275688d",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "scripts/verify_strategy_batch95.py": "9c6e66e95eaf88dcc59b12662dcc48c9a681d2628e766de342a742cd6fb280ff",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "509ddb00d8394643eec30f5d609ae6a1356319a033545eb4990ee2f527b3e216",
+      "tests/unit/test_batch95_acceptance.py": "9b6270ad092ba190e6be10f35daee4065d0f68cb7856235ebf007ee451c4d11a",
+      "tests/unit/test_batch95_preparation.py": "6c806bc26987e29b506a1c96172672a0089f175612829c128fa5d4be858339eb",
+      "tests/unit/test_batch95_stage.py": "ed6280f8fbd8831537a7bfb1b888370eed32bf64af6ae5f6d4bb56f508ecf14e"
+    },
+    "limits": [
+      "Actual formal prepare/isolate/catalog/replay/finish against Store not run by reviewer",
+      "Concurrent live edits invalidate a whole-current-tree verdict; this finding is pinned to immutable reviewed v1 source copy",
+      "Payload index/candidate bytes bind actual data root; broader partition protection remains explicitly size/mtime",
+      "Same-directory final replay overwrite remains prohibited; new failure directory/version is compatible with immutable archive rules"
+    ],
+    "live_implementation_sha256_at_report": {
+      "scripts/accept_strategy_batch95.py": "593f8da72c9ca5985bd0c61ab71ce6f06f40b97ac2a0bfee6f429865d6ca0abc",
+      "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+      "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+      "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+      "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+      "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+      "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+      "scripts/review_strategy_batch95.py": "6ae51bcd2fccb1adc46ae72d0120770bb4f00b37f62660dadff2411f9275688d",
+      "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+      "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+      "scripts/verify_strategy_batch95.py": "9c6e66e95eaf88dcc59b12662dcc48c9a681d2628e766de342a742cd6fb280ff",
+      "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+      "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+      "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+      "src/observe/strategy_catalog.py": "509ddb00d8394643eec30f5d609ae6a1356319a033545eb4990ee2f527b3e216",
+      "tests/unit/test_batch95_acceptance.py": "d4a03d836efbed600e18d8173ca5b27b27c8d452e54fead980c9bc136c8b29ff",
+      "tests/unit/test_batch95_preparation.py": "6c806bc26987e29b506a1c96172672a0089f175612829c128fa5d4be858339eb",
+      "tests/unit/test_batch95_stage.py": "ed6280f8fbd8831537a7bfb1b888370eed32bf64af6ae5f6d4bb56f508ecf14e"
+    },
+    "new_trading_backtests": 0,
+    "repository_code_modified": false,
+    "role": "architecture",
+    "scope": "batch95_formal_source_acceptance",
+    "scope_checked": [
+      "18 runtime operand files and complete three source byte/text/function inventories",
+      "Historical preparation56-operand provenance, oldcatalog frozen helper separation, exact695-to276 candidate delta",
+      "Non-REVIEWS catalog AST unchanged, no new trading/implementations or altered source pool/cost parameters",
+      "Baseline copying, expected81 unique JUnit identities, isolated filesystem copying and candidate publication/final gate paths",
+      "Initial/catalog/final replay outputs preserve stage numerical reference and never enter Book trades"
+    ],
+    "status": "returned"
+  },
+  "case_id": "batch95-formal-closed-architecture",
+  "nature": "immutable_confirmed_failed_gate_and_closed_finding",
+  "purpose": "保留已关闭真实门禁发现及红触发，最终v4审查与正式94测试另验证，不覆盖旧失败",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch95/20261010-formal-review-v1/architecture/review.json",
+    "sha256": "be9a15a16f5c391284d9fe132bbeeb1ecd6986f436595e20eae887389f1a370e"
+  }
+}

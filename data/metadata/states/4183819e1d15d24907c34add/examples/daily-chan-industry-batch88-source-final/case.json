@@ -1,0 +1,863 @@
+{
+  "case": {
+    "catalog": {
+      "api_file_counts": {
+        "attribute_history": 249,
+        "bond.run_query": 3,
+        "finance.run_query": 87,
+        "get_all_securities": 297,
+        "get_all_trade_days": 54,
+        "get_bars": 79,
+        "get_call_auction": 9,
+        "get_current_data": 398,
+        "get_current_tick": 9,
+        "get_dominant_future": 28,
+        "get_extras": 58,
+        "get_factor_values": 82,
+        "get_fundamentals": 292,
+        "get_fundamentals_continuously": 5,
+        "get_future_contracts": 10,
+        "get_history_fundamentals": 18,
+        "get_index_stocks": 215,
+        "get_industry": 24,
+        "get_industry_stocks": 93,
+        "get_money_flow": 9,
+        "get_price": 317,
+        "get_ticks": 22,
+        "get_valuation": 20,
+        "history": 181,
+        "macro.run_query": 7,
+        "marginsec_close": 4,
+        "marginsec_open": 4,
+        "order": 77,
+        "order_target": 255,
+        "order_target_value": 434,
+        "order_value": 205,
+        "run_daily": 486,
+        "run_monthly": 123,
+        "run_weekly": 117
+      },
+      "catalog_id": "c57172c2d82af7b6453e",
+      "catalog_version": "strategy_catalog_v1",
+      "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+      "distinct_contents": 654,
+      "encoding_counts": {
+        "gb18030": 99,
+        "utf-8-sig": 596
+      },
+      "files": 695,
+      "output": "data/catalog/strategies/c57172c2d82af7b6453e",
+      "reviewed_sources": [
+        "S-bcd947018a9c",
+        "S-25a2ce74300f",
+        "S-bc319409eff5",
+        "S-7fc777423ab1",
+        "S-2986239ac760",
+        "S-a02bd5fb82fa",
+        "S-7dffe8edb923",
+        "S-e336a9e62ff1",
+        "S-95dbc8b9a124",
+        "S-f10cb8ff702d",
+        "S-641b9138fa5d",
+        "S-0206000af652",
+        "S-18d2868df809",
+        "S-5c7b2aeec2aa",
+        "S-2129796d6da6",
+        "S-7da7fcfec431",
+        "S-af09cfafe6cf",
+        "S-b0df386a9dcf",
+        "S-95b83db2a7bc",
+        "S-f01ccf5aba44",
+        "S-dde5d3d3b70e",
+        "S-886271fb6b84",
+        "S-4630a790c3da",
+        "S-df677a5ebcd4",
+        "S-e2209e269e29",
+        "S-7decff38834a",
+        "S-5e11fde9aff3",
+        "S-12f03bfd0f95",
+        "S-f2e9047924e2",
+        "S-eff4d7ae7982",
+        "S-1f50da84115f",
+        "S-ea621382a002",
+        "S-acbb5f9cf09f",
+        "S-3413c5f12dc4",
+        "S-38b227d4327a",
+        "S-68c46bf70920",
+        "S-d1914cbbf6bb",
+        "S-1422d134ff75",
+        "S-db01c1c96ded",
+        "S-063f47ab3d44",
+        "S-4daa86e5158f",
+        "S-d32775c4089e",
+        "S-4fc6fb337479",
+        "S-63c706efe95f",
+        "S-12ba1c0d79f5",
+        "S-9d9f03067815",
+        "S-850132b43dab",
+        "S-147b0cfb49ff",
+        "S-d07877e2c354",
+        "S-d8596ab3828a",
+        "S-c97c02ea2346",
+        "S-00007afacbb0",
+        "S-a5b450847a6e",
+        "S-b8a8b5e90627",
+        "S-d885413f8d35",
+        "S-7f91b002698b",
+        "S-a71bf28aa99b",
+        "S-57b937da520d",
+        "S-f5b335357daa",
+        "S-fed6ca288035",
+        "S-dc85884a380a",
+        "S-9005dd4b1cba",
+        "S-ced8ae5ce344",
+        "S-62e8d5c7a1f4",
+        "S-8cd0ebff07d7",
+        "S-d4725a5a21fb",
+        "S-66eefedcf0df",
+        "S-4cc2cba1cbd9",
+        "S-5831425175ce",
+        "S-630ebb99f658",
+        "S-cafee3ad464a",
+        "S-e66b1ad7d8fc",
+        "S-560abd656ca0",
+        "S-2c9d2319c7d3",
+        "S-84b17f428272",
+        "S-6b0a4a36011b",
+        "S-88c607586b82",
+        "S-f45975e3cd3f",
+        "S-0c2cff0626ee",
+        "S-51a96eadb4d2",
+        "S-954b41e5a396",
+        "S-9112d55dd0cc",
+        "S-9c1a89daf62c",
+        "S-7f7e299f339a",
+        "S-72e5a8798544",
+        "S-a4c77bd8b44e",
+        "S-bbf9fccbd6eb",
+        "S-c6fe57d02852",
+        "S-4b7dbe8af8ac",
+        "S-d0ecd9406080",
+        "S-bee2c8d71c81",
+        "S-13b988210e42",
+        "S-62e7304a4e91",
+        "S-6c7441327c3f",
+        "S-398e16c90dee",
+        "S-68930ba303f5",
+        "S-f81bb8422f94",
+        "S-87966f00e099",
+        "S-848cffb63799",
+        "S-790f0000ed44",
+        "S-38d7f27c1372",
+        "S-5ec3559109c3",
+        "S-07472fbc2bde",
+        "S-66d37162df54",
+        "S-bb187e7a4887",
+        "S-faf66e10ba1d",
+        "S-71571339e9e6",
+        "S-d5b7c03a7119",
+        "S-bf4ed04c68a7",
+        "S-5f14afeecf21",
+        "S-979d5187c3ec",
+        "S-dc57f9049b90",
+        "S-daecf5bc2eef",
+        "S-d1d16967e9c8",
+        "S-f39f02e3e03f",
+        "S-e070401fbf90",
+        "S-906ef1dfcf9f",
+        "S-d5d5edecea7b",
+        "S-3f190493784c",
+        "S-078084d1a6cb",
+        "S-e12e4a8dd5e5",
+        "S-05431e7ae641",
+        "S-de485dcbc1fe",
+        "S-c00703810bd3",
+        "S-7e6d5e73b9e8",
+        "S-6320a637da54",
+        "S-03e5e601f4cc",
+        "S-fc701a6d18eb",
+        "S-c5edb3ef544f",
+        "S-af075cf4c6b7",
+        "S-7bcd889e7b6a",
+        "S-7e88bff4dc3a",
+        "S-5f0fb6c259ee",
+        "S-0dbbecb9eb1d",
+        "S-47d77840ec26",
+        "S-993fc6059661",
+        "S-4cc76c2c420b",
+        "S-2034813a5b91",
+        "S-569f398c08f3",
+        "S-578d2e730081",
+        "S-3811a6d26860",
+        "S-a8d1fa5a793a",
+        "S-8f3bdcfa8d7f",
+        "S-f8eaf0fa2c7c",
+        "S-c2fa4290b950",
+        "S-1a1aef9faa9b",
+        "S-84f3f0c3c784",
+        "S-c02ac3bad6ef",
+        "S-69bfefcb4d1d",
+        "S-653ef41eb685",
+        "S-c55ddc35cce6",
+        "S-c2a42783423c",
+        "S-75af9ddf3d76",
+        "S-f23cf187dc47",
+        "S-64a80805fb8a",
+        "S-a37c26ce95d6",
+        "S-075d01ac07cf",
+        "S-7363e43c9a08",
+        "S-8294e3469a6d",
+        "S-7ff11583b76b",
+        "S-64bca3ebbca5",
+        "S-a00834c00f8e",
+        "S-e84bd8c8eecb",
+        "S-e69eb36bb221",
+        "S-21fdea960e9b",
+        "S-a9596eba9dc5",
+        "S-1c7b2dac16c6",
+        "S-2fd706bb71d6",
+        "S-b3cc2dcd8a0d",
+        "S-285c04a4d1ce",
+        "S-bdfd3c6fde91",
+        "S-e0fb958bf2d4",
+        "S-739fbfd14334",
+        "S-da49d185309b",
+        "S-3626c17cbcae",
+        "S-cc41735b8a2d",
+        "S-2d13d994c3f7",
+        "S-53655cbaa9bc",
+        "S-b01f3e94a5b8",
+        "S-c28a0c7f5f80",
+        "S-c98372326f58",
+        "S-665c147b3cf0",
+        "S-c5a0e347acdc",
+        "S-69ef2eedcc68",
+        "S-4766560702c0",
+        "S-bab96f942801",
+        "S-683cc39b7527",
+        "S-36ea1540cfac",
+        "S-9e7f49de0893",
+        "S-31ff28a9afb2",
+        "S-d6db552a3293",
+        "S-9539de6881cd",
+        "S-31af0ed2018f",
+        "S-baf44b0f6001",
+        "S-56338f4ceb26",
+        "S-bb46c1ee16cf",
+        "S-cce77eb946a8",
+        "S-19c4382df792",
+        "S-02611c6f5038",
+        "S-976aaefe793c",
+        "S-7f248f5caa7b",
+        "S-84adbe33af88",
+        "S-ee1aa7ba22b3",
+        "S-726f0aa658ec",
+        "S-cded591ad6be",
+        "S-68dd8d2d5eec",
+        "S-926d08fe0ba8",
+        "S-9e752d17571d",
+        "S-624b1cbccd4f",
+        "S-784d8f7e456f",
+        "S-e2462b051f4b",
+        "S-34c0e177b151",
+        "S-87160c6e564c",
+        "S-5008146cd1d4",
+        "S-e307438a42e6",
+        "S-f9ab6005c30c",
+        "S-de82ea4feb32",
+        "S-bae5b4fe76e8",
+        "S-ec0ab5ffcecf",
+        "S-2d40c2d698f7",
+        "S-6615db0d4e16",
+        "S-1fce2be2b9ec",
+        "S-85aa910ed165",
+        "S-028ef663b462",
+        "S-91dc4ee62715",
+        "S-7f049bb69647",
+        "S-d68e945d07cb",
+        "S-9664bc23b40f",
+        "S-04dba1d0caaf",
+        "S-a40276639484",
+        "S-fb06e8894ab7",
+        "S-7cc61be11aed",
+        "S-ee99921ca98d",
+        "S-4cbc5c72990f",
+        "S-c0fb1e63f51d",
+        "S-1e5fd99659cf",
+        "S-4d86dd0d21e5",
+        "S-2462ad43d90c",
+        "S-9a751570080b",
+        "S-b43bab022282",
+        "S-3be0226c9375",
+        "S-2998470d8f3f",
+        "S-ccb84ba42e45",
+        "S-a78d8acd0042",
+        "S-c1bba20dca69",
+        "S-b785d665cf54",
+        "S-73dd3253aaaa",
+        "S-b318f6effe5e",
+        "S-85df9d32a2d9",
+        "S-81a0307e6b20",
+        "S-dbd26615c5f8",
+        "S-8caa8420540b",
+        "S-fa0c56ab417c",
+        "S-5300a99a1779",
+        "S-b9e2ea87e056",
+        "S-5c175735fe2e",
+        "S-4730e53b92bc",
+        "S-a55f095fba8d"
+      ],
+      "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+      "status_counts": {
+        "已验证": 11,
+        "待审查": 2,
+        "待数据": 483,
+        "暂不可复现": 70,
+        "重复版本": 41,
+        "非交易研究脚本": 88
+      },
+      "suffix_counts": {
+        ".ipynb": 1,
+        ".py": 5,
+        ".txt": 689
+      }
+    },
+    "not_a_backtest": true,
+    "previous_catalog_file": "data/catalog/strategies/19c7e443a2c6fcf74a29/catalog.json",
+    "previous_catalog_sha256": "2f93d4b35e1de1fe0900c6d04c5e2893c854d47aaca4924b5b23c2acbb6454b0",
+    "snapshot": "20261006-145049-e06c",
+    "sources": [
+      {
+        "definitions": [
+          {
+            "ast_sha256": "058bff6081fc4bcd5194b8ca2c0313ba2667cd811e032a70f8fc09e80944fcb2",
+            "end_line": 20,
+            "kind": "ClassDef",
+            "line": 16,
+            "name": "InclusionType"
+          },
+          {
+            "ast_sha256": "2de767cd80f6f34e9d90dfd72cbe8ad3ef25dd2231a8a63a26765d29f036b51f",
+            "end_line": 55,
+            "kind": "ClassDef",
+            "line": 22,
+            "name": "TopBotType"
+          },
+          {
+            "ast_sha256": "d67484c30fbae839294644d81381216ed2e9a6d9573cd117d11885e1cdbc6fbc",
+            "end_line": 61,
+            "kind": "FunctionDef",
+            "line": 60,
+            "name": "float_less"
+          },
+          {
+            "ast_sha256": "60e42c3d97a0f7c31445fb428224224c95d1c887ac905399fce9c71e5dd83354",
+            "end_line": 64,
+            "kind": "FunctionDef",
+            "line": 63,
+            "name": "float_more"
+          },
+          {
+            "ast_sha256": "4e10dea544f3a971a37817958186ea145a09342d365a040e1902a82866a990e7",
+            "end_line": 67,
+            "kind": "FunctionDef",
+            "line": 66,
+            "name": "float_less_equal"
+          },
+          {
+            "ast_sha256": "6aa124108f504cbe2260104282c5a0c2200af8e22dd3ba19a6b2f30172df3994",
+            "end_line": 70,
+            "kind": "FunctionDef",
+            "line": 69,
+            "name": "float_more_equal"
+          },
+          {
+            "ast_sha256": "991bbee1eb9cb2a80d6d902cca25575339bbf19ac9e396900432bbac26cf8129",
+            "end_line": 85,
+            "kind": "FunctionDef",
+            "line": 79,
+            "name": "gap_range_func"
+          },
+          {
+            "ast_sha256": "b9963efb2595386d8c4b4647c264ccf69d54517d2d0a0f072e6664281737bb66",
+            "end_line": 94,
+            "kind": "FunctionDef",
+            "line": 87,
+            "name": "get_previous_loc"
+          },
+          {
+            "ast_sha256": "93c411d0eb085227d01b5012bc88e5202d48b18fa949324012bbb15870143ac0",
+            "end_line": 103,
+            "kind": "FunctionDef",
+            "line": 96,
+            "name": "get_next_loc"
+          },
+          {
+            "ast_sha256": "5e6f2a87860e82148627ebc890442c3169449233b961020c5897abeeef78f039",
+            "end_line": 1791,
+            "kind": "ClassDef",
+            "line": 109,
+            "name": "KBarChan"
+          },
+          {
+            "ast_sha256": "546944c36d231492e4b4b99ebbbc3764dfebd11430116945778c9d39bc799ac8",
+            "end_line": 1864,
+            "kind": "FunctionDef",
+            "line": 1816,
+            "name": "draw_chan"
+          },
+          {
+            "ast_sha256": "764335c90b7466f6d2110fb2ed2b50868f8b4382f9c153c487fafdeab087544b",
+            "end_line": 40,
+            "kind": "FunctionDef",
+            "line": 30,
+            "name": "reverse"
+          },
+          {
+            "ast_sha256": "064ca2297073adbbf63a728e2c0a7397d3d2e0fbeb476faf9340cd4614758f33",
+            "end_line": 55,
+            "kind": "FunctionDef",
+            "line": 43,
+            "name": "value2type"
+          },
+          {
+            "ast_sha256": "d4c5978162387c4d7fde5fbf588dc5d7bf064cb4586ad99fbf2a2ae2eee6837a",
+            "end_line": 138,
+            "kind": "FunctionDef",
+            "line": 115,
+            "name": "__init__"
+          },
+          {
+            "ast_sha256": "9df51cb9c5d2dbdd182e3a39c8701c9febd0e7e3bfb8032360e4d1a63a2d1d9e",
+            "end_line": 152,
+            "kind": "FunctionDef",
+            "line": 140,
+            "name": "checkInclusive"
+          },
+          {
+            "ast_sha256": "9dd92bd1cbe6e873213682ea1e544c751f590d17fe7ba3921d4de2be57aff363",
+            "end_line": 158,
+            "kind": "FunctionDef",
+            "line": 154,
+            "name": "isBullType"
+          },
+          {
+            "ast_sha256": "5394189a01aa16eef19f3aa69212c721a8e10e99559ad85ddc0c8a7041707a89",
+            "end_line": 257,
+            "kind": "FunctionDef",
+            "line": 161,
+            "name": "standardize"
+          },
+          {
+            "ast_sha256": "9d80153b0d64dd8b3cd8c9e66472c4719b9aae00211165cf683f8e1b1a69e7c6",
+            "end_line": 265,
+            "kind": "FunctionDef",
+            "line": 259,
+            "name": "checkTopBot"
+          },
+          {
+            "ast_sha256": "9e191daac11f369f7aa81757a93089cdcf7371d50b3f50e150283c0772797c97",
+            "end_line": 307,
+            "kind": "FunctionDef",
+            "line": 267,
+            "name": "markTopBot"
+          },
+          {
+            "ast_sha256": "4080a56dece123f0e7234cbf233d838fa4d6578d6d08892826082154d27c6eb4",
+            "end_line": 321,
+            "kind": "FunctionDef",
+            "line": 309,
+            "name": "trace_back_index"
+          },
+          {
+            "ast_sha256": "06425dd8c2ae47f897354aaf76634a868638cbcb4aab17c0ec6208c85f4202e8",
+            "end_line": 331,
+            "kind": "FunctionDef",
+            "line": 323,
+            "name": "prepare_original_kdf"
+          },
+          {
+            "ast_sha256": "0944beff68ed1c24b66bfffb23da3f8dbceb3a3b64028e789d32cdf6c04daafc",
+            "end_line": 339,
+            "kind": "FunctionDef",
+            "line": 333,
+            "name": "gap_exists_in_range"
+          },
+          {
+            "ast_sha256": "ca7c473ac9432b3c96bf8e4617d1314d5d201e2d13d17695aee1aa7b716d947e",
+            "end_line": 368,
+            "kind": "FunctionDef",
+            "line": 342,
+            "name": "gap_exists"
+          },
+          {
+            "ast_sha256": "fedf3f0d9d755af894f5c4dd8eeda19a2ed69a4a8e7942a7df6fbf0799e2cd64",
+            "end_line": 382,
+            "kind": "FunctionDef",
+            "line": 374,
+            "name": "gap_region"
+          },
+          {
+            "ast_sha256": "6fb6214e9c9aaaca9e3d52d43964e8a258cedd51c589b2a72759cbde065a10ba",
+            "end_line": 393,
+            "kind": "FunctionDef",
+            "line": 384,
+            "name": "get_next_tb"
+          },
+          {
+            "ast_sha256": "62919303a762c2f813410310276cef5cbbb471813f154fd028721d3cc54ffac7",
+            "end_line": 476,
+            "kind": "FunctionDef",
+            "line": 395,
+            "name": "clean_first_two_tb"
+          },
+          {
+            "ast_sha256": "ad61bfdcc615839d14d27c04533e485bc19cac9894d3329b2817d87a0da3c559",
+            "end_line": 498,
+            "kind": "FunctionDef",
+            "line": 478,
+            "name": "check_gap_qualify"
+          },
+          {
+            "ast_sha256": "f242a774cc3908bcc1a162315d8d003d3929436f3f81d9816b3fc7bb598bbe33",
+            "end_line": 511,
+            "kind": "FunctionDef",
+            "line": 500,
+            "name": "same_tb_remove_previous"
+          },
+          {
+            "ast_sha256": "2ba747aea6def1ab05a094628ddd3b170060f5b9f780ccfa55c6a6f2c0cfbadc",
+            "end_line": 526,
+            "kind": "FunctionDef",
+            "line": 513,
+            "name": "same_tb_remove_current"
+          },
+          {
+            "ast_sha256": "eaf7a337b520e36727365602c7d41cd58f08cfab91d79880aea1e2896c11aa18",
+            "end_line": 541,
+            "kind": "FunctionDef",
+            "line": 528,
+            "name": "same_tb_remove_next"
+          },
+          {
+            "ast_sha256": "dbd04a616b2b0ae72951f60e4223475d5f1c4310046426c051918350524ed7b3",
+            "end_line": 879,
+            "kind": "FunctionDef",
+            "line": 544,
+            "name": "defineBi"
+          },
+          {
+            "ast_sha256": "38987e06a074c457847e61370b18cb5bc32492a9df7cf34d00d4f24eb03138f2",
+            "end_line": 910,
+            "kind": "FunctionDef",
+            "line": 882,
+            "name": "work_on_end"
+          },
+          {
+            "ast_sha256": "e4f4b9fee2da9b20220cf1e432947635ad98ee0f680c6fc195f4216f5fe29a76",
+            "end_line": 918,
+            "kind": "FunctionDef",
+            "line": 912,
+            "name": "getMarkedBL"
+          },
+          {
+            "ast_sha256": "29e3e35484b422b104f2e734d8987557f4de4e1cb0757b19cefa9957007519f2",
+            "end_line": 939,
+            "kind": "FunctionDef",
+            "line": 920,
+            "name": "getPureBi"
+          },
+          {
+            "ast_sha256": "f92523e71800461f53d389d599be84f7dc662aa13f8d73b0d72c177f65096797",
+            "end_line": 946,
+            "kind": "FunctionDef",
+            "line": 941,
+            "name": "getFenBi"
+          },
+          {
+            "ast_sha256": "5a1a12c39abaedcd5215c3c5c50e29701db5a299f3077a17d75d740d3000c388",
+            "end_line": 953,
+            "kind": "FunctionDef",
+            "line": 948,
+            "name": "getFenDuan"
+          },
+          {
+            "ast_sha256": "13bb5d467df37a65fabd2917b4b021ae0f054d67c4ca54ded4036b68d5dbcf0b",
+            "end_line": 956,
+            "kind": "FunctionDef",
+            "line": 955,
+            "name": "getOriginal_df"
+          },
+          {
+            "ast_sha256": "bcc575f9a4be940d38447149d0ccc6aa272b831d02ee74544935fbd9eb387f85",
+            "end_line": 959,
+            "kind": "FunctionDef",
+            "line": 958,
+            "name": "getFenBI_df"
+          },
+          {
+            "ast_sha256": "58440590ea05d1900140924b777a6768eb2366695a739d86a39646abdfd5f520",
+            "end_line": 962,
+            "kind": "FunctionDef",
+            "line": 961,
+            "name": "getFenDuan_df"
+          },
+          {
+            "ast_sha256": "320a815c76a775929b5c1be32b1e0127f2dab093a759ce44e37a30a040b8840d",
+            "end_line": 1003,
+            "kind": "FunctionDef",
+            "line": 967,
+            "name": "find_initial_direction"
+          },
+          {
+            "ast_sha256": "5aa8e7e4f202d418d5e6eb2ec4a40e277d5860fb5e7dffee0685e70fbb923ee1",
+            "end_line": 1037,
+            "kind": "FunctionDef",
+            "line": 1005,
+            "name": "combine_gaps"
+          },
+          {
+            "ast_sha256": "af706e378bc7b721f6d192958f5a72cfbfd10f4fa55ef7a0e30955daa29eddc0",
+            "end_line": 1077,
+            "kind": "FunctionDef",
+            "line": 1039,
+            "name": "kbar_gap_as_xd"
+          },
+          {
+            "ast_sha256": "afb786926680c7f672cac0bd18b4a591e2f6b7fffadd99f748428af8f8b74d64",
+            "end_line": 1086,
+            "kind": "FunctionDef",
+            "line": 1080,
+            "name": "xd_inclusion"
+          },
+          {
+            "ast_sha256": "c4f096543e15beebb81b0924070f193e43d587c8f892ce0b1d4395dd80f808da",
+            "end_line": 1161,
+            "kind": "FunctionDef",
+            "line": 1088,
+            "name": "is_XD_inclusion_free"
+          },
+          {
+            "ast_sha256": "f4192b449b8b0960f19add5a0cdbfd19c304538af054ca02ac52bf3db8979ff6",
+            "end_line": 1210,
+            "kind": "FunctionDef",
+            "line": 1164,
+            "name": "check_inclusion_by_direction"
+          },
+          {
+            "ast_sha256": "a17e2c7551fe9ee52f2639bf8af5e47ea3424c96aa9f03c5723876b64699f835",
+            "end_line": 1226,
+            "kind": "FunctionDef",
+            "line": 1213,
+            "name": "check_current_gap"
+          },
+          {
+            "ast_sha256": "a19316335cdcfd4c0b56ed1e7d8fdbdfa465414c54f412a46ce859347ffd6b3b",
+            "end_line": 1253,
+            "kind": "FunctionDef",
+            "line": 1228,
+            "name": "check_XD_topbot"
+          },
+          {
+            "ast_sha256": "0d97e3c0c1db47ae4a44cddc8c7220c6e5d710a7f2d05bf0a40fdecd4a3c8349",
+            "end_line": 1294,
+            "kind": "FunctionDef",
+            "line": 1256,
+            "name": "check_kline_gap_as_xd"
+          },
+          {
+            "ast_sha256": "3bc85989c2dd3998c1ebad51f0b1c8703387f5f6fd1d68efe9d51e0d7545f7a9",
+            "end_line": 1316,
+            "kind": "FunctionDef",
+            "line": 1297,
+            "name": "check_previous_elem_to_avoid_xd_gap"
+          },
+          {
+            "ast_sha256": "6332f09aef626b6e1a77ee4d0edb6a188bd2a66784082398b952d4dba07d1cc4",
+            "end_line": 1339,
+            "kind": "FunctionDef",
+            "line": 1318,
+            "name": "check_XD_topbot_directed"
+          },
+          {
+            "ast_sha256": "1f79d73d5a2c1c3177d7ebbba908af7fd4cd55a9f688805a45866ddfbe11b0c0",
+            "end_line": 1364,
+            "kind": "FunctionDef",
+            "line": 1341,
+            "name": "defineXD"
+          },
+          {
+            "ast_sha256": "8bd9f03f14dc5d088211101a1a6099fca350d6e9174bdb176a1104585df64505",
+            "end_line": 1387,
+            "kind": "FunctionDef",
+            "line": 1366,
+            "name": "get_next_N_elem"
+          },
+          {
+            "ast_sha256": "bd16e25a07efa0facd80966bb21518f1814951c8beac343af353e04d5be11b33",
+            "end_line": 1418,
+            "kind": "FunctionDef",
+            "line": 1390,
+            "name": "get_previous_N_elem"
+          },
+          {
+            "ast_sha256": "595d4ed235ad2455082f16444d1c9caf25831c367ab0e37db0c11917b29fd5e8",
+            "end_line": 1477,
+            "kind": "FunctionDef",
+            "line": 1420,
+            "name": "xd_topbot_candidate"
+          },
+          {
+            "ast_sha256": "4e5c99309988996c835ecc4f2b1fbd0c3647126bd60d8436b0840c0e0f490f37",
+            "end_line": 1485,
+            "kind": "FunctionDef",
+            "line": 1479,
+            "name": "restore_tb_data"
+          },
+          {
+            "ast_sha256": "8741b12e39c043d9c1868ff4810c40852c3b485a77f354a734e4584d8ec59f38",
+            "end_line": 1527,
+            "kind": "FunctionDef",
+            "line": 1488,
+            "name": "pop_gap"
+          },
+          {
+            "ast_sha256": "c9f169a7ec0af33bc65d764e56bb0572004821004fa5e8d1a974f723c81b067c",
+            "end_line": 1775,
+            "kind": "FunctionDef",
+            "line": 1530,
+            "name": "find_XD"
+          },
+          {
+            "ast_sha256": "b62a8de4f58542098aae0ecdc71ccbf9e91f6bcf819c12c8efe57c6e11677a2d",
+            "end_line": 1791,
+            "kind": "FunctionDef",
+            "line": 1777,
+            "name": "direction_assert"
+          }
+        ],
+        "encoding": "utf-8-sig",
+        "formal_acceptance": false,
+        "has_order_calls": false,
+        "lines": 1887,
+        "newly_reviewed": true,
+        "review": {
+          "fidelity": "1887行全文与原字节冻结；原类独立装载/日频组件重放及有限独立算式检查，原平台日期/取数/图表不等价",
+          "future_information_risks": [
+            "笔/线段端点可重绘，须保留每个evaluation_date状态；原图端点不是历史确认时点",
+            "每日独立类重放不证明另一缠论引擎或聚宽平台等价"
+          ],
+          "gaps": [
+            "原日期/完整1000根输入、含当前bar/停牌取数、平台动态复权未证；早期短窗仅可用日线参考",
+            "pd.datetime已移除、旧pyecharts绘图接口与空线段索引未迁移验收",
+            "原整数趋势/缺口合并/末端假设保留，不能从终图回填信号或自行添加交易规则"
+          ],
+          "implementations": [],
+          "next_step": "有原日期/取数和绘图版本后复核图表；交易扩展另立具体规则并确认，不计交易回测",
+          "review_status": "人工审查完成",
+          "rules": {
+            "BI": "标准化索引差至少4或原缺口资格，三索引前溯/删除及末端修正；chan_price按顶high/底low",
+            "XD": "四/六/八端点包含清理、六端点极值与缺口分支，尾段推测及旧端点撤销",
+            "clock": "end_time=pd.datetime.now，原运行日期未知；无initialize/run_daily/order或持仓规则",
+            "fractal": "标准化不足7行只附tb零列；严格且非isclose极值，首端反向推定、末端反向标记",
+            "gap": "scipy shift原默认样条/首值0，门槛0.01且排isclose；nested combine_gaps可缩短区间，保留原缺陷",
+            "inclusion": "原默认初段包含时删首根；方向用高点和np.isclose；trend_type为int，写入正负0.5截断到0",
+            "indicator": "prepare_original_kdf的TA-Lib MACD未在实际getFenDuan路径调用，不造指标依赖",
+            "input": "get_bars count1000/unit1d/date-open-high-low-close/df=False；fq_ref_date=end_time",
+            "output": "旧pyecharts Line/Overlap/Kline画原OHLC/笔/线段，写stock@end_time.html；非订单/净值",
+            "security": "300058.XSHE蓝色光标；不是300354分钟缠论策略"
+          },
+          "scope": "蓝色光标1000根日线的缠论笔/线段图表工具，无交易规则",
+          "status": "非交易研究脚本"
+        },
+        "source_copy": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/source-reviews/S-8cd0ebff07d7.source",
+        "source_path": "repo/量化策略源代码/2021年度精选策略/16.缠论工具（笔， 线段）.txt",
+        "source_sha256": "9565a07a451750a9de2381900a502a24ba13e100ecfd471848de6c887583a6ed",
+        "top_level_ast_sha256": "e53b00585201d19fea9df210d50aae2a748d5a350b60c0284671c73641a8fc57"
+      },
+      {
+        "definitions": [
+          {
+            "ast_sha256": "d14929ad148eef83db58c14ba17ab266a28e7f4cba2cd5dd390240db7f803c20",
+            "end_line": 182,
+            "kind": "FunctionDef",
+            "line": 134,
+            "name": "get_top_secutiry"
+          },
+          {
+            "ast_sha256": "28f6cf9ee781fd544cc6a29f9cc824fa9a33fa465b8bbe8d72082ec63ea02ec8",
+            "end_line": 244,
+            "kind": "FunctionDef",
+            "line": 184,
+            "name": "get_momentum_result"
+          },
+          {
+            "ast_sha256": "732190f8eefc481a14cd5ad0a558a80635456535434b0514031bf03281b5352f",
+            "end_line": 302,
+            "kind": "FunctionDef",
+            "line": 246,
+            "name": "get_momentum_list"
+          },
+          {
+            "ast_sha256": "1e129f2bd844b6c3b54c00fc4aea5506b6245835b5449da930fcd4057f691505",
+            "end_line": 311,
+            "kind": "FunctionDef",
+            "line": 304,
+            "name": "recursive_join"
+          },
+          {
+            "ast_sha256": "d952acb02e6cfb353643a0770ab626bd18925779e931e22e1291a0ff95771636",
+            "end_line": 317,
+            "kind": "FunctionDef",
+            "line": 313,
+            "name": "get_result"
+          }
+        ],
+        "encoding": "utf-8-sig",
+        "formal_acceptance": false,
+        "has_order_calls": false,
+        "lines": 393,
+        "newly_reviewed": true,
+        "review": {
+          "fidelity": "393行全文/5函数冻结；原函数合成诊断与独立跨行业算式检查，缺历史行业及全市场池，不造真实排名或收益",
+          "future_information_risks": [
+            "当前池和行业用于前10日评分存在池/分类事后偏差，历史复现需按原研究日期保留该行为并披露"
+          ],
+          "gaps": [
+            "本机无可证历史sw_l3成员/名称/版本、原日证券池/ST退市覆盖；当前分类不得回填",
+            "原get_price日期对齐/停牌填充/前复权与行业版本未证；旧max_colwidth=-1不兼容",
+            "金融财报/资金流不是本来源依赖；现有日线单股票不能替代全市场真实行业排名"
+          ],
+          "implementations": [],
+          "next_step": "恢复明确原研究日期/全池/行业快照和30日原行情再核真实表图；交易变体先确认经济规则",
+          "review_status": "人工审查完成",
+          "rules": {
+            "cost": "无下单/仓位/退出/成本规则，不能计算原交易收益",
+            "dates": "today用于全池过滤/行业和前排名单标题，不按过去10个评分日期重建股票池；global末交易日缺列报KeyError",
+            "defects": "缺行业名称用字符串删除列表TypeError且计数已写；不支持周期lambda NameError、零价格除零；遍历末证券日期标整表列",
+            "growth": "1/3/5/10/20日收益>=5%/8%/10%/15%/20%；最近10端点，20日需30行",
+            "industry": "活跃sw_l3；get_industry无日期；行业总数为过滤后池，无行业/编码者删掉",
+            "input": "get_price count30/daily/close-money/skip_paused=False/fq=pre/panel=False；money未参与算式",
+            "output": "递归join过去10列，按全局last_trade_date列排序前6行业；sw_l3名称去后三字，前排实际最多7只",
+            "pool": "get_all_securities当前池；end_date>today、start_date<today-150自然日、最新is_st=False；暂停不排除",
+            "score": "行业上榜股票数平方/行业总数，format两位小数转float再稳定排序；未上榜行业0"
+          },
+          "scope": "申万三级行业最近10日强势股计数平方动量排名notebook，无交易规则",
+          "status": "非交易研究脚本"
+        },
+        "source_copy": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/source-reviews/S-2d13d994c3f7.source",
+        "source_path": "repo/量化策略源代码/2023年度精选策略/63.A股最强板块动量趋势（最终版）.txt",
+        "source_sha256": "25c512eef49a1b71cd75c05029c4cc6f26a55dd7c34bddcdecdcda3bc1e0dfad",
+        "top_level_ast_sha256": "a74e646e423f4dfd4c026aacced274f966f04bd8d80d28deb27abb94395f1784"
+      }
+    ]
+  },
+  "case_id": "daily-chan-industry-batch88-source-final",
+  "nature": "accepted_two_nontrading_source_reviews",
+  "purpose": "两完整原文/目录仅两记录改变，258正式审查/437剩余，原工具无订单规则；不因工具验收扩张交易完成",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch88/20261009-daily-chan-industry-acceptance/source-reviews/review.json",
+    "sha256": "766faeddd56c5137287c2b04d765c2f2832817051471cb2a06e3140d55b0d6b4"
+  }
+}

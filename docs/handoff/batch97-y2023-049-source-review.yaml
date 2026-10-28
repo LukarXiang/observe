@@ -1,0 +1,28 @@
+source:
+  path: repo/量化策略源代码/2023年度精选策略/49.【7日趋势】交易策略.txt
+  sha256: 4a9e21d05fb014d129ea24928cec287311511cfadc6c5ff8c308e26b52277989
+  lines: 423
+  functions: 19
+status: blocked_original_trading_inputs
+fidelity: 原规则全文审查；日线算术参考不是原全池信号或交易复现
+rules:
+  benchmark: 000905.XSHG
+  schedule: ["09:00前一交易日筛选", "09:30先止损再开盘过滤并增量买入"]
+  valuation: "2<换手率<=10；30<总市值<=500（聚宽单位亿元）；换手率降序"
+  universe: "get_all_securities(['stock'])未给asof；剔688、少于365交易日、名称ST/*/退及KeyError"
+  prices: "上一交易日结束120行，skip_paused=True、fq=pre；并非注释五日形态"
+  filter: "末6项MA13>MA21和MA21>MA55各至少5；8次相邻量比严格>1.7至少3；末量>=前量×1.5、末收/末开>=1.05、末收/前收>=1"
+  score: "MA13/21/55相对中位数均方根偏离的-2..-21和，减末5项均线多头相对差和；升序(score,code)，仅保留score>.005"
+  open: "当日一条daily open/pre_close；1<open/pre_close<1.03；最多前三只"
+  buy: "0持仓现金/3买全部；1持仓现金/2买前2；2持仓现金买前1；>2不买；不排已持有目标，order_value为增量"
+  stops: "原分钟买入时刻至previous_date最高价；按当前持仓价/成本严格<-7%、峰值>20%回撤/当前价>3%、15%<峰值<=20%回撤>5%、持仓>=3日盈利<5%、持仓1日盈利<0%依序清仓"
+  holding_days: "get_trade_days(init_time,current_dt)条数；不等于简单日期差"
+  costs: "买卖佣金.0003、卖税.001、最低5、参与度.25、固定滑点0；原平台即时成交未证"
+trade_restore:
+  - 历史每日总市值、股本事件、原全池名称/上市身份与换手率口径
+  - 原动态前复权价格/成交量及09:30当日开盘可用性
+  - 原持仓期间一分钟高点、持仓价格/持有天数及订单反馈
+research:
+  directory: data/staging/strategies-batch97/20261011-components-v1
+  scope: 十股原价120交易观察；缺行窗口阻断；未运行市值/名称预选、当日开盘或分钟退出
+  backtest: false

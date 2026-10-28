@@ -1,0 +1,33 @@
+{
+  "case": {
+    "actual_minimal_error": {
+      "message": "Attributes of DataFrame.iloc[:, 0] (column name=\"date\") are different\n\nAttribute \"dtype\" are different\n[left]:  datetime64[ms]\n[right]: datetime64[s]",
+      "type": "AssertionError"
+    },
+    "copied_tests_passed": {
+      "isolated": 19,
+      "local": 19
+    },
+    "date_values_in_ns_identical": true,
+    "evidence_sha256": {
+      "data/staging/strategies-batch105/20261011-stage-date-precision-failure/verify_strategy_batch105_stage.py": "1b8b4910f71891ffc6a60c149efba3ac093d739f991794d2a73a77ef884ccdfa",
+      "scripts/verify_strategy_batch105_stage.py": "1b8b4910f71891ffc6a60c149efba3ac093d739f991794d2a73a77ef884ccdfa"
+    },
+    "exit_code": 1,
+    "failure_location": "readback/assert_frame_equal(fixed,expected_fixed)",
+    "new_trading_backtests": 0,
+    "observed_tool_session": 1846,
+    "original_verifier_unchanged": true,
+    "saved_date_dtype": "datetime64[ms]",
+    "source_date_dtype": "datetime64[s]",
+    "status": "failed_control_preserved"
+  },
+  "case_id": "batch105-date-precision-failure",
+  "nature": "actual_parquet_unit_promotion_control_failure",
+  "purpose": "秒提升毫秒值无损，原校验器与最小失败保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch105/20261011-stage-date-precision-failure/checked.json",
+    "sha256": "d0e8b2bc46915ec8417f7b0a8ea6952b721ef9b8e394b9ecababd7407b4d983f"
+  }
+}

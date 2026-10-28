@@ -1,0 +1,115 @@
+{
+  "case": {
+    "MA_reference_windows": 45753,
+    "accepted_checkpoint": "20261009-050433-fac7",
+    "accepted_directory": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow",
+    "adversarial_review": {
+      "examined": [
+        "Pinned original sources and print-only adaptation retain line numbers; imports/top-level not executed",
+        "54 strict .8 anchor,30 interval,2.5 mean-volume and <=.1 amplitude; no270 minimum injected",
+        "Declared numpy.mean reference,31 complete MA reference scope,decision-day price anchor and unchanged supplier volume",
+        "Initial47781 inventory and failure preserved; actual46781 and duplicate-key gate corrected with new SHA binding",
+        "CSI300/bank/status/turnover gates retained; ten stocks never replace original pool",
+        "95 missing helpers/nonempty zero-weight sorting not reconstructed; sort failure and retry state preserved",
+        "Only inert message stub; real sends0; subprocess uses argument lists",
+        "Past observations only; known pauses skipped,missing sessions blocked",
+        "Forbidden socket/HTTP exact30 diagnostics,46053 values,corrected inventory and3catalog replay",
+        "63current/63copies/106evidence/17CORE; old5363controls/398stats preserved,uniqueBook unchanged"
+      ],
+      "findings": []
+    },
+    "buy_reference_windows": 46053,
+    "catalog_sha256": "dd7aeaa7c72a1303098fe4703c0cd71a61337a81fd2e92bcf7a1fbd5595c55d0",
+    "checked_state_file": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/checked-state.json",
+    "checked_state_sha256": "40c6543b3c98cae0df506443b2a983bda6f84263d79cac8da4e5627b73567c5f",
+    "controlled_diagnostics": 30,
+    "core_files_required": 17,
+    "evidence_files_checked": 106,
+    "final_binding_file": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/final-binding-verification.json",
+    "final_binding_sha256": "2f99c5ddeee0e202454d1afe538e807b2a290d188ee409a76f9c5390b2aa5799",
+    "first_reference_decision": "2005-01-06",
+    "git_publication": "pending_user_commit_and_push",
+    "hard_stops": [],
+    "implementation_copies_checked": 63,
+    "implementation_files_checked": 63,
+    "implementation_manifest_scope": "Entrypoint SHAs above; complete63 current/copy manifest in SHA-bound checked_state_file",
+    "implementation_sha256": {
+      "scripts/review_strategy_batch86.py": "7e1f72c8c36dda24e5d6d7a4ee97957edcfbaf5b6adeff1a5cf63de445a92a3a",
+      "tests/unit/test_batch86_research.py": "5e41293dfd1c89bfe4cb6ee81e42e3b14c752d00b0253c1998e987bf5c57c8c0"
+    },
+    "independent_boolean_differences": 0,
+    "inventory_correction": {
+      "actual_count": 46781,
+      "corrected_sha256": "76703e780bf80d634632e1f47edb3a15ab1b31d6a739e5771677d3f2947d5825",
+      "correction_sha256": "d3e8417c240c0ed28555c9f03baf8ff78a0e1ba026640b886c94d541ae157eaa",
+      "old_count": 47781,
+      "original_payload_changed": false,
+      "original_sha256": "8c2ad40e3f8c207c59cb1933863470c2a022c02273454e297a3abaa42a3db000",
+      "paused_rows": 718,
+      "trading_rows": 46063
+    },
+    "last_reference_decision": "2026-09-29",
+    "new_data_rows": 0,
+    "new_native_requests": 0,
+    "new_trading_backtests": 0,
+    "new_wire_responses": 0,
+    "newly_reviewed": 2,
+    "original95_flow_windows": 0,
+    "original95_technical_signal_windows": 0,
+    "original_complete_pool_signal_days": 0,
+    "original_strategy_complete": false,
+    "partial_buy_windows": 2690,
+    "receipt_file": "docs/handoff/2026-10-09-batch86-verification.json",
+    "receipt_sha256": "c6930140317392189efab18f05dfaa3549e66363cd8e10f968de701fd2a516c6",
+    "reference_buy_true": 20,
+    "review_depth": "deep",
+    "scope": "Two complete sources; literal volume-amplitude/MA arithmetic and controlled wizard diagnostics. Original full-universe and95 signals/trades blocked.",
+    "scope_alignment": "on_target",
+    "source_scope": "254/695 accepted;441 remaining;12 real backtested/reproduced sources;69 strategy parent runs",
+    "specialist_reviews": {
+      "architecture": {
+        "agent": "batch86_architecture",
+        "final_current_checked_receipt_and_binding_SHA_verified": true,
+        "findings": [],
+        "independent_all_window_arithmetic_and_dates_verified": true,
+        "independent_old_controls_SHA_and_partition_stat_verified": true
+      },
+      "security": {
+        "agent": "batch86_security",
+        "final_current_checked_receipt_and_binding_SHA_verified": true,
+        "findings": [],
+        "independent_old_controls_SHA_and_partition_stat_verified": true
+      }
+    },
+    "status": "ok",
+    "verification": {
+      "diff_check_passed": true,
+      "formal_related_tests_passed": 142,
+      "full_pytest_run": false,
+      "offline": "match/0",
+      "old_asset_protection": {
+        "baseline_sha256": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4",
+        "mutable_registry_files_excluded": 0,
+        "old_calendar_rows_unchanged": 7938,
+        "old_controls_unchanged": 5363,
+        "old_index_rows_unchanged": 5280,
+        "old_partition_metadata_unchanged": 398,
+        "partition_check": "size/mtime only; no fresh full hash",
+        "status": "ok"
+      },
+      "ruff_passed": true,
+      "specialized_included_in_formal": true,
+      "specialized_tests_passed": 26,
+      "warning_scope": "3 controlled original pandas sum warnings and1 existing Starlette/httpx",
+      "warnings": 4
+    }
+  },
+  "case_id": "volume-flow-batch86-final",
+  "nature": "accepted_reference_arithmetic_and_frozen_specialist_review",
+  "purpose": "254正式研究验收、63实施副本/106证据/17CORE；26专项含于142相关、安全架构独立全窗与旧5363控制/398stats通过，失败更正不覆盖、交易0",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-09-batch86-final-review.json",
+    "sha256": "9bedeae25835d7780a76128d3d7c034fdcf0c33ba16b81c9bdb638d3a9c98649"
+  }
+}

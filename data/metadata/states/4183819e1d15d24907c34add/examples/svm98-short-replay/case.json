@@ -1,0 +1,83 @@
+{
+  "case": {
+    "all_output_files": [
+      {
+        "file": "config.json",
+        "sha256": "57afa7dc4c001345cfa51bafc28bfe957a606ee03fbf5097f26cfcaeca6e3f59"
+      },
+      {
+        "file": "data_manifest.json",
+        "sha256": "b7703ce46c13566e9776001b8b8cbb7d7a02af978a7c29683c0399014cbc2a6f"
+      },
+      {
+        "file": "factors.parquet",
+        "sha256": "c6b210ddf997135d1b1502f9ee554872cbaf0d9d89c7226c5ec85f8575f5ea09"
+      },
+      {
+        "file": "scores.parquet",
+        "sha256": "3a898dcfc1729e21938e40fff64c2883b683b1124ede7f3f2080c72540685d07"
+      },
+      {
+        "file": "signal_coverage.parquet",
+        "sha256": "1433d35fb42969d21141b22ac51305d190d07ccb44cf0cc9ea05107dff704291"
+      },
+      {
+        "file": "subruns.json",
+        "sha256": "9f1d26b68a88457ee77a265c5ed839ea082d022643f042ba2ac766e86ef63d79"
+      },
+      {
+        "file": "svm_models.json",
+        "sha256": "7da880d7badc9bf66d53c8838f55bd5731d5e0c2b597408c4ea308d679864cf7"
+      },
+      {
+        "file": "svm_samples.parquet",
+        "sha256": "083caaee9c49fc9adf073d03700534ad5648c3afaf4e79873bc682d6c9f25664"
+      },
+      {
+        "file": "targets.parquet",
+        "sha256": "376bf76c2bd1bc9f1d2f7bb2d6486cbda6b3c67c3a6eaa1ca1a89c293b83c87e"
+      },
+      {
+        "file": "universe.parquet",
+        "sha256": "b11ee1c1aa825740fc693b5a452654c969151f8d732eae66c3b112d0feb1b0c7"
+      }
+    ],
+    "differences": 0,
+    "original_preflight_sha256": "776fdd6d4982f327d157fa2c913d11865545a6a145dcaa01f4c93fcb9c1169dd",
+    "preflight_semantic_fields_checked": [
+      "status",
+      "scope",
+      "start",
+      "end",
+      "decision_days",
+      "checks",
+      "potential_positive_target_decisions",
+      "source_sha256",
+      "config_sha256",
+      "snapshot",
+      "snapshot_sha256",
+      "inventory_sha256",
+      "input_sha_evidence",
+      "input_sha_evidence_sha256",
+      "implementation_sha256",
+      "network_forbidden",
+      "parameters_changed",
+      "new_trade_backtests",
+      "orders_executed",
+      "limits"
+    ],
+    "process_evidence_file": "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/replay-proof/replay.json",
+    "process_evidence_sha256": "d2cbc87d37c59dfd6a0e039d7ae67d9f28f57ef3d6bc5b23144cfbde5b5567a8",
+    "replay_preflight_sha256": "6294518f81c51a5974dc6480f5a2fb316e79b62472ec1d4bf4df87fabaee6722",
+    "scope": "All10preflight outputs incl signal_coverage byte exact; wrapper path-specific output hashes not compared as common bytes; no trading backtest",
+    "status": "match"
+  },
+  "case_id": "svm98-short-replay",
+  "nature": "approved_variant_all_signal_artifacts_exact_new_process_replay",
+  "purpose": "包含signal_coverage的10输出字节SHA和共同语义，首worker导入失败留档，新worker只修导入上下文",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-history-supplement/20261011-svm98-short-island-preflight/replay-proof/full-replay-binding.json",
+    "sha256": "f4f02599c6367f27e305176865e8d748ddadf5d969ca3999993107fe41497238"
+  }
+}

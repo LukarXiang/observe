@@ -1,0 +1,119 @@
+{
+  "case": {
+    "42_controlled_holding_comparison": [
+      {
+        "controlled_holding": "159949.XSHE",
+        "dates": 2366,
+        "leader_different_from_null": 14
+      },
+      {
+        "controlled_holding": "510050.XSHG",
+        "dates": 2366,
+        "leader_different_from_null": 34
+      },
+      {
+        "controlled_holding": "510300.XSHG",
+        "dates": 2366,
+        "leader_different_from_null": 44
+      }
+    ],
+    "inputs": [
+      {
+        "event_cause_proven": false,
+        "input": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-518880/parsed.parquet",
+        "instrument": "518880.XSHG",
+        "native_adjacent_changes_over30pct": [],
+        "rows_through_cutoff": 3204,
+        "sha256": "d51f5f9c996ab6ec26e999076462c11b677dcfc9f602fea9233cd0e2e39be0fc"
+      },
+      {
+        "event_cause_proven": false,
+        "input": "data/staging/strategies-batch75/20261008-ETF-info-rotation/probes/159915/parsed.parquet",
+        "instrument": "159915.XSHE",
+        "native_adjacent_changes_over30pct": [],
+        "rows_through_cutoff": 3595,
+        "sha256": "1088772b72237c42a3f15bb73dcd8bb83a2370a0eaf832f2fb5000b1221d6b2f"
+      },
+      {
+        "event_cause_proven": false,
+        "input": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-510180/parsed.parquet",
+        "instrument": "510180.XSHG",
+        "native_adjacent_changes_over30pct": [
+          {
+            "close": 0.604,
+            "date": "2009-05-21",
+            "native_row_change": -0.9022653721682847,
+            "previous_close": 6.18,
+            "previous_native_date": "2009-05-18"
+          },
+          {
+            "close": 1.98,
+            "date": "2013-12-23",
+            "native_row_change": 2.8596491228070176,
+            "previous_close": 0.513,
+            "previous_native_date": "2013-12-18"
+          }
+        ],
+        "rows_through_cutoff": 4951,
+        "sha256": "fbff896e29561d431102a11e71cf1f93252a0cbea8e4808cdba0d386d18e280e"
+      },
+      {
+        "event_cause_proven": false,
+        "input": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-510050/parsed.parquet",
+        "instrument": "510050.XSHG",
+        "native_adjacent_changes_over30pct": [],
+        "rows_through_cutoff": 5252,
+        "sha256": "17897aa46f5d66ba2878ad90f537ddd6c2d3d2d1baaf2b321cdc333d6b4237f2"
+      },
+      {
+        "event_cause_proven": false,
+        "input": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-159949/parsed.parquet",
+        "instrument": "159949.XSHE",
+        "native_adjacent_changes_over30pct": [],
+        "rows_through_cutoff": 2475,
+        "sha256": "ea41672d91f581543f057f9e79c061cb5c16a46507233447463b4b830bcc2d9d"
+      },
+      {
+        "event_cause_proven": false,
+        "input": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/probes/fund-513100/parsed.parquet",
+        "instrument": "513100.XSHG",
+        "native_adjacent_changes_over30pct": [
+          {
+            "close": 1.015,
+            "date": "2022-01-14",
+            "native_row_change": -0.8045069337442219,
+            "previous_close": 5.192,
+            "previous_native_date": "2022-01-12"
+          }
+        ],
+        "rows_through_cutoff": 3201,
+        "sha256": "4885a44c20002de8f9cf3f2fe436e51f777a1207a6837e84501124aef90c9baf"
+      },
+      {
+        "event_cause_proven": false,
+        "input": "data/raw/macd_patterns_probe_batch20/etf510300/20261005-macd-patterns.parquet",
+        "instrument": "510300.XSHG",
+        "native_adjacent_changes_over30pct": [],
+        "rows_through_cutoff": 3487,
+        "sha256": "40f3a5a24e70d1fc90517139d73982b08fdec9ee35a777a79e78ae959abb59ed"
+      }
+    ],
+    "limits": [
+      "Adjacent native changes are arithmetic counterexamples, not validated event/price errors or returns",
+      "Multiplying a negative score by1.04 makes it lower; preserve original rule, no achieved holding path",
+      "42 comparisons are three separate controlled alternatives to null, not independent portfolios"
+    ],
+    "not_a_backtest": true,
+    "prices_corrected": false,
+    "rank_file": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/rank-components.parquet",
+    "rank_sha256": "bff919c18b3ac973915b79e6e0b06db2f76242e93f5821eb0e65da145b76e31e"
+  },
+  "case_id": "rsrs-batch79-quality",
+  "nature": "native_price_counterexamples_and_controlled_holding_comparison",
+  "purpose": "七画像/三原生跳变无事件证明或纠价；42三持仓情形相对null赢家差14/34/44，只是算术反事实不是换仓/收益",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch79/20261009-RSRS-bias-momentum/native-history-quality.json",
+    "sha256": "ccdc3c7977d656d6d7bb6995d0dc0b258fcc926479718137e77236859893487e"
+  }
+}

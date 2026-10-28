@@ -1,0 +1,21 @@
+schema: 1
+source: 2024年度精选策略2/69.场内基金定投价值平均增强策略，年化30%+.txt
+sha256: 8af59e10a1c1c8810f91bdeb2d76cdc017e8812c058f0fb324aea47cc9d444ee
+lines: 329
+definitions: 12
+stage: full_source_read_and_component_study
+formal_source_research_acceptance: false
+original_strategy_complete: false
+assets: 最终生效399324深证红利指数、159905深证红利ETF；前两组赋值被覆盖
+entry: rate1严格小于0.318；普通建仓70%、每期资金20%/10；半仓重入50%、每期50%/16
+extrema: 最近375.0行最高点及之后低点；最高点前625.0行最低点；另用250行最高点后低点计算阶段涨幅
+target: 月首open+30m按每期金额减去市值与上月目标的差，最多5期，按100股金额取整；月次交易日开盘保存市值乘1.005
+profit: 收益严格超过40%且回撤超过9%，或收益超过100%/250行指数阶段涨幅超过75%；第一分支rate0超过90%等待重建，否则次日半仓买回
+cost: fund买卖佣金0.0003，最低1，无印花税；原滑点未显式设置
+gaps:
+  - float接口count375.0/625.0是否被平台接受未知；原指数操作数仅为原生候选参考
+  - refresh_trade_price读取成交后1分钟末close，当前缺对应原输入与执行协议
+  - np.irr已从NumPy移除，等间隔现金流IRR不等于交易日期XIRR
+  - 未确认成交即更新投资现金流和建仓状态；缺持仓key可能报错
+  - 159905历史事件、复权、状态与基金费用规则未放行；内部买卖现金流不是外部账户入金
+next: 独立核长历史极值与状态，再核原基金与分钟成交；必要变体确认后唯一Book三成本、逐年与禁网复现

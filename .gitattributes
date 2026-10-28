@@ -1,5 +1,8 @@
 # Metadata originals retain their recorded bytes across operating systems.
 data/metadata/** -text whitespace=cr-at-eol
+# Navigation documents may be edited with Windows line endings.
+README.md whitespace=cr-at-eol
+docs/tasks/README.md whitespace=cr-at-eol
 # These files are bound by byte SHA in research and metadata manifests.
 src/** -text
 scripts/** -text

@@ -1,0 +1,26 @@
+{
+  "case": {
+    "default_cpv_formula_available": false,
+    "new_requests": 1,
+    "not_a_backtest": true,
+    "original_input_rows_admitted": 0,
+    "profiles": [
+      {
+        "case": "minute-600519",
+        "complete22_day_windows": 0,
+        "failure": "ConnectionError: HTTPSConnectionPool(host='push2his.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/stock/trends2/get?fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6%2Cf7%2Cf8%2Cf9%2Cf10%2Cf11%2Cf12%2Cf13&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58&ut=7eea3edcaed734bea9cbfc24409ed989&ndays=5&iscr=0&secid=1.600519 (Caused by NameResolutionError(\"HTTPSConnection(host='push2his.eastmoney.com', port=443): Failed to resolve 'push2his.eastmoney.com' ([Errno -2] Name or service not known)\"))",
+        "native_parser_replayed": false,
+        "original_rows_admitted": 0,
+        "status": "failed"
+      }
+    ]
+  },
+  "case_id": "intraday-factor-batch82-candidates",
+  "nature": "accepted_bounded_native_request_failure",
+  "purpose": "单1m请求DNS失败0响应/新增；固定ndays5不能补22日，原解析未重放，不用5m替代",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch82/20261009-intraday-reversal-price-volume/candidate-audit.json",
+    "sha256": "1edfa3e94a4af4f4edd51e6f885324e0d1e6bf5f6c405a93fbcbdd36c1f20762"
+  }
+}

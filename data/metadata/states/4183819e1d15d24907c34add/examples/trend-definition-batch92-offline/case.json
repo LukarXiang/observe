@@ -1,0 +1,117 @@
+{
+  "case": {
+    "catalog_files_match": 3,
+    "differences": 0,
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "operand_binding_adapted": true,
+    "platform_equivalence_proven": false,
+    "rows": 7181,
+    "socket_HTTP_disabled": true,
+    "status": "match",
+    "summary": {
+      "net_asset_value_computed": false,
+      "new_trading_backtests": 0,
+      "original_60_row_branch": "absolute only; relative/mixed demo failures are not repaired",
+      "overlapping_ranges": true,
+      "platform_equivalence_proven": false,
+      "ranges": [
+        {
+          "entry_transitions": 32,
+          "exit_transitions": 31,
+          "finite_bounds": 1823,
+          "finite_scores": 1842,
+          "first": "2014-01-02",
+          "held_observation_rows": 947,
+          "independent_flags_differences": 0,
+          "independent_score_difference_dates": [],
+          "independent_score_differences": 0,
+          "last": "2021-10-25",
+          "last_next_return_missing": true,
+          "max_independent_quantile_abs_error": {
+            "lower_bound": 1.4210854715202004e-14,
+            "upper_bound": 0.0
+          },
+          "not_a_backtest": true,
+          "range": "original_period",
+          "rows": 1901
+        },
+        {
+          "entry_transitions": 90,
+          "exit_transitions": 90,
+          "finite_bounds": 5202,
+          "finite_scores": 5221,
+          "first": "2005-01-05",
+          "held_observation_rows": 2748,
+          "independent_flags_differences": 0,
+          "independent_score_difference_dates": [],
+          "independent_score_differences": 0,
+          "last": "2026-09-29",
+          "last_next_return_missing": true,
+          "max_independent_quantile_abs_error": {
+            "lower_bound": 1.4210854715202004e-14,
+            "upper_bound": 0.0
+          },
+          "not_a_backtest": true,
+          "range": "extended_reference",
+          "rows": 5280
+        }
+      ],
+      "signal_rows_are_index_paper_states": true,
+      "source_body_changed": false,
+      "status": "component_research"
+    },
+    "supplemental": {
+      "JQ_demo_equivalence_proven": false,
+      "compatibility_cases": [
+        {
+          "case": "original_relative_score",
+          "exception": "TypeError",
+          "message": "NDFrame.fillna() got an unexpected keyword argument 'method'",
+          "synthetic": true
+        },
+        {
+          "case": "datetime_price_zero_label",
+          "exception": "KeyError",
+          "message": "0",
+          "synthetic": true
+        },
+        {
+          "actual_full_mixed_branch_executed": false,
+          "case": "max_two_None_returns_after_injected_score_calls",
+          "exception": "TypeError",
+          "message": "'>' not supported between instances of 'NoneType' and 'NoneType'",
+          "synthetic": true
+        }
+      ],
+      "differences": 0,
+      "independent_full_states": [
+        {
+          "all_score_and_quantile_inputs_independent": true,
+          "difference_dates": [],
+          "full_independent_flag_differences": 0,
+          "range": "extended_reference",
+          "rows": 5280
+        },
+        {
+          "all_score_and_quantile_inputs_independent": true,
+          "difference_dates": [],
+          "full_independent_flag_differences": 0,
+          "range": "original_period",
+          "rows": 1901
+        }
+      ],
+      "not_a_backtest": true,
+      "raw_demo_candidate_rows": 17,
+      "status": "match"
+    }
+  },
+  "case_id": "trend-definition-batch92-offline",
+  "nature": "forbidden_network_original_and_independent_component_catalog_replay",
+  "purpose": "原评分阈值和完整独立状态、三兼容异常、17行演示来源及三目录match0；范围重叠且平台不等价，新增交易0",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/offline-verification.json",
+    "sha256": "f11cd642ba0577e42e54ea2294d32d022cc9555e1d3bd4ff73ac78c134d09bb6"
+  }
+}

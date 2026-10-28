@@ -1,0 +1,22 @@
+{
+  "case": {
+    "cause": "The reused native.verify requires batch74-specific primary/source binding; batch76 owns an independent root binding and cannot reuse that contract.",
+    "command": "~/envs/quant/.venv/bin/python -m pytest -q tests/unit/test_batch76_research.py -k candidate_audit_uses_batch76",
+    "deselected": 30,
+    "driver_copy": "driver-before-probe-binding-correction.py",
+    "exception": "FileNotFoundError: probes/input-binding.json",
+    "failed": 1,
+    "fix": "Implement batch76 candidate validation using its own source/receipt/API binding, while reusing native expected_request/invoke and exact response-parser replay.",
+    "not_a_backtest": true,
+    "old_batch74_code_changed": false,
+    "status": "failed"
+  },
+  "case_id": "dynamic-emotion-batch76-binding-regression",
+  "nature": "immutable_cross_batch_verifier_contract_red_regression",
+  "purpose": "红1失败30 deselected保留；独立candidate_audit核本批来源/receipt/API并精确原解析重放，旧74实现只读；修正后31专项通过",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probe-binding-red-regression.json",
+    "sha256": "6e051d5bcca63298865f4ce268c73a14223b13197953e445a2b03acefa20b48d"
+  }
+}

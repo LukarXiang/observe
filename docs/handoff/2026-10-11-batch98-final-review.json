@@ -1,0 +1,99 @@
+{
+ "status": "ok",
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "library_goal_complete": false,
+ "original_strategy_complete": false,
+ "progress": {
+  "checkpoint": "20261011-024709-1cdb",
+  "note": "Batch98 bull/bear63+northRSRS58 source research accepted;5280index days/5263OLS/27+2diagnostics/offline match0;original trades blocked",
+  "catalog_id": "7be79d4beb81635628dd",
+  "catalog_sha256": "73c6a816348424b06d6c108e6e5c6638a8de831853f5addbda254294d20355ad",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 484,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 282,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-024709-1cdb"
+ },
+ "components": {
+  "index_rows": 5280,
+  "OLS_windows": 5263,
+  "comparison_price_leg": {
+   "MA": {
+    "marks_differences": 0,
+    "up_crossings": 49,
+    "down_crossings": 49,
+    "long_state_days": 2733,
+    "complete_windows": 5221
+   },
+   "BBANDS": {
+    "marks_differences": 0,
+    "up_crossings": 139,
+    "down_crossings": 131,
+    "long_state_days": 2692,
+    "complete_windows": 5261
+   }
+  },
+  "diagnostics": {
+   "cases": 27,
+   "synthetic_only": true,
+   "hand_cases": "match",
+   "orders_or_fills": 0
+  },
+  "perfect_fit_boundary_cases": 2,
+  "offline": "match/0",
+  "new_trading_backtests": 0
+ },
+ "source_sha256": [
+  "9dbf27618f8d0285ad9f7602954875e6dd8a6604e7c87def544b75e6055caac9",
+  "1ca06cbc4d95a15dd646bb1aa73b50fbf5503252071f9ed0a1461d08aa3c1e69"
+ ],
+ "evidence_sha256": {
+  "docs/handoff/batch98-y2021-063-source-review.yaml": "afe4dc29799d01aa5861fcb5c7ef49a974a818e21c98bcf01dcea5f7a19cda6c",
+  "docs/handoff/batch98-y2023-058-source-review.yaml": "d8ecc0e36e7e70616fb151a218977cf22b34e6fee110e923b48eb68b6ec09098",
+  "scripts/accept_strategy_batch98.py": "06959c9b1634be414a8deecfa059e2ed94dfcfad6ea88dc01778f5f7caec45d2",
+  "tests/unit/test_batch98_acceptance.py": "b38b770aa4e58b8548bc81c4f4894f17b15e68440779ef3975f04880bce6bacc",
+  "data/staging/strategies-batch98/20261011-guard-validation-v2/checked.json": "22886780eabaaf2ae18c75c4094b3d77c416aa08cd3e03920cac2d9564d23317",
+  "data/staging/strategies-batch98/20261011-original-components-v1/prepared.json": "5640a4b2204d010df5da8d14faaeadc21b3e26a200e4ba77bb2fcb7203a023b2",
+  "data/staging/strategies-batch98/20261011-original-components-v1/dependencies.json": "1785ec8eebfc521003e84fd0777479a8346918e04d112148dbd7c593c7227c02",
+  "data/staging/strategies-batch98/20261011-original-components-json-recovery/offline-verification.json": "9ec4bf79147b21cb5027a188beca8aec5541b3cd290b6e687bab8bed8d44fdb1",
+  "data/staging/strategies-batch98/20261011-original-components-json-recovery/prepared.json": "318c75630d09a56f8b54bc3c6c313b40788c21eecd9cc257146835fe769c73fd",
+  "data/staging/strategies-batch98/20261011-original-components-json-recovery/representation-verification.json": "028744bad81f11c7b46a9e223588b1cbdf79d61cc99e26bced09b1cf0de2f300",
+  "data/staging/strategies-batch98/20261011-bounded-northbound-probes/summary.json": "1de0c76667148fcaebfd8d74b35920361b314322cefc1a290ceaf3b0e8574eb9",
+  "data/staging/strategies-batch98/20261011-bounded-northbound-probes/prepared.json": "2e374e6ffed7ef64ee261f30c1452e64348c11bff82b8099520a74a853350cec",
+  "data/staging/strategies-batch98/20261011-RSRS-perfect-fit-boundary/offline.json": "7fcfcb154ffc4c677b228d8a6cbcfedc24e5d467c73ed3d8e94a0efffadc9149",
+  "data/staging/strategies-batch98/20261011-RSRS-perfect-fit-boundary/study-command.json": "02739b793acf6247ffb719f24d298b3caf5899085e48817f1b07c173d9c59cf2",
+  "data/staging/strategies-batch98/20261011-RSRS-perfect-fit-boundary/replay-command.json": "a40b5fd501608910ad4af9e15fbe26deb44d2928bbb7b8dbbdda47564797701b",
+  "data/staging/strategies-batch98/20261011-formal-source-acceptance/source-reviews.json": "5666826861e448dc7f3a157f55d9e814e032dc3b6be800f46ea9d4cc632c022f",
+  "data/staging/strategies-batch98/20261011-formal-source-acceptance/prepared.json": "abc8fac67b86322b916459f4a87b0c0f3c01ec45fbc5b4120cca9b5877f98704",
+  "docs/tasks/2026-10-11-第九十八批牛熊指标与北向RSRS-正式研究验收.md": "7b9b60d4b5e45b484d529f078f38bfbf8b028df4d2f9749316e2cf09fb496417",
+  "src/observe/strategy_catalog.py": "3c507dc700d28c165322e19e27254b682e5bf2d991153c4d2ce7d39183fb88dd",
+  "data/staging/strategies-batch98/20261011-original-components-v1/protection.json": "fcf33c8de2d54325eec58fc8fa2fb708364a85378a1d5ef339ce34f6feef438f",
+  "data/catalog/strategies/7be79d4beb81635628dd/catalog.json": "73c6a816348424b06d6c108e6e5c6638a8de831853f5addbda254294d20355ad",
+  "data/catalog/strategies/progress/20261011-024709-1cdb/summary.json": "146552d81c34073210fcaa088a0f5d384bf6b8e7e30a0ad075d0331cba13a552"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 6614,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+ },
+ "new_trading_backtests": 0,
+ "new_strategy_parent_runs": 0,
+ "review_method": "Full-source review, independent scalar arithmetic, fresh offline workers and local/isolated tests; no independent agent review claimed"
+}

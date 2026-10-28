@@ -1,0 +1,79 @@
+{
+  "case": {
+    "api_evidence_file": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/existing-apis.json",
+    "api_evidence_sha256": "17fbde9c97c21156729e5d4c192f4e8d8244b07f5ab3dc678983b20c361a6611",
+    "decision": "Reuse verified same-host DNS failures and recent-only flow API limitation; changing symbol cannot recover original long history. No blind retries.",
+    "file": "data/staging/strategies-batch85/20261009-industry-wizard-money-flow/probe-results.json",
+    "missing": [
+      "Original daily CSI300/bank399951 members and history of names/ST/limits",
+      "Original previous-natural-day turnover_ratio query and available denominator/vintage",
+      "Exact wizard technical/flow/ranking/allocation helper version and long previous-day net_pct_main"
+    ],
+    "new_requests": 0,
+    "new_rows": 0,
+    "not_a_backtest": true,
+    "published": false,
+    "results": [
+      {
+        "api_sha256": "17fbde9c97c21156729e5d4c192f4e8d8244b07f5ab3dc678983b20c361a6611",
+        "attempts": [
+          {
+            "method": "GET",
+            "params": null,
+            "url": "https://www.swsresearch.com/swindex/pdf/SwClass2021/StockClassifyUse_stock.xls"
+          }
+        ],
+        "case": "industry-history",
+        "error": "ConnectionError: HTTPSConnectionPool(host='www.swsresearch.com', port=443): Max retries exceeded with url: /swindex/pdf/SwClass2021/StockClassifyUse_stock.xls (Caused by NameResolutionError(\"HTTPSConnection(host='www.swsresearch.com', port=443): Failed to resolve 'www.swsresearch.com' ([Errno -2] Name or service not known)\"))",
+        "published": false,
+        "query": {
+          "function": "stock_industry_clf_hist_sw",
+          "parameters": {}
+        },
+        "status": "failed",
+        "strict_usable": false,
+        "wire_responses": []
+      },
+      {
+        "api_sha256": "17fbde9c97c21156729e5d4c192f4e8d8244b07f5ab3dc678983b20c361a6611",
+        "attempts": [
+          {
+            "method": "GET",
+            "params": {
+              "_": 1791491252451,
+              "fields1": "f1,f2,f3,f7",
+              "fields2": "f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61,f62,f63,f64,f65",
+              "klt": "101",
+              "lmt": "0",
+              "secid": "1.600519",
+              "ut": "b2884a393a59ad64002292a3e90d46a5"
+            },
+            "url": "https://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get"
+          }
+        ],
+        "case": "money-flow-600519",
+        "error": "ConnectionError: HTTPSConnectionPool(host='push2his.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/stock/fflow/daykline/get?lmt=0&klt=101&secid=1.600519&fields1=f1%2Cf2%2Cf3%2Cf7&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61%2Cf62%2Cf63%2Cf64%2Cf65&ut=b2884a393a59ad64002292a3e90d46a5&_=1791491252451 (Caused by NameResolutionError(\"HTTPSConnection(host='push2his.eastmoney.com', port=443): Failed to resolve 'push2his.eastmoney.com' ([Errno -2] Name or service not known)\"))",
+        "published": false,
+        "query": {
+          "function": "stock_individual_fund_flow",
+          "parameters": {
+            "market": "sh",
+            "stock": "600519"
+          }
+        },
+        "status": "failed",
+        "strict_usable": false,
+        "wire_responses": []
+      }
+    ],
+    "sha256": "8c804184102c1ae1211e09119b95c12d8c37a6f62293885abdcfce6f7cc40f25"
+  },
+  "case_id": "volume-flow-batch86-supplement",
+  "nature": "accepted_prior_dns_failure_and_recent_only_api_reuse",
+  "purpose": "第85批两DNS失败及API源码按SHA复核；近期接口无历史起止，改证券不能补原全区间；新请求/响应/行/发布0，不证明供应商无数据",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/supplement-decision.json",
+    "sha256": "c11a854f30bb47df7fcc74cdf9a1bc3a110637c976b8e136c351ceac2343af9d"
+  }
+}

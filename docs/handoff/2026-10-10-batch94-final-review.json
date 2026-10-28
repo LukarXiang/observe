@@ -1,0 +1,249 @@
+{
+ "status": "ok",
+ "accepted_checkpoint": "20261010-203913-69b2",
+ "progress": {
+  "checkpoint": "20261010-203913-69b2",
+  "note": "Batch94 three ETF source research accepted;long native FFT/Kalman andRSRS,102 synthetic callbacks;no trading",
+  "catalog_id": "021347e0816f40d6a6b9",
+  "catalog_sha256": "211bd8c261b55082523bdc123e39f06b81053a919b921cad5f457d21e89ed6ce",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 273,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 75,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261010-203913-69b2"
+ },
+ "accepted_directory": "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v5",
+ "receipt_file": "docs/handoff/2026-10-10-batch94-verification.json",
+ "receipt_sha256": "67ea1186584019acdad116c57b9a8719fa92d3b4ef78fc48c13cc4e15b0eaea8",
+ "checked_state_file": "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v5/checked-state.json",
+ "checked_state_sha256": "7c075d5ea2e009af8eb6abb7a8acea6c7bb262a549e288c224442517c74c45d5",
+ "final_binding_file": "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v5/final-binding.json",
+ "final_binding_sha256": "71ebc64a22bb68fec2b8a4fcd87d60fec1a3a928115abcb52572246f9a99e833",
+ "formal_report": "docs/tasks/2026-10-10-第九十四批ETF低通与卡尔曼-正式研究验收.md",
+ "formal_report_sha256": "d2d301ddd3ce5a12d8138c769b49c349f1d01787ffc0c6443cdb4ca7c6288b78",
+ "review_completion_file": "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v5/review-completion.json",
+ "review_completion_sha256": "4a10b1ee111ad5a47c2cfcc4ea36bc4df905235ed63d2046609265d210ec2e22",
+ "reviewed_implementation_sha256": {
+  "src/observe/strategy_catalog.py": "c82caf370aa5c223209b959850d93b4f6e4a2c5b03d3ed8ec09e7ad2aa80a904",
+  "scripts/verify_strategy_batch94.py": "6bd9ccd72c79b1576325555713e1c1c96e32143160f5fb784658edd7640b147d",
+  "tests/unit/test_batch94_acceptance.py": "54d16b5f83f7503b7dcdd965d1d373e91a4da5171179a1e34862b40eb6013789",
+  "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+  "tests/unit/test_batch94_stage.py": "3e632fffe9417f5a4b8cacd9b58c8d7ee9c83fa89fbd8e7c8182a94f803823f6",
+  "scripts/reference_strategy_batch94.py": "8b11640ff3233cbce3ed721156040b232b5cf3d5d93e3a269827691882d64287",
+  "tests/unit/test_batch94_reference.py": "7cc786746a371e1c4283d9a41140939c25c6613b14ef7ee5a38d4f8bdd1b1012",
+  "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+  "tests/unit/test_batch94_reference_recovery.py": "192e5af61830395bdb8f993df6b86bf9f5381f9fcd50e5ab576f9d5db0e5565e",
+  "tests/unit/test_batch94_reference_transport.py": "8d3ef7af08a1e03a17f4f860786e051ecdac11cf059e53df670cd8d69a1b61be",
+  "scripts/diagnose_strategy_batch94.py": "49ea218923a8321f2696e9139e36ddc3fd23ef7dae3cb71752c69b74922192f2",
+  "tests/unit/test_batch94_callbacks.py": "2f0a1ae2309c7c553e9ca39fb0877e1a5c1be71bac82eb93b172110603ee40a0"
+ },
+ "review_depth": "deep",
+ "remaining_findings": [],
+ "source_full_lines_read": [
+  182,
+  189,
+  189
+ ],
+ "catalog_changed_sources": [
+  "2023年度精选策略/37.ETF动量轮动RSRS择时-魔改4-低通滤波.txt",
+  "2023年度精选策略/47.动量ETF轮动-RSRS择时-卡尔曼滤波.txt",
+  "2024年度精选策略2/18.动量ETF轮动-RSRS择时-卡尔曼滤波.txt"
+ ],
+ "sole_historical_prose_correction": "2024年度精选策略2/67.三因子策略年化21%简单多因子策略框架.txt",
+ "checks": {
+  "passed": 121,
+  "skipped": 0,
+  "files": {
+   "tests.unit.test_batch94_stage": 25,
+   "tests.unit.test_batch94_reference": 18,
+   "tests.unit.test_batch94_reference_recovery": 4,
+   "tests.unit.test_batch94_reference_transport": 1,
+   "tests.unit.test_batch94_callbacks": 38,
+   "tests.unit.test_batch94_acceptance": 35
+  }
+ },
+ "checks_commands": [
+  {
+   "command": [
+    "/home/zuozhe/envs/quant/.venv/bin/ruff",
+    "check",
+    "src",
+    "tests",
+    "src/observe/strategy_catalog.py",
+    "scripts/verify_strategy_batch94.py",
+    "tests/unit/test_batch94_acceptance.py",
+    "scripts/review_strategy_batch94.py",
+    "tests/unit/test_batch94_stage.py",
+    "scripts/reference_strategy_batch94.py",
+    "tests/unit/test_batch94_reference.py",
+    "scripts/recover_strategy_batch94_reference.py",
+    "tests/unit/test_batch94_reference_recovery.py",
+    "tests/unit/test_batch94_reference_transport.py",
+    "scripts/diagnose_strategy_batch94.py",
+    "tests/unit/test_batch94_callbacks.py",
+    "scripts/prepare_handoff.py",
+    "scripts/build_strategy_catalog.py",
+    "scripts/verify_financial_import.py"
+   ],
+   "returncode": 0,
+   "log": "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v5/checks/0.log",
+   "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  {
+   "command": [
+    "/home/zuozhe/envs/quant/.venv/bin/python",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_batch94_stage.py",
+    "tests/unit/test_batch94_reference.py",
+    "tests/unit/test_batch94_reference_recovery.py",
+    "tests/unit/test_batch94_reference_transport.py",
+    "tests/unit/test_batch94_callbacks.py",
+    "tests/unit/test_batch94_acceptance.py",
+    "--deselect",
+    "tests/unit/test_batch94_reference_recovery.py::test_socket_methods_blocked_before_transport"
+   ],
+   "returncode": 0,
+   "log": "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v5/checks/1.log",
+   "sha256": "8232f9c445b887adab846a957d9b6c576be2b66aead1d08db4f6e5d73736262b"
+  },
+  {
+   "command": [
+    "git",
+    "diff",
+    "--check"
+   ],
+   "returncode": 0,
+   "log": "data/staging/strategies-batch94/20261010-etf-filters-acceptance-v5/checks/2.log",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+ ],
+ "isolation": {
+  "status": "passed",
+  "command": [
+   "/home/zuozhe/envs/quant/.venv/bin/python",
+   "-B",
+   "-m",
+   "pytest",
+   "-q",
+   "-p",
+   "no:cacheprovider",
+   "tests/unit/test_batch94_stage.py",
+   "tests/unit/test_batch94_reference.py",
+   "tests/unit/test_batch94_reference_recovery.py",
+   "tests/unit/test_batch94_reference_transport.py",
+   "tests/unit/test_batch94_callbacks.py",
+   "tests/unit/test_batch94_acceptance.py",
+   "--deselect",
+   "tests/unit/test_batch94_reference_recovery.py::test_socket_methods_blocked_before_transport"
+  ],
+  "returncode": 0,
+  "coverage": {
+   "passed": 121,
+   "skipped": 0,
+   "files": {
+    "tests.unit.test_batch94_stage": 25,
+    "tests.unit.test_batch94_reference": 18,
+    "tests.unit.test_batch94_reference_recovery": 4,
+    "tests.unit.test_batch94_reference_transport": 1,
+    "tests.unit.test_batch94_callbacks": 38,
+    "tests.unit.test_batch94_acceptance": 35
+   }
+  },
+  "log_sha256": "c863f6a928337d432448670e2e5a9c587594b3675d6e848e2b255f0b6651b993",
+  "junit_sha256": "6fda8bd2200ff165897d504bdfd917dde0db6e3247861e2bbe185dee82f18b54",
+  "manifest_sha256": "4f58844b6b99db77064f2616e976344fee3063636c7a721bd3f5593572eff50d",
+  "implementation_sha256": {
+   "src/observe/strategy_catalog.py": "c82caf370aa5c223209b959850d93b4f6e4a2c5b03d3ed8ec09e7ad2aa80a904",
+   "scripts/verify_strategy_batch94.py": "6bd9ccd72c79b1576325555713e1c1c96e32143160f5fb784658edd7640b147d",
+   "tests/unit/test_batch94_acceptance.py": "54d16b5f83f7503b7dcdd965d1d373e91a4da5171179a1e34862b40eb6013789",
+   "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+   "tests/unit/test_batch94_stage.py": "3e632fffe9417f5a4b8cacd9b58c8d7ee9c83fa89fbd8e7c8182a94f803823f6",
+   "scripts/reference_strategy_batch94.py": "8b11640ff3233cbce3ed721156040b232b5cf3d5d93e3a269827691882d64287",
+   "tests/unit/test_batch94_reference.py": "7cc786746a371e1c4283d9a41140939c25c6613b14ef7ee5a38d4f8bdd1b1012",
+   "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+   "tests/unit/test_batch94_reference_recovery.py": "192e5af61830395bdb8f993df6b86bf9f5381f9fcd50e5ab576f9d5db0e5565e",
+   "tests/unit/test_batch94_reference_transport.py": "8d3ef7af08a1e03a17f4f860786e051ecdac11cf059e53df670cd8d69a1b61be",
+   "scripts/diagnose_strategy_batch94.py": "49ea218923a8321f2696e9139e36ddc3fd23ef7dae3cb71752c69b74922192f2",
+   "tests/unit/test_batch94_callbacks.py": "2f0a1ae2309c7c553e9ca39fb0877e1a5c1be71bac82eb93b172110603ee40a0"
+  }
+ },
+ "fresh_replay": {
+  "status": "match",
+  "differences": 0,
+  "RSRS_rows": 4662,
+  "FFT_rows": 10467,
+  "Kalman_windows": 11157,
+  "actual_RSRS_rows": 4662,
+  "callback_cases": 102,
+  "network_forbidden": true,
+  "not_a_trading_backtest": true,
+  "new_trading_backtests": 0,
+  "implementation_sha256": {
+   "src/observe/strategy_catalog.py": "c82caf370aa5c223209b959850d93b4f6e4a2c5b03d3ed8ec09e7ad2aa80a904",
+   "scripts/verify_strategy_batch94.py": "6bd9ccd72c79b1576325555713e1c1c96e32143160f5fb784658edd7640b147d",
+   "tests/unit/test_batch94_acceptance.py": "54d16b5f83f7503b7dcdd965d1d373e91a4da5171179a1e34862b40eb6013789",
+   "scripts/review_strategy_batch94.py": "935c1b44c7f87682f1d62fd1a81a251cf49f4ca194e37c4be342d4570d620126",
+   "tests/unit/test_batch94_stage.py": "3e632fffe9417f5a4b8cacd9b58c8d7ee9c83fa89fbd8e7c8182a94f803823f6",
+   "scripts/reference_strategy_batch94.py": "8b11640ff3233cbce3ed721156040b232b5cf3d5d93e3a269827691882d64287",
+   "tests/unit/test_batch94_reference.py": "7cc786746a371e1c4283d9a41140939c25c6613b14ef7ee5a38d4f8bdd1b1012",
+   "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+   "tests/unit/test_batch94_reference_recovery.py": "192e5af61830395bdb8f993df6b86bf9f5381f9fcd50e5ab576f9d5db0e5565e",
+   "tests/unit/test_batch94_reference_transport.py": "8d3ef7af08a1e03a17f4f860786e051ecdac11cf059e53df670cd8d69a1b61be",
+   "scripts/diagnose_strategy_batch94.py": "49ea218923a8321f2696e9139e36ddc3fd23ef7dae3cb71752c69b74922192f2",
+   "tests/unit/test_batch94_callbacks.py": "2f0a1ae2309c7c553e9ca39fb0877e1a5c1be71bac82eb93b172110603ee40a0"
+  },
+  "file_sha256": {
+   "rsrs-reference.parquet": "fa301217a8f5bb09a4b327ac6b26d8c276af298e7d33b02801a3cb7d777caa96",
+   "fft-native-reference.parquet": "48688fe51984869889aa661e73fe6cea0d9ce07a2925f600377a0ae56bbb9cde",
+   "kalman-native-reference.parquet": "76c07c2ee1b377f5c5fda895201e516aeffd00e6c1314be14ffe3e9ed5d9f004",
+   "literal-rsrs-capture.parquet": "866050a57108eba545ae7e0d5b2201b86b4a9551aa483019b8b538ad6c0a8352",
+   "callbacks.json": "fad816b0dad84b88fd92b9acb97927a71d7b9c08c14a4288d4853df1d592990a"
+  }
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5780,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26"
+ },
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "new_trading_backtests": 0,
+ "manually_reviewed": 273,
+ "remaining_unreviewed": 422,
+ "locally_backtested_and_reproduced_sources": 12,
+ "local_strategy_parent_runs": 75,
+ "strict_financial_usable_rows": 0,
+ "original_strategy_complete": false,
+ "library_goal_complete": false,
+ "Git_publication": "pending_user_commit_and_push",
+ "next_plan": "docs/tasks/2026-10-10-第九十五批ETF魔改3与v2-执行计划.md",
+ "baseline_metadata_only_verification": {
+  "files_copied": 1189,
+  "checked": 846,
+  "export_id": "6cace267f52a97c35ab2a4ec",
+  "payload_copied": false,
+  "isolated_src_import_verified": true,
+  "status": "ok"
+ }
+}

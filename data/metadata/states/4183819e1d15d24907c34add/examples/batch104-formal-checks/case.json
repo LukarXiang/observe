@@ -1,0 +1,61 @@
+{
+  "case": {
+    "actual_imports": {
+      "observe.strategy_catalog": "/mnt/d/projects/observe/data/staging/strategies-batch104/20261011-formal-validation/isolated/src/observe/strategy_catalog.py",
+      "scripts.accept_strategy_batch104": "/mnt/d/projects/observe/data/staging/strategies-batch104/20261011-formal-validation/isolated/scripts/accept_strategy_batch104.py",
+      "scripts.recover_strategy_batch104_stage_receipt": "/mnt/d/projects/observe/data/staging/strategies-batch104/20261011-formal-validation/isolated/scripts/recover_strategy_batch104_stage_receipt.py",
+      "scripts.reference_strategy_batch104": "/mnt/d/projects/observe/data/staging/strategies-batch104/20261011-formal-validation/isolated/scripts/reference_strategy_batch104.py",
+      "scripts.research_strategy_batch104": "/mnt/d/projects/observe/data/staging/strategies-batch104/20261011-formal-validation/isolated/scripts/research_strategy_batch104.py"
+    },
+    "copied_files": 185,
+    "copy_manifest_sha256": "5a27a382d9f6fb88721d4dbbb4f13f989fa48e2237c8d9d2ed94e06fd477fc2f",
+    "evidence_sha256": {
+      "data/staging/strategies-batch104/20261011-formal-validation/copy-manifest.json": "5a27a382d9f6fb88721d4dbbb4f13f989fa48e2237c8d9d2ed94e06fd477fc2f",
+      "data/staging/strategies-batch104/20261011-formal-validation/isolated-command.json": "b8024bb79bd1d6f019c6e5246ef0e45c6d14351ccdf425ef741f7a46c1a0de70",
+      "data/staging/strategies-batch104/20261011-formal-validation/isolated-imports.json": "dbb3dbbd84eebfab86c82d92d7e71b589f2f58f4f188533d406db17e965437dd",
+      "data/staging/strategies-batch104/20261011-formal-validation/isolated-saved-readback.json": "e421bfae5087a75c903b957bddfb49596cde47d49e01fc1c1993ad9db3008181",
+      "data/staging/strategies-batch104/20261011-formal-validation/isolated-tests.xml": "c2253bcbfb715c8e60d5261b21be9047fb7d241460cdb9f9beb147b7f8c63733",
+      "data/staging/strategies-batch104/20261011-formal-validation/isolated.log": "0e26e3f7241e487513cb0f83fab1bbdc5ba2628cfdf41162680debd97ffbbb96",
+      "data/staging/strategies-batch104/20261011-formal-validation/local-command.json": "2f832469d0f50b82c01e1d9ba392c7f8c86dd8542ac650245a05ade21cea6525",
+      "data/staging/strategies-batch104/20261011-formal-validation/local-imports.json": "e885a792e47f8bc86bce9b60114459ba0c9e2f1f3b3f8b39f37bdc0e559d2c51",
+      "data/staging/strategies-batch104/20261011-formal-validation/local-tests.xml": "b8347952861842de2ff23cc34c0592e5063d9b1bc9cd2d7f088616630bdb63c8",
+      "data/staging/strategies-batch104/20261011-formal-validation/local.log": "f49cb34d178f0d9793edaa2e0960b44fe18d4064893abc0707dadba953728175",
+      "data/staging/strategies-batch104/20261011-formal-validation/saved-readback.json": "e421bfae5087a75c903b957bddfb49596cde47d49e01fc1c1993ad9db3008181",
+      "docs/handoff/batch104-y2024b-080-formal-source-review.yaml": "127f039975d46bb0c6319c4fb6954619d8f4a6aafc13fefced6a6ee5411c3a2b",
+      "docs/handoff/batch104-y2025-078-formal-source-review.yaml": "945fd0015553c04b71cdfdd3ec5890b63fdd9d8500461c71713b29696c211b0c",
+      "scripts/verify_strategy_batch104_formal.py": "fbd52262d9994acb38194726ac92023b69e16f90503a9c739598cfe796567044",
+      "tests/unit/test_batch104_acceptance.py": "ad2c5104150cc9be4c035f89c15bfccb51f7163f3fab6d3c66cebc275e47486b",
+      "tests/unit/test_batch104_receipt_recovery.py": "63bea7232abd883eae4b370a736440c596e923f56785ac5e13bc9b7694ae7ef2",
+      "tests/unit/test_batch104_reference.py": "af195779f2a026668ffa4b40717d4423b7c99b51ad3fd121ef00ab23217e0baa",
+      "tests/unit/test_batch104_research.py": "311cc503bf9ec205ea17cd672deb7cf779ae88179ea1a2d81e66a6cdfaf6d179"
+    },
+    "formal_source_research_acceptance": false,
+    "formal_trading_acceptance": false,
+    "new_trading_backtests": 0,
+    "saved_readback": {
+      "all_condition_disagreements_preserved": 0,
+      "condition_disagreements_preserved": 35,
+      "mean_max_abs_errors": {
+        "close": 9.094947017729282e-13,
+        "volume": 0.0
+      },
+      "new_trading_backtests": 0,
+      "relative_disagreements": 0,
+      "relative_windows": 93132,
+      "short31_windows": 46481
+    },
+    "status": "ok_formal_ready",
+    "tests": {
+      "isolated": 39,
+      "local": 39
+    }
+  },
+  "case_id": "batch104-formal-checks",
+  "nature": "source_research_control_or_initial_read_not_trading",
+  "purpose": "第104批正式294/12/87及新目录读回恢复；第105批仅初读；经济批准不扩大",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch104/20261011-formal-validation/checked.json",
+    "sha256": "3b4d4e93994987415b2840450952214fea8b200b8b361942f6879241fb1c0e75"
+  }
+}

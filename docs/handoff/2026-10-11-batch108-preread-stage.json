@@ -1,0 +1,201 @@
+{
+ "status": "ok_preread_stage_not_formal",
+ "progress": {
+  "checkpoint": "20261011-081112-2e6e",
+  "note": "Batch108 two stock candidates fully preread232/340 lines;current snapshot lacks index_constituents;formal300/trading12/parents87 unchanged;107 catalog/metadata239 regression passed",
+  "catalog_id": "0dd173dfd03cb7c148a3",
+  "catalog_sha256": "698b1817c5bf48582694c900ff43677fbec87ef911797c3b2189c066a484dfa6",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 300,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-081112-2e6e"
+ },
+ "sources": [
+  {
+   "path": "2021年度精选策略/5.价值低波（下）--十年十倍（2020拜年）.txt",
+   "source_sha256": "5248f808910f85ec48e629a27aca27c760b186c6c4d05a5e81cd922d9ad73bb2",
+   "copied_sha256": "5248f808910f85ec48e629a27aca27c760b186c6c4d05a5e81cd922d9ad73bb2",
+   "complete_lines_read": 232,
+   "encoding": "utf-8-sig",
+   "definitions": [
+    {
+     "name": "initialize",
+     "line": 27,
+     "end_line": 42
+    },
+    {
+     "name": "set_params",
+     "line": 44,
+     "end_line": 52
+    },
+    {
+     "name": "set_variables",
+     "line": 72,
+     "end_line": 73
+    },
+    {
+     "name": "set_backtest",
+     "line": 75,
+     "end_line": 87
+    },
+    {
+     "name": "before_market_open",
+     "line": 94,
+     "end_line": 101
+    },
+    {
+     "name": "high_value",
+     "line": 104,
+     "end_line": 120
+    },
+    {
+     "name": "volatility_weight",
+     "line": 123,
+     "end_line": 131
+    },
+    {
+     "name": "risk_controller",
+     "line": 134,
+     "end_line": 153
+    },
+    {
+     "name": "set_slip_fee",
+     "line": 165,
+     "end_line": 191
+    },
+    {
+     "name": "market_open",
+     "line": 199,
+     "end_line": 217
+    },
+    {
+     "name": "after_market_close",
+     "line": 224,
+     "end_line": 232
+    }
+   ],
+   "formal_source_acceptance": false
+  },
+  {
+   "path": "2023年度精选策略/97.韶华研究之六，简单不一样的发现趋势，3年6倍.txt",
+   "source_sha256": "93fbbdf2a15cfadb7cd622a781b4b031192a5556bd25e1793bdb62ca1f6a6de4",
+   "copied_sha256": "93fbbdf2a15cfadb7cd622a781b4b031192a5556bd25e1793bdb62ca1f6a6de4",
+   "complete_lines_read": 340,
+   "encoding": "utf-8-sig",
+   "definitions": [
+    {
+     "name": "after_code_changed",
+     "line": 15,
+     "end_line": 37
+    },
+    {
+     "name": "set_params",
+     "line": 46,
+     "end_line": 63
+    },
+    {
+     "name": "set_variables",
+     "line": 66,
+     "end_line": 72
+    },
+    {
+     "name": "set_backtest",
+     "line": 75,
+     "end_line": 84
+    },
+    {
+     "name": "before_market_open_timely",
+     "line": 87,
+     "end_line": 145
+    },
+    {
+     "name": "before_market_open_daily",
+     "line": 148,
+     "end_line": 150
+    },
+    {
+     "name": "market_open_daily",
+     "line": 154,
+     "end_line": 187
+    },
+    {
+     "name": "market_open_timely",
+     "line": 190,
+     "end_line": 220
+    },
+    {
+     "name": "market_close_daily",
+     "line": 223,
+     "end_line": 224
+    },
+    {
+     "name": "after_market_close",
+     "line": 227,
+     "end_line": 228
+    },
+    {
+     "name": "continuous_yangs_filter",
+     "line": 235,
+     "end_line": 262
+    },
+    {
+     "name": "second_filter",
+     "line": 268,
+     "end_line": 293
+    },
+    {
+     "name": "lost_control",
+     "line": 296,
+     "end_line": 334
+    }
+   ],
+   "formal_source_acceptance": false
+  }
+ ],
+ "active_tables": [
+  "adj_coverage",
+  "adj_factors",
+  "bars_1d",
+  "bars_5m",
+  "calendar",
+  "company_controls_annual",
+  "corp_actions",
+  "financial_annual",
+  "financial_availability",
+  "financial_fields",
+  "financial_quarterly",
+  "index_1d",
+  "instruments",
+  "minute_universe",
+  "valuation_coverage",
+  "valuations_1d"
+ ],
+ "index_constituents_in_active_snapshot": false,
+ "findings": [
+  "2021/5 actually trades treasury index000012;PE/PB impliedROE,241 closes inverse std,61-line CSI300 regime and0.9-peak half exposure;carrier and index pool unresolved",
+  "2023/97 only after_code_changed setup;monthly complete-bar3 strictly close>1.05open,positive PE ascending top5;daily last-close/last10-high<0.8 stop,no replenishment;same09:30 monthly/daily ordering unresolved",
+  "Free-function and valuation-only AST scans do not resolve external imports,classes,monthly protocol,trade callbacks or historical names",
+  "Current snapshot lacks active index_constituents;inspect original handoff manifests and frozen member SHA before any restore or new acquisition;do not silently use newest index membership"
+ ],
+ "next_action": "Inspect originals and full pool/history/fees/identity dependencies;prefer executable stock source only after the historical membership and monthly-bar protocol are verified",
+ "formal_source_research_acceptance": false,
+ "formal_trading_acceptance": false,
+ "new_trading_backtests": 0,
+ "library_goal_complete": false,
+ "evidence_sha256": {
+  "data/staging/strategies-batch108/20261011-value-lowvol-trend-preread-v1/checked.json": "5a090303f7fe0a15cf86c7737733324c7a240cdd594ac51331d6041cebebaffc",
+  "data/staging/strategies-batch107/20261011-catalog-metadata-regression-v1/tests.json": "1d8ffcdf43bc824481c7c6f8cc8dcc10f98a0c9f488c8479db0e603122b6f90f"
+ }
+}

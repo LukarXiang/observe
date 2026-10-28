@@ -1,0 +1,928 @@
+{
+  "benchmark": [
+    {
+      "index": {
+        "anchor_date": "2021-02-01",
+        "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+        "description": "沪深 300 价格指数，不含分红",
+        "index": "000300.SH",
+        "missing_levels": 0
+      },
+      "metrics": {
+        "active_annualization_basis": "matched_daily_returns_compounded",
+        "active_return_mean": 0.0004275883945450768,
+        "annual_return_diff": 0.10852306199648964,
+        "available": true,
+        "benchmark_common_days": 1371,
+        "benchmark_missing_days": 0,
+        "common_benchmark_annual_return": -0.038188472206617696,
+        "common_end": "2026-09-29",
+        "common_start": "2021-02-02",
+        "common_strategy_annual_return": 0.07033458978987195,
+        "information_ratio": 0.7592981506432473,
+        "missing_dates": [],
+        "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+      },
+      "scenario": "base"
+    },
+    {
+      "index": {
+        "anchor_date": "2021-02-01",
+        "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+        "description": "沪深 300 价格指数，不含分红",
+        "index": "000300.SH",
+        "missing_levels": 0
+      },
+      "metrics": {
+        "active_annualization_basis": "matched_daily_returns_compounded",
+        "active_return_mean": 0.0004065319198096805,
+        "annual_return_diff": 0.10312678568400702,
+        "available": true,
+        "benchmark_common_days": 1371,
+        "benchmark_missing_days": 0,
+        "common_benchmark_annual_return": -0.038188472206617696,
+        "common_end": "2026-09-29",
+        "common_start": "2021-02-02",
+        "common_strategy_annual_return": 0.06493831347738932,
+        "information_ratio": 0.7215495826623314,
+        "missing_dates": [],
+        "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+      },
+      "scenario": "fees_x2"
+    },
+    {
+      "index": {
+        "anchor_date": "2021-02-01",
+        "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+        "description": "沪深 300 价格指数，不含分红",
+        "index": "000300.SH",
+        "missing_levels": 0
+      },
+      "metrics": {
+        "active_annualization_basis": "matched_daily_returns_compounded",
+        "active_return_mean": 0.00041639591499583893,
+        "annual_return_diff": 0.10564085744970941,
+        "available": true,
+        "benchmark_common_days": 1371,
+        "benchmark_missing_days": 0,
+        "common_benchmark_annual_return": -0.038188472206617696,
+        "common_end": "2026-09-29",
+        "common_start": "2021-02-02",
+        "common_strategy_annual_return": 0.06745238524309172,
+        "information_ratio": 0.7394591749331922,
+        "missing_dates": [],
+        "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+      },
+      "scenario": "slippage_x2"
+    }
+  ],
+  "comparison": {
+    "cache": "bypassed",
+    "code_drift": {},
+    "differences": [],
+    "implementation_drift": false,
+    "result": "match",
+    "tables": {
+      "base": {
+        "cash_events": {
+          "differences": 0,
+          "rows_actual": 12009,
+          "rows_expected": 12009
+        },
+        "equity": {
+          "differences": 0,
+          "rows_actual": 1371,
+          "rows_expected": 1371
+        },
+        "fills": {
+          "differences": 0,
+          "rows_actual": 5720,
+          "rows_expected": 5720
+        },
+        "limitations": {
+          "differences": 0,
+          "rows_actual": 1,
+          "rows_expected": 1
+        },
+        "metrics": {
+          "differences": 0
+        },
+        "orders": {
+          "differences": 0,
+          "rows_actual": 5770,
+          "rows_expected": 5770
+        },
+        "positions_daily": {
+          "differences": 0,
+          "rows_actual": 323655,
+          "rows_expected": 323655
+        },
+        "receivables": {
+          "differences": 0,
+          "rows_actual": 0,
+          "rows_expected": 0
+        },
+        "scores": {
+          "differences": 0,
+          "rows_actual": 4132777,
+          "rows_expected": 4132777
+        },
+        "trading": {
+          "differences": 0
+        }
+      },
+      "benchmark_eval": {
+        "benchmark_eval": {
+          "differences": 0,
+          "rows_actual": 3,
+          "rows_expected": 3
+        }
+      },
+      "factors": {
+        "columns": {},
+        "differences": 0,
+        "only_in_actual": 0,
+        "only_in_expected": 0,
+        "rows_actual": 4132777,
+        "rows_expected": 4132777
+      },
+      "fees_x2": {
+        "cash_events": {
+          "differences": 0,
+          "rows_actual": 11961,
+          "rows_expected": 11961
+        },
+        "equity": {
+          "differences": 0,
+          "rows_actual": 1371,
+          "rows_expected": 1371
+        },
+        "fills": {
+          "differences": 0,
+          "rows_actual": 5696,
+          "rows_expected": 5696
+        },
+        "limitations": {
+          "differences": 0,
+          "rows_actual": 1,
+          "rows_expected": 1
+        },
+        "metrics": {
+          "differences": 0
+        },
+        "orders": {
+          "differences": 0,
+          "rows_actual": 5748,
+          "rows_expected": 5748
+        },
+        "positions_daily": {
+          "differences": 0,
+          "rows_actual": 323576,
+          "rows_expected": 323576
+        },
+        "receivables": {
+          "differences": 0,
+          "rows_actual": 0,
+          "rows_expected": 0
+        },
+        "scores": {
+          "differences": 0,
+          "rows_actual": 4132777,
+          "rows_expected": 4132777
+        },
+        "trading": {
+          "differences": 0
+        }
+      },
+      "report": {
+        "report": {
+          "differences": 0
+        }
+      },
+      "scores": {
+        "columns": {},
+        "differences": 0,
+        "only_in_actual": 0,
+        "only_in_expected": 0,
+        "rows_actual": 4132777,
+        "rows_expected": 4132777
+      },
+      "slippage_x2": {
+        "cash_events": {
+          "differences": 0,
+          "rows_actual": 12017,
+          "rows_expected": 12017
+        },
+        "equity": {
+          "differences": 0,
+          "rows_actual": 1371,
+          "rows_expected": 1371
+        },
+        "fills": {
+          "differences": 0,
+          "rows_actual": 5724,
+          "rows_expected": 5724
+        },
+        "limitations": {
+          "differences": 0,
+          "rows_actual": 1,
+          "rows_expected": 1
+        },
+        "metrics": {
+          "differences": 0
+        },
+        "orders": {
+          "differences": 0,
+          "rows_actual": 5779,
+          "rows_expected": 5779
+        },
+        "positions_daily": {
+          "differences": 0,
+          "rows_actual": 323556,
+          "rows_expected": 323556
+        },
+        "receivables": {
+          "differences": 0,
+          "rows_actual": 0,
+          "rows_expected": 0
+        },
+        "scores": {
+          "differences": 0,
+          "rows_actual": 4132777,
+          "rows_expected": 4132777
+        },
+        "trading": {
+          "differences": 0
+        }
+      },
+      "targets": {
+        "columns": {},
+        "differences": 0,
+        "only_in_actual": 0,
+        "only_in_expected": 0,
+        "rows_actual": 329160,
+        "rows_expected": 329160
+      },
+      "universe": {
+        "columns": {},
+        "differences": 0,
+        "only_in_actual": 0,
+        "only_in_expected": 0,
+        "rows_actual": 6761195,
+        "rows_expected": 6761195
+      }
+    }
+  },
+  "configuration": {
+    "benchmark": "000300.SH",
+    "cache": false,
+    "cost_scenarios": [
+      "base",
+      "fees_x2",
+      "slippage_x2"
+    ],
+    "end": "2026-09-29",
+    "execution": {
+      "fee_multiplier": 1.0,
+      "liquidity_override": null,
+      "liquidity_window": 20,
+      "slippage": 0.001
+    },
+    "implementation": "ep_component_v1",
+    "index_universe": null,
+    "initial_cash": 1000000.0,
+    "instrument": "000333.SZ",
+    "name": "EP 倒数组件与主板近似变体（固定参数工程验证）",
+    "parameters": {
+      "buy_multiplier": 1.01,
+      "long": 20,
+      "positive_only": true,
+      "short": 10,
+      "top_fraction": 0.1
+    },
+    "portfolio": {
+      "buffer": 0,
+      "construction": "target_weights",
+      "max_sell": null,
+      "max_weight": 1.0,
+      "n": 1,
+      "open_cash_policy": "sell_then_buy",
+      "participation": 0.05,
+      "rebalance_every": 1,
+      "rebalance_frequency": "monthly",
+      "rebalance_session": 1,
+      "refill_between_rebalance": false
+    },
+    "rules": "configs/rule_profiles/main_board.yaml",
+    "snapshot": "20261005-152153-eb05",
+    "source_path": "repo/量化策略源代码/2022年度精选策略/74.基本面单因子测试——以BP因子为例.txt",
+    "start": "2021-02-02",
+    "universe": {
+      "boards": [
+        "main"
+      ],
+      "exclude_st": true,
+      "liquidity_window": 1,
+      "max_suspended": 0,
+      "min_avg_amount": 0.0,
+      "min_listed_sessions": 1,
+      "suspend_window": 21
+    }
+  },
+  "configuration_available": true,
+  "coverage": {
+    "detail_policy": "daily coverage remains in source report payload; these are boundary examples",
+    "first": {
+      "candidates": 2812,
+      "cash_weight": 1.0,
+      "date": "2021-02-02",
+      "finite_factors": 2812,
+      "positive_factors": 2370,
+      "selected": 0
+    },
+    "last": {
+      "candidates": 3034,
+      "cash_weight": 0.0,
+      "date": "2026-09-29",
+      "finite_factors": 3034,
+      "positive_factors": 2262,
+      "selected": 226
+    },
+    "rows": 1371
+  },
+  "decision_time": "收盘数据确认可用后",
+  "evidence_status": "archived_unreviewed",
+  "execution_status": "success_limited",
+  "execution_time": "下一交易日开盘",
+  "implementation": "ep_component_v1",
+  "kind": "strategy",
+  "limitations": [
+    {
+      "detail": "BP/EP 组件及主板近似变体",
+      "differences": [
+        "只复现倒数因子组件，单独登记主板股票池变体",
+        "固定前10%正估值股票，保留负值因子但不纳入此探索组合",
+        "收盘决策后次日开盘执行；月末收盘下单以在下月首交易日执行",
+        "使用现有原始价账本、分日期费率与成交限制"
+      ],
+      "fidelity": "数据或执行受限的近似复现",
+      "gaps": [
+        "缺中证800历史成分",
+        "平台估值口径未证明与 BaoStock PE_TTM/PB_MRQ 一致",
+        "平台排序/分位边界和历史成本未等价移植"
+      ],
+      "kind": "strategy_port"
+    },
+    {
+      "detail": "固定参数工程验证；此区间已查看，不作为独立最终留出，不据此判断策略有效",
+      "kind": "evaluation_scope"
+    },
+    {
+      "audit": {
+        "audit_id": "20261005-152142-c9c9",
+        "audited_at": "2026-10-05T15:21:42.462691",
+        "batch_id": "20261005-152040-e16e",
+        "input_range": {
+          "days": 1392,
+          "end": "2026-09-29",
+          "rows": 6848484,
+          "start": "2021-01-04"
+        },
+        "scope": "snapshot",
+        "source": "audit 20261005-152142-c9c9",
+        "status": "problem"
+      },
+      "detail": "快照批次审计状态为 problem（范围 snapshot），不是全快照审计通过",
+      "kind": "data_audit"
+    },
+    {
+      "audit": {
+        "audit_id": "20261005-152142-c9c9",
+        "audited_at": "2026-10-05T15:21:42.462691",
+        "batch_id": "20261005-152040-e16e",
+        "input_range": {
+          "days": 1392,
+          "end": "2026-09-29",
+          "rows": 6848484,
+          "start": "2021-01-04"
+        },
+        "scope": "snapshot",
+        "source": "audit 20261005-152142-c9c9",
+        "status": "problem"
+      },
+      "detail": "快照批次审计状态为 problem（范围 snapshot），不是全快照审计通过",
+      "kind": "data_audit"
+    },
+    {
+      "audit": {
+        "audit_id": "20261005-152142-c9c9",
+        "audited_at": "2026-10-05T15:21:42.462691",
+        "batch_id": "20261005-152040-e16e",
+        "input_range": {
+          "days": 1392,
+          "end": "2026-09-29",
+          "rows": 6848484,
+          "start": "2021-01-04"
+        },
+        "scope": "snapshot",
+        "source": "audit 20261005-152142-c9c9",
+        "status": "problem"
+      },
+      "detail": "快照批次审计状态为 problem（范围 snapshot），不是全快照审计通过",
+      "kind": "data_audit"
+    }
+  ],
+  "metrics": null,
+  "original_strategy_complete": false,
+  "parameters": {
+    "buy_multiplier": 1.01,
+    "long": 20,
+    "positive_only": true,
+    "short": 10,
+    "top_fraction": 0.1
+  },
+  "payload_verification": "not_reaudited",
+  "period": {
+    "end": "2026-09-29",
+    "start": "2021-02-02"
+  },
+  "portfolio": {
+    "buffer": 0,
+    "construction": "target_weights",
+    "max_sell": null,
+    "max_weight": 1.0,
+    "n": 1,
+    "open_cash_policy": "sell_then_buy",
+    "participation": 0.05,
+    "rebalance_every": 1,
+    "rebalance_frequency": "monthly",
+    "rebalance_session": 1,
+    "refill_between_rebalance": false
+  },
+  "recorded_environment": {
+    "git_commit": "bf840a8c5d82144e73f5cad4334911dd636ab7c5",
+    "git_dirty": true,
+    "lock_sha256": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382",
+    "packages": {
+      "lightgbm": "4.7.0",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1"
+    },
+    "python": "3.12.12"
+  },
+  "references": [
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261005-180828-e631d4-strategy-762a/config.json",
+      "sha256": "ddf831ed4cb953e0de0f234482d21a21aea975ec4940e1d547d02cd24a3a952a"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261005-180828-e631d4-strategy-762a/status.json",
+      "sha256": "4d9dda9f1380e07a7d338c40514062e6a03285d5a3ef1ebb607f5d0e6b1b9d75"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261005-180828-e631d4-strategy-762a/report.json",
+      "sha256": "ff06ddd97aab36cc4ddf06f546c1d2d295e5199809c4f1955f0abe73e0efc0c3"
+    },
+    {
+      "availability": "payload_reference",
+      "path": "data/runs/20261005-180828-e631d4-strategy-762a/comparison.json",
+      "sha256": "9f2f5871bbf49885772cee171ff64711310efd6df14aa5b2305bde795e785bc3"
+    }
+  ],
+  "reproduce_of": "/mnt/d/projects/observe/data/runs/20261005-175633-e631d4-strategy-d3be",
+  "reproduction": {
+    "differences": 0,
+    "of": "/mnt/d/projects/observe/data/runs/20261005-175633-e631d4-strategy-d3be",
+    "result": "match"
+  },
+  "result_scope": "configured_run",
+  "results": [
+    {
+      "blocked": null,
+      "metrics": {
+        "annual_return": 0.07033458978987173,
+        "annual_vol": 0.15655073497376293,
+        "drawdown_peak": 795,
+        "drawdown_trough": 878,
+        "max_drawdown": -0.1665344643064981,
+        "sharpe": 0.5128063783423952,
+        "total_return": 0.46972760000000013
+      },
+      "scenario": "base",
+      "status": "success_limited",
+      "trading": {
+        "cash_share_mean": 0.08427456437070627,
+        "fee_ratio_to_initial": 0.03447485,
+        "fees": {
+          "commission": 28600.0,
+          "fee": 34474.85,
+          "stamp_tax": 5661.36,
+          "transfer_fee": 213.49
+        },
+        "fill_rate": 0.9913344887348353,
+        "filled_orders": 5720,
+        "max_single_weight_mean": 0.00585103815632609,
+        "orders": 5770,
+        "partial_fills": 0,
+        "reject_reasons": {
+          "cash": 20,
+          "limit_down": 5,
+          "limit_up": 11,
+          "no_liquidity_reference": 4,
+          "slippage_outside_limit": 2,
+          "suspended": 8
+        },
+        "stale_price_days": 185,
+        "top5_weight_mean": 0.025866508724925883,
+        "turnover_half_daily_mean": 0.005425739087713938,
+        "turnover_two_sided_daily_mean": 0.010851478175427877
+      },
+      "yearly": [
+        {
+          "metrics": {
+            "annual_return": 0.07423969874807712,
+            "annual_vol": 0.12924254753607423,
+            "drawdown_peak": 150,
+            "drawdown_trough": 182,
+            "max_drawdown": -0.1438571547259404,
+            "sharpe": 0.6186201785685094,
+            "total_return": 0.0679006499999999
+          },
+          "sessions": 222,
+          "year": 2021
+        },
+        {
+          "metrics": {
+            "annual_return": -0.03138129937461864,
+            "annual_vol": 0.19791254216280818,
+            "drawdown_peak": 60,
+            "drawdown_trough": 198,
+            "max_drawdown": -0.1625618457518735,
+            "sharpe": -0.06175404521648512,
+            "total_return": -0.03138129937461864
+          },
+          "sessions": 242,
+          "year": 2022
+        },
+        {
+          "metrics": {
+            "annual_return": 0.034385879797160124,
+            "annual_vol": 0.10497716430488271,
+            "drawdown_peak": 139,
+            "drawdown_trough": 193,
+            "max_drawdown": -0.09352620977465054,
+            "sharpe": 0.37428310503911494,
+            "total_return": 0.034385879797160124
+          },
+          "sessions": 242,
+          "year": 2023
+        },
+        {
+          "metrics": {
+            "annual_return": 0.18997081097378787,
+            "annual_vol": 0.20659102198416512,
+            "drawdown_peak": 89,
+            "drawdown_trough": 172,
+            "max_drawdown": -0.1665344643064981,
+            "sharpe": 0.9449520362102929,
+            "total_return": 0.18997081097378787
+          },
+          "sessions": 242,
+          "year": 2024
+        },
+        {
+          "metrics": {
+            "annual_return": 0.1436760345574526,
+            "annual_vol": 0.12368421053969567,
+            "drawdown_peak": 53,
+            "drawdown_trough": 61,
+            "max_drawdown": -0.08568850403649253,
+            "sharpe": 1.1485241398469737,
+            "total_return": 0.14431065618106342
+          },
+          "sessions": 243,
+          "year": 2025
+        },
+        {
+          "metrics": {
+            "annual_return": 0.011802779733058877,
+            "annual_vol": 0.1451498192937876,
+            "drawdown_peak": 43,
+            "drawdown_trough": 116,
+            "max_drawdown": -0.1270383262104149,
+            "sharpe": 0.15317342505282389,
+            "total_return": 0.008765719148219109
+          },
+          "sessions": 180,
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "blocked": null,
+      "metrics": {
+        "annual_return": 0.0649383134773891,
+        "annual_vol": 0.1562877583632661,
+        "drawdown_peak": 795,
+        "drawdown_trough": 878,
+        "max_drawdown": -0.16773313777186705,
+        "sharpe": 0.48106485965468276,
+        "total_return": 0.4282391200000002
+      },
+      "scenario": "fees_x2",
+      "status": "success_limited",
+      "trading": {
+        "cash_share_mean": 0.08478668994866337,
+        "fee_ratio_to_initial": 0.06855657000000001,
+        "fees": {
+          "commission": 56960.0,
+          "fee": 68556.57,
+          "stamp_tax": 11174.92,
+          "transfer_fee": 421.65
+        },
+        "fill_rate": 0.9909533750869868,
+        "filled_orders": 5696,
+        "max_single_weight_mean": 0.005808489740549049,
+        "orders": 5748,
+        "partial_fills": 0,
+        "reject_reasons": {
+          "cash": 23,
+          "limit_down": 5,
+          "limit_up": 11,
+          "no_liquidity_reference": 4,
+          "slippage_outside_limit": 2,
+          "suspended": 7
+        },
+        "stale_price_days": 185,
+        "top5_weight_mean": 0.02581989395035014,
+        "turnover_half_daily_mean": 0.005422384903130619,
+        "turnover_two_sided_daily_mean": 0.010844769806261237
+      },
+      "yearly": [
+        {
+          "metrics": {
+            "annual_return": 0.06691064669459279,
+            "annual_vol": 0.12905951139890942,
+            "drawdown_peak": 150,
+            "drawdown_trough": 182,
+            "max_drawdown": -0.1450803810636635,
+            "sharpe": 0.5662569200457964,
+            "total_return": 0.06121509000000014
+          },
+          "sessions": 222,
+          "year": 2021
+        },
+        {
+          "metrics": {
+            "annual_return": -0.03692248665631026,
+            "annual_vol": 0.19813677161345059,
+            "drawdown_peak": 60,
+            "drawdown_trough": 198,
+            "max_drawdown": -0.1648874973518144,
+            "sharpe": -0.09040376102389037,
+            "total_return": -0.03692248665631026
+          },
+          "sessions": 242,
+          "year": 2022
+        },
+        {
+          "metrics": {
+            "annual_return": 0.030459161866680073,
+            "annual_vol": 0.10488544305709044,
+            "drawdown_peak": 139,
+            "drawdown_trough": 193,
+            "max_drawdown": -0.09443960954940589,
+            "sharpe": 0.33825257174943907,
+            "total_return": 0.030459161866680073
+          },
+          "sessions": 242,
+          "year": 2023
+        },
+        {
+          "metrics": {
+            "annual_return": 0.18070207085963497,
+            "annual_vol": 0.20613084006155585,
+            "drawdown_peak": 89,
+            "drawdown_trough": 172,
+            "max_drawdown": -0.16773313777186705,
+            "sharpe": 0.9086716769269138,
+            "total_return": 0.18070207085963497
+          },
+          "sessions": 242,
+          "year": 2024
+        },
+        {
+          "metrics": {
+            "annual_return": 0.13979356024627165,
+            "annual_vol": 0.12315605079063245,
+            "drawdown_peak": 53,
+            "drawdown_trough": 61,
+            "max_drawdown": -0.08563080544833579,
+            "sharpe": 1.1252808994099908,
+            "total_return": 0.14041000270444526
+          },
+          "sessions": 243,
+          "year": 2025
+        },
+        {
+          "metrics": {
+            "annual_return": 0.00965578913325249,
+            "annual_vol": 0.14435795185832,
+            "drawdown_peak": 43,
+            "drawdown_trough": 116,
+            "max_drawdown": -0.12605140117237668,
+            "sharpe": 0.13851231565634695,
+            "total_return": 0.00717314424439941
+          },
+          "sessions": 180,
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "blocked": null,
+      "metrics": {
+        "annual_return": 0.06745238524309216,
+        "annual_vol": 0.15646911484850343,
+        "drawdown_peak": 795,
+        "drawdown_trough": 878,
+        "max_drawdown": -0.16729810366890152,
+        "sharpe": 0.4957632402594363,
+        "total_return": 0.4474465000000001
+      },
+      "scenario": "slippage_x2",
+      "status": "success_limited",
+      "trading": {
+        "cash_share_mean": 0.08403269453709529,
+        "fee_ratio_to_initial": 0.034448120000000006,
+        "fees": {
+          "commission": 28620.0,
+          "fee": 34448.12,
+          "stamp_tax": 5616.28,
+          "transfer_fee": 211.84
+        },
+        "fill_rate": 0.9904827824883198,
+        "filled_orders": 5724,
+        "max_single_weight_mean": 0.005887373713855535,
+        "orders": 5779,
+        "partial_fills": 0,
+        "reject_reasons": {
+          "cash": 22,
+          "limit_down": 5,
+          "limit_up": 13,
+          "no_liquidity_reference": 4,
+          "slippage_outside_limit": 4,
+          "suspended": 7
+        },
+        "stale_price_days": 185,
+        "top5_weight_mean": 0.025986227594786342,
+        "turnover_half_daily_mean": 0.005420240660421013,
+        "turnover_two_sided_daily_mean": 0.010840481320842026
+      },
+      "yearly": [
+        {
+          "metrics": {
+            "annual_return": 0.07038708717517705,
+            "annual_vol": 0.12901549286857608,
+            "drawdown_peak": 150,
+            "drawdown_trough": 182,
+            "max_drawdown": -0.14454657654359326,
+            "sharpe": 0.5916285736577886,
+            "total_return": 0.06438677000000004
+          },
+          "sessions": 222,
+          "year": 2021
+        },
+        {
+          "metrics": {
+            "annual_return": -0.03336833094984826,
+            "annual_vol": 0.19818112085631268,
+            "drawdown_peak": 60,
+            "drawdown_trough": 198,
+            "max_drawdown": -0.16354106590983364,
+            "sharpe": -0.07175817188613412,
+            "total_return": -0.03336833094984826
+          },
+          "sessions": 242,
+          "year": 2022
+        },
+        {
+          "metrics": {
+            "annual_return": 0.033051611303726025,
+            "annual_vol": 0.10499622521458664,
+            "drawdown_peak": 139,
+            "drawdown_trough": 193,
+            "max_drawdown": -0.09371124466996272,
+            "sharpe": 0.3619399889594842,
+            "total_return": 0.033051611303726025
+          },
+          "sessions": 242,
+          "year": 2023
+        },
+        {
+          "metrics": {
+            "annual_return": 0.18390361838806424,
+            "annual_vol": 0.20636198003921252,
+            "drawdown_peak": 89,
+            "drawdown_trough": 172,
+            "max_drawdown": -0.16729810366890152,
+            "sharpe": 0.9210094300935139,
+            "total_return": 0.18390361838806424
+          },
+          "sessions": 242,
+          "year": 2024
+        },
+        {
+          "metrics": {
+            "annual_return": 0.14105834773064152,
+            "annual_vol": 0.12368798185947959,
+            "drawdown_peak": 53,
+            "drawdown_trough": 61,
+            "max_drawdown": -0.08596575957060026,
+            "sharpe": 1.1299628125897923,
+            "total_return": 0.1416807063660499
+          },
+          "sessions": 243,
+          "year": 2025
+        },
+        {
+          "metrics": {
+            "annual_return": 0.01013995578770377,
+            "annual_vol": 0.1446632306498409,
+            "drawdown_peak": 43,
+            "drawdown_trough": 116,
+            "max_drawdown": -0.12623415167208307,
+            "sharpe": 0.14183733510287858,
+            "total_return": 0.007532360629701307
+          },
+          "sessions": 180,
+          "year": 2026
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "differences": [
+      "只复现倒数因子组件，单独登记主板股票池变体",
+      "固定前10%正估值股票，保留负值因子但不纳入此探索组合",
+      "收盘决策后次日开盘执行；月末收盘下单以在下月首交易日执行",
+      "使用现有原始价账本、分日期费率与成交限制"
+    ],
+    "fidelity": "数据或执行受限的近似复现",
+    "gaps": [
+      "缺中证800历史成分",
+      "平台估值口径未证明与 BaoStock PE_TTM/PB_MRQ 一致",
+      "平台排序/分位边界和历史成本未等价移植"
+    ],
+    "implementations": [
+      "bp_component_v1",
+      "ep_component_v1"
+    ],
+    "review_status": "人工审查完成",
+    "rules": {
+      "factors": [
+        "1/pb_ratio",
+        "1/pe_ratio"
+      ],
+      "parameters": {
+        "index": "000906.XSHG",
+        "precent": 0.1,
+        "quantile": [
+          0,
+          10
+        ],
+        "shift": 21
+      },
+      "rebalance": "每月首个交易日交易",
+      "universe": "中证800历史成分；前21交易日不停牌；剔除ST",
+      "weights": "分位名单等额目标；持仓内所有证券再平衡"
+    },
+    "scope": "BP/EP 组件及主板近似变体",
+    "status": "实现中"
+  },
+  "run_id": "20261005-180828-e631d4-strategy-762a",
+  "schema": 1,
+  "snapshot": "20261005-152153-eb05",
+  "strategy_id": "S-f8eaf0fa2c7c",
+  "superseded_by": null,
+  "trading": null,
+  "universe": {
+    "boards": [
+      "main"
+    ],
+    "exclude_st": true,
+    "liquidity_window": 1,
+    "max_suspended": 0,
+    "min_avg_amount": 0.0,
+    "min_listed_sessions": 1,
+    "suspend_window": 21
+  },
+  "validation": []
+}

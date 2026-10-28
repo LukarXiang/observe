@@ -1,0 +1,445 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "dividend70_monthly_five_and_no_explicit_slippage",
+        "scheduled": [
+          [
+            "main",
+            [
+              1
+            ],
+            {
+              "time": "9:30"
+            }
+          ]
+        ]
+      },
+      {
+        "calls": [
+          "000300.XSHG",
+          {
+            "kwargs": {},
+            "query": {
+              "count": null,
+              "fields": [
+                "statDate",
+                "income.code"
+              ],
+              "filters": [
+                [
+                  "gt",
+                  "pe_ratio",
+                  0
+                ],
+                [
+                  "in",
+                  "income.code",
+                  [
+                    "A",
+                    "B"
+                  ]
+                ]
+              ],
+              "sort": []
+            }
+          }
+        ],
+        "case": "dividend70_HS300_PEgt0_current_fundamentals"
+      },
+      {
+        "case": "dividend70_qualifying_native_append_AttributeError",
+        "error": "AttributeError",
+        "financial_locals": {
+          "market_cap": 10000.0,
+          "one_year": 600.0,
+          "statqs": [
+            "2024q4",
+            "2024q3",
+            "2024q2",
+            "2024q1",
+            "2023q4",
+            "2023q3",
+            "2023q2",
+            "2023q1",
+            "2022q4",
+            "2022q3",
+            "2022q2",
+            "2022q1"
+          ],
+          "three_year": 200.0,
+          "two_year": 400.0
+        },
+        "orders": []
+      },
+      {
+        "case": "dividend70_query_report_date_is_not_availability",
+        "query": {
+          "count": 12,
+          "fields": [
+            "bonus_amount_rmb",
+            "report_date"
+          ],
+          "filters": [
+            [
+              "eq",
+              "dividend.code",
+              "A"
+            ],
+            [
+              "le",
+              "report_date",
+              "2024-12-31"
+            ]
+          ],
+          "sort": [
+            [
+              "desc",
+              "report_date"
+            ]
+          ]
+        },
+        "unit_equivalence_proved": false
+      },
+      {
+        "amounts": [
+          200.0,
+          400.0,
+          500.0
+        ],
+        "case": "dividend70_year1_equality_fails"
+      },
+      {
+        "amounts": [
+          600.0,
+          160.0,
+          300.0
+        ],
+        "case": "dividend70_year2_equality_fails"
+      },
+      {
+        "amounts": [
+          600.0,
+          400.0,
+          128.0
+        ],
+        "case": "dividend70_year3_equality_fails"
+      },
+      {
+        "amounts": [
+          400.0,
+          400.0,
+          200.0
+        ],
+        "case": "dividend70_sum3_equality_fails"
+      },
+      {
+        "case": "dividend70_report_month_floor_division_q0_excluded",
+        "result_empty": true
+      },
+      {
+        "case": "dividend70_missing_report_date_fill_zero_AttributeError",
+        "error": "AttributeError",
+        "financial_locals": {
+          "market_cap": null,
+          "one_year": 0.0,
+          "statqs": [
+            "2024q4",
+            "2024q3",
+            "2024q2",
+            "2024q1",
+            "2023q4",
+            "2023q3",
+            "2023q2",
+            "2023q1",
+            "2022q4",
+            "2022q3",
+            "2022q2",
+            "2022q1"
+          ],
+          "three_year": 0.0,
+          "two_year": 0.0
+        },
+        "orders": []
+      },
+      {
+        "bfive": [],
+        "bten": [],
+        "case": "dividend70_cascade_count_10"
+      },
+      {
+        "bfive": [
+          "S010"
+        ],
+        "bten": [
+          "S010"
+        ],
+        "case": "dividend70_cascade_count_11"
+      },
+      {
+        "bfive": [
+          "S018",
+          "S017",
+          "S016",
+          "S015",
+          "S014"
+        ],
+        "bten": [
+          "S018",
+          "S017",
+          "S016",
+          "S015",
+          "S014",
+          "S013",
+          "S012",
+          "S011",
+          "S010"
+        ],
+        "case": "dividend70_cascade_count_19"
+      },
+      {
+        "bfive": [
+          "S019",
+          "S018",
+          "S017",
+          "S016",
+          "S015"
+        ],
+        "bten": [
+          "S019",
+          "S018",
+          "S017",
+          "S016",
+          "S015",
+          "S014",
+          "S013",
+          "S012",
+          "S011",
+          "S010"
+        ],
+        "case": "dividend70_cascade_count_20"
+      },
+      {
+        "bfive": [
+          "S099",
+          "S098",
+          "S097",
+          "S096",
+          "S095"
+        ],
+        "bten": [
+          "S099",
+          "S098",
+          "S097",
+          "S096",
+          "S095",
+          "S094",
+          "S093",
+          "S092",
+          "S091",
+          "S090"
+        ],
+        "case": "dividend70_cascade_count_100"
+      },
+      {
+        "case": "dividend70_cash_equality_blocked_at_price_mean_equality",
+        "orders": []
+      },
+      {
+        "case": "dividend70_cash_above_half_intends_full_fifth",
+        "orders": [
+          [
+            "target_value",
+            "A",
+            200.0
+          ]
+        ]
+      },
+      {
+        "case": "dividend70_immediate_sell_mutates_keys_RuntimeError",
+        "error": "RuntimeError",
+        "financial_locals": {},
+        "orders": [
+          [
+            "target_value",
+            "A",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "dividend12_unheld_plain_dict_KeyError",
+        "error": "KeyError",
+        "financial_locals": {},
+        "orders": []
+      },
+      {
+        "case": "dividend12_price_95percent_equality_no_buy",
+        "orders": []
+      },
+      {
+        "case": "dividend12_below_95percent_fixed_10000",
+        "orders": [
+          [
+            "increment_value",
+            "A",
+            10000
+          ]
+        ]
+      },
+      {
+        "case": "dividend12_loss10_equality_no_add",
+        "orders": []
+      },
+      {
+        "case": "dividend12_loss_above10_adds_10000",
+        "orders": [
+          [
+            "increment_value",
+            "A",
+            10000
+          ]
+        ]
+      },
+      {
+        "case": "dividend12_today100_blocks_add",
+        "orders": []
+      },
+      {
+        "case": "dividend12_today_positive_blocks_ST_sell",
+        "orders": []
+      },
+      {
+        "case": "dividend12_ST_target_zero",
+        "orders": [
+          [
+            "target",
+            "A",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "dividend12_profit16_equality_no_sell",
+        "orders": []
+      },
+      {
+        "case": "dividend12_profit_above16_target_zero",
+        "orders": [
+          [
+            "target",
+            "A",
+            0
+          ]
+        ]
+      },
+      {
+        "case": "dividend12_sell_MA_unused",
+        "orders": []
+      },
+      {
+        "case": "dividend12_None_buy_repeated_pool_and_positions",
+        "orders": [
+          [
+            "increment_value",
+            "A",
+            10000
+          ],
+          [
+            "increment_value",
+            "A",
+            10000
+          ]
+        ]
+      },
+      {
+        "case": "dividend12_zero_cost_ZeroDivisionError",
+        "error": "ZeroDivisionError",
+        "financial_locals": {},
+        "orders": []
+      },
+      {
+        "case": "dividend12_unused_Shanghai_pool_04_equality_first10",
+        "selected": [
+          "000000",
+          "000001",
+          "000002",
+          "000003",
+          "000004",
+          "000005",
+          "000006",
+          "000007",
+          "000008",
+          "000009"
+        ],
+        "unused_index": [
+          "000001.XSHG"
+        ]
+      },
+      {
+        "case": "dividend12_under10_choosePool_KeyError",
+        "error": "KeyError",
+        "financial_locals": {},
+        "orders": []
+      },
+      {
+        "case": "dividend12_PE10_25_totalcap_desc100_all_market",
+        "list_to_dividend": [
+          "SZ_A"
+        ],
+        "query": {
+          "kwargs": {
+            "date": "2023-12-29"
+          },
+          "query": {
+            "count": 100,
+            "fields": [
+              "code",
+              "pe_ratio"
+            ],
+            "filters": [
+              [
+                "lt",
+                "pe_ratio",
+                25
+              ],
+              [
+                "gt",
+                "pe_ratio",
+                10
+              ]
+            ],
+            "sort": [
+              [
+                "desc",
+                "market_cap"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "case": "dividend12_native_DataFrame_sort_AttributeError",
+        "error": "AttributeError",
+        "financial_locals": {},
+        "orders": []
+      }
+    ],
+    "limits": [
+      "Explicit finance/query/position/current-price stubs; no actual historical ranking or fills",
+      "No compatibility shim applied to original append/sort, no financial amount unit, JY field or immediate-order equivalence claimed"
+    ],
+    "not_a_backtest": true,
+    "platform_equivalent": false,
+    "real_historical_trade_windows": 0,
+    "synthetic_fixture": true
+  },
+  "case_id": "dividend-batch72-diagnostics",
+  "nature": "accepted_original_function_synthetic_diagnostics",
+  "purpose": "35季度/金额阈值/多级名单/重复增量订单/兼容失败诊断；35专项/146相关检查通过，来源研究不计交易回测",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch72/20261008-dividend-income/diagnostics.json",
+    "sha256": "708485ec040e2ea3b4dfdd552862229a6183850cb577d3d9d3d59c9bb37b7c9a"
+  }
+}

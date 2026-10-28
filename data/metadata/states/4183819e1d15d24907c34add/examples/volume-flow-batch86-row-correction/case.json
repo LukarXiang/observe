@@ -1,0 +1,21 @@
+{
+  "case": {
+    "actual_count": 46781,
+    "corrected_file": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/dependency-inventory-corrected.json",
+    "corrected_sha256": "76703e780bf80d634632e1f47edb3a15ab1b31d6a739e5771677d3f2947d5825",
+    "explanation": "Initial handoff prose count was incorrect; pinned accepted payload did not change",
+    "not_a_backtest": true,
+    "old_count": 47781,
+    "original_file": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/dependency-inventory.json",
+    "original_sha256": "8c2ad40e3f8c207c59cb1933863470c2a022c02273454e297a3abaa42a3db000",
+    "price_sha256": "3f564aaaebb2ef1a303c3286287965e239a7e2337608b5675418f1df100def5b"
+  },
+  "case_id": "volume-flow-batch86-row-correction",
+  "nature": "immutable_initial_inventory_and_actual_payload_count_correction",
+  "purpose": "原交接文字47781错误；同一第47批SHA实际46781(46063交易+718暂停)，初始库存和study失败不覆盖，独立corrected库存及两SHA绑定只改行数字段",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch86/20261009-longterm-volume-technical-flow/inventory-row-correction.json",
+    "sha256": "d3e8417c240c0ed28555c9f03baf8ff78a0e1ba026640b886c94d541ae157eaa"
+  }
+}

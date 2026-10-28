@@ -1,0 +1,66 @@
+{
+ "status": "in_progress_initial_only",
+ "progress": {
+  "checkpoint": "20261011-065046-0115",
+  "note": "Batch105 two industry notebooks full186/291 and AST frozen;actual local module search retained;formal294/trading12/parents87 unchanged;no component or trading acceptance",
+  "catalog_id": "d2eb22f379acfbeedb01",
+  "catalog_sha256": "b9dafd67a972a704c9bd743f86be3d62f27be8382adc19c2fb59917cbd4cab8b",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 294,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-065046-0115"
+ },
+ "formal_source_research_acceptance": false,
+ "formal_trading_acceptance": false,
+ "library_goal_complete": false,
+ "new_trading_backtests": 0,
+ "economic_variant_approved": false,
+ "full_sources_and_AST": [
+  {
+   "source": "2024年度精选策略2/52.市场宽度——简洁版.txt",
+   "strategy_id": "S-f676e9b6ffec",
+   "source_sha256": "99d10bce41b0c7e1c2669c3c0c74afefea384ba6a099673c24e041fde5b89aaf",
+   "encoding": "utf-8-sig",
+   "lines": 186,
+   "top_functions": [
+    "display_mkt",
+    "display_mkt2"
+   ],
+   "formal_acceptance": false,
+   "new_trading_backtests": 0
+  },
+  {
+   "source": "2024年度精选策略1/89.【复现·水】市场情绪指标专题行业指数顶部和底部信号.txt",
+   "strategy_id": "S-0482d0cffcd3",
+   "source_sha256": "f41f457f69e71ddb4b0b22697ca8a9fd329d7ba2954f2c7a4571e7296896f4e8",
+   "encoding": "utf-8-sig",
+   "lines": 291,
+   "top_functions": [
+    "get_ind_overthreshold_num"
+   ],
+   "formal_acceptance": false,
+   "new_trading_backtests": 0
+  }
+ ],
+ "original_nhnl_implementation_proven": false,
+ "no_original_top_level_download_or_private_database_executed": true,
+ "evidence_sha256": {
+  "docs/handoff/2026-10-11-batch104-final-review.json": "9069759fd8a38740f2da4d455981aecffdee40f02118931c1606c28e4d7abac1",
+  "docs/handoff/2026-10-11-batch104-readback-recovery.json": "d84052ec260283c3418af20f011e4fb4ec599788dc45585c5b03e23546bd3d7a",
+  "docs/tasks/2026-10-11-第一百零五批市场宽度与行业新高新低-执行计划.md": "18a63533917a9a115bc8a28f7ad5d178fc9033eeee82ee104bd01dad1587ad44",
+  "data/staging/strategies-batch104/20261011-next-source-preread/preread.json": "34139ba883892c169af6df060f3165d8c97be5be16ed94bbcc6e86800016345a",
+  "data/staging/strategies-batch105/20261011-initial-module-inventory/checked.json": "a2111947af9e7feb7721da9fba496fd1629a7bcdd3ee5f776baea634a9fb6a41"
+ }
+}

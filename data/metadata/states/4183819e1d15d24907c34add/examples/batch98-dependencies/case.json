@@ -1,0 +1,77 @@
+{
+  "case": {
+    "candidate_fields_not_equivalent": [
+      "SW ordinary turnoverrate is not free-float index turnover",
+      "NET_DEAL_AMT is not quota_daily minus quota_daily_balance",
+      "MUTUAL_TYPE005 aggregate omits both link-specific quotas and quota history"
+    ],
+    "index_rate_provider": "Tushare index_dailybasic turnover_rate_f; source credentials not used",
+    "missing_original_tables": [
+      "fund_redemptions",
+      "index_dailybasic",
+      "index_members",
+      "northbound_holdings",
+      "northbound_quota"
+    ],
+    "new_trading_backtests": 0,
+    "northbound_candidate": {
+      "coverage": [
+        {
+          "field": "当日成交净买额",
+          "first": "2014-11-17",
+          "last": "2024-08-16",
+          "observations": 2264
+        },
+        {
+          "field": "当日资金流入",
+          "first": "2014-11-17",
+          "last": "2026-04-08",
+          "observations": 2266
+        },
+        {
+          "field": "当日余额",
+          "first": "2014-11-18",
+          "last": "2026-04-08",
+          "observations": 2264
+        }
+      ],
+      "file": "data/raw/dependency_probe_batch12/northbound_flow/20261005-daily-candidates.parquet",
+      "published": false,
+      "result": "data/staging/strategies-batch12/20261005-daily-candidates/probes/northbound_flow/result.json",
+      "result_sha256": "df2a09e9c1bc599da8b7af929976748e8eb5f78407fd61889257914070d82934",
+      "rows": 2763,
+      "sha256": "03607825ccb35da06ac8068ecdb810702a737268bf463da98e32253cde4c93d7",
+      "strict_usable": false
+    },
+    "published_batch": "20261006-145049-5ceb",
+    "registered_tables": [
+      "adj_coverage",
+      "adj_factors",
+      "bars_1d",
+      "bars_5m",
+      "calendar",
+      "company_controls_annual",
+      "corp_actions",
+      "financial_annual",
+      "financial_availability",
+      "financial_fields",
+      "financial_quarterly",
+      "index_1d",
+      "instruments",
+      "minute_universe",
+      "valuation_coverage",
+      "valuations_1d"
+    ],
+    "snapshot": "20261006-145049-e06c",
+    "snapshot_sha256": "9449dc18911fe5f27fe65f55f5849602bec0cba998335b74a6d2b1377e19af60",
+    "source_credentials_executed_or_exported": false
+  },
+  "case_id": "batch98-dependencies",
+  "nature": "missing_tables_and_archived_candidate_sha",
+  "purpose": "原16表登记与2763北向合并候选SHA/余额净买覆盖；不以候选字段替代原输入",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch98/20261011-original-components-v1/dependencies.json",
+    "sha256": "1785ec8eebfc521003e84fd0777479a8346918e04d112148dbd7c593c7227c02"
+  }
+}

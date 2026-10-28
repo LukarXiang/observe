@@ -1,0 +1,44 @@
+{
+ "status": "in_progress_stage_only",
+ "progress": {
+  "checkpoint": "20261011-061734-c5de",
+  "note": "Batch104 full sources and46 original diagnostics;21 local tests;raw NaN and native moneyflow failures retained;relative second threshold reference needs correction;formal292/trading12/parents87 unchanged",
+  "catalog_id": "4e7e51bb2fa283705860",
+  "catalog_sha256": "a36e87f6943af12fe58874c88732a1c6f741d8884880c4acc9d2332321ba5c1b",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 292,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence."
+ },
+ "parent": "docs/handoff/2026-10-11-batch103-final-review.json",
+ "parent_sha256": "83fb1ced00e5d00383b0a8296f31426b38f387c11ab863905d9141957d3bf29f",
+ "original_diagnostics": 46,
+ "local_tests": 21,
+ "isolated_tests": 0,
+ "longest_reference_acceptance": false,
+ "reference_comparison_issue": "Original second bound0.5,reference0.3;8605 differences need new corrected comparison;not source/platform defect",
+ "source_strategy_modified": false,
+ "new_trading_backtests": 0,
+ "formal_source_research_acceptance": false,
+ "formal_trading_acceptance": false,
+ "evidence_sha256": {
+  "data/staging/strategies-batch103/20261011-next-source-preread/preread.json": "d5d7e339553ccd7c70c24e3f3fab0024482b1121f20552fdef98591079009600",
+  "data/staging/strategies-batch104/20261011-original-diagnostic-development/diagnostics.json": "8646e1d4fccb089dbca3702f856648088d7bbac74e6fef4a9b6e1f53e258f9f9",
+  "data/staging/strategies-batch104/20261011-raw-reference-failure/recovery-tests.xml": "39102a0ed5f672524dacf4f3d6fd95cffb7bbe53d5cce856818cee0ae7b69d54",
+  "data/staging/strategies-batch104/20261011-raw-reference-failure/recovery-tests.log": "1fbd1558785440df4eb9917a8cbb6d50a12a6e26e86b037e8158022bc55ebb61",
+  "data/staging/strategies-batch104/20261011-input-inventory/inventory.json": "ee6694150638b9e80538eadac395fdc1f86cc03f0b6016c33fb20188a664cfa4",
+  "data/staging/strategies-batch104/20261011-moneyflow-explicit-numeric-reference/offline-verification.json": "785bb4de0df8de31c86eb951c320ac7371b6e92711336fceef990d21c6ee2ba5",
+  "docs/tasks/2026-10-11-第一百零四批短线均线与首板低开-执行计划.md": "b1ed0599bcbf9a2fbb5726f02e9c15b09fb2ef4a9a59bbcd5da093a6fbea39dc"
+ }
+}

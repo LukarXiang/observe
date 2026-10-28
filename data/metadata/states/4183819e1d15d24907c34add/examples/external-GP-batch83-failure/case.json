@@ -1,0 +1,26 @@
+{
+  "case": {
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "scripts.verify_offline_tests",
+      "-q",
+      "tests/unit/test_batch83_research.py"
+    ],
+    "files": {
+      "review_strategy_batch83.py": "b9c5f32104662511c66fcd650a164e467e18cc8783e51a9311eaa0516e3abd67",
+      "test_batch83_research.py": "58dac241660bf0dea515d0e090c6be654b089fb0b9badabb5b2093da6f56522d",
+      "tests.log": "6d7b0a96b7ef6624350baa17579f980ab1be7ac3411217827123748ed01b012c"
+    },
+    "not_a_backtest": true,
+    "returncode": 1
+  },
+  "case_id": "external-GP-batch83-failure",
+  "nature": "immutable_original_object_nan_test_expectation_failure",
+  "purpose": "首轮1失败32通过；代码/测试/log只读SHA归档；原_corr object数组的nan_to_num保留NaN，误断言已修且33专项通过",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch83/20261009-external-timing-GP/development-specialized-attempt01/result.json",
+    "sha256": "a99a14bd7b69c4b4bb3f9a625390555036ba3b28af8d4524223d21887d9f897a"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "case": {
+    "accepted_checkpoint_after_recovery": "20261011-045100-03d0",
+    "cause": "Temporary script outside repo launched without PYTHONPATH=src:.",
+    "config_modified_by_failed_command": false,
+    "error": "ModuleNotFoundError",
+    "export_policy": "Existing in-flight intermediate export retained; wait for terminal, then make a new full export and verify current root",
+    "module": "scripts",
+    "observed_returncode": 1,
+    "recovery": "Same helper launched with command-local PYTHONPATH=src:. succeeded in session31040; no install or global environment change",
+    "script_sha256": "44a1a0b3dc9fc049ae0362ee253f8baf09a8ef898d7a3022e7f61003f3dbb933",
+    "status": "observed_temporary_metadata_helper_import_failure",
+    "strategy_source_or_output_modified": false
+  },
+  "case_id": "batch101-metadata-helper-import",
+  "nature": "observed_post_acceptance_handoff_tool_failure_not_strategy_error",
+  "purpose": "临时helper缺项目导入路径；命令局部PYTHONPATH修复，无安装/策略变化",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch101/20261011-metadata-update-import-failure/failure.json",
+    "sha256": "7e6c383e7d5b4dd811384f0542baa37a83eb200564a62a5903ff4a765f6f9ae4"
+  }
+}

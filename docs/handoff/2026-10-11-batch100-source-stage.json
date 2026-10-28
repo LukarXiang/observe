@@ -1,0 +1,90 @@
+{
+ "status": "ok_source_phase",
+ "formal_source_research_acceptance": false,
+ "formal_trading_acceptance": false,
+ "original_strategy_complete": false,
+ "accepted_checkpoint_unchanged": "20261011-032459-0af3",
+ "progress": {
+  "checkpoint": "20261011-034001-1f69",
+  "note": "Batch100 source/timing phase:2 full sources/32 original diagnostics/11 local+11 isolated;longest400-row prefix running;formal284 unchanged",
+  "catalog_id": "8c744c937eaef1666b85",
+  "catalog_sha256": "b4daa64d6a14fbce5321ebf816fc691a33d463d86f77f386fa8bca447521d000",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 484,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 284,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-034001-1f69"
+ },
+ "source_sha256": [
+  "eee496f1bc636b0372ba32153596d3bb72c9d4f73e2c3520a16c35da532f0e76",
+  "4947832e5d01a5a15b4408de799c0c4e908d5e91eda996fbc33bb0f3c22c3a8a"
+ ],
+ "source_lines": [
+  171,
+  179
+ ],
+ "original_diagnostics": 32,
+ "exceptions_preserved": 5,
+ "validation": {
+  "local": 11,
+  "isolated": 11,
+  "skips": 0,
+  "copied_files": 247
+ },
+ "longest_component": {
+  "status": "in_progress",
+  "observed_live_tool_session": 37738,
+  "driver_action": "study",
+  "directory": "data/staging/strategies-batch100/20261011-original-feature-stage",
+  "expected_windows": 4852,
+  "completed_windows_proven_at_checkpoint": 0,
+  "first_expected_decision": "2006-10-17",
+  "last_expected_decision": "2026-09-29",
+  "expected_feature_columns": 1059,
+  "offline_match": "not_yet_verified"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 6614,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+ },
+ "new_trading_backtests": 0,
+ "new_strategy_parent_runs": 0,
+ "economic_rule_changes": false,
+ "real_pickle_loaded": false,
+ "new_requests_responses_publications": 0,
+ "evidence_sha256": {
+  "docs/tasks/2026-10-11-第一百批行业轮动与50ETF-Xgboost-来源与时点阶段记录.md": "6bd1e07a8e3ae1441ca3699fa82ecc7f37ff8bef24dc540242dc6ff2dec9a11d",
+  "data/staging/strategies-batch100/20261011-source-stage-validation/checked.json": "9d140e9b6d2cb541145b9b8c00873c20491628dec59a59331cd5c6ac0139f7c4",
+  "data/staging/strategies-batch100/20261011-original-feature-stage/prepared.json": "1bfbe448cb28124dbcf27d191d8194d39e5c5311756223ec84703da5ba08875a",
+  "data/staging/strategies-batch100/20261011-original-feature-stage/dependencies.json": "94134d8ae27bac39d3ff16d7fa51826b8f98e8a94c313479468b94bc808ad305",
+  "data/staging/strategies-batch100/20261011-original-feature-stage/diagnostics-preread.json": "f50566232921200ae82e0068bab64b8590d44e9385e78385287c4590cff7402f",
+  "data/staging/strategies-batch100/20261011-original-feature-stage/baseline.json": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f",
+  "data/staging/strategies-batch100/20261011-original-feature-stage/protection.json": "fcf33c8de2d54325eec58fc8fa2fb708364a85378a1d5ef339ce34f6feef438f",
+  "docs/handoff/batch100-y2022-032-source-review.yaml": "6be5066f4050c67ebfe9f356866bcdd57c9c49a4b648bab34d9e0e454db37b03",
+  "docs/handoff/batch100-y2022-026-source-review.yaml": "03d9bc949f75dd09e26e3bbeb78138fe8071c0e3afcc70bd4e390ab45d50b153",
+  "data/staging/strategies-batch100/20261011-prepare-search-interruption/interruption.json": "41a96812d650d51ab244b2af715400554fc9ab5a78b3ff6f92a77cb72cda3375",
+  "scripts/research_strategy_batch100.py": "1c9b7a58f53d4533afab765cb1bc8cbca6cb5f321abea56db89a2f8aeb725b20",
+  "tests/unit/test_batch100_research.py": "b5b207dd3dfa7cc6c5c8e7c4ef22832f9e85bb08106727d6c9fe5be389c870fd",
+  "scripts/verify_strategy_batch100_stage.py": "e81bdf69c00f02031779fe301a6ad5b96875c5ebb1f22ed9ff7a18ec03ad9659",
+  "scripts/archive_strategy_batch100_stage.py": "90022d28b75686743841b593166e12cb779e6ac7bcd295065de06249fbf55af5"
+ },
+ "next_start": "Poll existing live study handle or inspect terminal command receipt; do not restart on missing interim output; then longest independent audit/fresh network-blocked replay/source acceptance",
+ "git": "User managed; no commit or push by agent"
+}

@@ -1,0 +1,528 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "active_symbol_and_schedules",
+        "events": [
+          [
+            "benchmark",
+            "000300.XSHG"
+          ],
+          [
+            "option",
+            "use_real_price",
+            true
+          ],
+          [
+            "cost",
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003
+            },
+            {
+              "type": "stock"
+            }
+          ],
+          [
+            "schedule",
+            "before_market_open",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "every_bar"
+            }
+          ],
+          [
+            "schedule",
+            "market_open",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "every_bar"
+            }
+          ],
+          [
+            "schedule",
+            "after_market_close",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "every_bar"
+            }
+          ]
+        ],
+        "security": "300354.XSHE"
+      },
+      {
+        "bars": [
+          {
+            "close_price": 15.5,
+            "datetime": "2021-01-04T09:31:00",
+            "high_price": 16.0,
+            "low_price": 14.0,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 15.5,
+            "datetime": "2021-01-04T09:31:00",
+            "high_price": 16.0,
+            "low_price": 14.0,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          }
+        ],
+        "case": "market_open_duplicate_and_omitted_open",
+        "query": [
+          [
+            [
+              "300354.XSHE"
+            ],
+            {
+              "count": 1,
+              "fields": [
+                "date",
+                "open",
+                "high",
+                "low",
+                "close"
+              ],
+              "unit": "1m"
+            }
+          ],
+          [
+            [
+              "300354.XSHE"
+            ],
+            {
+              "count": 1,
+              "fields": [
+                "date",
+                "open",
+                "high",
+                "low",
+                "close"
+              ],
+              "unit": "1m"
+            }
+          ]
+        ]
+      },
+      {
+        "bars": 2,
+        "case": "none_history_no_reset"
+      },
+      {
+        "bars": 2,
+        "case": "initialize_does_not_reset_chan"
+      },
+      {
+        "case": "indicator_seed_and_rounding",
+        "ema": [
+          1.0,
+          1.5,
+          2.75,
+          5.375
+        ],
+        "macd": [
+          [
+            0.0,
+            0.0797,
+            0.3009,
+            0.7898
+          ],
+          [
+            0.0,
+            0.0159,
+            0.0729,
+            0.2163
+          ],
+          [
+            0.0,
+            0.1276,
+            0.456,
+            1.147
+          ]
+        ],
+        "sma": [
+          1.0,
+          1.5,
+          2.3333,
+          4.6667
+        ]
+      },
+      {
+        "case": "first_three_no_fx",
+        "chan": [
+          {
+            "close_price": 7.5,
+            "datetime": "2021-01-04T00:00:00",
+            "high_price": 10,
+            "low_price": 5,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 9.0,
+            "datetime": "2021-01-04T00:01:00",
+            "high_price": 12,
+            "low_price": 6,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 8.0,
+            "datetime": "2021-01-04T00:02:00",
+            "high_price": 11,
+            "low_price": 5,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          }
+        ],
+        "fx": [],
+        "strokes": []
+      },
+      {
+        "case": "no_include_third_fx",
+        "chan": [
+          {
+            "close_price": 7.5,
+            "datetime": "2021-01-04T00:00:00",
+            "high_price": 10,
+            "low_price": 5,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 9.0,
+            "datetime": "2021-01-04T00:01:00",
+            "high_price": 12,
+            "low_price": 6,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 8.0,
+            "datetime": "2021-01-04T00:02:00",
+            "high_price": 11,
+            "low_price": 5,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          }
+        ],
+        "fx": [
+          [
+            12,
+            6,
+            "2021-01-04T00:01:00",
+            "up",
+            1
+          ]
+        ],
+        "strokes": [
+          [
+            12,
+            6,
+            "2021-01-04T00:01:00",
+            "up",
+            1
+          ]
+        ]
+      },
+      {
+        "case": "up_include",
+        "chan": [
+          {
+            "close_price": 7.5,
+            "datetime": "2021-01-04T00:00:00",
+            "high_price": 10,
+            "low_price": 5,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 8.5,
+            "datetime": "2021-01-04T00:01:00",
+            "high_price": 11,
+            "low_price": 6,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 9.5,
+            "datetime": "2021-01-04T00:03:00",
+            "high_price": 12,
+            "low_price": 7.5,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          }
+        ],
+        "fx": [],
+        "strokes": []
+      },
+      {
+        "case": "down_include",
+        "chan": [
+          {
+            "close_price": 9.5,
+            "datetime": "2021-01-04T00:00:00",
+            "high_price": 12,
+            "low_price": 7,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 8.5,
+            "datetime": "2021-01-04T00:01:00",
+            "high_price": 11,
+            "low_price": 6,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 7.5,
+            "datetime": "2021-01-04T00:03:00",
+            "high_price": 9,
+            "low_price": 5,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          }
+        ],
+        "fx": [],
+        "strokes": []
+      },
+      {
+        "case": "double_fractal_only_last_to_stroke",
+        "chan": [
+          {
+            "close_price": 7.5,
+            "datetime": "2021-01-04T00:00:00",
+            "high_price": 10,
+            "low_price": 5,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 7.5,
+            "datetime": "2021-01-04T00:01:00",
+            "high_price": 12,
+            "low_price": 3,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          },
+          {
+            "close_price": 7.5,
+            "datetime": "2021-01-04T00:02:00",
+            "high_price": 11,
+            "low_price": 4,
+            "open_interest": 0,
+            "open_price": 0,
+            "volume": 0
+          }
+        ],
+        "fx": [
+          [
+            12,
+            3,
+            "2021-01-04T00:01:00",
+            "up",
+            1
+          ],
+          [
+            12,
+            3,
+            "2021-01-04T00:01:00",
+            "down",
+            1
+          ]
+        ],
+        "strokes": [
+          [
+            12,
+            3,
+            "2021-01-04T00:01:00",
+            "down",
+            1
+          ]
+        ]
+      },
+      {
+        "amount": 300000.0,
+        "case": "increment_quantity_10.0",
+        "orders": [
+          [
+            "300354.XSHE",
+            30000
+          ],
+          [
+            "300354.XSHE",
+            -30000
+          ]
+        ]
+      },
+      {
+        "amount": 240000.0,
+        "case": "increment_quantity_1200.0",
+        "orders": [
+          [
+            "300354.XSHE",
+            200
+          ],
+          [
+            "300354.XSHE",
+            -200
+          ]
+        ]
+      },
+      {
+        "amount": 400000.0,
+        "case": "increment_quantity_2000.0",
+        "orders": [
+          [
+            "300354.XSHE",
+            200
+          ],
+          [
+            "300354.XSHE",
+            -200
+          ]
+        ]
+      },
+      {
+        "amount": 0.0,
+        "case": "increment_quantity_6000.0",
+        "orders": [
+          [
+            "300354.XSHE",
+            0
+          ],
+          [
+            "300354.XSHE",
+            0
+          ]
+        ]
+      },
+      {
+        "amount": 0.0,
+        "case": "increment_quantity_10000.0",
+        "orders": [
+          [
+            "300354.XSHE",
+            0
+          ],
+          [
+            "300354.XSHE",
+            0
+          ]
+        ]
+      },
+      {
+        "buy": 7,
+        "case": "duplicate_signal_and_invalid_no_reversal",
+        "invalid": [
+          [
+            "2021-01-04T00:02:00",
+            11.0,
+            "B1",
+            "2021-01-04T00:10:00"
+          ]
+        ],
+        "last_orders": [
+          [
+            "300354.XSHE",
+            30000
+          ],
+          [
+            "300354.XSHE",
+            30000
+          ]
+        ]
+      },
+      {
+        "buy": 8,
+        "case": "zero_price_appends_before_error",
+        "error": "ZeroDivisionError"
+      },
+      {
+        "case": "macd_segment_seed_and_reverse_dates",
+        "reverse": 0,
+        "value": 1.0194
+      },
+      {
+        "case": "stroke_correction_short_distance_pops",
+        "strokes": [
+          [
+            22,
+            11,
+            "2021-01-04T00:05:00",
+            "up",
+            5
+          ]
+        ]
+      },
+      {
+        "case": "trend_signal_confirmation_not_pivot_date",
+        "orders": [
+          [
+            "300354.XSHE",
+            -27300
+          ]
+        ],
+        "signals": [
+          [
+            "2021-01-04T00:08:00",
+            12,
+            "S1",
+            "2021-01-04T00:20:00"
+          ]
+        ]
+      },
+      {
+        "case": "stroke_correction_three_strokes_self_distance_pops",
+        "strokes": [
+          [
+            30,
+            15,
+            "2021-01-04T00:00:00",
+            "down",
+            0
+          ],
+          [
+            22,
+            11,
+            "2021-01-04T00:09:00",
+            "up",
+            9
+          ]
+        ]
+      }
+    ],
+    "messages_sent": 0,
+    "new_trading_backtests": 0,
+    "not_a_backtest": true,
+    "policy": "Only SHA-pinned class/function definitions with inert order/API stubs; annotations removed, bodies/defaults unchanged"
+  },
+  "case_id": "chan-batch87-diagnostics",
+  "nature": "accepted_corrected_original_callbacks_state_and_increment_quantity",
+  "purpose": "21原类/回调受控诊断，三every_bar/重复bar、初三无分型、双分型只最后进笔、半偶/0股、失效无回滚、短距3与三笔self距0删笔及确认时刻；原20例另档只读保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/diagnostics-corrected.json",
+    "sha256": "c4264f812a7ca197515ed50bf7625cb4bc4ac2ba07d79de4c30456ab489f9032"
+  }
+}

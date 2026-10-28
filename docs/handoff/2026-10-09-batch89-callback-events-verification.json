@@ -1,0 +1,102 @@
+{
+  "status": "stage_checks_passed",
+  "formal_acceptance": false,
+  "scope": "SHA-pinned original callbacks under synthetic API contracts and one bounded direct event-page request failure; not ES repair or trading",
+  "current_checkpoint": "20261009-064726-532d",
+  "current_summary_sha256": "538898b2bf0d71f9dc6e0c2eb064b8cffffbf27d2d5dbfa1c137797b6f074906",
+  "accepted_checkpoint": "20261009-061912-e023",
+  "parent_receipt": "docs/handoff/2026-10-09-batch89-stage-verification.json",
+  "parent_receipt_sha256": "650f57343cfecf51f67db7deb44fc9b2bca03918982974a92e3f51a5b38e1486",
+  "stage_report": "docs/tasks/2026-10-09-第八十九批一致性风险与全天候-回调与事件阶段记录.md",
+  "stage_report_sha256": "cfd5b62e1dc7c6fddc76ddd0aa63bc4c8fbd30099b119fe287f06fedab9ed7e8",
+  "directories": [
+    "data/staging/strategies-batch89/20261009-all-weather-callbacks",
+    "data/staging/strategies-batch89/20261009-all-weather-events"
+  ],
+  "source_sha256": [
+    "80903d8634a4b69ac5dd52836bf6442fdad76dca7ce4b313794629a63fd92db6",
+    "32340549346ad2e7ad6e7d7e28ac9e7dd53bad0bfd36352e434bc6cb9946e430"
+  ],
+  "implementation_sha256": {
+    "scripts/diagnose_strategy_batch89.py": "5e927b94a89fa3d1cdd861b6bcf60db2dac3705b9174bb27979a7856fe3bc581",
+    "tests/unit/test_batch89_callbacks.py": "bde56570d1f13b2021929208c1348e5da251330f809e5660462fbe51b4c82a64",
+    "scripts/probe_strategy_batch89_events.py": "ee402376690931d37c172823ec0dd8710c6d8d1a71d62ba29dabc87ea7fce362",
+    "tests/unit/test_batch89_events.py": "85bb8e740a434d4a83e476efccdc6886753a85e43d7f013155dbc56495eac210"
+  },
+  "evidence_sha256": {
+    "data/staging/strategies-batch89/20261009-all-weather-callbacks/baseline.json": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4",
+    "data/staging/strategies-batch89/20261009-all-weather-callbacks/diagnostics.json": "9b46909cdfa202c718460a8151f14a5d1a544d614e5a0f0c1a858ec5298ed511",
+    "data/staging/strategies-batch89/20261009-all-weather-callbacks/implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+    "data/staging/strategies-batch89/20261009-all-weather-callbacks/input-binding.json": "b93a9f28b32abfc36375786b37e1356069bbb72788267d2614210deb78be10a7",
+    "data/staging/strategies-batch89/20261009-all-weather-callbacks/offline-verification.json": "a9699d77f6c4770a4b2088a94f969759d53788dca7fe9b9a2b7f1cc027b5cf20",
+    "data/staging/strategies-batch89/20261009-all-weather-callbacks/progress-start.json": "05e9199b7ae81b7f7bf391e35929b5b359274691c831fede7039ed8205226226",
+    "data/staging/strategies-batch89/20261009-all-weather-callbacks/protection.json": "82f9880211c040118c41dac0d3bf945caf3241f6d7ae5f59fa6898f56fe415a8",
+    "data/staging/strategies-batch89/20261009-all-weather-callbacks/scope.json": "4e3783ed0ee9f6f5c65cf88fbc46998093766ddc3ba565379645edbc93ffb630",
+    "data/staging/strategies-batch89/20261009-all-weather-callbacks/command-results.json": "e5fa3e314368aefb45dfe9bc663de29cc4f9a6e305dffd9519b3e4c5673a5af4",
+    "data/staging/strategies-batch89/20261009-all-weather-events/input-binding.json": "1c1cda05bcb56e9e7f474c894876ad7706ea90850222abc7a4a0064ebcf9d9ff",
+    "data/staging/strategies-batch89/20261009-all-weather-events/fund_em.reference.py": "bbd17ed2ff2d97b199fb7f91dbe07725feb4842fe075ca9c1cc1e59f38335a30",
+    "data/staging/strategies-batch89/20261009-all-weather-events/513100.request.json": "672e2e1a577ee3dfe9e9bd770895b9fa5e4d0b98810eb553c3ee21945270e5c4",
+    "data/staging/strategies-batch89/20261009-all-weather-events/probe-results.json": "86bdfc3fdd7ee95f3ac82653d58d77dee30978325da3d27739d738e19b0d56cb"
+  },
+  "checks": {
+    "scope_alignment": "on_target",
+    "review_depth": "deep",
+    "related_tests": 164,
+    "related_suite_passed": 159,
+    "additional_event_tests_passed": 5,
+    "new_stage_tests": 15,
+    "warnings": 1,
+    "full_suite_run": false,
+    "raw_pytest_log_archived": false,
+    "ruff": "passed",
+    "git_diff_check": "passed"
+  },
+  "specialist_reviews": {
+    "security": {"agent": "batch89_callbacks_security", "findings": [], "four_implementation_SHA_verified": true},
+    "architecture": {"agent": "batch89_callbacks_architecture", "findings": [], "four_implementation_SHA_verified": true}
+  },
+  "adversarial_review": {
+    "findings": [],
+    "examined": [
+      "Pinned source verified before compiling definitions; imports/top-level code excluded",
+      "All callback-cycle weights synthetic; real risk history explicitly refused",
+      "Zero target differences retain numpy/list scalar shapes and warnings/exceptions",
+      "Deferred and deleted-zero position lifecycle exposes KeyError; order intention never counted as fill",
+      "Original partial-sale internal cost state is not Book fee/PnL/NAV",
+      "Direct fixed event-page URL without SDK/supplier JS, redirects or env proxies",
+      "No repeated same-domain DNS request; missing raw response not fabricated",
+      "New archive directories reject reuse; pending return repair and historical input gates remain"
+    ]
+  },
+  "old_asset_protection": {
+    "status": "ok",
+    "control_SHA_files": 5363,
+    "partition_size_mtime_files": 398,
+    "calendar_rows": 7938,
+    "index_rows": 5280,
+    "fresh_full_partition_hash": false
+  },
+  "callback_cases": 32,
+  "offline_callback_result": "match",
+  "offline_callback_differences": 0,
+  "attempted_requests": 1,
+  "event_responses": 0,
+  "event_candidate_pages": 0,
+  "event_not_requested_symbols": ["510300", "518880", "511010"],
+  "event_failure": "fundf10.eastmoney.com DNS failure on 513100; same-domain repetition stopped",
+  "SDK_or_supplier_JS_executed": false,
+  "return_semantics_decision": "pending_D-allweather-fill",
+  "published_batch": "20261006-145049-5ceb",
+  "snapshot": "20261006-145049-e06c",
+  "accepted_source_count": 258,
+  "source_count": 695,
+  "remaining_source_count": 437,
+  "locally_backtested_sources": 12,
+  "strategy_parent_runs": 69,
+  "new_real_ES_weights_or_original_signals": 0,
+  "new_trading_backtests": 0,
+  "synthetic_only": true,
+  "not_a_backtest": true,
+  "platform_equivalence_proven": false,
+  "library_goal_complete": false
+}

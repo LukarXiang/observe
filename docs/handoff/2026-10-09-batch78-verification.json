@@ -1,0 +1,1830 @@
+{
+ "status": "ok",
+ "snapshot": "20261006-145049-e06c",
+ "reviews": {
+  "sources": [
+   {
+    "source_path": "repo/量化策略源代码/2024年度精选策略1/3.【回顾3】ETF策略之核心资产轮动.txt",
+    "source_copy": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/source-reviews/S-31af0ed2018f.source",
+    "source_sha256": "437a3f19f060e4c661e55e70a0713a48a348fd8efb4006587f9055c98b9cbb65",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 77,
+    "definition_ast": {
+     "initialize": "FunctionDef(name='initialize', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Name(id='set_benchmark', ctx=Load()), args=[Constant(value='000300.XSHG')], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='use_real_price'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='avoid_future_data'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_slippage', ctx=Load()), args=[Call(func=Name(id='FixedSlippage', ctx=Load()), args=[Constant(value=0.0)], keywords=[])], keywords=[])), Expr(value=Call(func=Name(id='set_order_cost', ctx=Load()), args=[Call(func=Name(id='OrderCost', ctx=Load()), args=[], keywords=[keyword(arg='open_tax', value=Constant(value=0)), keyword(arg='close_tax', value=Constant(value=0)), keyword(arg='open_commission', value=Constant(value=0.0002)), keyword(arg='close_commission', value=Constant(value=0.0002)), keyword(arg='close_today_commission', value=Constant(value=0)), keyword(arg='min_commission', value=Constant(value=5))])], keywords=[keyword(arg='type', value=Constant(value='fund'))])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='set_level', ctx=Load()), args=[Constant(value='system'), Constant(value='error')], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='etf_pool', ctx=Store())], value=List(elts=[Constant(value='518880.XSHG'), Constant(value='513100.XSHG'), Constant(value='159915.XSHE'), Constant(value='510180.XSHG')], ctx=Load())), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='m_days', ctx=Store())], value=Constant(value=25)), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='trade', ctx=Load()), Constant(value='9:30')], keywords=[]))], decorator_list=[], type_params=[])",
+     "get_rank": "FunctionDef(name='get_rank', args=arguments(posonlyargs=[], args=[arg(arg='etf_pool')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='score_list', ctx=Store())], value=List(elts=[], ctx=Load())), For(target=Name(id='etf', ctx=Store()), iter=Name(id='etf_pool', ctx=Load()), body=[Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='etf', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='m_days', ctx=Load()), Constant(value='1d'), List(elts=[Constant(value='close')], ctx=Load())], keywords=[])), Assign(targets=[Name(id='y', ctx=Store()), Subscript(value=Name(id='df', ctx=Load()), slice=Constant(value='log'), ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='log', ctx=Load()), args=[Attribute(value=Name(id='df', ctx=Load()), attr='close', ctx=Load())], keywords=[])), Assign(targets=[Name(id='x', ctx=Store()), Subscript(value=Name(id='df', ctx=Load()), slice=Constant(value='num'), ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='arange', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='df', ctx=Load()), attr='log', ctx=Load()), attr='size', ctx=Load())], keywords=[])), Assign(targets=[Tuple(elts=[Name(id='slope', ctx=Store()), Name(id='intercept', ctx=Store())], ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='polyfit', ctx=Load()), args=[Name(id='x', ctx=Load()), Name(id='y', ctx=Load()), Constant(value=1)], keywords=[])), Assign(targets=[Name(id='annualized_returns', ctx=Store())], value=BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='pow', ctx=Load()), args=[Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[Name(id='slope', ctx=Load())], keywords=[]), Constant(value=250)], keywords=[]), op=Sub(), right=Constant(value=1))), Assign(targets=[Name(id='r_squared', ctx=Store())], value=BinOp(left=Constant(value=1), op=Sub(), right=BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[BinOp(left=BinOp(left=Name(id='y', ctx=Load()), op=Sub(), right=BinOp(left=BinOp(left=Name(id='slope', ctx=Load()), op=Mult(), right=Name(id='x', ctx=Load())), op=Add(), right=Name(id='intercept', ctx=Load()))), op=Pow(), right=Constant(value=2))], keywords=[]), op=Div(), right=BinOp(left=BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='y', ctx=Load())], keywords=[]), op=Sub(), right=Constant(value=1)), op=Mult(), right=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='var', ctx=Load()), args=[Name(id='y', ctx=Load())], keywords=[keyword(arg='ddof', value=Constant(value=1))]))))), Assign(targets=[Name(id='score', ctx=Store())], value=BinOp(left=Name(id='annualized_returns', ctx=Load()), op=Mult(), right=Name(id='r_squared', ctx=Load()))), Expr(value=Call(func=Attribute(value=Name(id='score_list', ctx=Load()), attr='append', ctx=Load()), args=[Name(id='score', ctx=Load())], keywords=[]))], orelse=[]), Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Attribute(value=Name(id='pd', ctx=Load()), attr='DataFrame', ctx=Load()), args=[], keywords=[keyword(arg='index', value=Name(id='etf_pool', ctx=Load())), keyword(arg='data', value=Dict(keys=[Constant(value='score')], values=[Name(id='score_list', ctx=Load())]))])), Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Attribute(value=Name(id='df', ctx=Load()), attr='sort_values', ctx=Load()), args=[], keywords=[keyword(arg='by', value=Constant(value='score')), keyword(arg='ascending', value=Constant(value=False))])), Assign(targets=[Name(id='rank_list', ctx=Store())], value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Name(id='df', ctx=Load()), attr='index', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='print', ctx=Load()), args=[Name(id='df', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='record', ctx=Load()), args=[], keywords=[keyword(arg='黄金', value=Call(func=Name(id='round', ctx=Load()), args=[Subscript(value=Attribute(value=Name(id='df', ctx=Load()), attr='loc', ctx=Load()), slice=Constant(value='518880.XSHG'), ctx=Load()), Constant(value=2)], keywords=[]))])), Expr(value=Call(func=Name(id='record', ctx=Load()), args=[], keywords=[keyword(arg='纳指', value=Call(func=Name(id='round', ctx=Load()), args=[Subscript(value=Attribute(value=Name(id='df', ctx=Load()), attr='loc', ctx=Load()), slice=Constant(value='513100.XSHG'), ctx=Load()), Constant(value=2)], keywords=[]))])), Expr(value=Call(func=Name(id='record', ctx=Load()), args=[], keywords=[keyword(arg='成长', value=Call(func=Name(id='round', ctx=Load()), args=[Subscript(value=Attribute(value=Name(id='df', ctx=Load()), attr='loc', ctx=Load()), slice=Constant(value='159915.XSHE'), ctx=Load()), Constant(value=2)], keywords=[]))])), Expr(value=Call(func=Name(id='record', ctx=Load()), args=[], keywords=[keyword(arg='价值', value=Call(func=Name(id='round', ctx=Load()), args=[Subscript(value=Attribute(value=Name(id='df', ctx=Load()), attr='loc', ctx=Load()), slice=Constant(value='510180.XSHG'), ctx=Load()), Constant(value=2)], keywords=[]))])), Return(value=Name(id='rank_list', ctx=Load()))], decorator_list=[], type_params=[])",
+     "trade": "FunctionDef(name='trade', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='target_num', ctx=Store())], value=Constant(value=1)), Assign(targets=[Name(id='target_list', ctx=Store())], value=Subscript(value=Call(func=Name(id='get_rank', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='etf_pool', ctx=Load())], keywords=[]), slice=Slice(upper=Name(id='target_num', ctx=Load())), ctx=Load())), Assign(targets=[Name(id='hold_list', ctx=Store())], value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[])), For(target=Name(id='etf', ctx=Store()), iter=Name(id='hold_list', ctx=Load()), body=[If(test=Compare(left=Name(id='etf', ctx=Load()), ops=[NotIn()], comparators=[Name(id='target_list', ctx=Load())]), body=[Expr(value=Call(func=Name(id='order_target_value', ctx=Load()), args=[Name(id='etf', ctx=Load()), Constant(value=0)], keywords=[])), Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='卖出'), op=Add(), right=Call(func=Name(id='str', ctx=Load()), args=[Name(id='etf', ctx=Load())], keywords=[]))], keywords=[]))], orelse=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='继续持有'), op=Add(), right=Call(func=Name(id='str', ctx=Load()), args=[Name(id='etf', ctx=Load())], keywords=[]))], keywords=[]))])], orelse=[]), Assign(targets=[Name(id='hold_list', ctx=Store())], value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[])), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='hold_list', ctx=Load())], keywords=[]), ops=[Lt()], comparators=[Name(id='target_num', ctx=Load())]), body=[Assign(targets=[Name(id='value', ctx=Store())], value=BinOp(left=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load()), op=Div(), right=BinOp(left=Name(id='target_num', ctx=Load()), op=Sub(), right=Call(func=Name(id='len', ctx=Load()), args=[Name(id='hold_list', ctx=Load())], keywords=[])))), For(target=Name(id='etf', ctx=Store()), iter=Name(id='target_list', ctx=Load()), body=[If(test=Compare(left=Attribute(value=Subscript(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), slice=Name(id='etf', ctx=Load()), ctx=Load()), attr='total_amount', ctx=Load()), ops=[Eq()], comparators=[Constant(value=0)]), body=[Expr(value=Call(func=Name(id='order_target_value', ctx=Load()), args=[Name(id='etf', ctx=Load()), Name(id='value', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='买入'), op=Add(), right=Call(func=Name(id='str', ctx=Load()), args=[Name(id='etf', ctx=Load())], keywords=[]))], keywords=[]))], orelse=[])], orelse=[])], orelse=[])], decorator_list=[], type_params=[])"
+    },
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "四固定核心资产25行普通log动量排名、每日9:30单仓轮动",
+     "fidelity": "77行全文/3函数及原排名/订单诊断；原算式与全池共同日频排名参考独立核验，基金输入和平台语义未齐，无交易复现",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "固定518880/513100/159915/510180，保留顺序与事后固定池限制",
+      "score": "25行log(close)普通np.polyfit；(exp(slope)^250-1)乘R2，R2分母(n-1)乘样本方差",
+      "selection": "降序第一只，不过滤负动量，不加债券备用；并列排序按原Pandas保留",
+      "record": "四个record传round后的单行Series，不默改标量或删记录；原平台接受性未证",
+      "orders": "9:30先卖名单外；按即时现金/剩余槽位买新仓，赢家已有持仓不重新调目标",
+      "position": "普通dict缺持仓key报KeyError，平台默认零Position及卖出后现金是否即时释放未证",
+      "cost": "fund买卖.0002/最低5/卖税0，FixedSlippage0"
+     },
+     "gaps": [
+      "四ETF历史身份/上市、事件、状态、复权与费用及9:30成交版本未齐，close候选不代表可交易输入",
+      "math依赖平台隐式注入；恒定/非正/缺失价格与年化溢出原边界不默修",
+      "单行Series记录和默认Position、即时订单成交/现金语义未证明"
+     ],
+     "future_information_risks": [
+      "固定池为事后选择；最新补取历史不证明当时复权/身份与盘前可用版本"
+     ],
+     "next_step": "按SHA复用三候选并补513100，核最长25行普通/加权差异及禁网原解析；输入放行才唯一Book三成本，重要规则变体先确认"
+    },
+    "newly_reviewed": true,
+    "original_line_numbers_retained": true
+   },
+   {
+    "source_path": "repo/量化策略源代码/聚宽2025年精选/38ETF策略之核心资产轮动（线性增加权重）.txt",
+    "source_copy": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/source-reviews/S-81a0307e6b20.source",
+    "source_sha256": "4d00a6e469c5efa19487b328dd234d8d090d2f5333e58824fcb1a30efdd79bf7",
+    "encoding": "utf-8-sig",
+    "complete_lines_read": 86,
+    "definition_ast": {
+     "initialize": "FunctionDef(name='initialize', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Expr(value=Call(func=Name(id='set_benchmark', ctx=Load()), args=[Constant(value='000300.XSHG')], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='use_real_price'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_option', ctx=Load()), args=[Constant(value='avoid_future_data'), Constant(value=True)], keywords=[])), Expr(value=Call(func=Name(id='set_slippage', ctx=Load()), args=[Call(func=Name(id='FixedSlippage', ctx=Load()), args=[Constant(value=0.0)], keywords=[])], keywords=[])), Expr(value=Call(func=Name(id='set_order_cost', ctx=Load()), args=[Call(func=Name(id='OrderCost', ctx=Load()), args=[], keywords=[keyword(arg='open_tax', value=Constant(value=0)), keyword(arg='close_tax', value=Constant(value=0)), keyword(arg='open_commission', value=Constant(value=0.0002)), keyword(arg='close_commission', value=Constant(value=0.0002)), keyword(arg='close_today_commission', value=Constant(value=0)), keyword(arg='min_commission', value=Constant(value=5))])], keywords=[keyword(arg='type', value=Constant(value='fund'))])), Expr(value=Call(func=Attribute(value=Name(id='log', ctx=Load()), attr='set_level', ctx=Load()), args=[Constant(value='system'), Constant(value='error')], keywords=[])), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='etf_pool', ctx=Store())], value=List(elts=[Constant(value='518880.XSHG'), Constant(value='513100.XSHG'), Constant(value='159915.XSHE'), Constant(value='510180.XSHG')], ctx=Load())), Assign(targets=[Attribute(value=Name(id='g', ctx=Load()), attr='m_days', ctx=Store())], value=Constant(value=25)), Expr(value=Call(func=Name(id='run_daily', ctx=Load()), args=[Name(id='trade', ctx=Load()), Constant(value='9:30')], keywords=[]))], decorator_list=[], type_params=[])",
+     "MOM": "FunctionDef(name='MOM', args=arguments(posonlyargs=[], args=[arg(arg='etf')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Name(id='attribute_history', ctx=Load()), args=[Name(id='etf', ctx=Load()), Attribute(value=Name(id='g', ctx=Load()), attr='m_days', ctx=Load()), Constant(value='1d'), List(elts=[Constant(value='close')], ctx=Load())], keywords=[])), Assign(targets=[Name(id='y', ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='log', ctx=Load()), args=[Attribute(value=Subscript(value=Name(id='df', ctx=Load()), slice=Constant(value='close'), ctx=Load()), attr='values', ctx=Load())], keywords=[])), Assign(targets=[Name(id='n', ctx=Store())], value=Call(func=Name(id='len', ctx=Load()), args=[Name(id='y', ctx=Load())], keywords=[])), Assign(targets=[Name(id='x', ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='arange', ctx=Load()), args=[Name(id='n', ctx=Load())], keywords=[])), Assign(targets=[Name(id='weights', ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='linspace', ctx=Load()), args=[Constant(value=1), Constant(value=2), Name(id='n', ctx=Load())], keywords=[])), Assign(targets=[Tuple(elts=[Name(id='slope', ctx=Store()), Name(id='intercept', ctx=Store())], ctx=Store())], value=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='polyfit', ctx=Load()), args=[Name(id='x', ctx=Load()), Name(id='y', ctx=Load()), Constant(value=1)], keywords=[keyword(arg='w', value=Name(id='weights', ctx=Load()))])), Assign(targets=[Name(id='annualized_returns', ctx=Store())], value=BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='pow', ctx=Load()), args=[Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[Name(id='slope', ctx=Load())], keywords=[]), Constant(value=250)], keywords=[]), op=Sub(), right=Constant(value=1))), Assign(targets=[Name(id='residuals', ctx=Store())], value=BinOp(left=Name(id='y', ctx=Load()), op=Sub(), right=BinOp(left=BinOp(left=Name(id='slope', ctx=Load()), op=Mult(), right=Name(id='x', ctx=Load())), op=Add(), right=Name(id='intercept', ctx=Load())))), Assign(targets=[Name(id='weighted_residuals', ctx=Store())], value=BinOp(left=Name(id='weights', ctx=Load()), op=Mult(), right=BinOp(left=Name(id='residuals', ctx=Load()), op=Pow(), right=Constant(value=2)))), Assign(targets=[Name(id='r_squared', ctx=Store())], value=BinOp(left=Constant(value=1), op=Sub(), right=BinOp(left=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='sum', ctx=Load()), args=[Name(id='weighted_residuals', ctx=Load())], keywords=[]), op=Div(), right=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='sum', ctx=Load()), args=[BinOp(left=Name(id='weights', ctx=Load()), op=Mult(), right=BinOp(left=BinOp(left=Name(id='y', ctx=Load()), op=Sub(), right=Call(func=Attribute(value=Name(id='np', ctx=Load()), attr='mean', ctx=Load()), args=[Name(id='y', ctx=Load())], keywords=[])), op=Pow(), right=Constant(value=2)))], keywords=[])))), Assign(targets=[Name(id='score', ctx=Store())], value=BinOp(left=Name(id='annualized_returns', ctx=Load()), op=Mult(), right=Name(id='r_squared', ctx=Load()))), Return(value=Name(id='score', ctx=Load()))], decorator_list=[], type_params=[])",
+     "get_rank": "FunctionDef(name='get_rank', args=arguments(posonlyargs=[], args=[arg(arg='etf_pool')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='score_list', ctx=Store())], value=List(elts=[], ctx=Load())), For(target=Name(id='etf', ctx=Store()), iter=Name(id='etf_pool', ctx=Load()), body=[Assign(targets=[Name(id='score', ctx=Store())], value=Call(func=Name(id='MOM', ctx=Load()), args=[Name(id='etf', ctx=Load())], keywords=[])), Expr(value=Call(func=Attribute(value=Name(id='score_list', ctx=Load()), attr='append', ctx=Load()), args=[Name(id='score', ctx=Load())], keywords=[]))], orelse=[]), Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Attribute(value=Name(id='pd', ctx=Load()), attr='DataFrame', ctx=Load()), args=[], keywords=[keyword(arg='index', value=Name(id='etf_pool', ctx=Load())), keyword(arg='data', value=Dict(keys=[Constant(value='score')], values=[Name(id='score_list', ctx=Load())]))])), Assign(targets=[Name(id='df', ctx=Store())], value=Call(func=Attribute(value=Name(id='df', ctx=Load()), attr='sort_values', ctx=Load()), args=[], keywords=[keyword(arg='by', value=Constant(value='score')), keyword(arg='ascending', value=Constant(value=False))])), Assign(targets=[Name(id='rank_list', ctx=Store())], value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Name(id='df', ctx=Load()), attr='index', ctx=Load())], keywords=[])), Return(value=Name(id='rank_list', ctx=Load()))], decorator_list=[], type_params=[])",
+     "trade": "FunctionDef(name='trade', args=arguments(posonlyargs=[], args=[arg(arg='context')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='target_num', ctx=Store())], value=Constant(value=1)), Assign(targets=[Name(id='target_list', ctx=Store())], value=Subscript(value=Call(func=Name(id='get_rank', ctx=Load()), args=[Attribute(value=Name(id='g', ctx=Load()), attr='etf_pool', ctx=Load())], keywords=[]), slice=Slice(upper=Name(id='target_num', ctx=Load())), ctx=Load())), Assign(targets=[Name(id='hold_list', ctx=Store())], value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[])), For(target=Name(id='etf', ctx=Store()), iter=Name(id='hold_list', ctx=Load()), body=[If(test=Compare(left=Name(id='etf', ctx=Load()), ops=[NotIn()], comparators=[Name(id='target_list', ctx=Load())]), body=[Expr(value=Call(func=Name(id='order_target_value', ctx=Load()), args=[Name(id='etf', ctx=Load()), Constant(value=0)], keywords=[])), Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='卖出'), op=Add(), right=Call(func=Name(id='str', ctx=Load()), args=[Name(id='etf', ctx=Load())], keywords=[]))], keywords=[]))], orelse=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='继续持有'), op=Add(), right=Call(func=Name(id='str', ctx=Load()), args=[Name(id='etf', ctx=Load())], keywords=[]))], keywords=[])), Pass()])], orelse=[]), Assign(targets=[Name(id='hold_list', ctx=Store())], value=Call(func=Name(id='list', ctx=Load()), args=[Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load())], keywords=[])), If(test=Compare(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='hold_list', ctx=Load())], keywords=[]), ops=[Lt()], comparators=[Name(id='target_num', ctx=Load())]), body=[Assign(targets=[Name(id='value', ctx=Store())], value=BinOp(left=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='available_cash', ctx=Load()), op=Div(), right=BinOp(left=Name(id='target_num', ctx=Load()), op=Sub(), right=Call(func=Name(id='len', ctx=Load()), args=[Name(id='hold_list', ctx=Load())], keywords=[])))), For(target=Name(id='etf', ctx=Store()), iter=Name(id='target_list', ctx=Load()), body=[If(test=Compare(left=Attribute(value=Subscript(value=Attribute(value=Attribute(value=Name(id='context', ctx=Load()), attr='portfolio', ctx=Load()), attr='positions', ctx=Load()), slice=Name(id='etf', ctx=Load()), ctx=Load()), attr='total_amount', ctx=Load()), ops=[Eq()], comparators=[Constant(value=0)]), body=[Expr(value=Call(func=Name(id='order_target_value', ctx=Load()), args=[Name(id='etf', ctx=Load()), Name(id='value', ctx=Load())], keywords=[])), Expr(value=Call(func=Name(id='print', ctx=Load()), args=[BinOp(left=Constant(value='买入'), op=Add(), right=Call(func=Name(id='str', ctx=Load()), args=[Name(id='etf', ctx=Load())], keywords=[]))], keywords=[]))], orelse=[])], orelse=[])], orelse=[])], decorator_list=[], type_params=[])"
+    },
+    "review": {
+     "review_status": "人工审查完成",
+     "scope": "四固定核心资产25行线性加权log动量排名与9:30单仓轮动",
+     "fidelity": "86行全文/4函数及原MOM/排名/订单诊断；原非标准权重R2保留、最长共同日频参考独立核验，原基金交易未放行",
+     "implementations": [],
+     "status": "待数据",
+     "rules": {
+      "pool": "固定518880/513100/159915/510180，与2024/03同池但字节和动量算式不同",
+      "fit": "25行np.linspace(1,2,n)传polyfit w，实际最小化w平方加权残差，不能改成w一次拟合",
+      "R2": "分子w一次加权残差；分母w一次乘相对未加权mean的平方，不修成标准加权R2",
+      "score": "(exp(slope)^250-1)乘原R2，降序第一只，不加正动量过滤或备用",
+      "orders": "9:30先名单外目标0，再按即时持仓/现金买新仓；赢家已有持仓不重新定权重",
+      "cost": "fund买卖.0002/最低5/无卖税，FixedSlippage0"
+     },
+     "gaps": [
+      "四ETF完整历史身份/事件/状态/复权/费用及9:30执行语义未齐，不使用候选close编造交易收益",
+      "math隐式注入；恒定/非正/缺失close及溢出、默认缺仓Position和即时现金未证",
+      "加权拟合与R2不同权重是原经济规则，重要修正必须另建变体确认"
+     ],
+     "future_information_risks": [
+      "固定四池事后偏差与最新历史版本限制保留"
+     ],
+     "next_step": "用原w平方拟合和原w一次R2独立核验最长四池评分/排序、按年比较；禁网原解析与旧资产保护通过后研究验收，输入齐备才唯一Book三成本"
+    },
+    "newly_reviewed": true,
+    "original_line_numbers_retained": true
+   }
+  ],
+  "references": [
+   {
+    "file": "repo/akshare/akshare/fund/fund_etf_sina.py",
+    "copy": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/references/fund_etf_sina.py",
+    "sha256": "f620e60898064db0d3f88b537ca5631503d101f2759a0da88fc68fb4641873c7",
+    "commit": "0191689d57c667b7c7a198fd0cf97316837ef311"
+   },
+   {
+    "file": "repo/rqalpha/rqalpha/portfolio/account.py",
+    "copy": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/references/account.py",
+    "sha256": "0df29c6fbbfe15fe15aeab7715ffe322c1074e46004b5a95f4cf14b20665b6b0",
+    "commit": "0d98adefa87956e26f3e7ca5b26b5f3fc7ca834f"
+   }
+  ],
+  "catalog": {
+   "catalog_version": "strategy_catalog_v1",
+   "catalog_id": "d8e4c39532149ba06b72",
+   "source_root": "/mnt/d/projects/observe/repo/量化策略源代码",
+   "files": 695,
+   "distinct_contents": 654,
+   "status_counts": {
+    "待数据": 488,
+    "已验证": 11,
+    "待审查": 2,
+    "暂不可复现": 65,
+    "非交易研究脚本": 88,
+    "重复版本": 41
+   },
+   "suffix_counts": {
+    ".txt": 689,
+    ".ipynb": 1,
+    ".py": 5
+   },
+   "encoding_counts": {
+    "gb18030": 99,
+    "utf-8-sig": 596
+   },
+   "api_file_counts": {
+    "get_fundamentals": 292,
+    "get_fundamentals_continuously": 5,
+    "get_history_fundamentals": 18,
+    "get_valuation": 20,
+    "finance.run_query": 87,
+    "macro.run_query": 7,
+    "bond.run_query": 3,
+    "get_money_flow": 9,
+    "get_index_stocks": 215,
+    "get_industry_stocks": 93,
+    "get_industry": 24,
+    "get_ticks": 22,
+    "get_call_auction": 9,
+    "get_price": 317,
+    "get_bars": 79,
+    "attribute_history": 249,
+    "history": 181,
+    "get_current_data": 398,
+    "get_extras": 58,
+    "get_factor_values": 82,
+    "get_all_securities": 297,
+    "run_daily": 486,
+    "run_weekly": 117,
+    "run_monthly": 123,
+    "order_target_value": 434,
+    "order_target": 255,
+    "order_value": 205,
+    "order": 77,
+    "get_future_contracts": 10,
+    "get_dominant_future": 28,
+    "marginsec_open": 4,
+    "marginsec_close": 4
+   },
+   "reviewed_sources": [
+    "S-bcd947018a9c",
+    "S-25a2ce74300f",
+    "S-bc319409eff5",
+    "S-7fc777423ab1",
+    "S-2986239ac760",
+    "S-a02bd5fb82fa",
+    "S-7dffe8edb923",
+    "S-e336a9e62ff1",
+    "S-95dbc8b9a124",
+    "S-f10cb8ff702d",
+    "S-641b9138fa5d",
+    "S-18d2868df809",
+    "S-5c7b2aeec2aa",
+    "S-2129796d6da6",
+    "S-7da7fcfec431",
+    "S-af09cfafe6cf",
+    "S-b0df386a9dcf",
+    "S-95b83db2a7bc",
+    "S-f01ccf5aba44",
+    "S-dde5d3d3b70e",
+    "S-886271fb6b84",
+    "S-df677a5ebcd4",
+    "S-e2209e269e29",
+    "S-7decff38834a",
+    "S-5e11fde9aff3",
+    "S-12f03bfd0f95",
+    "S-f2e9047924e2",
+    "S-eff4d7ae7982",
+    "S-1f50da84115f",
+    "S-ea621382a002",
+    "S-acbb5f9cf09f",
+    "S-3413c5f12dc4",
+    "S-38b227d4327a",
+    "S-68c46bf70920",
+    "S-1422d134ff75",
+    "S-db01c1c96ded",
+    "S-063f47ab3d44",
+    "S-4daa86e5158f",
+    "S-d32775c4089e",
+    "S-4fc6fb337479",
+    "S-63c706efe95f",
+    "S-12ba1c0d79f5",
+    "S-9d9f03067815",
+    "S-850132b43dab",
+    "S-147b0cfb49ff",
+    "S-d07877e2c354",
+    "S-d8596ab3828a",
+    "S-c97c02ea2346",
+    "S-00007afacbb0",
+    "S-a5b450847a6e",
+    "S-b8a8b5e90627",
+    "S-d885413f8d35",
+    "S-7f91b002698b",
+    "S-a71bf28aa99b",
+    "S-57b937da520d",
+    "S-fed6ca288035",
+    "S-dc85884a380a",
+    "S-9005dd4b1cba",
+    "S-ced8ae5ce344",
+    "S-62e8d5c7a1f4",
+    "S-d4725a5a21fb",
+    "S-66eefedcf0df",
+    "S-4cc2cba1cbd9",
+    "S-5831425175ce",
+    "S-630ebb99f658",
+    "S-cafee3ad464a",
+    "S-e66b1ad7d8fc",
+    "S-560abd656ca0",
+    "S-2c9d2319c7d3",
+    "S-84b17f428272",
+    "S-6b0a4a36011b",
+    "S-88c607586b82",
+    "S-0c2cff0626ee",
+    "S-51a96eadb4d2",
+    "S-954b41e5a396",
+    "S-9112d55dd0cc",
+    "S-9c1a89daf62c",
+    "S-7f7e299f339a",
+    "S-72e5a8798544",
+    "S-a4c77bd8b44e",
+    "S-bbf9fccbd6eb",
+    "S-c6fe57d02852",
+    "S-4b7dbe8af8ac",
+    "S-d0ecd9406080",
+    "S-bee2c8d71c81",
+    "S-13b988210e42",
+    "S-62e7304a4e91",
+    "S-6c7441327c3f",
+    "S-398e16c90dee",
+    "S-68930ba303f5",
+    "S-f81bb8422f94",
+    "S-87966f00e099",
+    "S-848cffb63799",
+    "S-790f0000ed44",
+    "S-38d7f27c1372",
+    "S-5ec3559109c3",
+    "S-07472fbc2bde",
+    "S-66d37162df54",
+    "S-bb187e7a4887",
+    "S-faf66e10ba1d",
+    "S-71571339e9e6",
+    "S-d5b7c03a7119",
+    "S-bf4ed04c68a7",
+    "S-5f14afeecf21",
+    "S-979d5187c3ec",
+    "S-dc57f9049b90",
+    "S-daecf5bc2eef",
+    "S-d1d16967e9c8",
+    "S-f39f02e3e03f",
+    "S-e070401fbf90",
+    "S-906ef1dfcf9f",
+    "S-d5d5edecea7b",
+    "S-3f190493784c",
+    "S-078084d1a6cb",
+    "S-e12e4a8dd5e5",
+    "S-05431e7ae641",
+    "S-de485dcbc1fe",
+    "S-c00703810bd3",
+    "S-7e6d5e73b9e8",
+    "S-6320a637da54",
+    "S-03e5e601f4cc",
+    "S-fc701a6d18eb",
+    "S-c5edb3ef544f",
+    "S-af075cf4c6b7",
+    "S-7bcd889e7b6a",
+    "S-7e88bff4dc3a",
+    "S-5f0fb6c259ee",
+    "S-0dbbecb9eb1d",
+    "S-47d77840ec26",
+    "S-993fc6059661",
+    "S-4cc76c2c420b",
+    "S-2034813a5b91",
+    "S-578d2e730081",
+    "S-3811a6d26860",
+    "S-a8d1fa5a793a",
+    "S-8f3bdcfa8d7f",
+    "S-f8eaf0fa2c7c",
+    "S-c2fa4290b950",
+    "S-1a1aef9faa9b",
+    "S-84f3f0c3c784",
+    "S-c02ac3bad6ef",
+    "S-69bfefcb4d1d",
+    "S-653ef41eb685",
+    "S-c55ddc35cce6",
+    "S-c2a42783423c",
+    "S-75af9ddf3d76",
+    "S-f23cf187dc47",
+    "S-64a80805fb8a",
+    "S-a37c26ce95d6",
+    "S-075d01ac07cf",
+    "S-7363e43c9a08",
+    "S-8294e3469a6d",
+    "S-7ff11583b76b",
+    "S-64bca3ebbca5",
+    "S-a00834c00f8e",
+    "S-e84bd8c8eecb",
+    "S-e69eb36bb221",
+    "S-21fdea960e9b",
+    "S-a9596eba9dc5",
+    "S-1c7b2dac16c6",
+    "S-2fd706bb71d6",
+    "S-b3cc2dcd8a0d",
+    "S-285c04a4d1ce",
+    "S-bdfd3c6fde91",
+    "S-e0fb958bf2d4",
+    "S-da49d185309b",
+    "S-3626c17cbcae",
+    "S-cc41735b8a2d",
+    "S-53655cbaa9bc",
+    "S-b01f3e94a5b8",
+    "S-c28a0c7f5f80",
+    "S-c98372326f58",
+    "S-665c147b3cf0",
+    "S-c5a0e347acdc",
+    "S-69ef2eedcc68",
+    "S-4766560702c0",
+    "S-bab96f942801",
+    "S-683cc39b7527",
+    "S-36ea1540cfac",
+    "S-31ff28a9afb2",
+    "S-d6db552a3293",
+    "S-9539de6881cd",
+    "S-31af0ed2018f",
+    "S-bb46c1ee16cf",
+    "S-cce77eb946a8",
+    "S-976aaefe793c",
+    "S-7f248f5caa7b",
+    "S-84adbe33af88",
+    "S-ee1aa7ba22b3",
+    "S-726f0aa658ec",
+    "S-cded591ad6be",
+    "S-68dd8d2d5eec",
+    "S-926d08fe0ba8",
+    "S-9e752d17571d",
+    "S-624b1cbccd4f",
+    "S-784d8f7e456f",
+    "S-e2462b051f4b",
+    "S-5008146cd1d4",
+    "S-e307438a42e6",
+    "S-f9ab6005c30c",
+    "S-de82ea4feb32",
+    "S-bae5b4fe76e8",
+    "S-ec0ab5ffcecf",
+    "S-2d40c2d698f7",
+    "S-6615db0d4e16",
+    "S-1fce2be2b9ec",
+    "S-85aa910ed165",
+    "S-028ef663b462",
+    "S-91dc4ee62715",
+    "S-7f049bb69647",
+    "S-d68e945d07cb",
+    "S-04dba1d0caaf",
+    "S-a40276639484",
+    "S-fb06e8894ab7",
+    "S-ee99921ca98d",
+    "S-4cbc5c72990f",
+    "S-c0fb1e63f51d",
+    "S-1e5fd99659cf",
+    "S-4d86dd0d21e5",
+    "S-9a751570080b",
+    "S-b43bab022282",
+    "S-3be0226c9375",
+    "S-2998470d8f3f",
+    "S-ccb84ba42e45",
+    "S-a78d8acd0042",
+    "S-c1bba20dca69",
+    "S-b785d665cf54",
+    "S-73dd3253aaaa",
+    "S-b318f6effe5e",
+    "S-85df9d32a2d9",
+    "S-81a0307e6b20",
+    "S-dbd26615c5f8",
+    "S-8caa8420540b",
+    "S-fa0c56ab417c",
+    "S-5300a99a1779",
+    "S-4730e53b92bc",
+    "S-a55f095fba8d"
+   ],
+   "caveat": "未审查文件的依赖/分类为静态候选；近似变体不会自动合并，不代表全量策略已实现",
+   "output": "data/catalog/strategies/d8e4c39532149ba06b72"
+  },
+  "snapshot": "20261006-145049-e06c",
+  "previous_catalog_file": "data/catalog/strategies/c99bc135d7249fe45a2c/catalog.json",
+  "previous_catalog_sha256": "a878dabda1210c5b6f1cdd862ad340d0dd420225d893e9705b9ae79954b26141",
+  "not_a_backtest": true
+ },
+ "checks": {
+  "status": "passed",
+  "commands": [
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/ruff",
+     "check",
+     "src",
+     "tests",
+     "scripts/review_strategy_batch78.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/checks/check-0.log",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+   },
+   {
+    "command": [
+     "/home/zuozhe/envs/quant/.venv/bin/python",
+     "-m",
+     "scripts.verify_offline_tests",
+     "-q",
+     "tests/unit/test_batch78_research.py",
+     "tests/unit/test_batch77_research.py",
+     "tests/unit/test_catalog_dependencies.py",
+     "tests/unit/test_catalog_schedules.py",
+     "tests/unit/test_research_metadata.py",
+     "tests/unit/test_external_cash_flows.py",
+     "tests/integration/test_strategy_merge.py"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/checks/check-1.log",
+    "sha256": "98e2191a5d4b6f81927ce8fe88e286d4890a6f5e5a3df2c331c0c2357d423974"
+   },
+   {
+    "command": [
+     "git",
+     "diff",
+     "--check"
+    ],
+    "returncode": 0,
+    "log": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/checks/check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  ],
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "src/observe/strategy_catalog.py": "2a6e516a05f538379c74d905da11a6922c7bab59221cf7895dbb0499e2f8b28f",
+   "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91"
+  },
+  "evidence_sha256": {
+   "baseline.json": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4",
+   "candidate-audit.json": "c9d944e8498c78b4ac7d53ed4365641900556dc1b484f1f93f41df13932e94a1",
+   "catalog-before.json": "f1d009cbed0f30260d0dcad54bf848c705c196ab181341e83aa3b5b54ec2beb5",
+   "common-rank-components.parquet": "9fc67a94cf382046c6c0eeb4a667e4c209e17439ce199441bae51d3559ca3f14",
+   "component-research.json": "98393aff78048a7def7f841c944cb5fec647d9becbebf0813e65a0fe464cc191",
+   "dependency-inventory.json": "24f0a8682c82fc4e907cbfd4849900bdae92e70e70190e57964f143bf96f9b41",
+   "diagnostics.json": "af8cae1341584a4ca5e1b2cad557b4d3b147c75fbcfb854d8263c15cf3789788",
+   "existing-apis.json": "83ec9eaf0a87a44cf9ff8f785e763b05fb8853a93deec3aa21a5674cb261106f",
+   "implementation-evidence.before.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "input-binding.json": "b553b6be435991752711e9090d749f266bddc13eeaf787f6ba180ad36e94c132",
+   "momentum-components.parquet": "2cfcb9c89b691131bdf9124d3e61e1c30fe3621a7dc451d7f66517f2cca05448",
+   "native-history-quality.json": "f9852feb159662ffc4332008151e16d55a229955bc658303e0747df4af0cd651",
+   "offline-catalog.json": "70d80af541e677e1516427ab754be6e19bcc6b5ed0684380df3f469ddbb43f4f",
+   "offline-verification.json": "da1c8c317898502ed946e44c8df30748a478a55ec99a60ebb29bc6feabe32511",
+   "probe-results.json": "8700758f70a4a4e749669be54632fae53ca0651485795ba0bebcf122f66dac03",
+   "progress-start.json": "e0dadbbc7b58a917434c40a838d93ceed412c712d23fa3749acc5a7b1979d9e3",
+   "reused-inputs.json": "37a93f8833a53d96c6ac46d837580a4d53c8b7b0d9d061f2d4a5a0701d171cef",
+   "source-extraction.json": "14cb709051129bd9c19b60d627665bc06a8e6121a1722f467d077403c5d679d6",
+   "specialized-tests-repaired.json": "6c9c1a67fd88607f98f3d92313c2fc56735fb11efbcfcd57b0bf245ead34eec4",
+   "specialized-tests-repaired.log": "85c693ac0df42562c4204b565e4e1a877cea87d051fe62a4c3ec0a82656f08f0",
+   "specialized-tests.json": "46491b001b2833bb9ec5540f8fa4a19ffd4d2fdc88d4816bfca0d0662762cc46",
+   "specialized-tests.log": "c7a8738e4958f6a6e55fc51617e96cbbe8b1e8b5e12e11818bd16d1df93d8ee6",
+   "strategy_catalog.before.py": "f97164042ce38871530908106c0c8fc07913ec690b2d285fc3cec22472812383",
+   "worker.json": "0a41f7a1ab3c38d3e2c365ea447f74e2115aed0dbad1e6376f193646a39362c0",
+   "checks/check-0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+   "checks/check-1.log": "98e2191a5d4b6f81927ce8fe88e286d4890a6f5e5a3df2c331c0c2357d423974",
+   "checks/check-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "development-failure-initial/failure.json": "9049ed5ad9e86952310eaff5e8a1db4f973f0909fe4648967be5e177b046fd66",
+   "development-failure-initial/review_strategy_batch78.py": "d2b1e4dd33352648b59d0e86a1e445442b2857f48a7250abb5bced68be8df932",
+   "development-failure-initial/test_batch78_research.py": "3e245ebae1d4088767367ee29b642869bb9ce82edac2914fd859eca0ad89108e",
+   "development-failure-ranking/failure.json": "f296f024ea3f61a9ff1a771d6cc00d45d8f60ad64e9a0c84b7e14973802bf0b2",
+   "development-failure-ranking/review_strategy_batch78.py": "dd51ba84be51ac7c090630801b182f30995291354b660433f5bf38111f8bb511",
+   "development-failure-ranking/tests.log": "ac4ecf1e49b900a9da893dbbafff862eef11b5a6ad211c0b2f994de65d51eed7",
+   "development-failure-ranking/test_batch78_research.py": "3e245ebae1d4088767367ee29b642869bb9ce82edac2914fd859eca0ad89108e",
+   "references/account.py": "0df29c6fbbfe15fe15aeab7715ffe322c1074e46004b5a95f4cf14b20665b6b0",
+   "references/fund_etf_sina.py": "f620e60898064db0d3f88b537ca5631503d101f2759a0da88fc68fb4641873c7",
+   "source-reviews/review.json": "88276bcd961462f14f3552009d82e94b8e940826d6c0c663090bdf7137870898",
+   "source-reviews/S-31af0ed2018f.source": "437a3f19f060e4c661e55e70a0713a48a348fd8efb4006587f9055c98b9cbb65",
+   "source-reviews/S-81a0307e6b20.source": "4d00a6e469c5efa19487b328dd234d8d090d2f5333e58824fcb1a30efdd79bf7",
+   "catalog-offline/catalog/strategies/implementation-evidence.json": "32abd05fc4ae56311d91b3ee62e7f7904b9baea21dfb1ed2ca65f5a8837021c6",
+   "catalog-offline/catalog/strategies/latest.json": "4f0b82668c02ba979af7cf5842cdb754002232524ae2ed2761d705ea3fe6253e",
+   "catalog-offline/catalog/strategies/d8e4c39532149ba06b72/catalog.json": "4ff587c76d00f84df573fb43f1be6cdd376d56d2039513520fc02d7d42bd57b8",
+   "catalog-offline/catalog/strategies/d8e4c39532149ba06b72/catalog.parquet": "8b04be42d23d799a26baaba2bc987a48982f3f9954405546668f6c1d15c86c60",
+   "catalog-offline/catalog/strategies/d8e4c39532149ba06b72/summary.json": "0b7feec37cb13e14ea663f10de33492c558974b8ae2efc74b32ae7928eefd745",
+   "implementation-checked/scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "implementation-checked/scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "implementation-checked/scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "implementation-checked/scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "implementation-checked/scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "implementation-checked/scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "implementation-checked/scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "implementation-checked/scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "implementation-checked/scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "implementation-checked/scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "implementation-checked/scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "implementation-checked/scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "implementation-checked/scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "implementation-checked/scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "implementation-checked/scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "implementation-checked/scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "implementation-checked/scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "implementation-checked/scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "implementation-checked/scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "implementation-checked/scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "implementation-checked/scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "implementation-checked/scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "implementation-checked/scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "implementation-checked/src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "implementation-checked/src/observe/strategy_catalog.py": "2a6e516a05f538379c74d905da11a6922c7bab59221cf7895dbb0499e2f8b28f",
+   "implementation-checked/src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "implementation-checked/src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "implementation-checked/src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "implementation-checked/src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "implementation-checked/tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "implementation-checked/tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "implementation-checked/tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "implementation-checked/tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "implementation-checked/tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "implementation-checked/tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "implementation-checked/tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "implementation-checked/tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "implementation-checked/tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "implementation-checked/tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "implementation-checked/tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "implementation-checked/tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "implementation-checked/tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "implementation-checked/tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91",
+   "probes/fund-513100/parsed.parquet": "4885a44c20002de8f9cf3f2fe436e51f777a1207a6837e84501124aef90c9baf",
+   "probes/fund-513100/response.bin": "7c8ec738b530a889597d7df6a79f1e0c707a5f37d6f4447cec49724391b8c1c4",
+   "probes/fund-513100/result.json": "544e709fc8511c961d374a00e343cfc2f5baf53c9bd7c8e3d9cf363807d1aea5"
+  }
+ },
+ "offline": {
+  "result": "match",
+  "differences": 0,
+  "socket_network_disabled": true,
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "src/observe/strategy_catalog.py": "2a6e516a05f538379c74d905da11a6922c7bab59221cf7895dbb0499e2f8b28f",
+   "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91"
+  },
+  "not_a_backtest": true
+ },
+ "diagnostics": {
+  "cases": [
+   {
+    "case": "0_defaults",
+    "pool": [
+     "518880.XSHG",
+     "513100.XSHG",
+     "159915.XSHE",
+     "510180.XSHG"
+    ],
+    "period": 25,
+    "costs": [
+     [
+      {
+       "open_tax": 0,
+       "close_tax": 0,
+       "open_commission": 0.0002,
+       "close_commission": 0.0002,
+       "close_today_commission": 0,
+       "min_commission": 5
+      },
+      {
+       "type": "fund"
+      }
+     ]
+    ],
+    "schedules": [
+     [
+      "trade",
+      "9:30"
+     ]
+    ]
+   },
+   {
+    "case": "0_positive",
+    "rank": [
+     "510180.XSHG",
+     "159915.XSHE",
+     "513100.XSHG",
+     "518880.XSHG"
+    ],
+    "scores": [
+     0.28402541668775516,
+     0.6487212707001431,
+     1.1170000166127037,
+     1.7182818284590713
+    ]
+   },
+   {
+    "case": "0_negative",
+    "rank": [
+     "518880.XSHG",
+     "513100.XSHG",
+     "159915.XSHE",
+     "510180.XSHG"
+    ],
+    "scores": [
+     -0.22119921692858924,
+     -0.3934693402873647,
+     -0.5276334472589823,
+     -0.6321205588285566
+    ]
+   },
+   {
+    "case": "0_tied",
+    "rank": [
+     "518880.XSHG",
+     "513100.XSHG",
+     "159915.XSHE",
+     "510180.XSHG"
+    ],
+    "scores": [
+     0.28402541668775516,
+     0.28402541668775516,
+     0.28402541668775516,
+     0.28402541668775516
+    ]
+   },
+   {
+    "case": "0_record_types",
+    "records": [
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     },
+     {
+      "type": "Series",
+      "length": 1
+     }
+    ]
+   },
+   {
+    "case": "0_implicit_math_error",
+    "exception": "NameError"
+   },
+   {
+    "case": "0_constant",
+    "finite": [
+     false,
+     true,
+     true,
+     false,
+     true
+    ],
+    "score": null
+   },
+   {
+    "case": "0_zero",
+    "finite": [
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "score": null
+   },
+   {
+    "case": "0_negative_price",
+    "finite": [
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "score": null
+   },
+   {
+    "case": "0_nan",
+    "finite": [
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "score": null
+   },
+   {
+    "case": "0_short",
+    "finite": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "score": 0.28402541668775516
+   },
+   {
+    "case": "0_overflow",
+    "exception": "OverflowError"
+   },
+   {
+    "case": "0_missing_position_key",
+    "exception": "KeyError"
+   },
+   {
+    "case": "0_winner_held",
+    "orders": [],
+    "cash": 100.0
+   },
+   {
+    "case": "0_delayed_sale",
+    "orders": [
+     [
+      "513100.XSHG",
+      0
+     ]
+    ],
+    "cash": 100.0
+   },
+   {
+    "case": "0_immediate_sale",
+    "orders": [
+     [
+      "513100.XSHG",
+      0
+     ],
+     [
+      "518880.XSHG",
+      600.0
+     ]
+    ],
+    "cash": 600.0
+   },
+   {
+    "case": "1_defaults",
+    "pool": [
+     "518880.XSHG",
+     "513100.XSHG",
+     "159915.XSHE",
+     "510180.XSHG"
+    ],
+    "period": 25,
+    "costs": [
+     [
+      {
+       "open_tax": 0,
+       "close_tax": 0,
+       "open_commission": 0.0002,
+       "close_commission": 0.0002,
+       "close_today_commission": 0,
+       "min_commission": 5
+      },
+      {
+       "type": "fund"
+      }
+     ]
+    ],
+    "schedules": [
+     [
+      "trade",
+      "9:30"
+     ]
+    ]
+   },
+   {
+    "case": "1_positive",
+    "rank": [
+     "510180.XSHG",
+     "159915.XSHE",
+     "513100.XSHG",
+     "518880.XSHG"
+    ],
+    "scores": [
+     0.28402541668775516,
+     0.6487212707001431,
+     1.1170000166127037,
+     1.7182818284590713
+    ]
+   },
+   {
+    "case": "1_negative",
+    "rank": [
+     "518880.XSHG",
+     "513100.XSHG",
+     "159915.XSHE",
+     "510180.XSHG"
+    ],
+    "scores": [
+     -0.22119921692858924,
+     -0.3934693402873647,
+     -0.5276334472589823,
+     -0.6321205588285566
+    ]
+   },
+   {
+    "case": "1_tied",
+    "rank": [
+     "518880.XSHG",
+     "513100.XSHG",
+     "159915.XSHE",
+     "510180.XSHG"
+    ],
+    "scores": [
+     0.28402541668775516,
+     0.28402541668775516,
+     0.28402541668775516,
+     0.28402541668775516
+    ]
+   },
+   {
+    "case": "1_record_types",
+    "records": []
+   },
+   {
+    "case": "1_implicit_math_error",
+    "exception": "NameError"
+   },
+   {
+    "case": "1_constant",
+    "finite": [
+     false,
+     true,
+     true,
+     false,
+     true
+    ],
+    "score": null
+   },
+   {
+    "case": "1_zero",
+    "finite": [
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "score": null
+   },
+   {
+    "case": "1_negative_price",
+    "finite": [
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "score": null
+   },
+   {
+    "case": "1_nan",
+    "finite": [
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "score": null
+   },
+   {
+    "case": "1_short",
+    "finite": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "score": 0.28402541668775516
+   },
+   {
+    "case": "1_overflow",
+    "exception": "OverflowError"
+   },
+   {
+    "case": "1_missing_position_key",
+    "exception": "KeyError"
+   },
+   {
+    "case": "1_winner_held",
+    "orders": [],
+    "cash": 100.0
+   },
+   {
+    "case": "1_delayed_sale",
+    "orders": [
+     [
+      "513100.XSHG",
+      0
+     ]
+    ],
+    "cash": 100.0
+   },
+   {
+    "case": "1_immediate_sale",
+    "orders": [
+     [
+      "513100.XSHG",
+      0
+     ],
+     [
+      "518880.XSHG",
+      600.0
+     ]
+    ],
+    "cash": 600.0
+   }
+  ],
+  "not_a_backtest": true,
+  "original_formulas_unchanged": true,
+  "platform_assumptions": "Explicit math/local record/default-position/instant-fill stubs isolate original rules; no platform equivalence or real fills",
+  "external_messages": 0
+ },
+ "components": {
+  "not_a_backtest": true,
+  "new_trading_backtests": 0,
+  "single_fund_variant_windows": 29710,
+  "common_rank_dates": 3102,
+  "original_rank_calls": 6204,
+  "blocked": [
+   [
+    "ALL",
+    "2013-12-23",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2013-12-24",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2013-12-25",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2013-12-26",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2013-12-27",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2013-12-30",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2013-12-31",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-02",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-03",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-06",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-07",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-08",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-09",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-10",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-13",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-14",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-15",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-16",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-17",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-20",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-21",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-22",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-23",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2014-01-24",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-09",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-10",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-18",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-19",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-22",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-23",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-24",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-25",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-02-26",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-01",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-02",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-03",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-04",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-05",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-08",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-09",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-10",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-11",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-12",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-15",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-16",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-17",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-18",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2021-03-19",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-14",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-17",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-18",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-19",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-20",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-21",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-24",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-25",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-26",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-27",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-01-28",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-07",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-08",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-09",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-10",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-11",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-14",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-15",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-16",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-17",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-18",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-21",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-22",
+    "unequal25_native_dates"
+   ],
+   [
+    "ALL",
+    "2022-02-23",
+    "unequal25_native_dates"
+   ]
+  ],
+  "independent_leader_differences": 0,
+  "independent_rank_differences": 0,
+  "variant_leader_differences": 189,
+  "max_independent_abs_differences": {
+   "score": 1.1920928955078125e-07,
+   "slope": 8.435092901937224e-17,
+   "intercept": 1.7763568394002505e-15,
+   "r2": 3.597122599785507e-14,
+   "annualized": 9.825453162193298e-08
+  },
+  "yearly": [
+   {
+    "year": "2013",
+    "common_dates": 70,
+    "variant_leader_differences": 9,
+    "ordinary_leaders": {
+     "159915.XSHE": 30,
+     "513100.XSHG": 22,
+     "510180.XSHG": 13,
+     "518880.XSHG": 5
+    },
+    "weighted_leaders": {
+     "159915.XSHE": 26,
+     "513100.XSHG": 24,
+     "510180.XSHG": 16,
+     "518880.XSHG": 4
+    }
+   },
+   {
+    "year": "2014",
+    "common_dates": 228,
+    "variant_leader_differences": 15,
+    "ordinary_leaders": {
+     "159915.XSHE": 71,
+     "510180.XSHG": 71,
+     "518880.XSHG": 43,
+     "513100.XSHG": 43
+    },
+    "weighted_leaders": {
+     "510180.XSHG": 72,
+     "159915.XSHE": 69,
+     "513100.XSHG": 44,
+     "518880.XSHG": 43
+    }
+   },
+   {
+    "year": "2015",
+    "common_dates": 244,
+    "variant_leader_differences": 16,
+    "ordinary_leaders": {
+     "159915.XSHE": 130,
+     "513100.XSHG": 57,
+     "518880.XSHG": 31,
+     "510180.XSHG": 26
+    },
+    "weighted_leaders": {
+     "159915.XSHE": 127,
+     "513100.XSHG": 59,
+     "518880.XSHG": 30,
+     "510180.XSHG": 28
+    }
+   },
+   {
+    "year": "2016",
+    "common_dates": 244,
+    "variant_leader_differences": 16,
+    "ordinary_leaders": {
+     "518880.XSHG": 87,
+     "513100.XSHG": 74,
+     "510180.XSHG": 45,
+     "159915.XSHE": 38
+    },
+    "weighted_leaders": {
+     "518880.XSHG": 87,
+     "513100.XSHG": 72,
+     "510180.XSHG": 51,
+     "159915.XSHE": 34
+    }
+   },
+   {
+    "year": "2017",
+    "common_dates": 244,
+    "variant_leader_differences": 10,
+    "ordinary_leaders": {
+     "513100.XSHG": 126,
+     "510180.XSHG": 50,
+     "518880.XSHG": 35,
+     "159915.XSHE": 33
+    },
+    "weighted_leaders": {
+     "513100.XSHG": 124,
+     "510180.XSHG": 54,
+     "518880.XSHG": 33,
+     "159915.XSHE": 33
+    }
+   },
+   {
+    "year": "2018",
+    "common_dates": 243,
+    "variant_leader_differences": 8,
+    "ordinary_leaders": {
+     "513100.XSHG": 106,
+     "518880.XSHG": 68,
+     "159915.XSHE": 44,
+     "510180.XSHG": 25
+    },
+    "weighted_leaders": {
+     "513100.XSHG": 105,
+     "518880.XSHG": 69,
+     "159915.XSHE": 43,
+     "510180.XSHG": 26
+    }
+   },
+   {
+    "year": "2019",
+    "common_dates": 244,
+    "variant_leader_differences": 17,
+    "ordinary_leaders": {
+     "513100.XSHG": 96,
+     "518880.XSHG": 68,
+     "159915.XSHE": 50,
+     "510180.XSHG": 30
+    },
+    "weighted_leaders": {
+     "513100.XSHG": 92,
+     "518880.XSHG": 67,
+     "159915.XSHE": 53,
+     "510180.XSHG": 32
+    }
+   },
+   {
+    "year": "2020",
+    "common_dates": 243,
+    "variant_leader_differences": 18,
+    "ordinary_leaders": {
+     "159915.XSHE": 98,
+     "513100.XSHG": 70,
+     "518880.XSHG": 48,
+     "510180.XSHG": 27
+    },
+    "weighted_leaders": {
+     "159915.XSHE": 98,
+     "513100.XSHG": 68,
+     "518880.XSHG": 51,
+     "510180.XSHG": 26
+    }
+   },
+   {
+    "year": "2021",
+    "common_dates": 218,
+    "variant_leader_differences": 11,
+    "ordinary_leaders": {
+     "513100.XSHG": 100,
+     "159915.XSHE": 89,
+     "510180.XSHG": 28,
+     "518880.XSHG": 1
+    },
+    "weighted_leaders": {
+     "513100.XSHG": 98,
+     "159915.XSHE": 89,
+     "510180.XSHG": 28,
+     "518880.XSHG": 3
+    }
+   },
+   {
+    "year": "2022",
+    "common_dates": 217,
+    "variant_leader_differences": 13,
+    "ordinary_leaders": {
+     "518880.XSHG": 100,
+     "513100.XSHG": 50,
+     "159915.XSHE": 43,
+     "510180.XSHG": 24
+    },
+    "weighted_leaders": {
+     "518880.XSHG": 101,
+     "513100.XSHG": 49,
+     "159915.XSHE": 44,
+     "510180.XSHG": 23
+    }
+   },
+   {
+    "year": "2023",
+    "common_dates": 242,
+    "variant_leader_differences": 15,
+    "ordinary_leaders": {
+     "513100.XSHG": 114,
+     "518880.XSHG": 88,
+     "510180.XSHG": 22,
+     "159915.XSHE": 18
+    },
+    "weighted_leaders": {
+     "513100.XSHG": 116,
+     "518880.XSHG": 85,
+     "510180.XSHG": 24,
+     "159915.XSHE": 17
+    }
+   },
+   {
+    "year": "2024",
+    "common_dates": 242,
+    "variant_leader_differences": 16,
+    "ordinary_leaders": {
+     "513100.XSHG": 99,
+     "518880.XSHG": 83,
+     "159915.XSHE": 48,
+     "510180.XSHG": 12
+    },
+    "weighted_leaders": {
+     "513100.XSHG": 97,
+     "518880.XSHG": 86,
+     "159915.XSHE": 47,
+     "510180.XSHG": 12
+    }
+   },
+   {
+    "year": "2025",
+    "common_dates": 243,
+    "variant_leader_differences": 8,
+    "ordinary_leaders": {
+     "518880.XSHG": 101,
+     "159915.XSHE": 88,
+     "513100.XSHG": 48,
+     "510180.XSHG": 6
+    },
+    "weighted_leaders": {
+     "518880.XSHG": 103,
+     "159915.XSHE": 88,
+     "513100.XSHG": 45,
+     "510180.XSHG": 7
+    }
+   },
+   {
+    "year": "2026",
+    "common_dates": 180,
+    "variant_leader_differences": 17,
+    "ordinary_leaders": {
+     "518880.XSHG": 74,
+     "159915.XSHE": 52,
+     "513100.XSHG": 40,
+     "510180.XSHG": 14
+    },
+    "weighted_leaders": {
+     "518880.XSHG": 73,
+     "159915.XSHE": 47,
+     "513100.XSHG": 47,
+     "510180.XSHG": 13
+    }
+   }
+  ],
+  "first_history_end": "2013-09-03",
+  "last_history_end": "2026-09-29",
+  "limits": [
+   "Native close rows do not prove adjusted histories/events/states/identity/fees or9:30 execution",
+   "Original weighted fit uses squared w; original R2 uses single w and unweighted mean",
+   "All post20260929 rows retained but excluded; fixed ex-post fund pool remains a limitation"
+  ],
+  "original_input_rows_admitted": 0,
+  "implementation_sha256": {
+   "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+   "scripts/probe_strategy_batch74_fallback.py": "4d587c53cedf7df766a5e8838fbd469f9b23de4e99341bd8b792ffbcbec413bd",
+   "scripts/recover_strategy_batch75.py": "06f8e19a6bedbd0867777d279ed3ea3d51c67812125103c9cc6b948780df1ae0",
+   "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+   "scripts/review_strategy_batch32.py": "8abedb64f7d8a08a5d9e925f8a5017fd689f526f18b1796644d663f562dba7bc",
+   "scripts/review_strategy_batch58.py": "ee41b20b7026f66fa98bc84ed10ec6c8fc744129eddf536e14e7e02520d4f21d",
+   "scripts/review_strategy_batch59.py": "3db223758dbbebe01692b0bec98b48455a92c475d86617f87e1b622e01ce5faf",
+   "scripts/review_strategy_batch64.py": "5ad3abdef8b5e2886e9a94ae1538ea2c6a65e455cdf3072173e028770ab28d7c",
+   "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+   "scripts/review_strategy_batch68.py": "76b55024600c5a4845dc00ecf39a2926492d94fe47c2dc47b004f8294ec9da8c",
+   "scripts/review_strategy_batch69.py": "7be1e2165e6b95a49f02c0b8957e4fc4fe007d1924622bcef694dd5c42bd0e1d",
+   "scripts/review_strategy_batch70.py": "2598e316b06de25f9d6c05dab9fa34fcb9aa6768f1ebb1c006f36f265e5eaf1b",
+   "scripts/review_strategy_batch71.py": "c0e0b9b9b29df59c412f9c9fbb649ad9e63596658e8bbd34c1383885abf8b9d4",
+   "scripts/review_strategy_batch72.py": "1b45af1a1185567fc592dac0a392c507750fd1bee22a94234cf277dbe3aa0504",
+   "scripts/review_strategy_batch73.py": "84ca6704e0d3ac50adb3d5ce8c3f6de0891c0fb376a92776077cf4fd2b52856f",
+   "scripts/review_strategy_batch74.py": "8722408d287d9b0ff8e393da1de271aabc35fc909bd7fac3956034f27734e250",
+   "scripts/review_strategy_batch75.py": "8c6f9ac4f1fed77b30c6db153a22aef6c1846848de310ba6f9c170ac0a484081",
+   "scripts/review_strategy_batch76.py": "5bb1b4b85728de13d58f1784cffa90789f598ac16de16f3c67f26245cb1760a0",
+   "scripts/review_strategy_batch77.py": "df1e7cb9a6d1026e70fe68b7cba355056811f943a6720d65c547cb733c2c7bf3",
+   "scripts/review_strategy_batch78.py": "2a0ee5feedfd352ee8794ffc6c936608fc1fdc8af1009feed2cf7cddb030c8d4",
+   "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+   "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+   "scripts/verify_strategy_batch66.py": "9509b578b2079f4da42f35f19a704068b1cc0cc3a671b74f3c38adafc852c343",
+   "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+   "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+   "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+   "src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+   "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+   "src/observe/strategy_catalog.py": "2a6e516a05f538379c74d905da11a6922c7bab59221cf7895dbb0499e2f8b28f",
+   "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+   "tests/unit/test_batch68_research.py": "de51e42aff293c0a597286005b407d86f0127658c474878fff6e9cb4451b8c0c",
+   "tests/unit/test_batch69_research.py": "bdca88074f18a0c9db536112977d826ca85a6b29282cf88050886752f17bdd6f",
+   "tests/unit/test_batch70_research.py": "99abef2dcc85408b3299ec32a3a24a0c1344fefac31c272ce920b1fd0bcd1be1",
+   "tests/unit/test_batch71_research.py": "8249ad817a4fa032fb671fd9e03fe35c4de2441177ca7dd8e8ff8fa20a228600",
+   "tests/unit/test_batch72_research.py": "e4c240d23013d9b22765e40caaf21cde38f1c55c95dd3f1d4d70365b17f3f17a",
+   "tests/unit/test_batch73_research.py": "ef2541398c017674d645eb643ef152c983fc09e13fffb04c83047e0524fcce9e",
+   "tests/unit/test_batch74_research.py": "bfa25dc265046e77cb8627c36cfddaf6e73be3996f894a1988f63d5e6339b82a",
+   "tests/unit/test_batch75_recovery.py": "3e92f2b33c43ff1a00e5580485fefef1296e793461e35543a50983615ec18224",
+   "tests/unit/test_batch75_research.py": "149bbb3bc70730891141ddcb3612078849babc9d0564f4ec578b782d2f4811b9",
+   "tests/unit/test_batch76_research.py": "4efaa589558dbfc8d788b42a307696b36b03f12dc251429c7b69b876720acb5a",
+   "tests/unit/test_batch77_research.py": "67a9c5817a54f0f4eea15939b4bc5bcf05e3989e19c52779b7d27eea925c23ad",
+   "tests/unit/test_batch78_research.py": "c9ad687aece2bb815e6314661a171d663a527e7125d6ef0a4815d25962ec6b81",
+   "tests/unit/test_external_cash_flows.py": "80cf96b03ff5cc23913d4a278c525b2063a0df1611ec0fcefd02f395a6be0c91"
+  }
+ },
+ "inventory": {
+  "snapshot": "20261006-145049-e06c",
+  "funds": [
+   "518880.XSHG",
+   "513100.XSHG",
+   "159915.XSHE",
+   "510180.XSHG"
+  ],
+  "registered_fund_rows": {
+   "instruments": 0,
+   "bars_1d": 0,
+   "adj_factors": 0,
+   "adj_coverage": 0,
+   "corp_actions": 0,
+   "bars_5m": 0,
+   "valuations_1d": 0
+  },
+  "original_trades_admitted": 0,
+  "not_a_backtest": true,
+  "gates": [
+   "Historical ETF identity/events/states/adjustment/fee versions incomplete",
+   "Original9:30 execution/instant cash/positions missing-key semantics unproved",
+   "Original03 record receives Series; platform acceptance and implicit math injection unproved",
+   "Fixed ex-post pool and historical vendor vintage remain limitations"
+  ]
+ },
+ "candidates": {
+  "profiles": [
+   {
+    "case": "fund-518880",
+    "status": "success",
+    "strict_usable": false,
+    "reused": true,
+    "rows": 3206,
+    "first": "2013-07-29",
+    "last": "2026-10-08",
+    "post_cutoff_rows": 2
+   },
+   {
+    "case": "fund-159915",
+    "status": "success",
+    "strict_usable": false,
+    "reused": true,
+    "rows": 3597,
+    "first": "2011-12-09",
+    "last": "2026-10-08",
+    "post_cutoff_rows": 2
+   },
+   {
+    "case": "fund-510180",
+    "status": "success",
+    "strict_usable": false,
+    "reused": true,
+    "rows": 4953,
+    "first": "2006-05-18",
+    "last": "2026-10-08",
+    "post_cutoff_rows": 2
+   },
+   {
+    "case": "fund-513100",
+    "status": "success",
+    "strict_usable": false,
+    "reused": false,
+    "rows": 3203,
+    "first": "2013-07-31",
+    "last": "2026-10-08",
+    "post_cutoff_rows": 2
+   }
+  ],
+  "new_native_parser_match": true,
+  "new_requests": 1,
+  "http_statuses": [
+   200
+  ],
+  "original_input_rows_admitted": 0,
+  "not_a_backtest": true
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5363,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "abec9f0bdc989358cd5eecbfa428cdaf63308c19c91890f7bc0d0edcffbe98f4"
+ },
+ "progress": {
+  "checkpoint": "20261009-013336-a77a",
+  "note": "Batch78 core-assets ordinary/weighted momentum reference research accepted; original trades blocked",
+  "catalog_id": "d8e4c39532149ba06b72",
+  "catalog_sha256": "4ff587c76d00f84df573fb43f1be6cdd376d56d2039513520fc02d7d42bd57b8",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 488,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 65,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 237,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 69,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261009-013336-a77a"
+ },
+ "newly_reviewed": 2,
+ "not_a_backtest": true,
+ "new_trading_backtests": 0,
+ "original_strategy_complete": false
+}

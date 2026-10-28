@@ -1,0 +1,23 @@
+{
+  "case": {
+    "cause": "Formal copy manifest omitted newly imported acceptance helpers not present in historical price/volume graphs",
+    "economic_rule_changes": false,
+    "error": "ModuleNotFoundError",
+    "failed_directory": "data/staging/strategies-batch103/20261011-formal-validation",
+    "failed_files": 542,
+    "formal_receipt_written": false,
+    "isolated_returncode": 1,
+    "local_tests": 48,
+    "message": "No module named 'scripts.accept_strategy_batch100'",
+    "original_strategy_error": false,
+    "status": "observed_formal_handoff_failure"
+  },
+  "case_id": "batch103-isolated-import-failure-v1",
+  "nature": "observed_copy_dependency_failure",
+  "purpose": "v1隔离缺accept100，首次记录器错误归因也保留",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch103/20261011-formal-validation-import-failure/failure.json",
+    "sha256": "29fa2f87dc058fc3379b0b626bb574cf6846f64a278b54dc6d7d4f146e926d90"
+  }
+}

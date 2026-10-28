@@ -1,0 +1,26 @@
+{
+  "case": {
+    "cause": "Test fixture row.update shared nested rules with expected selected specification; mutation changed both",
+    "command": [
+      "/home/zuozhe/envs/quant/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_batch98_acceptance.py",
+      "tests/unit/test_batch98_rsrs_boundary.py"
+    ],
+    "production_economic_rule_change": false,
+    "representative_red_rerun": true,
+    "returncode": 1,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "8436097749836bd4f63a22ea8220728de1d438e5a92061fac1632f79ed1a445d"
+  },
+  "case_id": "batch98-alias-fixture-failure",
+  "nature": "immutable_actual_expected_rules_alias",
+  "purpose": "1失败13通过，期望实际共享rules；深拷贝修复后拒绝测试有效",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch98/20261011-catalog-fixture-alias-failure/failure.json",
+    "sha256": "74d29888172d6e9c67e181a700e719c47c6415504f9e2c8d2f131c730c3be5a0"
+  }
+}

@@ -1,0 +1,238 @@
+{
+ "status": "ok",
+ "scope": "in_progress_original_callback_and_arithmetic_reference_not_formal_acceptance",
+ "current_checkpoint": "20261010-211228-0ed3",
+ "accepted_checkpoint": "20261010-205315-172a",
+ "progress": {
+  "checkpoint": "20261010-211228-0ed3",
+  "note": "Batch95 long magic3/v2 arithmetic and original callback stage, no formal95 acceptance/trades",
+  "catalog_id": "021347e0816f40d6a6b9",
+  "catalog_sha256": "211bd8c261b55082523bdc123e39f06b81053a919b921cad5f457d21e89ed6ce",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 273,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 77,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261010-211228-0ed3"
+ },
+ "formal_source_research_acceptance": false,
+ "formal_trading_acceptance": false,
+ "library_goal_complete": false,
+ "new_trading_backtests": 0,
+ "new_requests": 0,
+ "new_provider_rows": 0,
+ "published_input_changed": false,
+ "source_lines": [
+  171,
+  171,
+  249
+ ],
+ "source_functions": [
+  13,
+  13,
+  15
+ ],
+ "diagnostic_cases": 108,
+ "components": {
+  "magic3_RSRS": {
+   "rows": 4662,
+   "first": "2007-07-27",
+   "last": "2026-09-29",
+   "seed_slopes": 599,
+   "maximum_independent_error": 2.3783286451362073e-10,
+   "signals": {
+    "KEEP": 2869,
+    "BUY": 941,
+    "SELL": 852
+   },
+   "controlled_mean_injection": false,
+   "original_platform_mean_available_proven": false,
+   "not_a_trading_backtest": true
+  },
+  "v2_RSRS_controlled_mean_reference": {
+   "rows": 4662,
+   "first": "2007-07-27",
+   "last": "2026-09-29",
+   "seed_slopes": 600,
+   "maximum_independent_error": 2.3783286451362073e-10,
+   "signals": {
+    "BUY": 3040,
+    "SELL": 1622
+   },
+   "controlled_mean_injection": true,
+   "original_platform_mean_available_proven": false,
+   "not_a_trading_backtest": true
+  },
+  "native_momentum": {
+   "windows": 22044,
+   "profiles": [
+    {
+     "variant": 0,
+     "symbol": "510050.XSHG",
+     "windows": 5233,
+     "first_last_input": "2005-03-22",
+     "last_last_input": "2026-09-29",
+     "maximum_independent_error": 5.0306980803327406e-17
+    },
+    {
+     "variant": 0,
+     "symbol": "510300.XSHG",
+     "windows": 3468,
+     "first_last_input": "2012-06-25",
+     "last_last_input": "2026-09-29",
+     "maximum_independent_error": 4.683753385137379e-17
+    },
+    {
+     "variant": 0,
+     "symbol": "159949.XSHE",
+     "windows": 2456,
+     "first_last_input": "2016-08-18",
+     "last_last_input": "2026-09-29",
+     "maximum_independent_error": 3.642919299551295e-17
+    },
+    {
+     "variant": 2,
+     "symbol": "510050.XSHG",
+     "windows": 5143,
+     "first_last_input": "2005-08-02",
+     "last_last_input": "2026-09-29",
+     "maximum_independent_error": 4.336808689942018e-17
+    },
+    {
+     "variant": 2,
+     "symbol": "510300.XSHG",
+     "windows": 3378,
+     "first_last_input": "2012-11-05",
+     "last_last_input": "2026-09-29",
+     "maximum_independent_error": 4.85722573273506e-17
+    },
+    {
+     "variant": 2,
+     "symbol": "159949.XSHE",
+     "windows": 2366,
+     "first_last_input": "2017-01-03",
+     "last_last_input": "2026-09-29",
+     "maximum_independent_error": 4.597017211338539e-17
+    }
+   ],
+   "missing_pool": [
+    "159928.XSHE"
+   ],
+   "full_original_pool_ranking_rows": 0,
+   "native_unadjusted_reference": true,
+   "history_index_labels_controlled": true,
+   "original_adjusted_price_equivalence_proven": false,
+   "last_input_has_no_proven_next_execution_session": true,
+   "not_a_trading_backtest": true
+  },
+  "new_trading_backtests": 0,
+  "formal_source_research_acceptance": false,
+  "original_strategy_complete": false
+ },
+ "fresh_offline_replay": {
+  "status": "match",
+  "differences": 0,
+  "network_forbidden": true,
+  "fresh_process_required_by_cli": true,
+  "implementation_sha256": {
+   "scripts/review_strategy_batch95.py": "6ae51bcd2fccb1adc46ae72d0120770bb4f00b37f62660dadff2411f9275688d",
+   "tests/unit/test_batch95_stage.py": "ed6280f8fbd8831537a7bfb1b888370eed32bf64af6ae5f6d4bb56f508ecf14e"
+  },
+  "files_sha256": {
+   "diagnostics.json": "6529ed0a70068b38505e98c60a8b5944990023bb7c86fc78b6135f76d5ad7e4b",
+   "rsrs-magic3.parquet": "95b397733f2f36f51c1ec1eccb24b267db96abc37131d9793867211bef5c5972",
+   "rsrs-v2-reference.parquet": "4cf6a5e239196cb4fbb3eaed5da83c924a78e0febd26c528b142bc687006c882",
+   "native-momentum-reference.parquet": "2e9e3549884680382895542ec0918ce9cc99c7a066c4679d489385d00225637e",
+   "component-research.json": "f0f82683b3867049ad99fd54cdab1fddeb46f9cda7ba304123d964b88d110e6e"
+  },
+  "new_trading_backtests": 0,
+  "formal_source_research_acceptance": false
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5919,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "6793e056b0cf0ba9423cad26ef95855269e8a5ca9b8a654ac15ee945a396d88d"
+ },
+ "implementation_sha256": {
+  "scripts/review_strategy_batch95.py": "6ae51bcd2fccb1adc46ae72d0120770bb4f00b37f62660dadff2411f9275688d",
+  "tests/unit/test_batch95_stage.py": "ed6280f8fbd8831537a7bfb1b888370eed32bf64af6ae5f6d4bb56f508ecf14e"
+ },
+ "evidence_sha256": {
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/parent-binding.json": "c5b257bf4e99182389eb87dc6a847a353b50c4eacabfb9529b8f7b674de38bcb",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/source-reviews.json": "1cce469496198116c07b978d961c760003edfe4c999162dfbbdaeb4c588bffc3",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/candidate-inputs.json": "29bb303ff6fb14b56f7ce77e6d708de1d5717d4270d225d40a007951f96281f7",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/benchmark-candidates.json": "b5572d481b756ee75817559fa66843d33b84084c8ce990598b70b121db59da64",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/supplement-decision.json": "41069851410ccfbf89a1b0f9ebb197f51dea8998b7e2b2050a4f090e967cac1a",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/index-binding.json": "699a3343dd4a5f5ebf92eaa82b909f1f06ff44911063494986089083df22f1be",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/implementation-binding.json": "abe4658583e76142204d39594dee3d20f36a09aba9af9babff22b3f924e0e2b3",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/output-binding.json": "0c447f4c613ecd5c1ed0feaf78c4d3f78edd015d3829b9ab1f4255857f30dc01",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/diagnostics.json": "6529ed0a70068b38505e98c60a8b5944990023bb7c86fc78b6135f76d5ad7e4b",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/component-research.json": "f0f82683b3867049ad99fd54cdab1fddeb46f9cda7ba304123d964b88d110e6e",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/offline-verification.json": "db4dcd7099f3d818bf96d7da6788e1bce5d48fd81130ff08bc15a86dac887dfb",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/seed-comparison.json": "9a74c0042c85a8aadf8f772ca9cb4d5b916f37413e2c3d8c7606e93c456bb329",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/protection.json": "9751e6edf9dd96683062c583ef6a98ca646ec9abbe0dbd4badfb187c56115307",
+  "data/staging/strategies-batch95/20261010-magic3-v2-numerical-stage/progress-stage.json": "b6564b2b29654640daf9f693636bf4dcb403d6c2782aa91a6e5b1e3afc4d4c08"
+ },
+ "formal_report": "docs/tasks/2026-10-10-第九十五批ETF魔改3与v2-数值与回调阶段记录.md",
+ "report_sha256": "76d2dc1f27e0c14899976993a70c5a116b0a7ae7a793553fcf63136f0e377b27",
+ "tests": {
+  "local_passed": 28,
+  "isolated_passed": 28,
+  "failed_first_fixture": 1,
+  "full_suite_claimed": false,
+  "local_log": "data/staging/strategies-batch95/20261010-initial-checks/pytest-corrected.log",
+  "local_log_sha256": "dfd5123ba87b36af1201290d173052b90138c94e898c7262ba77001d49b6b743",
+  "isolation": {
+   "directory": "/tmp/batch95-stage-isolated-lch134e5",
+   "command": [
+    "/home/zuozhe/envs/quant/.venv/bin/python",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_batch95_stage.py"
+   ],
+   "returncode": 0,
+   "identity_stdout": "/tmp/batch95-stage-isolated-lch134e5/src/observe/__init__.py\n/tmp/batch95-stage-isolated-lch134e5/scripts/review_strategy_batch95.py\n",
+   "log_sha256": "a5ae39e03c7574c4eec0027d0c1e16c73c4000109af33c1d0858abf33aba1a8f",
+   "not_a_formal_acceptance": true
+  },
+  "first_failure": "data/staging/strategies-batch95/20261010-initial-checks/failure.json",
+  "first_failure_sha256": "46feafeae18a0bbff5e30fcc012939d94024aa30f8ad0e5c08b7a150321fffe0"
+ },
+ "checks_observed": [
+  {
+   "command": "/home/zuozhe/envs/quant/.venv/bin/ruff check src tests scripts/review_strategy_batch95.py scripts/prepare_handoff.py scripts/build_strategy_catalog.py scripts/verify_financial_import.py",
+   "returncode": 0,
+   "stdout": "All checks passed!"
+  },
+  {
+   "command": "git diff --check",
+   "returncode": 0
+  },
+  {
+   "command": "bash /home/zuozhe/.agents/skills/write/scripts/check-punctuation.sh --lang zh docs/tasks/2026-10-10-第九十五批ETF魔改3与v2-数值与回调阶段记录.md",
+   "returncode": 0,
+   "stdout": "punctuation: ok"
+  }
+ ],
+ "next_step": "New-directory formal source research acceptance with independent review and input inventory; fund/60m admission before unique Book trades",
+ "Git_publication": "pending_user_commit_and_push"
+}

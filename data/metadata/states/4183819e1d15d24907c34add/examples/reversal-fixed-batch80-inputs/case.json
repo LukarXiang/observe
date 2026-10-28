@@ -1,0 +1,266 @@
+{
+  "case": {
+    "inputs": {
+      "159915.XSHE": {
+        "api_sha256": "75209272ab596c94cfc8ec6a105ae8971d589ca1fea3a383ddf63e9c78b1dc36",
+        "attempts": [
+          {
+            "method": "GET",
+            "url": "https://finance.sina.com.cn/realstock/company/sz159915/hisdata_klc2/klc_kl.js"
+          }
+        ],
+        "case": "159915",
+        "columns": [
+          "date",
+          "prevclose",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "amount",
+          "postVol",
+          "postAmt"
+        ],
+        "file": "data/staging/strategies-batch75/20261008-ETF-info-rotation/probes/159915/parsed.parquet",
+        "published": false,
+        "rows": 3597,
+        "sha256": "1088772b72237c42a3f15bb73dcd8bb83a2370a0eaf832f2fb5000b1221d6b2f",
+        "status": "success",
+        "strict_usable": false,
+        "symbol": "sz159915",
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch75/20261008-ETF-info-rotation/probes/159915/response.bin",
+            "sha256": "7ffb12f33bfd18f6cf3778189a37e409b7cde06526ed3117afbe4b1409de1d3a",
+            "status_code": 200
+          }
+        ]
+      },
+      "510180.XSHG": {
+        "api_sha256": "88b2896dad2c4063e0bb5713dd2faae63672609b209382aaaffbce5a1ff4a5a1",
+        "attempts": [
+          {
+            "method": "GET",
+            "parameters": null,
+            "url": "https://finance.sina.com.cn/realstock/company/sh510180/hisdata_klc2/klc_kl.js"
+          }
+        ],
+        "case": "fund-510180",
+        "columns": [
+          "date",
+          "prevclose",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "amount",
+          "postVol",
+          "postAmt"
+        ],
+        "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-510180/parsed.parquet",
+        "published": false,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sh510180"
+          }
+        },
+        "rows": 4953,
+        "sha256": "fbff896e29561d431102a11e71cf1f93252a0cbea8e4808cdba0d386d18e280e",
+        "status": "success",
+        "strict_usable": false,
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-510180/response.bin",
+            "sha256": "09ba1959a04408a511ef2c66d09c9b9e19042837a4d8d0f4e8a6d01ee03a7add",
+            "status_code": 200
+          }
+        ]
+      },
+      "510880.XSHG": {
+        "api_sha256": "88b2896dad2c4063e0bb5713dd2faae63672609b209382aaaffbce5a1ff4a5a1",
+        "attempts": [
+          {
+            "method": "GET",
+            "parameters": null,
+            "url": "https://finance.sina.com.cn/realstock/company/sh510880/hisdata_klc2/klc_kl.js"
+          }
+        ],
+        "case": "fund-510880",
+        "columns": [
+          "date",
+          "prevclose",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "amount",
+          "postVol",
+          "postAmt"
+        ],
+        "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-510880/parsed.parquet",
+        "published": false,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sh510880"
+          }
+        },
+        "rows": 4790,
+        "sha256": "cbef7da8257d8ba6746ab37cc03497c1568a25f42bd6e5c521add8fa1a9e4f30",
+        "status": "success",
+        "strict_usable": false,
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/fund-510880/response.bin",
+            "sha256": "baf8a29fc9850c91b743c6e81ced89fe5d0f9e88b317b6129f256a81cbb500fc",
+            "status_code": 200
+          }
+        ]
+      },
+      "511010.XSHG": {
+        "api_sha256": "3ff09a6afc9826920f377a5b90104abb6868932b64717deae347b3f8e4afade9",
+        "attempts": [
+          {
+            "method": "GET",
+            "parameters": null,
+            "url": "https://finance.sina.com.cn/realstock/company/sh511010/hisdata_klc2/klc_kl.js"
+          }
+        ],
+        "case": "fund-511010",
+        "columns": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "amount",
+          "postVol",
+          "postAmt"
+        ],
+        "file": "data/staging/strategies-batch77/20261009-DCA-index-valuation/probes/fund-511010/parsed.parquet",
+        "published": false,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sh511010"
+          }
+        },
+        "rows": 3279,
+        "sha256": "9416b5c3ee0d3f4fc11c18b2b84e86668feeb48be49b972d22a62582c3bb4230",
+        "status": "success",
+        "strict_usable": false,
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch77/20261009-DCA-index-valuation/probes/fund-511010/response-0.bin",
+            "sha256": "e6122578704bc1ab6643c578c818b84c5f567c4930775a48978e40a2743f01b0",
+            "status_code": 200
+          }
+        ]
+      },
+      "513100.XSHG": {
+        "api_sha256": "83ec9eaf0a87a44cf9ff8f785e763b05fb8853a93deec3aa21a5674cb261106f",
+        "attempts": [
+          {
+            "method": "GET",
+            "parameters": null,
+            "url": "https://finance.sina.com.cn/realstock/company/sh513100/hisdata_klc2/klc_kl.js"
+          }
+        ],
+        "case": "fund-513100",
+        "columns": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "amount",
+          "postVol",
+          "postAmt"
+        ],
+        "file": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/probes/fund-513100/parsed.parquet",
+        "published": false,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sh513100"
+          }
+        },
+        "rows": 3203,
+        "sha256": "4885a44c20002de8f9cf3f2fe436e51f777a1207a6837e84501124aef90c9baf",
+        "status": "success",
+        "strict_usable": false,
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch78/20261009-core-assets-weighted-momentum/probes/fund-513100/response.bin",
+            "sha256": "7c8ec738b530a889597d7df6a79f1e0c707a5f37d6f4447cec49724391b8c1c4",
+            "status_code": 200
+          }
+        ]
+      },
+      "518880.XSHG": {
+        "api_sha256": "95e4d23f95af3bbbe56a4bb8d19965e3cd1cfbd519db744d51b7d782dee7ddc1",
+        "attempts": [
+          {
+            "method": "GET",
+            "parameters": null,
+            "url": "https://finance.sina.com.cn/realstock/company/sh518880/hisdata_klc2/klc_kl.js"
+          }
+        ],
+        "case": "fund-518880",
+        "columns": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "amount",
+          "postVol",
+          "postAmt"
+        ],
+        "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-518880/parsed.parquet",
+        "published": false,
+        "query": {
+          "function": "fund_etf_hist_sina",
+          "parameters": {
+            "symbol": "sh518880"
+          }
+        },
+        "rows": 3206,
+        "sha256": "d51f5f9c996ab6ec26e999076462c11b677dcfc9f602fea9233cd0e2e39be0fc",
+        "status": "success",
+        "strict_usable": false,
+        "wire_responses": [
+          {
+            "encoding": null,
+            "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/fund-518880/response.bin",
+            "sha256": "dffbce2d727e2ff7dee4155cd93719e8db28cc11e7c3bf7e9b3ba32ab72473c0",
+            "status_code": 200
+          }
+        ]
+      }
+    },
+    "new_requests": 0,
+    "not_a_backtest": true,
+    "strict_usable": false
+  },
+  "case_id": "reversal-fixed-batch80-inputs",
+  "nature": "accepted_native_daily_payload_reuse",
+  "purpose": "六基金已有候选按正式SHA复用，无新增请求或原交易准入，不能代替9:30/9:35价格与事件",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch80/20261009-reversal-fixed-weights/reused-inputs.json",
+    "sha256": "31022fa1c8487cedca667203c9b9f047b4029619d72e925014a9d819a7776df9"
+  }
+}

@@ -1,0 +1,49 @@
+{
+ "schema": 1,
+ "status": "ok",
+ "scope": "Batch67 source and component research acceptance; original trades gated",
+ "directory": "data/staging/strategies-batch67/20261008-momentum-low-price-json-recovery",
+ "accepted_checkpoint": "20261008-191652-00b8",
+ "accepted_receipt": "docs/handoff/2026-10-08-batch67-verification.json",
+ "accepted_receipt_sha256": "317f85bd1a70e91bf32604e8131c3e0257d4aecc2b62c0c7c83a36e745f88660",
+ "checked_state_sha256": "2d7004978499fe8ff56cead874ef1429fa490fb4c2af6f2e3148ef1bda9adf55",
+ "review_depth": "deep",
+ "on_target": true,
+ "reviewed_implementation_sha256": {
+  "scripts/review_strategy_batch67.py": "8d0b21f9dadd394e6d4a2d045ea13b7258c8d641f53f3efe05bf6c440f2c2bab",
+  "tests/unit/test_batch67_research.py": "d7d28c75a9baa1ac7831acb84f3f3d2d5ee11c95dabe7ff87e17d1639252fb0b",
+  "src/observe/strategy_catalog.py": "510b101e2e3f3edc2004a8eed708703bae6bf9d8c07c384d8750f95592a3b683"
+ },
+ "security": {
+  "reviewer": "/root/batch67_security",
+  "findings": []
+ },
+ "architecture": {
+  "reviewer": "/root/batch67_architecture",
+  "findings": []
+ },
+ "checks": {
+  "tests_passed": 103,
+  "warnings": 1,
+  "elapsed_seconds": 14.16,
+  "ruff": "passed",
+  "diff_check": "passed",
+  "offline": "match0"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5293,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "7f2f3e14cded41b960b43eed0e193a47bceb05eb5d7dcdbb6313d2076b7ec7d8"
+ },
+ "formal_strategy_acceptance": false,
+ "not_a_backtest": true,
+ "new_strategy_trade_runs": 0,
+ "manually_reviewed": 215,
+ "duplicate_files_in_new_reviews": 1,
+ "economic_rules_changed": false
+}

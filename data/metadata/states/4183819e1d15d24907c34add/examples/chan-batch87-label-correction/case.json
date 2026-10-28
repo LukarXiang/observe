@@ -1,0 +1,20 @@
+{
+  "case": {
+    "corrected_cases": 21,
+    "corrected_file": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/diagnostics-corrected.json",
+    "corrected_sha256": "c4264f812a7ca197515ed50bf7625cb4bc4ac2ba07d79de4c30456ab489f9032",
+    "not_a_backtest": true,
+    "original_cases": 20,
+    "original_file": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/diagnostics.json",
+    "original_sha256": "e4d30f614dd11e08ccc215fa7c13f745a2ebfa9514e78b731ea966fa1437c360",
+    "reason": "Initial two-stroke fixture actually proves index distance8-5=3, not self-distance0; label corrected and three-stroke fixture added. Original source,20-case record and state/indicator tables remain unchanged."
+  },
+  "case_id": "chan-batch87-label-correction",
+  "nature": "immutable_original_twenty_cases_and_separate_corrected_twenty_one_cases",
+  "purpose": "两SHA关联：原两笔例实际距离8-5=3，误标self0；只改标签并追加三笔self9-9=0例，原数据/状态表/策略不变",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch87/20261009-chan-minute-state-machine/diagnostic-label-correction.json",
+    "sha256": "37abaa7d68e7d44a31aebb9e01fe838f28d755aec53c8705fd15d70b70961eb5"
+  }
+}

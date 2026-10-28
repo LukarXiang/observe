@@ -1,0 +1,24 @@
+{
+  "case": {
+    "actual_command": "python -m pytest -q tests/unit/test_batch99_research.py",
+    "error": "ValueError: could not convert string to float: 2018-07-20T00:00:00",
+    "failed": 1,
+    "files_sha256": {
+      "research_strategy_batch99.py": "db8f16e4d922160338af410fda9bc9bbc2425df58d684fd81b5277ce91518a07",
+      "test_batch99_research.py": "d7deaec453b843f8e89bea00cda3289a151a88aee220e8b5b672dd34f7243ca9"
+    },
+    "nature": "test_fixture_archive_index_name_assumption",
+    "passed": 16,
+    "reason": "Original SHIBOR index name is date; test filtered only index. Arithmetic was not changed.",
+    "returncode": 1,
+    "test": "test_long_SHIBOR_first_page_failure_and_current_pandas"
+  },
+  "case_id": "batch99-index-test-failure",
+  "nature": "immutable_test_assumption_failure",
+  "purpose": "1失败16通过，日期索引名假设错误，仅修测试",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch99/20261011-test-date-index-failure/failure.json",
+    "sha256": "f2b00877928a96140d51a5a96b5e833d154e11c544f97e97e295c9c13135f87d"
+  }
+}

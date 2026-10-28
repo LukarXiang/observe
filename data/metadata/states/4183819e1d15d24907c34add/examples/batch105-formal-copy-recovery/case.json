@@ -1,0 +1,34 @@
+{
+  "case": {
+    "changes": "New CHECK directory and explicit precision-helper/driver copies;five actual imported module paths checked",
+    "copied_files": 178,
+    "evidence_sha256": {
+      "data/staging/strategies-batch105/20261011-formal-source-validation-recovery/checked.json": "8515f45dc5c9b304e651bb63143a2583da6bbe79abf81f7a274ab524d09c83f1",
+      "data/staging/strategies-batch105/20261011-formal-source-validation-recovery/copy-manifest.json": "3fc230778da3cf67cf3acb18573fc523fcc5193f94672677007ed59576d57da8",
+      "data/staging/strategies-batch105/20261011-formal-source-validation/copy-manifest.json": "0fcf6ba37dd75b46c015df5bf597af588428c1b348ba54b849bfa3ce7fa35d94",
+      "data/staging/strategies-batch105/20261011-formal-source-validation/isolated.log": "bebeac2e5af6d8958f4c7d3538f0910f0d0bba7c0985dfdf53e038abb592b2e2",
+      "data/staging/strategies-batch105/20261011-formal-source-validation/local.log": "4a3a84f0a9a31de7c68f57225274957611b0139cca6ea8502f110d86d6fda67c",
+      "data/staging/strategies-batch105/20261011-protocol-window-identity/checked.json": "230dac61e428ab699ac0560676e0c25845a9fa9f2239c7a2e877e3269b58a22a",
+      "scripts/accept_strategy_batch105.py": "c96f94c52a81cb868725d04ac012193c61b445ea01d8d46334f4acc78299eeb7",
+      "scripts/recover_strategy_batch105_formal.py": "3f1777caecb6a56806772b852a6669f5cce977d4ef6715e53d86a3d2003d9d73",
+      "scripts/recover_strategy_batch105_stage.py": "15e11b6af68c299cf172b2fb2de1ff7416a557ea452c375b76fe707ce6f1fee9"
+    },
+    "new_trading_backtests": 0,
+    "original_driver_preserved": true,
+    "original_failed_directory": "data/staging/strategies-batch105/20261011-formal-source-validation",
+    "root_cause": "Formal copy plan omitted precision recovery module;local31 passed,isolated collection ModuleNotFoundError",
+    "status": "ok_recovered_formal_copy_plan",
+    "tests": {
+      "isolated": 31,
+      "local": 31
+    }
+  },
+  "case_id": "batch105-formal-copy-recovery",
+  "nature": "isolated_missing_helper_failure_and_31_test_recovery",
+  "purpose": "本机31绿但隔离缺模块；新目录178副本/31与31/五实际导入核验",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-11-batch105-formal-copy-recovery.json",
+    "sha256": "a9a5c807314ece35b9103bd545c5bc19c6e3c584d004a6a39051055547af130a"
+  }
+}

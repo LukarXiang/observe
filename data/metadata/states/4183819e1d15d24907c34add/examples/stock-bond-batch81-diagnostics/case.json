@@ -1,0 +1,2867 @@
+{
+  "case": {
+    "cases": [
+      {
+        "case": "0_defaults",
+        "costs": [
+          [
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003
+            },
+            {
+              "type": "stock"
+            }
+          ]
+        ],
+        "fund_cost_explicit": false,
+        "initial_state": {
+          "buttun": 0,
+          "day": 1,
+          "pool": []
+        },
+        "schedules": [
+          [
+            "market_open",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "9:31"
+            }
+          ],
+          [
+            "market_1455",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "14:55"
+            }
+          ]
+        ],
+        "slippage_explicit": false
+      },
+      {
+        "case": "1_defaults",
+        "costs": [
+          [
+            {
+              "close_commission": 0.0003,
+              "close_tax": 0.001,
+              "min_commission": 5,
+              "open_commission": 0.0003
+            },
+            {
+              "type": "stock"
+            }
+          ]
+        ],
+        "fund_cost_explicit": false,
+        "initial_state": {
+          "bad_sign": 0,
+          "drawback_status": 0,
+          "max_net": 10000.0
+        },
+        "schedules": [
+          [
+            "before_market_open",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "before_open"
+            }
+          ],
+          [
+            "market_open",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "9:30"
+            }
+          ],
+          [
+            "after_market_close",
+            {
+              "reference_security": "000300.XSHG",
+              "time": "after_close"
+            }
+          ]
+        ],
+        "slippage_explicit": false
+      },
+      {
+        "case": "57_initial_no_signal",
+        "error": null,
+        "events": [],
+        "final_values": {},
+        "history_shape": "explicit ndarray operand",
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "states": [
+          {
+            "button": 0,
+            "cash": 100.0,
+            "day": 1
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_series_label_error",
+        "error": "KeyError",
+        "events": [],
+        "final_values": {},
+        "history_shape": "datetime-indexed Series",
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "states": [],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_missing_close",
+        "error": "IndexError",
+        "events": [],
+        "final_values": {},
+        "history_shape": "explicit ndarray operand",
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "states": [],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_zero_close",
+        "error": null,
+        "events": [],
+        "final_values": {},
+        "history_shape": "explicit ndarray operand",
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "states": [
+          {
+            "button": 0,
+            "cash": 100.0,
+            "day": 1
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_y_equal",
+        "error": null,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 100.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": false,
+            "cash_before": 100.0,
+            "current_value": 0.0,
+            "stock": "512100.XSHG",
+            "target": 100.0
+          }
+        ],
+        "final_values": {},
+        "history_shape": "explicit ndarray operand",
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            0
+          ],
+          [
+            "512100.XSHG",
+            100.0
+          ]
+        ],
+        "states": [
+          {
+            "button": 1,
+            "cash": 100.0,
+            "day": 2
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_y_above",
+        "error": null,
+        "events": [],
+        "final_values": {},
+        "history_shape": "explicit ndarray operand",
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "states": [
+          {
+            "button": 0,
+            "cash": 100.0,
+            "day": 1
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_t_equal",
+        "error": null,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 100.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": false,
+            "cash_before": 100.0,
+            "current_value": 0.0,
+            "stock": "512100.XSHG",
+            "target": 100.0
+          }
+        ],
+        "final_values": {},
+        "history_shape": "explicit ndarray operand",
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            0
+          ],
+          [
+            "512100.XSHG",
+            100.0
+          ]
+        ],
+        "states": [
+          {
+            "button": 1,
+            "cash": 100.0,
+            "day": 2
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_t_above",
+        "error": null,
+        "events": [],
+        "final_values": {},
+        "history_shape": "explicit ndarray operand",
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "states": [
+          {
+            "button": 0,
+            "cash": 100.0,
+            "day": 1
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_repeat_held",
+        "error": null,
+        "events": [],
+        "final_values": {
+          "512100.XSHG": 1000.0
+        },
+        "history_shape": "explicit ndarray operand",
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [],
+        "states": [
+          {
+            "button": 1,
+            "cash": 100.0,
+            "day": 8
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_entry_and_exit_same_callback",
+        "error": null,
+        "events": [
+          {
+            "accepted": true,
+            "cash_before": 100.0,
+            "current_value": 1000.0,
+            "stock": "511010.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": true,
+            "cash_before": 1100.0,
+            "current_value": 0.0,
+            "stock": "512100.XSHG",
+            "target": 1100.0
+          },
+          {
+            "accepted": true,
+            "cash_before": 0.0,
+            "current_value": 1100.0,
+            "stock": "512100.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": true,
+            "cash_before": 1100.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 1100.0
+          }
+        ],
+        "final_values": {
+          "511010.XSHG": 1100.0
+        },
+        "history_shape": "explicit ndarray operand",
+        "mode": "immediate",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            0
+          ],
+          [
+            "512100.XSHG",
+            1100.0
+          ],
+          [
+            "512100.XSHG",
+            0
+          ],
+          [
+            "511010.XSHG",
+            1100.0
+          ]
+        ],
+        "states": [
+          {
+            "button": 0,
+            "cash": 0.0,
+            "day": 1
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_exit_without_trigger",
+        "error": null,
+        "events": [
+          {
+            "accepted": true,
+            "cash_before": 100.0,
+            "current_value": 1000.0,
+            "stock": "512100.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": true,
+            "cash_before": 1100.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 1100.0
+          }
+        ],
+        "final_values": {
+          "511010.XSHG": 1100.0
+        },
+        "history_shape": "explicit ndarray operand",
+        "mode": "immediate",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "512100.XSHG",
+            0
+          ],
+          [
+            "511010.XSHG",
+            1100.0
+          ]
+        ],
+        "states": [
+          {
+            "button": 0,
+            "cash": 0.0,
+            "day": 1
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_entry_19_callbacks",
+        "error": null,
+        "events": [
+          {
+            "accepted": true,
+            "cash_before": 100.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": true,
+            "cash_before": 100.0,
+            "current_value": 0.0,
+            "stock": "512100.XSHG",
+            "target": 100.0
+          },
+          {
+            "accepted": true,
+            "cash_before": 0.0,
+            "current_value": 100.0,
+            "stock": "512100.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": true,
+            "cash_before": 100.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 100.0
+          }
+        ],
+        "final_values": {
+          "511010.XSHG": 100.0
+        },
+        "history_shape": "explicit ndarray operand",
+        "mode": "immediate",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            0
+          ],
+          [
+            "512100.XSHG",
+            100.0
+          ],
+          [
+            "512100.XSHG",
+            0
+          ],
+          [
+            "511010.XSHG",
+            100.0
+          ]
+        ],
+        "states": [
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 2
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 3
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 4
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 5
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 6
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 7
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 8
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 9
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 10
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 11
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 12
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 13
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 14
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 15
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 16
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 17
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 18
+          },
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 19
+          },
+          {
+            "button": 0,
+            "cash": 0.0,
+            "day": 1
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_switch_immediate",
+        "error": null,
+        "events": [
+          {
+            "accepted": true,
+            "cash_before": 100.0,
+            "current_value": 1000.0,
+            "stock": "511010.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": true,
+            "cash_before": 1100.0,
+            "current_value": 0.0,
+            "stock": "512100.XSHG",
+            "target": 1100.0
+          }
+        ],
+        "final_values": {
+          "512100.XSHG": 1100.0
+        },
+        "history_shape": "explicit ndarray operand",
+        "mode": "immediate",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            0
+          ],
+          [
+            "512100.XSHG",
+            1100.0
+          ]
+        ],
+        "states": [
+          {
+            "button": 1,
+            "cash": 0.0,
+            "day": 2
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_switch_delayed",
+        "error": null,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 100.0,
+            "current_value": 1000.0,
+            "stock": "511010.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": false,
+            "cash_before": 100.0,
+            "current_value": 0.0,
+            "stock": "512100.XSHG",
+            "target": 100.0
+          }
+        ],
+        "final_values": {
+          "511010.XSHG": 1000.0
+        },
+        "history_shape": "explicit ndarray operand",
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            0
+          ],
+          [
+            "512100.XSHG",
+            100.0
+          ]
+        ],
+        "states": [
+          {
+            "button": 1,
+            "cash": 100.0,
+            "day": 2
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_switch_partial",
+        "error": null,
+        "events": [
+          {
+            "accepted": true,
+            "cash_before": 100.0,
+            "current_value": 1000.0,
+            "stock": "511010.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": true,
+            "cash_before": 600.0,
+            "current_value": 0.0,
+            "stock": "512100.XSHG",
+            "target": 600.0
+          }
+        ],
+        "final_values": {
+          "511010.XSHG": 500.0,
+          "512100.XSHG": 300.0
+        },
+        "history_shape": "explicit ndarray operand",
+        "mode": "partial",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            0
+          ],
+          [
+            "512100.XSHG",
+            600.0
+          ]
+        ],
+        "states": [
+          {
+            "button": 1,
+            "cash": 300.0,
+            "day": 2
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "57_switch_failed",
+        "error": null,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 100.0,
+            "current_value": 1000.0,
+            "stock": "511010.XSHG",
+            "target": 0
+          },
+          {
+            "accepted": false,
+            "cash_before": 100.0,
+            "current_value": 0.0,
+            "stock": "512100.XSHG",
+            "target": 100.0
+          }
+        ],
+        "final_values": {
+          "511010.XSHG": 1000.0
+        },
+        "history_shape": "explicit ndarray operand",
+        "mode": "failed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            0
+          ],
+          [
+            "512100.XSHG",
+            100.0
+          ]
+        ],
+        "states": [
+          {
+            "button": 1,
+            "cash": 100.0,
+            "day": 2
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state0_below95",
+        "debt_cash": 4749.5,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 4749.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 1187.375
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 1187.375
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 1187.375
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 1187.375
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            4749.5
+          ],
+          [
+            "510300.XSHG",
+            1187.375
+          ],
+          [
+            "510220.XSHG",
+            1187.375
+          ],
+          [
+            "513500.XSHG",
+            1187.375
+          ],
+          [
+            "513100.XSHG",
+            1187.375
+          ]
+        ],
+        "status": 2,
+        "stock_cash": 4749.5,
+        "synthetic_state_only": true,
+        "total": 9499.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state0_equal95",
+        "debt_cash": 5700.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 5700.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 950.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 950.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 950.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 950.0
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            5700.0
+          ],
+          [
+            "510300.XSHG",
+            950.0
+          ],
+          [
+            "510220.XSHG",
+            950.0
+          ],
+          [
+            "513500.XSHG",
+            950.0
+          ],
+          [
+            "513100.XSHG",
+            950.0
+          ]
+        ],
+        "status": 1,
+        "stock_cash": 3800.0,
+        "synthetic_state_only": true,
+        "total": 9500.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state0_equal975",
+        "debt_cash": 6825.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 6825.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 731.25
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 731.25
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 731.25
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 731.25
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            6825.0
+          ],
+          [
+            "510300.XSHG",
+            731.25
+          ],
+          [
+            "510220.XSHG",
+            731.25
+          ],
+          [
+            "513500.XSHG",
+            731.25
+          ],
+          [
+            "513100.XSHG",
+            731.25
+          ]
+        ],
+        "status": 0,
+        "stock_cash": 2925.0,
+        "synthetic_state_only": true,
+        "total": 9750.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state0_above975",
+        "debt_cash": 6825.7,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 6825.7
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 731.3249999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 731.3249999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 731.3249999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 731.3249999999999
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            6825.7
+          ],
+          [
+            "510300.XSHG",
+            731.3249999999999
+          ],
+          [
+            "510220.XSHG",
+            731.3249999999999
+          ],
+          [
+            "513500.XSHG",
+            731.3249999999999
+          ],
+          [
+            "513100.XSHG",
+            731.3249999999999
+          ]
+        ],
+        "status": 0,
+        "stock_cash": 2925.2999999999997,
+        "synthetic_state_only": true,
+        "total": 9751.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state0_equal99",
+        "debt_cash": 6930.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 6930.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 742.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 742.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 742.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 742.5
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            6930.0
+          ],
+          [
+            "510300.XSHG",
+            742.5
+          ],
+          [
+            "510220.XSHG",
+            742.5
+          ],
+          [
+            "513500.XSHG",
+            742.5
+          ],
+          [
+            "513100.XSHG",
+            742.5
+          ]
+        ],
+        "status": 0,
+        "stock_cash": 2970.0,
+        "synthetic_state_only": true,
+        "total": 9900.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state0_above99",
+        "debt_cash": 6930.7,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 6930.7
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 742.5749999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 742.5749999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 742.5749999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 742.5749999999999
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            6930.7
+          ],
+          [
+            "510300.XSHG",
+            742.5749999999999
+          ],
+          [
+            "510220.XSHG",
+            742.5749999999999
+          ],
+          [
+            "513500.XSHG",
+            742.5749999999999
+          ],
+          [
+            "513100.XSHG",
+            742.5749999999999
+          ]
+        ],
+        "status": 0,
+        "stock_cash": 2970.2999999999997,
+        "synthetic_state_only": true,
+        "total": 9901.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state1_below95",
+        "debt_cash": 4749.5,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 4749.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 1187.375
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 1187.375
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 1187.375
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 1187.375
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            4749.5
+          ],
+          [
+            "510300.XSHG",
+            1187.375
+          ],
+          [
+            "510220.XSHG",
+            1187.375
+          ],
+          [
+            "513500.XSHG",
+            1187.375
+          ],
+          [
+            "513100.XSHG",
+            1187.375
+          ]
+        ],
+        "status": 2,
+        "stock_cash": 4749.5,
+        "synthetic_state_only": true,
+        "total": 9499.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state1_equal95",
+        "debt_cash": 5700.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 5700.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 950.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 950.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 950.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 950.0
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            5700.0
+          ],
+          [
+            "510300.XSHG",
+            950.0
+          ],
+          [
+            "510220.XSHG",
+            950.0
+          ],
+          [
+            "513500.XSHG",
+            950.0
+          ],
+          [
+            "513100.XSHG",
+            950.0
+          ]
+        ],
+        "status": 1,
+        "stock_cash": 3800.0,
+        "synthetic_state_only": true,
+        "total": 9500.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state1_equal975",
+        "debt_cash": 5850.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 5850.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 975.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 975.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 975.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 975.0
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            5850.0
+          ],
+          [
+            "510300.XSHG",
+            975.0
+          ],
+          [
+            "510220.XSHG",
+            975.0
+          ],
+          [
+            "513500.XSHG",
+            975.0
+          ],
+          [
+            "513100.XSHG",
+            975.0
+          ]
+        ],
+        "status": 1,
+        "stock_cash": 3900.0,
+        "synthetic_state_only": true,
+        "total": 9750.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state1_above975",
+        "debt_cash": 5850.599999999999,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 5850.599999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 975.1
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 975.1
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 975.1
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 975.1
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            5850.599999999999
+          ],
+          [
+            "510300.XSHG",
+            975.1
+          ],
+          [
+            "510220.XSHG",
+            975.1
+          ],
+          [
+            "513500.XSHG",
+            975.1
+          ],
+          [
+            "513100.XSHG",
+            975.1
+          ]
+        ],
+        "status": 1,
+        "stock_cash": 3900.4,
+        "synthetic_state_only": true,
+        "total": 9751.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state1_equal99",
+        "debt_cash": 5940.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 5940.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 990.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 990.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 990.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 990.0
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            5940.0
+          ],
+          [
+            "510300.XSHG",
+            990.0
+          ],
+          [
+            "510220.XSHG",
+            990.0
+          ],
+          [
+            "513500.XSHG",
+            990.0
+          ],
+          [
+            "513100.XSHG",
+            990.0
+          ]
+        ],
+        "status": 1,
+        "stock_cash": 3960.0,
+        "synthetic_state_only": true,
+        "total": 9900.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state1_above99",
+        "debt_cash": 6930.7,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 6930.7
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 742.5749999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 742.5749999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 742.5749999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 742.5749999999999
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            6930.7
+          ],
+          [
+            "510300.XSHG",
+            742.5749999999999
+          ],
+          [
+            "510220.XSHG",
+            742.5749999999999
+          ],
+          [
+            "513500.XSHG",
+            742.5749999999999
+          ],
+          [
+            "513100.XSHG",
+            742.5749999999999
+          ]
+        ],
+        "status": 0,
+        "stock_cash": 2970.2999999999997,
+        "synthetic_state_only": true,
+        "total": 9901.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state2_below95",
+        "debt_cash": 4749.5,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 4749.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 1187.375
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 1187.375
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 1187.375
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 1187.375
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            4749.5
+          ],
+          [
+            "510300.XSHG",
+            1187.375
+          ],
+          [
+            "510220.XSHG",
+            1187.375
+          ],
+          [
+            "513500.XSHG",
+            1187.375
+          ],
+          [
+            "513100.XSHG",
+            1187.375
+          ]
+        ],
+        "status": 2,
+        "stock_cash": 4749.5,
+        "synthetic_state_only": true,
+        "total": 9499.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state2_equal95",
+        "debt_cash": 4750.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 4750.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 1187.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 1187.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 1187.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 1187.5
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            4750.0
+          ],
+          [
+            "510300.XSHG",
+            1187.5
+          ],
+          [
+            "510220.XSHG",
+            1187.5
+          ],
+          [
+            "513500.XSHG",
+            1187.5
+          ],
+          [
+            "513100.XSHG",
+            1187.5
+          ]
+        ],
+        "status": 2,
+        "stock_cash": 4750.0,
+        "synthetic_state_only": true,
+        "total": 9500.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state2_equal975",
+        "debt_cash": 4875.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 4875.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 1218.75
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 1218.75
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 1218.75
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 1218.75
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            4875.0
+          ],
+          [
+            "510300.XSHG",
+            1218.75
+          ],
+          [
+            "510220.XSHG",
+            1218.75
+          ],
+          [
+            "513500.XSHG",
+            1218.75
+          ],
+          [
+            "513100.XSHG",
+            1218.75
+          ]
+        ],
+        "status": 2,
+        "stock_cash": 4875.0,
+        "synthetic_state_only": true,
+        "total": 9750.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state2_above975",
+        "debt_cash": 5850.599999999999,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 5850.599999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 975.1
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 975.1
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 975.1
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 975.1
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            5850.599999999999
+          ],
+          [
+            "510300.XSHG",
+            975.1
+          ],
+          [
+            "510220.XSHG",
+            975.1
+          ],
+          [
+            "513500.XSHG",
+            975.1
+          ],
+          [
+            "513100.XSHG",
+            975.1
+          ]
+        ],
+        "status": 1,
+        "stock_cash": 3900.4,
+        "synthetic_state_only": true,
+        "total": 9751.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state2_equal99",
+        "debt_cash": 5940.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 5940.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 990.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 990.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 990.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 990.0
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            5940.0
+          ],
+          [
+            "510300.XSHG",
+            990.0
+          ],
+          [
+            "510220.XSHG",
+            990.0
+          ],
+          [
+            "513500.XSHG",
+            990.0
+          ],
+          [
+            "513100.XSHG",
+            990.0
+          ]
+        ],
+        "status": 1,
+        "stock_cash": 3960.0,
+        "synthetic_state_only": true,
+        "total": 9900.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_state2_above99",
+        "debt_cash": 6930.7,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 6930.7
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 742.5749999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 742.5749999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 742.5749999999999
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 742.5749999999999
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            6930.7
+          ],
+          [
+            "510300.XSHG",
+            742.5749999999999
+          ],
+          [
+            "510220.XSHG",
+            742.5749999999999
+          ],
+          [
+            "513500.XSHG",
+            742.5749999999999
+          ],
+          [
+            "513100.XSHG",
+            742.5749999999999
+          ]
+        ],
+        "status": 0,
+        "stock_cash": 2970.2999999999997,
+        "synthetic_state_only": true,
+        "total": 9901.0
+      },
+      {
+        "bad_sign": 1,
+        "case": "76_declining_means",
+        "debt_cash": 9500.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 9500.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 0.0
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            9500.0
+          ],
+          [
+            "510300.XSHG",
+            0.0
+          ],
+          [
+            "510220.XSHG",
+            0.0
+          ],
+          [
+            "513500.XSHG",
+            0.0
+          ],
+          [
+            "513100.XSHG",
+            0.0
+          ]
+        ],
+        "status": 2,
+        "stock_cash": 0.0,
+        "synthetic_state_only": true,
+        "total": 9500.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_peak9_equal",
+        "debt_cash": 4750.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 4750.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 1187.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 1187.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 1187.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 1187.5
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            4750.0
+          ],
+          [
+            "510300.XSHG",
+            1187.5
+          ],
+          [
+            "510220.XSHG",
+            1187.5
+          ],
+          [
+            "513500.XSHG",
+            1187.5
+          ],
+          [
+            "513100.XSHG",
+            1187.5
+          ]
+        ],
+        "status": 2,
+        "stock_cash": 4750.0,
+        "synthetic_state_only": true,
+        "total": 9500.0
+      },
+      {
+        "bad_sign": 1,
+        "case": "76_peak9_below",
+        "debt_cash": 9500.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 9500.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 0.0
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            9500.0
+          ],
+          [
+            "510300.XSHG",
+            0.0
+          ],
+          [
+            "510220.XSHG",
+            0.0
+          ],
+          [
+            "513500.XSHG",
+            0.0
+          ],
+          [
+            "513100.XSHG",
+            0.0
+          ]
+        ],
+        "status": 2,
+        "stock_cash": 0.0,
+        "synthetic_state_only": true,
+        "total": 9500.0
+      },
+      {
+        "bad_sign": 0,
+        "case": "76_peak19_equal",
+        "debt_cash": 4750.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 4750.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 1187.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 1187.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 1187.5
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 1187.5
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            4750.0
+          ],
+          [
+            "510300.XSHG",
+            1187.5
+          ],
+          [
+            "510220.XSHG",
+            1187.5
+          ],
+          [
+            "513500.XSHG",
+            1187.5
+          ],
+          [
+            "513100.XSHG",
+            1187.5
+          ]
+        ],
+        "status": 2,
+        "stock_cash": 4750.0,
+        "synthetic_state_only": true,
+        "total": 9500.0
+      },
+      {
+        "bad_sign": 1,
+        "case": "76_peak19_below",
+        "debt_cash": 9500.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 9500.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510300.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "510220.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513500.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 10000.0,
+            "current_value": 0.0,
+            "stock": "513100.XSHG",
+            "target": 0.0
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            9500.0
+          ],
+          [
+            "510300.XSHG",
+            0.0
+          ],
+          [
+            "510220.XSHG",
+            0.0
+          ],
+          [
+            "513500.XSHG",
+            0.0
+          ],
+          [
+            "513100.XSHG",
+            0.0
+          ]
+        ],
+        "status": 2,
+        "stock_cash": 0.0,
+        "synthetic_state_only": true,
+        "total": 9500.0
+      },
+      {
+        "bad_sign": 1,
+        "case": "76_stock_to_debt_immediate",
+        "debt_cash": 10000.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 10000.0
+          },
+          {
+            "accepted": true,
+            "cash_before": 0.0,
+            "current_value": 2500.0,
+            "stock": "510300.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": true,
+            "cash_before": 2500.0,
+            "current_value": 2500.0,
+            "stock": "510220.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": true,
+            "cash_before": 5000.0,
+            "current_value": 2500.0,
+            "stock": "513500.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": true,
+            "cash_before": 7500.0,
+            "current_value": 2500.0,
+            "stock": "513100.XSHG",
+            "target": 0.0
+          }
+        ],
+        "final_cash": 10000.0,
+        "final_values": {},
+        "highwater": 10000.0,
+        "mode": "immediate",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            10000.0
+          ],
+          [
+            "510300.XSHG",
+            0.0
+          ],
+          [
+            "510220.XSHG",
+            0.0
+          ],
+          [
+            "513500.XSHG",
+            0.0
+          ],
+          [
+            "513100.XSHG",
+            0.0
+          ]
+        ],
+        "status": 0,
+        "stock_cash": 0.0,
+        "synthetic_state_only": true,
+        "total": 10000.0
+      },
+      {
+        "bad_sign": 1,
+        "case": "76_stock_to_debt_delayed",
+        "debt_cash": 10000.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 10000.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 2500.0,
+            "stock": "510300.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 2500.0,
+            "stock": "510220.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 2500.0,
+            "stock": "513500.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 2500.0,
+            "stock": "513100.XSHG",
+            "target": 0.0
+          }
+        ],
+        "final_cash": 0.0,
+        "final_values": {
+          "510220.XSHG": 2500.0,
+          "510300.XSHG": 2500.0,
+          "513100.XSHG": 2500.0,
+          "513500.XSHG": 2500.0
+        },
+        "highwater": 10000.0,
+        "mode": "delayed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            10000.0
+          ],
+          [
+            "510300.XSHG",
+            0.0
+          ],
+          [
+            "510220.XSHG",
+            0.0
+          ],
+          [
+            "513500.XSHG",
+            0.0
+          ],
+          [
+            "513100.XSHG",
+            0.0
+          ]
+        ],
+        "status": 0,
+        "stock_cash": 0.0,
+        "synthetic_state_only": true,
+        "total": 10000.0
+      },
+      {
+        "bad_sign": 1,
+        "case": "76_stock_to_debt_partial",
+        "debt_cash": 10000.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 10000.0
+          },
+          {
+            "accepted": true,
+            "cash_before": 0.0,
+            "current_value": 2500.0,
+            "stock": "510300.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": true,
+            "cash_before": 1250.0,
+            "current_value": 2500.0,
+            "stock": "510220.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": true,
+            "cash_before": 2500.0,
+            "current_value": 2500.0,
+            "stock": "513500.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": true,
+            "cash_before": 3750.0,
+            "current_value": 2500.0,
+            "stock": "513100.XSHG",
+            "target": 0.0
+          }
+        ],
+        "final_cash": 5000.0,
+        "final_values": {
+          "510220.XSHG": 1250.0,
+          "510300.XSHG": 1250.0,
+          "513100.XSHG": 1250.0,
+          "513500.XSHG": 1250.0
+        },
+        "highwater": 10000.0,
+        "mode": "partial",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            10000.0
+          ],
+          [
+            "510300.XSHG",
+            0.0
+          ],
+          [
+            "510220.XSHG",
+            0.0
+          ],
+          [
+            "513500.XSHG",
+            0.0
+          ],
+          [
+            "513100.XSHG",
+            0.0
+          ]
+        ],
+        "status": 0,
+        "stock_cash": 0.0,
+        "synthetic_state_only": true,
+        "total": 10000.0
+      },
+      {
+        "bad_sign": 1,
+        "case": "76_stock_to_debt_failed",
+        "debt_cash": 10000.0,
+        "events": [
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 0.0,
+            "stock": "511010.XSHG",
+            "target": 10000.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 2500.0,
+            "stock": "510300.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 2500.0,
+            "stock": "510220.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 2500.0,
+            "stock": "513500.XSHG",
+            "target": 0.0
+          },
+          {
+            "accepted": false,
+            "cash_before": 0.0,
+            "current_value": 2500.0,
+            "stock": "513100.XSHG",
+            "target": 0.0
+          }
+        ],
+        "final_cash": 0.0,
+        "final_values": {
+          "510220.XSHG": 2500.0,
+          "510300.XSHG": 2500.0,
+          "513100.XSHG": 2500.0,
+          "513500.XSHG": 2500.0
+        },
+        "highwater": 10000.0,
+        "mode": "failed",
+        "not_a_backtest": true,
+        "orders": [
+          [
+            "511010.XSHG",
+            10000.0
+          ],
+          [
+            "510300.XSHG",
+            0.0
+          ],
+          [
+            "510220.XSHG",
+            0.0
+          ],
+          [
+            "513500.XSHG",
+            0.0
+          ],
+          [
+            "513100.XSHG",
+            0.0
+          ]
+        ],
+        "status": 0,
+        "stock_cash": 0.0,
+        "synthetic_state_only": true,
+        "total": 10000.0
+      },
+      {
+        "case": "76_highwater_after_close",
+        "states": [
+          {
+            "close_equity": 10000.0,
+            "max_after": 10000.0,
+            "max_before": 10000.0
+          },
+          {
+            "close_equity": 11000.0,
+            "max_after": 11000.0,
+            "max_before": 10000.0
+          },
+          {
+            "close_equity": 10900.0,
+            "max_after": 11000.0,
+            "max_before": 11000.0
+          }
+        ],
+        "synthetic_state_only": true
+      },
+      {
+        "case": "76_exact_slices",
+        "synthetic_state_only": true,
+        "windows": [
+          {
+            "indices": [
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "kind": "mean"
+          },
+          {
+            "indices": [
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38
+            ],
+            "kind": "mean"
+          },
+          {
+            "indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "kind": "mean"
+          },
+          {
+            "indices": [
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "kind": "max"
+          },
+          {
+            "indices": [
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "kind": "max"
+          }
+        ]
+      }
+    ],
+    "not_a_backtest": true,
+    "operand_policy": "Explicit ndarray compatibility reference only; datetime Series error retained; no tick/portfolio NAV substitution"
+  },
+  "case_id": "stock-bond-batch81-diagnostics",
+  "nature": "accepted_original_function_synthetic_state_diagnostics",
+  "purpose": "47原函数/受控状态诊断，52专项/212相关通过且重叠；缺失/计数/阈值/债先失败和收盘高点保留，合成状态不计回测",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch81/20261009-stock-bond-drawdown/diagnostics.json",
+    "sha256": "7042bcc98cdb0bf9b0c8be9534823db7136983b9734ffb4b14c118d8e242cee8"
+  }
+}

@@ -1,0 +1,35 @@
+schema: 1
+source: 2021年度精选策略/63.【复现】华泰证券-波动率和换手率构建牛熊指标.txt
+source_sha256: 9dbf27618f8d0285ad9f7602954875e6dd8a6604e7c87def544b75e6055caac9
+source_lines: 1495
+review_scope: 全文规则审查与定义清单；原文含凭据，Git不复制凭据或整段源码
+formal_acceptance: see_batch98_receipt
+formal_acceptance_receipt: docs/handoff/2026-10-11-batch98-final-review.json
+original_strategy_complete: false
+rules:
+  main_indices: [000001.SH, 000016.SH, 000300.SH, 000905.SH]
+  main_interval: 2007-01-01..2019-10-31
+  sensitivity_interval: 2004-01-01..2019-10-31
+  main_period: 250
+  sensitivity_periods: [150, 200, 250, 300]
+  kernel: rolling_population_std(pct_chg_percent,n) / rolling_mean(turnover_rate_f,n)
+  exploration: 60/120/200/250行；早期close/pre_close小数收益与样本标准差，不等于最终类
+  MA: 20/60均值；前差严格负/正，当前差含零；首次交叉，状态延续
+  BBANDS: 20均值±2倍样本标准差；前差严格、当前差含等号；首次突破，状态延续
+  direction: 牛熊指标下穿持有上穿空仓，close比较腿反向；初始无仓
+  paper_return: 当日收盘信号乘下一日指数close-to-close收益；不是可成交证券权益
+  trading_costs: 原脚本未设置真实成交或费用；项目不得复制其纸面净值作为Book回测
+defects:
+  - get_turnover包段端点含首尾，3001日期夹具重复末日期；潜在超供应商3000条限制
+  - back_testing的inverts在close之后不重置，反转后续kernel方向；原主比较顺序kernel在先
+  - 单信号summary调用全局risk_indicator而非self方法，且m未定义；当前pandas末值标签兼容也未修
+  - Statistical_indicator返回stdRet为medianRet；图表的正态标准差字段因此错误
+  - Cal_forward_ret的未来1日pct_chg为百分数，其他未来多日收益为小数；只用于分析不能当交易输入
+  - 分母零和空参数未防护；原append/旧API/无限重试类不执行
+data_gaps:
+  - 未登记原四指数历史自由流通股本换手率turnover_rate_f及当时可用版本
+  - 替代Cal_index_turnover用指数volume/历史成员流通股本总和，未证明单位、成分及股本版本；不是个股换手率平均
+  - 指数不能直接买入；原文未指定可交易载体、开盘/收盘成交、基金事件与费用
+allowed_evidence: 已核原CSI300日线的close比较腿MA/BBANDS状态及独立算式参考；合成kernel只验证计算规则
+economic_variant_approved: false
+next: 补原自由流通股本换手率，核原可交易载体和时点；如改代理规则先明确方案确认，再走唯一Book三成本与禁网复现

@@ -166,3 +166,50 @@ def test_comparison_only_legacy_run_is_not_silently_omitted(tmp_path):
     assert result['result_scope'] == 'status_or_comparison_only'
     assert result['comparison']['result'] == 'match'
     assert result['reproduce_of'] == 'original'
+
+
+@pytest.mark.parametrize('pending', [False, True])
+def test_status_page_follows_accepted_and_current_checkpoints(pending):
+    accepted = {'checkpoint': 'accepted64', 'note': 'Batch64 accepted', 'manually_reviewed': 213}
+    current = {**accepted, 'sources': 695, 'locally_backtested_sources': 12, 'local_strategy_runs': 67}
+    if pending:
+        current.update(checkpoint='working65', note='Batch65 dependency research in progress')
+    project = {'current': current, 'accepted': accepted, 'published_batch': 'release'}
+    page = m.render(project, {'tasks': []})
+    assert 'Batch64 accepted' in page
+    assert '正式检查/冻结终审待做' not in page
+    assert ('当前检查点尚未正式验收' in page) is pending
+    if pending:
+        assert 'Batch65 dependency research in progress' in page
+    else:
+        assert '当前检查点已完成正式验收' in page
+
+
+@pytest.mark.parametrize('note', ['待用户提交上传，本批尚未上传', '本批已推送并核对远端'])
+def test_status_page_does_not_reuse_a_historical_publication_claim(note):
+    accepted = {'checkpoint': 'accepted', 'note': 'accepted', 'manually_reviewed': 213}
+    current = {**accepted, 'sources': 695, 'locally_backtested_sources': 12, 'local_strategy_runs': 67}
+    project = {'current': current, 'accepted': accepted, 'published_batch': 'release'}
+    page = m.render(project, {'tasks': [], 'publication': {'current_worktree_note': note}})
+    assert note in page
+    assert '本机工作区Git已对齐' not in page
+
+
+def test_status_page_run_explanation_uses_current_parent_count():
+    accepted = {'checkpoint': 'accepted', 'note': 'accepted', 'manually_reviewed': 213}
+    current = {**accepted, 'sources': 695, 'locally_backtested_sources': 12, 'local_strategy_runs': 68}
+    project = {'current': current, 'accepted': accepted, 'published_batch': 'release'}
+    page = m.render(project, {'tasks': []})
+    assert '68个策略父运行含短长窗口、复现和失败' in page
+    assert '67个策略父运行' not in page
+
+
+@pytest.mark.parametrize('verified,backtested', [(11, 12), (12, 13)])
+def test_status_page_does_not_freeze_legacy_review_or_catalog_counts(verified, backtested):
+    accepted = {'checkpoint': 'accepted68', 'note': 'Low-PB sources reviewed', 'manually_reviewed': 217}
+    current = {**accepted, 'sources': 695, 'locally_backtested_sources': backtested, 'local_strategy_runs': 68,
+        'catalog_status_counts': {'已验证': verified}}
+    page = m.render({'current': current, 'accepted': accepted, 'published_batch': 'release'}, {'tasks': []})
+    assert '旧声明式来源仍未正式审查' not in page
+    assert f'目录“已验证{verified}”与本机回测来源{backtested}口径不同' in page
+    assert '来源审查与交易验收分别记录' in page

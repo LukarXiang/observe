@@ -1,0 +1,199 @@
+{
+  "case": {
+    "bars_1m_registered": false,
+    "candidates": [
+      {
+        "first": "2005-01-05",
+        "last": "2026-09-29",
+        "prior_checked_state": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/checked-state.json",
+        "prior_checked_state_sha256": "404e3667923419532aac1faf5fed99d40fc3b88c24a357ab769b310c7af04b7d",
+        "registry": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probe-results.json",
+        "registry_sha256": "fd86e182f9b5ec1fc86ceb89eb2b09886266b5f8e3cf40a58f68b5d5720a9daa",
+        "row": {
+          "api_sha256": "88b2896dad2c4063e0bb5713dd2faae63672609b209382aaaffbce5a1ff4a5a1",
+          "attempts": [
+            {
+              "method": "GET",
+              "parameters": {
+                "d": "2020_2_4"
+              },
+              "url": "https://finance.sina.com.cn/realstock/company/sz399001/hisdata/klc_kl.js"
+            }
+          ],
+          "case": "index-sz399001",
+          "columns": [
+            "date",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume"
+          ],
+          "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/index-sz399001/parsed.parquet",
+          "published": false,
+          "query": {
+            "function": "stock_zh_index_daily",
+            "parameters": {
+              "symbol": "sz399001"
+            }
+          },
+          "rows": 8645,
+          "sha256": "9cc098b17b29e2cd9af7a615d0157b6b1618c386a315dccb5e21b64bd5b95a4b",
+          "status": "success",
+          "strict_usable": false,
+          "wire_responses": [
+            {
+              "encoding": null,
+              "file": "data/staging/strategies-batch76/20261009-dynamic-emotion-two-eight/probes/index-sz399001/response.bin",
+              "sha256": "7685acca253d2fa239c0126d20be67f770e3d2d61f4eec42523186197e35af97",
+              "status_code": 200
+            }
+          ]
+        },
+        "rows_to_cutoff": 5280,
+        "strict_usable": false,
+        "symbol": "399001.SZ"
+      },
+      {
+        "first": "2005-01-05",
+        "last": "2026-09-29",
+        "prior_checked_state": "data/staging/strategies-batch74/20261008-FOF-two-eight/checked-state.json",
+        "prior_checked_state_sha256": "8b48b2ccb2a84d2784311b6d7a9665bc57535e1f3ac129a9b2167b2ac0ba5b31",
+        "registry": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/results.json",
+        "registry_sha256": "d258e2fb847f2441c1f646e15aba2fa98360911e1e63dcefec25729b67b8ac68",
+        "row": {
+          "api_sha256": "95e4d23f95af3bbbe56a4bb8d19965e3cd1cfbd519db744d51b7d782dee7ddc1",
+          "attempts": [
+            {
+              "method": "GET",
+              "parameters": {
+                "d": "2020_2_4"
+              },
+              "url": "https://finance.sina.com.cn/realstock/company/sh000016/hisdata/klc_kl.js"
+            }
+          ],
+          "case": "index-sh000016",
+          "columns": [
+            "date",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume"
+          ],
+          "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/index-sh000016/parsed.parquet",
+          "published": false,
+          "query": {
+            "function": "stock_zh_index_daily",
+            "parameters": {
+              "symbol": "sh000016"
+            }
+          },
+          "rows": 5526,
+          "sha256": "a23e3dba0b646d6f787c6d98f0dcf1ec6ec97f7bb1066490ee69927aa95a7655",
+          "status": "success",
+          "strict_usable": false,
+          "wire_responses": [
+            {
+              "encoding": null,
+              "file": "data/staging/strategies-batch74/20261008-FOF-two-eight/sina-fallback/index-sh000016/response.bin",
+              "sha256": "2dc37b4df0ba6f1ab5c53a127035a61e4545954d684cefec352294830eb08ed0",
+              "status_code": 200
+            }
+          ]
+        },
+        "rows_to_cutoff": 5280,
+        "strict_usable": false,
+        "symbol": "000016.SH"
+      }
+    ],
+    "limits": [
+      "Daily candidates are not original 14:30/14:50 minute input",
+      "No replacement index or regenerated RF predictions",
+      "Fund fees/events/state/execution still need proof"
+    ],
+    "original_trade_inputs_admitted": false,
+    "partition_check": "Filtered row inventory; old partition protection separately uses size/mtime",
+    "published_batch": "20261006-145049-5ceb",
+    "tables": {
+      "adj_coverage": {
+        "counts": {
+          "000001.SH": 0,
+          "000016.SH": 0,
+          "159901.SZ": 0,
+          "399001.SZ": 0,
+          "399333.SZ": 0
+        },
+        "partition_count": 1
+      },
+      "adj_factors": {
+        "counts": {
+          "000001.SH": 0,
+          "000016.SH": 0,
+          "159901.SZ": 0,
+          "399001.SZ": 0,
+          "399333.SZ": 0
+        },
+        "partition_count": 1
+      },
+      "bars_1d": {
+        "counts": {
+          "000001.SH": 0,
+          "000016.SH": 0,
+          "159901.SZ": 0,
+          "399001.SZ": 0,
+          "399333.SZ": 0
+        },
+        "partition_count": 22
+      },
+      "bars_5m": {
+        "counts": {
+          "000001.SH": 0,
+          "000016.SH": 0,
+          "159901.SZ": 0,
+          "399001.SZ": 0,
+          "399333.SZ": 0
+        },
+        "partition_count": 58
+      },
+      "corp_actions": {
+        "counts": {
+          "000001.SH": 0,
+          "000016.SH": 0,
+          "159901.SZ": 0,
+          "399001.SZ": 0,
+          "399333.SZ": 0
+        },
+        "partition_count": 1
+      },
+      "index_1d": {
+        "counts": {
+          "000001.SH": 0,
+          "000016.SH": 0,
+          "159901.SZ": 0,
+          "399001.SZ": 0,
+          "399333.SZ": 0
+        },
+        "partition_count": 1
+      },
+      "minute_universe": {
+        "counts": {
+          "000001.SH": 0,
+          "000016.SH": 0,
+          "159901.SZ": 0,
+          "399001.SZ": 0,
+          "399333.SZ": 0
+        },
+        "partition_count": 1
+      }
+    }
+  },
+  "case_id": "batch96-input-inventory",
+  "nature": "in_progress_exact_symbol_inventory_and_existing_candidate_SHA",
+  "purpose": "七活跃表五证券均0，旧深成指/上证50日线各5280候选核SHA但不发布，不代原1m",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch96/20261011-original-callback-stage/input-inventory.json",
+    "sha256": "2406130b05ddc04a3d35bb61ddaebd0069715c14d2e73dd4b64a17aadf61a8e2"
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "case": {
+    "Git_publication": "pending_user_commit_and_push",
+    "accepted_checkpoint": "20261010-170420-4500",
+    "accepted_directory": "data/staging/strategies-batch92/20261010-trend-definition-acceptance",
+    "adversarial_review": {
+      "agents": [
+        "batch92_assumption",
+        "batch92_composition",
+        "batch92_cascade",
+        "batch92_abuse"
+      ],
+      "angles": [
+        "assumption_violation",
+        "composition_failures",
+        "cascade_construction",
+        "abuse_cases"
+      ],
+      "diagnosis_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/review-findings-and-resolution.json",
+      "diagnosis_sha256": "b448611efb24c2dca0c2c06c8b731be064c9dfea0914e825619b4c54eda916a8",
+      "final_open_findings": [],
+      "fixed": [
+        "required exact command scope",
+        "stage-to-acceptance old-asset/run inventory equality",
+        "recursive nested run inventory",
+        "added run before publication",
+        "isolation pre-test code identity and manifest tie"
+      ],
+      "strategy_economics_changed": false
+    },
+    "catalog_changed_sources": 1,
+    "checked_state_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/checked-state.json",
+    "checked_state_sha256": "fcda897b0feabe7676c12d0a9bd001413ffd2606fa33a849e887307f2c235603",
+    "checks": {
+      "all_intended_test_identities_bound": true,
+      "checked_evidence_files": 40,
+      "diff": "passed",
+      "errors": 0,
+      "full_suite_run": false,
+      "implementation_files": 5,
+      "isolated_duration_seconds": 10.221,
+      "isolated_tests": 191,
+      "new_acceptance_tests": 18,
+      "new_stage_tests": 13,
+      "per_file_test_counts": {
+        "tests.integration.test_strategy_merge": 8,
+        "tests.unit.test_batch70_research": 13,
+        "tests.unit.test_batch91_acceptance": 17,
+        "tests.unit.test_batch91_stage": 10,
+        "tests.unit.test_batch92_acceptance": 18,
+        "tests.unit.test_batch92_stage": 13,
+        "tests.unit.test_catalog_dependencies": 29,
+        "tests.unit.test_catalog_futures": 27,
+        "tests.unit.test_catalog_schedules": 33,
+        "tests.unit.test_research_metadata": 23
+      },
+      "root_duration_seconds": 25.069,
+      "root_related_tests": 191,
+      "ruff": "passed",
+      "skipped": 0
+    },
+    "component_rows_overlapping_ranges": 7181,
+    "final_binding_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/final-binding-verification.json",
+    "final_binding_sha256": "a465f775e5814df26daec682cab4ae3204e9a5bd8554fd21f1456c6ab2674805",
+    "formal_source_research_acceptance": true,
+    "formal_trading_acceptance": false,
+    "independent_full_signal_differences": 0,
+    "isolation": {
+      "basis": "396 preceding metadata SHA code files plus Batch92 candidate and pinned source/upstream inputs",
+      "copied_files": 1236,
+      "failed_isolation_preserved": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/isolation-first-input-rejection/failure.json",
+      "junit_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/isolated-tests.xml",
+      "junit_sha256": "bb1821ce82d453e5df2281fbb44dc71c6100a2d8b13f7f583ae843dd39e64ef2",
+      "known_commit_equivalence_claimed": false,
+      "log_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/isolated-tests.log",
+      "log_sha256": "8d0b758f198f2dfe52e3c8a3c1daa0161e7c44f67352f1d14f6e94129ae3623d",
+      "manifest_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/isolated-files.json",
+      "manifest_sha256": "f3a672ed8ff9fb059055ea27939198c08b26611c23b82ba51c53e0692e2d8908",
+      "obsolete_unrelated_README_seed_excluded": true
+    },
+    "library_goal_complete": false,
+    "local_strategy_parent_runs": 75,
+    "locally_backtested_and_reproduced_sources": 12,
+    "manually_reviewed": 268,
+    "new_requests": 0,
+    "new_trading_backtests": 0,
+    "next_plan": "docs/tasks/2026-10-10-第九十三批FFScore与三因子-执行计划.md",
+    "offline_replay_differences": 0,
+    "other_catalog_records_unchanged": 694,
+    "platform_equivalence_proven": false,
+    "protection": {
+      "baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+      "mutable_registry_files_excluded": 0,
+      "old_calendar_rows_unchanged": 7938,
+      "old_controls_unchanged": 5780,
+      "old_index_rows_unchanged": 5280,
+      "old_partition_metadata_unchanged": 398,
+      "partition_check": "size/mtime only; no fresh full hash",
+      "status": "ok"
+    },
+    "receipt_file": "docs/handoff/2026-10-10-batch92-verification.json",
+    "receipt_sha256": "247aa7828f0ecab710608481727e14bc4c274bee33cba7773445f67be02acc61",
+    "remaining_unreviewed": 427,
+    "review_depth": "deep",
+    "reviewed_implementation_sha256": {
+      "scripts/review_strategy_batch92.py": "c1a96482848b2901a825203667fb8f60bd29247b22b63e92e2bc37ca29997287",
+      "scripts/verify_strategy_batch92.py": "7ad85daca023f13118aece8a070128f95946c7ebdf775a0629f2dc521ae9bcbf",
+      "src/observe/strategy_catalog.py": "68437a8a8b3337e3807557ce2a0b0ee77fa98668680503671813983ab9b716a1",
+      "tests/unit/test_batch92_acceptance.py": "2daafa0d546c0e37962347772bd1c530d055dd01f804bb5b5569be6c4ad82394",
+      "tests/unit/test_batch92_stage.py": "b9f305c8441bbf37afd90124205544f08a27210bf8ead1c713540e5e5fc61705"
+    },
+    "scope_alignment": "on_target",
+    "source_full_lines_read": 807,
+    "specialist_reviews": {
+      "architecture": {
+        "agent": "batch92_architecture",
+        "findings": []
+      },
+      "security": {
+        "agent": "batch92_security",
+        "findings": []
+      }
+    },
+    "stage_protection": {
+      "acceptance_baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+      "method": "Compare stage controls against freshly hashed acceptance controls; finish rehashes these via protect",
+      "old_control_SHA_bindings_retained": 5780,
+      "old_partition_stats_retained": 398,
+      "stage_baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+      "status": "ok"
+    },
+    "status": "ok"
+  },
+  "case_id": "trend-definition-batch92-final",
+  "nature": "formal_source_and_index_paper_state_research_not_trading",
+  "purpose": "268来源验收/191相关和隔离/5实现40证据/1236副本；7181重叠状态独立评分分位禁网match0及旧5780控制398stats保护，三兼容与17行原始演示身份另核；无ETF映射/费用/NAV/交易",
+  "reference": {
+    "availability": "git_document",
+    "path": "docs/handoff/2026-10-10-batch92-final-review.json",
+    "sha256": "228e098d52f9bd1c15b21c04627be4043dd51e70444defe15155accc37cdd420"
+  }
+}

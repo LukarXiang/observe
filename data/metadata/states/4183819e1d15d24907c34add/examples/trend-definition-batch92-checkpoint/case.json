@@ -1,0 +1,90 @@
+{
+  "case": {
+    "accepted_checkpoint": "20261010-162223-81d4",
+    "current_checkpoint": "20261010-163154-d6e4",
+    "development_failure": "data/staging/strategies-batch92/20261010-development-first-preflight/failure.json",
+    "evidence_sha256": {
+      "601388-raw-demo-candidate.parquet": "c918d6df7130e9fa5d86c0c9783310f6042e8bfdef8013eb2fd6cb2b17cda51f",
+      "baseline.json": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+      "checks/0.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "checks/1.log": "85b35a4d6e00dcd05eaff4c4f874e0cb460ae2b9d0e6f553894b188a19910942",
+      "checks/2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "checks/tests.xml": "c8a226cb45ed6f2a9e9314b74f93ce588e19b6ddd471b4b275aec0995528858f",
+      "checks/unit-checks.json": "c6b423b60e8611d52cd059968a7b605529c3e7a51e99f3558af92f481f21475a",
+      "compatibility-diagnostics.json": "41285edf5ed418212100a0998793dffcbfd1fa0d7230b96d288f0e3be5843143",
+      "component-checkpoint.json": "201cae4cd0b3f1d4473c1745907618edf1838809d646a92d3032528049a572f3",
+      "component-research.json": "6de1b12971af5e9ddbe7738b2e733e3ebe1f4cfbdc3f9600d842912c046ded2c",
+      "demo-coverage-audit.json": "e80e69a5c4d5671b3f89c65120175da215d6a2a350fa32fb9c3b057145010fb6",
+      "dependency-inventory.json": "464d0537e32ed44601307974b5aa09e0cda5fe57c028b8a4858aee627c23ae6b",
+      "implementation-evidence.before.json": "7d2e219341c6b668361c4cbe67857c9080d3c5b7c64c6fe1f76f15325889205d",
+      "independent-full-signal-audit.json": "3f8d94d4041b2748e24788c252f3bc0696a587829175db954104a00414e9272c",
+      "index-input.parquet": "654f94b18462c68a55bdb08877103f8f4406d47b6e0d347bb095f65b7fdcecb7",
+      "input-binding.json": "0e8c99c9e091e7d4a64d2e6a5991f074f2a2be79ab8d182e08d68362ca12912a",
+      "offline-verification.json": "e1837e42f2ddcc9e30dc4bbccaabbdedb72e6ff308ad316ef6367dd966146abd",
+      "original.source": "47f4244f0dd45f37cbb6c30c781d47ca7b20b9324ce69587906961a324f8dadd",
+      "progress-start.json": "5df739e7bd1975367596641fa34666a954db00e0e0078ca3a9aa1d8081869c61",
+      "source-definition-review.json": "c6707c37857c9a209ac9d0c21d0401d341fe1e6143415dc3146f7ff8b512fab0",
+      "trend-values.parquet": "373c99c589c32279bde8ada21994b4da09b0c4e8099168baa11f8e9f6582b309"
+    },
+    "formal_source_acceptance": false,
+    "formal_stage_acceptance": false,
+    "implementation_sha256": {
+      "scripts/review_strategy_batch92.py": "c1a96482848b2901a825203667fb8f60bd29247b22b63e92e2bc37ca29997287",
+      "tests/unit/test_batch92_stage.py": "b9f305c8441bbf37afd90124205544f08a27210bf8ead1c713540e5e5fc61705"
+    },
+    "independent_signal": {
+      "last_forward_return_not_converted_to_zero": true,
+      "not_a_backtest": true,
+      "operand_file": "data/staging/strategies-batch92/20261010-trend-definition-stage/trend-values.parquet",
+      "operand_sha256": "373c99c589c32279bde8ada21994b4da09b0c4e8099168baa11f8e9f6582b309",
+      "raw_close_source": "separately verified score columns from frozen index price endpoints",
+      "rows": [
+        {
+          "all_score_and_quantile_inputs_independent": true,
+          "difference_dates": [],
+          "full_independent_flag_differences": 0,
+          "range": "extended_reference",
+          "rows": 5280
+        },
+        {
+          "all_score_and_quantile_inputs_independent": true,
+          "difference_dates": [],
+          "full_independent_flag_differences": 0,
+          "range": "original_period",
+          "rows": 1901
+        }
+      ],
+      "status": "match"
+    },
+    "net_asset_value_computed": false,
+    "new_requests": 0,
+    "new_trading_backtests": 0,
+    "offline": {
+      "differences": 0,
+      "formal_acceptance": false,
+      "new_trading_backtests": 0,
+      "not_a_backtest": true,
+      "rows": 7181,
+      "socket_HTTP_disabled": true,
+      "status": "match"
+    },
+    "pending": [
+      "specialist/four-angle source/component review",
+      "complete notebook dependencies and demo JQ price identity audit",
+      "stage old-asset protection and formal frozen checks",
+      "new-directory catalog registration and formal source acceptance"
+    ],
+    "source_sha256": "47f4244f0dd45f37cbb6c30c781d47ca7b20b9324ce69587906961a324f8dadd",
+    "status": "component_outputs_and_unit_checks_archived",
+    "unit_tests_duration_seconds": 3.47,
+    "unit_tests_passed": 13
+  },
+  "case_id": "trend-definition-batch92-checkpoint",
+  "nature": "historical_component_stage_before_formal_acceptance",
+  "purpose": "保留历史检查点20261010-163154-d6e4当时267来源口径，原文807行/7定义、7181重叠组件和13单元档只读；后续正式验收另见batch92-final，不回写旧阶段",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch92/20261010-trend-definition-stage/stage-checkpoint.json",
+    "sha256": "db3e192793add15bd16785740283ac2c8b724c27c9ee3e086dade9d63f5dcfdb"
+  }
+}

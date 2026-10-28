@@ -1,0 +1,255 @@
+{
+ "status": "ok_reference_stage",
+ "formal_source_research_acceptance": false,
+ "formal_trading_acceptance": false,
+ "library_goal_complete": false,
+ "original_strategy_complete": false,
+ "progress": {
+  "checkpoint": "20261011-051203-6ddc",
+  "note": "Batch102 in-progress:33 diagnostics/213 reused PMI/5161 EOD/153 annual/11095 ETF references;two offline byte matches/local20-isolated20/all saved cells checked;formal288/trades12/parents87 unchanged",
+  "catalog_id": "c0d325870003be60d116",
+  "catalog_sha256": "19d789012a996383459834c33d46e7e4fef628a1fd3b64bbf8d5bcb32f5bdd28",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 71,
+   "非交易研究脚本": 87,
+   "重复版本": 41
+  },
+  "manually_reviewed": 288,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-051203-6ddc"
+ },
+ "components": {
+  "PMI_windows": 213,
+  "PMI_reused_history_not_new_samples": true,
+  "PMI_condition_disagreements": 0,
+  "PMI_max_slope_error": 3.9841295151887834e-08,
+  "index_complete120_EOD_rows": 5161,
+  "index_strict_chain_disagreements": 0,
+  "annual109_month_windows": 153,
+  "ETF20_row_windows": 11095,
+  "ETF_profiles": {
+   "159949.XSHE": {
+    "rows": 2475,
+    "first": "2016-07-22",
+    "last": "2026-09-29",
+    "windows": 2456,
+    "missing_open_dates": [],
+    "year_windows": {
+     "2016": 90,
+     "2017": 244,
+     "2018": 243,
+     "2019": 244,
+     "2020": 243,
+     "2021": 243,
+     "2022": 242,
+     "2023": 242,
+     "2024": 242,
+     "2025": 243,
+     "2026": 180
+    }
+   },
+   "512100.XSHG": {
+    "rows": 2406,
+    "first": "2016-11-04",
+    "last": "2026-09-29",
+    "windows": 2387,
+    "missing_open_dates": [
+     "2022-09-02"
+    ],
+    "year_windows": {
+     "2016": 22,
+     "2017": 244,
+     "2018": 243,
+     "2019": 244,
+     "2020": 243,
+     "2021": 243,
+     "2022": 241,
+     "2023": 242,
+     "2024": 242,
+     "2025": 243,
+     "2026": 180
+    }
+   },
+   "513100.XSHG": {
+    "rows": 3201,
+    "first": "2013-07-31",
+    "last": "2026-09-29",
+    "windows": 3182,
+    "missing_open_dates": [
+     "2022-01-13"
+    ],
+    "year_windows": {
+     "2013": 84,
+     "2014": 245,
+     "2015": 244,
+     "2016": 244,
+     "2017": 244,
+     "2018": 243,
+     "2019": 244,
+     "2020": 243,
+     "2021": 243,
+     "2022": 241,
+     "2023": 242,
+     "2024": 242,
+     "2025": 243,
+     "2026": 180
+    }
+   },
+   "513500.XSHG": {
+    "rows": 3089,
+    "first": "2014-01-15",
+    "last": "2026-09-29",
+    "windows": 3070,
+    "missing_open_dates": [
+     "2022-03-29"
+    ],
+    "year_windows": {
+     "2014": 217,
+     "2015": 244,
+     "2016": 244,
+     "2017": 244,
+     "2018": 243,
+     "2019": 244,
+     "2020": 243,
+     "2021": 243,
+     "2022": 241,
+     "2023": 242,
+     "2024": 242,
+     "2025": 243,
+     "2026": 180
+    }
+   }
+  },
+  "ETF_gap_crossing_windows": 57,
+  "ETF_eligibility_disagreements": 0,
+  "diagnostics": 33,
+  "errors": {
+   "percentile_single_zero_denominator": "ZeroDivisionError",
+   "macro_DataFrame_current_scalar_error": "TypeError",
+   "ETF_datetime_index_minus1_KeyError": "KeyError"
+  },
+  "network_blocked": true,
+  "full_original_pool_signals": 0,
+  "new_trading_backtests": 0,
+  "original_strategy_complete": false,
+  "strict_usable": false
+ },
+ "offline": {
+  "result": "match",
+  "differences": 0,
+  "fresh_network_blocked_processes": 2
+ },
+ "validation": {
+  "tests": {
+   "local": 20,
+   "isolated": 20
+  },
+  "copied_files": 294,
+  "actual_imports": 4,
+  "readback": {
+   "status": "ok",
+   "saved_tables": {
+    "PMI": {
+     "rows": 213,
+     "columns": 10,
+     "all_values_checked": true
+    },
+    "index": {
+     "rows": 5161,
+     "columns": 15,
+     "all_values_checked": true
+    },
+    "annual": {
+     "rows": 153,
+     "columns": 6,
+     "all_values_checked": true
+    },
+    "ETF": {
+     "rows": 11095,
+     "columns": 12,
+     "all_values_checked": true
+    }
+   },
+   "all_saved_cells_checked": true,
+   "network_blocked": true,
+   "new_trading_backtests": 0
+  },
+  "saved_cells_per_readback": 213603,
+  "ruff": "passed src/tests/required handoff scripts and batch102 scripts"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 6614,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "1c24969d67e406d2320c5eb2d9a0b9006ddb76be46094cb9c3daed75a75cc97f"
+ },
+ "duplicate": {
+  "source": "2024年度精选策略2/48.一种宏观数据的中长线策略，年化15%，最大回撤9%.txt",
+  "duplicate_of": "S-d6db552a3293",
+  "same_bytes_as": "repo/量化策略源代码/2024年度精选策略1/21.一种宏观数据的中长线策略，年化15%，最大回撤9%.txt",
+  "new_independent_strategy": false
+ },
+ "probe": {
+  "status": "blocked",
+  "akshare": "1.18.97",
+  "installed_api_sha256": "3329a45f9336e9f62a7f5a43a5523bfbae3bfa25c24bbd50e6cdffa8421dcc2c",
+  "repo_api_sha256": "035715c3663c270ff96acbeee1f8ebde3bc6f301e4487ce3860b6080358f58c7",
+  "repo_commit": "0191689d57c667b7c7a198fd0cf97316837ef311",
+  "attempts": [
+   {
+    "method": "GET",
+    "url": "https://data.stats.gov.cn/dg/website/page.html#/pc/national/monthData",
+    "params": null,
+    "timeout_seconds": 10,
+    "redirects": false,
+    "retries": 0,
+    "status": "failed",
+    "error": "ConnectionError",
+    "message": "Failed to perform, curl: (7) failed to open socket: Operation not permitted. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+   }
+  ],
+  "new_data_samples": 0,
+  "published": false,
+  "history_release_versions_proven": false,
+  "next": "Resolve genuine returned catalog ids before requesting indicators; no guessed cid and no further same-domain retries"
+ },
+ "evidence_sha256": {
+  "docs/tasks/2026-10-11-第一百零二批宏观周期与ETF调试版-阶段记录.md": "5d8f0bd4e8f6c3c414dd50f887bd40438eb3be9704896159363c9d4a562cb8ed",
+  "data/staging/strategies-batch102/20261011-macro-ETF-reference/prepared.json": "9d9240f1dd15975498520e698349759d58aa3e3da16c36db7468a93295b15680",
+  "data/staging/strategies-batch102/20261011-macro-ETF-reference/dependencies.json": "94d6fbd9fbc9eb6ac8bb40d4eaf874c5fea5c3162fc0aa2776353ec54e3aa29f",
+  "data/staging/strategies-batch102/20261011-macro-ETF-reference/registry-scan.json": "3dcf9ba934221a74f4629b4c51301894b8339abd57f1c906991cf43de5563aee",
+  "data/staging/strategies-batch102/20261011-macro-ETF-reference/NBS-probe/results.json": "0db07d37c19b73b250213ce9db8eee3e88b5f7d46a2d9d0f442a0e36786ddbde",
+  "data/staging/strategies-batch102/20261011-macro-ETF-reference/offline-verification.json": "fd98335d2e6a5876ee6b239fe8dd229f1d0e7d6e3efd1525a225569b972c68b1",
+  "data/staging/strategies-batch102/20261011-macro-ETF-reference/protection.json": "fcf33c8de2d54325eec58fc8fa2fb708364a85378a1d5ef339ce34f6feef438f",
+  "data/staging/strategies-batch102/20261011-reference-stage-validation/checked.json": "beaf01ce4b1e937a69cc09753d6429d18239e86b8fb9a347ce289bc3c523d79c",
+  "data/staging/strategies-batch102/20261011-reference-stage-validation/saved-readback.json": "b070e090bd583d7785721f014268a276a0f7ed35fe591374e04ed2f996eaecc8",
+  "data/staging/strategies-batch102/20261011-reference-stage-validation/isolated-saved-readback.json": "b070e090bd583d7785721f014268a276a0f7ed35fe591374e04ed2f996eaecc8",
+  "data/staging/strategies-batch102/20261011-reference-stage-validation/local-tests.xml": "544ef72089278797856eb8033edf8036de4d9987287d32feb09bae5705c3924d",
+  "data/staging/strategies-batch102/20261011-reference-stage-validation/isolated-isolated-tests.xml": "7d82e84795c317717754e372dd8a0281471d16110d6b9605b44dac535abac716",
+  "data/staging/strategies-batch102/20261011-reference-stage-validation/implementation.json": "d473106ec0a67aa0b2524e104bbcd1988449d8f291fc80f774cbc911497c9f70",
+  "data/staging/strategies-batch102/20261011-reference-development/ruff-initial.json": "d81930aec073a7ca05efbdc542d8ab9d4243b3ff35e7241e8747f8032be95cd6",
+  "data/staging/strategies-batch102/20261011-reference-development/calendar-schema-failure.json": "4fa02c573e619bbe2c5006c4c49f58bf31cb9df1eefa1a7dd1c66bd4e477ed7a",
+  "scripts/verify_strategy_batch102_stage.py": "a2c3bc5d832755e857465dea3ff360e6b536b3c5f4252f7bea804a7488bea6fa",
+  "scripts/research_strategy_batch102.py": "29a417fe086337ac8ac7cbd0c80eecce6707267fbad2cf62d0ec04334b1e9cc9",
+  "scripts/reference_strategy_batch102.py": "06606b6ccac2ff9f3a4bbc8c2af4824fd984f1f0c46a4afcc503e2c530def2af",
+  "tests/unit/test_batch102_research.py": "0fb95dc7fcf4cec513db256abc22ad532efbae72f710430926a249e34ee76fe4",
+  "tests/unit/test_batch102_reference.py": "7a577273103a4e0ff3cb1907e9c2f2ae4be44b73d829565c6b49aa615909baf9",
+  "data/catalog/strategies/progress/20261011-051203-6ddc/summary.json": "9bd7d7ba7879236d36f94cdc6fae15faa352d3af3a1487b86a4c58e59934d1dc"
+ },
+ "new_trading_backtests": 0,
+ "new_strategy_parent_runs": 0,
+ "review_method": "Full source/explicit stubs, fresh offline byte replay and local/copied saved-value checks;no independent agent review",
+ "next_start": "Prepare exact macro48/ETF58 rule specs and candidate catalog, preserve duplicate mapping and other693 sources;formal acceptance remains pending"
+}

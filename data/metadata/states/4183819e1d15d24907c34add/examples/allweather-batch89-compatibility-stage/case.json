@@ -1,0 +1,40 @@
+{
+  "case": {
+    "changed_return_rows": 23,
+    "decision": "pending_D-allweather-fill",
+    "first_example": {
+      "current_default_return": 0.0,
+      "date": "2021-01-11",
+      "explicit_forward_filled_return": -0.002036631068297212
+    },
+    "history_calls_before_failure": [
+      {
+        "df": true,
+        "field": "close",
+        "freq": "1d",
+        "lag": 120,
+        "stock": "510300.XSHG"
+      }
+    ],
+    "not_a_backtest": true,
+    "numpy": "2.5.3",
+    "original_failure": {
+      "exception": "TypeError",
+      "message": "NDFrame.fillna() got an unexpected keyword argument 'method'"
+    },
+    "original_platform_pandas_version_proven": false,
+    "pandas": "3.0.6",
+    "socket_HTTP_disabled": true,
+    "synthetic_business_rows": 120,
+    "synthetic_calendar_rows": 166,
+    "synthetic_only": true
+  },
+  "case_id": "allweather-batch89-compatibility-stage",
+  "nature": "in_progress_original_error_and_synthetic_default_return_difference",
+  "purpose": "原函数fillna(method=None) TypeError，受控120交易/166自然日与23收益差异禁网留档，原平台版本未证；D-allweather-fill pending，不修ES/算原权重",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch89/20261009-all-weather-source-stage/compatibility-diagnostics.json",
+    "sha256": "16fdec9a4da8726f4eab08d28ff241829715fc515af707c3bc89eb6a3960b807"
+  }
+}

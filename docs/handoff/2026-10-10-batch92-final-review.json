@@ -1,0 +1,132 @@
+{
+ "status": "ok",
+ "accepted_checkpoint": "20261010-170420-4500",
+ "accepted_directory": "data/staging/strategies-batch92/20261010-trend-definition-acceptance",
+ "receipt_file": "docs/handoff/2026-10-10-batch92-verification.json",
+ "receipt_sha256": "247aa7828f0ecab710608481727e14bc4c274bee33cba7773445f67be02acc61",
+ "checked_state_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/checked-state.json",
+ "checked_state_sha256": "fcda897b0feabe7676c12d0a9bd001413ffd2606fa33a849e887307f2c235603",
+ "final_binding_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/final-binding-verification.json",
+ "final_binding_sha256": "a465f775e5814df26daec682cab4ae3204e9a5bd8554fd21f1456c6ab2674805",
+ "review_depth": "deep",
+ "scope_alignment": "on_target",
+ "formal_source_research_acceptance": true,
+ "formal_trading_acceptance": false,
+ "specialist_reviews": {
+  "security": {
+   "agent": "batch92_security",
+   "findings": []
+  },
+  "architecture": {
+   "agent": "batch92_architecture",
+   "findings": []
+  }
+ },
+ "adversarial_review": {
+  "angles": [
+   "assumption_violation",
+   "composition_failures",
+   "cascade_construction",
+   "abuse_cases"
+  ],
+  "agents": [
+   "batch92_assumption",
+   "batch92_composition",
+   "batch92_cascade",
+   "batch92_abuse"
+  ],
+  "final_open_findings": [],
+  "fixed": [
+   "required exact command scope",
+   "stage-to-acceptance old-asset/run inventory equality",
+   "recursive nested run inventory",
+   "added run before publication",
+   "isolation pre-test code identity and manifest tie"
+  ],
+  "strategy_economics_changed": false,
+  "diagnosis_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/review-findings-and-resolution.json",
+  "diagnosis_sha256": "b448611efb24c2dca0c2c06c8b731be064c9dfea0914e825619b4c54eda916a8"
+ },
+ "reviewed_implementation_sha256": {
+  "src/observe/strategy_catalog.py": "68437a8a8b3337e3807557ce2a0b0ee77fa98668680503671813983ab9b716a1",
+  "scripts/verify_strategy_batch92.py": "7ad85daca023f13118aece8a070128f95946c7ebdf775a0629f2dc521ae9bcbf",
+  "tests/unit/test_batch92_acceptance.py": "2daafa0d546c0e37962347772bd1c530d055dd01f804bb5b5569be6c4ad82394",
+  "scripts/review_strategy_batch92.py": "c1a96482848b2901a825203667fb8f60bd29247b22b63e92e2bc37ca29997287",
+  "tests/unit/test_batch92_stage.py": "b9f305c8441bbf37afd90124205544f08a27210bf8ead1c713540e5e5fc61705"
+ },
+ "checks": {
+  "implementation_files": 5,
+  "checked_evidence_files": 40,
+  "new_acceptance_tests": 18,
+  "new_stage_tests": 13,
+  "root_related_tests": 191,
+  "root_duration_seconds": 25.069,
+  "isolated_tests": 191,
+  "isolated_duration_seconds": 10.221,
+  "skipped": 0,
+  "errors": 0,
+  "full_suite_run": false,
+  "all_intended_test_identities_bound": true,
+  "per_file_test_counts": {
+   "tests.unit.test_batch91_acceptance": 17,
+   "tests.unit.test_batch91_stage": 10,
+   "tests.unit.test_batch70_research": 13,
+   "tests.unit.test_catalog_futures": 27,
+   "tests.unit.test_catalog_dependencies": 29,
+   "tests.unit.test_catalog_schedules": 33,
+   "tests.unit.test_research_metadata": 23,
+   "tests.integration.test_strategy_merge": 8,
+   "tests.unit.test_batch92_stage": 13,
+   "tests.unit.test_batch92_acceptance": 18
+  },
+  "ruff": "passed",
+  "diff": "passed"
+ },
+ "isolation": {
+  "basis": "396 preceding metadata SHA code files plus Batch92 candidate and pinned source/upstream inputs",
+  "copied_files": 1236,
+  "manifest_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/isolated-files.json",
+  "manifest_sha256": "f3a672ed8ff9fb059055ea27939198c08b26611c23b82ba51c53e0692e2d8908",
+  "log_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/isolated-tests.log",
+  "log_sha256": "8d0b758f198f2dfe52e3c8a3c1daa0161e7c44f67352f1d14f6e94129ae3623d",
+  "junit_file": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/isolated-tests.xml",
+  "junit_sha256": "bb1821ce82d453e5df2281fbb44dc71c6100a2d8b13f7f583ae843dd39e64ef2",
+  "known_commit_equivalence_claimed": false,
+  "obsolete_unrelated_README_seed_excluded": true,
+  "failed_isolation_preserved": "data/staging/strategies-batch92/20261010-trend-definition-acceptance/isolation-first-input-rejection/failure.json"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5780,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26"
+ },
+ "stage_protection": {
+  "status": "ok",
+  "stage_baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+  "acceptance_baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+  "old_control_SHA_bindings_retained": 5780,
+  "old_partition_stats_retained": 398,
+  "method": "Compare stage controls against freshly hashed acceptance controls; finish rehashes these via protect"
+ },
+ "catalog_changed_sources": 1,
+ "other_catalog_records_unchanged": 694,
+ "component_rows_overlapping_ranges": 7181,
+ "offline_replay_differences": 0,
+ "independent_full_signal_differences": 0,
+ "source_full_lines_read": 807,
+ "new_requests": 0,
+ "new_trading_backtests": 0,
+ "manually_reviewed": 268,
+ "remaining_unreviewed": 427,
+ "locally_backtested_and_reproduced_sources": 12,
+ "local_strategy_parent_runs": 75,
+ "platform_equivalence_proven": false,
+ "library_goal_complete": false,
+ "next_plan": "docs/tasks/2026-10-10-第九十三批FFScore与三因子-执行计划.md",
+ "Git_publication": "pending_user_commit_and_push"
+}

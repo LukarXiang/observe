@@ -1,0 +1,2057 @@
+{
+ "status": "ok",
+ "nature": "supplement_existing_approved_approximate_backtests",
+ "formal_trading_acceptance": true,
+ "original_strategy_complete": false,
+ "library_goal_complete": false,
+ "source_sha256": "011bfb2aa689d471d949e1813c53089adce4125ae748b06ce227265a81c842fd",
+ "snapshot": "20261006-145049-e06c",
+ "progress": {
+  "checkpoint": "20261011-015307-6927",
+  "note": "Pair66 five short islands291days/sole Book three costs/independent signal and fees/forbidden-network fresh-process match0; no new source",
+  "catalog_id": "48832bb4f60bc4353180",
+  "catalog_sha256": "ca0a9a019a743672d4b80d556b713271af64f16e3d3bd0db9e23dec14f975ceb",
+  "published_batch": "20261006-145049-5ceb",
+  "sources": 695,
+  "catalog_status_counts": {
+   "待数据": 483,
+   "已验证": 11,
+   "待审查": 2,
+   "暂不可复现": 70,
+   "非交易研究脚本": 88,
+   "重复版本": 41
+  },
+  "manually_reviewed": 278,
+  "locally_backtested_sources": 12,
+  "locally_reproduced_sources": 12,
+  "local_strategy_runs": 87,
+  "caveat": "Static classification is not manual review; local status is not a fresh integrity check; all implementations remain component/approximate evidence.",
+  "output": "data/catalog/strategies/progress/20261011-015307-6927"
+ },
+ "windows": [
+  {
+   "input_start": "2010-12-14",
+   "end": "2011-04-08",
+   "continuous_rows": 76,
+   "post_warmup_sessions": 16,
+   "selected": false,
+   "start": "2011-03-16",
+   "decision_days": 16,
+   "signal_actions": [
+    {
+     "decision": "2011-04-06",
+     "action": 1,
+     "next_execution_in_window": "2011-04-07"
+    }
+   ],
+   "executable_signal_actions": 1,
+   "independent_differences": 0,
+   "maximum_raw_z_difference": 3.3306690738754696e-15,
+   "execution_eligibility_checked": false,
+   "zero_signal_window": false,
+   "label": "pair66-short-1",
+   "execution_input": {
+    "start": "2011-03-16",
+    "end": "2011-04-08",
+    "sessions": 16,
+    "warmup_start": "2011-02-16",
+    "boards": [
+     "main"
+    ],
+    "liquidity": {
+     "mode": "history",
+     "window": 20
+    },
+    "quotes": 32,
+    "quotes_without_liquidity_reference": 0,
+    "unexplained_price_resets": 0,
+    "actions": 0
+   },
+   "execution_limitations": [],
+   "config_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-1.yaml",
+   "config_sha256": "4b303d4553284d4ec27b57c67ed4e7b2c4f6203ca67b879e7493c87e952b608e",
+   "run_id": "20261011-013056-f45668-strategy-c0d1",
+   "reproduction_run_id": "20261011-014535-f45668-strategy-c8a9",
+   "validation_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-1-verification.json",
+   "validation_sha256": "dae3ed752513edec35898a438f235383b553d204b8852f44e384d4be6535ac85",
+   "hand_check": {
+    "sessions_checked": 16,
+    "switches": {
+     "1": 1,
+     "2": 0
+    },
+    "orders": [
+     {
+      "scenario": "base",
+      "orders_checked": 1,
+      "sessions_checked": 16
+     },
+     {
+      "scenario": "fees_x2",
+      "orders_checked": 1,
+      "sessions_checked": 16
+     },
+     {
+      "scenario": "slippage_x2",
+      "orders_checked": 1,
+      "sessions_checked": 16
+     }
+    ],
+    "method": "Independent fsum sample std/60-session dynamically anchored spread/NumPy scalar round/source signal state; independent intents via sole Book ledger"
+   },
+   "period": {
+    "start": "2011-03-16",
+    "end": "2011-04-08"
+   },
+   "results": [
+    {
+     "scenario": "base",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.011415229999999887,
+      "annual_return": 0.18729467803029975,
+      "annual_vol": 0.05003703670358885,
+      "sharpe": null,
+      "max_drawdown": -0.0012847700000000462,
+      "drawdown_peak": 0,
+      "drawdown_trough": 15
+     },
+     "trading": {
+      "cash_share_mean": 0.8755354629891964,
+      "fee_ratio_to_initial": 0.00026877,
+      "fees": {
+       "commission": 248.86,
+       "fee": 268.77,
+       "stamp_tax": 0.0,
+       "transfer_fee": 19.91
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.12446453701080365,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.12446453701080365,
+      "turnover_half_daily_mean": 0.0311070625,
+      "turnover_two_sided_daily_mean": 0.062214125
+     },
+     "yearly": [
+      {
+       "year": 2011,
+       "sessions": 16,
+       "metrics": {
+        "annual_return": 0.18729467803029975,
+        "annual_vol": 0.05003703670358885,
+        "drawdown_peak": 0,
+        "drawdown_trough": 15,
+        "max_drawdown": -0.0012847700000000462,
+        "sharpe": null,
+        "total_return": 0.011415229999999887
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "fees_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.011146469999999908,
+      "annual_return": 0.18253174809898853,
+      "annual_vol": 0.05023407780176854,
+      "sharpe": null,
+      "max_drawdown": -0.0015535300000000252,
+      "drawdown_peak": 0,
+      "drawdown_trough": 15
+     },
+     "trading": {
+      "cash_share_mean": 0.8755021702575261,
+      "fee_ratio_to_initial": 0.0005375299999999999,
+      "fees": {
+       "commission": 497.71,
+       "fee": 537.53,
+       "stamp_tax": 0.0,
+       "transfer_fee": 39.82
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.12449782974247386,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.12449782974247386,
+      "turnover_half_daily_mean": 0.0311070625,
+      "turnover_two_sided_daily_mean": 0.062214125
+     },
+     "yearly": [
+      {
+       "year": 2011,
+       "sessions": 16,
+       "metrics": {
+        "annual_return": 0.18253174809898853,
+        "annual_vol": 0.05023407780176854,
+        "drawdown_peak": 0,
+        "drawdown_trough": 15,
+        "max_drawdown": -0.0015535300000000252,
+        "sharpe": null,
+        "total_return": 0.011146469999999908
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "slippage_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.010398960000000068,
+      "annual_return": 0.169378135300716,
+      "annual_vol": 0.05089135447286726,
+      "sharpe": null,
+      "max_drawdown": -0.0023010400000000875,
+      "drawdown_peak": 0,
+      "drawdown_trough": 15
+     },
+     "trading": {
+      "cash_share_mean": 0.8754094784826156,
+      "fee_ratio_to_initial": 0.00026904,
+      "fees": {
+       "commission": 249.11,
+       "fee": 269.04,
+       "stamp_tax": 0.0,
+       "transfer_fee": 19.93
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.12459052151738445,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.12459052151738445,
+      "turnover_half_daily_mean": 0.0311388125,
+      "turnover_two_sided_daily_mean": 0.062277625
+     },
+     "yearly": [
+      {
+       "year": 2011,
+       "sessions": 16,
+       "metrics": {
+        "annual_return": 0.169378135300716,
+        "annual_vol": 0.05089135447286726,
+        "drawdown_peak": 0,
+        "drawdown_trough": 15,
+        "max_drawdown": -0.0023010400000000875,
+        "sharpe": null,
+        "total_return": 0.010398960000000068
+       }
+      }
+     ],
+     "blocked": null
+    }
+   ],
+   "benchmark": [
+    {
+     "scenario": "base",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2011-03-15",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -0.002181646256323881,
+      "annual_return_diff": -0.8050504910096181,
+      "available": true,
+      "benchmark_common_days": 16,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.9923451690399179,
+      "common_end": "2011-04-08",
+      "common_start": "2011-03-16",
+      "common_strategy_annual_return": 0.18729467803029975,
+      "information_ratio": null,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "fees_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2011-03-15",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -0.0021982298212890675,
+      "annual_return_diff": -0.8098134209409293,
+      "available": true,
+      "benchmark_common_days": 16,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.9923451690399179,
+      "common_end": "2011-04-08",
+      "common_start": "2011-03-16",
+      "common_strategy_annual_return": 0.18253174809898853,
+      "information_ratio": null,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "slippage_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2011-03-15",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -0.002244353566458919,
+      "annual_return_diff": -0.8229670337392059,
+      "available": true,
+      "benchmark_common_days": 16,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.9923451690399179,
+      "common_end": "2011-04-08",
+      "common_start": "2011-03-16",
+      "common_strategy_annual_return": 0.169378135300712,
+      "information_ratio": null,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    }
+   ],
+   "fills_checked": 3
+  },
+  {
+   "input_start": "2011-05-09",
+   "end": "2011-09-15",
+   "continuous_rows": 92,
+   "post_warmup_sessions": 32,
+   "selected": false,
+   "start": "2011-08-02",
+   "decision_days": 32,
+   "signal_actions": [
+    {
+     "decision": "2011-08-03",
+     "action": 2,
+     "next_execution_in_window": "2011-08-04"
+    }
+   ],
+   "executable_signal_actions": 1,
+   "independent_differences": 0,
+   "maximum_raw_z_difference": 2.886579864025407e-15,
+   "execution_eligibility_checked": false,
+   "zero_signal_window": false,
+   "label": "pair66-short-2",
+   "execution_input": {
+    "start": "2011-08-02",
+    "end": "2011-09-15",
+    "sessions": 32,
+    "warmup_start": "2011-07-05",
+    "boards": [
+     "main"
+    ],
+    "liquidity": {
+     "mode": "history",
+     "window": 20
+    },
+    "quotes": 64,
+    "quotes_without_liquidity_reference": 0,
+    "unexplained_price_resets": 0,
+    "actions": 0
+   },
+   "execution_limitations": [],
+   "config_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-2.yaml",
+   "config_sha256": "282144c542b1365a0a7b3cc5c953748f838eaa114d364d2e71bc5b2762329e10",
+   "run_id": "20261011-014631-855a1d-strategy-0846",
+   "reproduction_run_id": "20261011-014828-855a1d-strategy-d0df",
+   "validation_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-2-verification.json",
+   "validation_sha256": "41f431a727d1836e8409c2d9356ef2a3dc9ec3a29176e6c4c9638c72f2c2a8a3",
+   "hand_check": {
+    "sessions_checked": 32,
+    "switches": {
+     "1": 0,
+     "2": 1
+    },
+    "orders": [
+     {
+      "scenario": "base",
+      "orders_checked": 1,
+      "sessions_checked": 32
+     },
+     {
+      "scenario": "fees_x2",
+      "orders_checked": 1,
+      "sessions_checked": 32
+     },
+     {
+      "scenario": "slippage_x2",
+      "orders_checked": 1,
+      "sessions_checked": 32
+     }
+    ],
+    "method": "Independent fsum sample std/60-session dynamically anchored spread/NumPy scalar round/source signal state; independent intents via sole Book ledger"
+   },
+   "period": {
+    "start": "2011-08-02",
+    "end": "2011-09-15"
+   },
+   "results": [
+    {
+     "scenario": "base",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": -0.13021746999999995,
+      "annual_return": -0.6518284582982528,
+      "annual_vol": 0.2877294388697791,
+      "sharpe": -3.518634256833226,
+      "max_drawdown": -0.14170947,
+      "drawdown_peak": 0,
+      "drawdown_trough": 26
+     },
+     "trading": {
+      "cash_share_mean": 0.06422258029828934,
+      "fee_ratio_to_initial": 0.00026947,
+      "fees": {
+       "commission": 249.51,
+       "fee": 269.47,
+       "stamp_tax": 0.0,
+       "transfer_fee": 19.96
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.9357774197017107,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.9357774197017107,
+      "turnover_half_daily_mean": 0.0155943125,
+      "turnover_two_sided_daily_mean": 0.031188625
+     },
+     "yearly": [
+      {
+       "year": 2011,
+       "sessions": 32,
+       "metrics": {
+        "annual_return": -0.6518284582982528,
+        "annual_vol": 0.2877294388697791,
+        "drawdown_peak": 0,
+        "drawdown_trough": 26,
+        "max_drawdown": -0.14170947,
+        "sharpe": -3.518634256833226,
+        "total_return": -0.13021746999999995
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "fees_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": -0.13048693999999994,
+      "annual_return": -0.6526433819766821,
+      "annual_vol": 0.2878112437740471,
+      "sharpe": -3.5256617817955203,
+      "max_drawdown": -0.14197894,
+      "drawdown_peak": 0,
+      "drawdown_trough": 26
+     },
+     "trading": {
+      "cash_share_mean": 0.06394907385576602,
+      "fee_ratio_to_initial": 0.00053894,
+      "fees": {
+       "commission": 499.02,
+       "fee": 538.94,
+       "stamp_tax": 0.0,
+       "transfer_fee": 39.92
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.9360509261442338,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.9360509261442338,
+      "turnover_half_daily_mean": 0.0155943125,
+      "turnover_two_sided_daily_mean": 0.031188625
+     },
+     "yearly": [
+      {
+       "year": 2011,
+       "sessions": 32,
+       "metrics": {
+        "annual_return": -0.6526433819766821,
+        "annual_vol": 0.2878112437740471,
+        "drawdown_peak": 0,
+        "drawdown_trough": 26,
+        "max_drawdown": -0.14197894,
+        "sharpe": -3.5256617817955203,
+        "total_return": -0.13048693999999994
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "slippage_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": -0.13110170999999993,
+      "annual_return": -0.6544963594491839,
+      "annual_vol": 0.2880051357394669,
+      "sharpe": -3.541592124282084,
+      "max_drawdown": -0.14259370999999998,
+      "drawdown_peak": 0,
+      "drawdown_trough": 26
+     },
+     "trading": {
+      "cash_share_mean": 0.06332449511530429,
+      "fee_ratio_to_initial": 0.00026971,
+      "fees": {
+       "commission": 249.73,
+       "fee": 269.71,
+       "stamp_tax": 0.0,
+       "transfer_fee": 19.98
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.9366755048846958,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.9366755048846958,
+      "turnover_half_daily_mean": 0.015608125,
+      "turnover_two_sided_daily_mean": 0.03121625
+     },
+     "yearly": [
+      {
+       "year": 2011,
+       "sessions": 32,
+       "metrics": {
+        "annual_return": -0.6544963594491839,
+        "annual_vol": 0.2880051357394669,
+        "drawdown_peak": 0,
+        "drawdown_trough": 26,
+        "max_drawdown": -0.14259370999999998,
+        "sharpe": -3.541592124282084,
+        "total_return": -0.13110170999999993
+       }
+      }
+     ],
+     "blocked": null
+    }
+   ],
+   "benchmark": [
+    {
+     "scenario": "base",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2011-08-01",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -0.0015504989311340873,
+      "annual_return_diff": -0.1689472715753344,
+      "available": true,
+      "benchmark_common_days": 32,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.48288118672291935,
+      "common_end": "2011-09-15",
+      "common_start": "2011-08-02",
+      "common_strategy_annual_return": -0.6518284582982538,
+      "information_ratio": -2.3778105061220276,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "fees_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2011-08-01",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -0.0015600462131117147,
+      "annual_return_diff": -0.16976219525376302,
+      "available": true,
+      "benchmark_common_days": 32,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.48288118672291935,
+      "common_end": "2011-09-15",
+      "common_start": "2011-08-02",
+      "common_strategy_annual_return": -0.6526433819766824,
+      "information_ratio": -2.3907102796463033,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "slippage_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2011-08-01",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -0.0015818297583286428,
+      "annual_return_diff": -0.17161517272626392,
+      "available": true,
+      "benchmark_common_days": 32,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.48288118672291935,
+      "common_end": "2011-09-15",
+      "common_start": "2011-08-02",
+      "common_strategy_annual_return": -0.6544963594491833,
+      "information_ratio": -2.419876466760716,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    }
+   ],
+   "fills_checked": 3
+  },
+  {
+   "input_start": "2015-09-09",
+   "end": "2016-02-19",
+   "continuous_rows": 107,
+   "post_warmup_sessions": 47,
+   "selected": false,
+   "start": "2015-12-09",
+   "decision_days": 47,
+   "signal_actions": [
+    {
+     "decision": "2015-12-09",
+     "action": 1,
+     "next_execution_in_window": "2015-12-10"
+    }
+   ],
+   "executable_signal_actions": 1,
+   "independent_differences": 0,
+   "maximum_raw_z_difference": 2.6645352591003757e-15,
+   "execution_eligibility_checked": false,
+   "zero_signal_window": false,
+   "label": "pair66-short-3",
+   "execution_input": {
+    "start": "2015-12-09",
+    "end": "2016-02-19",
+    "sessions": 47,
+    "warmup_start": "2015-11-11",
+    "boards": [
+     "main"
+    ],
+    "liquidity": {
+     "mode": "history",
+     "window": 20
+    },
+    "quotes": 94,
+    "quotes_without_liquidity_reference": 0,
+    "unexplained_price_resets": 0,
+    "actions": 0
+   },
+   "execution_limitations": [],
+   "config_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-3.yaml",
+   "config_sha256": "cfb775caa663f4338afb4d991a1ffab465e7d8245f04c201e82a9b6e522bd5c3",
+   "run_id": "20261011-014723-349335-strategy-8be4",
+   "reproduction_run_id": "20261011-014914-349335-strategy-29a1",
+   "validation_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-3-verification.json",
+   "validation_sha256": "973dcefae2515a64f9e7b371531daeab41b635591c942212ad2493be9e0746a5",
+   "hand_check": {
+    "sessions_checked": 47,
+    "switches": {
+     "1": 1,
+     "2": 0
+    },
+    "orders": [
+     {
+      "scenario": "base",
+      "orders_checked": 1,
+      "sessions_checked": 47
+     },
+     {
+      "scenario": "fees_x2",
+      "orders_checked": 1,
+      "sessions_checked": 47
+     },
+     {
+      "scenario": "slippage_x2",
+      "orders_checked": 1,
+      "sessions_checked": 47
+     }
+    ],
+    "method": "Independent fsum sample std/60-session dynamically anchored spread/NumPy scalar round/source signal state; independent intents via sole Book ledger"
+   },
+   "period": {
+    "start": "2015-12-09",
+    "end": "2016-02-19"
+   },
+   "results": [
+    {
+     "scenario": "base",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": -0.22019717000000005,
+      "annual_return": -0.7221331961564218,
+      "annual_vol": 0.5017257937555988,
+      "sharpe": -2.2962175492677517,
+      "max_drawdown": -0.32635799542007304,
+      "drawdown_peak": 9,
+      "drawdown_trough": 34
+     },
+     "trading": {
+      "cash_share_mean": 0.024382810054355133,
+      "fee_ratio_to_initial": 0.00026917,
+      "fees": {
+       "commission": 249.23,
+       "fee": 269.17,
+       "stamp_tax": 0.0,
+       "transfer_fee": 19.94
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.9756171899456451,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.9756171899456451,
+      "turnover_half_daily_mean": 0.010605617021276596,
+      "turnover_two_sided_daily_mean": 0.021211234042553193
+     },
+     "yearly": [
+      {
+       "year": 2015,
+       "sessions": 17,
+       "metrics": {
+        "annual_return": 0.3395252992969666,
+        "annual_vol": 0.2341423554676096,
+        "drawdown_peak": 9,
+        "drawdown_trough": 17,
+        "max_drawdown": -0.04381016421102091,
+        "sharpe": null,
+        "total_return": 0.020746829999999994
+       }
+      },
+      {
+       "year": 2016,
+       "sessions": 30,
+       "metrics": {
+        "annual_return": -0.8860436349134191,
+        "annual_vol": 0.6007044301173506,
+        "drawdown_peak": 0,
+        "drawdown_trough": 17,
+        "max_drawdown": -0.29549344767497343,
+        "sharpe": -3.3046155075899817,
+        "total_return": -0.23604677763241255
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "fees_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": -0.22046633999999998,
+      "annual_return": -0.7226266937533663,
+      "annual_vol": 0.5018810594111862,
+      "sharpe": -2.298876653387024,
+      "max_drawdown": -0.3264403061615635,
+      "drawdown_peak": 9,
+      "drawdown_trough": 34
+     },
+     "trading": {
+      "cash_share_mean": 0.024085373274646465,
+      "fee_ratio_to_initial": 0.00053834,
+      "fees": {
+       "commission": 498.46,
+       "fee": 538.34,
+       "stamp_tax": 0.0,
+       "transfer_fee": 39.88
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.9759146267253533,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.9759146267253533,
+      "turnover_half_daily_mean": 0.010605617021276596,
+      "turnover_two_sided_daily_mean": 0.021211234042553193
+     },
+     "yearly": [
+      {
+       "year": 2015,
+       "sessions": 17,
+       "metrics": {
+        "annual_return": 0.3345057091241659,
+        "annual_vol": 0.23429987213224374,
+        "drawdown_peak": 9,
+        "drawdown_trough": 17,
+        "max_drawdown": -0.043821213571390794,
+        "sharpe": null,
+        "total_return": 0.020477660000000064
+       }
+      },
+      {
+       "year": 2016,
+       "sessions": 30,
+       "metrics": {
+        "annual_return": -0.8861185315132799,
+        "annual_vol": 0.6008951225447612,
+        "drawdown_peak": 0,
+        "drawdown_trough": 17,
+        "max_drawdown": -0.2955713895784843,
+        "sharpe": -3.304463301181369,
+        "total_return": -0.2361090393688775
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "slippage_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": -0.22108541000000004,
+      "annual_return": -0.7237590200338004,
+      "annual_vol": 0.5022413342691339,
+      "sharpe": -2.3049727848137094,
+      "max_drawdown": -0.3266297720929684,
+      "drawdown_peak": 9,
+      "drawdown_trough": 34
+     },
+     "trading": {
+      "cash_share_mean": 0.023400592975460627,
+      "fee_ratio_to_initial": 0.00026941000000000004,
+      "fees": {
+       "commission": 249.45,
+       "fee": 269.41,
+       "stamp_tax": 0.0,
+       "transfer_fee": 19.96
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.9765994070245395,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.9765994070245395,
+      "turnover_half_daily_mean": 0.010615063829787235,
+      "turnover_two_sided_daily_mean": 0.02123012765957447
+     },
+     "yearly": [
+      {
+       "year": 2015,
+       "sessions": 17,
+       "metrics": {
+        "annual_return": 0.32302733321809196,
+        "annual_vol": 0.23467866464767034,
+        "drawdown_peak": 9,
+        "drawdown_trough": 17,
+        "max_drawdown": -0.04384664740075539,
+        "sharpe": null,
+        "total_return": 0.0198585899999999
+       }
+      },
+      {
+       "year": 2016,
+       "sessions": 30,
+       "metrics": {
+        "annual_return": -0.8862907740139525,
+        "annual_vol": 0.6013341703068293,
+        "drawdown_peak": 0,
+        "drawdown_trough": 17,
+        "max_drawdown": -0.29575080600144776,
+        "sharpe": -3.304112826962299,
+        "total_return": -0.23625236122196114
+       }
+      }
+     ],
+     "blocked": null
+    }
+   ],
+   "benchmark": [
+    {
+     "scenario": "base",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2015-12-08",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -0.0014064255420405715,
+      "annual_return_diff": -0.13534356842145812,
+      "available": true,
+      "benchmark_common_days": 47,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.5867896277349627,
+      "common_end": "2016-02-19",
+      "common_start": "2015-12-09",
+      "common_strategy_annual_return": -0.7221331961564208,
+      "information_ratio": -1.3789519452089547,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "fees_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2015-12-08",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -0.0014134134664852977,
+      "annual_return_diff": -0.13583706601840395,
+      "available": true,
+      "benchmark_common_days": 47,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.5867896277349627,
+      "common_end": "2016-02-19",
+      "common_start": "2015-12-09",
+      "common_strategy_annual_return": -0.7226266937533666,
+      "information_ratio": -1.3851861689023162,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "slippage_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2015-12-08",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": -0.001429487667482639,
+      "annual_return_diff": -0.13696939229883776,
+      "available": true,
+      "benchmark_common_days": 47,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.5867896277349627,
+      "common_end": "2016-02-19",
+      "common_start": "2015-12-09",
+      "common_strategy_annual_return": -0.7237590200338004,
+      "information_ratio": -1.399470950475,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    }
+   ],
+   "fills_checked": 3
+  },
+  {
+   "input_start": "2016-12-01",
+   "end": "2017-09-15",
+   "continuous_rows": 196,
+   "post_warmup_sessions": 136,
+   "selected": false,
+   "start": "2017-03-03",
+   "decision_days": 136,
+   "signal_actions": [
+    {
+     "decision": "2017-04-14",
+     "action": 2,
+     "next_execution_in_window": "2017-04-17"
+    },
+    {
+     "decision": "2017-07-10",
+     "action": 1,
+     "next_execution_in_window": "2017-07-11"
+    },
+    {
+     "decision": "2017-09-04",
+     "action": 2,
+     "next_execution_in_window": "2017-09-05"
+    }
+   ],
+   "executable_signal_actions": 3,
+   "independent_differences": 0,
+   "maximum_raw_z_difference": 1.7763568394002505e-15,
+   "execution_eligibility_checked": false,
+   "zero_signal_window": false,
+   "label": "pair66-short-4",
+   "execution_input": {
+    "start": "2017-03-03",
+    "end": "2017-09-15",
+    "sessions": 136,
+    "warmup_start": "2017-02-03",
+    "boards": [
+     "main"
+    ],
+    "liquidity": {
+     "mode": "history",
+     "window": 20
+    },
+    "quotes": 272,
+    "quotes_without_liquidity_reference": 0,
+    "unexplained_price_resets": 0,
+    "actions": 2
+   },
+   "execution_limitations": [],
+   "config_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-4.yaml",
+   "config_sha256": "e28b302e11964011042159940cfd852a912f00e547f2d32488ec35eb46503f6a",
+   "run_id": "20261011-014740-0414c9-strategy-fcfd",
+   "reproduction_run_id": "20261011-015002-0414c9-strategy-6ea2",
+   "validation_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-4-verification.json",
+   "validation_sha256": "9a81faa978e7cc4c512564621d79bfdd8a0475114e3933af7f411c967a5e3d9e",
+   "hand_check": {
+    "sessions_checked": 136,
+    "switches": {
+     "1": 1,
+     "2": 2
+    },
+    "orders": [
+     {
+      "scenario": "base",
+      "orders_checked": 5,
+      "sessions_checked": 136
+     },
+     {
+      "scenario": "fees_x2",
+      "orders_checked": 5,
+      "sessions_checked": 136
+     },
+     {
+      "scenario": "slippage_x2",
+      "orders_checked": 5,
+      "sessions_checked": 136
+     }
+    ],
+    "method": "Independent fsum sample std/60-session dynamically anchored spread/NumPy scalar round/source signal state; independent intents via sole Book ledger"
+   },
+   "period": {
+    "start": "2017-03-03",
+    "end": "2017-09-15"
+   },
+   "results": [
+    {
+     "scenario": "base",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.51779807,
+      "annual_return": 1.1011367402758534,
+      "annual_vol": 0.26115853662437866,
+      "sharpe": 2.9758239789940686,
+      "max_drawdown": -0.07915909181533898,
+      "drawdown_peak": 36,
+      "drawdown_trough": 45
+     },
+     "trading": {
+      "cash_share_mean": 0.21495267625649112,
+      "fee_ratio_to_initial": 0.00459393,
+      "fees": {
+       "commission": 1662.56,
+       "fee": 4593.93,
+       "stamp_tax": 2798.36,
+       "transfer_fee": 133.01
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 5,
+      "max_single_weight_mean": 0.7850473237435089,
+      "orders": 5,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.7850473237435089,
+      "turnover_half_daily_mean": 0.01817120027917218,
+      "turnover_two_sided_daily_mean": 0.03634240055834436
+     },
+     "yearly": [
+      {
+       "year": 2017,
+       "sessions": 136,
+       "metrics": {
+        "annual_return": 1.1011367402758534,
+        "annual_vol": 0.26115853662437866,
+        "drawdown_peak": 36,
+        "drawdown_trough": 45,
+        "max_drawdown": -0.07915909181533898,
+        "sharpe": 2.9758239789940686,
+        "total_return": 0.51779807
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "fees_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.5128115099999999,
+      "annual_return": 1.088869092635925,
+      "annual_vol": 0.26088513182671236,
+      "sharpe": 2.9561681333449252,
+      "max_drawdown": -0.07917856650648514,
+      "drawdown_peak": 36,
+      "drawdown_trough": 45
+     },
+     "trading": {
+      "cash_share_mean": 0.21512352642891713,
+      "fee_ratio_to_initial": 0.00917349,
+      "fees": {
+       "commission": 3318.12,
+       "fee": 9173.49,
+       "stamp_tax": 5589.91,
+       "transfer_fee": 265.46
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 5,
+      "max_single_weight_mean": 0.7848764735710828,
+      "orders": 5,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.7848764735710828,
+      "turnover_half_daily_mean": 0.01815092570514746,
+      "turnover_two_sided_daily_mean": 0.03630185141029492
+     },
+     "yearly": [
+      {
+       "year": 2017,
+       "sessions": 136,
+       "metrics": {
+        "annual_return": 1.088869092635925,
+        "annual_vol": 0.26088513182671236,
+        "drawdown_peak": 36,
+        "drawdown_trough": 45,
+        "max_drawdown": -0.07917856650648514,
+        "sharpe": 2.9561681333449252,
+        "total_return": 0.5128115099999999
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "slippage_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.5094405099999999,
+      "annual_return": 1.0805937829608636,
+      "annual_vol": 0.26031796488865616,
+      "sharpe": 2.946762308604471,
+      "max_drawdown": -0.07900613271369195,
+      "drawdown_peak": 36,
+      "drawdown_trough": 45
+     },
+     "trading": {
+      "cash_share_mean": 0.21616329335191528,
+      "fee_ratio_to_initial": 0.004572489999999999,
+      "fees": {
+       "commission": 1655.09,
+       "fee": 4572.49,
+       "stamp_tax": 2784.99,
+       "transfer_fee": 132.41
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 5,
+      "max_single_weight_mean": 0.7838367066480847,
+      "orders": 5,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.7838367066480847,
+      "turnover_half_daily_mean": 0.01813016548853672,
+      "turnover_two_sided_daily_mean": 0.03626033097707344
+     },
+     "yearly": [
+      {
+       "year": 2017,
+       "sessions": 136,
+       "metrics": {
+        "annual_return": 1.0805937829608636,
+        "annual_vol": 0.26031796488865616,
+        "drawdown_peak": 36,
+        "drawdown_trough": 45,
+        "max_drawdown": -0.07900613271369195,
+        "sharpe": 2.946762308604471,
+        "total_return": 0.5094405099999999
+       }
+      }
+     ],
+     "blocked": null
+    }
+   ],
+   "benchmark": [
+    {
+     "scenario": "base",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2017-03-02",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.0023901274527690234,
+      "annual_return_diff": 0.8867520972262539,
+      "available": true,
+      "benchmark_common_days": 136,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.21438464304959326,
+      "common_end": "2017-09-15",
+      "common_start": "2017-03-03",
+      "common_strategy_annual_return": 1.1011367402758472,
+      "information_ratio": 2.4842917531780615,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "fees_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2017-03-02",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.002365575707164851,
+      "annual_return_diff": 0.8744844495863295,
+      "available": true,
+      "benchmark_common_days": 136,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.21438464304959326,
+      "common_end": "2017-09-15",
+      "common_start": "2017-03-03",
+      "common_strategy_annual_return": 1.0888690926359228,
+      "information_ratio": 2.4612670754894164,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "slippage_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2017-03-02",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.002348529649383434,
+      "annual_return_diff": 0.8662091399112686,
+      "available": true,
+      "benchmark_common_days": 136,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": 0.21438464304959326,
+      "common_end": "2017-09-15",
+      "common_start": "2017-03-03",
+      "common_strategy_annual_return": 1.0805937829608618,
+      "information_ratio": 2.4494638394082324,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    }
+   ],
+   "fills_checked": 15
+  },
+  {
+   "input_start": "2019-04-09",
+   "end": "2019-09-30",
+   "continuous_rows": 120,
+   "post_warmup_sessions": 60,
+   "selected": false,
+   "start": "2019-07-08",
+   "decision_days": 60,
+   "signal_actions": [
+    {
+     "decision": "2019-08-01",
+     "action": 2,
+     "next_execution_in_window": "2019-08-02"
+    }
+   ],
+   "executable_signal_actions": 1,
+   "independent_differences": 0,
+   "maximum_raw_z_difference": 4.218847493575595e-15,
+   "execution_eligibility_checked": false,
+   "zero_signal_window": false,
+   "label": "pair66-short-5",
+   "execution_input": {
+    "start": "2019-07-08",
+    "end": "2019-09-30",
+    "sessions": 60,
+    "warmup_start": "2019-06-10",
+    "boards": [
+     "main"
+    ],
+    "liquidity": {
+     "mode": "history",
+     "window": 20
+    },
+    "quotes": 120,
+    "quotes_without_liquidity_reference": 0,
+    "unexplained_price_resets": 0,
+    "actions": 1
+   },
+   "execution_limitations": [],
+   "config_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-5.yaml",
+   "config_sha256": "e04555a44dba04ada30b9327185d779c724bfc4e91cfbf43d4543d606c1503c0",
+   "run_id": "20261011-014800-775a42-strategy-226a",
+   "reproduction_run_id": "20261011-015051-775a42-strategy-1a89",
+   "validation_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-5-verification.json",
+   "validation_sha256": "cac640ee045de72d5e6709f8493c21767edbfcc5fdd87f9fa9dbee406e842dda",
+   "hand_check": {
+    "sessions_checked": 60,
+    "switches": {
+     "1": 0,
+     "2": 1
+    },
+    "orders": [
+     {
+      "scenario": "base",
+      "orders_checked": 1,
+      "sessions_checked": 60
+     },
+     {
+      "scenario": "fees_x2",
+      "orders_checked": 1,
+      "sessions_checked": 60
+     },
+     {
+      "scenario": "slippage_x2",
+      "orders_checked": 1,
+      "sessions_checked": 60
+     }
+    ],
+    "method": "Independent fsum sample std/60-session dynamically anchored spread/NumPy scalar round/source signal state; independent intents via sole Book ledger"
+   },
+   "period": {
+    "start": "2019-07-08",
+    "end": "2019-09-30"
+   },
+   "results": [
+    {
+     "scenario": "base",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.12913812000000013,
+      "annual_return": 0.6320990569337628,
+      "annual_vol": 0.1872397523850231,
+      "sharpe": 2.7101949146820843,
+      "max_drawdown": -0.04807748950486401,
+      "drawdown_peak": 43,
+      "drawdown_trough": 59
+     },
+     "trading": {
+      "cash_share_mean": 0.33389784988318577,
+      "fee_ratio_to_initial": 0.00026988,
+      "fees": {
+       "commission": 249.89,
+       "fee": 269.88,
+       "stamp_tax": 0.0,
+       "transfer_fee": 19.99
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.6661021501168141,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.6661021501168141,
+      "turnover_half_daily_mean": 0.0083296,
+      "turnover_two_sided_daily_mean": 0.0166592
+     },
+     "yearly": [
+      {
+       "year": 2019,
+       "sessions": 60,
+       "metrics": {
+        "annual_return": 0.6320990569337628,
+        "annual_vol": 0.1872397523850231,
+        "drawdown_peak": 43,
+        "drawdown_trough": 59,
+        "max_drawdown": -0.04807748950486401,
+        "sharpe": 2.7101949146820843,
+        "total_return": 0.12913812000000013
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "fees_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.12819705999999997,
+      "annual_return": 0.6266196712332,
+      "annual_vol": 0.18623691932801334,
+      "sharpe": 2.705719878123606,
+      "max_drawdown": -0.04787569154225113,
+      "drawdown_peak": 43,
+      "drawdown_trough": 59
+     },
+     "trading": {
+      "cash_share_mean": 0.33691930671186915,
+      "fee_ratio_to_initial": 0.0005369400000000001,
+      "fees": {
+       "commission": 497.17,
+       "fee": 536.94,
+       "stamp_tax": 0.0,
+       "transfer_fee": 39.77
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.6630806932881309,
+      "orders": 1,
+      "partial_fills": 1,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.6630806932881309,
+      "turnover_half_daily_mean": 0.008286216666666667,
+      "turnover_two_sided_daily_mean": 0.016572433333333334
+     },
+     "yearly": [
+      {
+       "year": 2019,
+       "sessions": 60,
+       "metrics": {
+        "annual_return": 0.6266196712332,
+        "annual_vol": 0.18623691932801334,
+        "drawdown_peak": 43,
+        "drawdown_trough": 59,
+        "max_drawdown": -0.04787569154225113,
+        "sharpe": 2.705719878123606,
+        "total_return": 0.12819705999999997
+       }
+      }
+     ],
+     "blocked": null
+    },
+    {
+     "scenario": "slippage_x2",
+     "status": "success_limited",
+     "metrics": {
+      "total_return": 0.12751026,
+      "annual_return": 0.6226294730958872,
+      "annual_vol": 0.1859954769713135,
+      "sharpe": 2.6957693449006666,
+      "max_drawdown": -0.04790364648049206,
+      "drawdown_peak": 43,
+      "drawdown_trough": 59
+     },
+     "trading": {
+      "cash_share_mean": 0.33650087425952996,
+      "fee_ratio_to_initial": 0.00026874,
+      "fees": {
+       "commission": 248.83,
+       "fee": 268.74,
+       "stamp_tax": 0.0,
+       "transfer_fee": 19.91
+      },
+      "fill_rate": 1.0,
+      "filled_orders": 1,
+      "max_single_weight_mean": 0.6634991257404703,
+      "orders": 1,
+      "partial_fills": 0,
+      "reject_reasons": {},
+      "stale_price_days": 0,
+      "top5_weight_mean": 0.6634991257404703,
+      "turnover_half_daily_mean": 0.008294174999999999,
+      "turnover_two_sided_daily_mean": 0.016588349999999998
+     },
+     "yearly": [
+      {
+       "year": 2019,
+       "sessions": 60,
+       "metrics": {
+        "annual_return": 0.6226294730958872,
+        "annual_vol": 0.1859954769713135,
+        "drawdown_peak": 43,
+        "drawdown_trough": 59,
+        "max_drawdown": -0.04790364648049206,
+        "sharpe": 2.6957693449006666,
+        "total_return": 0.12751026
+       }
+      }
+     ],
+     "blocked": null
+    }
+   ],
+   "benchmark": [
+    {
+     "scenario": "base",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2019-07-05",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.0023964532401562154,
+      "annual_return_diff": 0.7111408135428771,
+      "available": true,
+      "benchmark_common_days": 60,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.07904175660911428,
+      "common_end": "2019-09-30",
+      "common_start": "2019-07-08",
+      "common_strategy_annual_return": 0.6320990569337628,
+      "information_ratio": 3.197697349705965,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "fees_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2019-07-05",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.002381778487784669,
+      "annual_return_diff": 0.7056614278423129,
+      "available": true,
+      "benchmark_common_days": 60,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.07904175660911428,
+      "common_end": "2019-09-30",
+      "common_start": "2019-07-08",
+      "common_strategy_annual_return": 0.6266196712331986,
+      "information_ratio": 3.193009585685275,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    },
+    {
+     "scenario": "slippage_x2",
+     "index": {
+      "index": "000300.SH",
+      "description": "沪深 300 价格指数，不含分红",
+      "anchor_date": "2019-07-05",
+      "convention": "首日收益以前一交易日收盘为起点；只读取实验快照，不前向填充、不跨缺失交易日",
+      "missing_levels": 0
+     },
+     "metrics": {
+      "active_annualization_basis": "matched_daily_returns_compounded",
+      "active_return_mean": 0.0023714312582108544,
+      "annual_return_diff": 0.7016712297050015,
+      "available": true,
+      "benchmark_common_days": 60,
+      "benchmark_missing_days": 0,
+      "common_benchmark_annual_return": -0.07904175660911428,
+      "common_end": "2019-09-30",
+      "common_start": "2019-07-08",
+      "common_strategy_annual_return": 0.6226294730958872,
+      "information_ratio": 3.1883134203287207,
+      "missing_dates": [],
+      "note": "策略自身收益保留完整区间；主动日收益为策略减基准；年化收益率差只在共同有效日分别复利年化后相减，缺失日不拼成多日收益"
+     }
+    }
+   ],
+   "fills_checked": 3
+  }
+ ],
+ "omitted": [
+  {
+   "start": "2015-05-28",
+   "end": "2015-07-08",
+   "sessions": 29,
+   "reason": "zero_signal_window",
+   "new_trading_backtests": 0
+  }
+ ],
+ "prepared_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/prepared.json",
+ "prepared_sha256": "56bb297e13f5235b70fae72655b561285866fc4a862de494369578a844030d1c",
+ "implementation_sha256": {
+  "configs/rule_profiles/main_board.yaml": "5f39564edaa1963e8b6242ff84a77b25fa04c22eb9d87829ace460ef2aa0eb7f",
+  "pyproject.toml": "2c937c8ac7608c6d84729f1fdb31b14d1ae3b0cfbf6ef1890fd283d3fdf179f4",
+  "scripts/archive_strategy_progress.py": "8ca35595c03bc406cde42d6b999edf74af83eff6ecb1e73364bca5f85a797b13",
+  "scripts/backtest_pair66_short_windows.py": "1964f8b79ee3a1b24da4649f893333f168c594d4da4f5ae1e58ea4f1dd496d39",
+  "scripts/preflight_pair66_short_windows.py": "fd4c29e119e75419e52dacc80426fd9999fda37fd800567dc80cb9e5e221e7ab",
+  "scripts/recover_strategy_batch94_reference.py": "f03bdec52cc647d1dd46f1409cf77442b9911e0b153abfe34807bb9c0857d6a2",
+  "scripts/reference_strategy_batch94.py": "8b11640ff3233cbce3ed721156040b232b5cf3d5d93e3a269827691882d64287",
+  "scripts/review_strategy_batch18.py": "30610a22e34240e11e14f0109401ff95ca7acf562c87208a6a69d32e38f5684f",
+  "scripts/run_strategy_batch4.py": "4fcbe0068305b494d37882d2bfe0a2aae6b4f8eb4b5ef90b0c17ae471b160a9b",
+  "scripts/run_strategy_batch5.py": "158ae14467bdbc5da9a13f1d627818fe8ce9e046d8d41c1092b1560ea830e837",
+  "scripts/run_strategy_batch8.py": "d75aded02165e36d7f0b7b082bbf36c37d5ff63031811932a677b6cd82f9fa45",
+  "scripts/supplement_pair66_history.py": "15aa92dc9fa75a166100680fb91f3da7756db71cfaeceb9a0bf4c2b596065fbb",
+  "scripts/verify_strategy_batch3.py": "3b9375027f5beaba6abbe6b00a5c77394867857d54a74a7cc1d1e22f6f833fe7",
+  "src/observe/__init__.py": "e1faa1d940ed2ff92ce968060848481c9e37104853dbf97dded1a4c470731197",
+  "src/observe/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/observe/api/app.py": "6089b66c49c6e968669e0a52adef710739f0cdfd95fcd32adc97f8e9e20f5717",
+  "src/observe/artifacts.py": "e89ed2aca86113de845ea35a97350c9ef266bdaa9f9dd2c4a27f9d053dfc92b4",
+  "src/observe/cache.py": "be6b36e04c5dd80a7c0f825812d3a9900bb38f32bc2dcb06ea2c52a57174226a",
+  "src/observe/cli.py": "ef0b63e8865de9f6bf03573384524d8fb98c5fa9f7b307f4ae9f6cfa80deaf3d",
+  "src/observe/data/__init__.py": "374c1ef7b9dda9a81ee2cbb3966ae4cb5e3c72a734efbb2687dc915bb7d19ad9",
+  "src/observe/data/audit.py": "e80c2edc9b6060007d2597bf87cf5dc492f224273639f45f6dae66182757228d",
+  "src/observe/data/constituents.py": "be71f99d09149a0496a7d0a33e4da5e2c997182a97224079059c7a91471ec180",
+  "src/observe/data/financial_history.py": "b2bcaaff545bdf57d9a69550cf218915d385101cb5ce2ea27d224bdf59134ed1",
+  "src/observe/data/financial_schema.py": "5f1fde089ebb7a4bfc94482b49862d61b9b949c7a96ed68f617448cced45b3e9",
+  "src/observe/data/financials.py": "2160049992240ac65efaf012df22b96f46f1a53d669886b6e122789944f3af75",
+  "src/observe/data/indices.py": "80fe367b43473a0eb2f502c515f91de900293a83b9be9558a132e9c293b30df7",
+  "src/observe/data/locks.py": "03ff434d8603a05ee13dd4dffe0ae179d427e84df6cff0b7000b1f4738fe7c6f",
+  "src/observe/data/minute.py": "2cdfb293826d0d6c9de4d121e72d40cf8cc790e1a323f9839adac7e1ad4113a9",
+  "src/observe/data/net.py": "75754fee153b7a6ba64d2220893df8d134bca215c555a0f610f305d203aa0a65",
+  "src/observe/data/prices.py": "916f3c0fab8bc96bc19a4f6ae558987a6bbf114171966dbe9edbed3dc4f61d58",
+  "src/observe/data/raw.py": "daac89eebd1f52469ccd36962f2198bc7df08b0d3d3a1e1a7ea9fdab262159d3",
+  "src/observe/data/sources/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/observe/data/sources/baostock.py": "f10b1813484c4f0299573bb3da5e5eb0d6b262502c2b171b5aebe5330c6e4554",
+  "src/observe/data/sources/tdx.py": "0164fda074562c0d2bfb1e38ef8b7bd4f54d7ea44fb7dc17d9d319092b166d34",
+  "src/observe/data/standardize.py": "9ee6bfe12c746611882c1abdb8ecd218b795cd103894157b02113be99d1458ea",
+  "src/observe/data/store.py": "ef10f45016e3e8cd088225664f6b987aa98496d578028b1ab3f5764ed0e36fca",
+  "src/observe/data/update.py": "d4d8192e150b018af885ddaa6c31fea5a78bcbe63722dff76888f24b5284c547",
+  "src/observe/data/valuations.py": "92fc80c62032fae04f6eed61f498b77b1c3fed16f58c0aaa54fc1eff43e430b9",
+  "src/observe/dataset.py": "0ee6308378c8bb78fc3c224cdefa952cdfe929b566756eb5bdb77821a62bc3d4",
+  "src/observe/diagnose.py": "39d79b01525a1e2bec41718ab8f400fa48e61e218f54ce10d1f0c9d97cbd423d",
+  "src/observe/doctor.py": "1732585c0b315cab98ad8444795c29bdd2325043bdc09e21e26987f415541d0b",
+  "src/observe/evaluation/__init__.py": "1f51eceafbad9bd03a3c4382c4fc00db592286e6959a4442d6b37180dee5a9ea",
+  "src/observe/evaluation/benchmarks.py": "9e177ddc6447af09017dea97e2b0f9afdfd821859e793442e50ad04dd8ef79e8",
+  "src/observe/evaluation/paired.py": "764237ff3b1c6f94e09658338802d82972c54e05c8a4cee6c6cb1bcae7cdb3c0",
+  "src/observe/evaluation/portfolio.py": "0f409b458c9da45a125ed360e72b0f86006e4d505af5f282f73cebdd0a54b9aa",
+  "src/observe/evaluation/ranking.py": "d40c68a22c1f3268e89c927be06b613f0b82dcfc2bd5b18653339c2b07ad303b",
+  "src/observe/evaluation/research.py": "7a1113b909462ee644e46a053ef4d6d1bb401dd9635c88d63faacd6a08cc499c",
+  "src/observe/execution.py": "08d5382716097834c92c31a199817c75df82fa6eb79b88b32c8c431fcbd124f6",
+  "src/observe/experiments.py": "dfdd44e02c339d091655916461730ff56570ef6b39ce08fb2d729fdeae76e8b6",
+  "src/observe/factors/__init__.py": "ca2b296bd1a112d0cc37d0bf1a37fe1e9990d34abf4dfe69e071f25898d5d132",
+  "src/observe/factors/expr.py": "bb8eb1f87fe9071a86fbb4111992633400abf3e4156690596b90757c26ff864c",
+  "src/observe/factors/intraday.py": "6c4ea4573d9ef48953f98540c52c6a0f2b11dd33a386ba296ca9f67b790c8acb",
+  "src/observe/features.py": "71615ee6cefc97b696e437ed9db764863c31e15da89366fb6584c189f4b229ec",
+  "src/observe/integrity.py": "a5088946d02f52e01d42dea5b63ccc61d2a783de78103559f1ec73357bee6072",
+  "src/observe/jobs.py": "8dcbcc13c9e3287aa5cabc2e2126b54b02f1086e9dd21576cf3e87f54a7d862f",
+  "src/observe/labels.py": "a5389ef298900a509b981699276abcd3e9773f67a6cc878a79c677cf899b7dc3",
+  "src/observe/ledger/__init__.py": "dcae2ccd8c4402b05b56caad4e2347fa407c6a723ff480cc3d37c15416470b2c",
+  "src/observe/ledger/book.py": "7d9e4e9a0bfc0d435dc04abc461d85a95bb94f818cd3627c14aeb73f17d4dc60",
+  "src/observe/ledger/rules.py": "38a5205c2ec22b695d9e4b9d28e71e5a327faee0f1973570d81dd36c9e538551",
+  "src/observe/loop.py": "3faef14dd5fc60ad937ad43ca1ff7da4f7bba5e6db518fa5f2ea3fc2492fd941",
+  "src/observe/models.py": "2eba6d4f28c4b4e244583d2f5792e817fa45dcb7670e0caefe97f6bf243af2ec",
+  "src/observe/paired.py": "8ab19f2c48643b879f473a4968f0cb55c143469ab8c1ee08074c9377ae7e0ed0",
+  "src/observe/portfolio.py": "fe2cdda0c930b290db42a372e2d303f0502dc11749322def4a6e6dfb0a98c9db",
+  "src/observe/reeval.py": "70ea4104d80d33d2dbdd967a7d459e7d6f995f2d385b48d4f4a2e39f87bb8f07",
+  "src/observe/replay.py": "319455a0031ce2d8b6d1e08595fbb0288f5fc65d9b67533b39bcfcc80db8b9e4",
+  "src/observe/research.py": "633ccbbaf3c6a5d53e50704a0744a65a43989ab2e2eea4611f54aa4ae5d18a2b",
+  "src/observe/runs.py": "76807c5685aa132255316d12bdbf6f35beb9f4c18544997da44df6d0bc553034",
+  "src/observe/schedule.py": "064ca2014d6c5e36f217aea9554ce4d0205cfcebf517481118a9f13eca4e30be",
+  "src/observe/strategies.py": "eca89fc62bafa71840dc676add9aeac71ea2c18809abe02d7702fba9f1a5b7ae",
+  "src/observe/strategy/__init__.py": "7bb0042615e7fbfa19e5864e89e3981f84b6562d5d02c8c52803a66b9b9c609b",
+  "src/observe/strategy/engine.py": "a4ae69a49676ffcbbacbe04182e0a690e275b34df4d8f69b19b8f1dbc9f4b92b",
+  "src/observe/strategy/fields.py": "b19101ea8a7df7087361d122cd5224b70e6e0e0c52d826feb50805d5d8b418f9",
+  "src/observe/strategy/report.py": "0da46a2b1de5ec8bf29635af1a519d01be2c29f99dec5d3a6e3b1743a3916663",
+  "src/observe/strategy/run.py": "b07625d738d0765a400644b41ba28f722659c4690e04db0ca44a4183e24291f9",
+  "src/observe/strategy/spec.py": "ed7a141bd9d0f5de53d687a8ea914f6cf9461a5547edd56118320dcf2de30995",
+  "src/observe/strategy_catalog.py": "4af3031c01da471016c816d5b80add33631df1319505470940e73725a3b01b38",
+  "src/observe/strategy_ema.py": "582a28097ea7cee79bcb10c53d7b6fad17a92c439e14a875757a0eb692aa907b",
+  "src/observe/strategy_means.py": "3edba546e8412330b601291c3ce95041ae00bcf509b8de2a888595ba3df6ad84",
+  "src/observe/strategy_rotation.py": "a62accfde9b7bc1fc1e3f0fd55861d5b21fec75cb7fc4f9b9371c6eaa2093ee4",
+  "src/observe/strategy_rsi.py": "a3d071410a44c1169fa5ad3760bf89276ae1d92e24641288797e1080da08b67c",
+  "src/observe/strategy_svm.py": "3cb24f32d847f06bc939026741cf894f1d49be23e4fa0ac5cbe27141a8fc5878",
+  "src/observe/universe.py": "5992e75ed2909332a04ed91fbb4274ca4c0e6d11b7465a29c7d0ad36af571659",
+  "tests/unit/test_pair66_short_windows.py": "82cc95a097bc530fca8e22427e5451116a005792bcfeffd94d32a4c0565a0127",
+  "uv.lock": "6d570df0d6feff37948f074e82e055bda13036d6b7fe24f238a878645294e382",
+  "scripts/complete_pair66_short_windows.py": "8e8daf34bbb6605fefb08764ef7406ef6903dc76eb3f52b00f525cd391a71d62",
+  "tests/unit/test_pair66_short_completion.py": "387e9eae8afb32bcfded154bf350bf5a9d8c58f005098f65ebee36ac2bdd227d"
+ },
+ "fees": {
+  "status": "ok",
+  "fills_checked": 27,
+  "checks": [
+   {
+    "run_id": "20261011-013056-f45668-strategy-c0d1",
+    "child": "20261011-013058-a27f21-base-c9ea",
+    "scenario": "base",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2008-09-19": 1
+    },
+    "fee_total": 268.77
+   },
+   {
+    "run_id": "20261011-013056-f45668-strategy-c0d1",
+    "child": "20261011-013101-aa6bb0-fees_x2-6033",
+    "scenario": "fees_x2",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2008-09-19": 1
+    },
+    "fee_total": 537.53
+   },
+   {
+    "run_id": "20261011-013056-f45668-strategy-c0d1",
+    "child": "20261011-013105-397e19-slippage_x2-7057",
+    "scenario": "slippage_x2",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2008-09-19": 1
+    },
+    "fee_total": 269.04
+   },
+   {
+    "run_id": "20261011-014631-855a1d-strategy-0846",
+    "child": "20261011-014633-d7f1ad-base-45cf",
+    "scenario": "base",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2008-09-19": 1
+    },
+    "fee_total": 269.47
+   },
+   {
+    "run_id": "20261011-014631-855a1d-strategy-0846",
+    "child": "20261011-014636-5a66e6-fees_x2-2ce6",
+    "scenario": "fees_x2",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2008-09-19": 1
+    },
+    "fee_total": 538.94
+   },
+   {
+    "run_id": "20261011-014631-855a1d-strategy-0846",
+    "child": "20261011-014639-353d4f-slippage_x2-cd00",
+    "scenario": "slippage_x2",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2008-09-19": 1
+    },
+    "fee_total": 269.71
+   },
+   {
+    "run_id": "20261011-014723-349335-strategy-8be4",
+    "child": "20261011-014724-415d56-base-f6eb",
+    "scenario": "base",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2015-08-01": 1
+    },
+    "fee_total": 269.17
+   },
+   {
+    "run_id": "20261011-014723-349335-strategy-8be4",
+    "child": "20261011-014727-adcccd-fees_x2-cc26",
+    "scenario": "fees_x2",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2015-08-01": 1
+    },
+    "fee_total": 538.34
+   },
+   {
+    "run_id": "20261011-014723-349335-strategy-8be4",
+    "child": "20261011-014729-ec6242-slippage_x2-1936",
+    "scenario": "slippage_x2",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2015-08-01": 1
+    },
+    "fee_total": 269.41
+   },
+   {
+    "run_id": "20261011-014740-0414c9-strategy-fcfd",
+    "child": "20261011-014742-c10a6a-base-5637",
+    "scenario": "base",
+    "fills_checked": 5,
+    "fee_regime_counts": {
+     "2015-08-01": 5
+    },
+    "fee_total": 4593.93
+   },
+   {
+    "run_id": "20261011-014740-0414c9-strategy-fcfd",
+    "child": "20261011-014745-1313c5-fees_x2-0c6a",
+    "scenario": "fees_x2",
+    "fills_checked": 5,
+    "fee_regime_counts": {
+     "2015-08-01": 5
+    },
+    "fee_total": 9173.49
+   },
+   {
+    "run_id": "20261011-014740-0414c9-strategy-fcfd",
+    "child": "20261011-014749-a38dfb-slippage_x2-1ffb",
+    "scenario": "slippage_x2",
+    "fills_checked": 5,
+    "fee_regime_counts": {
+     "2015-08-01": 5
+    },
+    "fee_total": 4572.49
+   },
+   {
+    "run_id": "20261011-014800-775a42-strategy-226a",
+    "child": "20261011-014802-5186bc-base-2586",
+    "scenario": "base",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2015-08-01": 1
+    },
+    "fee_total": 269.88
+   },
+   {
+    "run_id": "20261011-014800-775a42-strategy-226a",
+    "child": "20261011-014805-103ae8-fees_x2-3462",
+    "scenario": "fees_x2",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2015-08-01": 1
+    },
+    "fee_total": 536.94
+   },
+   {
+    "run_id": "20261011-014800-775a42-strategy-226a",
+    "child": "20261011-014807-d3b3b3-slippage_x2-b9e2",
+    "scenario": "slippage_x2",
+    "fills_checked": 1,
+    "fee_regime_counts": {
+     "2015-08-01": 1
+    },
+    "fee_total": 268.74
+   }
+  ],
+  "method": "Independent multiplication from frozen YAML date ranges and Decimal half-up cents; verifies arithmetic, not external fee accuracy"
+ },
+ "protection": {
+  "status": "ok",
+  "old_controls_unchanged": 5919,
+  "mutable_registry_files_excluded": 0,
+  "old_partition_metadata_unchanged": 398,
+  "old_calendar_rows_unchanged": 7938,
+  "old_index_rows_unchanged": 5280,
+  "partition_check": "size/mtime only; no fresh full hash",
+  "baseline_sha256": "6793e056b0cf0ba9423cad26ef95855269e8a5ca9b8a654ac15ee945a396d88d"
+ },
+ "payload_partitions_byte_hashed": 28,
+ "network_forbidden": true,
+ "fresh_process_reproduction": true,
+ "fresh_worker_evidence": [
+  {
+   "file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-1-fresh-worker.json",
+   "sha256": "f1ff92664f5ef32f994b88e91ade87f8a10cb2394a3064d8be7bb8895c90b6b4",
+   "command": [
+    "/home/zuozhe/envs/quant/.venv/bin/python",
+    "-B",
+    "-m",
+    "scripts.complete_pair66_short_windows",
+    "worker",
+    "--label",
+    "pair66-short-1"
+   ],
+   "returncode": 0,
+   "manager_pid": 3,
+   "started_at": "2026-10-11T01:45:22.686046",
+   "finished_at": "2026-10-11T01:46:02.328307",
+   "implementation_sha256": {
+    "scripts/complete_pair66_short_windows.py": "8e8daf34bbb6605fefb08764ef7406ef6903dc76eb3f52b00f525cd391a71d62",
+    "tests/unit/test_pair66_short_completion.py": "387e9eae8afb32bcfded154bf350bf5a9d8c58f005098f65ebee36ac2bdd227d"
+   },
+   "stdout_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-1-worker.stdout",
+   "stdout_sha256": "e5f61f695f7bd23d87234b984435b747780b54c74bfd27099bab4b47fd3666ef",
+   "stderr_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-1-worker.stderr",
+   "stderr_sha256": "d67f965e714103c52c82e10d719f1015448a831bb6a80ca4e1933480c837ff5d",
+   "run_id": "20261011-013056-f45668-strategy-c0d1",
+   "reproduction_run_id": "20261011-014535-f45668-strategy-c8a9",
+   "worker_pid": 50,
+   "worker_parent_pid": 3,
+   "reproduction_created": true,
+   "validation_sha256": "dae3ed752513edec35898a438f235383b553d204b8852f44e384d4be6535ac85"
+  },
+  {
+   "file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-2-fresh-worker.json",
+   "sha256": "513a750ed5fbac488624d927cb916f58eac1d28216494457002d731334b9e848",
+   "command": [
+    "/home/zuozhe/envs/quant/.venv/bin/python",
+    "-B",
+    "-m",
+    "scripts.complete_pair66_short_windows",
+    "worker",
+    "--label",
+    "pair66-short-2"
+   ],
+   "returncode": 0,
+   "manager_pid": 287,
+   "started_at": "2026-10-11T01:48:15.757517",
+   "finished_at": "2026-10-11T01:48:52.611809",
+   "implementation_sha256": {
+    "scripts/complete_pair66_short_windows.py": "8e8daf34bbb6605fefb08764ef7406ef6903dc76eb3f52b00f525cd391a71d62",
+    "tests/unit/test_pair66_short_completion.py": "387e9eae8afb32bcfded154bf350bf5a9d8c58f005098f65ebee36ac2bdd227d"
+   },
+   "stdout_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-2-worker.stdout",
+   "stdout_sha256": "6b03afeabe6bf5b476bd991b62c7042b1b4b8da1aeef502e84a504193b48dea1",
+   "stderr_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-2-worker.stderr",
+   "stderr_sha256": "d67f965e714103c52c82e10d719f1015448a831bb6a80ca4e1933480c837ff5d",
+   "run_id": "20261011-014631-855a1d-strategy-0846",
+   "reproduction_run_id": "20261011-014828-855a1d-strategy-d0df",
+   "worker_pid": 334,
+   "worker_parent_pid": 287,
+   "reproduction_created": true,
+   "validation_sha256": "41f431a727d1836e8409c2d9356ef2a3dc9ec3a29176e6c4c9638c72f2c2a8a3"
+  },
+  {
+   "file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-3-fresh-worker.json",
+   "sha256": "2a66a998579f64e536c06be4c8d57095ace036456ede9af37b7871930eef7611",
+   "command": [
+    "/home/zuozhe/envs/quant/.venv/bin/python",
+    "-B",
+    "-m",
+    "scripts.complete_pair66_short_windows",
+    "worker",
+    "--label",
+    "pair66-short-3"
+   ],
+   "returncode": 0,
+   "manager_pid": 436,
+   "started_at": "2026-10-11T01:49:02.077171",
+   "finished_at": "2026-10-11T01:49:40.158337",
+   "implementation_sha256": {
+    "scripts/complete_pair66_short_windows.py": "8e8daf34bbb6605fefb08764ef7406ef6903dc76eb3f52b00f525cd391a71d62",
+    "tests/unit/test_pair66_short_completion.py": "387e9eae8afb32bcfded154bf350bf5a9d8c58f005098f65ebee36ac2bdd227d"
+   },
+   "stdout_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-3-worker.stdout",
+   "stdout_sha256": "39ad51bd14b1bd93d39d97b5f01d8e0a81e69d1804656e427f151aba589d45b3",
+   "stderr_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-3-worker.stderr",
+   "stderr_sha256": "d67f965e714103c52c82e10d719f1015448a831bb6a80ca4e1933480c837ff5d",
+   "run_id": "20261011-014723-349335-strategy-8be4",
+   "reproduction_run_id": "20261011-014914-349335-strategy-29a1",
+   "worker_pid": 483,
+   "worker_parent_pid": 436,
+   "reproduction_created": true,
+   "validation_sha256": "973dcefae2515a64f9e7b371531daeab41b635591c942212ad2493be9e0746a5"
+  },
+  {
+   "file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-4-fresh-worker.json",
+   "sha256": "3d0907c3d2f257f331e3eddf36f7460f7d6b3b21a7136bc8fa813e163c4e3a65",
+   "command": [
+    "/home/zuozhe/envs/quant/.venv/bin/python",
+    "-B",
+    "-m",
+    "scripts.complete_pair66_short_windows",
+    "worker",
+    "--label",
+    "pair66-short-4"
+   ],
+   "returncode": 0,
+   "manager_pid": 584,
+   "started_at": "2026-10-11T01:49:49.643325",
+   "finished_at": "2026-10-11T01:50:27.639831",
+   "implementation_sha256": {
+    "scripts/complete_pair66_short_windows.py": "8e8daf34bbb6605fefb08764ef7406ef6903dc76eb3f52b00f525cd391a71d62",
+    "tests/unit/test_pair66_short_completion.py": "387e9eae8afb32bcfded154bf350bf5a9d8c58f005098f65ebee36ac2bdd227d"
+   },
+   "stdout_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-4-worker.stdout",
+   "stdout_sha256": "3ffb81926998ef970e26de378fb204f98a1776812e1c8704a1bffedceff22276",
+   "stderr_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-4-worker.stderr",
+   "stderr_sha256": "d67f965e714103c52c82e10d719f1015448a831bb6a80ca4e1933480c837ff5d",
+   "run_id": "20261011-014740-0414c9-strategy-fcfd",
+   "reproduction_run_id": "20261011-015002-0414c9-strategy-6ea2",
+   "worker_pid": 631,
+   "worker_parent_pid": 584,
+   "reproduction_created": true,
+   "validation_sha256": "9a81faa978e7cc4c512564621d79bfdd8a0475114e3933af7f411c967a5e3d9e"
+  },
+  {
+   "file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-5-fresh-worker.json",
+   "sha256": "159c75048efe8d3263959f60a0c180ee3d2b662110f7e9e8a34349f79aa41e65",
+   "command": [
+    "/home/zuozhe/envs/quant/.venv/bin/python",
+    "-B",
+    "-m",
+    "scripts.complete_pair66_short_windows",
+    "worker",
+    "--label",
+    "pair66-short-5"
+   ],
+   "returncode": 0,
+   "manager_pid": 732,
+   "started_at": "2026-10-11T01:50:38.156668",
+   "finished_at": "2026-10-11T01:51:15.498114",
+   "implementation_sha256": {
+    "scripts/complete_pair66_short_windows.py": "8e8daf34bbb6605fefb08764ef7406ef6903dc76eb3f52b00f525cd391a71d62",
+    "tests/unit/test_pair66_short_completion.py": "387e9eae8afb32bcfded154bf350bf5a9d8c58f005098f65ebee36ac2bdd227d"
+   },
+   "stdout_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-5-worker.stdout",
+   "stdout_sha256": "757593f4f1f353829420916b626fc663add1ef6ba62388297ad5ee09d0075577",
+   "stderr_file": "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-5-worker.stderr",
+   "stderr_sha256": "d67f965e714103c52c82e10d719f1015448a831bb6a80ca4e1933480c837ff5d",
+   "run_id": "20261011-014800-775a42-strategy-226a",
+   "reproduction_run_id": "20261011-015051-775a42-strategy-1a89",
+   "worker_pid": 779,
+   "worker_parent_pid": 732,
+   "reproduction_created": true,
+   "validation_sha256": "cac640ee045de72d5e6709f8493c21767edbfcc5fdd87f9fa9dbee406e842dda"
+  }
+ ],
+ "new_original_parent_runs": 5,
+ "new_reproduction_parent_runs": 5,
+ "new_strategy_sources": 0,
+ "new_source_backtest_coverage": 0,
+ "decision_days": 291,
+ "three_cost_ledger_days": 873,
+ "evidence_sha256": {
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/prepared.json": "56bb297e13f5235b70fae72655b561285866fc4a862de494369578a844030d1c",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-review-v2/review-completion.json": "b5faab3aa5a424a2f5076b53db80d4eda9cc9fd5176aa36a72b1d2453975db27",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-1-fresh-worker.json": "f1ff92664f5ef32f994b88e91ade87f8a10cb2394a3064d8be7bb8895c90b6b4",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-2-fresh-worker.json": "513a750ed5fbac488624d927cb916f58eac1d28216494457002d731334b9e848",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-3-fresh-worker.json": "2a66a998579f64e536c06be4c8d57095ace036456ede9af37b7871930eef7611",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-4-fresh-worker.json": "3d0907c3d2f257f331e3eddf36f7460f7d6b3b21a7136bc8fa813e163c4e3a65",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/pair66-short-5-fresh-worker.json": "159c75048efe8d3263959f60a0c180ee3d2b662110f7e9e8a34349f79aa41e65",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-1-run.json": "3e983632d8b5d10ba84a6d5c987bc05ad178af55204c4f004cf7bd0ba3493ef4",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-1-verification.json": "dae3ed752513edec35898a438f235383b553d204b8852f44e384d4be6535ac85",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-2-run.json": "8266c2a1a5b1b13bc869fd872b75670d5c47e00ddf3980c34f890560ca9779ef",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-2-verification.json": "41f431a727d1836e8409c2d9356ef2a3dc9ec3a29176e6c4c9638c72f2c2a8a3",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-3-run.json": "161d8f0018b5e77c421e825cce7910bc499ce7c43398c7e0bbcb1a4de09ea4a7",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-3-verification.json": "973dcefae2515a64f9e7b371531daeab41b635591c942212ad2493be9e0746a5",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-4-run.json": "937a392a8155d55e85c493f9e4dc55fe3a98a3324ceb041b6a6e74e2d9088562",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-4-verification.json": "9a81faa978e7cc4c512564621d79bfdd8a0475114e3933af7f411c967a5e3d9e",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-5-run.json": "9f2a1d0aaf1f86e7c2ce1eedd937d52f5283be7e316ce7997f2fabc66e046403",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/pair66-short-5-verification.json": "cac640ee045de72d5e6709f8493c21767edbfcc5fdd87f9fa9dbee406e842dda",
+  "/mnt/d/projects/observe/data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/acceptance-attempt-1hzx8v1h/fee-hand-checks.json": "10fe8170d4210cfe0988ca908bdf3a9cb5095a2ebef9023f07292907608c4f1a",
+  "/mnt/d/projects/observe/data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/acceptance-attempt-1hzx8v1h/protection.json": "9751e6edf9dd96683062c583ef6a98ca646ec9abbe0dbd4badfb187c56115307",
+  "data/staging/strategies-history-supplement/20261011-pair66-short-islands/completion-guards/implementation.json": "d941a13e916887d2e3e978f19e2c42933a0a99e09b782bda6e889b833c1fe040",
+  "data/catalog/strategies/progress/20261011-015307-6927/summary.json": "753eaed7e48e5a487b046c502460d6c0025beeb3abddea76008fe292df843b1b",
+  "data/catalog/strategies/progress/20261011-015307-6927/sources.json": "21f38f166f4d882e08ed5a5e2ad31170613e16a9df42a4ac7a1ddb73a4f11f03",
+  "data/catalog/strategies/progress/20261011-015307-6927/runs.json": "6109bcf3acca7f3bb95dee03f233ac97ec569e27acae8780ad8bbd288e3cfecf",
+  "data/catalog/strategies/progress/20261011-015307-6927/progress.md": "ee3041bae23f1ac8630249b88146a48ccb5be1d4170340a8e219bb79f4add913"
+ },
+ "limits": [
+  "Approved dynamic-anchor daily approximation; intraday/platform equivalence not proven",
+  "Five independent1million-cash empty-state islands; NAV not stitched; short annualization unstable",
+  "Fixed pair and already viewed history are not independent holdout; no parameter selection",
+  "Historical fee/rule assumptions remain unverified; hand checks prove arithmetic only",
+  "Incomplete freeze/verification attempts must use new reviewed recovery; never overwrite old evidence"
+ ]
+}

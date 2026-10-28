@@ -1,0 +1,110 @@
+{
+  "case": {
+    "calendar_sha256": "3cffa1ee0bdb1442745b8dd330be0d58bafa959c3b04bb997ee26da6997ca020",
+    "new_trading_backtests": 0,
+    "not_original_pause_proof": true,
+    "profiles": {
+      "fund-159905": {
+        "calendar_extra": 0,
+        "calendar_missing": 1,
+        "calendar_missing_examples": [
+          "2013-12-31"
+        ],
+        "first": "2011-01-11",
+        "input_sha256": "2d7ab44e9ab5300658f539478bb4b4cef87c6be8fb2b12b2cd4e70dd9e61354f",
+        "last": "2026-09-29",
+        "native_price_basis_not_adjusted": true,
+        "rows": 3818,
+        "strict_usable": false
+      },
+      "fund-159949": {
+        "calendar_extra": 0,
+        "calendar_missing": 0,
+        "calendar_missing_examples": [],
+        "first": "2016-07-22",
+        "input_sha256": "ef4ff9c324f877c70133be2b1476c97ad7e6b154c2228bbdadcc9929cd888ecc",
+        "last": "2026-09-29",
+        "native_price_basis_not_adjusted": true,
+        "rows": 2475,
+        "strict_usable": false
+      },
+      "fund-510880": {
+        "calendar_extra": 0,
+        "calendar_missing": 0,
+        "calendar_missing_examples": [],
+        "first": "2007-01-18",
+        "input_sha256": "565633ecf95efc84ace32b3abb530e242e1a0a0fb5cf53dd2165fe761975f4ee",
+        "last": "2026-09-29",
+        "native_price_basis_not_adjusted": true,
+        "rows": 4788,
+        "strict_usable": false
+      },
+      "fund-511010": {
+        "calendar_extra": 0,
+        "calendar_missing": 0,
+        "calendar_missing_examples": [],
+        "first": "2013-04-09",
+        "input_sha256": "f78e1fef99223f0bd43a2b994fd22b39ea74756dd653cd27c1fd0a6497cdf1ab",
+        "last": "2026-09-29",
+        "native_price_basis_not_adjusted": true,
+        "rows": 3277,
+        "strict_usable": false
+      },
+      "fund-511880": {
+        "calendar_extra": 0,
+        "calendar_missing": 0,
+        "calendar_missing_examples": [],
+        "first": "2013-04-18",
+        "input_sha256": "1057491e6d3ec48f66d346e4e0823bb8cfa3b3cfbc5c45fd5c4ead075cbf3f77",
+        "last": "2026-09-29",
+        "native_price_basis_not_adjusted": true,
+        "rows": 3270,
+        "strict_usable": false
+      },
+      "fund-513100": {
+        "calendar_extra": 0,
+        "calendar_missing": 1,
+        "calendar_missing_examples": [
+          "2022-01-13"
+        ],
+        "first": "2013-07-31",
+        "input_sha256": "daed842cde0c86514e6cfa35860fed2d78f3cb0bb6b25d7287f02e2321ce3c21",
+        "last": "2026-09-29",
+        "native_price_basis_not_adjusted": true,
+        "rows": 3201,
+        "strict_usable": false
+      },
+      "fund-518880": {
+        "calendar_extra": 0,
+        "calendar_missing": 0,
+        "calendar_missing_examples": [],
+        "first": "2013-07-29",
+        "input_sha256": "c99808962c3aabbcd1b212996984a521ac607f32b3121342d4c98f48dacd77e5",
+        "last": "2026-09-29",
+        "native_price_basis_not_adjusted": true,
+        "rows": 3204,
+        "strict_usable": false
+      },
+      "index-sz399324": {
+        "calendar_extra": 0,
+        "calendar_missing": 0,
+        "calendar_missing_examples": [],
+        "first": "2006-01-24",
+        "input_sha256": "168c091c7c972c7f708fd74ce284021b73d908ccbc13612ea326ee3a76d7238b",
+        "last": "2026-09-29",
+        "native_price_basis_not_adjusted": true,
+        "rows": 5025,
+        "strict_usable": false
+      }
+    },
+    "status": "native_calendar_profile_only"
+  },
+  "case_id": "batch106-calendar-profile",
+  "nature": "actual_native_calendar_coverage_not_pause_proof",
+  "purpose": "8原生候选；159905/513100各缺1开市日，不填充或推断停牌",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch106/20261011-calendar-coverage-v1/checked.json",
+    "sha256": "6277035c9fd96dc00567c9d247103cf65a3f9d2a01371b50bd21258963268efe"
+  }
+}

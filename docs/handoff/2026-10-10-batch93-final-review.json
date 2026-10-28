@@ -1,0 +1,152 @@
+{
+  "Git_publication": "pending_user_commit_and_push",
+  "accepted_checkpoint": "20261010-181224-4012",
+  "accepted_directory": "data/staging/strategies-batch93/20261010-ffscore-threefactor-acceptance",
+  "adversarial_review": {
+    "abuse_cases": "complete_clean_final_SHA",
+    "assumption_violation": "complete_clean_final_SHA",
+    "cascade_construction": "complete_clean_final_SHA",
+    "composition_failures": "complete_clean_final_SHA",
+    "remaining_findings": []
+  },
+  "catalog_changed_sources": [
+    "2023年度精选策略/18.【复现】FFScore财务模型.txt",
+    "2024年度精选策略2/67.三因子策略年化21%简单多因子策略框架.txt"
+  ],
+  "checked_state_file": "data/staging/strategies-batch93/20261010-ffscore-threefactor-acceptance/checked-state.json",
+  "checked_state_sha256": "a3b0e3653dd004a230d50ef44c3aae3a3c54b6233426009769cc904b2cb89152",
+  "checks": {
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "src/observe/strategy_catalog.py",
+          "scripts/verify_strategy_batch93.py",
+          "tests/unit/test_batch93_acceptance.py",
+          "scripts/review_strategy_batch93.py",
+          "tests/unit/test_batch93_stage.py",
+          "scripts/prepare_handoff.py",
+          "scripts/build_strategy_catalog.py",
+          "scripts/verify_financial_import.py"
+        ],
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.verify_offline_tests",
+          "-q",
+          "-o",
+          "addopts=",
+          "tests/unit/test_batch91_acceptance.py",
+          "tests/unit/test_batch91_stage.py",
+          "tests/unit/test_batch70_research.py",
+          "tests/unit/test_catalog_futures.py",
+          "tests/unit/test_catalog_dependencies.py",
+          "tests/unit/test_catalog_schedules.py",
+          "tests/unit/test_research_metadata.py",
+          "tests/integration/test_strategy_merge.py",
+          "tests/unit/test_batch92_stage.py",
+          "tests/unit/test_batch92_acceptance.py",
+          "tests/unit/test_batch93_stage.py",
+          "tests/unit/test_financials.py",
+          "tests/unit/test_batch93_acceptance.py"
+        ],
+        "log_sha256": "805d26913d7d7e53d5bc74e36f1560a5cb47d8e7a9555c909cb318d32d9c0ff9",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "returncode": 0
+      }
+    ],
+    "errors": 0,
+    "passed": 237,
+    "skipped": 0
+  },
+  "final_binding_file": "data/staging/strategies-batch93/20261010-ffscore-threefactor-acceptance/final-binding-verification.json",
+  "final_binding_sha256": "baa51880d02bfb7df71840acbfd58bc77d88bb78fa5fbc329d1d635294d85fd1",
+  "financial_operand_rows": 501353,
+  "financial_partition_bytes": 2205405257,
+  "financial_partitions_fresh_byte_verified": 147,
+  "formal_report": "docs/tasks/2026-10-10-第九十三批FFScore与三因子-正式研究验收.md",
+  "formal_report_sha256": "c60fdfc8283e2c795f11c5f4318271e3e915beae1a2281abcd0f724d92005cdb",
+  "formal_source_research_acceptance": true,
+  "formal_trading_acceptance": false,
+  "independent_coverage_records": 40,
+  "independent_scalar_metric_cells": 168,
+  "isolation": {
+    "copied_files": 1465,
+    "known_commit_equivalence_claimed": false,
+    "passed": 237
+  },
+  "library_goal_complete": false,
+  "literal_original_synthetic_cases": 30,
+  "local_strategy_parent_runs": 75,
+  "locally_backtested_and_reproduced_sources": 12,
+  "manually_reviewed": 270,
+  "new_requests": 0,
+  "new_trading_backtests": 0,
+  "next_plan": "docs/tasks/2026-10-10-第九十四批ETF低通与卡尔曼轮动-执行计划.md",
+  "offline_replay_differences": 0,
+  "other_catalog_records_unchanged": 693,
+  "platform_equivalence_proven": false,
+  "protection": {
+    "baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+    "mutable_registry_files_excluded": 0,
+    "old_calendar_rows_unchanged": 7938,
+    "old_controls_unchanged": 5780,
+    "old_index_rows_unchanged": 5280,
+    "old_partition_metadata_unchanged": 398,
+    "partition_check": "size/mtime only; no fresh full hash",
+    "status": "ok"
+  },
+  "receipt_file": "docs/handoff/2026-10-10-batch93-verification.json",
+  "receipt_sha256": "31f0a1064f9eb5f9f0a048a14d4d6aef905a4fc092542b111f48c227a252c054",
+  "remaining_unreviewed": 425,
+  "review_completion_file": "docs/handoff/2026-10-10-batch93-review-completion.json",
+  "review_completion_sha256": "07e7a3b574491fb9497dfbcecf04804350bfac6cd4aaa55903fbf77cf9f416be",
+  "review_depth": "deep",
+  "reviewed_implementation_sha256": {
+    "scripts/review_strategy_batch93.py": "9567fe49b5f9013da756e1594a1d3c68b71d057ce8c1474886c05a38ccf51611",
+    "scripts/verify_strategy_batch93.py": "0790913de704df57c6e8270fd00faee0388bc05a4ec720bf532f6f3d07ad5e43",
+    "src/observe/strategy_catalog.py": "c22a02559b4691626e5301ea6703154ff433dffbf99a91c0011cf2275f35a1ea",
+    "tests/unit/test_batch93_acceptance.py": "57e9b354cda2633945ee8f9f20a0697fde40f8e19a8972c61ae663f7d2a26d48",
+    "tests/unit/test_batch93_stage.py": "2ae6d28a202445888780ce6786af2f37a2b6ebadba39d3dfd0bd6ba5b860b220"
+  },
+  "rule_text_clarification": {
+    "actual_three_factor_spies": "standardlize adds10; winsorize multiplies2; PB pipeline uses identity spies",
+    "catalog_field": "2024b67.gaps identity spies wording",
+    "evidence": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/diagnostics.json",
+    "planned_catalog_text_only_correction": "Batch94; frozen catalogue/source economics and diagnostic bytes retained"
+  },
+  "scope_alignment": "on_target",
+  "source_full_lines_read": [
+    367,
+    135
+  ],
+  "specialist_reviews": {
+    "architecture": "complete_clean_final_SHA",
+    "security": "complete_clean_final_SHA"
+  },
+  "stage_protection": {
+    "acceptance_baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+    "method": "Compare stage controls against freshly hashed acceptance controls; finish rehashes these via protect",
+    "old_control_SHA_bindings_retained": 5780,
+    "old_partition_stats_retained": 398,
+    "stage_baseline_sha256": "3ae529008d1b0e13b403ea3a5ec220eb10f0bf1ea06cd2481abcba22cf2f0a26",
+    "status": "ok"
+  },
+  "status": "ok",
+  "strict_financial_usable_rows": 0
+}

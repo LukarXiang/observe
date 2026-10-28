@@ -1,0 +1,37 @@
+{
+  "case": {
+    "dates": [
+      "2021-01-04",
+      "2026-09-29"
+    ],
+    "error_counts": {},
+    "evaluation_dates": 1392,
+    "failed_dates": 0,
+    "formal_acceptance": false,
+    "instrument": "300058.SZ",
+    "last_bi_rows": 66,
+    "last_xd_rows": 8,
+    "limits": [
+      "Historical daily frequency matches unit1d but platform inclusion/paused behavior unproved",
+      "Original notebook end_time unknown; this is a daily component reference, not original chart/date reproduction",
+      "Algorithm retains endpoint assumptions, approximate comparisons and nested-gap behavior",
+      "Independent math/structure checks and complete forbidden-network replay still required for final acceptance"
+    ],
+    "new_trading_backtests": 0,
+    "nonempty_bi_dates": 1383,
+    "nonempty_xd_dates": 1362,
+    "not_a_backtest": true,
+    "platform_equivalence_proven": false,
+    "policy": "Fresh original KBarChan per date; at most1000 rows; adjusted OHLC anchored to each last row factor; no final-chart backfill",
+    "state_file": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/chan-daily-state-values.parquet",
+    "state_sha256": "7902501544a36aa5ab9a58e6c7a8c2a12e5a181e362969ea2a01c74c9550519d"
+  },
+  "case_id": "daily-chan-industry-batch88-components-stage",
+  "nature": "in_progress_long_daily_original_component_reference",
+  "purpose": "1392逐日期最多1000行动态锚定原KBarChan无异常，末66笔8线；平台原日期/停牌/图表/独立算法未验收，非信号或收益",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch88/20261009-daily-chan-industry-notebook/component-research.json",
+    "sha256": "962e1dddd3180b25623988f421a08d03dbdf34d2e8bf803f568b9fb1b1a4a3b8"
+  }
+}

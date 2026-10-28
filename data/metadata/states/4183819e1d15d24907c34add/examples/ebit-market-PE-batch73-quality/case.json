@@ -1,0 +1,63 @@
+{
+  "case": {
+    "limits": [
+      "22 parsed rows are indicators/categories across two point samples, not 22 trading dates.",
+      "Empty old-date results cannot be forward-filled, interpolated or silently replaced.",
+      "No new SDK/account or credentials configured; original four factors and code322002 market PE not fetched."
+    ],
+    "nature": "read_only_wire_response_inspection",
+    "not_a_backtest": true,
+    "original_input_admitted": false,
+    "schema": 1,
+    "sse_empty_history": [
+      {
+        "case": "sse-20050105",
+        "http_status": 200,
+        "raw_result_rows": 0,
+        "requested_date": "2005-01-05",
+        "response_sha256": "d1058df438a374e8abf43213734003e4ef83eda30283b2687177399ae6bebd39"
+      },
+      {
+        "case": "sse-20200102",
+        "http_status": 200,
+        "raw_result_rows": 0,
+        "requested_date": "2020-01-02",
+        "response_sha256": "d1058df438a374e8abf43213734003e4ef83eda30283b2687177399ae6bebd39"
+      }
+    ],
+    "sse_recent": {
+      "case": "sse-20260929",
+      "limit": "Category-specific values differ; original JoinQuant code322002 identity and PE definition remain unproved. Native parser drops the report-date row.",
+      "native_main_A_average_PE": 13.61,
+      "native_parsed_rows": 8,
+      "native_star_average_PE": 119.13,
+      "native_total_stock_average_PE": 16.91,
+      "raw_first_row_average_PE": "13.61",
+      "raw_first_row_product_code": "01",
+      "raw_first_row_trade_date": "20260929",
+      "raw_result_rows": 5,
+      "response_sha256": "f2c66089ba0f3c878e05d125ff3b103197c5cfa349543b12d59c5e503633ef11"
+    },
+    "szse_recent": {
+      "case": "szse-20260929",
+      "limit": "Native security-category statistics do not include average PE; requested date alone is not proof of original availability or daily history.",
+      "native_columns": [
+        "证券类别",
+        "数量",
+        "成交金额",
+        "总市值",
+        "流通市值"
+      ],
+      "native_parsed_rows": 14,
+      "response_sha256": "7e52af584b24bf5b0efd28393c79420203e1357229bd2356bad5f7fdf6b51abd"
+    }
+  },
+  "case_id": "ebit-market-PE-batch73-quality",
+  "nature": "reference_only_exchange_empty_history_and_category_difference",
+  "purpose": "两早期空列表字节相同；SSE原日期及PE类别差异、SZSE缺PE字段和22行非22日限制；不放行原交易",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch73/20261008-ebit-market-PE/exchange-data-quality.json",
+    "sha256": "ba3a645d2a63bfe6c17d006167ad34f9bfb41fb892ee19d57508b1a5769d3b30"
+  }
+}

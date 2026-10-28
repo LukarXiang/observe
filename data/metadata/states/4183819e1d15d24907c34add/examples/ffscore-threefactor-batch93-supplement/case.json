@@ -1,0 +1,126 @@
+{
+  "case": {
+    "apis": [
+      {
+        "function": "query_profit_data",
+        "sha256": "4526498ede4ee2ef67d89d5283bc297e4a7503433bbfc3548a8190796acef798",
+        "signature": "(code, year=None, quarter=None)",
+        "source": "def query_profit_data(code, year=None, quarter=None):\n    \"\"\"季频盈利能力\n    @param code: 证券代码，不可为空\n    @param year: 统计年份，为空时默认当前年\n    @param quarter: 统计季度，为空时默认当前季度\n    \"\"\"\n    data = rs.ResultData()\n    if code is None or code == \"\":\n        print(\"股票代码不能为空，请检查。\")\n        data.error_msg = \"股票代码不能为空，请检查。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n    if len(code) != cons.STOCK_CODE_LENGTH:\n        print(\"股票代码应为\" + str(cons.STOCK_CODE_LENGTH) + \"位，请检查。格式示例：sh.600000。\")\n        data.error_msg = \"股票代码应为\" + str(cons.STOCK_CODE_LENGTH) + \"位，请检查。格式示例：sh.600000。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n    code = code.lower()\n    if (code.endswith(\"sh\") or code.endswith(\"sz\")):\n        code = code[7:9].lower() + \".\" + code[0:6]\n\n    if year is None or year == \"\":\n        year = time.strftime(\"%Y\", time.localtime())  # 当前年份\n    if quarter is None or quarter == \"\":\n        quarter = (int(time.strftime(\"%m\", time.localtime())) + 2) // 3  # 当前季度\n    elif quarter not in [1, 2, 3, 4] and quarter not in [\"1\", \"2\", \"3\", \"4\"]:\n        print(\"季度填写错误，请检查。填写范围：1，2，3，4\")\n        data.error_msg = \"季度填写错误，请检查。填写范围：1，2，3，4\"\n        data.error_code = cons.BSERR_PARAM_ERR\n    year = str(year)\n    if not year.isdigit():\n        print(\"年份输入有误，请修改。\")\n        data.error_msg = \"年份输入有误，请修改。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n\n    user_id = \"\"\n    try:\n        user_id = getattr(conx, \"user_id\")\n    except Exception:\n        print(\"you don't login.\")\n        data.error_code = cons.BSERR_NO_LOGIN\n        data.error_msg = \"you don't login.\"\n        return data\n\n    param = \"%s,%s,%s,%s,%s,%s,%s\" % (\n        \"query_profit_data\", user_id, \"1\",\n        cons.BAOSTOCK_PER_PAGE_COUNT, code, year, quarter)\n\n    msg_body = strUtil.organize_msg_body(param)\n    msg_header = msgheader.to_message_header(\n        cons.MESSAGE_TYPE_PROFITDATA_REQUEST, len(msg_body))\n\n    data.msg_type = cons.MESSAGE_TYPE_PROFITDATA_REQUEST\n    data.msg_body = msg_body\n\n    head_body = msg_header + msg_body\n    crc32str = zlib.crc32(bytes(head_body, encoding='utf-8'))\n    receive_data = sock.send_msg(head_body + cons.MESSAGE_SPLIT + str(crc32str))\n\n    if receive_data is None or receive_data.strip() == \"\":\n        data.error_code = cons.BSERR_RECVSOCK_FAIL\n        data.error_msg = \"网络接收错误。\"\n        return data\n\n    msg_header = receive_data[0:cons.MESSAGE_HEADER_LENGTH]\n    msg_body = receive_data[cons.MESSAGE_HEADER_LENGTH:-1]\n    header_arr = msg_header.split(cons.MESSAGE_SPLIT)\n    body_arr = msg_body.split(cons.MESSAGE_SPLIT)\n    data.msg_body_length = header_arr[2]\n    data.error_code = body_arr[0]\n    data.error_msg = body_arr[1]\n\n    if cons.BSERR_SUCCESS == data.error_code:\n        data.method = body_arr[2]\n        data.user_id = body_arr[3]\n        data.cur_page_num = body_arr[4]\n        data.per_page_count = body_arr[5]\n        data.setData(body_arr[6])\n        data.code = body_arr[7]\n        data.year = body_arr[8]\n        data.quarter = body_arr[9]\n        data.setFields(body_arr[10])\n    return data\n"
+      },
+      {
+        "function": "query_balance_data",
+        "sha256": "9ae345b83e8fb15d36e2c1f37c8cfd0ae39ef07803e599fd9de87f3e7a6f10c7",
+        "signature": "(code, year=None, quarter=None)",
+        "source": "def query_balance_data(code, year=None, quarter=None):\n    \"\"\"季频偿债能力\n    @param code: 证券代码，不可为空\n    @param year: 统计年份，为空时默认当前年\n    @param quarter: 统计季度，为空时默认当前季度\n    \"\"\"\n    data = rs.ResultData()\n    if code is None or code == \"\":\n        print(\"股票代码不能为空，请检查。\")\n        data.error_msg = \"股票代码不能为空，请检查。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n    if len(code) != cons.STOCK_CODE_LENGTH:\n        print(\"股票代码应为\" + str(cons.STOCK_CODE_LENGTH) + \"位，请检查。格式示例：sh.600000。\")\n        data.error_msg = \"股票代码应为\" + str(cons.STOCK_CODE_LENGTH) + \"位，请检查。格式示例：sh.600000。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n    code = code.lower()\n    if (code.endswith(\"sh\") or code.endswith(\"sz\")):\n        code = code[7:9].lower() + \".\" + code[0:6]\n\n    if year is None or year == \"\":\n        year = time.strftime(\"%Y\", time.localtime())  # 当前年份\n    if quarter is None or quarter == \"\":\n        quarter = (int(time.strftime(\"%m\", time.localtime())) + 2) // 3  # 当前季度\n    elif quarter not in [1, 2, 3, 4] and quarter not in [\"1\", \"2\", \"3\", \"4\"]:\n        print(\"季度填写错误，请检查。填写范围：1，2，3，4\")\n        data.error_msg = \"季度填写错误，请检查。填写范围：1，2，3，4\"\n        data.error_code = cons.BSERR_PARAM_ERR\n    year = str(year)\n    if not year.isdigit():\n        print(\"年份输入有误，请修改。\")\n        data.error_msg = \"年份输入有误，请修改。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n\n    user_id = \"\"\n    try:\n        user_id = getattr(conx, \"user_id\")\n    except Exception:\n        print(\"you don't login.\")\n        data.error_code = cons.BSERR_NO_LOGIN\n        data.error_msg = \"you don't login.\"\n        return data\n\n    param = \"%s,%s,%s,%s,%s,%s,%s\" % (\n        \"query_balance_data\", user_id, \"1\",\n        cons.BAOSTOCK_PER_PAGE_COUNT, code, year, quarter)\n\n    msg_body = strUtil.organize_msg_body(param)\n    msg_header = msgheader.to_message_header(\n        cons.MESSAGE_TYPE_QUERYBALANCEDATA_REQUEST, len(msg_body))\n\n    data.msg_type = cons.MESSAGE_TYPE_QUERYBALANCEDATA_REQUEST\n    data.msg_body = msg_body\n\n    head_body = msg_header + msg_body\n    crc32str = zlib.crc32(bytes(head_body, encoding='utf-8'))\n    receive_data = sock.send_msg(head_body + cons.MESSAGE_SPLIT + str(crc32str))\n\n    if receive_data is None or receive_data.strip() == \"\":\n        data.error_code = cons.BSERR_RECVSOCK_FAIL\n        data.error_msg = \"网络接收错误。\"\n        return data\n\n    msg_header = receive_data[0:cons.MESSAGE_HEADER_LENGTH]\n    msg_body = receive_data[cons.MESSAGE_HEADER_LENGTH:-1]\n    header_arr = msg_header.split(cons.MESSAGE_SPLIT)\n    body_arr = msg_body.split(cons.MESSAGE_SPLIT)\n    data.msg_body_length = header_arr[2]\n    data.error_code = body_arr[0]\n    data.error_msg = body_arr[1]\n\n    if cons.BSERR_SUCCESS == data.error_code:\n        data.method = body_arr[2]\n        data.user_id = body_arr[3]\n        data.cur_page_num = body_arr[4]\n        data.per_page_count = body_arr[5]\n        data.setData(body_arr[6])\n        data.code = body_arr[7]\n        data.year = body_arr[8]\n        data.quarter = body_arr[9]\n        data.setFields(body_arr[10])\n    return data\n"
+      },
+      {
+        "function": "query_cash_flow_data",
+        "sha256": "7ac125ef49a8cb77baf038951daabd43de85e69a903b58b09ee107482fadbef6",
+        "signature": "(code, year=None, quarter=None)",
+        "source": "def query_cash_flow_data(code, year=None, quarter=None):\n    \"\"\"季频现金流量\n    @param code: 证券代码，不可为空\n    @param year: 统计年份，为空时默认当前年\n    @param quarter: 统计季度，为空时默认当前季度\n    \"\"\"\n    data = rs.ResultData()\n    if code is None or code == \"\":\n        print(\"股票代码不能为空，请检查。\")\n        data.error_msg = \"股票代码不能为空，请检查。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n    if len(code) != cons.STOCK_CODE_LENGTH:\n        print(\"股票代码应为\" + str(cons.STOCK_CODE_LENGTH) + \"位，请检查。格式示例：sh.600000。\")\n        data.error_msg = \"股票代码应为\" + str(cons.STOCK_CODE_LENGTH) + \"位，请检查。格式示例：sh.600000。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n    code = code.lower()\n    if (code.endswith(\"sh\") or code.endswith(\"sz\")):\n        code = code[7:9].lower() + \".\" + code[0:6]\n\n    if year is None or year == \"\":\n        year = time.strftime(\"%Y\", time.localtime())  # 当前年份\n    if quarter is None or quarter == \"\":\n        quarter = (int(time.strftime(\"%m\", time.localtime())) + 2) // 3  # 当前季度\n    elif quarter not in [1, 2, 3, 4] and quarter not in [\"1\", \"2\", \"3\", \"4\"]:\n        print(\"季度填写错误，请检查。填写范围：1，2，3，4\")\n        data.error_msg = \"季度填写错误，请检查。填写范围：1，2，3，4\"\n        data.error_code = cons.BSERR_PARAM_ERR\n    year = str(year)\n    if not year.isdigit():\n        print(\"年份输入有误，请修改。\")\n        data.error_msg = \"年份输入有误，请修改。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n\n    user_id = \"\"\n    try:\n        user_id = getattr(conx, \"user_id\")\n    except Exception:\n        print(\"you don't login.\")\n        data.error_code = cons.BSERR_NO_LOGIN\n        data.error_msg = \"you don't login.\"\n        return data\n\n    param = \"%s,%s,%s,%s,%s,%s,%s\" % (\n        \"query_cash_flow_data\", user_id, \"1\",\n        cons.BAOSTOCK_PER_PAGE_COUNT, code, year, quarter)\n\n    msg_body = strUtil.organize_msg_body(param)\n    msg_header = msgheader.to_message_header(\n        cons.MESSAGE_TYPE_QUERYCASHFLOWDATA_REQUEST, len(msg_body))\n\n    data.msg_type = cons.MESSAGE_TYPE_QUERYCASHFLOWDATA_REQUEST\n    data.msg_body = msg_body\n\n    head_body = msg_header + msg_body\n    crc32str = zlib.crc32(bytes(head_body, encoding='utf-8'))\n    receive_data = sock.send_msg(head_body + cons.MESSAGE_SPLIT + str(crc32str))\n\n    if receive_data is None or receive_data.strip() == \"\":\n        data.error_code = cons.BSERR_RECVSOCK_FAIL\n        data.error_msg = \"网络接收错误。\"\n        return data\n\n    msg_header = receive_data[0:cons.MESSAGE_HEADER_LENGTH]\n    msg_body = receive_data[cons.MESSAGE_HEADER_LENGTH:-1]\n    header_arr = msg_header.split(cons.MESSAGE_SPLIT)\n    body_arr = msg_body.split(cons.MESSAGE_SPLIT)\n    data.msg_body_length = header_arr[2]\n    data.error_code = body_arr[0]\n    data.error_msg = body_arr[1]\n\n    if cons.BSERR_SUCCESS == data.error_code:\n        data.method = body_arr[2]\n        data.user_id = body_arr[3]\n        data.cur_page_num = body_arr[4]\n        data.per_page_count = body_arr[5]\n        data.setData(body_arr[6])\n        data.code = body_arr[7]\n        data.year = body_arr[8]\n        data.quarter = body_arr[9]\n        data.setFields(body_arr[10])\n    return data\n"
+      },
+      {
+        "function": "query_growth_data",
+        "sha256": "51b6116b15e2fb3c94a5b4d54a564f29c1b11015c04ee982dce69991bed8baa0",
+        "signature": "(code, year=None, quarter=None)",
+        "source": "def query_growth_data(code, year=None, quarter=None):\n    \"\"\"季频成长能力\n    @param code: 证券代码，不可为空\n    @param year: 统计年份，为空时默认当前年\n    @param quarter: 统计季度，为空时默认当前季度\n    \"\"\"\n    data = rs.ResultData()\n    if code is None or code == \"\":\n        print(\"股票代码不能为空，请检查。\")\n        data.error_msg = \"股票代码不能为空，请检查。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n    if len(code) != cons.STOCK_CODE_LENGTH:\n        print(\"股票代码应为\" + str(cons.STOCK_CODE_LENGTH) + \"位，请检查。格式示例：sh.600000。\")\n        data.error_msg = \"股票代码应为\" + str(cons.STOCK_CODE_LENGTH) + \"位，请检查。格式示例：sh.600000。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n    code = code.lower()\n    if (code.endswith(\"sh\") or code.endswith(\"sz\")):\n        code = code[7:9].lower() + \".\" + code[0:6]\n\n    if year is None or year == \"\":\n        year = time.strftime(\"%Y\", time.localtime())  # 当前年份\n    if quarter is None or quarter == \"\":\n        quarter = (int(time.strftime(\"%m\", time.localtime())) + 2) // 3  # 当前季度\n    elif quarter not in [1, 2, 3, 4] and quarter not in [\"1\", \"2\", \"3\", \"4\"]:\n        print(\"季度填写错误，请检查。填写范围：1，2，3，4\")\n        data.error_msg = \"季度填写错误，请检查。填写范围：1，2，3，4\"\n        data.error_code = cons.BSERR_PARAM_ERR\n    year = str(year)\n    if not year.isdigit():\n        print(\"年份输入有误，请修改。\")\n        data.error_msg = \"年份输入有误，请修改。\"\n        data.error_code = cons.BSERR_PARAM_ERR\n        return data\n\n    user_id = \"\"\n    try:\n        user_id = getattr(conx, \"user_id\")\n    except Exception:\n        print(\"you don't login.\")\n        data.error_code = cons.BSERR_NO_LOGIN\n        data.error_msg = \"you don't login.\"\n        return data\n\n    param = \"%s,%s,%s,%s,%s,%s,%s\" % (\n        \"query_growth_data\", user_id, \"1\",\n        cons.BAOSTOCK_PER_PAGE_COUNT, code, year, quarter)\n\n    msg_body = strUtil.organize_msg_body(param)\n    msg_header = msgheader.to_message_header(\n        cons.MESSAGE_TYPE_QUERYGROWTHDATA_REQUEST, len(msg_body))\n\n    data.msg_type = cons.MESSAGE_TYPE_QUERYGROWTHDATA_REQUEST\n    data.msg_body = msg_body\n\n    head_body = msg_header + msg_body\n    crc32str = zlib.crc32(bytes(head_body, encoding='utf-8'))\n    receive_data = sock.send_msg(head_body + cons.MESSAGE_SPLIT + str(crc32str))\n\n    if receive_data is None or receive_data.strip() == \"\":\n        data.error_code = cons.BSERR_RECVSOCK_FAIL\n        data.error_msg = \"网络接收错误。\"\n        return data\n\n    msg_header = receive_data[0:cons.MESSAGE_HEADER_LENGTH]\n    msg_body = receive_data[cons.MESSAGE_HEADER_LENGTH:-1]\n    header_arr = msg_header.split(cons.MESSAGE_SPLIT)\n    body_arr = msg_body.split(cons.MESSAGE_SPLIT)\n    data.msg_body_length = header_arr[2]\n    data.error_code = body_arr[0]\n    data.error_msg = body_arr[1]\n\n    if cons.BSERR_SUCCESS == data.error_code:\n        data.method = body_arr[2]\n        data.user_id = body_arr[3]\n        data.cur_page_num = body_arr[4]\n        data.per_page_count = body_arr[5]\n        data.setData(body_arr[6])\n        data.code = body_arr[7]\n        data.year = body_arr[8]\n        data.quarter = body_arr[9]\n        data.setFields(body_arr[10])\n    return data\n"
+      }
+    ],
+    "decision": "Reuse accepted same-host login/DNS failures; quarterly APIs do not establish historical vintages, whole-pool SW_l1 or JQ style-factor definitions",
+    "installed_baostock_version": "00.9.40",
+    "new_requests": 0,
+    "new_samples": 0,
+    "new_trading_backtests": 0,
+    "previous_file": "data/staging/strategies-batch31/20261006-capm-weekly-rsrs-finance/probe-results.json",
+    "previous_probes": {
+      "published": false,
+      "results": [
+        {
+          "api_sha256": "3ab7a2ff6cc8f76cf4423bed0d9e0e0735bf8ab1975292971fb690d698991ca0",
+          "endpoint": "roe",
+          "error": "UnboundLocalError: cannot access local variable 'mySockect' where it is not associated with a value",
+          "files": [],
+          "published": false,
+          "query": {
+            "function": "query_profit_data",
+            "limit": "Quarterly final ROE/publication sample is not platform ROE vintage or the whole original pool",
+            "parameters": {
+              "code": "sh.600519",
+              "quarter": 1,
+              "year": 2020
+            },
+            "provider": "baostock"
+          },
+          "status": "failed",
+          "wire": []
+        },
+        {
+          "api_sha256": "3ab7a2ff6cc8f76cf4423bed0d9e0e0735bf8ab1975292971fb690d698991ca0",
+          "endpoint": "holder",
+          "error": "ConnectionError: HTTPSConnectionPool(host='vip.stock.finance.sina.com.cn', port=443): Max retries exceeded with url: /corp/go.php/vCI_CirculateStockHolder/stockid/600519.phtml (Caused by NameResolutionError(\"HTTPSConnection(host='vip.stock.finance.sina.com.cn', port=443): Failed to resolve 'vip.stock.finance.sina.com.cn' ([Errno -2] Name or service not known)\"))",
+          "files": [],
+          "published": false,
+          "query": {
+            "function": "stock_circulate_stock_holder",
+            "limit": "May provide only five holders; announcement dates do not prove original top10 table revisions",
+            "parameters": {
+              "symbol": "600519"
+            },
+            "provider": "akshare"
+          },
+          "status": "failed",
+          "wire": []
+        },
+        {
+          "api_sha256": "3ab7a2ff6cc8f76cf4423bed0d9e0e0735bf8ab1975292971fb690d698991ca0",
+          "endpoint": "etf",
+          "error": "ConnectionError: HTTPSConnectionPool(host='finance.sina.com.cn', port=443): Max retries exceeded with url: /realstock/company/sh510050/hisdata_klc2/klc_kl.js (Caused by NameResolutionError(\"HTTPSConnection(host='finance.sina.com.cn', port=443): Failed to resolve 'finance.sina.com.cn' ([Errno -2] Name or service not known)\"))",
+          "files": [],
+          "published": false,
+          "query": {
+            "function": "fund_etf_hist_sina",
+            "limit": "One fund price sample does not supply seven funds/events/states or seven index histories",
+            "parameters": {
+              "symbol": "sh510050"
+            },
+            "provider": "akshare"
+          },
+          "status": "failed",
+          "wire": []
+        }
+      ]
+    },
+    "previous_receipt_sha256": "7cade8dd583d636f08ac6f16efb582f0aa006315d434c3d5d56154215b50ff53",
+    "previous_sha256": "9703085e17fb3d362b1438aa0aa087b58d7d4c956a9686282fe5ceb40c3e2238",
+    "provider_absence_proven": false,
+    "published": false,
+    "references": [
+      {
+        "copy": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/references/_return_on_assets.py",
+        "file": "repo/skfolio/src/skfolio/descriptor/_profitability/_return_on_assets.py",
+        "scope": "Definition comparison only; not admitted as original JQ ratio/style factor",
+        "sha256": "5dff102acb5c3dc171003791ec8a8d266f2a730914e639102b07f51f7a7c5ee5"
+      },
+      {
+        "copy": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/references/_return_on_equity.py",
+        "file": "repo/skfolio/src/skfolio/descriptor/_profitability/_return_on_equity.py",
+        "scope": "Definition comparison only; not admitted as original JQ ratio/style factor",
+        "sha256": "b2199b0522b2a553b6d9f62b51a2e470ab833709397c0d165a547fa6e2654407"
+      },
+      {
+        "copy": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/references/_ew_residual_volatility.py",
+        "file": "repo/skfolio/src/skfolio/descriptor/_volatility/_ew_residual_volatility.py",
+        "scope": "Definition comparison only; not admitted as original JQ ratio/style factor",
+        "sha256": "c52f7c1d1ae8ea3c56210441d6bf2301c5312cb04558adcee9c71cf31f5e10c3"
+      }
+    ]
+  },
+  "case_id": "ffscore-threefactor-batch93-supplement",
+  "nature": "in_progress_accepted_failure_reuse_and_reference_definition_audit",
+  "purpose": "核第31批登录/DNS失败及四BaoStock查询源，冻结三skfolio定义作比较；不把TTM/衰减残差替换平台因子，新请求/样本/发布0，旧失败不证明当前网络或供应商缺数据",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch93/20261010-ffscore-threefactor-operands/supplement-decision.json",
+    "sha256": "3c049e26bfb2b95983d2be38bdb75ea70351ddccf9624d77dd0ceeadc0f2d32c"
+  }
+}

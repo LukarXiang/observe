@@ -1,0 +1,88 @@
+[
+  {
+    "code": [
+      "src/observe/data/financials.py",
+      "src/observe/data/financial_history.py"
+    ],
+    "id": "C-financial",
+    "limits": "严格历史输入0，不借公告日期、不以实收资本金额替股数",
+    "status": "implemented_limited",
+    "supports": "完整归档、字典、时点门禁、探索滞后、单季/TTM/同比"
+  },
+  {
+    "code": [
+      "src/observe/strategies.py",
+      "src/observe/portfolio.py",
+      "src/observe/loop.py"
+    ],
+    "id": "C-rule-strategy",
+    "limits": "日频与原即时成交不等价，固定池事后选择保留",
+    "status": "verified_limited",
+    "supports": "目标权重/现金、真实日历周月调仓、状态机、固定金额、槽位现金、唯一Book"
+  },
+  {
+    "code": [
+      "src/observe/ledger/book.py",
+      "src/observe/execution.py"
+    ],
+    "id": "C-ledger",
+    "limits": "登记权益仅显式cash_entitlement=record_close现金事件；ETF整体输入仍未放行，退市/换股待上市权益保留阻断；不是期货/期权/全分钟撮合实现",
+    "status": "verified_limited",
+    "supports": "原始价、T+1、数量约束、费用、部分成交、公司行动/转换与显式登记收盘现金红利权益、除息应收及实际到账"
+  },
+  {
+    "code": [
+      "src/observe/ledger/book.py",
+      "tests/unit/test_external_cash_flows.py"
+    ],
+    "evidence": "docs/handoff/2026-10-08-batch74-verification.json",
+    "id": "C-external-cash-flow",
+    "limits": "仅当前已开始未收盘日、唯一事件ID及分精度/1万亿元上限；缺估值/退市持仓阻断；未接入缺输入策略或CLI，原盘中回调估值等价性未证",
+    "status": "verified_limited",
+    "supports": "唯一Book显式external_flows模式、报价估值入金/赎回、份额与单位净值、入金非收益、原子拒绝和全赎回再入金；33手算/148账本与旧长区间三成本兼容match0"
+  },
+  {
+    "code": [
+      "src/observe/research.py",
+      "src/observe/features.py",
+      "src/observe/models.py"
+    ],
+    "evidence": "docs/07-后端研究框架逻辑.md",
+    "id": "C-research",
+    "limits": "已查看区间不是独立最终留出",
+    "status": "verified_limited",
+    "supports": "因子、滚动模型、标签成熟、阶段缓存、三成本与基准"
+  },
+  {
+    "code": [
+      "src/observe/paired.py"
+    ],
+    "evidence": "docs/06-分钟特征成对实验报告.md",
+    "id": "C-minute",
+    "limits": "无可确认增量；缺退市分钟；组合阻断不能作为收益证明",
+    "status": "research_limited",
+    "supports": "主实验Ridge秩IC增量+0.0065，95%区间[-0.0091,+0.0234]包含0"
+  },
+  {
+    "code": [
+      "src/observe/replay.py",
+      "src/observe/strategies.py",
+      "src/observe/runs.py"
+    ],
+    "id": "C-reproduce",
+    "limits": "本机缺失的旧输入须按原SHA迁移，不能替代",
+    "status": "verified_limited",
+    "supports": "冻结输入、禁网重算、逐值比较、迁移后重建索引"
+  },
+  {
+    "code": [
+      "scripts/research_strategy_batch106.py",
+      "scripts/probe_strategy_batch106_events.py",
+      "scripts/accept_strategy_batch106.py"
+    ],
+    "id": "C-monthly-slots-value-average-reference",
+    "limits": "不是ETF交易模块，月MACD未计算，原生候选不能作为活跃Store输入；旧目录绑定发布前实现图",
+    "status": "verified_component_only",
+    "supports": "SHA绑定原定义诊断、双阶段极值独立参考、月首年度标量与禁网/复制树/两源目录门禁"
+  }
+]

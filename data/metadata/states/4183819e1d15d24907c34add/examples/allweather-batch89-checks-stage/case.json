@@ -1,0 +1,79 @@
+{
+  "case": {
+    "capture_policy": "Recorded completed tool results; pytest raw output is summarized, not a claimed full raw log.",
+    "commands": [
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/ruff",
+          "check",
+          "src",
+          "tests",
+          "scripts/prepare_handoff.py",
+          "scripts/build_strategy_catalog.py",
+          "scripts/verify_financial_import.py",
+          "scripts/review_strategy_batch89.py",
+          "scripts/verify_strategy_batch88.py"
+        ],
+        "returncode": 0,
+        "stdout": "All checks passed!\n"
+      },
+      {
+        "command": [
+          "/home/zuozhe/envs/quant/.venv/bin/python",
+          "-m",
+          "scripts.verify_offline_tests",
+          "-q",
+          "tests/unit/test_batch89_stage.py",
+          "tests/unit/test_batch88_research.py",
+          "tests/unit/test_batch88_verification.py",
+          "tests/unit/test_batch87_research.py",
+          "tests/unit/test_research_metadata.py",
+          "tests/unit/test_catalog_dependencies.py",
+          "tests/unit/test_catalog_schedules.py",
+          "tests/integration/test_strategy_merge.py"
+        ],
+        "full_suite_run": false,
+        "new_stage_tests": 6,
+        "returncode": 0,
+        "stdout_summary": "149 passed, 1 warning in 21.41s",
+        "warning": "Existing Starlette/httpx TestClient deprecation"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "returncode": 0,
+        "stdout": ""
+      }
+    ],
+    "formal_acceptance": false,
+    "implementation_sha256": {
+      "scripts/review_strategy_batch89.py": "f69911f74d3df9ba5dff333e73854bce36cf14876bbcdbf1fef1ed371ffc251c",
+      "tests/unit/test_batch89_stage.py": "48dda98cc2cb65f053d517d64bc47268c68842bbdd5130b2b52eef43c6cd703e"
+    },
+    "new_trading_backtests": 0,
+    "specialist_reviews": {
+      "architecture": {
+        "agent": "batch89_stage_architecture",
+        "findings": [],
+        "implementation_SHA_verified": true
+      },
+      "security": {
+        "agent": "batch89_stage_security",
+        "findings": [],
+        "implementation_SHA_verified": true
+      }
+    },
+    "status": "passed"
+  },
+  "case_id": "allweather-batch89-checks-stage",
+  "nature": "in_progress_code_checks_not_formal_research_acceptance",
+  "purpose": "6专项含于149相关/Ruff/diff、安全架构两文件SHA核验，原始测试输出只摘要记录；尚未正式来源或交易验收",
+  "reference": {
+    "availability": "payload_reference",
+    "path": "data/staging/strategies-batch89/20261009-all-weather-source-stage/command-results.json",
+    "sha256": "fdeb1b2917df3002a21789c832d0b3d8b2373076237cb6c5b3917d488f468723"
+  }
+}
